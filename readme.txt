@@ -102,6 +102,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 * Added backup feature
 * Removed utm domain
 * Added Turkish translations
+* Fixed file naming for new theme files
 
 = 1.4.1 =
 * Cache invalidation

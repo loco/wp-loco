@@ -229,23 +229,26 @@ abstract class LocoAdmin {
         if( ! $locale ){
             throw new Exception( Loco::__('You must specify a valid locale for a new PO file') );
         }
-        // default domain and PO file name
-        if( ! $domain ){
-            $domain = $package->get_domain();
-        }
-        $po_dir = $package->lang_dir( $domain );
-        $po_name = $domain.'-'.$locale->get_code().'.po';
+        
+        // default PO file location
+        $po_path = $package->create_po_path( $locale, $domain );
+        $po_dir  = dirname( $po_path );
+        $po_name = basename( $po_path );
 
-        // extract from POT if possible
-        if( $pot_path = $package->get_pot( $domain ) ){
+        // extract strings from POT if possible
+        if( $pot_path = $package->get_pot($domain) ){
             $pot = self::parse_po_with_headers( $pot_path, $head );
             if( $pot && ! ( 1 === count($pot) && '' === $pot[0]['source'] ) ){
                 $export = $pot;
-                $po_dir = dirname($pot_path);
+                // override default PO location if POT location is writable
+                $pot_dir = dirname( $pot_path );
+                if( is_writable($pot_dir) ){
+                    $po_dir = $pot_dir;
+                }
             }
         }
 
-        // else extract from source code when no POT
+        // else extract strings from source code when no POT
         if( ! $export ){
             $export = self::xgettext( $package, $po_dir );
             if( ! $export ){

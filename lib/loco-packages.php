@@ -233,7 +233,24 @@ class LocoPackage {
         // failed to get writable directory, so we'll just return the highest priority
         return array_shift( $dirs );
     }
-    
+
+
+    /**
+     * Build name of PO file for given or default domain
+     */
+    public function create_po_path( LocoLocale $locale, $domain = '' ){
+        if( ! $domain ){
+            $domain = $this->domain;
+        }
+        $dir = $this->lang_dir( $domain );
+        $name = $locale->get_code().'.po';    
+        // only prefix with text domain for plugins and files in global lang directory
+        if( 'plugin' === $this->get_type() || 0 === strpos( $dir, $this->_lang_dir() ) ){
+            $name = $domain.'-'.$name;
+        }
+        return $dir.'/'.$name;
+    }
+        
     
     /**
      * Get root of package
