@@ -149,12 +149,10 @@ abstract class Loco {
     /**
      * 
      */
-    public static function utm_query( $utm_medium = 'wp', $utm_campaign = 'wp' ){
-        static $utm_source, $utm_content;
-        if( ! isset($utm_source) ){
-            $utm_source = parse_url( get_bloginfo('url'), PHP_URL_HOST ) or $utm_source = $_SERVER['HTTP_HOST'];
-            $utm_content = Loco::NS.'-'.Loco::VERSION;
-        }
+    public static function utm_query( $utm_medium ){
+        $utm_campaign = 'wp';
+        $utm_source = 'wp-admin';
+        $utm_content = Loco::VERSION;
         return http_build_query( compact('utm_campaign','utm_medium','utm_content','utm_source') );
     }
     

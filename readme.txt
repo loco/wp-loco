@@ -100,6 +100,8 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 = 1.4.2 =
 * Added backup feature
+* Removed utm domain
+* Added Turkish translations
 
 = 1.4.1 =
 * Cache invalidation
@@ -178,3 +180,5 @@ These features are on our todo list. There's no particular timeframe for any of 
 
 * Dutch translations courtesy of [Niels Geryl](http://hetwittepaard.be)
 * German translations courtesy of [Sebastian König](http://aykutmania.de)
+* Turkish translations courtesy of [Abdullah Pazarbaşı](http://abdullahpazarbasi.com)
+
