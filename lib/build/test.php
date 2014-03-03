@@ -80,6 +80,28 @@ class LocoTest extends PHPUnit_Framework_TestCase {
     
     
     
+    /**
+     * Test plural forms
+     */
+    public function testPluralForms(){
+        // English - two forms
+        $locale = LocoLocale::init('en','GB');
+        extract( $locale->export() );
+        $this->assertEquals( 2, $nplurals );
+        // Chinese - one form
+        $locale = LocoLocale::init('zh','TW');
+        extract( $locale->export() );
+        $this->assertEquals( 1, $nplurals );
+        // Polish - three forms
+        $locale = LocoLocale::init('pl','PL');
+        extract( $locale->export() );
+        $this->assertEquals( 3, $nplurals );
+        // Arabic - six forms
+        $locale = LocoLocale::init('ar','AE');
+        extract( $locale->export() );
+        $this->assertEquals( 6, $nplurals );
+    }
+
 }
 
 
