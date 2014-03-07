@@ -333,6 +333,7 @@ class LocoPackage {
                 $paths[$path] = file_exists($path) ? ( is_writeable($path) ? '' : Loco::__('MO file not writable') ) : Loco::__('MO file not found');
             }
         }
+        ksort( $paths );
         return $paths;    
     }   
     
