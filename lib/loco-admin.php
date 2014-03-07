@@ -253,6 +253,7 @@ abstract class LocoAdmin {
         if( ! $export ){
             $export = self::xgettext( $package, $po_dir );
             if( ! $export ){
+                var_dump( $domain );
                 throw new Exception( Loco::__('No translatable strings found').'. '.Loco::__('Cannot create a PO file.') );
             }
         }
@@ -289,12 +290,21 @@ abstract class LocoAdmin {
         }
         // template file is developer-editable and has no locale
         $ispot = self::is_pot($path);
+
+        // path may not exist if we're creating a new one
+        if( file_exists($path) ){
+            $modified = self::format_datetime( filemtime($path) );
+        }
+        else {
+            $modified = 0;
+        }
         
         // support incorrect usage of template PO files
-        if( ! $ispot && $head && ! $head->Language && self::none_translated($data) ){
+        if( ! $ispot && $head && $modified && ! $head->Language && self::none_translated($data) ){
             $path .= 't';
             $warnings[] = sprintf( Loco::__('PO file used as template. This will be renamed to %s on first save'), basename($path) );
             $ispot = true;
+            $modified = 0;
         }
         
         if( $ispot ){
@@ -311,13 +321,6 @@ abstract class LocoAdmin {
         }
         
         
-        // path may not exist if we're creating a new one
-        if( file_exists($path) ){
-            $modified = self::format_datetime( filemtime($path) );
-        }
-        else {
-            $modified = 0;
-        }
         // warn if new file can't be written
         $writable = self::is_writable( $path );
         if( ! $writable && ! $modified ){

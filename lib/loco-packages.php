@@ -739,10 +739,12 @@ class LocoThemePackage extends LocoPackage {
     protected function is_child(){
         return ! empty($this->parent);
     }
+    protected function get_parent(){
+        return $this->parent ? LocoPackage::get( $this->parent, 'theme' ) : null;
+    }
     public function meta(){
         $meta = parent::meta();
-        if( $this->parent ){
-            $parent = LocoPackage::get( $this->parent, 'theme' );
+        if( $parent = $this->get_parent() ){
             $pmeta = $parent->meta();
             $meta['parent'] = $parent->get_name();
             // merge parent resources unless child has its own domain
@@ -752,6 +754,12 @@ class LocoThemePackage extends LocoPackage {
             }
         }
         return $meta;
+    }
+    public function get_pot( $domain = '' ){
+        if( ( $parent = $this->get_parent() ) && ( $pot = $parent->get_pot($domain) ) ){
+            return $pot;
+        }
+        return parent::get_pot( $domain );
     }
     public function get_type(){
         return 'theme';
