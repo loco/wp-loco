@@ -404,6 +404,11 @@ abstract class LocoAdmin {
 
         // no longer need the full local paths
         $path = self::trim_path( $path );
+        
+        // If parsing MO file, from now on treat as PO
+        if( ! $ispot && self::is_mo($path) ){
+            $path = str_replace( '.mo', '.po', $path );
+        }
 
         Loco::enqueue_scripts('build/admin-poedit');
         Loco::render('admin-poedit', compact('package','path','po','pot','locale','headers','name','type','modified','writable','warnings') );
@@ -417,6 +422,15 @@ abstract class LocoAdmin {
      */
     public static function is_pot( $path ){
         return 'pot' === strtolower( pathinfo($path,PATHINFO_EXTENSION) );
+    }
+    
+    
+    
+    /**
+     * test if a file path is a MO (compiled) file
+     */
+    public static function is_mo( $path ){
+        return 'mo' === strtolower( pathinfo($path,PATHINFO_EXTENSION) );
     }
     
     
@@ -498,6 +512,17 @@ abstract class LocoAdmin {
     public static function find_po( $dir ){
         return self::find( $dir, array('po','pot') );
     }
+    
+    
+    
+    /**
+     * Recursively find all MO files anywhere under a directory
+     */
+    public static function find_mo( $dir ){
+        $files = self::find( $dir, array('mo') );
+        return $files['mo'];
+    }
+
 
     
     /**
@@ -596,29 +621,34 @@ abstract class LocoAdmin {
     }
     
     
+    
     /**
-     * Parse PO or POT file
+     * Parse MO, PO or POT file
      */
     public static function parse_po( $path ){
         function_exists('loco_parse_po') or loco_require('build/gettext-compiled');
-        $export = array();
-        $source = file_get_contents($path) and
-        $export = loco_parse_po( file_get_contents($path) );
-        return $export;
+        $source = trim( file_get_contents($path) );
+        if( ! $source ){
+            return array();
+        }
+        $parser = strpos($path,'.mo') ? 'loco_parse_mo' : 'loco_parse_po';
+        return call_user_func( $parser, $source );
     }
     
     
     
     /**
-     * Parse PO or POT file, placing header object into argument
+     * Parse MO, PO or POT file, placing header object into argument
      */
     public static function parse_po_with_headers( $path, &$headers ){
         $export = self::parse_po( $path );
         if( ! isset($export[0]) ){
-            throw new Exception('Empty or invalid PO file');
+            $ext = strtoupper( pathinfo($path,PATHINFO_EXTENSION) );
+            throw new Exception( sprintf( Loco::__('Empty or invalid %s file'), $ext ) );
         }
         if( $export[0]['source'] !== '' ){
-            throw new Exception('PO file has no header');
+            $ext = strtoupper( pathinfo($path,PATHINFO_EXTENSION) );
+            throw new Exception( sprintf( Loco::__('%s file has no header'), $ext ) );
         }
         $headers = loco_parse_po_headers( $export[0]['target'] );
         $export[0] = array(); // <- avoid index errors as json
@@ -647,7 +677,7 @@ abstract class LocoAdmin {
      * @return LocoLocale
      */
     public static function resolve_file_locale( $path ){
-        $stub = str_replace( '.po', '', basename($path) );
+        $stub = str_replace( array('.po','.mo'), array('',''), basename($path) );
         $locale = loco_locale_resolve($stub);
         return $locale;
     }
@@ -661,12 +691,16 @@ abstract class LocoAdmin {
     public static function resolve_file_domain( $path ){
         extract( pathinfo($path) );
         if( ! isset($filename) ){
-            $filename = str_replace('.', '', $basename ); // PHP < 5.2.0
+            $filename = str_replace( '.'.$extension, '', $basename ); // PHP < 5.2.0
         }
         if( 'pot' === $extension ){
             return $filename;
         }
-        return preg_replace('/-[a-z]{2}_[A-Z]{2}$/', '', $filename );
+        if( $domain = preg_replace('/[a-z]{2}(_[A-Z]{2})?$/', '', $filename ) ){
+            return ltrim( $domain, '-' );
+        }
+        // empty domain means file name is probably just a locale
+        return '';
     }
     
     

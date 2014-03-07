@@ -119,7 +119,15 @@ class LocoPackage {
      */
     public function get_name(){
         return $this->name;
-    }    
+    }
+    
+    
+    /**
+     * Get all text domains with PO or POT files.
+     */    
+    private function get_domains(){     
+        return array_unique( array_merge( array_keys($this->pot), array_keys($this->po) ) );
+    }
     
     
     /**
@@ -131,7 +139,7 @@ class LocoPackage {
         }
         if( $this->domain === $this->handle ){
             // if text domain defaulted and existing files disagree, try to correct primary domain
-            $candidates = array_merge( array_keys($this->pot), array_keys($this->po) );
+            $candidates = $this->get_domains();
             if( $candidates && ! in_array( $this->domain, $candidates, true ) ){
                 $this->domain = $candidates[0];
             }
@@ -191,7 +199,7 @@ class LocoPackage {
      * Add multiple locations from found PO and POT files
      * @return LocoPackage
      */
-    public function add_po( array $files, $domain = '' ){
+    private function add_po( array $files, $domain = '' ){
         if( isset($files['pot']) && is_array($files['pot']) ){
             foreach( $files['pot'] as $path ){
                 $domain or $domain = LocoAdmin::resolve_file_domain($path) or $domain = $this->get_domain();
@@ -210,11 +218,32 @@ class LocoPackage {
     }    
     
     
+    
+    /**
+     * Add any MO files for which PO files are missing
+     */ 
+    private function add_mo( array $files, $domain = '' ){
+        foreach( $files as $mo_path ){
+            $domain or $domain = LocoAdmin::resolve_file_domain($mo_path) or $domain = $this->get_domain();
+            $locale = LocoAdmin::resolve_file_locale($mo_path);
+            $code = $locale->get_code() or $code = 'xx_XX';
+            if( isset($this->po[$domain][$code]) ){
+                // PO matched, ignore this MO
+                // @todo better matching as PO may not be in same location as MO
+                continue;
+            }
+            // add MO in place of PO
+            $this->add_file($mo_path) and $this->po[$domain][$code] = $mo_path;
+        }
+    }    
+    
+    
+    
     /**
      * Add a location under which there may be PHP source files for one or more of our domains
      * @return LocoPackage
      */        
-    public function add_source( $path ){
+    private function add_source( $path ){
         $this->src[] = $path;
         return $this;
     }    
@@ -409,7 +438,21 @@ class LocoPackage {
         if( ! $domain ){
             $domain = $this->get_domain();
         }
-        return isset($this->pot[$domain]) ? $this->pot[$domain] : '';
+        if( ! empty($this->pot[$domain]) ){
+            return $this->pot[$domain];
+        }
+        // no POT, but some authors may use locale-less PO files incorrectly as a template
+        if( isset($this->po[$domain]) ){
+            foreach( array('','xx_XX','en_US','en_GB') as $try ){
+                if( isset($this->po[$domain][$try]) ){
+                    $pot = $this->po[$domain][$try];
+                    unset( $this->po[$domain][$try] );
+                    return $this->pot[$domain] = $pot;
+                }
+            }
+        }
+        // no template candidate
+        return '';
     }    
     
     
@@ -466,7 +509,9 @@ class LocoPackage {
     public function meta(){
         if( ! is_array($this->_meta) ){
             $pot = $po = array();
-            foreach( $this->pot as $domain => $path ){
+            // get POT files for all domains, fixing incorrect PO usage
+            foreach( $this->get_domains() as $domain ){
+                $path = $this->get_pot( $domain ) and
                 $pot[] = compact('domain','path');
             }
             // get progress and locale for each PO file
@@ -478,7 +523,7 @@ class LocoPackage {
                         $po[] = array (
                             'path'   => $path,
                             'domain' => $domain,
-                            'name'   => str_replace( array('.po',$domain), array('',''), basename($path) ),
+                            'name'   => trim( str_replace( array('.po','.mo',$domain), array('','',''), basename($path) ), '-_'),
                             'stats'  => loco_po_stats( $export ),
                             'length' => count( $export ),
                             'locale' => loco_locale_resolve($code),
@@ -541,6 +586,10 @@ class LocoPackage {
             if( $files = LocoAdmin::find_po($root) ){
                 $package->add_po( $files, $domain );
             }
+            // pick up any MO files that have missing PO
+            if( $files = LocoAdmin::find_mo($root) ){
+                $package->add_mo( $files, $domain );
+            }
             // find additional theme PO under WP_LANG_DIR/themes unless a child theme
             $package->add_lang_dir(  WP_LANG_DIR.'/themes', $domain );
             // child theme inherits parent template translations
@@ -589,6 +638,10 @@ class LocoPackage {
             // add PO and POT under plugin root
             if( $files = LocoAdmin::find_po($root) ){
                 $package->add_po( $files, $domain );
+            }
+            // pick up any MO files that have missing PO
+            if( $files = LocoAdmin::find_mo($root) ){
+                $package->add_mo( $files, $domain );
             }
             // find additional plugin PO under WP_LANG_DIR/plugin
             $package->add_lang_dir(  WP_LANG_DIR.'/plugins', $domain );

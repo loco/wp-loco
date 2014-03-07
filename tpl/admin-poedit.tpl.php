@@ -41,6 +41,7 @@ $modified or $pofiles[] = $path;
                 // drop down of files in package
                 $poname = basename( $path );
                 foreach( $pofiles as $_path ):
+                    $_path = str_replace( '.mo','.po',$_path);
                     $label = basename($_path);
                     $poedit = LocoAdmin::trim_path($_path);
                     $url = LocoAdmin::uri( $package->get_query() + compact('poedit') );

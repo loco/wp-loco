@@ -100,6 +100,8 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 = 1.4.3 =
  * Child themes use parent text domains
+ * MO files parsed when PO files missing
+ * Handle incorrect usage of PO files as templates
 
 = 1.4.2 =
 * Added backup feature
