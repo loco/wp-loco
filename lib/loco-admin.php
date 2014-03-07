@@ -655,13 +655,16 @@ abstract class LocoAdmin {
     
     /**
      * Resolve a PO file path or file name to TextDomain
-     * @param string e.g. "blah/mytheme-fr_FR.po"
-     * @return string e.fg. "mytheme"
+     * @param string e.g. "blah/mytheme-fr_FR.po" or "myplugin.pot"
+     * @return string e.g. "mytheme"
      */
     public static function resolve_file_domain( $path ){
         extract( pathinfo($path) );
         if( ! isset($filename) ){
             $filename = str_replace('.', '', $basename ); // PHP < 5.2.0
+        }
+        if( 'pot' === $extension ){
+            return $filename;
         }
         return preg_replace('/-[a-z]{2}_[A-Z]{2}$/', '', $filename );
     }
