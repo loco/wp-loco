@@ -289,6 +289,14 @@ abstract class LocoAdmin {
         }
         // template file is developer-editable and has no locale
         $ispot = self::is_pot($path);
+        
+        // support incorrect usage of template PO files
+        if( ! $ispot && $head && ! $head->Language && self::none_translated($data) ){
+            $path .= 't';
+            $warnings[] = sprintf( Loco::__('PO file used as template. This will be renamed to %s on first save'), basename($path) );
+            $ispot = true;
+        }
+        
         if( $ispot ){
             $pot = $data;
             $type = 'POT';
@@ -301,6 +309,8 @@ abstract class LocoAdmin {
             $domain = self::resolve_file_domain($path);
             $haspot = $package->get_pot( $domain );
         }
+        
+        
         // path may not exist if we're creating a new one
         if( file_exists($path) ){
             $modified = self::format_datetime( filemtime($path) );
@@ -618,6 +628,20 @@ abstract class LocoAdmin {
             }
         }
         return $export;
+    }
+    
+    
+    
+    /**
+     * Establish if translations are all empty
+     */
+    private static function none_translated( array $data ){
+        foreach( $data as $message ){
+            if( ! empty($message['target']) ){
+                return false;
+            }
+        }
+        return true;
     }
     
     

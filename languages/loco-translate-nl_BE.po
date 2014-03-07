@@ -3,11 +3,11 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon Jan 20 2014 00:38:13 GMT+0000 (GMT)\n"
-"Last-Translator: admin <support@localise.biz>\n"
+"PO-Revision-Date: Fri Mar 07 2014 17:33:06 GMT+0000 (GMT)\n"
+"Last-Translator: admin <r-admin@timwhitlock.info>\n"
 "Language-Team: \n"
 "Language: Dutch (Belgium)\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -22,69 +22,243 @@ msgstr ""
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: .."
 
+#. Translators: Bold text label in admin error messages
+#: ../lib/loco-admin.php:15 ../pub/js/lang/dummy.php:7
+msgctxt "Message label"
+msgid "Error"
+msgstr "Fout"
+
+#: ../lib/loco-admin.php:24 ../pub/js/lang/dummy.php:6
+msgctxt "Message label"
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: ../lib/loco-admin.php:33 ../pub/js/lang/dummy.php:5
+msgctxt "Message label"
+msgid "OK"
+msgstr "OK"
+
 #: ../lib/loco-admin.php:47
 msgid "Settings saved"
 msgstr ""
 
-#: ../lib/loco-admin.php:838
+#: ../lib/loco-admin.php:120
+msgid "New PO file"
+msgstr "Nieuw PO-bestand"
+
+#: ../lib/loco-admin.php:231
+msgid "You must specify a valid locale for a new PO file"
+msgstr "Specifieer een geldige locale voor een nieuw PO-bestand"
+
+#: ../lib/loco-admin.php:256 ../lib/loco-admin.php:356
+msgid "No translatable strings found"
+msgstr "Geen vertaalbare teksten gevonden"
+
+#: ../lib/loco-admin.php:256
+msgid "Cannot create a PO file."
+msgstr "Kan geen PO-bestand aanmaken"
+
+#: ../lib/loco-admin.php:263
+msgid "PO file already exists with locale %s"
+msgstr "PO-bestand bestaat al in locale %s"
+
+#: ../lib/loco-admin.php:296
+msgid "PO file used as template. This will be renamed to %s on first save"
+msgstr ""
+
+#: ../lib/loco-admin.php:326
+msgid ""
+"File cannot be created automatically. Fix the file permissions or use Download "
+"instead of Save"
+msgstr ""
+"Bestand kan niet automatisch aangemaakt worden. Verander de rechten of gebruik "
+"download en bewaar."
+
+#: ../lib/loco-admin.php:335 ../lib/loco-admin.php:344
+msgid "%s file is empty"
+msgstr "Het bestand %s is leeg"
+
+#: ../lib/loco-admin.php:336 ../lib/loco-admin.php:351
+msgid "Run Sync to update from source code"
+msgstr "Voer Sync uit om de broncode up te daten"
+
+#: ../lib/loco-admin.php:340
+msgid "No strings could be extracted from source code"
+msgstr "Er kon geen tekst uit de broncode gehaald worden"
+
+#: ../lib/loco-admin.php:347
+msgid "Run Sync to update from %s"
+msgstr "Gebruik Sync om vanuit %s up te daten"
+
+#: ../lib/loco-admin.php:366
+msgid "Source code has been modified, run Sync to update POT"
+msgstr "Broncode is veranderd. Gebruik Sync om POT up te daten"
+
+#: ../lib/loco-admin.php:370
+msgid "POT has been modified since PO file was saved, run Sync to update"
+msgstr "POT is veranderd sedert bewaren van het PO-bestand. Gebruik Sync om up te daten"
+
+#: ../lib/loco-admin.php:457
+msgid "Bad file path"
+msgstr "Foute bestandslocatie"
+
+#: ../lib/loco-admin.php:671
+msgid "Empty or invalid %s file"
+msgstr ""
+
+#: ../lib/loco-admin.php:675
+msgid "%s file has no header"
+msgstr ""
+
+#: ../lib/loco-admin.php:797
+msgctxt "Add button"
+msgid "New template"
+msgstr "Nieuw sjabloon"
+
+#: ../lib/loco-admin.php:816
+msgctxt "Add button"
+msgid "New language"
+msgstr "Nieuwe taal"
+
+#: ../lib/loco-admin.php:855
+msgid "%s%% translated"
+msgstr "%s%% vertaald"
+
+#: ../lib/loco-admin.php:855
+msgid "1 string"
+msgid_plural "%s strings"
+msgstr[0] "1 te vertalen tekst"
+msgstr[1] "%s te vertalen teksten"
+
+#: ../lib/loco-admin.php:858
+msgid "%s fuzzy"
+msgstr "%s onzeker"
+
+#: ../lib/loco-admin.php:861
+msgid "%s untranslated"
+msgstr "%s onvertaald"
+
+#: ../lib/loco-admin.php:903
 msgid "Failed to compile MO file with built-in compiler"
 msgstr ""
 
-#: ../lib/loco-admin.php:869
+#: ../lib/loco-admin.php:932
+msgid "Loco, Translation Management"
+msgstr "Loco, vertalingsbeheer"
+
+#: ../lib/loco-admin.php:934
 msgid "Translation"
 msgstr ""
 
-#: ../lib/loco-admin.php:884 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ../tpl/admin-root.tpl.php:7
+#: ../lib/loco-admin.php:937 ../lib/loco-admin.php:948
+msgid "Manage translations"
+msgstr "Beheer vertalingen"
+
+#: ../lib/loco-admin.php:949 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ../tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr ""
 
-#: ../lib/loco-admin.php:908
+#: ../lib/loco-admin.php:973
 msgid "File download failed"
 msgstr ""
 
-#: ../lib/loco-packages.php:249
+#: ../lib/loco-locales.php:70
+msgid "Unknown language"
+msgstr "Onbekende taal"
+
+#: ../lib/loco-packages.php:374 ../lib/loco-packages.php:381
+msgid "Some files not writable"
+msgstr "Sommige bestanden hebben geen schrijfrechten"
+
+#: ../lib/loco-packages.php:384
 msgid "Some files missing"
 msgstr ""
 
-#: ../lib/loco-packages.php:266
-msgid "Folder not writable"
-msgstr ""
+#: ../lib/loco-packages.php:390 ../lib/loco-packages.php:394
+msgid "\"%s\" folder not writable"
+msgstr "Map \"%s\" heeft geen schrijfrechten"
 
-#: ../lib/loco-packages.php:268
+#: ../lib/loco-packages.php:408
 msgid "POT file not writable"
 msgstr ""
 
-#: ../lib/loco-packages.php:272
+#: ../lib/loco-packages.php:413
 msgid "PO file not writable"
 msgstr ""
 
-#: ../lib/loco-packages.php:274
+#: ../lib/loco-packages.php:415
 msgid "MO file not writable"
 msgstr ""
 
-#: ../lib/loco-packages.php:274
+#: ../lib/loco-packages.php:415
 msgid "MO file not found"
 msgstr ""
 
-#: ../php/loco-download.php:68 ../php/loco-posave.php:88
+#: ../lib/loco-packages.php:426
+msgid "Folder not writable"
+msgstr ""
+
+#: ../php/loco-ajax.php:17 ../php/loco-download.php:21
+msgid "User does not have permission to manage translations"
+msgstr "Gebruik heeft geen rechten om vertalingen te beheren"
+
+#: ../php/loco-download.php:75 ../php/loco-posave.php:121
 msgid "Failed to compile MO file with %s, check your settings"
 msgstr ""
+
+#: ../php/loco-posave.php:10 ../php/loco-posync.php:9
+msgid "Invalid data posted to server"
+msgstr "Ongeldige gegevens op server"
 
 #: ../php/loco-posave.php:23 ../php/loco-posync.php:22
 msgid "Package not found called %s"
 msgstr ""
 
+#: ../php/loco-posave.php:58
+msgid ""
+"Web server cannot create backups in \"%s\". Fix file permissions or disable "
+"backups in settings"
+msgstr ""
+
+#: ../php/loco-posave.php:66
+msgid ""
+"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create "
+"it manually."
+msgstr ""
+"Webserver kan map \"%s\" in \"%s\" niet aanmaken. Bewerk bestandsrechten of maak "
+"het zelf aan."
+
 #: ../php/loco-posave.php:69
+msgid ""
+"Web server cannot create files in the \"%s\" directory. Fix file permissions or "
+"use the download function."
+msgstr ""
+"Webserver kan map \"%s\" in \"%s\" niet aanmaken. Bewerk bestandsrechten of gebruik "
+"de downloadfunctie."
+
+#: ../php/loco-posave.php:81
+msgid ""
+"%s file is not writable by the web server. Fix file permissions or download and "
+"copy to \"%s/%s\"."
+msgstr ""
+"Bestand %s kan niet beschreven worden door de webserver. Bewerk de "
+"schrijfrechten of download en kopieer naar \"%s/%s\"."
+
+#: ../php/loco-posave.php:102
 msgid "Cannot create MO file"
 msgstr ""
 
-#: ../php/loco-posave.php:72
+#: ../php/loco-posave.php:105
 msgid "Cannot overwrite MO file"
 msgstr ""
 
-#: ../php/loco-posave.php:98
+#: ../php/loco-posave.php:131
 msgid "Failed to write MO file"
 msgstr ""
+
+#: ../php/loco-posync.php:53
+msgid "No strings could be extracted from source files"
+msgstr "Er konden geen te vertalen teksten uit de bronbestanden gehaald worden"
 
 #: ../pub/js/lang/dummy.php:8
 msgid "Unknown error"
@@ -130,6 +304,10 @@ msgstr[1] ""
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""
 
+#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
+msgid "Packages"
+msgstr "Pakketten"
+
 #: ../tpl/admin-fscheck.tpl.php:8
 msgid "File check"
 msgstr ""
@@ -142,13 +320,48 @@ msgstr ""
 msgid "Back"
 msgstr ""
 
-#: ../tpl/admin-fscheck.tpl.php:41 ../tpl/admin-opts.tpl.php:64
+#: ../tpl/admin-fscheck.tpl.php:41 ../tpl/admin-opts.tpl.php:80
 msgid "Get help"
 msgstr ""
 
-#: ../tpl/admin-list.tpl.php:93
+#: ../tpl/admin-list.tpl.php:11
+msgctxt "Table header"
+msgid "Package details"
+msgstr "Pakketdetails"
+
+#: ../tpl/admin-list.tpl.php:14
+msgctxt "Table header"
+msgid "Translations (PO)"
+msgstr "Vertalingen (PO)"
+
+#: ../tpl/admin-list.tpl.php:17
+msgctxt "Table header"
+msgid "Template (POT)"
+msgstr "Sjabloon (POT)"
+
+#: ../tpl/admin-list.tpl.php:20
+msgctxt "Table header"
+msgid "File permissions"
+msgstr "Bestandsrechten"
+
+#: ../tpl/admin-list.tpl.php:43
+msgid "1 language"
+msgid_plural "%u languages"
+msgstr[0] "1 taal"
+msgstr[1] "%u talen"
+
+#: ../tpl/admin-list.tpl.php:48
+msgctxt "Modified time"
+msgid "Updated"
+msgstr "Geüpdated"
+
+#: ../tpl/admin-list.tpl.php:98
 msgid "OK"
 msgstr ""
+
+#: ../tpl/admin-nav.tpl.php:20
+msgid "Powered by"
+msgstr "Ondersteund door"
 
 #: ../tpl/admin-opts.tpl.php:18
 msgid "Configure Loco Translate"
@@ -174,218 +387,26 @@ msgstr ""
 msgid "Generate hash tables"
 msgstr ""
 
-#: ../tpl/admin-opts.tpl.php:63
+#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
+msgid "Backing up PO files"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:69
+msgid "Number of backups to keep of each file:"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:79
 msgid "Save settings"
 msgstr ""
+
+#: ../tpl/admin-poedit.tpl.php:31
+msgid "Template file"
+msgstr "Sjabloonbestand"
 
 #: ../tpl/admin-poedit.tpl.php:39
 msgctxt "Dropdown label"
 msgid "Switch to..."
 msgstr ""
-
-#: ../tpl/admin-root.tpl.php:66
-msgctxt "Package list header"
-msgid "Core"
-msgstr ""
-
-#. Translators: Bold text label in admin error messages
-#: ../lib/loco-admin.php:15 ../pub/js/lang/dummy.php:7
-msgctxt "Message label"
-msgid "Error"
-msgstr "Fout"
-
-#: ../lib/loco-admin.php:24 ../pub/js/lang/dummy.php:6
-msgctxt "Message label"
-msgid "Warning"
-msgstr "Waarschuwing"
-
-#: ../lib/loco-admin.php:33 ../pub/js/lang/dummy.php:5
-msgctxt "Message label"
-msgid "OK"
-msgstr "OK"
-
-#: ../lib/loco-admin.php:120
-msgid "New PO file"
-msgstr "Nieuw PO-bestand"
-
-#: ../lib/loco-admin.php:230
-msgid "You must specify a valid locale for a new PO file"
-msgstr "Specifieer een geldige locale voor een nieuw PO-bestand"
-
-#: ../lib/loco-admin.php:252 ../lib/loco-admin.php:342
-msgid "No translatable strings found"
-msgstr "Geen vertaalbare teksten gevonden"
-
-#: ../lib/loco-admin.php:252
-msgid "Cannot create a PO file."
-msgstr "Kan geen PO-bestand aanmaken"
-
-#: ../lib/loco-admin.php:259
-msgid "PO file already exists with locale %s"
-msgstr "PO-bestand bestaat al in locale %s"
-
-#: ../lib/loco-admin.php:312
-msgid ""
-"File cannot be created automatically. Fix the file permissions or use Download "
-"instead of Save"
-msgstr ""
-"Bestand kan niet automatisch aangemaakt worden. Verander de rechten of gebruik "
-"download en bewaar."
-
-#: ../lib/loco-admin.php:321 ../lib/loco-admin.php:330
-msgid "%s file is empty"
-msgstr "Het bestand %s is leeg"
-
-#: ../lib/loco-admin.php:322 ../lib/loco-admin.php:337
-msgid "Run Sync to update from source code"
-msgstr "Voer Sync uit om de broncode up te daten"
-
-#: ../lib/loco-admin.php:326
-msgid "No strings could be extracted from source code"
-msgstr "Er kon geen tekst uit de broncode gehaald worden"
-
-#: ../lib/loco-admin.php:333
-msgid "Run Sync to update from %s"
-msgstr "Gebruik Sync om vanuit %s up te daten"
-
-#: ../lib/loco-admin.php:352
-msgid "Source code has been modified, run Sync to update POT"
-msgstr "Broncode is veranderd. Gebruik Sync om POT up te daten"
-
-#: ../lib/loco-admin.php:356
-msgid "POT has been modified since PO file was saved, run Sync to update"
-msgstr "POT is veranderd sedert bewaren van het PO-bestand. Gebruik Sync om up te daten"
-
-#: ../lib/loco-admin.php:429
-msgid "Bad file path"
-msgstr "Foute bestandslocatie"
-
-#: ../lib/loco-admin.php:732
-msgctxt "Add button"
-msgid "New template"
-msgstr "Nieuw sjabloon"
-
-#: ../lib/loco-admin.php:751
-msgctxt "Add button"
-msgid "New language"
-msgstr "Nieuwe taal"
-
-#: ../lib/loco-admin.php:790
-msgid "%s%% translated"
-msgstr "%s%% vertaald"
-
-#: ../lib/loco-admin.php:790
-msgid "1 string"
-msgid_plural "%s strings"
-msgstr[0] "1 te vertalen tekst"
-msgstr[1] "%s te vertalen teksten"
-
-#: ../lib/loco-admin.php:793
-msgid "%s fuzzy"
-msgstr "%s onzeker"
-
-#: ../lib/loco-admin.php:796
-msgid "%s untranslated"
-msgstr "%s onvertaald"
-
-#: ../lib/loco-admin.php:867
-msgid "Loco, Translation Management"
-msgstr "Loco, vertalingsbeheer"
-
-#: ../lib/loco-admin.php:872 ../lib/loco-admin.php:883
-msgid "Manage translations"
-msgstr "Beheer vertalingen"
-
-#: ../lib/loco-locales.php:70
-msgid "Unknown language"
-msgstr "Onbekende taal"
-
-#: ../lib/loco-packages.php:240 ../lib/loco-packages.php:246
-msgid "Some files not writable"
-msgstr "Sommige bestanden hebben geen schrijfrechten"
-
-#: ../lib/loco-packages.php:255
-msgid "\"%s\" folder not writable"
-msgstr "Map \"%s\" heeft geen schrijfrechten"
-
-#: ../php/loco-ajax.php:17 ../php/loco-download.php:21
-msgid "User does not have permission to manage translations"
-msgstr "Gebruik heeft geen rechten om vertalingen te beheren"
-
-#: ../php/loco-posave.php:10 ../php/loco-posync.php:9
-msgid "Invalid data posted to server"
-msgstr "Ongeldige gegevens op server"
-
-#: ../php/loco-posave.php:37
-msgid ""
-"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create "
-"it manually."
-msgstr ""
-"Webserver kan map \"%s\" in \"%s\" niet aanmaken. Bewerk bestandsrechten of maak "
-"het zelf aan."
-
-#: ../php/loco-posave.php:40
-msgid ""
-"Web server cannot create files in the \"%s\" directory. Fix file permissions or "
-"use the download function."
-msgstr ""
-"Webserver kan map \"%s\" in \"%s\" niet aanmaken. Bewerk bestandsrechten of gebruik "
-"de downloadfunctie."
-
-#: ../php/loco-posave.php:48
-msgid ""
-"%s file is not writable by the web server. Fix file permissions or download and "
-"copy to \"%s/%s\"."
-msgstr ""
-"Bestand %s kan niet beschreven worden door de webserver. Bewerk de "
-"schrijfrechten of download en kopieer naar \"%s/%s\"."
-
-#: ../php/loco-posync.php:53
-msgid "No strings could be extracted from source files"
-msgstr "Er konden geen te vertalen teksten uit de bronbestanden gehaald worden"
-
-#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
-msgid "Packages"
-msgstr "Pakketten"
-
-#: ../tpl/admin-list.tpl.php:11
-msgctxt "Table header"
-msgid "Package details"
-msgstr "Pakketdetails"
-
-#: ../tpl/admin-list.tpl.php:14
-msgctxt "Table header"
-msgid "Translations (PO)"
-msgstr "Vertalingen (PO)"
-
-#: ../tpl/admin-list.tpl.php:17
-msgctxt "Table header"
-msgid "Template (POT)"
-msgstr "Sjabloon (POT)"
-
-#: ../tpl/admin-list.tpl.php:20
-msgctxt "Table header"
-msgid "File permissions"
-msgstr "Bestandsrechten"
-
-#: ../tpl/admin-list.tpl.php:38
-msgid "1 language"
-msgid_plural "%u languages"
-msgstr[0] "1 taal"
-msgstr[1] "%u talen"
-
-#: ../tpl/admin-list.tpl.php:43
-msgctxt "Modified time"
-msgid "Updated"
-msgstr "Geüpdated"
-
-#: ../tpl/admin-nav.tpl.php:20
-msgid "Powered by"
-msgstr "Ondersteund door"
-
-#: ../tpl/admin-poedit.tpl.php:31
-msgid "Template file"
-msgstr "Sjabloonbestand"
 
 #: ../tpl/admin-poedit.tpl.php:57
 msgid "Updated"
@@ -478,3 +499,8 @@ msgstr "Thema's"
 msgctxt "Package list header"
 msgid "Plugins"
 msgstr "Plug-ins"
+
+#: ../tpl/admin-root.tpl.php:66
+msgctxt "Package list header"
+msgid "Core"
+msgstr ""

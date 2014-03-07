@@ -39,10 +39,9 @@ $modified or $pofiles[] = $path;
                     <?php Loco::h(Loco::_x('Switch to...','Dropdown label'))?> 
                 </option><?php
                 // drop down of files in package
-                $poname = basename( $path );
+                $poname = str_replace( '.mo', '.po', basename( $path ) );
                 foreach( $pofiles as $_path ):
-                    $_path = str_replace( '.mo','.po',$_path);
-                    $label = basename($_path);
+                    $label = str_replace( '.mo', '.po', basename($_path) );
                     $poedit = LocoAdmin::trim_path($_path);
                     $url = LocoAdmin::uri( $package->get_query() + compact('poedit') );
                 ?> 
