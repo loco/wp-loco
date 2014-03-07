@@ -107,11 +107,20 @@ class LocoPackage {
     
     
     /**
+     * Get descriptive package name
+     */
+    public function get_name(){
+        return $this->name;
+    }    
+    
+    
+    /**
      * Get default text domain
      */
     public function get_domain(){
         return $this->domain;
     }    
+
     
     /**
      * Get time most recent PO/POT file was updated
@@ -459,8 +468,18 @@ class LocoPackage {
     private static function get_theme( $handle ){
         $theme = wp_get_theme( $handle );
         if( $theme && $theme->exists() ){
+            $name = $theme->get('Name');
+            // child themes must use their parent's language files
+            $parent = $theme->get_template();
+            if( $parent && $parent !== $theme->get_stylesheet() ){
+                $theme = wp_get_theme( $parent );
+                if( $theme && $theme->exists() ){
+                    $handle = $parent;
+                    $name = $theme->get('Name');
+                }
+            }
             $domain = $theme->get('TextDomain') or $domain = $handle;
-            $package = new LocoThemePackage( $handle, $domain, $theme->get('Name') );
+            $package = new LocoThemePackage( $handle, $domain, $name );
             $root = $theme->get_theme_root().'/'.$handle;
             $package->add_source( $root );
             // add PO and POT under theme root

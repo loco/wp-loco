@@ -98,6 +98,9 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 == Changelog ==
 
 
+= 1.4.3 =
+ * Child themes use parent text domains
+
 = 1.4.2 =
 * Added backup feature
 * Removed utm domain
@@ -163,7 +166,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 == Upgrade Notice ==
 
-= 1.4.2 =
+= 1.4.3 =
 * Bug fixes and improvements.
 
 

@@ -154,7 +154,8 @@ abstract class LocoAdmin {
             $themes = array();
             foreach( wp_get_themes( array( 'allowed' => true ) ) as $name => $theme ){
                 $package = LocoPackage::get( $name, 'theme' ) and
-                $themes[] = $package;
+                $name = $package->get_name();
+                $themes[ $name ] = $package;
             }
             // @var array $plugin
             $plugins = array();
