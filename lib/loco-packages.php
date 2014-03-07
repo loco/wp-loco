@@ -282,12 +282,26 @@ class LocoPackage {
             $domain = $this->get_domain();
         }
         $dir = $this->lang_dir( $domain );
-        $name = $locale->get_code().'.po';    
+        $name = $locale->get_code().'.po';
         // only prefix with text domain for plugins and files in global lang directory
         if( 'plugin' === $this->get_type() || 0 === strpos( $dir, $this->_lang_dir() ) ){
-            $name = $domain.'-'.$name;
+            $prefix = $domain.'-';
         }
-        return $dir.'/'.$name;
+        else {
+            $prefix = '';
+        }
+        // if PO files exist, copy their naming format and use location if writable
+        if( ! empty($this->po[$domain]) ){
+            foreach( $this->po[$domain] as $code => $path ){
+                $info = pathinfo( $path );
+                $prefix = str_replace( $code.'.po', '', '', $info['basename'] );
+                if( is_writable($info['dirname']) ){
+                    $dir = $info['dirname'];
+                    break;
+                }
+            }
+        }
+        return $dir.'/'.$prefix.$name;
     }
         
     
