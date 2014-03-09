@@ -102,6 +102,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
  * Child themes use parent text domains
  * MO files parsed when PO files missing
  * Handle incorrect usage of PO files as templates
+ * Nicer top-level menu with dashicons icon
 
 = 1.4.2 =
 * Added backup feature

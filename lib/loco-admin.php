@@ -773,6 +773,7 @@ abstract class LocoAdmin {
     /**
      * Test if we're on our own admin page
      * @param string optionally specify exact slug including Loco::NS
+     * @return string current slug
      */
     public static function is_self( $page = null ){
         static $active;
@@ -781,13 +782,10 @@ abstract class LocoAdmin {
             $splode = explode( Loco::NS, $screen->base, 2 );
             $active = isset($splode[1]) ? Loco::NS.$splode[1] : false;
         }
-        if( false === $active ){
-            return false;
+        if( false !== $active && ( is_null($page) || $page === $active ) ){
+            return $active;
         }
-        if( is_null($page) ){
-            return true;
-        }
-        return $page === $active;
+        return '';
     }
     
     
@@ -942,11 +940,20 @@ abstract class LocoAdmin {
 /**
  * Enqueue only admin styles we need
  */  
-function _loco_hook__admin_print_styles(){
-    if( LocoAdmin::is_self() ){
+function _loco_hook__current_screen(){
+    if( $slug = LocoAdmin::is_self() ){
+        // redirect legacy links
+        if( $i = strpos( $slug,'-legacy') ){
+            $args = $_GET;
+            $args['page'] = substr_replace( $slug, '', $i );
+            $uri = LocoAdmin::uri( $args, $slug );
+            wp_redirect( $uri );
+        }
+        // add common resources for all Loco admin pages
         Loco::enqueue_styles('loco-admin');
     }
 }  
+
 
 
 /**
@@ -963,19 +970,20 @@ function _loco_hook__admin_menu() {
         $title = $page_title.' - '.$tool_title;
         $page = array( 'LocoAdmin', 'render_page_tools' );
         // @todo when were dashicons introduced?
-        $hook = add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, 'dashicons-translation' );
+        add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, 'dashicons-translation' );
         // add main link under self with different name
         add_submenu_page( $slug, $title, $tool_title, $cap, $slug, $page );
-        // also add under Tools > Manage translations (legacy)
-        add_management_page( $title, $tool_title, $cap, $slug, $page );
+        // also add under Tools menu (legacy)
+        add_management_page( $title, $tool_title, $cap, $slug.'-legacy', $page );
         // Settings page
         $slug = $slug.'-settings';
         $title = $page_title.' - '.$opts_title;
         $page = array( 'LocoAdmin', 'render_page_options' );
         add_submenu_page( Loco::NS, $title, $opts_title, $cap, $slug, $page );
-        add_options_page( $title, $opts_title, Loco::CAPABILITY, $slug, $page );
-        // other admin page hooks
-        add_action('admin_print_styles', '_loco_hook__admin_print_styles' );
+        // also add under Settings menu (legacy)
+        add_options_page( $title, $opts_title, Loco::CAPABILITY, $slug.'-legacy', $page );
+        // Hook in page stuff as soon as screen is avaiable
+        add_action('current_screen', '_loco_hook__current_screen' );
     }        
 }
 
@@ -985,8 +993,8 @@ function _loco_hook__admin_menu() {
  */
 function _loco_hook__plugin_row_meta( $links, $file = '' ){
     if( false !== strpos($file,'/loco.php') ){
-        $links[] = '<a href="tools.php?page='.Loco::NS.'"><strong>'.Loco::__('Manage translations').'</strong></a>';
-        $links[] = '<a href="options-general.php?page='.Loco::NS.'"><strong>'.Loco::__('Settings').'</strong></a>';
+        $links[] = '<a href="'.Loco::html( LocoAdmin::uri( array(), '' ) ).'"><strong>'.Loco::__('Manage translations').'</strong></a>';
+        $links[] = '<a href="'.Loco::html( LocoAdmin::uri( array(), 'settings') ).'"><strong>'.Loco::__('Settings').'</strong></a>';
     } 
     return $links;
 }
