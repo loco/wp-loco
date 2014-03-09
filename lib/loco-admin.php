@@ -35,11 +35,22 @@ abstract class LocoAdmin {
     }
     
     
+    /**
+     * Exit forbidden
+     */
+    private static function forbid(){
+        wp_die( Loco::__('Permission denied'), 'Forbidden', array('response' => 403 ) );
+        trigger_error('wp_die failure', E_USER_ERROR );
+        exit();
+    }     
+    
+    
     
     /**
      * Admin settings page render call
      */
     public static function render_page_options(){
+        current_user_can(Loco::CAPABILITY) or self::forbid();
         // update applicaion settings if posted
         if( isset($_POST['loco']) && is_array( $update = $_POST['loco'] ) ){
             $update += array( 'gen_hash' => '0' );
@@ -63,13 +74,13 @@ abstract class LocoAdmin {
      * Admin tools page render call
      */
     public static function render_page_tools(){
+        current_user_can(Loco::CAPABILITY) or self::forbid();
         do {
             try {
                 
                 // libs required for all manage translation pages
                 loco_require('loco-locales','loco-packages');
                 
-
                 // most actions except root listing define a single package by name and type
                 $package = null;
                 if( isset($_GET['name']) && isset($_GET['type']) ){
@@ -746,26 +757,37 @@ abstract class LocoAdmin {
     /**
      * Generate an admin page URI with custom args
      */
-    public static function uri( array $args = array() ){
-        static $base_uri;
-        if( ! isset($base_uri) ){
-            $snip = 'page='.Loco::NS;
-            $base_uri = current( explode($snip,$_SERVER['REQUEST_URI']) ).$snip;
+    public static function uri( array $args = array(), $suffix = '' ){
+        $base_uri = admin_url('admin.php');
+        if( ! isset($args['page']) ){
+            $args['page'] = Loco::NS;
+            if( $suffix ){
+                $args['page'].= '-'.$suffix;
+            }
         }
-        if( ! $args ){
-            return $base_uri;
-        }
-        return $base_uri.'&'.http_build_query( $args );
+        return $base_uri.'?'.http_build_query( $args );
     }
     
     
     
     /**
      * Test if we're on our own admin page
+     * @param string optionally specify exact slug including Loco::NS
      */
-    public static function is_self(){
-        static $bool;
-        return isset($bool) ? $bool : ( $bool = false !== strpos($_SERVER['REQUEST_URI'], '?page='.Loco::NS ) );
+    public static function is_self( $page = null ){
+        static $active;
+        if( ! isset($active) ){
+            $screen = get_current_screen();
+            $splode = explode( Loco::NS, $screen->base, 2 );
+            $active = isset($splode[1]) ? Loco::NS.$splode[1] : false;
+        }
+        if( false === $active ){
+            return false;
+        }
+        if( is_null($page) ){
+            return true;
+        }
+        return $page === $active;
     }
     
     
@@ -931,15 +953,30 @@ function _loco_hook__admin_print_styles(){
  * Admin menu registration callback
  */
 function _loco_hook__admin_menu() {
-    // Settings menu
-    $title = Loco::__('Loco, Translation Management');
-    $page = array( 'LocoAdmin', 'render_page_options' );
-    add_options_page( $title, Loco::__('Translation'), 'manage_options', Loco::NS, $page );
-    // Tools menu
-    $page = array( 'LocoAdmin', 'render_page_tools' );
-    $hook = add_management_page( $title, Loco::__('Manage translations'), LOCO::CAPABILITY, Loco::NS, $page );
-    add_action('admin_print_styles', '_loco_hook__admin_print_styles' );
-        
+    $cap = LOCO::CAPABILITY;
+    if( current_user_can($cap) ){
+        $page_title = Loco::__('Loco, Translation Management');
+        $tool_title = Loco::__('Manage translations');
+        $opts_title = Loco::__('Translation options');
+        // Loco main menu item
+        $slug = Loco::NS;
+        $title = $page_title.' - '.$tool_title;
+        $page = array( 'LocoAdmin', 'render_page_tools' );
+        // @todo when were dashicons introduced?
+        $hook = add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, 'dashicons-translation' );
+        // add main link under self with different name
+        add_submenu_page( $slug, $title, $tool_title, $cap, $slug, $page );
+        // also add under Tools > Manage translations (legacy)
+        add_management_page( $title, $tool_title, $cap, $slug, $page );
+        // Settings page
+        $slug = $slug.'-settings';
+        $title = $page_title.' - '.$opts_title;
+        $page = array( 'LocoAdmin', 'render_page_options' );
+        add_submenu_page( Loco::NS, $title, $opts_title, $cap, $slug, $page );
+        add_options_page( $title, $opts_title, Loco::CAPABILITY, $slug, $page );
+        // other admin page hooks
+        add_action('admin_print_styles', '_loco_hook__admin_print_styles' );
+    }        
 }
 
 

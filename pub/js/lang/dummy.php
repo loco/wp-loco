@@ -1,6 +1,6 @@
 <?php
 /**
- * here for source code extraction until xgettext is applied to js files too
+ * Here for source code extraction until xgettext is applied to js files too
  */
 _x('OK','Message label');
 _x('Warning','Message label');
@@ -15,3 +15,9 @@ __('Already up to date with source code');
 _n('1 new string added','%s new strings added', 2 );
 _n('1 obsolete string removed','%s obsolete strings removed', 2 );
 __('Your changes will be lost if you continue without saving');
+
+
+/**
+ * Legacy translations, removed from front end but don't want to lose in case reinstated 
+ */
+__('Translation');

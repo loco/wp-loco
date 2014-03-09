@@ -4,7 +4,7 @@
  */
 $nav = array (
     Loco::__('Packages') => '',
-    Loco::__('Settings') => str_replace( 'tools', 'options-general', LocoAdmin::uri() ),
+    Loco::__('Settings') => LocoAdmin::uri( array(), 'settings' ),
 ); 
 ?> 
 
