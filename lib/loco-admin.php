@@ -962,6 +962,10 @@ function _loco_hook__current_screen(){
 function _loco_hook__admin_menu() {
     $cap = LOCO::CAPABILITY;
     if( current_user_can($cap) ){
+        // hook in legacy wordpress styles as menu will display
+        $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) or
+        Loco::enqueue_styles('loco-legacy');
+        
         $page_title = Loco::__('Loco, Translation Management');
         $tool_title = Loco::__('Manage translations');
         $opts_title = Loco::__('Translation options');
@@ -970,12 +974,7 @@ function _loco_hook__admin_menu() {
         $title = $page_title.' - '.$tool_title;
         $page = array( 'LocoAdmin', 'render_page_tools' );
         // Dashicons were introduced in WP 3.8
-        if( version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) ){
-            $icon = 'dashicons-translation';
-        }
-        else {
-            $icon = 'none';
-        }
+        $icon = $wp_38 ? 'dashicons-translation' : 'none';
         add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, $icon );
         // add main link under self with different name
         add_submenu_page( $slug, $title, $tool_title, $cap, $slug, $page );

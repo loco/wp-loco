@@ -1,0 +1,10 @@
+/* styles for versions of wordpress below 3.8 */
+
+#adminmenu .toplevel_page_loco-translate .wp-menu-image {
+    background-image: url(../img/wp/menu.png);
+    background-position: -329px -33px;
+}
+
+#adminmenu .toplevel_page_loco-translate.wp-has-current-submenu .wp-menu-image {
+    background-position: -329px -1px;
+}
