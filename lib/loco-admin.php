@@ -969,8 +969,14 @@ function _loco_hook__admin_menu() {
         $slug = Loco::NS;
         $title = $page_title.' - '.$tool_title;
         $page = array( 'LocoAdmin', 'render_page_tools' );
-        // @todo when were dashicons introduced?
-        add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, 'dashicons-translation' );
+        // Dashicons were introduced in WP 3.8
+        if( version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) ){
+            $icon = 'dashicons-translation';
+        }
+        else {
+            $icon = 'none';
+        }
+        add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, $icon );
         // add main link under self with different name
         add_submenu_page( $slug, $title, $tool_title, $cap, $slug, $page );
         // also add under Tools menu (legacy)
