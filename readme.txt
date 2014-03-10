@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
 Requires at least: 3.5
 Tested up to: 3.8.1
-Stable tag: 1.4.2
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,6 +103,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
  * MO files parsed when PO files missing
  * Handle incorrect usage of PO files as templates
  * Nicer top-level menu with dashicons icon
+ * Added IE<=8 warning
 
 = 1.4.2 =
 * Added backup feature
