@@ -65,6 +65,7 @@ abstract class LocoAdmin {
             function_exists('loco_find_executable') or loco_require('build/shell-compiled');
             $args['which_msgfmt'] = loco_find_executable('msgfmt');// and Loco::config( $args );
         }
+        Loco::enqueue_scripts('build/admin-common');
         Loco::render('admin-opts', $args );
     }     
     
@@ -130,7 +131,7 @@ abstract class LocoAdmin {
                     // else render msginit start screen
                     $title = Loco::__('New PO file');
                     $locales = loco_require('build/locales-compiled');
-                    Loco::enqueue_scripts('admin-poinit');
+                    Loco::enqueue_scripts( 'build/admin-common', 'build/admin-poinit');
                     Loco::render('admin-poinit', compact('package','domain','title','locales') );
                     break;
                 }
@@ -149,6 +150,7 @@ abstract class LocoAdmin {
                 //
                 if( isset($_GET['fscheck']) ){
                     $meta = $package->meta();
+                    Loco::enqueue_scripts('build/admin-common');
                     Loco::render('admin-fscheck', $meta + compact('package') );
                     break;
                 }

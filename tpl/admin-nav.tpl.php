@@ -22,3 +22,6 @@
         </a>
     </h2>
     
+    <!--[if lt IE 9]><?php
+    LocoAdmin::warning( __( $ignore = 'Your browser is out of date!').' '.Loco::html( Loco::__('Loco may not work as expected') ) );
+    ?><![endif]-->

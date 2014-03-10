@@ -1,0 +1,1 @@
+!function(a,c,b){a=c.getElementById("loco-msginit");var d=a["custom-locale"];b(a["common-locale"]).change(function(){d.value=b(this).val();return!0})}(window,document,window.jQuery);
