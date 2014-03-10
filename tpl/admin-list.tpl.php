@@ -99,7 +99,7 @@
                             </li><?php
                         }
                         catch( Exception $Ex ){?> 
-                            <li class="loco-warn">
+                            <li class="loco-warning">
                                 <?php echo LocoAdmin::fscheck_link( $package, $domain, $Ex->getMessage() )?> 
                             </li><?php
                         }?> 

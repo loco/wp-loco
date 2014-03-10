@@ -24,7 +24,7 @@ $nav = array (
             <code><?php Loco::h( LocoAdmin::trim_path($path) )?></code>
         </li><?php
         if( $error ):?>
-        <li class="loco-warn">
+        <li class="loco-warning">
             <span><?php Loco::h($error)?></span>
         </li><?php
         else:?> 
