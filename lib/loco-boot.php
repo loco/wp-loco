@@ -11,6 +11,9 @@ abstract class Loco {
     const VERSION = '1.4.2';
     const CAPABILITY = 'manage_options';
     
+    /* current plugin locale */
+    private static $locale;
+    
     /* whether to enable APC cache */
     public static $apc_enabled;
 
@@ -33,14 +36,35 @@ abstract class Loco {
     /**
      * Bootstrap localisation of self
      */
-    public static function load_textdomain(){
-        $locale = get_locale();
-        if( ! $locale || 0 === strpos($locale,'en') ){
-            return;
+    public static function load_textdomain( $locale = null ){
+        if( is_null($locale) ){
+            $locale = get_locale();
         }
-        $plugin_rel_path = basename( self::basedir() );
-        load_plugin_textdomain( Loco::NS, false, $plugin_rel_path.'/languages' );
+        if( ! $locale || 0 === strpos($locale,'en') ){
+            self::$locale and unload_textdomain( Loco::NS );
+            $locale = 'en_US';
+        }
+        else if( self::$locale !== $locale ){
+            $plugin_rel_path = basename( self::basedir() );
+            load_plugin_textdomain( Loco::NS, false, $plugin_rel_path.'/languages' );
+        }
+        // detect changes in plugin locale, binding once only
+        isset(self::$locale) or add_filter( 'plugin_locale', array(__CLASS__,'filter_plugin_locale'), 10 , 2 );
+        self::$locale = $locale;
     }
+    
+    
+    
+    /**
+     * Listen for change in plugin locale
+     */
+    public static function filter_plugin_locale( $locale, $domain ){
+        if( self::NS !== $domain && $locale !== self::$locale ){
+            self::load_textdomain( $locale );
+        }
+        return $locale;
+    }
+    
     
     
     /**
@@ -53,6 +77,7 @@ abstract class Loco {
             // temporary measure assumes name of plugin folder is unchanged.
             $here = WP_PLUGIN_DIR.'/'.Loco::NS.'/loco.php';
         }
+        //var_dump( $here );
         return $here;
     }     
     
@@ -291,6 +316,4 @@ abstract class Loco {
 // minimum config
 Loco::$apc_enabled = function_exists('apc_fetch') && ini_get('apc.enabled');
 Loco::load_textdomain();
-
-
 
