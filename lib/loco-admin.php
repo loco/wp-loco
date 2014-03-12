@@ -266,7 +266,6 @@ abstract class LocoAdmin {
         if( ! $export ){
             $export = self::xgettext( $package, $po_dir );
             if( ! $export ){
-                var_dump( $domain );
                 throw new Exception( Loco::__('No translatable strings found').'. '.Loco::__('Cannot create a PO file.') );
             }
         }
