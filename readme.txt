@@ -98,6 +98,9 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 == Changelog ==
 
 
+= 1.4.4 =
+ * Fixed bug in prefixing new PO files with text domain based on existing files
+
 = 1.4.3 =
  * Child themes use parent text domains
  * MO files parsed when PO files missing
@@ -170,7 +173,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 == Upgrade Notice ==
 
-= 1.4.3 =
+= 1.4.4 =
 * Bug fixes and improvements.
 
 
