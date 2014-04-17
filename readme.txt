@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
 Requires at least: 3.5
-Tested up to: 3.8.1
+Tested up to: 3.9
 Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -97,6 +97,10 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 == Changelog ==
 
+= 1.4.4 =
+* Fixed file prefixing bug
+* Language updates
+* Tested in WP 3.9
 
 = 1.4.3 =
  * Child themes use parent text domains
