@@ -2,7 +2,7 @@
 /**
  * Loco | bootstraps plugin when it's needed.
  * Top-level Loco class holds some basic utilities
- */ 
+ */
 abstract class Loco {
 
     /** plugin namespace */
@@ -13,9 +13,12 @@ abstract class Loco {
     
     /* current plugin locale */
     private static $locale;
-    
+
     /* whether to enable APC cache */
     public static $apc_enabled;
+
+    /* whether to enable the cache at all  */
+    public static $cache_enabled;
 
     /* call Wordpress __ with our text domain  */
     public static function __( $msgid = '' ){
@@ -212,7 +215,7 @@ abstract class Loco {
      * @return mixed 
      */
     public static function cached( $key ){
-        if( WP_DEBUG ){
+        if( ! self::$cache_enabled ){
             return null;
         }
         $key = self::cache_key($key);
@@ -229,6 +232,9 @@ abstract class Loco {
      * @return void
      */
      public static function cache( $key, $value, $ttl = 0 ){
+        if( ! self::$cache_enabled ){
+            return;
+        }
         $key = self::cache_key($key);
         if( self::$apc_enabled ){
             apc_store( $key, $value, $ttl );
@@ -314,6 +320,7 @@ abstract class Loco {
 
 
 // minimum config
+Loco::$cache_enabled = apply_filters( 'loco_cache_enabled', ! WP_DEBUG ) and
 Loco::$apc_enabled = function_exists('apc_fetch') && ini_get('apc.enabled');
 Loco::load_textdomain();
 
