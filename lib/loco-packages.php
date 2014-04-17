@@ -323,7 +323,7 @@ class LocoPackage {
         if( ! empty($this->po[$domain]) ){
             foreach( $this->po[$domain] as $code => $path ){
                 $info = pathinfo( $path );
-                $prefix = str_replace( $code.'.po', '', '', $info['basename'] );
+                $prefix = str_replace( $code.'.'.$info['extension'], '', $info['basename'] );
                 if( is_writable($info['dirname']) ){
                     $dir = $info['dirname'];
                     break;
