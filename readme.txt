@@ -98,13 +98,10 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 == Changelog ==
 
 = 1.4.4 =
-* Fixed file prefixing bug
+* Fixed bug in prefixing new PO files with text domain based on existing files
 * Language file updates
 * Tested in WP 3.9
 * Added loco_cache_enabled filter
-
-= 1.4.4 =
- * Fixed bug in prefixing new PO files with text domain based on existing files
 
 = 1.4.3 =
 * Child themes use parent text domains
