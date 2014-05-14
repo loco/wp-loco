@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Wed Mar 12 2014 10:15:08 GMT+0000 (GMT)\n"
-"Last-Translator: Loco <support@localise.biz>\n"
+"PO-Revision-Date: Wed May 14 2014 16:21:01 GMT+0100 (BST)\n"
+"Last-Translator: Tim <tim@timwhitlock.192.168.0.7.xip.io>\n"
 "Language-Team: \n"
 "Language: Turkish\n"
 "Plural-Forms: nplurals=2; plural=n > 1\n"
@@ -22,48 +22,6 @@ msgstr ""
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: tr_TR"
 
-#: ../lib/loco-admin.php:42
-msgid "Permission denied"
-msgstr ""
-
-#: ../lib/loco-admin.php:317
-msgid "PO file used as template. This will be renamed to %s on first save"
-msgstr ""
-
-#: ../lib/loco-admin.php:686
-msgid "Empty or invalid %s file"
-msgstr ""
-
-#: ../lib/loco-admin.php:690
-msgid "%s file has no header"
-msgstr ""
-
-#: ../lib/loco-admin.php:972
-msgid "Translation options"
-msgstr ""
-
-#: ../lib/loco-admin.php:979
-msgid "Loco Translate"
-msgstr ""
-
-#: ../php/loco-posave.php:58
-msgid ""
-"Web server cannot create backups in \"%s\". Fix file permissions or disable "
-"backups in settings"
-msgstr ""
-
-#: ../tpl/admin-nav.tpl.php:26
-msgid "Loco may not work as expected"
-msgstr ""
-
-#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
-msgid "Backing up PO files"
-msgstr ""
-
-#: ../tpl/admin-opts.tpl.php:69
-msgid "Number of backups to keep of each file:"
-msgstr ""
-
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:15 ../pub/js/lang/dummy.php:7
 msgctxt "Message label"
@@ -80,31 +38,39 @@ msgctxt "Message label"
 msgid "OK"
 msgstr "TAMAM"
 
+#: ../lib/loco-admin.php:42
+msgid "Permission denied"
+msgstr ""
+
 #: ../lib/loco-admin.php:58
 msgid "Settings saved"
 msgstr "Ayarlar saklandı"
 
-#: ../lib/loco-admin.php:132
+#: ../lib/loco-admin.php:134
 msgid "New PO file"
 msgstr "Yeni PO Dosyası"
 
-#: ../lib/loco-admin.php:244
+#: ../lib/loco-admin.php:246
 msgid "You must specify a valid locale for a new PO file"
 msgstr "Yeni PO dosyası için geçerli bir locale değeri belirtmek zorundasınız"
 
-#: ../lib/loco-admin.php:269 ../lib/loco-admin.php:371
+#: ../lib/loco-admin.php:271 ../lib/loco-admin.php:373
 msgid "No translatable strings found"
 msgstr "Çevrilebilir cümle bulunamadı"
 
-#: ../lib/loco-admin.php:269
+#: ../lib/loco-admin.php:271
 msgid "Cannot create a PO file."
 msgstr "Bir PO dosyası oluşturulamıyor."
 
-#: ../lib/loco-admin.php:276
+#: ../lib/loco-admin.php:278
 msgid "PO file already exists with locale %s"
 msgstr "PO dosyası %s locale değeri ile zaten mevcut"
 
-#: ../lib/loco-admin.php:341
+#: ../lib/loco-admin.php:319
+msgid "PO file used as template. This will be renamed to %s on first save"
+msgstr ""
+
+#: ../lib/loco-admin.php:343
 msgid ""
 "File cannot be created automatically. Fix the file permissions or use Download "
 "instead of Save"
@@ -112,81 +78,97 @@ msgstr ""
 "Dosya otomatik olarak oluşturulamıyor. Dosya izinlerini tamir edin ya da "
 "Saklama yerine İndirin."
 
-#: ../lib/loco-admin.php:350 ../lib/loco-admin.php:359
+#: ../lib/loco-admin.php:352 ../lib/loco-admin.php:361
 msgid "%s file is empty"
 msgstr "%s dosyası boş"
 
-#: ../lib/loco-admin.php:351 ../lib/loco-admin.php:366
+#: ../lib/loco-admin.php:353 ../lib/loco-admin.php:368
 msgid "Run Sync to update from source code"
 msgstr "Kaynak dosyasından güncelleme için Senkr. çalıştır"
 
-#: ../lib/loco-admin.php:355
+#: ../lib/loco-admin.php:357
 msgid "No strings could be extracted from source code"
 msgstr "Kaynak kodundan herhangi cümle çıkarılamadı"
 
-#: ../lib/loco-admin.php:362
+#: ../lib/loco-admin.php:364
 msgid "Run Sync to update from %s"
 msgstr "%s üzerinden güncelleme için Senkr. çalıştır"
 
-#: ../lib/loco-admin.php:381
+#: ../lib/loco-admin.php:383
 msgid "Source code has been modified, run Sync to update POT"
 msgstr "Kaynak dosyası değiştirilmiş, POT güncellemesi için Senkr. çalıştırın"
 
-#: ../lib/loco-admin.php:385
+#: ../lib/loco-admin.php:387
 msgid "POT has been modified since PO file was saved, run Sync to update"
 msgstr ""
 "PO dosyası en son saklandığından beri POT değişikliğe uğramış, güncelleme için "
 "Senkr. çalıştırın."
 
-#: ../lib/loco-admin.php:472
+#: ../lib/loco-admin.php:474
 msgid "Bad file path"
 msgstr "Uygun olmayan dosya yolu"
 
-#: ../lib/loco-admin.php:821
+#: ../lib/loco-admin.php:688
+msgid "Empty or invalid %s file"
+msgstr ""
+
+#: ../lib/loco-admin.php:692
+msgid "%s file has no header"
+msgstr ""
+
+#: ../lib/loco-admin.php:824
 msgctxt "Add button"
 msgid "New template"
 msgstr "Yeni şablon"
 
-#: ../lib/loco-admin.php:840
+#: ../lib/loco-admin.php:843
 msgctxt "Add button"
 msgid "New language"
 msgstr "Yeni dil"
 
-#: ../lib/loco-admin.php:879
+#: ../lib/loco-admin.php:882
 msgid "%s%% translated"
 msgstr "%s%% çevrildi"
 
-#: ../lib/loco-admin.php:879
+#: ../lib/loco-admin.php:882
 msgid "1 string"
 msgid_plural "%s strings"
 msgstr[0] "1 cümle"
 msgstr[1] "%s cümle"
 
-#: ../lib/loco-admin.php:882
+#: ../lib/loco-admin.php:885
 msgid "%s fuzzy"
 msgstr "%s bulanık"
 
-#: ../lib/loco-admin.php:885
+#: ../lib/loco-admin.php:888
 msgid "%s untranslated"
 msgstr "%s çevrilmemiş"
 
-#: ../lib/loco-admin.php:927
+#: ../lib/loco-admin.php:930
 msgid "Failed to compile MO file with built-in compiler"
 msgstr "Dahili derleyici ile MO derlemesinde hata"
 
-#: ../lib/loco-admin.php:970 ../tpl/admin-nav.tpl.php:21
+#: ../lib/loco-admin.php:973 ../tpl/admin-nav.tpl.php:21
 msgid "Loco, Translation Management"
 msgstr "Loco, Çevri Yönetimi"
 
-#: ../lib/loco-admin.php:971 ../lib/loco-admin.php:1002
+#: ../lib/loco-admin.php:974 ../lib/loco-admin.php:1005
 msgid "Manage translations"
 msgstr "Çevrileri Yönet"
 
-#: ../lib/loco-admin.php:1003 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ../tpl/admin-root.tpl.php:7
+#: ../lib/loco-admin.php:975
+msgid "Translation options"
+msgstr ""
+
+#: ../lib/loco-admin.php:982
+msgid "Loco Translate"
+msgstr ""
+
+#: ../lib/loco-admin.php:1006 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ../tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "Ayarlar"
 
-#: ../lib/loco-admin.php:1027
+#: ../lib/loco-admin.php:1030
 msgid "File download failed"
 msgstr "Dosya indirme hatası"
 
@@ -194,37 +176,41 @@ msgstr "Dosya indirme hatası"
 msgid "Unknown language"
 msgstr "Bilinmeyen dil"
 
-#: ../lib/loco-packages.php:374 ../lib/loco-packages.php:381
+#: ../lib/loco-packages.php:420 ../lib/loco-packages.php:427
 msgid "Some files not writable"
 msgstr "Bazı dosyalar yazılabilir değil"
 
-#: ../lib/loco-packages.php:384
+#: ../lib/loco-packages.php:430
 msgid "Some files missing"
 msgstr "Bazı dosyalar eksik"
 
-#: ../lib/loco-packages.php:390 ../lib/loco-packages.php:394
+#: ../lib/loco-packages.php:436 ../lib/loco-packages.php:440
 msgid "\"%s\" folder not writable"
 msgstr "\"%s\" dizini yazılabilir değil"
 
-#: ../lib/loco-packages.php:408
+#: ../lib/loco-packages.php:461
 msgid "POT file not writable"
 msgstr "POT dosyası yazılabilir değil"
 
-#: ../lib/loco-packages.php:413
+#: ../lib/loco-packages.php:466
 msgid "PO file not writable"
 msgstr "PO dosyası yazılabilir değil"
 
-#: ../lib/loco-packages.php:415
+#: ../lib/loco-packages.php:468
 msgid "MO file not writable"
 msgstr "MO dosyası yazılabilir değil"
 
-#: ../lib/loco-packages.php:415
+#: ../lib/loco-packages.php:468
 msgid "MO file not found"
 msgstr "MO dosyası bulunamadı"
 
-#: ../lib/loco-packages.php:426
+#: ../lib/loco-packages.php:473
 msgid "Folder not writable"
 msgstr "Dizin yazılabilir değil"
+
+#: ../lib/loco-packages.php:473
+msgid "Folder not found"
+msgstr ""
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
@@ -241,6 +227,12 @@ msgstr "Sunucuya gönderili veri geçersiz"
 #: ../php/loco-posave.php:23 ../php/loco-posync.php:22
 msgid "Package not found called %s"
 msgstr "%s isimli paket bulunamadı"
+
+#: ../php/loco-posave.php:58
+msgid ""
+"Web server cannot create backups in \"%s\". Fix file permissions or disable "
+"backups in settings"
+msgstr ""
 
 #: ../php/loco-posave.php:66
 msgid ""
@@ -389,6 +381,10 @@ msgstr "TAMAM"
 msgid "Powered by"
 msgstr "Destekleyici:"
 
+#: ../tpl/admin-nav.tpl.php:26
+msgid "Loco may not work as expected"
+msgstr ""
+
 #: ../tpl/admin-opts.tpl.php:18
 msgid "Configure Loco Translate"
 msgstr "Loco Translate'i konfigüre et"
@@ -412,6 +408,14 @@ msgstr "Sunucudaki msgfmt'ye yol gir"
 #: ../tpl/admin-opts.tpl.php:54
 msgid "Generate hash tables"
 msgstr "Hash tabloları üret"
+
+#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
+msgid "Backing up PO files"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:69
+msgid "Number of backups to keep of each file:"
+msgstr ""
 
 #: ../tpl/admin-opts.tpl.php:79
 msgid "Save settings"
@@ -491,7 +495,12 @@ msgctxt "Form label"
 msgid "or enter any language code"
 msgstr "veya herhangi dil kodu gir"
 
-#: ../tpl/admin-poinit.tpl.php:51
+#: ../tpl/admin-poinit.tpl.php:63
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr ""
+
+#: ../tpl/admin-poinit.tpl.php:68
 msgctxt "Submit button"
 msgid "Start translating"
 msgstr "Çevriye Başla"
