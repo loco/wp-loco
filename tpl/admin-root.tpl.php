@@ -36,7 +36,7 @@ $nav = array (
     //
     if( $themes ):?> 
     <div class="icon32 icon-appearance"><br /></div>
-    <h2>
+    <h2 class="dashicons-admin-appearance">
         <?php Loco::h( Loco::_x('Themes','Package list header') )?> 
     </h2>
     <div class="loco-list loco-list-themes">
@@ -49,7 +49,7 @@ $nav = array (
     //
     if( $plugins ):?> 
     <div class="icon32 icon-plugins"><br /></div>
-    <h2>
+    <h2 class="dashicons-admin-plugins">
         <?php Loco::h( Loco::_x('Plugins','Package list header') )?> 
     </h2>
     <div class="loco-list loco-list-plugins">
@@ -62,7 +62,7 @@ $nav = array (
     //
     if( $core ):?> 
     <div class="icon32 icon-generic"><br /></div>
-    <h2>
+    <h2 class="dashicons-wordpress">
         <?php Loco::h( Loco::_x('Core','Package list header') )?> 
     </h2>
     <div class="loco-list loco-list-core">
