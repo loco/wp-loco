@@ -412,7 +412,7 @@ class LocoPackage {
      * Check PO/POT paths are writable.
      * Called when generating root list view for simple error indicators.
      */    
-    public function check_permissions( $is_parent = false ){
+    public function check_permissions(){
         $dirs = array();
         foreach( $this->pot as $path ){
             $dirs[ dirname($path) ] = 1;
@@ -440,17 +440,13 @@ class LocoPackage {
                 throw new Exception( sprintf( Loco::__('"%s" folder not writable'), basename($dir) ) );
             }
         }
-        // check parent theme if exists
-        if( ! $is_parent && ( $parent = $this->get_parent() ) ){
-            $parent->check_permissions( true );
-        }
-}    
+    }    
     
     
     /**
      * Get file permission for every important file path in package 
      */
-    public function get_permission_errors( $is_parent = false ){
+    public function get_permission_errors(){
         $dirs = array();
         // add common directories
         $base = $this->get_root();
@@ -475,10 +471,6 @@ class LocoPackage {
         // run directory checks and sort final list alphabetically
         foreach( array_keys($dirs) as $dir ){
             $paths[$dir] = is_writable($dir) ? '' : ( is_dir($dir) ? Loco::__('Folder not writable') : Loco::__('Folder not found') );
-        }
-        // check parent theme if exists
-        if( ! $is_parent && ( $parent = $this->get_parent() ) ){
-            $paths += $parent->get_permission_errors( true );
         }
         ksort( $paths );
         return $paths;    
@@ -809,6 +801,20 @@ class LocoThemePackage extends LocoPackage {
             }
         }
         return $meta;
+    }
+    public function check_permissions(){
+        parent::check_permissions();
+        if( $parent = $this->get_parent() ){
+            $parent->check_permissions();
+        }
+    }
+    public function get_permission_errors(){
+        $paths = parent::get_permission_errors();
+        // check parent theme if exists
+        if( $parent = $this->get_parent() ){
+            $paths += $parent->get_permission_errors( true );
+        }
+        return $paths;
     }
     public function get_pot( $domain = '' ){
         if( ( $parent = $this->get_parent() ) && ( $pot = $parent->get_pot($domain) ) ){
