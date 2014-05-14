@@ -626,7 +626,7 @@ class LocoPackage {
         if( $theme && $theme->exists() ){
             $name = $theme->get('Name');
             $domain = $theme->get('TextDomain');
-            $package = new LocoThemePackage( $handle, $domain, $theme->get('DomainPath') );
+            $package = new LocoThemePackage( $handle, $domain, $name, $theme->get('DomainPath') );
             $root = $theme->get_theme_root().'/'.$handle;
             $package->add_source( $root );
             // add PO and POT under theme root
