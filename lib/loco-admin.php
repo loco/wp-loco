@@ -723,9 +723,10 @@ abstract class LocoAdmin {
     
     
     /**
-     * Resolve a PO file path or file name to TextDomain
-     * @param string e.g. "blah/mytheme-fr_FR.po" or "myplugin.pot"
-     * @return string e.g. "mytheme"
+     * Resolve a PO file path or file name to TextDomain.
+     * Note that this does not parse the file to read any data, it just extracts from filename
+     * @param string e.g. "path/to/foo-fr_FR.po" or "foo.pot"
+     * @return string e.g. "foo"
      */
     public static function resolve_file_domain( $path ){
         extract( pathinfo($path) );
@@ -736,7 +737,7 @@ abstract class LocoAdmin {
             return $filename;
         }
         if( $domain = preg_replace('/[a-z]{2}(_[A-Z]{2})?$/', '', $filename ) ){
-            return ltrim( $domain, '-' );
+            return trim( $domain, '-' );
         }
         // empty domain means file name is probably just a locale
         return '';
