@@ -99,6 +99,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 = 1.4.5 =
 * Support for Domain Path tag
+* Added choice of location when language and package dirs both writable
 * Fixed bug extracting domain from file names
 * Tested in WP 3.9.1
 
