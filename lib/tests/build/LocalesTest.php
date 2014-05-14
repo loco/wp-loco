@@ -8,6 +8,12 @@
 class LocalesTest extends PHPUnit_Framework_TestCase {
     
     
+    public function testGetAllLocales(){
+        $map = LocoLocale::get_names();
+        $this->assertCount( 79, $map );
+    }
+    
+    
     public function testSimpleLocaleResolve(){
         $locale = loco_locale_resolve('en_GB');
         $this->assertInstanceOf('LocoLocale', $locale );

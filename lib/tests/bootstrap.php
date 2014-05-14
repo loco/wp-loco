@@ -17,6 +17,24 @@ function add_action(){
     // noop    
 }
 
+function add_filter(){
+    // noop    
+}
+
+function apply_filters( $value ){
+    return $value;
+}
+
+function get_locale(){
+    return 'en_US';
+}
+
+function __($t){
+    return $t;
+}
+
+define('WP_DEBUG', true );
+
 require __DIR__.'/../../loco.php';
 
-loco_require( 'loco-locales','build/gettext-compiled', 'build/locales-compiled', 'build/shell-compiled' );
+loco_require( 'loco-boot','loco-locales','build/gettext-compiled','build/shell-compiled' );

@@ -132,7 +132,7 @@ abstract class LocoAdmin {
                     $gdir = $package->global_lang_dir();
                     // render msginit start screen
                     $title = Loco::__('New PO file');
-                    $locales = loco_require('build/locales-compiled');
+                    $locales = LocoLocale::get_names();
                     Loco::enqueue_scripts( 'build/admin-common', 'build/admin-poinit');
                     Loco::render('admin-poinit', compact('package','domain','title','locales','path','pdir','gdir') );
                     break;
