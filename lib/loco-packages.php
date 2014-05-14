@@ -16,6 +16,12 @@ class LocoPackage {
      * @var string
      */    
     private $domain;
+
+    /**
+     * Default domain path relative to package root, e.g. "/languages"
+     * @var string
+     */    
+    private $domainpath = '/languages';
     
     /**
      * Nice descriptive name, e.g. "Loco Translate"
@@ -73,16 +79,19 @@ class LocoPackage {
     /**
      * Construct package from name, root and domain
      */    
-    protected function __construct( $name_or_path, $domain, $name ){
+    protected function __construct( $name_or_path, $domain, $name, $dpath = '' ){
         $this->handle = $name_or_path;
         $this->domain = $domain;
         $this->name = $name or $this->name = $domain;
+        if( $dpath ){
+            $this->domainpath = '/'.trim($dpath,'/');
+        }
     }   
     
     /**
      * Get default system languages directory
      */    
-    protected function _lang_dir(){
+    protected function global_lang_dir(){
         return WP_LANG_DIR;
     }    
     
@@ -278,7 +287,7 @@ class LocoPackage {
         }
         // check languages subfolder of all source file locations
         foreach( $this->src as $path ){
-            $pref = $path.'/languages';
+            $pref = $path.$this->domainpath;
             if( is_writable($pref) ){
                 return $pref;
             }
@@ -293,7 +302,7 @@ class LocoPackage {
             }
         }
         // check global languages location
-        $path = $this->_lang_dir();
+        $path = $this->global_lang_dir();
         if( is_writable($path) ){
             return $path;
         }
@@ -313,7 +322,7 @@ class LocoPackage {
         $dir = $this->lang_dir( $domain );
         $name = $locale->get_code().'.po';
         // only prefix with text domain for plugins and files in global lang directory
-        if( 'plugin' === $this->get_type() || 0 === strpos( $dir, $this->_lang_dir() ) ){
+        if( 'plugin' === $this->get_type() || 0 === strpos( $dir, $this->global_lang_dir() ) ){
             $prefix = $domain.'-';
         }
         else {
@@ -402,6 +411,13 @@ class LocoPackage {
      */
     public function get_permission_errors(){
         $dirs = array();
+        // add common directories
+        $base = $this->get_root();
+        $dirs[ $base ] = 1;
+        $dirs[ $base.$this->domainpath ] = 1;
+        $dirs[ $this->lang_dir() ] = 1;
+        $dirs[ $this->global_lang_dir() ] = 1;
+        // add and check files, collecting additional directories along the way
         $paths = array();
         foreach( $this->pot as $path ){
             $dirs[ dirname($path) ] = 1;
@@ -415,15 +431,9 @@ class LocoPackage {
                 $paths[$path] = file_exists($path) ? ( is_writeable($path) ? '' : Loco::__('MO file not writable') ) : Loco::__('MO file not found');
             }
         }
-        if( ! isset($path) ){
-            $base = $this->get_root();
-            $dirs[ $base ] = 1;
-            $dirs[ $base.'/languages' ] = 1;
-        }
-        $dirs[ $this->lang_dir() ] = 1;
-        $dirs[ $this->_lang_dir() ] = 1;
+        // run directory checks and sort final list alphabetically
         foreach( array_keys($dirs) as $dir ){
-            $paths[$dir] = is_writable($dir) ? '' : Loco::__('Folder not writable');
+            $paths[$dir] = is_writable($dir) ? '' : ( is_dir($dir) ? Loco::__('Folder not writable') : Loco::__('Folder not found') );
         }
         ksort( $paths );
         return $paths;    
@@ -579,7 +589,7 @@ class LocoPackage {
         if( $theme && $theme->exists() ){
             $name = $theme->get('Name');
             $domain = $theme->get('TextDomain');
-            $package = new LocoThemePackage( $handle, $domain, $name );
+            $package = new LocoThemePackage( $handle, $domain, $theme->get('DomainPath') );
             $root = $theme->get_theme_root().'/'.$handle;
             $package->add_source( $root );
             // add PO and POT under theme root
@@ -632,7 +642,7 @@ class LocoPackage {
         if( isset($plugins[$handle]) && is_array($plugins[$handle]) ){
             $plugin = $plugins[$handle];
             $domain = $plugin['TextDomain'] or $domain = str_replace('/','-',dirname($handle));
-            $package = new LocoPluginPackage( $handle, $domain, $plugin['Name'] );
+            $package = new LocoPluginPackage( $handle, $domain, $plugin['Name'], $plugin['DomainPath'] );
             $root = WP_PLUGIN_DIR.'/'.dirname($handle);
             $package->add_source( $root );
             // add PO and POT under plugin root
@@ -730,7 +740,7 @@ class LocoPackage {
  */
 class LocoThemePackage extends LocoPackage {
     private $parent;
-    protected function _lang_dir(){
+    protected function global_lang_dir(){
         return WP_LANG_DIR.'/themes';
     }
     protected function inherit( LocoThemePackage $parent ){
@@ -771,7 +781,7 @@ class LocoThemePackage extends LocoPackage {
  * Extended package class for plugins
  */
 class LocoPluginPackage extends LocoPackage {
-    protected function _lang_dir(){
+    protected function global_lang_dir(){
         return WP_LANG_DIR.'/plugins';
     }
     public function get_type(){
