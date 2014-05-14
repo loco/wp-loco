@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
 Requires at least: 3.5
-Tested up to: 3.9
+Tested up to: 3.9.1
 Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -96,6 +96,10 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 
 == Changelog ==
+
+= 1.4.5 =
+* Fixed bug extracting domain from file names
+* Tested in WP 3.9.1
 
 = 1.4.4 =
 * Fixed bug in prefixing new PO files with text domain based on existing files
