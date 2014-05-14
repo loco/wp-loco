@@ -12,3 +12,7 @@
 #adminmenu .toplevel_page_loco-translate.wp-has-current-submenu .wp-menu-image {
     background-position: 2px -28px;
 }
+
+.wrap.loco-lists > h2:before {
+    display: none !important;
+}
