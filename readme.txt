@@ -98,6 +98,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 == Changelog ==
 
 = 1.4.5 =
+* Support for Domain Path tag
 * Fixed bug extracting domain from file names
 * Tested in WP 3.9.1
 
