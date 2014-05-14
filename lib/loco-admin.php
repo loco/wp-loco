@@ -109,11 +109,12 @@ abstract class LocoAdmin {
                 //
                 if( isset($_GET['msginit']) ){
                     $domain = $_GET['msginit'];
+                    $force_global = isset($_GET['gforce']) ? (bool) $_GET['gforce'] : null;
                     // handle PO file creation if locale is set
                     if( isset($_GET['custom-locale']) ){
                         try {
                             $locale = $_GET['custom-locale'] or $locale = $_GET['common-locale'];
-                            $po_path = self::msginit( $package, $domain, $locale, $export, $head );
+                            $po_path = self::msginit( $package, $domain, $locale, $export, $head, $force_global );
                             if( $po_path ){
                                 self::render_poeditor( $package, $po_path, $export, $head );
                                 break;
@@ -124,15 +125,16 @@ abstract class LocoAdmin {
                             self::error( $Ex->getMessage() );
                         }
                     }    
-                    // else do a dry run to pre-empt failures
-                    else {
-                        $dummy = self::msginit( $package, $domain, 'en', $export, $head );
-                    }
-                    // else render msginit start screen
+                    // else do a dry run to pre-empt failures and allow manual alteration of target path
+                    $path = self::msginit( $package, $domain, 'en', $export, $head, $force_global );
+                    // get alternative location options
+                    $pdir = $package->lang_dir( $domain, true );
+                    $gdir = $package->global_lang_dir();
+                    // render msginit start screen
                     $title = Loco::__('New PO file');
                     $locales = loco_require('build/locales-compiled');
                     Loco::enqueue_scripts( 'build/admin-common', 'build/admin-poinit');
-                    Loco::render('admin-poinit', compact('package','domain','title','locales') );
+                    Loco::render('admin-poinit', compact('package','domain','title','locales','path','pdir','gdir') );
                     break;
                 }
 
@@ -236,7 +238,7 @@ abstract class LocoAdmin {
      * Initialize a new PO file from a locale code
      * @return string path where PO file will be saved to
      */
-    private static function msginit( LocoPackage $package, $domain = '', $code, &$export, &$head ){
+    private static function msginit( LocoPackage $package, $domain = '', $code, &$export, &$head, $force_global = null ){
         $head = null;
         $export = array();
         $locale = $code ? loco_locale_resolve($code) : null;
@@ -245,7 +247,7 @@ abstract class LocoAdmin {
         }
         
         // default PO file location
-        $po_path = $package->create_po_path( $locale, $domain );
+        $po_path = $package->create_po_path( $locale, $domain, $force_global );
         $po_dir  = dirname( $po_path );
         $po_name = basename( $po_path );
 
@@ -254,9 +256,9 @@ abstract class LocoAdmin {
             $pot = self::parse_po_with_headers( $pot_path, $head );
             if( $pot && ! ( 1 === count($pot) && '' === $pot[0]['source'] ) ){
                 $export = $pot;
-                // override default PO location if POT location is writable
                 $pot_dir = dirname( $pot_path );
-                if( is_writable($pot_dir) ){
+                // override default PO location if POT location is writable and getting best location
+                if( is_writable($pot_dir) && is_null($force_global) ){
                     $po_dir = $pot_dir;
                 }
             }

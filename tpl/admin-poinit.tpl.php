@@ -46,7 +46,24 @@ $argpair = $package->get_query();
                 <br />
             </label>
             <input type="text" maxlength="5" size="5" pattern="^[a-zA-Z]{2}([\-_][a-zA-Z]{2})?$" name="custom-locale" for="f-loco-locale" placeholder="xx_XX" />
-        </p>
+        </p><?php
+        // provide location choice if package and global dirs are both writable
+        if( is_writeable($pdir) && is_writable($gdir) ):
+            $is_global = $package->is_global_path( $path );
+            $pdir = LocoAdmin::trim_path( $pdir );
+        ?> 
+        <p>
+            <label>
+                <input type="radio" name="gforce" value="0"<?php print( $is_global ? '' : ' checked') ?> />
+                <?php echo Loco::_x( sprintf('create in <code>%s</code>',$pdir),'Form label')?>
+            </label>
+            <br />
+            <label>
+                <input type="radio" name="gforce" value="1"<?php print( $is_global ? ' checked' : '') ?> />
+                <?php Loco::h( Loco::_x('create in global languages directory','Form label') )?>
+            </label>
+        </p><?php
+        endif?> 
         <p class="submit">
             <input type="submit" value="<?php Loco::h( Loco::_x('Start translating','Submit button') )?>" class="button button-primary button-large" />
         </p>

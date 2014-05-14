@@ -91,11 +91,25 @@ class LocoPackage {
     /**
      * Get default system languages directory
      */    
-    protected function global_lang_dir(){
+    public function global_lang_dir(){
         return WP_LANG_DIR;
-    }    
-    
-    
+    }
+
+    /**
+     * Test if provided path is under global lang dir 
+     */    
+    public function is_global_path($path){
+        return 0 === strpos( $path, $this->global_lang_dir() );
+    }
+
+    /**
+     * Test if package has a writable global lang dir 
+     */    
+    public function is_global_writable(){
+        $dir = $this->global_lang_dir();
+        return $dir && is_dir($dir) && is_writable( $dir );
+    }
+
     /**
      * Get package type, defaults to 'core'
      */
@@ -261,11 +275,14 @@ class LocoPackage {
     /**
      * Get most likely intended language folder
      */    
-    public function lang_dir( $domain = '' ){
+    public function lang_dir( $domain = '', $skip_global = false ){
         $dirs = array();
         // check location of POT in domain
         foreach( $this->pot as $d => $path ){
             if( ! $domain || $d === $domain ){
+                if( $skip_global && $this->is_global_path($path) ){
+                    continue;
+                }
                 $path = dirname($path);
                 if( is_writable($path) ){
                     return $path;
@@ -277,6 +294,9 @@ class LocoPackage {
         foreach( $this->po as $d => $paths ){
             if( ! $domain || $d === $domain ){
                 foreach( $paths as $path ){
+                    if( $skip_global && $this->is_global_path($path) ){
+                        continue;
+                    }
                     $path = dirname($path);
                     if( is_writable($path) ){
                         return $path;
@@ -287,6 +307,9 @@ class LocoPackage {
         }
         // check languages subfolder of all source file locations
         foreach( $this->src as $path ){
+            if( $skip_global && $this->is_global_path($path) ){
+                continue;
+            }
             $pref = $path.$this->domainpath;
             if( is_writable($pref) ){
                 return $pref;
@@ -302,11 +325,13 @@ class LocoPackage {
             }
         }
         // check global languages location
-        $path = $this->global_lang_dir();
-        if( is_writable($path) ){
-            return $path;
+        if( ! $skip_global ){
+            $path = $this->global_lang_dir();
+            if( is_writable($path) ){
+                return $path;
+            }
+            $dirs[] = $path;
         }
-        $dirs[] = $path;
         // failed to get writable directory, so we'll just return the highest priority
         return array_shift( $dirs );
     }
@@ -315,21 +340,33 @@ class LocoPackage {
     /**
      * Build name of PO file for given or default domain
      */
-    public function create_po_path( LocoLocale $locale, $domain = '' ){
+    public function create_po_path( LocoLocale $locale, $domain = '', $force_global = null ){
         if( ! $domain ){
             $domain = $this->get_domain();
         }
-        $dir = $this->lang_dir( $domain );
+        // get best directory
+        if( is_null($force_global) ){
+            $dir = $this->lang_dir( $domain );
+            $force_global = $this->is_global_path( $dir );
+        }
+        // else use global directory by force
+        else if( $force_global ){
+            $dir = $this->global_lang_dir();
+        }
+        // else use best, but skipping global directory
+        else {
+            $dir = $this->lang_dir( $domain, true );
+        }
         $name = $locale->get_code().'.po';
         // only prefix with text domain for plugins and files in global lang directory
-        if( 'plugin' === $this->get_type() || 0 === strpos( $dir, $this->global_lang_dir() ) ){
+        if( 'plugin' === $this->get_type() || $force_global ){
             $prefix = $domain.'-';
         }
         else {
             $prefix = '';
         }
         // if PO files exist, copy their naming format and use location if writable
-        if( ! empty($this->po[$domain]) ){
+        if( is_null($force_global) && ! empty($this->po[$domain]) ){
             foreach( $this->po[$domain] as $code => $path ){
                 $info = pathinfo( $path );
                 $prefix = str_replace( $code.'.'.$info['extension'], '', $info['basename'] );
@@ -740,7 +777,7 @@ class LocoPackage {
  */
 class LocoThemePackage extends LocoPackage {
     private $parent;
-    protected function global_lang_dir(){
+    public function global_lang_dir(){
         return WP_LANG_DIR.'/themes';
     }
     protected function inherit( LocoThemePackage $parent ){
@@ -781,7 +818,7 @@ class LocoThemePackage extends LocoPackage {
  * Extended package class for plugins
  */
 class LocoPluginPackage extends LocoPackage {
-    protected function global_lang_dir(){
+    public function global_lang_dir(){
         return WP_LANG_DIR.'/plugins';
     }
     public function get_type(){
