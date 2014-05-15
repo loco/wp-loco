@@ -3,7 +3,7 @@
  * Object representing a theme, plugin or domain within core code.
  * Packages are identified uniquely by a type (e.g. "theme") and internal wordpress name, e.g. "loco-translate".
  */
-class LocoPackage {
+abstract class LocoPackage {
     
     /**
      * Internal identifier, could be name, or path, or anything in future
@@ -21,7 +21,7 @@ class LocoPackage {
      * Default domain path relative to package root, e.g. "/languages"
      * @var string
      */    
-    private $domainpath = '/languages';
+    protected $domainpath = '/languages';
     
     /**
      * Nice descriptive name, e.g. "Loco Translate"
@@ -77,6 +77,13 @@ class LocoPackage {
     private $_meta;    
 
     /**
+     * Get package subclass type
+     * @return string theme, plugin or core
+     */
+    abstract public function get_type();
+
+
+    /**
      * Construct package from name, root and domain
      */    
     protected function __construct( $name_or_path, $domain, $name, $dpath = '' ){
@@ -95,12 +102,14 @@ class LocoPackage {
         return WP_LANG_DIR;
     }
 
+
     /**
      * Test if provided path is under global lang dir 
      */    
     public function is_global_path($path){
         return 0 === strpos( $path, $this->global_lang_dir() );
     }
+
 
     /**
      * Test if package has a writable global lang dir 
@@ -110,12 +119,6 @@ class LocoPackage {
         return $dir && is_dir($dir) && is_writable( $dir );
     }
 
-    /**
-     * Get package type, defaults to 'core'
-     */
-    public function get_type(){
-        return 'core';
-    }    
     
     /**
      * Get identifying pair of arguments for fetching this object
@@ -574,6 +577,7 @@ class LocoPackage {
                             'stats'  => loco_po_stats( $export ),
                             'length' => count( $export ),
                             'locale' => loco_locale_resolve($code),
+                            'projid' => trim( $headers->{'project-id-version'} ),
                         );
                     }
                     catch( Exception $Ex ){
@@ -676,24 +680,52 @@ class LocoPackage {
             return $package;
         }
     }
-    
-    
+
+
     /**
      * construct a core package object from name
+     * @return LocoPackage
      */
     private static function get_core( $handle ){
-        /*
-        $files = LocoAdmin::pop_lang_dir($domain);
-        if( $files['po'] || $files['pot'] ){
-            $package = new LocoPackage( $domain, $handle );
-            $package->add_po( $files );
-            //
-            Loco::cache( $key, $package );
-            return $package;
+        static $grouped;
+        if( ! isset($grouped) ){
+            $grouped = array();
+            foreach( LocoAdmin::find_grouped( WP_LANG_DIR.'/*{.po,.pot}', GLOB_NOSORT|GLOB_BRACE ) as $ext => $files ){
+                foreach( $files as $path ){
+                    $domain = LocoAdmin::resolve_file_domain( $path );
+                    $grouped[ $domain ][ $ext ][] = $path;
+                }
+            }
         }
-        */
+        $domain = $handle or $domain = 'default';
+        $package = new LocoCorePackage( $handle, $domain, '' );
+        if( isset($grouped[$handle]) ){
+            $package->add_po( $grouped[$handle], $domain );
+            // get name from po file
+            $meta = $package->meta();
+            foreach( $meta['po'] as $pmeta ){
+                if( $pmeta['projid'] ){
+                    $package->name = $pmeta['projid'];
+                }
+            }
+        }
+        return $package;
     }
-    
+
+
+
+    /**
+     * Get all core pseudo packages
+     */
+    public static function get_core_packages(){
+        static $names = array( '', 'admin', 'admin-network', 'continents-cities', 'ms' );
+        $packages = array();
+        foreach( $names as $handle ){
+            $packages[$handle] = self::get( $handle, 'core' );
+        }
+        return $packages;
+    }   
+     
     
     
     /**
@@ -821,6 +853,17 @@ class LocoPluginPackage extends LocoPackage {
     }
     public function get_type(){
         return 'plugin';
+    }      
+}
+
+
+/**
+ * Extended package class for core pseudo packages
+ */
+class LocoCorePackage extends LocoPackage {
+    protected $domainpath = '';
+    public function get_type(){
+        return 'core';
     }      
 }
 

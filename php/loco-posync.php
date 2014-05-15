@@ -43,6 +43,10 @@
         }
     
         // Extract from sources by default     
+        if( ! $package->get_source_dirs() ){
+            throw new Exception( Loco::__('No source files in this package, nothing to sync') );
+        }        
+        
         $relative_to = dirname($path);
         //$relative_to = $pot_path ? dirname($pot_path) : $package->get_root();
         if( $exp = LocoAdmin::xgettext( $package, $relative_to ) ){

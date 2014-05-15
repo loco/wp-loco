@@ -98,7 +98,6 @@ abstract class LocoAdmin {
                     // Establish best/intended location for new POT file
                     $dir = $package->lang_dir( $domain );
                     $pot_path = $dir.'/'.$domain.'.pot';
-                    // extract from all PHP source files
                     $export = self::xgettext( $package, $dir );
                     self::render_poeditor( $package, $pot_path, $export );
                     break;
@@ -178,22 +177,14 @@ abstract class LocoAdmin {
                 $package = LocoPackage::get( $plugin_file, 'plugin' ) and
                 $plugins[] = $package;
             }
-            // pick up remaining items under WP_LANG_DIR
+            // @var array $core
             $core = array();
-            /*
-            $cores = array (
-                //'admin-network'     => 'Network',
-                'admin'             => 'Admin Network',
-                'continents-cities' => 'Timezones',
-                'ms'                => 'Multisite',
-                ''                  => 'Other',
-            );
-            foreach( $cores as $domain => $name ){
-                if( $package = LocoPackage::get_core( $domain, $name ) ){
-                    $core[] = self::init_package_args( $package, 'core' );
+            foreach( LocoPackage::get_core_packages() as $package ){
+                // if package has no PO or POT we skip it because core packages have no source
+                if( $package->get_po() || $package->get_pot() ){
+                    $core[] = $package;
                 }
             }
-            */ 
             // order most active packges first in each set
             $args = array (
                 'themes'  => LocoPackage::sort_modified( $themes ),
@@ -636,14 +627,24 @@ abstract class LocoAdmin {
         class_exists('LocoPHPExtractor') or loco_require('build/gettext-compiled');
         $extractor = new LocoPHPExtractor;
         $export = array();
-        foreach( $package->get_source_dirs() as $dir ){
-            $fileref = loco_relative_path( $relative_to, $dir );
-            foreach( self::find_php($dir) as $path ){
-                $source = file_get_contents($path) and
-                $tokens = token_get_all($source) and
-                $export = $extractor->extract( $tokens, str_replace( $dir, $fileref, $path ) );
+        // extract from PHP sources, as long as source locations exist
+        if( $srcdirs = $package->get_source_dirs() ){
+            foreach( $srcdirs as $dir ){
+                $fileref = loco_relative_path( $relative_to, $dir );
+                foreach( self::find_php($dir) as $path ){
+                    $source = file_get_contents($path) and
+                    $tokens = token_get_all($source) and
+                    $export = $extractor->extract( $tokens, str_replace( $dir, $fileref, $path ) );
+                }
             }
         }
+        // else use an existing PO file (should be used for core only)
+        else if( $po = $package->get_po() ){
+            foreach( $po as $code => $path ){
+                $export = self::parse_po( $path );
+                break;
+            }
+        }        
         return $export;
     }
     

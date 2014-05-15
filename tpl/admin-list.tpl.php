@@ -32,7 +32,7 @@
                     <td>
                         <ul class="loco-details">
                             <li title="<?php Loco::h($domain)?>">
-                                <strong><?php Loco::h($name)?></strong>
+                                <strong><?php Loco::h($package->get_name())?></strong>
                             </li><?php
                             if( isset($parent) ):?> 
                             <li>
@@ -65,7 +65,7 @@
                             ?> 
                             <li class="loco-edit-po">
                                 <?php echo LocoAdmin::edit_link( $package, $po_path, $label, $po_locale->icon_class() )?> 
-                                <small class="loco-progress">
+                                <small class="loco-progress" title="<?php echo $po_stats['p']?>">
                                     <?php echo $po_stats['p']?>%
                                 </small>
                             </li><?php
@@ -82,12 +82,11 @@
                                 <?php echo LocoAdmin::edit_link( $package, $pot_path )?> 
                             </li><?php
                             endforeach;
-                         // else no POT file
                          else:?> 
                             <li class="loco-add">
                                 <?php echo LocoAdmin::xgettext_link( $package )?> 
                             </li><?php 
-                         endif;?>
+                         endif?> 
                         </ul>
                     </td>
                     <td>

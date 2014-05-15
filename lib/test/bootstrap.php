@@ -42,4 +42,4 @@ define('WP_DEBUG', true );
 
 require __DIR__.'/../../loco.php';
 
-loco_require( 'loco-boot','loco-admin','loco-locales','build/gettext-compiled','build/shell-compiled' );
+loco_require( 'loco-boot','loco-admin','loco-locales','loco-packages','build/gettext-compiled','build/shell-compiled' );
