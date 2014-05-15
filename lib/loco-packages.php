@@ -625,7 +625,8 @@ class LocoPackage {
         $theme = wp_get_theme( $handle );
         if( $theme && $theme->exists() ){
             $name = $theme->get('Name');
-            $domain = $theme->get('TextDomain');
+            $domain = $theme->get('TextDomain') or $domain = $handle;
+            // create theme package with text domain defaulting to template name
             $package = new LocoThemePackage( $handle, $domain, $name, $theme->get('DomainPath') );
             $root = $theme->get_theme_root().'/'.$handle;
             $package->add_source( $root );
@@ -639,31 +640,11 @@ class LocoPackage {
             }
             // find additional theme PO under WP_LANG_DIR/themes unless a child theme
             $package->add_lang_dir(  WP_LANG_DIR.'/themes', $domain );
-            // child theme inherits parent template translations
-            while( $parent = $theme->get_template() ){
-                if( $parent === $handle ){
-                    // circular reference
-                    break;
+            // child theme inherits parent, but keeps its own domain
+            if( $parent = $theme->get_template() ){
+                if( $parent !== $handle ){
+                    $package->inherit( $parent );
                 }
-                $parent = LocoPackage::get( $parent, 'theme' );
-                if( ! $parent ){
-                    // parent missing
-                    break;
-                }
-                // indicate that theme is a child
-                $package->inherit( $parent );
-                if( $domain && $domain !== $parent->domain ){
-                    // child specifies its own domain and will have to call load_child_theme_textdomain
-                }
-                else if( ! empty($package->po) || ! empty($package->pot) ){
-                    // child has its own language files and domain will be picked up when get_domain called
-                    $package->get_domain();
-                }
-                else {
-                    // else should child inherit parent domain?
-                    $package->domain = $parent->get_domain();
-                }
-                break;
             }
             return $package;
         }
@@ -780,8 +761,11 @@ class LocoThemePackage extends LocoPackage {
     public function global_lang_dir(){
         return WP_LANG_DIR.'/themes';
     }
-    protected function inherit( LocoThemePackage $parent ){
-        $this->parent = $parent->get_handle();
+    protected function inherit( $template ){
+        $parent = wp_get_theme( $template );
+        if( $parent && $parent->exists() ){
+            $this->parent = $template;
+        }
     }
     protected function is_child(){
         return ! empty($this->parent);
