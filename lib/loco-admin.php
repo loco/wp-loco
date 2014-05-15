@@ -53,7 +53,7 @@ abstract class LocoAdmin {
         current_user_can(Loco::CAPABILITY) or self::forbid();
         // update applicaion settings if posted
         if( isset($_POST['loco']) && is_array( $update = $_POST['loco'] ) ){
-            $update += array( 'gen_hash' => '0' );
+            $update += array( 'gen_hash' => '0', 'enable_core' => '0' );
             $args = Loco::config( $update );
             $args['success'] = Loco::__('Settings saved');
         }
