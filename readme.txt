@@ -20,6 +20,8 @@ Features include:
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
+* Support for PO features including comments, references and plural forms
+* Configurable PO file backups
 
 Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.com/timwhitlock">@timwhitlock</a> / <a rel="author" href="https://plus.google.com/106703751121449519322">Tim Whitlock</a>
 
@@ -29,19 +31,19 @@ Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.co
 
 1. Unzip all files to the `/wp-content/plugins/loco-translate` directory
 2. Log into Wordpress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
-3. Go to *Tools > Manage Translations* in the left-hand menu to start translating
+3. Go to *Loco Translate > Manage Translations* in the left-hand menu to start translating
 
 
 If you want to create new translations for a theme or plugin, follow these steps:
 
 1. Create a `languages` directory in your plugin or theme's root directory
 2. Make the new directory writable by the web server
-3. Find the theme or plugin in the list at *Tools > Manage Translations*
+3. Find the theme or plugin in the list at *Loco Translate > Manage Translations*
 4. Click `+ New language` and follow the on-screen prompts.
 
 A quick guide on using the plugin is [available here](https://localise.biz/help/wordpress/translate-plugin), but make sure you're familiar with the conventions of [Translating Wordpress](http://codex.wordpress.org/Translating_WordPress) before you start.
 
-Please note that this plugin doesn’t support Windows servers.
+Please note that this plugin doesn’t support Windows servers and the editor doesn't fully support MSIE<=8.
 
 
 == Frequently Asked Questions ==
@@ -56,6 +58,13 @@ No. It's for manually entering your own translations, but we do intend to be int
 The extraction process looks for Wordpress translation functions with string literal arguments, such as `__('Foo')`.
 
 Using your own custom functions like `myTranslate('Foo')` won't work. Neither will using variables, such as `__( $foo )`.
+
+= Why can't I see the translations appearing in my theme/plugin? =
+
+All Loco Translate does is manage your translation process and organize your files. There is more to localizing your theme or plugin than just creating the files. 
+
+Make sure you're familiar with the conventions of [translating Wordpress](http://codex.wordpress.org/Translating_WordPress) and if you think Loco is saving invalid files or putting them in the wrong place, then open a [support ticket](http://wordpress.org/support/plugin/loco-translate).
+
 
 
 = Do I need to create a POT file? =
@@ -84,7 +93,8 @@ You can configure the path to the `msgfmt` program in the Settings tab.
 
 = Does it support Windows? =
 
-At the user end, yes you can access the interface on Windows using Internet Explorer. But Loco Translate does not support Windows versions of PHP, so if your server running Wordpress has a Windows operating system the back end won’t work.
+You can access the interface on Windows using Internet Explorer, but version 9 or above is recommended.  
+Loco Translate does not support Windows versions of PHP, so if your server running Wordpress has a Windows operating system the back end may not work properly.
 
 
 
@@ -183,7 +193,7 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 
 == Upgrade Notice ==
 
-= 1.4.4 =
+= 1.4.5 =
 * Bug fixes and improvements.
 
 
