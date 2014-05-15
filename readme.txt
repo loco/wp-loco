@@ -101,8 +101,8 @@ At the user end, yes you can access the interface on Windows using Internet Expl
 * Support for Domain Path tag
 * Added choice of location when language and package dirs both writable
 * Fixed bug extracting domain from file names
-* Fixed bug where child themes did not inherit file permission checks
 * Child themes always have their own text domain and don't duplicate parent files
+* Better plural support in po file editor
 * Tested in WP 3.9.1
 
 = 1.4.4 =
