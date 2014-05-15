@@ -2,8 +2,13 @@
 /**
  * Unit test bootstrapper.
  * This is nothing close to an accurate simulation of Wordpress environment, it's just for testing utils.
- * @usage phpunit --bootstrap bootstrap.php .
+ * @usage phpunit --bootstrap bootstrap.php tests
  */
+ 
+define('WP_CONTENT_DIR', realpath(__DIR__.'/../../../..') ); 
+WP_CONTENT_DIR or die("Can't find WP_CONTENT_DIR\n");
+
+define('WP_LANG_DIR', WP_CONTENT_DIR.'/languages' );
  
 function is_admin(){
     return false;
@@ -37,4 +42,4 @@ define('WP_DEBUG', true );
 
 require __DIR__.'/../../loco.php';
 
-loco_require( 'loco-boot','loco-locales','build/gettext-compiled','build/shell-compiled' );
+loco_require( 'loco-boot','loco-admin','loco-locales','build/gettext-compiled','build/shell-compiled' );
