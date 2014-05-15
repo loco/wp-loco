@@ -179,10 +179,13 @@ abstract class LocoAdmin {
             }
             // @var array $core
             $core = array();
-            foreach( LocoPackage::get_core_packages() as $package ){
-                // if package has no PO or POT we skip it because core packages have no source
-                if( $package->get_po() || $package->get_pot() ){
-                    $core[] = $package;
+            $conf = Loco::config();
+            if( ! empty($conf['enable_core']) ){
+                foreach( LocoPackage::get_core_packages() as $package ){
+                    // if package has no PO or POT we skip it because core packages have no source
+                    if( $package->get_po() || $package->get_pot() ){
+                        $core[] = $package;
+                    }
                 }
             }
             // order most active packges first in each set

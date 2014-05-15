@@ -113,6 +113,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 * Fixed bug extracting domain from file names
 * Child themes always have their own text domain and don't duplicate parent files
 * Better plural support in po file editor
+* Added experimental support for core packages
 * Tested in WP 3.9.1
 
 = 1.4.4 =

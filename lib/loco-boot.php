@@ -294,6 +294,8 @@ abstract class Loco {
                 'gen_hash' => '0',
                 // number of backups to keep of PO and MO files
                 'num_backups' => '1',
+                // whether to enable core package translation
+                'enable_core' => '0',
             );
             foreach( $conf as $key => $val ){
                 $conf[$key] = get_option( Loco::NS.'-'.$key);

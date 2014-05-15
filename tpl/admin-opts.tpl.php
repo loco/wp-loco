@@ -73,6 +73,22 @@ $nav = array (
                         </fieldset>
                     </td>
                 </tr>
+                <tr valign="top">
+                    <th scope="row"><?php Loco::h( Loco::__('Experimental features') )?></th>
+                    <td>
+                        <fieldset>
+                            <legend class="screen-reader-text">
+                                <span><?php Loco::h( Loco::__('Experimental features') )?></span>
+                            </legend>
+                            <p>
+                                <label for="loco--enable-core">
+                                    <input type="checkbox" name="loco[enable_core]" value="1" id="loco--enable-core"<?php echo $enable_core ? ' checked' : '';?> />
+                                    <?php Loco::h( Loco::__('Enable Wordpress core translations') )?> 
+                                </label>
+                            </p>
+                        </fieldset>
+                    </td>
+                </tr>
             </tbody>
         </table>
         <p class="submit">
