@@ -21,7 +21,7 @@ function add_filter(){
     // noop    
 }
 
-function apply_filters( $value ){
+function apply_filters( $hook, $value = null ){
     return $value;
 }
 

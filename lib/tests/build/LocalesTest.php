@@ -10,7 +10,7 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     
     public function testGetAllLocales(){
         $map = LocoLocale::get_names();
-        $this->assertCount( 79, $map );
+        $this->assertCount( 130, $map );
     }
     
     
@@ -66,6 +66,28 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
         extract( $locale->export() );
         $this->assertEquals( 6, $nplurals );
     }    
+    
+
+    public function testPluralFormArrays(){
+        // English - two forms
+        $locale = LocoLocale::init('en','GB');
+        extract( $locale->export() );
+        $this->assertCount( 2, $plurals );
+        // Chinese - one form
+        $locale = LocoLocale::init('zh','TW');
+        extract( $locale->export() );
+        $this->assertCount( 1, $plurals );
+        // Polish - three forms
+        $locale = LocoLocale::init('pl','PL');
+        extract( $locale->export() );
+        $this->assertCount( 3, $plurals );
+        // Arabic - six forms
+        $locale = LocoLocale::init('ar','AE');
+        extract( $locale->export() );
+        $this->assertCount( 6, $plurals );
+    }
+    
+    
     
     
 }
