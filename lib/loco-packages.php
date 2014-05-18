@@ -828,7 +828,10 @@ class LocoThemePackage extends LocoPackage {
         $paths = parent::get_permission_errors();
         // check parent theme if exists
         if( $parent = $this->get_parent() ){
-            $paths += $parent->get_permission_errors( true );
+            // recurse if child theme uses same domain as parent
+            if( $this->get_domain() === $parent->get_domain() ){
+                $paths += $parent->get_permission_errors( true );
+            }
         }
         return $paths;
     }
