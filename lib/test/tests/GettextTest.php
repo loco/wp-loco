@@ -52,6 +52,31 @@ class GettextTest extends PHPUnit_Framework_TestCase {
         $bin = file_get_contents( $mopath );
         $this->assertStringEndsWith( "\0", $bin, 'Bad mo file ending' );
     }
-       
+    
+    
+    
+    /**
+     * Test xgettext style tring extraction
+     */
+    public function testLocoPHPExtractor(){
+        $source = file_get_contents( __DIR__.'/../../../pub/js/lang/dummy.php' );
+        $tokens = token_get_all($source);
+        $extractor = new LocoPHPExtractor;
+        $export = $extractor->extract( $tokens, 'test.php' );
+        // should have got 15 messages, 2 of which pluralized
+        $this->assertCount( 17, $export );
+        // check first message on line 8, "Unknown error"
+        $this->assertEquals( 'Unknown error', $export[0]['source'] );
+        // reference should be intact with line number
+        $this->assertContains('test.php:8', $export[0]['refs'] );
+        // first message should not have included the file header comment not intended to go with it
+        $this->assertEmpty( $export[0]['notes'], 'Comment block should not have been extracted' );
+        // third item should auto-detect its php-format flag
+        $this->assertEquals( 'php', $export[3]['format'] );
+    }
+
 
 }
+
+
+
