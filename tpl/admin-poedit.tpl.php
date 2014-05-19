@@ -136,9 +136,11 @@ $modified or $pofiles[] = $path;
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php" id="loco-filter">
-                <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php Loco::h(Loco::__('Filter translations'))?>" autocomplete="off" disabled />
+                <div class="loco-clearable">
+                    <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php Loco::h(Loco::__('Filter translations'))?>" autocomplete="off" disabled />
+                </div>
             </form>
-            <form action="http://wordpress.org/support/plugin/<?php echo Loco::NS?>" target="_blank">
+            <form action="http://wordpress.org/support/plugin/<?php echo Loco::NS?>" target="_blank" class="loco-right">
                 <button class="button loco-help" data-loco="help" type="submit">
                     <span><?php Loco::h( Loco::_x('Help','Editor button') )?></span>
                 </button>
