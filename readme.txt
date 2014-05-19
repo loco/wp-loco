@@ -115,6 +115,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 * Better plural support in po file editor
 * Added experimental support for core packages
 * Tested in WP 3.9.1
+* Added Swedish translations
 
 = 1.4.4 =
 * Fixed bug in prefixing new PO files with text domain based on existing files
@@ -213,4 +214,5 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Dutch translations courtesy of [Niels Geryl](http://hetwittepaard.be)
 * German translations courtesy of [Sebastian König](http://aykutmania.de)
 * Turkish translations courtesy of [Abdullah Pazarbaşı](http://abdullahpazarbasi.com)
+* Swedish translations courtesy if [Jimmy Malmqvist](https://twitter.com/jimmymalmqvist)
 
