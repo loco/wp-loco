@@ -116,6 +116,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 * Added experimental support for core packages
 * Tested in WP 3.9.1
 * Added Swedish translations
+* Added text filter clear button
 
 = 1.4.4 =
 * Fixed bug in prefixing new PO files with text domain based on existing files
