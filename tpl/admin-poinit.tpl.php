@@ -55,7 +55,7 @@ $argpair = $package->get_query();
         <p>
             <label>
                 <input type="radio" name="gforce" value="0"<?php print( $is_global ? '' : ' checked') ?> />
-                <?php echo Loco::_x( sprintf('create in <code>%s</code>',$pdir),'Form label')?>
+                <?php echo sprintf( Loco::_x('create in <code>%s</code>','Form label' ), $pdir )?>
             </label>
             <br />
             <label>
