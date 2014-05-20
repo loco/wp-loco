@@ -215,5 +215,5 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Dutch translations courtesy of [Niels Geryl](http://hetwittepaard.be)
 * German translations courtesy of [Sebastian König](http://aykutmania.de)
 * Turkish translations courtesy of [Abdullah Pazarbaşı](http://abdullahpazarbasi.com)
-* Swedish translations courtesy if [Jimmy Malmqvist](https://twitter.com/jimmymalmqvist)
+* Swedish translations courtesy if [Jimmy Malmqvist](http://jimmymalmqvist.com)
 
