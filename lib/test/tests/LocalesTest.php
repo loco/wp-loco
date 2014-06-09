@@ -25,6 +25,13 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     }    
     
     
+    public function testLanguageOnlyResolves(){
+        $locale = loco_locale_resolve('en_GB');
+        $this->assertEquals( 'English (UK)', $locale->get_name() );
+        $this->assertEquals( 'en_GB', $locale->get_code() );
+    }
+    
+    
     public function testUnknownLocaleWithValidLanguageAndRegionAllowed(){
         $locale = loco_locale_resolve('pl_CY');
         $this->assertInstanceOf('LocoLocale', $locale );

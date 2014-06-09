@@ -269,7 +269,7 @@ abstract class LocoAdmin {
         // check for PO conflict as this is msginit, not a sync.
         $po_path = $po_dir.'/'.$po_name;
         if( file_exists($po_path) ){
-            throw new Exception( sprintf(Loco::__('PO file already exists with locale %s'), $po_code ) );
+            throw new Exception( sprintf(Loco::__('PO file already exists with locale %s'), $locale->get_code() ) );
         }
 
         // return path, export and head set as references
