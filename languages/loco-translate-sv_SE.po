@@ -3,11 +3,11 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon May 19 2014 16:15:48 GMT+0100 (BST)\n"
-"Last-Translator: admin <animal@tw.127.0.0.1.xip.io>\n"
+"PO-Revision-Date: Mon Jun 09 2014 17:13:41 GMT+0100 (BST)\n"
+"Last-Translator: Tim <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Swedish\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,6 +21,37 @@ msgstr ""
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: sv_SE\n"
 "X-Poedit-SearchPath-0: .."
+
+#. label for the window pane holding native translation
+#: ../pub/js/lang/dummy.php:25
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr ""
+
+#. where %s is the language, e.g French translation
+#: ../pub/js/lang/dummy.php:27
+#, php-format
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr ""
+
+#. label for the window pane holding translator comments
+#: ../pub/js/lang/dummy.php:29
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr ""
+
+#. label for the window pane holding message context
+#: ../pub/js/lang/dummy.php:31
+msgctxt "Editor pane"
+msgid "Context"
+msgstr ""
+
+#: ../tpl/admin-poinit.tpl.php:58
+#, php-format
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr ""
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:15 ../pub/js/lang/dummy.php:8
@@ -347,31 +378,6 @@ msgstr[1] "%s föråldrade strängar togs bort"
 msgid "Your changes will be lost if you continue without saving"
 msgstr "Dina ändringar kommer att gå förlorade om du fortsätter utan att spara"
 
-#. label for the window pane holding native translation
-#: ../pub/js/lang/dummy.php:25
-msgctxt "Editor pane"
-msgid "Source text"
-msgstr ""
-
-#. where %s is the language, e.g French translation
-#: ../pub/js/lang/dummy.php:27
-#, php-format
-msgctxt "Editor pane"
-msgid "%s translation"
-msgstr ""
-
-#. label for the window pane holding translator comments
-#: ../pub/js/lang/dummy.php:29
-msgctxt "Editor pane"
-msgid "Comments"
-msgstr ""
-
-#. label for the window pane holding message context
-#: ../pub/js/lang/dummy.php:31
-msgctxt "Editor pane"
-msgid "Context"
-msgstr ""
-
 #: ../pub/js/lang/dummy.php:37
 msgid "Translation"
 msgstr "Översättning"
@@ -560,12 +566,6 @@ msgstr "Välj bland vanliga språk"
 msgctxt "Form label"
 msgid "or enter any language code"
 msgstr "eller skriv valfri landskod"
-
-#: ../tpl/admin-poinit.tpl.php:58
-#, php-format
-msgctxt "Form label"
-msgid "create in <code>%s</code>"
-msgstr ""
 
 #: ../tpl/admin-poinit.tpl.php:63
 msgctxt "Form label"

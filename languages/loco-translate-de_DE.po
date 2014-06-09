@@ -3,11 +3,11 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon May 19 2014 16:15:54 GMT+0100 (BST)\n"
-"Last-Translator: admin <animal@tw.127.0.0.1.xip.io>\n"
+"PO-Revision-Date: Mon Jun 09 2014 17:13:27 GMT+0100 (BST)\n"
+"Last-Translator: Tim <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: German\n"
-"Plural-Forms: nplurals=2; plural=(n != 1)\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -21,6 +21,58 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: de_DE"
+
+#: ../lib/loco-packages.php:476
+msgid "Folder not found"
+msgstr ""
+
+#: ../php/loco-posync.php:47
+msgid "No source files in this package, nothing to sync"
+msgstr ""
+
+#. label for the window pane holding native translation
+#: ../pub/js/lang/dummy.php:25
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr ""
+
+#. where %s is the language, e.g French translation
+#: ../pub/js/lang/dummy.php:27
+#, php-format
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr ""
+
+#. label for the window pane holding translator comments
+#: ../pub/js/lang/dummy.php:29
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr ""
+
+#. label for the window pane holding message context
+#: ../pub/js/lang/dummy.php:31
+msgctxt "Editor pane"
+msgid "Context"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
+msgid "Experimental features"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:86
+msgid "Enable Wordpress core translations"
+msgstr ""
+
+#: ../tpl/admin-poinit.tpl.php:58
+#, php-format
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr ""
+
+#: ../tpl/admin-poinit.tpl.php:63
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr ""
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:15 ../pub/js/lang/dummy.php:8
@@ -223,10 +275,6 @@ msgstr "MO-Datei nicht gefunden"
 msgid "Folder not writable"
 msgstr "Ordner nicht schreibbar"
 
-#: ../lib/loco-packages.php:476
-msgid "Folder not found"
-msgstr ""
-
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
 msgstr "Benutzer hat keine Rechte die Übersetzungen zu verwalten"
@@ -294,10 +342,6 @@ msgstr "Überschreiben der MO-Datei fehlgeschlagen"
 msgid "Failed to write MO file"
 msgstr "Fehler beim Schreiben der MO-Datei"
 
-#: ../php/loco-posync.php:47
-msgid "No source files in this package, nothing to sync"
-msgstr ""
-
 #: ../php/loco-posync.php:57
 msgid "No strings could be extracted from source files"
 msgstr "Es konnten keine Zeichenketten aus der Quelle extrahiert werden"
@@ -349,31 +393,6 @@ msgstr[1] "%s veraltete Zeichenketten entfernt"
 #: ../pub/js/lang/dummy.php:18
 msgid "Your changes will be lost if you continue without saving"
 msgstr "Deine Änderungen gehen verloren, wenn du fortsetzt ohne zu Speichern"
-
-#. label for the window pane holding native translation
-#: ../pub/js/lang/dummy.php:25
-msgctxt "Editor pane"
-msgid "Source text"
-msgstr ""
-
-#. where %s is the language, e.g French translation
-#: ../pub/js/lang/dummy.php:27
-#, php-format
-msgctxt "Editor pane"
-msgid "%s translation"
-msgstr ""
-
-#. label for the window pane holding translator comments
-#: ../pub/js/lang/dummy.php:29
-msgctxt "Editor pane"
-msgid "Comments"
-msgstr ""
-
-#. label for the window pane holding message context
-#: ../pub/js/lang/dummy.php:31
-msgctxt "Editor pane"
-msgid "Context"
-msgstr ""
 
 #: ../pub/js/lang/dummy.php:37
 msgid "Translation"
@@ -477,14 +496,6 @@ msgstr "PO-Datei sichern"
 msgid "Number of backups to keep of each file:"
 msgstr "Anzahl der Sicherungen pro Datei"
 
-#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
-msgid "Experimental features"
-msgstr ""
-
-#: ../tpl/admin-opts.tpl.php:86
-msgid "Enable Wordpress core translations"
-msgstr ""
-
 #: ../tpl/admin-opts.tpl.php:95
 msgid "Save settings"
 msgstr "Einstellungen speichern"
@@ -563,17 +574,6 @@ msgstr "Wähle aus den Standardsprachen"
 msgctxt "Form label"
 msgid "or enter any language code"
 msgstr "oder trage den Sprach-Code ein"
-
-#: ../tpl/admin-poinit.tpl.php:58
-#, php-format
-msgctxt "Form label"
-msgid "create in <code>%s</code>"
-msgstr ""
-
-#: ../tpl/admin-poinit.tpl.php:63
-msgctxt "Form label"
-msgid "create in global languages directory"
-msgstr ""
 
 #: ../tpl/admin-poinit.tpl.php:68
 msgctxt "Submit button"

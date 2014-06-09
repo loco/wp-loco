@@ -3,11 +3,11 @@
  * Project: loco.js conversion
  * Release: Working copy
  * Locale: sv_SE, Swedish
- * Exported at: Wed, 21 May 2014 00:19:13 +0100 
+ * Exported at: Mon, 09 Jun 2014 17:10:05 +0100 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
-    // named plural forms according to Unicode 
+    // named plural forms
     var pluralForms = ["one","other"];
     
     // calc numeric index of a plural form (0-1)
