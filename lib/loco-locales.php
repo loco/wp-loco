@@ -32,13 +32,13 @@ final class LocoLocale {
     private $lang;
     private $region;
     private $label;
-    private $plurals = array('Single','Other');
+    private $plurals = array('one','other');
     private $nplurals = 2;
-    private $pluraleq = '(n != 1)';
+    private $pluraleq = 'n != 1';
 
     private function __construct( $lc, $cc ){
-        $lc and $this->lang = $lc;
-        $cc and $this->region = $cc;
+        $lc and $this->lang = strtolower($lc);
+        $cc and $this->region = strtoupper($cc);
     }
 
     public function export(){
@@ -62,7 +62,7 @@ final class LocoLocale {
     }
     
     public function get_name(){
-        return is_null($this->label) ? Loco::__('Unknown language') : $this->label;
+        return empty($this->label) ? Loco::__('Unknown language') : $this->label;
     }
     
     public function equal_to( LocoLocale $locale ){
@@ -74,52 +74,77 @@ final class LocoLocale {
         $cc = preg_quote( $this->region, $delimiter );
         return $lc.'(?:[\-_]'.$cc.')?';
     }
-    
-    
+
+
+
     /**
      * @return LocoLocale
      */
     public static function init( $lc, $cc ){
-        $locales = self::data();
+        extract( self::data() );
+        if( ! $cc ){
+            $cc = loco_language_country($lc);
+        }
+        $label = '';
         $locale = new LocoLocale( $lc, $cc );
+        // attempt to use a common locale combination
         if( isset($locales[$lc]) ){
             if( ! $cc ){
-                $cc = loco_language_country($lc) or
                 $cc = key( $locales[$lc] );
+                $locale->region = $cc;
             }
             if( isset($locales[$lc][$cc]) ){
-                $locale->lang = $lc;
-                $locale->region = $cc;
-                list( $locale->label, $locale->pluraleq, $plurals ) = $locales[$lc][$cc];
-                $locale->plurals = $plurals;
-                $locale->nplurals = count( $plurals );
+                $locale->label = $locales[$lc][$cc];
             }
+        }
+        // get plural rules from iso 639 language and set label if common locale wasn't known
+        if( isset($langs[$lc]) ){
+            list( $label, $pluraleq, $plurals ) = $langs[$lc];
+            $locale->pluraleq = $pluraleq;
+            $locale->plurals = $plurals;
+            $locale->nplurals = count( $plurals );
+        }
+        // get country just for label if not already applied from common locale combo
+        if( ! $locale->label ){
+            if( $cc ){
+                if( isset($regions[$cc]) ){
+                    $label = $label ? $label.' ('.$regions[$cc].')' : $regions[$cc];
+                }
+                else {
+                    $label = $label ? $label.' ('.$cc.')' : '';
+                }
+            }
+            $locale->label = $label;
         }
         return $locale;
     }
-    
+
+
 
     /**
      * @return array
      */
     private static function data(){
-        static $locales;
-        if( ! isset($locales) ){
-            // this must be the first include of this file so it returns
-            $locales = loco_require('build/locales-compiled');
+        static $data;
+        if( ! isset($data) ){
+            // this must be the first include of this file to ensure it returns
+            $data = loco_require('build/locales-compiled');
         }
-        return $locales;
+        return $data;
     }
     
     
+    
     /**
-     * 
+     * Get names of all common locales indexed by xx_YY code
+     * @return array
      */
     public static function get_names(){
         $names = array();
-        foreach( self::data() as $lc => $regions ){
-            foreach( $regions as $cc => $data ){
-                $names[$lc.'_'.$cc] = $data[0];
+        $data = self::data();
+        foreach( $data['locales'] as $lc => $regions ){
+            foreach( $regions as $cc => $label ){
+                $names[$lc.'_'.$cc] = $label;
             }
         }
         return $names;

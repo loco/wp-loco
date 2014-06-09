@@ -14,15 +14,48 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     }
     
     
-    public function testSimpleLocaleResolve(){
+    public function testKnownLocaleResolves(){
         $locale = loco_locale_resolve('en_GB');
         $this->assertInstanceOf('LocoLocale', $locale );
         $this->assertEquals( 'English (UK)', $locale->get_name() );
         $this->assertEquals( 'en_GB', $locale->get_code() );
         // assert plurals
         $data = $locale->export();
-        $this->assertEquals( 2, (int) $data['nplurals'] );
+        $this->assertEquals( 2, $data['nplurals'] );
     }    
+    
+    
+    public function testUnknownLocaleWithValidLanguageAndRegionAllowed(){
+        $locale = loco_locale_resolve('pl_CY');
+        $this->assertInstanceOf('LocoLocale', $locale );
+        $this->assertEquals( 'pl_CY', $locale->get_code() );
+        $this->assertEquals( 'Polish (Cyprus)', $locale->get_name() );
+    }
+    
+    
+    public function testUnkownRegionWithValidLanguageAllowed(){
+        $locale = loco_locale_resolve('en_FF');
+        $this->assertInstanceOf('LocoLocale', $locale );
+        $this->assertEquals( 'en_FF', $locale->get_code() );
+        $this->assertEquals( 'English (FF)', $locale->get_name() );
+    }
+    
+    
+    public function testUnknownLanguageWithValidRegionAllowed(){
+        $locale = loco_locale_resolve('zz_GB');
+        $this->assertInstanceOf('LocoLocale', $locale );
+        $this->assertEquals( 'zz_GB', $locale->get_code() );
+        $this->assertEquals( 'United Kingdom', $locale->get_name() );
+    }
+    
+    
+    public function testUnknownAndUnknownRegionAllowed(){
+        $locale = loco_locale_resolve('zz_ZZ');
+        $this->assertInstanceOf('LocoLocale', $locale );
+        $this->assertEquals( 'zz_ZZ', $locale->get_code() );
+        $this->assertEquals( 'Unknown language', $locale->get_name() );
+    }
+    
     
     
     public function testPrefixedLocaleResolve(){
