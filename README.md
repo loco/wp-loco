@@ -20,4 +20,4 @@ If you want to use a stable release listed in the Wordpress plugin directory, yo
 
     $ cd wp-content/plugins/loco-translate 
     $ git fetch origin
-    $ git checkout tags/1.4.2
+    $ git checkout tags/1.4.5
