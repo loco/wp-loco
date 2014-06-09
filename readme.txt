@@ -116,6 +116,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 * Added experimental support for core packages
 * Tested in WP 3.9.1
 * Added Swedish translations
+* Added Russian translations
 * Added text filter clear button
 
 = 1.4.4 =
@@ -215,5 +216,6 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Dutch translations courtesy of [Niels Geryl](http://hetwittepaard.be)
 * German translations courtesy of [Sebastian König](http://aykutmania.de)
 * Turkish translations courtesy of [Abdullah Pazarbaşı](http://abdullahpazarbasi.com)
-* Swedish translations courtesy if [Jimmy Malmqvist](http://jimmymalmqvist.com)
+* Swedish translations courtesy of [Jimmy Malmqvist](http://jimmymalmqvist.com)
+* Russian translations courtesy of [Alexey Tkachenko](http://atkachenko.ru)
 
