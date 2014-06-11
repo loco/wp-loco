@@ -107,6 +107,9 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 
 == Changelog ==
 
+= 1.4.6 =
+* Updated Swedish and Turkish translations
+
 = 1.4.5 =
 * Support for Domain Path tag
 * Added choice of location when language and package dirs both writable
@@ -197,7 +200,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 
 == Upgrade Notice ==
 
-= 1.4.5 =
+= 1.4.6 =
 * Bug fixes and improvements.
 
 
@@ -215,7 +218,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 
 * Dutch translations courtesy of [Niels Geryl](http://hetwittepaard.be)
 * German translations courtesy of [Sebastian König](http://aykutmania.de)
-* Turkish translations courtesy of [Abdullah Pazarbaşı](http://abdullahpazarbasi.com)
+* Turkish translations courtesy of [Abdullah Pazarbaşı](http://abdullahpazarbasi.com) and Abdullah Manaz
 * Swedish translations courtesy of [Jimmy Malmqvist](http://jimmymalmqvist.com)
 * Russian translations courtesy of [Alexey Tkachenko](http://atkachenko.ru)
 
