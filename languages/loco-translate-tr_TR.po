@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon Jun 09 2014 17:13:45 GMT+0100 (BST)\n"
-"Last-Translator: Tim <support@localise.biz>\n"
+"PO-Revision-Date: Wed Jun 11 2014 01:07:47 GMT+0300\n"
+"Last-Translator: Abdullah Manaz <abdullahmanaz@gmail.com>\n"
 "Language-Team: \n"
 "Language: Turkish\n"
 "Plural-Forms: nplurals=1; plural=0\n"
@@ -24,34 +24,36 @@ msgstr ""
 
 #: ../lib/loco-admin.php:42
 msgid "Permission denied"
-msgstr ""
+msgstr "İzin reddedildi"
 
 #: ../lib/loco-admin.php:313
 #, php-format
 msgid "PO file used as template. This will be renamed to %s on first save"
 msgstr ""
+"PO dosyası Şablon olarak kullanıldı. İlk kaydetmenizde %s olarak "
+"isimlendirilecek."
 
 #: ../lib/loco-admin.php:692
 #, php-format
 msgid "Empty or invalid %s file"
-msgstr ""
+msgstr "%s Dosyası boş veya geçersiz"
 
 #: ../lib/loco-admin.php:696
 #, php-format
 msgid "%s file has no header"
-msgstr ""
+msgstr "%s Dosyasının başlığı yok"
 
 #: ../lib/loco-admin.php:979
 msgid "Translation options"
-msgstr ""
+msgstr "Çeviri Seçenekleri"
 
 #: ../lib/loco-admin.php:986
 msgid "Loco Translate"
-msgstr ""
+msgstr "Loco Çeviri"
 
 #: ../lib/loco-packages.php:476
 msgid "Folder not found"
-msgstr ""
+msgstr "Dizin bulunmadı"
 
 #: ../php/loco-posave.php:58
 #, php-format
@@ -59,16 +61,18 @@ msgid ""
 "Web server cannot create backups in \"%s\". Fix file permissions or disable "
 "backups in settings"
 msgstr ""
+"Web Sunucusu \"%s\" adresinde yedek oluşturamaz. Dosya izinlerini düzenleyin "
+"veya ayarlardaki Yedeklemeyi geçersiz kılın."
 
 #: ../php/loco-posync.php:47
 msgid "No source files in this package, nothing to sync"
-msgstr ""
+msgstr "Bu pakette eşleştirilecek kaynak dosyalar yok."
 
 #. label for the window pane holding native translation
 #: ../pub/js/lang/dummy.php:25
 msgctxt "Editor pane"
 msgid "Source text"
-msgstr ""
+msgstr "Kaynak Metin"
 
 #. where %s is the language, e.g French translation
 #: ../pub/js/lang/dummy.php:27
@@ -76,49 +80,51 @@ msgstr ""
 msgctxt "Editor pane"
 msgid "%s translation"
 msgstr ""
+"%s Dili Nerede? (örnek: Turkce Çeviri)\n"
+"%s Çevirisi"
 
 #. label for the window pane holding translator comments
 #: ../pub/js/lang/dummy.php:29
 msgctxt "Editor pane"
 msgid "Comments"
-msgstr ""
+msgstr "Yorumlar"
 
 #. label for the window pane holding message context
 #: ../pub/js/lang/dummy.php:31
 msgctxt "Editor pane"
 msgid "Context"
-msgstr ""
+msgstr "Metin"
 
 #: ../tpl/admin-nav.tpl.php:26
 msgid "Loco may not work as expected"
-msgstr ""
+msgstr "Loco beklendiği gibi çalışmayabilir"
 
 #: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
 msgid "Backing up PO files"
-msgstr ""
+msgstr "PO dosyaları yedekleniyor"
 
 #: ../tpl/admin-opts.tpl.php:69
 msgid "Number of backups to keep of each file:"
-msgstr ""
+msgstr "Saklanacak her dosyanın yedek sayısı:"
 
 #: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
 msgid "Experimental features"
-msgstr ""
+msgstr "Deneysel Özellikler"
 
 #: ../tpl/admin-opts.tpl.php:86
 msgid "Enable Wordpress core translations"
-msgstr ""
+msgstr "WordPress Çekirdek Çevirilerini Geçerli Kıl"
 
 #: ../tpl/admin-poinit.tpl.php:58
 #, php-format
 msgctxt "Form label"
 msgid "create in <code>%s</code>"
-msgstr ""
+msgstr "<code>%s</code> Adresinde Oluştur"
 
 #: ../tpl/admin-poinit.tpl.php:63
 msgctxt "Form label"
 msgid "create in global languages directory"
-msgstr ""
+msgstr "Genel Language dizininde Oluştur"
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:15 ../pub/js/lang/dummy.php:8
@@ -146,37 +152,37 @@ msgstr "Yeni PO Dosyası"
 
 #: ../lib/loco-admin.php:240
 msgid "You must specify a valid locale for a new PO file"
-msgstr "Yeni PO dosyası için geçerli bir locale değeri belirtmek zorundasınız"
+msgstr "Yeni PO dosyası için geçerli bir Yerel Değer belirtmek zorundasınız"
 
 #: ../lib/loco-admin.php:265 ../lib/loco-admin.php:367
 msgid "No translatable strings found"
-msgstr "Çevrilebilir cümle bulunamadı"
+msgstr "Çevrilebilecek cümle bulunamadı"
 
 #: ../lib/loco-admin.php:265
 msgid "Cannot create a PO file."
-msgstr "Bir PO dosyası oluşturulamıyor."
+msgstr "Bir PO dosyası oluşturulamaz."
 
 #: ../lib/loco-admin.php:272
 #, php-format
 msgid "PO file already exists with locale %s"
-msgstr "PO dosyası %s locale değeri ile zaten mevcut"
+msgstr "PO dosyası %s Yerel Değer ile zaten var"
 
 #: ../lib/loco-admin.php:337
 msgid ""
 "File cannot be created automatically. Fix the file permissions or use "
 "Download instead of Save"
 msgstr ""
-"Dosya otomatik olarak oluşturulamıyor. Dosya izinlerini tamir edin ya da "
-"Saklama yerine İndirin."
+"Dosya otomatik olarak oluşturulamıyor. Dosya izinlerini düzenleyin ya da "
+"İndirilenler dizinine kaydedin."
 
 #: ../lib/loco-admin.php:346 ../lib/loco-admin.php:355
 #, php-format
 msgid "%s file is empty"
-msgstr "%s dosyası boş"
+msgstr "%s Dosyası boş"
 
 #: ../lib/loco-admin.php:347 ../lib/loco-admin.php:362
 msgid "Run Sync to update from source code"
-msgstr "Kaynak dosyasından güncelleme için Senkr. çalıştır"
+msgstr "Kaynak kodundan güncelleştirmek için Eşleştirme Yap"
 
 #: ../lib/loco-admin.php:351
 msgid "No strings could be extracted from source code"
@@ -185,17 +191,17 @@ msgstr "Kaynak kodundan herhangi cümle çıkarılamadı"
 #: ../lib/loco-admin.php:358
 #, php-format
 msgid "Run Sync to update from %s"
-msgstr "%s üzerinden güncelleme için Senkr. çalıştır"
+msgstr "%s kaynağından güncelleştirme için Eşleştirme Yap"
 
 #: ../lib/loco-admin.php:377
 msgid "Source code has been modified, run Sync to update POT"
-msgstr "Kaynak dosyası değiştirilmiş, POT güncellemesi için Senkr. çalıştırın"
+msgstr "Kaynak dosyası değiştirilmiş, POT güncellemesi için Eşleştirme Yap"
 
 #: ../lib/loco-admin.php:381
 msgid "POT has been modified since PO file was saved, run Sync to update"
 msgstr ""
 "PO dosyası en son saklandığından beri POT değişikliğe uğramış, güncelleme "
-"için Senkr. çalıştırın."
+"için Eşleştirme Yap"
 
 #: ../lib/loco-admin.php:468
 msgid "Bad file path"
@@ -209,7 +215,7 @@ msgstr "Yeni şablon"
 #: ../lib/loco-admin.php:847
 msgctxt "Add button"
 msgid "New language"
-msgstr "Yeni dil"
+msgstr "Yeni Lisan"
 
 #: ../lib/loco-admin.php:886
 #, php-format
@@ -226,7 +232,7 @@ msgstr[1] "%s cümle"
 #: ../lib/loco-admin.php:889
 #, php-format
 msgid "%s fuzzy"
-msgstr "%s bulanık"
+msgstr "%s belirsiz"
 
 #: ../lib/loco-admin.php:892
 #, php-format
@@ -235,15 +241,15 @@ msgstr "%s çevrilmemiş"
 
 #: ../lib/loco-admin.php:934
 msgid "Failed to compile MO file with built-in compiler"
-msgstr "Dahili derleyici ile MO derlemesinde hata"
+msgstr "Dahili derleyici ile MO derlemesinde hata oldu"
 
 #: ../lib/loco-admin.php:977 ../tpl/admin-nav.tpl.php:21
 msgid "Loco, Translation Management"
-msgstr "Loco, Çevri Yönetimi"
+msgstr "Loco, Çeviri Yönetimi"
 
 #: ../lib/loco-admin.php:978 ../lib/loco-admin.php:1009
 msgid "Manage translations"
-msgstr "Çevrileri Yönet"
+msgstr "Çevirileri Yönet"
 
 #: ../lib/loco-admin.php:1010 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.
 #: tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ..
@@ -265,7 +271,7 @@ msgstr "Bazı dosyalar yazılabilir değil"
 
 #: ../lib/loco-packages.php:433
 msgid "Some files missing"
-msgstr "Bazı dosyalar eksik"
+msgstr "Bazı dosyalar yok"
 
 #: ../lib/loco-packages.php:439 ../lib/loco-packages.php:443
 #, php-format
@@ -294,7 +300,7 @@ msgstr "Dizin yazılabilir değil"
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
-msgstr "Kullanıcı çevrileri yönetmeye yetkili değil"
+msgstr "Kullanıcı çevirileri yönetmeye yetkili değil"
 
 #: ../php/loco-download.php:75 ../php/loco-posave.php:121
 #, php-format
@@ -303,7 +309,7 @@ msgstr "%s ile MO dosyası derlemede hata, ayarlarınızı denetleyin"
 
 #: ../php/loco-posave.php:10 ../php/loco-posync.php:9
 msgid "Invalid data posted to server"
-msgstr "Sunucuya gönderili veri geçersiz"
+msgstr "Sunucuya gönderilen bilgi geçersiz"
 
 #: ../php/loco-posave.php:23 ../php/loco-posync.php:22
 #, php-format
@@ -316,8 +322,8 @@ msgid ""
 "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
 "create it manually."
 msgstr ""
-"Web sunucusu \"%s\" dizini oluşturamıyor \"%s\" içinde. Dosya izinlerini tamir "
-"edin ya da elle oluşturun."
+"Web sunucusu  \"%s\" dizinini \"%s\" burada oluşturamıyor . Dosya izinlerini "
+"düzenleyin ya da elle oluşturun."
 
 #: ../php/loco-posave.php:69
 #, php-format
@@ -325,8 +331,8 @@ msgid ""
 "Web server cannot create files in the \"%s\" directory. Fix file permissions "
 "or use the download function."
 msgstr ""
-"Web sunucusu \"%s\" dizini içinde dosya oluşturamıyor. Dosya izinlerini tamir "
-"edin ya da indirme fonksiyonunu kullanın."
+"Web sunucusu \"%s\" dizini içinde dosya oluşturamıyor. Dosya izinlerini "
+"düzenleyin ya da indirme fonksiyonunu kullanın."
 
 #: ../php/loco-posave.php:81
 #, php-format
@@ -334,8 +340,8 @@ msgid ""
 "%s file is not writable by the web server. Fix file permissions or download "
 "and copy to \"%s/%s\"."
 msgstr ""
-"%s dosyası web sunucu tarafından yazılamaz durumda. Dosya izinlerini tamir "
-"edin ya da indirip \"%s/%s\" yoluna kopyalayın."
+"%s dosyası web sunucu tarafından yazılamaz durumda. Dosya izinlerini "
+"düzenleyin ya da indirip \"%s/%s\" yoluna kopyalayın."
 
 #: ../php/loco-posave.php:102
 msgid "Cannot create MO file"
@@ -359,7 +365,7 @@ msgstr "Bilinmeyen hata"
 
 #: ../pub/js/lang/dummy.php:10
 msgid "PO file saved"
-msgstr "PO dosyası saklandı"
+msgstr "PO dosyası kaydedildi"
 
 #: ../pub/js/lang/dummy.php:11
 msgid "and MO file compiled"
@@ -372,7 +378,7 @@ msgstr "%s üzerinden birleştirildi"
 
 #: ../pub/js/lang/dummy.php:13
 msgid "Merged from source code"
-msgstr "Kaynak kodtan birleştirildi"
+msgstr "Kaynak koddan birleştirildi"
 
 #: ../pub/js/lang/dummy.php:14
 #, php-format
@@ -399,11 +405,11 @@ msgstr[1] "%s kullanımdışı cümle kaldırıldı"
 
 #: ../pub/js/lang/dummy.php:18
 msgid "Your changes will be lost if you continue without saving"
-msgstr "Saklamadan devam ederseniz değişiklikleriniz kaybolacak"
+msgstr "Kaydetmeden devam ederseniz değişiklikleriniz kaybolacak"
 
 #: ../pub/js/lang/dummy.php:37
 msgid "Translation"
-msgstr "Çevri"
+msgstr "Çeviri"
 
 #: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.
 #: tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
@@ -435,7 +441,7 @@ msgstr "Paket detayları"
 #: ../tpl/admin-list.tpl.php:14
 msgctxt "Table header"
 msgid "Translations (PO)"
-msgstr "Çevriler (PO)"
+msgstr "Çeviriler (PO)"
 
 #: ../tpl/admin-list.tpl.php:17
 msgctxt "Table header"
@@ -451,13 +457,13 @@ msgstr "Dosya izinleri"
 #, php-format
 msgid "1 language"
 msgid_plural "%u languages"
-msgstr[0] "1 dil"
-msgstr[1] "%u dil"
+msgstr[0] "1 Lisan"
+msgstr[1] "%u Lisan"
 
 #: ../tpl/admin-list.tpl.php:48
 msgctxt "Modified time"
 msgid "Updated"
-msgstr "Güncellenme"
+msgstr "Güncellendi"
 
 #: ../tpl/admin-list.tpl.php:97
 msgid "OK"
@@ -465,11 +471,11 @@ msgstr "TAMAM"
 
 #: ../tpl/admin-nav.tpl.php:20
 msgid "Powered by"
-msgstr "Destekleyici:"
+msgstr "Hazırlayan:"
 
 #: ../tpl/admin-opts.tpl.php:18
 msgid "Configure Loco Translate"
-msgstr "Loco Translate'i konfigüre et"
+msgstr "Loco Çeviri Kurgusu"
 
 #: ../tpl/admin-opts.tpl.php:27 ../tpl/admin-opts.tpl.php:31
 msgid "Compiling MO files"
@@ -485,7 +491,7 @@ msgstr "Harici komut kullan:"
 
 #: ../tpl/admin-opts.tpl.php:47
 msgid "Enter path to msgfmt on server"
-msgstr "Sunucudaki msgfmt'ye yol gir"
+msgstr "Sunucudaki msgfmt yolunu girin"
 
 #: ../tpl/admin-opts.tpl.php:54
 msgid "Generate hash tables"
@@ -493,7 +499,7 @@ msgstr "Hash tabloları üret"
 
 #: ../tpl/admin-opts.tpl.php:95
 msgid "Save settings"
-msgstr "Ayarları sakla"
+msgstr "Ayarları Kaydet"
 
 #: ../tpl/admin-poedit.tpl.php:31
 msgid "Template file"
@@ -502,11 +508,11 @@ msgstr "Şablon dosyası"
 #: ../tpl/admin-poedit.tpl.php:39
 msgctxt "Dropdown label"
 msgid "Switch to..."
-msgstr "Geç:"
+msgstr "Geçiş Yap:"
 
 #: ../tpl/admin-poedit.tpl.php:57
 msgid "Updated"
-msgstr "Güncel"
+msgstr "Güncellendi"
 
 #: ../tpl/admin-poedit.tpl.php:62
 msgid "never"
@@ -515,7 +521,7 @@ msgstr "asla"
 #: ../tpl/admin-poedit.tpl.php:87
 msgctxt "Editor button"
 msgid "Save"
-msgstr "Sakla"
+msgstr "Kaydet"
 
 #: ../tpl/admin-poedit.tpl.php:94 ../tpl/admin-poedit.tpl.php:103
 msgctxt "Editor button"
@@ -525,7 +531,7 @@ msgstr "İndir"
 #: ../tpl/admin-poedit.tpl.php:115
 msgctxt "Editor button"
 msgid "Sync"
-msgstr "Senkr."
+msgstr "Eşleştir"
 
 #: ../tpl/admin-poedit.tpl.php:120
 msgctxt "Editor button"
@@ -545,11 +551,11 @@ msgstr "Sil"
 #: ../tpl/admin-poedit.tpl.php:135
 msgctxt "Editor button"
 msgid "Fuzzy"
-msgstr "Bulanık"
+msgstr "Belirsiz"
 
 #: ../tpl/admin-poedit.tpl.php:139
 msgid "Filter translations"
-msgstr "Çevrileri filtrele"
+msgstr "Çevirileri filtrele"
 
 #: ../tpl/admin-poedit.tpl.php:143
 msgctxt "Editor button"
@@ -559,7 +565,7 @@ msgstr "Yardım"
 #: ../tpl/admin-poinit.tpl.php:21
 #, php-format
 msgid "Initialize new translations in %s"
-msgstr "%s için yeni çevriler başlat"
+msgstr "%s için yeni çeviriye başla"
 
 #: ../tpl/admin-poinit.tpl.php:34
 msgid "Select from common languages"
@@ -568,12 +574,12 @@ msgstr "Yaygın diller arasından seç"
 #: ../tpl/admin-poinit.tpl.php:45
 msgctxt "Form label"
 msgid "or enter any language code"
-msgstr "veya herhangi dil kodu gir"
+msgstr "veya herhangi bir dil kodu gir"
 
 #: ../tpl/admin-poinit.tpl.php:68
 msgctxt "Submit button"
 msgid "Start translating"
-msgstr "Çevriye Başla"
+msgstr "Çeviriye Başla"
 
 #: ../tpl/admin-root.tpl.php:18
 msgid "New version available"
@@ -582,7 +588,7 @@ msgstr "Yeni versiyon mevcut"
 #: ../tpl/admin-root.tpl.php:21
 #, php-format
 msgid "Upgrade to version %s of Loco Translate"
-msgstr "Loco Translate'in %s versiyonuna yükselt"
+msgstr "Loco Çeviri eklentisini %s versiyonuna yükselt"
 
 #: ../tpl/admin-root.tpl.php:31
 msgid "Select a plugin or theme to translate"
@@ -591,7 +597,7 @@ msgstr "Çevirisini yapmak için bir eklenti ya da tema seç"
 #: ../tpl/admin-root.tpl.php:40
 msgctxt "Package list header"
 msgid "Themes"
-msgstr "Temalar"
+msgstr "Görünümler"
 
 #: ../tpl/admin-root.tpl.php:53
 msgctxt "Package list header"
