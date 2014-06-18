@@ -8,7 +8,7 @@ abstract class Loco {
     /** plugin namespace */
     const NS = 'loco-translate';
     
-    const VERSION = '1.4.4';
+    const VERSION = '1.4.6';
     const CAPABILITY = 'manage_options';
     
     /* current plugin locale */
