@@ -111,6 +111,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 * Updated Swedish and Turkish translations
 * Added Indonesian translations
 * Added Italian translations
+* Template bugfix for child theme inheritance
 
 = 1.4.5 =
 * Support for Domain Path tag

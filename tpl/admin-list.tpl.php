@@ -24,6 +24,7 @@
             <tbody><?php 
             /* @var $package LocoPackage */
             foreach( $items as $package ): 
+                unset($parent);
                 extract( $package->meta() );
                 $mtime = $package->get_modified();
                 $n = count( $po );
@@ -36,7 +37,7 @@
                             </li><?php
                             if( isset($parent) ):?> 
                             <li>
-                                Inherits: <?php Loco::h($parent)?> 
+                                <?php Loco::h( Loco::__('Extends: %s'), $parent ) ?> 
                             </li><?php 
                             endif?> 
                             <li><?php 
