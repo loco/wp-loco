@@ -16,8 +16,10 @@ Add the plugin to your Wordpress project via Git as follows:
 
     $ git submodule add git@github.com:loco/wp-loco.git wp-content/plugins/loco-translate
     
-If you want to use a stable release listed in the Wordpress plugin directory, you can checkout by tag, e.g.:
+If you want to use a stable release listed in the Wordpress plugin directory, you can checkout by tag, e.g:
 
     $ cd wp-content/plugins/loco-translate 
     $ git fetch origin --tags
-    $ git checkout tags/1.4.5
+    $ git checkout tags/x.y.z
+    
+Be sure to check the latest version by typing `git tag` and replacing `x.y.z` in above example.
