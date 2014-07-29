@@ -111,14 +111,15 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 * Updated Swedish and Turkish translations
 * Added Indonesian translations
 * Added Italian translations
-* Template bugfix for child theme inheritance
+* Template bug fix for child theme inheritance
+* Form action bug fix - affected Firefox
 
 = 1.4.5 =
 * Support for Domain Path tag
-* Added choice of location when language and package dirs both writable
+* Added choice of location when language and package folders both writable
 * Fixed bug extracting domain from file names
 * Child themes always have their own text domain and don't duplicate parent files
-* Better plural support in po file editor
+* Better plural support in PO file editor
 * Added experimental support for core packages
 * Tested in WP 3.9.1
 * Added Swedish translations
