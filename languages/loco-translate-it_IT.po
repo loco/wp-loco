@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Sun Jul 27 2014 23:59:49 GMT+0200 (CEST)\n"
+"PO-Revision-Date: Tue Jul 29 2014 09:28:48 GMT+0100 (BST)\n"
 "Last-Translator: Admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Italian\n"
@@ -420,19 +420,24 @@ msgctxt "Table header"
 msgid "File permissions"
 msgstr "Permessi dei file"
 
-#: ../tpl/admin-list.tpl.php:43
+#: ../tpl/admin-list.tpl.php:40
+#, php-format
+msgid "Extends: %s"
+msgstr ""
+
+#: ../tpl/admin-list.tpl.php:44
 #, php-format
 msgid "1 language"
 msgid_plural "%u languages"
 msgstr[0] "1 lingua"
 msgstr[1] "lingue"
 
-#: ../tpl/admin-list.tpl.php:48
+#: ../tpl/admin-list.tpl.php:49
 msgctxt "Modified time"
 msgid "Updated"
 msgstr "Modificato"
 
-#: ../tpl/admin-list.tpl.php:97
+#: ../tpl/admin-list.tpl.php:98
 msgid "OK"
 msgstr "OK"
 

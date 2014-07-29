@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Tue Jun 10 2014 23:45:48 GMT+0200 (Västeuropa, sommartid)\n"
-"Last-Translator: Admin <stgbyggab@gmail.com>\n"
+"PO-Revision-Date: Tue Jul 29 2014 09:29:05 GMT+0100 (BST)\n"
+"Last-Translator: Admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Swedish\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -22,95 +22,228 @@ msgstr ""
 "X-Loco-Target-Locale: sv_SE\n"
 "X-Poedit-SearchPath-0: .."
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:8
-msgid "Unknown error"
-msgstr "Okänt fel"
+#. Translators: Bold text label in admin error messages
+#: ../lib/loco-admin.php:15
+msgctxt "Message label"
+msgid "Error"
+msgstr "Fel"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:10
-msgid "PO file saved"
-msgstr "PO-fil sparad"
+#: ../lib/loco-admin.php:24
+msgctxt "Message label"
+msgid "Warning"
+msgstr "Varning"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:12
-msgid "and MO file compiled"
-msgstr "och MO-fil sammanställd"
+#: ../lib/loco-admin.php:33
+msgctxt "Message label"
+msgid "OK"
+msgstr "OK"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:15
+#: ../lib/loco-admin.php:42
+msgid "Permission denied"
+msgstr "Behörighet saknas"
+
+#: ../lib/loco-admin.php:58
+msgid "Settings saved"
+msgstr "Inställningar sparade"
+
+#: ../lib/loco-admin.php:133
+msgid "New PO file"
+msgstr "Ny PO-fil"
+
+#: ../lib/loco-admin.php:240
+msgid "You must specify a valid locale for a new PO file"
+msgstr "Du måste ange en giltig landskod för en ny PO-fil"
+
+#: ../lib/loco-admin.php:265 ../lib/loco-admin.php:367
+msgid "No translatable strings found"
+msgstr "Inga översättbara strängar hittades"
+
+#: ../lib/loco-admin.php:265
+msgid "Cannot create a PO file."
+msgstr "Kunde ej skapa en PO-fil."
+
+#: ../lib/loco-admin.php:272
 #, php-format
-msgid "Merged from %s"
-msgstr "Sammanslagen från %s"
+msgid "PO file already exists with locale %s"
+msgstr "PO-fil finns redan med landskod %s"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:17
-msgid "Merged from source code"
-msgstr "Sammanslagen från källkod"
-
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:19
+#: ../lib/loco-admin.php:313
 #, php-format
-msgid "Already up to date with %s"
-msgstr "Redan aktuell med %s"
+msgid "PO file used as template. This will be renamed to %s on first save"
+msgstr ""
+"PO-fil används som mall. Den kommer att byta namn till %s när du väljer att "
+"spara"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:21
-msgid "Already up to date with source code"
-msgstr "Redan aktuell med källkod"
+#: ../lib/loco-admin.php:337
+msgid ""
+"File cannot be created automatically. Fix the file permissions or use "
+"Download instead of Save"
+msgstr ""
+"Fil kunde ej skapas automatiskt. Ändra filrättigheter eller använd Ladda ner "
+"istället för Spara"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:23
+#: ../lib/loco-admin.php:346 ../lib/loco-admin.php:355
 #, php-format
-msgid "1 new string added"
-msgid_plural "%s new strings added"
-msgstr[0] "1 ny sträng tillagd"
-msgstr[1] "%s nya strängar tillagda"
+msgid "%s file is empty"
+msgstr "%s-filen är tom"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:25
+#: ../lib/loco-admin.php:347 ../lib/loco-admin.php:362
+msgid "Run Sync to update from source code"
+msgstr "Använd Synka för att uppdatera från källkoden"
+
+#: ../lib/loco-admin.php:351
+msgid "No strings could be extracted from source code"
+msgstr "Inga strängar kunde hittas från källkoden"
+
+#: ../lib/loco-admin.php:358
 #, php-format
-msgid "1 obsolete string removed"
-msgid_plural "%s obsolete strings removed"
-msgstr[0] "1 föråldrad sträng togs bort"
-msgstr[1] "%s föråldrade strängar togs bort"
+msgid "Run Sync to update from %s"
+msgstr "Använd Synka för att uppdatera från %s"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:27
-msgid "Your changes will be lost if you continue without saving"
-msgstr "Dina ändringar kommer att gå förlorade om du fortsätter utan att spara"
+#: ../lib/loco-admin.php:377
+msgid "Source code has been modified, run Sync to update POT"
+msgstr "Källkod har ändrats, använd Synka för att uppdatera POT"
 
-#. label for the window pane holding native translation
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:35
-msgctxt "Editor pane"
-msgid "Source text"
-msgstr "Källtext"
+#: ../lib/loco-admin.php:381
+msgid "POT has been modified since PO file was saved, run Sync to update"
+msgstr "POT har ändrats sedan PO-filen sparades, använd Synka för att uppdatera"
 
-#. where %s is the language, e.g French translation
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:38
+#: ../lib/loco-admin.php:468
+msgid "Bad file path"
+msgstr "Ogiltig sökväg"
+
+#: ../lib/loco-admin.php:692
 #, php-format
-msgctxt "Editor pane"
-msgid "%s translation"
-msgstr "%s översättning"
+msgid "Empty or invalid %s file"
+msgstr "Tom eller ogiltigt %s-fil"
 
-#. label for the window pane holding translator comments
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:41
-msgctxt "Editor pane"
-msgid "Comments"
-msgstr "Kommentarer"
+#: ../lib/loco-admin.php:696
+#, php-format
+msgid "%s file has no header"
+msgstr "%s-filen saknar header"
 
-#. label for the window pane holding message context
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:44
-msgctxt "Editor pane"
-msgid "Context"
-msgstr "Innehåll"
+#: ../lib/loco-admin.php:828
+msgctxt "Add button"
+msgid "New template"
+msgstr "Ny mall"
 
-#: ../../plugins/loco-translate/pub/js/lang/dummy.php:52
-msgid "Translation"
-msgstr "Översättning"
+#: ../lib/loco-admin.php:847
+msgctxt "Add button"
+msgid "New language"
+msgstr "Nytt språk"
 
-#: ../../plugins/loco-translate/php/loco-posave.php:10 ../../plugins/loco-
-#: translate/php/loco-posync.php:9
+#: ../lib/loco-admin.php:886
+#, php-format
+msgid "%s%% translated"
+msgstr "%s%% översatt"
+
+#: ../lib/loco-admin.php:886
+#, php-format
+msgid "1 string"
+msgid_plural "%s strings"
+msgstr[0] "1 sträng"
+msgstr[1] "%s strängar"
+
+#: ../lib/loco-admin.php:889
+#, php-format
+msgid "%s fuzzy"
+msgstr "%s oklar"
+
+#: ../lib/loco-admin.php:892
+#, php-format
+msgid "%s untranslated"
+msgstr "%s ej översatta"
+
+#: ../lib/loco-admin.php:934
+msgid "Failed to compile MO file with built-in compiler"
+msgstr "Det gick ej att sammanställa MO-fil med inbyggd kompilator"
+
+#: ../lib/loco-admin.php:977 ../tpl/admin-nav.tpl.php:21
+msgid "Loco, Translation Management"
+msgstr "Loco, Translation Management"
+
+#: ../lib/loco-admin.php:978 ../lib/loco-admin.php:1009
+msgid "Manage translations"
+msgstr "Språkfiler"
+
+#: ../lib/loco-admin.php:979
+msgid "Translation options"
+msgstr "Inställningar"
+
+#: ../lib/loco-admin.php:986
+msgid "Loco Translate"
+msgstr "Översättningar"
+
+#: ../lib/loco-admin.php:1010 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.
+#: tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ..
+#: tpl/admin-root.tpl.php:7
+msgid "Settings"
+msgstr "Inställningar"
+
+#: ../lib/loco-admin.php:1034
+msgid "File download failed"
+msgstr "Nedladdning misslyckades"
+
+#: ../lib/loco-locales.php:65
+msgid "Unknown language"
+msgstr "Okänt språk"
+
+#: ../lib/loco-packages.php:423 ../lib/loco-packages.php:430
+msgid "Some files not writable"
+msgstr "Vissa filer är ej skrivbara"
+
+#: ../lib/loco-packages.php:433
+msgid "Some files missing"
+msgstr "Vissa filer saknas"
+
+#: ../lib/loco-packages.php:439 ../lib/loco-packages.php:443
+#, php-format
+msgid "\"%s\" folder not writable"
+msgstr "Mappen \"%s\" är ej skrivbar"
+
+#: ../lib/loco-packages.php:464
+msgid "POT file not writable"
+msgstr "POT-filen är ej skrivbar"
+
+#: ../lib/loco-packages.php:469
+msgid "PO file not writable"
+msgstr "PO-filen är ej skrivbar"
+
+#: ../lib/loco-packages.php:471
+msgid "MO file not writable"
+msgstr "MO-filen är ej skrivbar"
+
+#: ../lib/loco-packages.php:471
+msgid "MO file not found"
+msgstr "MO-fil hittades ej"
+
+#: ../lib/loco-packages.php:476
+msgid "Folder not writable"
+msgstr "Mappen är ej skrivbar"
+
+#: ../lib/loco-packages.php:476
+msgid "Folder not found"
+msgstr "Mappen hittades ej"
+
+#: ../php/loco-ajax.php:17 ../php/loco-download.php:21
+msgid "User does not have permission to manage translations"
+msgstr "Användaren saknar behörighet att hantera översättningar"
+
+#: ../php/loco-download.php:75 ../php/loco-posave.php:121
+#, php-format
+msgid "Failed to compile MO file with %s, check your settings"
+msgstr "Det gick ej sammanställa MO-filen med %s , kontrollera dina inställningar"
+
+#: ../php/loco-posave.php:10 ../php/loco-posync.php:9
 msgid "Invalid data posted to server"
 msgstr "Ogiltig data skickades till servern"
 
-#: ../../plugins/loco-translate/php/loco-posave.php:23 ../../plugins/loco-
-#: translate/php/loco-posync.php:22
+#: ../php/loco-posave.php:23 ../php/loco-posync.php:22
 #, php-format
 msgid "Package not found called %s"
 msgstr "Paket %s ej hittat"
 
-#: ../../plugins/loco-translate/php/loco-posave.php:58
+#: ../php/loco-posave.php:58
 #, php-format
 msgid ""
 "Web server cannot create backups in \"%s\". Fix file permissions or disable "
@@ -119,7 +252,7 @@ msgstr ""
 "Webbservern kunde ej skapa säkerhetskopior i \"%s\". Ändra filrättigheter "
 "eller inaktivera säkerhetskopior i inställningarna"
 
-#: ../../plugins/loco-translate/php/loco-posave.php:66
+#: ../php/loco-posave.php:66
 #, php-format
 msgid ""
 "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
@@ -128,7 +261,7 @@ msgstr ""
 "Webbservern kunde ej skapa mappen \"%s\" i \"%s\". Ändra filrättigheter eller "
 "skapa den manuellt."
 
-#: ../../plugins/loco-translate/php/loco-posave.php:69
+#: ../php/loco-posave.php:69
 #, php-format
 msgid ""
 "Web server cannot create files in the \"%s\" directory. Fix file permissions "
@@ -137,7 +270,7 @@ msgstr ""
 "Webbservern kunde ej skapa filer i mappen \"%s\". Ändra filrättigheter eller "
 "använd nedladdningsfunktionen."
 
-#: ../../plugins/loco-translate/php/loco-posave.php:81
+#: ../php/loco-posave.php:81
 #, php-format
 msgid ""
 "%s file is not writable by the web server. Fix file permissions or download "
@@ -146,481 +279,333 @@ msgstr ""
 "%s-filen är ej skrivbar av webbservern. Ändra filrättigheter eller ladda ner "
 "och kopiera till \"%s/%s\"."
 
-#: ../../plugins/loco-translate/php/loco-posave.php:102
+#: ../php/loco-posave.php:102
 msgid "Cannot create MO file"
 msgstr "Kunde ej skapa MO-fil"
 
-#: ../../plugins/loco-translate/php/loco-posave.php:105
+#: ../php/loco-posave.php:105
 msgid "Cannot overwrite MO file"
 msgstr "Kunde ej skriva över MO-fil"
 
-#: ../../plugins/loco-translate/php/loco-posave.php:121 ../../plugins/loco-
-#: translate/php/loco-download.php:75
-#, php-format
-msgid "Failed to compile MO file with %s, check your settings"
-msgstr "Det gick ej sammanställa MO-filen med %s , kontrollera dina inställningar"
-
-#: ../../plugins/loco-translate/php/loco-posave.php:131
+#: ../php/loco-posave.php:131
 msgid "Failed to write MO file"
 msgstr "Kunde ej skapa MO-fil"
 
-#: ../../plugins/loco-translate/php/loco-download.php:21 ../../plugins/loco-
-#: translate/php/loco-ajax.php:17
-msgid "User does not have permission to manage translations"
-msgstr "Användaren saknar behörighet att hantera översättningar"
-
-#: ../../plugins/loco-translate/php/loco-posync.php:47
+#: ../php/loco-posync.php:47
 msgid "No source files in this package, nothing to sync"
 msgstr "Inga källfiler hittades till denna språkfil, ingenting att synkronisera"
 
-#: ../../plugins/loco-translate/php/loco-posync.php:57
+#: ../php/loco-posync.php:57
 msgid "No strings could be extracted from source files"
 msgstr "Inga strängar kunde hittas från källfiler"
 
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:6 ../../plugins/loco-
-#: translate/tpl/admin-poinit.tpl.php:6 ../../plugins/loco-translate/tpl/admin-
-#: poedit.tpl.php:6 ../../plugins/loco-translate/tpl/admin-fscheck.tpl.php:6 ../..
-#: /plugins/loco-translate/tpl/admin-root.tpl.php:6
+#: ../pub/js/lang/dummy.php:8
+msgid "Unknown error"
+msgstr "Okänt fel"
+
+#: ../pub/js/lang/dummy.php:10
+msgid "PO file saved"
+msgstr "PO-fil sparad"
+
+#: ../pub/js/lang/dummy.php:12
+msgid "and MO file compiled"
+msgstr "och MO-fil sammanställd"
+
+#: ../pub/js/lang/dummy.php:15
+#, php-format
+msgid "Merged from %s"
+msgstr "Sammanslagen från %s"
+
+#: ../pub/js/lang/dummy.php:17
+msgid "Merged from source code"
+msgstr "Sammanslagen från källkod"
+
+#: ../pub/js/lang/dummy.php:19
+#, php-format
+msgid "Already up to date with %s"
+msgstr "Redan aktuell med %s"
+
+#: ../pub/js/lang/dummy.php:21
+msgid "Already up to date with source code"
+msgstr "Redan aktuell med källkod"
+
+#: ../pub/js/lang/dummy.php:23
+#, php-format
+msgid "1 new string added"
+msgid_plural "%s new strings added"
+msgstr[0] "1 ny sträng tillagd"
+msgstr[1] "%s nya strängar tillagda"
+
+#: ../pub/js/lang/dummy.php:25
+#, php-format
+msgid "1 obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] "1 föråldrad sträng togs bort"
+msgstr[1] "%s föråldrade strängar togs bort"
+
+#: ../pub/js/lang/dummy.php:27
+msgid "Your changes will be lost if you continue without saving"
+msgstr "Dina ändringar kommer att gå förlorade om du fortsätter utan att spara"
+
+#. label for the window pane holding native translation
+#: ../pub/js/lang/dummy.php:35
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr "Källtext"
+
+#. where %s is the language, e.g French translation
+#: ../pub/js/lang/dummy.php:38
+#, php-format
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr "%s översättning"
+
+#. label for the window pane holding translator comments
+#: ../pub/js/lang/dummy.php:41
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr "Kommentarer"
+
+#. label for the window pane holding message context
+#: ../pub/js/lang/dummy.php:44
+msgctxt "Editor pane"
+msgid "Context"
+msgstr "Innehåll"
+
+#: ../pub/js/lang/dummy.php:52
+msgid "Translation"
+msgstr "Översättning"
+
+#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.
+#: tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
 msgid "Packages"
 msgstr "Språkfiler"
 
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:7 ../../plugins/loco-
-#: translate/tpl/admin-poinit.tpl.php:8 ../../plugins/loco-translate/tpl/admin-
-#: poedit.tpl.php:8 ../../plugins/loco-translate/tpl/admin-fscheck.tpl.php:7 ../..
-#: /plugins/loco-translate/tpl/admin-root.tpl.php:7 ../../plugins/loco-
-#: translate/lib/loco-admin.php:1010
-msgid "Settings"
-msgstr "Inställningar"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:18
-msgid "Configure Loco Translate"
-msgstr "Konfigurera Loco Translate"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:27 ../../plugins/loco-
-#: translate/tpl/admin-opts.tpl.php:31
-msgid "Compiling MO files"
-msgstr "Sammanställa MO-filer"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:36
-msgid "Use built-in MO compiler."
-msgstr "Använd inbyggd MO-kompilator."
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:42
-msgid "Use external command:"
-msgstr "Använd externt kommando:"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:47
-msgid "Enter path to msgfmt on server"
-msgstr "Skriv in sökväg till msgfmt på servern"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:54
-msgid "Generate hash tables"
-msgstr "Generera hashtabeller"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:61 ../../plugins/loco-
-#: translate/tpl/admin-opts.tpl.php:65
-msgid "Backing up PO files"
-msgstr "Säkerhetskopiera PO-filer"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:69
-msgid "Number of backups to keep of each file:"
-msgstr "Antal säkerhetskopior att behålla för varje fil:"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:77 ../../plugins/loco-
-#: translate/tpl/admin-opts.tpl.php:81
-msgid "Experimental features"
-msgstr "Experimentella funktioner"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:86
-msgid "Enable Wordpress core translations"
-msgstr "Aktivera Wordpress översättningar"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:95
-msgid "Save settings"
-msgstr "Spara inställningar"
-
-#: ../../plugins/loco-translate/tpl/admin-opts.tpl.php:96 ../../plugins/loco-
-#: translate/tpl/admin-fscheck.tpl.php:41
-msgid "Get help"
-msgstr "Hjälp"
-
-#: ../../plugins/loco-translate/tpl/admin-poinit.tpl.php:21
-#, php-format
-msgid "Initialize new translations in %s"
-msgstr "Skapa nya översättningar i %s"
-
-#: ../../plugins/loco-translate/tpl/admin-poinit.tpl.php:34
-msgid "Select from common languages"
-msgstr "Välj bland vanliga språk"
-
-#: ../../plugins/loco-translate/tpl/admin-poinit.tpl.php:45
-msgctxt "Form label"
-msgid "or enter any language code"
-msgstr "eller skriv valfri landskod"
-
-#: ../../plugins/loco-translate/tpl/admin-poinit.tpl.php:58
-#, php-format
-msgctxt "Form label"
-msgid "create in <code>%s</code>"
-msgstr "skapa i <code>%s</code>"
-
-#: ../../plugins/loco-translate/tpl/admin-poinit.tpl.php:63
-msgctxt "Form label"
-msgid "create in global languages directory"
-msgstr "skapa i den globala språk katalogen"
-
-#: ../../plugins/loco-translate/tpl/admin-poinit.tpl.php:68
-msgctxt "Submit button"
-msgid "Start translating"
-msgstr "Börja översätta"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:31
-msgid "Template file"
-msgstr "Mallfil"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:39
-msgctxt "Dropdown label"
-msgid "Switch to..."
-msgstr "Växla till..."
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:57
-msgid "Updated"
-msgstr "Uppdaterad"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:62
-msgid "never"
-msgstr "aldrig"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:87
-msgctxt "Editor button"
-msgid "Save"
-msgstr "Spara"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:94 ../../plugins/loco-
-#: translate/tpl/admin-poedit.tpl.php:103
-msgctxt "Editor button"
-msgid "Download"
-msgstr "Ladda ner"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:115
-msgctxt "Editor button"
-msgid "Sync"
-msgstr "Synka"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:120
-msgctxt "Editor button"
-msgid "Revert"
-msgstr "Återgå"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:125
-msgctxt "Editor button"
-msgid "Add"
-msgstr "Lägg till"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:130
-msgctxt "Editor button"
-msgid "Del"
-msgstr "Radera"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:135
-msgctxt "Editor button"
-msgid "Fuzzy"
-msgstr "Oklar"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:140
-msgid "Filter translations"
-msgstr "Sök översättningar"
-
-#: ../../plugins/loco-translate/tpl/admin-poedit.tpl.php:145
-msgctxt "Editor button"
-msgid "Help"
-msgstr "Hjälp"
-
-#: ../../plugins/loco-translate/tpl/admin-fscheck.tpl.php:8
+#: ../tpl/admin-fscheck.tpl.php:8
 msgid "File check"
 msgstr "Filrättigheter"
 
-#: ../../plugins/loco-translate/tpl/admin-fscheck.tpl.php:17
+#: ../tpl/admin-fscheck.tpl.php:17
 #, php-format
 msgid "File system permissions for %s"
 msgstr "Filsystem rättigheter för %s"
 
-#: ../../plugins/loco-translate/tpl/admin-fscheck.tpl.php:40
+#: ../tpl/admin-fscheck.tpl.php:40
 msgid "Back"
 msgstr "Tillbaka"
 
-#: ../../plugins/loco-translate/tpl/admin-nav.tpl.php:20
-msgid "Powered by"
-msgstr "Drivs av"
+#: ../tpl/admin-fscheck.tpl.php:41 ../tpl/admin-opts.tpl.php:96
+msgid "Get help"
+msgstr "Hjälp"
 
-#: ../../plugins/loco-translate/tpl/admin-nav.tpl.php:21 ../../plugins/loco-
-#: translate/lib/loco-admin.php:977
-msgid "Loco, Translation Management"
-msgstr "Loco, Translation Management"
-
-#: ../../plugins/loco-translate/tpl/admin-nav.tpl.php:26
-msgid "Loco may not work as expected"
-msgstr "Loco kanske ej fungerar som väntat"
-
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:11
+#: ../tpl/admin-list.tpl.php:11
 msgctxt "Table header"
 msgid "Package details"
 msgstr "Beskrivning"
 
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:14
+#: ../tpl/admin-list.tpl.php:14
 msgctxt "Table header"
 msgid "Translations (PO)"
 msgstr "Översättningar (PO)"
 
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:17
+#: ../tpl/admin-list.tpl.php:17
 msgctxt "Table header"
 msgid "Template (POT)"
 msgstr "Mall (POT)"
 
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:20
+#: ../tpl/admin-list.tpl.php:20
 msgctxt "Table header"
 msgid "File permissions"
 msgstr "Filrättigheter"
 
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:43
+#: ../tpl/admin-list.tpl.php:40
+#, php-format
+msgid "Extends: %s"
+msgstr ""
+
+#: ../tpl/admin-list.tpl.php:44
 #, php-format
 msgid "1 language"
 msgid_plural "%u languages"
 msgstr[0] "1 språk"
 msgstr[1] "%u språk"
 
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:48
+#: ../tpl/admin-list.tpl.php:49
 msgctxt "Modified time"
 msgid "Updated"
 msgstr "Senast sparad"
 
-#: ../../plugins/loco-translate/tpl/admin-list.tpl.php:97
+#: ../tpl/admin-list.tpl.php:98
 msgid "OK"
 msgstr "OK"
 
-#: ../../plugins/loco-translate/tpl/admin-root.tpl.php:18
+#: ../tpl/admin-nav.tpl.php:20
+msgid "Powered by"
+msgstr "Drivs av"
+
+#: ../tpl/admin-nav.tpl.php:26
+msgid "Loco may not work as expected"
+msgstr "Loco kanske ej fungerar som väntat"
+
+#: ../tpl/admin-opts.tpl.php:18
+msgid "Configure Loco Translate"
+msgstr "Konfigurera Loco Translate"
+
+#: ../tpl/admin-opts.tpl.php:27 ../tpl/admin-opts.tpl.php:31
+msgid "Compiling MO files"
+msgstr "Sammanställa MO-filer"
+
+#: ../tpl/admin-opts.tpl.php:36
+msgid "Use built-in MO compiler."
+msgstr "Använd inbyggd MO-kompilator."
+
+#: ../tpl/admin-opts.tpl.php:42
+msgid "Use external command:"
+msgstr "Använd externt kommando:"
+
+#: ../tpl/admin-opts.tpl.php:47
+msgid "Enter path to msgfmt on server"
+msgstr "Skriv in sökväg till msgfmt på servern"
+
+#: ../tpl/admin-opts.tpl.php:54
+msgid "Generate hash tables"
+msgstr "Generera hashtabeller"
+
+#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
+msgid "Backing up PO files"
+msgstr "Säkerhetskopiera PO-filer"
+
+#: ../tpl/admin-opts.tpl.php:69
+msgid "Number of backups to keep of each file:"
+msgstr "Antal säkerhetskopior att behålla för varje fil:"
+
+#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
+msgid "Experimental features"
+msgstr "Experimentella funktioner"
+
+#: ../tpl/admin-opts.tpl.php:86
+msgid "Enable Wordpress core translations"
+msgstr "Aktivera Wordpress översättningar"
+
+#: ../tpl/admin-opts.tpl.php:95
+msgid "Save settings"
+msgstr "Spara inställningar"
+
+#: ../tpl/admin-poedit.tpl.php:31
+msgid "Template file"
+msgstr "Mallfil"
+
+#: ../tpl/admin-poedit.tpl.php:39
+msgctxt "Dropdown label"
+msgid "Switch to..."
+msgstr "Växla till..."
+
+#: ../tpl/admin-poedit.tpl.php:57
+msgid "Updated"
+msgstr "Uppdaterad"
+
+#: ../tpl/admin-poedit.tpl.php:62
+msgid "never"
+msgstr "aldrig"
+
+#: ../tpl/admin-poedit.tpl.php:87
+msgctxt "Editor button"
+msgid "Save"
+msgstr "Spara"
+
+#: ../tpl/admin-poedit.tpl.php:94 ../tpl/admin-poedit.tpl.php:103
+msgctxt "Editor button"
+msgid "Download"
+msgstr "Ladda ner"
+
+#: ../tpl/admin-poedit.tpl.php:115
+msgctxt "Editor button"
+msgid "Sync"
+msgstr "Synka"
+
+#: ../tpl/admin-poedit.tpl.php:120
+msgctxt "Editor button"
+msgid "Revert"
+msgstr "Återgå"
+
+#: ../tpl/admin-poedit.tpl.php:125
+msgctxt "Editor button"
+msgid "Add"
+msgstr "Lägg till"
+
+#: ../tpl/admin-poedit.tpl.php:130
+msgctxt "Editor button"
+msgid "Del"
+msgstr "Radera"
+
+#: ../tpl/admin-poedit.tpl.php:135
+msgctxt "Editor button"
+msgid "Fuzzy"
+msgstr "Oklar"
+
+#: ../tpl/admin-poedit.tpl.php:140
+msgid "Filter translations"
+msgstr "Sök översättningar"
+
+#: ../tpl/admin-poedit.tpl.php:145
+msgctxt "Editor button"
+msgid "Help"
+msgstr "Hjälp"
+
+#: ../tpl/admin-poinit.tpl.php:21
+#, php-format
+msgid "Initialize new translations in %s"
+msgstr "Skapa nya översättningar i %s"
+
+#: ../tpl/admin-poinit.tpl.php:34
+msgid "Select from common languages"
+msgstr "Välj bland vanliga språk"
+
+#: ../tpl/admin-poinit.tpl.php:45
+msgctxt "Form label"
+msgid "or enter any language code"
+msgstr "eller skriv valfri landskod"
+
+#: ../tpl/admin-poinit.tpl.php:58
+#, php-format
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr "skapa i <code>%s</code>"
+
+#: ../tpl/admin-poinit.tpl.php:63
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr "skapa i den globala språk katalogen"
+
+#: ../tpl/admin-poinit.tpl.php:68
+msgctxt "Submit button"
+msgid "Start translating"
+msgstr "Börja översätta"
+
+#: ../tpl/admin-root.tpl.php:18
 msgid "New version available"
 msgstr "Ny version tillgänglig"
 
-#: ../../plugins/loco-translate/tpl/admin-root.tpl.php:21
+#: ../tpl/admin-root.tpl.php:21
 #, php-format
 msgid "Upgrade to version %s of Loco Translate"
 msgstr "Uppdatera till version %s av Loco Translate"
 
-#: ../../plugins/loco-translate/tpl/admin-root.tpl.php:31
+#: ../tpl/admin-root.tpl.php:31
 msgid "Select a plugin or theme to translate"
 msgstr "Välj ett tillägg eller tema att översätta"
 
-#: ../../plugins/loco-translate/tpl/admin-root.tpl.php:40
+#: ../tpl/admin-root.tpl.php:40
 msgctxt "Package list header"
 msgid "Themes"
 msgstr "Teman"
 
-#: ../../plugins/loco-translate/tpl/admin-root.tpl.php:53
+#: ../tpl/admin-root.tpl.php:53
 msgctxt "Package list header"
 msgid "Plugins"
 msgstr "Tillägg"
 
-#: ../../plugins/loco-translate/tpl/admin-root.tpl.php:66
+#: ../tpl/admin-root.tpl.php:66
 msgctxt "Package list header"
 msgid "Core"
 msgstr "Wordpress"
-
-#. Translators: Bold text label in admin error messages
-#: ../../plugins/loco-translate/lib/loco-admin.php:15
-msgctxt "Message label"
-msgid "Error"
-msgstr "Fel"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:24
-msgctxt "Message label"
-msgid "Warning"
-msgstr "Varning"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:33
-msgctxt "Message label"
-msgid "OK"
-msgstr "OK"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:42
-msgid "Permission denied"
-msgstr "Behörighet saknas"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:58
-msgid "Settings saved"
-msgstr "Inställningar sparade"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:133
-msgid "New PO file"
-msgstr "Ny PO-fil"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:240
-msgid "You must specify a valid locale for a new PO file"
-msgstr "Du måste ange en giltig landskod för en ny PO-fil"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:265 ../../plugins/loco-
-#: translate/lib/loco-admin.php:367
-msgid "No translatable strings found"
-msgstr "Inga översättbara strängar hittades"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:265
-msgid "Cannot create a PO file."
-msgstr "Kunde ej skapa en PO-fil."
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:272
-#, php-format
-msgid "PO file already exists with locale %s"
-msgstr "PO-fil finns redan med landskod %s"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:313
-#, php-format
-msgid "PO file used as template. This will be renamed to %s on first save"
-msgstr ""
-"PO-fil används som mall. Den kommer att byta namn till %s när du väljer att "
-"spara"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:337
-msgid ""
-"File cannot be created automatically. Fix the file permissions or use "
-"Download instead of Save"
-msgstr ""
-"Fil kunde ej skapas automatiskt. Ändra filrättigheter eller använd Ladda ner "
-"istället för Spara"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:346 ../../plugins/loco-
-#: translate/lib/loco-admin.php:355
-#, php-format
-msgid "%s file is empty"
-msgstr "%s-filen är tom"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:347 ../../plugins/loco-
-#: translate/lib/loco-admin.php:362
-msgid "Run Sync to update from source code"
-msgstr "Använd Synka för att uppdatera från källkoden"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:351
-msgid "No strings could be extracted from source code"
-msgstr "Inga strängar kunde hittas från källkoden"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:358
-#, php-format
-msgid "Run Sync to update from %s"
-msgstr "Använd Synka för att uppdatera från %s"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:377
-msgid "Source code has been modified, run Sync to update POT"
-msgstr "Källkod har ändrats, använd Synka för att uppdatera POT"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:381
-msgid "POT has been modified since PO file was saved, run Sync to update"
-msgstr "POT har ändrats sedan PO-filen sparades, använd Synka för att uppdatera"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:468
-msgid "Bad file path"
-msgstr "Ogiltig sökväg"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:692
-#, php-format
-msgid "Empty or invalid %s file"
-msgstr "Tom eller ogiltigt %s-fil"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:696
-#, php-format
-msgid "%s file has no header"
-msgstr "%s-filen saknar header"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:828
-msgctxt "Add button"
-msgid "New template"
-msgstr "Ny mall"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:847
-msgctxt "Add button"
-msgid "New language"
-msgstr "Nytt språk"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:886
-#, php-format
-msgid "%s%% translated"
-msgstr "%s%% översatt"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:886
-#, php-format
-msgid "1 string"
-msgid_plural "%s strings"
-msgstr[0] "1 sträng"
-msgstr[1] "%s strängar"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:889
-#, php-format
-msgid "%s fuzzy"
-msgstr "%s oklar"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:892
-#, php-format
-msgid "%s untranslated"
-msgstr "%s ej översatta"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:934
-msgid "Failed to compile MO file with built-in compiler"
-msgstr "Det gick ej att sammanställa MO-fil med inbyggd kompilator"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:978 ../../plugins/loco-
-#: translate/lib/loco-admin.php:1009
-msgid "Manage translations"
-msgstr "Språkfiler"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:979
-msgid "Translation options"
-msgstr "Inställningar"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:986
-msgid "Loco Translate"
-msgstr "Översättningar"
-
-#: ../../plugins/loco-translate/lib/loco-admin.php:1034
-msgid "File download failed"
-msgstr "Nedladdning misslyckades"
-
-#: ../../plugins/loco-translate/lib/loco-locales.php:65
-msgid "Unknown language"
-msgstr "Okänt språk"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:423 ../../plugins/loco-
-#: translate/lib/loco-packages.php:430
-msgid "Some files not writable"
-msgstr "Vissa filer är ej skrivbara"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:433
-msgid "Some files missing"
-msgstr "Vissa filer saknas"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:439 ../../plugins/loco-
-#: translate/lib/loco-packages.php:443
-#, php-format
-msgid "\"%s\" folder not writable"
-msgstr "Mappen \"%s\" är ej skrivbar"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:464
-msgid "POT file not writable"
-msgstr "POT-filen är ej skrivbar"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:469
-msgid "PO file not writable"
-msgstr "PO-filen är ej skrivbar"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:471
-msgid "MO file not writable"
-msgstr "MO-filen är ej skrivbar"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:471
-msgid "MO file not found"
-msgstr "MO-fil hittades ej"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:476
-msgid "Folder not writable"
-msgstr "Mappen är ej skrivbar"
-
-#: ../../plugins/loco-translate/lib/loco-packages.php:476
-msgid "Folder not found"
-msgstr "Mappen hittades ej"

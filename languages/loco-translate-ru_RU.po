@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon Jun 09 2014 17:13:38 GMT+0100 (BST)\n"
-"Last-Translator: Tim <support@localise.biz>\n"
+"PO-Revision-Date: Tue Jul 29 2014 09:29:01 GMT+0100 (BST)\n"
+"Last-Translator: Admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Russian\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
@@ -22,71 +22,6 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: ru_RU"
-
-#: ../lib/loco-packages.php:476
-msgid "Folder not found"
-msgstr ""
-
-#: ../php/loco-posync.php:47
-msgid "No source files in this package, nothing to sync"
-msgstr ""
-
-#: ../pub/js/lang/dummy.php:19
-#, php-format
-msgid "Already up to date with %s"
-msgstr ""
-
-#: ../pub/js/lang/dummy.php:21
-msgid "Already up to date with source code"
-msgstr ""
-
-#. label for the window pane holding native translation
-#: ../pub/js/lang/dummy.php:35
-msgctxt "Editor pane"
-msgid "Source text"
-msgstr ""
-
-#. where %s is the language, e.g French translation
-#: ../pub/js/lang/dummy.php:38
-#, php-format
-msgctxt "Editor pane"
-msgid "%s translation"
-msgstr ""
-
-#. label for the window pane holding translator comments
-#: ../pub/js/lang/dummy.php:41
-msgctxt "Editor pane"
-msgid "Comments"
-msgstr ""
-
-#. label for the window pane holding message context
-#: ../pub/js/lang/dummy.php:44
-msgctxt "Editor pane"
-msgid "Context"
-msgstr ""
-
-#: ../tpl/admin-opts.tpl.php:69
-msgid "Number of backups to keep of each file:"
-msgstr ""
-
-#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
-msgid "Experimental features"
-msgstr ""
-
-#: ../tpl/admin-opts.tpl.php:86
-msgid "Enable Wordpress core translations"
-msgstr ""
-
-#: ../tpl/admin-poinit.tpl.php:58
-#, php-format
-msgctxt "Form label"
-msgid "create in <code>%s</code>"
-msgstr ""
-
-#: ../tpl/admin-poinit.tpl.php:63
-msgctxt "Form label"
-msgid "create in global languages directory"
-msgstr ""
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:15
@@ -287,6 +222,10 @@ msgstr "МО файл не найден"
 msgid "Folder not writable"
 msgstr "Каталог недоступен для записи"
 
+#: ../lib/loco-packages.php:476
+msgid "Folder not found"
+msgstr ""
+
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
 msgstr "У пользователя недостаточно прав для управления переводами"
@@ -353,6 +292,10 @@ msgstr "Невозможно перезаписать МО файл"
 msgid "Failed to write MO file"
 msgstr "Ошибка записи  МО файла"
 
+#: ../php/loco-posync.php:47
+msgid "No source files in this package, nothing to sync"
+msgstr ""
+
 #: ../php/loco-posync.php:57
 msgid "No strings could be extracted from source files"
 msgstr "Нет строк для обработки из исходного кода"
@@ -378,6 +321,15 @@ msgstr "Объединено с %s"
 msgid "Merged from source code"
 msgstr "Объединено с исходным кодом"
 
+#: ../pub/js/lang/dummy.php:19
+#, php-format
+msgid "Already up to date with %s"
+msgstr ""
+
+#: ../pub/js/lang/dummy.php:21
+msgid "Already up to date with source code"
+msgstr ""
+
 #: ../pub/js/lang/dummy.php:23
 #, php-format
 msgid "1 new string added"
@@ -395,6 +347,31 @@ msgstr[1] "%s строки удалено"
 #: ../pub/js/lang/dummy.php:27
 msgid "Your changes will be lost if you continue without saving"
 msgstr "Изменения будут потеряны, если Вы не сохранитесь"
+
+#. label for the window pane holding native translation
+#: ../pub/js/lang/dummy.php:35
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr ""
+
+#. where %s is the language, e.g French translation
+#: ../pub/js/lang/dummy.php:38
+#, php-format
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr ""
+
+#. label for the window pane holding translator comments
+#: ../pub/js/lang/dummy.php:41
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr ""
+
+#. label for the window pane holding message context
+#: ../pub/js/lang/dummy.php:44
+msgctxt "Editor pane"
+msgid "Context"
+msgstr ""
 
 #: ../pub/js/lang/dummy.php:52
 msgid "Translation"
@@ -444,19 +421,24 @@ msgctxt "Table header"
 msgid "File permissions"
 msgstr "Права доступа к файлу"
 
-#: ../tpl/admin-list.tpl.php:43
+#: ../tpl/admin-list.tpl.php:40
+#, php-format
+msgid "Extends: %s"
+msgstr ""
+
+#: ../tpl/admin-list.tpl.php:44
 #, php-format
 msgid "1 language"
 msgid_plural "%u languages"
 msgstr[0] "1 язык"
 msgstr[1] "%u языка(ов)"
 
-#: ../tpl/admin-list.tpl.php:48
+#: ../tpl/admin-list.tpl.php:49
 msgctxt "Modified time"
 msgid "Updated"
 msgstr "Обновлённый"
 
-#: ../tpl/admin-list.tpl.php:97
+#: ../tpl/admin-list.tpl.php:98
 msgid "OK"
 msgstr "ОК"
 
@@ -495,6 +477,18 @@ msgstr "Генерировать hash таблицы"
 #: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
 msgid "Backing up PO files"
 msgstr "Резервное копирование РО файлов"
+
+#: ../tpl/admin-opts.tpl.php:69
+msgid "Number of backups to keep of each file:"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
+msgid "Experimental features"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:86
+msgid "Enable Wordpress core translations"
+msgstr ""
 
 #: ../tpl/admin-opts.tpl.php:95
 msgid "Save settings"
@@ -574,6 +568,17 @@ msgstr "Выбрать язык из списка"
 msgctxt "Form label"
 msgid "or enter any language code"
 msgstr "или ввести код языка"
+
+#: ../tpl/admin-poinit.tpl.php:58
+#, php-format
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr ""
+
+#: ../tpl/admin-poinit.tpl.php:63
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr ""
 
 #: ../tpl/admin-poinit.tpl.php:68
 msgctxt "Submit button"

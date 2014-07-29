@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Wed Jul 16 2014 15:35:25 GMT+0700 (SE Asia Standard Time)\n"
-"Last-Translator: Ivan Lanin <ivan@bahtera.org>\n"
+"PO-Revision-Date: Tue Jul 29 2014 09:28:44 GMT+0100 (BST)\n"
+"Last-Translator: Admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Indonesian\n"
 "Plural-Forms: nplurals=1; plural=0\n"
@@ -22,135 +22,93 @@ msgstr ""
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: id_ID"
 
-#: ../lib/loco-admin.php:986
-msgid "Loco Translate"
-msgstr "Loco Terjemahan"
+#. Translators: Bold text label in admin error messages
+#: ../lib/loco-admin.php:15
+msgctxt "Message label"
+msgid "Error"
+msgstr "Kesalahan"
 
-#: ../php/loco-posave.php:58
+#: ../lib/loco-admin.php:24
+msgctxt "Message label"
+msgid "Warning"
+msgstr "Peringatan"
+
+#: ../lib/loco-admin.php:33
+msgctxt "Message label"
+msgid "OK"
+msgstr "Oke"
+
+#: ../lib/loco-admin.php:42
+msgid "Permission denied"
+msgstr "Akses ditolak"
+
+#: ../lib/loco-admin.php:58
+msgid "Settings saved"
+msgstr "Setelan disimpan"
+
+#: ../lib/loco-admin.php:133
+msgid "New PO file"
+msgstr "Berkas PO baru"
+
+#: ../lib/loco-admin.php:240
+msgid "You must specify a valid locale for a new PO file"
+msgstr "Anda harus menentukan locale valid untuk berkas PO baru"
+
+#: ../lib/loco-admin.php:265 ../lib/loco-admin.php:367
+msgid "No translatable strings found"
+msgstr "Tidak ada string yang dapat diterjemahkan"
+
+#: ../lib/loco-admin.php:265
+msgid "Cannot create a PO file."
+msgstr "Berkas PO tidak dapat dibuat"
+
+#: ../lib/loco-admin.php:272
 #, php-format
-msgid ""
-"Web server cannot create backups in \"%s\". Fix file permissions or disable "
-"backups in settings"
+msgid "PO file already exists with locale %s"
+msgstr "Berkas PO untuk locale %s  sudah ada"
+
+#: ../lib/loco-admin.php:313
+#, php-format
+msgid "PO file used as template. This will be renamed to %s on first save"
 msgstr ""
-"Tidak dapat membuat cadangan di \"%s\". Perbaiki hak akses atau matikan "
-"pencadangan di setelan."
+"Berkas PO digunakan sebagai template. Berkas ini akan diubah namanya menjadi "
+"%s saat disimpan"
 
-#: ../php/loco-posave.php:66
-#, php-format
+#: ../lib/loco-admin.php:337
 msgid ""
-"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
-"create it manually."
+"File cannot be created automatically. Fix the file permissions or use "
+"Download instead of Save"
 msgstr ""
-"Tidak dapat membuat direktori \"%s\" di \"%s\". Perbaiki hak akses atau buat "
-"secara manual."
+"Berkas tidak dapat dibuat otomatis. Perbaiki hak akses atau gunakan Unduh "
+"alih-alih Simpan"
 
-#: ../php/loco-posave.php:69
+#: ../lib/loco-admin.php:346 ../lib/loco-admin.php:355
 #, php-format
-msgid ""
-"Web server cannot create files in the \"%s\" directory. Fix file permissions "
-"or use the download function."
+msgid "%s file is empty"
+msgstr "Berkas %s kosong"
+
+#: ../lib/loco-admin.php:347 ../lib/loco-admin.php:362
+msgid "Run Sync to update from source code"
+msgstr "Jalankan Sinkronisasi untuk memperbarui dari kode program"
+
+#: ../lib/loco-admin.php:351
+msgid "No strings could be extracted from source code"
+msgstr "Tidak ada string yang dapat diambil dari kode program"
+
+#: ../lib/loco-admin.php:358
+#, php-format
+msgid "Run Sync to update from %s"
+msgstr "Jalankan Sinkronisasi untuk mengambil dari %s"
+
+#: ../lib/loco-admin.php:377
+msgid "Source code has been modified, run Sync to update POT"
+msgstr "Kode program telah diubah; jalankan Sinkronisasi untuk memperbarui POT"
+
+#: ../lib/loco-admin.php:381
+msgid "POT has been modified since PO file was saved, run Sync to update"
 msgstr ""
-"Tidak dapat membuat berkas di direktori \"%s\". Perbaiki hak akses atau "
-"gunakan fungsi unduh."
-
-#: ../php/loco-posave.php:81
-#, php-format
-msgid ""
-"%s file is not writable by the web server. Fix file permissions or download "
-"and copy to \"%s/%s\"."
-msgstr ""
-"Berkas %s tidak dapat ditulis. Perbaiki hak akses atau unduh dan salin ke "
-"\"%s/%s\"."
-
-#: ../pub/js/lang/dummy.php:15
-#, php-format
-msgid "Merged from %s"
-msgstr "Digabungkan dari %s"
-
-#: ../pub/js/lang/dummy.php:17
-msgid "Merged from source code"
-msgstr "Digabungkan dari kode program"
-
-#: ../pub/js/lang/dummy.php:19
-#, php-format
-msgid "Already up to date with %s"
-msgstr "Sudah selaras dengan %s"
-
-#: ../pub/js/lang/dummy.php:21
-msgid "Already up to date with source code"
-msgstr "Sudah selaras dengan kode program"
-
-#: ../pub/js/lang/dummy.php:23
-#, php-format
-msgid "1 new string added"
-msgid_plural "%s new strings added"
-msgstr[0] "1 string baru ditambahkan"
-msgstr[1] "%s string baru ditambahkan"
-
-#: ../pub/js/lang/dummy.php:25
-#, php-format
-msgid "1 obsolete string removed"
-msgid_plural "%s obsolete strings removed"
-msgstr[0] "1 string usang dihapus"
-msgstr[1] "%s string usang dihapus"
-
-#: ../pub/js/lang/dummy.php:27
-msgid "Your changes will be lost if you continue without saving"
-msgstr "Perubahan akan dibuang bila melanjutkan tanpa menyimpan"
-
-#: ../tpl/admin-fscheck.tpl.php:8
-msgid "File check"
-msgstr "Pemeriksaan berkas"
-
-#: ../tpl/admin-fscheck.tpl.php:17
-#, php-format
-msgid "File system permissions for %s"
-msgstr "Hak akses sistem berkas untuk %s"
-
-#: ../tpl/admin-opts.tpl.php:47
-msgid "Enter path to msgfmt on server"
-msgstr "Masukkan folder msgfmt pada server"
-
-#: ../tpl/admin-opts.tpl.php:54
-msgid "Generate hash tables"
-msgstr "Buat tabel hash"
-
-#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
-msgid "Backing up PO files"
-msgstr "Pencadangan berkas PO"
-
-#: ../tpl/admin-opts.tpl.php:69
-msgid "Number of backups to keep of each file:"
-msgstr "Jumlah cadangan untuk tiap berkas:"
-
-#: ../tpl/admin-poedit.tpl.php:62
-msgid "never"
-msgstr "tidak pernah"
-
-#: ../tpl/admin-poinit.tpl.php:21
-#, php-format
-msgid "Initialize new translations in %s"
-msgstr "Buat terjemahan baru di %s"
-
-#: ../tpl/admin-poinit.tpl.php:34
-msgid "Select from common languages"
-msgstr "Pilih dari bahasa yang umum"
-
-#: ../tpl/admin-poinit.tpl.php:45
-msgctxt "Form label"
-msgid "or enter any language code"
-msgstr "atau masukkan suatu kode bahasa"
-
-#: ../tpl/admin-poinit.tpl.php:58
-#, php-format
-msgctxt "Form label"
-msgid "create in <code>%s</code>"
-msgstr "buat di <code>%s</code>"
-
-#: ../tpl/admin-poinit.tpl.php:63
-msgctxt "Form label"
-msgid "create in global languages directory"
-msgstr "buat di direktori bahasa global"
+"POT telah diubah sejak berkas PO terakhir disimpan; jalankan Sinkronisasi "
+"untuk memperbarui POT"
 
 #: ../lib/loco-admin.php:468
 msgid "Bad file path"
@@ -161,14 +119,68 @@ msgstr "Folder berkas salah"
 msgid "Empty or invalid %s file"
 msgstr "Berkas %s kosong atau tidak valid"
 
+#: ../lib/loco-admin.php:696
+#, php-format
+msgid "%s file has no header"
+msgstr "%s berkas tidak memiliki header"
+
+#: ../lib/loco-admin.php:828
+msgctxt "Add button"
+msgid "New template"
+msgstr "Template baru"
+
+#: ../lib/loco-admin.php:847
+msgctxt "Add button"
+msgid "New language"
+msgstr "Bahasa baru"
+
+#: ../lib/loco-admin.php:886
+#, php-format
+msgid "%s%% translated"
+msgstr "%s%% diterjemahkan"
+
+#: ../lib/loco-admin.php:886
+#, php-format
+msgid "1 string"
+msgid_plural "%s strings"
+msgstr[0] "1 string"
+msgstr[1] ""
+
 #: ../lib/loco-admin.php:889
 #, php-format
 msgid "%s fuzzy"
 msgstr "%s fuzzy"
 
+#: ../lib/loco-admin.php:892
+#, php-format
+msgid "%s untranslated"
+msgstr "%s%% belum diterjemahkan"
+
 #: ../lib/loco-admin.php:934
 msgid "Failed to compile MO file with built-in compiler"
 msgstr "Gagal mengompilasi berkas MO dengan kompilator bawaan"
+
+#: ../lib/loco-admin.php:977 ../tpl/admin-nav.tpl.php:21
+msgid "Loco, Translation Management"
+msgstr "Loco, Pengelola Terjemahan"
+
+#: ../lib/loco-admin.php:978 ../lib/loco-admin.php:1009
+msgid "Manage translations"
+msgstr "Kelola terjemahan"
+
+#: ../lib/loco-admin.php:979
+msgid "Translation options"
+msgstr "Opsi terjemahan"
+
+#: ../lib/loco-admin.php:986
+msgid "Loco Translate"
+msgstr "Loco Terjemahan"
+
+#: ../lib/loco-admin.php:1010 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.
+#: tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ..
+#: tpl/admin-root.tpl.php:7
+msgid "Settings"
+msgstr "Setelan"
 
 #: ../lib/loco-admin.php:1034
 msgid "File download failed"
@@ -233,6 +245,42 @@ msgstr "Data yang dikirim ke server tidak valid"
 msgid "Package not found called %s"
 msgstr "Paket %s tidak ditemukan"
 
+#: ../php/loco-posave.php:58
+#, php-format
+msgid ""
+"Web server cannot create backups in \"%s\". Fix file permissions or disable "
+"backups in settings"
+msgstr ""
+"Tidak dapat membuat cadangan di \"%s\". Perbaiki hak akses atau matikan "
+"pencadangan di setelan."
+
+#: ../php/loco-posave.php:66
+#, php-format
+msgid ""
+"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
+"create it manually."
+msgstr ""
+"Tidak dapat membuat direktori \"%s\" di \"%s\". Perbaiki hak akses atau buat "
+"secara manual."
+
+#: ../php/loco-posave.php:69
+#, php-format
+msgid ""
+"Web server cannot create files in the \"%s\" directory. Fix file permissions "
+"or use the download function."
+msgstr ""
+"Tidak dapat membuat berkas di direktori \"%s\". Perbaiki hak akses atau "
+"gunakan fungsi unduh."
+
+#: ../php/loco-posave.php:81
+#, php-format
+msgid ""
+"%s file is not writable by the web server. Fix file permissions or download "
+"and copy to \"%s/%s\"."
+msgstr ""
+"Berkas %s tidak dapat ditulis. Perbaiki hak akses atau unduh dan salin ke "
+"\"%s/%s\"."
+
 #: ../php/loco-posave.php:102
 msgid "Cannot create MO file"
 msgstr "Berkas MO tidak dapat dibuat"
@@ -245,6 +293,12 @@ msgstr "Berkas MO tidak dapat ditimpa"
 msgid "Failed to write MO file"
 msgstr "Gagal menulis berkas MO"
 
+#: ../php/loco-posync.php:47
+msgid "No source files in this package, nothing to sync"
+msgstr ""
+"Berkas sumber paket ini tidak ditemukan; tidak ada yang dapat "
+"disinkronisasikan"
+
 #: ../php/loco-posync.php:57
 msgid "No strings could be extracted from source files"
 msgstr "Tidak ada string yang dapat diekstrak dari berkas sumber"
@@ -252,49 +306,6 @@ msgstr "Tidak ada string yang dapat diekstrak dari berkas sumber"
 #: ../pub/js/lang/dummy.php:8
 msgid "Unknown error"
 msgstr "Kesalahan "
-
-#: ../lib/loco-admin.php:358
-#, php-format
-msgid "Run Sync to update from %s"
-msgstr "Jalankan Sinkronisasi untuk mengambil dari %s"
-
-#: ../lib/loco-admin.php:377
-msgid "Source code has been modified, run Sync to update POT"
-msgstr "Kode program telah diubah; jalankan Sinkronisasi untuk memperbarui POT"
-
-#: ../lib/loco-admin.php:381
-msgid "POT has been modified since PO file was saved, run Sync to update"
-msgstr ""
-"POT telah diubah sejak berkas PO terakhir disimpan; jalankan Sinkronisasi "
-"untuk memperbarui POT"
-
-#: ../php/loco-posync.php:47
-msgid "No source files in this package, nothing to sync"
-msgstr ""
-"Berkas sumber paket ini tidak ditemukan; tidak ada yang dapat "
-"disinkronisasikan"
-
-#: ../lib/loco-admin.php:696
-#, php-format
-msgid "%s file has no header"
-msgstr "%s berkas tidak memiliki header"
-
-#: ../lib/loco-admin.php:886
-#, php-format
-msgid "%s%% translated"
-msgstr "%s%% diterjemahkan"
-
-#: ../lib/loco-admin.php:886
-#, php-format
-msgid "1 string"
-msgid_plural "%s strings"
-msgstr[0] "1 string"
-msgstr[1] ""
-
-#: ../lib/loco-admin.php:892
-#, php-format
-msgid "%s untranslated"
-msgstr "%s%% belum diterjemahkan"
 
 #: ../pub/js/lang/dummy.php:10
 msgid "PO file saved"
@@ -304,152 +315,41 @@ msgstr "Berkas PO disimpan"
 msgid "and MO file compiled"
 msgstr "dan berkas MO dikompilasi"
 
-#: ../tpl/admin-fscheck.tpl.php:41 ../tpl/admin-opts.tpl.php:96
-msgid "Get help"
-msgstr "Dapatkan bantuan"
-
-#: ../tpl/admin-opts.tpl.php:27 ../tpl/admin-opts.tpl.php:31
-msgid "Compiling MO files"
-msgstr "Kompilasi berkas MO"
-
-#: ../tpl/admin-opts.tpl.php:36
-msgid "Use built-in MO compiler."
-msgstr "Gunakan kompiler bawaan"
-
-#: ../tpl/admin-opts.tpl.php:42
-msgid "Use external command:"
-msgstr "Gunakan perintah eksternal:"
-
-#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
-msgid "Experimental features"
-msgstr "Fitur eksperimen"
-
-#: ../tpl/admin-opts.tpl.php:86
-msgid "Enable Wordpress core translations"
-msgstr "Aktifkan penerjemahan inti Wordpress"
-
-#: ../tpl/admin-opts.tpl.php:95
-msgid "Save settings"
-msgstr "Simpan setelan"
-
-#: ../tpl/admin-poedit.tpl.php:31
-msgid "Template file"
-msgstr "Berkas template"
-
-#: ../tpl/admin-poedit.tpl.php:39
-msgctxt "Dropdown label"
-msgid "Switch to..."
-msgstr "Beralih ke..."
-
-#: ../tpl/admin-poinit.tpl.php:68
-msgctxt "Submit button"
-msgid "Start translating"
-msgstr "Mulai penerjemahan"
-
-#: ../tpl/admin-root.tpl.php:31
-msgid "Select a plugin or theme to translate"
-msgstr "Pilih plugin atau tema untuk diterjemahkan"
-
-#: ../tpl/admin-nav.tpl.php:26
-msgid "Loco may not work as expected"
-msgstr "Loco mungkin tidak bekerja sesuai harapan"
-
-#: ../tpl/admin-opts.tpl.php:18
-msgid "Configure Loco Translate"
-msgstr "Konfigurasikan Loco Translate"
-
-#: ../tpl/admin-root.tpl.php:21
+#: ../pub/js/lang/dummy.php:15
 #, php-format
-msgid "Upgrade to version %s of Loco Translate"
-msgstr "Tingkatkan Loco Translate kepada versi %s"
+msgid "Merged from %s"
+msgstr "Digabungkan dari %s"
 
-#: ../lib/loco-admin.php:346 ../lib/loco-admin.php:355
+#: ../pub/js/lang/dummy.php:17
+msgid "Merged from source code"
+msgstr "Digabungkan dari kode program"
+
+#: ../pub/js/lang/dummy.php:19
 #, php-format
-msgid "%s file is empty"
-msgstr "Berkas %s kosong"
+msgid "Already up to date with %s"
+msgstr "Sudah selaras dengan %s"
 
-#: ../lib/loco-admin.php:347 ../lib/loco-admin.php:362
-msgid "Run Sync to update from source code"
-msgstr "Jalankan Sinkronisasi untuk memperbarui dari kode program"
+#: ../pub/js/lang/dummy.php:21
+msgid "Already up to date with source code"
+msgstr "Sudah selaras dengan kode program"
 
-#: ../lib/loco-admin.php:351
-msgid "No strings could be extracted from source code"
-msgstr "Tidak ada string yang dapat diambil dari kode program"
-
-#: ../lib/loco-admin.php:977 ../tpl/admin-nav.tpl.php:21
-msgid "Loco, Translation Management"
-msgstr "Loco, Pengelola Terjemahan"
-
-#: ../lib/loco-admin.php:978 ../lib/loco-admin.php:1009
-msgid "Manage translations"
-msgstr "Kelola terjemahan"
-
-#: ../lib/loco-admin.php:979
-msgid "Translation options"
-msgstr "Opsi terjemahan"
-
-#: ../lib/loco-admin.php:1010 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.
-#: tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ..
-#: tpl/admin-root.tpl.php:7
-msgid "Settings"
-msgstr "Setelan"
-
-#: ../pub/js/lang/dummy.php:52
-msgid "Translation"
-msgstr "Terjemahan"
-
-#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.
-#: tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
-msgid "Packages"
-msgstr "Paket"
-
-#: ../tpl/admin-fscheck.tpl.php:40
-msgid "Back"
-msgstr "Kembali"
-
-#: ../tpl/admin-list.tpl.php:11
-msgctxt "Table header"
-msgid "Package details"
-msgstr "Detail paket"
-
-#: ../tpl/admin-list.tpl.php:14
-msgctxt "Table header"
-msgid "Translations (PO)"
-msgstr "Terjemahan (PO)"
-
-#: ../tpl/admin-list.tpl.php:17
-msgctxt "Table header"
-msgid "Template (POT)"
-msgstr "Template (POT)"
-
-#: ../tpl/admin-list.tpl.php:20
-msgctxt "Table header"
-msgid "File permissions"
-msgstr "Hak akses"
-
-#: ../tpl/admin-list.tpl.php:43
+#: ../pub/js/lang/dummy.php:23
 #, php-format
-msgid "1 language"
-msgid_plural "%u languages"
-msgstr[0] "1 bahasa"
-msgstr[1] "%u bahasa"
+msgid "1 new string added"
+msgid_plural "%s new strings added"
+msgstr[0] "1 string baru ditambahkan"
+msgstr[1] "%s string baru ditambahkan"
 
-#: ../tpl/admin-list.tpl.php:48
-msgctxt "Modified time"
-msgid "Updated"
-msgstr "Diperbarui"
+#: ../pub/js/lang/dummy.php:25
+#, php-format
+msgid "1 obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] "1 string usang dihapus"
+msgstr[1] "%s string usang dihapus"
 
-#: ../tpl/admin-list.tpl.php:97
-msgid "OK"
-msgstr "Oke"
-
-#: ../tpl/admin-nav.tpl.php:20
-msgid "Powered by"
-msgstr "Didukung oleh"
-
-#: ../tpl/admin-poedit.tpl.php:57
-msgid "Updated"
-msgstr "Diperbarui"
+#: ../pub/js/lang/dummy.php:27
+msgid "Your changes will be lost if you continue without saving"
+msgstr "Perubahan akan dibuang bila melanjutkan tanpa menyimpan"
 
 #. label for the window pane holding native translation
 #: ../pub/js/lang/dummy.php:35
@@ -476,75 +376,141 @@ msgctxt "Editor pane"
 msgid "Context"
 msgstr "Konteks"
 
-#. Translators: Bold text label in admin error messages
-#: ../lib/loco-admin.php:15
-msgctxt "Message label"
-msgid "Error"
-msgstr "Kesalahan"
+#: ../pub/js/lang/dummy.php:52
+msgid "Translation"
+msgstr "Terjemahan"
 
-#: ../lib/loco-admin.php:24
-msgctxt "Message label"
-msgid "Warning"
-msgstr "Peringatan"
+#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.
+#: tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
+msgid "Packages"
+msgstr "Paket"
 
-#: ../lib/loco-admin.php:33
-msgctxt "Message label"
+#: ../tpl/admin-fscheck.tpl.php:8
+msgid "File check"
+msgstr "Pemeriksaan berkas"
+
+#: ../tpl/admin-fscheck.tpl.php:17
+#, php-format
+msgid "File system permissions for %s"
+msgstr "Hak akses sistem berkas untuk %s"
+
+#: ../tpl/admin-fscheck.tpl.php:40
+msgid "Back"
+msgstr "Kembali"
+
+#: ../tpl/admin-fscheck.tpl.php:41 ../tpl/admin-opts.tpl.php:96
+msgid "Get help"
+msgstr "Dapatkan bantuan"
+
+#: ../tpl/admin-list.tpl.php:11
+msgctxt "Table header"
+msgid "Package details"
+msgstr "Detail paket"
+
+#: ../tpl/admin-list.tpl.php:14
+msgctxt "Table header"
+msgid "Translations (PO)"
+msgstr "Terjemahan (PO)"
+
+#: ../tpl/admin-list.tpl.php:17
+msgctxt "Table header"
+msgid "Template (POT)"
+msgstr "Template (POT)"
+
+#: ../tpl/admin-list.tpl.php:20
+msgctxt "Table header"
+msgid "File permissions"
+msgstr "Hak akses"
+
+#: ../tpl/admin-list.tpl.php:40
+#, php-format
+msgid "Extends: %s"
+msgstr ""
+
+#: ../tpl/admin-list.tpl.php:44
+#, php-format
+msgid "1 language"
+msgid_plural "%u languages"
+msgstr[0] "1 bahasa"
+msgstr[1] "%u bahasa"
+
+#: ../tpl/admin-list.tpl.php:49
+msgctxt "Modified time"
+msgid "Updated"
+msgstr "Diperbarui"
+
+#: ../tpl/admin-list.tpl.php:98
 msgid "OK"
 msgstr "Oke"
 
-#: ../lib/loco-admin.php:42
-msgid "Permission denied"
-msgstr "Akses ditolak"
+#: ../tpl/admin-nav.tpl.php:20
+msgid "Powered by"
+msgstr "Didukung oleh"
 
-#: ../lib/loco-admin.php:58
-msgid "Settings saved"
-msgstr "Setelan disimpan"
+#: ../tpl/admin-nav.tpl.php:26
+msgid "Loco may not work as expected"
+msgstr "Loco mungkin tidak bekerja sesuai harapan"
 
-#: ../lib/loco-admin.php:133
-msgid "New PO file"
-msgstr "Berkas PO baru"
+#: ../tpl/admin-opts.tpl.php:18
+msgid "Configure Loco Translate"
+msgstr "Konfigurasikan Loco Translate"
 
-#: ../lib/loco-admin.php:240
-msgid "You must specify a valid locale for a new PO file"
-msgstr "Anda harus menentukan locale valid untuk berkas PO baru"
+#: ../tpl/admin-opts.tpl.php:27 ../tpl/admin-opts.tpl.php:31
+msgid "Compiling MO files"
+msgstr "Kompilasi berkas MO"
 
-#: ../lib/loco-admin.php:265 ../lib/loco-admin.php:367
-msgid "No translatable strings found"
-msgstr "Tidak ada string yang dapat diterjemahkan"
+#: ../tpl/admin-opts.tpl.php:36
+msgid "Use built-in MO compiler."
+msgstr "Gunakan kompiler bawaan"
 
-#: ../lib/loco-admin.php:265
-msgid "Cannot create a PO file."
-msgstr "Berkas PO tidak dapat dibuat"
+#: ../tpl/admin-opts.tpl.php:42
+msgid "Use external command:"
+msgstr "Gunakan perintah eksternal:"
 
-#: ../lib/loco-admin.php:272
-#, php-format
-msgid "PO file already exists with locale %s"
-msgstr "Berkas PO untuk locale %s  sudah ada"
+#: ../tpl/admin-opts.tpl.php:47
+msgid "Enter path to msgfmt on server"
+msgstr "Masukkan folder msgfmt pada server"
 
-#: ../lib/loco-admin.php:313
-#, php-format
-msgid "PO file used as template. This will be renamed to %s on first save"
-msgstr ""
-"Berkas PO digunakan sebagai template. Berkas ini akan diubah namanya menjadi "
-"%s saat disimpan"
+#: ../tpl/admin-opts.tpl.php:54
+msgid "Generate hash tables"
+msgstr "Buat tabel hash"
 
-#: ../lib/loco-admin.php:337
-msgid ""
-"File cannot be created automatically. Fix the file permissions or use "
-"Download instead of Save"
-msgstr ""
-"Berkas tidak dapat dibuat otomatis. Perbaiki hak akses atau gunakan Unduh "
-"alih-alih Simpan"
+#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
+msgid "Backing up PO files"
+msgstr "Pencadangan berkas PO"
 
-#: ../lib/loco-admin.php:828
-msgctxt "Add button"
-msgid "New template"
-msgstr "Template baru"
+#: ../tpl/admin-opts.tpl.php:69
+msgid "Number of backups to keep of each file:"
+msgstr "Jumlah cadangan untuk tiap berkas:"
 
-#: ../lib/loco-admin.php:847
-msgctxt "Add button"
-msgid "New language"
-msgstr "Bahasa baru"
+#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
+msgid "Experimental features"
+msgstr "Fitur eksperimen"
+
+#: ../tpl/admin-opts.tpl.php:86
+msgid "Enable Wordpress core translations"
+msgstr "Aktifkan penerjemahan inti Wordpress"
+
+#: ../tpl/admin-opts.tpl.php:95
+msgid "Save settings"
+msgstr "Simpan setelan"
+
+#: ../tpl/admin-poedit.tpl.php:31
+msgid "Template file"
+msgstr "Berkas template"
+
+#: ../tpl/admin-poedit.tpl.php:39
+msgctxt "Dropdown label"
+msgid "Switch to..."
+msgstr "Beralih ke..."
+
+#: ../tpl/admin-poedit.tpl.php:57
+msgid "Updated"
+msgstr "Diperbarui"
+
+#: ../tpl/admin-poedit.tpl.php:62
+msgid "never"
+msgstr "tidak pernah"
 
 #: ../tpl/admin-poedit.tpl.php:87
 msgctxt "Editor button"
@@ -590,9 +556,48 @@ msgctxt "Editor button"
 msgid "Help"
 msgstr "Bantuan"
 
+#: ../tpl/admin-poinit.tpl.php:21
+#, php-format
+msgid "Initialize new translations in %s"
+msgstr "Buat terjemahan baru di %s"
+
+#: ../tpl/admin-poinit.tpl.php:34
+msgid "Select from common languages"
+msgstr "Pilih dari bahasa yang umum"
+
+#: ../tpl/admin-poinit.tpl.php:45
+msgctxt "Form label"
+msgid "or enter any language code"
+msgstr "atau masukkan suatu kode bahasa"
+
+#: ../tpl/admin-poinit.tpl.php:58
+#, php-format
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr "buat di <code>%s</code>"
+
+#: ../tpl/admin-poinit.tpl.php:63
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr "buat di direktori bahasa global"
+
+#: ../tpl/admin-poinit.tpl.php:68
+msgctxt "Submit button"
+msgid "Start translating"
+msgstr "Mulai penerjemahan"
+
 #: ../tpl/admin-root.tpl.php:18
 msgid "New version available"
 msgstr "Ada versi baru"
+
+#: ../tpl/admin-root.tpl.php:21
+#, php-format
+msgid "Upgrade to version %s of Loco Translate"
+msgstr "Tingkatkan Loco Translate kepada versi %s"
+
+#: ../tpl/admin-root.tpl.php:31
+msgid "Select a plugin or theme to translate"
+msgstr "Pilih plugin atau tema untuk diterjemahkan"
 
 #: ../tpl/admin-root.tpl.php:40
 msgctxt "Package list header"
