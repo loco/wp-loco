@@ -107,6 +107,9 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 
 == Changelog ==
 
+= 1.4.7 =
+* Added Polish translations
+
 = 1.4.6 =
 * Updated Swedish and Turkish translations
 * Added Indonesian translations
@@ -227,4 +230,5 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Russian translations by [Alexey Tkachenko](http://atkachenko.ru)
 * Indonesian translations by [Ivan Lanin](https://twitter.com/ivanlanin)
 * Italian translations by [ElectricFeet](http://wordpress.org/support/profile/electricfeet)
+* Polish translations by [Jerry1333](http://www.jerry1333.net)
 
