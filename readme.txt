@@ -110,6 +110,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 = 1.4.7 =
 * Added Polish translations
 * Tested in WP 4.0
+* Add support for Wordpress's regionless locales
 
 = 1.4.6 =
 * Updated Swedish and Turkish translations
