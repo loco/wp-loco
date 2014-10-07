@@ -24,6 +24,9 @@ class UtilsTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( 'en_GB', $locale->get_code() );
 
         $locale = LocoAdmin::resolve_file_locale('/foo-ja.po');
+        $this->assertEquals( 'ja', $locale->get_code() );
+
+        $locale = LocoAdmin::resolve_file_locale('/foo-ja_jp.po');
         $this->assertEquals( 'ja_JP', $locale->get_code() );
     }
     

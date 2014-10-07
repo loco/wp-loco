@@ -58,7 +58,8 @@ final class LocoLocale {
     }
     
     public function icon_class(){
-        return 'flag flag-'.strtolower($this->region);
+        $cc = $this->region or $cc = loco_language_country($this->lang) or $cc = 'zz';
+        return 'flag flag-'.strtolower($cc);
     }
     
     public function get_name(){
@@ -83,17 +84,22 @@ final class LocoLocale {
     public static function init( $lc, $cc ){
         extract( self::data() );
         if( ! $cc ){
-            $cc = loco_language_country($lc);
+            if( self::is_regionless($lc) ){
+                // Wordpress expects this locale to be regionless
+            }
+            else {
+                $cc = loco_language_country($lc);
+            }
         }
         $label = '';
         $locale = new LocoLocale( $lc, $cc );
-        // attempt to use a common locale combination
+        // get locale name from our own list
         if( isset($locales[$lc]) ){
-            if( ! $cc ){
-                $cc = key( $locales[$lc] );
-                $locale->region = $cc;
+            $names = self::get_names();
+            if( ! $cc && isset($names[$lc]) ){
+                $locale->label = $names[$lc];
             }
-            if( isset($locales[$lc][$cc]) ){
+            else if( isset($locales[$lc][$cc]) ){
                 $locale->label = $locales[$lc][$cc];
             }
         }
@@ -140,14 +146,41 @@ final class LocoLocale {
      * @return array
      */
     public static function get_names(){
-        $names = array();
-        $data = self::data();
-        foreach( $data['locales'] as $lc => $regions ){
-            foreach( $regions as $cc => $label ){
-                $names[$lc.'_'.$cc] = $label;
+        static $names = array();
+        if( ! $names ){
+            $data = self::data();
+            foreach( $data['locales'] as $lc => $regions ){
+                $no_cc = self::is_regionless($lc);
+                foreach( $regions as $cc => $label ){
+                    if( 'ZZ' === $cc ){
+                        $names[$lc] = $label;
+                    }
+                    else if( $cc === $no_cc ){
+                        // already have as regionless
+                    }
+                    else {
+                        $names[$lc.'_'.$cc] = $label;
+                    }
+                }
             }
+            asort($names,SORT_ASC|SORT_NATURAL);
         }
         return $names;
+    }
+    
+    
+    
+    /**
+     * Test whether a language code is considered regionless by Wordpress core. 
+     * example: Thai is not "th_TH" but only "th"
+     */
+    public static function is_regionless( $lc ){
+        $data = self::data();
+        if( ! isset($data['locales'][$lc]['ZZ']) ){
+            return false;
+        }
+        // return the default region for this language if there was to be one
+        return key($data['locales'][$lc]);
     }    
     
 }

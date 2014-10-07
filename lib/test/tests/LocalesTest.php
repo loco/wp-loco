@@ -10,7 +10,16 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     
     public function testGetAllLocales(){
         $map = LocoLocale::get_names();
-        $this->assertCount( 130, $map );
+        $this->assertCount( 137, $map );
+        return $map;
+    }
+    
+    
+    /**
+     * @depends testGetAllLocales
+     */    
+    public function testRegionlessLocalesInNames( array $map ){
+        $this->assertArrayHasKey( 'th', $map );
     }
     
     
@@ -25,10 +34,22 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     }    
     
     
-    public function testLanguageOnlyResolves(){
-        $locale = loco_locale_resolve('en_GB');
-        $this->assertEquals( 'English (UK)', $locale->get_name() );
-        $this->assertEquals( 'en_GB', $locale->get_code() );
+    public function testLanguageResolvesToDefaultRegion(){
+        $locale = loco_locale_resolve('fr');
+        $this->assertEquals( 'French', $locale->get_name() );
+        $this->assertEquals( 'fr_FR', $locale->get_code() );
+    }
+    
+    
+    public function testRegionlessLanguageResolvesToLanguageOnly(){
+        $locale = loco_locale_resolve('th');
+        $this->assertEquals( 'Thai', $locale->get_name() );
+        $this->assertEquals( 'th', $locale->get_code() );
+    }
+    
+    public function testRegionlessLocaleHasFlag(){
+        $locale = LocoLocale::init('th', null );
+        $this->assertEquals( 'flag flag-th', $locale->icon_class() );        
     }
     
     
