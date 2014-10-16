@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
 Requires at least: 3.5
 Tested up to: 4.0
-Stable tag: 1.4.6
+Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -209,7 +209,7 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 
 == Upgrade Notice ==
 
-= 1.4.6 =
+= 1.4.7 =
 * Bug fixes and improvements.
 
 
