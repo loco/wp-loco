@@ -58,7 +58,7 @@ final class LocoLocale {
     }
     
     public function icon_class(){
-        $cc = $this->region or $cc = loco_language_country($this->lang) or $cc = 'zz';
+        $cc = $this->region or $cc = self::default_region($this->lang) or $cc = 'zz';
         return 'flag flag-'.strtolower($cc);
     }
     
@@ -88,7 +88,7 @@ final class LocoLocale {
                 // Wordpress expects this locale to be regionless
             }
             else {
-                $cc = loco_language_country($lc);
+                $cc = self::default_region($lc);
             }
         }
         $label = '';
@@ -181,7 +181,16 @@ final class LocoLocale {
         }
         // return the default region for this language if there was to be one
         return key($data['locales'][$lc]);
-    }    
+    }
+    
+    
+    /**
+     * Alias to loco_language_country
+     */
+    private static function default_region( $lang ){
+        self::data(); // <- ensure lazy load of libs
+        return loco_language_country( $lang );
+    }     
     
 }
 
