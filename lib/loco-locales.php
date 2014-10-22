@@ -42,7 +42,9 @@ final class LocoLocale {
     }
 
     public function export(){
-        return get_object_vars($this);
+        $data = get_object_vars($this);
+        $this->region or $data['region'] = self::default_region($this->lang);
+        return $data;
     }
     
     public function __toString(){
