@@ -107,6 +107,9 @@ Loco Translate does not support Windows versions of PHP, so if your server runni
 
 == Changelog ==
 
+= 1.4.8 =
+* Added WPLANG warning for WP4 deprecation
+
 = 1.4.7 =
 * Added Polish translations
 * Tested in WP 4.0
