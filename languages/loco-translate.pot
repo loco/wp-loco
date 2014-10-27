@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"POT-Revision-Date: Tue Jul 29 2014 09:34:51 GMT+0100 (BST)\n"
+"POT-Revision-Date: Mon Oct 27 2014 17:50:21 GMT+0000 (GMT)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: \n"
 "Language-Team: \n"
@@ -174,7 +174,7 @@ msgstr ""
 
 #: ../lib/loco-admin.php:1010 ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.
 #: tpl.php:7 ../tpl/admin-poedit.tpl.php:8 ../tpl/admin-poinit.tpl.php:8 ..
-#: tpl/admin-root.tpl.php:7
+#: /tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr ""
 
@@ -182,7 +182,11 @@ msgstr ""
 msgid "File download failed"
 msgstr ""
 
-#: ../lib/loco-locales.php:65
+#: ../lib/loco-admin.php:1044
+msgid "WPLANG is deprecated and should be removed from wp-config.php"
+msgstr ""
+
+#: ../lib/loco-locales.php:68
 msgid "Unknown language"
 msgstr ""
 

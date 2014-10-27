@@ -1041,7 +1041,7 @@ function _loco_hook__wp_ajax_download(){
  */
 function _loco_hook_admin_notices(){
     if( defined('WPLANG') && LocoAdmin::is_self() && WPLANG && 3 < (int) $GLOBALS['wp_version'] ){
-        LocoAdmin::warning('WPLANG is deprecated and should be removed from wp-config.php');
+        LocoAdmin::warning( Loco::__('WPLANG is deprecated and should be removed from wp-config.php') );
     }
 } 
 
