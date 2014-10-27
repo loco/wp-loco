@@ -22,7 +22,7 @@ abstract class LocoAdmin {
      */
     public static function warning( $message, $label = '' ){
         $label or $label = _x('Warning','Message label');
-        echo '<div class="loco-message updated loco-warning"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
+        echo '<div class="loco-message error loco-warning"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
     }
     
     
@@ -1036,8 +1036,19 @@ function _loco_hook__wp_ajax_download(){
 }
 
 
+/**
+ * callback when admin notices are being printed
+ */
+function _loco_hook_admin_notices(){
+    if( defined('WPLANG') && LocoAdmin::is_self() && WPLANG && 3 < (int) $GLOBALS['wp_version'] ){
+        LocoAdmin::warning('WPLANG is deprecated and should be removed from wp-config.php');
+    }
+} 
+
+
 
 add_action('admin_menu', '_loco_hook__admin_menu' );
+add_action('admin_notices', '_loco_hook_admin_notices');
 add_action('plugin_row_meta', '_loco_hook__plugin_row_meta', 10, 2 );
 
 // ajax hooks all going through one central function
