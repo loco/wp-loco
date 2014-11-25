@@ -560,8 +560,8 @@ abstract class LocoAdmin {
      * Recursively find all PHP source files anywhere under a directory
      */
     public static function find_php( $dir ){
-        $files = self::find( $dir, array('php') );
-        return $files['php'];
+        $files = self::find( $dir, array('php','phtml') );
+        return array_merge($files['php'], $files['phtml']);
     }
     
     
