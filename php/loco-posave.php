@@ -6,7 +6,7 @@
  
     DOING_AJAX or die();
 
-    if( empty($path) || empty($po) || empty($name) || empty($type) ){
+    if( empty($path) || empty($po) || ! isset($name) || empty($type) ){
         throw new Exception( Loco::__('Invalid data posted to server'), 422 );
     }
   
