@@ -773,7 +773,7 @@ abstract class LocoAdmin {
                 $args['page'].= '-'.$suffix;
             }
         }
-        return $base_uri.'?'.http_build_query( $args );
+        return add_query_arg($args,$base_uri);
     }
     
     
