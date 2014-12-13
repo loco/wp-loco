@@ -165,7 +165,7 @@ final class LocoLocale {
                     }
                 }
             }
-            asort($names,SORT_ASC|SORT_NATURAL);
+            asort($names,SORT_ASC|SORT_STRING);
         }
         return $names;
     }
