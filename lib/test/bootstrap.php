@@ -14,6 +14,21 @@ function is_admin(){
     return false;
 } 
 
+function admin_url( $path = '', $scheme = 'admin' ){
+    return 'http://test/wp-admin/admin.php';
+}
+
+function add_query_arg( array $args, $base_uri ){
+    $u = parse_url( $base_uri );
+    if( isset($u['query']) ){
+        parse_str( $u['query'], $query );
+        $args += $query;
+    }
+    $uri = $u['scheme'].'://'.$u['host'].$u['path'];
+    $args and $uri .= '?'.http_build_query($args);
+    return $uri;
+}
+
 function esc_html( $text ){
     return htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
 }
