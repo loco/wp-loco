@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
 Requires at least: 3.5
-Tested up to: 4.0
+Tested up to: 4.0.1
 Stable tag: 1.4.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -136,6 +136,8 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 = 1.4.8 =
 * Added WPLANG warning for WP4 deprecation
 * Added some FAQs
+* Removed SORT_NATURAL for PHP 5.3 compat
+* Fixed dummy msginit bug when default locale exists
 
 = 1.4.7 =
 * Added Polish translations
@@ -239,7 +241,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Upgrade Notice ==
 
-= 1.4.7 =
+= 1.4.8 =
 * Bug fixes and improvements.
 
 
