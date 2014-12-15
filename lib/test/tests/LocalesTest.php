@@ -34,6 +34,12 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     }    
     
     
+    public function testAnonymousLocaleAllowed(){
+        $locale = loco_locale_resolve('zz_ZZ');
+        $this->assertInstanceOf('LocoLocale', $locale );
+    }
+    
+    
     public function testLanguageResolvesToDefaultRegion(){
         $locale = loco_locale_resolve('fr');
         $this->assertEquals( 'French', $locale->get_name() );

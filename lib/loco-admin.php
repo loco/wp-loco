@@ -125,7 +125,7 @@ abstract class LocoAdmin {
                         }
                     }    
                     // else do a dry run to pre-empt failures and allow manual alteration of target path
-                    $path = self::msginit( $package, $domain, 'en', $export, $head, $force_global );
+                    $path = self::msginit( $package, $domain, 'zz_ZZ', $export, $head, $force_global );
                     // get alternative location options
                     $pdir = $package->lang_dir( $domain, true );
                     $gdir = $package->global_lang_dir();
