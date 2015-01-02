@@ -293,7 +293,7 @@ abstract class LocoPackage {
                 $dirs[] = $path;
             }
         }
-        // check location of al PO files in domain
+        // check location of all PO files in domain
         foreach( $this->po as $d => $paths ){
             if( ! $domain || $d === $domain ){
                 foreach( $paths as $path ){

@@ -18,6 +18,21 @@ function admin_url( $path = '', $scheme = 'admin' ){
     return 'http://test/wp-admin/admin.php';
 }
 
+function get_plugins(){
+    return array(
+        'loco-translate/loco.php' => array(
+            'Name' => 'Loco Translate',
+            'TextDomain' => 'loco-translate',
+            'DomainPath' => '/languages/',
+        ),
+        'woocommerce/woocommerce.php' => array(
+            'Name' => 'WooCommerce',
+            'TextDomain' => 'woocommerce',
+            'DomainPath' => '/i18n/languages/',
+        ),
+    );
+}
+
 function add_query_arg( array $args, $base_uri ){
     $u = parse_url( $base_uri );
     if( isset($u['query']) ){
@@ -54,6 +69,7 @@ function __($t){
 }
 
 define('WP_DEBUG', true );
+define('WP_PLUGIN_DIR', __DIR__.'/../../..' );
 
 require __DIR__.'/../../loco.php';
 
