@@ -500,9 +500,9 @@ abstract class LocoPackage {
         if( ! empty($this->pot[$domain]) ){
             return $this->pot[$domain];
         }
-        // no POT, but some authors may use locale-less PO files incorrectly as a template
+        // no POT, but some authors may use PO files incorrectly as a template
         if( isset($this->po[$domain]) ){
-            foreach( array('','xx_XX','en_US','en_GB') as $try ){
+            foreach( array('','xx_XX','en_US','en_GB','en_EN') as $try ){
                 if( isset($this->po[$domain][$try]) ){
                     $pot = $this->po[$domain][$try];
                     unset( $this->po[$domain][$try] );
