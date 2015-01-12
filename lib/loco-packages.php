@@ -212,7 +212,7 @@ abstract class LocoPackage {
         $pattern = $langdir.'/'.$domain.'{-*.po,.pot}';
         $nfiles = $this->nfiles;
         $files = LocoAdmin::find_grouped( $pattern, GLOB_NOSORT|GLOB_BRACE ) and
-        $this->add_po( $files );
+        $this->add_po( $files, $domain );
         // add $langdir if files added
         if( $nfiles !== $this->nfiles ){
             $this->add_dir( $langdir );
@@ -223,21 +223,30 @@ abstract class LocoPackage {
     
     /**
      * Add multiple locations from found PO and POT files
+     * @param array file paths collected with LocoAdmin::find_po
+     * @param string specific text domain to add
      * @return LocoPackage
      */
-    private function add_po( array $files, $domain = '' ){
+    private function add_po( array $files, $domain ){
         if( isset($files['pot']) && is_array($files['pot']) ){
             foreach( $files['pot'] as $path ){
-                $domain or $domain = LocoAdmin::resolve_file_domain($path) or $domain = $this->get_domain();
-                $this->add_file($path) and $this->pot[$domain] = $path;
+                $key = LocoAdmin::resolve_file_domain($path) or $key = $this->get_domain();
+                if( ( ! $domain || $key === $domain ) && $this->add_file($path) ){
+                    $this->pot[$key] = $path;
+                }
             }
         }
         if( isset($files['po']) && is_array($files['po']) ){
             foreach( $files['po'] as $path ){
-                $domain or $domain = LocoAdmin::resolve_file_domain($path) or $domain = $this->get_domain();
+                $key = LocoAdmin::resolve_file_domain($path) or $key = $this->get_domain();
+                if( ! $domain || $key !== $domain ){
+                    continue;
+                }
                 $locale = LocoAdmin::resolve_file_locale($path);
                 $code = $locale->get_code() or $code = 'xx_XX';
-                $this->add_file($path) and $this->po[ $domain ][ $code ] = $path;
+                if( $this->add_file($path) ){
+                    $this->po[ $key ][ $code ] = $path;
+                }
             }
         }
         return $this;
@@ -622,7 +631,7 @@ abstract class LocoPackage {
 
 
     /**
-     * construct package object from theme
+     * Construct package object from theme data
      * @return LocoPackage
      */
     private static function get_theme( $handle ){
@@ -635,12 +644,12 @@ abstract class LocoPackage {
             $root = $theme->get_theme_root().'/'.$handle;
             $package->add_source( $root );
             // add PO and POT under theme root
-            if( $files = LocoAdmin::find_po($root) ){
-                $package->add_po( $files, $domain );
+            if( $pofiles = LocoAdmin::find_po($root) ){
+                $package->add_po( $pofiles, $domain );
             }
             // pick up any MO files that have missing PO
-            if( $files = LocoAdmin::find_mo($root) ){
-                $package->add_mo( $files, $domain );
+            if( $mofiles = LocoAdmin::find_mo($root) ){
+                $package->add_mo( $mofiles, $domain );
             }
             // find additional theme PO under WP_LANG_DIR/themes unless a child theme
             $package->add_lang_dir(  WP_LANG_DIR.'/themes', $domain );
@@ -649,6 +658,11 @@ abstract class LocoPackage {
                 if( $parent !== $handle ){
                     $package->inherit( $parent );
                 }
+            }
+            // fall back to all POT matches if no exact domain match
+            if( ! $package->pot ){
+                unset( $pofiles['po'] );
+                $package->add_po( $pofiles, null );
             }
             return $package;
         }
@@ -668,15 +682,20 @@ abstract class LocoPackage {
             $root = WP_PLUGIN_DIR.'/'.dirname($handle);
             $package->add_source( $root );
             // add PO and POT under plugin root
-            if( $files = LocoAdmin::find_po($root) ){
-                $package->add_po( $files, $domain );
+            if( $pofiles = LocoAdmin::find_po($root) ){
+                $package->add_po( $pofiles, $domain );
             }
             // pick up any MO files that have missing PO
-            if( $files = LocoAdmin::find_mo($root) ){
-                $package->add_mo( $files, $domain );
+            if( $mofiles = LocoAdmin::find_mo($root) ){
+                $package->add_mo( $mofiles, $domain );
             }
             // find additional plugin PO under WP_LANG_DIR/plugin
             $package->add_lang_dir(  WP_LANG_DIR.'/plugins', $domain );
+            // fall back to all POT matches if no exact domain match
+            if( ! $package->pot ){
+                unset( $pofiles['po'] );
+                $package->add_po( $pofiles, null );
+            }
             return $package;
         }
     }
