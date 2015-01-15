@@ -51,6 +51,10 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
         $locale = loco_locale_resolve('th');
         $this->assertEquals( 'Thai', $locale->get_name() );
         $this->assertEquals( 'th', $locale->get_code() );
+        // Catalan: https://wordpress.org/support/topic/problems-catalan
+        $locale = loco_locale_resolve('ca');
+        $this->assertEquals( 'Catalan; Valencian', $locale->get_name() );
+        $this->assertEquals( 'ca', $locale->get_code() );
     }
     
     public function testRegionlessLocaleHasFlag(){
