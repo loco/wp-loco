@@ -16,6 +16,6 @@ class ResolveFileLocaleTest extends PHPUnit_Framework_TestCase {
 
     public function testLanguageCodeExpandsToDefaultRegionAfterHyphen(){
         $locale = LocoAdmin::resolve_file_locale('/foo-en.po');
-        $this->assertEquals( 'en_GB', $locale->get_code() );
+        $this->assertEquals( 'en_US', $locale->get_code() );
     }
 }

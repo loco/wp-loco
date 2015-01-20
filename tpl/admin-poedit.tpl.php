@@ -76,7 +76,7 @@ $modified or $pofiles[] = $path;
     <div id="loco-poedit">
         
         <nav id="loco-nav" class="wp-core-ui">
-            <form action="<?php echo $phpbase?>/loco-fail.php" method="post">
+            <form action="<?php echo $phpbase?>/loco-fail.php" method="post" id="loco-poedit-save">
                 <input type="hidden" name="po" value="" />
                 <input type="hidden" name="path" value="<?php Loco::h($path)?>" />
                 <input type="hidden" name="action" value="loco-posave" /><?php

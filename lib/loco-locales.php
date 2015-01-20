@@ -88,6 +88,7 @@ final class LocoLocale {
         if( ! $cc ){
             if( self::is_regionless($lc) ){
                 // Wordpress expects this locale to be regionless
+                $cc = '';
             }
             else {
                 $cc = self::default_region($lc);
@@ -95,15 +96,9 @@ final class LocoLocale {
         }
         $label = '';
         $locale = new LocoLocale( $lc, $cc );
-        // get locale name from our own list
-        if( isset($locales[$lc]) ){
-            $names = self::get_names();
-            if( ! $cc && isset($names[$lc]) ){
-                $locale->label = $names[$lc];
-            }
-            else if( isset($locales[$lc][$cc]) ){
-                $locale->label = $locales[$lc][$cc];
-            }
+        // get locale name from official Wordpress list
+        if( isset($locales[$lc][$cc]) ){
+            $locale->label = $locales[$lc][$cc];
         }
         // get plural rules from iso 639 language and set label if common locale wasn't known
         if( isset($langs[$lc]) ){
@@ -152,13 +147,9 @@ final class LocoLocale {
         if( ! $names ){
             $data = self::data();
             foreach( $data['locales'] as $lc => $regions ){
-                $no_cc = self::is_regionless($lc);
                 foreach( $regions as $cc => $label ){
-                    if( 'ZZ' === $cc ){
+                    if( '' === $cc ){
                         $names[$lc] = $label;
-                    }
-                    else if( $cc === $no_cc ){
-                        // already have as regionless
                     }
                     else {
                         $names[$lc.'_'.$cc] = $label;
@@ -178,19 +169,19 @@ final class LocoLocale {
      */
     public static function is_regionless( $lc ){
         $data = self::data();
-        if( ! isset($data['locales'][$lc]['ZZ']) ){
-            return false;
-        }
-        // return the default region for this language if there was to be one
-        return key($data['locales'][$lc]);
+        return isset($data['locales'][$lc]['']);
     }
+
     
     
     /**
      * Alias to loco_language_country
      */
-    private static function default_region( $lang ){
-        self::data(); // <- ensure lazy load of libs
+    public static function default_region( $lang ){
+        self::data();
+        if( 'en' === $lang ){
+            return 'US';
+        }
         return loco_language_country( $lang );
     }     
     

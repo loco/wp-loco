@@ -10,7 +10,7 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     
     public function testGetAllLocales(){
         $map = LocoLocale::get_names();
-        $this->assertCount( 137, $map );
+        $this->assertCount( 140, $map );
         return $map;
     }
     
@@ -39,11 +39,28 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
         $this->assertInstanceOf('LocoLocale', $locale );
     }
     
+
+    public function testLocaleDefaultRegionHelper(){
+        $this->assertSame( 'FR', LocoLocale::default_region('fr') );
+        $this->assertSame( 'US', LocoLocale::default_region('en') );
+        $this->assertSame( 'TH', LocoLocale::default_region('th') );
+        $this->assertSame( '', LocoLocale::default_region('eo') );
+        $this->assertSame( '', LocoLocale::default_region('eu') );
+    }
+    
     
     public function testLanguageResolvesToDefaultRegion(){
         $locale = loco_locale_resolve('fr');
-        $this->assertEquals( 'French', $locale->get_name() );
+        $this->assertEquals( 'French (France)', $locale->get_name() );
         $this->assertEquals( 'fr_FR', $locale->get_code() );
+    }
+    
+
+    public function testLocaleIsRegionlessHelper(){
+        $this->assertFalse( LocoLocale::is_regionless('en'), 'French (fr) should not be regionless' );
+        $this->assertFalse( LocoLocale::is_regionless('en'), 'English (en) should not be regionaless' );
+        $this->assertTrue(  LocoLocale::is_regionless('th'), 'Thai (th) should be regionless' );
+        $this->assertTrue(  LocoLocale::is_regionless('ca'), 'Catalan (ca) should be regionless' );
     }
     
     
@@ -53,7 +70,7 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( 'th', $locale->get_code() );
         // Catalan: https://wordpress.org/support/topic/problems-catalan
         $locale = loco_locale_resolve('ca');
-        $this->assertEquals( 'Catalan; Valencian', $locale->get_name() );
+        $this->assertEquals( 'Catalan', $locale->get_name() );
         $this->assertEquals( 'ca', $locale->get_code() );
     }
     
@@ -106,9 +123,9 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     
     
     public function testLocaleEquality(){    
-        $locale = LocoLocale::init('en','GB');
+        $locale = LocoLocale::init('en','US');
         $other = LocoLocale::init('en','');
-        $this->assertTrue( $locale->equal_to($other), $locale.' is not the same locale as '.$other );
+        $this->assertTrue( $locale->equal_to($other), $locale.' should resolve to the same locale as '.$other );
     }
     
     

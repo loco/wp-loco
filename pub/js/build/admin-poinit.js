@@ -1,1 +1,1 @@
-!function(a,c,b){a=c.getElementById("loco-msginit");var d=a["custom-locale"];b(a["common-locale"]).change(function(){d.value=b(this).val();return!0})}(window,document,window.jQuery);
+!function(c,f,b){c=f.getElementById("loco-msginit");var d=c["common-locale"],e=c["custom-locale"];b(d).change(function(){e.value=b(this).val();return!0});b(e).bind("input",function(a){a=a.target.value;/^([a-z]{2,3})(?:[ _\-]([A-Z]{2}))?$/i.exec(a)&&(a=RegExp.$1.toLowerCase(),RegExp.$2&&(a+="_"+RegExp.$2.toUpperCase()),b(d).val(a))})}(window,document,window.jQuery);

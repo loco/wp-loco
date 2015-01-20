@@ -134,11 +134,13 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 == Changelog ==
 
 = 1.4.8 =
+* Added PO Editor keyboard shortcuts
 * Added WPLANG warning for WP4 deprecation
 * Added some FAQs
 * Removed SORT_NATURAL for PHP 5.3 compat
 * Fixed dummy msginit bug when default locale exists
 * POT/domain matching fix
+* Using Wordpress language codes
 
 = 1.4.7 =
 * Added Polish translations
