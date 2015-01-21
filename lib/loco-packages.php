@@ -508,12 +508,21 @@ abstract class LocoPackage {
             // check package declares Text Domain
             $domain = $this->get_original('TextDomain');
             if( ! $domain ){
-                $warn[] = sprintf(Loco::__('%s does not declare a "Text Domain"'),$camelType).' .. '.sprintf(Loco::__('Loco has guessed "%s"'),$this->get_domain() );
+                $domain = $this->get_domain();
+                $warn[] = sprintf(Loco::__('%s does not declare a "Text Domain"'),$camelType).' .. '.sprintf(Loco::__('Loco has guessed "%s"'), $domain );
             }
             // check package declares "Domain Path"
             $path = $this->get_original('Domain Path');
             if( ! $domain ){
-                $warn[] = sprintf(Loco::__('%s does not declare a "Domain Path"'),$camelType).' .. '.sprintf(Loco::__('Loco has guessed "%s"'),$this->domainpath);
+                $warn[] = sprintf(Loco::__('%s does not declare a "Domain Path"'),$camelType).' .. '.sprintf(Loco::__('Loco has guessed "%s"'), $this->domainpath );
+            }
+            // check POT exists and looks correct
+            $path = $this->get_pot($domain);
+            if( ! $path ){
+                $warn[] = sprintf( Loco::__('%s has no POT file. Create one at "%s/%s.pot" if you need one.'), $camelType, $this->domainpath, $domain );
+            }
+            else if( $domain.'.pot' !== basename($path) ){
+                $warn[] = sprintf(Loco::__('%s has a strange POT file name (%s). A better name would be "%s.pot"'), $camelType, basename($path), $domain );
             }
             // TODO check references to other domains in xgettext
         }
