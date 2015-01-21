@@ -44,6 +44,7 @@ final class LocoLocale {
     public function export(){
         $data = get_object_vars($this);
         $this->region or $data['region'] = self::default_region($this->lang);
+        $data['icon'] = $this->icon_class();
         return $data;
     }
     

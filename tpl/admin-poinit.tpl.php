@@ -42,10 +42,12 @@ $argpair = $package->get_query();
         </p>
         <p>
             <label for="f-loco-locale">
+                &ndash;
                 <?php Loco::h( Loco::_x('or enter any language code','Form label') )?>:
                 <br />
             </label>
             <input type="text" maxlength="5" size="5" pattern="^[a-zA-Z]{2}([\-_][a-zA-Z]{2})?$" name="custom-locale" for="f-loco-locale" placeholder="xx_XX" />
+            <span class="flag"></span>
         </p><?php
         // provide location choice if package and global dirs are both writable
         if( is_writeable($pdir) && is_writable($gdir) ):
@@ -65,7 +67,7 @@ $argpair = $package->get_query();
         </p><?php
         endif?> 
         <p class="submit">
-            <input type="submit" value="<?php Loco::h( Loco::_x('Start translating','Submit button') )?>" class="button button-primary button-large" />
+            <input type="submit" value="<?php Loco::h( Loco::_x('Start translating','Submit button') )?>" class="button button-primary button-large" disabled />
         </p>
     </form>
     

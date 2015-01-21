@@ -431,7 +431,7 @@ abstract class LocoAdmin {
             $path = str_replace( '.mo', '.po', $path );
         }
 
-        Loco::enqueue_scripts('build/admin-poedit');
+        Loco::enqueue_scripts('build/admin-common','build/admin-poedit');
         Loco::render('admin-poedit', compact('package','path','po','pot','locale','headers','name','type','modified','writable','warnings') );
         return true;
     }
@@ -1052,6 +1052,7 @@ add_action('admin_notices', '_loco_hook_admin_notices');
 add_action('plugin_row_meta', '_loco_hook__plugin_row_meta', 10, 2 );
 
 // ajax hooks all going through one central function
+add_action('wp_ajax_loco-data', '_loco_hook__wp_ajax' );
 add_action('wp_ajax_loco-posave', '_loco_hook__wp_ajax' );
 add_action('wp_ajax_loco-posync', '_loco_hook__wp_ajax' );
 add_action('wp_ajax_loco-download', '_loco_hook__wp_ajax_download' );
