@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
 Requires at least: 3.5
 Tested up to: 4.1
-Stable tag: 1.4.7
+Stable tag: 1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -133,7 +133,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Changelog ==
 
-= 1.4.8 =
+= 1.5 =
 * Added PO Editor keyboard shortcuts
 * Added WPLANG warning for WP4 deprecation
 * Added some FAQs
@@ -245,7 +245,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Upgrade Notice ==
 
-= 1.4.8 =
+= 1.5 =
 * Bug fixes and improvements.
 
 
