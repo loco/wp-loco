@@ -1,0 +1,22 @@
+<?php
+/**
+ * Polyfiller for missing PHP mbstring extension.
+ * Simply avoids fatal errors. Doesn't attempt to really replace the functionality
+ */
+
+ 
+function loco__mb_detect_encoding( $str, array $encoding_list, $strict ){
+    return 'UTF-8';    
+}
+
+if( ! extension_loaded('mbstring') && WP_DEBUG && ( ! defined('DOING_AJAX') || ! DOING_AJAX ) ){
+    LocoAdmin::warning( sprintf( Loco::__('PHP extension "%s" is not installed. If you experience problems you should install it'), 'mbstring' ) );
+}
+
+if( ! function_exists('mb_detect_encoding') ){
+    function mb_detect_encoding( $str = '', array $encoding_list = array(), $strict = false ){
+        return loco__mb_detect_encoding( $str, $encoding_list, $strict );
+    }
+}
+
+

@@ -3,7 +3,7 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: ru_RU, Russian
- * Exported at: Wed, 21 Jan 2015 10:44:17 +0000 
+ * Exported at: Wed, 21 Jan 2015 14:04:40 +0000 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

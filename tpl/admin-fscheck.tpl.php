@@ -13,9 +13,9 @@ $nav = array (
     
     <?php Loco::render('admin-nav', compact('nav') )?> 
     
-    <h3 class="title">
+    <h2>
         <?php Loco::h( sprintf( Loco::__('File system permissions for %s'), $name ) )?> 
-    </h3><?php
+    </h2><?php
 
     /* @var $package LocoPackage */  
     foreach( $package->get_permission_errors() as $path => $error ):?> 

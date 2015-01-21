@@ -2,7 +2,23 @@
 /**
  * Loco admin
  */
-abstract class LocoAdmin { 
+abstract class LocoAdmin {
+    
+    /**
+     * Admin notices buffer
+     */
+    private static $notices = array();     
+    
+    /**
+     * Flush admin notices buffer
+     */
+    public static function flush_notices(){
+        while( $buffered = array_shift(self::$notices) ){
+            list( $func, $args ) = $buffered;
+            call_user_func_array( array(__CLASS__,$func), $args );
+        }
+    }
+    
 
     /**
      * Print error
@@ -21,8 +37,13 @@ abstract class LocoAdmin {
      * Print warning notice
      */
     public static function warning( $message, $label = '' ){
-        $label or $label = _x('Warning','Message label');
-        echo '<div class="loco-message error loco-warning"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
+        if( did_action('admin_notices') ){
+            $label or $label = _x('Warning','Message label');
+            echo '<div class="loco-message error loco-warning"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
+        }
+        else {
+            self::$notices[] = array( __FUNCTION__, func_get_args() );
+        }
     }
     
     
@@ -67,9 +88,29 @@ abstract class LocoAdmin {
         }
         Loco::enqueue_scripts('build/admin-common');
         Loco::render('admin-opts', $args );
-    }     
+    }
+
+
     
+    /**
+     * Admin diagnostics page render call
+     */
+    public static function render_page_diagnostics(){
+        current_user_can(Loco::CAPABILITY) or self::forbid();
+        loco_require('loco-locales','loco-packages');
+        // global data
+        global $wp_version;
+        // collect data about current theme
+        $theme = wp_get_theme();
+        $package = LocoPackage::get( $theme->get_stylesheet(), 'theme' );
+        $theme_locale = apply_filters( 'theme_locale', get_locale(), $theme->get('TextDomain') );
+        // 
+        $args = compact('wp_version','theme','theme_locale','package');
+        Loco::enqueue_scripts('build/admin-common', 'debug');
+        Loco::render('admin-debug', $args );
+    }    
     
+
       
     /**
      * Admin tools page render call
@@ -206,6 +247,7 @@ abstract class LocoAdmin {
                     }
                 }
             }
+            Loco::enqueue_scripts('build/admin-common');
             Loco::render('admin-root', $args );
         }
         while( false );
@@ -968,7 +1010,7 @@ function _loco_hook__current_screen(){
  * Admin menu registration callback
  */
 function _loco_hook__admin_menu() {
-    $cap = LOCO::CAPABILITY;
+    $cap = Loco::CAPABILITY;
     if( current_user_can($cap) ){
         // hook in legacy wordpress styles as menu will display
         $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) or
@@ -977,6 +1019,7 @@ function _loco_hook__admin_menu() {
         $page_title = Loco::__('Loco, Translation Management');
         $tool_title = Loco::__('Manage translations');
         $opts_title = Loco::__('Translation options');
+        $diag_title = Loco::__('Diagnostics');
         // Loco main menu item
         $slug = Loco::NS;
         $title = $page_title.' - '.$tool_title;
@@ -989,12 +1032,15 @@ function _loco_hook__admin_menu() {
         // also add under Tools menu (legacy)
         add_management_page( $title, $tool_title, $cap, $slug.'-legacy', $page );
         // Settings page
-        $slug = $slug.'-settings';
+        $slug = Loco::NS.'-settings';
         $title = $page_title.' - '.$opts_title;
         $page = array( 'LocoAdmin', 'render_page_options' );
         add_submenu_page( Loco::NS, $title, $opts_title, $cap, $slug, $page );
         // also add under Settings menu (legacy)
-        add_options_page( $title, $opts_title, Loco::CAPABILITY, $slug.'-legacy', $page );
+        add_options_page( $title, $opts_title, $cap, $slug.'-legacy', $page );
+        /*/ TODO Diagnostics page
+        $page = array( 'LocoAdmin', 'render_page_diagnostics' );
+        add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );*/
         // Hook in page stuff as soon as screen is avaiable
         add_action('current_screen', '_loco_hook__current_screen' );
     }        
@@ -1043,6 +1089,7 @@ function _loco_hook_admin_notices(){
     if( defined('WPLANG') && LocoAdmin::is_self() && WPLANG && 3 < (int) $GLOBALS['wp_version'] ){
         LocoAdmin::warning( Loco::__('WPLANG is deprecated and should be removed from wp-config.php') );
     }
+    LocoAdmin::flush_notices();
 } 
 
 
@@ -1062,3 +1109,7 @@ if( ! defined('WP_LANG_DIR') ){
     define('WP_LANG_DIR', WP_CONTENT_DIR.'/languages' );
 } 
  
+// Load polyfills and raise warnings in debug mode
+extension_loaded('mbstring') or loco_require('compat/loco-mbstring');
+extension_loaded('iconv') or loco_require('compat/loco-iconv');
+

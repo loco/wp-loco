@@ -56,6 +56,19 @@ function add_filter(){
     // noop    
 }
 
+function do_action( $name ){
+    did_action( $name, true );
+}
+
+function did_action( $name ){
+    static $faked = array();
+    if( 2 === func_num_args() ){
+        $faked[$name] = func_get_arg(1);
+    }
+    return isset($faked[$name]) ? $faked[$name] : false;
+}
+
+
 function apply_filters( $hook, $value = null ){
     return $value;
 }
@@ -73,4 +86,4 @@ define('WP_PLUGIN_DIR', __DIR__.'/../../..' );
 
 require __DIR__.'/../../loco.php';
 
-loco_require( 'loco-boot','loco-admin','loco-locales','loco-packages','build/gettext-compiled','build/shell-compiled' );
+loco_require( 'loco-boot','loco-admin','loco-locales','loco-packages','build/gettext-compiled','build/shell-compiled', 'compat/loco-mbstring' );
