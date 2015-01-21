@@ -141,6 +141,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Fixed dummy msginit bug when default locale exists
 * POT/domain matching fix
 * Using Wordpress language codes
+* Added polyfills for mbstring and iconv
 
 = 1.4.7 =
 * Added Polish translations
@@ -268,4 +269,20 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Indonesian translations by [Ivan Lanin](https://twitter.com/ivanlanin)
 * Italian translations by [ElectricFeet](http://wordpress.org/support/profile/electricfeet)
 * Polish translations by [Jerry1333](http://www.jerry1333.net)
+
+== Keyboard shortcuts ==
+
+The PO file editor supports the following keyboard shortcuts for faster translating:
+
+* Done and Next: `Ctrl ↵`
+* Next string: `Ctrl ↓`
+* Previous string: `Ctrl ↑`
+* Next untranslated: `Shift Ctrl ↓`
+* Previous untranslated: `Shift Ctrl ↑`
+* Copy from source text: `Ctrl B`
+* Clear translation: `Ctrl K`
+* Toggle Fuzzy: `Ctrl U`
+* Save PO / compile MO: `Ctrl S`
+
+Mac users can use ⌘ Cmd instead of Ctrl.
 
