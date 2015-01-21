@@ -204,9 +204,9 @@ abstract class LocoAdmin {
                 // Show filesystem check if 'fscheck' in query
                 //
                 if( isset($_GET['fscheck']) ){
-                    $meta = $package->meta();
+                    $args = $package->meta() + compact('package');
                     Loco::enqueue_scripts('build/admin-common');
-                    Loco::render('admin-fscheck', $meta + compact('package') );
+                    Loco::render('admin-fscheck', $args );
                     break;
                 }
                 
@@ -1051,11 +1051,11 @@ function _loco_hook__admin_menu() {
         add_submenu_page( Loco::NS, $title, $opts_title, $cap, $slug, $page );
         // also add under Settings menu (legacy)
         add_options_page( $title, $opts_title, $cap, $slug.'-legacy', $page );
-        // Diagnostics page - enabled in debug mode only
+        /*/ Diagnostics page - enabled in debug mode only
         if( WP_DEBUG ){
             $page = array( 'LocoAdmin', 'render_page_diagnostics' );
-            //add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );
-        }
+            add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );
+        }*/
         // Hook in page stuff as soon as screen is avaiable
         add_action('current_screen', '_loco_hook__current_screen' );
     }        

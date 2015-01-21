@@ -1,6 +1,7 @@
 <?php
 /**
  * File system check screen - shows permission problems and gives advice on fixing
+ * @var LocoPackage $package
  */
 $nav = array (
     Loco::__('Packages') => LocoAdmin::uri(),
@@ -11,7 +12,7 @@ $nav = array (
 
 <div class="wrap loco-admin loco-fscheck">
     
-    <?php Loco::render('admin-nav', compact('nav') )?> 
+    <?php Loco::render('admin-nav', compact('nav') );?> 
     
     <h2>
         <?php Loco::h( sprintf( Loco::__('File system permissions for %s'), $name ) )?> 
@@ -33,7 +34,22 @@ $nav = array (
         </li><?php
         endif?> 
     </ul><?php 
-    endforeach?> 
+    endforeach;
+
+
+    if( $warnings = $package->get_author_warnings() ):?> 
+    <h2>
+        <?php Loco::h( sprintf( Loco::__('Other potential issues with %s'), $name ) ) ?> 
+    </h2>
+    
+    <ul class="loco-list"><?php
+        foreach( $warnings as $error ):?> 
+        <li class="loco-warning">
+            <span><?php Loco::h($error)?></span>
+        </li><?php 
+        endforeach;?> 
+    </ul><?php 
+    endif?> 
     
     
     <p class="submit">
