@@ -100,15 +100,25 @@ abstract class LocoAdmin {
         loco_require('loco-locales','loco-packages');
         // global data
         global $wp_version;
+        $user = wp_get_current_user();
+        // collect data about Loco plugin
+        $config = Loco::config();
+        $caching = Loco::$cache_enabled ? ( Loco::$apc_enabled ? 'APC' : 'WP' ) : 'Off'; 
         // collect data about current theme
         $theme = wp_get_theme();
         $package = LocoPackage::get( $theme->get_stylesheet(), 'theme' );
         $theme_locale = apply_filters( 'theme_locale', get_locale(), $theme->get('TextDomain') );
-        // check if locale is a valid Wordpress locale
-        if( ! LocoLocale::valid_wp_locale($theme_locale) ){
-            
+        // collect data about all plugins
+        $plugins = array();
+        foreach( get_plugins() as $plugin_file => $plugin ){
+            $package = LocoPackage::get( $plugin_file, 'plugin' ) and
+            $plugins[ $package->get_name() ] = $package->get_domain();
         }
-        $args = compact('wp_version','theme','theme_locale','package');
+        // check if locale is a valid Wordpress language code
+        if( ! LocoLocale::is_valid_wordpress($theme_locale) ){
+            self::warning( sprintf( Loco::__('"%s" is not a standard WordPress locale code'), $theme_locale ) );
+        }
+        $args = compact('wp_version','theme','theme_locale','package','config','caching','user','plugins');
         Loco::enqueue_scripts('build/admin-common', 'debug');
         Loco::render('admin-debug', $args );
     }    
@@ -1044,7 +1054,7 @@ function _loco_hook__admin_menu() {
         // Diagnostics page - enabled in debug mode only
         if( WP_DEBUG ){
             $page = array( 'LocoAdmin', 'render_page_diagnostics' );
-            add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );
+            //add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );
         }
         // Hook in page stuff as soon as screen is avaiable
         add_action('current_screen', '_loco_hook__current_screen' );
