@@ -86,4 +86,4 @@ define('WP_PLUGIN_DIR', __DIR__.'/../../..' );
 
 require __DIR__.'/../../loco.php';
 
-loco_require( 'loco-boot','loco-admin','loco-locales','loco-packages','build/gettext-compiled','build/shell-compiled', 'compat/loco-mbstring' );
+loco_require( 'loco-boot','loco-admin','loco-locales','loco-packages','build/gettext-compiled','build/shell-compiled', 'compat/loco-mbstring', 'compat/loco-iconv' );

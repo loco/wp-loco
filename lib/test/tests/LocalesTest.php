@@ -23,6 +23,21 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     }
     
     
+    public function testValidWordpressLocales(){
+        // regionless
+        $this->assertTrue( LocoLocale::is_valid_wordpress('th'), '"th" should be a valid WP locale ' );
+        $this->assertFalse( LocoLocale::is_valid_wordpress('th_TH'), 'th_TH is not valid, it should be "th"' );
+        $this->assertFalse( LocoLocale::is_valid_wordpress('TH'), '"TH" should be invalid due to uppercasing' );
+        // regionfull
+        $this->assertTrue( LocoLocale::is_valid_wordpress('fr_FR'), '"fr_FR" should be a valid WP locale ' );
+        $this->assertFalse( LocoLocale::is_valid_wordpress('fr'), 'fr is not valid, it should be "fr_FR"' );
+        $this->assertFalse( LocoLocale::is_valid_wordpress('FR'), '"FR" should be invalid due to uppercasing' );
+        // three characters official
+        $this->assertTrue( LocoLocale::is_valid_wordpress('bel'), '"bel" should be a valid WP locale ' );
+        $this->assertTrue( LocoLocale::is_valid_wordpress('rup_MK'), '"rup_MK" should be a valid WP locale ' );
+    }    
+    
+    
     public function testKnownLocaleResolves(){
         $locale = loco_locale_resolve('en_GB');
         $this->assertInstanceOf('LocoLocale', $locale );

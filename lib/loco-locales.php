@@ -13,10 +13,15 @@
 function loco_locale_resolve( $s ){
     $lc = '';
     $cc = '';
-    if( preg_match('/(?:^|\W)([a-z]{2})(?:(?:-|_)([a-z]{2}))?$/i', $s, $r ) ){
+    if( preg_match('/(?:^|\W)([a-z]{2,3})(?:(?:-|_)([a-z]{2}))?$/i', $s, $r ) ){
         $lc = strtolower($r[1]);
         if( isset($r[2]) ){
             $cc = strtoupper($r[2]);
+            // handle situation when short domain part looks like language
+            if( ! LocoLocale::is_known_language($lc) && LocoLocale::is_known_language($cc) ){
+                $lc = strtolower($cc);
+                $cc = '';
+            }
         }
     }
     return LocoLocale::init( $lc, $cc );
@@ -184,8 +189,42 @@ final class LocoLocale {
             return 'US';
         }
         return loco_language_country( $lang );
-    }     
+    }
     
+    
+    /**
+     * Test if locale code is strictly a valid Wordpress locale
+     */
+    public static function is_valid_wordpress( $code ){
+        if( ! preg_match('/^[a-z]{2,3}(?:_[A-Z]{2})?$/', $code, $r ) ){
+            return false;
+        }
+        $names = self::get_names();
+        return isset( $names[$r[0]] );
+    }
+    
+    
+    /**
+     * Test if code is a valid language code
+     * This includes all two character languages in ISO-639, plus any three character codes used by Wordpress
+     */
+    public static function is_known_language( $code ){
+        $data = self::data();
+        $code = strtolower($code);
+        return isset($data['langs'][$code]);
+    }
+    
+    
+    /**
+     * Test if code is a known region
+     * This includes all two character languages in ISO-3166
+     */
+    public static function is_known_region( $code ){
+        $data = self::data();
+        $code = strtoupper($code);
+        return isset($data['regions'][$code]);
+    }
+         
 }
 
  

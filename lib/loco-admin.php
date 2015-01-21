@@ -104,7 +104,10 @@ abstract class LocoAdmin {
         $theme = wp_get_theme();
         $package = LocoPackage::get( $theme->get_stylesheet(), 'theme' );
         $theme_locale = apply_filters( 'theme_locale', get_locale(), $theme->get('TextDomain') );
-        // 
+        // check if locale is a valid Wordpress locale
+        if( ! LocoLocale::valid_wp_locale($theme_locale) ){
+            
+        }
         $args = compact('wp_version','theme','theme_locale','package');
         Loco::enqueue_scripts('build/admin-common', 'debug');
         Loco::render('admin-debug', $args );
@@ -784,8 +787,8 @@ abstract class LocoAdmin {
         if( 'pot' === $extension ){
             return $filename;
         }
-        if( $domain = preg_replace('/[a-z]{2}(_[A-Z]{2})?$/', '', $filename ) ){
-            return trim( $domain, '-' );
+        if( $domain = preg_replace('/[a-z]{2,3}(_[A-Z]{2})?$/', '', $filename ) ){
+            return rtrim( $domain, '-' );
         }
         // empty domain means file name is probably just a locale
         return '';
@@ -1038,9 +1041,11 @@ function _loco_hook__admin_menu() {
         add_submenu_page( Loco::NS, $title, $opts_title, $cap, $slug, $page );
         // also add under Settings menu (legacy)
         add_options_page( $title, $opts_title, $cap, $slug.'-legacy', $page );
-        /*/ TODO Diagnostics page
-        $page = array( 'LocoAdmin', 'render_page_diagnostics' );
-        add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );*/
+        // Diagnostics page - enabled in debug mode only
+        if( WP_DEBUG ){
+            $page = array( 'LocoAdmin', 'render_page_diagnostics' );
+            add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );
+        }
         // Hook in page stuff as soon as screen is avaiable
         add_action('current_screen', '_loco_hook__current_screen' );
     }        

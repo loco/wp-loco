@@ -46,7 +46,7 @@ $argpair = $package->get_query();
                 <?php Loco::h( Loco::_x('or enter any language code','Form label') )?>:
                 <br />
             </label>
-            <input type="text" maxlength="5" size="5" pattern="^[a-zA-Z]{2}([\-_][a-zA-Z]{2})?$" name="custom-locale" for="f-loco-locale" placeholder="xx_XX" />
+            <input type="text" maxlength="6" size="5" pattern="^[a-zA-Z]{2,3}([\-_][a-zA-Z]{2})?$" name="custom-locale" for="f-loco-locale" placeholder="xx_XX" />
             <span class="flag"></span>
         </p><?php
         // provide location choice if package and global dirs are both writable

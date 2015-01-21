@@ -19,4 +19,8 @@ if( ! function_exists('mb_detect_encoding') ){
     }
 }
 
-
+if( ! function_exists('mb_list_encodings') ){
+    function mb_list_encodings(){
+        return array('none');
+    }
+}
