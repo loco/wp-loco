@@ -500,10 +500,7 @@ abstract class LocoPackage {
     public function get_author_warnings(){
         $warn = array();
         $type = $this->get_type();
-        if( 'core' === $type ){
-            // no tests for core packages
-        }
-        else {
+        if( 'core' !== $type ){
             $camelType = strtoupper($type{0}).substr($type,1);
             // check package declares Text Domain
             $domain = $this->get_original('TextDomain');
@@ -525,6 +522,14 @@ abstract class LocoPackage {
                 $warn[] = sprintf(Loco::__('%s has a strange POT file name (%s). A better name would be "%s.pot"'), $camelType, basename($path), $domain );
             }
             // TODO check references to other domains in xgettext
+        }
+        // Check if any locale codes are not an official Wordpress languages
+        $meta = $this->meta();
+        foreach( $meta['po'] as $po_data ){
+            $wplang = $po_data['locale']->get_code() or $wplang = $po_data['locale']->get_name();
+            if( ! LocoLocale::is_valid_wordpress($wplang) ){
+                $warn[] = sprintf( Loco::__('%s is not an official WordPress language'), $wplang );
+            }
         }
         return $warn;
     }     
@@ -553,7 +558,17 @@ abstract class LocoPackage {
         }
         // no template candidate
         return '';
+    }
+    
+
+    /**
+     * Check if given path is one of the package's POT files
+     * @return string related text domain if valid POT, else false
+     */    
+    public function is_pot( $path ){
+        return array_search( $path, $this->pot, true );
     }    
+    
     
     
     /**

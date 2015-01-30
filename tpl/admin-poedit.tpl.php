@@ -42,8 +42,7 @@ $modified or $pofiles[] = $path;
                 $poname = str_replace( '.mo', '.po', basename( $path ) );
                 foreach( $pofiles as $_path ):
                     $label = str_replace( '.mo', '.po', basename($_path) );
-                    $poedit = LocoAdmin::trim_path($_path);
-                    $url = LocoAdmin::uri( $package->get_query() + compact('poedit') );
+                    $url = LocoAdmin::edit_uri( $package, $_path );
                 ?> 
                 <option value="<?php Loco::h($url)?>" <?php $poname === $label and print('selected')?>>
                     <?php Loco::h($label)?> 

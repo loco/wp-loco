@@ -133,6 +133,10 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Changelog ==
 
+= 1.5.1 =
+* Better handling of incorrectly named POT files
+* Appended potential issue warnings on existing "file check" page
+
 = 1.5 =
 * Added PO Editor keyboard shortcuts
 * Added WPLANG warning for WP4 deprecation
@@ -245,7 +249,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Upgrade Notice ==
 
-= 1.5 =
+= 1.5.1 =
 * Bug fixes and improvements.
 
 
