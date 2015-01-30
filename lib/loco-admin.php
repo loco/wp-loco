@@ -64,14 +64,21 @@ abstract class LocoAdmin {
         trigger_error('wp_die failure', E_USER_ERROR );
         exit();
     }     
-    
+
+
+    /**
+     * Check current user has permission to access Loco admin screens, or exit forbidden
+     */
+    private static function check_capability(){
+        current_user_can( Loco::admin_capablity() ) or self::forbid();
+    }    
     
     
     /**
      * Admin settings page render call
      */
     public static function render_page_options(){
-        current_user_can(Loco::CAPABILITY) or self::forbid();
+        self::check_capability();
         // update applicaion settings if posted
         if( isset($_POST['loco']) && is_array( $update = $_POST['loco'] ) ){
             $update += array( 'gen_hash' => '0', 'enable_core' => '0' );
@@ -96,7 +103,7 @@ abstract class LocoAdmin {
      * Admin diagnostics page render call
      */
     public static function render_page_diagnostics(){
-        current_user_can(Loco::CAPABILITY) or self::forbid();
+        self::check_capability();
         loco_require('loco-locales','loco-packages');
         // global data
         global $wp_version;
@@ -129,7 +136,7 @@ abstract class LocoAdmin {
      * Admin tools page render call
      */
     public static function render_page_tools(){
-        current_user_can(Loco::CAPABILITY) or self::forbid();
+        self::check_capability();
         do {
             try {
                 
@@ -1038,7 +1045,7 @@ function _loco_hook__current_screen(){
  * Admin menu registration callback
  */
 function _loco_hook__admin_menu() {
-    $cap = Loco::CAPABILITY;
+    $cap = Loco::admin_capablity();
     if( current_user_can($cap) ){
         // hook in legacy wordpress styles as menu will display
         $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) or

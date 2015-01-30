@@ -17,7 +17,7 @@ try {
         throw new Exception('Wordpress not bootstrapped');
     }
     
-    if( ! current_user_can(Loco::CAPABILITY) ){
+    if( ! current_user_can(Loco::admin_capablity()) ){
         throw new Exception( Loco::__('User does not have permission to manage translations'), 403 );
     }
 

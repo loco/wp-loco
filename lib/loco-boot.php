@@ -7,9 +7,9 @@ abstract class Loco {
 
     /** plugin namespace */
     const NS = 'loco-translate';
-    
+
+    /** plugin version */ 
     const VERSION = '1.5.1';
-    const CAPABILITY = 'manage_options';
     
     /* current plugin locale */
     private static $locale;
@@ -316,6 +316,15 @@ abstract class Loco {
         }
         return $conf;
     }    
+
+
+    /**
+     * Get Wordpress capability for all Loco Admin functionality
+     */
+    public static function admin_capablity(){
+        return apply_filters( 'loco_admin_capability', 'manage_options' );
+    }
+
 }
 
 

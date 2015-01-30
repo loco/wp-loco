@@ -40,9 +40,9 @@ else {
     function loco_after_setup_theme(){
         if( is_user_logged_in() ){
             loco_require('loco-boot');
-            if( current_user_can(Loco::CAPABILITY) ){
-                // @todo font end functionality
-            }
+            //if( current_user_can( Loco::admin_capablity() ) ){
+            // TODO font end functionality
+            //}
         }
     }
 }

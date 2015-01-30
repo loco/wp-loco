@@ -42,6 +42,10 @@ class LocoBootTest extends PHPUnit_Framework_TestCase {
     }
     
     
+    public function testDefaultAdminCapabilityIsManageOptions(){
+        $this->assertSame( 'manage_options', Loco::admin_capablity() );
+    }
+    
 }
 
 
