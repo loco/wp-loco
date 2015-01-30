@@ -385,7 +385,6 @@ abstract class LocoAdmin {
             $haspot = $package->get_pot( $domain );
         }
         
-        
         // warn if new file can't be written
         $writable = self::is_writable( $path );
         if( ! $writable && ! $modified ){
@@ -707,10 +706,14 @@ abstract class LocoAdmin {
                 }
             }
         }
-        // else use an existing PO file (should be used for core only)
+        // else use first existing PO file in place of POT
         else if( $po = $package->get_po() ){
             foreach( $po as $code => $path ){
                 $export = self::parse_po( $path );
+                // strip translations, as this is intended as a POT
+                foreach( $export as $i => $message ){
+                    $export[$i]['target'] = '';
+                }
                 break;
             }
         }        

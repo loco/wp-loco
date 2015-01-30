@@ -375,8 +375,13 @@ abstract class LocoPackage {
             $dir = $this->lang_dir( $domain, true );
         }
         $name = $locale->get_code().'.po';
+        // core default package has no file prefix
+        $type = $this->get_type();
+        if( 'core' === $type && 'default' === $domain ){
+            $prefix = '';
+        }
         // only prefix with text domain for plugins and files in global lang directory
-        if( 'plugin' === $this->get_type() || $force_global ){
+        else if( 'plugin' === $type || $force_global ){
             $prefix = $domain.'-';
         }
         else {
@@ -582,6 +587,7 @@ abstract class LocoPackage {
         return isset($this->po[$domain]) ? $this->po[$domain] : array();
     }
     
+    
 
     /**
      * Find all source files, currently only PHP
@@ -615,6 +621,13 @@ abstract class LocoPackage {
         return $dirs;
     }
     
+    
+    /**
+     * Test if package has any source directories
+     */
+    public function has_source_dirs(){
+        return ! empty( $this->src );
+    }
     
     
     /**
@@ -775,6 +788,7 @@ abstract class LocoPackage {
         $domain = $handle or $domain = 'default';
         $package = new LocoCorePackage( $handle, $domain, '' );
         if( isset($grouped[$handle]) ){
+            // add PO file and POT files for this component          
             $package->add_po( $grouped[$handle], $domain );
             // get name from po file
             $meta = $package->meta();
@@ -783,6 +797,8 @@ abstract class LocoPackage {
                     $package->name = $pmeta['projid'];
                 }
             }
+            // disable source directories as Core packages cannot be synced
+            $package->src = array();
         }
         return $package;
     }
