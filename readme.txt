@@ -137,6 +137,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Better handling of incorrectly named POT files
 * Appended potential issue warnings on existing "file check" page
 * Added loco_admin_capability filter for all plugin access
+* Fixed editor shortcuts to avoid blocking alt-commands
 
 = 1.5 =
 * Added PO Editor keyboard shortcuts
