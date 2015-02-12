@@ -1,6 +1,6 @@
 === Plugin Name ===
 Contributors: timwhitlock
-Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, POEdit, productivity
+Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 3.5
 Tested up to: 4.1
 Stable tag: 1.5.1
@@ -16,7 +16,7 @@ The Loco Translate plugin provides in-browser editing of PO files used for local
 
 Features include:
 
-* POEdit style translations editor within Wordpress admin
+* Built-in translation editor within Wordpress admin
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
@@ -210,7 +210,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Support for files under WP_LANG_DIR
 * Last-Translator header added to PO files from Wordpress user
 * Disabling cache when WP_DEBUG = true
-* Better POEdit integration, including source headers and file refs
+* Better editor integration, including source headers and file refs
 * Added editor dropdown for switching between files
 * Guessing of msgfmt path when not in settings
 
