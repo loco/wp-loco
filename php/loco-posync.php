@@ -33,11 +33,13 @@
             if( $pot_path = $package->get_pot($domain) ){
                 $exp = LocoAdmin::parse_po( $pot_path );
                 if( ! $exp || ( 1 === count($exp) && '' === $exp[0]['source'] ) ){
-                    //throw new Exception( Loco::__('POT file is empty') );
-                    continue;
+                    // throw new Exception( Loco::__('POT file is empty').' - '.basename($pot_path) );
+                    // fall through to try source code
                 }
-                $pot = basename($pot_path);
-                break;
+                else {
+                    $pot = basename($pot_path);
+                    break;
+                }
             }
     
         }
