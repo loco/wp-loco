@@ -25,4 +25,24 @@ class ResolveFileDomainTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( 'foo', $domain );
     }
     
+    public function testValidLanguageCodeNotUsedAsDomain(){
+        $domain = LocoAdmin::resolve_file_domain( '/fr_FR.po' );
+        $this->assertSame( '', $domain );
+    }
+
+    public function testInvalidLanguageCodeNotUsedAsDomain(){
+        $domain = LocoAdmin::resolve_file_domain( '/en_EN.po' );
+        $this->assertSame( '', $domain );
+    }
+
+    public function testValidLanguageCodeNotUsedAsDomainWhenPot(){
+        $domain = LocoAdmin::resolve_file_domain( '/fr_FR.pot' );
+        $this->assertSame( '', $domain );
+    }
+
+    public function testInvalidLanguageCodeNotUsedAsDomainWhenPot(){
+        $domain = LocoAdmin::resolve_file_domain( '/en_EN.pot' );
+        $this->assertSame( '', $domain );
+    }
+    
 }

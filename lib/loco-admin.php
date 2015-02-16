@@ -809,6 +809,10 @@ abstract class LocoAdmin {
             $filename = str_replace( '.'.$extension, '', $basename ); // PHP < 5.2.0
         }
         if( 'pot' === $extension ){
+            // POT shouldn't have a locale code, but people do things like 'en_EN.pot'
+            if( preg_match('/[a-z]{2,3}_[A-Z]{2}$/', $filename ) ){
+                return '';
+            }
             return $filename;
         }
         if( $domain = preg_replace('/[a-z]{2,3}(_[A-Z]{2})?$/', '', $filename ) ){
