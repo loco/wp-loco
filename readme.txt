@@ -133,6 +133,9 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Changelog ==
 
+= 1.5.2 =
+* Handle locale codes used wrongly in POT file names
+
 = 1.5.1 =
 * Better handling of incorrectly named POT files
 * Appended potential issue warnings on existing "file check" page
