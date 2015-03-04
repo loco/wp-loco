@@ -118,7 +118,7 @@ Loco Translate does not support Windows versions of PHP, so if your server has a
 
 In most cases it does, but Loco Translate is not a standalone application - it runs on your server and extraneous factors occasionally cause problems. If the plugin is unable to handle a particular situation automatically then you might have to intervene, and there isn’t always a *non-technical* solution to a technical problem. 
 
-If you think there is a problem with Loco Translate you can open a [support ticket](https://wordpress.org/support/plugin/loco-translate) and provide as much relevant detail as possible.
+If you think there is a problem with Loco Translate you can open a [support ticket](https://wordpress.org/support/plugin/loco-translate), but please provide as much relevant detail as possible.
 
 If you have a suggestion on how to improve the experience of using Loco Translate then please [get in touch](https://localise.biz/contact).
 
@@ -135,6 +135,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 = 1.5.2 =
 * Handle locale codes used wrongly in POT file names
+* Added Persian translations and updated Turkish
 
 = 1.5.1 =
 * Better handling of incorrectly named POT files
@@ -266,18 +267,21 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Integration with Google and Bing for automatic translation
 * Integration with Loco API for collaborative translation
 * Support multiple message domains within a single package.
+* Sort order in editor list
 
 
 == Credits ==
 
 * Dutch translations by [Niels Geryl](http://hetwittepaard.be)
 * German translations by [Sebastian König](http://aykutmania.de)
-* Turkish translations by [Abdullah Pazarbaşı](http://abdullahpazarbasi.com) and Abdullah Manaz
+* Turkish translations by [Abdullah Pazarbaşı](http://abdullahpazarbasi.com), Abdullah Manaz and WordCommerce
 * Swedish translations by [Jimmy Malmqvist](http://jimmymalmqvist.com)
 * Russian translations by [Alexey Tkachenko](http://atkachenko.ru)
 * Indonesian translations by [Ivan Lanin](https://twitter.com/ivanlanin)
 * Italian translations by [ElectricFeet](http://wordpress.org/support/profile/electricfeet)
 * Polish translations by [Jerry1333](http://www.jerry1333.net)
+* Persian translations by [Araz Rad](http://fa.araz.id.ir)
+
 
 == Keyboard shortcuts ==
 
