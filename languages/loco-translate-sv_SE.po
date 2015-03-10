@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Tue Jul 29 2014 09:29:05 GMT+0100 (BST)\n"
-"Last-Translator: Admin <support@localise.biz>\n"
+"PO-Revision-Date: Tue Mar 10 2015 08:45:07 GMT+0000 (GMT)\n"
+"Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Swedish\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -184,7 +184,11 @@ msgstr "Inställningar"
 msgid "File download failed"
 msgstr "Nedladdning misslyckades"
 
-#: ../lib/loco-locales.php:65
+#: ../lib/loco-admin.php:1044
+msgid "WPLANG is deprecated and should be removed from wp-config.php"
+msgstr "WPLANG är inaktuell och bör tas bort från wp-config.php"
+
+#: ../lib/loco-locales.php:68
 msgid "Unknown language"
 msgstr "Okänt språk"
 
@@ -376,8 +380,9 @@ msgstr "Innehåll"
 msgid "Translation"
 msgstr "Översättning"
 
-#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6 ../tpl/admin-poedit.
-#: tpl.php:6 ../tpl/admin-poinit.tpl.php:6 ../tpl/admin-root.tpl.php:6
+#: ../tpl/admin-fscheck.tpl.php:6 ../tpl/admin-opts.tpl.php:6
+#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
+#: ../tpl/admin-root.tpl.php:6
 msgid "Packages"
 msgstr "Språkfiler"
 
@@ -421,7 +426,7 @@ msgstr "Filrättigheter"
 #: ../tpl/admin-list.tpl.php:40
 #, php-format
 msgid "Extends: %s"
-msgstr ""
+msgstr "Utökar: %s"
 
 #: ../tpl/admin-list.tpl.php:44
 #, php-format
