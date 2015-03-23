@@ -3,7 +3,7 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: fa_IR, Persian
- * Exported at: Wed, 04 Mar 2015 10:43:01 +0000 
+ * Exported at: Mon, 23 Mar 2015 10:34:38 +0000 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

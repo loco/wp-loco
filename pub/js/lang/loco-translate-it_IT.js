@@ -3,7 +3,7 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: it_IT, Italian
- * Exported at: Fri, 30 Jan 2015 17:55:13 +0000 
+ * Exported at: Mon, 23 Mar 2015 10:34:39 +0000 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

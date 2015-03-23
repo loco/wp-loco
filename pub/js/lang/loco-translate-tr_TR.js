@@ -3,7 +3,7 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: tr_TR, Turkish
- * Exported at: Wed, 04 Mar 2015 10:43:03 +0000 
+ * Exported at: Mon, 23 Mar 2015 10:34:40 +0000 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
