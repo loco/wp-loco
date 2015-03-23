@@ -3,8 +3,8 @@
  * Root admin screen - lists available themes and plugins
  */
 $nav = array (
-    Loco::__('Packages') => '',
-    Loco::__('Settings') => LocoAdmin::uri( array(), 'settings' ),
+    Loco::__('Packages') => array(),
+    Loco::__('Settings') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
 ); 
 ?> 
 

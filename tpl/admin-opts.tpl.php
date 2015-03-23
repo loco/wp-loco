@@ -3,8 +3,8 @@
  * Admin options screen - changes loco plugin settings
  */
 $nav = array (
-    Loco::__('Packages') => LocoAdmin::uri(),
-    Loco::__('Settings') => '',
+    Loco::__('Packages') => array( 'href' => LocoAdmin::uri() ),
+    Loco::__('Settings') => array( 'icon' => 'admin-settings' ),
 ); 
 ?>
 

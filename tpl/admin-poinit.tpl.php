@@ -3,9 +3,9 @@
  * msginit locale selection screen
  */
 $nav = array (
-    Loco::__('Packages') => LocoAdmin::uri(),
-    $title => '',
-    Loco::__('Settings') => LocoAdmin::uri( array(), 'settings' ),
+    Loco::__('Packages') => array( 'href' => LocoAdmin::uri() ),
+    $title => array( 'icon' => 'welcome-add-page' ),
+    Loco::__('Settings') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
 );  
 
 /* @var $package LocoPackage */

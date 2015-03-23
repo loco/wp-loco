@@ -4,9 +4,9 @@
  * @var LocoPackage $package
  */
 $nav = array (
-    Loco::__('Packages') => LocoAdmin::uri(),
-    Loco::__('Settings') => LocoAdmin::uri( array(), 'settings' ),
-    Loco::__('File check') => '',
+    Loco::__('Packages') => array( 'href' => LocoAdmin::uri() ),
+    Loco::__('Settings') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
+    Loco::__('File check') => array( 'icon' => 'admin-tools' ),
 ); 
 ?>
 
