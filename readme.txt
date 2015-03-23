@@ -135,7 +135,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 = 1.5.2 =
 * Handle locale codes used wrongly in POT file names
-* Added Persian translations and updated Turkish
+* Added Persian translations and updated Turkish and German
 
 = 1.5.1 =
 * Better handling of incorrectly named POT files
@@ -255,7 +255,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Upgrade Notice ==
 
-= 1.5.1 =
+= 1.5.2 =
 * Bug fixes and improvements.
 
 
@@ -273,7 +273,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 == Credits ==
 
 * Dutch translations by [Niels Geryl](http://hetwittepaard.be)
-* German translations by [Sebastian König](http://aykutmania.de)
+* German translations by [Sebastian König](http://aykutmania.de) and [Arno Welzel](https://wordpress.org/support/profile/awelzel)
 * Turkish translations by [Abdullah Pazarbaşı](http://abdullahpazarbasi.com), Abdullah Manaz and WordCommerce
 * Swedish translations by [Jimmy Malmqvist](http://jimmymalmqvist.com)
 * Russian translations by [Alexey Tkachenko](http://atkachenko.ru)

@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Tue Jul 29 2014 09:28:37 GMT+0100 (BST)\n"
-"Last-Translator: Admin <support@localise.biz>\n"
+"PO-Revision-Date: Mon Mar 23 2015 10:27:00 GMT+0000 (GMT)\n"
+"Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: German\n"
 "Plural-Forms: nplurals=2; plural=n != 1\n"
@@ -186,7 +186,11 @@ msgstr "Einstellungen"
 msgid "File download failed"
 msgstr "Dateidownload ist fehlgeschlagen"
 
-#: ../lib/loco-locales.php:65
+#: ../lib/loco-admin.php:1044
+msgid "WPLANG is deprecated and should be removed from wp-config.php"
+msgstr ""
+
+#: ../lib/loco-locales.php:68
 msgid "Unknown language"
 msgstr "Unbekannte Sprache"
 
@@ -225,7 +229,7 @@ msgstr "Ordner nicht schreibbar"
 
 #: ../lib/loco-packages.php:476
 msgid "Folder not found"
-msgstr ""
+msgstr "Ordner nicht gefunden"
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
@@ -296,7 +300,7 @@ msgstr "Fehler beim Schreiben der MO-Datei"
 
 #: ../php/loco-posync.php:47
 msgid "No source files in this package, nothing to sync"
-msgstr ""
+msgstr "Keine Quelldateien in diesem Paket gefunden, nichts zu synchronisieren"
 
 #: ../php/loco-posync.php:57
 msgid "No strings could be extracted from source files"
@@ -354,26 +358,26 @@ msgstr "Deine Änderungen gehen verloren, wenn du fortsetzt ohne zu Speichern"
 #: ../pub/js/lang/dummy.php:35
 msgctxt "Editor pane"
 msgid "Source text"
-msgstr ""
+msgstr "Quelltext"
 
 #. where %s is the language, e.g French translation
 #: ../pub/js/lang/dummy.php:38
 #, php-format
 msgctxt "Editor pane"
 msgid "%s translation"
-msgstr ""
+msgstr "%s Übersetzung"
 
 #. label for the window pane holding translator comments
 #: ../pub/js/lang/dummy.php:41
 msgctxt "Editor pane"
 msgid "Comments"
-msgstr ""
+msgstr "Kommentare"
 
 #. label for the window pane holding message context
 #: ../pub/js/lang/dummy.php:44
 msgctxt "Editor pane"
 msgid "Context"
-msgstr ""
+msgstr "Kontext"
 
 #: ../pub/js/lang/dummy.php:52
 msgid "Translation"
@@ -424,7 +428,7 @@ msgstr "Dateizugriffsrechte"
 #: ../tpl/admin-list.tpl.php:40
 #, php-format
 msgid "Extends: %s"
-msgstr ""
+msgstr "Erweiterung: %s"
 
 #: ../tpl/admin-list.tpl.php:44
 #, php-format
@@ -484,11 +488,11 @@ msgstr "Anzahl der Sicherungen pro Datei"
 
 #: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
 msgid "Experimental features"
-msgstr ""
+msgstr "Experimentelle Funktionen"
 
 #: ../tpl/admin-opts.tpl.php:86
 msgid "Enable Wordpress core translations"
-msgstr ""
+msgstr "Wordpress Core Übersetzung aktivieren"
 
 #: ../tpl/admin-opts.tpl.php:95
 msgid "Save settings"
@@ -573,12 +577,12 @@ msgstr "oder trage den Sprach-Code ein"
 #, php-format
 msgctxt "Form label"
 msgid "create in <code>%s</code>"
-msgstr ""
+msgstr "erstellen in <code>%s</code>"
 
 #: ../tpl/admin-poinit.tpl.php:63
 msgctxt "Form label"
 msgid "create in global languages directory"
-msgstr ""
+msgstr "in globalem Sprachverzeichnis erstellen"
 
 #: ../tpl/admin-poinit.tpl.php:68
 msgctxt "Submit button"
