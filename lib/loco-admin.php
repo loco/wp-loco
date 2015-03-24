@@ -190,11 +190,16 @@ abstract class LocoAdmin {
                     // get alternative location options
                     $pdir = $package->lang_dir( $domain, true );
                     $gdir = $package->global_lang_dir();
+                    $pdir_ok = is_writeable($pdir);
+                    $gdir_ok = is_writeable($gdir);
+                    $is_global = $package->is_global_path( $path );
+                    // warn about unwriteable locations?
+                    
                     // render msginit start screen
                     $title = Loco::__('New PO file');
                     $locales = LocoLocale::get_names();
                     Loco::enqueue_scripts( 'build/admin-common', 'build/admin-poinit');
-                    Loco::render('admin-poinit', compact('package','domain','title','locales','path','pdir','gdir') );
+                    Loco::render('admin-poinit', compact('package','domain','title','locales','path','pdir','gdir','pdir_ok','gdir_ok','is_global') );
                     break;
                 }
 
@@ -1155,5 +1160,6 @@ if( ! defined('WP_LANG_DIR') ){
  
 // Load polyfills and raise warnings in debug mode
 extension_loaded('mbstring') or loco_require('compat/loco-mbstring');
+extension_loaded('tokenizer') or loco_require('compat/loco-tokenizer');
 extension_loaded('iconv') or loco_require('compat/loco-iconv');
 
