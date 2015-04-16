@@ -6,6 +6,7 @@
 $nav = array (
     Loco::__('Packages') => array( 'href' => LocoAdmin::uri() ),
     Loco::__('Settings') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
+    // 
     Loco::__('File check') => array( 'icon' => 'admin-tools' ),
 ); 
 ?>

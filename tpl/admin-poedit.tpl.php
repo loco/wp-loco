@@ -4,8 +4,9 @@
  */
 $nav = array (
     Loco::__('Packages') => array( 'href' => LocoAdmin::uri() ),
-    $name => array( 'icon' => 'POT' === $type ? 'edit' : 'translation' ),
     Loco::__('Settings') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
+    //
+    $name => array( 'icon' => 'POT' === $type ? 'edit' : 'translation' ),
 );  
 
 $phpbase = Loco::html( Loco::baseurl() ).'/php';
