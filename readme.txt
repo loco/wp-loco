@@ -135,7 +135,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 = 1.5.2 =
 * Handle locale codes used wrongly in POT file names
-* Added Persian translations and updated Turkish and German
+* Added Persian and Japanese translations. Updated Turkish and German
 
 = 1.5.1 =
 * Better handling of incorrectly named POT files
@@ -281,6 +281,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Italian translations by [ElectricFeet](http://wordpress.org/support/profile/electricfeet)
 * Polish translations by [Jerry1333](http://www.jerry1333.net)
 * Persian translations by [Araz Rad](http://fa.araz.id.ir)
+* Japanese translations by [Agarthe LLC](https://agarthe.com)
 
 
 == Keyboard shortcuts ==
