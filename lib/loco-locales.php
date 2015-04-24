@@ -66,8 +66,11 @@ final class LocoLocale {
     }
     
     public function icon_class(){
-        $cc = $this->region or $cc = self::default_region($this->lang) or $cc = 'zz';
-        return 'flag flag-'.strtolower($cc);
+        $cc = $this->region or $cc = self::default_region($this->lang);
+        if( $cc ){
+            return 'flag flag-'.strtolower($cc).' lang-'.$this->lang;
+        }
+        return 'lang lang-'.$this->lang;
     }
     
     public function get_name(){

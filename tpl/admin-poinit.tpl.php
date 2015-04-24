@@ -48,7 +48,7 @@ $argpair = $package->get_query();
                 <br />
             </label>
             <input type="text" maxlength="6" size="8" pattern="^[a-zA-Z]{2,3}([\-_][a-zA-Z]{2})?$" name="custom-locale" for="f-loco-locale" placeholder="xx_XX" />
-            <span class="flag"></span>
+            <span class="icon flag"></span>
         </p><?php
         
         // provide location choice if package and global dirs are both writable
