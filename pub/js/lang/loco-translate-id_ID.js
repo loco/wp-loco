@@ -3,7 +3,7 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: id_ID, Indonesian
- * Exported at: Fri, 24 Apr 2015 12:21:12 +0100 
+ * Exported at: Fri, 24 Apr 2015 12:52:07 +0100 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

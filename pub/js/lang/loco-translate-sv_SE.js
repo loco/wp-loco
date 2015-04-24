@@ -3,7 +3,7 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: sv_SE, Swedish
- * Exported at: Fri, 24 Apr 2015 12:21:14 +0100 
+ * Exported at: Fri, 24 Apr 2015 12:52:09 +0100 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
