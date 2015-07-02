@@ -46,15 +46,14 @@
     
         // Extract from sources by default
         if( ! $package->has_source_dirs() ){
-            throw new Exception( Loco::__('No source directories in this package, cannot sync from source code') );
+            // nothing to sync
         }        
-        
-        if( $exp = LocoAdmin::xgettext( $package, dirname($path) ) ){
+        else if( $exp = LocoAdmin::xgettext( $package, dirname($path) ) ){
             $pot = '';
             break;
         }
 
-        throw new Exception( Loco::__('No strings could be extracted from source files') );
+        throw new Exception( Loco::__('No strings could be extracted from source code') );
     }
     
 
@@ -63,7 +62,7 @@
     if( '' === $exp[0]['source'] ){
         $keep = array('Project-Id-Version','Language-Team','POT-Creation-Date','POT-Revision-Date');
         $head = loco_parse_po_headers( $exp[0]['target'] );
-        $headers = array_intersect_key( $head->to_array(), array_flip($keep) );
+        $headers = array_intersect_key( $head->export(), array_flip($keep) );
         /*/ add prefixed header keys that can't be included above
         foreach( $head as $key => $value ){
             if( 0 === strpos($key, 'X-Poedit-' ) ){

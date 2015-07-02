@@ -89,9 +89,9 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
         $this->assertEquals( 'ca', $locale->get_code() );
     }
     
-    public function testRegionlessLocaleHasFlag(){
+    public function testRegionlessLocaleHasFlagClass(){
         $locale = LocoLocale::init('th', null );
-        $this->assertEquals( 'flag flag-th', $locale->icon_class() );        
+        $this->assertContains( 'flag flag-th', $locale->icon_class() );        
     }
     
     

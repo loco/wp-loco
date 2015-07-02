@@ -17,7 +17,7 @@ class GettextTest extends PHPUnit_Framework_TestCase {
         $head = $po[0];
         $this->assertEquals( '', $head['source'] );
         $head = loco_parse_po_headers( $head['target'] );
-        /* @var $head LocoArray */
+        /* @var $head LocoHeaders */
         $this->assertEquals( 'Loco Translate', $head->__get('Project-Id-Version'), 'Failed to extract Project-Id-Version' );
         $this->assertEquals( 'German', $head->language, 'Failed to extract Language header' );
         return $po;
@@ -63,8 +63,8 @@ class GettextTest extends PHPUnit_Framework_TestCase {
         $tokens = token_get_all($source);
         $extractor = new LocoPHPExtractor;
         $export = $extractor->extract( $tokens, 'test.php' );
-        // should have got 15 messages, 2 of which pluralized
-        $this->assertCount( 17, $export );
+        // should have got 18 messages, 2 of which pluralized
+        $this->assertCount( 20, $export );
         // check first message on line 8, "Unknown error"
         $this->assertEquals( 'Unknown error', $export[0]['source'] );
         // reference should be intact with line number
