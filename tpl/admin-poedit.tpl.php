@@ -54,7 +54,7 @@ $modified or $pofiles[] = $path;
         endif?> 
         
         <span class="loco-meta">
-            <?php Loco::h( Loco::__('Updated') )?>:
+            <?php Loco::h( Loco::_x('Updated','Modified time') )?>:
             <span id="loco-po-modified">
             <?php if( $modified ):?> 
                  <?php Loco::h($modified)?>

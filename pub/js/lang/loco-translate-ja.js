@@ -3,12 +3,15 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: ja_JP, Japanese
- * Exported at: Fri, 24 Apr 2015 12:52:08 +0100 
+ * Exported by: Unregistered user
+ * Exported at: Thu, 02 Jul 2015 14:56:22 +0100 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
-    var pluralForms = ["other"];
+    var pluralForms = [
+    "other"
+];
     
     // calc numeric index of a plural form (0-0)
     function pluralIndex( n ){
@@ -29,5 +32,145 @@ loco = window.loco||{}, loco.t = function( pairs ){
         return value || ( 1 === n ? msgid1 : msgid2 ) || msgid1 || '';
     };
 }(
-    {"Error":"\u30a8\u30e9\u30fc","Warning":"\u8b66\u544a","OK":{"OK":["OK","OK"]},"Permission denied":"\u30a2\u30af\u30bb\u30b9\u304c\u62d2\u5426\u3055\u308c\u307e\u3057\u305f","Settings saved":"\u8a2d\u5b9a\u3092\u4fdd\u5b58\u3057\u307e\u3057\u305f","New PO file":"\u65b0\u3057\u3044PO\u30d5\u30a1\u30a4\u30eb","You must specify a valid locale for a new PO file":"\u65b0\u3057\u3044PO\u30d5\u30a1\u30a4\u30eb\u306e\u305f\u3081\u306e\u6709\u52b9\u306a\u30ed\u30b1\u30fc\u30eb\u3092\u6307\u5b9a\u3059\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059","No translatable strings found":"\u7ffb\u8a33\u3067\u304d\u308b\u6587\u5b57\u5217\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f","Cannot create a PO file.":"PO\u30d5\u30a1\u30a4\u30eb\u3092\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093\u3002","PO file already exists with locale %s":"\u30ed\u30b1\u30fc\u30eb%s\u306ePO\u30d5\u30a1\u30a4\u30eb\u306f\u3059\u3067\u306b\u5b58\u5728\u3057\u307e\u3059","PO file used as template. This will be renamed to %s on first save":"PO\u30d5\u30a1\u30a4\u30eb\u3092\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u3068\u3057\u3066\u4f7f\u7528\u3057\u307e\u3057\u305f\u3002\u3053\u308c\u306f\u6700\u521d\u306b%s\u3068\u3057\u3066\u4fdd\u5b58\u3055\u308c\u307e\u3059\u3002","File cannot be created automatically. Fix the file permissions or use Download instead of Save":"\u30d5\u30a1\u30a4\u30eb\u3092\u81ea\u52d5\u7684\u306b\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093\u3002\u30d5\u30a1\u30a4\u30eb\u306e\u30d1\u30fc\u30df\u30c3\u30b7\u30e7\u30f3\u3092\u5909\u66f4\u3059\u308b\u304b\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3057\u3066\u4fdd\u5b58\u3057\u305f\u3082\u306e\u3092\u4f7f\u7528\u3057\u3066\u4e0b\u3055\u3044\u3002","%s file is empty":"\u30d5\u30a1\u30a4\u30eb %s \u306f\u7a7a\u3067\u3059","Run Sync to update from source code":"\u30bd\u30fc\u30b9\u30b3\u30fc\u30c9\u306e\u66f4\u65b0\u306e\u540c\u671f\u3092\u5b9f\u884c","No strings could be extracted from source code":"\u30bd\u30fc\u30b9\u30d5\u30a1\u30a4\u30eb\u304b\u3089\u6587\u5b57\u5217\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f","Run Sync to update from %s":"%s\u306e\u66f4\u65b0\u306e\u540c\u671f\u3092\u5b9f\u884c","Source code has been modified, run Sync to update POT":"\u30bd\u30fc\u30b9\u30b3\u30fc\u30c9\u3092\u5909\u66f4\u3057\u3001POT\u306e\u540c\u671f\u3068\u66f4\u65b0\u3092\u884c\u3044\u307e\u3057\u305f","POT has been modified since PO file was saved, run Sync to update":"PO\u30d5\u30a1\u30a4\u30eb\u306e\u4fdd\u5b58\u5f8c\u306bPOT\u304c\u5909\u66f4\u3055\u308c\u305f\u305f\u3081\u3001\u540c\u671f\u3068\u66f4\u65b0\u3092\u884c\u3044\u307e\u3057\u305f","Bad file path":"\u9593\u9055\u3063\u305f\u30d5\u30a1\u30a4\u30eb\u30d1\u30b9","Empty or invalid %s file":"\u30d5\u30a1\u30a4\u30eb%s\u306f\u7a7a\u307e\u305f\u306f\u58ca\u308c\u3066\u3044\u307e\u3059","%s file has no header":"\u30d5\u30a1\u30a4\u30eb%s\u306b\u30d8\u30c3\u30c0\u304c\u3042\u308a\u307e\u305b\u3093","New template":"\u65b0\u3057\u3044\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8","New language":"\u65b0\u3057\u3044\u8a00\u8a9e","%s%% translated":"%s%%\u4ef6\u7ffb\u8a33\u6e08\u307f","1 string":{"other":"%s\u4ef6\u306e\u6587\u5b57\u5217"},"%s fuzzy":"%s\u4ef6\u306e\u30d5\u30a1\u30b8\u30fc","%s untranslated":"%s\u4ef6\u306e\u672a\u7ffb\u8a33","Failed to compile MO file with built-in compiler":"\u5185\u8535\u30b3\u30f3\u30d1\u30a4\u30e9\u30fc\u3067\u306eMO\u30d5\u30a1\u30a4\u30eb\u306e\u30b3\u30f3\u30d1\u30a4\u30eb\u304c\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f","Loco, Translation Management":"Loco - \u7ffb\u8a33\u7ba1\u7406","Manage translations":"\u7ba1\u7406","Translation options":"\u8a2d\u5b9a","Loco Translate":"Loco Translate","Settings":"\u8a2d\u5b9a","File download failed":"\u30d5\u30a1\u30a4\u30eb\u306e\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u304c\u3067\u304d\u307e\u305b\u3093\u3067\u3057\u305f","WPLANG is deprecated and should be removed from wp-config.php":"WPLANG \u306f\u5ec3\u6b62\u3055\u308c\u305f\u305f\u3081\u3001wp-config.php \u304b\u3089\u524a\u9664\u3059\u308b\u5fc5\u8981\u304c\u3042\u308a\u307e\u3059\u3002","Unknown language":"\u4e0d\u660e\u306a\u8a00\u8a9e","Some files not writable":"\u3044\u304f\u3064\u304b\u306e\u30d5\u30a1\u30a4\u30eb\u306b\u66f8\u304d\u8fbc\u3081\u307e\u305b\u3093","Some files missing":"\u3044\u304f\u3064\u304b\u306e\u30d5\u30a1\u30a4\u30eb\u304c\u4e0d\u660e","\"%s\" folder not writable":"\"%s\" \u30d5\u30a9\u30eb\u30c0\u306b\u66f8\u304d\u8fbc\u3081\u307e\u305b\u3093","POT file not writable":"POT\u30d5\u30a1\u30a4\u30eb\u306b\u66f8\u304d\u8fbc\u3081\u307e\u305b\u3093","PO file not writable":"PO\u30d5\u30a1\u30a4\u30eb\u306b\u66f8\u304d\u8fbc\u3081\u307e\u305b\u3093","MO file not writable":"MO\u30d5\u30a1\u30a4\u30eb\u306b\u66f8\u304d\u8fbc\u3081\u307e\u305b\u3093","MO file not found":"MO\u30d5\u30a1\u30a4\u30eb\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093","Folder not writable":"\u30d5\u30a9\u30eb\u30c0\u306b\u66f8\u304d\u8fbc\u3081\u307e\u305b\u3093","Folder not found":"\u30d5\u30a9\u30eb\u30c0\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093","User does not have permission to manage translations":"\u30e6\u30fc\u30b6\u30fc\u306f\u7ffb\u8a33\u7ba1\u7406\u3092\u884c\u3046\u6a29\u9650\u3092\u6301\u3063\u3066\u3044\u307e\u305b\u3093","Failed to compile MO file with %s, check your settings":"%s\u306eMO\u30d5\u30a1\u30a4\u30eb\u306e\u30b3\u30f3\u30d1\u30a4\u30eb\u306b\u5931\u6557\u3057\u307e\u3057\u305f\u3002\u8a2d\u5b9a\u3092\u78ba\u8a8d\u3057\u3066\u4e0b\u3055\u3044\u3002","Invalid data posted to server":"\u30b5\u30fc\u30d0\u30fc\u3078\u306e\u7121\u52b9\u306a\u30c7\u30fc\u30bf\u9001\u4fe1","Package not found called %s":"\u30d1\u30c3\u30b1\u30fc\u30b8\u304c\u898b\u3064\u304b\u3089\u305a%s\u3092\u547c\u3073\u51fa\u305b\u307e\u305b\u3093","Web server cannot create backups in \"%s\". Fix file permissions or disable backups in settings":"\u30a6\u30a7\u30d6\u30b5\u30fc\u30d0\u30fc\u3067\"%s\"\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093\u3002\u30d5\u30a1\u30a4\u30eb\u306e\u30d1\u30fc\u30df\u30c3\u30b7\u30e7\u30f3\u3092\u5909\u66f4\u3059\u308b\u304b\u3001\u8a2d\u5b9a\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u3092\u7121\u52b9\u306b\u3057\u3066\u4e0b\u3055\u3044\u3002","Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create it manually.":"\u30a6\u30a7\u30d6\u30b5\u30fc\u30d0\u30fc\u306f\"%s\"\u3092\"%s\"\u306b\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093\u3002\u30d5\u30a1\u30a4\u30eb\u306e\u30d1\u30fc\u30df\u30c3\u30b7\u30e7\u30f3\u3092\u5909\u66f4\u3059\u308b\u304b\u3001\u624b\u3067\u4f5c\u6210\u3057\u3066\u4e0b\u3055\u3044\u3002","Web server cannot create files in the \"%s\" directory. Fix file permissions or use the download function.":"\u30a6\u30a7\u30d6\u30b5\u30fc\u30d0\u30fc\u306f\"%s\"\u30c7\u30a3\u30ec\u30af\u30c8\u30ea\u306b\u30d5\u30a1\u30a4\u30eb\u3092\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093\u3002\u30d5\u30a1\u30a4\u30eb\u306e\u30d1\u30fc\u30df\u30c3\u30b7\u30e7\u30f3\u3092\u5909\u66f4\u3059\u308b\u304b\u3001\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u6a5f\u80fd\u3092\u4f7f\u7528\u3057\u3066\u4e0b\u3055\u3044\u3002","%s file is not writable by the web server. Fix file permissions or download and copy to \"%s\/%s\".":"%s\u30d5\u30a1\u30a4\u30eb\u306f\u30a6\u30a7\u30d6\u30b5\u30fc\u30d0\u30fc\u304b\u3089\u66f8\u304d\u8fbc\u307f\u3067\u304d\u307e\u305b\u3093\u3002\u30d5\u30a1\u30a4\u30eb\u306e\u6a29\u9650\u3092\u5909\u66f4\u3059\u308b\u304b\u3001 \u30c0\u30a6\u30f3\u30ed\u30fc\u30c9\u3057\u3066\"%s\/%s\"\u3078\u30b3\u30d4\u30fc\u3057\u3066\u4e0b\u3055\u3044\u3002","Cannot create MO file":"MO\u30d5\u30a1\u30a4\u30eb\u3092\u4f5c\u6210\u3067\u304d\u307e\u305b\u3093","Cannot overwrite MO file":"MO\u30d5\u30a1\u30a4\u30eb\u3092\u4e0a\u66f8\u304d\u3067\u304d\u307e\u305b\u3093","Failed to write MO file":"MO\u30d5\u30a1\u30a4\u30eb\u3078\u66f8\u304d\u8fbc\u307f\u3067\u304d\u307e\u305b\u3093","No source files in this package, nothing to sync":"\u3053\u306e\u30d1\u30c3\u30b1\u30fc\u30b8\u306b\u306f\u30bd\u30fc\u30b9\u30d5\u30a1\u30a4\u30eb\u304c\u306a\u3044\u305f\u3081\u3001\u540c\u671f\u3057\u3066\u3044\u307e\u305b\u3093","No strings could be extracted from source files":"\u30bd\u30fc\u30b9\u30d5\u30a1\u30a4\u30eb\u304b\u3089\u6587\u5b57\u5217\u304c\u898b\u3064\u304b\u308a\u307e\u305b\u3093\u3067\u3057\u305f","Unknown error":"\u4e0d\u660e\u306a\u30a8\u30e9\u30fc","PO file saved":"PO\u30d5\u30a1\u30a4\u30eb\u3092\u4fdd\u5b58\u3057\u307e\u3057\u305f","and MO file compiled":"\u307e\u305fMO\u30d5\u30a1\u30a4\u30eb\u3092\u30b3\u30f3\u30d1\u30a4\u30eb\u3057\u307e\u3057\u305f","Merged from %s":"%s\u304b\u3089\u7d50\u5408","Merged from source code":"\u30bd\u30fc\u30b9\u30b3\u30fc\u30c9\u304b\u3089\u7d50\u5408","Already up to date with %s":"%s\u306f\u3059\u3067\u306b\u6700\u65b0\u3067\u3059","Already up to date with source code":"\u30bd\u30fc\u30b9\u30b3\u30fc\u30c9\u306f\u3059\u3067\u306b\u6700\u65b0\u3067\u3059","1 new string added":{"other":"%s\u4ef6\u306e\u65b0\u3057\u3044\u6587\u5b57\u5217\u3092\u8ffd\u52a0\u3057\u307e\u3057\u305f"},"1 obsolete string removed":{"other":"%s\u4ef6\u306e\u6587\u5b57\u5217\u3092\u524a\u9664\u3057\u307e\u3057\u305f"},"Your changes will be lost if you continue without saving":"\u4fdd\u5b58\u305b\u305a\u306b\u7d9a\u3051\u308b\u3068\u5909\u66f4\u5185\u5bb9\u306f\u53cd\u6620\u3055\u308c\u307e\u305b\u3093","Source text":"\u539f\u6587","%s translation":"%s\u306e\u7ffb\u8a33","Comments":"\u30b3\u30e1\u30f3\u30c8","Context":"\u5c5e\u6027","Translation":"\u8a33\u6587","Packages":"\u30d1\u30c3\u30b1\u30fc\u30b8","File check":"\u30d5\u30a1\u30a4\u30eb\u30c1\u30a7\u30c3\u30af","File system permissions for %s":"%s\u306e\u30d5\u30a1\u30a4\u30eb\u30b7\u30b9\u30c6\u30e0\u6a29\u9650","Back":"\u623b\u308b","Get help":"\u30d8\u30eb\u30d7","Package details":"\u30d1\u30c3\u30b1\u30fc\u30b8\u8a73\u7d30","Translations (PO)":"\u7ffb\u8a33 (PO)","Template (POT)":"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8 (POT)               ","File permissions":"\u30d5\u30a1\u30a4\u30eb\u6a29\u9650","Extends: %s":"\u62e1\u5f35: %s","1 language":{"other":"%u\u8a00\u8a9e"},"Updated":{"Updated":["\u66f4\u65b0\u65e5\u6642","\u66f4\u65b0\u65e5\u6642"]},"Powered by":"\u3000","Loco may not work as expected":"Loco \u304c\u671f\u5f85\u901a\u308a\u306b\u52d5\u4f5c\u3057\u306a\u3044\u53ef\u80fd\u6027\u304c\u3042\u308a\u307e\u3059","Configure Loco Translate":"Loco Translate \u306e\u8a2d\u5b9a","Compiling MO files":"MO\u30d5\u30a1\u30a4\u30eb\u306e\u30b3\u30f3\u30d1\u30a4\u30eb","Use built-in MO compiler.":"\u5185\u8535\u306eMO\u30b3\u30f3\u30d1\u30a4\u30e9\u30fc\u3092\u4f7f\u7528\u3059\u308b","Use external command:":"\u5916\u90e8\u30b3\u30de\u30f3\u30c9\u3092\u4f7f\u7528\u3059\u308b:","Enter path to msgfmt on server":"\u30b5\u30fc\u30d0\u306emsgfmt\u3078\u306e\u30d1\u30b9\u3092\u5165\u529b","Generate hash tables":"\u30cf\u30c3\u30b7\u30e5\u30c6\u30fc\u30d6\u30eb\u3092\u751f\u6210\u3059\u308b","Backing up PO files":"PO\u30d5\u30a1\u30a4\u30eb\u306e\u30d0\u30c3\u30af\u30a2\u30c3\u30d7","Number of backups to keep of each file:":"\u30d5\u30a1\u30a4\u30eb\u3054\u3068\u306b\u4fdd\u5b58\u3059\u308b\u30d0\u30c3\u30af\u30a2\u30c3\u30d7\u6570:","Experimental features":"\u5b9f\u9a13\u7684\u306a\u6a5f\u80fd","Enable Wordpress core translations":"WordPress\u30b3\u30a2\u306e\u7ffb\u8a33\u3092\u884c\u3046","Save settings":"\u8a2d\u5b9a\u3092\u4fdd\u5b58","Template file":"\u30c6\u30f3\u30d7\u30ec\u30fc\u30c8\u30d5\u30a1\u30a4\u30eb","Switch to...":"\u5207\u308a\u66ff\u3048\u2026","never":"\u5e38\u306b","Save":"\u4fdd\u5b58","Download":"\u30c0\u30a6\u30f3\u30ed\u30fc\u30c9","Sync":"\u540c\u671f","Revert":"\u5143\u306b\u623b\u3059","Add":"\u8ffd\u52a0","Del":"\u524a\u9664","Fuzzy":"\u30d5\u30a1\u30b8\u30fc","Filter translations":"\u7ffb\u8a33\u3092\u7d5e\u308a\u8fbc\u307f","Help":"\u30d8\u30eb\u30d7","Initialize new translations in %s":"%s\u306e\u65b0\u3057\u3044\u8a00\u8a9e\u306e\u521d\u671f\u5316","Select from common languages":"\u5b9a\u7fa9\u6e08\u307f\u306e\u8a00\u8a9e\u304b\u3089\u9078\u629e","or enter any language code":"\u307e\u305f\u306f\u4ed6\u306e\u8a00\u8a9e\u30b3\u30fc\u30c9\u3092\u5165\u529b","create in <code>%s<\/code>":"<code>%s<\/code>\u306b\u4f5c\u6210\u3059\u308b","create in global languages directory":"\u5168\u4f53\u306e\u8a00\u8a9e\u30c7\u30a3\u30ec\u30af\u30c8\u30ea\u306b\u4f5c\u6210\u3059\u308b","Start translating":"\u7ffb\u8a33\u3092\u958b\u59cb\u3059\u308b","New version available":"\u5229\u7528\u53ef\u80fd\u306a\u65b0\u3057\u3044\u30d0\u30fc\u30b8\u30e7\u30f3","Upgrade to version %s of Loco Translate":"Loco Translate \u306e\u30d0\u30fc\u30b8\u30e7\u30f3\u3092%s\u3078\u66f4\u65b0\u3057\u307e\u3059","Select a plugin or theme to translate":"\u7ffb\u8a33\u3059\u308b\u30c6\u30fc\u30de\u307e\u305f\u306f\u30d7\u30e9\u30b0\u30a4\u30f3\u3092\u9078\u629e\u3057\u3066\u4e0b\u3055\u3044","Themes":"\u30c6\u30fc\u30de","Plugins":"\u30d7\u30e9\u30b0\u30a4\u30f3","Core":"\u30b3\u30a2"} 
+    {
+    "Error": "エラー",
+    "Warning": "警告",
+    "OK": "OK",
+    "Permission denied": "アクセスが拒否されました",
+    "Settings saved": "設定を保存しました",
+    "%s is not an official WordPress language": "",
+    "New PO file": "新しいPOファイル",
+    "PO file used as template. This will be renamed to %s on first save": "POファイルをテンプレートとして使用しました。これは最初に%sとして保存されます。",
+    "You must specify a valid locale for a new PO file": "新しいPOファイルのための有効なロケールを指定する必要があります",
+    "No translatable strings found": "翻訳できる文字列が見つかりませんでした",
+    "Cannot create a PO file.": "POファイルを作成できません。",
+    "PO file already exists with locale %s": "ロケール%sのPOファイルはすでに存在します",
+    "File cannot be created automatically. Fix the file permissions or use Download instead of Save": "ファイルを自動的に作成できません。ファイルのパーミッションを変更するか、ダウンロードして保存したものを使用して下さい。",
+    "%s file is empty": "ファイル %s は空です",
+    "Run Sync to update from source code": "ソースコードの更新の同期を実行",
+    "No strings could be extracted from source code": "ソースファイルから文字列が見つかりませんでした",
+    "Run Sync to update from %s": "%sの更新の同期を実行",
+    "Source code has been modified, run Sync to update POT": "ソースコードを変更し、POTの同期と更新を行いました",
+    "POT has been modified since PO file was saved, run Sync to update": "POファイルの保存後にPOTが変更されたため、同期と更新を行いました",
+    "Bad file path": "間違ったファイルパス",
+    "Empty or invalid %s file": "ファイル%sは空または壊れています",
+    "%s file has no header": "ファイル%sにヘッダがありません",
+    "New template": "新しいテンプレート",
+    "New language": "新しい言語",
+    "%s%% translated": "%s%%件翻訳済み",
+    "1 string": {
+        "other": "%s件の文字列"
+    },
+    "%s fuzzy": "%s件のファジー",
+    "%s untranslated": "%s件の未翻訳",
+    "Failed to compile MO file with built-in compiler": "内蔵コンパイラーでのMOファイルのコンパイルができませんでした",
+    "Loco, Translation Management": "Loco - 翻訳管理",
+    "Manage translations": "管理",
+    "Translation options": "設定",
+    "Loco Translate": "Loco Translate",
+    "Settings": "設定",
+    "File download failed": "ファイルのダウンロードができませんでした",
+    "WPLANG is deprecated and should be removed from wp-config.php": "WPLANG は廃止されたため、wp-config.php から削除する必要があります。",
+    "Unknown language": "不明な言語",
+    "Some files not writable": "いくつかのファイルに書き込めません",
+    "Some files missing": "いくつかのファイルが不明",
+    "\"%s\" folder not writable": "\"%s\" フォルダに書き込めません",
+    "POT file not writable": "POTファイルに書き込めません",
+    "PO file not writable": "POファイルに書き込めません",
+    "MO file not writable": "MOファイルに書き込めません",
+    "MO file not found": "MOファイルが見つかりません",
+    "Folder not writable": "フォルダに書き込めません",
+    "Folder not found": "フォルダが見つかりません",
+    "%s does not declare a \"Text Domain\"": "",
+    "Loco has guessed \"%s\"": "",
+    "%s does not declare a \"Domain Path\"": "",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "User does not have permission to manage translations": "ユーザーは翻訳管理を行う権限を持っていません",
+    "Invalid data posted to server": "サーバーへの無効なデータ送信",
+    "Failed to compile MO file with %s, check your settings": "%sのMOファイルのコンパイルに失敗しました。設定を確認して下さい。",
+    "Package not found called %s": "パッケージが見つからず%sを呼び出せません",
+    "Web server cannot create backups in \"%s\". Fix file permissions or disable backups in settings": "ウェブサーバーで\"%s\"のバックアップを作成できません。ファイルのパーミッションを変更するか、設定のバックアップを無効にして下さい。",
+    "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create it manually.": "ウェブサーバーは\"%s\"を\"%s\"に作成できません。ファイルのパーミッションを変更するか、手で作成して下さい。",
+    "Web server cannot create files in the \"%s\" directory. Fix file permissions or use the download function.": "ウェブサーバーは\"%s\"ディレクトリにファイルを作成できません。ファイルのパーミッションを変更するか、ダウンロード機能を使用して下さい。",
+    "%s file is not writable by the web server. Fix file permissions or download and copy to \"%s/%s\".": "%sファイルはウェブサーバーから書き込みできません。ファイルの権限を変更するか、 ダウンロードして\"%s/%s\"へコピーして下さい。",
+    "Cannot create MO file": "MOファイルを作成できません",
+    "Cannot overwrite MO file": "MOファイルを上書きできません",
+    "Failed to write MO file": "MOファイルへ書き込みできません",
+    "Unknown error": "不明なエラー",
+    "PO file saved": "POファイルを保存しました",
+    "and MO file compiled": "またMOファイルをコンパイルしました",
+    "Merged from %s": "%sから結合",
+    "Merged from source code": "ソースコードから結合",
+    "Already up to date with %s": "%sはすでに最新です",
+    "Already up to date with source code": "ソースコードはすでに最新です",
+    "1 new string added": {
+        "other": "%s件の新しい文字列を追加しました"
+    },
+    "1 obsolete string removed": {
+        "other": "%s件の文字列を削除しました"
+    },
+    "Your changes will be lost if you continue without saving": "保存せずに続けると変更内容は反映されません",
+    "Source text": "原文",
+    "%s translation": "%sの翻訳",
+    "Comments": "コメント",
+    "Context": "属性",
+    "Translation": "訳文",
+    "No source files in this package, nothing to sync": "このパッケージにはソースファイルがないため、同期していません",
+    "No strings could be extracted from source files": "ソースファイルから文字列が見つかりませんでした",
+    "create in <code>%s</code>": "<code>%s</code>に作成する",
+    "Packages": "パッケージ",
+    "File check": "ファイルチェック",
+    "File system permissions for %s": "%sのファイルシステム権限",
+    "Other potential issues with %s": "",
+    "Back": "戻る",
+    "Get help": "ヘルプ",
+    "Package details": "パッケージ詳細",
+    "Translations (PO)": "翻訳 (PO)",
+    "Template (POT)": "テンプレート (POT)               ",
+    "File permissions": "ファイル権限",
+    "Extends: %s": "拡張: %s",
+    "1 language": {
+        "other": "%u言語"
+    },
+    "Updated": "更新日時",
+    "Powered by": "　",
+    "Loco may not work as expected": "Loco が期待通りに動作しない可能性があります",
+    "Configure Loco Translate": "Loco Translate の設定",
+    "Compiling MO files": "MOファイルのコンパイル",
+    "Use built-in MO compiler.": "内蔵のMOコンパイラーを使用する",
+    "Use external command:": "外部コマンドを使用する:",
+    "Enter path to msgfmt on server": "サーバのmsgfmtへのパスを入力",
+    "Generate hash tables": "ハッシュテーブルを生成する",
+    "Backing up PO files": "POファイルのバックアップ",
+    "Number of backups to keep of each file:": "ファイルごとに保存するバックアップ数:",
+    "Experimental features": "実験的な機能",
+    "Enable Wordpress core translations": "WordPressコアの翻訳を行う",
+    "Save settings": "設定を保存",
+    "Template file": "テンプレートファイル",
+    "Switch to...": "切り替え…",
+    "never": "常に",
+    "Save": "保存",
+    "Download": "ダウンロード",
+    "Sync": "同期",
+    "Revert": "元に戻す",
+    "Add": "追加",
+    "Del": "削除",
+    "Fuzzy": "ファジー",
+    "Filter translations": "翻訳を絞り込み",
+    "Help": "ヘルプ",
+    "Initialize new translations in %s": "%sの新しい言語の初期化",
+    "Select from common languages": "定義済みの言語から選択",
+    "or enter any language code": "または他の言語コードを入力",
+    "create in plugin directory": "",
+    "create in global languages directory": "全体の言語ディレクトリに作成する",
+    "Start translating": "翻訳を開始する",
+    "New version available": "利用可能な新しいバージョン",
+    "Upgrade to version %s of Loco Translate": "Loco Translate のバージョンを%sへ更新します",
+    "Select a plugin or theme to translate": "翻訳するテーマまたはプラグインを選択して下さい",
+    "Themes": "テーマ",
+    "Plugins": "プラグイン",
+    "Core": "コア"
+} 
 );

@@ -50,3 +50,9 @@ _x('Context','Editor pane');
  
 // 
 __('Translation');
+
+__('No source files in this package, nothing to sync');
+
+__('No strings could be extracted from source files');
+
+_x('create in <code>%s</code>','Form label');

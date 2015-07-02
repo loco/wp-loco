@@ -3,12 +3,15 @@
  * Project: loco.po conversion
  * Release: Working copy
  * Locale: tr_TR, Turkish
- * Exported at: Fri, 24 Apr 2015 12:52:09 +0100 
+ * Exported by: Unregistered user
+ * Exported at: Thu, 02 Jul 2015 14:56:23 +0100 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
-    var pluralForms = ["other"];
+    var pluralForms = [
+    "other"
+];
     
     // calc numeric index of a plural form (0-0)
     function pluralIndex( n ){
@@ -29,5 +32,145 @@ loco = window.loco||{}, loco.t = function( pairs ){
         return value || ( 1 === n ? msgid1 : msgid2 ) || msgid1 || '';
     };
 }(
-    {"Error":"Hata","Warning":"Uyar\u0131","OK":{"OK":["Tamam","Tamam"]},"Permission denied":"\u0130zin reddedildi","Settings saved":"Ayarlar kaydedildi","New PO file":"Yeni PO Dosyas\u0131","You must specify a valid locale for a new PO file":"Yeni PO dosyas\u0131 i\u00e7in ge\u00e7erli bir Yerel De\u011fer belirtmek zorundas\u0131n\u0131z","No translatable strings found":"\u00c7evrilebilecek herhangi bir dize bulunamad\u0131","Cannot create a PO file.":"PO dosyas\u0131 olu\u015fturulamaz.","PO file already exists with locale %s":"PO dosyas\u0131 %s dil koduyla zaten mevcut","PO file used as template. This will be renamed to %s on first save":"PO dosyas\u0131 \u015fablon olarak kullan\u0131ld\u0131. \u0130lk kaydetmenizde %s olarak isimlendirilecek.","File cannot be created automatically. Fix the file permissions or use Download instead of Save":"Dosya otomatik olarak olu\u015fturulam\u0131yor. Dosya izinlerini d\u00fczenleyin veya kaydet butonu yerine indirme butonunu kullan\u0131n.","%s file is empty":"%s dosyas\u0131 bo\u015f","Run Sync to update from source code":"Kaynak kodundan g\u00fcncelle\u015ftirme yapmak i\u00e7in e\u015fitleme yap\u0131n","No strings could be extracted from source code":"Kaynak kodundan herhangi dize \u00e7\u0131kar\u0131lamad\u0131","Run Sync to update from %s":"%s kayna\u011f\u0131ndan g\u00fcncelle\u015ftirme yapmak i\u00e7in e\u015fitleme yap\u0131n","Source code has been modified, run Sync to update POT":"Kaynak dosyas\u0131 de\u011fi\u015ftirilmi\u015f, POT doyas\u0131n\u0131 g\u00fcncellemek i\u00e7in e\u015fitleme yap\u0131n","POT has been modified since PO file was saved, run Sync to update":"PO dosyas\u0131 en son kaydedildi\u011finden beri POT de\u011fi\u015fikli\u011fe u\u011fram\u0131\u015f, g\u00fcncellemek i\u00e7in e\u015fitleme yap\u0131n","Bad file path":"Ge\u00e7ersiz dosya yolu","Empty or invalid %s file":"%s dosyas\u0131 bo\u015f veya ge\u00e7ersiz","%s file has no header":"%s dosyas\u0131n\u0131n ba\u015fl\u0131\u011f\u0131 yok","New template":"Yeni \u015eablon","New language":"Yeni Dil","%s%% translated":"%s%% \u00e7evrildi","1 string":{"other":"1 dize"},"%s fuzzy":"%s bulan\u0131k","%s untranslated":"%s \u00e7evrilmemi\u015f","Failed to compile MO file with built-in compiler":"Yerle\u015fik derleyici vas\u0131tas\u0131yla MO dosyas\u0131 derlenirken hata olu\u015ftu","Loco, Translation Management":"Loco \u00c7eviri Y\u00f6netimi","Manage translations":"\u00c7evirileri Y\u00f6net","Translation options":"\u00c7eviri Se\u00e7enekleri","Loco Translate":"Loco \u00c7eviri","Settings":"Ayarlar","File download failed":"Dosya indirme i\u015flemi ba\u015far\u0131s\u0131z oldu","WPLANG is deprecated and should be removed from wp-config.php":"WPLANG iart\u0131k kullan\u0131lm\u0131yor bu nedenle wp-config.php dosyas\u0131ndan \u00e7\u0131kar\u0131lmas\u0131 gerekiyor","Unknown language":"Bilinmeyen dil","Some files not writable":"Baz\u0131 dosyalar yaz\u0131labilir de\u011fil","Some files missing":"Baz\u0131 dosyalar kay\u0131p","\"%s\" folder not writable":"\"%s\" dizini yaz\u0131labilir de\u011fil","POT file not writable":"POT dosyas\u0131 yaz\u0131labilir de\u011fil","PO file not writable":"PO dosyas\u0131 yaz\u0131labilir de\u011fil","MO file not writable":"MO dosyas\u0131 yaz\u0131labilir de\u011fil","MO file not found":"MO dosyas\u0131 bulunamad\u0131","Folder not writable":"Dizin yaz\u0131labilir de\u011fil","Folder not found":"Dizin bulunmad\u0131","User does not have permission to manage translations":"Kullan\u0131c\u0131n\u0131n \u00e7evirileri y\u00f6netme izni yok","Failed to compile MO file with %s, check your settings":"%s vas\u0131tas\u0131yla MO dosyas\u0131 derlenirken hata olu\u015ftu, ayarlar\u0131n\u0131z\u0131 tekrar kontrol edin","Invalid data posted to server":"Sunucuya ge\u00e7ersiz veri g\u00f6nderildi","Package not found called %s":"%s isimli paket bulunamad\u0131","Web server cannot create backups in \"%s\". Fix file permissions or disable backups in settings":"Web sunucusu \"%s\" i\u00e7inde yedek olu\u015fturam\u0131yor. Dosya izinlerini d\u00fczeltin veya ayarlardan yedeklemeleri devre d\u0131\u015f\u0131 b\u0131rak\u0131n.","Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create it manually.":"Web sunucusu  \"%s\" dizinini \"%s\" i\u00e7inde olu\u015fturam\u0131yor. Dosya izinlerini d\u00fczeltin veya el ile olu\u015fturmay\u0131 deneyin.","Web server cannot create files in the \"%s\" directory. Fix file permissions or use the download function.":"Web sunucusu \"%s\" dizini i\u00e7inde dosya olu\u015fturam\u0131yor. Dosya izinlerini d\u00fczeltin veya indirme fonksiyonunu kullan\u0131n.","%s file is not writable by the web server. Fix file permissions or download and copy to \"%s\/%s\".":"%s dosyas\u0131 web sunucusu taraf\u0131ndan yaz\u0131lam\u0131yor. Dosya izinlerini d\u00fczeltin veya dosyay\u0131 indirip \"%s\/%s\" yoluna kopyalay\u0131n.","Cannot create MO file":"MO dosyas\u0131 olu\u015fturulam\u0131yor","Cannot overwrite MO file":"MO dosyas\u0131 \u00fczerine yaz\u0131lam\u0131yor","Failed to write MO file":"MO dosyas\u0131na yazma i\u015flemi ba\u015far\u0131s\u0131z oldu","No source files in this package, nothing to sync":"Bu paket i\u00e7inde e\u015fitleme yap\u0131lacak herhangi bir kaynak dosya bulunmuyor","No strings could be extracted from source files":"Kaynak dosyalar\u0131ndan herhangi bir dize \u00e7\u0131kart\u0131lamad\u0131","Unknown error":"Bilinmeyen hata","PO file saved":"PO dosyas\u0131 kaydedildi","and MO file compiled":"ve MO dosyas\u0131 derlendi","Merged from %s":"%s \u00fczerinden birle\u015ftirildi","Merged from source code":"Kaynak koddan birle\u015ftirildi","Already up to date with %s":"%s zaten g\u00fcncel","Already up to date with source code":"Kaynak kod zaten g\u00fcncel","1 new string added":{"other":"1 adet yeni dize eklendi"},"1 obsolete string removed":{"other":"1 adet kullan\u0131lmayan dize kald\u0131r\u0131ld\u0131"},"Your changes will be lost if you continue without saving":"Kaydetmeden devam ederseniz yapt\u0131\u011f\u0131n\u0131z de\u011fi\u015fiklikler kaybolacak","Source text":"Kaynak Metin","%s translation":"%s \u00c7eviri","Comments":"Yorumlar","Context":"Genel Durum","Translation":"\u00c7eviri","Packages":"Paketler","File check":"Dosya Denetimi","File system permissions for %s":"%s i\u00e7in dosya sistemi izinleri","Back":"Geri","Get help":"Yard\u0131m","Package details":"Paket Bilgileri","Translations (PO)":"\u00c7eviriler (PO)","Template (POT)":"\u015eablon (POT)","File permissions":"Dosya \u0130zinleri","Extends: %s":"Geni\u015fletmeler: %s","1 language":{"other":"1 Dil"},"Updated":{"Updated":["G\u00fcncellendi","G\u00fcncellendi"]},"Powered by":"Haz\u0131rlayan:","Loco may not work as expected":"Loco beklendi\u011fi gibi \u00e7al\u0131\u015fmayabilir","Configure Loco Translate":"Loco \u00c7eviri Yap\u0131land\u0131rma","Compiling MO files":"MO Dosyalar\u0131 Derleme","Use built-in MO compiler.":"Yerle\u015fik MO derleyiciyi kullan","Use external command:":"Harici komut kullan:","Enter path to msgfmt on server":"Sunucudaki msgfmt yolunu girin","Generate hash tables":"Hash tablolar\u0131 olu\u015ftur","Backing up PO files":"PO Dosyalar\u0131 Yedekleme","Number of backups to keep of each file:":"Her bir dosya i\u00e7in tutulacak yedek say\u0131s\u0131:","Experimental features":"Deneysel \u00d6zellikler","Enable Wordpress core translations":"WordPress \u00e7ekirdek \u00e7evirilerini etkinle\u015ftir","Save settings":"Ayarlar\u0131 Kaydet","Template file":"\u015eablon dosyas\u0131","Switch to...":"Ge\u00e7i\u015f Yap:","never":"hi\u00e7bir zaman","Save":"Kaydet","Download":"\u0130ndir","Sync":"E\u015fitle","Revert":"Geri Al","Add":"Ekle","Del":"Sil","Fuzzy":"Bulan\u0131k","Filter translations":"\u00c7evirileri filtrele","Help":"Yard\u0131m","Initialize new translations in %s":"%s i\u00e7in yeni \u00e7eviri ba\u015flat","Select from common languages":"Bilinen diller aras\u0131ndan se\u00e7","or enter any language code":"veya herhangi bir dil kodu gir","create in <code>%s<\/code>":"<code>%s<\/code> yolunda olu\u015ftur","create in global languages directory":"languages dizini i\u00e7inde olu\u015ftur","Start translating":"\u00c7evirmeye Ba\u015fla","New version available":"Yeni versiyon mevcut","Upgrade to version %s of Loco Translate":"Loco \u00c7eviri eklentisini %s versiyonuna y\u00fckselt","Select a plugin or theme to translate":"\u00c7evirmek i\u00e7in bir eklenti veya tema se\u00e7in","Themes":"Temalar","Plugins":"Eklentiler","Core":"\u00c7ekirdek"} 
+    {
+    "Error": "Hata",
+    "Warning": "Uyarı",
+    "OK": "Tamam",
+    "Permission denied": "İzin reddedildi",
+    "Settings saved": "Ayarlar kaydedildi",
+    "%s is not an official WordPress language": "",
+    "New PO file": "Yeni PO Dosyası",
+    "PO file used as template. This will be renamed to %s on first save": "PO dosyası şablon olarak kullanıldı. İlk kaydetmenizde %s olarak isimlendirilecek.",
+    "You must specify a valid locale for a new PO file": "Yeni PO dosyası için geçerli bir Yerel Değer belirtmek zorundasınız",
+    "No translatable strings found": "Çevrilebilecek herhangi bir dize bulunamadı",
+    "Cannot create a PO file.": "PO dosyası oluşturulamaz.",
+    "PO file already exists with locale %s": "PO dosyası %s dil koduyla zaten mevcut",
+    "File cannot be created automatically. Fix the file permissions or use Download instead of Save": "Dosya otomatik olarak oluşturulamıyor. Dosya izinlerini düzenleyin veya kaydet butonu yerine indirme butonunu kullanın.",
+    "%s file is empty": "%s dosyası boş",
+    "Run Sync to update from source code": "Kaynak kodundan güncelleştirme yapmak için eşitleme yapın",
+    "No strings could be extracted from source code": "Kaynak kodundan herhangi dize çıkarılamadı",
+    "Run Sync to update from %s": "%s kaynağından güncelleştirme yapmak için eşitleme yapın",
+    "Source code has been modified, run Sync to update POT": "Kaynak dosyası değiştirilmiş, POT doyasını güncellemek için eşitleme yapın",
+    "POT has been modified since PO file was saved, run Sync to update": "PO dosyası en son kaydedildiğinden beri POT değişikliğe uğramış, güncellemek için eşitleme yapın",
+    "Bad file path": "Geçersiz dosya yolu",
+    "Empty or invalid %s file": "%s dosyası boş veya geçersiz",
+    "%s file has no header": "%s dosyasının başlığı yok",
+    "New template": "Yeni Şablon",
+    "New language": "Yeni Dil",
+    "%s%% translated": "%s%% çevrildi",
+    "1 string": {
+        "other": "1 dize"
+    },
+    "%s fuzzy": "%s bulanık",
+    "%s untranslated": "%s çevrilmemiş",
+    "Failed to compile MO file with built-in compiler": "Yerleşik derleyici vasıtasıyla MO dosyası derlenirken hata oluştu",
+    "Loco, Translation Management": "Loco Çeviri Yönetimi",
+    "Manage translations": "Çevirileri Yönet",
+    "Translation options": "Çeviri Seçenekleri",
+    "Loco Translate": "Loco Çeviri",
+    "Settings": "Ayarlar",
+    "File download failed": "Dosya indirme işlemi başarısız oldu",
+    "WPLANG is deprecated and should be removed from wp-config.php": "WPLANG iartık kullanılmıyor bu nedenle wp-config.php dosyasından çıkarılması gerekiyor",
+    "Unknown language": "Bilinmeyen dil",
+    "Some files not writable": "Bazı dosyalar yazılabilir değil",
+    "Some files missing": "Bazı dosyalar kayıp",
+    "\"%s\" folder not writable": "\"%s\" dizini yazılabilir değil",
+    "POT file not writable": "POT dosyası yazılabilir değil",
+    "PO file not writable": "PO dosyası yazılabilir değil",
+    "MO file not writable": "MO dosyası yazılabilir değil",
+    "MO file not found": "MO dosyası bulunamadı",
+    "Folder not writable": "Dizin yazılabilir değil",
+    "Folder not found": "Dizin bulunmadı",
+    "%s does not declare a \"Text Domain\"": "",
+    "Loco has guessed \"%s\"": "",
+    "%s does not declare a \"Domain Path\"": "",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "User does not have permission to manage translations": "Kullanıcının çevirileri yönetme izni yok",
+    "Invalid data posted to server": "Sunucuya geçersiz veri gönderildi",
+    "Failed to compile MO file with %s, check your settings": "%s vasıtasıyla MO dosyası derlenirken hata oluştu, ayarlarınızı tekrar kontrol edin",
+    "Package not found called %s": "%s isimli paket bulunamadı",
+    "Web server cannot create backups in \"%s\". Fix file permissions or disable backups in settings": "Web sunucusu \"%s\" içinde yedek oluşturamıyor. Dosya izinlerini düzeltin veya ayarlardan yedeklemeleri devre dışı bırakın.",
+    "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create it manually.": "Web sunucusu  \"%s\" dizinini \"%s\" içinde oluşturamıyor. Dosya izinlerini düzeltin veya el ile oluşturmayı deneyin.",
+    "Web server cannot create files in the \"%s\" directory. Fix file permissions or use the download function.": "Web sunucusu \"%s\" dizini içinde dosya oluşturamıyor. Dosya izinlerini düzeltin veya indirme fonksiyonunu kullanın.",
+    "%s file is not writable by the web server. Fix file permissions or download and copy to \"%s/%s\".": "%s dosyası web sunucusu tarafından yazılamıyor. Dosya izinlerini düzeltin veya dosyayı indirip \"%s/%s\" yoluna kopyalayın.",
+    "Cannot create MO file": "MO dosyası oluşturulamıyor",
+    "Cannot overwrite MO file": "MO dosyası üzerine yazılamıyor",
+    "Failed to write MO file": "MO dosyasına yazma işlemi başarısız oldu",
+    "Unknown error": "Bilinmeyen hata",
+    "PO file saved": "PO dosyası kaydedildi",
+    "and MO file compiled": "ve MO dosyası derlendi",
+    "Merged from %s": "%s üzerinden birleştirildi",
+    "Merged from source code": "Kaynak koddan birleştirildi",
+    "Already up to date with %s": "%s zaten güncel",
+    "Already up to date with source code": "Kaynak kod zaten güncel",
+    "1 new string added": {
+        "other": "1 adet yeni dize eklendi"
+    },
+    "1 obsolete string removed": {
+        "other": "1 adet kullanılmayan dize kaldırıldı"
+    },
+    "Your changes will be lost if you continue without saving": "Kaydetmeden devam ederseniz yaptığınız değişiklikler kaybolacak",
+    "Source text": "Kaynak Metin",
+    "%s translation": "%s Çeviri",
+    "Comments": "Yorumlar",
+    "Context": "Genel Durum",
+    "Translation": "Çeviri",
+    "No source files in this package, nothing to sync": "Bu paket içinde eşitleme yapılacak herhangi bir kaynak dosya bulunmuyor",
+    "No strings could be extracted from source files": "Kaynak dosyalarından herhangi bir dize çıkartılamadı",
+    "create in <code>%s</code>": "<code>%s</code> yolunda oluştur",
+    "Packages": "Paketler",
+    "File check": "Dosya Denetimi",
+    "File system permissions for %s": "%s için dosya sistemi izinleri",
+    "Other potential issues with %s": "",
+    "Back": "Geri",
+    "Get help": "Yardım",
+    "Package details": "Paket Bilgileri",
+    "Translations (PO)": "Çeviriler (PO)",
+    "Template (POT)": "Şablon (POT)",
+    "File permissions": "Dosya İzinleri",
+    "Extends: %s": "Genişletmeler: %s",
+    "1 language": {
+        "other": "1 Dil"
+    },
+    "Updated": "Güncellendi",
+    "Powered by": "Hazırlayan:",
+    "Loco may not work as expected": "Loco beklendiği gibi çalışmayabilir",
+    "Configure Loco Translate": "Loco Çeviri Yapılandırma",
+    "Compiling MO files": "MO Dosyaları Derleme",
+    "Use built-in MO compiler.": "Yerleşik MO derleyiciyi kullan",
+    "Use external command:": "Harici komut kullan:",
+    "Enter path to msgfmt on server": "Sunucudaki msgfmt yolunu girin",
+    "Generate hash tables": "Hash tabloları oluştur",
+    "Backing up PO files": "PO Dosyaları Yedekleme",
+    "Number of backups to keep of each file:": "Her bir dosya için tutulacak yedek sayısı:",
+    "Experimental features": "Deneysel Özellikler",
+    "Enable Wordpress core translations": "WordPress çekirdek çevirilerini etkinleştir",
+    "Save settings": "Ayarları Kaydet",
+    "Template file": "Şablon dosyası",
+    "Switch to...": "Geçiş Yap:",
+    "never": "hiçbir zaman",
+    "Save": "Kaydet",
+    "Download": "İndir",
+    "Sync": "Eşitle",
+    "Revert": "Geri Al",
+    "Add": "Ekle",
+    "Del": "Sil",
+    "Fuzzy": "Bulanık",
+    "Filter translations": "Çevirileri filtrele",
+    "Help": "Yardım",
+    "Initialize new translations in %s": "%s için yeni çeviri başlat",
+    "Select from common languages": "Bilinen diller arasından seç",
+    "or enter any language code": "veya herhangi bir dil kodu gir",
+    "create in plugin directory": "",
+    "create in global languages directory": "languages dizini içinde oluştur",
+    "Start translating": "Çevirmeye Başla",
+    "New version available": "Yeni versiyon mevcut",
+    "Upgrade to version %s of Loco Translate": "Loco Çeviri eklentisini %s versiyonuna yükselt",
+    "Select a plugin or theme to translate": "Çevirmek için bir eklenti veya tema seçin",
+    "Themes": "Temalar",
+    "Plugins": "Eklentiler",
+    "Core": "Çekirdek"
+} 
 );

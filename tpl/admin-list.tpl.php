@@ -95,7 +95,7 @@
                         try {
                             $package->check_permissions();?> 
                             <li class="loco-ok">
-                                <?php echo LocoAdmin::fscheck_link( $package, $domain, Loco::__('OK') )?> 
+                                <?php echo LocoAdmin::fscheck_link( $package, $domain, Loco::_x('OK','Message label') )?> 
                             </li><?php
                         }
                         catch( Exception $Ex ){?> 

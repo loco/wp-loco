@@ -4,12 +4,15 @@
  * Release: Working copy
  * Locale: pt_BR, Portuguese (Brazil)
  * Exported by: Unregistered user
- * Exported at: Tue, 30 Jun 2015 08:45:09 +0100 
+ * Exported at: Thu, 02 Jul 2015 14:56:23 +0100 
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
-    var pluralForms = ["one","other"];
+    var pluralForms = [
+    "one",
+    "other"
+];
     
     // calc numeric index of a plural form (0-1)
     function pluralIndex( n ){
@@ -30,5 +33,149 @@ loco = window.loco||{}, loco.t = function( pairs ){
         return value || ( 1 === n ? msgid1 : msgid2 ) || msgid1 || '';
     };
 }(
-    {"Error":"Erro","Warning":"Alerta","OK":[["Ok","OK"]],"Permission denied":"Permiss\u00e3o negada","Settings saved":"Configura\u00e7\u00f5es salvas","New PO file":"Novo arquivo PO","You must specify a valid locale for a new PO file":"Voc\u00ea tem que especificar um local v\u00e1lido para o novo arquivo PO","No translatable strings found":"N\u00e3o foram encontrados termos traduz\u00edveis","Cannot create a PO file.":"N\u00e3o pode ser criado o arquivo PO.","PO file already exists with locale %s":"Arquivo PO j\u00e1 existe com a localiza\u00e7\u00e3o %s","PO file used as template. This will be renamed to %s on first save":"Arquivo PO usado como template. Isto vai ser renomeado para %s no primeiro salvamento","File cannot be created automatically. Fix the file permissions or use Download instead of Save":"Arquivo n\u00e3o pode ser criado automaticamente. Corrija as permiss\u00f5es do arquivo ou use Baixar em vez de Salvar.","%s file is empty":"O arquivo %s est\u00e1 vazio","Run Sync to update from source code":"Clique em Sincronizar para atualizar a partir do c\u00f3digo fonte","No strings could be extracted from source code":"Nenhum termo pode ser extra\u00eddo a partir do c\u00f3digo fonte","Run Sync to update from %s":"Clique em Sincronizar para atualizar a partir de %s","Source code has been modified, run Sync to update POT":"O c\u00f3digo fonte foi modificado, clique em Sincronizar para o POT atualizado","POT has been modified since PO file was saved, run Sync to update":"O arquivo POT n\u00e3o foi atualizado desde que o arquivo PO foi salvo, clique em Sincronizar para atualizar","Bad file path":"Endere\u00e7o de arquivo ruim","Empty or invalid %s file":"O arquivo %s est\u00e1 vazio ou \u00e9 inv\u00e1lido","%s file has no header":"O arquivo %s n\u00e3o tem cabe\u00e7alho","New template":"Novo modelo","New language":"Novo idioma","%s%% translated":"%s%% traduzido","1 string":{"one":"1 termo","other":"%s termos"},"%s fuzzy":"%s incerto","%s untranslated":"%s n\u00e3o traduzido","Failed to compile MO file with built-in compiler":"Falha ao compilar arquivo MO com compilador embutido","Loco, Translation Management":"Loco, Gerenciador de Tradu\u00e7\u00e3o","Manage translations":"Gerenciar tradu\u00e7\u00f5es","Translation options":"Op\u00e7\u00f5es de tradu\u00e7\u00f5es","Loco Translate":"Tradu\u00e7\u00e3o (Loco)","Settings":"Configura\u00e7\u00f5es","File download failed":"Download do arquivo falhou","WPLANG is deprecated and should be removed from wp-config.php":"WPLANG \u00e9 obsoleto e deve ser removido do wp-config.php","Unknown language":"Idioma desconhecido","Some files not writable":"Alguns arquivos n\u00e3o s\u00e3o edit\u00e1veis","Some files missing":"Alguns arquivos est\u00e3o ausentes","\"%s\" folder not writable":"Pasta \"%s\" n\u00e3o edit\u00e1vel","POT file not writable":"Arquivo POT n\u00e3o edit\u00e1vel","PO file not writable":"Arquivo PO n\u00e3o edit\u00e1vel","MO file not writable":"Arquivo MO n\u00e3o edit\u00e1vel","MO file not found":"Arquivo MO ausente","Folder not writable":"Pasta n\u00e3o edit\u00e1vel","Folder not found":"Pasta n\u00e3o encontrada","User does not have permission to manage translations":"O usu\u00e1rio n\u00e3o tem permiss\u00f5es para gerenciar tradu\u00e7\u00f5es","Failed to compile MO file with %s, check your settings":"Falha ao compilar arquivo MO com %s, verifique suas configura\u00e7\u00f5es","Invalid data posted to server":"Dados inv\u00e1lidos enviados para servidor","Package not found called %s":"Pacote chamado %s n\u00e3o encontrado","Web server cannot create backups in \"%s\". Fix file permissions or disable backups in settings":"Servidor Web n\u00e3o pode criar backups em \"%s\". Corrija as permiss\u00f5es do arquivo ou desabilite backups nas configura\u00e7\u00f5es.","Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create it manually.":"Servidor Web n\u00e3o pode criar o diret\u00f3rio \"%s\" em \"%s\". Corrija permiss\u00f5es do arquivo ou crie manualmente.","Web server cannot create files in the \"%s\" directory. Fix file permissions or use the download function.":"O servidor web n\u00e3o pode criar arquivos no diret\u00f3rio \"%s\". Resolva as permiss\u00f5es do arquivo ou use a fun\u00e7\u00e3o de download.","%s file is not writable by the web server. Fix file permissions or download and copy to \"%s\/%s\".":"Arquivo %s n\u00e3o \u00e9 edit\u00e1vel pelo servidor web. Corrija as permiss\u00f5es do arquivo ou baixe e copie para \"%s\/%s\".","Cannot create MO file":"Arquivo MO n\u00e3o pode ser criado","Cannot overwrite MO file":"Arquivo MO n\u00e3o pode ser sobrescrito","Failed to write MO file":"Arquivo MO falho em ser editado","No source files in this package, nothing to sync":"N\u00e3o h\u00e1 arquivos fontes neste pacote, nada a sincronizar","No strings could be extracted from source files":"Nenhum termo n\u00e3o pode ser extra\u00eddo a partir dos arquivos de origem","Unknown error":"Erro desconhecido","PO file saved":"Arquivo PO salvo","and MO file compiled":"e MO compilado","Merged from %s":"Combinado a partir de %s","Merged from source code":"Combinado a partir do c\u00f3digo fonte","Already up to date with %s":"Atualizado desde %s","Already up to date with source code":"J\u00e1 est\u00e1 atualizado a partir do c\u00f3digo fonte","1 new string added":{"one":"1 novo termo adicionado","other":"%s novos termos adicionados"},"1 obsolete string removed":{"one":"1 um termo obsoleto removido","other":"%s termos obsoletos removidos"},"Your changes will be lost if you continue without saving":"Suas altera\u00e7\u00f5es ser\u00e3o perdidas se voc\u00ea continuar sem salvar","Source text":"Texto fonte","%s translation":"tradu\u00e7\u00e3o %s","Comments":"Coment\u00e1rios","Context":"Contexto","Translation":"Tradu\u00e7\u00e3o","Packages":"Pacotes","File check":"Confer\u00eancia","File system permissions for %s":"Permiss\u00f5es do sistema de arquivo para %s","Back":"Voltar","Get help":"Pedir ajudar","Package details":"Detalhes do pacote","Translations (PO)":"Tradu\u00e7\u00f5es (PO)","Template (POT)":"Modelo (POT)","File permissions":"Permiss\u00f5es do arquivo","Extends: %s":"Extendido: %s","1 language":{"one":"1 idioma","other":"%u idiomas"},"Updated":[["Atualizado","Atualizado"]],"Powered by":"Desenvolvido por","Loco may not work as expected":"Loco pode n\u00e3o funcionar como esperado","Configure Loco Translate":"Configure Tradu\u00e7\u00e3o Loco","Compiling MO files":"Compilando arquivos MO","Use built-in MO compiler.":"Usar compilador MO interno.","Use external command:":"Usar comando externo:","Enter path to msgfmt on server":"Digite caminho para msgfmt no servidor","Generate hash tables":"Gerar tabela de dispers\u00e3o","Backing up PO files":"Criando c\u00f3pia de seguran\u00e7a dos arquivos PO","Number of backups to keep of each file:":"N\u00famero de backups para manter de cada arquivo:","Experimental features":"Funcionalidades experimentais","Enable Wordpress core translations":"Ativar tradu\u00e7\u00f5es da core do Wordpress","Save settings":"Configura\u00e7\u00f5es de salvamento","Template file":"Arquivo modelo","Switch to...":"Mudar para...","never":"nunca","Save":"Salvar","Download":"Baixar","Sync":"Sincronizar","Revert":"Reverter","Add":"Adicionar","Del":"Apagar","Fuzzy":"Incerto","Filter translations":"Filtrar tradu\u00e7\u00f5es","Help":"Ajuda","Initialize new translations in %s":"Iniciar novas tradu\u00e7\u00f5es em %s","Select from common languages":"Selecionar a partir dos idiomas mais comuns","or enter any language code":"ou adicione novo c\u00f3digo de linguagem","create in <code>%s<\/code>":"criar em <code>%s<\/code>","create in global languages directory":"criar no diret\u00f3rio de idiomas global","Start translating":"Come\u00e7ar a traduzir","New version available":"Novo atualiza\u00e7\u00e3o dispon\u00edvel","Upgrade to version %s of Loco Translate":"Atualizar para a vers\u00e3o %s do Tradu\u00e7\u00e3o (Loco)","Select a plugin or theme to translate":"Selecione um plugin ou tema para traduzir","Themes":"Temas","Plugins":"Plugins","Core":"N\u00facleo"} 
+    {
+    "Error": "Erro",
+    "Warning": "Alerta",
+    "OK": "Ok",
+    "Permission denied": "Permissão negada",
+    "Settings saved": "Configurações salvas",
+    "%s is not an official WordPress language": "",
+    "New PO file": "Novo arquivo PO",
+    "PO file used as template. This will be renamed to %s on first save": "Arquivo PO usado como template. Isto vai ser renomeado para %s no primeiro salvamento",
+    "You must specify a valid locale for a new PO file": "Você tem que especificar um local válido para o novo arquivo PO",
+    "No translatable strings found": "Não foram encontrados termos traduzíveis",
+    "Cannot create a PO file.": "Não pode ser criado o arquivo PO.",
+    "PO file already exists with locale %s": "Arquivo PO já existe com a localização %s",
+    "File cannot be created automatically. Fix the file permissions or use Download instead of Save": "Arquivo não pode ser criado automaticamente. Corrija as permissões do arquivo ou use Baixar em vez de Salvar.",
+    "%s file is empty": "O arquivo %s está vazio",
+    "Run Sync to update from source code": "Clique em Sincronizar para atualizar a partir do código fonte",
+    "No strings could be extracted from source code": "Nenhum termo pode ser extraído a partir do código fonte",
+    "Run Sync to update from %s": "Clique em Sincronizar para atualizar a partir de %s",
+    "Source code has been modified, run Sync to update POT": "O código fonte foi modificado, clique em Sincronizar para o POT atualizado",
+    "POT has been modified since PO file was saved, run Sync to update": "O arquivo POT não foi atualizado desde que o arquivo PO foi salvo, clique em Sincronizar para atualizar",
+    "Bad file path": "Endereço de arquivo ruim",
+    "Empty or invalid %s file": "O arquivo %s está vazio ou é inválido",
+    "%s file has no header": "O arquivo %s não tem cabeçalho",
+    "New template": "Novo modelo",
+    "New language": "Novo idioma",
+    "%s%% translated": "%s%% traduzido",
+    "1 string": {
+        "one": "1 termo",
+        "other": "%s termos"
+    },
+    "%s fuzzy": "%s incerto",
+    "%s untranslated": "%s não traduzido",
+    "Failed to compile MO file with built-in compiler": "Falha ao compilar arquivo MO com compilador embutido",
+    "Loco, Translation Management": "Loco, Gerenciador de Tradução",
+    "Manage translations": "Gerenciar traduções",
+    "Translation options": "Opções de traduções",
+    "Loco Translate": "Tradução (Loco)",
+    "Settings": "Configurações",
+    "File download failed": "Download do arquivo falhou",
+    "WPLANG is deprecated and should be removed from wp-config.php": "WPLANG é obsoleto e deve ser removido do wp-config.php",
+    "Unknown language": "Idioma desconhecido",
+    "Some files not writable": "Alguns arquivos não são editáveis",
+    "Some files missing": "Alguns arquivos estão ausentes",
+    "\"%s\" folder not writable": "Pasta \"%s\" não editável",
+    "POT file not writable": "Arquivo POT não editável",
+    "PO file not writable": "Arquivo PO não editável",
+    "MO file not writable": "Arquivo MO não editável",
+    "MO file not found": "Arquivo MO ausente",
+    "Folder not writable": "Pasta não editável",
+    "Folder not found": "Pasta não encontrada",
+    "%s does not declare a \"Text Domain\"": "",
+    "Loco has guessed \"%s\"": "",
+    "%s does not declare a \"Domain Path\"": "",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "User does not have permission to manage translations": "O usuário não tem permissões para gerenciar traduções",
+    "Invalid data posted to server": "Dados inválidos enviados para servidor",
+    "Failed to compile MO file with %s, check your settings": "Falha ao compilar arquivo MO com %s, verifique suas configurações",
+    "Package not found called %s": "Pacote chamado %s não encontrado",
+    "Web server cannot create backups in \"%s\". Fix file permissions or disable backups in settings": "Servidor Web não pode criar backups em \"%s\". Corrija as permissões do arquivo ou desabilite backups nas configurações.",
+    "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or create it manually.": "Servidor Web não pode criar o diretório \"%s\" em \"%s\". Corrija permissões do arquivo ou crie manualmente.",
+    "Web server cannot create files in the \"%s\" directory. Fix file permissions or use the download function.": "O servidor web não pode criar arquivos no diretório \"%s\". Resolva as permissões do arquivo ou use a função de download.",
+    "%s file is not writable by the web server. Fix file permissions or download and copy to \"%s/%s\".": "Arquivo %s não é editável pelo servidor web. Corrija as permissões do arquivo ou baixe e copie para \"%s/%s\".",
+    "Cannot create MO file": "Arquivo MO não pode ser criado",
+    "Cannot overwrite MO file": "Arquivo MO não pode ser sobrescrito",
+    "Failed to write MO file": "Arquivo MO falho em ser editado",
+    "Unknown error": "Erro desconhecido",
+    "PO file saved": "Arquivo PO salvo",
+    "and MO file compiled": "e MO compilado",
+    "Merged from %s": "Combinado a partir de %s",
+    "Merged from source code": "Combinado a partir do código fonte",
+    "Already up to date with %s": "Atualizado desde %s",
+    "Already up to date with source code": "Já está atualizado a partir do código fonte",
+    "1 new string added": {
+        "one": "1 novo termo adicionado",
+        "other": "%s novos termos adicionados"
+    },
+    "1 obsolete string removed": {
+        "one": "1 um termo obsoleto removido",
+        "other": "%s termos obsoletos removidos"
+    },
+    "Your changes will be lost if you continue without saving": "Suas alterações serão perdidas se você continuar sem salvar",
+    "Source text": "Texto fonte",
+    "%s translation": "tradução %s",
+    "Comments": "Comentários",
+    "Context": "Contexto",
+    "Translation": "Tradução",
+    "No source files in this package, nothing to sync": "Não há arquivos fontes neste pacote, nada a sincronizar",
+    "No strings could be extracted from source files": "Nenhum termo não pode ser extraído a partir dos arquivos de origem",
+    "create in <code>%s</code>": "criar em <code>%s</code>",
+    "Packages": "Pacotes",
+    "File check": "Conferência",
+    "File system permissions for %s": "Permissões do sistema de arquivo para %s",
+    "Other potential issues with %s": "",
+    "Back": "Voltar",
+    "Get help": "Pedir ajudar",
+    "Package details": "Detalhes do pacote",
+    "Translations (PO)": "Traduções (PO)",
+    "Template (POT)": "Modelo (POT)",
+    "File permissions": "Permissões do arquivo",
+    "Extends: %s": "Extendido: %s",
+    "1 language": {
+        "one": "1 idioma",
+        "other": "%u idiomas"
+    },
+    "Updated": "Atualizado",
+    "Powered by": "Desenvolvido por",
+    "Loco may not work as expected": "Loco pode não funcionar como esperado",
+    "Configure Loco Translate": "Configure Tradução Loco",
+    "Compiling MO files": "Compilando arquivos MO",
+    "Use built-in MO compiler.": "Usar compilador MO interno.",
+    "Use external command:": "Usar comando externo:",
+    "Enter path to msgfmt on server": "Digite caminho para msgfmt no servidor",
+    "Generate hash tables": "Gerar tabela de dispersão",
+    "Backing up PO files": "Criando cópia de segurança dos arquivos PO",
+    "Number of backups to keep of each file:": "Número de backups para manter de cada arquivo:",
+    "Experimental features": "Funcionalidades experimentais",
+    "Enable Wordpress core translations": "Ativar traduções da core do Wordpress",
+    "Save settings": "Configurações de salvamento",
+    "Template file": "Arquivo modelo",
+    "Switch to...": "Mudar para...",
+    "never": "nunca",
+    "Save": "Salvar",
+    "Download": "Baixar",
+    "Sync": "Sincronizar",
+    "Revert": "Reverter",
+    "Add": "Adicionar",
+    "Del": "Apagar",
+    "Fuzzy": "Incerto",
+    "Filter translations": "Filtrar traduções",
+    "Help": "Ajuda",
+    "Initialize new translations in %s": "Iniciar novas traduções em %s",
+    "Select from common languages": "Selecionar a partir dos idiomas mais comuns",
+    "or enter any language code": "ou adicione novo código de linguagem",
+    "create in plugin directory": "",
+    "create in global languages directory": "criar no diretório de idiomas global",
+    "Start translating": "Começar a traduzir",
+    "New version available": "Novo atualização disponível",
+    "Upgrade to version %s of Loco Translate": "Atualizar para a versão %s do Tradução (Loco)",
+    "Select a plugin or theme to translate": "Selecione um plugin ou tema para traduzir",
+    "Themes": "Temas",
+    "Plugins": "Plugins",
+    "Core": "Núcleo"
+} 
 );
