@@ -402,19 +402,17 @@ msgstr "Помощь"
 #: ../tpl/admin-list.tpl.php:11
 msgctxt "Table header"
 msgid "Package details"
-msgstr ""
-"Детали пакета\n"
-"\n"
+msgstr "Детали пакета"
 
 #: ../tpl/admin-list.tpl.php:14
 msgctxt "Table header"
 msgid "Translations (PO)"
-msgstr "Переводы (РО)\n"
+msgstr "Переводы (РО)"
 
 #: ../tpl/admin-list.tpl.php:17
 msgctxt "Table header"
 msgid "Template (POT)"
-msgstr "Шаблоны (РОТ)\n"
+msgstr "Шаблоны (РОТ)"
 
 #: ../tpl/admin-list.tpl.php:20
 msgctxt "Table header"
