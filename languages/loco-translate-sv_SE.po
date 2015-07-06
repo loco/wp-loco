@@ -181,8 +181,8 @@ msgid "Loco Translate"
 msgstr "Översättningar"
 
 #: ../lib/loco-admin.php:1105 ../tpl/admin-fscheck.tpl.php:8
-#: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
-#: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
+#: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
+#: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "Inställningar"
 
@@ -428,7 +428,7 @@ msgid "create in <code>%s</code>"
 msgstr "skapa i <code>%s</code>"
 
 #: ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:6
-#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
+#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
 #: ../tpl/admin-root.tpl.php:6
 msgid "Packages"
 msgstr "Språkfiler"

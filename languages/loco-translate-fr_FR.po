@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Thu Jul 02 2015 14:56:06 GMT+0100 (BST)\n"
+"PO-Revision-Date: Mon Jul 06 2015 10:30:10 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: French (France)\n"
@@ -189,8 +189,8 @@ msgid "Loco Translate"
 msgstr "Loco Translate"
 
 #: ../lib/loco-admin.php:1105 ../tpl/admin-fscheck.tpl.php:8
-#: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
-#: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
+#: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
+#: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "Paramètres"
 
@@ -443,7 +443,7 @@ msgid "create in <code>%s</code>"
 msgstr "créer dans <code>%s</code>"
 
 #: ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:6
-#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
+#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
 #: ../tpl/admin-root.tpl.php:6
 msgid "Packages"
 msgstr "Paquetages"
