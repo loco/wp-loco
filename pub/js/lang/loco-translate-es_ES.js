@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: es_ES, Spanish (Spain)
  * Exported by: Unregistered user
- * Exported at: Thu, 02 Jul 2015 14:56:21 +0100 
+ * Exported at: Mon, 06 Jul 2015 10:41:09 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -39,7 +39,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "OK": "Correcto",
     "Permission denied": "Permiso denegado",
     "Settings saved": "Configuración guardada",
-    "%s is not an official WordPress language": "",
+    "%s is not an official WordPress language": "%s no es un nombre oficial de idioma de WordPress",
     "New PO file": "Nuevo fichero PO",
     "PO file used as template. This will be renamed to %s on first save": "Fichero PO utilizado como plantilla. Se renombrará a %s la primera vez que lo guarde",
     "You must specify a valid locale for a new PO file": "Debe\n \nespecificar\n \nuna\n \nconfiguración regional\n \nválida\n \npara\n \nun\n \nnuevo\n \narchivo\n \nPO",
@@ -83,12 +83,12 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "MO file not found": "Archivo MO no encontrado",
     "Folder not writable": "No se puede escribir en la carpeta",
     "Folder not found": "Carpeta no encontrada",
-    "%s does not declare a \"Text Domain\"": "",
-    "Loco has guessed \"%s\"": "",
-    "%s does not declare a \"Domain Path\"": "",
-    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
-    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "%s does not declare a \"Text Domain\"": "%s no declara un \"Text Domain\"",
+    "Loco has guessed \"%s\"": "Loco ha adivinado \"%s\"",
+    "%s does not declare a \"Domain Path\"": "%s no declara una \"Ruta de Dominio\"",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s no tiene un fichero POT. Crear uno en \"%s/%s.pot\" si lo necesita.",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s tiene un nombre de archivo POT extraño. Un mejor nombre sería \"%s.pot\"",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "La extensión PHP \"%s\" no está instalada. Si experimenta problemas debería instalarlo",
     "User does not have permission to manage translations": "El usuario no tiene permiso para gestionar traducciones",
     "Invalid data posted to server": "Datos no válidos publicados en el servidor",
     "Failed to compile MO file with %s, check your settings": "Fallo al compilar el archivo MO con %s, compruebe su configuración",
@@ -121,13 +121,13 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Comments": "Comentarios",
     "Context": "Contexto",
     "Translation": "Traducción",
-    "No source files in this package, nothing to sync": "No hay archivos  de código fuente en este paquete, nada que sincronizar",
+    "No source files in this package, nothing to sync": "",
     "No strings could be extracted from source files": "No se pueden extraer las cadenas de los archivos fuente",
     "create in <code>%s</code>": "crear en <code>%s</code>",
     "Packages": "Paquetes",
     "File check": "Comprobar archivo",
     "File system permissions for %s": "Permisos del sistema de archivos para %s",
-    "Other potential issues with %s": "",
+    "Other potential issues with %s": "Otros posibles problemas con %s",
     "Back": "Volver",
     "Get help": "Obtener ayuda",
     "Package details": "Detalles\n del \npaquete",
@@ -143,7 +143,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Powered by": "Funciona con",
     "Loco may not work as expected": "Loco puede no funcionar como se esperaba",
     "Configure Loco Translate": "Configurar Loco Translate",
-    "Compiling MO files": "Al compilar archivo MO",
+    "Compiling MO files": "Compilando archivo MO",
     "Use built-in MO compiler.": "Utilizar compilador MO integrado.",
     "Use external command:": "Utilice\n el \ncomando\n \nexterno\n:",
     "Enter path to msgfmt on server": "Introduzca la carpeta del servidor msgfmt",
