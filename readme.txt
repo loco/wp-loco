@@ -274,7 +274,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 
 * Dutch translations by [Niels Geryl](http://hetwittepaard.be)
 * German translations by [Sebastian König](http://aykutmania.de) and [Arno Welzel](https://wordpress.org/support/profile/awelzel)
-* Turkish translations by [Abdullah Pazarbaşı](http://abdullahpazarbasi.com), Abdullah Manaz and WordCommerce
+* Turkish translations by [Abdullah Pazarbaşı](http://abdullahpazarbasi.com), Abdullah Manaz and [WordCommerce](http://www.wordcommerce.com/wordcommerce-iletisim/)
 * Swedish translations by [Jimmy Malmqvist](http://jimmymalmqvist.com)
 * Russian translations by [Alexey Tkachenko](http://atkachenko.ru)
 * Indonesian translations by [Ivan Lanin](https://twitter.com/ivanlanin)
