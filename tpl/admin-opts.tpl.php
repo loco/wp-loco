@@ -54,6 +54,12 @@ $nav = array (
                                     <?php Loco::h( Loco::__('Generate hash tables') )?> 
                                 </label>
                             </p>
+                            <p>
+                                <label for="loco--use-fuzzy">
+                                    <input type="checkbox" name="loco[use_fuzzy]" value="1" id="loco--use-fuzzy"<?php echo $use_fuzzy ? ' checked' : '';?> />
+                                    <?php Loco::h( Loco::__('Include Fuzzy strings') )?> 
+                                </label>
+                            </p>
                         </fieldset>
                     </td>
                 </tr>

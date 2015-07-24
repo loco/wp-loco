@@ -290,8 +290,10 @@ abstract class Loco {
                 'use_msgfmt' => false,
                 // which external msgfmt command to use
                 'which_msgfmt' => '',
-                // whether to compile hash table into mo files
+                // whether to compile hash table into MO files
                 'gen_hash' => '0',
+                // whether to include Fuzzy strings in MO files
+                'use_fuzzy' => '1',
                 // number of backups to keep of PO and MO files
                 'num_backups' => '1',
                 // whether to enable core package translation

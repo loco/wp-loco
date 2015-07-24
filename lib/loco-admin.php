@@ -79,9 +79,9 @@ abstract class LocoAdmin {
      */
     public static function render_page_options(){
         self::check_capability();
-        // update applicaion settings if posted
+        // update application settings if posted
         if( isset($_POST['loco']) && is_array( $update = $_POST['loco'] ) ){
-            $update += array( 'gen_hash' => '0', 'enable_core' => '0' );
+            $update += array( 'gen_hash' => '0', 'use_fuzzy' => '0', 'enable_core' => '0' );
             $args = Loco::config( $update );
             $args['success'] = Loco::__('Settings saved');
         }
@@ -988,7 +988,7 @@ abstract class LocoAdmin {
     
     
     /**
-     * get configured path to external msgfmt command, including --no-hash argument 
+     * get configured path to external msgfmt command, including --no-hash and --use-fuzzy arguments 
      * @return string 
      */
     public static function msgfmt_command(){
@@ -999,6 +999,9 @@ abstract class LocoAdmin {
         $cmd = escapeshellarg( trim( $conf['which_msgfmt'] ) );
         if( ! $conf['gen_hash'] ){
             $cmd .= ' --no-hash';
+        }
+        if( $conf['use_fuzzy'] ){
+            $cmd .= ' --use-fuzzy';
         }
         return $cmd;
     }
@@ -1014,7 +1017,8 @@ abstract class LocoAdmin {
             $conf = Loco::config();
             loco_require('build/gettext-compiled');
             $gen_hash = (bool) $conf['gen_hash'];
-            $mo = loco_msgfmt( $po, $gen_hash );
+            $use_fuzzy = (bool) $conf['use_fuzzy'];
+            $mo = loco_msgfmt( $po, $gen_hash, $use_fuzzy );
         }
         catch( Exception $Ex ){
             error_log( $Ex->getMessage(), 0 );
@@ -1126,7 +1130,7 @@ function _loco_hook__wp_ajax_download(){
     extract( Loco::postdata() );
     if( isset($action) ){
         require Loco::basedir().'/php/loco-download.php';
-        die( __('File download failed') );
+        die( Loco::__('File download failed') );
     }
 }
 

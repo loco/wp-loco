@@ -26,12 +26,17 @@ class GettextTest extends PHPUnit_Framework_TestCase {
 
     /**
      * Test native MO writer
-     * @depends testParsePO
      */
-    public function testNativeMsgfmt( array $po ){
+    public function testNativeMsgfmt(){
+        $po = array(
+            array( 'source' => '', 'target' => 'Project-Id-Version: Test' ),
+            array( 'source' => '__Foo__', 'target' => '__Bar__' ),
+        );
         $bin = loco_msgfmt( $po );
         $this->assertStringStartsWith( "\xDE\x12\x04\x95\0\0\0\0", $bin, 'Bad magic number encoding' );
         $this->assertStringEndsWith( "\0", $bin, 'Bad mo file ending' );
+        $this->assertContains( '__Foo__', $bin );
+        $this->assertContains( '__Bar__', $bin );
     }
     
     
