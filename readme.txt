@@ -134,7 +134,8 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 == Changelog ==
 
 = 1.5.3 =
-* PHP < 5.4 compatibility bug fix
+* Critical PHP < 5.4 compatibility bug fix
+* Added option to exclude Fuzzy strings from MO files
 
 = 1.5.2 =
 * Handle locale codes used wrongly in POT file names
