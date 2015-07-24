@@ -10,7 +10,7 @@ class PhpVersionTest extends PHPUnit_Framework_TestCase {
     }*/
     
     public function testPhpIsAtLeast53(){
-        $this->assertTrue( version_compare( phpversion(), '5.3', '>=' ) );
+        $this->assertTrue( version_compare( phpversion(), '5.4', '>=' ) );
     }
     
     
