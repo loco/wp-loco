@@ -133,9 +133,13 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Changelog ==
 
+= 1.5.3 =
+* PHP < 5.4 compatibility bug fix
+
 = 1.5.2 =
 * Handle locale codes used wrongly in POT file names
 * Added French, Brazilian Portuguese, Persian, Japanese and Spanish translations. Updated Turkish and German
+* Note that this release is broken for PHP < 5.4
 
 = 1.5.1 =
 * Better handling of incorrectly named POT files
@@ -255,7 +259,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Upgrade Notice ==
 
-= 1.5.2 =
+= 1.5.3 =
 * Bug fixes and improvements.
 
 
