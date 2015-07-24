@@ -86,4 +86,20 @@ define('WP_PLUGIN_DIR', __DIR__.'/../../..' );
 
 require __DIR__.'/../../loco.php';
 
-loco_require( 'loco-boot','loco-admin','loco-locales','loco-packages','build/gettext-compiled','build/shell-compiled', 'compat/loco-mbstring', 'compat/loco-iconv' );
+loco_require (
+    // top-level classes
+    'loco-boot',
+    'loco-admin',
+    // core library classes
+    'loco-locales',
+    'loco-packages',
+    // all compiled libraries
+    'build/gettext-compiled',
+    'build/shell-compiled',
+    // all compatibilty polyfills
+    'compat/loco-tokenizer',
+    'compat/loco-mbstring',
+    'compat/loco-iconv',
+    'compat/loco-json',
+    'compat/loco-php'
+);

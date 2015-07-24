@@ -5,7 +5,7 @@
  */
 
  
-function loco__iconv( $in_charset, $out_charset, $str ){
+function loco_compat_iconv( $in_charset, $out_charset, $str ){
     return $str;
 }
 
@@ -15,7 +15,7 @@ if( ! extension_loaded('iconv') && WP_DEBUG && ( ! defined('DOING_AJAX') || ! DO
 
 if( ! function_exists('iconv') ){
     function iconv( $in_charset = '', $out_charset = '', $str = '' ){
-        return loco__iconv( $in_charset, $out_charset, $str );
+        return loco_compat_iconv( $in_charset, $out_charset, $str );
     }
 }
 

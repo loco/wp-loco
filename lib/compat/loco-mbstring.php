@@ -5,7 +5,7 @@
  */
 
  
-function loco__mb_detect_encoding( $str, array $encoding_list, $strict ){
+function loco_compat_mb_detect_encoding( $str, array $encoding_list, $strict ){
     return 'UTF-8';    
 }
 
@@ -15,7 +15,7 @@ if( ! extension_loaded('mbstring') && WP_DEBUG && ( ! defined('DOING_AJAX') || !
 
 if( ! function_exists('mb_detect_encoding') ){
     function mb_detect_encoding( $str = '', array $encoding_list = array(), $strict = false ){
-        return loco__mb_detect_encoding( $str, $encoding_list, $strict );
+        return loco_compat_mb_detect_encoding( $str, $encoding_list, $strict );
     }
 }
 

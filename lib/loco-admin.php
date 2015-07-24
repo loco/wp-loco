@@ -1162,4 +1162,7 @@ if( ! defined('WP_LANG_DIR') ){
 extension_loaded('mbstring') or loco_require('compat/loco-mbstring');
 extension_loaded('tokenizer') or loco_require('compat/loco-tokenizer');
 extension_loaded('iconv') or loco_require('compat/loco-iconv');
+extension_loaded('json') or loco_require('compat/loco-json');
 
+// emergency polyfills for php<5.4
+version_compare( phpversion(), '5.3', '>=' ) or loco_require('compat/loco-php');
