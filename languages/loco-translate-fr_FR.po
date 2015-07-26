@@ -46,7 +46,7 @@ msgstr "Non autorisé"
 msgid "Settings saved"
 msgstr "Paramètres enregistrés"
 
-#: ../lib/loco-admin.php:126 ../lib/loco-packages.php:536
+#: ../lib/loco-admin.php:126 ../lib/loco-packages.php:545
 #, php-format
 msgid "%s is not an official WordPress language"
 msgstr ""
@@ -124,81 +124,81 @@ msgstr ""
 msgid "Bad file path"
 msgstr "Mauvais chemin de fichier"
 
-#: ../lib/loco-admin.php:766
+#: ../lib/loco-admin.php:775
 #, php-format
 msgid "Empty or invalid %s file"
 msgstr "Le fichier %s est vide ou non-valide"
 
-#: ../lib/loco-admin.php:770
+#: ../lib/loco-admin.php:779
 #, php-format
 msgid "%s file has no header"
 msgstr "Le fichier %s n'a pas d'en-têtes"
 
-#: ../lib/loco-admin.php:917
+#: ../lib/loco-admin.php:926
 msgctxt "Add button"
 msgid "New template"
 msgstr "Nouveau modèle"
 
-#: ../lib/loco-admin.php:936
+#: ../lib/loco-admin.php:945
 msgctxt "Add button"
 msgid "New language"
 msgstr "Nouvelle langue"
 
-#: ../lib/loco-admin.php:975
+#: ../lib/loco-admin.php:984
 #, php-format
 msgid "%s%% translated"
 msgstr "%s%% traduit"
 
-#: ../lib/loco-admin.php:975
+#: ../lib/loco-admin.php:984
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
 msgstr[0] "1 chaîne de caractères"
 msgstr[1] "%s chaînes de caractères"
 
-#: ../lib/loco-admin.php:978
+#: ../lib/loco-admin.php:987
 #, php-format
 msgid "%s fuzzy"
 msgstr "%s floues"
 
-#: ../lib/loco-admin.php:981
+#: ../lib/loco-admin.php:990
 #, php-format
 msgid "%s untranslated"
 msgstr "%s non traduites"
 
-#: ../lib/loco-admin.php:1027
+#: ../lib/loco-admin.php:1036
 msgid "Failed to compile MO file with built-in compiler"
 msgstr ""
 "Impossible de compiler le fichier binaire de traduction (fichier MO) avec le "
 "compilateur intégré"
 
-#: ../lib/loco-admin.php:1070 ../tpl/admin-nav.tpl.php:27
+#: ../lib/loco-admin.php:1079 ../tpl/admin-nav.tpl.php:27
 msgid "Loco, Translation Management"
 msgstr "Loco, Gestionnaire de Traduction"
 
-#: ../lib/loco-admin.php:1071 ../lib/loco-admin.php:1108
+#: ../lib/loco-admin.php:1080 ../lib/loco-admin.php:1117
 msgid "Manage translations"
 msgstr "Traductions"
 
-#: ../lib/loco-admin.php:1072
+#: ../lib/loco-admin.php:1081
 msgid "Translation options"
 msgstr "Paramètres"
 
-#: ../lib/loco-admin.php:1079
+#: ../lib/loco-admin.php:1088
 msgid "Loco Translate"
 msgstr "Loco Translate"
 
-#: ../lib/loco-admin.php:1109 ../tpl/admin-fscheck.tpl.php:8
+#: ../lib/loco-admin.php:1118 ../tpl/admin-fscheck.tpl.php:8
 #: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
 #: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "Paramètres"
 
-#: ../lib/loco-admin.php:1133
+#: ../lib/loco-admin.php:1142
 msgid "File download failed"
 msgstr "Le téléchargement du fichier a échoué"
 
-#: ../lib/loco-admin.php:1143
+#: ../lib/loco-admin.php:1152
 msgid "WPLANG is deprecated and should be removed from wp-config.php"
 msgstr ""
 "La constante WPLANG est dépréciée et devrait être supprimée de wp-config.php"
@@ -207,66 +207,66 @@ msgstr ""
 msgid "Unknown language"
 msgstr "Région inconnue"
 
-#: ../lib/loco-packages.php:442 ../lib/loco-packages.php:449
+#: ../lib/loco-packages.php:451 ../lib/loco-packages.php:458
 msgid "Some files not writable"
 msgstr "Certains fichiers ne sont pas accessibles en écriture"
 
-#: ../lib/loco-packages.php:452
+#: ../lib/loco-packages.php:461
 msgid "Some files missing"
 msgstr "Certains fichiers sont manquants"
 
-#: ../lib/loco-packages.php:458 ../lib/loco-packages.php:462
+#: ../lib/loco-packages.php:467 ../lib/loco-packages.php:471
 #, php-format
 msgid "\"%s\" folder not writable"
 msgstr "Le répertoire \"%s\" n'est pas accessible en écriture"
 
-#: ../lib/loco-packages.php:483
+#: ../lib/loco-packages.php:492
 msgid "POT file not writable"
 msgstr "Le modèle (fichier POT) n'est pas accessible en écriture"
 
-#: ../lib/loco-packages.php:488
+#: ../lib/loco-packages.php:497
 msgid "PO file not writable"
 msgstr "Le fichier de traduction (fichier PO) n'est pas accessible en écriture"
 
-#: ../lib/loco-packages.php:490
+#: ../lib/loco-packages.php:499
 msgid "MO file not writable"
 msgstr ""
 "Le fichier binaire de traduction (fichier MO) n'est pas accessible en "
 "écriture"
 
-#: ../lib/loco-packages.php:490
+#: ../lib/loco-packages.php:499
 msgid "MO file not found"
 msgstr "Le fichier binaire de traduction (fichier MO) n'a pas été trouvé"
 
-#: ../lib/loco-packages.php:495
+#: ../lib/loco-packages.php:504
 msgid "Folder not writable"
 msgstr "Répertoire non accessible en écriture"
 
-#: ../lib/loco-packages.php:495
+#: ../lib/loco-packages.php:504
 msgid "Folder not found"
 msgstr "Répertoire non trouvé"
 
-#: ../lib/loco-packages.php:514
+#: ../lib/loco-packages.php:523
 #, php-format
 msgid "%s does not declare a \"Text Domain\""
 msgstr ""
 
-#: ../lib/loco-packages.php:514 ../lib/loco-packages.php:519
+#: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
 #, php-format
 msgid "Loco has guessed \"%s\""
 msgstr ""
 
-#: ../lib/loco-packages.php:519
+#: ../lib/loco-packages.php:528
 #, php-format
 msgid "%s does not declare a \"Domain Path\""
 msgstr ""
 
-#: ../lib/loco-packages.php:524
+#: ../lib/loco-packages.php:533
 #, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
 msgstr ""
 
-#: ../lib/loco-packages.php:527
+#: ../lib/loco-packages.php:536
 #, php-format
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr ""
@@ -677,3 +677,8 @@ msgstr "Extensions"
 msgctxt "Package list header"
 msgid "Core"
 msgstr "Fichiers principaux"
+
+#. Plugin URI of the plugin
+#. Description of the plugin
+msgid "Translate Wordpress plugins and themes directly in your browser"
+msgstr ""

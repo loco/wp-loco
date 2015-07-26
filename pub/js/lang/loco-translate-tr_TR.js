@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: tr_TR, Turkish
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 16:33:01 +0100
+ * Exported at: Sun, 26 Jul 2015 17:58:07 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -38,7 +38,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "OK": "Tamam",
     "Permission denied": "İzin reddedildi",
     "Settings saved": "Ayarlar kaydedildi",
-    "%s is not an official WordPress language": "",
+    "%s is not an official WordPress language": "%s resmi WordPress dillerinden biri değil",
     "New PO file": "Yeni PO Dosyası",
     "PO file used as template. This will be renamed to %s on first save": "PO dosyası şablon olarak kullanıldı. İlk kaydetmenizde %s olarak isimlendirilecek.",
     "You must specify a valid locale for a new PO file": "Yeni PO dosyası için geçerli bir yerel değer belirtmek zorundasınız",
@@ -81,12 +81,12 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "MO file not found": "MO dosyası bulunamadı",
     "Folder not writable": "Dizin yazılabilir değil",
     "Folder not found": "Dizin bulunmadı",
-    "%s does not declare a \"Text Domain\"": "",
-    "Loco has guessed \"%s\"": "",
-    "%s does not declare a \"Domain Path\"": "",
-    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
-    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "%s does not declare a \"Text Domain\"": "%s bir \"Metin Etki Alanı\" beyan etmiyor",
+    "Loco has guessed \"%s\"": "Loco tahmini: \"%s\"",
+    "%s does not declare a \"Domain Path\"": "%s bir \"Etki Alanı Yolu\" beyan etmiyor",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s POT dosyası içermiyor. Eğer ihtiyacınız varsa \"%s/%s.pot\" yolunda bir tane oluşturabilirsiniz.",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s alışılmadık bir POT dosya adına (%s) sahip. Daha iyi bir isim önerisi: \"%s.pot\"",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "\"%s\" PHP eklentisi yüklü değil. \nEğer\n \nsorun yaşarsanız\n \nbu eklentiyi\n \nyüklemeniz gerekir.",
     "User does not have permission to manage translations": "Kullanıcı çevirileri yönetmek için gerekli izinlere sahip değil",
     "Invalid data posted to server": "Sunucuya gönderilen veri geçersiz",
     "Failed to compile MO file with %s, check your settings": "%s ile MO dosyası derleme işlemi başarısız oldu, ayarlarınızı tekrar kontrol edin",
@@ -123,7 +123,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Packages": "Paketler",
     "File check": "Dosya denetimi",
     "File system permissions for %s": "%s için dosya sistemi izinleri",
-    "Other potential issues with %s": "",
+    "Other potential issues with %s": "%s ile\n \ndiğer\n \npotansiyel\n \nsorunlar",
     "Back": "Geri",
     "Get help": "Yardım",
     "Package details": "Paket Detayları",
@@ -143,7 +143,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Use external command:": "Harici komut kullan:",
     "Enter path to msgfmt on server": "Sunucudaki msgfmt yolunu girin",
     "Generate hash tables": "Komut tabloları oluştur",
-    "Include Fuzzy strings": "",
+    "Include Fuzzy strings": "Belirsiz satırları dahil et",
     "Backing up PO files": "PO Dosyaları Yedekleme",
     "Number of backups to keep of each file:": "Her bir dosyanın saklanacak yedek sayısı:",
     "Experimental features": "Deneysel Özellikler",
@@ -164,7 +164,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "%s için yeni çeviri başlat",
     "Select from common languages": "Yaygın diller arasından seçin",
     "or enter any language code": "veya herhangi bir dil kodu girin",
-    "create in plugin directory": "",
+    "create in plugin directory": "eklenti\n \ndizininde\n \noluştur",
     "create in global languages directory": "Genel \"Language\" dizininde oluştur",
     "Start translating": "Çeviriye Başla",
     "New version available": "Yeni sürüm mevcut",
@@ -172,6 +172,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Select a plugin or theme to translate": "Çevirmek için bir eklenti veya tema seçin",
     "Themes": "Temalar",
     "Plugins": "Eklentiler",
-    "Core": "Çekirdek"
+    "Core": "Çekirdek",
+    "Translate Wordpress plugins and themes directly in your browser": ""
 } 
 );

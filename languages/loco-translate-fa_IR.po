@@ -46,7 +46,7 @@ msgstr "دسترسی امکان پذیر نیست"
 msgid "Settings saved"
 msgstr "تنظیمات ذخیره شد"
 
-#: ../lib/loco-admin.php:126 ../lib/loco-packages.php:536
+#: ../lib/loco-admin.php:126 ../lib/loco-packages.php:545
 #, php-format
 msgid "%s is not an official WordPress language"
 msgstr ""
@@ -119,79 +119,79 @@ msgstr ""
 msgid "Bad file path"
 msgstr "مسیر قایل قبول نیست"
 
-#: ../lib/loco-admin.php:766
+#: ../lib/loco-admin.php:775
 #, php-format
 msgid "Empty or invalid %s file"
 msgstr "فایل %s خالی یا غیر قابل قبول می باشد"
 
-#: ../lib/loco-admin.php:770
+#: ../lib/loco-admin.php:779
 #, php-format
 msgid "%s file has no header"
 msgstr "فایل %s دارای سربرگ نمی باشد"
 
-#: ../lib/loco-admin.php:917
+#: ../lib/loco-admin.php:926
 msgctxt "Add button"
 msgid "New template"
 msgstr "فرم جدید"
 
-#: ../lib/loco-admin.php:936
+#: ../lib/loco-admin.php:945
 msgctxt "Add button"
 msgid "New language"
 msgstr "زبان جدید"
 
-#: ../lib/loco-admin.php:975
+#: ../lib/loco-admin.php:984
 #, php-format
 msgid "%s%% translated"
 msgstr "%s%% ترجمه شده"
 
-#: ../lib/loco-admin.php:975
+#: ../lib/loco-admin.php:984
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
 msgstr[0] "%s سطر"
 msgstr[1] ""
 
-#: ../lib/loco-admin.php:978
+#: ../lib/loco-admin.php:987
 #, php-format
 msgid "%s fuzzy"
 msgstr "%s مبهم"
 
-#: ../lib/loco-admin.php:981
+#: ../lib/loco-admin.php:990
 #, php-format
 msgid "%s untranslated"
 msgstr "%s ترجمه نشده"
 
-#: ../lib/loco-admin.php:1027
+#: ../lib/loco-admin.php:1036
 msgid "Failed to compile MO file with built-in compiler"
 msgstr "فایل MO با کامپایلر توکار، کامپایل نشد"
 
-#: ../lib/loco-admin.php:1070 ../tpl/admin-nav.tpl.php:27
+#: ../lib/loco-admin.php:1079 ../tpl/admin-nav.tpl.php:27
 msgid "Loco, Translation Management"
 msgstr "لوکو، مدریت ترجمه"
 
-#: ../lib/loco-admin.php:1071 ../lib/loco-admin.php:1108
+#: ../lib/loco-admin.php:1080 ../lib/loco-admin.php:1117
 msgid "Manage translations"
 msgstr "مدریت ترجمه ها"
 
-#: ../lib/loco-admin.php:1072
+#: ../lib/loco-admin.php:1081
 msgid "Translation options"
 msgstr "تنظیمات ترجمه ها"
 
-#: ../lib/loco-admin.php:1079
+#: ../lib/loco-admin.php:1088
 msgid "Loco Translate"
 msgstr "مترجم لوکو"
 
-#: ../lib/loco-admin.php:1109 ../tpl/admin-fscheck.tpl.php:8
+#: ../lib/loco-admin.php:1118 ../tpl/admin-fscheck.tpl.php:8
 #: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
 #: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "تنظیمات"
 
-#: ../lib/loco-admin.php:1133
+#: ../lib/loco-admin.php:1142
 msgid "File download failed"
 msgstr "خطا در دریافت فایل"
 
-#: ../lib/loco-admin.php:1143
+#: ../lib/loco-admin.php:1152
 msgid "WPLANG is deprecated and should be removed from wp-config.php"
 msgstr "WPLANG منسوخ شده و باید از wp-config.php پاک شود"
 
@@ -199,64 +199,64 @@ msgstr "WPLANG منسوخ شده و باید از wp-config.php پاک شود"
 msgid "Unknown language"
 msgstr "زبان نا آشنا"
 
-#: ../lib/loco-packages.php:442 ../lib/loco-packages.php:449
+#: ../lib/loco-packages.php:451 ../lib/loco-packages.php:458
 msgid "Some files not writable"
 msgstr "تعدادی از فایل قابل نوشتن نیستند"
 
-#: ../lib/loco-packages.php:452
+#: ../lib/loco-packages.php:461
 msgid "Some files missing"
 msgstr "تعدادی از فایل ها موجود نیستند"
 
-#: ../lib/loco-packages.php:458 ../lib/loco-packages.php:462
+#: ../lib/loco-packages.php:467 ../lib/loco-packages.php:471
 #, php-format
 msgid "\"%s\" folder not writable"
 msgstr "پوشه %s قابل نوشتن نیست"
 
-#: ../lib/loco-packages.php:483
+#: ../lib/loco-packages.php:492
 msgid "POT file not writable"
 msgstr "فایل POT قایل نوشتن نیست"
 
-#: ../lib/loco-packages.php:488
+#: ../lib/loco-packages.php:497
 msgid "PO file not writable"
 msgstr "فایل PO فابل نوشتن نیست"
 
-#: ../lib/loco-packages.php:490
+#: ../lib/loco-packages.php:499
 msgid "MO file not writable"
 msgstr "فایل MO فابل نوشتن نیست"
 
-#: ../lib/loco-packages.php:490
+#: ../lib/loco-packages.php:499
 msgid "MO file not found"
 msgstr "فایل MO پیدا نشد"
 
-#: ../lib/loco-packages.php:495
+#: ../lib/loco-packages.php:504
 msgid "Folder not writable"
 msgstr "پوشه قایل نوشتن نیست"
 
-#: ../lib/loco-packages.php:495
+#: ../lib/loco-packages.php:504
 msgid "Folder not found"
 msgstr "پوشه پیدا نشد"
 
-#: ../lib/loco-packages.php:514
+#: ../lib/loco-packages.php:523
 #, php-format
 msgid "%s does not declare a \"Text Domain\""
 msgstr ""
 
-#: ../lib/loco-packages.php:514 ../lib/loco-packages.php:519
+#: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
 #, php-format
 msgid "Loco has guessed \"%s\""
 msgstr ""
 
-#: ../lib/loco-packages.php:519
+#: ../lib/loco-packages.php:528
 #, php-format
 msgid "%s does not declare a \"Domain Path\""
 msgstr ""
 
-#: ../lib/loco-packages.php:524
+#: ../lib/loco-packages.php:533
 #, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
 msgstr ""
 
-#: ../lib/loco-packages.php:527
+#: ../lib/loco-packages.php:536
 #, php-format
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr ""
@@ -660,6 +660,11 @@ msgstr "افزونه ها"
 msgctxt "Package list header"
 msgid "Core"
 msgstr "هسته"
+
+#. Plugin URI of the plugin
+#. Description of the plugin
+msgid "Translate Wordpress plugins and themes directly in your browser"
+msgstr ""
 
 #~ msgid "OK"
 #~ msgstr "اوکی"

@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: es_ES, Spanish (Spain)
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 16:32:57 +0100
+ * Exported at: Sun, 26 Jul 2015 17:58:03 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -177,6 +177,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Select a plugin or theme to translate": "Seleccione un plugin o tema para traducir",
     "Themes": "Temas",
     "Plugins": "Plugins",
-    "Core": "Núcleo"
+    "Core": "Núcleo",
+    "Translate Wordpress plugins and themes directly in your browser": ""
 } 
 );

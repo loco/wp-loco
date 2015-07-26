@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: fa_IR, Persian
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 16:32:58 +0100
+ * Exported at: Sun, 26 Jul 2015 17:58:03 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -172,6 +172,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Select a plugin or theme to translate": "یک افزونه یا پوسته را برای ترجمه انتخاب کنید",
     "Themes": "پوسته ها",
     "Plugins": "افزونه ها",
-    "Core": "هسته"
+    "Core": "هسته",
+    "Translate Wordpress plugins and themes directly in your browser": ""
 } 
 );
