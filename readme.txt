@@ -133,6 +133,10 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Changelog ==
 
+= 1.5.4 =
+* Added theme/plugin metadata extraction to POT generation.
+* Updated Swedish and Turkish translations.
+
 = 1.5.3 =
 * Critical PHP < 5.4 compatibility bug fix
 * Added option to exclude Fuzzy strings from MO files
@@ -260,7 +264,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 == Upgrade Notice ==
 
-= 1.5.3 =
+= 1.5.4 =
 * Bug fixes and improvements.
 
 
