@@ -721,7 +721,16 @@ abstract class LocoAdmin {
                 }
                 break;
             }
-        }        
+        }
+        // add translatable header tags
+        if( $headers = $package->get_headers() ){
+            $target = '';
+            $suffix = ' of the '.$package->get_type();
+            foreach( $headers as $tag => $source ){
+                $notes = str_replace('URI',' URI',$tag).$suffix;
+                $export[] = compact('source','target','notes');
+            }
+        }
         return $export;
     }
     

@@ -98,7 +98,16 @@ abstract class LocoPackage {
         if( $dpath ){
             $this->domainpath = '/'.trim($dpath,'/');
         }
-    }   
+    }
+
+
+    /**
+     * Get translatable header tags
+     */
+    public function get_headers(){
+        return array();
+    }
+
     
     /**
      * Get default system languages directory
@@ -935,9 +944,17 @@ class LocoThemePackage extends LocoPackage {
     public function get_type(){
         return 'theme';
     }      
-    public function get_original( $header ){
+    public function get_original( $tag ){
         $theme = wp_get_theme( $this->get_handle() );
-        return $theme->get( $header );
+        return $theme->get( $tag );
+    }
+    public function get_headers(){
+        $headers = array();
+        $theme = wp_get_theme( $this->get_handle() );
+        foreach( array('PluginURI','Description','Author','AuthorURI') as $tag ){
+            $headers[$tag] = $theme->get($tag) or $headers[$tag] = '';
+        }
+        return $headers;
     }
 }
 
@@ -952,10 +969,19 @@ class LocoPluginPackage extends LocoPackage {
     public function get_type(){
         return 'plugin';
     }      
-    public function get_original( $header ){
+    public function get_original( $tag ){
         $plugins = get_plugins();
         $plugin = $plugins[ $this->get_handle() ];
-        return isset($plugin[$header]) ? $plugin[$header] : '';
+        return isset($plugin[$tag]) ? $plugin[$tag] : '';
+    }
+    public function get_headers(){
+        $headers = array();
+        $plugins = get_plugins();
+        $plugin = $plugins[ $this->get_handle() ];
+        foreach( array('PluginURI','Description','Author','AuthorURI') as $tag ){
+            $headers[$tag] = isset($plugin[$tag]) ? $plugin[$tag] : '';
+        }
+        return $headers;
     }
 }
 
