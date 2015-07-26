@@ -951,7 +951,7 @@ class LocoThemePackage extends LocoPackage {
     public function get_headers(){
         $headers = array();
         $theme = wp_get_theme( $this->get_handle() );
-        foreach( array('PluginURI','Description','Author','AuthorURI') as $tag ){
+        foreach( array('Name','ThemeURI','Description','Author','AuthorURI') as $tag ){
             $headers[$tag] = $theme->get($tag) or $headers[$tag] = '';
         }
         return $headers;
