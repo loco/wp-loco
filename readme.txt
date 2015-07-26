@@ -136,6 +136,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 = 1.5.4 =
 * Added theme/plugin metadata extraction to POT generation.
 * POT extractor fix for function calls in argument lists.
+* Fix for authors using unsuffixed PO files as templates.
 * Updated Swedish and Turkish translations.
 
 = 1.5.3 =
