@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: tr_TR, Turkish
  * Exported by: Unregistered user
- * Exported at: Thu, 09 Jul 2015 07:37:09 +0100
+ * Exported at: Sun, 26 Jul 2015 16:33:01 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -143,6 +143,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Use external command:": "Harici komut kullan:",
     "Enter path to msgfmt on server": "Sunucudaki msgfmt yolunu girin",
     "Generate hash tables": "Komut tabloları oluştur",
+    "Include Fuzzy strings": "",
     "Backing up PO files": "PO Dosyaları Yedekleme",
     "Number of backups to keep of each file:": "Her bir dosyanın saklanacak yedek sayısı:",
     "Experimental features": "Deneysel Özellikler",

@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: pl_PL, Polish
  * Exported by: Unregistered user
- * Exported at: Thu, 02 Jul 2015 14:56:22 +0100 
+ * Exported at: Sun, 26 Jul 2015 16:33:00 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -153,6 +153,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Use external command:": "Użyj zewnętrznej komendy:",
     "Enter path to msgfmt on server": "Wpisz ścieżkę do msgfmt na serwerze",
     "Generate hash tables": "Generuj tablice hash",
+    "Include Fuzzy strings": "",
     "Backing up PO files": "Zrób kopię zapasową plików PO",
     "Number of backups to keep of each file:": "Liczba kopii zapasowych każdego pliku do przechowania:",
     "Experimental features": "Funkcje eksperymentalne",

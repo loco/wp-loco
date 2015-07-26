@@ -161,37 +161,37 @@ msgstr "неточный перевод"
 msgid "%s untranslated"
 msgstr "%s не переведено"
 
-#: ../lib/loco-admin.php:1023
+#: ../lib/loco-admin.php:1027
 msgid "Failed to compile MO file with built-in compiler"
 msgstr "Ошибка компиляции МО файла встроенным компилятором"
 
-#: ../lib/loco-admin.php:1066 ../tpl/admin-nav.tpl.php:27
+#: ../lib/loco-admin.php:1070 ../tpl/admin-nav.tpl.php:27
 msgid "Loco, Translation Management"
 msgstr "Loco, управление переводами"
 
-#: ../lib/loco-admin.php:1067 ../lib/loco-admin.php:1104
+#: ../lib/loco-admin.php:1071 ../lib/loco-admin.php:1108
 msgid "Manage translations"
 msgstr "Управление переводами"
 
-#: ../lib/loco-admin.php:1068
+#: ../lib/loco-admin.php:1072
 msgid "Translation options"
 msgstr "Опции перевода"
 
-#: ../lib/loco-admin.php:1075
+#: ../lib/loco-admin.php:1079
 msgid "Loco Translate"
 msgstr "Переводчик Loco"
 
-#: ../lib/loco-admin.php:1105 ../tpl/admin-fscheck.tpl.php:8
+#: ../lib/loco-admin.php:1109 ../tpl/admin-fscheck.tpl.php:8
 #: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
 #: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "Установки"
 
-#: ../lib/loco-admin.php:1129
+#: ../lib/loco-admin.php:1133
 msgid "File download failed"
 msgstr "Ошибка загрузки файла"
 
-#: ../lib/loco-admin.php:1139
+#: ../lib/loco-admin.php:1143
 msgid "WPLANG is deprecated and should be removed from wp-config.php"
 msgstr ""
 
@@ -261,8 +261,8 @@ msgstr ""
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr ""
 
-#: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-mbstring.php:13 ..
-#: /lib/compat/loco-tokenizer.php:9
+#: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
+#: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
 #, php-format
 msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
@@ -450,7 +450,7 @@ msgstr ""
 msgid "Back"
 msgstr "Назад"
 
-#: ../tpl/admin-fscheck.tpl.php:58 ../tpl/admin-opts.tpl.php:96
+#: ../tpl/admin-fscheck.tpl.php:58 ../tpl/admin-opts.tpl.php:102
 msgid "Get help"
 msgstr "Помощь"
 
@@ -523,23 +523,27 @@ msgstr "Путь к msgfmt на сервере"
 msgid "Generate hash tables"
 msgstr "Генерировать hash таблицы"
 
-#: ../tpl/admin-opts.tpl.php:61 ../tpl/admin-opts.tpl.php:65
+#: ../tpl/admin-opts.tpl.php:60
+msgid "Include Fuzzy strings"
+msgstr ""
+
+#: ../tpl/admin-opts.tpl.php:67 ../tpl/admin-opts.tpl.php:71
 msgid "Backing up PO files"
 msgstr "Резервное копирование РО файлов"
 
-#: ../tpl/admin-opts.tpl.php:69
+#: ../tpl/admin-opts.tpl.php:75
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
-#: ../tpl/admin-opts.tpl.php:77 ../tpl/admin-opts.tpl.php:81
+#: ../tpl/admin-opts.tpl.php:83 ../tpl/admin-opts.tpl.php:87
 msgid "Experimental features"
 msgstr ""
 
-#: ../tpl/admin-opts.tpl.php:86
+#: ../tpl/admin-opts.tpl.php:92
 msgid "Enable Wordpress core translations"
 msgstr ""
 
-#: ../tpl/admin-opts.tpl.php:95
+#: ../tpl/admin-opts.tpl.php:101
 msgid "Save settings"
 msgstr "Сохранить установки"
 
