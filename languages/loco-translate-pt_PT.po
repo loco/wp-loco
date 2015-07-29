@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2015-07-29 11:11+0100\n"
-"PO-Revision-Date: 2015-07-29 11:11+0100\n"
+"PO-Revision-Date: 2015-07-29 11:54+0100\n"
 "Last-Translator: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
 "Language: pt_PT\n"
@@ -276,7 +276,7 @@ msgstr ""
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
-msgstr "O utilizador não tem permissões para gerir  traduções"
+msgstr "O utilizador não tem permissões para gerir traduções"
 
 #: ../php/loco-data.php:21 ../php/loco-posave.php:10 ../php/loco-posync.php:9
 msgid "Invalid data posted to server"

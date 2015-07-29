@@ -89,7 +89,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "O %s não tem ficheiro POT. Crie um em \"%s/%s.pot\" se precisar.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "O %s tem um ficheiro POT com um nome estranho (%s). Seria melhor um nome como \"%s.pot\".",
     "PHP extension \"%s\" is not installed. If you experience problems you should install it": "A extensão \"%s\" do PHP não está instalada. Se tiver algum problema deverá proceder à sua instalação.",
-    "User does not have permission to manage translations": "O utilizador não tem permissões para gerir  traduções",
+    "User does not have permission to manage translations": "O utilizador não tem permissões para gerir traduções",
     "Invalid data posted to server": "Dados inválidos enviados para o servidor",
     "Failed to compile MO file with %s, check your settings": "Falhou ao compilar ficheiro MO com %s, verifique as suas definições",
     "Package not found called %s": "Pacote com nome %s não encontrado",
