@@ -137,7 +137,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Added theme/plugin metadata extraction to POT generation.
 * POT extractor fix for function calls in argument lists.
 * Fix for authors using unsuffixed PO files as templates.
-* Updated Swedish and Turkish translations, and amended typos.
+* Updated Swedish and Turkish translations, added pt_PT and amended typos.
 
 = 1.5.3 =
 * Critical PHP < 5.4 compatibility bug fix
@@ -295,6 +295,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Japanese translations by [Agarthe LLC](https://agarthe.com)
 * Spanish translations by [temesis1234](https://wordpress.org/support/profile/temesis1234)
 * Brazilian Portuguese translations by [pamcabezas](https://github.com/pamcabezas)
+* European Portuguese translations by [Pedro Mendonça](https://github.com/pedro-mendonca)
 * French translations by [Borjan Tchakaloff](https://github.com/bibz)
 
 == Keyboard shortcuts ==
