@@ -89,7 +89,7 @@ $nav = array (
                             <p>
                                 <label for="loco--enable-core">
                                     <input type="checkbox" name="loco[enable_core]" value="1" id="loco--enable-core"<?php echo $enable_core ? ' checked' : '';?> />
-                                    <?php Loco::h( Loco::__('Enable Wordpress core translations') )?> 
+                                    <?php Loco::h( Loco::__('Enable WordPress core translations') )?> 
                                 </label>
                             </p>
                         </fieldset>
