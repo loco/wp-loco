@@ -121,7 +121,7 @@ abstract class LocoAdmin {
             $package = LocoPackage::get( $plugin_file, 'plugin' ) and
             $plugins[ $package->get_name() ] = $package->get_domain();
         }
-        // check if locale is a valid Wordpress language code
+        // check if locale is a valid WordPress language code
         if( ! LocoLocale::is_valid_wordpress($theme_locale) ){
             self::warning( sprintf( Loco::__('%s is not an official WordPress language'), $theme_locale ) );
         }
@@ -1174,7 +1174,7 @@ add_action('wp_ajax_loco-posave', '_loco_hook__wp_ajax' );
 add_action('wp_ajax_loco-posync', '_loco_hook__wp_ajax' );
 add_action('wp_ajax_loco-download', '_loco_hook__wp_ajax_download' );
 
-// WP_LANG_DIR was introduced in Wordpress 2.1.0.
+// WP_LANG_DIR was introduced in WordPress 2.1.0.
 if( ! defined('WP_LANG_DIR') ){
     define('WP_LANG_DIR', WP_CONTENT_DIR.'/languages' );
 } 

@@ -23,7 +23,7 @@ class LocalesTest extends PHPUnit_Framework_TestCase {
     }
     
     
-    public function testValidWordpressLocales(){
+    public function testValidWordPressLocales(){
         // regionless
         $this->assertTrue( LocoLocale::is_valid_wordpress('th'), '"th" should be a valid WP locale ' );
         $this->assertFalse( LocoLocale::is_valid_wordpress('th_TH'), 'th_TH is not valid, it should be "th"' );

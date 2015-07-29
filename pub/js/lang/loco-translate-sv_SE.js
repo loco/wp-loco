@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: sv_SE, Swedish
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:06 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:52 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -152,7 +152,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "Säkerhetskopiera PO-filer",
     "Number of backups to keep of each file:": "Antal säkerhetskopior att behålla för varje fil:",
     "Experimental features": "Experimentella funktioner",
-    "Enable Wordpress core translations": "Aktivera Wordpress översättningar",
+    "Enable WordPress core translations": "Aktivera WordPress översättningar",
     "Save settings": "Spara inställningar",
     "Template file": "Mallfil",
     "Switch to...": "Växla till...",
@@ -177,7 +177,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Select a plugin or theme to translate": "Välj ett tillägg eller tema att översätta",
     "Themes": "Teman",
     "Plugins": "Tillägg",
-    "Core": "Wordpress",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Core": "WordPress",
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

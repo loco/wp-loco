@@ -539,7 +539,7 @@ msgid "Experimental features"
 msgstr "قابلیت های آزمایشی"
 
 #: ../tpl/admin-opts.tpl.php:92
-msgid "Enable Wordpress core translations"
+msgid "Enable WordPress core translations"
 msgstr "فعال سازی ترجمه هسته وردپرس"
 
 #: ../tpl/admin-opts.tpl.php:101
@@ -661,9 +661,8 @@ msgctxt "Package list header"
 msgid "Core"
 msgstr "هسته"
 
-#. Plugin URI of the plugin
 #. Description of the plugin
-msgid "Translate Wordpress plugins and themes directly in your browser"
+msgid "Translate WordPress plugins and themes directly in your browser"
 msgstr ""
 
 #~ msgid "OK"

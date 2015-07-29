@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: pl_PL, Polish
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:05 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:51 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -157,7 +157,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "Zrób kopię zapasową plików PO",
     "Number of backups to keep of each file:": "Liczba kopii zapasowych każdego pliku do przechowania:",
     "Experimental features": "Funkcje eksperymentalne",
-    "Enable Wordpress core translations": "Włącz tłumaczenie silnika Wordpress",
+    "Enable WordPress core translations": "Włącz tłumaczenie silnika WordPress",
     "Save settings": "Zapisz ustawienia",
     "Template file": "Plik schematu",
     "Switch to...": "Zmień na...",
@@ -183,6 +183,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Motywy",
     "Plugins": "Wtyczki",
     "Core": "Silnik",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

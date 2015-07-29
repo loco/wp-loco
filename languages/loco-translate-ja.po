@@ -538,7 +538,7 @@ msgid "Experimental features"
 msgstr "実験的な機能"
 
 #: ../tpl/admin-opts.tpl.php:92
-msgid "Enable Wordpress core translations"
+msgid "Enable WordPress core translations"
 msgstr "WordPressコアの翻訳を行う"
 
 #: ../tpl/admin-opts.tpl.php:101
@@ -659,9 +659,8 @@ msgctxt "Package list header"
 msgid "Core"
 msgstr "コア"
 
-#. Plugin URI of the plugin
 #. Description of the plugin
-msgid "Translate Wordpress plugins and themes directly in your browser"
+msgid "Translate WordPress plugins and themes directly in your browser"
 msgstr ""
 
 #~ msgid "OK"

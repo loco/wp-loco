@@ -96,7 +96,7 @@ final class LocoLocale {
         extract( self::data() );
         if( ! $cc ){
             if( self::is_regionless($lc) ){
-                // Wordpress expects this locale to be regionless
+                // WordPress expects this locale to be regionless
                 $cc = '';
             }
             else {
@@ -105,7 +105,7 @@ final class LocoLocale {
         }
         $label = '';
         $locale = new LocoLocale( $lc, $cc );
-        // get locale name from official Wordpress list
+        // get locale name from official WordPress list
         if( isset($locales[$lc][$cc]) ){
             $locale->label = $locales[$lc][$cc];
         }
@@ -173,7 +173,7 @@ final class LocoLocale {
     
     
     /**
-     * Test whether a language code is considered regionless by Wordpress core. 
+     * Test whether a language code is considered regionless by WordPress core. 
      * example: Thai is not "th_TH" but only "th"
      */
     public static function is_regionless( $lc ){
@@ -196,7 +196,7 @@ final class LocoLocale {
     
     
     /**
-     * Test if locale code is strictly a valid Wordpress locale
+     * Test if locale code is strictly a valid WordPress locale
      */
     public static function is_valid_wordpress( $code ){
         if( ! preg_match('/^[a-z]{2,3}(?:_[A-Z]{2})?$/', $code, $r ) ){
@@ -209,7 +209,7 @@ final class LocoLocale {
     
     /**
      * Test if code is a valid language code
-     * This includes all two character languages in ISO-639, plus any three character codes used by Wordpress
+     * This includes all two character languages in ISO-639, plus any three character codes used by WordPress
      */
     public static function is_known_language( $code ){
         $data = self::data();

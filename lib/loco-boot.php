@@ -20,17 +20,17 @@ abstract class Loco {
     /* whether to enable the cache at all  */
     public static $cache_enabled;
 
-    /* call Wordpress __ with our text domain  */
+    /* call WordPress __ with our text domain  */
     public static function __( $msgid = '' ){
         return __( $msgid, self::NS );
     }
 
-    /* call Wordpress _n with our text domain  */
+    /* call WordPress _n with our text domain  */
     public static function _n( $msgid = '', $msgid_plural = '', $n = 0 ){
         return _n( $msgid, $msgid_plural, $n, self::NS );
     }
 
-    /* call Wordpress _x with our text domain  */
+    /* call WordPress _x with our text domain  */
     public static function _x( $msgid = '', $msgctxt = '', $n = 0 ){
         return _x( $msgid, $msgctxt, self::NS );
     }
@@ -187,20 +187,20 @@ abstract class Loco {
     
     
     /**
-     * Get actual postdata, not hacked postdata Wordpress ruined with wp_magic_quotes
+     * Get actual postdata, not hacked postdata WordPress ruined with wp_magic_quotes
      * @return array
      */
     public static function postdata(){
         static $post;
         if( ! is_array($post) ){
-            // Not using Wordpress's hacked POST collection.
+            // Not using WordPress's hacked POST collection.
             $str = file_get_contents('php://input') or 
             // preferred way is to parse original data
             $str = isset($_SERVER['HTTP_RAW_POST_DATA']) ? $_SERVER['HTTP_RAW_POST_DATA'] : '';
             if( $str ){
                 parse_str( $str, $post );
             }
-            // fall back to undoing Wordpress 'magic'
+            // fall back to undoing WordPress 'magic'
             else {
                 $post = stripslashes_deep( $_POST );
             }
@@ -321,7 +321,7 @@ abstract class Loco {
 
 
     /**
-     * Get Wordpress capability for all Loco Admin functionality
+     * Get WordPress capability for all Loco Admin functionality
      */
     public static function admin_capablity(){
         return apply_filters( 'loco_admin_capability', 'manage_options' );

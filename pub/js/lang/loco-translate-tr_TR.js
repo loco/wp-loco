@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: tr_TR, Turkish
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:07 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:52 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -147,7 +147,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "PO Dosyaları Yedekleme",
     "Number of backups to keep of each file:": "Her bir dosyanın saklanacak yedek sayısı:",
     "Experimental features": "Deneysel Özellikler",
-    "Enable Wordpress core translations": "WordPress çekirdek çevirilerini etkinleştir",
+    "Enable WordPress core translations": "WordPress çekirdek çevirilerini etkinleştir",
     "Save settings": "Ayarları Kaydet",
     "Template file": "Şablon dosyası",
     "Switch to...": "Geçiş Yap:",
@@ -173,6 +173,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Temalar",
     "Plugins": "Eklentiler",
     "Core": "Çekirdek",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

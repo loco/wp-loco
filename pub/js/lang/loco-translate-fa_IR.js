@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: fa_IR, Persian
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:03 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:47 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -147,7 +147,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "پشتیبان گیری از فایل های PO",
     "Number of backups to keep of each file:": "تعداد پشتیبان های گرفته شده از هر فایل:",
     "Experimental features": "قابلیت های آزمایشی",
-    "Enable Wordpress core translations": "فعال سازی ترجمه هسته وردپرس",
+    "Enable WordPress core translations": "فعال سازی ترجمه هسته وردپرس",
     "Save settings": "دخیره تنظیمات",
     "Template file": "قالب فایل",
     "Switch to...": "تعویض به",
@@ -173,6 +173,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "پوسته ها",
     "Plugins": "افزونه ها",
     "Core": "هسته",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

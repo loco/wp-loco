@@ -527,7 +527,7 @@ msgid "Experimental features"
 msgstr ""
 
 #: ../tpl/admin-opts.tpl.php:92
-msgid "Enable Wordpress core translations"
+msgid "Enable WordPress core translations"
 msgstr ""
 
 #: ../tpl/admin-opts.tpl.php:101
@@ -648,18 +648,18 @@ msgctxt "Package list header"
 msgid "Core"
 msgstr ""
 
-#. Plugin URI of the plugin
-#msgid "http://wordpress.org/extend/plugins/loco-translate"
-#msgstr ""
-
 #. Description of the plugin
-msgid "Translate Wordpress plugins and themes directly in your browser"
+msgid "Translate WordPress plugins and themes directly in your browser"
 msgstr ""
 
-#. Author of the plugin
-#msgid "Tim Whitlock"
-#msgstr ""
+##. Plugin URI of the plugin
+##msgid "http://wordpress.org/extend/plugins/loco-translate"
+##msgstr ""
 
-#. Author URI of the plugin
-#msgid "https://localise.biz/help/wordpress/translate-plugin"
-#msgstr ""
+##. Author of the plugin
+##msgid "Tim Whitlock"
+##msgstr ""
+
+##. Author URI of the plugin
+##msgid "https://localise.biz/help/wordpress/translate-plugin"
+##msgstr ""

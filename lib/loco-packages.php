@@ -83,7 +83,7 @@ abstract class LocoPackage {
     abstract public function get_type();
 
     /**
-     * Get original data about package stored in Wordpress
+     * Get original data about package stored in WordPress
      */
     abstract public function get_original( $header );     
 
@@ -551,7 +551,7 @@ abstract class LocoPackage {
             }
             // TODO check references to other domains in xgettext
         }
-        // Check if any locale codes are not an official Wordpress languages
+        // Check if any locale codes are not an official WordPress languages
         $meta = $this->meta();
         foreach( $meta['po'] as $po_data ){
             $wplang = $po_data['locale']->get_code() or $wplang = $po_data['locale']->get_name();
@@ -763,7 +763,7 @@ abstract class LocoPackage {
     
     /**
      * Construct package object from plugin array
-     * note that handle is file path for plugins in Wordpress
+     * note that handle is file path for plugins in WordPress
      */
     private static function get_plugin( $handle ){
         $plugins = get_plugins();
@@ -844,7 +844,7 @@ abstract class LocoPackage {
     
     /**
      * Get a package - from cache if possible
-     * @param string unique name or identifier known to Wordpress
+     * @param string unique name or identifier known to WordPress
      * @param string "core", "theme" or "plugin"
      * @return LocoPackage
      */

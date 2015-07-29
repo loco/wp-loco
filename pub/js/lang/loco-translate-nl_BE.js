@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: nl_BE, Dutch (Belgium)
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:05 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:50 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -152,7 +152,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "",
     "Number of backups to keep of each file:": "",
     "Experimental features": "",
-    "Enable Wordpress core translations": "",
+    "Enable WordPress core translations": "",
     "Save settings": "",
     "Template file": "Sjabloonbestand",
     "Switch to...": "",
@@ -178,6 +178,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Thema's",
     "Plugins": "Plug-ins",
     "Core": "",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

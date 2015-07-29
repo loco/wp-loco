@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: id_ID, Indonesian
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:04 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:48 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -147,7 +147,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "Pencadangan berkas PO",
     "Number of backups to keep of each file:": "Jumlah cadangan untuk tiap berkas:",
     "Experimental features": "Fitur eksperimen",
-    "Enable Wordpress core translations": "Aktifkan penerjemahan inti Wordpress",
+    "Enable WordPress core translations": "Aktifkan penerjemahan inti WordPress",
     "Save settings": "Simpan setelan",
     "Template file": "Berkas template",
     "Switch to...": "Beralih ke...",
@@ -173,6 +173,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Tema",
     "Plugins": "Plugin",
     "Core": "Inti",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

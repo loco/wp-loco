@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ru_RU, Russian
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:06 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:51 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -157,7 +157,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "Резервное копирование РО файлов",
     "Number of backups to keep of each file:": "",
     "Experimental features": "",
-    "Enable Wordpress core translations": "",
+    "Enable WordPress core translations": "",
     "Save settings": "Сохранить установки",
     "Template file": "Файл шаблона",
     "Switch to...": "Переключиться на...",
@@ -183,6 +183,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Темы",
     "Plugins": "Плагины",
     "Core": "Ядро",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );

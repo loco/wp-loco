@@ -14,7 +14,7 @@ try {
     }
 
     if( ! function_exists('current_user_can') || ! class_exists('LocoAdmin') ){
-        throw new Exception('Wordpress not bootstrapped');
+        throw new Exception('WordPress not bootstrapped');
     }
     
     if( ! current_user_can(Loco::admin_capablity()) ){

@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ja_JP, Japanese
  * Exported by: Unregistered user
- * Exported at: Sun, 26 Jul 2015 17:58:04 +0100
+ * Exported at: Wed, 29 Jul 2015 10:24:49 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -147,7 +147,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "POファイルのバックアップ",
     "Number of backups to keep of each file:": "ファイルごとに保存するバックアップ数:",
     "Experimental features": "実験的な機能",
-    "Enable Wordpress core translations": "WordPressコアの翻訳を行う",
+    "Enable WordPress core translations": "WordPressコアの翻訳を行う",
     "Save settings": "設定を保存",
     "Template file": "テンプレートファイル",
     "Switch to...": "切り替え…",
@@ -173,6 +173,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "テーマ",
     "Plugins": "プラグイン",
     "Core": "コア",
-    "Translate Wordpress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": ""
 } 
 );
