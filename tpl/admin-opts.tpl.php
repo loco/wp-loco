@@ -43,7 +43,7 @@ $nav = array (
                                 </label>
                                 <ul>
                                     <li>
-                                        <input type="text" size="32" name="loco[which_msgfmt]" id="loco--which_msgfmt" value="<?php Loco::h($which_msgfmt)?>"
+                                        <input type="text" size="40" name="loco[which_msgfmt]" id="loco--which_msgfmt" value="<?php Loco::h($which_msgfmt)?>"
                                         placeholder="<?php Loco::h( Loco::__('Enter path to msgfmt on server') ) ?>" />
                                     </li>
                                 </ul>
