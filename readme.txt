@@ -7,22 +7,22 @@ Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Translate Wordpress plugins and themes directly in your browser
+Translate WordPress plugins and themes directly in your browser
 
 
 == Description ==
 
-The Loco Translate plugin provides in-browser editing of PO files used for localizing Wordpress plugins and themes.
+The Loco Translate plugin provides in-browser editing of PO files used for localizing WordPress plugins and themes.
 
 Features include:
 
-* Built-in translation editor within Wordpress admin
+* Built-in translation editor within WordPress admin
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
 * Support for PO features including comments, references and plural forms
 * Configurable PO file backups
-* Built-in Wordpress locale codes
+* Built-in WordPress locale codes
 
 Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.com/timwhitlock">@timwhitlock</a> / <a rel="author" href="https://plus.google.com/106703751121449519322">Tim Whitlock</a>
 
@@ -31,7 +31,7 @@ Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.co
 == Installation ==
 
 1. Unzip all files to the `/wp-content/plugins/loco-translate` directory
-2. Log into Wordpress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
+2. Log into WordPress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
 3. Go to *Loco Translate > Manage Translations* in the left-hand menu to start translating
 
 
@@ -52,7 +52,7 @@ To translate someone else’s theme into your language, follow these steps:
 
 
 
-A quick guide on using the plugin is [available here](https://localise.biz/help/wordpress/translate-plugin), but make sure you're familiar with the conventions of [Translating Wordpress](http://codex.wordpress.org/Translating_WordPress) before you start.
+A quick guide on using the plugin is [available here](https://localise.biz/help/wordpress/translate-plugin), but make sure you're familiar with the conventions of [Translating WordPress](http://codex.wordpress.org/Translating_WordPress) before you start.
 
 Please note that this plugin doesn’t support Windows servers and the editor doesn't fully support MSIE<=8.
 
@@ -74,7 +74,7 @@ but please see [this extended FAQ](https://wordpress.org/support/topic/faq-why-a
 
 = Why can't it extract any translatable strings from my code? =
 
-The extraction process looks for Wordpress translation functions with string literal arguments, such as `__('Foo')`.
+The extraction process looks for WordPress translation functions with string literal arguments, such as `__('Foo')`.
 
 Using your own custom functions like `myTranslate('Foo')` won't work. Neither will using variables, such as `__( $foo )`.
 
@@ -161,13 +161,13 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Removed SORT_NATURAL for PHP 5.3 compat
 * Fixed dummy msginit bug when default locale exists
 * POT/domain matching fix
-* Using Wordpress language codes
+* Using WordPress language codes
 * Added polyfills for mbstring and iconv
 
 = 1.4.7 =
 * Added Polish translations
 * Tested in WP 4.0
-* Add support for Wordpress's regionless locales
+* Add support for WordPress's regionless locales
 
 = 1.4.6 =
 * Updated Swedish and Turkish translations
@@ -223,7 +223,7 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 
 = 1.3 =
 * Support for files under WP_LANG_DIR
-* Last-Translator header added to PO files from Wordpress user
+* Last-Translator header added to PO files from WordPress user
 * Disabling cache when WP_DEBUG = true
 * Better editor integration, including source headers and file refs
 * Added editor dropdown for switching between files
