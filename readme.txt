@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 3.5
-Tested up to: 4.2.4
+Tested up to: 4.3
 Stable tag: 1.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -137,7 +137,8 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Added theme/plugin metadata extraction to POT generation.
 * POT extractor fix for function calls in argument lists.
 * Fix for authors using unsuffixed PO files as templates.
-* Updated Swedish and Turkish translations, added pt_PT and amended typos.
+* Updated Swedish and Turkish translations, added pt_PT and Kurdish and amended typos.
+* Added WordPress skin colours
 
 = 1.5.3 =
 * Critical PHP < 5.4 compatibility bug fix

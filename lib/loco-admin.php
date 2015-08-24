@@ -1069,6 +1069,11 @@ function _loco_hook__current_screen(){
         }
         // add common resources for all Loco admin pages
         Loco::enqueue_styles('loco-admin');
+        // load colour scheme is user has non-default
+        $skin = get_user_option('admin_color');
+        if( $skin && 'fresh' !== $skin ){
+            Loco::enqueue_styles( 'skins/'.$skin );
+        }
     }
 }  
 
