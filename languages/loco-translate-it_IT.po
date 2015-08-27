@@ -186,7 +186,7 @@ msgstr "Tradurre con Loco"
 #: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
 #: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
-msgstr "Imposatzioni"
+msgstr "Impostazioni"
 
 #: ../lib/loco-admin.php:1142
 msgid "File download failed"
@@ -194,7 +194,7 @@ msgstr "Download del file non riuscito"
 
 #: ../lib/loco-admin.php:1152
 msgid "WPLANG is deprecated and should be removed from wp-config.php"
-msgstr ""
+msgstr "WPLANG è deprecato e dovrebbe essere rimosso da wp-config.php"
 
 #: ../lib/loco-locales.php:77
 msgid "Unknown language"
@@ -240,27 +240,27 @@ msgstr "Cartella non trovata"
 #: ../lib/loco-packages.php:523
 #, php-format
 msgid "%s does not declare a \"Text Domain\""
-msgstr ""
+msgstr "%s non dichiara un \"Text Domain\""
 
 #: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
 #, php-format
 msgid "Loco has guessed \"%s\""
-msgstr ""
+msgstr "Loco ha ipotizzato \"%s\""
 
 #: ../lib/loco-packages.php:528
 #, php-format
 msgid "%s does not declare a \"Domain Path\""
-msgstr ""
+msgstr "%s non dichiara un \"Domain Path\""
 
 #: ../lib/loco-packages.php:533
 #, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
-msgstr ""
+msgstr "%s non ha un file POT. Creane uno a \"%s/%s.pot\" se serve."
 
 #: ../lib/loco-packages.php:536
 #, php-format
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
-msgstr ""
+msgstr "%s ha uno strano nome del file POT (%s). Un nome migliore sarebbe \"%s.pot\""
 
 #: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
 #: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
@@ -269,6 +269,8 @@ msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
 "install it"
 msgstr ""
+"L'estensione PHP \"%s\" non è installata. Se riscontri dei problemi dovresti "
+"installarla"
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
@@ -479,7 +481,7 @@ msgstr "Permessi dei file"
 #: ../tpl/admin-list.tpl.php:40
 #, php-format
 msgid "Extends: %s"
-msgstr ""
+msgstr "Estende: %s"
 
 #: ../tpl/admin-list.tpl.php:44
 #, php-format
@@ -527,7 +529,7 @@ msgstr "Generare tabelle hash"
 
 #: ../tpl/admin-opts.tpl.php:60
 msgid "Include Fuzzy strings"
-msgstr ""
+msgstr "Include stringhe ambigue"
 
 #: ../tpl/admin-opts.tpl.php:67 ../tpl/admin-opts.tpl.php:71
 msgid "Backing up PO files"
@@ -623,7 +625,7 @@ msgstr "o inserisci qualsiasi codice lingua"
 #: ../tpl/admin-poinit.tpl.php:59
 msgctxt "Form label"
 msgid "create in plugin directory"
-msgstr ""
+msgstr "crea nella cartella del plugin"
 
 #: ../tpl/admin-poinit.tpl.php:65
 msgctxt "Form label"
@@ -665,7 +667,7 @@ msgstr "Core"
 
 #. Description of the plugin
 msgid "Translate WordPress plugins and themes directly in your browser"
-msgstr ""
+msgstr "Traduci plugin e temi di Wordpress direttamente nel tuo browser"
 
 #~ msgid "OK"
 #~ msgstr "OK"
