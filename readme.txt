@@ -295,7 +295,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Persian translations by [Araz Rad](http://fa.araz.id.ir)
 * Japanese translations by [Agarthe LLC](https://agarthe.com)
 * Spanish translations by [temesis1234](https://wordpress.org/support/profile/temesis1234)
-* Brazilian Portuguese translations by [pamcabezas](https://github.com/pamcabezas)
+* Brazilian Portuguese translations by [pamcabezas](https://github.com/pamcabezas) and [Marcelo Saldanha](http://www.associadosweb.com/)
 * European Portuguese translations by [Pedro Mendonça](https://github.com/pedro-mendonca)
 * French translations by [Borjan Tchakaloff](https://github.com/bibz)
 

@@ -3,8 +3,8 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Tue Jun 30 2015 08:42:23 GMT+0100 (BST)\n"
-"Last-Translator: admin <support@localise.biz>\n"
+"PO-Revision-Date: Sat Sep 05 2015 22:52:00 GMT-0300 (BRT)\n"
+"Last-Translator: Marcelo Saldanha <saldanha@associadosweb.com.br>\n"
 "Language-Team: \n"
 "Language: Portuguese (Brazil)\n"
 "MIME-Version: 1.0\n"
@@ -49,7 +49,7 @@ msgstr "Configurações salvas"
 #: ../lib/loco-admin.php:126 ../lib/loco-packages.php:545
 #, php-format
 msgid "%s is not an official WordPress language"
-msgstr ""
+msgstr "%s não é uma linguagem oficial do Wordpress"
 
 #: ../lib/loco-admin.php:199
 msgid "New PO file"
@@ -240,27 +240,30 @@ msgstr "Pasta não encontrada"
 #: ../lib/loco-packages.php:523
 #, php-format
 msgid "%s does not declare a \"Text Domain\""
-msgstr ""
+msgstr "%s não declara um \"Text Domain\""
 
 #: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
 #, php-format
 msgid "Loco has guessed \"%s\""
-msgstr ""
+msgstr "Loco adivinhou \"%s\""
 
 #: ../lib/loco-packages.php:528
 #, php-format
 msgid "%s does not declare a \"Domain Path\""
-msgstr ""
+msgstr "%s não declara um \"Domain Path\""
 
 #: ../lib/loco-packages.php:533
 #, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
 msgstr ""
+"%s não possui um arquivo POT. Crie um em \"%s/%s.pot\" se você precisar."
 
 #: ../lib/loco-packages.php:536
 #, php-format
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr ""
+"%s possui um nome estranho para o arquivo POT (%s). Um nome melhor seria "
+"\"%s.pot\""
 
 #: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
 #: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
@@ -269,6 +272,8 @@ msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
 "install it"
 msgstr ""
+"A extensão PHP \"%s\" não está instalada. Se você encontrar problemas, tente "
+"instalá-la."
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
@@ -445,7 +450,7 @@ msgstr "Permissões do sistema de arquivo para %s"
 #: ../tpl/admin-fscheck.tpl.php:43
 #, php-format
 msgid "Other potential issues with %s"
-msgstr ""
+msgstr "Outros problemas em potencial com %s"
 
 #: ../tpl/admin-fscheck.tpl.php:57
 msgid "Back"
@@ -526,7 +531,7 @@ msgstr "Gerar tabela de dispersão"
 
 #: ../tpl/admin-opts.tpl.php:60
 msgid "Include Fuzzy strings"
-msgstr ""
+msgstr "Incluir Fuzzy strings"
 
 #: ../tpl/admin-opts.tpl.php:67 ../tpl/admin-opts.tpl.php:71
 msgid "Backing up PO files"
@@ -622,7 +627,7 @@ msgstr "ou adicione novo código de linguagem"
 #: ../tpl/admin-poinit.tpl.php:59
 msgctxt "Form label"
 msgid "create in plugin directory"
-msgstr ""
+msgstr "criar no diretório do plugin"
 
 #: ../tpl/admin-poinit.tpl.php:65
 msgctxt "Form label"
@@ -665,9 +670,3 @@ msgstr "Núcleo"
 #. Description of the plugin
 msgid "Translate WordPress plugins and themes directly in your browser"
 msgstr ""
-
-#~ msgid "OK"
-#~ msgstr "OK"
-
-#~ msgid "Updated"
-#~ msgstr "Atualizado"

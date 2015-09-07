@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ck_CK, Kurdish (Sorani)
  * Exported by: Unregistered user
- * Exported at: Mon, 24 Aug 2015 11:53:26 +0100
+ * Exported at: Mon, 07 Sep 2015 11:46:19 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

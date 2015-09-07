@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: pt_BR, Portuguese (Brazil)
  * Exported by: Unregistered user
- * Exported at: Wed, 29 Jul 2015 10:24:51 +0100
+ * Exported at: Mon, 07 Sep 2015 11:46:24 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -39,7 +39,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "OK": "Ok",
     "Permission denied": "Permissão negada",
     "Settings saved": "Configurações salvas",
-    "%s is not an official WordPress language": "",
+    "%s is not an official WordPress language": "%s não é uma linguagem oficial do Wordpress",
     "New PO file": "Novo arquivo PO",
     "PO file used as template. This will be renamed to %s on first save": "Arquivo PO usado como template. Isto vai ser renomeado para %s no primeiro salvamento",
     "You must specify a valid locale for a new PO file": "Você tem que especificar um local válido para o novo arquivo PO",
@@ -83,12 +83,12 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "MO file not found": "Arquivo MO ausente",
     "Folder not writable": "Pasta não editável",
     "Folder not found": "Pasta não encontrada",
-    "%s does not declare a \"Text Domain\"": "",
-    "Loco has guessed \"%s\"": "",
-    "%s does not declare a \"Domain Path\"": "",
-    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
-    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "%s does not declare a \"Text Domain\"": "%s não declara um \"Text Domain\"",
+    "Loco has guessed \"%s\"": "Loco adivinhou \"%s\"",
+    "%s does not declare a \"Domain Path\"": "%s não declara um \"Domain Path\"",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s não possui um arquivo POT. Crie um em \"%s/%s.pot\" se você precisar.",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s possui um nome estranho para o arquivo POT (%s). Um nome melhor seria \"%s.pot\"",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "A extensão PHP \"%s\" não está instalada. Se você encontrar problemas, tente instalá-la.",
     "User does not have permission to manage translations": "O usuário não tem permissões para gerenciar traduções",
     "Invalid data posted to server": "Dados inválidos enviados para servidor",
     "Failed to compile MO file with %s, check your settings": "Falha ao compilar arquivo MO com %s, verifique suas configurações",
@@ -127,7 +127,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Packages": "Pacotes",
     "File check": "Conferência",
     "File system permissions for %s": "Permissões do sistema de arquivo para %s",
-    "Other potential issues with %s": "",
+    "Other potential issues with %s": "Outros problemas em potencial com %s",
     "Back": "Voltar",
     "Get help": "Pedir ajudar",
     "Package details": "Detalhes do pacote",
@@ -148,7 +148,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Use external command:": "Usar comando externo:",
     "Enter path to msgfmt on server": "Digite caminho para msgfmt no servidor",
     "Generate hash tables": "Gerar tabela de dispersão",
-    "Include Fuzzy strings": "",
+    "Include Fuzzy strings": "Incluir Fuzzy strings",
     "Backing up PO files": "Criando cópia de segurança dos arquivos PO",
     "Number of backups to keep of each file:": "Número de backups para manter de cada arquivo:",
     "Experimental features": "Funcionalidades experimentais",
@@ -169,7 +169,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Iniciar novas traduções em %s",
     "Select from common languages": "Selecionar a partir dos idiomas mais comuns",
     "or enter any language code": "ou adicione novo código de linguagem",
-    "create in plugin directory": "",
+    "create in plugin directory": "criar no diretório do plugin",
     "create in global languages directory": "criar no diretório de idiomas global",
     "Start translating": "Começar a traduzir",
     "New version available": "Novo atualização disponível",

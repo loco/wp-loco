@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: it_IT, Italian
  * Exported by: Unregistered user
- * Exported at: Wed, 29 Jul 2015 10:24:49 +0100
+ * Exported at: Mon, 07 Sep 2015 11:46:22 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -70,9 +70,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Manage translations": "Gestire le traduzioni",
     "Translation options": "Opzioni di traduzione",
     "Loco Translate": "Tradurre con Loco",
-    "Settings": "Imposatzioni",
+    "Settings": "Impostazioni",
     "File download failed": "Download del file non riuscito",
-    "WPLANG is deprecated and should be removed from wp-config.php": "",
+    "WPLANG is deprecated and should be removed from wp-config.php": "WPLANG è deprecato e dovrebbe essere rimosso da wp-config.php",
     "Unknown language": "Lingua sconosciuta",
     "Some files not writable": "Alcuni file non scrivibili",
     "Some files missing": "Alcuni file mancanti",
@@ -83,12 +83,12 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "MO file not found": "File MO non trovato",
     "Folder not writable": "Cartella non scrivibile",
     "Folder not found": "Cartella non trovata",
-    "%s does not declare a \"Text Domain\"": "",
-    "Loco has guessed \"%s\"": "",
-    "%s does not declare a \"Domain Path\"": "",
-    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
-    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "%s does not declare a \"Text Domain\"": "%s non dichiara un \"Text Domain\"",
+    "Loco has guessed \"%s\"": "Loco ha ipotizzato \"%s\"",
+    "%s does not declare a \"Domain Path\"": "%s non dichiara un \"Domain Path\"",
+    "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s non ha un file POT. Creane uno a \"%s/%s.pot\" se serve.",
+    "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s ha uno strano nome del file POT (%s). Un nome migliore sarebbe \"%s.pot\"",
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "L'estensione PHP \"%s\" non è installata. Se riscontri dei problemi dovresti installarla",
     "User does not have permission to manage translations": "L'utente non ha il permesso di gestire le traduzioni",
     "Invalid data posted to server": "Dati invalidi mandati al server",
     "Failed to compile MO file with %s, check your settings": "Non è stato possibile compilare il file MO con %s, controlla le impostazioni",
@@ -134,7 +134,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Translations (PO)": "Traduzioni (PO)",
     "Template (POT)": "Modello (POT)",
     "File permissions": "Permessi dei file",
-    "Extends: %s": "",
+    "Extends: %s": "Estende: %s",
     "1 language": {
         "one": "1 lingua",
         "other": "lingue"
@@ -148,7 +148,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Use external command:": "Utilizza il comando esterno:",
     "Enter path to msgfmt on server": "Inserisci il percorso a msgfmt sul server",
     "Generate hash tables": "Generare tabelle hash",
-    "Include Fuzzy strings": "",
+    "Include Fuzzy strings": "Include stringhe ambigue",
     "Backing up PO files": "Effettuando un backup dei file PO",
     "Number of backups to keep of each file:": "Numero di backup da conservare per ogni file:",
     "Experimental features": "Funzioni sperimentali",
@@ -169,7 +169,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Inizializza nuove traduzioni in %s ",
     "Select from common languages": "Seleziona una lingua predefinita",
     "or enter any language code": "o inserisci qualsiasi codice lingua",
-    "create in plugin directory": "",
+    "create in plugin directory": "crea nella cartella del plugin",
     "create in global languages directory": "creare nella cartella globale di lingue",
     "Start translating": "Inizia a tradurre",
     "New version available": "Nuova versione disponibile",
@@ -178,6 +178,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Temi",
     "Plugins": "Plugin",
     "Core": "Core",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "Translate WordPress plugins and themes directly in your browser": "Traduci plugin e temi di Wordpress direttamente nel tuo browser"
 } 
 );
