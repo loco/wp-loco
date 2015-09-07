@@ -45,11 +45,13 @@ To translate your own theme or plugin, follow these steps:
 
 To translate someone else’s theme into your language, follow these steps:
 
-1. Create the global languages directory exists at `wp-content/languages/themes`
+1. Create the global languages directory at `wp-content/languages/themes`
 2. Ensure this directory writable by the web server
 3. Find the theme in the list at *Loco Translate > Manage Translations*
 4. Click `+ New language` and follow the on-screen prompts.
 
+
+**Important**: Step 2 above is critical if you don’t want to lose your translations when your theme is updated. Translation files saved inside theme directories will be deleted by WordPress auto-update. The global languages directory is safe, but must be writable by your web server for Loco Translate to save files there.
 
 
 A quick guide on using the plugin is [available here](https://localise.biz/help/wordpress/translate-plugin), but make sure you're familiar with the conventions of [Translating WordPress](http://codex.wordpress.org/Translating_WordPress) before you start.
@@ -59,33 +61,22 @@ Please note that this plugin doesn’t support Windows servers and the editor do
 
 == Frequently Asked Questions ==
 
-= Does this automatically translate my project? =
+= Does this automatically translate my theme? =
 
-No. It's for manually entering your own translations, but we do intend to be integrating some automatic translation services into the plugin soon.
+No. It's for manually entering your own translations.
 
+= Why can't I see the translations appearing on my site? =
 
-= Why can't I see the translations appearing in my theme/plugin? =
+If you’ve set your WordPress language correctly and your theme is loading translations correctly, then the most likely reason is that Loco Translate is not compatible with your theme or plugin. [See this extended FAQ](https://wordpress.org/support/topic/faq-why-arent-my-translations-showing-up-1)
 
-All Loco Translate does is manage your translation process and organize your files, it does not run when people are visiting your site.
+= Why can't it find anything to translate? =
 
-If you think Loco is saving invalid MO files or putting them in the wrong place, then open a [support ticket](http://wordpress.org/support/plugin/loco-translate), 
-but please see [this extended FAQ](https://wordpress.org/support/topic/faq-why-arent-my-translations-showing-up) before posting.
-
-
-= Why can't it extract any translatable strings from my code? =
-
-The extraction process looks for WordPress translation functions with string literal arguments, such as `__('Foo')`.
-
-Using your own custom functions like `myTranslate('Foo')` won't work. Neither will using variables, such as `__( $foo )`.
-
-See [more tips on localizing your theme](https://localise.biz/help/wordpress/theme-localization).
+This would happen if it can’t find a translation template (POT file) and can’t find any WordPress translation functions in your source code either. If it’s not your theme, check with the author whether they provide a POT file. If it is your theme, try [these tips](https://localise.biz/help/wordpress/theme-localization).
 
 
 = Do I need to create a POT (template) file? =
 
-If you’re not familiar with the [Gettext](https://www.gnu.org/software/gettext/) workflow and don’t plan to distribute your plugin then you might want to work without a POT file.
-
-There are some good reasons to maintain a POT file, but Loco Translate doesn’t require it and can sync your translations directly with your source code.
+If you’re not familiar with [Gettext](https://www.gnu.org/software/gettext/) then you may find the workflow of maintaining a template rather complicated. Loco will work without a POT file, but if you plan to distribute your theme or plugin you should add one.
 
 
 
@@ -98,7 +89,7 @@ If writable directories pose a security risk then restrict translation to a deve
 
 = How do I create MO files? =
 
-Every time you save a PO file Loco Translate tries to compile a MO file in the same location. As above, ensure that the web server is able to write to disk, otherwise MO compilation will fail.
+Every time you save a PO file Loco Translate compiles a MO file in the same location. As above, ensure that the web server is able to write to disk, otherwise MO compilation will fail.
 
 
 = Why do I get a syntax error when saving and syncing? =
@@ -109,19 +100,21 @@ See [this extended FAQ](https://wordpress.org/support/topic/faq-what-is-causing-
 
 = Does it support Windows? =
 
-You can access the interface on Windows using Internet Explorer, but version 9 or above is recommended.
+You can access the interface on Windows using Internet Explorer, but version 9 or above is required.
 
 Loco Translate does not support Windows versions of PHP, so if your server has a Windows operating system the plugin may not work properly.
 
 
-= This is too technical; why doesn’t it just work? = 
+= Does it support Solaris? =
 
-In most cases it does, but Loco Translate is not a standalone application - it runs on your server and extraneous factors occasionally cause problems. If the plugin is unable to handle a particular situation automatically then you might have to intervene, and there isn’t always a *non-technical* solution to a technical problem. 
+No. It requires some file system functionality which not available in PHP when running on Solaris.
 
-If you think there is a problem with Loco Translate you can open a [support ticket](https://wordpress.org/support/plugin/loco-translate), but please provide as much relevant detail as possible.
 
-If you have a suggestion on how to improve the experience of using Loco Translate then please [get in touch](https://localise.biz/contact).
+= What support is there? =
 
+If you think there is a problem with Loco Translate you can open a [support ticket](https://wordpress.org/support/plugin/loco-translate), but please provide as much relevant detail as possible. There is no personal support by email for this plugin. 
+
+The majority of new questions in the support forum have been asked before. Please look for similar questions before posting.
 
 
 == Screenshots ==
@@ -137,8 +130,9 @@ If you have a suggestion on how to improve the experience of using Loco Translat
 * Added theme/plugin metadata extraction to POT generation.
 * POT extractor fix for function calls in argument lists.
 * Fix for authors using unsuffixed PO files as templates.
-* Updated Swedish and Turkish translations, added pt_PT and Kurdish and amended typos.
+* Updated translations, added pt_PT and Kurdish and amended typos.
 * Added WordPress skin colours
+* Workarounds for single-file plugins
 
 = 1.5.3 =
 * Critical PHP < 5.4 compatibility bug fix
