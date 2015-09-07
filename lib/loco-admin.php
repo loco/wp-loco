@@ -718,6 +718,14 @@ abstract class LocoAdmin {
                 }
             }
         }
+        // extract from single file plugin
+        else if( $path = $package->get_default_file() ){
+            $dir = dirname($path);
+            $fileref = loco_relative_path( $relative_to, $dir );
+            $source = file_get_contents($path) and
+            $tokens = token_get_all($source) and
+            $export = $extractor->extract( $tokens, str_replace( $dir, $fileref, $path ) );
+        }
         // else use first existing PO file in place of POT
         else if( $po = $package->get_po() ){
             foreach( $po as $code => $path ){

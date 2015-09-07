@@ -85,7 +85,12 @@ abstract class LocoPackage {
     /**
      * Get original data about package stored in WordPress
      */
-    abstract public function get_original( $header );     
+    abstract public function get_original( $header );
+
+    /**
+     * Get primary file containing package headers 
+     */
+    abstract public function get_default_file();
 
 
     /**
@@ -770,21 +775,28 @@ abstract class LocoPackage {
         if( isset($plugins[$handle]) && is_array($plugins[$handle]) ){
             $plugin = $plugins[$handle];
             $domain = $plugin['TextDomain'] or $domain = str_replace('/','-',dirname($handle));
-            $package = new LocoPluginPackage( $handle, $domain, $plugin['Name'], $plugin['DomainPath'] );
-            $root = WP_PLUGIN_DIR.'/'.dirname($handle);
-            $package->add_source( $root );
-            // add PO and POT under plugin root
-            if( $pofiles = LocoAdmin::find_po($root) ){
-                $package->add_po( $pofiles, $domain );
+            if( '.' === $domain ){
+                // single-file plugin has no directory to take a domain from 
+                $domain = substr( basename($handle),0,-4);
             }
-            // pick up any MO files that have missing PO
-            if( $mofiles = LocoAdmin::find_mo($root) ){
-                $package->add_mo( $mofiles, $domain );
+            $package = new LocoPluginPackage( $handle, $domain, $plugin['Name'], $plugin['DomainPath'] );
+            // single-file plugins have no root, or anywhere to save POT file.
+            if( false !== strpos($handle,'/') ){
+                $root = WP_PLUGIN_DIR.'/'.dirname($handle);
+                $package->add_source( $root );
+                // add PO and POT under plugin root
+                if( $pofiles = LocoAdmin::find_po($root) ){
+                    $package->add_po( $pofiles, $domain );
+                }
+                // pick up any MO files that have missing PO
+                if( $mofiles = LocoAdmin::find_mo($root) ){
+                    $package->add_mo( $mofiles, $domain );
+                }
             }
             // find additional plugin PO under WP_LANG_DIR/plugin
             $package->add_lang_dir(  WP_LANG_DIR.'/plugins', $domain );
             // fall back to all POT matches if no exact domain match
-            if( ! $package->pot ){
+            if( ! $package->pot && isset($pofiles) ){
                 unset( $pofiles['po'] );
                 $package->add_po( $pofiles, null );
             }
@@ -970,6 +982,9 @@ class LocoThemePackage extends LocoPackage {
         }
         return $headers;
     }
+    public function get_default_file(){
+        return $this->get_root().'/style.css';
+    }
 }
 
 
@@ -997,6 +1012,9 @@ class LocoPluginPackage extends LocoPackage {
         }
         return $headers;
     }
+    public function get_default_file(){
+        return WP_PLUGIN_DIR.'/'.$this->get_handle();
+    }
 }
 
 
@@ -1009,6 +1027,9 @@ class LocoCorePackage extends LocoPackage {
         return 'core';
     }      
     public function get_original( $header ){
+        return null;
+    }
+    public function get_default_file(){
         return null;
     }
 }
