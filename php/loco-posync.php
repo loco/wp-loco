@@ -44,11 +44,8 @@
     
         }
     
-        // Extract from sources by default
-        if( ! $package->has_source_dirs() ){
-            // nothing to sync
-        }        
-        else if( $exp = LocoAdmin::xgettext( $package, dirname($path) ) ){
+        // Extract from sources
+        if( $exp = LocoAdmin::xgettext( $package, dirname($path) ) ){
             $pot = '';
             break;
         }
