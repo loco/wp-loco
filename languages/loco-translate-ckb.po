@@ -20,7 +20,7 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
-"X-Loco-Target-Locale: ckb_GB\n"
+"X-Loco-Target-Locale: ckb\n"
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:31
@@ -256,7 +256,7 @@ msgstr "%s هیچ دەقەپاوانێکی ڕانەگەیاندووە"
 #: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
 #, php-format
 msgid "Loco has guessed \"%s\""
-msgstr "لۆکۆ \"%s\"ی خەملاندووە.\n"
+msgstr "لۆکۆ \"%s\"ی خەملاندووە."
 
 #: ../lib/loco-packages.php:528
 #, php-format
@@ -559,7 +559,7 @@ msgstr "تایبەتمەندیە تاقیکاریەکان"
 
 #: ../tpl/admin-opts.tpl.php:92
 msgid "Enable WordPress core translations"
-msgstr ""
+msgstr "کاراکردنی وەرگێڕانەکانی کاکڵی وێردپرێس"
 
 #: ../tpl/admin-opts.tpl.php:101
 msgid "Save settings"
@@ -682,6 +682,3 @@ msgstr "کاکڵ"
 #. Description of the plugin
 msgid "Translate WordPress plugins and themes directly in your browser"
 msgstr ""
-
-#~ msgid "Enable Wordpress core translations"
-#~ msgstr "کاراکردنی وەرگێڕانەکانی کاکڵی وێردپرێس"

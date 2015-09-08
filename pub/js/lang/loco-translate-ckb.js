@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ck_CK, Kurdish (Sorani)
  * Exported by: Unregistered user
- * Exported at: Mon, 07 Sep 2015 11:46:19 +0100
+ * Exported at: Tue, 08 Sep 2015 10:15:17 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -84,7 +84,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Folder not writable": "بوخچە بۆ نووسینەوە نیە",
     "Folder not found": "بوخچە نەدۆزرایەوە",
     "%s does not declare a \"Text Domain\"": "%s هیچ دەقەپاوانێکی ڕانەگەیاندووە",
-    "Loco has guessed \"%s\"": "لۆکۆ \"%s\"ی خەملاندووە.\n",
+    "Loco has guessed \"%s\"": "لۆکۆ \"%s\"ی خەملاندووە.",
     "%s does not declare a \"Domain Path\"": "%s هیچ ڕێڕەوێکی پاوانی ڕانەگەیاندووە",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s هیچ دۆسیەیەکی (POT)ی نیە، ئەگەر دەتەوێ دانەیەک لە \"%s/%s.pot\" دروست بکە",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s دۆسیەناوێکی (POT)ی نامۆی هەیە کە (%s) ناویەتی، \"%s.pot\" بە ناوێکی باش دادەنرێ.",
@@ -152,7 +152,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Backing up PO files": "پاراستنی دۆسیە (PO)کان",
     "Number of backups to keep of each file:": "ژمارەی پاراستنەکان بۆ هێشتنەوەی هەر دۆسیەیەک:",
     "Experimental features": "تایبەتمەندیە تاقیکاریەکان",
-    "Enable WordPress core translations": "",
+    "Enable WordPress core translations": "کاراکردنی وەرگێڕانەکانی کاکڵی وێردپرێس",
     "Save settings": "پاشەکەوتکردنی ڕێکخستنەکان",
     "Template file": "دۆسیەی داڕێژە",
     "Switch to...": "گۆڕین بۆ...",
