@@ -127,12 +127,13 @@ The majority of new questions in the support forum have been asked before. Pleas
 == Changelog ==
 
 = 1.5.4 =
-* Added theme/plugin metadata extraction to POT generation.
-* POT extractor fix for function calls in argument lists.
-* Fix for authors using unsuffixed PO files as templates.
-* Updated translations, added pt_PT and Kurdish and amended typos.
+* Added theme/plugin metadata extraction to POT generation
+* POT extractor fix for function calls in argument lists
+* Fix for authors using unsuffixed PO files as templates
+* Updated translations, added pt_PT and Kurdish and amended typos
 * Added WordPress skin colours
 * Workarounds for single-file plugins
+* Fixed reordering bug after sync
 
 = 1.5.3 =
 * Critical PHP < 5.4 compatibility bug fix
