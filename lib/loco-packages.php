@@ -261,10 +261,15 @@ abstract class LocoPackage {
                 $name = basename($path);
                 if( false === strpos($name,'-') ){
                     // PO file has no locale suffix, we might need to use this as a POT if there is none
-                    $key = $this->get_domain();
-                    if( ! isset($this->pot[$key]) ){
-                        $this->pot[$key] = $path;
-                        continue;
+                    if( 'default' === $domain ){
+                        $key = 'default'; // <- core
+                    }
+                    else {
+                        $key = $this->get_domain();
+                        if( ! isset($this->pot[$key]) ){
+                            $this->pot[$key] = $path;
+                            continue;
+                        }
                     }
                 }
                 else {
