@@ -29,4 +29,4 @@ Be sure to check the latest version by typing `git tag` and replacing `x.y.z` in
 
 There is no issue tracker here. Please submit bugs or feature requests in the [WordPress support forum](http://wordpress.org/support/plugin/loco-translate).
 
-The Github repository is for people who want the latest development version of the plugin and prefer Git to [SVN](http://plugins.svn.wordpress.org/loco-translate/trunk/). This is not a collaborative project and there are no resources available for examining pull reqeusts.
+The Github repository is for people who want the latest development version of the plugin and prefer Git to [SVN](http://plugins.svn.wordpress.org/loco-translate/trunk/). This is not a collaborative project and there are no resources available for examining pull requests.
