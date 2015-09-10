@@ -56,8 +56,7 @@ $argpair = $package->get_query();
         <p>
             <label>
                 <input type="radio" name="gforce" value="0"<?php print( $is_global ? '' : ' checked')?><?php print( $pdir_ok ? '' : ' disabled')?> />
-                <?php echo sprintf( Loco::_x('create in plugin directory','Form label' ) )?> 
-                <code><?php Loco::h(LocoAdmin::trim_path($pdir))?>/</code>
+                <?php echo sprintf( Loco::_x('create in <code>%s</code>','Form label' ), LocoAdmin::trim_path($pdir) )?> 
             </label>
             <br />
             <label>
