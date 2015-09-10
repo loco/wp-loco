@@ -30,91 +30,42 @@ Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.co
 
 == Installation ==
 
+= Installing manually: =
+
 1. Unzip all files to the `/wp-content/plugins/loco-translate` directory
 2. Log into WordPress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
 3. Go to *Loco Translate > Manage Translations* in the left-hand menu to start translating
 
+= Basic usage: =
 
-To translate your own theme or plugin, follow these steps:
+To translate a theme into your language, follow these steps:
+
+1. Create the global languages directory at `wp-content/languages/themes`
+2. Ensure this directory writeable by the web server
+3. Find the theme in the list at *Loco Translate > Manage Translations*
+4. Click `+ New language` and follow the on-screen prompts.
+
+**Important**: Step 2 above is critical if you don’t want to lose your translations when your theme is updated. Translation files saved inside theme directories will be deleted by WordPress auto-update. The global languages directory is safe, but must be writeable by your web server for Loco Translate to save files in it.
+
+
+To translate your own theme or plugin for distribution, follow these steps:
 
 1. Create a `languages` subdirectory in your plugin or theme's root directory
-2. Ensure this directory writable by the web server
+2. Ensure this directory writeable by the web server
 3. Find the theme or plugin in the list at *Loco Translate > Manage Translations*
 4. Click `+ New language` and follow the on-screen prompts.
 
 
-To translate someone else’s theme into your language, follow these steps:
-
-1. Create the global languages directory at `wp-content/languages/themes`
-2. Ensure this directory writable by the web server
-3. Find the theme in the list at *Loco Translate > Manage Translations*
-4. Click `+ New language` and follow the on-screen prompts.
-
-
-**Important**: Step 2 above is critical if you don’t want to lose your translations when your theme is updated. Translation files saved inside theme directories will be deleted by WordPress auto-update. The global languages directory is safe, but must be writable by your web server for Loco Translate to save files there.
-
-
-A quick guide on using the plugin is [available here](https://localise.biz/help/wordpress/translate-plugin), but make sure you're familiar with the conventions of [Translating WordPress](http://codex.wordpress.org/Translating_WordPress) before you start.
-
-Please note that this plugin doesn’t support Windows servers and the editor doesn't fully support MSIE<=8.
+More information on using the plugin is [available here](https://localise.biz/help/wordpress/translate-plugin).
 
 
 == Frequently Asked Questions ==
 
-= Does this automatically translate my theme? =
+See our [most common support questions](https://localise.biz/help/wordpress/translate-plugin/faqs).
 
-No. It's for manually entering your own translations.
+= How do I use it? = 
 
-= Why can't I see the translations appearing on my site? =
-
-If you’ve set your WordPress language correctly and your theme is loading translations correctly, then the most likely reason is that Loco Translate is not compatible with your theme or plugin. [See this extended FAQ](https://wordpress.org/support/topic/faq-why-arent-my-translations-showing-up-1)
-
-= Why can't it find anything to translate? =
-
-This would happen if it can’t find a translation template (POT file) and can’t find any WordPress translation functions in your source code either. If it’s not your theme, check with the author whether they provide a POT file. If it is your theme, try [these tips](https://localise.biz/help/wordpress/theme-localization).
-
-
-= Do I need to create a POT (template) file? =
-
-If you’re not familiar with [Gettext](https://www.gnu.org/software/gettext/) then you may find the workflow of maintaining a template rather complicated. Loco will work without a POT file, but if you plan to distribute your theme or plugin you should add one.
-
-
-
-= Why do I get file warnings when I try to save translations? =
-
-To save PO files directly to your site some files and directories must be writable by the web server. If you're unsure how to manage file permissions on your server, ask your system administrator or hosting provider. 
-
-If writable directories pose a security risk then restrict translation to a development server. The file permissions are only required for editing translations and not related to viewing them.
-
-
-= How do I create MO files? =
-
-Every time you save a PO file Loco Translate compiles a MO file in the same location. As above, ensure that the web server is able to write to disk, otherwise MO compilation will fail.
-
-
-= Why do I get a syntax error when saving and syncing? =
-
-This error means something has gone unexpectedly wrong on your server.
-See [this extended FAQ](https://wordpress.org/support/topic/faq-what-is-causing-unexpected-tokencharacter-syntax-error) for some tips on what to do.
-
-
-= Does it support Windows? =
-
-You can access the interface on Windows using Internet Explorer, but version 9 or above is required.
-
-Loco Translate does not support Windows versions of PHP, so if your server has a Windows operating system the plugin may not work properly.
-
-
-= Does it support Solaris? =
-
-No. It requires some file system functionality which not available in PHP when running on Solaris.
-
-
-= What support is there? =
-
-If you think there is a problem with Loco Translate you can open a [support ticket](https://wordpress.org/support/plugin/loco-translate), but please provide as much relevant detail as possible. There is no personal support by email for this plugin. 
-
-The majority of new questions in the support forum have been asked before. Please look for similar questions before posting.
+Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/beginners) and a more advanced [technical overview](https://localise.biz/help/wordpress/translate-plugin/overview).
 
 
 == Screenshots ==
@@ -266,6 +217,13 @@ The majority of new questions in the support forum have been asked before. Pleas
 * Bug fixes and improvements.
 
 
+
+== More info ==
+
+* [About the plugin](https://localise.biz/help/wordpress/translate-plugin/beginners)
+* [Beginner's guide to translating a theme](https://localise.biz/help/wordpress/translate-plugin/beginners)
+* [Technical overview](https://localise.biz/help/wordpress/translate-plugin/overview)
+* [Getting help](https://localise.biz/help/wordpress/translate-plugin/support)
 
 == Coming soon ==
 
