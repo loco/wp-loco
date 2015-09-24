@@ -77,6 +77,10 @@ Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/
 
 == Changelog ==
 
+= 1.5.5 =
+* Added Korean translations
+* Fixed hard-coding of dirname in symlink workaround
+
 = 1.5.4 =
 * Added theme/plugin metadata extraction to POT generation
 * POT extractor fix for function calls in argument lists
@@ -251,6 +255,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Brazilian Portuguese translations by [pamcabezas](https://github.com/pamcabezas) and [Marcelo Saldanha](http://www.associadosweb.com/)
 * European Portuguese translations by [Pedro Mendonça](https://github.com/pedro-mendonca)
 * French translations by [Borjan Tchakaloff](https://github.com/bibz)
+* Korean translations by [Josh Kim](mailto:joshkkim@gmail.com)
 
 == Keyboard shortcuts ==
 
