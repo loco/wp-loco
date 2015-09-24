@@ -99,7 +99,7 @@ $nav = array (
         </table>
         <p class="submit">
             <input type="submit" class="button-primary" value="<?php Loco::h( Loco::__('Save settings') )?>" />
-            <a class="button" href="http://wordpress.org/support/plugin/<?php echo Loco::NS?>" target="_blank"><?php Loco::h( Loco::__('Get help') )?></a>
+            <a class="button" href="https://localise.biz/help/wordpress/translate-plugin/support" target="_blank"><?php Loco::h( Loco::__('Get help') )?></a>
         </p>
     </form>
     

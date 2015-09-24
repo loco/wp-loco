@@ -140,7 +140,7 @@ $modified or $pofiles[] = $path;
                     <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php Loco::h(Loco::__('Filter translations'))?>" autocomplete="off" disabled />
                 </div>
             </form>
-            <form action="http://wordpress.org/support/plugin/<?php echo Loco::NS?>" target="_blank" class="loco-right">
+            <form action="https://localise.biz/help/wordpress/translate-plugin/support" target="_blank" class="loco-right">
                 <button class="button loco-help" data-loco="help" type="submit">
                     <span><?php Loco::h( Loco::_x('Help','Editor button') )?></span>
                 </button>

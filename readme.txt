@@ -80,6 +80,7 @@ Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/
 = 1.5.5 =
 * Added Korean translations
 * Fixed hard-coding of dirname in symlink workaround
+* Changed help links to point to Loco site
 
 = 1.5.4 =
 * Added theme/plugin metadata extraction to POT generation

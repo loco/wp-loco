@@ -55,7 +55,7 @@ $nav = array (
     
     <p class="submit">
         <a class="button-primary" href="<?php Loco::h( LocoAdmin::uri() )?>"><?php Loco::h( Loco::__('Back') )?></a>
-        <a class="button" href="http://wordpress.org/support/plugin/<?php echo Loco::NS?>" target="_blank"><?php Loco::h( Loco::__('Get help') )?></a>
+        <a class="button" href="https://localise.biz/help/wordpress/translate-plugin/support" target="_blank"><?php Loco::h( Loco::__('Get help') )?></a>
     </p>
 
     
