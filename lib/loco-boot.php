@@ -9,7 +9,7 @@ abstract class Loco {
     const NS = 'loco-translate';
 
     /** plugin version */ 
-    const VERSION = '1.5.4';
+    const VERSION = '1.5.5';
     
     /* current plugin locale */
     private static $locale;
@@ -77,10 +77,9 @@ abstract class Loco {
         $here = __FILE__;
         if( 0 !== strpos( WP_PLUGIN_DIR, $here ) ){
             // something along this path has been symlinked into the document tree
-            // temporary measure assumes name of plugin folder is unchanged.
-            $here = WP_PLUGIN_DIR.'/'.Loco::NS.'/loco.php';
+            $name = basename( dirname( dirname($here) ) );
+            $here = WP_PLUGIN_DIR.'/'.$name.'/lib/loco-boot.php';
         }
-        //var_dump( $here );
         return $here;
     }     
     
@@ -90,7 +89,7 @@ abstract class Loco {
      */
     public static function basedir(){
         static $dir;
-        isset($dir) or $dir = dirname( self::__file() );
+        isset($dir) or $dir = dirname( dirname( self::__file() ) );
         return $dir;    
     }
     
@@ -100,7 +99,7 @@ abstract class Loco {
      */
     public static function baseurl(){
         static $url;
-        isset($url) or $url = plugins_url( '', self::__file() );
+        isset($url) or $url = plugins_url( '', self::basedir().'/loco.php' );
         return $url;
     }
     
