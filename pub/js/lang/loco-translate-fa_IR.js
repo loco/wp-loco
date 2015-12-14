@@ -2,9 +2,9 @@
  * Loco js export: JavaScript function
  * Project: loco.po conversion
  * Release: Working copy
- * Locale: fa_IR, Persian
+ * Locale: fa-IR, Persian
  * Exported by: Unregistered user
- * Exported at: Tue, 08 Sep 2015 10:15:18 +0100
+ * Exported at: Mon, 14 Dec 2015 11:00:52 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

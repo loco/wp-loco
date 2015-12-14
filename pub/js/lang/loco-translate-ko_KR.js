@@ -2,9 +2,9 @@
  * Loco js export: JavaScript function
  * Project: loco.po conversion
  * Release: Working copy
- * Locale: ko_KR, ko
+ * Locale: ko-KR, Korean
  * Exported by: Unregistered user
- * Exported at: Thu, 24 Sep 2015 09:59:03 +0100
+ * Exported at: Mon, 14 Dec 2015 11:00:54 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

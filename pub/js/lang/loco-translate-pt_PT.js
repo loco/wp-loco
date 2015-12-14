@@ -2,9 +2,9 @@
  * Loco js export: JavaScript function
  * Project: loco.po conversion
  * Release: Working copy
- * Locale: , pt_PT
+ * Locale: pt-PT, Portuguese (Portugal)
  * Exported by: Unregistered user
- * Exported at: Tue, 08 Sep 2015 10:15:22 +0100
+ * Exported at: Mon, 14 Dec 2015 11:00:56 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -16,7 +16,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     
     // calc numeric index of a plural form (0-1)
     function pluralIndex( n ){
-        return Number( (n != 1) );
+        return Number( n != 1 );
     }
 
     // expose public t() function

@@ -2,9 +2,9 @@
  * Loco js export: JavaScript function
  * Project: loco.po conversion
  * Release: Working copy
- * Locale: es_ES, Spanish (Spain)
+ * Locale: es-ES, Spanish (Spain)
  * Exported by: Unregistered user
- * Exported at: Tue, 08 Sep 2015 10:15:18 +0100
+ * Exported at: Mon, 14 Dec 2015 11:00:51 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

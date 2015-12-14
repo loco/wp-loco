@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 3.5
-Tested up to: 4.3.1
+Tested up to: 4.4
 Stable tag: 1.5.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -78,7 +78,7 @@ Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/
 == Changelog ==
 
 = 1.5.5 =
-* Added Korean translations
+* Added Korean and Ukrainian translations
 * Fixed hard-coding of dirname in symlink workaround
 * Changed help links to point to Loco site
 
@@ -257,6 +257,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * European Portuguese translations by [Pedro Mendonça](https://github.com/pedro-mendonca)
 * French translations by [Borjan Tchakaloff](https://github.com/bibz)
 * Korean translations by [Josh Kim](mailto:joshkkim@gmail.com)
+* Ukrainian translations by [Dmitriy Malyuta](https://www.facebook.com/malyuta)
 
 == Keyboard shortcuts ==
 

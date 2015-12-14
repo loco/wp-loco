@@ -3,267 +3,266 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon Dec 14 2015 10:59:03 GMT+0000 (GMT)\n"
+"PO-Revision-Date: Mon Dec 14 2015 10:58:03 GMT+0000 (GMT)\n"
 "Last-Translator: admin <admin@localise.biz>\n"
-"Language-Team: Pedro Mendonça <ped.gaspar@gmail.com>\n"
-"Language: Portuguese (Portugal)\n"
+"Language-Team: \n"
+"Language: Ukrainian\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
+"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-Basepath: ..\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
 "X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
 "__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
 "_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
-"X-Poedit-SearchPath-0: .\n"
-"X-Poedit-SearchPathExcluded-0: lib/loco-boot.php\n"
-"X-Loco-Target-Locale: pt_PT\n"
+"X-Loco-Target-Locale: uk_UA\n"
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:31
 msgctxt "Message label"
 msgid "Error"
-msgstr "Erro"
+msgstr "Помилка"
 
 #: ../lib/loco-admin.php:41
 msgctxt "Message label"
 msgid "Warning"
-msgstr "Aviso"
+msgstr "Попередження"
 
 #: ../lib/loco-admin.php:54 ../tpl/admin-list.tpl.php:98
 msgctxt "Message label"
 msgid "OK"
-msgstr "Ok"
+msgstr "ОК"
 
 #: ../lib/loco-admin.php:63
 msgid "Permission denied"
-msgstr "Permissão negada"
+msgstr "Доступ заборонено"
 
 #: ../lib/loco-admin.php:86
 msgid "Settings saved"
-msgstr "Definições guardadas"
+msgstr "Налаштування збережено"
 
 #: ../lib/loco-admin.php:126 ../lib/loco-packages.php:545
 #, php-format
 msgid "%s is not an official WordPress language"
-msgstr "%s não é um idioma oficial do WordPress"
+msgstr "%s не є офіційною мовою WordPress"
 
 #: ../lib/loco-admin.php:199
 msgid "New PO file"
-msgstr "Novo ficheiro PO"
+msgstr "Новий РО-файл"
 
 #: ../lib/loco-admin.php:214
 #, php-format
 msgid "PO file used as template. This will be renamed to %s on first save"
 msgstr ""
-"Ficheiro PO utilizado como modelo. Será renomeado para %s quando o guardar "
-"pela primeira vez."
+"РО-файл використовується як шаблон. Його буде перейменовано до %s при "
+"першому збереженні"
 
 #: ../lib/loco-admin.php:312
 msgid "You must specify a valid locale for a new PO file"
-msgstr "Tem que especificar um código locale válido para o novo ficheiro PO"
+msgstr "Ви маєте визначити правильну локаль для нового РО-файла"
 
 #: ../lib/loco-admin.php:337 ../lib/loco-admin.php:428
 msgid "No translatable strings found"
-msgstr "Não foram encontrados termos para tradução"
+msgstr "Не знайдено строк, які можна було б перекласти"
 
 #: ../lib/loco-admin.php:337
 msgid "Cannot create a PO file."
-msgstr "Não pode ser criado o ficheiro PO."
+msgstr "Не можу створити РО файл."
 
 #: ../lib/loco-admin.php:344
 #, php-format
 msgid "PO file already exists with locale %s"
-msgstr "O ficheiro PO já existe com o código locale %s"
+msgstr "РО-файл вже існує для локалі %s"
 
 #: ../lib/loco-admin.php:398
 msgid ""
 "File cannot be created automatically. Fix the file permissions or use "
 "Download instead of Save"
 msgstr ""
-"Não foi possível criar o ficheiro automaticamente. Corrija as permissões do "
-"ficheiro ou use Descarregar em vez de Guardar."
+"Файл не може бути створений автоматично. Виправте права доступу або "
+"використайте «Завантажити» замість «Зберегти»"
 
 #: ../lib/loco-admin.php:407 ../lib/loco-admin.php:416
 #, php-format
 msgid "%s file is empty"
-msgstr "O ficheiro %s está vazio"
+msgstr "%s файл пустий"
 
 #: ../lib/loco-admin.php:408 ../lib/loco-admin.php:423
 msgid "Run Sync to update from source code"
-msgstr "Clique em Sincronizar para actualizar a partir do código fonte"
+msgstr "Запустіть «Синхронізувати», щоб оновити з ісходного коду"
 
 #: ../lib/loco-admin.php:412 ../php/loco-posync.php:56
 msgid "No strings could be extracted from source code"
-msgstr "Nenhum termo pôde ser extraído a partir do código fonte"
+msgstr "Немає строк, які можуть бути витягнуті із ісходного коду"
 
 #: ../lib/loco-admin.php:419
 #, php-format
 msgid "Run Sync to update from %s"
-msgstr "Clique em Sincronizar para actualizar a partir de %s"
+msgstr "Запустіть «Синхронізувати», щоб оновити з %s"
 
 #: ../lib/loco-admin.php:438
 msgid "Source code has been modified, run Sync to update POT"
 msgstr ""
-"O código fonte foi modificado, clique em Sincronizar para actualizar o POT"
+"Ісходний код було модифіковано, запустіть «Синхронізувати», щоб оновити РОТ"
 
 #: ../lib/loco-admin.php:442
 msgid "POT has been modified since PO file was saved, run Sync to update"
 msgstr ""
-"O ficheiro POT foi modificado depois do ficheiro PO ter sido guardado, "
-"clique em Sincronizar para actualizar"
+"РОТ було модифіковано з моменту останнього збереження РО-файлу, запустіть "
+"«Синхронізувати» для оновлення"
 
 #: ../lib/loco-admin.php:538
 msgid "Bad file path"
-msgstr "Caminho do ficheiro incorrecto"
+msgstr "Невірний шлях до файлу"
 
 #: ../lib/loco-admin.php:775
 #, php-format
 msgid "Empty or invalid %s file"
-msgstr "O ficheiro %s está vazio ou é inválido"
+msgstr "Пустий або ушкоджений %s файл "
 
 #: ../lib/loco-admin.php:779
 #, php-format
 msgid "%s file has no header"
-msgstr "O ficheiro %s não tem cabeçalho"
+msgstr "%s файл не має заголовку"
 
 #: ../lib/loco-admin.php:926
 msgctxt "Add button"
 msgid "New template"
-msgstr "Novo modelo"
+msgstr "Новий шаблон"
 
 #: ../lib/loco-admin.php:945
 msgctxt "Add button"
 msgid "New language"
-msgstr "Novo idioma"
+msgstr "Нова мова"
 
 #: ../lib/loco-admin.php:984
 #, php-format
 msgid "%s%% translated"
-msgstr "%s%% traduzido"
+msgstr "%s%% перекладено"
 
 #: ../lib/loco-admin.php:984
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
-msgstr[0] "1 termo"
-msgstr[1] "%s termos"
+msgstr[0] "1 строка"
+msgstr[1] "%s строк"
 
 #: ../lib/loco-admin.php:987
 #, php-format
 msgid "%s fuzzy"
-msgstr "%s impreciso(s)"
+msgstr "%s неясний"
 
 #: ../lib/loco-admin.php:990
 #, php-format
 msgid "%s untranslated"
-msgstr "%s não traduzido"
+msgstr "%s неперекладено"
 
 #: ../lib/loco-admin.php:1036
 msgid "Failed to compile MO file with built-in compiler"
-msgstr "Falhou ao compilar o ficheiro MO com compilador incluído"
+msgstr "Не вдалося скомпілювати МО-файл за допомогою вбудованного компілятора"
 
 #: ../lib/loco-admin.php:1079 ../tpl/admin-nav.tpl.php:27
 msgid "Loco, Translation Management"
-msgstr "Loco, Translation Management"
+msgstr "Керування перекладами Loco"
 
 #: ../lib/loco-admin.php:1080 ../lib/loco-admin.php:1117
 msgid "Manage translations"
-msgstr "Gerir traduções"
+msgstr "Керувати перекладами"
 
 #: ../lib/loco-admin.php:1081
 msgid "Translation options"
-msgstr "Opções de tradução"
+msgstr "Налаштування перекладів"
 
 #: ../lib/loco-admin.php:1088
 msgid "Loco Translate"
-msgstr "Loco Translate"
+msgstr "Перекладач Loco"
 
 #: ../lib/loco-admin.php:1118 ../tpl/admin-fscheck.tpl.php:8
 #: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
 #: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
 msgid "Settings"
-msgstr "Definições"
+msgstr "Налаштування"
 
 #: ../lib/loco-admin.php:1142
 msgid "File download failed"
-msgstr "Falhou ao descarregar o ficheiro"
+msgstr "Скачування файлу не вдалося"
 
 #: ../lib/loco-admin.php:1152
 msgid "WPLANG is deprecated and should be removed from wp-config.php"
-msgstr "O WPLANG está obsoleto e deve ser removido do wp-config.php"
+msgstr "WPLANG застарів і його буде видалено з wp-config.php"
 
 #: ../lib/loco-locales.php:77
 msgid "Unknown language"
-msgstr "Idioma desconhecido"
+msgstr "Невідома мова"
 
 #: ../lib/loco-packages.php:451 ../lib/loco-packages.php:458
 msgid "Some files not writable"
-msgstr "Alguns ficheiros não são editáveis"
+msgstr "Деякі файли неможливо записувати"
 
 #: ../lib/loco-packages.php:461
 msgid "Some files missing"
-msgstr "Alguns ficheiros em falta"
+msgstr "Деякі файли відсутні"
 
 #: ../lib/loco-packages.php:467 ../lib/loco-packages.php:471
 #, php-format
 msgid "\"%s\" folder not writable"
-msgstr "Pasta \"%s\" não é editável"
+msgstr "Папка \"%s\" не дозволяє записувати"
 
 #: ../lib/loco-packages.php:492
 msgid "POT file not writable"
-msgstr "Ficheiro POT não editável"
+msgstr "РОТ-файл не дозволяє записувати"
 
 #: ../lib/loco-packages.php:497
 msgid "PO file not writable"
-msgstr "Ficheiro PO não editável"
+msgstr "РО-файл не дозволяє записувати"
 
 #: ../lib/loco-packages.php:499
 msgid "MO file not writable"
-msgstr "Ficheiro MO não editável"
+msgstr "МО-файл не дозволяє записувати"
 
 #: ../lib/loco-packages.php:499
 msgid "MO file not found"
-msgstr "Ficheiro MO não encontrado"
+msgstr "МО-файл не знайдено"
 
 #: ../lib/loco-packages.php:504
 msgid "Folder not writable"
-msgstr "Pasta não editável"
+msgstr "Папка не дозволяє записувати"
 
 #: ../lib/loco-packages.php:504
 msgid "Folder not found"
-msgstr "Pasta não encontrada"
+msgstr "Папку не знайдено"
 
 #: ../lib/loco-packages.php:523
 #, php-format
 msgid "%s does not declare a \"Text Domain\""
-msgstr "O %s não declara um \"Text Domain\""
+msgstr "%s не декларує \"Text Domain\""
 
 #: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
 #, php-format
 msgid "Loco has guessed \"%s\""
-msgstr "O Loco adivinhou \"%s\""
+msgstr "Loco припускає \"%s\""
 
 #: ../lib/loco-packages.php:528
 #, php-format
 msgid "%s does not declare a \"Domain Path\""
-msgstr "O %s não declara um \"Domain Path\""
+msgstr "%s не декларує \"Domain Path\""
 
 #: ../lib/loco-packages.php:533
 #, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
-msgstr "O %s não tem ficheiro POT. Crie um em \"%s/%s.pot\" se precisar."
+msgstr ""
+"%s не має РОТ-файлу. Створіть його як \"%s/%s.pot\", якщо ви потребуєте."
 
 #: ../lib/loco-packages.php:536
 #, php-format
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
-msgstr ""
-"O %s tem um ficheiro POT com um nome estranho (%s). Seria melhor um nome "
-"como \"%s.pot\"."
+msgstr "%s має дивну назву РОТ-файлу (%s). Кращою назвою була б \"%s.pot\""
 
 #: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
 #: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
@@ -272,26 +271,27 @@ msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
 "install it"
 msgstr ""
-"A extensão \"%s\" do PHP não está instalada. Se tiver algum problema deverá "
-"proceder à sua instalação."
+"PHP-розширення \"%s\" не встановлене. Якщо ви досвічені у цих питаннях, "
+"встановіть його"
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
-msgstr "O utilizador não tem permissões para gerir traduções"
+msgstr "Користувач немає доступу до керування перекладами"
 
 #: ../php/loco-data.php:21 ../php/loco-posave.php:10 ../php/loco-posync.php:9
 msgid "Invalid data posted to server"
-msgstr "Dados inválidos enviados para o servidor"
+msgstr "Невірна дата встановлена на сервері"
 
 #: ../php/loco-download.php:75 ../php/loco-posave.php:121
 #, php-format
 msgid "Failed to compile MO file with %s, check your settings"
-msgstr "Falhou ao compilar ficheiro MO com %s, verifique as suas definições"
+msgstr ""
+"Невдалося скомпілювати МО-файл за допомогою %s, перевірте ваші налаштування"
 
 #: ../php/loco-posave.php:23 ../php/loco-posync.php:22
 #, php-format
 msgid "Package not found called %s"
-msgstr "Pacote com nome %s não encontrado"
+msgstr "Пакунок %s не знайдено"
 
 #: ../php/loco-posave.php:58
 #, php-format
@@ -299,8 +299,8 @@ msgid ""
 "Web server cannot create backups in \"%s\". Fix file permissions or disable "
 "backups in settings"
 msgstr ""
-"O servidor web não pode criar cópias de segurança em \"%s\". Corrija as "
-"permissões do ficheiro ou desactive as cópias de segurança nas definições."
+"Сервер не може створити бекап у \"%s\". Виправте права доступу до файлів, "
+"або вимкніть створення бекапів у налаштуваннях."
 
 #: ../php/loco-posave.php:66
 #, php-format
@@ -308,8 +308,8 @@ msgid ""
 "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
 "create it manually."
 msgstr ""
-"O servidor web não pode criar o directório \"%s\" em \"%s\". Corrija "
-"permissões do ficheiro ou crie o directório manualmente."
+"Сервер не може створити папку \"%s\" у \"%s\". Виправте права доступу до "
+"папки або створіть її вручну."
 
 #: ../php/loco-posave.php:69
 #, php-format
@@ -317,8 +317,8 @@ msgid ""
 "Web server cannot create files in the \"%s\" directory. Fix file permissions "
 "or use the download function."
 msgstr ""
-"O servidor web não pode criar ficheiros no directório \"%s\". Corrija as "
-"permissões do ficheiro ou utilize a função Descarregar."
+"Сервер не може створити файл у папці \"%s\". Виправте права доступу або "
+"використовуйте функції «Скачати РО» та «Скачати МО»."
 
 #: ../php/loco-posave.php:81
 #, php-format
@@ -326,347 +326,350 @@ msgid ""
 "%s file is not writable by the web server. Fix file permissions or download "
 "and copy to \"%s/%s\"."
 msgstr ""
-"O ficheiro %s não é editável pelo servidor web. Corrija as permissões do "
-"ficheiro ou descarregue e copie para \"%s/%s\"."
+"Сервер не дозволяє записувати у файл %s. Виправте права доступу або скачайте "
+"файл та скопіюйте його вручну до \"%s/%s\"."
 
 #: ../php/loco-posave.php:102
 msgid "Cannot create MO file"
-msgstr "Não é possível criar ficheiro MO"
+msgstr "Не можу створити МО-файл"
 
 #: ../php/loco-posave.php:105
 msgid "Cannot overwrite MO file"
-msgstr "Não é possível substituir ficheiro MO"
+msgstr "Не можу переписати МО-файл"
 
 #: ../php/loco-posave.php:131
 msgid "Failed to write MO file"
-msgstr "Falhou ao guardar ficheiro MO"
+msgstr "Не вдалося записати МО-файл"
 
 #: ../pub/js/lang/dummy.php:8
 msgid "Unknown error"
-msgstr "Erro desconhecido"
+msgstr "Невідома помилка"
 
 #: ../pub/js/lang/dummy.php:10
 msgid "PO file saved"
-msgstr "Ficheiro PO guardado"
+msgstr "РО-файл збережено"
 
 #: ../pub/js/lang/dummy.php:12
 msgid "and MO file compiled"
-msgstr "e ficheiro MO compilado"
+msgstr "та МО-файл скомпільовано"
 
 #: ../pub/js/lang/dummy.php:15
 #, php-format
 msgid "Merged from %s"
-msgstr "Misturado a partir de %s"
+msgstr "Об'єднано з %s"
 
 #: ../pub/js/lang/dummy.php:17
 msgid "Merged from source code"
-msgstr "Misturado a partir do código fonte"
+msgstr "Об'єднано з ісходним кодом"
 
 #: ../pub/js/lang/dummy.php:19
 #, php-format
 msgid "Already up to date with %s"
-msgstr "Actualizado desde %s"
+msgstr "Вже оновлено з %s"
 
 #: ../pub/js/lang/dummy.php:21
 msgid "Already up to date with source code"
-msgstr "Já está actualizado a partir do código fonte"
+msgstr "Вже оновлено з ісходного коду"
 
 #: ../pub/js/lang/dummy.php:23
 #, php-format
 msgid "1 new string added"
 msgid_plural "%s new strings added"
-msgstr[0] "1 novo termo adicionado"
-msgstr[1] "%s novos termos adicionados"
+msgstr[0] "1 нову строку додано"
+msgstr[1] "%s нових строк додано"
+msgstr[2] "%s нових строк додано"
 
 #: ../pub/js/lang/dummy.php:25
 #, php-format
 msgid "1 obsolete string removed"
 msgid_plural "%s obsolete strings removed"
-msgstr[0] "1 um termo obsoleto removido"
-msgstr[1] "%s termos obsoletos removidos"
+msgstr[0] "1 застарілу строку видалено"
+msgstr[1] "%s застарілих строк видалено"
+msgstr[2] "%s застарілих строк видалено"
 
 #: ../pub/js/lang/dummy.php:27
 msgid "Your changes will be lost if you continue without saving"
-msgstr "As suas alterações serão perdidas se continuar sem guardar"
+msgstr "Внесені зміни буде втрачено, якщо ви продовжите без збереження"
 
 #. label for the window pane holding native translation
 #: ../pub/js/lang/dummy.php:35
 msgctxt "Editor pane"
 msgid "Source text"
-msgstr "Texto fonte"
+msgstr "Ісходний текст"
 
 #. where %s is the language, e.g French translation
 #: ../pub/js/lang/dummy.php:38
 #, php-format
 msgctxt "Editor pane"
 msgid "%s translation"
-msgstr "Tradução para %s"
+msgstr "%s переклад"
 
 #. label for the window pane holding translator comments
 #: ../pub/js/lang/dummy.php:41
 msgctxt "Editor pane"
 msgid "Comments"
-msgstr "Comentários"
+msgstr "Коментарі"
 
 #. label for the window pane holding message context
 #: ../pub/js/lang/dummy.php:44
 msgctxt "Editor pane"
 msgid "Context"
-msgstr "Contexto"
+msgstr "Контекст"
 
 #: ../pub/js/lang/dummy.php:52
 msgid "Translation"
-msgstr "Tradução"
+msgstr "Переклад"
 
 #: ../pub/js/lang/dummy.php:54
 msgid "No source files in this package, nothing to sync"
-msgstr "Não há ficheiros de origem neste pacote, não há nada para sincronizar."
+msgstr "Немає ісходних файлів у цьому пакунку, немає що синхронізувати"
 
 #: ../pub/js/lang/dummy.php:56
 msgid "No strings could be extracted from source files"
-msgstr "Nenhum termo pôde ser extraído a partir dos ficheiros de origem"
+msgstr "Немає строк, які б можна було витягнути із ісходних файлі"
 
 #: ../pub/js/lang/dummy.php:58
 #, php-format
 msgctxt "Form label"
 msgid "create in <code>%s</code>"
-msgstr "criar em <code>%s</code>"
+msgstr "створено у <code>%s</code>"
 
 #: ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:6
 #: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
 #: ../tpl/admin-root.tpl.php:6
 msgid "Packages"
-msgstr "Pacotes"
+msgstr "Пакунки"
 
 #: ../tpl/admin-fscheck.tpl.php:10
 msgid "File check"
-msgstr "Verificação do ficheiro"
+msgstr "Перевірка файлу"
 
 #: ../tpl/admin-fscheck.tpl.php:19
 #, php-format
 msgid "File system permissions for %s"
-msgstr "Permissões do sistema de ficheiros para %s"
+msgstr "Налаштування файлової системи для %s"
 
 #: ../tpl/admin-fscheck.tpl.php:43
 #, php-format
 msgid "Other potential issues with %s"
-msgstr "Outros problemas potenciais com %s"
+msgstr "Інші потенційні проблеми з %s"
 
 #: ../tpl/admin-fscheck.tpl.php:57
 msgid "Back"
-msgstr "Voltar"
+msgstr "Повернутись назад"
 
 #: ../tpl/admin-fscheck.tpl.php:58 ../tpl/admin-opts.tpl.php:102
 msgid "Get help"
-msgstr "Obter ajuda"
+msgstr "Отримати допомогу"
 
 #: ../tpl/admin-list.tpl.php:11
 msgctxt "Table header"
 msgid "Package details"
-msgstr "Detalhes do pacote"
+msgstr "Деталі пакунку"
 
 #: ../tpl/admin-list.tpl.php:14
 msgctxt "Table header"
 msgid "Translations (PO)"
-msgstr "Traduções (PO)"
+msgstr "Переклади (РО)"
 
 #: ../tpl/admin-list.tpl.php:17
 msgctxt "Table header"
 msgid "Template (POT)"
-msgstr "Modelo (POT)"
+msgstr "Шаблони (РОТ)"
 
 #: ../tpl/admin-list.tpl.php:20
 msgctxt "Table header"
 msgid "File permissions"
-msgstr "Permissões do ficheiro"
+msgstr "Доступ до файлів"
 
 #: ../tpl/admin-list.tpl.php:40
 #, php-format
 msgid "Extends: %s"
-msgstr "Estendido: %s"
+msgstr "Розширення: %s"
 
 #: ../tpl/admin-list.tpl.php:44
 #, php-format
 msgid "1 language"
 msgid_plural "%u languages"
-msgstr[0] "1 idioma"
-msgstr[1] "%u idiomas"
+msgstr[0] "1 мова"
+msgstr[1] "%u мов"
+msgstr[2] "%u мов"
 
 #: ../tpl/admin-list.tpl.php:49 ../tpl/admin-poedit.tpl.php:57
 msgctxt "Modified time"
 msgid "Updated"
-msgstr "Actualizado"
+msgstr "Оновлено"
 
 #: ../tpl/admin-nav.tpl.php:26
 msgid "Powered by"
-msgstr "Desenvolvido por"
+msgstr "Запроваджено"
 
 #: ../tpl/admin-nav.tpl.php:32
 msgid "Loco may not work as expected"
-msgstr "O Loco pode não funcionar como esperado"
+msgstr "Можливо, Loco працює не так, як планувалося"
 
 #: ../tpl/admin-opts.tpl.php:18
 msgid "Configure Loco Translate"
-msgstr "Configurar Loco Translate"
+msgstr "Налаштувати Перекладач Loco"
 
 #: ../tpl/admin-opts.tpl.php:27 ../tpl/admin-opts.tpl.php:31
 msgid "Compiling MO files"
-msgstr "A compilar ficheiros MO"
+msgstr "Компіляція МО-файлів"
 
 #: ../tpl/admin-opts.tpl.php:36
 msgid "Use built-in MO compiler."
-msgstr "Utilizar compilador MO incluído."
+msgstr "Використовувати вбудований МО-компілятор."
 
 #: ../tpl/admin-opts.tpl.php:42
 msgid "Use external command:"
-msgstr "Utilizar comando externo:"
+msgstr "Використовувати зовнішні команди:"
 
 #: ../tpl/admin-opts.tpl.php:47
 msgid "Enter path to msgfmt on server"
-msgstr "Introduza o caminho para o msgfmt no servidor"
+msgstr "Введіть шлях до msgfmt на сервері"
 
 #: ../tpl/admin-opts.tpl.php:54
 msgid "Generate hash tables"
-msgstr "Gerar tabela hash"
+msgstr "Генерувати таблицю хешів"
 
 #: ../tpl/admin-opts.tpl.php:60
 msgid "Include Fuzzy strings"
-msgstr "Incluir termos imprecisos"
+msgstr "Включити нечітки строки"
 
 #: ../tpl/admin-opts.tpl.php:67 ../tpl/admin-opts.tpl.php:71
 msgid "Backing up PO files"
-msgstr "A criar cópia de segurança dos ficheiros PO"
+msgstr "Збереження(бекап) РО-файлів"
 
 #: ../tpl/admin-opts.tpl.php:75
 msgid "Number of backups to keep of each file:"
-msgstr "Número de cópias de segurança a manter de para cada ficheiro:"
+msgstr "Скільки бекапів зберегати для кожного файлу:"
 
 #: ../tpl/admin-opts.tpl.php:83 ../tpl/admin-opts.tpl.php:87
 msgid "Experimental features"
-msgstr "Recursos experimentais"
+msgstr "Експериментальні можливості"
 
 #: ../tpl/admin-opts.tpl.php:92
 msgid "Enable WordPress core translations"
-msgstr "Activar traduções do core do WordPress"
+msgstr "Включити переклад ядра WordPress"
 
 #: ../tpl/admin-opts.tpl.php:101
 msgid "Save settings"
-msgstr "Guardar definições"
+msgstr "Зберегти налаштування"
 
 #: ../tpl/admin-poedit.tpl.php:32
 msgid "Template file"
-msgstr "Ficheiro modelo"
+msgstr "Файл шаблону"
 
 #: ../tpl/admin-poedit.tpl.php:40
 msgctxt "Dropdown label"
 msgid "Switch to..."
-msgstr "Mudar para..."
+msgstr "Переключитись до..."
 
 #: ../tpl/admin-poedit.tpl.php:62
 msgid "never"
-msgstr "nunca"
+msgstr "ніколи"
 
 #: ../tpl/admin-poedit.tpl.php:87
 msgctxt "Editor button"
 msgid "Save"
-msgstr "Guardar"
+msgstr "Зберегти"
 
 #: ../tpl/admin-poedit.tpl.php:94 ../tpl/admin-poedit.tpl.php:103
 msgctxt "Editor button"
 msgid "Download"
-msgstr "Descarregar"
+msgstr "Скачати"
 
 #: ../tpl/admin-poedit.tpl.php:115
 msgctxt "Editor button"
 msgid "Sync"
-msgstr "Sincronizar"
+msgstr "Синхронізувати"
 
 #: ../tpl/admin-poedit.tpl.php:120
 msgctxt "Editor button"
 msgid "Revert"
-msgstr "Reverter"
+msgstr "Повернути"
 
 #: ../tpl/admin-poedit.tpl.php:125
 msgctxt "Editor button"
 msgid "Add"
-msgstr "Adicionar"
+msgstr "Додати"
 
 #: ../tpl/admin-poedit.tpl.php:130
 msgctxt "Editor button"
 msgid "Del"
-msgstr "Apagar"
+msgstr "Видалити"
 
 #: ../tpl/admin-poedit.tpl.php:135
 msgctxt "Editor button"
 msgid "Fuzzy"
-msgstr "Impreciso"
+msgstr "Нечіткі"
 
 #: ../tpl/admin-poedit.tpl.php:140
 msgid "Filter translations"
-msgstr "Filtrar traduções"
+msgstr "Фільтрувати переклади"
 
 #: ../tpl/admin-poedit.tpl.php:145
 msgctxt "Editor button"
 msgid "Help"
-msgstr "Ajuda"
+msgstr "Справка"
 
 #: ../tpl/admin-poinit.tpl.php:22
 #, php-format
 msgid "Initialize new translations in %s"
-msgstr "Iniciar novas traduções em %s"
+msgstr "Ініціалізувати нові переклади у %s"
 
 #: ../tpl/admin-poinit.tpl.php:35
 msgid "Select from common languages"
-msgstr "Selecionar a partir dos idiomas mais comuns"
+msgstr "Оберіть із доступних мов"
 
 #: ../tpl/admin-poinit.tpl.php:47
 msgctxt "Form label"
 msgid "or enter any language code"
-msgstr "ou introduza um código de idioma"
+msgstr "або введіть код будь-якої мови"
 
 #: ../tpl/admin-poinit.tpl.php:59
 msgctxt "Form label"
 msgid "create in plugin directory"
-msgstr "criar no directório do plugin"
+msgstr "створити у папці плагіну"
 
 #: ../tpl/admin-poinit.tpl.php:65
 msgctxt "Form label"
 msgid "create in global languages directory"
-msgstr "criar no directório global de idiomas"
+msgstr "створити у глобальній папці для мов"
 
 #: ../tpl/admin-poinit.tpl.php:72
 msgctxt "Submit button"
 msgid "Start translating"
-msgstr "Começar a traduzir"
+msgstr "Розпочати переклад"
 
 #: ../tpl/admin-root.tpl.php:18
 msgid "New version available"
-msgstr "Novo atualização disponível"
+msgstr "Нова версія доступна"
 
 #: ../tpl/admin-root.tpl.php:21
 #, php-format
 msgid "Upgrade to version %s of Loco Translate"
-msgstr "Actualizar para a versão %s do Loco Translate"
+msgstr "Оновіться до версії %s Перекладача Loco"
 
 #: ../tpl/admin-root.tpl.php:31
 msgid "Select a plugin or theme to translate"
-msgstr "Selecione um plugin ou tema para traduzir"
+msgstr "Оберіть плагін або тему для перекладу"
 
 #: ../tpl/admin-root.tpl.php:40
 msgctxt "Package list header"
 msgid "Themes"
-msgstr "Temas"
+msgstr "Теми"
 
 #: ../tpl/admin-root.tpl.php:53
 msgctxt "Package list header"
 msgid "Plugins"
-msgstr "Plugins"
+msgstr "Плагіни"
 
 #: ../tpl/admin-root.tpl.php:66
 msgctxt "Package list header"
 msgid "Core"
-msgstr "Core"
+msgstr "Ядро"
 
 #. Description of the plugin
 msgid "Translate WordPress plugins and themes directly in your browser"
-msgstr "Traduza plugins e temas do WordPress directamente no seu browser"
+msgstr "Переклад плагінів та тем WordPress прямо у вашому браузері"

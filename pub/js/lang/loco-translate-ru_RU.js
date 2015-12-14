@@ -2,17 +2,17 @@
  * Loco js export: JavaScript function
  * Project: loco.po conversion
  * Release: Working copy
- * Locale: ru_RU, Russian
+ * Locale: ru-RU, Russian
  * Exported by: Unregistered user
- * Exported at: Tue, 08 Sep 2015 10:15:23 +0100
+ * Exported at: Mon, 14 Dec 2015 11:00:56 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
     var pluralForms = [
-    "one",
-    "few",
-    "other"
+    "Form 0",
+    "Form 1",
+    "Form 2"
 ];
     
     // calc numeric index of a plural form (0-2)
@@ -61,9 +61,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New language": "Новый язык",
     "%s%% translated": "%s%% переведено",
     "1 string": {
-        "one": "1 строка",
-        "few": "%s строк(и)",
-        "other": ""
+        "Form 0": "1 строка",
+        "Form 1": "%s строк(и)",
+        "Form 2": ""
     },
     "%s fuzzy": "неточный перевод",
     "%s untranslated": "%s не переведено",
@@ -110,14 +110,14 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Already up to date with %s": "",
     "Already up to date with source code": "",
     "1 new string added": {
-        "one": "1 новая строка добавлена",
-        "few": "%s новых строки добавлено",
-        "other": ""
+        "Form 0": "1 новая строка добавлена",
+        "Form 1": "%s новых строки добавлено",
+        "Form 2": ""
     },
     "1 obsolete string removed": {
-        "one": "1строка удалена",
-        "few": "%s строки удалено",
-        "other": ""
+        "Form 0": "1строка удалена",
+        "Form 1": "%s строки удалено",
+        "Form 2": ""
     },
     "Your changes will be lost if you continue without saving": "Изменения будут потеряны, если Вы не сохранитесь",
     "Source text": "",
@@ -140,9 +140,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "File permissions": "Права доступа к файлу",
     "Extends: %s": "",
     "1 language": {
-        "one": "1 язык",
-        "few": "%u языка(ов)",
-        "other": ""
+        "Form 0": "1 язык",
+        "Form 1": "%u языка(ов)",
+        "Form 2": ""
     },
     "Updated": "Обновлённый",
     "Powered by": "Представлено",
