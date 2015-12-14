@@ -81,6 +81,7 @@ Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/
 * Added Korean and Ukrainian translations
 * Fixed hard-coding of dirname in symlink workaround
 * Changed help links to point to Loco site
+* Added Solaris incompatibility warning
 
 = 1.5.4 =
 * Added theme/plugin metadata extraction to POT generation

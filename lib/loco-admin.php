@@ -1200,3 +1200,7 @@ extension_loaded('json') or loco_require('compat/loco-json');
 
 // emergency polyfills for php<5.4
 version_compare( phpversion(), '5.4', '>=' ) or loco_require('compat/loco-php');
+
+// other system requirement problems
+defined('GLOB_BRACE') or loco_require('compat/loco-glob');
+
