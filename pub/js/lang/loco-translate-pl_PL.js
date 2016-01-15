@@ -4,15 +4,15 @@
  * Release: Working copy
  * Locale: pl-PL, Polish
  * Exported by: Unregistered user
- * Exported at: Mon, 14 Dec 2015 11:00:55 +0000
+ * Exported at: Fri, 15 Jan 2016 09:46:45 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
     var pluralForms = [
-    "Form 0",
-    "Form 1",
-    "Form 2"
+    "one",
+    "few",
+    "other"
 ];
     
     // calc numeric index of a plural form (0-2)
@@ -61,9 +61,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New language": "Nowy język",
     "%s%% translated": "%s%% przetłumaczono",
     "1 string": {
-        "Form 0": "1 linia",
-        "Form 1": "%s linie",
-        "Form 2": "%s linii"
+        "one": "1 linia",
+        "few": "%s linie",
+        "other": "%s linii"
     },
     "%s fuzzy": "%s niepewnych",
     "%s untranslated": "%s nie przetłumaczone",
@@ -110,14 +110,14 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Already up to date with %s": "Już aktualne z %s",
     "Already up to date with source code": "Już aktualne z kodu źródłowego",
     "1 new string added": {
-        "Form 0": "1 nowa linia dodana",
-        "Form 1": "%s nowe linie dodano",
-        "Form 2": "%s nowych linii dodano"
+        "one": "1 nowa linia dodana",
+        "few": "%s nowe linie dodano",
+        "other": "%s nowych linii dodano"
     },
     "1 obsolete string removed": {
-        "Form 0": "1 zbędna linia usunięta",
-        "Form 1": "%s zbędne linie usunięte",
-        "Form 2": "%s zbędnych linii usunięto"
+        "one": "1 zbędna linia usunięta",
+        "few": "%s zbędne linie usunięte",
+        "other": "%s zbędnych linii usunięto"
     },
     "Your changes will be lost if you continue without saving": "Utracisz aktualne zmiany jeśli będziesz kontynuował bez zapisywania",
     "Source text": "Tekst źródłowy",
@@ -140,9 +140,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "File permissions": "Uprawnienia plików",
     "Extends: %s": "Rozszerza: %s",
     "1 language": {
-        "Form 0": "1 język",
-        "Form 1": "%u języki",
-        "Form 2": "%u języków"
+        "one": "1 język",
+        "few": "%u języki",
+        "other": "%u języków"
     },
     "Updated": "Zaktualizowano",
     "Powered by": "Napędzany przez",

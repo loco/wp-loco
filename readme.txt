@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 3.5
-Tested up to: 4.4
+Tested up to: 4.4.1
 Stable tag: 1.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -76,6 +76,9 @@ Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/
 
 
 == Changelog ==
+
+= 1.5.6 =
+* Added Czech translations
 
 = 1.5.5 =
 * Added Korean and Ukrainian translations
@@ -259,6 +262,8 @@ These features are on our todo list. There's no particular timeframe for any of 
 * French translations by [Borjan Tchakaloff](https://github.com/bibz)
 * Korean translations by [Josh Kim](mailto:joshkkim@gmail.com)
 * Ukrainian translations by [Dmitriy Malyuta](https://www.facebook.com/malyuta)
+* Czech translations by [Martin Kokeš](https://twitter.com/zhr3k)
+
 
 == Keyboard shortcuts ==
 

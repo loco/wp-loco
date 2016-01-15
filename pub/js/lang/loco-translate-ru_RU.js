@@ -4,15 +4,15 @@
  * Release: Working copy
  * Locale: ru-RU, Russian
  * Exported by: Unregistered user
- * Exported at: Mon, 14 Dec 2015 11:00:56 +0000
+ * Exported at: Fri, 15 Jan 2016 09:46:46 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
     var pluralForms = [
-    "Form 0",
-    "Form 1",
-    "Form 2"
+    "one",
+    "few",
+    "other"
 ];
     
     // calc numeric index of a plural form (0-2)
@@ -61,9 +61,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New language": "Новый язык",
     "%s%% translated": "%s%% переведено",
     "1 string": {
-        "Form 0": "1 строка",
-        "Form 1": "%s строк(и)",
-        "Form 2": ""
+        "one": "1 строка",
+        "few": "%s строк(и)",
+        "other": ""
     },
     "%s fuzzy": "неточный перевод",
     "%s untranslated": "%s не переведено",
@@ -110,14 +110,14 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Already up to date with %s": "",
     "Already up to date with source code": "",
     "1 new string added": {
-        "Form 0": "1 новая строка добавлена",
-        "Form 1": "%s новых строки добавлено",
-        "Form 2": ""
+        "one": "1 новая строка добавлена",
+        "few": "%s новых строки добавлено",
+        "other": ""
     },
     "1 obsolete string removed": {
-        "Form 0": "1строка удалена",
-        "Form 1": "%s строки удалено",
-        "Form 2": ""
+        "one": "1строка удалена",
+        "few": "%s строки удалено",
+        "other": ""
     },
     "Your changes will be lost if you continue without saving": "Изменения будут потеряны, если Вы не сохранитесь",
     "Source text": "",
@@ -140,9 +140,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "File permissions": "Права доступа к файлу",
     "Extends: %s": "",
     "1 language": {
-        "Form 0": "1 язык",
-        "Form 1": "%u языка(ов)",
-        "Form 2": ""
+        "one": "1 язык",
+        "few": "%u языка(ов)",
+        "other": ""
     },
     "Updated": "Обновлённый",
     "Powered by": "Представлено",

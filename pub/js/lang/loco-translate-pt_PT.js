@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: pt-PT, Portuguese (Portugal)
  * Exported by: Unregistered user
- * Exported at: Mon, 14 Dec 2015 11:00:56 +0000
+ * Exported at: Fri, 15 Jan 2016 09:46:45 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

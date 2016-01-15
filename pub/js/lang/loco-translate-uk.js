@@ -4,15 +4,15 @@
  * Release: Working copy
  * Locale: uk-UA, Ukrainian
  * Exported by: Unregistered user
- * Exported at: Mon, 14 Dec 2015 11:00:58 +0000
+ * Exported at: Fri, 15 Jan 2016 09:46:47 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
     var pluralForms = [
-    "Form 0",
-    "Form 1",
-    "Form 2"
+    "one",
+    "few",
+    "other"
 ];
     
     // calc numeric index of a plural form (0-2)
@@ -61,9 +61,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New language": "Нова мова",
     "%s%% translated": "%s%% перекладено",
     "1 string": {
-        "Form 0": "1 строка",
-        "Form 1": "%s строк",
-        "Form 2": ""
+        "one": "1 строка",
+        "few": "%s строк",
+        "other": ""
     },
     "%s fuzzy": "%s неясний",
     "%s untranslated": "%s неперекладено",
@@ -110,14 +110,14 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Already up to date with %s": "Вже оновлено з %s",
     "Already up to date with source code": "Вже оновлено з ісходного коду",
     "1 new string added": {
-        "Form 0": "1 нову строку додано",
-        "Form 1": "%s нових строк додано",
-        "Form 2": "%s нових строк додано"
+        "one": "1 нову строку додано",
+        "few": "%s нових строк додано",
+        "other": "%s нових строк додано"
     },
     "1 obsolete string removed": {
-        "Form 0": "1 застарілу строку видалено",
-        "Form 1": "%s застарілих строк видалено",
-        "Form 2": "%s застарілих строк видалено"
+        "one": "1 застарілу строку видалено",
+        "few": "%s застарілих строк видалено",
+        "other": "%s застарілих строк видалено"
     },
     "Your changes will be lost if you continue without saving": "Внесені зміни буде втрачено, якщо ви продовжите без збереження",
     "Source text": "Ісходний текст",
@@ -140,9 +140,9 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "File permissions": "Доступ до файлів",
     "Extends: %s": "Розширення: %s",
     "1 language": {
-        "Form 0": "1 мова",
-        "Form 1": "%u мов",
-        "Form 2": "%u мов"
+        "one": "1 мова",
+        "few": "%u мов",
+        "other": "%u мов"
     },
     "Updated": "Оновлено",
     "Powered by": "Запроваджено",
