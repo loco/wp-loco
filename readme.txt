@@ -26,8 +26,6 @@ Features include:
 
 Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.com/timwhitlock">@timwhitlock</a> / <a rel="author" href="https://plus.google.com/106703751121449519322">Tim Whitlock</a>
 
-
-
 == Installation ==
 
 = Installing manually: =
@@ -61,11 +59,16 @@ More information on using the plugin is [available here](https://localise.biz/he
 
 == Frequently Asked Questions ==
 
-See our [most common support questions](https://localise.biz/help/wordpress/translate-plugin/faqs).
-
 = How do I use it? = 
 
-Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/beginners) and a more advanced [technical overview](https://localise.biz/help/wordpress/translate-plugin/overview).
+Try our [beginner's guide](https://localise.biz/help/wordpress/translate-plugin/beginners), or the more advanced [technical overview](https://localise.biz/help/wordpress/translate-plugin/overview) if you’re familiar with WordPress localisation.
+
+= How do I get help? =
+
+Please see [getting help with Loco Translate](https://localise.biz/help/wordpress/translate-plugin/support) and note that personal support by email is not available for this plugin. Help is provided via the [plugin support forum](https://wordpress.org/support/plugin/loco-translate).
+
+Before posting your questions on the support forum, please see the [most common support questions](https://localise.biz/help/wordpress/translate-plugin/faqs).
+
 
 
 == Screenshots ==
