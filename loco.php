@@ -25,24 +25,11 @@ function loco_require(){
         $ret = require_once $dir.'/lib/'.$subpath.'.php';
     }
     return $ret;
-} 
+}
 
 
 
 // Inialize admin screen
-if( is_admin() ){
+if( function_exists('is_admin') && is_admin() ){
     loco_require('loco-boot','loco-admin');
-}
-
-// else fire up theme functionality for admins
-else {
-    add_action( 'after_setup_theme', 'loco_after_setup_theme' );
-    function loco_after_setup_theme(){
-        if( is_user_logged_in() ){
-            loco_require('loco-boot');
-            //if( current_user_can( Loco::admin_capablity() ) ){
-            // TODO font end functionality
-            //}
-        }
-    }
 }
