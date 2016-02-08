@@ -83,6 +83,7 @@ Before posting your questions on the support forum, please see the [most common 
 = 1.5.6 =
 * Added Czech translations
 * Updated Russian translations
+* No longer using glob functions
 
 = 1.5.5 =
 * Added Korean and Ukrainian translations

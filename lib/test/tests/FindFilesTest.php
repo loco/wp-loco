@@ -32,8 +32,7 @@ class FileFilesTest extends PHPUnit_Framework_TestCase {
 
     
     public function testFindGrouped(){
-        $pattern = WP_CONTENT_DIR.'/themes/twentyfourteen/languages/*{.po,.pot}';
-        $files = LocoAdmin::find_grouped( $pattern, GLOB_NOSORT|GLOB_BRACE );
+        $files = LocoAdmin::find_po( WP_CONTENT_DIR.'/themes/twentyfourteen/languages' );
         $this->assertStringEndsWith('twentyfourteen.pot', $files['pot'][0] );
     }
     

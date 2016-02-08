@@ -639,54 +639,41 @@ abstract class LocoAdmin {
     /**
      * Recursively find files of any given extensions
      */
-    private static function find( $dir, array $exts ){
-        $options = 0;
-        $found = array_fill_keys( $exts, array() );
-        $exts = implode(',',$exts);
-        if( isset($exts[1]) ){
-            $options |= GLOB_BRACE;
-            $exts = '{'.$exts.'}';
-        }
-        return self::find_recursive( $dir, '/*.'.$exts, $options, $found );
+    private static function find( $dir, array $exts, $group = false ){
+        $match = '/\\.(?:'.implode('|',$exts).')$/';
+        return self::find_grouped( $dir, $match, array_fill_keys( $exts, array() ), true );
     }
     
     
     
     /**
      * @internal
-     * @param string path to start with no trailing slash
-     * @param string path pattern to match, e.g. "/*.po"
-     * @param int optional GLOB_* options
-     * @param array existing collation to add to in recursion
-     * @return array collection of paths grouped by extension, { po: [..], pot: [..] }
      */
-    private static function find_recursive( $dir, $pattern, $options, array $found ){
-        // collect files in this directory level
-        $found = self::find_grouped( $dir.$pattern, GLOB_NOSORT|$options, $found ); 
-        // recurse to subdirectories
-        $sub = glob( $dir.'/*', GLOB_ONLYDIR|GLOB_NOSORT );
-        if( is_array($sub) ){
-            foreach( $sub as $dir ){
-                $found = self::find_recursive( $dir, $pattern, $options, $found );
+    public static function find_grouped( $dir, $match, array $found = array(), $recurse = false ){
+        $rs = opendir($dir);
+        while( $f = readdir($rs) ){
+            if( '.' === $f{0} ){
+                continue;
             }
-        }
-        return $found;
-    }
-    
-    
-    /**
-     * @internal
-     */
-    public static function find_grouped( $pattern, $options = 0, $found = array() ){
-        $files = glob( $pattern, $options );
-        if( is_array($files) ){
-            foreach( $files as $path ){
+            $path = $dir.'/'.$f;
+            if( ! file_exists($path) ){
+                // likely to be a symlink to outside PHP's open_basedir. file_exists call will have raised E_WARNING
+                continue;
+            }
+            if( is_dir($path) ){
+                if( $recurse ){
+                    $found = self::find_grouped( $path, $match, $found, true );
+                }
+            }
+            else if( ! $match || preg_match($match,$path) ){
                 $ext = strtolower( pathinfo($path,PATHINFO_EXTENSION ) );
                 $found[$ext][] = $path;
             }
         }
+        closedir($rs);
         return $found;
-    }    
+    }
+
     
     
     
@@ -1200,7 +1187,3 @@ extension_loaded('json') or loco_require('compat/loco-json');
 
 // emergency polyfills for php<5.4
 version_compare( phpversion(), '5.4', '>=' ) or loco_require('compat/loco-php');
-
-// other system requirement problems
-defined('GLOB_BRACE') or loco_require('compat/loco-glob');
-

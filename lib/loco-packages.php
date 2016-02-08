@@ -228,9 +228,8 @@ abstract class LocoPackage {
      * find additional plugin PO under WP_LANG_DIR
      */
     private function add_lang_dir( $langdir, $domain ){      
-        $pattern = $langdir.'/'.$domain.'{-*.po,.pot}';
         $nfiles = $this->nfiles;
-        $files = LocoAdmin::find_grouped( $pattern, GLOB_NOSORT|GLOB_BRACE ) and
+        $files = LocoAdmin::find_grouped( $langdir, '/(?:-[^\.]+\.po|\.pot)$/' ) and
         $this->add_po( $files, $domain );
         // add $langdir if files added
         if( $nfiles !== $this->nfiles ){
@@ -818,7 +817,7 @@ abstract class LocoPackage {
         static $grouped;
         if( ! isset($grouped) ){
             $grouped = array();
-            foreach( LocoAdmin::find_grouped( WP_LANG_DIR.'/*{.po,.pot}', GLOB_NOSORT|GLOB_BRACE ) as $ext => $files ){
+            foreach( LocoAdmin::find_grouped( WP_LANG_DIR, '/\.pot?$/' ) as $ext => $files ){
                 foreach( $files as $path ){
                     $domain = LocoAdmin::resolve_file_domain( $path );
                     $grouped[ $domain ][ $ext ][] = $path;
