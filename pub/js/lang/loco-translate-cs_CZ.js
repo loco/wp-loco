@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: cs-CZ, Czech
  * Exported by: Unregistered user
- * Exported at: Fri, 15 Jan 2016 09:46:40 +0000
+ * Exported at: Mon, 08 Feb 2016 10:11:01 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     

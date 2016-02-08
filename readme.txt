@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 3.5
-Tested up to: 4.4.1
+Tested up to: 4.4.2
 Stable tag: 1.5.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -82,6 +82,7 @@ Before posting your questions on the support forum, please see the [most common 
 
 = 1.5.6 =
 * Added Czech translations
+* Updated Russian translations
 
 = 1.5.5 =
 * Added Korean and Ukrainian translations
@@ -253,7 +254,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * German translations by [Sebastian König](http://aykutmania.de) and [Arno Welzel](https://wordpress.org/support/profile/awelzel)
 * Turkish translations by [Abdullah Pazarbaşı](http://abdullahpazarbasi.com), Abdullah Manaz and [WordCommerce](http://www.wordcommerce.com/wordcommerce-iletisim/)
 * Swedish translations by [Jimmy Malmqvist](http://jimmymalmqvist.com)
-* Russian translations by [Alexey Tkachenko](http://atkachenko.ru)
+* Russian translations by [Alexey Tkachenko](http://atkachenko.ru) and Vyacheslav Stabrovsky
 * Indonesian translations by [Ivan Lanin](https://twitter.com/ivanlanin)
 * Italian translations by [ElectricFeet](http://wordpress.org/support/profile/electricfeet)
 * Polish translations by [Jerry1333](http://www.jerry1333.net)

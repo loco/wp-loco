@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: sv-SE, Swedish
  * Exported by: Unregistered user
- * Exported at: Fri, 15 Jan 2016 09:46:46 +0000
+ * Exported at: Mon, 08 Feb 2016 10:11:08 +0000
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
