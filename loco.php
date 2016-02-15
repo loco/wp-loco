@@ -11,6 +11,13 @@ Domain Path: /languages/
 */
 
 
+/**
+ * Avoid conflict with version 2.0
+ */
+if( function_exists('loco_include') ){
+    return;
+}
+
 
 /** 
  * Include a component from lib subdirectory

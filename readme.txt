@@ -81,7 +81,7 @@ Before posting your questions on the support forum, please see the [most common 
 == Changelog ==
 
 = 1.5.6 =
-* Added Czech translations
+* Added Czech and Greek translations
 * Updated Russian translations
 * No longer using glob functions
 
@@ -268,6 +268,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Korean translations by [Josh Kim](mailto:joshkkim@gmail.com)
 * Ukrainian translations by [Dmitriy Malyuta](https://www.facebook.com/malyuta)
 * Czech translations by [Martin Kokeš](https://twitter.com/zhr3k)
+* Greek translations by [Stathis Mellios](mailto:mellios@live.com)
 
 
 == Keyboard shortcuts ==
