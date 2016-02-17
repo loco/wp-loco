@@ -649,7 +649,7 @@ abstract class LocoAdmin {
     /**
      * @internal
      */
-    public static function find_grouped( $dir, $match, array $found = array(), $recurse = false ){
+    public static function find_grouped( $dir, $match, array $found = array(), $recurse = false, $recursions = array() ){
         $rs = opendir($dir);
         while( $f = readdir($rs) ){
             if( '.' === $f{0} ){
@@ -660,9 +660,16 @@ abstract class LocoAdmin {
                 // likely to be a symlink to outside PHP's open_basedir. file_exists call will have raised E_WARNING
                 continue;
             }
+            if( is_link($path) ){
+                $path = realpath($path);
+                if( ! $path ){
+                    continue;
+                }
+            }
             if( is_dir($path) ){
-                if( $recurse ){
-                    $found = self::find_grouped( $path, $match, $found, true );
+                if( $recurse && ! isset($recursions[$path]) ){
+                    $recursions[$path] = true;
+                    $found = self::find_grouped( $path, $match, $found, true, $recursions );
                 }
             }
             else if( ! $match || preg_match($match,$path) ){
