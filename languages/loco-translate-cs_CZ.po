@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Fri Jan 15 2016 09:45:37 GMT+0000 (GMT)\n"
-"Last-Translator: admin <animal@animal.local>\n"
-"Language-Team: \n"
+"PO-Revision-Date: Thu Apr 07 2016 19:44:43 GMT+0100 (BST)\n"
+"Last-Translator: admin <support@localise.biz>\n"
+"Language-Team: Czech\n"
 "Language: Czech\n"
+"Plural-Forms: nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : "
+"2\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=( n == 1 ) ? 0 : ( n >= 2 && n <= 4 ) ? 1 : "
-"2\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -22,9 +22,11 @@ msgstr ""
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
 "X-Loco-Target-Locale: cs_CZ\n"
+"X-Loco-WordPress-Plugin: 2.0"
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:31
+#, fuzzy
 msgctxt "Message label"
 msgid "Error"
 msgstr "Chyba"
@@ -264,14 +266,14 @@ msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr "%s má podivný název souboru POT (%s). Lepší jméno bylo by \"%s.pot\""
 
 #: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
-#: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
+#: lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
 #, php-format
 msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
 "install it"
 msgstr ""
-"PHP rozšíření \"%s\" není nainstalováno. Pokud dochází k problémům, měli "
-"byste jej nainstalovat"
+"PHP rozšíření \"%s\" není nainstalováno. Pokud dochází k problémům, měli byste "
+"jej nainstalovat"
 
 #: ../php/loco-ajax.php:17 ../php/loco-download.php:21
 msgid "User does not have permission to manage translations"
@@ -297,8 +299,8 @@ msgid ""
 "Web server cannot create backups in \"%s\". Fix file permissions or disable "
 "backups in settings"
 msgstr ""
-"Webový server nemůže vytvářet zálohy v \"%s\". Opravte oprávnění souborů "
-"nebo zakažte zálohy v nastavení"
+"Webový server nemůže vytvářet zálohy v \"%s\". Opravte oprávnění souborů nebo "
+"zakažte zálohy v nastavení"
 
 #: ../php/loco-posave.php:66
 #, php-format
@@ -306,8 +308,8 @@ msgid ""
 "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
 "create it manually."
 msgstr ""
-"Webový server nemůže vytvořit adresář \"%s\" v \"%s\". Opravte oprávnění "
-"souborů nebo jej vytvořte ručně."
+"Webový server nemůže vytvořit adresář \"%s\" v \"%s\". Opravte oprávnění souborů "
+"nebo jej vytvořte ručně."
 
 #: ../php/loco-posave.php:69
 #, php-format

@@ -3,14 +3,14 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon Feb 15 2016 15:07:31 GMT+0000 (GMT)\n"
+"PO-Revision-Date: Fri Jun 24 2016 12:35:10 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
-"Language-Team: \n"
-"Language: Greek\n"
+"Language-Team: Greek\n"
+"Language: el\n"
+"Plural-Forms: nplurals=2; plural=n != 1\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -20,7 +20,7 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
-"X-Loco-Target-Locale: el_GR\n"
+"X-Loco-Target-Locale: el_GR"
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:31
@@ -47,7 +47,6 @@ msgid "Settings saved"
 msgstr "Οι ρυθμίσεις αποθηκεύτηκαν"
 
 #: ../lib/loco-admin.php:126 ../lib/loco-packages.php:545
-#, php-format
 msgid "%s is not an official WordPress language"
 msgstr "%s δεν είναι μια επίσημη γλώσσα του WordPress"
 
@@ -56,7 +55,6 @@ msgid "New PO file"
 msgstr "Νέο αρχείο PO"
 
 #: ../lib/loco-admin.php:214
-#, php-format
 msgid "PO file used as template. This will be renamed to %s on first save"
 msgstr ""
 "Το αρχείο PO χρησιμοποιήθηκε ως πρότυπο. Αυτό θα μετονομαστεί σε %s με την "
@@ -75,7 +73,6 @@ msgid "Cannot create a PO file."
 msgstr "Δε μπορεί να δημιουργηθεί ένα αρχείο PO."
 
 #: ../lib/loco-admin.php:344
-#, php-format
 msgid "PO file already exists with locale %s"
 msgstr "Το αρχείο PO υπάρχει ήδη με την τοποθεσία %s"
 
@@ -88,7 +85,6 @@ msgstr ""
 "αρχείου ή χρησιμοποιήστε τη Λήψη αντί για την Αποθήκευση"
 
 #: ../lib/loco-admin.php:407 ../lib/loco-admin.php:416
-#, php-format
 msgid "%s file is empty"
 msgstr "Το αρχείο %s είναι άδειο"
 
@@ -101,7 +97,6 @@ msgid "No strings could be extracted from source code"
 msgstr "Δεν μπορούν να εξαχθούν φράσεις από τον πηγαίο κώδικα"
 
 #: ../lib/loco-admin.php:419
-#, php-format
 msgid "Run Sync to update from %s"
 msgstr "Τρέξτε τον Συγχρονισμό για να γίνει ενημέρωση από το %s"
 
@@ -122,12 +117,10 @@ msgid "Bad file path"
 msgstr "Λάθος διεύθυνση αρχείου"
 
 #: ../lib/loco-admin.php:775
-#, php-format
 msgid "Empty or invalid %s file"
 msgstr "Κενό ή μη έγκυρο αρχείο %s"
 
 #: ../lib/loco-admin.php:779
-#, php-format
 msgid "%s file has no header"
 msgstr "Το αρχείο %s δεν έχει κεφαλίδα"
 
@@ -142,24 +135,20 @@ msgid "New language"
 msgstr "Νέα γλώσσα"
 
 #: ../lib/loco-admin.php:984
-#, php-format
 msgid "%s%% translated"
 msgstr "%s%% μεταφράστηκε"
 
 #: ../lib/loco-admin.php:984
-#, php-format
 msgid "1 string"
 msgid_plural "%s strings"
 msgstr[0] "1 φράση"
 msgstr[1] "%s φράσεις"
 
 #: ../lib/loco-admin.php:987
-#, php-format
 msgid "%s fuzzy"
 msgstr "%s ασαφές"
 
 #: ../lib/loco-admin.php:990
-#, php-format
 msgid "%s untranslated"
 msgstr "%s αμετάφραστο"
 
@@ -184,9 +173,9 @@ msgstr "Επιλογές μετάφρασης"
 msgid "Loco Translate"
 msgstr "Loco Translate"
 
-#: ../lib/loco-admin.php:1118 ../tpl/admin-fscheck.tpl.php:8
-#: ../tpl/admin-opts. tpl.php:7 ../tpl/admin-poedit.tpl.php:7
-#: ../tpl/admin-poinit.tpl.php:7 .. /tpl/admin-root.tpl.php:7
+#: ../lib/loco-admin.php:1118 ../tpl/admin-fscheck.tpl.php:8 ../tpl/admin-opts. 
+#: tpl.php:7 ../tpl/admin-poedit.tpl.php:7 ../tpl/admin-poinit.tpl.php:7 .. 
+#: tpl/admin-root.tpl.php:7
 msgid "Settings"
 msgstr "Ρυθμίσεις"
 
@@ -212,7 +201,6 @@ msgid "Some files missing"
 msgstr "Κάποια αρχεία λείπουν"
 
 #: ../lib/loco-packages.php:467 ../lib/loco-packages.php:471
-#, php-format
 msgid "\"%s\" folder not writable"
 msgstr "Ο φάκελος \"%s\" δεν είναι εγγράψιμος"
 
@@ -241,37 +229,31 @@ msgid "Folder not found"
 msgstr "Ο φάκελος δε βρέθηκε"
 
 #: ../lib/loco-packages.php:523
-#, php-format
 msgid "%s does not declare a \"Text Domain\""
 msgstr "Το %s δε δηλώνει κάποιο \"Πεδίο Κειμένου\""
 
 #: ../lib/loco-packages.php:523 ../lib/loco-packages.php:528
-#, php-format
 msgid "Loco has guessed \"%s\""
 msgstr "Το Loco έχει μαντέξει \"%s\""
 
 #: ../lib/loco-packages.php:528
-#, php-format
 msgid "%s does not declare a \"Domain Path\""
 msgstr "Το %s δε δηλώνει κάποιο \"Πεδίο Διεύθυνσης\""
 
 #: ../lib/loco-packages.php:533
-#, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
 msgstr ""
 "Το %s δεν έχει κάποιο αρχείο POT. Εάν χρειάζεστε ένα, δημιουργήστε το στο "
 "\"%s/%s.pot\""
 
 #: ../lib/loco-packages.php:536
-#, php-format
 msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr ""
 "Το %s έχει ένα περίεργο όνομα αρχείου (%s). Ένα καλύτερο όνομα θα ήταν το "
 "\"%s.pot\""
 
-#: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
-#: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
-#, php-format
+#: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 .. 
+#: lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
 msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
 "install it"
@@ -288,18 +270,15 @@ msgid "Invalid data posted to server"
 msgstr "Δημοσιεύθηκαν μη έγκυρα δεδομένα στο διακομιστή"
 
 #: ../php/loco-download.php:75 ../php/loco-posave.php:121
-#, php-format
 msgid "Failed to compile MO file with %s, check your settings"
 msgstr ""
 "Αποτυχία μεταγλώττισης του αρχείου MO με το %s, ελέγξτε τις ρυθμίσεις σας"
 
 #: ../php/loco-posave.php:23 ../php/loco-posync.php:22
-#, php-format
 msgid "Package not found called %s"
 msgstr "Το πακέτο %s δε βρέθηκε"
 
 #: ../php/loco-posave.php:58
-#, php-format
 msgid ""
 "Web server cannot create backups in \"%s\". Fix file permissions or disable "
 "backups in settings"
@@ -309,7 +288,6 @@ msgstr ""
 "στις ρυθμίσεις"
 
 #: ../php/loco-posave.php:66
-#, php-format
 msgid ""
 "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
 "create it manually."
@@ -318,7 +296,6 @@ msgstr ""
 "Διορθώστε τα δικαιώματα αρχείου ή δημιουργήστε το χειροκίνητα."
 
 #: ../php/loco-posave.php:69
-#, php-format
 msgid ""
 "Web server cannot create files in the \"%s\" directory. Fix file permissions "
 "or use the download function."
@@ -327,7 +304,6 @@ msgstr ""
 "Διορθώστε τα δικαιώματα αρχείου ή χρησιμοποιήστε τη λειτουργία Λήψη."
 
 #: ../php/loco-posave.php:81
-#, php-format
 msgid ""
 "%s file is not writable by the web server. Fix file permissions or download "
 "and copy to \"%s/%s\"."
@@ -360,7 +336,6 @@ msgid "and MO file compiled"
 msgstr "και το αρχείο MO μεταγλωττίστηκε"
 
 #: ../pub/js/lang/dummy.php:15
-#, php-format
 msgid "Merged from %s"
 msgstr "Συγχώνευση από %s"
 
@@ -369,7 +344,6 @@ msgid "Merged from source code"
 msgstr "Συγχώνευση από τον πηγαίο κώδικα"
 
 #: ../pub/js/lang/dummy.php:19
-#, php-format
 msgid "Already up to date with %s"
 msgstr "Ήδη ενημερωμένο με το %s"
 
@@ -378,14 +352,12 @@ msgid "Already up to date with source code"
 msgstr "Ήδη ενημερωμένο με τον πηγαίο κώδικα"
 
 #: ../pub/js/lang/dummy.php:23
-#, php-format
 msgid "1 new string added"
 msgid_plural "%s new strings added"
 msgstr[0] "Προστέθηκε 1 καινούργια φράση"
 msgstr[1] "Προστέθηκαν %s καινούργιες φράσεις"
 
 #: ../pub/js/lang/dummy.php:25
-#, php-format
 msgid "1 obsolete string removed"
 msgid_plural "%s obsolete strings removed"
 msgstr[0] "Αφαιρέθηκε 1 απαρχαιωμένη φράση"
@@ -404,7 +376,6 @@ msgstr "Κείμενο πηγής"
 
 #. where %s is the language, e.g French translation
 #: ../pub/js/lang/dummy.php:38
-#, php-format
 msgctxt "Editor pane"
 msgid "%s translation"
 msgstr "%s μετάφραση"
@@ -435,13 +406,12 @@ msgid "No strings could be extracted from source files"
 msgstr "Δε μπόρεσαν να εξαχθούν φράσεις από τα αρχεία πηγής"
 
 #: ../pub/js/lang/dummy.php:58
-#, php-format
 msgctxt "Form label"
 msgid "create in <code>%s</code>"
 msgstr "δημιουργία στο %s"
 
-#: ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:6
-#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6
+#: ../tpl/admin-fscheck.tpl.php:7 ../tpl/admin-opts.tpl.php:6 
+#: ../tpl/admin-poedit. tpl.php:6 ../tpl/admin-poinit.tpl.php:6 
 #: ../tpl/admin-root.tpl.php:6
 msgid "Packages"
 msgstr "Πακέτα"
@@ -451,12 +421,10 @@ msgid "File check"
 msgstr "Έλεγχος αρχείου"
 
 #: ../tpl/admin-fscheck.tpl.php:19
-#, php-format
 msgid "File system permissions for %s"
 msgstr "Δικαιώματα συστήματος αρχείων για το %s"
 
 #: ../tpl/admin-fscheck.tpl.php:43
-#, php-format
 msgid "Other potential issues with %s"
 msgstr "Άλλα πιθανά θέματα με το %s"
 
@@ -489,12 +457,10 @@ msgid "File permissions"
 msgstr "Δικαιώματα αρχείου"
 
 #: ../tpl/admin-list.tpl.php:40
-#, php-format
 msgid "Extends: %s"
 msgstr "Επεκτείνεται σε: %s"
 
 #: ../tpl/admin-list.tpl.php:44
-#, php-format
 msgid "1 language"
 msgid_plural "%u languages"
 msgstr[0] "1 γλώσσα"
@@ -619,7 +585,6 @@ msgid "Help"
 msgstr "Βοήθεια"
 
 #: ../tpl/admin-poinit.tpl.php:22
-#, php-format
 msgid "Initialize new translations in %s"
 msgstr "Προετοιμασία νέων μεταφράσεων στο %s"
 
@@ -652,7 +617,6 @@ msgid "New version available"
 msgstr "Διαθέσιμη νέα έκδοση"
 
 #: ../tpl/admin-root.tpl.php:21
-#, php-format
 msgid "Upgrade to version %s of Loco Translate"
 msgstr "Αναβάθμιση στην έκδοση %s του Loco Translate"
 

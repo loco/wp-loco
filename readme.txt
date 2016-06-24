@@ -82,7 +82,7 @@ Before posting your questions on the support forum, please see the [most common 
 
 = 1.5.6 =
 * Added Czech and Greek translations
-* Updated Russian translations
+* Updated Russian and Polish translations
 * No longer using glob functions
 
 = 1.5.5 =
@@ -258,7 +258,7 @@ These features are on our todo list. There's no particular timeframe for any of 
 * Russian translations by [Alexey Tkachenko](http://atkachenko.ru) and Vyacheslav Stabrovsky
 * Indonesian translations by [Ivan Lanin](https://twitter.com/ivanlanin)
 * Italian translations by [ElectricFeet](http://wordpress.org/support/profile/electricfeet)
-* Polish translations by [Jerry1333](http://www.jerry1333.net)
+* Polish translations by [Jerry1333](http://www.jerry1333.net) and [Marek Sierociński](http://marek.sierocinscy.pl)
 * Persian translations by [Araz Rad](http://fa.araz.id.ir)
 * Japanese translations by [Agarthe LLC](https://agarthe.com)
 * Spanish translations by [temesis1234](https://wordpress.org/support/profile/temesis1234)

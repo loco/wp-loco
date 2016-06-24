@@ -3,15 +3,15 @@ msgstr ""
 "Project-Id-Version: Loco Translate\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
-"PO-Revision-Date: Mon Dec 14 2015 10:58:03 GMT+0000 (GMT)\n"
-"Last-Translator: admin <admin@localise.biz>\n"
+"PO-Revision-Date: Sat Apr 09 2016 14:00:36 GMT+0100 (BST)\n"
+"Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: \n"
 "Language: Ukrainian\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && "
+"n%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10 >= 2 && n"
-"%10<=4 &&(n%100<10||n%100 >= 20)? 1 : 2)\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-Basepath: .\n"
 "X-Poedit-SearchPath-0: ..\n"
@@ -21,7 +21,7 @@ msgstr ""
 "esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
 "esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
 "X-Generator: Loco - https://localise.biz/\n"
-"X-Loco-Target-Locale: uk_UA\n"
+"X-Loco-Target-Locale: uk_UA"
 
 #. Translators: Bold text label in admin error messages
 #: ../lib/loco-admin.php:31
@@ -108,8 +108,7 @@ msgstr "Запустіть «Синхронізувати», щоб оновит
 
 #: ../lib/loco-admin.php:438
 msgid "Source code has been modified, run Sync to update POT"
-msgstr ""
-"Ісходний код було модифіковано, запустіть «Синхронізувати», щоб оновити РОТ"
+msgstr "Ісходний код було модифіковано, запустіть «Синхронізувати», щоб оновити РОТ"
 
 #: ../lib/loco-admin.php:442
 msgid "POT has been modified since PO file was saved, run Sync to update"
@@ -256,8 +255,7 @@ msgstr "%s не декларує \"Domain Path\""
 #: ../lib/loco-packages.php:533
 #, php-format
 msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
-msgstr ""
-"%s не має РОТ-файлу. Створіть його як \"%s/%s.pot\", якщо ви потребуєте."
+msgstr "%s не має РОТ-файлу. Створіть його як \"%s/%s.pot\", якщо ви потребуєте."
 
 #: ../lib/loco-packages.php:536
 #, php-format
@@ -265,7 +263,7 @@ msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
 msgstr "%s має дивну назву РОТ-файлу (%s). Кращою назвою була б \"%s.pot\""
 
 #: ../lib/compat/loco-iconv.php:13 ../lib/compat/loco-json.php:13 ..
-#: /lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
+#: lib/compat/loco-mbstring.php:13 ../lib/compat/loco-tokenizer.php:12
 #, php-format
 msgid ""
 "PHP extension \"%s\" is not installed. If you experience problems you should "
@@ -285,8 +283,7 @@ msgstr "Невірна дата встановлена на сервері"
 #: ../php/loco-download.php:75 ../php/loco-posave.php:121
 #, php-format
 msgid "Failed to compile MO file with %s, check your settings"
-msgstr ""
-"Невдалося скомпілювати МО-файл за допомогою %s, перевірте ваші налаштування"
+msgstr "Невдалося скомпілювати МО-файл за допомогою %s, перевірте ваші налаштування"
 
 #: ../php/loco-posave.php:23 ../php/loco-posync.php:22
 #, php-format
@@ -299,8 +296,8 @@ msgid ""
 "Web server cannot create backups in \"%s\". Fix file permissions or disable "
 "backups in settings"
 msgstr ""
-"Сервер не може створити бекап у \"%s\". Виправте права доступу до файлів, "
-"або вимкніть створення бекапів у налаштуваннях."
+"Сервер не може створити бекап у \"%s\". Виправте права доступу до файлів, або "
+"вимкніть створення бекапів у налаштуваннях."
 
 #: ../php/loco-posave.php:66
 #, php-format
@@ -308,8 +305,8 @@ msgid ""
 "Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
 "create it manually."
 msgstr ""
-"Сервер не може створити папку \"%s\" у \"%s\". Виправте права доступу до "
-"папки або створіть її вручну."
+"Сервер не може створити папку \"%s\" у \"%s\". Виправте права доступу до папки "
+"або створіть її вручну."
 
 #: ../php/loco-posave.php:69
 #, php-format
