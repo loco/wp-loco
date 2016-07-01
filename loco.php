@@ -36,7 +36,7 @@ function loco_require(){
 
 
 
-// Inialize admin screen
+// Initialize admin screen
 if( function_exists('is_admin') && is_admin() ){
     loco_require('loco-boot','loco-admin');
 }
