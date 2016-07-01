@@ -2,11 +2,15 @@
 
 ### Translate plugins and themes directly in your browser
 
-Gitified version of the official Loco WordPress plugin:  
+Git mirror of the official Loco WordPress plugin:  
 [http://wordpress.org/plugins/loco-translate/](http://wordpress.org/plugins/loco-translate/)
+
+**Please don't submit pull requests** this is just a mirror of the SVN repository at:  
+[https://plugins.svn.wordpress.org/loco-translate/trunk/](https://plugins.svn.wordpress.org/loco-translate/trunk/)
 
 Please report issues in the WordPress plugin directory support forum:  
 [http://wordpress.org/support/plugin/loco-translate](http://wordpress.org/support/plugin/loco-translate)
+
 
 ## Installation
 
