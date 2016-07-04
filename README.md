@@ -1,20 +1,15 @@
 # Loco WordPress Plugin
 
-### Translate plugins and themes directly in your browser
+### Legacy 1.x branch
 
-Git mirror of the official Loco WordPress plugin:  
+This is a Git mirror of the **deprecated** version of the official Loco WordPress plugin:  
+
 [http://wordpress.org/plugins/loco-translate/](http://wordpress.org/plugins/loco-translate/)
 
-**Please don't submit pull requests** this is just a mirror of the SVN repository at:  
-[https://plugins.svn.wordpress.org/loco-translate/trunk/](https://plugins.svn.wordpress.org/loco-translate/trunk/)
-
-Please report issues in the WordPress plugin directory support forum:  
-[http://wordpress.org/support/plugin/loco-translate](http://wordpress.org/support/plugin/loco-translate)
+There is **no support** for the legacy version as the 2.x is now the active branch. If for any reason you cannot use the 2.x version of this plugin, you can install the old version by checking out the appropriate stable tag.
 
 
 ## Installation
-
-Note that the actual name of the plugin is "loco-translate" not "wp-loco". It's renamed on Github to differentiate it as a WordPress plugin. 
 
 Add the plugin to your WordPress project via Git as follows:
 
@@ -24,13 +19,9 @@ If you want to use a stable release listed in the WordPress plugin directory, yo
 
     $ cd wp-content/plugins/loco-translate 
     $ git fetch origin --tags
-    $ git checkout tags/x.y.z
+    $ git checkout tags/1.5.6
     
-Be sure to check the latest version by typing `git tag` and replacing `x.y.z` in above example.
-
 
 ## Contributing
 
-There is no issue tracker here. Please submit bugs or feature requests in the [WordPress support forum](http://wordpress.org/support/plugin/loco-translate).
-
-The Github repository is for people who want the latest development version of the plugin and prefer Git to [SVN](http://plugins.svn.wordpress.org/loco-translate/trunk/). This is not a collaborative project and there are no resources available for examining pull requests.
+Development of this branch is frozen. Please don't submit pull requests.
