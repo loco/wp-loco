@@ -2,49 +2,11 @@
 
 /**
  * Compiled from Loco core. Do not edit!
- * Wed, 29 Jun 2016 13:50:09 +0100
+ * Mon, 04 Jul 2016 19:08:56 +0100
  */
 loco_check_extension('iconv');
 loco_check_extension('mbstring');
 loco_check_extension('tokenizer');
-if (!class_exists('LocoParseException')) {
-    abstract class LocoException extends Exception
-    {
-        public abstract function getStatus();
-    }
-    class LocoParseException extends LocoException
-    {
-        protected $column;
-        private $context;
-        public function getStatus()
-        {
-            return 422;
-        }
-        public function setContext($line, $column, $source)
-        {
-            $this->line = $line;
-            $this->column = $column;
-            $lines = preg_split('/\\R/', $source);
-            $this->context = $lines[$line - 1] . '
-' . str_repeat(' ', max(0, $column - 2)) . '^';
-            $this->message = sprintf('Error at line %u, column %u: %s', $this->line, $this->column, $this->message);
-        }
-        public function getContext()
-        {
-            return $this->context;
-        }
-        public function log(PLUGLogger $Logger)
-        {
-            $Logger->log($this->message);
-            if (is_string($this->context)) {
-                foreach (explode('
-', $this->context) as $line) {
-                    $Logger->log($line);
-                }
-            }
-        }
-    }
-}
 interface LocoArrayInterface extends ArrayAccess, Iterator, Countable, JsonSerializable
 {
     public function export();
@@ -448,7 +410,7 @@ class LocoMoParser
                 $this->be = true;
                 break;
             }
-            throw new LocoParseException('Invalid MO format');
+            throw new Loco_error_ParseException('Invalid MO format');
         }
         return $this->be;
     }
@@ -504,7 +466,7 @@ class LocoMoParser
         $fmt = $this->isBigendian() ? 'N' : 'V';
         $arr = unpack($fmt, $str);
         if (!isset($arr[1]) || !is_int($arr[1])) {
-            throw new LocoParseException('Failed to read 32 bit integer at byte ' . $offset);
+            throw new Loco_error_ParseException('Failed to read 32 bit integer at byte ' . $offset);
         }
         return $arr[1];
     }
@@ -1058,17 +1020,6 @@ abstract class LocoPo
 ' . $prefix, $lines);
     }
 }
-class LocoUnprocessableException extends LocoException
-{
-    public function __construct($message = '', $code = 0, Exception $previous = null)
-    {
-        parent::__construct($message ? $message : 'Unprocessable data', $code, $previous);
-    }
-    public function getStatus()
-    {
-        return 422;
-    }
-}
 class LocoPoIterator implements Iterator
 {
     private $po;
@@ -1082,7 +1033,7 @@ class LocoPoIterator implements Iterator
         $this->po = $po;
         $this->t = count($po);
         if (!isset($po[0])) {
-            throw new LocoUnprocessableException('Empty PO data');
+            throw new InvalidArgumentException('Empty PO data');
         }
     }
     public function rewind()
@@ -1131,7 +1082,7 @@ class LocoPoIterator implements Iterator
         if (!$this->headers) {
             $header = $this->po[0];
             if ('' !== $header['source'] || !empty($header['context'])) {
-                throw new LocoUnprocessableException('Invalid PO header');
+                throw new InvalidArgumentException('Invalid PO header');
             }
             $this->headers = loco_parse_po_headers($header['target']);
         }

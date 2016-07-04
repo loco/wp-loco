@@ -159,6 +159,16 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
 
 
     /**
+     * Get number of strings completely untranslated (excludes fuzzy).
+     * @return int
+     */
+    public function countUntranslated(){
+        $stats = $this->getStats();
+        return max( 0,  $stats['t'] - $stats['p'] );
+    }
+
+
+    /**
      * Echo progress bar using compiled function
      * @return void
      */
@@ -192,11 +202,11 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
         if( $num = $this->countFuzzy() ){
             $extra[] = sprintf( __('%s fuzzy','loco'), number_format($num) );
         }
-        if( $num = $this->countIncomplete() ){
+        if( $num = $this->countUntranslated() ){
             $extra[] = sprintf( __('%s untranslated','loco'), number_format($num) );
         }
         if( $extra ){
-            $stext .= ' ('.implode(',', $extra).')';
+            $stext .= ' ('.implode(', ', $extra).')';
         }
         return $stext;
     }

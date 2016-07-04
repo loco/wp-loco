@@ -2,46 +2,8 @@
 
 /**
  * Compiled from Loco core. Do not edit!
- * Wed, 29 Jun 2016 13:50:11 +0100
+ * Mon, 04 Jul 2016 19:00:39 +0100
  */
-if (!class_exists('LocoParseException')) {
-    abstract class LocoException extends Exception
-    {
-        public abstract function getStatus();
-    }
-    class LocoParseException extends LocoException
-    {
-        protected $column;
-        private $context;
-        public function getStatus()
-        {
-            return 422;
-        }
-        public function setContext($line, $column, $source)
-        {
-            $this->line = $line;
-            $this->column = $column;
-            $lines = preg_split('/\\R/', $source);
-            $this->context = $lines[$line - 1] . '
-' . str_repeat(' ', max(0, $column - 2)) . '^';
-            $this->message = sprintf('Error at line %u, column %u: %s', $this->line, $this->column, $this->message);
-        }
-        public function getContext()
-        {
-            return $this->context;
-        }
-        public function log(PLUGLogger $Logger)
-        {
-            $Logger->log($this->message);
-            if (is_string($this->context)) {
-                foreach (explode('
-', $this->context) as $line) {
-                    $Logger->log($line);
-                }
-            }
-        }
-    }
-}
 class LocoDomQuery extends ArrayIterator
 {
     public static function parse($source)
@@ -56,9 +18,9 @@ class LocoDomQuery extends ArrayIterator
         $used_errors || libxml_use_internal_errors(false);
         libxml_clear_errors();
         if ($errors || !$parsed) {
-            $e = new LocoParseException('Unknown parse error');
+            $e = new Loco_error_ParseException('Unknown parse error');
             foreach ($errors as $error) {
-                $e = new LocoParseException(trim($error->message));
+                $e = new Loco_error_ParseException(trim($error->message));
                 $e->setContext($error->line, $error->column, $source);
                 if (LIBXML_ERR_FATAL === $error->level) {
                     throw $e;

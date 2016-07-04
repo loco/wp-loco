@@ -2,7 +2,7 @@
 
 /**
  * Compiled from Loco core. Do not edit!
- * Wed, 29 Jun 2016 13:50:11 +0100
+ * Mon, 04 Jul 2016 19:00:39 +0100
  */
 function loco_parse_locale($tag)
 {
