@@ -1,0 +1,593 @@
+<?php
+/**
+ * A project is a set of translations within a Text Domain.
+ * Often a text domain will have just one set, but this allows domains to be split into multiple POT files.
+ */
+class Loco_package_Project {
+    
+    /**
+     * @var Loco_package_TextDomain
+     */
+    private $domain;
+    
+    /**
+     * Friendly project name, e.g. "Network Admin"
+     * @var string
+     */
+    private $name;
+    
+    /**
+     * Short name used for naming files, e.g "admin"
+     * @var string
+     */
+    private $slug;
+
+    /**
+     * Configured domain path[s] not including global search paths
+     * @var Loco_fs_FileList
+     */
+    private $dpaths;
+
+    /**
+     * Additional system domain path[s] added separately from bindle config
+     * @var Loco_fs_FileList
+     */
+    private $gpaths;
+
+    /**
+     * Directory paths to exclude during target scanning
+     * @var Loco_fs_FileList
+     */
+    private $xdpaths;
+
+    /**
+     * Locations where POT, PO and MO files may be saved, including standard global paths
+     * @var Loco_fs_FileFinder
+     */
+    private $target;
+    
+    /**
+     * Configured source path[s] not including global search paths
+     * @var Loco_fs_FileList
+     */
+    private $spaths;
+    
+    /**
+     * File and directory paths to exclude from source file extraction
+     * @var Loco_fs_FileList
+     */
+    private $xspaths;
+
+    /**
+     * Locations where extractable source files may be found
+     * @var Loco_fs_FileFinder
+     */
+    private $source;
+
+    /**
+     * Explicitly added individual PHP source files
+     * @var Loco_fs_FileList
+     */
+    private $sfiles;
+
+    /**
+     * Paths globally excluded by bundle-level configuration
+     * @var Loco_fs_FileList
+     */
+    private $xgpaths;
+
+    /**
+     * POT template file, ideally named "<name>.pot"
+     * @var Loco_fs_File
+     */
+    private $pot;
+
+
+    /**
+     * Construct project from its domain and a descriptive name
+     */
+    public function __construct( Loco_package_TextDomain $domain, $name ){
+        $this->name = $name;
+        $this->domain = $domain;
+        $this->slug = $domain->getName();
+        // sources
+        $this->sfiles = new Loco_fs_FileList;
+        $this->spaths = new Loco_fs_FileList;
+        $this->xspaths = new Loco_fs_FileList;
+        // targets
+        $this->dpaths = new Loco_fs_FileList;
+        $this->gpaths = new Loco_fs_FileList;
+        $this->xdpaths = new Loco_fs_FileList;
+        // global
+        $this->xgpaths = new Loco_fs_FileList;
+    }
+
+
+    /**
+     * Get ID identifying project uniquely within a bundle
+     * @return string
+     */
+    public function getId(){
+        $slug = $this->getSlug();
+        $domain = (string) $this->getDomain();
+        if( $slug === $domain ){
+            return $slug;
+        }
+        return addcslashes($domain,'.').'.'.addcslashes($slug,'.');
+    }
+
+
+    /**
+     * @return string
+     */
+    public function __toString(){
+        return (string) $this->name;
+    }
+
+
+    /**
+     * Set friendly name of project
+     * @return Loco_package_Project
+     */
+    public function setName( $name ){
+        $this->name = $name;
+        return $this;
+    }
+
+
+    /**
+     * Set short name of project
+     * @return Loco_package_Project
+     */
+    public function setSlug( $slug ){
+        $this->slug = $slug;
+        return $this;
+    }
+
+
+    /**
+     * Get friendly name of project, e.g. "Network Admin"
+     * @return string
+     */
+    public function getName(){
+        return $this->name;
+    }
+
+
+    /**
+     * Get short name of project, e.g. "admin"
+     * @return string
+     */
+    public function getSlug(){
+        return $this->slug;
+    }
+
+    
+    /**
+     * @var Loco_package_TextDomain
+     */
+    public function getDomain(){
+        return $this->domain;
+    }
+
+
+    /**
+     * Whether project is the default for its domain.
+     * @return bool
+     */
+    public function isDomainDefault(){
+        $slug = $this->getSlug();
+        $name = $this->getDomain()->getName();
+        // default if slug matches text domain.
+        // else special case for Core "default" domain which has empty slug
+        return $slug === $name || ( 'default' === $name && '' === $slug );
+    }
+
+
+    /**
+     * Add a root path where translation files may live
+     * @return Loco_package_Project
+     */
+    public function addTargetDirectory( $location ){
+        $this->target = null;
+        $this->dpaths->add( new Loco_fs_Directory($location) );
+        return $this;
+    }
+
+
+    /**
+     * Add a global search path where translation files may live
+     * @return Loco_package_Project
+     */
+    public function addSystemTargetDirectory( $location ){
+        $this->target = null;
+        $this->gpaths->add( new Loco_fs_Directory($location) );
+        return $this;
+    }
+
+
+    /**
+     * Get domain paths configured in project
+     * @return Loco_fs_FileList
+     */
+    public function getConfiguredTargets(){
+        return $this->dpaths;
+    }
+
+
+    /**
+     * Get system paths added to project after configuration
+     * @return Loco_fs_FileList
+     */
+    public function getSystemTargets(){
+        return $this->gpaths;
+    }
+    
+    
+    /**
+     * Get all target directory roots including global search paths
+     * @return Loco_fs_FileList
+     */
+    public function getDomainTargets(){
+        return $this->getTargetFinder()->getRootDirectories();
+    }
+    
+    
+    /**
+     * Lazy create all searchable domain paths including global directories
+     * @return Loco_fs_FileFinder
+     */
+    private function getTargetFinder(){    
+        if( ! $this->target ){        
+            $target = new Loco_fs_FileFinder;
+            $target->setRecursive(false)->group('pot','po','mo');
+            foreach( $this->dpaths as $path ){
+                // TODO search need not be recursive if it was the configured DomainPath
+                // currenly no way to know at this point, so recursing by default.
+                $target->addRoot( (string) $path, true );
+            }
+            foreach( $this->gpaths as $path ){
+                $target->addRoot( (string) $path, false );
+            }
+            foreach( $this->xdpaths as $path ){
+                $target->exclude( (string) $path );
+            }
+            foreach( $this->xgpaths as $path ){
+                $target->exclude( (string) $path );
+            }
+            $this->target = $target;
+        }
+        return $this->target;
+    }
+
+
+    
+    /**
+     * Add a path for excluding in a recursive target file search
+     * @return Loco_package_Project
+     */
+    public function excludeTargetPath( $path ){
+        $this->target = null;
+        $this->xdpaths->add( new Loco_fs_File($path) );
+        return $this;
+    }
+
+
+
+    /**
+     * Get all paths excluded when searching for targets
+     * @return Loco_fs_FileList
+     */
+    public function getConfiguredTargetsExcluded(){
+        return $this->xdpaths;
+    }
+
+
+    /**
+     * Lazy create all searchable source paths
+     * @return Loco_fs_FileFinder
+     */
+    private function getSourceFinder(){
+        if( ! $this->source ){    
+            $source = new Loco_fs_FileFinder;
+            $source->setRecursive(true)->group('php');
+            foreach( $this->spaths as $file ){
+                $path = realpath( (string) $file );    
+                if( $path && is_dir($path) ){
+                    $source->addRoot( $path, true );
+                }
+            }
+            foreach( $this->xspaths as $file ){
+                if( $path = realpath( (string) $file ) ){  
+                    $source->exclude( $path );
+                }
+            }
+            foreach( $this->xgpaths as $file ){
+                if( $path = realpath( (string) $file ) ){  
+                    $source->exclude( $path );
+                }
+            }
+            $this->source = $source;
+        }
+        return $this->source;
+    }    
+
+
+    /**
+     * Add a root path where source files may live under for this project
+     * @return Loco_package_Project
+     */
+    public function addSourceDirectory( $location ){
+        $this->source = null;
+        $this->spaths->add( new Loco_fs_File($location) );
+        return $this;
+    }
+
+
+    /**
+     * Add Explicit source file to project config
+     * @return Loco_package_Project
+     */
+    public function addSourceFile( $path ){
+        $this->source = null;
+        $this->sfiles->add( new Loco_fs_File($path) );
+        return $this;
+    }
+
+
+    /**
+     * Add a file or directory as a source location
+     * @return Loco_package_Project
+     */
+    public function addSourceLocation( $path ){
+        $file = new Loco_fs_File( $path );
+        if( $file->isDirectory() ){
+            $this->addSourceDirectory( $file );
+        }
+        else {
+            $this->addSourceFile( $file );
+        }
+        return $this;
+    }
+
+
+
+    /**
+     * Get all source directories and files defined in project
+     * @return Loco_fs_FileList
+     */
+    public function getConfiguredSources(){
+        $dynamic = $this->spaths->getArrayCopy();
+        $statics = $this->sfiles->getArrayCopy();
+        return new Loco_fs_FileList( array_merge( $dynamic, $statics ) );
+    }
+
+
+    /**
+     * Test if bundle has configured source files (even if they're excluded by other rules)
+     * @return bool
+     */
+    public function hasSourceFiles(){
+        return count( $this->sfiles ) || count( $this->spaths );
+    }     
+
+    
+    /**
+     * Add a path for excluding in source file search
+     * @return Loco_package_Project
+     */
+    public function excludeSourcePath( $path ){
+        $this->source = null;
+        $this->xspaths->add( new Loco_fs_File($path) );
+        return $this;
+    }
+
+
+
+    /**
+     * Get all paths excluded when searching for sources
+     * @return Loco_fs_FileList
+     */
+    public function getConfiguredSourcesExcluded(){
+        return $this->xspaths;
+    }
+
+
+
+    /**
+     * Add a globally excluded location affecting sources and targets
+     * @return Loco_package_Project
+     */
+    public function excludeLocation( $path ){
+        $this->source = null;
+        $this->target = null;
+        $this->xgpaths->add( new Loco_fs_File($path) );
+        return $this;
+    }
+
+
+    
+    /**
+     * Get full path to template POT (file)
+     * @return Loco_fs_File
+     */
+    public function getPot(){
+        if( ! $this->pot ){
+            // attempt to match POT exactly under configured domain paths
+            $name = $this->getSlug().'.pot';
+            foreach( $this->getConfiguredTargets() as $dir ){
+                $file = new Loco_fs_File( $name );
+                $file->normalize( (string) $dir );
+                if( $file->exists() ){
+                    $this->pot = $file;
+                    break;
+                }
+            }
+        }
+        return $this->pot;
+    }
+
+
+    
+    /**
+     * Force the use of a known POT file. This could be a PO file if necessary
+     * @return Loco_package_Project
+     */
+    public function setPot( Loco_fs_File $pot ){
+        $this->pot = $pot;
+        return $this;
+    }
+
+
+
+    /**
+     * Take a guess at most likely POT file under target locations
+     * @return Loco_fs_File
+     */
+    public function guessPot(){
+        $slug = $this->getSlug();
+        if( ! is_string($slug) || '' === $slug ){
+            $slug = (string) $this->getDomain();
+            if( '' === $slug ){
+                $slug = 'default';
+            }
+        }
+        // TODO fix this so search cannot descend into other packages (e.g. single file plugins)
+        $files = $this->getTargetFinder()->exportGroups();
+        foreach( array('pot','po') as $ext ){
+            /* @var $pot Loco_fs_File */
+            foreach( $files[$ext] as $pot ){
+                // use exact match on project slug if found
+                if( $slug === $pot->filename() ){
+                    return $pot;
+                }
+            }
+        }
+        // Failed to find correctly named POT file.
+        // if a single POT file is found letuse it
+        if( 1 === count($files['pot']) ){
+            return $pot;
+        }
+        // Either no POT files are found, or multiple are found.
+        // if the project is the default in its domain, we can try aliases which may be PO
+        if( $this->isDomainDefault() ){
+            $options = Loco_data_Settings::get();
+            if( $aliases = $options->pot_alias ){
+                $found = array();
+                /* @var $pot Loco_fs_File */
+                foreach( $this->target as $pot ){
+                    $priority = array_search( $pot->basename(), $aliases, true );
+                    if( false !== $priority ){
+                        $found[$priority] = $pot;
+                    }
+                }
+                if( $found ){
+                    ksort( $found );
+                    return current($found);
+                }
+            }
+        }
+        // failed to guess POT file
+    }
+
+
+
+
+    /**
+     * Get all extractable PHP source files found under all source paths
+     * @return Loco_fs_FileList
+     */
+    public function findSourceFiles(){
+        $source = $this->getSourceFinder();
+        // augment file list from directories unless already done so
+        if( ! $source->isCached() ){
+            $crawled = $source->exportGroups();
+            foreach( $crawled['php'] as $file ){
+                $this->sfiles->add($file);
+            }
+        }
+        return $this->sfiles;
+    }
+
+
+
+    /**
+     * Get all translation files matching project prefix across target directories
+     * @return Loco_fs_LocaleFileList
+     */
+    public function findLocaleFiles( $ext ){
+        $list = new Loco_fs_LocaleFileList;
+        $files = $this->getTargetFinder()->exportGroups();
+        $prefix = $this->getSlug(); 
+        $domain = $this->domain->getName();
+        $default = $this->isDomainDefault();
+        /* @var $file Loco_fs_File */
+        foreach( $files[$ext] as $file ){
+            $file = new Loco_fs_LocaleFile( $file );
+            // add file if prefix matches and has a suffix. locale will be validated later
+            if( $file->getPrefix() === $prefix && $file->getSuffix() ){
+                $list->addLocalized( $file );
+            }
+            // else in some cases a suffix-only file like "el.po" can match
+            else if( $default && $file->hasSuffixOnly() ){
+                // 1. theme files under their own directory
+                if( $file->underThemeDirectory() ){
+                    $list->addLocalized( $file );
+                }
+                // 2. WordPress core "default" domain, default project
+                else if( 'default' === $domain ){
+                    $list->addLocalized( $file );
+                }
+            }
+        }
+        return $list;
+    }
+
+
+
+    /**
+     * Intialize choice of PO file paths for a given locale
+     * @return Loco_fs_FileList
+     */
+    public function initLocaleFiles( Loco_Locale $locale ){
+        $slug = $this->getSlug();
+        $domain = $this->domain->getName();
+        $default = $this->isDomainDefault();
+        $suffix = sprintf( '%s.po', $locale );
+        $prefix = $slug ? sprintf('%s-',$slug) : '';
+        $choice = new Loco_fs_FileList;
+        /* @var $dir Loco_fs_Directory */
+        foreach( $this->getConfiguredTargets() as $dir ){
+            // theme files under their own directory normally have no file prefix
+            if( $default && $dir->underThemeDirectory() ){
+                $path = $dir->getPath().'/'.$suffix;
+            }
+            // plugin files are prefixed even in their own directory, so empty prefix here implies incorrect bundle configuration
+            //else if( $default && ! $prefix && $dir->underPluginDirectory() ){
+            //    $path = $dir->getPath().'/'.$domain.'-'.$suffix;
+            //}
+            // all other paths use configured prefix, which may be empty
+            else {
+                $path = $dir->getPath().'/'.$prefix.$suffix;
+            }
+            $choice->add( new Loco_fs_LocaleFile($path) );
+        }
+        /* @var $dir Loco_fs_Directory */
+        foreach( $this->getSystemTargets() as $dir ){
+            $path = $dir->getPath();
+            // themes and plugins under global locations will be loaded by domain, regardless of prefix
+            if( '/themes' === substr($path,-7) || '/plugins' ===  substr($path,-8) ){
+                $path .= '/'.$domain.'-'.$suffix;
+            }
+            // all other paths (probably core) use configured prefix, which may be empty
+            else {
+                $path .= '/'.$prefix.$suffix;
+            }
+            $choice->add( new Loco_fs_LocaleFile($path) );
+        }
+
+        return $choice;
+    }
+
+
+}

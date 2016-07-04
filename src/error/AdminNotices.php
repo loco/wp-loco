@@ -1,0 +1,150 @@
+<?php
+
+class Loco_error_AdminNotices extends Loco_hooks_Hookable {
+    
+    /**
+     * @var Loco_error_AdminNotices
+     */
+    private static $singleton;
+
+    /**
+     * @var array
+     */
+    private $errors = array();
+
+    /**
+     * Inline messages are handled by our own template views
+     * @var bool
+     */
+    private $inline = false;
+
+
+
+    /**
+     * @return Loco_error_AdminNotices
+     */
+    public static function get(){
+        self::$singleton or self::$singleton = new Loco_error_AdminNotices;
+        return self::$singleton;
+    } 
+
+
+    
+    /**
+     * @return void
+     */
+    public static function add( Loco_error_Exception $error ){
+        $notices = self::get();
+        $notices->errors[] = $error;
+        // do late flush if we missed the boat
+        if( did_action('loco_admin_init') ){
+            $notices->on_loco_admin_init();
+        }
+        if( did_action('admin_notices') ){
+            $notices->on_admin_notices();
+        }
+    }
+
+
+    /**
+     * Raise a success message
+     * @return Loco_error_Success
+     */
+    public static function success( $message ){
+        $notice = new Loco_error_Success( $message );
+        self::add( $notice );
+        return $notice;
+    }
+
+
+    /**
+     * Raise a warning message
+     * @return Loco_error_Warning
+     */
+    public static function warn( $message ){
+        $notice = new Loco_error_Warning( $message );
+        self::add( $notice );
+        return $notice;
+    }
+
+
+
+
+    /**
+     * Destroy and return buffer, generally used in tests.
+     * @return array
+     */
+    public static function destroy(){
+        if( $notices = self::$singleton ){
+            $buffer = $notices->errors;
+            $notices->errors = array();
+            self::$singleton = null;
+            return $buffer;
+        }
+        return array();
+    }
+
+
+    
+    /**
+     * @return void
+     */
+    private function flush(){
+        if( $this->errors ){
+            $html = array();
+            /* $var $error Loco_error_Exception */
+            foreach( $this->errors as $error ){
+                $html[] = sprintf (
+                    '<div class="notice notice-%s loco-notice%s"><p><strong class="has-icon">%s:</strong> <span>%s</span></p></div>',
+                    $error->getType(),
+                    $this->inline ? ' inline' : '',
+                    esc_html( $error->getTitle() ),
+                    esc_html( $error->getMessage() )
+                );
+            }
+            $this->errors = array();
+            echo implode("\n", $html),"\n";
+        }
+    }
+
+
+
+    /**
+     * admin_notices action handler.
+     */
+    public function on_admin_notices(){
+        if( ! $this->inline ){
+            $this->flush();
+        }
+    }
+
+
+    /**
+     * loco_admin_notices callback.
+     * Unlike WordPress "admin_notices" this fires from within template layout at the point we want them, hence they are marked as "inline"
+     */
+    public function on_loco_admin_notices(){
+        $this->inline = true;
+        $this->flush();
+    }
+
+
+    /**
+     * loco_admin_init callback
+     * When we know a Loco admin controller will render the page we will control the point at which notices are printed
+     */
+    public function on_loco_admin_init(){
+        $this->inline = true;
+    }
+
+
+
+    /**
+     * Make sure we always see notices if hooks didn't fire
+     */
+    public function __destruct(){
+        $this->inline = false;
+        $this->flush();
+    }
+
+}

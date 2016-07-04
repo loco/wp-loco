@@ -9,6 +9,8 @@ __('Unknown error');
 
 __('PO file saved');
 
+__('POT file saved');
+
 __('and MO file compiled');
 
 /* Translators: where %s is the path to a POT file */

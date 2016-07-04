@@ -1,0 +1,210 @@
+<?php
+/**
+ * Provides write operation context via the WordPress file system API
+ */
+class Loco_fs_FileWriter {
+
+   /**
+    * @var Loco_fs_File
+    */
+    private $file;
+
+    /**
+     * @var WP_Filesystem_Direct
+     */
+    private $fs;
+
+
+    public function __construct( Loco_fs_File $file ){
+        $this->file = $file;
+        $this->connect( new WP_Filesystem_Direct(null) );
+    }
+    
+    
+    /**
+     * @return Loco_fs_FileWriter
+     */
+    public function setFile( Loco_fs_File $file ){
+        $this->file = $file;
+        return $this;
+    }
+    
+
+
+    /**
+     * Connect to alternative file system context
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+    public function connect( WP_Filesystem_Base $fs, $disconnected = true ){
+        if( $disconnected && ! $fs->connect() ){
+            $errors = $fs->errors;
+            if( is_wp_error($errors) ){
+                foreach( $errors->get_error_messages() as $reason ){
+                    Loco_error_AdminNotices::warn($reason);
+                }
+            }
+            throw new Loco_error_WriteException( __('Failed to connect to remote server','loco') );
+        }
+        $this->fs = $fs;
+        return $this;
+    }
+
+
+    /**
+     * Get mapped path for use in indirect file system manipulation
+     * @return string
+     */
+    public function getPath(){
+        return $this->mapPath( $this->file->getPath() );
+    }
+
+
+    /**
+     * @internal
+     */
+    private function mapPath( $path ){
+        if( ! $this->isDirect() ){
+            $virt = $this->fs->wp_content_dir();
+            if( false === $virt ){
+                throw new Loco_error_WriteException('Failed to find WP_CONTENT_DIR via remote connection');
+            }
+            $base = loco_constant('WP_CONTENT_DIR');
+            $snip = strlen($base);
+            if( substr( $path, 0, $snip ) === $base ){
+                $path = substr_replace( $path, $virt, 0, $snip );
+            }
+            else {
+                throw new Loco_error_WriteException('Path must be under WP_CONTENT_DIR');
+            }
+        }
+        return $path;
+    }
+
+    
+    /**
+     * Test if a direct (not remote) file system
+     * @return bool
+     */
+    public function isDirect(){
+        return $this->fs instanceof WP_Filesystem_Direct;
+    }
+
+
+    /**
+     * @return bool
+     */
+    public function writable(){
+        return $this->fs->is_writable( $this->getPath() );
+    }
+
+
+
+    /**
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+    public function chmod( $mode, $recursive = false ){
+        if( ! $this->fs->chmod( $this->getPath(), $mode, $recursive ) ){
+            throw new Loco_error_WriteException( sprintf( __('Failed to chmod %s','loco'), $this->file->basename() ) );
+        }
+        return $this;
+    }
+
+
+
+    /**
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+    public function copy( Loco_fs_File $copy ){
+        $source = $this->getPath();
+        $target = $this->mapPath( $copy->getPath() );
+        if( ! $this->fs->copy( $source, $target ) ){
+            throw new Loco_error_WriteException( sprintf( __('Failed to copy %s','loco'), $this->file->basename() ) );
+        }
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+    public function delete( $recursive = false ){
+        if( ! $this->fs->delete( $this->getPath(), $recursive ) ){
+            throw new Loco_error_WriteException( sprintf( __('Failed to delete %s','loco'), $this->file->basename() ) );
+        }
+
+        return $this;
+    }
+
+
+
+    /**
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+    public function putContents( $data ){
+        $file = $this->file;
+        if( $file->isDirectory() ){
+            throw new Loco_error_WriteException( sprintf( __('"%s" is a directory, not a file','loco'), $file->basename() ) );
+        }
+        // avoid chmod of existing file
+        if( $file->exists() ){
+            $mode = $file->mode();
+        }
+        // may have bypassed definition of FS_CHMOD_FILE
+        else {
+            $mode = defined('FS_CHMOD_FILE') ? FS_CHMOD_FILE : 0644;
+        }
+        $path = $this->getPath();
+        if( ! $this->fs->put_contents( $path, $data, $mode ) ){
+            // provide useful reason for failure if possible
+            if( $file->exists() && ! $this->fs->is_writable($path) ){
+                throw new Loco_error_WriteException( __("File is write-protected",'loco') );
+            }
+            // else check directory exists in which to create a new file
+            else if( ( $dir = $file->getParent() ) && ! $dir->exists() ){
+                throw new Loco_error_WriteException( __("Parent directory doesn't exist",'loco') );
+            }
+            // else reason for failure is not established
+            throw new Loco_error_WriteException( __('Failed to save file','loco') );
+        }
+        
+        return $this;
+    }
+
+
+
+    /**
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+     public function mkdir(){
+        $fs = $this->fs;
+        // may have bypassed definition of FS_CHMOD_DIR
+        $mode = defined('FS_CHMOD_DIR') ? FS_CHMOD_DIR : 0755;
+        // find first ancestor that exists while building tree
+        $stack = array();
+        $here = $this->file;
+        /* @var $parent Loco_fs_Directory */
+        while( $parent = $here->getParent() ){
+            array_unshift( $stack, $this->mapPath( $here->getPath() ) );
+            if( $parent->exists() ){
+                // have existant directory, now build full path
+                foreach( $stack as $path ){
+                    if( ! $fs->mkdir( $path, $mode ) ){
+                        throw new Loco_error_WriteException( __('Failed to create directory','loco') );
+                    }
+                }
+                return true;
+            }
+            $here = $parent;
+        }
+        throw new Loco_error_WriteException(__('Failed to build directory path','loco'));
+     }
+    
+}

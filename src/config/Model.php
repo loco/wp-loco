@@ -1,0 +1,163 @@
+<?php
+/**
+ * Generic configuration model serializer for portable Loco configs
+ */
+abstract class Loco_config_Model {
+
+    /**
+     * @var LocoConfigDocument
+     */
+    private $dom;    
+    
+    /**
+     * Root directory for calculating relative file paths
+     * @var string
+     */
+    private $base;
+    
+    /**
+     * registry of location contants that may have been overridden
+     * @var array
+     */
+    private $dirs;
+
+    /**
+     * @return Iterator
+     */
+    abstract public function query( $query, $context = null );
+
+    /**
+     * @return LocoConfigDocument
+     */
+    abstract public function createDom();
+
+
+    /**
+     * 
+     */    
+    final public function __construct(){
+        $this->dirs = array();
+        $this->base = loco_constant('ABSPATH');
+        $this->dom = $this->createDom();
+    }
+    
+    
+    /**
+     * @return void
+     */
+    public function setDirectoryPath( $path, $key = null ){
+        if( is_null($key) ){
+            $this->base = $path;
+        }
+        else {
+            $this->dirs[$key] = $path;
+        }
+    }
+    
+    
+    /**
+     * @return LocoConfigDocument
+     */
+    public function getDom(){
+        return $this->dom;
+    }
+
+
+    /**
+     * Evaluate a name constant pointing to a file location
+     * @param string one of 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH'
+     */
+    public function getDirectoryPath( $key = null ){
+        if( is_null($key) ){
+            $value = $this->base;
+        }
+        else if( isset($this->dirs[$key]) ){
+            $value = $this->dirs[$key];
+        }
+        else {
+            $value = loco_constant($key);
+        }
+
+        return rtrim($value,'/');
+    }
+
+
+    /**
+     * @return LocoConfigElement
+     */
+    public function createFileElement( Loco_fs_File $file ){
+        $node = $this->dom->createElement( $file->isDirectory() ? 'directory' : 'file' );
+        if( $path = $file->getPath() ) {
+            // Calculate relative path to the config file itself
+            $relpath = $file->getRelativePath( $this->base );
+            // Map to a configured base path if target is not under our root. This makes XML more portable
+            if( $relpath && ( '/' === $relpath{0} || '..' === substr($relpath,0,2) ) ){
+                $bases = array( 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' );
+                foreach( $bases as $key ){
+                    if( $base = $this->getDirectoryPath($key) ){
+                        $len = strlen($base);
+                        if( substr($path,0,$len) === $base ){
+                            $node->setAttribute('base',$key);
+                            $relpath = substr( $path, $len+1 );
+                            break;
+                        }
+                    } // @codeCoverageIgnore
+                }
+            }
+            $path = $relpath;
+        }
+        $this->setFileElementPath( $node, $path );
+        return $node;
+    }
+
+
+
+    /**
+     * @param LocoConfigElement
+     * @param string
+     * @return LocoConfigText
+     */
+    protected function setFileElementPath( $node, $path ){
+        return $node->appendChild( $this->dom->createTextNode($path) );
+    }
+
+
+    
+    /**
+     * @param LocoConfigElement
+     * @return Loco_fs_File
+     */
+    public function evaluateFileElement( $el ){
+        $path = $el->textContent;
+
+        switch( $el->nodeName ){
+        case 'directory':
+            $file = new Loco_fs_Directory($path);
+            break;
+        case 'file':
+            $file = new Loco_fs_File($path);
+            break;
+        case 'path':
+            $file = new Loco_fs_File($path);
+            if( $file->isDirectory() ){
+                $file = new Loco_fs_Directory($path);
+            }
+            break;
+        default:
+            throw new InvalidArgumentException('Cannot evaluate file element from <'.$el->nodeName.'>');
+        }
+        
+        if( $el->hasAttribute('base') ){
+            $key = $el->getAttribute('base');
+            $base = $this->getDirectoryPath($key);
+            $file->normalize( $base );
+        }
+        else {
+            $file->normalize( $this->base );
+        }
+        
+        return $file;
+    }
+
+}
+

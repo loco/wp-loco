@@ -1,0 +1,1170 @@
+@charset "UTF-8";
+/** Loco CSS for Wordpress plugin  wraps Loco CSS libraries to ensure WP styles are overridden $ sass --style compressed admin.scss > <plugin_root>/pub/css/admin.css */
+/* FLAG icon mappings
+define( 'LOCO_FLAG_TRANSLATED',  0 ); // <- OK (unflagged)
+define( 'LOCO_FLAG_INCORRECT',   1 ); // <- known to be incorrect in some way
+define( 'LOCO_FLAG_PROVISIONAL', 2 ); // <- marked as needing review although tentatively approved
+define( 'LOCO_FLAG_UNAPPROVED',  3 ); // <- not yet approved (basically a draft)
+define( 'LOCO_FLAG_FUZZY',       4 ); // <- "fuzzy" in the Gettext sense of the word
+define( 'LOCO_FLAG_INCOMPLETE',  5 ); // <- Still working on it
+define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
+*/
+@import url(//fonts.googleapis.com/css?family=Lobster+Two:700&text=Loco);
+/** Modified Font:     @license http://fortawesome.github.io/Font-Awesome/license/  */
+@font-face { font-family: 'loco'; src: url("../font/loco.eot"); src: url("../font/loco.eot?#iefix") format("embedded-opentype"), url("../font/loco.woff") format("woff"), url("../font/loco.ttf") format("truetype"), url("../font/loco.svg#loco") format("svg"); font-weight: normal; font-style: normal; }
+/* line 28, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap { /** Custom dropdown lists */ /* can keep selectors to a sane width, but overflow messages with block alignment
+.selector .handle .label { max-width: 200px; @include text-overflow;
+}*/ /* Hover state - while closed dropdown is moused-over */ /* Active state - while dropdown is open */ /* completely disabled selector */ /* Disabled options */ /**  auto-complete components */ /* show field as in error / unpopulated */ /*.icon-next { &:before { display: none; } &:after { @extend .loco-font; padding-left: 0.3em; content: "\2794"; }
+}*/ /** translation flag aliases */ /** Common base class for language tag icons */ /** Regions have flag icon, and no text inside */ /*/ treat private use regions as regionless (ony allowing one in Loco, although there are about 30)
+.region-zz { background: #aaa; &:before { display: inline; }
+}*/ /* sprite saved to sprite-16/sprite.png */ /*/ custom region styles overriding images?
+.region-001 { @extend .loco-font; &:before { content: "\e61d"; }
+}*/ /*.region-m49 { background: #2e892e; &:before { vertical-align: middle; content: attr(lang); }
+}*/ /*/ special cases for alpha3 language codes that have valid default countries
+// currently only used in Wordpress until Loco supports alpha3
+.lang.lang-bel { @extend .flag-by; }
+.lang.lang-kin { @extend .lang-rw; }
+.lang.lang-lin { @extend .lang-ln; }
+.lang.lang-srd { @extend .lang-sc; }
+.lang.lang-tir { @extend .lang-ti; }
+.lang.lang-tuk { @extend .lang-tk; }
+
+// TODO Wordpress locales currently without icons
+// fuc, haz, ckb, xmf, ory, rhg, rue, sah, azb, gsw, tzm*/ /* breadcrumbed title */ /* Extra styles for table views */ /* inverted version of wordpress button style */ /* file paths like <code> but without the dark background */ /* Warnings and messages */ /*.error a.dismiss, // <- replaced with WordPress's notice-dismiss
+.updated a.dismiss { text-decoration: none; font-size: 20px; line-height: 1; display: block; position: absolute; right: 10px; top: 5px; &:before { display: none; }
+}*/ /*div.loco-help { background: #fff; border: solid 1px #ccc; border-left-width: 4px; margin: 15px 0; padding: 1px 12px; @include box-shadow(0 1px 1px 0 rgba(0,0,0,.1));
+}*/ }
+/* line 31, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap > .logo { display: block; float: right; clear: none; color: #ccc; z-index: 99; }
+/* line 37, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap > .logo a { font-family: 'Lobster Two',sans-serif; font-weight: 700; font-size: 32px; line-height: 1.2em; text-decoration: none; color: #d0d0d0; text-shadow: -1px -1px #bbb, 1px 1px #FFF; outline: none; }
+/* line 46, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap > .logo a:hover { color: #3db63d; text-shadow: -1px -1px #2e892e, 1px 1px #FFF; }
+/* line 50, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap > .logo a:active { color: #2e892e; }
+/* line 57, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div { position: relative; }
+/* line 61, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap code { white-space: pre; }
+/* line 6, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector { display: inline-block; white-space: nowrap; }
+/* line 11, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd a, #loco.wrap .selector .handle { cursor: default; display: block; position: relative; border-top: solid 1px #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd; border-left: solid 1px #fff; padding: 0.3em 0.5em; color: #666; height: 1.3em; overflow: hidden; white-space: normal; }
+/* line 27, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectorsep { display: inline-block; border: solid 1px transparent; }
+/* line 30, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectorsep:before { display: block; position: relative; padding: 0.3em 0.5em; color: #999; height: 1.3em; overflow: hidden; }
+/* line 38, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectorsep > * { display: block; line-height: 1em; color: #666; height: 1.3em; overflow: hidden; }
+/* line 47, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .handle { outline: none; /* icons */ /* down arrow grabber */ }
+/* line 50, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .handle .prefix { padding-right: 0.6ex; }
+/* line 53, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .handle .region, #loco.wrap .selector .handle .lang-ca, #loco.wrap .selector .handle .lang-eo, #loco.wrap .selector .handle .lang-eu, #loco.wrap .selector .handle .variant-wales, #loco.wrap .selector .handle .region-gb.lang-cy, #loco.wrap .selector .handle .variant-scotland, #loco.wrap .selector .handle .region-gb.lang-gd, #loco.wrap .selector .handle .lang, #loco.wrap .selector .handle .icon-16 { margin: 0 5px 0 0; }
+/* line 57, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .handle:after { font-family: loco; padding-left: 0.5em; padding-right: 0.2em; font-size: 1.3em; color: #ccc; float: right; }
+/* line 68, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .handle:focus:after, #loco.wrap .selector .handle:hover:after { color: #666; }
+/* line 74, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.no-title .handle .label { display: none; }
+/* line 77, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.no-caret .handle:after { display: none; }
+/* line 89, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.dummy .handle { border-color: transparent; }
+/* line 92, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.dummy .handle:after { display: none; }
+/* line 101, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .icon:before { color: #666; }
+/* line 104, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .lang, #loco.wrap .selector .region, #loco.wrap .selector .lang-ca, #loco.wrap .selector .lang-eo, #loco.wrap .selector .lang-eu, #loco.wrap .selector .variant-wales, #loco.wrap .selector .region-gb.lang-cy, #loco.wrap .selector .variant-scotland, #loco.wrap .selector .region-gb.lang-gd { vertical-align: middle; }
+/* line 109, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd { float: left; clear: none; position: relative; }
+/* line 113, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd > * { display: block; float: left; clear: none; }
+/* line 118, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd > a.has-icon { width: 1.3em; }
+/* line 121, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd > a.has-icon:before { color: #999; display: inline; padding-left: 0; padding-right: 0; line-height: 1.4em; }
+/* line 128, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd > a.has-icon:hover:after { color: #2e892e; }
+/* line 132, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd input[type="text"] { padding: 0.3em 0.5em; -webkit-border-radius: 0; -moz-border-radius: 0; -ms-border-radius: 0; -o-border-radius: 0; border-radius: 0; }
+/* line 138, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectorsep { display: inline-block; }
+/* line 140, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectorsep span { padding: 0.3em 0.5em; color: #666; height: 1.3em; }
+/* line 148, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector ul, #loco.wrap .selector li { display: block; position: relative; cursor: default; padding: 0; margin: 0; }
+/* line 157, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector ul { z-index: 1; position: absolute; left: 0; top: 0; /* <- ovrridden by js */ margin-top: 2px; background: #f5f5f5; box-shadow: 0 10px 5px rgba(0, 0, 0, 0.2); border: solid 1px #ccc; }
+/* line 168, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li { padding: 0.3em 0.5em; }
+/* line 175, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.multi li input { display: none; }
+/* line 178, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.multi li.checked { background: #eee; }
+/* line 187, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.active { background: #eee !important; }
+/* line 191, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.over { background: #ccc !important; color: #fff; text-shadow: 1px 1px #aaa; }
+/* line 195, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.over .label { color: #fff; }
+/* line 200, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .label { display: inline-block; font: inherit; color: inherit; padding: 0 0.5em; margin: 0; }
+/* line 209, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li .icon, #loco.wrap .selector .handle .icon { display: inline-block; min-width: 1.2em; text-align: center; font-size: 14px; vertical-align: middle; }
+/* line 216, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li .icon.no-icon, #loco.wrap .selector .handle .icon.no-icon { display: none; }
+/* line 221, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector .icon-16 { vertical-align: text-top; }
+/* line 228, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.ticked .icon.no-icon { font-size: 12px; display: inline-block; }
+/* line 232, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.ticked .active .icon.no-icon:before { content: "\2713"; }
+/* line 240, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selectoradd a:hover, #loco.wrap .selector a.handle:focus, #loco.wrap .selector a.handle:hover { color: #000; border-color: #999; }
+/* line 249, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.active .handle { border-color: #999; background-color: #eee; color: #999; }
+/* line 253, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.active .handle:after { color: #999; }
+/* line 262, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.disabled { padding: 0.3em 0.5em; border-top: solid 1px #fff; border-right: solid 1px #ddd; border-bottom: solid 1px #ddd; border-left: solid 1px #fff; color: #666; height: 1.3em; cursor: default; cursor: no-drop; cursor: not-allowed; }
+/* line 273, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector.disabled:after { font-family: loco; padding-left: 0.5em; padding-right: 0.3em; line-height: 1em; vertical-align: middle; }
+/* line 287, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.disabled, #loco.wrap .selector li.disabled.over { color: #aaa; text-shadow: 1px 1px #fff; pointer-events: none; }
+/* line 293, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.disabled * { cursor: text; }
+/* line 296, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.disabled .icon:before { color: #aaa; }
+/* line 300, httpdocs/static/sass/imports/_selectors.scss */
+#loco.wrap .selector li.disabled .flag, #loco.wrap .selector li.disabled .icon-16 { opacity: 0.4; }
+/* line 5, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-wrap { width: 100%; }
+/* line 7, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-wrap input { display: inline-block; }
+/* line 12, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-wrap.loading input { background: transparent url(../img/ajax-loader.gif) right 2px no-repeat; }
+/* line 16, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-drop { color: #333333; background: #FFFFFF; border-top: none; position: absolute; width: 100%; top: 0; left: 0; z-index: 99; -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4); -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4); box-shadow: 0 5px 5px rgba(0, 0, 0, 0.4); }
+/* line 29, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result { padding: 5px 10px; cursor: pointer; background: #F0F0F0; border-top: solid 1px #FFF; border-bottom: solid 1px #DDD; }
+/* line 35, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result:first-child { border-top: solid 1px #DDD; }
+/* line 38, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result > * { display: inline-block; vertical-align: middle; line-height: normal; }
+/* line 43, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result .icon:before { padding-right: 5px; }
+/* line 48, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result:hover { background: #A8A8A8; color: #FFFFFF; border-top-color: #A8A8A8; border-bottom-color: #999999; }
+/* line 55, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result.selected { background: #666666 !important; color: #FFFFFF; border-top-color: #666666; border-bottom-color: #666666; }
+/* line 63, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-result .lang, #loco.wrap div.auto-comp-result .region, #loco.wrap div.auto-comp-result .lang-ca, #loco.wrap div.auto-comp-result .lang-eo, #loco.wrap div.auto-comp-result .lang-eu, #loco.wrap div.auto-comp-result .variant-wales, #loco.wrap div.auto-comp-result .region-gb.lang-cy, #loco.wrap div.auto-comp-result .variant-scotland, #loco.wrap div.auto-comp-result .region-gb.lang-gd { margin-right: 5px; }
+/* line 71, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-wrap.error a.icon.clear:before { color: #cc0000; opacity: 1; }
+/* line 75, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-wrap.error input[type="text"] { border-color: #cc0000; color: #cc0000; }
+/* line 78, httpdocs/static/sass/imports/_autocomp.scss */
+#loco.wrap div.auto-comp-wrap.error input[type="text"]:focus { -webkit-box-shadow: 0 0 0.5em 0 rgba(153, 0, 0, 0.5); -moz-box-shadow: 0 0 0.5em 0 rgba(153, 0, 0, 0.5); box-shadow: 0 0 0.5em 0 rgba(153, 0, 0, 0.5); }
+@font-face { /* line 28, httpdocs/static/sass/wp/admin.scss */
+  #loco.wrap { font-family: 'loco'; src: url("../fonts/loco.eot"); src: url("../fonts/loco.eot?#iefix") format("embedded-opentype"), url("../fonts/loco.ttf") format("truetype"), url("../fonts/loco.woff") format("woff"), url("../fonts/loco.svg#loco") format("svg"); font-weight: normal; font-style: normal; } }
+/* line 13, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon, #loco.wrap .loco-font, #loco.wrap .has-icon:before { font-family: 'loco'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+/* line 28, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .has-icon:before { display: inline-block; padding-right: 0.3em; }
+/* line 35, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap a.icon-help { cursor: help; }
+/* line 37, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap a.icon-help span { display: none; }
+/* line 1, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-language:before { content: "\f326"; }
+/* line 4, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-proj:before { content: "\e900"; }
+/* line 7, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-plural:before { content: "\73"; }
+/* line 10, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-max:before { content: "\e901"; }
+/* line 13, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-min:before { content: "\e902"; }
+/* line 16, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-sort:before { content: "\e903"; }
+/* line 19, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-checkbox-checked:before, #loco.wrap .selector.multi li.checked .icon-checkbox:before { content: "\2611"; }
+/* line 22, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-checkbox-unchecked:before { content: "\2610"; }
+/* line 25, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-checkbox-partial:before { content: "\2609"; }
+/* line 28, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-radio-checked:before { content: "\26ab"; }
+/* line 31, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-radio-unchecked:before { content: "\26aa"; }
+/* line 34, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ext:before { content: "\2b08"; }
+/* line 37, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-star:before { content: "\e612"; }
+/* line 40, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-user:before { content: "\e620"; }
+/* line 43, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ok:before, #loco.wrap .notice-success > .has-icon:before, #loco.wrap .notice-success p > strong.has-icon:before { content: "\2713"; }
+/* line 46, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-remove:before { content: "\d7"; }
+/* line 49, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cog:before { content: "\e61b"; }
+/* line 52, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-trash:before { content: "\e60f"; }
+/* line 55, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-time:before { content: "\e62d"; }
+/* line 58, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-download:before { content: "\e608"; }
+/* line 61, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-revert:before { content: "\e635"; }
+/* line 64, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-sync:before { content: "\e634"; }
+/* line 67, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-lock:before, #loco.wrap .selector.disabled:after, #loco.wrap .notice-locked > .has-icon:before, #loco.wrap .notice-locked p > strong.has-icon:before { content: "\e604"; }
+/* line 70, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-flag:before { content: "\e60e"; }
+/* line 73, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-tag:before { content: "\e622"; }
+/* line 76, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-tags:before { content: "\e623"; }
+/* line 79, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-print:before { content: "\e62a"; }
+/* line 82, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-camera:before { content: "\e629"; }
+/* line 85, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-pencil:before { content: "\e61e"; }
+/* line 88, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-add:before { content: "\e60c"; }
+/* line 91, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-del:before { content: "\e60d"; }
+/* line 94, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-clear:before, #loco.wrap a.icon.clear:before { content: "\e615"; }
+/* line 97, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ok-sign:before { content: "\2714"; }
+/* line 100, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-help:before { content: "\3f"; }
+/* line 103, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-info:before { content: "\2139"; }
+/* line 106, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cancel:before { content: "\e605"; }
+/* line 109, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-warn:before, #loco.wrap .notice-warning > .has-icon:before, #loco.wrap .notice-warning p > strong.has-icon:before, #loco.wrap .notice-error > .has-icon:before, #loco.wrap .notice-error p > strong.has-icon:before { content: "\e62e"; }
+/* line 112, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-comment:before { content: "\e613"; }
+/* line 115, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-bar-chart:before { content: "\e624"; }
+/* line 118, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-key:before { content: "\e606"; }
+/* line 121, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cogs:before { content: "\e61c"; }
+/* line 124, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-comments:before { content: "\e614"; }
+/* line 127, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-signout:before { content: "\e61a"; }
+/* line 130, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-signin:before { content: "\e619"; }
+/* line 133, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-upload:before { content: "\e609"; }
+/* line 136, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-twitter:before { content: "\1f426"; }
+/* line 139, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-facebook:before { content: "\e630"; }
+/* line 142, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-github:before { content: "\e633"; }
+/* line 145, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-feed:before { content: "\e628"; }
+/* line 148, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-globe:before { content: "\e61d"; }
+/* line 151, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-wrench:before { content: "\e626"; }
+/* line 154, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-group:before { content: "\e61f"; }
+/* line 157, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cloud:before { content: "\e607"; }
+/* line 160, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-copy:before { content: "\e62b"; }
+/* line 163, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-save:before { content: "\e610"; }
+/* line 166, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-menu:before { content: "\e600"; }
+/* line 169, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-table:before { content: "\e627"; }
+/* line 172, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-caret-down:before, #loco.wrap .selector .handle:after { content: "\e602"; }
+/* line 175, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-caret-up:before, #loco.wrap .selector.active .handle:after { content: "\e601"; }
+/* line 178, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-caret-right:before { content: "\e62c"; }
+/* line 181, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-mail:before { content: "\e603"; }
+/* line 184, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cloud-upload:before { content: "\e617"; }
+/* line 187, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-file:before { content: "\e611"; }
+/* line 190, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-circle-white:before { content: "\26ac"; }
+/* line 193, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-circle-black:before { content: "\25cf"; }
+/* line 196, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-eraser:before { content: "\e636"; }
+/* line 199, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-unlock:before { content: "\e616"; }
+/* line 202, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-apple:before { content: "\e60b"; }
+/* line 205, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-android:before { content: "\e60a"; }
+/* line 208, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-back:before { content: "\2b05"; }
+/* line 211, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-next:before { content: "\2794"; }
+/* line 214, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-arrow-up:before { content: "\f062"; }
+/* line 217, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ccard:before { content: "\f09d"; }
+/* line 220, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-pro:before { content: "\26a1"; }
+/* line 223, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-hellip:before { content: "\2026"; }
+/* line 226, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-vellip:before { content: "\205e"; }
+/* line 229, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-collapse:before { content: "\f147"; }
+/* line 232, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-expand:before { content: "\f196"; }
+/* line 235, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-database:before { content: "\f1c0"; }
+/* line 62, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.is-untranslated:before { content: "×"; }
+/* line 65, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-0:before, #loco.wrap .icon-flag.is-translated:before { content: "✓"; }
+/* line 69, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-1:before, #loco.wrap .icon-flag.is-incorrect:before { content: ""; }
+/* line 73, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-2:before, #loco.wrap .icon-flag.is-provisional:before { content: ""; }
+/* line 77, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-3:before, #loco.wrap .icon-flag.is-unapproved:before { content: ""; }
+/* line 81, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-4:before, #loco.wrap .icon-flag.is-fuzzy:before { content: ""; }
+/* line 85, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-5:before, #loco.wrap .icon-flag.is-incomplete:before { content: ""; }
+/* line 89, httpdocs/static/sass/imports/_icons.scss */
+#loco.wrap .icon-flag.status-6:before, #loco.wrap .icon-flag.is-rejected:before { content: ""; }
+/* line 6, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang, #loco.wrap .region, #loco.wrap .lang-ca, #loco.wrap .lang-eo, #loco.wrap .lang-eu, #loco.wrap .variant-wales, #loco.wrap .region-gb.lang-cy, #loco.wrap .variant-scotland, #loco.wrap .region-gb.lang-gd { color: #fff; background: #2e892e; display: inline-block; text-transform: uppercase; overflow: hidden; font-family: Verdana,Arial,sans-serif; font-size: 9px; font-weight: normal; font-style: normal; line-height: 12px; text-align: center; white-space: normal; text-shadow: none; }
+/* line 22, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang { width: 20px; height: 12px; line-height: 12px; vertical-align: middle; }
+/* line 27, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang:before { content: attr(lang); }
+/* line 36, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang-el { background-color: #1D48A3; }
+/* line 38, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang-el:before { content: "\0395\03BB"; }
+/* line 45, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .region, #loco.wrap .lang-ca, #loco.wrap .lang-eo, #loco.wrap .lang-eu, #loco.wrap .variant-wales, #loco.wrap .region-gb.lang-cy, #loco.wrap .variant-scotland, #loco.wrap .region-gb.lang-gd { width: 16px; height: 12px; margin: 0 2px; background-image: url(../img/flags.png); background-repeat: no-repeat; background-color: transparent; }
+/* line 52, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .region:before, #loco.wrap .lang-ca:before, #loco.wrap .lang-eo:before, #loco.wrap .lang-eu:before, #loco.wrap .variant-wales:before, #loco.wrap .region-gb.lang-cy:before, #loco.wrap .variant-scotland:before, #loco.wrap .region-gb.lang-gd:before { content: "\0A"; display: none; }
+/* line 60, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang-zh { background-color: #B90000; }
+/* line 62, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang-zh.script-hans:before { content: "\4E2D\56FD"; }
+/* line 63, httpdocs/static/sass/imports/_lang.scss */
+#loco.wrap .lang-zh.script-hant:before { content: "\4E2D\570B"; }
+/* line 2, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .__ { background-position: 0 0; }
+/* line 3, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .lang-ca { background-position: 0 -12px; }
+/* line 4, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .lang-eo { background-position: 0 -24px; }
+/* line 5, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .lang-eu { background-position: 0 -36px; }
+/* line 6, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ad { background-position: 0 -48px; }
+/* line 7, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ae { background-position: 0 -60px; }
+/* line 8, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-af { background-position: 0 -72px; }
+/* line 9, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ag { background-position: 0 -84px; }
+/* line 10, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ai { background-position: 0 -96px; }
+/* line 11, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-al { background-position: 0 -108px; }
+/* line 12, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-am { background-position: 0 -120px; }
+/* line 13, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-an { background-position: 0 -132px; }
+/* line 14, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ao { background-position: 0 -144px; }
+/* line 15, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-aq { background-position: 0 -156px; }
+/* line 16, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ar { background-position: 0 -173px; }
+/* line 17, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-as { background-position: 0 -185px; }
+/* line 18, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-at { background-position: 0 -197px; }
+/* line 19, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-au { background-position: 0 -209px; }
+/* line 20, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-aw { background-position: 0 -221px; }
+/* line 21, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ax { background-position: 0 -233px; }
+/* line 22, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-az { background-position: 0 -245px; }
+/* line 23, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ba { background-position: 0 -257px; }
+/* line 24, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bb { background-position: 0 -269px; }
+/* line 25, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bd { background-position: 0 -281px; }
+/* line 26, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-be { background-position: 0 -293px; }
+/* line 27, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bf { background-position: 0 -305px; }
+/* line 28, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bg { background-position: 0 -317px; }
+/* line 29, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bh { background-position: 0 -329px; }
+/* line 30, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bi { background-position: 0 -341px; }
+/* line 31, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bj { background-position: 0 -353px; }
+/* line 32, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bl { background-position: 0 -365px; }
+/* line 33, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bm { background-position: 0 -382px; }
+/* line 34, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bn { background-position: 0 -394px; }
+/* line 35, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bo { background-position: 0 -406px; }
+/* line 36, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bq { background-position: 0 -418px; }
+/* line 37, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-br { background-position: 0 -430px; }
+/* line 38, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bs { background-position: 0 -442px; }
+/* line 39, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bt { background-position: 0 -454px; }
+/* line 40, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bv { background-position: 0 -466px; }
+/* line 41, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bw { background-position: 0 -478px; }
+/* line 42, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-by { background-position: 0 -490px; }
+/* line 43, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-bz { background-position: 0 -502px; }
+/* line 44, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ca { background-position: 0 -514px; }
+/* line 45, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cc { background-position: 0 -526px; }
+/* line 46, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cd { background-position: 0 -538px; }
+/* line 47, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cf { background-position: 0 -550px; }
+/* line 48, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cg { background-position: 0 -562px; }
+/* line 49, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ch { background-position: 0 -574px; }
+/* line 50, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ci { background-position: 0 -586px; }
+/* line 51, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ck { background-position: 0 -598px; }
+/* line 52, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cl { background-position: 0 -610px; }
+/* line 53, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cm { background-position: 0 -622px; }
+/* line 54, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cn { background-position: 0 -634px; }
+/* line 55, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-co { background-position: 0 -646px; }
+/* line 56, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cr { background-position: 0 -658px; }
+/* line 57, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cs { background-position: 0 -670px; }
+/* line 58, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cu { background-position: 0 -682px; }
+/* line 59, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cv { background-position: 0 -694px; }
+/* line 60, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cw { background-position: 0 -706px; }
+/* line 61, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cx { background-position: 0 -723px; }
+/* line 62, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cy { background-position: 0 -735px; }
+/* line 63, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-cz { background-position: 0 -747px; }
+/* line 64, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-de { background-position: 0 -759px; }
+/* line 65, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-dj { background-position: 0 -771px; }
+/* line 66, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-dk { background-position: 0 -783px; }
+/* line 67, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-dm { background-position: 0 -795px; }
+/* line 68, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-do { background-position: 0 -807px; }
+/* line 69, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-dz { background-position: 0 -819px; }
+/* line 70, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ec { background-position: 0 -831px; }
+/* line 71, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ee { background-position: 0 -843px; }
+/* line 72, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-eg { background-position: 0 -855px; }
+/* line 73, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-eh { background-position: 0 -867px; }
+/* line 74, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-er { background-position: 0 -879px; }
+/* line 75, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-es { background-position: 0 -891px; }
+/* line 76, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-et { background-position: 0 -903px; }
+/* line 77, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-fi { background-position: 0 -915px; }
+/* line 78, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-fj { background-position: 0 -927px; }
+/* line 79, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-fk { background-position: 0 -939px; }
+/* line 80, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-fm { background-position: 0 -951px; }
+/* line 81, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-fo { background-position: 0 -963px; }
+/* line 82, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-fr { background-position: 0 -975px; }
+/* line 83, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ga { background-position: 0 -987px; }
+/* line 84, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gb { background-position: 0 -999px; }
+/* line 85, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gd { background-position: 0 -1011px; }
+/* line 86, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ge { background-position: 0 -1023px; }
+/* line 87, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gf { background-position: 0 -1035px; }
+/* line 88, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gg { background-position: 0 -1047px; }
+/* line 89, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gh { background-position: 0 -1064px; }
+/* line 90, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gi { background-position: 0 -1076px; }
+/* line 91, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gl { background-position: 0 -1088px; }
+/* line 92, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gm { background-position: 0 -1100px; }
+/* line 93, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gn { background-position: 0 -1112px; }
+/* line 94, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gp { background-position: 0 -1124px; }
+/* line 95, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gq { background-position: 0 -1136px; }
+/* line 96, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gr { background-position: 0 -1148px; }
+/* line 97, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gs { background-position: 0 -1160px; }
+/* line 98, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gt { background-position: 0 -1172px; }
+/* line 99, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gu { background-position: 0 -1184px; }
+/* line 100, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gw { background-position: 0 -1196px; }
+/* line 101, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-gy { background-position: 0 -1208px; }
+/* line 102, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-hk { background-position: 0 -1220px; }
+/* line 103, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-hm { background-position: 0 -1232px; }
+/* line 104, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-hn { background-position: 0 -1244px; }
+/* line 105, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-hr { background-position: 0 -1256px; }
+/* line 106, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ht { background-position: 0 -1268px; }
+/* line 107, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-hu { background-position: 0 -1280px; }
+/* line 108, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-id { background-position: 0 -1292px; }
+/* line 109, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ie { background-position: 0 -1304px; }
+/* line 110, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-il { background-position: 0 -1316px; }
+/* line 111, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-im { background-position: 0 -1328px; }
+/* line 112, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-in { background-position: 0 -1345px; }
+/* line 113, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-io { background-position: 0 -1357px; }
+/* line 114, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-iq { background-position: 0 -1369px; }
+/* line 115, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ir { background-position: 0 -1381px; }
+/* line 116, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-is { background-position: 0 -1393px; }
+/* line 117, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-it { background-position: 0 -1405px; }
+/* line 118, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-je { background-position: 0 -1417px; }
+/* line 119, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-jm { background-position: 0 -1434px; }
+/* line 120, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-jo { background-position: 0 -1446px; }
+/* line 121, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-jp { background-position: 0 -1458px; }
+/* line 122, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ke { background-position: 0 -1470px; }
+/* line 123, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kg { background-position: 0 -1482px; }
+/* line 124, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kh { background-position: 0 -1494px; }
+/* line 125, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ki { background-position: 0 -1506px; }
+/* line 126, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-km { background-position: 0 -1518px; }
+/* line 127, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kn { background-position: 0 -1530px; }
+/* line 128, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kp { background-position: 0 -1542px; }
+/* line 129, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kr { background-position: 0 -1554px; }
+/* line 130, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kw { background-position: 0 -1566px; }
+/* line 131, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ky { background-position: 0 -1578px; }
+/* line 132, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-kz { background-position: 0 -1590px; }
+/* line 133, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-la { background-position: 0 -1602px; }
+/* line 134, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lb { background-position: 0 -1614px; }
+/* line 135, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lc { background-position: 0 -1626px; }
+/* line 136, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-li { background-position: 0 -1638px; }
+/* line 137, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lk { background-position: 0 -1650px; }
+/* line 138, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lr { background-position: 0 -1662px; }
+/* line 139, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ls { background-position: 0 -1674px; }
+/* line 140, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lt { background-position: 0 -1686px; }
+/* line 141, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lu { background-position: 0 -1698px; }
+/* line 142, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-lv { background-position: 0 -1710px; }
+/* line 143, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ly { background-position: 0 -1722px; }
+/* line 144, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ma { background-position: 0 -1734px; }
+/* line 145, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mc { background-position: 0 -1746px; }
+/* line 146, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-md { background-position: 0 -1758px; }
+/* line 147, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-me { background-position: 0 -1770px; }
+/* line 148, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mf { background-position: 0 -1783px; }
+/* line 149, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mg { background-position: 0 -1800px; }
+/* line 150, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mh { background-position: 0 -1812px; }
+/* line 151, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mk { background-position: 0 -1824px; }
+/* line 152, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ml { background-position: 0 -1836px; }
+/* line 153, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mm { background-position: 0 -1848px; }
+/* line 154, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mn { background-position: 0 -1860px; }
+/* line 155, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mo { background-position: 0 -1872px; }
+/* line 156, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mp { background-position: 0 -1884px; }
+/* line 157, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mq { background-position: 0 -1896px; }
+/* line 158, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mr { background-position: 0 -1908px; }
+/* line 159, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ms { background-position: 0 -1920px; }
+/* line 160, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mt { background-position: 0 -1932px; }
+/* line 161, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mu { background-position: 0 -1944px; }
+/* line 162, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mv { background-position: 0 -1956px; }
+/* line 163, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mw { background-position: 0 -1968px; }
+/* line 164, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mx { background-position: 0 -1980px; }
+/* line 165, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-my { background-position: 0 -1992px; }
+/* line 166, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-mz { background-position: 0 -2004px; }
+/* line 167, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-na { background-position: 0 -2016px; }
+/* line 168, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-nc { background-position: 0 -2028px; }
+/* line 169, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ne { background-position: 0 -2040px; }
+/* line 170, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-nf { background-position: 0 -2052px; }
+/* line 171, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ng { background-position: 0 -2064px; }
+/* line 172, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ni { background-position: 0 -2076px; }
+/* line 173, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-nl { background-position: 0 -2088px; }
+/* line 174, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-no { background-position: 0 -2100px; }
+/* line 175, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-np { background-position: 0 -2112px; }
+/* line 176, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-nr { background-position: 0 -2124px; }
+/* line 177, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-nu { background-position: 0 -2136px; }
+/* line 178, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-nz { background-position: 0 -2148px; }
+/* line 179, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-om { background-position: 0 -2160px; }
+/* line 180, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pa { background-position: 0 -2172px; }
+/* line 181, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pe { background-position: 0 -2184px; }
+/* line 182, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pf { background-position: 0 -2196px; }
+/* line 183, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pg { background-position: 0 -2208px; }
+/* line 184, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ph { background-position: 0 -2220px; }
+/* line 185, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pk { background-position: 0 -2232px; }
+/* line 186, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pl { background-position: 0 -2244px; }
+/* line 187, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pm { background-position: 0 -2256px; }
+/* line 188, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pn { background-position: 0 -2268px; }
+/* line 189, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pr { background-position: 0 -2280px; }
+/* line 190, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ps { background-position: 0 -2292px; }
+/* line 191, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pt { background-position: 0 -2304px; }
+/* line 192, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-pw { background-position: 0 -2316px; }
+/* line 193, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-py { background-position: 0 -2328px; }
+/* line 194, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-qa { background-position: 0 -2340px; }
+/* line 195, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-re { background-position: 0 -2352px; }
+/* line 196, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ro { background-position: 0 -2364px; }
+/* line 197, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-rs { background-position: 0 -2376px; }
+/* line 198, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ru { background-position: 0 -2388px; }
+/* line 199, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-rw { background-position: 0 -2400px; }
+/* line 200, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sa { background-position: 0 -2412px; }
+/* line 201, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sb { background-position: 0 -2424px; }
+/* line 202, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sc { background-position: 0 -2436px; }
+/* line 203, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sd { background-position: 0 -2448px; }
+/* line 204, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-se { background-position: 0 -2460px; }
+/* line 205, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sg { background-position: 0 -2472px; }
+/* line 206, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sh { background-position: 0 -2484px; }
+/* line 207, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-si { background-position: 0 -2496px; }
+/* line 208, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sj { background-position: 0 -2508px; }
+/* line 209, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sk { background-position: 0 -2520px; }
+/* line 210, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sl { background-position: 0 -2532px; }
+/* line 211, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sm { background-position: 0 -2544px; }
+/* line 212, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sn { background-position: 0 -2556px; }
+/* line 213, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-so { background-position: 0 -2568px; }
+/* line 214, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sr { background-position: 0 -2580px; }
+/* line 215, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ss { background-position: 0 -2592px; }
+/* line 216, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-st { background-position: 0 -2609px; }
+/* line 217, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sv { background-position: 0 -2621px; }
+/* line 218, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sx { background-position: 0 -2633px; }
+/* line 219, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sy { background-position: 0 -2650px; }
+/* line 220, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-sz { background-position: 0 -2662px; }
+/* line 221, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tc { background-position: 0 -2674px; }
+/* line 222, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-td { background-position: 0 -2686px; }
+/* line 223, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tf { background-position: 0 -2698px; }
+/* line 224, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tg { background-position: 0 -2710px; }
+/* line 225, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-th { background-position: 0 -2722px; }
+/* line 226, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tj { background-position: 0 -2734px; }
+/* line 227, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tk { background-position: 0 -2746px; }
+/* line 228, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tl { background-position: 0 -2758px; }
+/* line 229, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tm { background-position: 0 -2770px; }
+/* line 230, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tn { background-position: 0 -2782px; }
+/* line 231, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-to { background-position: 0 -2794px; }
+/* line 232, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tr { background-position: 0 -2806px; }
+/* line 233, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tt { background-position: 0 -2818px; }
+/* line 234, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tv { background-position: 0 -2830px; }
+/* line 235, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tw { background-position: 0 -2842px; }
+/* line 236, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-tz { background-position: 0 -2854px; }
+/* line 237, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ua { background-position: 0 -2866px; }
+/* line 238, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ug { background-position: 0 -2878px; }
+/* line 239, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-um { background-position: 0 -2890px; }
+/* line 240, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-us { background-position: 0 -2902px; }
+/* line 241, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-uy { background-position: 0 -2914px; }
+/* line 242, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-uz { background-position: 0 -2926px; }
+/* line 243, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-va { background-position: 0 -2938px; }
+/* line 244, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-vc { background-position: 0 -2950px; }
+/* line 245, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ve { background-position: 0 -2962px; }
+/* line 246, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-vg { background-position: 0 -2974px; }
+/* line 247, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-vi { background-position: 0 -2986px; }
+/* line 248, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-vn { background-position: 0 -2998px; }
+/* line 249, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-vu { background-position: 0 -3010px; }
+/* line 250, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-wf { background-position: 0 -3022px; }
+/* line 251, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ws { background-position: 0 -3034px; }
+/* line 252, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-ye { background-position: 0 -3046px; }
+/* line 253, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-yt { background-position: 0 -3058px; }
+/* line 254, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-za { background-position: 0 -3070px; }
+/* line 255, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-zm { background-position: 0 -3082px; }
+/* line 256, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .region-zw { background-position: 0 -3094px; }
+/* line 257, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .variant-scotland, #loco.wrap .region-gb.lang-gd { background-position: 0 -3106px; }
+/* line 258, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .variant-wales, #loco.wrap .region-gb.lang-cy { background-position: 0 -3118px; }
+/* line 259, httpdocs/static/sass/auto/_flags.scss */
+#loco.wrap .x-eu { background-position: 0 -3130px; }
+/* line 72, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap span.lang code { display: none; }
+/* line 1, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-language:before { content: "\f326"; }
+/* line 4, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-proj:before { content: "\e900"; }
+/* line 7, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-plural:before { content: "\73"; }
+/* line 10, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-max:before { content: "\e901"; }
+/* line 13, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-min:before { content: "\e902"; }
+/* line 16, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-sort:before { content: "\e903"; }
+/* line 19, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-checkbox-checked:before, #loco.wrap .selector.multi li.checked .icon-checkbox:before { content: "\2611"; }
+/* line 22, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-checkbox-unchecked:before { content: "\2610"; }
+/* line 25, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-checkbox-partial:before { content: "\2609"; }
+/* line 28, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-radio-checked:before { content: "\26ab"; }
+/* line 31, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-radio-unchecked:before { content: "\26aa"; }
+/* line 34, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ext:before { content: "\2b08"; }
+/* line 37, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-star:before { content: "\e612"; }
+/* line 40, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-user:before { content: "\e620"; }
+/* line 43, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ok:before, #loco.wrap .notice-success > .has-icon:before, #loco.wrap .notice-success p > strong.has-icon:before { content: "\2713"; }
+/* line 46, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-remove:before { content: "\d7"; }
+/* line 49, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cog:before { content: "\e61b"; }
+/* line 52, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-trash:before { content: "\e60f"; }
+/* line 55, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-time:before { content: "\e62d"; }
+/* line 58, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-download:before { content: "\e608"; }
+/* line 61, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-revert:before { content: "\e635"; }
+/* line 64, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-sync:before { content: "\e634"; }
+/* line 67, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-lock:before, #loco.wrap .selector.disabled:after, #loco.wrap .notice-locked > .has-icon:before, #loco.wrap .notice-locked p > strong.has-icon:before { content: "\e604"; }
+/* line 70, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-flag:before { content: "\e60e"; }
+/* line 73, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-tag:before { content: "\e622"; }
+/* line 76, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-tags:before { content: "\e623"; }
+/* line 79, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-print:before { content: "\e62a"; }
+/* line 82, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-camera:before { content: "\e629"; }
+/* line 85, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-pencil:before { content: "\e61e"; }
+/* line 88, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-add:before { content: "\e60c"; }
+/* line 91, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-del:before { content: "\e60d"; }
+/* line 94, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-clear:before, #loco.wrap a.icon.clear:before { content: "\e615"; }
+/* line 97, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ok-sign:before { content: "\2714"; }
+/* line 100, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-help:before { content: "\3f"; }
+/* line 103, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-info:before { content: "\2139"; }
+/* line 106, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cancel:before { content: "\e605"; }
+/* line 109, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-warn:before, #loco.wrap .notice-warning > .has-icon:before, #loco.wrap .notice-warning p > strong.has-icon:before, #loco.wrap .notice-error > .has-icon:before, #loco.wrap .notice-error p > strong.has-icon:before { content: "\e62e"; }
+/* line 112, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-comment:before { content: "\e613"; }
+/* line 115, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-bar-chart:before { content: "\e624"; }
+/* line 118, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-key:before { content: "\e606"; }
+/* line 121, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cogs:before { content: "\e61c"; }
+/* line 124, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-comments:before { content: "\e614"; }
+/* line 127, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-signout:before { content: "\e61a"; }
+/* line 130, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-signin:before { content: "\e619"; }
+/* line 133, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-upload:before { content: "\e609"; }
+/* line 136, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-twitter:before { content: "\1f426"; }
+/* line 139, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-facebook:before { content: "\e630"; }
+/* line 142, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-github:before { content: "\e633"; }
+/* line 145, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-feed:before { content: "\e628"; }
+/* line 148, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-globe:before { content: "\e61d"; }
+/* line 151, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-wrench:before { content: "\e626"; }
+/* line 154, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-group:before { content: "\e61f"; }
+/* line 157, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cloud:before { content: "\e607"; }
+/* line 160, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-copy:before { content: "\e62b"; }
+/* line 163, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-save:before { content: "\e610"; }
+/* line 166, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-menu:before { content: "\e600"; }
+/* line 169, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-table:before { content: "\e627"; }
+/* line 172, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-caret-down:before, #loco.wrap .selector .handle:after { content: "\e602"; }
+/* line 175, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-caret-up:before, #loco.wrap .selector.active .handle:after { content: "\e601"; }
+/* line 178, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-caret-right:before { content: "\e62c"; }
+/* line 181, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-mail:before { content: "\e603"; }
+/* line 184, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-cloud-upload:before { content: "\e617"; }
+/* line 187, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-file:before { content: "\e611"; }
+/* line 190, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-circle-white:before { content: "\26ac"; }
+/* line 193, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-circle-black:before { content: "\25cf"; }
+/* line 196, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-eraser:before { content: "\e636"; }
+/* line 199, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-unlock:before { content: "\e616"; }
+/* line 202, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-apple:before { content: "\e60b"; }
+/* line 205, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-android:before { content: "\e60a"; }
+/* line 208, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-back:before { content: "\2b05"; }
+/* line 211, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-next:before { content: "\2794"; }
+/* line 214, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-arrow-up:before { content: "\f062"; }
+/* line 217, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-ccard:before { content: "\f09d"; }
+/* line 220, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-pro:before { content: "\26a1"; }
+/* line 223, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-hellip:before { content: "\2026"; }
+/* line 226, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-vellip:before { content: "\205e"; }
+/* line 229, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-collapse:before { content: "\f147"; }
+/* line 232, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-expand:before { content: "\f196"; }
+/* line 235, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-database:before { content: "\f1c0"; }
+/* line 79, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .icon, #loco.wrap .has-icon:before { font-family: 'loco'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+/* line 93, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .has-icon:before, #loco.wrap .has-icon > span { display: inline-block; vertical-align: middle; }
+/* line 106, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 ul, #loco.wrap h1 li { margin: 0; padding: 0; }
+/* line 110, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 li { display: inline-block; }
+/* line 112, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 li:after { content: "/"; color: #999; text-shadow: none; display: inline-block; }
+/* line 118, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 li a { text-decoration: none; }
+/* line 123, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 li:last-child:after { content: ""; }
+/* line 126, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 li:last-child a { color: inherit; pointer-events: none; cursor: auto; }
+/* line 136, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h2 span { color: #999; font-weight: normal; }
+/* line 145, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h3 .loco-meta { font-size: 14px; font-weight: normal; }
+/* line 156, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .wp-list-table td:first-child .icon { width: 16px; display: inline-block; text-align: center; }
+/* line 162, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .wp-list-table td { white-space: nowrap; }
+/* line 169, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap nav.above-list-table { margin-bottom: 1em; }
+/* line 171, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap nav.above-list-table a { display: inline-block; margin-right: 1em; }
+/* line 180, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .wp-core-ui button.inverted, #loco.wrap .wp-core-ui button.inverted:hover { background: -moz-linear-gradient(top, #cccccc 0%, #e0e0e0 5%, #fefefe 100%); background: -webkit-linear-gradient(top, #cccccc 0%, #e0e0e0 5%, #fefefe 100%); background: linear-gradient(to bottom, #cccccc 0%, #e0e0e0 5%, #fefefe 100%); -webkit-box-shadow: 0 1px 0 #fff; -moz-box-shadow: 0 1px 0 #fff; box-shadow: 0 1px 0 #fff; border-color: #bbb; }
+/* line 192, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .loco-clearable { display: inline-block; vertical-align: middle; position: relative; }
+/* line 198, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .loco-clearable a.clear, #loco.wrap .auto-comp-wrap a.clear { top: 0; right: 0; outline: none; padding: 5px 5px; position: absolute; font-size: 1em; line-height: normal; text-decoration: none; }
+/* line 207, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .loco-clearable a.clear:before, #loco.wrap .auto-comp-wrap a.clear:before { vertical-align: middle; padding: 0; color: #999; }
+/* line 212, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .loco-clearable a.clear:hover:before, #loco.wrap .auto-comp-wrap a.clear:hover:before { color: #333; }
+/* line 215, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .loco-clearable a.clear span, #loco.wrap .auto-comp-wrap a.clear span { display: none; }
+/* line 219, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .loco-clearable ::-ms-clear, #loco.wrap .auto-comp-wrap ::-ms-clear { display: none; }
+/* line 226, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress { color: #000; }
+/* line 228, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress * { height: 100%; overflow: hidden; white-space: nowrap; }
+/* line 234, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress .t { background-color: #ddd; border: 1px solid #ccc; }
+/* line 238, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress .t .bar { float: left; clear: none; background-color: #3db63d; }
+/* line 244, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress .t .bar.f { background-color: #bd2c00; }
+/* line 250, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress .l { display: block; }
+/* line 256, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap td div.progress .t { border: none; }
+/* line 259, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap td div.progress .l { display: none; }
+/* line 266, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap code.path { color: #333; margin: 0; padding: 0; display: inline; background: transparent; }
+/* line 302, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice { position: relative; margin: 1em 0; /*p > * { display: inline-block; vertical-align: middle; padding-right: 6px;
+}*/ /*.has-icon:before { width: 1.2em;
+}*/ }
+/* line 314, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-generic { border-color: #ddd; }
+/* line 318, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-success > .has-icon, #loco.wrap .notice-success p > strong.has-icon { color: #000; }
+/* line 320, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-warning { border-color: #FFA500; }
+/* line 324, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-error { border-color: #dc3232; }
+/* line 328, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-danger { border-color: #dc3232; }
+/* line 331, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-locked { border-color: #FFA500; }
+/* line 341, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap input.regular-text, #loco.wrap textarea.regular-text { width: 25em; }
+/* line 347, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .button-link { padding: 0 10px 1px; }
+/* line 352, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .button-danger { background: #ba0000; border-color: #990000 #660000 #660000; -webkit-box-shadow: 0 1px 0 #660000; -moz-box-shadow: 0 1px 0 #660000; box-shadow: 0 1px 0 #660000; color: #fff; text-decoration: none; text-shadow: 0 -1px 1px #660000, 1px 0 1px #660000, 0 1px 1px #660000, -1px 0 1px #660000; }
+
+/* line 369, httpdocs/static/sass/wp/admin.scss */
+.js #wpbody-content > .notice { display: none; }
+/* line 371, httpdocs/static/sass/wp/admin.scss */
+.js #wpbody-content > .notice.inline { display: block; }
+
+/* line 378, httpdocs/static/sass/wp/admin.scss */
+.js #loco.wrap .jshide { display: none !important; }
+
+/* line 382, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .invis { visibility: hidden; }
+
+/* line 390, httpdocs/static/sass/wp/admin.scss */
+.form-table tr { vertical-align: top; }
+/* line 394, httpdocs/static/sass/wp/admin.scss */
+.form-table tr.compact td { padding-top: 0; }
+
+/** Dev */
+/* line 407, httpdocs/static/sass/wp/admin.scss */
+#loco-debug { margin-top: 50px; font-size: 12px; color: #999; }
+
+/* line 415, httpdocs/static/sass/wp/admin.scss */
+dl.debug dt { font-weight: bold; }
+/* line 418, httpdocs/static/sass/wp/admin.scss */
+dl.debug dt, dl.debug dd { white-space: pre; }
+
+/* Template for colours include, using default wordpress theme */
+/* line 21, httpdocs/static/sass/wp/_loco-skin.scss */
+.wrap #loco-editor .is-table .wg-tr:nth-child(even) { background-color: rgba(0, 115, 170, 0.05); }
+
+/* line 25, httpdocs/static/sass/wp/_loco-skin.scss */
+.wrap #loco-editor .wg-split-x > nav.wg-tabs > a.active, .wrap #loco-editor .is-table .wg-cols > div > div.selected { background-color: #0073aa; }
+
+/* line 30, httpdocs/static/sass/wp/_loco-skin.scss */
+.wrap #loco-editor .is-editable > .wg-content .wg-field:focus { border-color: #5b9dd9; -webkit-box-shadow: inset 0 0 0.6em rgba(30, 140, 190, 0.8); -moz-box-shadow: inset 0 0 0.6em rgba(30, 140, 190, 0.8); box-shadow: inset 0 0 0.6em rgba(30, 140, 190, 0.8); }
+
+/*# sourceMappingURL=admin.css.map */
