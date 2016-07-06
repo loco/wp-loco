@@ -249,17 +249,30 @@ class Loco_package_Project {
             foreach( $this->gpaths as $path ){
                 $target->addRoot( (string) $path, false );
             }
-            foreach( $this->xdpaths as $path ){
-                $target->exclude( (string) $path );
-            }
-            foreach( $this->xgpaths as $path ){
-                $target->exclude( (string) $path );
-            }
+            $this->excludeTargets( $target );
             $this->target = $target;
         }
         return $this->target;
     }
 
+    
+    /**
+     * utility excludes current exclude paths from target finder
+     * @return Loco_fs_FileFinder
+     */
+    private function excludeTargets( Loco_fs_FileFinder $finder ){
+        foreach( $this->xdpaths as $file ){
+            if( $path = realpath( (string) $file ) ){ 
+                $finder->exclude( $path );
+            }
+        }
+        foreach( $this->xgpaths as $file ){
+            if( $path = realpath( (string) $file ) ){
+                $finder->exclude( $path );
+            }
+        }
+        return $finder;
+    }
 
     
     /**
@@ -297,20 +310,30 @@ class Loco_package_Project {
                     $source->addRoot( $path, true );
                 }
             }
-            foreach( $this->xspaths as $file ){
-                if( $path = realpath( (string) $file ) ){  
-                    $source->exclude( $path );
-                }
-            }
-            foreach( $this->xgpaths as $file ){
-                if( $path = realpath( (string) $file ) ){  
-                    $source->exclude( $path );
-                }
-            }
+            $this->excludeSources( $source );
             $this->source = $source;
         }
         return $this->source;
-    }    
+    }
+
+
+    /**
+     * utility excludes current exclude paths from target finder
+     * @return Loco_fs_FileFinder
+     */
+    private function excludeSources( Loco_fs_FileFinder $finder ){
+        foreach( $this->xspaths as $file ){
+            if( $path = realpath( (string) $file ) ){ 
+                $finder->exclude( $path );
+            }
+        }
+        foreach( $this->xgpaths as $file ){
+            if( $path = realpath( (string) $file ) ){
+                $finder->exclude( $path );
+            }
+        }
+        return $finder;
+    }
 
 
     /**
@@ -452,8 +475,13 @@ class Loco_package_Project {
                 $slug = 'default';
             }
         }
-        // TODO fix this so search cannot descend into other packages (e.g. single file plugins)
-        $files = $this->getTargetFinder()->exportGroups();
+        // search only inside bundle for template
+        $finder = new Loco_fs_FileFinder;
+        foreach( $this->dpaths as $path ){
+            $finder->addRoot( (string) $path, true );
+        }
+        $this->excludeTargets($finder);
+        $files = $finder->group('pot','po','mo')->exportGroups();
         foreach( array('pot','po') as $ext ){
             /* @var $pot Loco_fs_File */
             foreach( $files[$ext] as $pot ){
@@ -466,7 +494,7 @@ class Loco_package_Project {
         // Failed to find correctly named POT file.
         // if a single POT file is found letuse it
         if( 1 === count($files['pot']) ){
-            return $pot;
+            return $files['pot'][0];
         }
         // Either no POT files are found, or multiple are found.
         // if the project is the default in its domain, we can try aliases which may be PO
@@ -475,7 +503,7 @@ class Loco_package_Project {
             if( $aliases = $options->pot_alias ){
                 $found = array();
                 /* @var $pot Loco_fs_File */
-                foreach( $this->target as $pot ){
+                foreach( $finder as $pot ){
                     $priority = array_search( $pot->basename(), $aliases, true );
                     if( false !== $priority ){
                         $found[$priority] = $pot;

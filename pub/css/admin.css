@@ -248,7 +248,7 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 100, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-help:before { content: "\3f"; }
 /* line 103, httpdocs/static/sass/auto/_icomoon.scss */
-#loco.wrap .icon-info:before { content: "\2139"; }
+#loco.wrap .icon-info:before, #loco.wrap .notice-info > .has-icon:before, #loco.wrap .notice-info p > strong.has-icon:before { content: "\2139"; }
 /* line 106, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-cancel:before { content: "\e605"; }
 /* line 109, httpdocs/static/sass/auto/_icomoon.scss */
@@ -280,7 +280,7 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 148, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-globe:before { content: "\e61d"; }
 /* line 151, httpdocs/static/sass/auto/_icomoon.scss */
-#loco.wrap .icon-wrench:before { content: "\e626"; }
+#loco.wrap .icon-wrench:before, #loco.wrap .notice-debug > .has-icon:before, #loco.wrap .notice-debug p > strong.has-icon:before { content: "\e626"; }
 /* line 154, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-group:before { content: "\e61f"; }
 /* line 157, httpdocs/static/sass/auto/_icomoon.scss */
@@ -960,7 +960,7 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 100, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-help:before { content: "\3f"; }
 /* line 103, httpdocs/static/sass/auto/_icomoon.scss */
-#loco.wrap .icon-info:before { content: "\2139"; }
+#loco.wrap .icon-info:before, #loco.wrap .notice-info > .has-icon:before, #loco.wrap .notice-info p > strong.has-icon:before { content: "\2139"; }
 /* line 106, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-cancel:before { content: "\e605"; }
 /* line 109, httpdocs/static/sass/auto/_icomoon.scss */
@@ -992,7 +992,7 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 148, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-globe:before { content: "\e61d"; }
 /* line 151, httpdocs/static/sass/auto/_icomoon.scss */
-#loco.wrap .icon-wrench:before { content: "\e626"; }
+#loco.wrap .icon-wrench:before, #loco.wrap .notice-debug > .has-icon:before, #loco.wrap .notice-debug p > strong.has-icon:before { content: "\e626"; }
 /* line 154, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-group:before { content: "\e61f"; }
 /* line 157, httpdocs/static/sass/auto/_icomoon.scss */
@@ -1122,39 +1122,41 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 324, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .notice-error { border-color: #dc3232; }
 /* line 328, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-debug { border-color: #00a0d2; }
+/* line 335, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .notice-danger { border-color: #dc3232; }
-/* line 331, httpdocs/static/sass/wp/admin.scss */
+/* line 338, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .notice-locked { border-color: #FFA500; }
-/* line 341, httpdocs/static/sass/wp/admin.scss */
+/* line 348, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap input.regular-text, #loco.wrap textarea.regular-text { width: 25em; }
-/* line 347, httpdocs/static/sass/wp/admin.scss */
+/* line 354, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-link { padding: 0 10px 1px; }
-/* line 352, httpdocs/static/sass/wp/admin.scss */
+/* line 359, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-danger { background: #ba0000; border-color: #990000 #660000 #660000; -webkit-box-shadow: 0 1px 0 #660000; -moz-box-shadow: 0 1px 0 #660000; box-shadow: 0 1px 0 #660000; color: #fff; text-decoration: none; text-shadow: 0 -1px 1px #660000, 1px 0 1px #660000, 0 1px 1px #660000, -1px 0 1px #660000; }
 
-/* line 369, httpdocs/static/sass/wp/admin.scss */
+/* line 376, httpdocs/static/sass/wp/admin.scss */
 .js #wpbody-content > .notice { display: none; }
-/* line 371, httpdocs/static/sass/wp/admin.scss */
+/* line 378, httpdocs/static/sass/wp/admin.scss */
 .js #wpbody-content > .notice.inline { display: block; }
 
-/* line 378, httpdocs/static/sass/wp/admin.scss */
+/* line 385, httpdocs/static/sass/wp/admin.scss */
 .js #loco.wrap .jshide { display: none !important; }
 
-/* line 382, httpdocs/static/sass/wp/admin.scss */
+/* line 389, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .invis { visibility: hidden; }
 
-/* line 390, httpdocs/static/sass/wp/admin.scss */
+/* line 397, httpdocs/static/sass/wp/admin.scss */
 .form-table tr { vertical-align: top; }
-/* line 394, httpdocs/static/sass/wp/admin.scss */
+/* line 401, httpdocs/static/sass/wp/admin.scss */
 .form-table tr.compact td { padding-top: 0; }
 
 /** Dev */
-/* line 407, httpdocs/static/sass/wp/admin.scss */
+/* line 414, httpdocs/static/sass/wp/admin.scss */
 #loco-debug { margin-top: 50px; font-size: 12px; color: #999; }
 
-/* line 415, httpdocs/static/sass/wp/admin.scss */
+/* line 422, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt { font-weight: bold; }
-/* line 418, httpdocs/static/sass/wp/admin.scss */
+/* line 425, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt, dl.debug dd { white-space: pre; }
 
 /* Template for colours include, using default wordpress theme */

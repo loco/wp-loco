@@ -156,6 +156,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-view' => 'bundle_View',
             '{type}-conf' => 'bundle_Conf',
             '{type}-setup' => 'bundle_Setup',
+            '{type}-debug' => 'bundle_Debug',
             // file initialization
             '{type}-msginit'   => 'init_InitPo',
             '{type}-xgettext'  => 'init_InitPot',
@@ -166,9 +167,9 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-file-delete' => 'file_Delete',
         );
         if( ! $page ){
-            $page = '';
+            $page = $action;
         }
-        if( $action ){
+        else if( $action ){
             $page .= '-'. $action;
         }
         $args['_route'] = $page;

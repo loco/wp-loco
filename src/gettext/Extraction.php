@@ -16,21 +16,32 @@ class Loco_gettext_Extraction {
      * @var LocoPHPExtractor
      */    
     private $extractor;
-    
+
+    /**
+     * Extra strings to be pushed into domains
+     * @var array
+     */
+    private $extras;
+
 
     public function __construct( Loco_package_Bundle $bundle ){
         $this->bundle = $bundle;
         $this->extractor = loco_wp_extractor();
+        $this->extras = array();
         // pull bundle's default metadata. these are translations that may not be encountered in files
         if( $default = $bundle->getDefaultProject() ){
-            $domain = (string) $default->getDomain();
+            $extras = array();
             $header = $bundle->getHeaderInfo();
             foreach( $bundle->getMetaTranslatable() as $prop => $notes ){
                 if( $source = $header->__get($prop) ){
                     if( is_string($source) ){
-                        $this->extractor->pushMeta( $source, $notes, $domain );
+                        $extras[] = array( $source, $notes );
                     }
                 }
+            }
+            if( $extras ){
+                $domain = (string) $default->getDomain();
+                $this->extras[$domain] = $extras;
             }
         }
     }
@@ -53,7 +64,23 @@ class Loco_gettext_Extraction {
 
 
     /**
-     * Get number of unique strings across all domains extracted
+     * Add metadata strings deferred from construction. Note this will alter domain counts
+     * @return Loco_gettext_Extraction
+     */
+    public function includeMeta(){
+        foreach( $this->extras as $domain => $extras ){
+            foreach( $extras as $args ){
+                $this->extractor->pushMeta( $args[0], $args[1], $domain );
+            }
+        }
+        $this->extras = array();
+        return $this;
+    }
+
+
+
+    /**
+     * Get number of unique strings across all domains extracted (excluding additional metadata)
      * @return array { default: x, myDomain: y }
      */
     public function getDomainCounts(){
@@ -71,4 +98,13 @@ class Loco_gettext_Extraction {
         return $data->templatize();
     }    
     
+    
+    /**
+     * Get total number of strings extracted from all domains, excluding additional metadata
+     * @return int
+     */
+    public function getTotal(){
+        return $this->extractor->getTotal();
+    }
+     
 }

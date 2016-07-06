@@ -81,7 +81,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         else {
             $extr = new Loco_gettext_Extraction( $bundle );
             $domain = (string) $project->getDomain();
-            $data = $extr->addProject($project)->getTemplate($domain);
+            $data = $extr->addProject($project)->includeMeta()->getTemplate($domain);
             $source = '';
         }
 

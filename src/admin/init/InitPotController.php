@@ -39,6 +39,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
 
         $slug = $project->getSlug();
         $domain = (string) $project->getDomain();
+        $this->set('domain', $domain );
         
         // Establish default POT path whether it exists or not
         $pot = $project->getPot();
@@ -69,12 +70,11 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         $ext = new Loco_gettext_Extraction( $bundle );
         $counts = $ext->addProject($project)->getDomainCounts();
         $total = isset($counts[$domain]) ? $counts[$domain] : 0;
-        
+
         // index all domains incase we find one not configured
         // $domains = $bundle->getDomains();
-        
         // count strings found across any other domains referenced
-        // TODO use this to indentify if extracted domain name is incorrect
+        /*/ TODO use this to indentify if extracted domain name is incorrect
         $other = 0;
         $ndomains = 0;
         foreach( $counts as $d => $n ){
@@ -82,16 +82,16 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
                 $ndomains++;
                 $other += $n;
             }
-        }   
+        }*/
         
         $this->set('total', $total );
         if( $total ){
             // TODO don't include translatable headers in count, as they're not really in source code.
             $this->set('found', sprintf( _n('One translatable string found in source code','%s translatable strings found in source code',$total,'loco'), number_format($total) ) );
         }
-        if( $other ){
+        /*if( $other ){
             $this->set('other', sprintf( '%s string(s) found in %s other domain(s)', number_format($other), number_format($ndomains) ) );
-        }
+        }*/
 
         // file metadata
         $this->set('pot', Loco_mvc_FileParams::create( $pot ) );
@@ -112,7 +112,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
             'loco-nonce' => $this->setNonce('xgettext')->value,
             'type' => $bundle->getType(),
             'bundle' => $bundle->getSlug(),
-            'domain' => $domain,
+            'domain' => $project->getId(),
             'slug' => $slug,
             'path' => $pot->getParent()->getRelativePath( loco_constant('WP_CONTENT_DIR') ),
         ) ) );

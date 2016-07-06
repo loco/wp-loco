@@ -21,7 +21,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
      */
     public function render(){
 
-        $this->prepareNavigation();
+        $this->prepareNavigation()->add( __('Setup options','loco') );
         $bundle = $this->getBundle();
         $action = 'setup:'.$bundle->getId();
  

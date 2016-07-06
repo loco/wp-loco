@@ -31,7 +31,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             $this->set('pot', '' );
             $domain = (string) $project->getDomain();
             $extr = new Loco_gettext_Extraction($bundle);
-            $data = $extr->addProject($project)->getTemplate($domain);
+            $data = $extr->addProject($project)->includeMeta()->getTemplate($domain);
         }
 
         $this->set( 'po', $data->jsonSerialize() );

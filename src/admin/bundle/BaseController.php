@@ -97,6 +97,9 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
             'setup' => __('Setup','loco'),
             'conf'  => __('Advanced','loco'),
         );
+        if( loco_debugging() ){
+            $actions['debug'] = __('Debug','loco');
+        }
         $suffix = $this->get('action');
         $prefix = strtolower( $this->get('type') );
         foreach( $actions as $action => $name ){

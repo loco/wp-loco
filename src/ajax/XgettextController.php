@@ -33,7 +33,7 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         // Do extraction and grab only given domain's strings
         $ext = new Loco_gettext_Extraction( $bundle );
         $domain = $project->getDomain()->getName();
-        $data = $ext->addProject($project)->getTemplate( $domain );
+        $data = $ext->addProject($project)->includeMeta()->getTemplate( $domain );
         
         // additional headers to set in new POT file
         $headers = array (

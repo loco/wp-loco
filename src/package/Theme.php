@@ -117,8 +117,13 @@ class Loco_package_Theme extends Loco_package_Bundle {
         
         // parent theme inheritance:
         if( $parent = $theme->parent() ){
-            $bundle->parent = self::createFromTheme($parent);
-            $bundle->inherit( $bundle->parent );
+            try {
+                $bundle->parent = self::createFromTheme($parent);
+                $bundle->inherit( $bundle->parent );
+            }
+            catch( Loco_error_Exception $e ){
+                Loco_error_AdminNotices::add($e);
+            }
         }
         
         // TODO provide hook to modify bundle?

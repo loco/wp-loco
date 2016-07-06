@@ -151,7 +151,6 @@ class Loco_api_WordPressFileSystem {
             // annoyingly WordPress moves the error notice above the navigation tabs :-/
             request_filesystem_credentials( '', $type, $error, $context, $extra );
         }
-var_dump( compact('type','creds') );
         // now have unauthorized remote connection
         $this->form = (string) $buffer->close();
         return false;
