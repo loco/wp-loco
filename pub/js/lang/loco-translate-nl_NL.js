@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: nl-NL, Dutch
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:35 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:11 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
     "User does not have permission to manage translations": "Gebruik heeft geen rechten om vertalingen te beheren",
     "Invalid data posted to server": "Ongeldige gegevens op server",
     "Failed to compile MO file with %s, check your settings": "",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "",
     "Cannot overwrite MO file": "",
     "Failed to write MO file": "",
-    "Unknown error": "",
-    "PO file saved": "",
-    "and MO file compiled": "",
-    "Merged from %s": "",
-    "Merged from source code": "",
-    "Already up to date with %s": "",
-    "Already up to date with source code": "",
-    "1 new string added": {
-        "one": "",
-        "other": ""
-    },
-    "1 obsolete string removed": {
-        "one": "",
-        "other": ""
-    },
-    "Your changes will be lost if you continue without saving": "",
-    "Source text": "",
-    "%s translation": "",
-    "Comments": "",
-    "Context": "",
-    "Translation": "",
-    "No source files in this package, nothing to sync": "",
-    "No strings could be extracted from source files": "Er konden geen te vertalen teksten uit de bronbestanden gehaald worden",
-    "create in <code>%s</code>": "",
     "Packages": "Pakketten",
     "File check": "",
     "File system permissions for %s": "",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Start nieuwe vertalingen in %s",
     "Select from common languages": "Selecteer van gebruikelijke talen",
     "or enter any language code": "of geef een taalcode op",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "",
     "create in global languages directory": "",
     "Start translating": "Start vertalen",
     "New version available": "Nieuwe versie beschikbaar",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Thema's",
     "Plugins": "Plug-ins",
     "Core": "",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "Unknown error": "",
+    "PO file saved": "",
+    "and MO file compiled": "",
+    "Merged from %s": "",
+    "Merged from source code": "",
+    "Already up to date with %s": "",
+    "Already up to date with source code": "",
+    "1 new string added": {
+        "one": "",
+        "other": ""
+    },
+    "1 obsolete string removed": {
+        "one": "",
+        "other": ""
+    },
+    "Your changes will be lost if you continue without saving": "",
+    "Source text": "",
+    "%s translation": "",
+    "Comments": "",
+    "Context": "",
+    "Translation": "",
+    "No source files in this package, nothing to sync": "",
+    "No strings could be extracted from source files": "Er konden geen te vertalen teksten uit de bronbestanden gehaald worden",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

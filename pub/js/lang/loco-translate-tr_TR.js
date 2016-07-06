@@ -4,18 +4,19 @@
  * Release: Working copy
  * Locale: tr-TR, Turkish
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:38 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:13 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
     // named plural forms
     var pluralForms = [
+    "one",
     "other"
 ];
     
-    // calc numeric index of a plural form (0-0)
+    // calc numeric index of a plural form (0-1)
     function pluralIndex( n ){
-        return Number( 0 );
+        return Number( n != 1 );
     }
 
     // expose public t() function
@@ -59,7 +60,8 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New language": "Yeni Dil",
     "%s%% translated": "%s%% çevrildi",
     "1 string": {
-        "other": "1 satır"
+        "one": "1 satır",
+        "other": "%s cümle"
     },
     "%s fuzzy": "%s belirsiz",
     "%s untranslated": "%s çevrilmemiş",
@@ -86,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s bir \"Etki Alanı Yolu\" beyan etmiyor",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s POT dosyası içermiyor. Eğer ihtiyacınız varsa \"%s/%s.pot\" yolunda bir tane oluşturabilirsiniz.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s alışılmadık bir POT dosya adına (%s) sahip. Daha iyi bir isim önerisi: \"%s.pot\"",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "\"%s\" PHP eklentisi yüklü değil. \nEğer\n \nsorun yaşarsanız\n \nbu eklentiyi\n \nyüklemeniz gerekir.",
     "User does not have permission to manage translations": "Kullanıcı çevirileri yönetmek için gerekli izinlere sahip değil",
     "Invalid data posted to server": "Sunucuya gönderilen veri geçersiz",
     "Failed to compile MO file with %s, check your settings": "%s ile MO dosyası derleme işlemi başarısız oldu, ayarlarınızı tekrar kontrol edin",
@@ -98,28 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "MO dosyası oluşturulamıyor",
     "Cannot overwrite MO file": "MO dosyası üzerine yazılamıyor",
     "Failed to write MO file": "MO dosyasına yazma işlemi başarısız oldu",
-    "Unknown error": "Bilinmeyen hata",
-    "PO file saved": "PO dosyası kaydedildi",
-    "and MO file compiled": "ve MO dosyası derlendi",
-    "Merged from %s": "%s üzerinden birleştirildi",
-    "Merged from source code": "Kaynak koddan birleştirildi",
-    "Already up to date with %s": "%s zaten güncel",
-    "Already up to date with source code": "Kaynak kod ile zaten güncel",
-    "1 new string added": {
-        "other": "1 yeni satır eklendi"
-    },
-    "1 obsolete string removed": {
-        "other": "1 adet kullanılmayan satır kaldırıldı"
-    },
-    "Your changes will be lost if you continue without saving": "Kaydetmeden devam ederseniz değişiklikleriniz kaybolacak",
-    "Source text": "Kaynak Metin",
-    "%s translation": "%s Çevirisi",
-    "Comments": "Yorumlar",
-    "Context": "Metin",
-    "Translation": "Çeviri",
-    "No source files in this package, nothing to sync": "Bu pakette eşleştirilecek kaynak dosyalar bulunmuyor",
-    "No strings could be extracted from source files": "Kaynak dosyalardan herhangi satır çıkartılamadı",
-    "create in <code>%s</code>": "<code>%s</code> adresinde oluştur",
     "Packages": "Paketler",
     "File check": "Dosya denetimi",
     "File system permissions for %s": "%s için dosya sistemi izinleri",
@@ -132,7 +111,8 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "File permissions": "Dosya İzinleri",
     "Extends: %s": "Genişletmeler:  %s",
     "1 language": {
-        "other": "1 Dil"
+        "one": "1 Dil",
+        "other": "%u Lisan"
     },
     "Updated": "Güncellendi",
     "Powered by": "Hazırlayan:",
@@ -164,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "%s için yeni çeviri başlat",
     "Select from common languages": "Yaygın diller arasından seçin",
     "or enter any language code": "veya herhangi bir dil kodu girin",
-    "create in plugin directory": "eklenti\n \ndizininde\n \noluştur",
+    "create in <code>%s</code>": "<code>%s</code> adresinde oluştur",
     "create in global languages directory": "Genel \"Language\" dizininde oluştur",
     "Start translating": "Çeviriye Başla",
     "New version available": "Yeni sürüm mevcut",
@@ -173,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Temalar",
     "Plugins": "Eklentiler",
     "Core": "Çekirdek",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "\"%s\" PHP eklentisi yüklü değil. \nEğer\n \nsorun yaşarsanız\n \nbu eklentiyi\n \nyüklemeniz gerekir.",
+    "Unknown error": "Bilinmeyen hata",
+    "PO file saved": "PO dosyası kaydedildi",
+    "and MO file compiled": "ve MO dosyası derlendi",
+    "Merged from %s": "%s üzerinden birleştirildi",
+    "Merged from source code": "Kaynak koddan birleştirildi",
+    "Already up to date with %s": "%s zaten güncel",
+    "Already up to date with source code": "Kaynak kod ile zaten güncel",
+    "1 new string added": {
+        "one": "1 yeni satır eklendi",
+        "other": "%s yeni cümle eklendi"
+    },
+    "1 obsolete string removed": {
+        "one": "1 adet kullanılmayan satır kaldırıldı",
+        "other": "%s kullanımdışı cümle kaldırıldı"
+    },
+    "Your changes will be lost if you continue without saving": "Kaydetmeden devam ederseniz değişiklikleriniz kaybolacak",
+    "Source text": "Kaynak Metin",
+    "%s translation": "%s Çevirisi",
+    "Comments": "Yorumlar",
+    "Context": "Metin",
+    "Translation": "Çeviri",
+    "No source files in this package, nothing to sync": "Bu pakette eşleştirilecek kaynak dosyalar bulunmuyor",
+    "No strings could be extracted from source files": "Kaynak dosyalardan herhangi satır çıkartılamadı",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

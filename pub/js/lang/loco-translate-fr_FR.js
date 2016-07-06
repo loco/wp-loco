@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: fr-FR, French (France)
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:33 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:08 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
     "User does not have permission to manage translations": "L'utilisateur n'a pas les droits d'accès nécessaires pour gérer les traductions",
     "Invalid data posted to server": "Données non valides envoyées au serveur",
     "Failed to compile MO file with %s, check your settings": "Impossible de compiler le fichier binaire de traduction (fichier MO) avec %s, vérifiez vos paramètres",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Impossible de créer le fichier binaire de traduction (fichier MO)",
     "Cannot overwrite MO file": "Impossible de réécrire le fichier binaire de traduction (fichier MO)",
     "Failed to write MO file": "Impossible d'écrire dans le fichier binaire de traduction (fichier MO)",
-    "Unknown error": "Erreur inconnue",
-    "PO file saved": "Fichier de traduction (fichier PO) sauvegardé",
-    "and MO file compiled": "et fichier binaire de traduction (fichier MO) compilé",
-    "Merged from %s": "Fusionné avec %s",
-    "Merged from source code": "Fusionné depuis le code source",
-    "Already up to date with %s": "Déjà à jour avec %s",
-    "Already up to date with source code": "Déjà à jour avec le code source",
-    "1 new string added": {
-        "one": "1 nouvelle chaîne de caractères a été ajoutée",
-        "other": "%s nouvelles chaînes de caractères ont été ajoutées"
-    },
-    "1 obsolete string removed": {
-        "one": "1 chaîne de caractères obsolète a été supprimée",
-        "other": "%s chaînes de caractères obsolètes ont été supprimées"
-    },
-    "Your changes will be lost if you continue without saving": "Vos modifications seront perdues si vous ne sauvegardez pas avant de continuer",
-    "Source text": "Source",
-    "%s translation": "%s traduction",
-    "Comments": "Commentaires",
-    "Context": "Contexte",
-    "Translation": "Traduction",
-    "No source files in this package, nothing to sync": "Aucun fichier source dans ce paquetage, il n'y a rien à synchroniser",
-    "No strings could be extracted from source files": "Aucune chaîne de caractères n'a pu être extraite des fichiers sources",
-    "create in <code>%s</code>": "créer dans <code>%s</code>",
     "Packages": "Paquetages",
     "File check": "Vérification de fichier",
     "File system permissions for %s": "Droits d'accès de %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Créer une nouvelle traduction pour %s",
     "Select from common languages": "Choisir parmi les langues courantes",
     "or enter any language code": "ou choisir un code régional",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "créer dans <code>%s</code>",
     "create in global languages directory": "créer dans le répertoire global des langues",
     "Start translating": "Traduire",
     "New version available": "Nouvelle version disponible",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Thèmes",
     "Plugins": "Extensions",
     "Core": "Fichiers principaux",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "Unknown error": "Erreur inconnue",
+    "PO file saved": "Fichier de traduction (fichier PO) sauvegardé",
+    "and MO file compiled": "et fichier binaire de traduction (fichier MO) compilé",
+    "Merged from %s": "Fusionné avec %s",
+    "Merged from source code": "Fusionné depuis le code source",
+    "Already up to date with %s": "Déjà à jour avec %s",
+    "Already up to date with source code": "Déjà à jour avec le code source",
+    "1 new string added": {
+        "one": "1 nouvelle chaîne de caractères a été ajoutée",
+        "other": "%s nouvelles chaînes de caractères ont été ajoutées"
+    },
+    "1 obsolete string removed": {
+        "one": "1 chaîne de caractères obsolète a été supprimée",
+        "other": "%s chaînes de caractères obsolètes ont été supprimées"
+    },
+    "Your changes will be lost if you continue without saving": "Vos modifications seront perdues si vous ne sauvegardez pas avant de continuer",
+    "Source text": "Source",
+    "%s translation": "%s traduction",
+    "Comments": "Commentaires",
+    "Context": "Contexte",
+    "Translation": "Traduction",
+    "No source files in this package, nothing to sync": "Aucun fichier source dans ce paquetage, il n'y a rien à synchroniser",
+    "No strings could be extracted from source files": "Aucune chaîne de caractères n'a pu être extraite des fichiers sources",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: sv-SE, Swedish
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:38 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:13 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s har inte angivit \"Domain Path\"",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s har ingen POT-fil. Skapa en i \"%s/%s.pot\" om du behöver en.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s har ett konstigt POT-filnamn (%s). Ett bättre filnamn hade varit \"%s.pot\"",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "PHP tillägg \"%s\" är inte installerat. Om du upplever problem bör du installera det",
     "User does not have permission to manage translations": "Användaren saknar behörighet att hantera översättningar",
     "Invalid data posted to server": "Ogiltig data skickades till servern",
     "Failed to compile MO file with %s, check your settings": "Det gick ej sammanställa MO-filen med %s , kontrollera dina inställningar",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Kunde ej skapa MO-fil",
     "Cannot overwrite MO file": "Kunde ej skriva över MO-fil",
     "Failed to write MO file": "Kunde ej skapa MO-fil",
-    "Unknown error": "Okänt fel",
-    "PO file saved": "PO-fil sparad",
-    "and MO file compiled": "och MO-fil sammanställd",
-    "Merged from %s": "Sammanslagen från %s",
-    "Merged from source code": "Sammanslagen från källkod",
-    "Already up to date with %s": "Redan aktuell med %s",
-    "Already up to date with source code": "Redan aktuell med källkod",
-    "1 new string added": {
-        "one": "1 ny sträng tillagd",
-        "other": "%s nya strängar tillagda"
-    },
-    "1 obsolete string removed": {
-        "one": "1 föråldrad sträng togs bort",
-        "other": "%s föråldrade strängar togs bort"
-    },
-    "Your changes will be lost if you continue without saving": "Dina ändringar kommer att gå förlorade om du fortsätter utan att spara",
-    "Source text": "Källtext",
-    "%s translation": "%s översättning",
-    "Comments": "Kommentarer",
-    "Context": "Innehåll",
-    "Translation": "Översättning",
-    "No source files in this package, nothing to sync": "Inga källfiler finns i detta paket, inget att synka",
-    "No strings could be extracted from source files": "Inga strängar kunde hittas från källfiler",
-    "create in <code>%s</code>": "skapa i <code>%s</code>",
     "Packages": "Språkfiler",
     "File check": "Filrättigheter",
     "File system permissions for %s": "Filsystem rättigheter för %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Skapa nya översättningar i %s",
     "Select from common languages": "Välj bland vanliga språk",
     "or enter any language code": "eller skriv valfri landskod",
-    "create in plugin directory": "skapa direkt i tillägg mappen",
+    "create in <code>%s</code>": "skapa i <code>%s</code>",
     "create in global languages directory": "skapa i den globala språk mappen",
     "Start translating": "Börja översätta",
     "New version available": "Ny version tillgänglig",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Teman",
     "Plugins": "Tillägg",
     "Core": "WordPress",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "PHP tillägg \"%s\" är inte installerat. Om du upplever problem bör du installera det",
+    "Unknown error": "Okänt fel",
+    "PO file saved": "PO-fil sparad",
+    "and MO file compiled": "och MO-fil sammanställd",
+    "Merged from %s": "Sammanslagen från %s",
+    "Merged from source code": "Sammanslagen från källkod",
+    "Already up to date with %s": "Redan aktuell med %s",
+    "Already up to date with source code": "Redan aktuell med källkod",
+    "1 new string added": {
+        "one": "1 ny sträng tillagd",
+        "other": "%s nya strängar tillagda"
+    },
+    "1 obsolete string removed": {
+        "one": "1 föråldrad sträng togs bort",
+        "other": "%s föråldrade strängar togs bort"
+    },
+    "Your changes will be lost if you continue without saving": "Dina ändringar kommer att gå förlorade om du fortsätter utan att spara",
+    "Source text": "Källtext",
+    "%s translation": "%s översättning",
+    "Comments": "Kommentarer",
+    "Context": "Innehåll",
+    "Translation": "Översättning",
+    "No source files in this package, nothing to sync": "Inga källfiler finns i detta paket, inget att synka",
+    "No strings could be extracted from source files": "Inga strängar kunde hittas från källfiler",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

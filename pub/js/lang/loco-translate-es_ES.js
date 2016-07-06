@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: es-ES, Spanish (Spain)
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:32 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:07 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s no declara una \"Ruta de Dominio\"",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s no tiene un fichero POT. Crear uno en \"%s/%s.pot\" si lo necesita.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s tiene un nombre de archivo POT extraño. Un mejor nombre sería \"%s.pot\"",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "La extensión PHP \"%s\" no está instalada. Si experimenta problemas debería instalarlo",
     "User does not have permission to manage translations": "El usuario no tiene permiso para gestionar traducciones",
     "Invalid data posted to server": "Datos no válidos publicados en el servidor",
     "Failed to compile MO file with %s, check your settings": "Fallo al compilar el archivo MO con %s, compruebe su configuración",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "No se puede crear el archivo MO",
     "Cannot overwrite MO file": "No se puede sobreescribir el archivo MO",
     "Failed to write MO file": "Fallo al escribir el archivo MO",
-    "Unknown error": "Error desconocido",
-    "PO file saved": "Fichero PO guardado",
-    "and MO file compiled": "y compilado el fichero MO",
-    "Merged from %s": "Combinado desde %s",
-    "Merged from source code": "Combinado desde el código fuente",
-    "Already up to date with %s": "Ya actualizado con %s",
-    "Already up to date with source code": "Actualizado ya con el código fuente",
-    "1 new string added": {
-        "one": "Añadido 1 nueva cadena",
-        "other": "Añadidas %s nuevas cadenas"
-    },
-    "1 obsolete string removed": {
-        "one": "1 cadena obsoleta eliminada",
-        "other": "%s cadenas obsoletas eliminadas"
-    },
-    "Your changes will be lost if you continue without saving": "Los cambios se perderán si continúa sin guardarlos",
-    "Source text": "Texto origen",
-    "%s translation": "%s traducción",
-    "Comments": "Comentarios",
-    "Context": "Contexto",
-    "Translation": "Traducción",
-    "No source files in this package, nothing to sync": "",
-    "No strings could be extracted from source files": "No se pueden extraer las cadenas de los archivos fuente",
-    "create in <code>%s</code>": "crear en <code>%s</code>",
     "Packages": "Paquetes",
     "File check": "Comprobar archivo",
     "File system permissions for %s": "Permisos del sistema de archivos para %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Comenzar nuevas traducciones en %s",
     "Select from common languages": "Seleccione de lenguajes comunes",
     "or enter any language code": "o introduzca cualquier código de idioma",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "crear en <code>%s</code>",
     "create in global languages directory": "crear en la carpeta global de idiomas",
     "Start translating": "Comenzar la traducicción",
     "New version available": "Disponible nueva versión",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Temas",
     "Plugins": "Plugins",
     "Core": "Núcleo",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "La extensión PHP \"%s\" no está instalada. Si experimenta problemas debería instalarlo",
+    "Unknown error": "Error desconocido",
+    "PO file saved": "Fichero PO guardado",
+    "and MO file compiled": "y compilado el fichero MO",
+    "Merged from %s": "Combinado desde %s",
+    "Merged from source code": "Combinado desde el código fuente",
+    "Already up to date with %s": "Ya actualizado con %s",
+    "Already up to date with source code": "Actualizado ya con el código fuente",
+    "1 new string added": {
+        "one": "Añadido 1 nueva cadena",
+        "other": "Añadidas %s nuevas cadenas"
+    },
+    "1 obsolete string removed": {
+        "one": "1 cadena obsoleta eliminada",
+        "other": "%s cadenas obsoletas eliminadas"
+    },
+    "Your changes will be lost if you continue without saving": "Los cambios se perderán si continúa sin guardarlos",
+    "Source text": "Texto origen",
+    "%s translation": "%s traducción",
+    "Comments": "Comentarios",
+    "Context": "Contexto",
+    "Translation": "Traducción",
+    "No source files in this package, nothing to sync": "",
+    "No strings could be extracted from source files": "No se pueden extraer las cadenas de los archivos fuente",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

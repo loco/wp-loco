@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: el-GR, Greek
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:31 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:06 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "Το %s δε δηλώνει κάποιο \"Πεδίο Διεύθυνσης\"",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "Το %s δεν έχει κάποιο αρχείο POT. Εάν χρειάζεστε ένα, δημιουργήστε το στο \"%s/%s.pot\"",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "Το %s έχει ένα περίεργο όνομα αρχείου (%s). Ένα καλύτερο όνομα θα ήταν το \"%s.pot\"",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "Η επέκταση του PHP \"%s\" δεν είναι εγκατεστημένη. Εάν αντιμετωπίσετε προβλήματα θα πρέπει να την εκαταστήσετε.",
     "User does not have permission to manage translations": "Ο χρήστης δεν έχει δικαιώματα να διαχειριστεί μεταφράσεις",
     "Invalid data posted to server": "Δημοσιεύθηκαν μη έγκυρα δεδομένα στο διακομιστή",
     "Failed to compile MO file with %s, check your settings": "Αποτυχία μεταγλώττισης του αρχείου MO με το %s, ελέγξτε τις ρυθμίσεις σας",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Δε μπόρεσε να δημιουργηθεί το αρχείο MO",
     "Cannot overwrite MO file": "Δε μπόρεσε να αντικατασταθεί το αρχείο MO",
     "Failed to write MO file": "Δε μπόρεσε να εγγραφεί να αρχείο MO",
-    "Unknown error": "Άγνωστο λάθος",
-    "PO file saved": "Το αρχείο PO αποθηκεύτηκε",
-    "and MO file compiled": "και το αρχείο MO μεταγλωττίστηκε",
-    "Merged from %s": "Συγχώνευση από %s",
-    "Merged from source code": "Συγχώνευση από τον πηγαίο κώδικα",
-    "Already up to date with %s": "Ήδη ενημερωμένο με το %s",
-    "Already up to date with source code": "Ήδη ενημερωμένο με τον πηγαίο κώδικα",
-    "1 new string added": {
-        "one": "Προστέθηκε 1 καινούργια φράση",
-        "other": "Προστέθηκαν %s καινούργιες φράσεις"
-    },
-    "1 obsolete string removed": {
-        "one": "Αφαιρέθηκε 1 απαρχαιωμένη φράση",
-        "other": "Αφαιρέθηκαν %s απαρχαιωμένες φράσεις"
-    },
-    "Your changes will be lost if you continue without saving": "Οι αλλαγές που κάνατε θα χαθούν εάν συνεχίσετε χωρίς να κάνετε αποθήκευση",
-    "Source text": "Κείμενο πηγής",
-    "%s translation": "%s μετάφραση",
-    "Comments": "Σχόλια",
-    "Context": "Πλαίσιο",
-    "Translation": "Μετάφραση",
-    "No source files in this package, nothing to sync": "Δεν υπάρχουν αρχεία πηγής σε αυτό το πακέτο, δε μπορεί να συγχρονιστεί κάτι",
-    "No strings could be extracted from source files": "Δε μπόρεσαν να εξαχθούν φράσεις από τα αρχεία πηγής",
-    "create in <code>%s</code>": "δημιουργία στο %s",
     "Packages": "Πακέτα",
     "File check": "Έλεγχος αρχείου",
     "File system permissions for %s": "Δικαιώματα συστήματος αρχείων για το %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Προετοιμασία νέων μεταφράσεων στο %s",
     "Select from common languages": "Επιλέξτε από τις κοινές γλώσσες",
     "or enter any language code": "ή εισάγετε έναν κωδικό γλώσσας",
-    "create in plugin directory": "δημιουργία στο φάκελο πρόσθετων",
+    "create in <code>%s</code>": "δημιουργία στο %s",
     "create in global languages directory": "δημιουργία στο φάκελο γενικών γλωσσών",
     "Start translating": "Έναρξη μετάφρασης",
     "New version available": "Διαθέσιμη νέα έκδοση",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Θέματα",
     "Plugins": "Πρόσθετα",
     "Core": "Πυρήνας",
-    "Translate WordPress plugins and themes directly in your browser": "Μεταφράστε πρόσθετα ή θέματα του WordPress απευθείας στον browser σας"
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "Η επέκταση του PHP \"%s\" δεν είναι εγκατεστημένη. Εάν αντιμετωπίσετε προβλήματα θα πρέπει να την εκαταστήσετε.",
+    "Unknown error": "Άγνωστο λάθος",
+    "PO file saved": "Το αρχείο PO αποθηκεύτηκε",
+    "and MO file compiled": "και το αρχείο MO μεταγλωττίστηκε",
+    "Merged from %s": "Συγχώνευση από %s",
+    "Merged from source code": "Συγχώνευση από τον πηγαίο κώδικα",
+    "Already up to date with %s": "Ήδη ενημερωμένο με το %s",
+    "Already up to date with source code": "Ήδη ενημερωμένο με τον πηγαίο κώδικα",
+    "1 new string added": {
+        "one": "Προστέθηκε 1 καινούργια φράση",
+        "other": "Προστέθηκαν %s καινούργιες φράσεις"
+    },
+    "1 obsolete string removed": {
+        "one": "Αφαιρέθηκε 1 απαρχαιωμένη φράση",
+        "other": "Αφαιρέθηκαν %s απαρχαιωμένες φράσεις"
+    },
+    "Your changes will be lost if you continue without saving": "Οι αλλαγές που κάνατε θα χαθούν εάν συνεχίσετε χωρίς να κάνετε αποθήκευση",
+    "Source text": "Κείμενο πηγής",
+    "%s translation": "%s μετάφραση",
+    "Comments": "Σχόλια",
+    "Context": "Πλαίσιο",
+    "Translation": "Μετάφραση",
+    "No source files in this package, nothing to sync": "Δεν υπάρχουν αρχεία πηγής σε αυτό το πακέτο, δε μπορεί να συγχρονιστεί κάτι",
+    "No strings could be extracted from source files": "Δε μπόρεσαν να εξαχθούν φράσεις από τα αρχεία πηγής",
+    "Translate WordPress plugins and themes directly in your browser": "Μεταφράστε πρόσθετα ή θέματα του WordPress απευθείας στον browser σας",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

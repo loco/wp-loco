@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: fa-IR, Persian
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:32 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:07 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -58,9 +58,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New template": "فرم جدید",
     "New language": "زبان جدید",
     "%s%% translated": "%s%% ترجمه شده",
-    "1 string": {
-        "other": "%s سطر"
-    },
+    "1 string": "%s سطر",
     "%s fuzzy": "%s مبهم",
     "%s untranslated": "%s ترجمه نشده",
     "Failed to compile MO file with built-in compiler": "فایل MO با کامپایلر توکار، کامپایل نشد",
@@ -86,7 +84,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
     "User does not have permission to manage translations": "کاربر دسترسی لازم برای مدریت ترجمه ها را ندارد",
     "Invalid data posted to server": "داده نادرست به سرور ارسال شده",
     "Failed to compile MO file with %s, check your settings": "خطای کامپایل فایل MO با %s. تنظیمات خود را برسی کنید",
@@ -98,28 +95,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "فایل MO ساخته نشد",
     "Cannot overwrite MO file": "فایل MO دوباره نویسی نشد",
     "Failed to write MO file": "فایل MO نوشته نشد",
-    "Unknown error": "خطای نا آشنا",
-    "PO file saved": "فایل PO ذخیره شد",
-    "and MO file compiled": "و فایل MO کامپایل شد",
-    "Merged from %s": "از %s یکی سازی شد",
-    "Merged from source code": "یکی سازی از سورس کد",
-    "Already up to date with %s": "قبلا با %s به روز است",
-    "Already up to date with source code": "قبلا با سورس کد به روز است",
-    "1 new string added": {
-        "other": "%s سطر اضافه شد"
-    },
-    "1 obsolete string removed": {
-        "other": "%s سطر قدیمی پاک شد"
-    },
-    "Your changes will be lost if you continue without saving": "اگر بدون ذخیره کردن ادامه دهید، تنظیمات شما پاک خواهد شد",
-    "Source text": "متن",
-    "%s translation": "ترجمه %s",
-    "Comments": "یادداشت",
-    "Context": "متن",
-    "Translation": "ترجمه",
-    "No source files in this package, nothing to sync": "هیج فایل سورسی در این بسته پیدا نشد؛ چیزی برای هماهنگ سازی نیست",
-    "No strings could be extracted from source files": "هیچ سطری از سورس کد وارد نشد",
-    "create in <code>%s</code>": "در <code>%s</code> ساخته شود",
     "Packages": "بسته ها",
     "File check": "چک فایل",
     "File system permissions for %s": "اجازه دسترسی برای %s",
@@ -131,9 +106,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Template (POT)": "قالب (POT)",
     "File permissions": "دسترسی فایل",
     "Extends: %s": "اضافه شد: %s",
-    "1 language": {
-        "other": "%u زبان"
-    },
+    "1 language": "%u زبان",
     "Updated": "به روز رسانی شد",
     "Powered by": "قدرت گرفته توسط",
     "Loco may not work as expected": "لوکو ممکن است درست کار نکند",
@@ -164,7 +137,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "ایجاد فایل ترجمه برای %s",
     "Select from common languages": "یکی از زبان های متداول رو انتخاب کنید",
     "or enter any language code": "یا کد زبان را وارد کنید",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "در <code>%s</code> ساخته شود",
     "create in global languages directory": "در پوشه ترجمه های سراسری ساخته شود",
     "Start translating": "شروع ترجمه",
     "New version available": "نسخه جدید آماده است",
@@ -173,6 +146,27 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "پوسته ها",
     "Plugins": "افزونه ها",
     "Core": "هسته",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "Unknown error": "خطای نا آشنا",
+    "PO file saved": "فایل PO ذخیره شد",
+    "and MO file compiled": "و فایل MO کامپایل شد",
+    "Merged from %s": "از %s یکی سازی شد",
+    "Merged from source code": "یکی سازی از سورس کد",
+    "Already up to date with %s": "قبلا با %s به روز است",
+    "Already up to date with source code": "قبلا با سورس کد به روز است",
+    "1 new string added": "%s سطر اضافه شد",
+    "1 obsolete string removed": "%s سطر قدیمی پاک شد",
+    "Your changes will be lost if you continue without saving": "اگر بدون ذخیره کردن ادامه دهید، تنظیمات شما پاک خواهد شد",
+    "Source text": "متن",
+    "%s translation": "ترجمه %s",
+    "Comments": "یادداشت",
+    "Context": "متن",
+    "Translation": "ترجمه",
+    "No source files in this package, nothing to sync": "هیج فایل سورسی در این بسته پیدا نشد؛ چیزی برای هماهنگ سازی نیست",
+    "No strings could be extracted from source files": "هیچ سطری از سورس کد وارد نشد",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

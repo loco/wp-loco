@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: id-ID, Indonesian
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:33 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:08 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -58,9 +58,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New template": "Template baru",
     "New language": "Bahasa baru",
     "%s%% translated": "%s%% diterjemahkan",
-    "1 string": {
-        "other": "1 string"
-    },
+    "1 string": "1 string",
     "%s fuzzy": "%s fuzzy",
     "%s untranslated": "%s%% belum diterjemahkan",
     "Failed to compile MO file with built-in compiler": "Gagal mengompilasi berkas MO dengan kompilator bawaan",
@@ -86,7 +84,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
     "User does not have permission to manage translations": "Pengguna tidak memiliki hak akses untuk mengelola terjemahan",
     "Invalid data posted to server": "Data yang dikirim ke server tidak valid",
     "Failed to compile MO file with %s, check your settings": "Gagal mengompilasi berkas MO dengan %s; periksa setelan Anda",
@@ -98,28 +95,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Berkas MO tidak dapat dibuat",
     "Cannot overwrite MO file": "Berkas MO tidak dapat ditimpa",
     "Failed to write MO file": "Gagal menulis berkas MO",
-    "Unknown error": "Kesalahan ",
-    "PO file saved": "Berkas PO disimpan",
-    "and MO file compiled": "dan berkas MO dikompilasi",
-    "Merged from %s": "Digabungkan dari %s",
-    "Merged from source code": "Digabungkan dari kode program",
-    "Already up to date with %s": "Sudah selaras dengan %s",
-    "Already up to date with source code": "Sudah selaras dengan kode program",
-    "1 new string added": {
-        "other": "1 string baru ditambahkan"
-    },
-    "1 obsolete string removed": {
-        "other": "1 string usang dihapus"
-    },
-    "Your changes will be lost if you continue without saving": "Perubahan akan dibuang bila melanjutkan tanpa menyimpan",
-    "Source text": "Teks sumber",
-    "%s translation": "%s terjemahan",
-    "Comments": "Komentar",
-    "Context": "Konteks",
-    "Translation": "Terjemahan",
-    "No source files in this package, nothing to sync": "Berkas sumber paket ini tidak ditemukan; tidak ada yang dapat disinkronisasikan",
-    "No strings could be extracted from source files": "Tidak ada string yang dapat diekstrak dari berkas sumber",
-    "create in <code>%s</code>": "buat di <code>%s</code>",
     "Packages": "Paket",
     "File check": "Pemeriksaan berkas",
     "File system permissions for %s": "Hak akses sistem berkas untuk %s",
@@ -131,9 +106,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Template (POT)": "Template (POT)",
     "File permissions": "Hak akses",
     "Extends: %s": "",
-    "1 language": {
-        "other": "1 bahasa"
-    },
+    "1 language": "1 bahasa",
     "Updated": "Diperbarui",
     "Powered by": "Didukung oleh",
     "Loco may not work as expected": "Loco mungkin tidak bekerja sesuai harapan",
@@ -164,7 +137,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Buat terjemahan baru di %s",
     "Select from common languages": "Pilih dari bahasa yang umum",
     "or enter any language code": "atau masukkan suatu kode bahasa",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "buat di <code>%s</code>",
     "create in global languages directory": "buat di direktori bahasa global",
     "Start translating": "Mulai penerjemahan",
     "New version available": "Ada versi baru",
@@ -173,6 +146,27 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Tema",
     "Plugins": "Plugin",
     "Core": "Inti",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "Unknown error": "Kesalahan ",
+    "PO file saved": "Berkas PO disimpan",
+    "and MO file compiled": "dan berkas MO dikompilasi",
+    "Merged from %s": "Digabungkan dari %s",
+    "Merged from source code": "Digabungkan dari kode program",
+    "Already up to date with %s": "Sudah selaras dengan %s",
+    "Already up to date with source code": "Sudah selaras dengan kode program",
+    "1 new string added": "1 string baru ditambahkan",
+    "1 obsolete string removed": "1 string usang dihapus",
+    "Your changes will be lost if you continue without saving": "Perubahan akan dibuang bila melanjutkan tanpa menyimpan",
+    "Source text": "Teks sumber",
+    "%s translation": "%s terjemahan",
+    "Comments": "Komentar",
+    "Context": "Konteks",
+    "Translation": "Terjemahan",
+    "No source files in this package, nothing to sync": "Berkas sumber paket ini tidak ditemukan; tidak ada yang dapat disinkronisasikan",
+    "No strings could be extracted from source files": "Tidak ada string yang dapat diekstrak dari berkas sumber",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

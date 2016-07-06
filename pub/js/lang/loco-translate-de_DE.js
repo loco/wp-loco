@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: de-DE, German
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:31 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:06 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
     "User does not have permission to manage translations": "Benutzer hat keine Rechte die Übersetzungen zu verwalten",
     "Invalid data posted to server": "Ungültige Daten zum Server gesendet",
     "Failed to compile MO file with %s, check your settings": "Kompilieren der MO-Datei fehlgeschlagen. Bitte prüfe Deine Einstellungen",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Erstellen der MO-Datei fehlgeschlagen.",
     "Cannot overwrite MO file": "Überschreiben der MO-Datei fehlgeschlagen",
     "Failed to write MO file": "Fehler beim Schreiben der MO-Datei",
-    "Unknown error": "Unbekannter Fehler",
-    "PO file saved": "PO-Datei gespeichert",
-    "and MO file compiled": "und MO-Datei kompiliert",
-    "Merged from %s": "Aus %s zusammengeführt",
-    "Merged from source code": "Aus Quelle zusammengeführt",
-    "Already up to date with %s": "Bereits auf dem aktuellen Stand mit %s",
-    "Already up to date with source code": "Bereits mit der Quelle auf dem aktuellen Stand",
-    "1 new string added": {
-        "one": "1 neue Zeichenkette hinzugefügt",
-        "other": "%s neue Zeichenketten hinzugefügt"
-    },
-    "1 obsolete string removed": {
-        "one": "1 veraltete Zeichenkette entfernt",
-        "other": "%s veraltete Zeichenketten entfernt"
-    },
-    "Your changes will be lost if you continue without saving": "Deine Änderungen gehen verloren, wenn du fortsetzt ohne zu Speichern",
-    "Source text": "Quelltext",
-    "%s translation": "%s Übersetzung",
-    "Comments": "Kommentare",
-    "Context": "Kontext",
-    "Translation": "Übersetzung",
-    "No source files in this package, nothing to sync": "Keine Quelldateien in diesem Paket gefunden, nichts zu synchronisieren",
-    "No strings could be extracted from source files": "Es konnten keine Zeichenketten aus der Quelle extrahiert werden",
-    "create in <code>%s</code>": "erstellen in <code>%s</code>",
     "Packages": "Pakete",
     "File check": "Dateiprüfung",
     "File system permissions for %s": "Dateisystem-Rechte für %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Initialisiere neue Übersetzung in %s",
     "Select from common languages": "Wähle aus den Standardsprachen",
     "or enter any language code": "oder trage den Sprach-Code ein",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "erstellen in <code>%s</code>",
     "create in global languages directory": "in globalem Sprachverzeichnis erstellen",
     "Start translating": "Starte Übersetzung",
     "New version available": "Neue Version verfügbar",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Themes",
     "Plugins": "Plugins",
     "Core": "Core",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "Unknown error": "Unbekannter Fehler",
+    "PO file saved": "PO-Datei gespeichert",
+    "and MO file compiled": "und MO-Datei kompiliert",
+    "Merged from %s": "Aus %s zusammengeführt",
+    "Merged from source code": "Aus Quelle zusammengeführt",
+    "Already up to date with %s": "Bereits auf dem aktuellen Stand mit %s",
+    "Already up to date with source code": "Bereits mit der Quelle auf dem aktuellen Stand",
+    "1 new string added": {
+        "one": "1 neue Zeichenkette hinzugefügt",
+        "other": "%s neue Zeichenketten hinzugefügt"
+    },
+    "1 obsolete string removed": {
+        "one": "1 veraltete Zeichenkette entfernt",
+        "other": "%s veraltete Zeichenketten entfernt"
+    },
+    "Your changes will be lost if you continue without saving": "Deine Änderungen gehen verloren, wenn du fortsetzt ohne zu Speichern",
+    "Source text": "Quelltext",
+    "%s translation": "%s Übersetzung",
+    "Comments": "Kommentare",
+    "Context": "Kontext",
+    "Translation": "Übersetzung",
+    "No source files in this package, nothing to sync": "Keine Quelldateien in diesem Paket gefunden, nichts zu synchronisieren",
+    "No strings could be extracted from source files": "Es konnten keine Zeichenketten aus der Quelle extrahiert werden",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

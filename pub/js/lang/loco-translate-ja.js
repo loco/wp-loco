@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ja-JP, Japanese
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:34 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:09 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -58,9 +58,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New template": "新しいテンプレート",
     "New language": "新しい言語",
     "%s%% translated": "%s%%件翻訳済み",
-    "1 string": {
-        "other": "%s件の文字列"
-    },
+    "1 string": "%s件の文字列",
     "%s fuzzy": "%s件のファジー",
     "%s untranslated": "%s件の未翻訳",
     "Failed to compile MO file with built-in compiler": "内蔵コンパイラーでのMOファイルのコンパイルができませんでした",
@@ -86,7 +84,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
     "User does not have permission to manage translations": "ユーザーは翻訳管理を行う権限を持っていません",
     "Invalid data posted to server": "サーバーへの無効なデータ送信",
     "Failed to compile MO file with %s, check your settings": "%sのMOファイルのコンパイルに失敗しました。設定を確認して下さい。",
@@ -98,28 +95,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "MOファイルを作成できません",
     "Cannot overwrite MO file": "MOファイルを上書きできません",
     "Failed to write MO file": "MOファイルへ書き込みできません",
-    "Unknown error": "不明なエラー",
-    "PO file saved": "POファイルを保存しました",
-    "and MO file compiled": "またMOファイルをコンパイルしました",
-    "Merged from %s": "%sから結合",
-    "Merged from source code": "ソースコードから結合",
-    "Already up to date with %s": "%sはすでに最新です",
-    "Already up to date with source code": "ソースコードはすでに最新です",
-    "1 new string added": {
-        "other": "%s件の新しい文字列を追加しました"
-    },
-    "1 obsolete string removed": {
-        "other": "%s件の文字列を削除しました"
-    },
-    "Your changes will be lost if you continue without saving": "保存せずに続けると変更内容は反映されません",
-    "Source text": "原文",
-    "%s translation": "%sの翻訳",
-    "Comments": "コメント",
-    "Context": "属性",
-    "Translation": "訳文",
-    "No source files in this package, nothing to sync": "このパッケージにはソースファイルがないため、同期していません",
-    "No strings could be extracted from source files": "ソースファイルから文字列が見つかりませんでした",
-    "create in <code>%s</code>": "<code>%s</code>に作成する",
     "Packages": "パッケージ",
     "File check": "ファイルチェック",
     "File system permissions for %s": "%sのファイルシステム権限",
@@ -131,9 +106,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Template (POT)": "テンプレート (POT)               ",
     "File permissions": "ファイル権限",
     "Extends: %s": "拡張: %s",
-    "1 language": {
-        "other": "%u言語"
-    },
+    "1 language": "%u言語",
     "Updated": "更新日時",
     "Powered by": "　",
     "Loco may not work as expected": "Loco が期待通りに動作しない可能性があります",
@@ -164,7 +137,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "%sの新しい言語の初期化",
     "Select from common languages": "定義済みの言語から選択",
     "or enter any language code": "または他の言語コードを入力",
-    "create in plugin directory": "",
+    "create in <code>%s</code>": "<code>%s</code>に作成する",
     "create in global languages directory": "全体の言語ディレクトリに作成する",
     "Start translating": "翻訳を開始する",
     "New version available": "利用可能な新しいバージョン",
@@ -173,6 +146,27 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "テーマ",
     "Plugins": "プラグイン",
     "Core": "コア",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "",
+    "Unknown error": "不明なエラー",
+    "PO file saved": "POファイルを保存しました",
+    "and MO file compiled": "またMOファイルをコンパイルしました",
+    "Merged from %s": "%sから結合",
+    "Merged from source code": "ソースコードから結合",
+    "Already up to date with %s": "%sはすでに最新です",
+    "Already up to date with source code": "ソースコードはすでに最新です",
+    "1 new string added": "%s件の新しい文字列を追加しました",
+    "1 obsolete string removed": "%s件の文字列を削除しました",
+    "Your changes will be lost if you continue without saving": "保存せずに続けると変更内容は反映されません",
+    "Source text": "原文",
+    "%s translation": "%sの翻訳",
+    "Comments": "コメント",
+    "Context": "属性",
+    "Translation": "訳文",
+    "No source files in this package, nothing to sync": "このパッケージにはソースファイルがないため、同期していません",
+    "No strings could be extracted from source files": "ソースファイルから文字列が見つかりませんでした",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

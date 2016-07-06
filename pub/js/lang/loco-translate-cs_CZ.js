@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: cs-CZ, Czech
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:30 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:05 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -90,7 +90,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s nedeklaruje \"Domain Path\"",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s nemá žádný soubor POT. Vytvořte jej jako \"%s/%s.pot\", pokud jej potřebujete.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s má podivný název souboru POT (%s). Lepší jméno bylo by \"%s.pot\"",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "PHP rozšíření \"%s\" není nainstalováno. Pokud dochází k problémům, měli byste jej nainstalovat",
     "User does not have permission to manage translations": "Uživatel nemá oprávnění ke správě překladů",
     "Invalid data posted to server": "Neplatná data zaslaná na server",
     "Failed to compile MO file with %s, check your settings": "Nepodařilo se zkompilovat soubor MO s %s, zkontrolujte vaše nastavení",
@@ -102,32 +101,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Nelze vytvořit soubor MO",
     "Cannot overwrite MO file": "Nelze přepsat soubor MO",
     "Failed to write MO file": "Do souboru MO nelze zapisovat",
-    "Unknown error": "Neznámá chyba",
-    "PO file saved": "Soubor PO uložen",
-    "and MO file compiled": "a soubor MO zkompilován",
-    "Merged from %s": "Sloučeno z %s",
-    "Merged from source code": "Sloučeno ze zdrojového kódu",
-    "Already up to date with %s": "Již v aktuálním stavu s %s",
-    "Already up to date with source code": "Již v aktuálním stavu se zdrojovým kódem",
-    "1 new string added": {
-        "one": "1 nový řetězec přidán",
-        "few": "%s nové řetězce přidány",
-        "other": "%s nových řetězců přidáno"
-    },
-    "1 obsolete string removed": {
-        "one": "1 zastaralý řetězec odstraněn",
-        "few": "%s zastaralé řetězce odstraněny",
-        "other": "%s zastaralých řetězců odstraněno"
-    },
-    "Your changes will be lost if you continue without saving": "Vaše změny budou ztraceny, pokud budete pokračovat bez uložení",
-    "Source text": "Zdrojový text",
-    "%s translation": "%s překlad",
-    "Comments": "Komentáře",
-    "Context": "Kontext",
-    "Translation": "Překlad",
-    "No source files in this package, nothing to sync": "Žádné zdrojové soubory v tomto balíčku, není nic k synchronizaci",
-    "No strings could be extracted from source files": "Žádné řetězce nemohly být extrahovány ze zdrojových souborů",
-    "create in <code>%s</code>": "vytvořit v <code>%s</code>",
     "Packages": "Balíčky",
     "File check": "Kontrola souborů",
     "File system permissions for %s": "Oprávnění souborového systému pro %s",
@@ -174,7 +147,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Inicializovat nové překlady v %s",
     "Select from common languages": "Vyberte z běžných jazyků",
     "or enter any language code": "nebo vložte libovolný kód jazyka",
-    "create in plugin directory": "vytvořit v adresáři pluginu",
+    "create in <code>%s</code>": "vytvořit v <code>%s</code>",
     "create in global languages directory": "vytvořit v adresáři s globálními jazyky",
     "Start translating": "Začít překládat",
     "New version available": "Nová verze k dispozici",
@@ -183,6 +156,35 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Šablony",
     "Plugins": "Pluginy",
     "Core": "Jádro",
-    "Translate WordPress plugins and themes directly in your browser": "Překládejte WordPress pluginy a témata přímo ve vašem prohlížeči"
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "PHP rozšíření \"%s\" není nainstalováno. Pokud dochází k problémům, měli byste jej nainstalovat",
+    "Unknown error": "Neznámá chyba",
+    "PO file saved": "Soubor PO uložen",
+    "and MO file compiled": "a soubor MO zkompilován",
+    "Merged from %s": "Sloučeno z %s",
+    "Merged from source code": "Sloučeno ze zdrojového kódu",
+    "Already up to date with %s": "Již v aktuálním stavu s %s",
+    "Already up to date with source code": "Již v aktuálním stavu se zdrojovým kódem",
+    "1 new string added": {
+        "one": "1 nový řetězec přidán",
+        "few": "%s nové řetězce přidány",
+        "other": "%s nových řetězců přidáno"
+    },
+    "1 obsolete string removed": {
+        "one": "1 zastaralý řetězec odstraněn",
+        "few": "%s zastaralé řetězce odstraněny",
+        "other": "%s zastaralých řetězců odstraněno"
+    },
+    "Your changes will be lost if you continue without saving": "Vaše změny budou ztraceny, pokud budete pokračovat bez uložení",
+    "Source text": "Zdrojový text",
+    "%s translation": "%s překlad",
+    "Comments": "Komentáře",
+    "Context": "Kontext",
+    "Translation": "Překlad",
+    "No source files in this package, nothing to sync": "Žádné zdrojové soubory v tomto balíčku, není nic k synchronizaci",
+    "No strings could be extracted from source files": "Žádné řetězce nemohly být extrahovány ze zdrojových souborů",
+    "Translate WordPress plugins and themes directly in your browser": "Překládejte WordPress pluginy a témata přímo ve vašem prohlížeči",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

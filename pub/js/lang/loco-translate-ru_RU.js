@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ru-RU, Russian
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:37 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:12 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -90,7 +90,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s не объявлена \"Domain Path\"",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s не имеет POT-файла. Создайте файл из \"%s/%s.pot\" если он вам нужен.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s неправильное имя POT-файла (%s). Правильное имя будет \"%s.pot\"",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "Расширение PHP \"%s\" не установлено. Вы должны его установить, если у вас возникли проблемы",
     "User does not have permission to manage translations": "У пользователя недостаточно прав для управления переводами",
     "Invalid data posted to server": "На сервер отправлены неверные данные",
     "Failed to compile MO file with %s, check your settings": "Ошибка компилирования МО-файла с %s . Проверьте настройки",
@@ -102,32 +101,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Невозможно создать МО-файл",
     "Cannot overwrite MO file": "Невозможно перезаписать МО-файл",
     "Failed to write MO file": "Ошибка записи МО-файла",
-    "Unknown error": "Неизвестная ошибка",
-    "PO file saved": "РО-файл сохранён",
-    "and MO file compiled": "и МО-файл скомпилирован",
-    "Merged from %s": "Объединено с %s",
-    "Merged from source code": "Объединено с исходным кодом",
-    "Already up to date with %s": "Уже обновлено с %s",
-    "Already up to date with source code": "Уже обновлено с исходным кодом",
-    "1 new string added": {
-        "one": "добавлена 1 новая строка",
-        "few": "добавлено %s новых строк(и)",
-        "other": ""
-    },
-    "1 obsolete string removed": {
-        "one": "удалена 1 строка",
-        "few": "удалены %s строк(и)",
-        "other": ""
-    },
-    "Your changes will be lost if you continue without saving": "Ваши изменения будут потеряны, если вы не сохранитесь",
-    "Source text": "Исходный текст",
-    "%s translation": "перевод %s",
-    "Comments": "Комментарии",
-    "Context": "Контекст",
-    "Translation": "Перевод",
-    "No source files in this package, nothing to sync": "В этом пакете исходные файлы для синхронизации отсутствуют ",
-    "No strings could be extracted from source files": "Нет строк для обработки из исходного кода",
-    "create in <code>%s</code>": "создать в <code>%s</code>",
     "Packages": "Пакеты переводов",
     "File check": "Проверка файла",
     "File system permissions for %s": "Права доступа файловой системы для %s",
@@ -174,7 +147,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Начать новый перевод в %s",
     "Select from common languages": "Выберите язык из списка",
     "or enter any language code": "или введите код языка",
-    "create in plugin directory": "создать в каталоге плагинов",
+    "create in <code>%s</code>": "создать в <code>%s</code>",
     "create in global languages directory": "создать в каталоге глобальных языков",
     "Start translating": "Начать перевод",
     "New version available": "Доступна новая версия",
@@ -183,6 +156,35 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Темы",
     "Plugins": "Плагины",
     "Core": "Ядро",
-    "Translate WordPress plugins and themes directly in your browser": "Переводите WordPress плагины и темы прямо в вашем браузере"
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "Расширение PHP \"%s\" не установлено. Вы должны его установить, если у вас возникли проблемы",
+    "Unknown error": "Неизвестная ошибка",
+    "PO file saved": "РО-файл сохранён",
+    "and MO file compiled": "и МО-файл скомпилирован",
+    "Merged from %s": "Объединено с %s",
+    "Merged from source code": "Объединено с исходным кодом",
+    "Already up to date with %s": "Уже обновлено с %s",
+    "Already up to date with source code": "Уже обновлено с исходным кодом",
+    "1 new string added": {
+        "one": "добавлена 1 новая строка",
+        "few": "добавлено %s новых строк(и)",
+        "other": ""
+    },
+    "1 obsolete string removed": {
+        "one": "удалена 1 строка",
+        "few": "удалены %s строк(и)",
+        "other": ""
+    },
+    "Your changes will be lost if you continue without saving": "Ваши изменения будут потеряны, если вы не сохранитесь",
+    "Source text": "Исходный текст",
+    "%s translation": "перевод %s",
+    "Comments": "Комментарии",
+    "Context": "Контекст",
+    "Translation": "Перевод",
+    "No source files in this package, nothing to sync": "В этом пакете исходные файлы для синхронизации отсутствуют ",
+    "No strings could be extracted from source files": "Нет строк для обработки из исходного кода",
+    "Translate WordPress plugins and themes directly in your browser": "Переводите WordPress плагины и темы прямо в вашем браузере",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

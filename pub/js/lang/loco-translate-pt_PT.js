@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: pt-PT, Portuguese (Portugal)
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:37 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:12 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "O %s não declara um \"Domain Path\"",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "O %s não tem ficheiro POT. Crie um em \"%s/%s.pot\" se precisar.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "O %s tem um ficheiro POT com um nome estranho (%s). Seria melhor um nome como \"%s.pot\".",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "A extensão \"%s\" do PHP não está instalada. Se tiver algum problema deverá proceder à sua instalação.",
     "User does not have permission to manage translations": "O utilizador não tem permissões para gerir traduções",
     "Invalid data posted to server": "Dados inválidos enviados para o servidor",
     "Failed to compile MO file with %s, check your settings": "Falhou ao compilar ficheiro MO com %s, verifique as suas definições",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "Não é possível criar ficheiro MO",
     "Cannot overwrite MO file": "Não é possível substituir ficheiro MO",
     "Failed to write MO file": "Falhou ao guardar ficheiro MO",
-    "Unknown error": "Erro desconhecido",
-    "PO file saved": "Ficheiro PO guardado",
-    "and MO file compiled": "e ficheiro MO compilado",
-    "Merged from %s": "Misturado a partir de %s",
-    "Merged from source code": "Misturado a partir do código fonte",
-    "Already up to date with %s": "Actualizado desde %s",
-    "Already up to date with source code": "Já está actualizado a partir do código fonte",
-    "1 new string added": {
-        "one": "1 novo termo adicionado",
-        "other": "%s novos termos adicionados"
-    },
-    "1 obsolete string removed": {
-        "one": "1 um termo obsoleto removido",
-        "other": "%s termos obsoletos removidos"
-    },
-    "Your changes will be lost if you continue without saving": "As suas alterações serão perdidas se continuar sem guardar",
-    "Source text": "Texto fonte",
-    "%s translation": "Tradução para %s",
-    "Comments": "Comentários",
-    "Context": "Contexto",
-    "Translation": "Tradução",
-    "No source files in this package, nothing to sync": "Não há ficheiros de origem neste pacote, não há nada para sincronizar.",
-    "No strings could be extracted from source files": "Nenhum termo pôde ser extraído a partir dos ficheiros de origem",
-    "create in <code>%s</code>": "criar em <code>%s</code>",
     "Packages": "Pacotes",
     "File check": "Verificação do ficheiro",
     "File system permissions for %s": "Permissões do sistema de ficheiros para %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "Iniciar novas traduções em %s",
     "Select from common languages": "Selecionar a partir dos idiomas mais comuns",
     "or enter any language code": "ou introduza um código de idioma",
-    "create in plugin directory": "criar no directório do plugin",
+    "create in <code>%s</code>": "criar em <code>%s</code>",
     "create in global languages directory": "criar no directório global de idiomas",
     "Start translating": "Começar a traduzir",
     "New version available": "Novo atualização disponível",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "Temas",
     "Plugins": "Plugins",
     "Core": "Core",
-    "Translate WordPress plugins and themes directly in your browser": "Traduza plugins e temas do WordPress directamente no seu browser"
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "A extensão \"%s\" do PHP não está instalada. Se tiver algum problema deverá proceder à sua instalação.",
+    "Unknown error": "Erro desconhecido",
+    "PO file saved": "Ficheiro PO guardado",
+    "and MO file compiled": "e ficheiro MO compilado",
+    "Merged from %s": "Misturado a partir de %s",
+    "Merged from source code": "Misturado a partir do código fonte",
+    "Already up to date with %s": "Actualizado desde %s",
+    "Already up to date with source code": "Já está actualizado a partir do código fonte",
+    "1 new string added": {
+        "one": "1 novo termo adicionado",
+        "other": "%s novos termos adicionados"
+    },
+    "1 obsolete string removed": {
+        "one": "1 um termo obsoleto removido",
+        "other": "%s termos obsoletos removidos"
+    },
+    "Your changes will be lost if you continue without saving": "As suas alterações serão perdidas se continuar sem guardar",
+    "Source text": "Texto fonte",
+    "%s translation": "Tradução para %s",
+    "Comments": "Comentários",
+    "Context": "Contexto",
+    "Translation": "Tradução",
+    "No source files in this package, nothing to sync": "Não há ficheiros de origem neste pacote, não há nada para sincronizar.",
+    "No strings could be extracted from source files": "Nenhum termo pôde ser extraído a partir dos ficheiros de origem",
+    "Translate WordPress plugins and themes directly in your browser": "Traduza plugins e temas do WordPress directamente no seu browser",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

@@ -2,9 +2,9 @@
  * Loco js export: JavaScript function
  * Project: loco.po conversion
  * Release: Working copy
- * Locale: ckb-GB, Kurdish (Sorani)
+ * Locale: ckb-GB, Central Kurdish
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:30 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:05 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -88,7 +88,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s هیچ ڕێڕەوێکی پاوانی ڕانەگەیاندووە",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s هیچ دۆسیەیەکی (POT)ی نیە، ئەگەر دەتەوێ دانەیەک لە \"%s/%s.pot\" دروست بکە",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s دۆسیەناوێکی (POT)ی نامۆی هەیە کە (%s) ناویەتی، \"%s.pot\" بە ناوێکی باش دادەنرێ.",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "لقوپۆپەی پی ئێچ پی \"%s\" دانەمەزراوە، ئەگەر تووشی کێشە هاتی؛ دەبێ دای بمەزرێنیت",
     "User does not have permission to manage translations": "بەکارهێنەر ڕێپێدراو نیە بۆ بەڕێوەبردنی وەرگێڕانەکان",
     "Invalid data posted to server": "دراوەی نادروست لە ڕاژەکە بڵاوکراوەتەوە",
     "Failed to compile MO file with %s, check your settings": "تێکخستنی دۆسیە (MO)کە لەگەڵ %s شکستی هێنا، بە ڕێکخستنەکاندا بچۆوە",
@@ -100,30 +99,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "ناتوانرێ دۆسیەی (MO) دروستکرێ",
     "Cannot overwrite MO file": "ناتوانرێ دۆسیە (MO)کە لەسەری بنووسرێتەوە",
     "Failed to write MO file": "نووسینی دۆسیە (MO)کە شکستی هێنا",
-    "Unknown error": "هەڵەی نەناسراو",
-    "PO file saved": "دۆسیەی (PO)کە پاشەکەوتکرا",
-    "and MO file compiled": "دۆسیە (MO)کەش تێکخرا",
-    "Merged from %s": "لەگەڵ %s یەکخراون",
-    "Merged from source code": "لەگەڵ کۆدی سەرچاوە یەکخراون",
-    "Already up to date with %s": "هەتا ئێستا وەک %s وایە",
-    "Already up to date with source code": "هەتا ئێستا وەک کۆدی سەرچاوەیە",
-    "1 new string added": {
-        "one": "دێرێکی نوێ زیادکرا",
-        "other": "%s دێری نوێ زیادکرا"
-    },
-    "1 obsolete string removed": {
-        "one": "دێرێکی بەسەرچوو سڕاوەتەوە",
-        "other": "%s دێری بەسەرچوو سڕاوەتەوە"
-    },
-    "Your changes will be lost if you continue without saving": "گۆڕانکاریەکانت لەدەست دەدەیت؛ ئەگەر بەبێ پاشەکەوتکردن بەردەوام بیت!",
-    "Source text": "دەقی سەرچاوە",
-    "%s translation": "%s وەرگێڕان",
-    "Comments": "لێدوانەکان",
-    "Context": "پێکهاتە",
-    "Translation": "وەرگێڕان",
-    "No source files in this package, nothing to sync": "هیچ دۆسیەیەکی سەرچاوە لەم پاکەتەدا نیە، هیچ شتێکیش بۆ هاوهەنگاوی نیە",
-    "No strings could be extracted from source files": "ناتوانرێ هیچ دێرێک لە دۆسیە سەرچاوەکان دەربهێنرێ",
-    "create in <code>%s</code>": "دروستکردن لە <code>%s</code>",
     "Packages": "پاکەتەکان",
     "File check": "پشکنینی دۆسیە",
     "File system permissions for %s": "ڕێپێدانی سیستەم بۆ دۆسیەی %s",
@@ -169,7 +144,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "دەستپێکردنی وەرگێڕانی نوێ لە %s",
     "Select from common languages": "دیاریکردن لە زمانە باوەکانەوە",
     "or enter any language code": "یان کۆدی زمانێک لێبدە",
-    "create in plugin directory": "دروستکردن لە بوخچەی پێوەکراو",
+    "create in <code>%s</code>": "دروستکردن لە <code>%s</code>",
     "create in global languages directory": "دروستکردن لە بوخچەی زمانە جیهانیەکان",
     "Start translating": "دەستپێکردنی وەرگێڕان",
     "New version available": "وەشانی نوێ بەردەستە",
@@ -178,6 +153,33 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "ڕووکارەکان",
     "Plugins": "پێوەکراوەکان",
     "Core": "کاکڵ",
-    "Translate WordPress plugins and themes directly in your browser": ""
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "لقوپۆپەی پی ئێچ پی \"%s\" دانەمەزراوە، ئەگەر تووشی کێشە هاتی؛ دەبێ دای بمەزرێنیت",
+    "Unknown error": "هەڵەی نەناسراو",
+    "PO file saved": "دۆسیەی (PO)کە پاشەکەوتکرا",
+    "and MO file compiled": "دۆسیە (MO)کەش تێکخرا",
+    "Merged from %s": "لەگەڵ %s یەکخراون",
+    "Merged from source code": "لەگەڵ کۆدی سەرچاوە یەکخراون",
+    "Already up to date with %s": "هەتا ئێستا وەک %s وایە",
+    "Already up to date with source code": "هەتا ئێستا وەک کۆدی سەرچاوەیە",
+    "1 new string added": {
+        "one": "دێرێکی نوێ زیادکرا",
+        "other": "%s دێری نوێ زیادکرا"
+    },
+    "1 obsolete string removed": {
+        "one": "دێرێکی بەسەرچوو سڕاوەتەوە",
+        "other": "%s دێری بەسەرچوو سڕاوەتەوە"
+    },
+    "Your changes will be lost if you continue without saving": "گۆڕانکاریەکانت لەدەست دەدەیت؛ ئەگەر بەبێ پاشەکەوتکردن بەردەوام بیت!",
+    "Source text": "دەقی سەرچاوە",
+    "%s translation": "%s وەرگێڕان",
+    "Comments": "لێدوانەکان",
+    "Context": "پێکهاتە",
+    "Translation": "وەرگێڕان",
+    "No source files in this package, nothing to sync": "هیچ دۆسیەیەکی سەرچاوە لەم پاکەتەدا نیە، هیچ شتێکیش بۆ هاوهەنگاوی نیە",
+    "No strings could be extracted from source files": "ناتوانرێ هیچ دێرێک لە دۆسیە سەرچاوەکان دەربهێنرێ",
+    "Translate WordPress plugins and themes directly in your browser": "",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );

@@ -4,7 +4,7 @@
  * Release: Working copy
  * Locale: ko-KR, Korean
  * Exported by: Unregistered user
- * Exported at: Mon, 15 Feb 2016 15:08:34 +0000
+ * Exported at: Wed, 06 Jul 2016 12:21:10 +0100
  */
 loco = window.loco||{}, loco.t = function( pairs ){
     
@@ -58,9 +58,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "New template": "새로운 양식",
     "New language": "새로운 언어",
     "%s%% translated": "%s%% 번역됨",
-    "1 string": {
-        "other": "%u개의 스트링"
-    },
+    "1 string": "%u개의 스트링",
     "%s fuzzy": "%s개가 모호함",
     "%s untranslated": "%s개가 번역되지 않음",
     "Failed to compile MO file with built-in compiler": "내장된 생성 도구로 MO 파일을 생성하는데 실패함",
@@ -86,7 +84,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "%s does not declare a \"Domain Path\"": "%s 이(가) \"도메인 경로\"를 알려주지 않습니다",
     "%s has no POT file. Create one at \"%s/%s.pot\" if you need one.": "%s 은(는) POT 파일이 없습니다. 필요할 경우  \"%s/%s.pot\" 에서 생성하세요.",
     "%s has a strange POT file name (%s). A better name would be \"%s.pot\"": "%s의 POT 파일명(%s)이 이상합니다. \"%s.pot\"가 더 나은 것 같습니다.",
-    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "php 확장 기능 \"%s\"이(가) 설치되지 않았습니다. 문제가 발생할 경우 설치하세요",
     "User does not have permission to manage translations": "사용자가 번역을 관리할 권한이 없음",
     "Invalid data posted to server": "서버에 잘못된 데이터가 게시됨",
     "Failed to compile MO file with %s, check your settings": "%s(으)로 MO 파일을 생성하는데 실패함, 설정을 확인하세요",
@@ -98,28 +95,6 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Cannot create MO file": "MO 파일을 생성할 수 없음",
     "Cannot overwrite MO file": "MO 파일을 덮어쓸 수 없음",
     "Failed to write MO file": "MO 파일에 기록하지 못함",
-    "Unknown error": "알 수없는 오류",
-    "PO file saved": "PO 파일이 저장됨",
-    "and MO file compiled": "그리고 MO 파일이 생성되었음",
-    "Merged from %s": "%s (으)로부터 병합됨",
-    "Merged from source code": "원본 코드에서 병합됨",
-    "Already up to date with %s": "%s 와(과) 비교하여 최신 상태임",
-    "Already up to date with source code": "원본 코드와 비교하여 최신 상태임",
-    "1 new string added": {
-        "other": "%u개의 새로운 스트링이 추가됨"
-    },
-    "1 obsolete string removed": {
-        "other": "%u개의 사용 중지된 스트링이 제거됨"
-    },
-    "Your changes will be lost if you continue without saving": "저장하지 않고 계속할 경우 변경 사항을 잃게 됩니다.",
-    "Source text": "원본 텍스트",
-    "%s translation": "%s 번역",
-    "Comments": "댓글",
-    "Context": "문맥",
-    "Translation": "번역",
-    "No source files in this package, nothing to sync": "이 패키지에 소스 파일이 없습니다, 동기화 할 것이 없음",
-    "No strings could be extracted from source files": "소스 파일로부터 스트링을 추출하지 못했음",
-    "create in <code>%s</code>": "<code>%s</code> 에 생성",
     "Packages": "패키지",
     "File check": "파일 확인",
     "File system permissions for %s": "%s 에 대한 파일 시스템 권한",
@@ -131,9 +106,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Template (POT)": "양식 (POT)",
     "File permissions": "파일 권한",
     "Extends: %s": "다음으로부터 확장: %s",
-    "1 language": {
-        "other": "%u개의 언어"
-    },
+    "1 language": "%u개의 언어",
     "Updated": "업데이트:",
     "Powered by": "다음에 의해 작동 중:",
     "Loco may not work as expected": "Loco가 예상대로 작동하지 않을 수 있음",
@@ -164,7 +137,7 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Initialize new translations in %s": "%s 에 새로운 번역을 시작",
     "Select from common languages": "공통 언어에서 선택",
     "or enter any language code": "또는 원하는 언어 코드 입력",
-    "create in plugin directory": "플러그인 디렉터리에 생성",
+    "create in <code>%s</code>": "<code>%s</code> 에 생성",
     "create in global languages directory": "범용 언어 디렉터리에 생성",
     "Start translating": "번역 시작",
     "New version available": "새로운 버전 사용 가능",
@@ -173,6 +146,27 @@ loco = window.loco||{}, loco.t = function( pairs ){
     "Themes": "테마",
     "Plugins": "플러그인",
     "Core": "핵심",
-    "Translate WordPress plugins and themes directly in your browser": "브라우저에서 직접 워드프레스 플러그인 및 테마 번역"
+    "PHP extension \"%s\" is not installed. If you experience problems you should install it": "php 확장 기능 \"%s\"이(가) 설치되지 않았습니다. 문제가 발생할 경우 설치하세요",
+    "Unknown error": "알 수없는 오류",
+    "PO file saved": "PO 파일이 저장됨",
+    "and MO file compiled": "그리고 MO 파일이 생성되었음",
+    "Merged from %s": "%s (으)로부터 병합됨",
+    "Merged from source code": "원본 코드에서 병합됨",
+    "Already up to date with %s": "%s 와(과) 비교하여 최신 상태임",
+    "Already up to date with source code": "원본 코드와 비교하여 최신 상태임",
+    "1 new string added": "%u개의 새로운 스트링이 추가됨",
+    "1 obsolete string removed": "%u개의 사용 중지된 스트링이 제거됨",
+    "Your changes will be lost if you continue without saving": "저장하지 않고 계속할 경우 변경 사항을 잃게 됩니다.",
+    "Source text": "원본 텍스트",
+    "%s translation": "%s 번역",
+    "Comments": "댓글",
+    "Context": "문맥",
+    "Translation": "번역",
+    "No source files in this package, nothing to sync": "이 패키지에 소스 파일이 없습니다, 동기화 할 것이 없음",
+    "No strings could be extracted from source files": "소스 파일로부터 스트링을 추출하지 못했음",
+    "Translate WordPress plugins and themes directly in your browser": "브라우저에서 직접 워드프레스 플러그인 및 테마 번역",
+    "http://wordpress.org/extend/plugins/loco-translate": "http://wordpress.org/extend/plugins/loco-translate",
+    "Tim Whitlock": "Tim Whitlock",
+    "https://localise.biz/help/wordpress/translate-plugin": "https://localise.biz/help/wordpress/translate-plugin"
 } 
 );
