@@ -74,7 +74,7 @@ final class LocoLocale {
     }
     
     public function get_name(){
-        return empty($this->label) ? Loco::__('Unknown language') : $this->label;
+        return empty($this->label) ? __('Unknown language','loco-translate') : $this->label;
     }
     
     public function equal_to( LocoLocale $locale ){

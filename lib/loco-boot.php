@@ -19,21 +19,6 @@ abstract class Loco {
 
     /* whether to enable the cache at all  */
     public static $cache_enabled;
-
-    /* call WordPress __ with our text domain  */
-    public static function __( $msgid = '' ){
-        return __( $msgid, self::NS );
-    }
-
-    /* call WordPress _n with our text domain  */
-    public static function _n( $msgid = '', $msgid_plural = '', $n = 0 ){
-        return _n( $msgid, $msgid_plural, $n, self::NS );
-    }
-
-    /* call WordPress _x with our text domain  */
-    public static function _x( $msgid = '', $msgctxt = '', $n = 0 ){
-        return _x( $msgid, $msgctxt, self::NS );
-    }
     
     
     /**

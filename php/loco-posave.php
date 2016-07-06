@@ -7,7 +7,7 @@
     DOING_AJAX or die();
 
     if( empty($path) || empty($po) || ! isset($name) || empty($type) ){
-        throw new Exception( Loco::__('Invalid data posted to server'), 422 );
+        throw new Exception( __('Invalid data posted to server','loco-translate'), 422 );
     }
   
     // path is allowed to not exist yet
@@ -20,7 +20,7 @@
     loco_require('loco-packages','loco-locales');
     $package = LocoPackage::get( $name, $type );
     if( ! $package ){
-        throw new Exception( sprintf( Loco::__('Package not found called %s'), $name ), 404 );
+        throw new Exception( sprintf( __('Package not found called %s','loco-translate'), $name ), 404 );
     }
 
     $fname = basename($path);
@@ -55,7 +55,7 @@
             }
         }
         else if( $num ){
-            throw new Exception( sprintf(Loco::__('Web server cannot create backups in "%s". Fix file permissions or disable backups in settings'), basename($podir) ) );
+            throw new Exception( sprintf( __('Web server cannot create backups in "%s". Fix file permissions or disable backups in settings','loco-translate'), basename($podir) ) );
         }
     }
 
@@ -63,10 +63,10 @@
     // else construct directory tree if file does not exist
     else if( ! file_exists($podir) && ! mkdir( $path, 0775, true ) ){
         $pname = basename( dirname($podir) );
-        throw new Exception( sprintf(Loco::__('Web server cannot create "%s" directory in "%s". Fix file permissions or create it manually.'), $dname, $pname ) );
+        throw new Exception( sprintf( __('Web server cannot create "%s" directory in "%s". Fix file permissions or create it manually.','loco-translate'), $dname, $pname ) );
     }
     else if( ! is_dir($podir) || ! is_writable($podir) ){
-        throw new Exception( sprintf(Loco::__('Web server cannot create files in the "%s" directory. Fix file permissions or use the download function.'), basename($podir) ) );
+        throw new Exception( sprintf(__('Web server cannot create files in the "%s" directory. Fix file permissions or use the download function.','loco-translate'), basename($podir) ) );
     }
 
     
@@ -78,7 +78,7 @@
     // attempt to write PO file
     $bytes = file_put_contents( $path, $po );
     if( false === $bytes ){
-        throw new Exception( sprintf(Loco::__('%s file is not writable by the web server. Fix file permissions or download and copy to "%s/%s".'), $ftype, $dname, $fname ) );
+        throw new Exception( sprintf(__('%s file is not writable by the web server. Fix file permissions or download and copy to "%s/%s".','loco-translate'), $ftype, $dname, $fname ) );
     }
     
     // primary action ok
@@ -99,10 +99,10 @@
             // check target MO path before compiling
             $mopath = preg_replace( '/\.po$/', '.mo', $path );
             if( ! file_exists($mopath) && ! is_writable( dirname($mopath) ) ){
-                throw new Exception( Loco::__('Cannot create MO file') );
+                throw new Exception( __('Cannot create MO file','loco-translate') );
             }
             else if( file_exists($mopath) && ! is_writable($mopath) ){
-                throw new Exception( Loco::__('Cannot overwrite MO file') );
+                throw new Exception( __('Cannot overwrite MO file','loco-translate') );
             }
 
             // attempt to compile MO direct to file via shell
@@ -118,7 +118,7 @@
                     error_log( $Ex->getMessage(), 0 );
                 }
                 if( ! $bytes ){
-                    throw new Exception( sprintf( Loco::__('Failed to compile MO file with %s, check your settings'), WHICH_MSGFMT ) );
+                    throw new Exception( sprintf( __('Failed to compile MO file with %s, check your settings','loco-translate'), WHICH_MSGFMT ) );
                 }
                 $response['compiled'] = $bytes;
                 break;
@@ -128,7 +128,7 @@
             $mo = LocoAdmin::msgfmt_native($po);
             $bytes = file_put_contents( $mopath, $mo );
             if( ! $bytes ){
-                throw new Exception( Loco::__('Failed to write MO file') );
+                throw new Exception( __('Failed to write MO file','loco-translate') );
             }
             $response['compiled'] = $bytes;
             break;

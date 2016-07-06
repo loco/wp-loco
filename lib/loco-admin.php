@@ -28,7 +28,7 @@ abstract class LocoAdmin {
             throw new Exception( $message );
         }
         // Translators: Bold text label in admin error messages
-        $label or $label = Loco::_x('Error','Message label');
+        $label or $label = _x('Error','Message label','loco-translate');
         echo '<div class="loco-message error loco-error"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
     }
     
@@ -38,7 +38,7 @@ abstract class LocoAdmin {
      */
     public static function warning( $message, $label = '' ){
         if( did_action('admin_notices') ){
-            $label or $label = Loco::_x('Warning','Message label');
+            $label or $label = _x('Warning','Message label','loco-translate');
             echo '<div class="loco-message error loco-warning"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
         }
         else {
@@ -51,7 +51,7 @@ abstract class LocoAdmin {
      * Print success
      */
     public static function success( $message, $label = '' ){
-        $label or $label = Loco::_x('OK','Message label');
+        $label or $label = _x('OK','Message label','loco-translate');
         echo '<div class="loco-message updated loco-success"><p><strong>',$label,':</strong> ',Loco::html($message),'</p></div>';
     }
     
@@ -60,7 +60,7 @@ abstract class LocoAdmin {
      * Exit forbidden
      */
     private static function forbid(){
-        wp_die( Loco::__('Permission denied'), 'Forbidden', array('response' => 403 ) );
+        wp_die( __('Permission denied','loco-translate'), 'Forbidden', array('response' => 403 ) );
         trigger_error('wp_die failure', E_USER_ERROR );
         exit();
     }     
@@ -83,7 +83,7 @@ abstract class LocoAdmin {
         if( isset($_POST['loco']) && is_array( $update = $_POST['loco'] ) ){
             $update += array( 'gen_hash' => '0', 'use_fuzzy' => '0', 'enable_core' => '0' );
             $args = Loco::config( $update );
-            $args['success'] = Loco::__('Settings saved');
+            $args['success'] = __('Settings saved','loco-translate');
         }
         else {
             $args = Loco::config();
@@ -123,7 +123,7 @@ abstract class LocoAdmin {
         }
         // check if locale is a valid WordPress language code
         if( ! LocoLocale::is_valid_wordpress($theme_locale) ){
-            self::warning( sprintf( Loco::__('%s is not an official WordPress language'), $theme_locale ) );
+            self::warning( sprintf( __('%s is not an official WordPress language','loco-translate'), $theme_locale ) );
         }
         $args = compact('wp_version','theme','theme_locale','package','config','caching','user','plugins');
         Loco::enqueue_scripts('build/admin-common', 'debug');
@@ -196,7 +196,7 @@ abstract class LocoAdmin {
                     // warn about unwriteable locations?
                     
                     // render msginit start screen
-                    $title = Loco::__('New PO file');
+                    $title = __('New PO file','loco-translate');
                     $locales = LocoLocale::get_names();
                     Loco::enqueue_scripts( 'build/admin-common', 'build/admin-poinit');
                     Loco::render('admin-poinit', compact('package','domain','title','locales','path','pdir','gdir','pdir_ok','gdir_ok','is_global') );
@@ -211,7 +211,7 @@ abstract class LocoAdmin {
                     // support incorrect usage of PO files as templates
                     if( isset($_GET['pot']) && ! self::is_pot($po_path) ){
                         $po_path = dirname($po_path).'/'.$_GET['pot'].'.pot';
-                        self::warning( sprintf( Loco::__('PO file used as template. This will be renamed to %s on first save'), basename($po_path) ) );
+                        self::warning( sprintf( __('PO file used as template. This will be renamed to %s on first save','loco-translate'), basename($po_path) ) );
                     }
                     self::render_poeditor( $package, $po_path, $export, $head );
                     break;
@@ -309,7 +309,7 @@ abstract class LocoAdmin {
         $export = array();
         $locale = $code ? loco_locale_resolve($code) : null;
         if( ! $locale ){
-            throw new Exception( Loco::__('You must specify a valid locale for a new PO file') );
+            throw new Exception( __('You must specify a valid locale for a new PO file','loco-translate') );
         }
         
         // default PO file location
@@ -334,14 +334,14 @@ abstract class LocoAdmin {
         if( ! $export ){
             $export = self::xgettext( $package, $po_dir );
             if( ! $export ){
-                throw new Exception( Loco::__('No translatable strings found').'. '.Loco::__('Cannot create a PO file.') );
+                throw new Exception( __('No translatable strings found','loco-translate').'. '.__('Cannot create a PO file.','loco-translate') );
             }
         }
         
         // check for PO conflict as this is msginit, not a sync.
         $po_path = $po_dir.'/'.$po_name;
         if( file_exists($po_path) ){
-            throw new Exception( sprintf(Loco::__('PO file already exists with locale %s'), $locale->get_code() ) );
+            throw new Exception( sprintf(__('PO file already exists with locale %s','loco-translate'), $locale->get_code() ) );
         }
 
         // return path, export and head set as references
@@ -393,9 +393,7 @@ abstract class LocoAdmin {
         // warn if new file can't be written
         $writable = self::is_writable( $path );
         if( ! $writable && ! $modified ){
-            //$message = $modified ? Loco::__('File cannot be saved to disk automatically'): Loco::__('File cannot be created automatically');
-            //$warnings[] = $message.'. '.sprintf(Loco::__('Fix the file permissions on %s'),$path);
-            $warnings[] = Loco::__('File cannot be created automatically. Fix the file permissions or use Download instead of Save');
+            $warnings[] = __('File cannot be created automatically. Fix the file permissions or use Download instead of Save','loco-translate');
         }
         
         // Warnings if file is empty
@@ -404,28 +402,28 @@ abstract class LocoAdmin {
             if( $is_pot ){
                 if( $modified ){
                     // existing POT, may need sync
-                    $lines[] = sprintf( Loco::__('%s file is empty'), 'POT' );
-                    $lines[] = Loco::__('Run Sync to update from source code');
+                    $lines[] = sprintf( __('%s file is empty','loco-translate'), 'POT' );
+                    $lines[] = __('Run Sync to update from source code','loco-translate');
                 }
                 else {
                     // new POT, would have tried to extract from source. Fine you can add by hand
-                    $lines[] = Loco::__('No strings could be extracted from source code');
+                    $lines[] = __('No strings could be extracted from source code','loco-translate');
                 }
             }
             else if( $modified ){
-                $lines[] = sprintf( Loco::__('%s file is empty'), 'PO' );
+                $lines[] = sprintf( __('%s file is empty','loco-translate'), 'PO' );
                 if( $haspot ){
                     // existing PO that might be updatable from POT
-                    $lines[] = sprintf( Loco::__('Run Sync to update from %s'), basename($haspot) );
+                    $lines[] = sprintf( __('Run Sync to update from %s','loco-translate'), basename($haspot) );
                 }
                 else {
                     // existing PO that might be updatable from sources
-                    $lines[] = Loco::__('Run Sync to update from source code');
+                    $lines[] = __('Run Sync to update from source code','loco-translate');
                 }
             }
             else {
                 // this shouldn't happen if we throw an error during msginit
-                throw new Exception( Loco::__('No translatable strings found') );
+                throw new Exception( __('No translatable strings found','loco-translate') );
             }
             $warnings[] = implode('. ', $lines );
         }
@@ -435,11 +433,11 @@ abstract class LocoAdmin {
             if( $is_pot ){
                 $sources = $package->get_source_files();
                 if( $sources && filemtime($path) < self::newest_mtime_recursive($sources) ){
-                    $warnings[] = Loco::__('Source code has been modified, run Sync to update POT');
+                    $warnings[] = __('Source code has been modified, run Sync to update POT','loco-translate');
                 }
             }
             else if( $haspot && filemtime($haspot) > filemtime($path) ){
-                $warnings[] = Loco::__('POT has been modified since PO file was saved, run Sync to update');
+                $warnings[] = __('POT has been modified since PO file was saved, run Sync to update','loco-translate');
             }
         }
 
@@ -535,7 +533,7 @@ abstract class LocoAdmin {
         }
         $realpath = realpath( $path );
         if( ! $realpath || ! is_readable($realpath) || ( $isdir && ! is_dir($realpath) ) || ( ! $isdir && ! is_file($realpath) ) ){
-            self::error( Loco::__('Bad file path').' '.var_export($path,1) );
+            self::error( __('Bad file path','loco-translate').' '.var_export($path,1) );
             return '';
         }
         // returning original path in case something was symlinked outside the web root
@@ -782,11 +780,11 @@ abstract class LocoAdmin {
         $export = self::parse_po( $path );
         if( ! isset($export[0]) ){
             $ext = strtoupper( pathinfo($path,PATHINFO_EXTENSION) );
-            throw new Exception( sprintf( Loco::__('Empty or invalid %s file'), $ext ) );
+            throw new Exception( sprintf( __('Empty or invalid %s file','loco-translate'), $ext ) );
         }
         if( $export[0]['source'] !== '' ){
             $ext = strtoupper( pathinfo($path,PATHINFO_EXTENSION) );
-            throw new Exception( sprintf( Loco::__('%s file has no header'), $ext ) );
+            throw new Exception( sprintf( __('%s file has no header','loco-translate'), $ext ) );
         }
         $headers = loco_parse_po_headers( $export[0]['target'] );
         $export[0] = array(); // <- avoid index errors as json
@@ -933,7 +931,7 @@ abstract class LocoAdmin {
             'xgettext' => $domain ? $domain : $package->get_domain(),
         ) );
         if( ! $label ){
-            $label = Loco::_x('New template','Add button') ;
+            $label = _x('New template','Add button','loco-translate') ;
         }
         return '<a href="'.Loco::html($url).'">'.Loco::html($label).'</a>';
         
@@ -952,7 +950,7 @@ abstract class LocoAdmin {
             'msginit' => $domain ? $domain : $package->get_domain(),
         ) );
         if( ! $label ){
-            $label = Loco::_x('New language','Add button');
+            $label = _x('New language','Add button','loco-translate');
         }
         return '<a href="'.Loco::html($url).'">'.Loco::html($label).'</a>';
     }
@@ -991,13 +989,13 @@ abstract class LocoAdmin {
      */   
     public static function format_progress_summary( array $stats ){
         extract( $stats );
-        $text = sprintf( Loco::__('%s%% translated'), $p ).', '.sprintf( Loco::_n('1 string', '%s strings', $t ), number_format($t) );
+        $text = sprintf( __('%s%% translated','loco-translate'), $p ).', '.sprintf( _n('1 string', '%s strings', $t,'loco-translate' ), number_format($t) );
         $extra = array();
         if( $f ){
-            $extra[] = sprintf( Loco::__('%s fuzzy'), number_format($f) );
+            $extra[] = sprintf( __('%s fuzzy','loco-translate'), number_format($f) );
         }   
         if( $u ){
-            $extra[] = sprintf( Loco::__('%s untranslated'), number_format($f) );
+            $extra[] = sprintf( __('%s untranslated','loco-translate'), number_format($f) );
         }
         if( $extra ){
             $text .= ' ('.implode(', ',$extra).')';
@@ -1043,7 +1041,7 @@ abstract class LocoAdmin {
             error_log( $Ex->getMessage(), 0 );
         }
         if( ! $mo ){
-            throw new Exception( sprintf( Loco::__('Failed to compile MO file with built-in compiler') ) );
+            throw new Exception( sprintf( __('Failed to compile MO file with built-in compiler','loco-translate') ) );
         }
         return $mo;    
     }     
@@ -1091,16 +1089,16 @@ function _loco_hook__admin_menu() {
         $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' ) or
         Loco::enqueue_styles('loco-legacy');
         
-        $page_title = Loco::__('Loco, Translation Management');
-        $tool_title = Loco::__('Manage translations');
-        $opts_title = Loco::__('Translation options');
+        $page_title = __('Loco, Translation Management','loco-translate');
+        $tool_title = __('Manage translations','loco-translate');
+        $opts_title = __('Translation options','loco-translate');
         // Loco main menu item
         $slug = Loco::NS;
         $title = $page_title.' - '.$tool_title;
         $page = array( 'LocoAdmin', 'render_page_tools' );
         // Dashicons were introduced in WP 3.8
         $icon = $wp_38 ? 'dashicons-translation' : 'none';
-        add_menu_page( $title, Loco::__('Loco Translate'), $cap, $slug, $page, $icon );
+        add_menu_page( $title, __('Loco Translate','loco-translate'), $cap, $slug, $page, $icon );
         // add main link under self with different name
         add_submenu_page( $slug, $title, $tool_title, $cap, $slug, $page );
         // also add under Tools menu (legacy)
@@ -1112,12 +1110,6 @@ function _loco_hook__admin_menu() {
         add_submenu_page( Loco::NS, $title, $opts_title, $cap, $slug, $page );
         // also add under Settings menu (legacy)
         add_options_page( $title, $opts_title, $cap, $slug.'-legacy', $page );
-        /*/ Diagnostics page - enabled in debug mode only
-        if( WP_DEBUG ){
-           $diag_title = Loco::__('Diagnostics');
-            $page = array( 'LocoAdmin', 'render_page_diagnostics' );
-            add_submenu_page( Loco::NS, $page_title.' - '.$diag_title, $diag_title, $cap, Loco::NS.'-diagnostics', $page );
-        }*/
         // Hook in page stuff as soon as screen is avaiable
         add_action('current_screen', '_loco_hook__current_screen' );
     }        
@@ -1129,8 +1121,8 @@ function _loco_hook__admin_menu() {
  */
 function _loco_hook__plugin_row_meta( $links, $file = '' ){
     if( false !== strpos($file,'/loco.php') ){
-        $links[] = '<a href="'.Loco::html( LocoAdmin::uri( array(), '' ) ).'"><strong>'.Loco::__('Manage translations').'</strong></a>';
-        $links[] = '<a href="'.Loco::html( LocoAdmin::uri( array(), 'settings') ).'"><strong>'.Loco::__('Settings').'</strong></a>';
+        $links[] = '<a href="'.Loco::html( LocoAdmin::uri( array(), '' ) ).'"><strong>'.__('Manage translations','loco-translate').'</strong></a>';
+        $links[] = '<a href="'.Loco::html( LocoAdmin::uri( array(), 'settings') ).'"><strong>'.__('Settings','loco-translate').'</strong></a>';
     } 
     return $links;
 }
@@ -1154,7 +1146,7 @@ function _loco_hook__wp_ajax_download(){
     extract( Loco::postdata() );
     if( isset($action) ){
         require Loco::basedir().'/php/loco-download.php';
-        die( Loco::__('File download failed') );
+        die( __('File download failed','loco-translate') );
     }
 }
 
@@ -1164,7 +1156,7 @@ function _loco_hook__wp_ajax_download(){
  */
 function _loco_hook_admin_notices(){
     if( defined('WPLANG') && LocoAdmin::is_self() && WPLANG && 3 < (int) $GLOBALS['wp_version'] ){
-        LocoAdmin::warning( Loco::__('WPLANG is deprecated and should be removed from wp-config.php') );
+        LocoAdmin::warning( __('WPLANG is deprecated and should be removed from wp-config.php','loco-translate') );
     }
     LocoAdmin::flush_notices();
 } 

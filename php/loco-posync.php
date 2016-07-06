@@ -6,7 +6,7 @@
     DOING_AJAX or die();
     
     if( empty($path) || ! isset($name) || empty($type) ){
-        throw new Exception( Loco::__('Invalid data posted to server'), 422 );
+        throw new Exception( __('Invalid data posted to server','loco-translate'), 422 );
     }
   
     // path is allowed to not exist yet
@@ -19,7 +19,7 @@
     loco_require('loco-packages','loco-locales');
     $package = LocoPackage::get( $name, $type );
     if( ! $package ){
-        throw new Exception( sprintf( Loco::__('Package not found called %s'), $name ), 404 );
+        throw new Exception( sprintf( __('Package not found called %s','loco-translate'), $name ), 404 );
     }
 
 
@@ -33,7 +33,6 @@
             if( $pot_path = $package->get_pot($domain) ){
                 $exp = LocoAdmin::parse_po( $pot_path );
                 if( ! $exp || ( 1 === count($exp) && '' === $exp[0]['source'] ) ){
-                    // throw new Exception( Loco::__('POT file is empty').' - '.basename($pot_path) );
                     // fall through to try source code
                 }
                 else {
@@ -50,7 +49,7 @@
             break;
         }
 
-        throw new Exception( Loco::__('No strings could be extracted from source code') );
+        throw new Exception( __('No strings could be extracted from source code','loco-translate') );
     }
     
 

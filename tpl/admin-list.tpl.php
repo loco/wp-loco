@@ -8,16 +8,16 @@
             <thead>
                 <tr>
                     <th scope="col">
-                        <?php Loco::h( Loco::_x('Package details','Table header') )?> 
+                        <?php Loco::h( _x('Package details','Table header','loco-translate') )?> 
                     </th>
                     <th scope="col">
-                        <?php Loco::h( Loco::_x('Translations (PO)','Table header') )?> 
+                        <?php Loco::h( _x('Translations (PO)','Table header','loco-translate') )?> 
                     </th>    
                     <th scope="col">
-                        <?php Loco::h( Loco::_x('Template (POT)','Table header') )?> 
+                        <?php Loco::h( _x('Template (POT)','Table header','loco-translate') )?> 
                     </th>    
                     <th scope="col">
-                        <?php Loco::h( Loco::_x('File permissions','Table header') )?> 
+                        <?php Loco::h( _x('File permissions','Table header','loco-translate') )?> 
                     </th>    
                 </tr>
             </thead>
@@ -37,16 +37,16 @@
                             </li><?php
                             if( isset($parent) ):?> 
                             <li>
-                                <?php Loco::h( Loco::__('Extends: %s'), $parent ) ?> 
+                                <?php Loco::h( __('Extends: %s','loco-translate'), $parent ) ?> 
                             </li><?php 
                             endif?> 
                             <li><?php 
-                                Loco::h( Loco::_n( '1 language', '%u languages', $n ), $n )?> 
+                                Loco::h( _n( '1 language', '%u languages', $n, 'loco-translate' ), $n )?> 
                             </li><?php 
                             if( $mtime ):?> 
                             <li class="loco-mtime">
                                 <small>
-                                    <?php Loco::h( Loco::_x('Updated','Modified time') )?> 
+                                    <?php Loco::h( _x('Updated','Modified time','loco-translate') )?> 
                                     <?php Loco::h( LocoAdmin::format_datetime($mtime) )?> 
                                 </small>
                             </li><?php
@@ -95,7 +95,7 @@
                         try {
                             $package->check_permissions();?> 
                             <li class="loco-ok">
-                                <?php echo LocoAdmin::fscheck_link( $package, $domain, Loco::_x('OK','Message label') )?> 
+                                <?php echo LocoAdmin::fscheck_link( $package, $domain, _x('OK','Message label','loco-translate') )?> 
                             </li><?php
                         }
                         catch( Exception $Ex ){?> 

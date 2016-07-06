@@ -18,4 +18,4 @@
     }
     
     
-    throw new Exception( Loco::__('Invalid data posted to server'), 422 );
+    throw new Exception( __('Invalid data posted to server','loco-translate'), 422 );
