@@ -21,6 +21,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     public function getHeaderInfo(){
         return new Loco_package_Header( array (
             'TextDomain' => 'default',
+            'DomainPath' => '/wp-content/languages/',
         ) );
     }
 

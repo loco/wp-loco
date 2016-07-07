@@ -27,13 +27,14 @@ class Loco_package_Header {
      * @return string
      */
     public function __get( $prop ){
-        // may have key directly, e.g. TextDomain in plugin array
-        if( isset($this->wp[$prop]) ){
-            return $this->wp[$prop];
+        $wp = $this->wp;
+        // prefer require "get" method to access raw properties (WP_Theme)
+        if( method_exists($wp, 'get') && ( $value = $wp->get($prop) ) ){
+            return $value;
         }
-        // else WP_Theme may require "get" method to access some properties
-        if( method_exists($this->wp, 'get') ){
-            return $this->wp->get($prop);
+        // may have key directly, e.g. TextDomain in plugin array
+        if( isset($wp[$prop]) ){
+            return $wp[$prop];
         }
         // else header not defined, which is probably fine
         return '';
@@ -83,6 +84,22 @@ class Loco_package_Header {
         }
         
         return $html;
+    }
+
+
+    /**
+     * Get hostname of vendor that hosts theme/plugin
+     * @return string e.g. "wordpress.org"
+     */
+    public function getVendorHost(){
+        $host = '';
+        if( ( $url = $this->PluginURI ) || ( $url = $this->ThemeURI ) ){
+            if( $host = parse_url($url,PHP_URL_HOST) ){
+                $bits = explode( '.', $host );
+                $host = implode( '.', array_slice($bits,-2) );
+            }
+        }
+        return $host;
     }
 
 }

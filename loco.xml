@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--
-Loco's own Loco configuration
--->
 <bundle name="Loco Translate (v2 translations)">
   <domain name="loco">
     <project>
       <source>
+        <file>loco.php</file>
         <directory>src</directory>
         <directory>tpl</directory>
       </source>
@@ -17,7 +15,6 @@ Loco's own Loco configuration
       </template>
     </project>
   </domain>
-  <!-- globally excluded locations will never be searched -->
   <exclude>
     <directory>lib</directory>
     <directory>pub</directory>

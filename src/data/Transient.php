@@ -59,11 +59,11 @@ abstract class Loco_data_Transient extends Loco_data_Serializable {
         $data = get_transient( $key );
         try {
             $this->setUnserialized($data);
+            return true;
         }
         catch( InvalidArgumentException $e ){
             return false;
         }
-        return true;
     }    
 
     

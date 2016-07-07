@@ -78,12 +78,11 @@ class Loco_package_Plugin extends Loco_package_Bundle {
             'PluginURI'   => 'URI of the plugin',
             'Author'      => 'Author of the plugin',
             'AuthorURI'   => 'Author URI of the plugin',
-            'Tags'        => 'Tags of the plugin',
+            // 'Tags'        => 'Tags of the plugin',
         );
     }
 
-
-
+    
     /**
      * {@inheritdoc}
      */

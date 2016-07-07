@@ -35,6 +35,12 @@ class Loco_admin_bundle_DebugController extends Loco_admin_bundle_BaseController
             ) );
         }
         
+        $meta = $bundle->getHeaderInfo();
+        $this->set('meta', new Loco_mvc_ViewParams( array(
+            'vendor' => $meta->getVendorHost(),
+            'author' => $meta->getAuthorCredit(),
+        ) ) );
+        
         if( count($bundle) ){
             $writer = new Loco_config_BundleWriter( $bundle );
             $this->set( 'xml', $writer->toXml() );

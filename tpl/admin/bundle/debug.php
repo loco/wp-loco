@@ -9,6 +9,9 @@ $this->extend('../layout');
     <p>
         This information is for developers to find problems in the bundle setup.
     </p>
+    <p data-vendor="<?php $meta->e('vendor')?>">
+        <?php echo $meta->author?> 
+    </p>
     
     <?php
     /* @var $notice Loco_mvc_ViewParams */

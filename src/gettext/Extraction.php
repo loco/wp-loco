@@ -47,7 +47,6 @@ class Loco_gettext_Extraction {
     }
 
 
-    
     /**
      * @return Loco_gettext_Extraction
      */
@@ -93,7 +92,7 @@ class Loco_gettext_Extraction {
      * @return Loco_gettext_Data
      */
     public function getTemplate( $domain ){
-        $raw = $this->extractor->filter( $domain, 'default' );
+        $raw = $this->extractor->filter( $domain );
         $data = new Loco_gettext_Data( $raw );
         return $data->templatize();
     }    

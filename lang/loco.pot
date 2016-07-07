@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"POT-Revision-Date: Tue Jul 05 2016 18:58:42 GMT+0100 (BST)\n"
+"POT-Revision-Date: Wed Jul 06 2016 14:53:32 GMT+0100 (BST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -16,24 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
 
-#. Name of the plugin
-msgid "Loco Translate (v2 Preview)"
-msgstr ""
-
-#. Description of the plugin
-msgid "Translate themes and plugins directly in WordPress (preview version)"
-msgstr ""
-
-#. URI of the plugin
-msgid "http://wordpress.org/extend/plugins/loco-translate"
-msgstr ""
-
-#. Author of the plugin
-msgid "Tim Whitlock"
-msgstr ""
-
-#. Author URI of the plugin
-msgid "https://localise.biz/help/wordpress/translate-plugin"
+#: loco.php:121
+msgid ""
+"Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
+"it"
 msgstr ""
 
 #: src/Locale.php:205
@@ -251,13 +237,13 @@ msgstr ""
 msgid "Loco interrupted by output from %s:%u"
 msgstr ""
 
-#: src/package/Debugger.php:129
+#: src/package/Debugger.php:141
 msgid "%u string extracted from source code for \"%s\""
 msgid_plural "%u strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Debugger.php:135
+#: src/package/Debugger.php:172
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
@@ -646,4 +632,24 @@ msgstr ""
 
 #: tpl/admin/list/inc-table.php:19
 msgid "Subsets"
+msgstr ""
+
+#. Name of the plugin
+msgid "Loco Translate (v2 Preview)"
+msgstr ""
+
+#. Description of the plugin
+msgid "Translate themes and plugins directly in WordPress (preview version)"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://wordpress.org/extend/plugins/loco-translate"
+msgstr ""
+
+#. Author of the plugin
+msgid "Tim Whitlock"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://localise.biz/help/wordpress/translate-plugin"
 msgstr ""

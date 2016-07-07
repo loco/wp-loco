@@ -73,7 +73,11 @@ class Loco_config_BundleWriter implements JsonSerializable {
         $dom = $model->getDom();
         $root = $dom->appendChild( $dom->createElement('bundle') );
         $root->setAttribute( 'name', $bundle->getName() );
-        //$root->setAttribute( 'slug', $bundle->getSlug() );
+
+        /*/ additional headers for information only (not read back in)
+        if( $value = $bundle->getHeaderInfo()->getVendorHost() ){
+            $root->setAttribute( 'vendor', $value );
+        }*/
         
         foreach( $bundle->exportGrouped() as $domainName => $projects ){
             $domainElement = $root->appendChild( $dom->createElement('domain') );

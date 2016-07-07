@@ -1,6 +1,6 @@
 <?php
 /**
- * Bundle diagnostics
+ * Bundle diagnostics.
  */
 class Loco_package_Debugger implements IteratorAggregate {
     
@@ -12,7 +12,7 @@ class Loco_package_Debugger implements IteratorAggregate {
     /**
      * @var array
      */
-    private $counts;    
+    private $counts;
     
 
     /**
@@ -39,6 +39,9 @@ class Loco_package_Debugger implements IteratorAggregate {
         case 'file':
             $this->good("Official configuration provided by author");
             break;
+        case 'internal':
+            $this->info("Configuration built-in to Loco");
+            break;
         case '':
             $this->warn("Cannot auto-detect configuration");
             break;
@@ -48,7 +51,7 @@ class Loco_package_Debugger implements IteratorAggregate {
 
         $base = $bundle->getDirectoryPath();
 
-        // naive self declarations
+        // self-declarations provided by author in file headers
         $native = $bundle->getHeaderInfo();
         if( $value = $native->TextDomain ){
             $this->good('Primary text domain declared by author as "%s"', $value);
@@ -60,35 +63,50 @@ class Loco_package_Debugger implements IteratorAggregate {
             $this->good('Primary domain path declared by author as "%s"', $value );
         }
         else if( is_dir($base.'/languages') ){
-            $this->info('DomainPath declaration is missing, but default "languages" folder is found');
+            $this->info('Standard "languages" folder found, although DomainPath not declared');
         }
         else {
             $this->warn("Author doesn't define the DomainPath header");
         }
         
+        // collecting only configured domains to match against source code
         $domains = array();
+        $templates = array();
         
         // show each known subset
-        if( $n = count($bundle) ){
+        if( $count = count($bundle) ){
             /* @var $project Loco_package_Project */
             foreach( $bundle as $project ){
+                $id = $project->getId();
                 $domain = (string) $project->getDomain();
                 $domains[$domain] = true;
                 // POT    
                 if( $potfile = $project->getPot() ){
                     if( $potfile->exists() ){
-                        $this->good('Template file for "%s" exists at "%s"', $domain, $potfile->getRelativePath($base) );
+                        $this->good('Template file for "%s" exists at "%s"', $id, $potfile->getRelativePath($base) );
+                        $meta = Loco_gettext_Metadata::load($potfile);
+                        if( $meta['valid'] ){
+                            $templates[$domain][] = $meta;
+                        }
+                        else {
+                            $this->error('Template file for "%s" is invalid format', $id );
+                        }
                     }
                     else {
-                        $this->warn('Template file for "%s" does not exist (%s)', $domain, $potfile->getRelativePath($base) );
+                        $this->warn('Template file for "%s" does not exist (%s)', $id, $potfile->getRelativePath($base) );
                     }
                 }
                 else {
                     $this->warn('No template file configured for "%s"', $domain );
                     if( $potfile = $project->guessPot() ){
-                        $this->devel('Possible template for "%s" found: "%s"', $domain, $potfile->getRelativePath($base) );
+                        $this->devel('Possible non-standard name for "%s" at "%s"', $id, $potfile->getRelativePath($base) );
+                        $project->setPot( $potfile ); // <- adding so that invert ignores it
                     }
                 }
+            }
+            $default = $bundle->getDefaultProject();
+            if( ! $default ){
+                $this->warn('%u subsets configured, but failed to establish the default/primary', $count );
             }
         }
         else {
@@ -101,11 +119,9 @@ class Loco_package_Debugger implements IteratorAggregate {
         if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
             $unknown = $bundle->invert();
             if( $n = count($unknown) ){
-                // $this->warn("%u unknown subset[s] found", $n );
                 /* @var $project Loco_package_Project */
                 foreach( $unknown as $project ){
                     $domain = (string) $project->getDomain();
-                    // $domains[$domain] = true;
                     // should only have one target due the way the inverter groups results
                     /* @var $dir Loco_fs_Directory */
                     foreach( $project->getConfiguredTargets() as $dir ){
@@ -115,19 +131,47 @@ class Loco_package_Debugger implements IteratorAggregate {
             }
         }
         
-        // source code extraction across entire directory
+        // source code extraction across entire bundle
         $tmp = clone $bundle;
         $tmp->exchangeArray( array() );
+        $project = $tmp->createDefault( (string) $default->getDomain() );
         $extr = new Loco_gettext_Extraction( $tmp );
-        $extr->addProject( $tmp->createDefault() );
+        $extr->addProject( $project );
+        
         if( $total = $extr->getTotal() ){
+            $extr->includeMeta();
             $counts = $extr->getDomainCounts();
-            //$this->good("%u string[s] can be extracted from source code for %s", $total, $this->implodeKeys($counts) );
+            // $this->good("%u string[s] can be extracted from source code for %s", $total, $this->implodeKeys($counts) );
             foreach( array_intersect_key($counts, $domains) as $domain => $count ){
                 $str = _n( '%u string extracted from source code for "%s"', '%u strings extracted from source code for "%s"', $count, 'loco' );
                 $this->good( $str, $count, $domain );
+                // check POT agrees with count, but only if domain has single POT
+                if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){
+                    $meta = current( $templates[$domain] );
+                    if( $meta->getTotal() !== $count ){
+                        $this->devel('%s in "%s". You might want to sync it with the source code', $meta->getTotalSummary(), basename($meta->getPath(false)) );
+                    }
+                    /*/
+                    $a = array();
+                    $pot = $extr->getTemplate('loco');
+                    foreach( $pot as $po ){
+                        $a[ $po['key'] ] = true;
+                    }
+                    //
+                    $b = array();
+                    $pot = Loco_gettext_Data::load($potfile);
+                    foreach( $pot as $po ){
+                        $b[ $po['key'] ] = true;
+                    }
+                    if( $extra_in_file = array_diff_key($b, $a) ){
+                        var_dump( compact('extra_in_file') );
+                    }
+                    if( $extra_in_code = array_diff_key($a, $b) ){
+                        var_dump( compact('extra_in_code') );
+                    }*/
+                }
             }
-            // with extracted strings we can check for domain mismaches
+            // with extracted strings we can check for domain mismatches
             if( $missing = array_diff_key($domains, $counts) ){
                 $num = count($missing);
                 $str = _n( 'Configured domain has no extractable strings', '%u configured domains have no extractable strings', $num, 'loco' );
@@ -156,8 +200,9 @@ class Loco_package_Debugger implements IteratorAggregate {
     }
 
 
-
     /**
+     * @internal
+     * Implements IteratorAggregate for looping over messages
      * @return ArrayIterator
      */
     public function getIterator(){
@@ -203,7 +248,6 @@ class Loco_package_Debugger implements IteratorAggregate {
         $text = call_user_func_array('sprintf', func_get_args() );
         return $this->add( new Loco_error_Debug($text) );
     }
-    
 
 
     /**
@@ -216,24 +260,31 @@ class Loco_package_Debugger implements IteratorAggregate {
     }
 
 
-
     /**
-     * Dump all messages - suitable for cli
+     * Print all diagnostic messages suitable for CLI
      * @codeCoverageIgnore
      */
-    public function dump(){
+    public function dump( $prefix = '' ){
         /* @var $notice Loco_error_Exception */
         foreach( $this as $notice ){
-            printf("[%s] %s\n", $notice->getType(), $notice->getMessage() );
+            printf("%s[%s] %s\n", $prefix, $notice->getType(), $notice->getMessage() );
         }
     }
 
- 
+
+    /**
+     * Get number of bad things discovered
+     * @return int
+     */
     public function countWarnings(){
         return $this->counts['warning'];
     }
 
 
+    /**
+     * Utility for printing "x", "y" & "z"
+     * @return string
+     */
     private function implodeNames( array $names ){
         $last = array_pop($names);
         if( $names ){
@@ -245,10 +296,14 @@ class Loco_package_Debugger implements IteratorAggregate {
         return '';
     }
     
+    
+    /**
+     * @internal
+     * @return string
+     */
     private function implodeKeys( array $assoc ){
         return $this->implodeNames( array_keys($assoc) );
     }
 
 
-     
 }
