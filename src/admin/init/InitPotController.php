@@ -63,35 +63,17 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         
         // Just warn if POT writing will fail when saved, but still show screen
         $dir = $pot->getParent();
-        $this->set('writable', $dir->writable() );
-        //$mode = new Loco_fs_FileMode( $dir->mode() );
         
         // Do initial string extraction for displaying stats for all domains
         $ext = new Loco_gettext_Extraction( $bundle );
         $counts = $ext->addProject($project)->getDomainCounts();
         $total = isset($counts[$domain]) ? $counts[$domain] : 0;
-
-        // index all domains incase we find one not configured
-        // $domains = $bundle->getDomains();
-        // count strings found across any other domains referenced
-        /*/ TODO use this to indentify if extracted domain name is incorrect
-        $other = 0;
-        $ndomains = 0;
-        foreach( $counts as $d => $n ){
-            if( $d !== $domain ){
-                $ndomains++;
-                $other += $n;
-            }
-        }*/
         
+        // this count deliberately doesn't include meta fields - they will be added on creation
         $this->set('total', $total );
         if( $total ){
-            // TODO don't include translatable headers in count, as they're not really in source code.
             $this->set('found', sprintf( _n('One translatable string found in source code','%s translatable strings found in source code',$total,'loco'), number_format($total) ) );
         }
-        /*if( $other ){
-            $this->set('other', sprintf( '%s string(s) found in %s other domain(s)', number_format($other), number_format($ndomains) ) );
-        }*/
 
         // file metadata
         $this->set('pot', Loco_mvc_FileParams::create( $pot ) );
@@ -104,6 +86,10 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         // navigate up to bundle listing page 
         $breadcrumb->add( $title );
         $this->set( 'breadcrumb', $breadcrumb );
+        
+        // ajax service takes the target directory path
+        $content_dir = loco_constant('WP_CONTENT_DIR');
+        $target_path = $pot->getParent()->getRelativePath($content_dir);
 
         // hidden fields to pass through to Ajax endpoint
         $this->set('hidden', new Loco_mvc_ViewParams( array(
@@ -113,13 +99,17 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
             'type' => $bundle->getType(),
             'bundle' => $bundle->getSlug(),
             'domain' => $project->getId(),
-            'slug' => $slug,
-            'path' => $pot->getParent()->getRelativePath( loco_constant('WP_CONTENT_DIR') ),
+            'path' => $target_path,
         ) ) );
-        
+
+        // File system connect required if location not writable
+        if( ! $pot->creatable() ){
+            $path = $pot->getRelativePath($content_dir);
+            $this->prepareFsConnect('create', $path );
+        }
         
         $this->enqueueScript('potinit');
-        return $this->view( 'admin/init/init-pot', array() );
+        return $this->view( 'admin/init/init-pot' );
     }
 
     

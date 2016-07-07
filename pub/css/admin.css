@@ -1150,13 +1150,19 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 401, httpdocs/static/sass/wp/admin.scss */
 .form-table tr.compact td { padding-top: 0; }
 
-/** Dev */
+/** file system connect stuff */
+/* line 411, httpdocs/static/sass/wp/admin.scss */
+#loco-fs p { line-height: 22px; }
 /* line 414, httpdocs/static/sass/wp/admin.scss */
+#loco-fs button[type="button"] { float: right; }
+
+/** Dev */
+/* line 424, httpdocs/static/sass/wp/admin.scss */
 #loco-debug { margin-top: 50px; font-size: 12px; color: #999; }
 
-/* line 422, httpdocs/static/sass/wp/admin.scss */
+/* line 432, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt { font-weight: bold; }
-/* line 425, httpdocs/static/sass/wp/admin.scss */
+/* line 435, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt, dl.debug dd { white-space: pre; }
 
 /* Template for colours include, using default wordpress theme */

@@ -159,6 +159,7 @@ if( ! defined('LOCO_LANG_DIR') ){
 // text domain loading helper, required if custom file locations in use
 new Loco_hooks_LoadHelper;
 
+// debug remote connect: new Loco_test_DummyFtpConnect;
 
 // initialize hooks for main site or admin screens:
 if( is_admin() ){

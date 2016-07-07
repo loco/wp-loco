@@ -80,6 +80,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'nonces' => array (
                 'save' => wp_create_nonce('save'),
                 'sync' => wp_create_nonce('sync'),
+                'fsConnect' => wp_create_nonce('fsConnect'),
             ),
         ) ) );
         
@@ -104,6 +105,11 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         ) );
         $this->set( 'dlFields', $hidden->setNonce('download') );
         $this->set( 'dlAction', admin_url('admin-ajax.php','relative') );
+        
+        // File system connect if required
+        if( ! $file->writable() ){
+            $this->prepareFsConnect( 'update', $this->get('path') );
+        }
         
         // set simpler title for breadcrumb
         $this->set('title', $file->basename() );

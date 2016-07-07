@@ -109,5 +109,22 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         
         return $breadcrumb;
     }
+
+
+
+    /**
+     * Prepare file system connect
+     * @return Loco_mvc_HiddenFields
+     */
+    protected function prepareFsConnect( $type, $path ){
+        $fields = new Loco_mvc_HiddenFields( array(
+            'auth' => $type,
+            'path' => $path,
+            'loco-nonce' => wp_create_nonce('fsConnect'),
+        ) );
+        $this->set('fsFields', $fields );
+        return $fields;
+    }
+
     
 }

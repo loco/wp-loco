@@ -5,21 +5,10 @@
  
 $this->extend('../layout');
 
-
-    if( ! $writable ):?> 
-    <div class="notice inline notice-warning">
-        <p>
-            <strong class="has-icon"><?php esc_html_e('Location not writable','loco')?>:</strong>
-            Ensure the "<?php $dir->e('name')?>" directory exists and is writable by the web server.
-        </p>
-    </div><?php
-    endif; 
-
-
     if( ! $total ):?> 
-    <div class="notice inline notice-warning">
+    <div class="notice inline notice-info">
         <p>
-            <strong class="has-icon"><?php esc_html_e('No translatable strings','loco')?>:</strong>
+            <strong class="has-icon"><?php esc_html_e('No strings extracted','loco')?>:</strong>
             We can't find any strings for the "<?php echo $params->e('domain')?>" domain.
         </p>
     </div><?php
@@ -44,7 +33,10 @@ $this->extend('../layout');
             endforeach;?> 
         
             <p class="submit">
-                <input type="submit" value="<?php esc_html_e('Create template file','loco')?>" class="button button-large button-primary" disabled />
+                <input type="submit" value="<?php esc_html_e('Create template','loco')?>" class="button button-large button-primary" disabled />
+                <span id="loco-fs-hook" class="jshide">
+                    <button type="button" class="button"><?php esc_html_e('Authorize','loco')?></button>
+                </span>
             </p>
         </form>
     </div>

@@ -37,13 +37,26 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
     
     
-    
+    /**
+     * @internal
+     * Executes deferred deletions with silent errors
+     */
     public function __destruct(){
-        foreach( $this->trash as $path ){
-            self::_unlink_if_exists($path);
+        if( $trash = $this->trash ){
+            $writer = $this->master->getWriteContext();
+            foreach( $trash as $file ){
+                if( $file->exists() ){
+                    try {
+                        $writer->setFile($file);
+                        $writer->delete(false);
+                    }
+                    catch( Loco_error_WriteException $e ){
+                        // avoiding fatals as pruning is non-critical operation
+                    }
+                }
+            }
         }
     }
-    
 
 
     /**
@@ -141,18 +154,6 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
         }
         return $this->length;
     }
-
-
-
-    /**
-     * @internal
-     */
-    public static function _unlink_if_exists( $path ){
-        $file = new Loco_fs_File($path);
-        if( $file->exists() ){
-            $file->unlink();
-        }
-    }
     
 
     /**
@@ -161,8 +162,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
      * @return void
      */
     public function unlinkLater($path){
-        // register_shutdown_function( array(__CLASS__,'_unlink_if_exists'), $path );
-        $this->trash[] = $path;
+        $this->trash[] = new Loco_fs_File($path);
     }
       
 }

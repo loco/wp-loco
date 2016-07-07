@@ -37,15 +37,13 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      */
     public function jsonSerialize(){
         return array (
-            'error' => array (
-                'code' => $this->getCode(),
-                'type' => $this->getType(),
-                'class' => get_class($this),
-                'title' => $this->getTitle(),
-                'message' => $this->getMessage(),
-                //'file' => str_replace( ABSPATH, '', $this->getFile() ),
-                //'line' => $this->getLine(),
-            ),
+            'code' => $this->getCode(),
+            'type' => $this->getType(),
+            'class' => get_class($this),
+            'title' => $this->getTitle(),
+            'message' => $this->getMessage(),
+            //'file' => str_replace( ABSPATH, '', $this->getFile() ),
+            //'line' => $this->getLine(),
         );
     }    
 

@@ -80,10 +80,10 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
                     Loco_error_AdminNotices::add( $e );
                 }
             }
-            //
-            $bundle = $this->getBundle();
-            $this->set('title', sprintf( __('Delete %s','loco'), $file->basename() ).' &lsaquo; '.$bundle->getName() );
         }
+
+        $bundle = $this->getBundle();
+        $this->set('title', sprintf( __('Delete %s','loco'), $file->basename() ).' &lsaquo; '.$bundle->getName() );
     }
 
 
@@ -120,6 +120,12 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
         }
         
         $this->set( 'locked', $locked );
+        
+        if( $locked ){
+            $this->prepareFsConnect( 'delete', $this->get('path') );
+        }
+
+        $this->enqueueScript('delete');
         return $this->view('admin/file/delete');
     }
     

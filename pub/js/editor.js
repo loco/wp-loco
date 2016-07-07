@@ -21,6 +21,10 @@
         elForm = document.getElementById('loco-actions'),
         filePath = conf.popath,
         
+        // file system connect when file is locked
+        elFilesys = document.getElementById('loco-fs'),
+        fsConnect = elFilesys && loco.fs.init( elFilesys ),
+        
         // Editor components
         editor,
         saveButton,
@@ -84,27 +88,15 @@
     function doSaveAction(){
         function onSuccess( result ){
             editor.save( true );
-            var locale = result.locale,
-                message = locale ? translate('PO file saved') : translate('POT file saved'),
-                filename = result.poname || '',
-                mobytes  = result.mobytes;
-            // MO compilation optional
-            if( null != mobytes ){
-                if( /\D/.test(mobytes) ){
-                    loco.notices.error( mobytes );
-                }
-                else {
-                    message += ' '+translate('and MO file compiled');
-                    //filename = filename.replace(/\.po$/i,'.mo');
-                }
-             }
-             loco.notices.success( message +' - '+filename );
         }
         var postdata = {
             path: filePath,
             locale: String( messages.locale() || '' ),
             data: String( messages )
         };
+        if( fsConnect ){
+            fsConnect.applyCreds( postdata );
+        }
         loco.ajax.post( 'save', postdata, onSuccess );
     }
     

@@ -4,7 +4,8 @@
 !function( window, document, $ ){
     
     var loco = window.locoScope,
-        elForm = document.getElementById('loco-potinit');
+        fsHook = document.getElementById('loco-fs'),
+        elForm = document.getElementById('loco-potinit')
     ;
 
 
@@ -40,6 +41,10 @@
         .submit( process );
 
     setFormDisabled( false );
+    
+    if( fsHook ){
+        loco.fs.init(fsHook).setForm( elForm );
+    }
     
 
 }( window, document, jQuery );

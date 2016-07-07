@@ -49,7 +49,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     public function init(){
         
         // add common admin page resources
-        $this->enqueueStyle('admin');
+        $this->enqueueStyle('admin', array('wp-jquery-ui-dialog') );
+
         // js translations
         if( ( $lang = get_locale() ) && 'en_US' !== $lang ){
             if( file_exists( loco_plugin_root().'/pub/js/lang/'.$lang.'.js' ) ){
@@ -64,7 +65,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         }
         
         // common js utils
-        $this->enqueueScript('min/admin');
+        $this->enqueueScript('min/admin', array('jquery-ui-dialog') );
         
         // check all extensions on all pages so admin notices are shown
         foreach( array('iconv','json','mbstring','tokenizer') as $ext ){
@@ -114,11 +115,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      * Add CSS to head
      * @return Loco_mvc_Controller
      */
-    public function enqueueStyle( $name ){
+    public function enqueueStyle( $name, array $deps = array() ){
         $plugin = loco_plugin_self();
         $version = loco_debugging() ? time() : loco_plugin_version();
         $url = plugins_url( 'pub/css/'.$name.'.css', $plugin );
-        wp_enqueue_style( 'loco-'.strtr($name,'/','-'), $url, array(), $version, 'all' );
+        wp_enqueue_style( 'loco-'.strtr($name,'/','-'), $url, $deps, $version, 'all' );
         
         return $this;
     }

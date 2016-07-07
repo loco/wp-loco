@@ -3,21 +3,9 @@
  * Confirmation form for deleting a file
  */
 $this->extend('../layout');
+?> 
 
-    /*if( $locked ):?> 
-    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-locked">
-        <p>
-            <strong class="has-icon">Protected:</strong>
-            If you can't delete this file directly, try connecting to the remote server:
-        </p>
-        <p>
-            <input type="submit" name="remote" value="Connect" class="button button-small" />
-        </p>
-    </form><?php
-    endif*/?> 
-
-
-    <form action="" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-del">
         <div class="notice inline notice-danger">
             <h3>
                 <span class="has-icon icon-trash"> </span>

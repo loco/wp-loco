@@ -21,6 +21,12 @@ class Loco_api_WordPressFileSystem {
      */
     private $connected = false;
 
+    /**
+     * Credentials passed to and from API
+     * @var array
+     */
+    private $creds = array();
+
     
     /**
      * Get HTML form rendered by request_filesystem_credentials
@@ -33,51 +39,49 @@ class Loco_api_WordPressFileSystem {
     
     /**
      * Authorize for the creation of a file that does not exist
-     * @return bool
+     * @return bool whether file system is authorized NOT necessarily whether file is creatable
      */
     public function authorizeCreate( Loco_fs_File $file ){
         if( $file->exists() ){
             throw new InvalidArgumentException('File already exists, try authorizeUpdate');
         }
         $file->getWriteContext()->connect( $this->getFileSystem(), $this->disconnected );
-        if( $file->creatable() ){
-            return true;
-        }
-        return $this->authorize( $file );
+        return $file->creatable() || $this->authorize($file);
     }
     
     
     /**
      * Authorize for the update of a file that does exist
-     * @return bool
+     * @return bool whether file system is authorized NOT necessarily whether file is updatable
      */
     public function authorizeUpdate( Loco_fs_File $file ){
         if( ! $file->exists() ){
             throw new InvalidArgumentException("File doesn't exist, try authorizeCreate");
         }
         $file->getWriteContext()->connect( $this->getFileSystem(), $this->disconnected );
-        if( $file->writable() ){
-            return true;
-        }
-        return $this->authorize( $file );
+        return $file->writable() || $this->authorize($file);
     }
     
     
     /**
-     * Authorize for the removal of an existing
-     * @return bool
+     * Authorize for the removal of an existing file
+     * @return bool whether file system is authorized NOT necessarily whether file is removable
      */
     public function authorizeDelete( Loco_fs_File $file ){
         if( ! $file->exists() ){
             throw new InvalidArgumentException("Can't delete a file that doesn't exist");
         }
-        $file->getWriteContext()->connect( $this->getFileSystem(), $this->disconnected );
-        if( $file->deletable() ){
-            return true;
-        }
-        return $this->authorize( $file );
+        return $file->deletable() || $this->authorize($file);
     }
 
+
+    /**
+     * Authorizes update or create, depending on whether file exists
+     * @return bool whether file system is authorized
+     */
+    public function authorizeWrite( Loco_fs_File $file ){
+        return ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file);
+    }
 
 
     /**
@@ -121,14 +125,15 @@ class Loco_api_WordPressFileSystem {
         
         $type = apply_filters( 'filesystem_method', $type, $post->getArrayCopy(), $context, true );
         
-        // the only params we'll pass into form will be our own nonce
-        $extra = array( 'loco-nonce' );
+        // the only params we'll pass into form will be those used by the ajax fsConnect end point
+        $extra = array( 'loco-nonce', 'path', 'auth' );
         
         // capture WordPress output during negotiation.
         $buffer = Loco_output_Buffer::start();
 
         if( $creds = request_filesystem_credentials( '', $type, false, $context, $extra ) ){
             // credentials passed through, should allow connect if they are correct
+            $this->creds = $creds or $this->creds = array();
             // lazy construct the file system from current credentials if possible
             // in typical WordPress style, after success the object will be held in a global.
             if( WP_Filesystem( $creds, $context ) ){
@@ -151,10 +156,23 @@ class Loco_api_WordPressFileSystem {
             // annoyingly WordPress moves the error notice above the navigation tabs :-/
             request_filesystem_credentials( '', $type, $error, $context, $extra );
         }
+        else {
+            // just set postdata as current credentials, excluding extra fields
+            $this->creds = array_diff_key( $post->getArrayCopy(), array_flip($extra) );
+        }
         // now have unauthorized remote connection
         $this->form = (string) $buffer->close();
         return false;
     }
+
+
+
+    /**
+     * @return array
+     */
+    public function getCredentials(){
+        return $this->creds;
+    }     
 
 
 

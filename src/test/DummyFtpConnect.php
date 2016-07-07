@@ -15,8 +15,8 @@ class Loco_test_DummyFtpConnect extends Loco_hooks_Hookable {
 
 /**
  * Dummy FTP file system.
- * WARNING: this does actually modify files - it just simulates remote connection
- * All operations performed "direct" when authorized, else they fail.
+ * WARNING: this actually modifies files - it just does it while simulating a remote connection
+ * - All operations performed "direct" when authorized, else they fail.
  */
 class WP_Filesystem_Debug extends WP_Filesystem_Base {
     
@@ -97,7 +97,6 @@ class WP_Filesystem_Debug extends WP_Filesystem_Base {
         return false;
     }
     
-
 
     /**
      * {@inheritdoc}

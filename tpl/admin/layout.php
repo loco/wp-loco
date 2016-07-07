@@ -48,8 +48,13 @@
     endif?> 
 
 
-    <div id="loco-notices">
-    <?php do_action('loco_admin_notices');?> 
+    <div id="loco-notices"><?php 
+        // flush message buffer
+        do_action('loco_admin_notices');
+        // standard file system lock dialogue
+        if( $params->has('fsFields') ):
+            echo $this->render('common/inc-fsconn');
+        endif?> 
     </div>
 
 

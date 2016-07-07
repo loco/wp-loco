@@ -31,7 +31,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     
     /**
-     * @return void
+     * @return Loco_error_Exception
      */
     public static function add( Loco_error_Exception $error ){
         $notices = self::get();
@@ -43,6 +43,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         if( did_action('admin_notices') ){
             $notices->on_admin_notices();
         }
+        return $error;
     }
 
 
@@ -51,9 +52,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * @return Loco_error_Success
      */
     public static function success( $message ){
-        $notice = new Loco_error_Success( $message );
-        self::add( $notice );
-        return $notice;
+        return self::add( new Loco_error_Success($message) );
     }
 
 
@@ -62,11 +61,17 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * @return Loco_error_Warning
      */
     public static function warn( $message ){
-        $notice = new Loco_error_Warning( $message );
-        self::add( $notice );
-        return $notice;
+        return self::add( new Loco_error_Warning($message) );
     }
 
+
+    /**
+     * Raise a generic warning message
+     * @return Loco_error_Notice
+     */
+    public static function info( $message ){
+        return self::add( new Loco_error_Notice($message) );
+    }
 
 
 

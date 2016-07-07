@@ -40,24 +40,25 @@ class Loco_ajax_SaveController extends Loco_mvc_AjaxController {
             throw new Loco_error_Exception('Invalid file path');
         }
         
+        // write permission for update required (also create and delete for backups)
+        $api = new Loco_api_WordPressFileSystem;
+        $api->authorizeWrite( $pofile );
+        
         // data posted must be valid
         $data = Loco_gettext_Data::fromSource( $post->data );
         
-        // avoid total failure when some things don't work
-        $errors = array();
-        
         // backup existing file BEFORE overwriting
-        if( $pofile->exists() ){
-            if( $num_backups = Loco_data_Settings::get()->num_backups ){
-                try {
-                    $backups = new Loco_fs_Revisions( $pofile );
-                    $backups->create();
-                    $backups->prune($num_backups);
-                }
-                catch( Exception $e ){
-                    $message = __('Failed to create backup file in "%s". Check the folder is writable or disable backups','loco');
-                    $errors[] = sprintf( $message, $pofile->getParent()->basename() );
-                }
+        // file system write context will carry through when revisions clone pofile
+        if( $num_backups = Loco_data_Settings::get()->num_backups ){
+            try {
+                $backups = new Loco_fs_Revisions( $pofile );
+                $backups->create();
+                $backups->prune($num_backups);
+            }
+            catch( Exception $e ){
+                $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco');
+                $message = sprintf( $message, $pofile->getParent()->basename() );
+                Loco_error_AdminNotices::info( $message );
             }
         }
                 
@@ -72,18 +73,26 @@ class Loco_ajax_SaveController extends Loco_mvc_AjaxController {
         $this->set('modified', $mtime);
         $this->set('datetime', Loco_mvc_ViewParams::date_i18n($mtime) );
         
-        // compile MO file unless saving template
+        // Intial message refers to PO/POT save success
+        $success = $locale ? __('PO file saved','loco') : __('POT file saved','loco');
+        
+        // Compile MO file unless saving template
         if( $locale ){
             try {
                 $data = $data->msgfmt();
                 $mofile = $pofile->cloneExtension('mo');
                 $bytes = $mofile->putContents( $data );
                 $this->set( 'mobytes', $bytes );
+                Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco') );
             }
             catch( Exception $e ){
-                $errors[] = $e->getMessage();
+                Loco_error_AdminNotices::add( $e );
+                Loco_error_AdminNotices::info( __('PO file saved, but MO file compilation failed','loco') );
                 $this->set( 'mobytes', 0 );
             }
+        }
+        else {
+            Loco_error_AdminNotices::success( __('POT file saved','loco') );
         }
 
         return parent::render();

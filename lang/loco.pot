@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"POT-Revision-Date: Wed Jul 06 2016 14:53:32 GMT+0100 (BST)\n"
+"POT-Revision-Date: Thu Jul 07 2016 20:58:39 GMT+0100 (BST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -47,14 +47,34 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
+#: src/ajax/FsConnectController.php:32
+msgid "Connected to remote file system"
+msgstr ""
+
 #: src/ajax/MsginitController.php:53 src/ajax/MsginitController.php:61
 msgid "%s already exists in this folder"
 msgstr ""
 
-#: src/ajax/SaveController.php:58
+#: src/ajax/SaveController.php:59
 msgid ""
-"Failed to create backup file in \"%s\". Check the folder is writable or "
-"disable backups"
+"Failed to create backup file in \"%s\". Check file permissions or disable "
+"backups"
+msgstr ""
+
+#: src/ajax/SaveController.php:77
+msgid "PO file saved"
+msgstr ""
+
+#: src/ajax/SaveController.php:77 src/ajax/SaveController.php:95
+msgid "POT file saved"
+msgstr ""
+
+#: src/ajax/SaveController.php:86
+msgid "PO file saved and MO file compiled"
+msgstr ""
+
+#: src/ajax/SaveController.php:90
+msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
 #: src/config/FormModel.php:123
@@ -98,40 +118,44 @@ msgstr ""
 msgid "Failed to connect to remote server"
 msgstr ""
 
-#: src/fs/FileWriter.php:109
+#: src/fs/FileWriter.php:122
 msgid "Failed to chmod %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:124
+#: src/fs/FileWriter.php:138
 msgid "Failed to copy %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:138
+#: src/fs/FileWriter.php:153
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:153
+#: src/fs/FileWriter.php:169
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
 
-#: src/fs/FileWriter.php:167
-msgid "File is write-protected"
+#: src/fs/FileWriter.php:183
+msgid "Permission denied to update file"
 msgstr ""
 
-#: src/fs/FileWriter.php:171
+#: src/fs/FileWriter.php:187
 msgid "Parent directory doesn't exist"
 msgstr ""
 
-#: src/fs/FileWriter.php:174
+#: src/fs/FileWriter.php:190
 msgid "Failed to save file"
 msgstr ""
 
-#: src/fs/FileWriter.php:200
+#: src/fs/FileWriter.php:217
 msgid "Failed to create directory"
 msgstr ""
 
-#: src/fs/FileWriter.php:207
+#: src/fs/FileWriter.php:224
 msgid "Failed to build directory path"
+msgstr ""
+
+#: src/fs/FileWriter.php:236
+msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
 #: src/fs/LocaleDirectory.php:59
@@ -237,23 +261,23 @@ msgstr ""
 msgid "Loco interrupted by output from %s:%u"
 msgstr ""
 
-#: src/package/Debugger.php:141
+#: src/package/Debugger.php:146
 msgid "%u string extracted from source code for \"%s\""
 msgid_plural "%u strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Debugger.php:172
+#: src/package/Debugger.php:177
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Header.php:76 src/admin/file/InfoController.php:103
+#: src/package/Header.php:77 src/admin/file/InfoController.php:103
 msgid "Unknown author"
 msgstr ""
 
-#: src/package/Header.php:82
+#: src/package/Header.php:83
 msgid "Visit official site"
 msgstr ""
 
@@ -351,7 +375,7 @@ msgid "Edit template"
 msgstr ""
 
 #: src/admin/bundle/ViewController.php:203 
-#: src/admin/init/InitPoController.php:133
+#: src/admin/init/InitPoController.php:133 tpl/admin/init/init-pot.php:36
 msgid "Create template"
 msgstr ""
 
@@ -367,7 +391,7 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:85 
+#: src/admin/file/DeleteController.php:86 
 #: src/admin/file/DeleteController.php:104
 msgid "Delete %s"
 msgstr ""
@@ -383,47 +407,47 @@ msgstr[1] ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: src/admin/file/EditController.php:87
+#: src/admin/file/EditController.php:88
 msgctxt "Editor button"
 msgid "Add"
 msgstr ""
 
-#: src/admin/file/EditController.php:88
+#: src/admin/file/EditController.php:89
 msgctxt "Editor button"
 msgid "Remove"
 msgstr ""
 
-#: src/admin/file/EditController.php:89
+#: src/admin/file/EditController.php:90
 msgctxt "Editor button"
 msgid "Help"
 msgstr ""
 
-#: src/admin/file/EditController.php:90
+#: src/admin/file/EditController.php:91
 msgctxt "Editor button"
 msgid "Save"
 msgstr ""
 
-#: src/admin/file/EditController.php:91
+#: src/admin/file/EditController.php:92
 msgctxt "Editor button"
 msgid "Sync"
 msgstr ""
 
-#: src/admin/file/EditController.php:92
+#: src/admin/file/EditController.php:93
 msgctxt "Editor button"
 msgid "Revert"
 msgstr ""
 
-#: src/admin/file/EditController.php:93
+#: src/admin/file/EditController.php:94
 msgctxt "Editor button"
 msgid "Fuzzy"
 msgstr ""
 
-#: src/admin/file/EditController.php:94
+#: src/admin/file/EditController.php:95
 msgctxt "Editor button"
 msgid "Download"
 msgstr ""
 
-#: src/admin/file/EditController.php:95
+#: src/admin/file/EditController.php:96
 msgid "Filter translations"
 msgstr ""
 
@@ -471,17 +495,17 @@ msgstr ""
 msgid "Template file already exists"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:90
+#: src/admin/init/InitPotController.php:75
 msgid "One translatable string found in source code"
 msgid_plural "%s translatable strings found in source code"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPotController.php:100
+#: src/admin/init/InitPotController.php:82
 msgid "New template file"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:101
+#: src/admin/init/InitPotController.php:83
 msgid "New translations template for \"%s\""
 msgstr ""
 
@@ -551,6 +575,18 @@ msgstr ""
 msgid "No translation files found"
 msgstr ""
 
+#: tpl/admin/common/inc-fsconn.php:12
+msgid "Folder is protected"
+msgstr ""
+
+#: tpl/admin/common/inc-fsconn.php:15
+msgid "File is protected"
+msgstr ""
+
+#: tpl/admin/common/inc-fsconn.php:19
+msgid "Connect"
+msgstr ""
+
 #: tpl/admin/errors/file-isdir.php:11
 msgid "File is a directory"
 msgstr ""
@@ -569,7 +605,7 @@ msgid ""
 "it"
 msgstr ""
 
-#: tpl/admin/file/delete.php:24
+#: tpl/admin/file/delete.php:12
 msgid "Confirm delete"
 msgstr ""
 
@@ -602,16 +638,12 @@ msgstr ""
 msgid "Create translations file"
 msgstr ""
 
-#: tpl/admin/init/init-pot.php:12
-msgid "Location not writable"
+#: tpl/admin/init/init-pot.php:11
+msgid "No strings extracted"
 msgstr ""
 
-#: tpl/admin/init/init-pot.php:22
-msgid "No translatable strings"
-msgstr ""
-
-#: tpl/admin/init/init-pot.php:47
-msgid "Create template file"
+#: tpl/admin/init/init-pot.php:38
+msgid "Authorize"
 msgstr ""
 
 #: tpl/admin/list/inc-table.php:10
@@ -643,7 +675,7 @@ msgid "Translate themes and plugins directly in WordPress (preview version)"
 msgstr ""
 
 #. URI of the plugin
-msgid "http://wordpress.org/extend/plugins/loco-translate"
+msgid "https://wordpress.org/plugins/loco-translate/"
 msgstr ""
 
 #. Author of the plugin

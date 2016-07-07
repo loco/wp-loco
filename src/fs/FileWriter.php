@@ -64,10 +64,11 @@ class Loco_fs_FileWriter {
      * @internal
      */
     private function mapPath( $path ){
-        // restrict file extensions to Gettext files for additional layer of security
+        /*/ restrict file extensions to Gettext files for additional layer of security
+        // disabled until configurable, too annoying when using safely (e.g. zip files)
         if( ( $ext = $this->file->extension() ) && ! preg_match('/^(po|mo|pot)~?$/',$ext) ){
             throw new Loco_error_WriteException('Unwritable file extension: *.'.$ext.' disallowed');
-        }
+        }*/
         // sanitize writable locations
         $remote = ! $this->isDirect();
         $base = loco_constant('WP_CONTENT_DIR');
@@ -179,7 +180,7 @@ class Loco_fs_FileWriter {
         if( ! $this->fs->put_contents( $path, $data, $mode ) ){
             // provide useful reason for failure if possible
             if( $file->exists() && ! $this->fs->is_writable($path) ){
-                throw new Loco_error_WriteException( __("File is write-protected",'loco') );
+                throw new Loco_error_WriteException( __("Permission denied to update file",'loco') );
             }
             // else check directory exists in which to create a new file
             else if( ( $dir = $file->getParent() ) && ! $dir->exists() ){
