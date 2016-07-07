@@ -64,19 +64,30 @@ class Loco_fs_FileWriter {
      * @internal
      */
     private function mapPath( $path ){
-        if( ! $this->isDirect() ){
+        // restrict file extensions to Gettext files for additional layer of security
+        if( ( $ext = $this->file->extension() ) && ! preg_match('/^(po|mo|pot)~?$/',$ext) ){
+            throw new Loco_error_WriteException('Unwritable file extension: *.'.$ext.' disallowed');
+        }
+        // sanitize writable locations
+        $remote = ! $this->isDirect();
+        $base = loco_constant('WP_CONTENT_DIR');
+        $snip = strlen($base);
+        if( substr( $path, 0, $snip ) !== $base ){
+            if( $remote ){
+                throw new Loco_error_WriteException('Remote path must be under WP_CONTENT_DIR');
+            }
+            /*/ Allowing direct file system access, because symlinks and also get_temp_dir()
+            else {
+                throw new Loco_error_WriteException('Direct path must be under WP_CONTENT_DIR');
+            }*/
+        }
+        // map virtual path for remote file system
+        if( $remote ){
             $virt = $this->fs->wp_content_dir();
             if( false === $virt ){
                 throw new Loco_error_WriteException('Failed to find WP_CONTENT_DIR via remote connection');
             }
-            $base = loco_constant('WP_CONTENT_DIR');
-            $snip = strlen($base);
-            if( substr( $path, 0, $snip ) === $base ){
-                $path = substr_replace( $path, $virt, 0, $snip );
-            }
-            else {
-                throw new Loco_error_WriteException('Path must be under WP_CONTENT_DIR');
-            }
+            $path = substr_replace( $path, $virt, 0, $snip );
         }
         return $path;
     }
@@ -95,7 +106,7 @@ class Loco_fs_FileWriter {
      * @return bool
      */
     public function writable(){
-        return $this->fs->is_writable( $this->getPath() );
+        return ! $this->disabled() && $this->fs->is_writable( $this->getPath() );
     }
 
 
@@ -105,6 +116,7 @@ class Loco_fs_FileWriter {
      * @throws Loco_error_WriteException
      */
     public function chmod( $mode, $recursive = false ){
+        $this->authorize();
         if( ! $this->fs->chmod( $this->getPath(), $mode, $recursive ) ){
             throw new Loco_error_WriteException( sprintf( __('Failed to chmod %s','loco'), $this->file->basename() ) );
         }
@@ -118,6 +130,7 @@ class Loco_fs_FileWriter {
      * @throws Loco_error_WriteException
      */
     public function copy( Loco_fs_File $copy ){
+        $this->authorize();
         $source = $this->getPath();
         $target = $this->mapPath( $copy->getPath() );
         if( ! $this->fs->copy( $source, $target ) ){
@@ -134,6 +147,7 @@ class Loco_fs_FileWriter {
      * @throws Loco_error_WriteException
      */
     public function delete( $recursive = false ){
+        $this->authorize();
         if( ! $this->fs->delete( $this->getPath(), $recursive ) ){
             throw new Loco_error_WriteException( sprintf( __('Failed to delete %s','loco'), $this->file->basename() ) );
         }
@@ -148,6 +162,7 @@ class Loco_fs_FileWriter {
      * @throws Loco_error_WriteException
      */
     public function putContents( $data ){
+        $this->authorize();
         $file = $this->file;
         if( $file->isDirectory() ){
             throw new Loco_error_WriteException( sprintf( __('"%s" is a directory, not a file','loco'), $file->basename() ) );
@@ -184,6 +199,7 @@ class Loco_fs_FileWriter {
      * @throws Loco_error_WriteException
      */
      public function mkdir(){
+        $this->authorize();
         $fs = $this->fs;
         // may have bypassed definition of FS_CHMOD_DIR
         $mode = defined('FS_CHMOD_DIR') ? FS_CHMOD_DIR : 0755;
@@ -204,7 +220,31 @@ class Loco_fs_FileWriter {
             }
             $here = $parent;
         }
-        throw new Loco_error_WriteException(__('Failed to build directory path','loco'));
-     }
-    
+        throw new Loco_error_WriteException( __('Failed to build directory path','loco') );
+    }
+
+
+
+    /**
+     * Check whether write operations are permitted, or throw
+     * @throws Loco_error_WriteException
+     * @return Loco_fs_FileWriter
+     */
+    public function authorize(){
+        if( $this->disabled() ){
+            throw new Loco_error_WriteException( __('File modification is disallowed by your WordPress config','loco') );
+        }
+        return $this;
+    } 
+
+
+
+    /**
+     * Check if file system modification is banned
+     * @return bool
+     */
+    public function disabled(){
+        return loco_constant('DISALLOW_FILE_MODS');
+    }
+
 }

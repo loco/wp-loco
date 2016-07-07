@@ -79,7 +79,7 @@ function loco_doing_ajax(){
  */
 function loco_constant( $name ){
     $value = defined($name) ? constant($name) : null;
-    // for security reasons values can only be hacked during test
+    // for security reasons values can only be modified in tests
     if( defined('LOCO_TEST') && LOCO_TEST ){
         $value = apply_filters('loco_constant', $value, $name );
         $value = apply_filters('loco_constant_'.$name, $value );

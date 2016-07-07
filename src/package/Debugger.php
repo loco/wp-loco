@@ -89,7 +89,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                             $templates[$domain][] = $meta;
                         }
                         else {
-                            $this->error('Template file for "%s" is invalid format', $id );
+                            $this->warn('Template file for "%s" is invalid format', $id );
                         }
                     }
                     else {

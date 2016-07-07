@@ -10,6 +10,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     
     private $fs_method;
     
+    private $fs_allow = true;
+    
     
     /**
      * Drop all Loco data from the options table (including transients)
@@ -59,6 +61,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         );
         // tests should always dictate the file system method, which defaults to direct
         add_filter('filesystem_method', array($this,'filter_fs_method') );
+        add_filter('loco_constant_DISALLOW_FILE_MODS', array($this,'filter_fs_allow') );
     }
 
 
@@ -90,7 +93,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
 
 
     /**
-     * @return string
+     * @internal
      */
     public function filter_fs_method( $method = '' ){
         return is_null($this->fs_method) ? $method : $this->fs_method;
@@ -106,7 +109,23 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $ping = class_exists('Loco_test_DummyFtpConnect');
         return $this;
     }
+
     
+    /**
+     * @return Loco_test_WordPressTestCase
+     */
+    public function disable_file_mods(){
+        $this->fs_allow = false;
+        return $this;
+    } 
+
+
+    /**
+     * @internal
+     */
+    public function filter_fs_allow(){
+        return ! $this->fs_allow;
+    }    
 
     
     /**
