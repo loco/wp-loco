@@ -47,18 +47,15 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         }
 
         // target PO should not exist yet
-        // TODO should we permit overwrite if backups are enabled?
         $pofile->normalize( $base );
-        if( $pofile->exists() ){
-            throw new Loco_error_Exception( sprintf( __('%s already exists in this folder','loco'), $pofile->basename() ) );
-        }
+        $api = new Loco_api_WordPressFileSystem;
+        $api->authorizeCreate( $pofile );
         
-
-        // Not much point compiling MO file at this time, because it's probably empty.
-        // but let's do it anyway, just for consistency and in case POT is actually a PO.
+        
+        // target MO shouldn't exist either, but we don't want to overwrite it without asking
         $mofile = $pofile->cloneExtension('mo');
         if( $mofile->exists() ){
-            throw new Loco_error_Exception( sprintf( __('%s already exists in this folder','loco'), $mofile->basename() ) );
+            throw new Loco_error_Exception( __('MO file exists for this language already. Delete it first','loco') );
         }
         
         // Permit forcing of any parsable file as strings template

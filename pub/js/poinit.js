@@ -3,9 +3,11 @@
  */
 !function( window, document, $ ){
     
-    var loco = window.locoScope,
-        //conf = window.locoConf,
-        elForm = document.getElementById('loco-poinit');
+    var path,
+        loco = window.locoScope,
+        fsHook = document.getElementById('loco-fs'),
+        elForm = document.getElementById('loco-poinit'),
+        fsConn = loco.fs.init( fsHook )
     ;
 
 
@@ -71,17 +73,28 @@
      */
     var pathSelector = function(){
         var elOpts = elForm['select-path'];
-        function getValue(){
-            var pairs = $(elOpts).serializeArray(), pair = pairs[0],
-                index = pair && pair.value || null,
-                elTxt = index && elForm['path['+index+']'];
-            return elTxt && elTxt.value;
+        function getIndex(){
+            var pairs = $(elOpts).serializeArray(), pair = pairs[0];
+            return pair && pair.value || null;
         }
+        function getSelected(){
+            var index = getIndex();
+            return index && elForm['path['+index+']'];
+        }
+        function getValue(){
+            var elField = getSelected();
+            return elField && elField.value;
+        }
+        function getLabel(){
+            var elField = getSelected();
+            return elField && $(elField.parentNode).find('code.path').text();
+        } 
         /*$(elForm['path[0]']).focus( function(){
             elOpts[0].checked = true;
         } );*/
         return {
-            val: getValue
+            val: getValue,
+            txt: getLabel
         };
     }( elForm );
 
@@ -105,8 +118,22 @@
             valid  = hasloc && hasdir
         ;
         redrawLocale( locale );
-        // $('tbody.disableable')[ hasloc ? 'removeClass' : 'addClass' ]('disabled');
-        // TODO validate via back end
+        // disabled until back end validates file path
+        setFormDisabled( true );
+        // check calculated path against back end 
+        if( valid ){
+            var newPath = pathSelector.txt();
+            if( newPath !== path ){
+                path = newPath;
+                fsHook.path.value = path;
+                fsConn.listen(onFsConnect).connect();
+            }
+        }
+    }
+    
+    
+    // callback after file system connect has returned
+    function onFsConnect( valid ){
         setFormDisabled( ! valid );
     }
     
@@ -153,6 +180,7 @@
     
     function process( event ){
         event.preventDefault();
+        fsConn.applyCreds( elForm );
         loco.ajax.submit( event.target, onMsginitSuccess );
         // TODO some kind of loader?
         return false;

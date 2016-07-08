@@ -192,7 +192,6 @@ class Loco_fs_FileWriter {
                 throw new Loco_error_WriteException( __("Parent directory doesn't exist",'loco') );
             }
             // else reason for failure is not established
-            Loco_error_AdminNotices::warn( sprintf('%s -> %s', $this->fs->method, $path ) );
             throw new Loco_error_WriteException( __('Failed to save file','loco') );
         }
         

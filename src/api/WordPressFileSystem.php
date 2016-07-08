@@ -49,7 +49,7 @@ class Loco_api_WordPressFileSystem {
      */
     public function authorizeCreate( Loco_fs_File $file ){
         if( $file->exists() ){
-            throw new InvalidArgumentException('File already exists, try authorizeUpdate');
+            throw new Loco_error_WriteException( sprintf( __('%s already exists in this folder','loco'), $file->basename() ) );
         }
         $file->getWriteContext()->connect( $this->getFileSystem(), $this->disconnected );
         return $file->creatable() || $this->authorize($file);
@@ -62,7 +62,7 @@ class Loco_api_WordPressFileSystem {
      */
     public function authorizeUpdate( Loco_fs_File $file ){
         if( ! $file->exists() ){
-            throw new InvalidArgumentException("File doesn't exist, try authorizeCreate");
+            throw new Loco_error_WriteException("File doesn't exist, try authorizeCreate");
         }
         $file->getWriteContext()->connect( $this->getFileSystem(), $this->disconnected );
         return $file->writable() || $this->authorize($file);
@@ -75,7 +75,7 @@ class Loco_api_WordPressFileSystem {
      */
     public function authorizeDelete( Loco_fs_File $file ){
         if( ! $file->exists() ){
-            throw new InvalidArgumentException("Can't delete a file that doesn't exist");
+            throw new Loco_error_WriteException("Can't delete a file that doesn't exist");
         }
         return $file->deletable() || $this->authorize($file);
     }

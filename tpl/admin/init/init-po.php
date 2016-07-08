@@ -95,14 +95,11 @@ $this->extend('../layout');
                             $parent = $choice['parent']; 
                             $offset = sprintf('%u',++$choiceId);?> 
                             <p>
-                                <label><?php
-                                    if( $choice->locked ):?> 
-                                    <span class="icon icon-lock"> </span><?php
-                                    else:?> 
-                                    <span><input type="radio" name="select-path" value="<?php echo $offset?>" <?php echo $choice->checked?> /></span>
-                                    <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" /> <?php
-                                    endif?> 
+                                <label>
+                                    <input type="radio" name="select-path" value="<?php echo $offset?>" <?php echo $choice->checked?> />
+                                    <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" />
                                     <code class="path"><?php $parent->e('relpath')?>/<?php echo $choice->holder?></code>
+                                    <?php $choice->locked && print('[no direct fs]')?> 
                                 </label>
                             </p><?php
                         endforeach?> 
