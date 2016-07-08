@@ -76,7 +76,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
 
     /**
-     * Destroy and return buffer, generally used in tests.
+     * Destroy and return buffer
      * @return array
      */
     public static function destroy(){
@@ -87,6 +87,21 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
             return $buffer;
         }
         return array();
+    }
+
+
+
+    /**
+     * Destroy and return all serialized notices, suitable for ajax response 
+     * @return array
+     */
+    public static function destroyAjax(){
+        $data = array();
+        /* @var $notice Loco_error_Exception */
+        foreach( self::destroy() as $notice ){
+            $data[] = $notice->jsonSerialize();
+        }
+        return $data;
     }
 
 

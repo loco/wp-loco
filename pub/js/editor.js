@@ -91,12 +91,13 @@
         }
         var postdata = {
             path: filePath,
-            locale: String( messages.locale() || '' ),
-            data: String( messages )
+            locale: String( messages.locale() || '' )
         };
         if( fsConnect ){
             fsConnect.applyCreds( postdata );
         }
+        // adding PO source last for easier debugging in network inspector
+        postdata.data = String( messages );
         loco.ajax.post( 'save', postdata, onSuccess );
     }
     

@@ -22,10 +22,16 @@ class Loco_api_WordPressFileSystem {
     private $connected = false;
 
     /**
-     * Credentials passed to and from API
+     * Credentials posted into the API
      * @var array
      */
-    private $creds = array();
+    private $creds_in = array();
+
+    /**
+     * Credentials returned from the API
+     * @var array
+     */
+    private $creds_out = array();
 
     
     /**
@@ -92,11 +98,15 @@ class Loco_api_WordPressFileSystem {
     
         $this->fs = null;
         $this->form = '';
+        $this->creds_out = array();
         $this->disconnected = true;
+        
+        $post = Loco_mvc_PostParams::get();
+        $dflt = array( 'hostname' => '', 'username' => '', 'password' => '', 'public_key' => '', 'private_key' => '', 'connection_type' => '');
+        $this->creds_in = array_intersect_key( $post->getArrayCopy(), $dflt );
         
         // deliberately circumventing call to `get_filesystem_method`
         // risk of WordPress version compatibility issues, but only sane way to force a remote connection
-        $post = Loco_mvc_PostParams::get();
         // @codeCoverageIgnoreStart
         if( defined('FS_METHOD') && FS_METHOD ){
             $type = FS_METHOD;
@@ -133,7 +143,9 @@ class Loco_api_WordPressFileSystem {
 
         if( $creds = request_filesystem_credentials( '', $type, false, $context, $extra ) ){
             // credentials passed through, should allow connect if they are correct
-            $this->creds = $creds or $this->creds = array();
+            if( is_array($creds) ){
+                $this->creds_out = $creds;
+            }
             // lazy construct the file system from current credentials if possible
             // in typical WordPress style, after success the object will be held in a global.
             if( WP_Filesystem( $creds, $context ) ){
@@ -156,10 +168,7 @@ class Loco_api_WordPressFileSystem {
             // annoyingly WordPress moves the error notice above the navigation tabs :-/
             request_filesystem_credentials( '', $type, $error, $context, $extra );
         }
-        else {
-            // just set postdata as current credentials, excluding extra fields
-            $this->creds = array_diff_key( $post->getArrayCopy(), array_flip($extra) );
-        }
+
         // now have unauthorized remote connection
         $this->form = (string) $buffer->close();
         return false;
@@ -168,11 +177,23 @@ class Loco_api_WordPressFileSystem {
 
 
     /**
+     * Get working credentials that resulted in connection
      * @return array
      */
-    public function getCredentials(){
-        return $this->creds;
-    }     
+    public function getOutputCredentials(){
+        return $this->creds_out;
+    }
+    
+    
+    
+    /**
+     * Get input credentials from original post.
+     * this is not the same as getCredentials. It is designed for replay only, regardless of success
+     * Note that input to request_filesystem_credentials is not the same as the output (specifically how hostname:port is handled)
+     */
+    public function getInputCredentials(){
+        return $this->creds_in;
+    }
 
 
 

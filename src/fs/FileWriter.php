@@ -71,7 +71,7 @@ class Loco_fs_FileWriter {
         }*/
         // sanitize writable locations
         $remote = ! $this->isDirect();
-        $base = loco_constant('WP_CONTENT_DIR');
+        $base = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
         $snip = strlen($base);
         if( substr( $path, 0, $snip ) !== $base ){
             if( $remote ){
@@ -88,6 +88,7 @@ class Loco_fs_FileWriter {
             if( false === $virt ){
                 throw new Loco_error_WriteException('Failed to find WP_CONTENT_DIR via remote connection');
             }
+            $virt = rtrim( $virt, '/' );
             $path = substr_replace( $path, $virt, 0, $snip );
         }
         return $path;
@@ -134,8 +135,12 @@ class Loco_fs_FileWriter {
         $this->authorize();
         $source = $this->getPath();
         $target = $this->mapPath( $copy->getPath() );
-        if( ! $this->fs->copy( $source, $target ) ){
-            throw new Loco_error_WriteException( sprintf( __('Failed to copy %s','loco'), $this->file->basename() ) );
+        // bugs in WP file system "exists" methods mean forcing $overwrite, but checking reliably first
+        if( $copy->exists() ){
+            throw new Loco_error_WriteException( __('Refusing to copy over an existing file','loco') );
+        }
+        if( ! $this->fs->copy( $source, $target, true ) ){
+            throw new Loco_error_WriteException( sprintf( __('Failed to copy %s to %s','loco'), basename($source), basename($target) ) );
         }
 
         return $this;
@@ -187,6 +192,7 @@ class Loco_fs_FileWriter {
                 throw new Loco_error_WriteException( __("Parent directory doesn't exist",'loco') );
             }
             // else reason for failure is not established
+            Loco_error_AdminNotices::warn( sprintf('%s -> %s', $this->fs->method, $path ) );
             throw new Loco_error_WriteException( __('Failed to save file','loco') );
         }
         

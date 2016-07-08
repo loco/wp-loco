@@ -57,8 +57,7 @@ class Loco_ajax_SaveController extends Loco_mvc_AjaxController {
             }
             catch( Exception $e ){
                 $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco');
-                $message = sprintf( $message, $pofile->getParent()->basename() );
-                Loco_error_AdminNotices::info( $message );
+                Loco_error_AdminNotices::info( sprintf( $message, $pofile->getParent()->basename() ) );
             }
         }
                 
