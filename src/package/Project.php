@@ -485,9 +485,16 @@ class Loco_package_Project {
         foreach( array('pot','po') as $ext ){
             /* @var $pot Loco_fs_File */
             foreach( $files[$ext] as $pot ){
+                $name = $pot->filename();
                 // use exact match on project slug if found
-                if( $slug === $pot->filename() ){
+                if( $slug === $name ){
                     return $pot;
+                }
+                // support unconventional <slug>-en_US.<ext>
+                foreach( array('-en_US'=>6, '-en'=>3 ) as $tail => $len ){
+                    if( '-en_US' === substr($name,-$len) && $slug === substr($name,0,-$len) ){
+                        return $pot;
+                    }
                 }
             }
         }

@@ -75,7 +75,7 @@ function loco_doing_ajax(){
 
 
 /**
- * Evaluate a [probably WordPress] constant
+ * Evaluate a constant by name
  */
 function loco_constant( $name ){
     $value = defined($name) ? constant($name) : null;
@@ -154,12 +154,13 @@ if( ! defined('LOCO_LANG_DIR') ){
 }
 
 
+// debug:
 // register_theme_directory( __DIR__.'/test/data/themes' );
+// new Loco_test_DummyFtpConnect;
 
 // text domain loading helper, required if custom file locations in use
 new Loco_hooks_LoadHelper;
 
-// debug remote connect: new Loco_test_DummyFtpConnect;
 
 // initialize hooks for main site or admin screens:
 if( is_admin() ){

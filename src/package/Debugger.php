@@ -139,36 +139,28 @@ class Loco_package_Debugger implements IteratorAggregate {
         $extr->addProject( $project );
         
         if( $total = $extr->getTotal() ){
-            $extr->includeMeta();
-            $counts = $extr->getDomainCounts();
+            // real count excludes additional metadata
+            $realCounts = $extr->getDomainCounts();
+            $counts = $extr->includeMeta()->getDomainCounts();
             // $this->good("%u string[s] can be extracted from source code for %s", $total, $this->implodeKeys($counts) );
             foreach( array_intersect_key($counts, $domains) as $domain => $count ){
-                $str = _n( '%u string extracted from source code for "%s"', '%u strings extracted from source code for "%s"', $count, 'loco' );
-                $this->good( $str, $count, $domain );
-                // check POT agrees with count, but only if domain has single POT
+                if( isset($realCounts[$domain]) ){
+                    $realCount = $realCounts[$domain];
+                    $str = _n( '%u string extracted from source code for "%s"', '%u strings extracted from source code for "%s"', $realCount, 'loco' );
+                    $this->good( $str, $realCount, $domain );
+                }
+                else {
+                    $this->warn('No strings extracted from source code for "%s"', $domain );
+                }
+                // check POT agrees with extracted count, but only if domain has single POT (i.e. not split across files on purpose)
                 if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){
                     $meta = current( $templates[$domain] );
                     if( $meta->getTotal() !== $count ){
                         $this->devel('%s in "%s". You might want to sync it with the source code', $meta->getTotalSummary(), basename($meta->getPath(false)) );
                     }
-                    /*/
-                    $a = array();
-                    $pot = $extr->getTemplate('loco');
-                    foreach( $pot as $po ){
-                        $a[ $po['key'] ] = true;
-                    }
-                    //
-                    $b = array();
-                    $pot = Loco_gettext_Data::load($potfile);
-                    foreach( $pot as $po ){
-                        $b[ $po['key'] ] = true;
-                    }
-                    if( $extra_in_file = array_diff_key($b, $a) ){
-                        var_dump( compact('extra_in_file') );
-                    }
-                    if( $extra_in_code = array_diff_key($a, $b) ){
-                        var_dump( compact('extra_in_code') );
-                    }*/
+                    /* TODO proper a/b comparison when string count agrees - the above does not prove they're identical
+                    $a = $extr->getTemplate('loco');
+                    $b = Loco_gettext_Data::load($potfile); */
                 }
             }
             // with extracted strings we can check for domain mismatches

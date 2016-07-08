@@ -51,6 +51,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         if( $plugin_override ){
             return true;
         }
+        // roots
+        $wp_lang_dir = rtrim( loco_constant('WP_LANG_DIR'), '/');
+        $lc_lang_dir = rtrim( loco_constant('LOCO_LANG_DIR') ,'/');
+
         // if context is set, then theme or plugin initialized loading process
         if( is_array($this->context) ){
             list( $subdir, $_domain, $locale ) = $this->context;
@@ -62,16 +66,23 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             // observe the same loading order philosophy as WordPress. Most official first, custom last. 
             $order = array (
                 $mopath,
-                loco_constant('WP_LANG_DIR').$subdir.'/'.$domain.'-'.$locale.'.mo',
-                loco_constant('LOCO_LANG_DIR').$subdir.'/'.$domain.'-'.$locale.'.mo',
+                $wp_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
+                $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
             );
         }
-        // else load_textdomain must have been called directly
-        // TODO work out a sane way to map custom file loads into LOCO_LANG_DIR
-        else {
+
+        // else load_textdomain must have been called directly.
+        // ideally this would only be for core translation files, which are under our "core" subdirectory
+        else if( dirname($mopath) === $wp_lang_dir ){
             $order = array (
                 $mopath,
+                substr_replace( $mopath, $lc_lang_dir.'/core', 0, strlen($wp_lang_dir) ),
             );
+        }
+
+        // else no way to map files onto LOCO_LANG_DIR
+        else {
+            $order = array( $mopath );
         }
         
         // permit themes/plugins to modify the default loading order
@@ -79,15 +90,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
         // recursively call load_textdomain with a lock on this process
         // the first file that exists should be loaded, unless something else interferes with the mofile path
-        if( is_array($order) ){
-            $this->lock = true;
-            foreach( $order as $mopath ){
-                if( load_textdomain( $domain, $mopath ) ){
-                    break;
-                }
-                /*if( is_readable($mopath) ){
-                    throw new Exception('File is readable, but load_textdomain returned false');
-                }*/
+        $this->lock = true;
+        foreach( $order as $mopath ){
+            if( load_textdomain( $domain, $mopath ) ){
+                break;
             }
         }
 
