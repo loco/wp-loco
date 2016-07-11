@@ -99,7 +99,7 @@ $this->extend('../layout');
                                     <input type="radio" name="select-path" value="<?php echo $offset?>" <?php echo $choice->checked?> />
                                     <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" />
                                     <code class="path"><?php $parent->e('relpath')?>/<?php echo $choice->holder?></code>
-                                    <?php $choice->locked && print('[no direct fs]')?> 
+                                    <?php $choice->locked && print('<!-- no direct fs -->')?> 
                                 </label>
                             </p><?php
                         endforeach?> 

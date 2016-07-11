@@ -1,6 +1,6 @@
 <?php
 /**
- * Abstracts session data access using WP_Session_Tokens api
+ * Abstracts session data access using WP_Session_Tokens
  */
 class Loco_data_Session extends Loco_data_Serializable {
     
@@ -10,6 +10,7 @@ class Loco_data_Session extends Loco_data_Serializable {
     private static $instance;
     
     /**
+     * Value from wp_get_session_token
      * @var string
      */
     private $token;
@@ -74,10 +75,9 @@ class Loco_data_Session extends Loco_data_Serializable {
      */
     private function getRaw(){
         $data = $this->manager->get( $this->token );
-        // session data must exist if login is valid
+        // session data will exist if WordPress login is valid
         if( ! $data || ! is_array($data) ){
-            // $debug = array( 'u' => get_current_user_id(), 'instance' => $this->token, 'global' => wp_get_session_token() );
-            throw new Loco_error_Exception('Invalid session' );
+            throw new Loco_error_Exception('Invalid session');
         }
 
         return $data;
@@ -86,7 +86,7 @@ class Loco_data_Session extends Loco_data_Serializable {
 
 
     /**
-     * Persist object in WordPress user meta table
+     * Persist object in WordPress usermeta table
      * @return Loco_data_Session
      */
     public function persist(){
@@ -100,14 +100,16 @@ class Loco_data_Session extends Loco_data_Serializable {
 
 
     /**
-     * clear our data key from WordPress user meta table
+     * Clear object data and remove our key from WordPress usermeta record
      * @return Loco_data_Session
      */
     public function clear(){
         $data = $this->getRaw();
-        unset( $data['loco'] );
-        $this->exchangeArray( array() );
-        $this->manager->update( $this->token, $data );
+        if( isset($data['loco']) ){
+            unset( $data['loco'] );
+            $this->exchangeArray( array() );
+            $this->manager->update( $this->token, $data );
+        }
 
         return $this;
     }

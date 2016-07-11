@@ -23,7 +23,7 @@ echo $header;
             <?php printf('%s file is writable',$file->type)?> 
         </h3>
         <p>
-            File can be overwritten by the web server, so you can save translations directory from the editor.
+            You can update these translations directory from the editor to the file system.
         </p>
         <p>
             <code><?php $file->ls()?></code>
@@ -35,8 +35,10 @@ echo $header;
             File is write-protected
         </h3>
         <p>
-            This file isn't writable by the web server. 
-            You won't be able to save it through WordPress unless you alter its file permissions.
+            This file can't be updated directly by the web server.
+        </p>
+        <p>
+            To make changes you'll have to connect to the remote file system, or make the file writable by <?php $params->e('httpd')?>.
         </p>
         <p>
             <code><?php $file->ls()?></code>
@@ -64,7 +66,7 @@ echo $header;
             Directory is writable
         </h3>
         <p>
-            The containing directory is writable by the web server, so you can add new files in the same location.
+            The containing directory is writable by <?php $params->e('httpd')?>, so you can add new files in the same location.
         </p>
         <p>
             <code><?php $dir->ls()?></code>
@@ -72,7 +74,7 @@ echo $header;
         if( ! $file->deletable ):?> 
         <p>
             <span class="has-icon icon-warn"></span>
-            Note that the file can't be deleted due to additional ownership permissions.
+            Note that the file may not be deletable due to additional ownership permissions.
         </p><?php
         endif;?> 
     </div><?php
@@ -83,7 +85,10 @@ echo $header;
             Directory is write-protected
         </h3>
         <p>
-            You won't be able to create new files here unless you change the directory permissions.
+            This directory can't be written to directly by the web server.
+        </p>
+        <p>
+            To create new files here you'll have to connect to the remote file system, or make the directory writable by <?php $params->e('httpd')?>.
         </p>
         <p>
             <code><?php $dir->ls()?></code>

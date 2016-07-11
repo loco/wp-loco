@@ -5,7 +5,7 @@
 
 
     if( $fsFields->has('connection_type') ):?> 
-    <form id="loco-fs" class="notice notice-info _jshide">
+    <form id="loco-fs" class="notice notice-info jshide">
         <p>
             <span>Remote file system connected (<?php $fsFields->e('connection_type')?>)</span>
         </p>

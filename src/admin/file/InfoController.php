@@ -58,6 +58,18 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             $info['writable'] = $dir->writable();
         }
         
+        // get the name of the webserver for information purposes
+        if( function_exists('posix_geteuid') ){
+            $info = posix_getpwuid( posix_geteuid() );
+            $this->set('httpd', $info['name'] );
+        }
+        else if( false !== stripos(PHP_SAPI,'apache') ){
+            $this->set('httpd', 'Apache' );
+        }
+        else {
+            $this->set('http',__('the web server','loco') );
+        }
+        
         // unknown file template if required
         $locale = null;
         $tpl = 'admin/file/info-other';

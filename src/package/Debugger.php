@@ -99,7 +99,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                 else {
                     $this->warn('No template file configured for "%s"', $domain );
                     if( $potfile = $project->guessPot() ){
-                        $this->devel('Possible non-standard name for "%s" at "%s"', $id, $potfile->getRelativePath($base) );
+                        $this->devel('Possible non-standard name for "%s" template at "%s"', $id, $potfile->getRelativePath($base) );
                         $project->setPot( $potfile ); // <- adding so that invert ignores it
                     }
                 }

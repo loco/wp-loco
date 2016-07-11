@@ -128,6 +128,9 @@
                 fsHook.path.value = path;
                 fsConn.listen(onFsConnect).connect();
             }
+            else {
+                setFormDisabled( false );
+            }
         }
     }
     
