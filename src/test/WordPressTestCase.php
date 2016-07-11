@@ -12,6 +12,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     
     private $fs_allow = true;
     
+    private $cookies_set;
+    
     
     /**
      * Drop all Loco data from the options table (including transients)
@@ -31,12 +33,15 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     public static function setUpBeforeClass(){
         parent::setUpBeforeClass();
         Loco_data_Settings::clear();
+        Loco_data_Session::destroy();
         self::dropOptions();
     }
 
     
     public static function tearDownAfterClass(){
         parent::tearDownAfterClass();
+        Loco_data_Settings::clear();
+        Loco_data_Session::destroy();
         self::dropOptions();
     }
 
@@ -58,10 +63,44 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $GLOBALS['_SERVER'] += array (
             'HTTP_HOST' => 'localhost',
             'SERVER_PROTOCOL' => 'HTTP/1.0',
+            'HTTP_USER_AGENT' => 'Loco/'.get_class($this),
         );
         // tests should always dictate the file system method, which defaults to direct
         add_filter('filesystem_method', array($this,'filter_fs_method') );
         add_filter('loco_constant_DISALLOW_FILE_MODS', array($this,'filter_fs_allow') );
+        // capture cookies so we can test what is set 
+        add_filter('loco_setcookie', array($this,'captureCookie'), 10, 1 );
+        $this->cookies_set = array();
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function clean_up_global_scope(){
+        parent::clean_up_global_scope();
+        $_COOKIE = array();
+        $_REQUEST = array();
+    }
+
+
+    /**
+     * Capture cookie and prevent actual http sending
+     */
+    public function captureCookie( Loco_data_Cookie $cookie ){
+        $this->cookies_set[ $cookie->getName() ] = $cookie;
+        return false;
+    }
+
+
+    /**
+     * @return Loco_data_Cookie
+     */
+    public function assertCookieSet( $name, $message = '' ){
+        $this->assertArrayHasKey( $name, $this->cookies_set, $message );
+        $cookie = $this->cookies_set[ $name ];
+        $this->assertInstanceOf( 'Loco_data_Cookie', $cookie, $message );
+        return $cookie;
     }
 
 
@@ -167,12 +206,20 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         if( $user->has_cap('manage_options') ){
             $user->add_cap('loco_admin');
         }
+        // simulate wp_set_auth_cookie. Can't actually set cookie cos headers
+       $_COOKIE[LOGGED_IN_COOKIE] = wp_generate_auth_cookie( $user->ID, time()+60, 'logged_in' );
+       $debug = array( 'name' => $this->getName(), 'token' => wp_get_session_token() ,'uid' => $user->ID );
+       // forcing new session instance
+       new Loco_data_Session;
    }
    
 
    protected function logout(){
+       Loco_data_Session::destroy();
+       wp_destroy_current_session();
+       unset( $_COOKIE[LOGGED_IN_COOKIE] );
        wp_set_current_user( 0 );
-       unset( $GLOBALS['current_user'] );
+       $GLOBALS['current_user'] = null;
    }
 
 
@@ -259,6 +306,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     public function setPostArray( array $post ){
         $_POST = $post;
         $_REQUEST = array_merge( $_GET, $_POST, $_COOKIE );
+        $_SERVER['REQUEST_METHOD'] = 'POST';
         Loco_mvc_PostParams::destroy();
     }
 
@@ -271,6 +319,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     public function setGetArray( array $get ){
         $_GET = $get;
         $_REQUEST = array_merge( $_GET, $_POST, $_COOKIE );
+        $_SERVER['REQUEST_METHOD'] = 'GET';
     }
 
 

@@ -88,6 +88,17 @@ class Loco_api_WordPressFileSystem {
     public function authorizeWrite( Loco_fs_File $file ){
         return ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file);
     }
+    
+    
+
+    /**
+     * Authorize connection for any operations, regardless of whether direct file system is available.
+     * @return bool whether file system is authorized
+     */    
+    public function authorizeConnect( Loco_fs_File $file ){
+        return $this->authorize($file);
+    }
+    
 
 
     /**
@@ -101,6 +112,16 @@ class Loco_api_WordPressFileSystem {
         $this->creds_out = array();
         $this->disconnected = true;
         
+        // observe settings held temporarily in session
+        $session = Loco_data_Session::get();
+        if( isset($session['loco-fs']) ){
+            $creds = $session['loco-fs'];
+            if( $this->tryCredentials($creds,$file) ){
+                $this->creds_in = array();
+                return true;
+            }
+        }
+
         $post = Loco_mvc_PostParams::get();
         $dflt = array( 'hostname' => '', 'username' => '', 'password' => '', 'public_key' => '', 'private_key' => '', 'connection_type' => '');
         $this->creds_in = array_intersect_key( $post->getArrayCopy(), $dflt );
@@ -138,21 +159,15 @@ class Loco_api_WordPressFileSystem {
         // the only params we'll pass into form will be those used by the ajax fsConnect end point
         $extra = array( 'loco-nonce', 'path', 'auth' );
         
+        // the only way to force WordPress to look at our cookie
+        
         // capture WordPress output during negotiation.
         $buffer = Loco_output_Buffer::start();
 
         if( $creds = request_filesystem_credentials( '', $type, false, $context, $extra ) ){
             // credentials passed through, should allow connect if they are correct
-            if( is_array($creds) ){
-                $this->creds_out = $creds;
-            }
-            // lazy construct the file system from current credentials if possible
-            // in typical WordPress style, after success the object will be held in a global.
-            if( WP_Filesystem( $creds, $context ) ){
-                $this->fs = $GLOBALS['wp_filesystem'];
-                // hook new file system into write context (specifying that connect has already been performed)
-                $this->disconnected = false;
-                $file->getWriteContext()->connect( $this->fs, false );
+            if( $this->tryCredentials( $creds?$creds:array(), $file ) ){
+                $this->persistCredentials();
                 return true;
             }
             // else there must be an error with the credentials
@@ -174,6 +189,38 @@ class Loco_api_WordPressFileSystem {
         return false;
     }
 
+
+
+    /**
+     * @internal
+     */
+    private function tryCredentials( array $creds, Loco_fs_File $file ){
+        // lazy construct the file system from current credentials if possible
+        // in typical WordPress style, after success the object will be held in a global.
+        if( WP_Filesystem( $creds, '/ignore/this/' ) ){
+            $this->fs = $GLOBALS['wp_filesystem'];
+            // hook new file system into write context (specifying that connect has already been performed)
+            $this->disconnected = false;
+            $file->getWriteContext()->connect( $this->fs, false );
+            //
+            $this->creds_out = $creds;
+            return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Set current credentials in a session cookie if settings allow
+     */
+    private function persistCredentials(){
+        $settings = Loco_data_Settings::get();
+        if( $settings['fs_persist'] ){
+            $session = Loco_data_Session::get();
+            $session['loco-fs'] = $this->creds_out;
+            $session->persist();
+        }
+    }    
 
 
     /**

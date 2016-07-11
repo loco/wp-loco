@@ -43,9 +43,17 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 $plugins[$plugin_file]['____'] = $plugin_info->response[$plugin_file];
             }
         }
-        $this->set('plugins', $plugins );
         
-                
+        
+        $token = wp_get_session_token();
+        $this->set( 'token', $token );
+        $this->set( 'cookie', wp_parse_auth_cookie( $_COOKIE[LOGGED_IN_COOKIE] ) );
+        
+        
+        $manager = WP_User_Meta_Session_Tokens::get_instance( get_current_user_id() );
+        $session = $manager->get( $token );
+        $this->set( 'session', $session );
+        
         
         /*/ try some notices
         Loco_error_AdminNotices::add( new Loco_error_Success('This is a sample success message') );

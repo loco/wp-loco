@@ -3,7 +3,13 @@
  */
 !function( window, document, $ ){
     
-    var fsConnect = window.locoScope.fs.init( document.getElementById('loco-fs') );
-    fsConnect.setForm( document.getElementById('loco-del') );
+    var fsHook = document.getElementById('loco-fs'),
+        elForm = document.getElementById('loco-del');
+    
+    if( fsHook && elForm ){
+        window.locoScope.fs
+            .init( fsHook )
+            .setForm( elForm );
+    }
 
 }( window, document, jQuery );

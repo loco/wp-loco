@@ -40,9 +40,11 @@ class Loco_ajax_SaveController extends Loco_mvc_AjaxController {
             throw new Loco_error_Exception('Invalid file path');
         }
         
-        // write permission for update required (also create and delete for backups)
-        $api = new Loco_api_WordPressFileSystem;
-        $api->authorizeWrite( $pofile );
+        // force the use of remote file system when configured from front end
+        if( $post->has('connection_type') ){
+            $api = new Loco_api_WordPressFileSystem;
+            $api->authorizeConnect( $pofile );
+        }
         
         // data posted must be valid
         $data = Loco_gettext_Data::fromSource( $post->data );

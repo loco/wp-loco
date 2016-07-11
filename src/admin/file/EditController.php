@@ -106,9 +106,27 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         $this->set( 'dlFields', $hidden->setNonce('download') );
         $this->set( 'dlAction', admin_url('admin-ajax.php','relative') );
         
-        // File system connect if required
-        if( ! $file->writable() ){
-            $this->prepareFsConnect( 'update', $this->get('path') );
+        // validate file system writableness for all operations involved in save
+        $writable = $file->writable();
+        
+        // Check in advance if MO file can be compiled in this directory
+        if( $writable ){
+            $dummy = $file->cloneExtension('mo');
+            if( ! ( $dummy->exists() ? $dummy->writable() : $dummy->creatable() ) ){
+                $writable = false;
+            }
+            // Check in advance if backups will work in this directory
+            else if( Loco_data_Settings::get()->num_backups ){
+                $dummy = new Loco_fs_File( $file->dirname().'/does-not-exist.po~' );
+                if( ! $dummy->creatable() ){
+                    $writable = false;
+                }
+            }
+        }
+
+        // File system connect if any operations likely to fail
+        if( ! $writable ){
+            $this->prepareFsConnect( 'connect', $this->get('path') );
         }
         
         // set simpler title for breadcrumb

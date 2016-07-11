@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
-Requires at least: 3.5
+Requires at least: 4.0
 Tested up to: 4.4.2
 Stable tag: 1.5.5
 License: GPLv2 or later

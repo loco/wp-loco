@@ -33,13 +33,13 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         $render = array( $this, 'renderPage' );
         
         // dashicons not available before 3.8
-        $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' );
-        $icon = $wp_38 ? 'dashicons-translation' : 'none';
+        // $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' );
+        // $icon = $wp_38 ? 'dashicons-translation' : 'none';
         
         $label = __('Loco Translate','loco');
         // translators: Page title for plugin home screen
         $title = __('Loco, Translation Management','loco');
-        add_menu_page( $title, $label, $cap, 'loco', $render, $icon );
+        add_menu_page( $title, $label, $cap, 'loco', $render, 'dashicons-translation' );
         // alternative label for first menu item which gets repeated from top level 
         add_submenu_page( 'loco', $title, __('Home','loco'), $cap, 'loco', $render );
 

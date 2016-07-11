@@ -28,6 +28,14 @@ class Loco_admin_ConfigController extends Loco_mvc_AdminController {
                     $perms->populate( $post->has('caps') ? $post->caps : array() );
                     // done update
                     Loco_error_AdminNotices::success( __('Settings saved','loco') );
+                    // remove saved params if persistant options unset
+                    if( ! $opts['fs_persist'] ){
+                        $session = Loco_data_Session::get();
+                        if( isset($session['loco-fs']) ){
+                            unset( $session['loco-fs'] );
+                            $session->persist();
+                        }
+                    }
                 }
             }
         }

@@ -48,6 +48,22 @@ $this->extend('layout');
                     </td>
                 </tr>
                 <tr>
+                    <th scope="row"><?php esc_html_e('File system credentials','loco')?></th>
+                    <td>
+                        <fieldset>
+                            <legend class="screen-reader-text">
+                                <span><?php esc_html_e('File system credentials','loco')?></span>
+                            </legend>
+                            <p>
+                                <label for="loco--fs-persist">
+                                    <input type="checkbox" name="opts[fs_persist]" value="1" id="loco--fs-persist"<?php echo $opts->fs_persist?' checked':''?> />
+                                    <?php esc_html_e('Remember in session','loco')?> 
+                                </label>
+                            </p>
+                        </fieldset>
+                    </td>
+                </tr>
+                <tr>
                     <th scope="row"><?php esc_html_e('Grant access to roles','loco')?></th>
                     <td>
                         <fieldset>

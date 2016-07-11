@@ -24,6 +24,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'num_backups' => 1,
         // alternative names for POT files in priority order
         'pot_alias' => array( 'default.po', 'en_US.po', 'en.po' ),
+        // whether to remember file system credentials in session
+        'fs_persist' => false,
         /*/ Legacy options from 1.x branch:
         // whether to use external msgfmt command (1), or internal (default)
         'use_msgfmt' => false,
