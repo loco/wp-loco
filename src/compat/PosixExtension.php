@@ -71,7 +71,24 @@ abstract class Loco_compat_PosixExtension {
 
         return $gid;
     }
-    
-    
+
+
+    /**
+     * Get the name of the user that the web server runs under
+     * This is only for visual/info purposes.
+     * @return string
+     */
+     public static function getHttpdUser(){
+        if( function_exists('posix_geteuid') ){
+            $info = posix_getpwuid( posix_geteuid() );
+            return $info['name'];
+        }
+        // @codeCoverageIgnoreStart
+        if( false !== stripos(PHP_SAPI,'apache') ){
+            return 'Apache';
+        }
+        return __('the web server','loco');
+        // @codeCoverageIgnoreEnd
+     }
 
 }

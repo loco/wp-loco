@@ -71,6 +71,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         foreach( array('iconv','json','mbstring','tokenizer') as $ext ){
             loco_check_extension($ext);
         }
+
+        /*/ additional system checks
+        if( 2147483647 === PHP_INT_MAX ){
+            Loco_error_AdminNotices::warn( __("Your operating system is not 64 bit",'loco') );
+        }*/
     }
 
 
