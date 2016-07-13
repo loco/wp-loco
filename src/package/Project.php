@@ -83,7 +83,7 @@ class Loco_package_Project {
     private $pot;
 
     /**
-     * Whether POT is protected from user sync.
+     * Whether POT file is protected from end-user update and sync operations.
      * @var bool
      */
     private $potlock;
@@ -437,7 +437,7 @@ class Loco_package_Project {
 
 
     /**
-     * Check whetehr POT file is protected from end-user update and sync operations.
+     * Check whether POT file is protected from end-user update and sync operations.
      * @return bool
      */
     public function isPotLocked(){

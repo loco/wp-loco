@@ -56,7 +56,8 @@
             url: conf.apiUrl+'/'+vendor+'/'+slug+'.jsonp',
             dataType: 'jsonp',
             success: onResponse,
-            error: onFailure
+            error: onFailure,
+            cache: true
         } );
         
         return {
@@ -93,6 +94,19 @@
         unsetJson('');
         return false;
     }
+    
+    function setVendors( list ){
+        var i = -1,
+            value, label,
+            length = list.length,
+            $select = $(elForm.vendor).html('')
+        ;
+        while( ++i < length ){
+            value = list[i][0];
+            label = list[i][1];
+            $select.append( $('<option></option>').attr('value',value).text(label) );
+        }            
+    }
 
     
     var loco = window.locoScope,
@@ -102,6 +116,14 @@
         elForm = document.getElementById('loco-remote'),
         $findButt = $(elForm).find('button[type="button"]').click( onFindClick ),
         $resetButt = $(elForm).find('input[type="reset"]').click( onCancelClick );
+   
+   // pull vendor list
+   $.ajax( {
+        url: conf.apiUrl+'/vendors.jsonp',
+        dataType: 'jsonp',
+        success: setVendors,
+        cache: true
+    } );
    
 
 }( window, document, jQuery );
