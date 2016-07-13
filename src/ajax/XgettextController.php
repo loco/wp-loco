@@ -18,17 +18,15 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         $base = loco_constant('WP_CONTENT_DIR');
         $target = new Loco_fs_Directory( $this->get('path') );
         $target->normalize( $base );
-        if( ! $target->exists() || ! $target->writable() || ! $target->isDirectory() ){
-            throw new Loco_error_Exception('Target directory is not writable');
+        if( $target->exists() && ! $target->isDirectory() ){
+            throw new Loco_error_Exception('Target is not a directory');
         }
 
         // POT file shouldn't exist currently
-        // TODO support updating / backing up of existing file
         $path = sprintf('%s/%s.pot', $target, $project->getSlug() );
         $potfile = new Loco_fs_File( $path );
-        if( $potfile->exists() ){
-            throw new Loco_error_Exception('POT file already exists');
-        }
+        $api = new Loco_api_WordPressFileSystem;
+        $api->authorizeCreate($potfile);
         
         // Do extraction and grab only given domain's strings
         $ext = new Loco_gettext_Extraction( $bundle );

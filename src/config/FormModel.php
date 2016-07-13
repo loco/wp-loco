@@ -40,7 +40,7 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
                         'path' => '',
                         'exclude' => array( 'path' => '' ),
                     ),
-                    'template' => array( 'path' => '' ),
+                    'template' => array( 'path' => '', 'locked' => false ),
                 );
                 $post['conf'][] = $this->collectPaths( $project, $tree );
             }
@@ -69,8 +69,8 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
                     $file = $this->evaluateFileElement($child);
                     $texts[] = $file->getRelativePath( $this->getDirectoryPath() );
                 }
-                // else must be simple key to next depth
-                else {
+                // else could be simple key to next depth
+                else if( is_array($branch[$name]) ){
                     $branch[$name] = $this->collectPaths( $child, $branch[$name] );
                 }
             }
@@ -80,6 +80,18 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
             }
             // @codeCoverageIgnoreEnd
         }
+        // parent may have attributes we can set in branch data
+        foreach( $branch as $name => $default ){
+            if( $parent->hasAttribute($name) ){
+                if( is_bool($default) ){
+                    $branch[$name] = $this->evaulateBooleanAttribute($parent, $name);
+                }
+                else {
+                    $branch[$name] = $parent->getAttribute($name);
+                }
+            }
+        }
+        // set compiled path values if any collected
         if( $texts ){
             $branch['path'] = implode("\n", $texts );
         }
@@ -156,13 +168,23 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
         $dom = $this->getDom();
         foreach( $nodes as $name => $data ){
             if( is_string($data) ){
-                // form model has multiline "path" nodes which we'll expand from non-empty lines
-                // resolving empty paths to "." must be done elsewhere. here empty means ignore.
-                foreach( preg_split('/\\R/', trim( $data,"\n\r"), -1, PREG_SPLIT_NO_EMPTY ) as $path ){
-                    $ext = pathinfo( $path, PATHINFO_EXTENSION );
-                    $child = $parent->appendChild( $dom->createElement( $ext ? 'file' : 'directory' ) );
-                    $child->appendChild( $dom->createTextNode($path) );
+                // support common path containing elements
+                if( 'file' === $name || 'directory' === $name || 'path' === $name ){
+                    // form model has multiline "path" nodes which we'll expand from non-empty lines
+                    // resolving empty paths to "." must be done elsewhere. here empty means ignore.
+                    foreach( preg_split('/\\R/', trim( $data,"\n\r"), -1, PREG_SPLIT_NO_EMPTY ) as $path ){
+                        $ext = pathinfo( $path, PATHINFO_EXTENSION );
+                        $child = $parent->appendChild( $dom->createElement( $ext ? 'file' : 'directory' ) );
+                        $child->appendChild( $dom->createTextNode($path) );
+                    }
                 }
+                // else assume valud is an attribute
+                else {
+                    $parent->setAttribute( $name, $data );
+                }
+            }
+            else if( is_bool($data) ){
+                $data ? $parent->setAttribute($name,'true') : $parent->removeAttribute($name);
             }
             else if( ! is_array($data) ){
                 throw new InvalidArgumentException('Invalid datatype');

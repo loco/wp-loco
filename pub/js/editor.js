@@ -25,6 +25,10 @@
         elFilesys = document.getElementById('loco-fs'),
         fsConnect = elFilesys && loco.fs.init( elFilesys ),
         
+        // prevent all write operations if readonly mode
+        readonly = conf.readonly,
+        editable = ! readonly,
+        
         // Editor components
         editor,
         saveButton,
@@ -378,8 +382,8 @@
     // initialize toolbar button actions
     var buttons = {
         help: registerNoopButton,
-        save: registerSaveButton,
-        sync: registerSyncButton,
+        save: editable && registerSaveButton,
+        sync: editable && registerSyncButton,
         revert: registerRevertButton,
         // downloads / post-throughs
         source: registerDownloadButton,
@@ -387,8 +391,8 @@
     };
     // POT only
     if( template ){
-        buttons.add = registerAddButton;
-        buttons.del = registerDelButton;
+        buttons.add = editable && registerAddButton;
+        buttons.del = editable && registerDelButton;
     }
     // PO only
     else {

@@ -5,7 +5,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"POT-Revision-Date: Thu Jul 07 2016 20:58:39 GMT+0100 (BST)\n"
+"POT-Revision-Date: Wed Jul 13 2016 14:48:13 GMT+0100 (BST)\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -30,7 +30,7 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/ConfigController.php:59
+#: src/admin/ConfigController.php:67
 msgid "Plugin settings"
 msgstr ""
 
@@ -47,38 +47,50 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:32
+#: src/ajax/FsConnectController.php:34
 msgid "Connected to remote file system"
 msgstr ""
 
-#: src/ajax/MsginitController.php:53 src/ajax/MsginitController.php:61
-msgid "%s already exists in this folder"
+#: src/ajax/MsginitController.php:58
+msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
-#: src/ajax/SaveController.php:59
+#: src/ajax/SaveController.php:61
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
 "backups"
 msgstr ""
 
-#: src/ajax/SaveController.php:77
+#: src/ajax/SaveController.php:78
 msgid "PO file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:77 src/ajax/SaveController.php:95
+#: src/ajax/SaveController.php:78 src/ajax/SaveController.php:96
 msgid "POT file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:86
+#: src/ajax/SaveController.php:87
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:90
+#: src/ajax/SaveController.php:91
 msgid "PO file saved, but MO file compilation failed"
+msgstr ""
+
+#: src/api/WordPressFileSystem.php:47
+msgid "%s already exists in this folder"
+msgstr ""
+
+#: src/compat/PosixExtension.php:90
+msgid "the web server"
 msgstr ""
 
 #: src/config/FormModel.php:123
 msgid "Text Domain cannot be empty"
+msgstr ""
+
+#: src/config/XMLModel.php:42
+msgid "XML supplied is empty"
 msgstr ""
 
 #: src/data/Permissions.php:67
@@ -118,43 +130,47 @@ msgstr ""
 msgid "Failed to connect to remote server"
 msgstr ""
 
-#: src/fs/FileWriter.php:122
+#: src/fs/FileWriter.php:123
 msgid "Failed to chmod %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:138
-msgid "Failed to copy %s"
+#: src/fs/FileWriter.php:140
+msgid "Refusing to copy over an existing file"
 msgstr ""
 
-#: src/fs/FileWriter.php:153
+#: src/fs/FileWriter.php:143
+msgid "Failed to copy %s to %s"
+msgstr ""
+
+#: src/fs/FileWriter.php:158
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:169
+#: src/fs/FileWriter.php:174
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
 
-#: src/fs/FileWriter.php:183
+#: src/fs/FileWriter.php:188
 msgid "Permission denied to update file"
 msgstr ""
 
-#: src/fs/FileWriter.php:187
+#: src/fs/FileWriter.php:192
 msgid "Parent directory doesn't exist"
 msgstr ""
 
-#: src/fs/FileWriter.php:190
+#: src/fs/FileWriter.php:195
 msgid "Failed to save file"
 msgstr ""
 
-#: src/fs/FileWriter.php:217
+#: src/fs/FileWriter.php:222
 msgid "Failed to create directory"
 msgstr ""
 
-#: src/fs/FileWriter.php:224
+#: src/fs/FileWriter.php:229
 msgid "Failed to build directory path"
 msgstr ""
 
-#: src/fs/FileWriter.php:236
+#: src/fs/FileWriter.php:241
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -261,19 +277,19 @@ msgstr ""
 msgid "Loco interrupted by output from %s:%u"
 msgstr ""
 
-#: src/package/Debugger.php:146
-msgid "%u string extracted from source code for \"%s\""
-msgid_plural "%u strings extracted from source code for \"%s\""
+#: src/package/Debugger.php:149
+msgid "One string extracted from source code for \"%2$s\""
+msgid_plural "%s strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Debugger.php:177
+#: src/package/Debugger.php:169
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Header.php:77 src/admin/file/InfoController.php:103
+#: src/package/Header.php:77 src/admin/file/InfoController.php:117
 msgid "Unknown author"
 msgstr ""
 
@@ -301,15 +317,23 @@ msgstr ""
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
-#: tpl/admin/config.php:51
+#: tpl/admin/config.php:51 tpl/admin/config.php:55
+msgid "File system credentials"
+msgstr ""
+
+#: tpl/admin/config.php:60
+msgid "Remember in session"
+msgstr ""
+
+#: tpl/admin/config.php:67
 msgid "Grant access to roles"
 msgstr ""
 
-#: tpl/admin/config.php:55
+#: tpl/admin/config.php:71
 msgid "Allow full access to these roles"
 msgstr ""
 
-#: tpl/admin/config.php:72
+#: tpl/admin/config.php:88
 msgid "Save settings"
 msgstr ""
 
@@ -360,21 +384,21 @@ msgstr ""
 msgid "Set up %s"
 msgstr ""
 
-#: src/admin/bundle/SetupController.php:24
+#: src/admin/bundle/SetupController.php:25
 msgid "Setup options"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:186 
+#: src/admin/bundle/ViewController.php:192 
 #: src/admin/init/InitPoController.php:16 
 #: src/admin/init/InitPoController.php:44
 msgid "New language"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:195
+#: src/admin/bundle/ViewController.php:201
 msgid "Edit template"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:203 
+#: src/admin/bundle/ViewController.php:209 
 #: src/admin/init/InitPoController.php:133 tpl/admin/init/init-pot.php:36
 msgid "Create template"
 msgstr ""
@@ -451,7 +475,7 @@ msgstr ""
 msgid "Filter translations"
 msgstr ""
 
-#: src/admin/file/InfoController.php:118
+#: src/admin/file/InfoController.php:132
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
 
@@ -575,15 +599,19 @@ msgstr ""
 msgid "No translation files found"
 msgstr ""
 
-#: tpl/admin/common/inc-fsconn.php:12
+#: tpl/admin/common/inc-fsconn.php:22
+msgid "Write protected"
+msgstr ""
+
+#: tpl/admin/common/inc-fsconn.php:25
 msgid "Folder is protected"
 msgstr ""
 
-#: tpl/admin/common/inc-fsconn.php:15
+#: tpl/admin/common/inc-fsconn.php:28
 msgid "File is protected"
 msgstr ""
 
-#: tpl/admin/common/inc-fsconn.php:19
+#: tpl/admin/common/inc-fsconn.php:32
 msgid "Connect"
 msgstr ""
 
@@ -634,7 +662,7 @@ msgstr ""
 msgid "Custom language"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:140
+#: tpl/admin/init/init-po.php:137
 msgid "Create translations file"
 msgstr ""
 

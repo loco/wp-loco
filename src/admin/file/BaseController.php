@@ -98,6 +98,19 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
     public function view( $tpl, array $args = array() ){
         
         if( $breadcrumb = $this->get('breadcrumb') ){
+            
+            // Add project name into breadcrumb if not the same as bundle name
+            try {
+                $project = $this->getProject();
+                if( $project->getName() !== $this->getBundle()->getName() ){
+                    $breadcrumb->add( $project->getName() );
+                }
+            }
+            catch( Loco_error_Exception $e ){
+                // ignore missing project in breadcrumb
+            }
+            
+            // Always add page title as final breadcrumb element
             $title = $this->get('title') or $title = 'Untitled';
             $breadcrumb->add( $title );
         }

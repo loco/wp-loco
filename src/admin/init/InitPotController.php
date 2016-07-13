@@ -60,6 +60,11 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
             throw new Loco_error_Exception( __('Template file already exists','loco') );
         }
         
+        // Bundle may deliberately lock template to avoid end-user tampering
+        // it makes little sense to do so when template doesn't exist, but we will honour the setting anyway.
+        if( $project->isPotLocked() ){
+            throw new Loco_error_Exception('Template is protected from updates by the bundle configuration');
+        }
         
         // Just warn if POT writing will fail when saved, but still show screen
         $dir = $pot->getParent();

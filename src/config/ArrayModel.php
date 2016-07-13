@@ -337,6 +337,10 @@ class LocoConfigElement extends LocoConfigNode {
         $this->data[1][$prop] = $value;
     }
 
+    public function removeAttribute( $prop ){
+        unset( $this->data[1][$prop] );
+    }
+
     public function getAttribute( $prop ){
         if( isset($this->data[1][$prop]) ){
             return $this->data[1][$prop]; 

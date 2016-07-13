@@ -82,6 +82,12 @@ class Loco_package_Project {
      */
     private $pot;
 
+    /**
+     * Whether POT is protected from user sync.
+     * @var bool
+     */
+    private $potlock;
+
 
     /**
      * Construct project from its domain and a descriptive name
@@ -428,6 +434,25 @@ class Loco_package_Project {
         return $this;
     }
 
+
+
+    /**
+     * Check whetehr POT file is protected from end-user update and sync operations.
+     * @return bool
+     */
+    public function isPotLocked(){
+        return (bool) $this->potlock;
+    }
+
+
+    /**
+     * Lock POT file to prevent end-user updates
+     * @return Loco_package_Project
+     */
+    public function setPotLock( $locked ){
+        $this->potlock = (bool) $locked;
+        return $this;
+    }
 
     
     /**

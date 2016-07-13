@@ -52,6 +52,9 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         if( $locale = $this->get('locale') ){
             $data->localize( $locale );
         }
+        
+        // default is tp permit editing of any file
+        $readonly = false;
 
         
         // Establish if file belongs to a configured project
@@ -62,9 +65,15 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             if( $locale && ( $pot = $project->getPot() ) && $pot->equal($file) ){
                 $locale = null;
             }
+            // Establish if save and sync is permitted based on template lock
+            if( $project->isPotLocked() && ( $potfile = $project->getPot() ) && $file->equal($potfile) ){
+                Loco_error_AdminNotices::warn('Template is protected from updates by the bundle configuration');
+                $readonly = true;
+            }
         }
         // Fine if not, this just means sync isn't possible.
         catch( Loco_error_Exception $e ){
+            Loco_error_AdminNotices::debug( $e->getMessage() );
             $project = null;
         }
 
@@ -73,11 +82,12 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'podata' => $data->jsonSerialize(),
             'locale' => $locale ? $locale->jsonSerialize() : null,
             'popath' => $this->get('path'),
+            'readonly' => $readonly,
             'project' => $project ? array (
                 'bundle' => $bundle->getId(),
                 'domain' => $project->getId(),
             ) : null,
-            'nonces' => array (
+            'nonces' => $readonly ? null : array (
                 'save' => wp_create_nonce('save'),
                 'sync' => wp_create_nonce('sync'),
                 'fsConnect' => wp_create_nonce('fsConnect'),

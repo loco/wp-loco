@@ -162,5 +162,19 @@ abstract class Loco_config_Model {
         return $file;
     }
 
+
+
+    /**
+     * @param LocoConfigElement
+     * @return bool
+     */
+    public function evaulateBooleanAttribute( $el, $attr ){
+        if( ! $el->hasAttribute($attr) ){
+            return false;
+        }
+        $value = (string) $el->getAttribute($attr);
+        return 'false' !== $value && 'no' !== $value && '' !== $value;
+    }     
+
 }
 

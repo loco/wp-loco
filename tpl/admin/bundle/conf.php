@@ -47,6 +47,10 @@ $this->extend('../layout');
                         <th scope="row"><label for="<?php echo $id?>-template">Template file</label></th>
                         <td>
                             <input type="text" name="<?php echo $p->prefix?>[template][path]" id="<?php echo $id?>-template" class="regular-text" value="<?php echo $p->escape( $p->template['path'] )?>" />
+                            <label>
+                                <input type="checkbox" value="1" name="<?php echo $p->prefix?>[template][locked]" <?php empty($p->template['locked']) || print('checked');?> />
+                                Locked
+                            </label>
                         </td>
                     </tr>
                     <tr valign="top">

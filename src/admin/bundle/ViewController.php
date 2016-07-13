@@ -192,25 +192,26 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
                 'name' => __('New language','loco'),
                 'icon' => 'add',
             ) );
-            // offer template editing if one exists
-            $pot = $project->getPot();
-            if( $pot && $pot->exists() ){
-                $meta = Loco_gettext_Metadata::load($pot)->persist( 0, true );
-                $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                    'href' => $this->getResourceLink('file-edit', $project, $meta ),
-                    'name' => __('Edit template','loco'),
-                    'icon' => 'pencil',
-                ) );
+            // offer template editing if permitted
+            if( ! $project->isPotLocked() ){
+                $pot = $project->getPot();
+                if( $pot && $pot->exists() ){
+                    $meta = Loco_gettext_Metadata::load($pot)->persist( 0, true );
+                    $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                        'href' => $this->getResourceLink('file-edit', $project, $meta ),
+                        'name' => __('Edit template','loco'),
+                        'icon' => 'pencil',
+                    ) );
+                }
+                // else offer creation of new Template
+                else {
+                    $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                        'href' => $this->getProjectLink('xgettext', $project ),
+                        'name' => __('Create template','loco'),
+                        'icon' => 'add',
+                    ) );
+                }
             }
-            // else offer creation of new Template
-            else {
-                $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                    'href' => $this->getProjectLink('xgettext', $project ),
-                    'name' => __('Create template','loco'),
-                    'icon' => 'add',
-                ) );
-            }
-
             $projects[] = $p;
         }
         

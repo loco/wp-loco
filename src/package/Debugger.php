@@ -146,7 +146,7 @@ class Loco_package_Debugger implements IteratorAggregate {
             foreach( array_intersect_key($counts, $domains) as $domain => $count ){
                 if( isset($realCounts[$domain]) ){
                     $realCount = $realCounts[$domain];
-                    $str = _n( '%u string extracted from source code for "%s"', '%u strings extracted from source code for "%s"', $realCount, 'loco' );
+                    $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', number_format($realCount), 'loco' );
                     $this->good( $str, $realCount, $domain );
                 }
                 else {
@@ -156,7 +156,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                 if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){
                     $meta = current( $templates[$domain] );
                     if( $meta->getTotal() !== $count ){
-                        $this->devel('%s in "%s". You might want to sync it with the source code', $meta->getTotalSummary(), basename($meta->getPath(false)) );
+                        $this->devel('%s in "%s". You might want to sync "%s" with the source code', $meta->getTotalSummary(), basename($meta->getPath(false)), $domain );
                     }
                     /* TODO proper a/b comparison when string count agrees - the above does not prove they're identical
                     $a = $extr->getTemplate('loco');
