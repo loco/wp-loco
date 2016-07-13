@@ -199,7 +199,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             // display loco admin page
             echo $this->ctrl->render();
         }
-        catch( Loco_error_Exception $e ){
+        catch( Exception $e ){
             $ctrl = new Loco_admin_ErrorController;
             $ctrl->_init( array() );
             echo $ctrl->renderError($e);

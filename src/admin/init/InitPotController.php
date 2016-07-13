@@ -97,7 +97,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
             'route' => 'xgettext',
             'loco-nonce' => $this->setNonce('xgettext')->value,
             'type' => $bundle->getType(),
-            'bundle' => $bundle->getSlug(),
+            'bundle' => $bundle->getHandle(),
             'domain' => $project->getId(),
             'path' => $target_path,
         ) ) );

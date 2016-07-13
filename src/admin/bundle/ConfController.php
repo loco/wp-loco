@@ -110,7 +110,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
         $args = array ( 
             'path' => 'loco.xml', 
             'action' => 'loco_download', 
-            'bundle' => $bundle->getSlug(), 
+            'bundle' => $bundle->getHandle(), 
             'type' => $bundle->getType()  
         );
         $this->set( 'xmlUrl', Loco_mvc_AjaxRouter::generate( 'DownloadConf', $args ) );

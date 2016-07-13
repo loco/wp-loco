@@ -64,13 +64,24 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         // unknown file template if required
         $locale = null;
         $tpl = 'admin/file/info-other';
+        
+        // we should know the project the file belongs to, but permitting orphans for debugging
+        try {
+            $project = $this->getProject();
+            $template = $project->getPot();
+            $isTemplate = $template && $file->equal($template);
+            $this->set('isTemplate', $isTemplate );
+        }
+        catch( Loco_error_Exception $e ){
+            $isTemplate = false;
+        }
 
         // file will be Gettext most likely            
         if( 'pot' === $ext || 'po' === $ext || 'mo' === $ext ){
             // treat as templte until locale verified
             $tpl = 'admin/file/info-pot';
-            // don't attempt to pull locale of template file                
-            if( 'pot' !== $ext ){
+            // don't attempt to pull locale of template file
+            if( 'pot' !== $ext && ! $isTemplate ){
                 $locale = $file->getLocale();
                 $code = (string) $locale;
                 if( $locale->isValid() ){

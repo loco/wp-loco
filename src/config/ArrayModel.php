@@ -14,6 +14,19 @@ class Loco_config_ArrayModel extends Loco_config_Model {
     
     
     /**
+     * Construct model from serialized JSON
+     * @return void
+     */
+    public function loadJson( $json ){
+        $root = json_decode( $json, true );
+        if( ! $root || ! is_array($root) ){
+            throw new Loco_error_ParseException('Invalid JSON');
+        }
+        $this->loadArray( $root );
+    }
+    
+    
+    /**
      * Construct model from exported array
      * @return void
      */

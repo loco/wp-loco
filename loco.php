@@ -154,10 +154,6 @@ if( ! defined('LOCO_LANG_DIR') ){
 }
 
 
-// debug:
-// register_theme_directory( __DIR__.'/test/data/themes' );
-// new Loco_test_DummyFtpConnect;
-
 // text domain loading helper, required if custom file locations in use
 new Loco_hooks_LoadHelper;
 

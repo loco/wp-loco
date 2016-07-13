@@ -1129,40 +1129,46 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 #loco.wrap .notice-locked { border-color: #FFA500; }
 /* line 348, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap input.regular-text, #loco.wrap textarea.regular-text { width: 25em; }
-/* line 354, httpdocs/static/sass/wp/admin.scss */
+/* line 353, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .button { text-decoration: none; }
+/* line 357, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-link { padding: 0 10px 1px; }
-/* line 359, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .button-danger { background: #ba0000; border-color: #990000 #660000 #660000; -webkit-box-shadow: 0 1px 0 #660000; -moz-box-shadow: 0 1px 0 #660000; box-shadow: 0 1px 0 #660000; color: #fff; text-decoration: none; text-shadow: 0 -1px 1px #660000, 1px 0 1px #660000, 0 1px 1px #660000, -1px 0 1px #660000; }
+/* line 362, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .button-danger { background: #ba0000; border-color: #990000 #660000 #660000; -webkit-box-shadow: 0 1px 0 #660000; -moz-box-shadow: 0 1px 0 #660000; box-shadow: 0 1px 0 #660000; color: #fff; text-shadow: 0 -1px 1px #660000, 1px 0 1px #660000, 0 1px 1px #660000, -1px 0 1px #660000; }
+/* line 374, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .button-success { background: #00B500; border-color: #009900 #2e892e #2e892e; -webkit-box-shadow: 0 1px 0 #2e892e; -moz-box-shadow: 0 1px 0 #2e892e; box-shadow: 0 1px 0 #2e892e; color: #fff; text-shadow: 0 -1px 1px #2e892e, 1px 0 1px #2e892e, 0 1px 1px #2e892e, -1px 0 1px #2e892e; }
+/* line 383, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .button-success:hover { background: #3db63d; }
 
-/* line 376, httpdocs/static/sass/wp/admin.scss */
+/* line 393, httpdocs/static/sass/wp/admin.scss */
 .js #wpbody-content > .notice { display: none; }
-/* line 378, httpdocs/static/sass/wp/admin.scss */
+/* line 395, httpdocs/static/sass/wp/admin.scss */
 .js #wpbody-content > .notice.inline { display: block; }
 
-/* line 385, httpdocs/static/sass/wp/admin.scss */
+/* line 402, httpdocs/static/sass/wp/admin.scss */
 .js #loco.wrap .jshide { display: none !important; }
 
-/* line 389, httpdocs/static/sass/wp/admin.scss */
+/* line 406, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .invis { visibility: hidden; }
 
-/* line 397, httpdocs/static/sass/wp/admin.scss */
+/* line 414, httpdocs/static/sass/wp/admin.scss */
 .form-table tr { vertical-align: top; }
-/* line 401, httpdocs/static/sass/wp/admin.scss */
+/* line 418, httpdocs/static/sass/wp/admin.scss */
 .form-table tr.compact td { padding-top: 0; }
 
 /** file system connect stuff */
-/* line 411, httpdocs/static/sass/wp/admin.scss */
+/* line 428, httpdocs/static/sass/wp/admin.scss */
 #loco-fs p { line-height: 22px; }
-/* line 414, httpdocs/static/sass/wp/admin.scss */
+/* line 431, httpdocs/static/sass/wp/admin.scss */
 #loco-fs button[type="button"] { float: right; }
 
 /** Dev */
-/* line 424, httpdocs/static/sass/wp/admin.scss */
+/* line 441, httpdocs/static/sass/wp/admin.scss */
 #loco-debug { margin-top: 50px; font-size: 12px; color: #999; }
 
-/* line 432, httpdocs/static/sass/wp/admin.scss */
+/* line 449, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt { font-weight: bold; }
-/* line 435, httpdocs/static/sass/wp/admin.scss */
+/* line 452, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt, dl.debug dd { white-space: pre; }
 
 /* Template for colours include, using default wordpress theme */

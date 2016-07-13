@@ -33,6 +33,17 @@ class Loco_package_Plugin extends Loco_package_Bundle {
 
 
     /**
+     * {@inheritdoc}
+     */
+    public function getSlug(){
+        // TODO establish "official" slug somehow
+        // Fallback to first handle component
+        $slug = explode( '/', parent::getSlug(), 2 );
+        return current( $slug );
+    }
+
+
+    /**
      * Maintaining our own cache of available plugins, because get_mu_plugins doesn't get cached by WP
      * @return array
      */    
@@ -56,6 +67,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         $cached = self::get_plugins();
         if( isset($cached[$handle]) ){
             $data = $cached[$handle];
+            // TODO augment plugin update info for slug??
         }
         // else get directly from primary file
         else if( $path = $this->getBootstrapPath() ){
@@ -86,7 +98,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function setSlug( $slug ){
+    public function setHandle( $slug ){
         // plugin handles are relative paths from WP_PLUGIN_DIR to bootstrap file
         // plugin is single file if its handle has no directory prefix
         if( basename($slug) === $slug ){
@@ -115,7 +127,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
                 $this->setBootstrapPath( $file->getPath() );
             }
         }
-        return parent::setSlug( $slug );
+        return parent::setHandle( $slug );
     }
 
 
@@ -167,15 +179,6 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         $bundle->boot = $path;
         
         $bundle->configure( $base, $data );
-        
-        
-        /*if( ! $bundle->isConfigured() ){
-            // Hello Dolly header translations are part of the Core "admin" project in the "default" domain
-            if( 'hello.php' === $bundle->getSlug() && 'Hello Dolly' === $bundle->getName() ){
-                $project = $bundle->createDefault('default');
-                $project->setSlug('admin');
-            }
-        }*/
         
         return $bundle;
     }

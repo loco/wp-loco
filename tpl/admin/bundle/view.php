@@ -5,12 +5,11 @@
 $this->extend('../layout');
 
 
-if( $warn ):?> 
+if( $warning ):?> 
 <div class="notice inline notice-warning">
     <p>
         <strong class="has-icon">Compatibility warning:</strong><br />
-        <span>This bundle may not automatically work with Loco Translate.</span>
-        <span>Click the Setup or Advanced tabs to configure the bundle fully.</span>
+        <span>This bundle may not automatically work with Loco Translate. <span>Click the Setup or Advanced tabs to configure the bundle fully.</span>
     </p>
 </div><?php
 endif;

@@ -49,7 +49,7 @@ class Loco_admin_Navigation extends ArrayIterator {
         // Add actual bundle page, href may be unset to show as current page if needed
         $nav->add (
             $bundle->getName(),
-            Loco_mvc_AdminRouter::generate( $type.'-view', array( 'bundle' => $bundle->getSlug() ) )
+            Loco_mvc_AdminRouter::generate( $type.'-view', array( 'bundle' => $bundle->getHandle() ) )
         );
         
         // client code will add current page

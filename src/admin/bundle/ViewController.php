@@ -101,13 +101,16 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             $locale->fetchName($api) or $locale->buildName() or $locale->setName($tag);
         }
         
-        // TODO avoid listing PO that is configured as template
-        // $pot = $project->getPot();
+        // avoid listing PO that is configured as template
+        $pot = $project->getPot();
         
         // collate as unique [PO,MO] pairs
         $pairs = array();
         /* @var $pofile Loco_fs_LocaleFile */
         foreach( $po as $pofile ){
+            if( $pot && $pofile->equal($pot) ){
+                continue;
+            }
             $pair = array( $pofile, null );
             $mofile = $pofile->cloneExtension('mo');
             if( $mofile->exists() ){
@@ -118,6 +121,9 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         /* @var $mofile Loco_fs_LocaleFile */
         foreach( $mo as $mofile ){
             $pofile = $mofile->cloneExtension('po');
+            if( $pot && $pofile->equal($pot) ){
+                continue;
+            }
             if( ! $pofile->exists() ){
                 $pairs[] = array( null, $mofile );
             }
@@ -225,7 +231,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         $configured = $bundle->isConfigured();
 
         // Hello Dolly is an exception. don't show unless configured deliberately 
-        if( ! $configured && 'hello.php' === $bundle->getSlug() && 'Hello Dolly' === $bundle->getName() ){
+        if( ! $configured && 'hello.php' === $bundle->getHandle() && 'Hello Dolly' === $bundle->getName() ){
             $this->set( 'redirect', Loco_mvc_AdminRouter::generate('core-view') );
             return $this->view('admin/bundle/alias');
         }
@@ -254,8 +260,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             }
         }
         
-
-        $this->set( 'warn', ! $configured );
+        $this->set( 'warning', ! $configured );
 
         return $this->view( 'admin/bundle/view' );
     }

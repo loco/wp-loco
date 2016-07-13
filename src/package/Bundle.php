@@ -10,6 +10,12 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * Internal handle for targeting in WordPress, e.g. "twentyfifteen" or "loco-translate/loco.php"
      * @var string
      */
+    private $handle;
+
+    /**
+     * Short name, e.g. "twentyfifteen" or "loco-translate"
+     * @var string
+     */
     private $slug;
 
     /**
@@ -103,9 +109,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * Construct from WordPress handle and friendly name
      */
-    public function __construct( $slug, $name ){
-        $this->setSlug( $slug );
-        $this->setName( $name );
+    public function __construct( $handle, $name ){
+        $this->setHandle($handle)->setName($name);
         $this->xpaths = new Loco_fs_FileList;
     }
 
@@ -125,8 +130,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      */
     public function getId(){
         $type = strtolower( $this->getType() );
-        $handle = $this->getSlug();
-        return $type.'.'.$handle;
+        return $type.'.'.$this->getHandle();
     }
 
 
@@ -159,8 +163,21 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * Get handle of bundle unique for its type, e.g. "twentyfifteen" or "loco-translate/loco.php"
      * @return string
      */
+    public function getHandle(){
+        return $this->handle;
+    }
+
+
+    /**
+     * Attempt to get the vendor-specific slug, which may or may not be the same as the internal handle
+     * @return string
+     */
     public function getSlug(){
-        return $this->slug;
+        if( $slug = $this->slug ){
+            return $slug;
+        }
+        // fall back to runtime handle
+        return $this->getHandle();
     }
 
 
@@ -183,6 +200,15 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         return $this;
     }
 
+
+    /**
+     * Set internal handle registered with WordPress for this bundle type 
+     * @return Loco_package_Bundle
+     */
+    public function setHandle( $handle ){
+        $this->handle = $handle;
+        return $this;
+    }
 
 
     /**
@@ -449,7 +475,10 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         if( isset($header['TextDomain']) && ( $slug = $header['TextDomain'] ) ){
             $domain = new Loco_package_TextDomain($slug);
             $domain->setCanonical( true );
-            // use domain as bundle slug if no slug was set when constructed
+            // use domain as bundle handle and slug if not set when constructed
+            if( ! $this->handle ){
+                $this->handle = $slug;
+            }
             if( ! $this->getSlug() ){
                 $this->setSlug( $slug );
             }

@@ -37,8 +37,8 @@ abstract class Loco_config_Model {
      */    
     final public function __construct(){
         $this->dirs = array();
-        $this->base = loco_constant('ABSPATH');
         $this->dom = $this->createDom();
+        $this->setDirectoryPath( loco_constant('ABSPATH') );
     }
     
     
@@ -46,6 +46,7 @@ abstract class Loco_config_Model {
      * @return void
      */
     public function setDirectoryPath( $path, $key = null ){
+        $path = rtrim( $path, '/' );
         if( is_null($key) ){
             $this->base = $path;
         }
@@ -75,10 +76,10 @@ abstract class Loco_config_Model {
             $value = $this->dirs[$key];
         }
         else {
-            $value = loco_constant($key);
+            $value = rtrim( loco_constant($key), '/' );
         }
 
-        return rtrim($value,'/');
+        return $value;
     }
 
 
@@ -91,14 +92,16 @@ abstract class Loco_config_Model {
             // Calculate relative path to the config file itself
             $relpath = $file->getRelativePath( $this->base );
             // Map to a configured base path if target is not under our root. This makes XML more portable
-            if( $relpath && ( '/' === $relpath{0} || '..' === substr($relpath,0,2) ) ){
+            // matching order is most specific first, resulting in shortest path
+            if( $relpath && ( '/' === $relpath{0} || '..' === substr($relpath,0,2) || $this->base === $this->getDirectoryPath('ABSPATH') ) ){
                 $bases = array( 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' );
                 foreach( $bases as $key ){
-                    if( $base = $this->getDirectoryPath($key) ){
+                    if( ( $base = $this->getDirectoryPath($key) ) && $base !== $this->base ){
+                        $base .= '/';
                         $len = strlen($base);
                         if( substr($path,0,$len) === $base ){
                             $node->setAttribute('base',$key);
-                            $relpath = substr( $path, $len+1 );
+                            $relpath = substr( $path, $len );
                             break;
                         }
                     } // @codeCoverageIgnore

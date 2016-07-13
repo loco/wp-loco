@@ -74,6 +74,16 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     }
 
 
+    /**
+     * Raise a debug notice, if debug is enabled
+     * @return Loco_error_Debug
+     */
+    public static function debug( $message ){
+        $notice = new Loco_error_Debug($message);
+        loco_debugging() and self::add( $notice );
+        return $notice;
+    }
+
 
     /**
      * Destroy and return buffer

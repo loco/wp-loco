@@ -106,7 +106,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         $type = strtolower( $this->get('type') );
         $this->set( 'redirect', Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type), array (
             'path' => $pofile->getRelativePath($base),
-            'bundle' => $bundle->getSlug(),
+            'bundle' => $bundle->getHandle(),
             'domain' => $project->getId(),
         ) ) );
         

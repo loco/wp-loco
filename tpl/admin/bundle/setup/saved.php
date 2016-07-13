@@ -2,12 +2,12 @@
 /**
  * Bundle is saved in database, but can be reset 
  */
-$this->extend('../layout');
+$this->extend('../../layout');
 
 ?> 
 
     <div class="notice inline notice-info">
-        <h3 class="has-icon icon-info">
+        <h3 class="has-icon">
             Bundle configuration saved
         </h3>
         <p>

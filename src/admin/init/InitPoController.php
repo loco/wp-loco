@@ -211,7 +211,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             'route' => 'msginit',
             'loco-nonce' => $this->setNonce('msginit')->value,
             'type' => $bundle->getType(),
-            'bundle' => $bundle->getSlug(),
+            'bundle' => $bundle->getHandle(),
             'domain' => $project->getId(),
             'source' => $this->get('source'),
         ) ) );

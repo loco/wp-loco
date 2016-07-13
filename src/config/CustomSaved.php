@@ -14,7 +14,7 @@ class Loco_config_CustomSaved extends Loco_data_Option {
      * {@inheritdoc}
      */
     public function getKey(){
-        return strtolower( $this->bundle->getType() ).'_config__'.$this->bundle->getSlug();
+        return strtolower( $this->bundle->getType() ).'_config__'.$this->bundle->getHandle();
     }
     
     

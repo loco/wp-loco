@@ -22,8 +22,9 @@ $this->start('header');
         </dl>
    </div>
     
-    <?php if( 'POT' !== $file->type ):?> 
-    <div class="notice inline notice-error">
+    <?php 
+    if( 'POT' !== $file->type && ! $params->isTemplate ):?> 
+    <div class="notice inline notice-warning">
         <h3 class="has-icon">
             Weird file name
         </h3>
@@ -34,4 +35,4 @@ $this->start('header');
             The author may intend this file to be used as a template, but templates should have the extension <strong>.pot</strong>
         </p>
     </div><?php
-    endif?> 
+    endif; 

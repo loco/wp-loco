@@ -1,9 +1,9 @@
 <?php
 /**
- * Bundle is set up from self-declared metadata
+ * Bundle is set up internally
  */
-$this->extend('setup');
-$this->start('header');
+$this->extend('../../layout');
+
 ?>
 
     <div class="notice inline notice-info">
@@ -11,9 +11,9 @@ $this->start('header');
             Bundle auto-configured
         </h3>
         <p>
-            This bundle's configuration has been automatically detected, but you can customize it if you need.
+            This bundle's configuration is built into Loco, but you can customize it if you need.
         </p>
-        <p>
+        <p class="submit">
             <a class="button button-link has-icon icon-cog" href="<?php $tabs[2]->e('href')?>">Customize</a>
         </p>
     </div>

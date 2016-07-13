@@ -2,7 +2,7 @@
 /**
  * Bundle is configured by official author
  */
-$this->extend('../layout');
+$this->extend('../../layout');
 
 ?>
 

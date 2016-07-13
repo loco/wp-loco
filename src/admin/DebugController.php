@@ -12,7 +12,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         /* @var $bundle Loco_package_Bundle */
         foreach( Loco_package_Listener::singleton()->getThemes() as $bundle ){
             $themes[] = array (
-                'slug' => $bundle->getSlug(),
+                'id' => $bundle->getId(),
                 'name' => $bundle->getName(),
                 'default' => $bundle->getDefaultProject()->getSlug(),
                 'count' => count($bundle),
@@ -23,7 +23,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         /* @var $bundle Loco_package_Bundle */
         foreach( Loco_package_Listener::singleton()->getPlugins() as $bundle ){
             $plugins[] = array (
-                'slug' => $bundle->getSlug(),
+                'id' => $bundle->getId(),
                 'name' => $bundle->getName(),
                 'default' => $bundle->getDefaultProject()->getSlug(),
                 'count' => count($bundle),

@@ -53,6 +53,9 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      * @return Loco_error_Exception
      */
     public static function convert( Exception $e ){
+        if( $e instanceof Loco_error_Exception ){
+            return $e;
+        }
         return new Loco_error_Exception( $e->getMessage(), $e->getCode(), $e );
     }    
     

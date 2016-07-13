@@ -52,7 +52,7 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         // TODO append project fragment #<slug> ?
         $type = strtolower( $bundle->getType() );
         $this->set( 'redirect', Loco_mvc_AdminRouter::generate( sprintf('%s-view',$type), array (
-            'bundle' => $bundle->getSlug(),
+            'bundle' => $bundle->getHandle(),
         ) ) );
         
         return parent::render();

@@ -79,9 +79,9 @@ class Loco_config_BundleReader {
         /* @var $domainElement LocoConfigElement */
         foreach( $model->query('domain',$bundleElement) as $domainElement ){
             $slug = $domainElement->getAttribute('name') or $slug = $bundle->getSlug();
-            // bundle slug may be missing from config but already set
-            if( ! $bundle->getSlug() ){
-               $bundle->setSlug( $slug );
+            // bundle may not have a handle set (most likely only in tests)
+            if( ! $bundle->getHandle() ){
+               $bundle->setHandle( $slug );
             }
             // Text Domain may also be declared by bundle author
             $domain = new Loco_package_TextDomain( $slug );

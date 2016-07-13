@@ -37,6 +37,10 @@ class Loco_config_XMLModel extends Loco_config_Model {
      * @return void
      */
     public function loadXml( $source ){
+        
+        if( ! $source ){
+            throw new Loco_error_XmlParseException( __('XML supplied is empty','loco') );
+        }
     
         $dom = $this->getDom();
     

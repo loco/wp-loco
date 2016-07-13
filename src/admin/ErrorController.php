@@ -5,8 +5,8 @@
 class Loco_admin_ErrorController extends Loco_mvc_AdminController {
     
     
-    public function renderError( Loco_error_Exception $e ){
-        $this->set('error', $e );
+    public function renderError( Exception $e ){
+        $this->set('error', Loco_error_Exception::convert($e) );
         return $this->render();
     }
 
