@@ -2,8 +2,8 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.0
-Tested up to: 4.4.2
-Stable tag: 1.5.5
+Tested up to: 4.5.3
+Stable tag: 1.5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +24,15 @@ Features include:
 * Configurable PO file backups
 * Built-in WordPress locale codes
 
+
 Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.com/timwhitlock">@timwhitlock</a> / <a rel="author" href="https://plus.google.com/106703751121449519322">Tim Whitlock</a>
+
+
+> New version coming soon:
+>
+> Please help us beta test the all new [version 2](https://localise.biz/help/wordpress/translate-plugin/developers).
+
+
 
 == Installation ==
 
