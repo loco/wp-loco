@@ -22,7 +22,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Signals the beginning of a "load_theme_textdomain" process
      */    
     public function filter_theme_locale( $locale, $domain ){
-        $this->context = array( '/themes', $domain, $locale );
+        $this->context = array( 'themes', $domain, $locale );
         return $locale;
     }
 
@@ -32,7 +32,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Signals the beginning of a "load_plugin_textdomain" process
      */    
     public function filter_plugin_locale( $locale, $domain ){
-        $this->context = array( '/plugins', $domain, $locale );
+        $this->context = array( 'plugins', $domain, $locale );
         return $locale;
     }
 
@@ -52,8 +52,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             return true;
         }
         // roots
-        $wp_lang_dir = rtrim( loco_constant('WP_LANG_DIR'), '/');
-        $lc_lang_dir = rtrim( loco_constant('LOCO_LANG_DIR') ,'/');
+        $wp_lang_dir = trailingslashit( loco_constant('WP_LANG_DIR') );
+        $lc_lang_dir = trailingslashit( loco_constant('LOCO_LANG_DIR') );
 
         // if context is set, then theme or plugin initialized loading process
         if( is_array($this->context) ){
@@ -72,17 +72,20 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         }
 
         // else load_textdomain must have been called directly.
-        // ideally this would only be for core translation files, which are under our "core" subdirectory
-        else if( dirname($mopath) === $wp_lang_dir ){
-            $order = array (
-                $mopath,
-                substr_replace( $mopath, $lc_lang_dir.'/core', 0, strlen($wp_lang_dir) ),
-            );
-        }
-
-        // else no way to map files onto LOCO_LANG_DIR
         else {
-            $order = array( $mopath );
+            $snip = strlen($wp_lang_dir);
+            // ideally direct loads are to something under WP_LANG_DIR
+            if( substr( dirname($mopath).'/', 0, $snip ) === $wp_lang_dir ){
+                $order = array (
+                    $mopath,
+                    substr_replace( $mopath, $lc_lang_dir, 0, $snip ),
+                );
+            }
+
+            // else no way to map files from WP_LANG_DIR to LOCO_LANG_DIR
+            else {
+                $order = array( $mopath );
+            }
         }
         
         // permit themes/plugins to modify the default loading order

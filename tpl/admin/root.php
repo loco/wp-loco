@@ -34,7 +34,7 @@ $this->extend('layout');
     <?php if( $plugins ):?> 
     <div>
         <h2>
-            <?php esc_attr_e('Active plugins:','loco')?> 
+            <?php esc_attr_e('Running plugins:','loco')?> 
         </h2>
         <p>
             These plugins have recently loaded translation files into the admin area:

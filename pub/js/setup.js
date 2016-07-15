@@ -8,7 +8,7 @@
     /**
      * Look up bundle configuration on remote server
      */
-    function find( vendor, slug ){
+    function find( vendor, slug, version ){
 
         function onFailure(){
             if( timer ){
@@ -53,7 +53,7 @@
         unsetJson('');
 
         $.ajax( {
-            url: conf.apiUrl+'/'+vendor+'/'+slug+'.jsonp',
+            url: conf.apiUrl+'/'+vendor+'/'+slug+'.jsonp?version='+encodeURIComponent(version),
             dataType: 'jsonp',
             success: onResponse,
             error: onFailure,
@@ -85,7 +85,7 @@
     function onFindClick( event ){
         event.preventDefault();
         finder && finder.abort();
-        finder = find( elForm.vendor.value, elForm.slug.value );
+        finder = find( elForm.vendor.value, elForm.slug.value, elForm.version.value );
         return false;
     }
     

@@ -59,8 +59,11 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         }
         // execute JSON-based config if posted
         else if( $post->has('json-setup') && $this->checkNonce( 'json-'.$action) ){
-            $configs = new Loco_config_BundleVersions;
-            $configs->loadJson( $post['json-content'] )->configure( $bundle );
+            $bundle->clear();
+            $model = new Loco_config_ArrayModel;
+            $model->loadJson( trim( $post['json-content'] ) );
+            $reader = new Loco_config_BundleReader($bundle);
+            $reader->loadModel( $model );
             $this->saveBundle();
             $bundle = $this->getBundle();
         }
@@ -75,7 +78,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         $this->set( 'credit', $info->getAuthorCredit() );
 
         // render according to current configuration method (save type)
-        $configured = $bundle->isConfigured();
+        $configured = $this->get('force') or $configured = $bundle->isConfigured();
         
         if( 'db' === $configured ){
             // form for resetting config
@@ -128,6 +131,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         // form to paste JSON config (via remote lookup)
         $fields = new Loco_mvc_HiddenFields( array(
             'json-content' => '',
+            'version' => $info->Version,
         ) );
         $fields->setNonce( 'json-'.$action );
         $this->set('jsonFields', $fields );

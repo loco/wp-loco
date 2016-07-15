@@ -146,8 +146,8 @@ class Loco_package_Debugger implements IteratorAggregate {
             foreach( array_intersect_key($counts, $domains) as $domain => $count ){
                 if( isset($realCounts[$domain]) ){
                     $realCount = $realCounts[$domain];
-                    $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', number_format($realCount), 'loco' );
-                    $this->good( $str, $realCount, $domain );
+                    $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', $realCount, 'loco' );
+                    $this->good( $str, number_format($realCount), $domain );
                 }
                 else {
                     $this->warn('No strings extracted from source code for "%s"', $domain );
@@ -164,12 +164,12 @@ class Loco_package_Debugger implements IteratorAggregate {
                 }
             }
             // with extracted strings we can check for domain mismatches
-            if( $missing = array_diff_key($domains, $counts) ){
+            if( $missing = array_diff_key($domains, $realCounts) ){
                 $num = count($missing);
                 $str = _n( 'Configured domain has no extractable strings', '%u configured domains have no extractable strings', $num, 'loco' );
                 $this->warn( $str.': %2$s', $num, $this->implodeKeys($missing) );
             }
-            if( $extra = array_diff_key($counts,$domains) ){
+            if( $extra = array_diff_key($realCounts,$domains) ){
                 $this->info('%u unconfigured domain[s] found in source code: %s', count($extra), $this->implodeKeys($extra) );
                 // extracted domains could prove that declared domain is wrong
                 if( $missing ){

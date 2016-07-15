@@ -10,7 +10,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     public function getSystemTargets(){
         return array (
             rtrim( loco_constant('WP_LANG_DIR'), '/' ),
-            rtrim( loco_constant('LOCO_LANG_DIR'), '/' ).'/core',
+            rtrim( loco_constant('LOCO_LANG_DIR'), '/' )
         );
     }
 

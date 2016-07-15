@@ -36,11 +36,11 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
 
     /**
-     * plugin_row_meta action callback
+     * plugin_action_links action callback
      */
-    public function on_plugin_row_meta( $links, $plugin = '' ){
+    public function on_plugin_action_links( $links, $plugin = '' ){
          try {
-             if( $plugin ){
+             if( $plugin && current_user_can('loco_admin') ){
                 $href = Loco_mvc_AdminRouter::generate('plugin-view', array( 'bundle' => $plugin) );
                 $links[] = '<a href="'.esc_attr($href).'">'.esc_html__('Translate','loco').'</a>';
              }

@@ -109,7 +109,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 $poname = ( $prefix = $potfile->getPrefix() ) ? sprintf('%s-%s.po',$prefix,$locale) : sprintf('%s.po',$locale);
                 $pofile = new Loco_fs_LocaleFile( $poname );
                 $pofile->normalize( $potfile->dirname() );
-                $filechoice->add( $potfile );
+                $filechoice->add( $pofile );
             }
             /// else if POT is in a folder we don't know about, we may as well add to the choices
             // TODO this means another utilty function in project for prefixing rules on individual location

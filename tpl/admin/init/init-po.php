@@ -117,13 +117,13 @@ $this->extend('../layout');
                         <td>
                             <p>
                                 <label>
-                                    <input type="radio" name="strip" value="" checked />
+                                    <input type="radio" name="strip" value="" />
                                     Copy target translations from <?php $params->e('sourceLocale')?> 
                                 </label>
                             </p>
                             <p>
                                 <label>
-                                    <input type="radio" name="strip" value="1" />
+                                    <input type="radio" name="strip" value="1" checked />
                                     Just copy English source strings
                                 </label>
                             </p>
