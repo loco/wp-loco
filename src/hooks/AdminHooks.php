@@ -28,7 +28,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
                 Loco_package_Listener::create();
             }
             // we'll need our own translations on all admin pages not just our own, for menu items etc..
-            $domainPath = dirname( loco_plugin_self() ).'/lang';
+            $domainPath = dirname( loco_plugin_self() ).'/languages';
             load_plugin_textdomain( 'loco', false, $domainPath );
         }
     }

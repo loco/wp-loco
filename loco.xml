@@ -8,10 +8,10 @@
         <directory>tpl</directory>
       </source>
       <target>
-        <directory>lang</directory>
+        <directory>languages</directory>
       </target>
       <template>
-        <file>lang/loco.pot</file>
+        <file>languages/loco.pot</file>
       </template>
     </project>
   </domain>

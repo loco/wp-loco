@@ -7,7 +7,7 @@ Author: Tim Whitlock
 Version: 2.0.0-dev
 Author URI: https://localise.biz/help/wordpress/translate-plugin
 Text Domain: loco
-Domain Path: /lang/
+Domain Path: /languages/
 */
 
 // disallow execution out of context
