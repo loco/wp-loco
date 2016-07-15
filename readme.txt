@@ -84,6 +84,7 @@ Before posting your questions on the support forum, please see the [most common 
 * Added Czech and Greek translations
 * Updated Russian and Polish translations
 * No longer using glob functions
+* Final 1.x release
 
 = 1.5.5 =
 * Added Korean and Ukrainian translations

@@ -12,7 +12,7 @@ $nav = array (
 
     // show upgrade notice if available
     if( isset($update) ):?> 
-    <div class="loco-message updated loco-warning">
+    <div class="loco-message updated inline loco-warning">
         <p>
             <strong>
                 <?php Loco::h( __('New version available','loco-translate') )?>:
@@ -20,6 +20,14 @@ $nav = array (
             <a href="http://wordpress.org/extend/plugins/<?php echo Loco::NS?>">
                 <?php Loco::h( __('Upgrade to version %s of Loco Translate','loco-translate'), $update )?>
             </a>
+        </p>
+    </div><?php
+    else:?> 
+    <div class="notice inline notice-info">
+        <h3>Version 2.0 is nearly here</h3>
+        <p>
+            We've been working on a completely new version of Loco Translate. 
+            If you'd like early access, please <a href="https://localise.biz/help/wordpress/translate-plugin/developers" target="_blank">help us test it</a>.
         </p>
     </div><?php
     endif; 
