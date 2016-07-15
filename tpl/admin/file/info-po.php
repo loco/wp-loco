@@ -40,3 +40,28 @@ $this->start('header');
         </p>
     </div><?php
     endif;
+
+
+    if( $params->has('potfile') ):
+    if( $potfile->synced ):?> 
+    <div class="notice inline notice-success">
+        <h3 class="has-icon">
+            In sync with template
+        </h3>
+        <p>
+            PO file has the same source strings as "<?php $potfile->e('name')?>"
+        </p>
+    </div><?php
+
+    else:?> 
+    <div class="notice inline notice-debug">
+        <h3 class="has-icon">
+            Out of sync with template
+        </h3>
+        <p>
+            PO file has different source strings to "<?php $potfile->e('name')?>". Try running Sync before making any changes.
+        </p>
+    </div><?php
+    endif;
+    endif;
+    

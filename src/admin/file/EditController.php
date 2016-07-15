@@ -39,10 +39,6 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             $this->set('modified', $file->modified() );
             $data = Loco_gettext_Data::load( $file );
         }
-        catch( Loco_error_Exception $e ){
-            Loco_error_AdminNotices::add($e);
-            $data = Loco_gettext_Data::dummy();
-        }
         catch( Exception $e ){
             Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
             $data = Loco_gettext_Data::dummy();
@@ -61,10 +57,24 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         try {
             $bundle = $this->getBundle();
             $project = $this->getProject();
+            $potfile = $project->getPot();
             // ensure template always treated as POT even if using a PO as template
-            if( $locale && ( $pot = $project->getPot() ) && $pot->equal($file) ){
+            if( $locale && $potfile && $potfile->equal($file) ){
                 $locale = null;
             }
+            /*/ else check whether PO requires syncing to POT 
+            else if( $potfile && ! $potfile->equal($file) ){
+                try {
+                    $potdata = Loco_gettext_Data::load( $potfile );
+                    if( ! $potdata->equalSource($data) ){
+                        // TODO notify some other way, because this warning will stick after sync has been performed.
+                        Loco_error_AdminNotices::warn( __('Translations are out of sync with the template file','loco') );
+                    }
+                }
+                catch( Exception $e ){
+                    throw new Loco_error_Exception("Template isn't valid, sync not available");
+                }
+            }*/
             // Establish if save and sync is permitted based on template lock
             if( $project->isPotLocked() && ( $potfile = $project->getPot() ) && $file->equal($potfile) ){
                 Loco_error_AdminNotices::warn('Template is protected from updates by the bundle configuration');

@@ -113,20 +113,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * Create a signature for use in comparing source strings between documents
      * @return string
-     *
-    public function getMsgidDigest(){
-        $data = array();
-        foreach( $this as $message ){
-            $msgid = $message['source'];
-            if( isset($message['context']) && ( $msgctxt = $message['context'] ) ){
-                $msgid = $msgctxt."\x04". ( $msgid ? $msgid : '('.$msgctxt.')' );
-            }
-            $data[] = $msgid;
-        }
-        sort( $data );
-        var_dump( $data );
-        return md5( implode("\0",$data) );
-    }*/
+     */
+    public function getSourceDigest(){
+        $data = $this->getHashes();
+        return md5( implode("\1",$data) );
+    }
 
     
     

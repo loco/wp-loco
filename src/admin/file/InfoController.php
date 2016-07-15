@@ -74,6 +74,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         }
         catch( Loco_error_Exception $e ){
             $isTemplate = false;
+            $template = null;
         }
 
         // file will be Gettext most likely            
@@ -121,16 +122,24 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 $potime = strtotime($podate) or $potime = $file->modified();
                 $this->set('potime', $potime );
                 // access to meta stats, normally cached on listing pages
-                $meta = Loco_gettext_Metadata::load($file);
+                $meta = Loco_gettext_Metadata::create($file,$data);
                 $this->set( 'meta', $meta );
-                // additional checks in debug mode
-                if( loco_debugging() ){
-                    // language sanity check. Warn if file name disagrees with PO header
-                    if( $locale && ( $value = $head['Language'] ) ){
-                        $check = (string) Loco_Locale::parse($value);
-                        if( $check !== $code ){
-                            Loco_error_AdminNotices::warn( sprintf( __('Language header is "%s" but file name contains "%s"','loco'), $value, $code ) );
-                        }
+                // establish whether PO is in sync with POT
+                if( $template && ! $isTemplate && 'po' === $ext ){
+                    try {
+                        $this->set('potfile', new Loco_mvc_FileParams( array(
+                            'synced' => Loco_gettext_Data::load($template)->equalSource($data),
+                        ), $template ) );
+                    }
+                    catch( Exception $e ){
+                        // ignore invalid template in this context
+                    }
+                }
+                // language sanity check. Developer warning if file name disagrees with PO header
+                if( $locale && ( $value = $head['Language'] ) ){
+                    $check = (string) Loco_Locale::parse($value);
+                    if( $check !== $code ){
+                        Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco'), $value, $code ) );
                     }
                 }
             }

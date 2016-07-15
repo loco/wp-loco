@@ -84,11 +84,11 @@ class Loco_package_Debugger implements IteratorAggregate {
                 if( $potfile = $project->getPot() ){
                     if( $potfile->exists() ){
                         $this->good('Template file for "%s" exists at "%s"', $id, $potfile->getRelativePath($base) );
-                        $meta = Loco_gettext_Metadata::load($potfile);
-                        if( $meta['valid'] ){
-                            $templates[$domain][] = $meta;
+                        try {
+                            $data = Loco_gettext_Data::load($potfile);
+                            $templates[$domain][] = $data;
                         }
-                        else {
+                        catch( Exception $e ){
                             $this->warn('Template file for "%s" is invalid format', $id );
                         }
                     }
@@ -154,13 +154,11 @@ class Loco_package_Debugger implements IteratorAggregate {
                 }
                 // check POT agrees with extracted count, but only if domain has single POT (i.e. not split across files on purpose)
                 if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){
-                    $meta = current( $templates[$domain] );
-                    if( $meta->getTotal() !== $count ){
-                        $this->devel('%s in "%s". You might want to sync "%s" with the source code', $meta->getTotalSummary(), basename($meta->getPath(false)), $domain );
+                    $data = current( $templates[$domain] );
+                    if( ! $extr->getTemplate($domain)->equalSource($data) ){
+                        $meta = Loco_gettext_Metadata::create( new Loco_fs_DummyFile(''), $data );
+                        $this->devel('Template is not in sync with source code (%s in file)', $meta->getTotalSummary() );
                     }
-                    /* TODO proper a/b comparison when string count agrees - the above does not prove they're identical
-                    $a = $extr->getTemplate('loco');
-                    $b = Loco_gettext_Data::load($potfile); */
                 }
             }
             // with extracted strings we can check for domain mismatches

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate (v2 translations)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"PO-Revision-Date: Fri Jul 15 2016 17:05:08 GMT+0100 (BST)\n"
+"PO-Revision-Date: Fri Jul 15 2016 20:02:11 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: English (UK)\n"
 "Language: en-GB\n"
@@ -274,13 +274,13 @@ msgid_plural "%s strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Debugger.php:169
+#: src/package/Debugger.php:167
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Header.php:77 src/admin/file/InfoController.php:117
+#: src/package/Header.php:77 src/admin/file/InfoController.php:118
 msgid "Unknown author"
 msgstr ""
 
@@ -422,51 +422,51 @@ msgstr[1] ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: src/admin/file/EditController.php:98
+#: src/admin/file/EditController.php:108
 msgctxt "Editor button"
 msgid "Add"
 msgstr ""
 
-#: src/admin/file/EditController.php:99
+#: src/admin/file/EditController.php:109
 msgctxt "Editor button"
 msgid "Remove"
 msgstr ""
 
-#: src/admin/file/EditController.php:100
+#: src/admin/file/EditController.php:110
 msgctxt "Editor button"
 msgid "Help"
 msgstr ""
 
-#: src/admin/file/EditController.php:101
+#: src/admin/file/EditController.php:111
 msgctxt "Editor button"
 msgid "Save"
 msgstr ""
 
-#: src/admin/file/EditController.php:102
+#: src/admin/file/EditController.php:112
 msgctxt "Editor button"
 msgid "Sync"
 msgstr ""
 
-#: src/admin/file/EditController.php:103
+#: src/admin/file/EditController.php:113
 msgctxt "Editor button"
 msgid "Revert"
 msgstr ""
 
-#: src/admin/file/EditController.php:104
+#: src/admin/file/EditController.php:114
 msgctxt "Editor button"
 msgid "Fuzzy"
 msgstr ""
 
-#: src/admin/file/EditController.php:105
+#: src/admin/file/EditController.php:115
 msgctxt "Editor button"
 msgid "Download"
 msgstr ""
 
-#: src/admin/file/EditController.php:106
+#: src/admin/file/EditController.php:116
 msgid "Filter translations"
 msgstr ""
 
-#: src/admin/file/InfoController.php:132
+#: src/admin/file/InfoController.php:142
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
 

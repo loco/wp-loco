@@ -92,7 +92,7 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
      * Construct from previously parsed PO data
      * @return Loco_gettext_Metadata 
      */
-    public function create( Loco_fs_File $file, Loco_gettext_Data $data ){
+    public static function create( Loco_fs_File $file, Loco_gettext_Data $data ){
         return new Loco_gettext_Metadata( array (
             'valid' => true,
             'bytes' => $file->size(),

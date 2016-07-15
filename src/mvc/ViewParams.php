@@ -121,6 +121,17 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     }
 
 
+
+    /**
+     * Debugging function
+     * @codeCoverageIgnore
+     */
+    public function dump(){
+        echo '<pre>',$this->escape( json_encode( $this->getArrayCopy(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE ) ),'</pre>';
+    }
+
+
+
     // The following are all aliases for WordPress output functions in formatting.php
     
 
