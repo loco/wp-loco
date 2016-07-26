@@ -19,6 +19,10 @@ abstract class Loco_compat_MbstringExtension {
         return strlen($str);
     }
 
+    public static function mb_convert_encoding( $str, $to_encoding, $from_encoding ){
+        return $str;
+    }
+
 }
 
 
@@ -39,5 +43,11 @@ if( ! function_exists('mb_list_encodings') ){
 if( ! function_exists('mb_strlen') ){
     function mb_strlen( $str, $encoding = null ){
         return Loco_compat_MbstringExtension::mb_strlen( $str );
+    }
+}
+
+if( ! function_exists('mb_convert_encoding') ){
+    function mb_convert_encoding( $str, $to_encoding, $from_encoding = null ){
+        return Loco_compat_MbstringExtension::mb_convert_encoding( $str, $to_encoding, $from_encoding );
     }
 }

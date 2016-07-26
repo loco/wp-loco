@@ -5,6 +5,10 @@
  * 
  * If this library is missing any strings detected as being something other than UTF-8 will be passed though the noop iconv function.
  * This will result in no conversion at all and failures will almost certainly occur.
+ * 
+ * SCRAPPED
+ * iconv conversions now using mb_convert_encoding
+ * @codeCoverageIgnore
  */
 abstract class Loco_compat_IconvExtension {
     

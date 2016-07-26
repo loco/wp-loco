@@ -68,7 +68,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         $this->enqueueScript('min/admin', array('jquery-ui-dialog') );
         
         // check all extensions on all pages so admin notices are shown
-        foreach( array('iconv','json','mbstring','tokenizer') as $ext ){
+        foreach( array('json','mbstring','tokenizer') as $ext ){
             loco_check_extension($ext);
         }
 
