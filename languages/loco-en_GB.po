@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate (v2 translations)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"PO-Revision-Date: Fri Jul 15 2016 20:02:11 GMT+0100 (BST)\n"
+"PO-Revision-Date: Mon Aug 01 2016 14:46:47 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: English (UK)\n"
 "Language: en-GB\n"
@@ -11,18 +11,26 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco - https://localise.biz/"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SearchPath-0: ..\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Loco-Target-Locale: en_GB"
 
+#: loco.php:128
+msgid ""
+"Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
+"it"
+msgstr ""
+
+# OK, fine
 #: src/Locale.php:205
 msgid "Invalid locale"
-msgstr ""
-
-#: src/admin/ConfigController.php:30
-msgid "Settings saved"
-msgstr ""
-
-#: src/admin/ConfigController.php:67
-msgid "Plugin settings"
 msgstr ""
 
 #: src/admin/Navigation.php:41 src/mvc/AdminRouter.php:48
@@ -230,7 +238,7 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:66
+#: src/mvc/AdminRouter.php:66 src/admin/config/BaseController.php:17
 msgid "Settings"
 msgstr ""
 
@@ -239,7 +247,7 @@ msgstr ""
 msgid "Loco plugin options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:197
+#: src/mvc/AdminRouter.php:199
 msgid "Page not found"
 msgstr ""
 
@@ -286,46 +294,6 @@ msgstr ""
 
 #: src/package/Header.php:83
 msgid "Visit official site"
-msgstr ""
-
-#: tpl/admin/config.php:13 tpl/admin/config.php:17
-msgid "Compiling MO files"
-msgstr ""
-
-#: tpl/admin/config.php:22
-msgid "Generate hash tables"
-msgstr ""
-
-#: tpl/admin/config.php:28
-msgid "Include Fuzzy strings"
-msgstr ""
-
-#: tpl/admin/config.php:35 tpl/admin/config.php:39
-msgid "Backing up PO files"
-msgstr ""
-
-#: tpl/admin/config.php:43
-msgid "Number of backups to keep of each file:"
-msgstr ""
-
-#: tpl/admin/config.php:51 tpl/admin/config.php:55
-msgid "File system credentials"
-msgstr ""
-
-#: tpl/admin/config.php:60
-msgid "Remember in session"
-msgstr ""
-
-#: tpl/admin/config.php:67
-msgid "Grant access to roles"
-msgstr ""
-
-#: tpl/admin/config.php:71
-msgid "Allow full access to these roles"
-msgstr ""
-
-#: tpl/admin/config.php:88
-msgid "Save settings"
 msgstr ""
 
 #: tpl/admin/root.php:26
@@ -392,6 +360,20 @@ msgstr ""
 #: src/admin/bundle/ViewController.php:210 
 #: src/admin/init/InitPoController.php:133 tpl/admin/init/init-pot.php:36
 msgid "Create template"
+msgstr ""
+
+#: src/admin/config/BaseController.php:18
+msgid "Version"
+msgstr ""
+
+# Also fine!
+#: src/admin/config/SettingsController.php:30
+msgid "Settings saved"
+msgstr ""
+
+#: src/admin/config/SettingsController.php:68 
+#: src/admin/config/VersionController.php:34
+msgid "Plugin settings"
 msgstr ""
 
 #: src/admin/file/BaseController.php:79
@@ -606,6 +588,54 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
+#: tpl/admin/config/settings.php:13 tpl/admin/config/settings.php:17
+msgid "Compiling MO files"
+msgstr ""
+
+#: tpl/admin/config/settings.php:22
+msgid "Generate hash tables"
+msgstr ""
+
+#: tpl/admin/config/settings.php:28
+msgid "Include Fuzzy strings"
+msgstr ""
+
+#: tpl/admin/config/settings.php:35 tpl/admin/config/settings.php:39
+msgid "Backing up PO files"
+msgstr ""
+
+#: tpl/admin/config/settings.php:43
+msgid "Number of backups to keep of each file:"
+msgstr ""
+
+#: tpl/admin/config/settings.php:51 tpl/admin/config/settings.php:55
+msgid "File system credentials"
+msgstr ""
+
+#: tpl/admin/config/settings.php:60
+msgid "Remember in session"
+msgstr ""
+
+#: tpl/admin/config/settings.php:67
+msgid "Grant access to roles"
+msgstr ""
+
+#: tpl/admin/config/settings.php:71
+msgid "Allow full access to these roles"
+msgstr ""
+
+#: tpl/admin/config/settings.php:88
+msgid "Save settings"
+msgstr ""
+
+#: tpl/admin/config/version.php:11 tpl/admin/config/version.php:25
+msgid "Version %s"
+msgstr ""
+
+#: tpl/admin/config/version.php:17
+msgid "Upgrade to %s"
+msgstr ""
+
 #: tpl/admin/errors/file-isdir.php:11
 msgid "File is a directory"
 msgstr ""
@@ -704,9 +734,3 @@ msgstr ""
 #. Author URI of the plugin
 msgid "https://localise.biz/help/wordpress/translate-plugin"
 msgstr ""
-
-#: loco.php:121
-msgid ""
-"Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
-"it"
-msgstr "s"

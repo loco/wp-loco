@@ -19,5 +19,6 @@
     <directory>lib</directory>
     <directory>pub</directory>
     <directory>test</directory>
+    <directory>legacy</directory>
   </exclude>
 </bundle>

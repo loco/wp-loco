@@ -21,6 +21,15 @@ if( function_exists('loco_require') ){
     return;
 }
 
+// run plugin in legacy mode if forced, or if upgraded from 1.x
+$loco_branch = get_option('loco-branch', false );
+if( '1' === $loco_branch || ( '2' !== $loco_branch && false !== get_option('loco-translate-use_msgfmt',false) ) ){
+    if( is_admin() ){
+        require dirname(__FILE__).'/old/v1.php';
+    }
+    return;
+}
+
 
 /**
  * Get absolute path to Loco primary plugin file

@@ -1,0 +1,18 @@
+/* styles for versions of wordpress below 3.8 */
+
+#adminmenu .toplevel_page_loco-translate .wp-menu-image {
+    background-image: url(../img/wp/menu.png);
+    background-position: 2px 0;
+    -webkit-background-size: 28px 56px;  /* Safari 3.0 */
+     -moz-background-size: 28px 56px;    /* Gecko 1.9.2 (Firefox 3.6) */
+       -o-background-size: 28px 56px;    /* Opera 9.5 */
+          background-size: 28px 56px;    /* Gecko 2.0 (Firefox 4.0) and other CSS3-compliant browsers */
+ }
+
+#adminmenu .toplevel_page_loco-translate.wp-has-current-submenu .wp-menu-image {
+    background-position: 2px -28px;
+}
+
+.wrap.loco-lists > h2:before {
+    display: none !important;
+}

@@ -1,0 +1,636 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Loco Translate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
+"PO-Revision-Date: Wed Jul 06 2016 12:19:02 GMT+0100 (BST)\n"
+"Last-Translator: admin <support@localise.biz>\n"
+"Language-Team: Korean\n"
+"Language: ko-KR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: ko_KR\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#. Translators: Bold text label in admin error messages
+#: lib/loco-admin.php:31
+msgctxt "Message label"
+msgid "Error"
+msgstr "오류"
+
+#: lib/loco-admin.php:41
+msgctxt "Message label"
+msgid "Warning"
+msgstr "경고"
+
+#: lib/loco-admin.php:54 tpl/admin-list.tpl.php:98
+msgctxt "Message label"
+msgid "OK"
+msgstr "확인"
+
+#: lib/loco-admin.php:63
+msgid "Permission denied"
+msgstr "권한이 거부됨"
+
+#: lib/loco-admin.php:86
+msgid "Settings saved"
+msgstr "설정이 저장됨"
+
+#: lib/loco-admin.php:126 lib/loco-packages.php:568
+msgid "%s is not an official WordPress language"
+msgstr "%s은(는) 공식 워드프레스 언어가 아닙니다"
+
+#: lib/loco-admin.php:199
+msgid "New PO file"
+msgstr "새로운 PO 파일"
+
+#: lib/loco-admin.php:214
+msgid "PO file used as template. This will be renamed to %s on first save"
+msgstr "PO 파일이 양식으로 사용됨. 처음 저장 시 파일명이  %s(으)로 바뀝니다."
+
+#: lib/loco-admin.php:312
+msgid "You must specify a valid locale for a new PO file"
+msgstr "새로운 PO 파일에 대한 올바른 로케일을 지정해야 합니다"
+
+#: lib/loco-admin.php:337 lib/loco-admin.php:426
+msgid "No translatable strings found"
+msgstr "번역 가능한 스트링을 발견하지 못함"
+
+#: lib/loco-admin.php:337
+msgid "Cannot create a PO file."
+msgstr "PO 파일을 생성할 수 없음."
+
+#: lib/loco-admin.php:344
+msgid "PO file already exists with locale %s"
+msgstr "이미 로케일  %s에 대한 PO 파일이 존재함"
+
+#: lib/loco-admin.php:396
+msgid ""
+"File cannot be created automatically. Fix the file permissions or use "
+"Download instead of Save"
+msgstr ""
+"파일을 자동으로 생성하지 못했습니다. 파일 권한을 수정하거나 저장 대신 다운로"
+"드를 사용하세요"
+
+#: lib/loco-admin.php:405 lib/loco-admin.php:414
+msgid "%s file is empty"
+msgstr "%s 파일이 비어있음"
+
+#: lib/loco-admin.php:406 lib/loco-admin.php:421
+msgid "Run Sync to update from source code"
+msgstr "소스 코드로부터 업데이트 하기 위해 동기화를 실행하세요"
+
+#: lib/loco-admin.php:410 php/loco-posync.php:52
+msgid "No strings could be extracted from source code"
+msgstr "소스 코드로부터 스트링을 추출하지 못했음"
+
+#: lib/loco-admin.php:417
+msgid "Run Sync to update from %s"
+msgstr "%s(으)로부터 업데이트 하기 위해 동기화를 실행하세요"
+
+#: lib/loco-admin.php:436
+msgid "Source code has been modified, run Sync to update POT"
+msgstr "소스 코드가 변경되었음, POT를 업데이트 하기 위해 동기화를 실행하세요"
+
+#: lib/loco-admin.php:440
+msgid "POT has been modified since PO file was saved, run Sync to update"
+msgstr ""
+"PO 파일이 저장된 이후로 POT가 변경됨, 업데이트 하기 위해 동기화를 실행하세요"
+
+#: lib/loco-admin.php:536
+msgid "Bad file path"
+msgstr "잘못된 파일 경로"
+
+#: lib/loco-admin.php:783
+msgid "Empty or invalid %s file"
+msgstr "비어있거나 잘못된 %s 파일"
+
+#: lib/loco-admin.php:787
+msgid "%s file has no header"
+msgstr "%s 파일에 머리글이 없음"
+
+#: lib/loco-admin.php:934
+msgctxt "Add button"
+msgid "New template"
+msgstr "새로운 양식"
+
+#: lib/loco-admin.php:953
+msgctxt "Add button"
+msgid "New language"
+msgstr "새로운 언어"
+
+#: lib/loco-admin.php:992
+msgid "%s%% translated"
+msgstr "%s%% 번역됨"
+
+#: lib/loco-admin.php:992
+msgid "1 string"
+msgid_plural "%s strings"
+msgstr[0] "%u개의 스트링"
+msgstr[1] ""
+
+#: lib/loco-admin.php:995
+msgid "%s fuzzy"
+msgstr "%s개가 모호함"
+
+#: lib/loco-admin.php:998
+msgid "%s untranslated"
+msgstr "%s개가 번역되지 않음"
+
+#: lib/loco-admin.php:1044
+msgid "Failed to compile MO file with built-in compiler"
+msgstr "내장된 생성 도구로 MO 파일을 생성하는데 실패함"
+
+#: lib/loco-admin.php:1092 tpl/admin-nav.tpl.php:27
+msgid "Loco, Translation Management"
+msgstr "Loco, 번역 관리"
+
+#: lib/loco-admin.php:1093 lib/loco-admin.php:1124
+msgid "Manage translations"
+msgstr "번역 관리"
+
+#: lib/loco-admin.php:1094
+msgid "Translation options"
+msgstr "번역 옵션"
+
+#: lib/loco-admin.php:1101
+msgid "Loco Translate"
+msgstr "Loco 번역"
+
+#: lib/loco-admin.php:1125 tpl/admin-fscheck.tpl.php:8
+#: tpl/admin-opts.tpl.php:7 tpl/admin-poedit.tpl.php:7
+#: tpl/admin-poinit.tpl.php:7 tpl/admin-root.tpl.php:7
+msgid "Settings"
+msgstr "설정"
+
+#: lib/loco-admin.php:1149
+msgid "File download failed"
+msgstr "파일 다운로드에 실패함"
+
+#: lib/loco-admin.php:1159
+msgid "WPLANG is deprecated and should be removed from wp-config.php"
+msgstr "WPLANG은 사용 중지되었으며 wp-config.php에서 제거되어야 합니다."
+
+#: lib/loco-locales.php:77
+msgid "Unknown language"
+msgstr "알 수 없는 언어"
+
+#: lib/loco-packages.php:474 lib/loco-packages.php:481
+msgid "Some files not writable"
+msgstr "일부 파일에 쓰기가 불가능함"
+
+#: lib/loco-packages.php:484
+msgid "Some files missing"
+msgstr "일부 파일을 찾지 못함"
+
+#: lib/loco-packages.php:490 lib/loco-packages.php:494
+msgid "\"%s\" folder not writable"
+msgstr "\"%s\" 폴더에 쓰기가 불가능함"
+
+#: lib/loco-packages.php:515
+msgid "POT file not writable"
+msgstr "POT 파일에 쓰기가 불가능함"
+
+#: lib/loco-packages.php:520
+msgid "PO file not writable"
+msgstr "PO 파일에 쓰기가 불가능함"
+
+#: lib/loco-packages.php:522
+msgid "MO file not writable"
+msgstr "MO 파일에 쓰기가 불가능함"
+
+#: lib/loco-packages.php:522
+msgid "MO file not found"
+msgstr "MO 파일을 찾지 못함"
+
+#: lib/loco-packages.php:527
+msgid "Folder not writable"
+msgstr "폴더에 쓰기가 불가능함"
+
+#: lib/loco-packages.php:527
+msgid "Folder not found"
+msgstr "폴더를 찾지 못함"
+
+#: lib/loco-packages.php:546
+msgid "%s does not declare a \"Text Domain\""
+msgstr "%s 이(가) \"텍스트 도메인\"을 알려주지 않습니다"
+
+#: lib/loco-packages.php:546 lib/loco-packages.php:551
+msgid "Loco has guessed \"%s\""
+msgstr "Loco가 \"%s\"로 추측했습니다"
+
+#: lib/loco-packages.php:551
+msgid "%s does not declare a \"Domain Path\""
+msgstr "%s 이(가) \"도메인 경로\"를 알려주지 않습니다"
+
+#: lib/loco-packages.php:556
+msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
+msgstr ""
+"%s 은(는) POT 파일이 없습니다. 필요할 경우  \"%s/%s.pot\" 에서 생성하세요."
+
+#: lib/loco-packages.php:559
+msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
+msgstr "%s의 POT 파일명(%s)이 이상합니다. \"%s.pot\"가 더 나은 것 같습니다."
+
+#: php/loco-ajax.php:17 php/loco-download.php:21
+msgid "User does not have permission to manage translations"
+msgstr "사용자가 번역을 관리할 권한이 없음"
+
+#: php/loco-data.php:21 php/loco-posave.php:10 php/loco-posync.php:9
+msgid "Invalid data posted to server"
+msgstr "서버에 잘못된 데이터가 게시됨"
+
+#: php/loco-download.php:75 php/loco-posave.php:121
+msgid "Failed to compile MO file with %s, check your settings"
+msgstr "%s(으)로 MO 파일을 생성하는데 실패함, 설정을 확인하세요"
+
+#: php/loco-posave.php:23 php/loco-posync.php:22
+msgid "Package not found called %s"
+msgstr "%s 이라 불리우는 패키지를 찾지 못함"
+
+#: php/loco-posave.php:58
+msgid ""
+"Web server cannot create backups in \"%s\". Fix file permissions or disable "
+"backups in settings"
+msgstr ""
+"웹 서버가 \"%s\" 에 백업을 생성할 수 없음. 파일 권한을 수정하거나 설정에서 백"
+"업을 비활성화하세요"
+
+#: php/loco-posave.php:66
+msgid ""
+"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
+"create it manually."
+msgstr ""
+"웹 서버가  \"%s\" 디렉터리를 \"%s\" 에 생성하지 못했습니다. 파일 권한을 수정"
+"하거나 수동으로 생성하세요."
+
+#: php/loco-posave.php:69
+msgid ""
+"Web server cannot create files in the \"%s\" directory. Fix file permissions "
+"or use the download function."
+msgstr ""
+"웹 서버가  \"%s\" 디렉터리를 \"%s\" 에 생성하지 못했습니다. 파일 권한을 수정"
+"하거나 다운로드 기능을 사용하세요."
+
+#: php/loco-posave.php:81
+msgid ""
+"%s file is not writable by the web server. Fix file permissions or download "
+"and copy to \"%s/%s\"."
+msgstr ""
+"웹 서버가  %s 파일을 기록할 수 없습니다. 파일 권한을 수정하거나 \"%s/%s\" 에 "
+"다운로드 및 복사하세요."
+
+#: php/loco-posave.php:102
+msgid "Cannot create MO file"
+msgstr "MO 파일을 생성할 수 없음"
+
+#: php/loco-posave.php:105
+msgid "Cannot overwrite MO file"
+msgstr "MO 파일을 덮어쓸 수 없음"
+
+#: php/loco-posave.php:131
+msgid "Failed to write MO file"
+msgstr "MO 파일에 기록하지 못함"
+
+#: tpl/admin-fscheck.tpl.php:7 tpl/admin-opts.tpl.php:6
+#: tpl/admin-poedit.tpl.php:6 tpl/admin-poinit.tpl.php:6
+#: tpl/admin-root.tpl.php:6
+msgid "Packages"
+msgstr "패키지"
+
+#: tpl/admin-fscheck.tpl.php:10
+msgid "File check"
+msgstr "파일 확인"
+
+#: tpl/admin-fscheck.tpl.php:19
+msgid "File system permissions for %s"
+msgstr "%s 에 대한 파일 시스템 권한"
+
+#: tpl/admin-fscheck.tpl.php:43
+msgid "Other potential issues with %s"
+msgstr "%s 에 대한 기타 잠재적 문제점"
+
+#: tpl/admin-fscheck.tpl.php:57
+msgid "Back"
+msgstr "뒤로"
+
+#: tpl/admin-fscheck.tpl.php:58 tpl/admin-opts.tpl.php:102
+msgid "Get help"
+msgstr "도움 얻기"
+
+#: tpl/admin-list.tpl.php:11
+msgctxt "Table header"
+msgid "Package details"
+msgstr "패키지 세부 사항"
+
+#: tpl/admin-list.tpl.php:14
+msgctxt "Table header"
+msgid "Translations (PO)"
+msgstr "번역 (PO)"
+
+#: tpl/admin-list.tpl.php:17
+msgctxt "Table header"
+msgid "Template (POT)"
+msgstr "양식 (POT)"
+
+#: tpl/admin-list.tpl.php:20
+msgctxt "Table header"
+msgid "File permissions"
+msgstr "파일 권한"
+
+#: tpl/admin-list.tpl.php:40
+msgid "Extends: %s"
+msgstr "다음으로부터 확장: %s"
+
+#: tpl/admin-list.tpl.php:44
+msgid "1 language"
+msgid_plural "%u languages"
+msgstr[0] "%u개의 언어"
+msgstr[1] ""
+
+#: tpl/admin-list.tpl.php:49 tpl/admin-poedit.tpl.php:57
+msgctxt "Modified time"
+msgid "Updated"
+msgstr "업데이트:"
+
+#: tpl/admin-nav.tpl.php:26
+msgid "Powered by"
+msgstr "다음에 의해 작동 중:"
+
+#: tpl/admin-nav.tpl.php:32
+msgid "Loco may not work as expected"
+msgstr "Loco가 예상대로 작동하지 않을 수 있음"
+
+#: tpl/admin-opts.tpl.php:18
+msgid "Configure Loco Translate"
+msgstr "Loco 번역 설정"
+
+#: tpl/admin-opts.tpl.php:27 tpl/admin-opts.tpl.php:31
+msgid "Compiling MO files"
+msgstr "MO 파일 생성 작업"
+
+#: tpl/admin-opts.tpl.php:36
+msgid "Use built-in MO compiler."
+msgstr "내장된 MO 생성 도구 사용"
+
+#: tpl/admin-opts.tpl.php:42
+msgid "Use external command:"
+msgstr "외부 명령어 사용:"
+
+#: tpl/admin-opts.tpl.php:47
+msgid "Enter path to msgfmt on server"
+msgstr "서버의 msgfmt 에 대한 경로 입력"
+
+#: tpl/admin-opts.tpl.php:54
+msgid "Generate hash tables"
+msgstr "해시 테이블 생성"
+
+#: tpl/admin-opts.tpl.php:60
+msgid "Include Fuzzy strings"
+msgstr "모호한 스트링 포함"
+
+#: tpl/admin-opts.tpl.php:67 tpl/admin-opts.tpl.php:71
+msgid "Backing up PO files"
+msgstr "PO 파일 백업 작업"
+
+#: tpl/admin-opts.tpl.php:75
+msgid "Number of backups to keep of each file:"
+msgstr "각 파일 별 유지할 백업 개수"
+
+#: tpl/admin-opts.tpl.php:83 tpl/admin-opts.tpl.php:87
+msgid "Experimental features"
+msgstr "실험적인 기능"
+
+#: tpl/admin-opts.tpl.php:92
+msgid "Enable WordPress core translations"
+msgstr "워드프레스 핵심 번역 활성화"
+
+#: tpl/admin-opts.tpl.php:101
+msgid "Save settings"
+msgstr "설정 저장"
+
+#: tpl/admin-poedit.tpl.php:32
+msgid "Template file"
+msgstr "양식 파일"
+
+#: tpl/admin-poedit.tpl.php:40
+msgctxt "Dropdown label"
+msgid "Switch to..."
+msgstr "다음으로 전환..."
+
+#: tpl/admin-poedit.tpl.php:62
+msgid "never"
+msgstr "절대"
+
+#: tpl/admin-poedit.tpl.php:87
+msgctxt "Editor button"
+msgid "Save"
+msgstr "저장"
+
+#: tpl/admin-poedit.tpl.php:94 tpl/admin-poedit.tpl.php:103
+msgctxt "Editor button"
+msgid "Download"
+msgstr "다운로드"
+
+#: tpl/admin-poedit.tpl.php:115
+msgctxt "Editor button"
+msgid "Sync"
+msgstr "동기화"
+
+#: tpl/admin-poedit.tpl.php:120
+msgctxt "Editor button"
+msgid "Revert"
+msgstr "되돌리기"
+
+#: tpl/admin-poedit.tpl.php:125
+msgctxt "Editor button"
+msgid "Add"
+msgstr "추가"
+
+#: tpl/admin-poedit.tpl.php:130
+msgctxt "Editor button"
+msgid "Del"
+msgstr "삭제"
+
+#: tpl/admin-poedit.tpl.php:135
+msgctxt "Editor button"
+msgid "Fuzzy"
+msgstr "모호함"
+
+#: tpl/admin-poedit.tpl.php:140
+msgid "Filter translations"
+msgstr "필터 번역"
+
+#: tpl/admin-poedit.tpl.php:145
+msgctxt "Editor button"
+msgid "Help"
+msgstr "도움말"
+
+#: tpl/admin-poinit.tpl.php:22
+msgid "Initialize new translations in %s"
+msgstr "%s 에 새로운 번역을 시작"
+
+#: tpl/admin-poinit.tpl.php:35
+msgid "Select from common languages"
+msgstr "공통 언어에서 선택"
+
+#: tpl/admin-poinit.tpl.php:47
+msgctxt "Form label"
+msgid "or enter any language code"
+msgstr "또는 원하는 언어 코드 입력"
+
+#: tpl/admin-poinit.tpl.php:59 pub/js/lang/dummy.php:58
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr "<code>%s</code> 에 생성"
+
+#: tpl/admin-poinit.tpl.php:64
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr "범용 언어 디렉터리에 생성"
+
+#: tpl/admin-poinit.tpl.php:71
+msgctxt "Submit button"
+msgid "Start translating"
+msgstr "번역 시작"
+
+#: tpl/admin-root.tpl.php:18
+msgid "New version available"
+msgstr "새로운 버전 사용 가능"
+
+#: tpl/admin-root.tpl.php:21
+msgid "Upgrade to version %s of Loco Translate"
+msgstr "Loco 번역을 버전 %s(으)로 업그레이드"
+
+#: tpl/admin-root.tpl.php:31
+msgid "Select a plugin or theme to translate"
+msgstr "번역할 플러그인 또는 테마를 선택하세요"
+
+#: tpl/admin-root.tpl.php:40
+msgctxt "Package list header"
+msgid "Themes"
+msgstr "테마"
+
+#: tpl/admin-root.tpl.php:53
+msgctxt "Package list header"
+msgid "Plugins"
+msgstr "플러그인"
+
+#: tpl/admin-root.tpl.php:66
+msgctxt "Package list header"
+msgid "Core"
+msgstr "핵심"
+
+#: lib/compat/loco-iconv.php:13 lib/compat/loco-json.php:13
+#: lib/compat/loco-mbstring.php:13 lib/compat/loco-tokenizer.php:12
+msgid ""
+"PHP extension \"%s\" is not installed. If you experience problems you should "
+"install it"
+msgstr ""
+"php 확장 기능 \"%s\"이(가) 설치되지 않았습니다. 문제가 발생할 경우 설치하세요"
+
+#: pub/js/lang/dummy.php:8
+msgid "Unknown error"
+msgstr "알 수없는 오류"
+
+#: pub/js/lang/dummy.php:10
+msgid "PO file saved"
+msgstr "PO 파일이 저장됨"
+
+#: pub/js/lang/dummy.php:12
+msgid "and MO file compiled"
+msgstr "그리고 MO 파일이 생성되었음"
+
+#: pub/js/lang/dummy.php:15
+msgid "Merged from %s"
+msgstr "%s (으)로부터 병합됨"
+
+#: pub/js/lang/dummy.php:17
+msgid "Merged from source code"
+msgstr "원본 코드에서 병합됨"
+
+#: pub/js/lang/dummy.php:19
+msgid "Already up to date with %s"
+msgstr "%s 와(과) 비교하여 최신 상태임"
+
+#: pub/js/lang/dummy.php:21
+msgid "Already up to date with source code"
+msgstr "원본 코드와 비교하여 최신 상태임"
+
+#: pub/js/lang/dummy.php:23
+msgid "1 new string added"
+msgid_plural "%s new strings added"
+msgstr[0] "%u개의 새로운 스트링이 추가됨"
+msgstr[1] ""
+
+#: pub/js/lang/dummy.php:25
+msgid "1 obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] "%u개의 사용 중지된 스트링이 제거됨"
+msgstr[1] ""
+
+#: pub/js/lang/dummy.php:27
+msgid "Your changes will be lost if you continue without saving"
+msgstr "저장하지 않고 계속할 경우 변경 사항을 잃게 됩니다."
+
+#. label for the window pane holding native translation
+#: pub/js/lang/dummy.php:35
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr "원본 텍스트"
+
+#. where %s is the language, e.g French translation
+#: pub/js/lang/dummy.php:38
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr "%s 번역"
+
+#. label for the window pane holding translator comments
+#: pub/js/lang/dummy.php:41
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr "댓글"
+
+#. label for the window pane holding message context
+#: pub/js/lang/dummy.php:44
+msgctxt "Editor pane"
+msgid "Context"
+msgstr "문맥"
+
+#: pub/js/lang/dummy.php:52
+msgid "Translation"
+msgstr "번역"
+
+#: pub/js/lang/dummy.php:54
+msgid "No source files in this package, nothing to sync"
+msgstr "이 패키지에 소스 파일이 없습니다, 동기화 할 것이 없음"
+
+#: pub/js/lang/dummy.php:56
+msgid "No strings could be extracted from source files"
+msgstr "소스 파일로부터 스트링을 추출하지 못했음"
+
+#. Description of the plugin
+msgid "Translate WordPress plugins and themes directly in your browser"
+msgstr "브라우저에서 직접 워드프레스 플러그인 및 테마 번역"
+
+#. URI of the plugin
+msgid "http://wordpress.org/extend/plugins/loco-translate"
+msgstr "http://wordpress.org/extend/plugins/loco-translate"
+
+#. Author of the plugin
+msgid "Tim Whitlock"
+msgstr "Tim Whitlock"
+
+#. Author URI of the plugin
+msgid "https://localise.biz/help/wordpress/translate-plugin"
+msgstr "https://localise.biz/help/wordpress/translate-plugin"

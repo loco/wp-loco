@@ -147,7 +147,9 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         $routes = array (
             '' => 'Root',
             'debug' => 'Debug',
-            'config' => 'Config',
+            // site-wide plugin configurations
+            'config' => 'config_Settings',
+            'config-version' => 'config_Version',
             // bundle type listings
             'theme'  => 'list_Themes',
             'plugin' => 'list_Plugins',

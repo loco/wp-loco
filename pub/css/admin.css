@@ -336,6 +336,8 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 232, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-expand:before { content: "\f196"; }
 /* line 235, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-wordpress:before { content: "\f19a"; }
+/* line 238, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-database:before { content: "\f1c0"; }
 /* line 62, httpdocs/static/sass/imports/_icons.scss */
 #loco.wrap .icon-flag.is-untranslated:before { content: "×"; }
@@ -1048,127 +1050,133 @@ define( 'LOCO_FLAG_REJECTED',    6 ); // <- failed approval
 /* line 232, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-expand:before { content: "\f196"; }
 /* line 235, httpdocs/static/sass/auto/_icomoon.scss */
+#loco.wrap .icon-wordpress:before { content: "\f19a"; }
+/* line 238, httpdocs/static/sass/auto/_icomoon.scss */
 #loco.wrap .icon-database:before { content: "\f1c0"; }
 /* line 79, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .icon, #loco.wrap .has-icon:before { font-family: 'loco'; speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+#loco.wrap .icon, #loco.wrap .has-icon:before, #loco.wrap .has-dashicon:before { speak: none; font-style: normal; font-weight: normal; font-variant: normal; text-transform: none; line-height: 1; /* Better Font Rendering =========== */ -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
 /* line 93, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .has-icon:before, #loco.wrap .has-icon > span { display: inline-block; vertical-align: middle; }
-/* line 106, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .icon, #loco.wrap .has-icon:before { font-family: 'loco'; }
+/* line 98, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .has-dashicon:before { font-family: 'dashicons'; font-size: 1.4em; }
+/* line 103, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .has-icon:before, #loco.wrap .has-dashicon:before, #loco.wrap .has-icon > span { display: inline-block; vertical-align: middle; }
+/* line 116, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h1 ul, #loco.wrap h1 li { margin: 0; padding: 0; }
-/* line 110, httpdocs/static/sass/wp/admin.scss */
+/* line 120, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h1 li { display: inline-block; }
-/* line 112, httpdocs/static/sass/wp/admin.scss */
+/* line 122, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h1 li:after { content: "/"; color: #999; text-shadow: none; display: inline-block; }
-/* line 118, httpdocs/static/sass/wp/admin.scss */
+/* line 128, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h1 li a { text-decoration: none; }
-/* line 123, httpdocs/static/sass/wp/admin.scss */
+/* line 133, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h1 li:last-child:after { content: ""; }
-/* line 126, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap h1 li:last-child a { color: inherit; pointer-events: none; cursor: auto; }
 /* line 136, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap h1 li:last-child a { color: inherit; pointer-events: none; cursor: auto; }
+/* line 146, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h2 span { color: #999; font-weight: normal; }
-/* line 145, httpdocs/static/sass/wp/admin.scss */
+/* line 155, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap h3 .loco-meta { font-size: 14px; font-weight: normal; }
-/* line 156, httpdocs/static/sass/wp/admin.scss */
+/* line 166, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .wp-list-table td:first-child .icon { width: 16px; display: inline-block; text-align: center; }
-/* line 162, httpdocs/static/sass/wp/admin.scss */
+/* line 172, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .wp-list-table td { white-space: nowrap; }
-/* line 169, httpdocs/static/sass/wp/admin.scss */
+/* line 179, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap nav.above-list-table { margin-bottom: 1em; }
-/* line 171, httpdocs/static/sass/wp/admin.scss */
+/* line 181, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap nav.above-list-table a { display: inline-block; margin-right: 1em; }
-/* line 180, httpdocs/static/sass/wp/admin.scss */
+/* line 190, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .wp-core-ui button.inverted, #loco.wrap .wp-core-ui button.inverted:hover { background: -moz-linear-gradient(top, #cccccc 0%, #e0e0e0 5%, #fefefe 100%); background: -webkit-linear-gradient(top, #cccccc 0%, #e0e0e0 5%, #fefefe 100%); background: linear-gradient(to bottom, #cccccc 0%, #e0e0e0 5%, #fefefe 100%); -webkit-box-shadow: 0 1px 0 #fff; -moz-box-shadow: 0 1px 0 #fff; box-shadow: 0 1px 0 #fff; border-color: #bbb; }
-/* line 192, httpdocs/static/sass/wp/admin.scss */
+/* line 202, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .loco-clearable { display: inline-block; vertical-align: middle; position: relative; }
-/* line 198, httpdocs/static/sass/wp/admin.scss */
+/* line 208, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .loco-clearable a.clear, #loco.wrap .auto-comp-wrap a.clear { top: 0; right: 0; outline: none; padding: 5px 5px; position: absolute; font-size: 1em; line-height: normal; text-decoration: none; }
-/* line 207, httpdocs/static/sass/wp/admin.scss */
+/* line 217, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .loco-clearable a.clear:before, #loco.wrap .auto-comp-wrap a.clear:before { vertical-align: middle; padding: 0; color: #999; }
-/* line 212, httpdocs/static/sass/wp/admin.scss */
+/* line 222, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .loco-clearable a.clear:hover:before, #loco.wrap .auto-comp-wrap a.clear:hover:before { color: #333; }
-/* line 215, httpdocs/static/sass/wp/admin.scss */
+/* line 225, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .loco-clearable a.clear span, #loco.wrap .auto-comp-wrap a.clear span { display: none; }
-/* line 219, httpdocs/static/sass/wp/admin.scss */
+/* line 229, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .loco-clearable ::-ms-clear, #loco.wrap .auto-comp-wrap ::-ms-clear { display: none; }
-/* line 226, httpdocs/static/sass/wp/admin.scss */
+/* line 236, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap div.progress { color: #000; }
-/* line 228, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap div.progress * { height: 100%; overflow: hidden; white-space: nowrap; }
-/* line 234, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap div.progress .t { background-color: #ddd; border: 1px solid #ccc; }
 /* line 238, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap div.progress .t .bar { float: left; clear: none; background-color: #3db63d; }
+#loco.wrap div.progress * { height: 100%; overflow: hidden; white-space: nowrap; }
 /* line 244, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress .t { background-color: #ddd; border: 1px solid #ccc; }
+/* line 248, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap div.progress .t .bar { float: left; clear: none; background-color: #3db63d; }
+/* line 254, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap div.progress .t .bar.f { background-color: #bd2c00; }
-/* line 250, httpdocs/static/sass/wp/admin.scss */
+/* line 260, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap div.progress .l { display: block; }
-/* line 256, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap td div.progress .t { border: none; }
-/* line 259, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap td div.progress .l { display: none; }
 /* line 266, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap td div.progress .t { border: none; }
+/* line 269, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap td div.progress .l { display: none; }
+/* line 276, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap code.path { color: #333; margin: 0; padding: 0; display: inline; background: transparent; }
-/* line 302, httpdocs/static/sass/wp/admin.scss */
+/* line 312, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .notice { position: relative; margin: 1em 0; /*p > * { display: inline-block; vertical-align: middle; padding-right: 6px;
 }*/ /*.has-icon:before { width: 1.2em;
 }*/ }
-/* line 314, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-generic { border-color: #ddd; }
-/* line 318, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-success > .has-icon, #loco.wrap .notice-success p > strong.has-icon { color: #000; }
-/* line 320, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-warning { border-color: #FFA500; }
 /* line 324, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-error { border-color: #dc3232; }
+#loco.wrap .notice-generic { border-color: #ddd; }
 /* line 328, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-debug { border-color: #00a0d2; }
-/* line 335, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-danger { border-color: #dc3232; }
+#loco.wrap .notice-success > .has-icon, #loco.wrap .notice-success p > strong.has-icon { color: #000; }
+/* line 330, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-warning { border-color: #FFA500; }
+/* line 334, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-error { border-color: #dc3232; }
 /* line 338, httpdocs/static/sass/wp/admin.scss */
-#loco.wrap .notice-locked { border-color: #FFA500; }
+#loco.wrap .notice-debug { border-color: #00a0d2; }
+/* line 345, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-danger { border-color: #dc3232; }
 /* line 348, httpdocs/static/sass/wp/admin.scss */
+#loco.wrap .notice-locked { border-color: #FFA500; }
+/* line 358, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap input.regular-text, #loco.wrap textarea.regular-text { width: 25em; }
-/* line 353, httpdocs/static/sass/wp/admin.scss */
+/* line 363, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button { text-decoration: none; }
-/* line 357, httpdocs/static/sass/wp/admin.scss */
+/* line 367, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-link { padding: 0 10px 1px; }
-/* line 362, httpdocs/static/sass/wp/admin.scss */
+/* line 372, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-danger { background: #ba0000; border-color: #990000 #660000 #660000; -webkit-box-shadow: 0 1px 0 #660000; -moz-box-shadow: 0 1px 0 #660000; box-shadow: 0 1px 0 #660000; color: #fff; text-shadow: 0 -1px 1px #660000, 1px 0 1px #660000, 0 1px 1px #660000, -1px 0 1px #660000; }
-/* line 374, httpdocs/static/sass/wp/admin.scss */
+/* line 384, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-success { background: #00B500; border-color: #009900 #2e892e #2e892e; -webkit-box-shadow: 0 1px 0 #2e892e; -moz-box-shadow: 0 1px 0 #2e892e; box-shadow: 0 1px 0 #2e892e; color: #fff; text-shadow: 0 -1px 1px #2e892e, 1px 0 1px #2e892e, 0 1px 1px #2e892e, -1px 0 1px #2e892e; }
-/* line 383, httpdocs/static/sass/wp/admin.scss */
+/* line 393, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .button-success:hover { background: #3db63d; }
 
-/* line 393, httpdocs/static/sass/wp/admin.scss */
+/* line 403, httpdocs/static/sass/wp/admin.scss */
 .js #wpbody-content > .notice { display: none; }
-/* line 395, httpdocs/static/sass/wp/admin.scss */
+/* line 405, httpdocs/static/sass/wp/admin.scss */
 .js #wpbody-content > .notice.inline { display: block; }
 
-/* line 402, httpdocs/static/sass/wp/admin.scss */
+/* line 412, httpdocs/static/sass/wp/admin.scss */
 .js #loco.wrap .jshide { display: none !important; }
 
-/* line 406, httpdocs/static/sass/wp/admin.scss */
+/* line 416, httpdocs/static/sass/wp/admin.scss */
 #loco.wrap .invis { visibility: hidden; }
 
-/* line 414, httpdocs/static/sass/wp/admin.scss */
+/* line 424, httpdocs/static/sass/wp/admin.scss */
 .form-table tr { vertical-align: top; }
-/* line 418, httpdocs/static/sass/wp/admin.scss */
+/* line 428, httpdocs/static/sass/wp/admin.scss */
 .form-table tr.compact td { padding-top: 0; }
 
 /** file system connect stuff */
-/* line 428, httpdocs/static/sass/wp/admin.scss */
+/* line 438, httpdocs/static/sass/wp/admin.scss */
 #loco-fs p { line-height: 22px; }
-/* line 431, httpdocs/static/sass/wp/admin.scss */
+/* line 441, httpdocs/static/sass/wp/admin.scss */
 #loco-fs button[type="button"] { float: right; }
 
 /** Dev */
-/* line 441, httpdocs/static/sass/wp/admin.scss */
+/* line 451, httpdocs/static/sass/wp/admin.scss */
 #loco-debug { margin-top: 50px; font-size: 12px; color: #999; }
 
-/* line 449, httpdocs/static/sass/wp/admin.scss */
+/* line 459, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt { font-weight: bold; }
-/* line 452, httpdocs/static/sass/wp/admin.scss */
+/* line 462, httpdocs/static/sass/wp/admin.scss */
 dl.debug dt, dl.debug dd { white-space: pre; }
 
 /* Template for colours include, using default wordpress theme */

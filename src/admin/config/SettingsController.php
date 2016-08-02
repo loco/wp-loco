@@ -2,7 +2,7 @@
 /**
  *  Site-wide Loco options (plugin settings)
  */
-class Loco_admin_ConfigController extends Loco_mvc_AdminController {
+class Loco_admin_config_SettingsController extends Loco_admin_config_BaseController {
 
 
     /**
@@ -59,6 +59,7 @@ class Loco_admin_ConfigController extends Loco_mvc_AdminController {
     }
 
 
+
     /**
      * {@inheritdoc}
      */
@@ -68,8 +69,7 @@ class Loco_admin_ConfigController extends Loco_mvc_AdminController {
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
         
-        return $this->view('admin/config', compact('breadcrumb') ); 
+        return $this->view('admin/config/settings', compact('breadcrumb') ); 
     }
-
     
 }

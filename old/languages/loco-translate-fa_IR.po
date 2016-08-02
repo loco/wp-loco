@@ -1,0 +1,637 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Loco Translate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
+"PO-Revision-Date: Wed Jul 06 2016 12:17:53 GMT+0100 (BST)\n"
+"Last-Translator: admin <support@localise.biz>\n"
+"Language-Team: Persian\n"
+"Language: fa-IR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: fa_IR\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#. Translators: Bold text label in admin error messages
+#: lib/loco-admin.php:31
+msgctxt "Message label"
+msgid "Error"
+msgstr "خطا"
+
+#: lib/loco-admin.php:41
+msgctxt "Message label"
+msgid "Warning"
+msgstr "اخطار"
+
+#: lib/loco-admin.php:54 tpl/admin-list.tpl.php:98
+msgctxt "Message label"
+msgid "OK"
+msgstr "اوکی"
+
+#: lib/loco-admin.php:63
+msgid "Permission denied"
+msgstr "دسترسی امکان پذیر نیست"
+
+#: lib/loco-admin.php:86
+msgid "Settings saved"
+msgstr "تنظیمات ذخیره شد"
+
+#: lib/loco-admin.php:126 lib/loco-packages.php:568
+msgid "%s is not an official WordPress language"
+msgstr ""
+
+#: lib/loco-admin.php:199
+msgid "New PO file"
+msgstr "فایل PO جدید"
+
+#: lib/loco-admin.php:214
+msgid "PO file used as template. This will be renamed to %s on first save"
+msgstr ""
+"فایل PO به جای قالب استفاده شد. در ذخیره اول، فایل به نام %s تغییر نام خواهد "
+"داد"
+
+#: lib/loco-admin.php:312
+msgid "You must specify a valid locale for a new PO file"
+msgstr "شما باید یک مسیر قابل قبول برای فایل PO مشخص کنید"
+
+#: lib/loco-admin.php:337 lib/loco-admin.php:426
+msgid "No translatable strings found"
+msgstr "هیچ سطری برای ترجمه پیدا نشد"
+
+#: lib/loco-admin.php:337
+msgid "Cannot create a PO file."
+msgstr "ساخت فایل PO امکان پذیر نیست"
+
+#: lib/loco-admin.php:344
+msgid "PO file already exists with locale %s"
+msgstr "فایل PO قبلا برای زبان %s وجیو دارد"
+
+#: lib/loco-admin.php:396
+msgid ""
+"File cannot be created automatically. Fix the file permissions or use "
+"Download instead of Save"
+msgstr ""
+"فایل قایل دخیره شدن نیست. اجازه دسترسی فایل ها را درست کنید یا از دریافت به "
+"جای دخیره استفاده کنید"
+
+#: lib/loco-admin.php:405 lib/loco-admin.php:414
+msgid "%s file is empty"
+msgstr "فایل %s خالی است"
+
+#: lib/loco-admin.php:406 lib/loco-admin.php:421
+msgid "Run Sync to update from source code"
+msgstr "اجرای هماهنگ سازی برای به روز رسانی سورس کد"
+
+#: lib/loco-admin.php:410 php/loco-posync.php:52
+msgid "No strings could be extracted from source code"
+msgstr "هیچ سطری از سورس کد پیدا نشد"
+
+#: lib/loco-admin.php:417
+msgid "Run Sync to update from %s"
+msgstr "اجرای هماهنگ سازی برای به روز رسانی از %s"
+
+#: lib/loco-admin.php:436
+msgid "Source code has been modified, run Sync to update POT"
+msgstr "سورس کد ویرایش شده است؛ برای به روز رسانی، هماهنگ سازی را اجرا کنید"
+
+#: lib/loco-admin.php:440
+msgid "POT has been modified since PO file was saved, run Sync to update"
+msgstr ""
+"از زمانی که فایل PO ذخیره شده بود، فایل POT ویرایش شده است. هماهنگ سازی را "
+"اجرا کنید"
+
+#: lib/loco-admin.php:536
+msgid "Bad file path"
+msgstr "مسیر قایل قبول نیست"
+
+#: lib/loco-admin.php:783
+msgid "Empty or invalid %s file"
+msgstr "فایل %s خالی یا غیر قابل قبول می باشد"
+
+#: lib/loco-admin.php:787
+msgid "%s file has no header"
+msgstr "فایل %s دارای سربرگ نمی باشد"
+
+#: lib/loco-admin.php:934
+msgctxt "Add button"
+msgid "New template"
+msgstr "فرم جدید"
+
+#: lib/loco-admin.php:953
+msgctxt "Add button"
+msgid "New language"
+msgstr "زبان جدید"
+
+#: lib/loco-admin.php:992
+msgid "%s%% translated"
+msgstr "%s%% ترجمه شده"
+
+#: lib/loco-admin.php:992
+msgid "1 string"
+msgid_plural "%s strings"
+msgstr[0] "%s سطر"
+msgstr[1] ""
+
+#: lib/loco-admin.php:995
+msgid "%s fuzzy"
+msgstr "%s مبهم"
+
+#: lib/loco-admin.php:998
+msgid "%s untranslated"
+msgstr "%s ترجمه نشده"
+
+#: lib/loco-admin.php:1044
+msgid "Failed to compile MO file with built-in compiler"
+msgstr "فایل MO با کامپایلر توکار، کامپایل نشد"
+
+#: lib/loco-admin.php:1092 tpl/admin-nav.tpl.php:27
+msgid "Loco, Translation Management"
+msgstr "لوکو، مدریت ترجمه"
+
+#: lib/loco-admin.php:1093 lib/loco-admin.php:1124
+msgid "Manage translations"
+msgstr "مدریت ترجمه ها"
+
+#: lib/loco-admin.php:1094
+msgid "Translation options"
+msgstr "تنظیمات ترجمه ها"
+
+#: lib/loco-admin.php:1101
+msgid "Loco Translate"
+msgstr "مترجم لوکو"
+
+#: lib/loco-admin.php:1125 tpl/admin-fscheck.tpl.php:8
+#: tpl/admin-opts.tpl.php:7 tpl/admin-poedit.tpl.php:7
+#: tpl/admin-poinit.tpl.php:7 tpl/admin-root.tpl.php:7
+msgid "Settings"
+msgstr "تنظیمات"
+
+#: lib/loco-admin.php:1149
+msgid "File download failed"
+msgstr "خطا در دریافت فایل"
+
+#: lib/loco-admin.php:1159
+msgid "WPLANG is deprecated and should be removed from wp-config.php"
+msgstr "WPLANG منسوخ شده و باید از wp-config.php پاک شود"
+
+#: lib/loco-locales.php:77
+msgid "Unknown language"
+msgstr "زبان نا آشنا"
+
+#: lib/loco-packages.php:474 lib/loco-packages.php:481
+msgid "Some files not writable"
+msgstr "تعدادی از فایل قابل نوشتن نیستند"
+
+#: lib/loco-packages.php:484
+msgid "Some files missing"
+msgstr "تعدادی از فایل ها موجود نیستند"
+
+#: lib/loco-packages.php:490 lib/loco-packages.php:494
+msgid "\"%s\" folder not writable"
+msgstr "پوشه %s قابل نوشتن نیست"
+
+#: lib/loco-packages.php:515
+msgid "POT file not writable"
+msgstr "فایل POT قایل نوشتن نیست"
+
+#: lib/loco-packages.php:520
+msgid "PO file not writable"
+msgstr "فایل PO فابل نوشتن نیست"
+
+#: lib/loco-packages.php:522
+msgid "MO file not writable"
+msgstr "فایل MO فابل نوشتن نیست"
+
+#: lib/loco-packages.php:522
+msgid "MO file not found"
+msgstr "فایل MO پیدا نشد"
+
+#: lib/loco-packages.php:527
+msgid "Folder not writable"
+msgstr "پوشه قایل نوشتن نیست"
+
+#: lib/loco-packages.php:527
+msgid "Folder not found"
+msgstr "پوشه پیدا نشد"
+
+#: lib/loco-packages.php:546
+msgid "%s does not declare a \"Text Domain\""
+msgstr ""
+
+#: lib/loco-packages.php:546 lib/loco-packages.php:551
+msgid "Loco has guessed \"%s\""
+msgstr ""
+
+#: lib/loco-packages.php:551
+msgid "%s does not declare a \"Domain Path\""
+msgstr ""
+
+#: lib/loco-packages.php:556
+msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
+msgstr ""
+
+#: lib/loco-packages.php:559
+msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
+msgstr ""
+
+#: php/loco-ajax.php:17 php/loco-download.php:21
+msgid "User does not have permission to manage translations"
+msgstr "کاربر دسترسی لازم برای مدریت ترجمه ها را ندارد"
+
+#: php/loco-data.php:21 php/loco-posave.php:10 php/loco-posync.php:9
+msgid "Invalid data posted to server"
+msgstr "داده نادرست به سرور ارسال شده"
+
+#: php/loco-download.php:75 php/loco-posave.php:121
+msgid "Failed to compile MO file with %s, check your settings"
+msgstr "خطای کامپایل فایل MO با %s. تنظیمات خود را برسی کنید"
+
+#: php/loco-posave.php:23 php/loco-posync.php:22
+msgid "Package not found called %s"
+msgstr "بسته ای با نام %s پیدا نشد"
+
+#: php/loco-posave.php:58
+msgid ""
+"Web server cannot create backups in \"%s\". Fix file permissions or disable "
+"backups in settings"
+msgstr ""
+"سرور نمی تواند در %s پشتیبان تهیه کند. اجازه دسترسی را درست کنید یا پشتیبان "
+"گیری را غیر فعال کنید"
+
+#: php/loco-posave.php:66
+msgid ""
+"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
+"create it manually."
+msgstr ""
+"سرور نمی تواند پوشه %s را در %s یسازد. اجازه دسترسی بدهید و یا پوشه را به "
+"صورت دستی بسازید"
+
+#: php/loco-posave.php:69
+msgid ""
+"Web server cannot create files in the \"%s\" directory. Fix file permissions "
+"or use the download function."
+msgstr ""
+"سرور نمی تواند فایلی در %s بسازد. اجازه دسترسی بدهید و یا از امکان دریافت "
+"استفاده کنید"
+
+#: php/loco-posave.php:81
+msgid ""
+"%s file is not writable by the web server. Fix file permissions or download "
+"and copy to \"%s/%s\"."
+msgstr ""
+"فایل %s قابل نوشتن نیست. اجازه دسترسی بدهید و یا یک نسخه به %s/%s کپی کنید"
+
+#: php/loco-posave.php:102
+msgid "Cannot create MO file"
+msgstr "فایل MO ساخته نشد"
+
+#: php/loco-posave.php:105
+msgid "Cannot overwrite MO file"
+msgstr "فایل MO دوباره نویسی نشد"
+
+#: php/loco-posave.php:131
+msgid "Failed to write MO file"
+msgstr "فایل MO نوشته نشد"
+
+#: tpl/admin-fscheck.tpl.php:7 tpl/admin-opts.tpl.php:6
+#: tpl/admin-poedit.tpl.php:6 tpl/admin-poinit.tpl.php:6
+#: tpl/admin-root.tpl.php:6
+msgid "Packages"
+msgstr "بسته ها"
+
+#: tpl/admin-fscheck.tpl.php:10
+msgid "File check"
+msgstr "چک فایل"
+
+#: tpl/admin-fscheck.tpl.php:19
+msgid "File system permissions for %s"
+msgstr "اجازه دسترسی برای %s"
+
+#: tpl/admin-fscheck.tpl.php:43
+msgid "Other potential issues with %s"
+msgstr ""
+
+#: tpl/admin-fscheck.tpl.php:57
+msgid "Back"
+msgstr "فبلی"
+
+#: tpl/admin-fscheck.tpl.php:58 tpl/admin-opts.tpl.php:102
+msgid "Get help"
+msgstr "کمک بگیرید"
+
+#: tpl/admin-list.tpl.php:11
+msgctxt "Table header"
+msgid "Package details"
+msgstr "جزئیات بسته"
+
+#: tpl/admin-list.tpl.php:14
+msgctxt "Table header"
+msgid "Translations (PO)"
+msgstr "ترجمه (PO)"
+
+#: tpl/admin-list.tpl.php:17
+msgctxt "Table header"
+msgid "Template (POT)"
+msgstr "قالب (POT)"
+
+#: tpl/admin-list.tpl.php:20
+msgctxt "Table header"
+msgid "File permissions"
+msgstr "دسترسی فایل"
+
+#: tpl/admin-list.tpl.php:40
+msgid "Extends: %s"
+msgstr "اضافه شد: %s"
+
+#: tpl/admin-list.tpl.php:44
+msgid "1 language"
+msgid_plural "%u languages"
+msgstr[0] "%u زبان"
+msgstr[1] ""
+
+#: tpl/admin-list.tpl.php:49 tpl/admin-poedit.tpl.php:57
+msgctxt "Modified time"
+msgid "Updated"
+msgstr "به روز رسانی شد"
+
+#: tpl/admin-nav.tpl.php:26
+msgid "Powered by"
+msgstr "قدرت گرفته توسط"
+
+#: tpl/admin-nav.tpl.php:32
+msgid "Loco may not work as expected"
+msgstr "لوکو ممکن است درست کار نکند"
+
+#: tpl/admin-opts.tpl.php:18
+msgid "Configure Loco Translate"
+msgstr "تنظیم مترجم لوکو"
+
+#: tpl/admin-opts.tpl.php:27 tpl/admin-opts.tpl.php:31
+msgid "Compiling MO files"
+msgstr "در حال کامپایل فایل MO"
+
+#: tpl/admin-opts.tpl.php:36
+msgid "Use built-in MO compiler."
+msgstr "استفاده از کامپایر توکار MO."
+
+#: tpl/admin-opts.tpl.php:42
+msgid "Use external command:"
+msgstr "استفاده از دستور خارجی:"
+
+#: tpl/admin-opts.tpl.php:47
+msgid "Enter path to msgfmt on server"
+msgstr "وارد کردن مسیر msgfmt  در سرور"
+
+#: tpl/admin-opts.tpl.php:54
+msgid "Generate hash tables"
+msgstr "ساختن جدول hash"
+
+#: tpl/admin-opts.tpl.php:60
+msgid "Include Fuzzy strings"
+msgstr ""
+
+#: tpl/admin-opts.tpl.php:67 tpl/admin-opts.tpl.php:71
+msgid "Backing up PO files"
+msgstr "پشتیبان گیری از فایل های PO"
+
+#: tpl/admin-opts.tpl.php:75
+msgid "Number of backups to keep of each file:"
+msgstr "تعداد پشتیبان های گرفته شده از هر فایل:"
+
+#: tpl/admin-opts.tpl.php:83 tpl/admin-opts.tpl.php:87
+msgid "Experimental features"
+msgstr "قابلیت های آزمایشی"
+
+#: tpl/admin-opts.tpl.php:92
+msgid "Enable WordPress core translations"
+msgstr "فعال سازی ترجمه هسته وردپرس"
+
+#: tpl/admin-opts.tpl.php:101
+msgid "Save settings"
+msgstr "دخیره تنظیمات"
+
+#: tpl/admin-poedit.tpl.php:32
+msgid "Template file"
+msgstr "قالب فایل"
+
+#: tpl/admin-poedit.tpl.php:40
+msgctxt "Dropdown label"
+msgid "Switch to..."
+msgstr "تعویض به"
+
+#: tpl/admin-poedit.tpl.php:62
+msgid "never"
+msgstr "هرگز"
+
+#: tpl/admin-poedit.tpl.php:87
+msgctxt "Editor button"
+msgid "Save"
+msgstr "ذخیره"
+
+#: tpl/admin-poedit.tpl.php:94 tpl/admin-poedit.tpl.php:103
+msgctxt "Editor button"
+msgid "Download"
+msgstr "دریافت"
+
+#: tpl/admin-poedit.tpl.php:115
+msgctxt "Editor button"
+msgid "Sync"
+msgstr "هماهنگ سازی"
+
+#: tpl/admin-poedit.tpl.php:120
+msgctxt "Editor button"
+msgid "Revert"
+msgstr "برگرداندن"
+
+#: tpl/admin-poedit.tpl.php:125
+msgctxt "Editor button"
+msgid "Add"
+msgstr "اضافه کردن"
+
+#: tpl/admin-poedit.tpl.php:130
+msgctxt "Editor button"
+msgid "Del"
+msgstr "پاک کردن"
+
+# cant find a proper word
+#: tpl/admin-poedit.tpl.php:135
+msgctxt "Editor button"
+msgid "Fuzzy"
+msgstr "مبهم"
+
+#: tpl/admin-poedit.tpl.php:140
+msgid "Filter translations"
+msgstr "فیلتر ترجمه"
+
+#: tpl/admin-poedit.tpl.php:145
+msgctxt "Editor button"
+msgid "Help"
+msgstr "کمک"
+
+#: tpl/admin-poinit.tpl.php:22
+msgid "Initialize new translations in %s"
+msgstr "ایجاد فایل ترجمه برای %s"
+
+#: tpl/admin-poinit.tpl.php:35
+msgid "Select from common languages"
+msgstr "یکی از زبان های متداول رو انتخاب کنید"
+
+#: tpl/admin-poinit.tpl.php:47
+msgctxt "Form label"
+msgid "or enter any language code"
+msgstr "یا کد زبان را وارد کنید"
+
+#: tpl/admin-poinit.tpl.php:59 pub/js/lang/dummy.php:58
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr "در <code>%s</code> ساخته شود"
+
+#: tpl/admin-poinit.tpl.php:64
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr "در پوشه ترجمه های سراسری ساخته شود"
+
+#: tpl/admin-poinit.tpl.php:71
+msgctxt "Submit button"
+msgid "Start translating"
+msgstr "شروع ترجمه"
+
+#: tpl/admin-root.tpl.php:18
+msgid "New version available"
+msgstr "نسخه جدید آماده است"
+
+#: tpl/admin-root.tpl.php:21
+msgid "Upgrade to version %s of Loco Translate"
+msgstr "به نسخه %s مترجم لوکو به روز رسانی شد"
+
+#: tpl/admin-root.tpl.php:31
+msgid "Select a plugin or theme to translate"
+msgstr "یک افزونه یا پوسته را برای ترجمه انتخاب کنید"
+
+#: tpl/admin-root.tpl.php:40
+msgctxt "Package list header"
+msgid "Themes"
+msgstr "پوسته ها"
+
+#: tpl/admin-root.tpl.php:53
+msgctxt "Package list header"
+msgid "Plugins"
+msgstr "افزونه ها"
+
+#: tpl/admin-root.tpl.php:66
+msgctxt "Package list header"
+msgid "Core"
+msgstr "هسته"
+
+#: lib/compat/loco-iconv.php:13 lib/compat/loco-json.php:13
+#: lib/compat/loco-mbstring.php:13 lib/compat/loco-tokenizer.php:12
+msgid ""
+"PHP extension \"%s\" is not installed. If you experience problems you should "
+"install it"
+msgstr ""
+
+#: pub/js/lang/dummy.php:8
+msgid "Unknown error"
+msgstr "خطای نا آشنا"
+
+#: pub/js/lang/dummy.php:10
+msgid "PO file saved"
+msgstr "فایل PO ذخیره شد"
+
+#: pub/js/lang/dummy.php:12
+msgid "and MO file compiled"
+msgstr "و فایل MO کامپایل شد"
+
+#: pub/js/lang/dummy.php:15
+msgid "Merged from %s"
+msgstr "از %s یکی سازی شد"
+
+#: pub/js/lang/dummy.php:17
+msgid "Merged from source code"
+msgstr "یکی سازی از سورس کد"
+
+#: pub/js/lang/dummy.php:19
+msgid "Already up to date with %s"
+msgstr "قبلا با %s به روز است"
+
+#: pub/js/lang/dummy.php:21
+msgid "Already up to date with source code"
+msgstr "قبلا با سورس کد به روز است"
+
+#: pub/js/lang/dummy.php:23
+msgid "1 new string added"
+msgid_plural "%s new strings added"
+msgstr[0] "%s سطر اضافه شد"
+msgstr[1] ""
+
+#: pub/js/lang/dummy.php:25
+msgid "1 obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] "%s سطر قدیمی پاک شد"
+msgstr[1] ""
+
+#: pub/js/lang/dummy.php:27
+msgid "Your changes will be lost if you continue without saving"
+msgstr "اگر بدون ذخیره کردن ادامه دهید، تنظیمات شما پاک خواهد شد"
+
+#. label for the window pane holding native translation
+#: pub/js/lang/dummy.php:35
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr "متن"
+
+#. where %s is the language, e.g French translation
+#: pub/js/lang/dummy.php:38
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr "ترجمه %s"
+
+#. label for the window pane holding translator comments
+#: pub/js/lang/dummy.php:41
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr "یادداشت"
+
+#. label for the window pane holding message context
+#: pub/js/lang/dummy.php:44
+msgctxt "Editor pane"
+msgid "Context"
+msgstr "متن"
+
+#: pub/js/lang/dummy.php:52
+msgid "Translation"
+msgstr "ترجمه"
+
+#: pub/js/lang/dummy.php:54
+msgid "No source files in this package, nothing to sync"
+msgstr "هیج فایل سورسی در این بسته پیدا نشد؛ چیزی برای هماهنگ سازی نیست"
+
+#: pub/js/lang/dummy.php:56
+msgid "No strings could be extracted from source files"
+msgstr "هیچ سطری از سورس کد وارد نشد"
+
+#. Description of the plugin
+msgid "Translate WordPress plugins and themes directly in your browser"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://wordpress.org/extend/plugins/loco-translate"
+msgstr "http://wordpress.org/extend/plugins/loco-translate"
+
+#. Author of the plugin
+msgid "Tim Whitlock"
+msgstr "Tim Whitlock"
+
+#. Author URI of the plugin
+msgid "https://localise.biz/help/wordpress/translate-plugin"
+msgstr "https://localise.biz/help/wordpress/translate-plugin"

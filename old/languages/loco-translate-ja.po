@@ -1,0 +1,635 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Loco Translate\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: Thu Jan 02 2014 17:30:57 GMT+0000 (GMT)\n"
+"PO-Revision-Date: Wed Jul 06 2016 12:18:48 GMT+0100 (BST)\n"
+"Last-Translator: admin <support@localise.biz>\n"
+"Language-Team: Japanese\n"
+"Language: ja\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-KeywordsList: _:1;gettext:1;dgettext:2;ngettext:1,2;dngettext:2,3;"
+"__:1;_e:1;_c:1;_n:1,2;_n_noop:1,2;_nc:1,2;__ngettext:1,2;__ngettext_noop:1,2;"
+"_x:1,2c;_ex:1,2c;_nx:1,2,4c;_nx_noop:1,2,3c;_n_js:1,2;_nx_js:1,2,3c;"
+"esc_attr__:1;esc_html__:1;esc_attr_e:1;esc_html_e:1;esc_attr_x:1,2c;"
+"esc_html_x:1,2c;comments_number_link:2,3;t:1;st:1;trans:1;transChoice:1,2\n"
+"X-Generator: Loco - https://localise.biz/\n"
+"X-Loco-Target-Locale: ja_JP\n"
+"X-Poedit-SearchPath-0: ..\n"
+
+#. Translators: Bold text label in admin error messages
+#: lib/loco-admin.php:31
+msgctxt "Message label"
+msgid "Error"
+msgstr "エラー"
+
+#: lib/loco-admin.php:41
+msgctxt "Message label"
+msgid "Warning"
+msgstr "警告"
+
+#: lib/loco-admin.php:54 tpl/admin-list.tpl.php:98
+msgctxt "Message label"
+msgid "OK"
+msgstr "OK"
+
+#: lib/loco-admin.php:63
+msgid "Permission denied"
+msgstr "アクセスが拒否されました"
+
+#: lib/loco-admin.php:86
+msgid "Settings saved"
+msgstr "設定を保存しました"
+
+#: lib/loco-admin.php:126 lib/loco-packages.php:568
+msgid "%s is not an official WordPress language"
+msgstr ""
+
+#: lib/loco-admin.php:199
+msgid "New PO file"
+msgstr "新しいPOファイル"
+
+#: lib/loco-admin.php:214
+msgid "PO file used as template. This will be renamed to %s on first save"
+msgstr ""
+"POファイルをテンプレートとして使用しました。これは最初に%sとして保存されま"
+"す。"
+
+#: lib/loco-admin.php:312
+msgid "You must specify a valid locale for a new PO file"
+msgstr "新しいPOファイルのための有効なロケールを指定する必要があります"
+
+#: lib/loco-admin.php:337 lib/loco-admin.php:426
+msgid "No translatable strings found"
+msgstr "翻訳できる文字列が見つかりませんでした"
+
+#: lib/loco-admin.php:337
+msgid "Cannot create a PO file."
+msgstr "POファイルを作成できません。"
+
+#: lib/loco-admin.php:344
+msgid "PO file already exists with locale %s"
+msgstr "ロケール%sのPOファイルはすでに存在します"
+
+#: lib/loco-admin.php:396
+msgid ""
+"File cannot be created automatically. Fix the file permissions or use "
+"Download instead of Save"
+msgstr ""
+"ファイルを自動的に作成できません。ファイルのパーミッションを変更するか、ダウ"
+"ンロードして保存したものを使用して下さい。"
+
+#: lib/loco-admin.php:405 lib/loco-admin.php:414
+msgid "%s file is empty"
+msgstr "ファイル %s は空です"
+
+#: lib/loco-admin.php:406 lib/loco-admin.php:421
+msgid "Run Sync to update from source code"
+msgstr "ソースコードの更新の同期を実行"
+
+#: lib/loco-admin.php:410 php/loco-posync.php:52
+msgid "No strings could be extracted from source code"
+msgstr "ソースファイルから文字列が見つかりませんでした"
+
+#: lib/loco-admin.php:417
+msgid "Run Sync to update from %s"
+msgstr "%sの更新の同期を実行"
+
+#: lib/loco-admin.php:436
+msgid "Source code has been modified, run Sync to update POT"
+msgstr "ソースコードを変更し、POTの同期と更新を行いました"
+
+#: lib/loco-admin.php:440
+msgid "POT has been modified since PO file was saved, run Sync to update"
+msgstr "POファイルの保存後にPOTが変更されたため、同期と更新を行いました"
+
+#: lib/loco-admin.php:536
+msgid "Bad file path"
+msgstr "間違ったファイルパス"
+
+#: lib/loco-admin.php:783
+msgid "Empty or invalid %s file"
+msgstr "ファイル%sは空または壊れています"
+
+#: lib/loco-admin.php:787
+msgid "%s file has no header"
+msgstr "ファイル%sにヘッダがありません"
+
+#: lib/loco-admin.php:934
+msgctxt "Add button"
+msgid "New template"
+msgstr "新しいテンプレート"
+
+#: lib/loco-admin.php:953
+msgctxt "Add button"
+msgid "New language"
+msgstr "新しい言語"
+
+#: lib/loco-admin.php:992
+msgid "%s%% translated"
+msgstr "%s%%件翻訳済み"
+
+#: lib/loco-admin.php:992
+msgid "1 string"
+msgid_plural "%s strings"
+msgstr[0] "%s件の文字列"
+msgstr[1] "1件の文字列"
+
+#: lib/loco-admin.php:995
+msgid "%s fuzzy"
+msgstr "%s件のファジー"
+
+#: lib/loco-admin.php:998
+msgid "%s untranslated"
+msgstr "%s件の未翻訳"
+
+#: lib/loco-admin.php:1044
+msgid "Failed to compile MO file with built-in compiler"
+msgstr "内蔵コンパイラーでのMOファイルのコンパイルができませんでした"
+
+#: lib/loco-admin.php:1092 tpl/admin-nav.tpl.php:27
+msgid "Loco, Translation Management"
+msgstr "Loco - 翻訳管理"
+
+#: lib/loco-admin.php:1093 lib/loco-admin.php:1124
+msgid "Manage translations"
+msgstr "管理"
+
+#: lib/loco-admin.php:1094
+msgid "Translation options"
+msgstr "設定"
+
+#: lib/loco-admin.php:1101
+msgid "Loco Translate"
+msgstr "Loco Translate"
+
+#: lib/loco-admin.php:1125 tpl/admin-fscheck.tpl.php:8
+#: tpl/admin-opts.tpl.php:7 tpl/admin-poedit.tpl.php:7
+#: tpl/admin-poinit.tpl.php:7 tpl/admin-root.tpl.php:7
+msgid "Settings"
+msgstr "設定"
+
+#: lib/loco-admin.php:1149
+msgid "File download failed"
+msgstr "ファイルのダウンロードができませんでした"
+
+#: lib/loco-admin.php:1159
+msgid "WPLANG is deprecated and should be removed from wp-config.php"
+msgstr "WPLANG は廃止されたため、wp-config.php から削除する必要があります。"
+
+#: lib/loco-locales.php:77
+msgid "Unknown language"
+msgstr "不明な言語"
+
+#: lib/loco-packages.php:474 lib/loco-packages.php:481
+msgid "Some files not writable"
+msgstr "いくつかのファイルに書き込めません"
+
+#: lib/loco-packages.php:484
+msgid "Some files missing"
+msgstr "いくつかのファイルが不明"
+
+#: lib/loco-packages.php:490 lib/loco-packages.php:494
+msgid "\"%s\" folder not writable"
+msgstr "\"%s\" フォルダに書き込めません"
+
+#: lib/loco-packages.php:515
+msgid "POT file not writable"
+msgstr "POTファイルに書き込めません"
+
+#: lib/loco-packages.php:520
+msgid "PO file not writable"
+msgstr "POファイルに書き込めません"
+
+#: lib/loco-packages.php:522
+msgid "MO file not writable"
+msgstr "MOファイルに書き込めません"
+
+#: lib/loco-packages.php:522
+msgid "MO file not found"
+msgstr "MOファイルが見つかりません"
+
+#: lib/loco-packages.php:527
+msgid "Folder not writable"
+msgstr "フォルダに書き込めません"
+
+#: lib/loco-packages.php:527
+msgid "Folder not found"
+msgstr "フォルダが見つかりません"
+
+#: lib/loco-packages.php:546
+msgid "%s does not declare a \"Text Domain\""
+msgstr ""
+
+#: lib/loco-packages.php:546 lib/loco-packages.php:551
+msgid "Loco has guessed \"%s\""
+msgstr ""
+
+#: lib/loco-packages.php:551
+msgid "%s does not declare a \"Domain Path\""
+msgstr ""
+
+#: lib/loco-packages.php:556
+msgid "%s has no POT file. Create one at \"%s/%s.pot\" if you need one."
+msgstr ""
+
+#: lib/loco-packages.php:559
+msgid "%s has a strange POT file name (%s). A better name would be \"%s.pot\""
+msgstr ""
+
+#: php/loco-ajax.php:17 php/loco-download.php:21
+msgid "User does not have permission to manage translations"
+msgstr "ユーザーは翻訳管理を行う権限を持っていません"
+
+#: php/loco-data.php:21 php/loco-posave.php:10 php/loco-posync.php:9
+msgid "Invalid data posted to server"
+msgstr "サーバーへの無効なデータ送信"
+
+#: php/loco-download.php:75 php/loco-posave.php:121
+msgid "Failed to compile MO file with %s, check your settings"
+msgstr "%sのMOファイルのコンパイルに失敗しました。設定を確認して下さい。"
+
+#: php/loco-posave.php:23 php/loco-posync.php:22
+msgid "Package not found called %s"
+msgstr "パッケージが見つからず%sを呼び出せません"
+
+#: php/loco-posave.php:58
+msgid ""
+"Web server cannot create backups in \"%s\". Fix file permissions or disable "
+"backups in settings"
+msgstr ""
+"ウェブサーバーで\"%s\"のバックアップを作成できません。ファイルのパーミッショ"
+"ンを変更するか、設定のバックアップを無効にして下さい。"
+
+#: php/loco-posave.php:66
+msgid ""
+"Web server cannot create \"%s\" directory in \"%s\". Fix file permissions or "
+"create it manually."
+msgstr ""
+"ウェブサーバーは\"%s\"を\"%s\"に作成できません。ファイルのパーミッションを変"
+"更するか、手で作成して下さい。"
+
+#: php/loco-posave.php:69
+msgid ""
+"Web server cannot create files in the \"%s\" directory. Fix file permissions "
+"or use the download function."
+msgstr ""
+"ウェブサーバーは\"%s\"ディレクトリにファイルを作成できません。ファイルのパー"
+"ミッションを変更するか、ダウンロード機能を使用して下さい。"
+
+#: php/loco-posave.php:81
+msgid ""
+"%s file is not writable by the web server. Fix file permissions or download "
+"and copy to \"%s/%s\"."
+msgstr ""
+"%sファイルはウェブサーバーから書き込みできません。ファイルの権限を変更する"
+"か、 ダウンロードして\"%s/%s\"へコピーして下さい。"
+
+#: php/loco-posave.php:102
+msgid "Cannot create MO file"
+msgstr "MOファイルを作成できません"
+
+#: php/loco-posave.php:105
+msgid "Cannot overwrite MO file"
+msgstr "MOファイルを上書きできません"
+
+#: php/loco-posave.php:131
+msgid "Failed to write MO file"
+msgstr "MOファイルへ書き込みできません"
+
+#: tpl/admin-fscheck.tpl.php:7 tpl/admin-opts.tpl.php:6
+#: tpl/admin-poedit.tpl.php:6 tpl/admin-poinit.tpl.php:6
+#: tpl/admin-root.tpl.php:6
+msgid "Packages"
+msgstr "パッケージ"
+
+#: tpl/admin-fscheck.tpl.php:10
+msgid "File check"
+msgstr "ファイルチェック"
+
+#: tpl/admin-fscheck.tpl.php:19
+msgid "File system permissions for %s"
+msgstr "%sのファイルシステム権限"
+
+#: tpl/admin-fscheck.tpl.php:43
+msgid "Other potential issues with %s"
+msgstr ""
+
+#: tpl/admin-fscheck.tpl.php:57
+msgid "Back"
+msgstr "戻る"
+
+#: tpl/admin-fscheck.tpl.php:58 tpl/admin-opts.tpl.php:102
+msgid "Get help"
+msgstr "ヘルプ"
+
+#: tpl/admin-list.tpl.php:11
+msgctxt "Table header"
+msgid "Package details"
+msgstr "パッケージ詳細"
+
+#: tpl/admin-list.tpl.php:14
+msgctxt "Table header"
+msgid "Translations (PO)"
+msgstr "翻訳 (PO)"
+
+#: tpl/admin-list.tpl.php:17
+msgctxt "Table header"
+msgid "Template (POT)"
+msgstr "テンプレート (POT)               "
+
+#: tpl/admin-list.tpl.php:20
+msgctxt "Table header"
+msgid "File permissions"
+msgstr "ファイル権限"
+
+#: tpl/admin-list.tpl.php:40
+msgid "Extends: %s"
+msgstr "拡張: %s"
+
+#: tpl/admin-list.tpl.php:44
+msgid "1 language"
+msgid_plural "%u languages"
+msgstr[0] "%u言語"
+msgstr[1] "1言語"
+
+#: tpl/admin-list.tpl.php:49 tpl/admin-poedit.tpl.php:57
+msgctxt "Modified time"
+msgid "Updated"
+msgstr "更新日時"
+
+#: tpl/admin-nav.tpl.php:26
+msgid "Powered by"
+msgstr "　"
+
+#: tpl/admin-nav.tpl.php:32
+msgid "Loco may not work as expected"
+msgstr "Loco が期待通りに動作しない可能性があります"
+
+#: tpl/admin-opts.tpl.php:18
+msgid "Configure Loco Translate"
+msgstr "Loco Translate の設定"
+
+#: tpl/admin-opts.tpl.php:27 tpl/admin-opts.tpl.php:31
+msgid "Compiling MO files"
+msgstr "MOファイルのコンパイル"
+
+#: tpl/admin-opts.tpl.php:36
+msgid "Use built-in MO compiler."
+msgstr "内蔵のMOコンパイラーを使用する"
+
+#: tpl/admin-opts.tpl.php:42
+msgid "Use external command:"
+msgstr "外部コマンドを使用する:"
+
+#: tpl/admin-opts.tpl.php:47
+msgid "Enter path to msgfmt on server"
+msgstr "サーバのmsgfmtへのパスを入力"
+
+#: tpl/admin-opts.tpl.php:54
+msgid "Generate hash tables"
+msgstr "ハッシュテーブルを生成する"
+
+#: tpl/admin-opts.tpl.php:60
+msgid "Include Fuzzy strings"
+msgstr ""
+
+#: tpl/admin-opts.tpl.php:67 tpl/admin-opts.tpl.php:71
+msgid "Backing up PO files"
+msgstr "POファイルのバックアップ"
+
+#: tpl/admin-opts.tpl.php:75
+msgid "Number of backups to keep of each file:"
+msgstr "ファイルごとに保存するバックアップ数:"
+
+#: tpl/admin-opts.tpl.php:83 tpl/admin-opts.tpl.php:87
+msgid "Experimental features"
+msgstr "実験的な機能"
+
+#: tpl/admin-opts.tpl.php:92
+msgid "Enable WordPress core translations"
+msgstr "WordPressコアの翻訳を行う"
+
+#: tpl/admin-opts.tpl.php:101
+msgid "Save settings"
+msgstr "設定を保存"
+
+#: tpl/admin-poedit.tpl.php:32
+msgid "Template file"
+msgstr "テンプレートファイル"
+
+#: tpl/admin-poedit.tpl.php:40
+msgctxt "Dropdown label"
+msgid "Switch to..."
+msgstr "切り替え…"
+
+#: tpl/admin-poedit.tpl.php:62
+msgid "never"
+msgstr "常に"
+
+#: tpl/admin-poedit.tpl.php:87
+msgctxt "Editor button"
+msgid "Save"
+msgstr "保存"
+
+#: tpl/admin-poedit.tpl.php:94 tpl/admin-poedit.tpl.php:103
+msgctxt "Editor button"
+msgid "Download"
+msgstr "ダウンロード"
+
+#: tpl/admin-poedit.tpl.php:115
+msgctxt "Editor button"
+msgid "Sync"
+msgstr "同期"
+
+#: tpl/admin-poedit.tpl.php:120
+msgctxt "Editor button"
+msgid "Revert"
+msgstr "元に戻す"
+
+#: tpl/admin-poedit.tpl.php:125
+msgctxt "Editor button"
+msgid "Add"
+msgstr "追加"
+
+#: tpl/admin-poedit.tpl.php:130
+msgctxt "Editor button"
+msgid "Del"
+msgstr "削除"
+
+#: tpl/admin-poedit.tpl.php:135
+msgctxt "Editor button"
+msgid "Fuzzy"
+msgstr "ファジー"
+
+#: tpl/admin-poedit.tpl.php:140
+msgid "Filter translations"
+msgstr "翻訳を絞り込み"
+
+#: tpl/admin-poedit.tpl.php:145
+msgctxt "Editor button"
+msgid "Help"
+msgstr "ヘルプ"
+
+#: tpl/admin-poinit.tpl.php:22
+msgid "Initialize new translations in %s"
+msgstr "%sの新しい言語の初期化"
+
+#: tpl/admin-poinit.tpl.php:35
+msgid "Select from common languages"
+msgstr "定義済みの言語から選択"
+
+#: tpl/admin-poinit.tpl.php:47
+msgctxt "Form label"
+msgid "or enter any language code"
+msgstr "または他の言語コードを入力"
+
+#: tpl/admin-poinit.tpl.php:59 pub/js/lang/dummy.php:58
+msgctxt "Form label"
+msgid "create in <code>%s</code>"
+msgstr "<code>%s</code>に作成する"
+
+#: tpl/admin-poinit.tpl.php:64
+msgctxt "Form label"
+msgid "create in global languages directory"
+msgstr "全体の言語ディレクトリに作成する"
+
+#: tpl/admin-poinit.tpl.php:71
+msgctxt "Submit button"
+msgid "Start translating"
+msgstr "翻訳を開始する"
+
+#: tpl/admin-root.tpl.php:18
+msgid "New version available"
+msgstr "利用可能な新しいバージョン"
+
+#: tpl/admin-root.tpl.php:21
+msgid "Upgrade to version %s of Loco Translate"
+msgstr "Loco Translate のバージョンを%sへ更新します"
+
+#: tpl/admin-root.tpl.php:31
+msgid "Select a plugin or theme to translate"
+msgstr "翻訳するテーマまたはプラグインを選択して下さい"
+
+#: tpl/admin-root.tpl.php:40
+msgctxt "Package list header"
+msgid "Themes"
+msgstr "テーマ"
+
+#: tpl/admin-root.tpl.php:53
+msgctxt "Package list header"
+msgid "Plugins"
+msgstr "プラグイン"
+
+#: tpl/admin-root.tpl.php:66
+msgctxt "Package list header"
+msgid "Core"
+msgstr "コア"
+
+#: lib/compat/loco-iconv.php:13 lib/compat/loco-json.php:13
+#: lib/compat/loco-mbstring.php:13 lib/compat/loco-tokenizer.php:12
+msgid ""
+"PHP extension \"%s\" is not installed. If you experience problems you should "
+"install it"
+msgstr ""
+
+#: pub/js/lang/dummy.php:8
+msgid "Unknown error"
+msgstr "不明なエラー"
+
+#: pub/js/lang/dummy.php:10
+msgid "PO file saved"
+msgstr "POファイルを保存しました"
+
+#: pub/js/lang/dummy.php:12
+msgid "and MO file compiled"
+msgstr "またMOファイルをコンパイルしました"
+
+#: pub/js/lang/dummy.php:15
+msgid "Merged from %s"
+msgstr "%sから結合"
+
+#: pub/js/lang/dummy.php:17
+msgid "Merged from source code"
+msgstr "ソースコードから結合"
+
+#: pub/js/lang/dummy.php:19
+msgid "Already up to date with %s"
+msgstr "%sはすでに最新です"
+
+#: pub/js/lang/dummy.php:21
+msgid "Already up to date with source code"
+msgstr "ソースコードはすでに最新です"
+
+#: pub/js/lang/dummy.php:23
+msgid "1 new string added"
+msgid_plural "%s new strings added"
+msgstr[0] "%s件の新しい文字列を追加しました"
+msgstr[1] "1件の新しい文字列を追加しました"
+
+#: pub/js/lang/dummy.php:25
+msgid "1 obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] "%s件の文字列を削除しました"
+msgstr[1] "1件の文字列を削除しました"
+
+#: pub/js/lang/dummy.php:27
+msgid "Your changes will be lost if you continue without saving"
+msgstr "保存せずに続けると変更内容は反映されません"
+
+#. label for the window pane holding native translation
+#: pub/js/lang/dummy.php:35
+msgctxt "Editor pane"
+msgid "Source text"
+msgstr "原文"
+
+#. where %s is the language, e.g French translation
+#: pub/js/lang/dummy.php:38
+msgctxt "Editor pane"
+msgid "%s translation"
+msgstr "%sの翻訳"
+
+#. label for the window pane holding translator comments
+#: pub/js/lang/dummy.php:41
+msgctxt "Editor pane"
+msgid "Comments"
+msgstr "コメント"
+
+#. label for the window pane holding message context
+#: pub/js/lang/dummy.php:44
+msgctxt "Editor pane"
+msgid "Context"
+msgstr "属性"
+
+#: pub/js/lang/dummy.php:52
+msgid "Translation"
+msgstr "訳文"
+
+#: pub/js/lang/dummy.php:54
+msgid "No source files in this package, nothing to sync"
+msgstr "このパッケージにはソースファイルがないため、同期していません"
+
+#: pub/js/lang/dummy.php:56
+msgid "No strings could be extracted from source files"
+msgstr "ソースファイルから文字列が見つかりませんでした"
+
+#. Description of the plugin
+msgid "Translate WordPress plugins and themes directly in your browser"
+msgstr ""
+
+#. URI of the plugin
+msgid "http://wordpress.org/extend/plugins/loco-translate"
+msgstr "http://wordpress.org/extend/plugins/loco-translate"
+
+#. Author of the plugin
+msgid "Tim Whitlock"
+msgstr "Tim Whitlock"
+
+#. Author URI of the plugin
+msgid "https://localise.biz/help/wordpress/translate-plugin"
+msgstr "https://localise.biz/help/wordpress/translate-plugin"

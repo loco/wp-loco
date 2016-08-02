@@ -3,7 +3,7 @@
  * Global settings screen. (plugin options)
  */
 
-$this->extend('layout');
+$this->extend('../layout');
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">

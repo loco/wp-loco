@@ -26,6 +26,11 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             // we don't know we will render a page yet, but we need to listen for text domain hooks as early as possible
             if( isset($_GET['page']) && 'loco' === substr($_GET['page'],0,4) ){
                 Loco_package_Listener::create();
+                // trigger post-upgrade process if required
+                $opts = Loco_data_Settings::get();
+                if( $opts->migrate() ){
+                    // would trigger upgrade handlers here in future releases
+                }
             }
             // we'll need our own translations on all admin pages not just our own, for menu items etc..
             $domainPath = dirname( loco_plugin_self() ).'/languages';
