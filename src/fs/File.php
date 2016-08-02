@@ -251,7 +251,14 @@ class Loco_fs_File {
      */
     public function clearStat(){
         $this->info = null;
-        clearstatcache( true, $this->path );
+        // PHP 5.3.0 Added optional clear_realpath_cache and filename parameters.
+        if( version_compare( PHP_VERSION, '5.3.0', '>=' ) ){
+            clearstatcache( true, $this->path );
+        }
+        // else no choice but to drop entire stat cache
+        else {
+            clearstatcache();
+        }
         return $this;
     }
 
