@@ -1,11 +1,11 @@
 <?php
 /*
 Plugin Name: Loco Translate (LEGACY)
-Plugin URI: http://wordpress.org/extend/plugins/loco-translate
+Plugin URI: https://github.com/loco/wp-loco/tree/1.x
 Description: Translate WordPress plugins and themes directly in your browser (deprecated 1.x branch)
 Author: Tim Whitlock
 Version: 1.5.6
-Author URI: https://localise.biz/help/wordpress/translate-plugin
+Author URI: https://localise.biz/
 Text Domain: loco-translate
 Domain Path: /languages/
 */
