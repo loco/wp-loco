@@ -204,8 +204,9 @@ class Loco_package_Debugger implements IteratorAggregate {
      * Add a success notice
      * @return Loco_package_Debugger
      */
-    private function good(){
-        $text = call_user_func_array('sprintf', func_get_args() );
+    private function good( $text ){
+        $args = func_get_args();
+        $text = call_user_func_array('sprintf', $args );
         return $this->add( new Loco_error_Success($text) );
     }
 
@@ -214,8 +215,9 @@ class Loco_package_Debugger implements IteratorAggregate {
      * Add a warning notice
      * @return Loco_package_Debugger
      */
-    private function warn(){
-        $text = call_user_func_array('sprintf', func_get_args() );
+    private function warn( $text ){
+        $args = func_get_args();
+        $text = call_user_func_array('sprintf', $args );
         return $this->add( new Loco_error_Warning($text) );
     }
 
@@ -224,8 +226,9 @@ class Loco_package_Debugger implements IteratorAggregate {
      * Add an information notice (not good, or bad)
      * @return Loco_package_Debugger
      */
-    private function info(){
-        $text = call_user_func_array('sprintf', func_get_args() );
+    private function info( $text ){
+        $args = func_get_args();
+        $text = call_user_func_array('sprintf', $args );
         return $this->add( new Loco_error_Notice($text) );
     }
 
@@ -234,8 +237,9 @@ class Loco_package_Debugger implements IteratorAggregate {
      * Add a developer notice. probably something helpful for fixing a problem
      * @return Loco_package_Debugger
      */
-    private function devel(){
-        $text = call_user_func_array('sprintf', func_get_args() );
+    private function devel( $text ){
+        $args = func_get_args();
+        $text = call_user_func_array('sprintf', $args );
         return $this->add( new Loco_error_Debug($text) );
     }
 
