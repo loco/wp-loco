@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate (v2 translations)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"PO-Revision-Date: Mon Aug 01 2016 14:46:55 GMT+0100 (BST)\n"
+"PO-Revision-Date: Tue Aug 02 2016 15:32:37 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco - https://localise.biz/"
 
-#: loco.php:128
+#: loco.php:130
 msgid ""
 "Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
 "it"
@@ -164,14 +164,14 @@ msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
 #: src/fs/LocaleDirectory.php:59
-msgid "Official"
+msgid "Author"
 msgstr ""
 
 #: src/fs/LocaleDirectory.php:61
-msgid "Installed"
+msgid "System"
 msgstr ""
 
-#: src/fs/LocaleDirectory.php:65
+#: src/fs/LocaleDirectory.php:64
 msgid "Custom"
 msgstr ""
 
@@ -193,7 +193,7 @@ msgstr ""
 msgid "%s untranslated"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:45
+#: src/hooks/AdminHooks.php:50
 msgid "Translate"
 msgstr ""
 
@@ -521,7 +521,11 @@ msgstr ""
 msgid "XML"
 msgstr ""
 
-#: tpl/admin/bundle/conf.php:118
+#: tpl/admin/bundle/conf.php:106
+msgid "Help"
+msgstr ""
+
+#: tpl/admin/bundle/conf.php:119
 msgid "Reset config"
 msgstr ""
 
@@ -700,12 +704,8 @@ msgstr ""
 msgid "Subsets"
 msgstr ""
 
-#. Name of the plugin
-msgid "Loco Translate (v2 Preview)"
-msgstr ""
-
 #. Description of the plugin
-msgid "Translate themes and plugins directly in WordPress (preview version)"
+msgid "Translate themes and plugins directly in WordPress"
 msgstr ""
 
 #. URI of the plugin

@@ -1,8 +1,8 @@
 <?php
 /*
-Plugin Name: Loco Translate (v2 Preview)
+Plugin Name: Loco Translate
 Plugin URI: https://wordpress.org/plugins/loco-translate/
-Description: Translate themes and plugins directly in WordPress (preview version)
+Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
 Version: 2.0.0-dev
 Author URI: https://localise.biz/help/wordpress/translate-plugin

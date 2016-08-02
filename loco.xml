@@ -17,8 +17,8 @@
   </domain>
   <exclude>
     <directory>lib</directory>
+    <directory>old</directory>
     <directory>pub</directory>
     <directory>test</directory>
-    <directory>legacy</directory>
   </exclude>
 </bundle>

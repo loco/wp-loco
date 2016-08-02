@@ -51,12 +51,11 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
                 }
                 /*else {
                     // current version is a future release (dev branch probably)
-                    var_dump( compact('old','new','diff') );
                 }*/
             }
         }
 
-        //$this->setUpdate('2.0.1-debug')
+        // $this->setUpdate('2.0.1-debug');
         return $this->view('admin/config/version', compact('breadcrumb','version') ); 
     }
 

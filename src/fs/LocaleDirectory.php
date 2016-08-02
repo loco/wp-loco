@@ -56,11 +56,10 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
         switch( $id ){
         case 'theme':
         case 'plugin':
-            return __('Official','loco');
+            return __('Author','loco');
         case 'wplang':
-            return __('Installed','loco');
+            return __('System','loco');
         case 'loco':
-            return 'Loco';
         case 'custom':
             return __('Custom','loco');
         }
