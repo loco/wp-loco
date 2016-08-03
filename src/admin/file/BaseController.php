@@ -77,7 +77,6 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         $this->set( 'tabs', $tabs );
         $actions = array (
             'file-edit' => __('Editor','loco'),
-            //'file-sync' => __('Sync','loco'),
             'file-info' => __('File info','loco'),
             'file-delete' => __('Delete','loco'),
         );
@@ -88,6 +87,18 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             $tabs->add( $name, $href, $action === $suffix );
         }
         
+        // Provide common language creation link if project scope is is valid
+        try {
+            $project = $this->getProject();
+            $args = array( 'bundle' => $bundle->getHandle(), 'domain' => $project->getId() );
+            $this->set( 'msginit', new Loco_mvc_ViewParams( array (
+                'href' => Loco_mvc_AdminRouter::generate( $prefix.'-msginit', $args ),
+                'text' => __('New language','loco'),
+            ) ) );
+        }
+        catch( Exception $e ){
+            
+        }
     }
 
 

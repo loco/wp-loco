@@ -114,53 +114,29 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             /// else if POT is in a folder we don't know about, we may as well add to the choices
             // TODO this means another utilty function in project for prefixing rules on individual location
         }
-        // show summary of what can be extracted from source if forcing source extraction
-        // TODO check if text domain looks wrong
-        else if( $this->get('extract') ){
-            $ext = new Loco_gettext_Extraction( $bundle );
-            $totals = $ext->addProject($project)->getDomainCounts();
-            $total = isset($totals[$domain]) ? $totals[$domain] : 0;
-            $summary = sprintf( _n('One string will be extracted from source code.','%s strings will be extracted from source code.',$total,'loco'), number_format($total) );
-        }
-        // else prompt for template
+        // else no template exists, so we prompt to extract from source
         else {
-            $this->set( 'skip', new Loco_mvc_ViewParams( array(
-                'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $_GET + array( 'extract' => '1' ) ),
-                'text' => __('Skip template','loco'),
-            ) ) );
             $this->set( 'ext', new Loco_mvc_ViewParams( array(
                 'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-xgettext', $_GET ),
                 'text' => __('Create template','loco'),
             ) ) );
-            // POT could still be defined, it might just not exist yet
-            if( $potfile ){
-                $this->set('pot', Loco_mvc_FileParams::create($potfile) );
+            // if forcing source extraction show brief description of source files
+            if( $this->get('extract') ){
+                $nfiles = count( $project->findSourceFiles() );
+                $summary = sprintf( _n('1 source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco'), number_format_i18n($nfiles) );
             }
-            // Not offering alternative file, because sync wont be to this file in future
-            /*/ offer user choice of copying another file instead of extracting source
-            else if( $altfile = $project->guessPot() ){
-                $source = $altfile->getRelativePath( $content_dir );
-                $this->set( 'alt', new Loco_mvc_ViewParams( array(
-                    'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), compact('source')+$_GET ),
-                    'text' => sprintf( __('Copy %s','loco'), $altfile->basename() ),
+            // else prompt for template creation before continuing
+            else {
+                $this->set( 'skip', new Loco_mvc_ViewParams( array(
+                    'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $_GET + array( 'extract' => '1' ) ),
+                    'text' => __('Skip template','loco'),
                 ) ) );
-            }*/
-            /*/ find existing languages to copy
-            $alts = $project->findLocaleFiles('po');
-            if( count($alts) ){
-                $pofiles = array();
-                foreach( $alts as $altfile ){
-                    $source = $altfile->getRelativePath( $content_dir );
-                    $locale = $altfile->getLocale();
-                    $pofiles[] = new Loco_mvc_ViewParams( array(
-                        'icon' => $locale->getIcon(),
-                        'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), compact('source')+$_GET ),
-                        'text' => sprintf( __('Copy %s','loco'), $altfile->basename() ),
-                    ) );
+                // POT could still be defined, it might just not exist yet
+                if( $potfile ){
+                    $this->set('pot', Loco_mvc_FileParams::create($potfile) );
                 }
-                $this->set('alts', $pofiles );
-            }*/
-            return $this->view('admin/init/init-prompt');
+                return $this->view('admin/init/init-prompt');
+            }
         }
         $this->set( 'summary', $summary );
 

@@ -30,7 +30,6 @@
     function process( event ){
         event.preventDefault();
         loco.ajax.submit( event.target, onXgettextSuccess );
-        // TODO some kind of loader. extracting can take a long time in Core bundles and big plugins.
         return false;
     }
     

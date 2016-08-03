@@ -570,7 +570,6 @@ class Loco_package_Project {
     }
 
 
-
     /**
      * Get all translation files matching project prefix across target directories
      * @return Loco_fs_LocaleFileList

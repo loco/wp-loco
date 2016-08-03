@@ -1,7 +1,7 @@
 <?php
 /**
  * Ajax "sync" route.
- * Performs the basic in-editor sync functiokn from the old 1.x version. 
+ * Performs the basic in-editor sync function from the old 1.x version. 
  * TODO replace with proper interactive merge functionality.
  */
 class Loco_ajax_SyncController extends Loco_mvc_AjaxController {

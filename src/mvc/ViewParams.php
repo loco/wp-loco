@@ -7,11 +7,13 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     
     /**
      * Default escape function for view type is HTML
+     * @return string
      */
-    public function escape( $s ){
-        return htmlspecialchars( $s, ENT_COMPAT, 'UTF-8' );
-    }    
-    
+    public function escape( $text ){
+        return htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
+    }
+
+
 
     /**
      * format integer as string date, including time according to user settings
@@ -48,10 +50,17 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
     /**
      * Print escaped property value
+     * @param string property key
+     * @param mixed optional arguments to substitute into value
      * @return void
      */
     public function e( $p ){
-        echo $this->escape( $this->__get($p) );
+        $text = $this->__get($p);
+        if( 1 < func_num_args() ){
+            $args = func_get_args();
+            $text = vprintf( $text, array_slice($args,1) );
+        }
+        echo $this->escape( $text );
         return '';
     }
 
@@ -76,7 +85,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * Print property as a string-formatted number
      */
     public function n( $p, $dp = null ){
-        echo number_format( $this->__get($p), $dp );
+        echo number_format_i18n( $this->__get($p), $dp );
         return '';
     }
 

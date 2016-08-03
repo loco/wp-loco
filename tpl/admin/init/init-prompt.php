@@ -22,10 +22,7 @@ $this->extend('../layout');
         </p>
         <p>
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
-            <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a><?php
-            if( $params->has('alt') ):?> 
-            <a href="<?php $alt->e('link')?>" class="button button-link has-icon icon-copy"><?php $alt->e('text')?></a><?php
-            endif?> 
+            <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a>
         </p>
     </div>
     

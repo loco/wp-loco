@@ -21,10 +21,15 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         if( $target->exists() && ! $target->isDirectory() ){
             throw new Loco_error_Exception('Target is not a directory');
         }
+        
+        // basename should be posted from front end
+        $name = $this->get('name');
+        if( ! $name ){
+            throw new Loco_error_Exception('Front end did not post $name');
+        }
 
         // POT file shouldn't exist currently
-        $path = sprintf('%s/%s.pot', $target, $project->getSlug() );
-        $potfile = new Loco_fs_File( $path );
+        $potfile = new Loco_fs_File( $target.'/'.$name );
         $api = new Loco_api_WordPressFileSystem;
         $api->authorizeCreate($potfile);
         
@@ -40,7 +45,7 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         
         $potsize = $potfile->putContents( (string) $data );
         
-        // set response data
+        // set response data for debugging
         $this->set( 'debug', array (
             'potname' => $potfile->basename(),
             'potsize' => $potsize,
@@ -50,12 +55,13 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         Loco_data_Session::get()->flash('success', __('Template file created','loco') );
         Loco_data_Session::close();
         
-        // front end will redirect to the bundle view
-        // TODO append project fragment #<slug> ?
-        $type = strtolower( $bundle->getType() );
-        $this->set( 'redirect', Loco_mvc_AdminRouter::generate( sprintf('%s-view',$type), array (
+        // redirect front end to bundle view. Discourages manual editing of template
+        $type = strtolower( $bundle->getType() );   
+        $href = Loco_mvc_AdminRouter::generate( sprintf('%s-view',$type), array(
             'bundle' => $bundle->getHandle(),
-        ) ) );
+        ) );
+        $hash = '#loco-'.$project->getId();
+        $this->set( 'redirect', $href.$hash );
         
         return parent::render();
     }

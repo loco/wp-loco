@@ -4,23 +4,17 @@
  */
  
 $this->extend('../layout');
+?> 
 
-
-    if( $params->has('ext') ):?> 
-    <div class="notice inline notice-warning">
-        <h3 class="has-icon">No template configured</h3>
+    <?php if( $params->has('ext') ):?> 
+    <div class="notice inline notice-info">
         <p>
-            Loco can sync directly with source code, but this isn't recommended.
-        </p>
-        <p>
-            <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a><?php
-            if( $params->has('alt') ):?> 
-            <a href="<?php $alt->e('link')?>" class="button button-link has-icon icon-copy"><?php $alt->e('text')?></a><?php
-            endif?> 
+            You're creating translations directly from source code.
+            <a href="<?php $ext->e('link')?>" class="">Create template instead</a>.
         </p>
     </div><?php
-    endif;?> 
-
+    endif?> 
+            
 
     <div class="notice inline notice-generic">
 

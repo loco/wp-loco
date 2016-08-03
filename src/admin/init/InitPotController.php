@@ -69,17 +69,21 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         // Just warn if POT writing will fail when saved, but still show screen
         $dir = $pot->getParent();
         
-        // Do initial string extraction for displaying stats for all domains
-        $ext = new Loco_gettext_Extraction( $bundle );
-        $counts = $ext->addProject($project)->getDomainCounts();
-        $total = isset($counts[$domain]) ? $counts[$domain] : 0;
-        
-        // this count deliberately doesn't include meta fields - they will be added on creation
-        $this->set('total', $total );
-        if( $total ){
-            $this->set('found', sprintf( _n('One translatable string found in source code','%s translatable strings found in source code',$total,'loco'), number_format($total) ) );
+        // Avoiding full source scan until actioned, but calculate size to manage expectations
+        $bytes = 0;
+        $nfiles = 0;
+        $sources = $project->findSourceFiles();
+        /* @var $sourceFile Loco_fs_File */
+        foreach( $sources as $sourceFile ){
+            $bytes += $sourceFile->size();
+            $nfiles++;
         }
-
+        $this->set( 'scan', new Loco_mvc_ViewParams( array (
+            'bytes' => $bytes,
+            'count' => $nfiles,
+            'size' => Loco_mvc_FileParams::renderBytes($bytes),
+        ) ) );
+        
         // file metadata
         $this->set('pot', Loco_mvc_FileParams::create( $pot ) );
         $this->set('dir', Loco_mvc_FileParams::create( $dir ) );
@@ -97,7 +101,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         $target_path = $pot->getParent()->getRelativePath($content_dir);
 
         // hidden fields to pass through to Ajax endpoint
-        $this->set('hidden', new Loco_mvc_ViewParams( array(
+        $this->set( 'hidden', new Loco_mvc_ViewParams( array(
             'action' => 'loco_json',
             'route' => 'xgettext',
             'loco-nonce' => $this->setNonce('xgettext')->value,
@@ -105,6 +109,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
             'bundle' => $bundle->getHandle(),
             'domain' => $project->getId(),
             'path' => $target_path,
+            'name' => $pot->basename(),
         ) ) );
 
         // File system connect required if location not writable
