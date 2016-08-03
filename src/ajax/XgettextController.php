@@ -46,6 +46,10 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
             'potsize' => $potsize,
         ) );
         
+        // put flash message into session to be displayed on redirected page
+        Loco_data_Session::get()->flash('success', __('Template file created','loco') );
+        Loco_data_Session::close();
+        
         // front end will redirect to the bundle view
         // TODO append project fragment #<slug> ?
         $type = strtolower( $bundle->getType() );

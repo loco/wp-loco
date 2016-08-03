@@ -23,8 +23,6 @@
     function onXgettextSuccess( data ){
         var href = data && data.redirect;
         if( href ){
-            // TODO show success panel and hide form instead of redirect?
-            // loco.notices.success('YES');
             location.assign( href );
         }
     }

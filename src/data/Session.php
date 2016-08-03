@@ -20,6 +20,12 @@ class Loco_data_Session extends Loco_data_Serializable {
      */
     private $manager;
 
+    /**
+     * Dirty flag: TODO abstract into array access setters
+     * @var bool
+     */
+    private $dirty = false;
+
 
     /**
      * @return Loco_data_Session
@@ -50,6 +56,21 @@ class Loco_data_Session extends Loco_data_Serializable {
 
 
 
+    /**
+     * Commit current session data to WordPress storage and remove from memory
+     */
+    public static function close(){
+        if( self::$instance && self::$instance->dirty ){
+            self::$instance->persist();
+            self::$instance = null;
+        }
+    } 
+
+
+
+    /**
+     * @internal
+     */
     final public function __construct( array $raw = array() ){
         parent::__construct( array() );
         $this->token = wp_get_session_token();
@@ -65,8 +86,22 @@ class Loco_data_Session extends Loco_data_Serializable {
         }
         // enforce single instance
         self::$instance = $this;
+        // ensure against unclean shutdown
+        if( loco_debugging() ){
+            register_shutdown_function( array($this,'_on_shutdown') );
+        }
     }
 
+
+    /**
+     * @internal
+     * Ensure against unclean use of session storage
+     */
+    public function _on_shutdown(){
+        if( $this->dirty ){
+            trigger_error('Unclean session shutdown: call either Loco_data_Session::destroy or Loco_data_Session::close');
+        }
+    }
 
 
     /**
@@ -93,7 +128,7 @@ class Loco_data_Session extends Loco_data_Serializable {
         $data = $this->getRaw();
         $data['loco'] = $this->getSerializable();
         $this->manager->update( $this->token, $data );
-
+        $this->dirty = false;
         return $this;
     }
 
@@ -107,13 +142,56 @@ class Loco_data_Session extends Loco_data_Serializable {
         $data = $this->getRaw();
         if( isset($data['loco']) ){
             unset( $data['loco'] );
-            $this->exchangeArray( array() );
             $this->manager->update( $this->token, $data );
         }
-
+        $this->exchangeArray( array() );
+        $this->dirty = false;
         return $this;
     }
 
-    
+
+    /**
+     * @param string name of messages bag, e.g. "errors"
+     * @param mixed optionally put data in rather than getting data out
+     * @return mixed
+     */
+    public function flash( $bag, $data = null ){
+        if( isset($data) ){
+            $this->dirty = true;
+            $this[$bag][] = $data;
+            return;
+        }
+        // else get first object in bag and remove before returning
+        if( isset($this[$bag]) ){
+            if( $data = array_shift($this[$bag]) ){
+                $this->dirty = true;
+                return $data;
+            }
+        }
+    }    
+
+
+
+    /**
+     * @internal
+     */
+    public function offsetSet( $index, $newval ){
+        if( ! isset($this[$index]) || $newval !== $this[$index] ){
+            $this->dirty = true;
+            parent::offsetSet( $index, $newval );
+        }
+    }
+
+
+
+    /**
+     * @internal
+     */
+    public function offsetUnset( $index ){
+        if( isset($this[$index]) ){
+            $this->dirty = true;
+            parent::offsetUnset( $index );
+        }
+    }
     
 }

@@ -44,16 +44,11 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             }
         }
         
-        
-        $token = wp_get_session_token();
-        $this->set( 'token', $token );
-        $this->set( 'cookie', wp_parse_auth_cookie( $_COOKIE[LOGGED_IN_COOKIE] ) );
-        
-        
-        $manager = WP_User_Meta_Session_Tokens::get_instance( get_current_user_id() );
-        $session = $manager->get( $token );
-        $this->set( 'session', $session );
-        
+        /*/ inspect session and test flash messages
+        $session = Loco_data_Session::get();
+        $session->flash( 'success', microtime() );
+        $this->set('session', $session->getArrayCopy() );
+        Loco_data_Session::close();*/
         
         /*/ try some notices
         Loco_error_AdminNotices::add( new Loco_error_Success('This is a sample success message') );

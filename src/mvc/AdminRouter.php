@@ -105,6 +105,11 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         if( ! $this->ctrl instanceof Loco_mvc_AdminController ){
             throw new Exception( $class.' must inherit Loco_mvc_AdminController');
         }
+        // transfer flash messages from session to admin notice buffer
+        $session = Loco_data_Session::get();
+        while( $message = $session->flash('success') ){
+            Loco_error_AdminNotices::success( $message );
+        }
         // buffer errors during controller setup
         try {
             $this->ctrl->_init( $_GET + $args );
@@ -206,6 +211,8 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             $ctrl->_init( array() );
             echo $ctrl->renderError($e);
         }
+        // ensure session always shutdown cleanly after render
+        Loco_data_Session::close();
     }
 
 
