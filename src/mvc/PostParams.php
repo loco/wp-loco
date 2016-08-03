@@ -38,19 +38,16 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
      */
      public static function create(){
         $post = array();
-        // preferred way is to parse original data
-        // note that input can only be fetched once
-        if( $raw = file_get_contents('php://input') ){
-            parse_str( $raw, $post );
+        if( 'POST' === $_SERVER['REQUEST_METHOD'] ){
+            // attempt to use clean input if available and unslashed
+            if( ( $raw = file_get_contents('php://input') ) && ! get_magic_quotes_gpc() && ! get_magic_quotes_runtime() ){
+                parse_str( $raw, $post );
+            }
+            // else reverse wp_magic_quotes (assumes no other process has hacked the array)
+            else {
+                $post = stripslashes_deep( $_POST );
+            }
         }
-        else if( isset($_SERVER['HTTP_RAW_POST_DATA']) ){
-            parse_str( $_SERVER['HTTP_RAW_POST_DATA'], $post );
-        }
-        // else fall back to undoing WordPress 'magic'
-        else {
-            $post = stripslashes_deep( $_POST );
-        }
-
         return new Loco_mvc_PostParams( $post );
     }
 
