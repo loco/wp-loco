@@ -66,9 +66,10 @@ class Loco_data_RecentItems extends Loco_data_Option {
      */
     private function getItems( $key, $offset, $count ){
         $stack = isset($this[$key]) ? $this[$key] : array();
-        // hash map should automatically be in "push" order but sorting to be sure.
-        asort( $stack, SORT_NUMERIC );
-        $stack = array_keys( $stack );
+        // hash map should automatically be in "push" order, meaning most recent last 
+        // sorting gives wrong order for same-second updates (only relevent in tests, but still..)
+        // asort( $stack, SORT_NUMERIC );
+        $stack = array_reverse( array_keys( $stack ) );
         if( is_null($count) && 0 === $offset ){
             return $stack;
         }
@@ -96,12 +97,13 @@ class Loco_data_RecentItems extends Loco_data_Option {
 
 
     /**
+     * TODO other types of item
      * Push project to the front of recent bundles stack
      * @return Loco_data_RecentItems
-     */
-    public function pushProject( Loco_package_Project $bundle ){
+     *
+    public function pushProject( Loco_package_Project $project ){
         return $this;
-    }
+    }*/
     
 
 }

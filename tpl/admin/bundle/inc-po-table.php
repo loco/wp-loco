@@ -7,22 +7,22 @@
         <table class="wp-list-table widefat fixed striped">
             <thead>
                 <tr>
-                    <th>
+                    <th data-sort-type="s">
                         <?php esc_html_e('Language','loco')?> 
                     </th>
-                    <th colspan="2">
+                    <th colspan="2" data-sort-type="n">
                         <?php esc_html_e('Translation progress','loco')?> 
                     </th>
-                    <th>
+                    <th data-sort-type="n">
                         <?php esc_html_e('Pending','loco')?> 
                     </th>
-                    <th>
+                    <th data-sort-type="s">
                         <?php esc_html_e('File info','loco')?> 
                     </th>
-                    <th>
+                    <th data-sort-type="n">
                         <?php esc_html_e('Last modified','loco')?> 
                     </th>
-                    <th>
+                    <th data-sort-type="s">
                         <?php esc_html_e('Folder','loco')?> 
                     </th>
                 </tr>
@@ -31,7 +31,7 @@
                 /* @var $po Loco_pages_ViewParams */
                 foreach( $pairs as $po ):?> 
                 <tr>
-                    <td class="has-row-actions">
+                    <td class="has-row-actions" data-sort-value="<?php $po->e('lname')?>">
                         <a href="<?php $po->e('edit')?>" class="row-title">
                             <span <?php echo $po->lattr?>><code><?php $po->e('lcode')?></code></span>
                             <span><?php $po->e('lname')?></span>
@@ -51,19 +51,19 @@
                             </span>
                         </nav>
                     </td>
-                    <td>
+                    <td data-sort-value="<?php echo $po->meta->getPercent()?>">
                         <?php $po->meta->printProgress()?> 
                     </td>
                     <td title="of <?php $po->n('total')?>">
                         <?php echo $po->meta->getPercent()?>%
                     </td>
-                    <td>
+                    <td data-sort-value="<?php $po->f('todo','%u')?>">
                         <?php $po->n('todo')?> 
                     </td>
-                    <td>
+                    <td data-sort-value="<?php $po->e('name')?>">
                          <a href="<?php $po->e('info')?>"><?php $po->e('name')?></a>
                     </td>
-                    <td>
+                    <td data-sort-value="<?php $po->f('time','%u')?>">
                         <time datetime="<?php $po->date('time','Y-m-d H:i:s')?>"><?php $po->date('time')?></time>
                     </td>
                     <td>
