@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate (v2 translations)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"PO-Revision-Date: Tue Aug 02 2016 15:32:37 GMT+0100 (BST)\n"
+"PO-Revision-Date: Wed Aug 03 2016 18:56:29 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -64,6 +64,10 @@ msgstr ""
 
 #: src/ajax/SaveController.php:91
 msgid "PO file saved, but MO file compilation failed"
+msgstr ""
+
+#: src/ajax/XgettextController.php:55
+msgid "Template file created"
 msgstr ""
 
 #: src/api/WordPressFileSystem.php:47
@@ -237,7 +241,7 @@ msgstr ""
 msgid "Loco plugin options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:199
+#: src/mvc/AdminRouter.php:203
 msgid "Page not found"
 msgstr ""
 
@@ -337,7 +341,7 @@ msgstr ""
 msgid "Setup options"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:192 
+#: src/admin/bundle/ViewController.php:192 src/admin/file/BaseController.php:96 
 #: src/admin/init/InitPoController.php:16 
 #: src/admin/init/InitPoController.php:44
 msgid "New language"
@@ -348,7 +352,7 @@ msgid "Edit template"
 msgstr ""
 
 #: src/admin/bundle/ViewController.php:210 
-#: src/admin/init/InitPoController.php:133 tpl/admin/init/init-pot.php:36
+#: src/admin/init/InitPoController.php:121 tpl/admin/init/init-pot.php:39
 msgid "Create template"
 msgstr ""
 
@@ -369,20 +373,26 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: src/admin/file/BaseController.php:81 tpl/admin/bundle/inc-po-table.php:20
+#: src/admin/file/BaseController.php:80 tpl/admin/bundle/inc-po-table.php:20
 msgid "File info"
 msgstr ""
 
-#: src/admin/file/BaseController.php:82 tpl/admin/bundle/inc-po-table.php:47
+#: src/admin/file/BaseController.php:81 tpl/admin/bundle/inc-po-table.php:47
 msgid "Delete"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:86 
-#: src/admin/file/DeleteController.php:104
+#: src/admin/file/DeleteController.php:74
+msgid "File deleted"
+msgid_plural "%u files deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/file/DeleteController.php:88 
+#: src/admin/file/DeleteController.php:106
 msgid "Delete %s"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:111
+#: src/admin/file/DeleteController.php:113
 msgid "One dependant file will also be deleted"
 msgid_plural "%u dependant files will also be deleted"
 msgstr[0] ""
@@ -441,18 +451,6 @@ msgstr ""
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
 
-#: src/admin/file/SyncController.php:29
-msgid "Updating translations from template"
-msgstr ""
-
-#: src/admin/file/SyncController.php:33
-msgid "Updating translations from source code"
-msgstr ""
-
-#: src/admin/file/SyncController.php:42
-msgid "Updating template from source code"
-msgstr ""
-
 #: src/admin/init/InitPoController.php:45
 msgid "Initializing new translations in \"%s\""
 msgstr ""
@@ -463,13 +461,13 @@ msgid_plural "%s strings found in %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:123
-msgid "One string will be extracted from source code."
-msgid_plural "%s strings will be extracted from source code."
+#: src/admin/init/InitPoController.php:126
+msgid "1 source file will be scanned for translatable strings"
+msgid_plural "%s source files will be scanned for translatable strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:129
+#: src/admin/init/InitPoController.php:132
 msgid "Skip template"
 msgstr ""
 
@@ -481,17 +479,11 @@ msgstr ""
 msgid "Template file already exists"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:80
-msgid "One translatable string found in source code"
-msgid_plural "%s translatable strings found in source code"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/admin/init/InitPotController.php:87
+#: src/admin/init/InitPotController.php:91
 msgid "New template file"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:88
+#: src/admin/init/InitPotController.php:92
 msgid "New translations template for \"%s\""
 msgstr ""
 
@@ -656,31 +648,43 @@ msgstr ""
 msgid "Template file"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:41
+#: tpl/admin/init/init-po.php:35
 msgid "Choose a language"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:48
+#: tpl/admin/init/init-po.php:42
 msgid "WordPress language"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:53
+#: tpl/admin/init/init-po.php:47
 msgid "No language selected"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:64
+#: tpl/admin/init/init-po.php:58
 msgid "Custom language"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:137
+#: tpl/admin/init/init-po.php:131
 msgid "Create translations file"
 msgstr ""
 
 #: tpl/admin/init/init-pot.php:11
-msgid "No strings extracted"
+msgid "No sources"
 msgstr ""
 
-#: tpl/admin/init/init-pot.php:38
+#: tpl/admin/init/init-pot.php:21
+msgid "Source files found:"
+msgstr ""
+
+#: tpl/admin/init/init-pot.php:25
+msgid "Data size to be scanned:"
+msgstr ""
+
+#: tpl/admin/init/init-pot.php:29
+msgid "Template file will be created at:"
+msgstr ""
+
+#: tpl/admin/init/init-pot.php:41
 msgid "Authorize"
 msgstr ""
 

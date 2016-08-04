@@ -40,7 +40,7 @@
     /**
      * 
      */
-    function doSyncAction(){
+    function doSyncAction( callback ){
         function onSuccess( result ){
              var info = [],
                  doc = messages,
@@ -68,8 +68,10 @@
              }
              loco.notices.success( info.join('. ') );
              $(innerDiv).trigger('poMerge',[result]);
+             // done sync
+             callback && callback();
         }
-        loco.ajax.post( 'sync', sync, onSuccess );
+        loco.ajax.post( 'sync', sync, onSuccess, callback );
     }
 
 
@@ -89,8 +91,9 @@
     /**
      * Post full editor contents to "posave" endpoint
      */    
-    function doSaveAction(){
+    function doSaveAction( callback ){
         function onSuccess( result ){
+            callback && callback();
             editor.save( true );
         }
         var postdata = {
@@ -102,7 +105,7 @@
         }
         // adding PO source last for easier debugging in network inspector
         postdata.data = String( messages );
-        loco.ajax.post( 'save', postdata, onSuccess );
+        loco.ajax.post( 'save', postdata, onSuccess, callback );
     }
     
 
@@ -123,17 +126,32 @@
         // enables and disable according to save/unsave events
         editor
             .on('poUnsaved', function(){
-                button.disabled = false;
+                enable();
                 $(button).addClass( 'button-primary loco-flagged' );
             } )
             .on('poSave', function(){
-                button.disabled = true;
+                disable();
                 $(button).removeClass( 'button-primary loco-flagged' );
             } )
         ;
+        function disable(){
+            button.disabled = true;
+        }
+        function enable(){
+            button.disabled = false;
+        }        
+        function think(){
+            disable();
+            $(button).addClass('loading');
+        }
+        function unthink(){
+            enable();
+            $(button).removeClass('loading');
+        }
         $(button).click( function(event){
             event.preventDefault();
-            doSaveAction();
+            think();
+            doSaveAction( unthink );
             return false;
         } );
         return true;
@@ -149,6 +167,14 @@
             function enable(){
                 button.disabled = false;
             }
+            function think(){
+                disable();
+                $(button).addClass('loading');
+            }
+            function unthink(){
+                enable();
+                $(button).removeClass('loading');
+            }
             // Only permit sync when document is saved
             editor
                 .on('poUnsaved', function(){
@@ -163,7 +189,8 @@
             // enable syncing on button click
             $(button).click( function(event){
                 event.preventDefault();
-                doSyncAction();
+                think();
+                doSyncAction( unthink );
                 return false;
             } );
             enable();

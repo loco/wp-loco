@@ -29,7 +29,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
             $s = $a[0];
             $d = trim($a[1],'0') and $s .= '.'.$d;
         }
-        $units = array( ' bytes', 'KB', 'MB', 'GB', 'TB' );
+        $units = array( ' bytes', ' KB', ' MB', ' GB', ' TB' );
         $s .= $units[$i];
         
         return $s;

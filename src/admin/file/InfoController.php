@@ -125,7 +125,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 $meta = Loco_gettext_Metadata::create($file,$data);
                 $this->set( 'meta', $meta );
                 // establish whether PO is in sync with POT
-                if( $template && ! $isTemplate && 'po' === $ext ){
+                if( $template && ! $isTemplate && 'po' === $ext && $template->exists() ){
                     try {
                         $this->set('potfile', new Loco_mvc_FileParams( array(
                             'synced' => Loco_gettext_Data::load($template)->equalSource($data),

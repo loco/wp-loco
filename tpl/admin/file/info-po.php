@@ -63,5 +63,15 @@ $this->start('header');
         </p>
     </div><?php
     endif;
+    
+    else:?> 
+    <div class="notice inline notice-debug">
+        <h3 class="has-icon">
+            Missing template
+        </h3>
+        <p>
+            These translations are not linked to a POT file. Sync operations will extract strings directly from source code.
+        </p>
+    </div><?php
     endif;
     

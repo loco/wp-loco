@@ -103,7 +103,7 @@
     // enable disable form submission
     
     function setFormDisabled( disabled ){
-        $(elForm).find('input[type="submit"]').each( function( i, button ){
+        $(elForm).find('button.button-primary').each( function( i, button ){
             button.disabled = disabled;
         } );
     }
