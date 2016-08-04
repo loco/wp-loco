@@ -609,6 +609,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      */
     public function getDomains(){
         $domains = array();
+        /* @var $project Loco_package_Project */
         foreach( $this as $project ){
             if( $domain = $project->getDomain() ){
                 $d = (string) $domain;
@@ -620,6 +621,21 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         return $domains;
     }
 
+
+
+    /**
+     * Get newest timestamp of all translation files (includes template, but exclude source files)
+     * @return int
+     */    
+    public function getLastUpdated(){
+        $t = 0;
+        /* @var $project Loco_package_Project */
+        foreach( $this as $project ){
+            $t = max( $t, $project->getLastUpdated() );
+        }
+        return $t;
+    }
+     
 
     /**
      * Get project by ID

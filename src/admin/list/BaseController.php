@@ -23,6 +23,7 @@ abstract class Loco_admin_list_BaseController extends Loco_mvc_AdminController {
             'type' => $type = strtolower( $bundle->getType() ),
             'view' => Loco_mvc_AdminRouter::generate( $type.'-view', array( 'bundle' => $handle ) ),
             'conf' => Loco_mvc_AdminRouter::generate( $type.'-conf', array( 'bundle' => $handle  ) ),
+            'time' => $bundle->getLastUpdated(),
         ) );
     }
     

@@ -72,7 +72,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * @return void
      */
     public static function clear(){
-        delete_option('loco-settings');
+        delete_option('loco_settings');
         self::$current = null;
     }
 
@@ -123,7 +123,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
      */
     public function persist(){
         $this->version = loco_plugin_version();
-        return update_option('loco-settings', $this->getSerializable() );
+        return update_option('loco_settings', $this->getSerializable() );
     }
 
 
@@ -133,7 +133,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * @return bool whether settings where previously saved
      */
     public function fetch(){
-        if( $data = get_option('loco-settings') ){
+        if( $data = get_option('loco_settings') ){
             $copy = new Loco_data_Settings;
             $copy->setUnserialized($data);
             // preserve any defaults not in previously saved data
@@ -154,7 +154,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * @return bool whether upgrade has occured
      */
     public function migrate(){
-        $existed = (bool) get_option('loco-settings');
+        $existed = (bool) get_option('loco_settings');
         // Populate new format from legacy 1.x options
         $this->gen_hash = get_option('loco-translate-gen_hash','0');
         $this->use_fuzzy = get_option('loco-translate-use_fuzzy', '1' );

@@ -34,6 +34,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         parent::setUpBeforeClass();
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
+        Loco_data_RecentItems::destroy();
         self::dropOptions();
     }
 
@@ -42,6 +43,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         parent::tearDownAfterClass();
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
+        Loco_data_RecentItems::destroy();
         self::dropOptions();
     }
 

@@ -11,6 +11,12 @@ abstract class Loco_data_Serializable extends ArrayObject {
      */
     private $v = 0;
 
+    /**
+     * Commit serialized data to WordPress storage
+     * @return mixed
+     */
+    abstract public function persist();
+
 
     /**
      * Alias property getter through ArrayObject implementation 

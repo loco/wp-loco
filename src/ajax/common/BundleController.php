@@ -9,9 +9,17 @@ abstract class Loco_ajax_common_BundleController extends Loco_mvc_AjaxController
      * @return Loco_package_Bundle
      */
     protected function getBundle(){
-        $type = $this->get('type');
-        $handle = $this->get('bundle');
-        return Loco_package_Bundle::createType( $type, $handle );
+        if( $id = $this->get('bundle') ){
+            // type may be passed as separate argument    
+            if( $type = $this->get('type') ){
+                return Loco_package_Bundle::createType( $type, $id );
+            }
+            // else embedded in standalone bundle identifier
+            // TODO standardize this across all Ajax end points 
+            return Loco_package_Bundle::fromId($id);
+        }
+        // else may have type embedded in bundle
+        throw new Loco_error_Exception('No bundle identifier posted');
     }
 
 

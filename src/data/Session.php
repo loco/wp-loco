@@ -7,7 +7,7 @@ class Loco_data_Session extends Loco_data_Serializable {
     /**
      * @var Loco_data_Session
      */
-    private static $instance;
+    private static $current;
     
     /**
      * Value from wp_get_session_token
@@ -31,10 +31,10 @@ class Loco_data_Session extends Loco_data_Serializable {
      * @return Loco_data_Session
      */
     public static function get(){
-        if( ! self::$instance ){
+        if( ! self::$current ){
             new Loco_data_Session;
         }
-        return self::$instance;
+        return self::$current;
     }
 
 
@@ -43,14 +43,14 @@ class Loco_data_Session extends Loco_data_Serializable {
      * Trash data and remove from memory
      */
     public static function destroy(){
-        if( self::$instance ){
+        if( self::$current ){
             try {
-                self::$instance->clear();
+                self::$current->clear();
             }
             catch( Exception $e ){
                 // probably no session to destroy
             }
-            self::$instance = null;
+            self::$current = null;
         }
     }
 
@@ -60,9 +60,9 @@ class Loco_data_Session extends Loco_data_Serializable {
      * Commit current session data to WordPress storage and remove from memory
      */
     public static function close(){
-        if( self::$instance && self::$instance->dirty ){
-            self::$instance->persist();
-            self::$instance = null;
+        if( self::$current && self::$current->dirty ){
+            self::$current->persist();
+            self::$current = null;
         }
     } 
 
@@ -85,7 +85,7 @@ class Loco_data_Session extends Loco_data_Serializable {
             $this[$prop] = $value;
         }
         // enforce single instance
-        self::$instance = $this;
+        self::$current = $this;
         // ensure against unclean shutdown
         if( loco_debugging() ){
             register_shutdown_function( array($this,'_on_shutdown') );

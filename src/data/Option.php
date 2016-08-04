@@ -27,7 +27,6 @@ abstract class Loco_data_Option extends Loco_data_Serializable {
      * @return bool whether object existed in cache
      */
     public function fetch(){
-        $v = $this->getVersion();
         $key = 'loco_'.$this->getKey();
         $data = get_option( $key );
         try {

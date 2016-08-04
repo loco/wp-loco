@@ -50,6 +50,10 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
             'potname' => $potfile->basename(),
             'potsize' => $potsize,
         ) );
+
+        // push recent items on file creation
+        // TODO push project and locale file
+        Loco_data_RecentItems::get()->pushBundle( $bundle )->persist();
         
         // put flash message into session to be displayed on redirected page
         Loco_data_Session::get()->flash('success', __('Template file created','loco') );

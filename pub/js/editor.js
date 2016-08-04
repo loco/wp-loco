@@ -5,7 +5,9 @@
     
     var loco = window.locoScope,
         conf = window.locoConf,
-        sync = null,
+        
+        syncParams = null,
+        saveParams = null,
         
         // UI translation
         translator = loco.translator,
@@ -71,7 +73,7 @@
              // done sync
              callback && callback();
         }
-        loco.ajax.post( 'sync', sync, onSuccess, callback );
+        loco.ajax.post( 'sync', syncParams, onSuccess, callback );
     }
 
 
@@ -95,17 +97,16 @@
         function onSuccess( result ){
             callback && callback();
             editor.save( true );
+            // Update saved time update
+            $('#loco-po-modified').text( result.datetime||'[datetime error]' );
         }
-        var postdata = {
-            path: filePath,
-            locale: String( messages.locale() || '' )
-        };
+        saveParams.locale = String( messages.locale() || '' );
         if( fsConnect ){
-            fsConnect.applyCreds( postdata );
+            fsConnect.applyCreds( saveParams );
         }
         // adding PO source last for easier debugging in network inspector
-        postdata.data = String( messages );
-        loco.ajax.post( 'save', postdata, onSuccess, callback );
+        saveParams.data = String( messages );
+        loco.ajax.post( 'save', saveParams, onSuccess, callback );
     }
     
 
@@ -148,6 +149,8 @@
             enable();
             $(button).removeClass('loading');
         }
+        saveParams = $.extend( { path: filePath }, conf.project||{} );
+
         $(button).click( function(event){
             event.preventDefault();
             think();
@@ -160,7 +163,8 @@
     
     
     function registerSyncButton( button ){
-        if( sync = conf.project ){
+        var project = conf.project;
+        if( project ){
             function disable(){
                 button.disabled = true;
             }
@@ -184,8 +188,12 @@
                     enable();
                 } )
             ;
-            // additional params for sync end point
-            sync.type = template ? 'pot' : 'po';
+            // params for sync end point
+            syncParams = {
+                bundle: project.bundle,
+                domain: project.domain,
+                type: template ? 'pot' : 'po'
+            };
             // enable syncing on button click
             $(button).click( function(event){
                 event.preventDefault();

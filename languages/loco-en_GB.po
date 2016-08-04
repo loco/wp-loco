@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate (v2 translations)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"PO-Revision-Date: Wed Aug 03 2016 18:56:22 GMT+0100 (BST)\n"
+"PO-Revision-Date: Thu Aug 04 2016 17:07:43 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: English (UK)\n"
 "Language: en-GB\n"
@@ -50,23 +50,23 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/ajax/SaveController.php:78
+#: src/ajax/SaveController.php:88
 msgid "PO file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:78 src/ajax/SaveController.php:96
+#: src/ajax/SaveController.php:88 src/ajax/SaveController.php:106
 msgid "POT file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:87
+#: src/ajax/SaveController.php:97
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:91
+#: src/ajax/SaveController.php:101
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
-#: src/ajax/XgettextController.php:55
+#: src/ajax/XgettextController.php:59
 msgid "Template file created"
 msgstr ""
 
@@ -290,11 +290,15 @@ msgstr ""
 msgid "Visit official site"
 msgstr ""
 
-#: tpl/admin/root.php:26
+#: tpl/admin/root.php:27
+msgid "Recently updated:"
+msgstr ""
+
+#: tpl/admin/root.php:39
 msgid "Active theme:"
 msgstr ""
 
-#: tpl/admin/root.php:37
+#: tpl/admin/root.php:51
 msgid "Running plugins:"
 msgstr ""
 
@@ -352,7 +356,7 @@ msgid "Edit template"
 msgstr ""
 
 #: src/admin/bundle/ViewController.php:210 
-#: src/admin/init/InitPoController.php:121 tpl/admin/init/init-pot.php:39
+#: src/admin/init/InitPoController.php:121 tpl/admin/init/init-pot.php:27
 msgid "Create template"
 msgstr ""
 
@@ -672,43 +676,27 @@ msgstr ""
 msgid "Create translations file"
 msgstr ""
 
-#: tpl/admin/init/init-pot.php:11
-msgid "No sources"
+#: tpl/admin/init/init-pot.php:12
+msgid "Source files to scan:"
 msgstr ""
 
-#: tpl/admin/init/init-pot.php:21
-msgid "Source files found:"
+#: tpl/admin/init/init-pot.php:17
+msgid "Strings will be extracted to:"
 msgstr ""
 
-#: tpl/admin/init/init-pot.php:25
-msgid "Data size to be scanned:"
-msgstr ""
-
-#: tpl/admin/init/init-pot.php:29
-msgid "Template file will be created at:"
-msgstr ""
-
-#: tpl/admin/init/init-pot.php:41
-msgid "Authorize"
-msgstr ""
-
-#: tpl/admin/list/inc-table.php:10
-msgid "Theme name"
-msgstr ""
-
-#: tpl/admin/list/inc-table.php:11
-msgid "Plugin name"
-msgstr ""
-
-#: tpl/admin/list/inc-table.php:12
+#: tpl/admin/list/inc-table.php:9
 msgid "Bundle name"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:16
+#: tpl/admin/list/inc-table.php:12
 msgid "Text domain"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:19
+#: tpl/admin/list/inc-table.php:15
+msgid "Last updated"
+msgstr ""
+
+#: tpl/admin/list/inc-table.php:18
 msgid "Subsets"
 msgstr ""
 

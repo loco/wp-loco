@@ -102,6 +102,10 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             'source' => $source, 
         ) );
         
+        // push recent items on file creation
+        // TODO push project and locale file
+        Loco_data_RecentItems::get()->pushBundle( $bundle )->persist();
+        
         // front end will redirect to the editor
         $type = strtolower( $this->get('type') );
         $this->set( 'redirect', Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type), array (

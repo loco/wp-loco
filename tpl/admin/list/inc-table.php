@@ -5,15 +5,14 @@
 ?> 
     <table class="wp-list-table widefat fixed striped">
         <thead>
-            <th><?php
-            switch( $params->type ): 
-                case 'theme':  esc_html_e('Theme name',  'loco'); break;
-                case 'plugin': esc_html_e('Plugin name', 'loco'); break;
-                default: esc_html_e('Bundle name', 'loco');
-            endswitch?> 
+            <th>
+                <?php esc_html_e('Bundle name', 'loco')?> 
             </th>
             <th>
                 <?php esc_html_e('Text domain','loco')?> 
+            </th>
+            <th>
+                <?php esc_html_e('Last updated','loco')?> 
             </th>
             <th>
                 <?php esc_html_e('Subsets','loco')?> 
@@ -29,7 +28,10 @@
                 <td>
                     <?php $bundle->e('dflt')?> 
                 </td>
-                <td>
+                <td data-sortable="<?php $bundle->f('time','%u')?>">
+                    <?php $bundle->time ? $bundle->date('time') : print '--'?> 
+                </td>
+                <td data-sortable="<?php $bundle->f('size','%u')?>">
                     <?php $bundle->n('size')?> 
                 </td>
             </tr><?php

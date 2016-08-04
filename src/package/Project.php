@@ -649,4 +649,22 @@ class Loco_package_Project {
     }
 
 
+    /**
+     * Get newest timestamp of all translation files (includes template, but exclude source files)
+     * @return int
+     */    
+    public function getLastUpdated(){
+        $t = 0;
+        $file = $this->getPot();
+        if( $file && $file->exists() ){
+            $t = $file->modified();
+        }
+        /* @var $file Loco_fs_File */
+        foreach( $this->findLocaleFiles('po') as $file ){
+            $t = max( $t, $file->modified() );
+        }
+        return $t;
+    }
+
+
 }

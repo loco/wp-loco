@@ -2,7 +2,7 @@
 /**
  * Ajax "save" route, for saving editor contents to disk
  */
-class Loco_ajax_SaveController extends Loco_mvc_AjaxController {
+class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
     
     
     /**
@@ -66,6 +66,16 @@ class Loco_ajax_SaveController extends Loco_mvc_AjaxController {
         // commit file directly to disk
         $bytes = $pofile->putContents( $data );
         $mtime = $pofile->modified();
+
+        // push recent items on file creation
+        try {
+            $bundle = $this->getBundle();
+            Loco_data_RecentItems::get()->pushBundle( $bundle )->persist();
+            // TODO push project and locale file
+        }
+        catch( Exception $e ){
+            // editor permitted to save files not in a bundle, so catching failures
+        }
         
         // start success data with bytes written and timestamp
         $this->set('locale', $locale );
