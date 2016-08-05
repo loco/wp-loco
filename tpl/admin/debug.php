@@ -9,3 +9,8 @@ $this->extend('layout');
 
     <?php
     echo $this->render('../debug/dump');
+    ?> 
+
+    <form>
+        <button class="button button-primary button-large has-icon icon-save loading" disabled>Test spinner</button>
+    </form>

@@ -3,8 +3,19 @@
  * @codeCoverageIgnore
  */
 class Loco_admin_DebugController extends Loco_mvc_AdminController {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init(){
+        parent::init();
+        $this->set('title','DEBUG');
+    }
     
     
+    /**
+     * {@inheritdoc}
+     */
     public function render(){
         
         // debug package listener
@@ -36,13 +47,13 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         // $this->set('active', get_option( 'active_plugins', array() ) );
         // $this->set('langs',get_available_languages());
 
-        $plugins = get_plugins();
+        /*$plugins = get_plugins();
         $plugin_info = get_site_transient( 'update_plugins' );
         foreach( $plugins as $plugin_file => $plugin_data ){
             if ( isset( $plugin_info->response[$plugin_file] ) ) {
                 $plugins[$plugin_file]['____'] = $plugin_info->response[$plugin_file];
             }
-        }
+        }*/
         
         /*/ inspect session and test flash messages
         $session = Loco_data_Session::get();
@@ -50,7 +61,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $this->set('session', $session->getArrayCopy() );
         Loco_data_Session::close();*/
         
-        // try some notices
+        /*/ try some notices
         Loco_error_AdminNotices::add( new Loco_error_Success('This is a sample success message') );
         Loco_error_AdminNotices::add( new Loco_error_Warning('This is a sample warning') );
         Loco_error_AdminNotices::add( new Loco_error_Exception('This is a sample error') );
