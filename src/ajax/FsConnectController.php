@@ -1,6 +1,6 @@
 <?php
 /**
- * Ajax service thaht provides remote server authentication for file system *write* operations
+ * Ajax service that provides remote server authentication for file system *write* operations
  */
 class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
 
