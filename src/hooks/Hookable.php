@@ -55,7 +55,7 @@ abstract class Loco_hooks_Hookable {
 
 
     /**
-     * Destructor deregisters hooks
+     * Destructor deregisters hooks.
      * We can't use __destruct because instances persist in WordPress hook registry
      */
     public function unhook(){

@@ -19,6 +19,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
+     * `theme_locale` filter callback.
      * Signals the beginning of a "load_theme_textdomain" process
      */    
     public function filter_theme_locale( $locale, $domain ){
@@ -29,6 +30,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
+     * `plugin_locale` filter callback.
      * Signals the beginning of a "load_plugin_textdomain" process
      */    
     public function filter_plugin_locale( $locale, $domain ){
@@ -63,25 +65,24 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             if( $_domain !== $domain ){
                 return false;
             }
-            // observe the same loading order philosophy as WordPress. Most official first, custom last. 
+            // ensure official translations loaded first, but let custom strings override auto-updates
             $order = array (
                 $mopath,
-                $wp_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
                 $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
+                $wp_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
             );
         }
 
         // else load_textdomain must have been called directly.
         else {
             $snip = strlen($wp_lang_dir);
-            // ideally direct loads are to something under WP_LANG_DIR
+            // direct file loads should be under WP_LANG_DIR
             if( substr( dirname($mopath).'/', 0, $snip ) === $wp_lang_dir ){
                 $order = array (
-                    $mopath,
                     substr_replace( $mopath, $lc_lang_dir, 0, $snip ),
+                    $mopath,
                 );
             }
-
             // else no way to map files from WP_LANG_DIR to LOCO_LANG_DIR
             else {
                 $order = array( $mopath );
