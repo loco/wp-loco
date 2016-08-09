@@ -93,19 +93,22 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         $order = apply_filters( 'loco_load_textdomain_order', $order, $domain );
 
         // recursively call load_textdomain with a lock on this process
-        // the first file that exists should be loaded, unless something else interferes with the mofile path
+        $loaded = false;
         $this->lock = true;
         foreach( $order as $mopath ){
-            if( load_textdomain( $domain, $mopath ) ){
+            if( load_textdomain($domain,$mopath) ){
+                $loaded = true;
                 break;
             }
         }
 
         // release lock and terminiate previous loading thread
         $this->lock = false;
-        return true;
+        $this->context = null;
+
+        // returning false here will cause WordPress to make a redundant second attempt at loading the original $mopath, 
+        // however this is essential to ensure correct return value from load_textdomain. otherwise plugins may stop trying other locations.
+        return $loaded;
     }
-
-
 
 }
