@@ -34,7 +34,9 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
         // Show recently "used' bundles
         $bundles = array();
         $recent = Loco_data_RecentItems::get();
-        foreach( $recent->getBundles() as $id ){
+        // filter in lieu of plugin setting
+        $maxlen = apply_filters('loco_num_recent_bundles', 10 );
+        foreach( $recent->getBundles(0,$maxlen) as $id ){
             try {
                 $bundle = Loco_package_Bundle::fromId($id);
                 $bundles[] = $this->bundleParam($bundle);

@@ -21,7 +21,7 @@ $this->start('header');
             
             <dt>Translation progress:</dt>
             <dd>
-                <?php echo esc_html( $meta->getProgressSummary() )?>
+                <?php echo esc_html( $meta->getProgressSummary() )?> 
             </dd>
             <dd>
                 <?php $meta->printProgress()?> 

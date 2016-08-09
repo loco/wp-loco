@@ -75,6 +75,7 @@ class Loco_fs_File {
         return is_array($this->info) ? $this->info : ( $this->info = pathinfo($this->path) );
     }
 
+
     /**
      * @return bool
      */
@@ -82,12 +83,14 @@ class Loco_fs_File {
         return file_exists( $this->path );
     }
 
+
     /**
      * @return bool
      */
     public function writable(){
         return $this->getWriteContext()->writable();
     }
+
 
     /**
      * @return bool

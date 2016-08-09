@@ -51,17 +51,22 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         
         // list available languages for dropdown list
         $locales = array();
+        $installed = array();
         $api = new Loco_api_WordPressTranslations;
         foreach( $api->getAvailableCore() as $key => $raw ){
             $locale = Loco_Locale::parse($key);
-            $locales [] = new Loco_mvc_ViewParams( array(
+            $vparam = new Loco_mvc_ViewParams( array(
                 'icon' => $locale->getIcon(),
                 'value' => (string) $locale,
                 'label' => $locale->fetchName($api),
             ) );
+            $locales[] = $vparam;
+            if( $api->isInstalled($key) ){
+                $installed[] = $vparam;
+            }
         }
         $this->set( 'locales', $locales );
-
+        $this->set( 'installed', $installed );
         
         // default locale is a placeholder
         $locale = new Loco_Locale('zxx');
@@ -139,9 +144,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
         }
         $this->set( 'summary', $summary );
-
-
         
+
         // group established locations into types (offical, etc..) 
         // there is no point checking whether any of these file exist, because we don't know what language will be chosen yet.
         $locations = array();

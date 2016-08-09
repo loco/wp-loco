@@ -53,8 +53,8 @@ class Loco_data_RecentItems extends Loco_data_Option {
             // remove before add ensures latest item appended to hashmap
             unset($stack[$id]);
             $stack[$id] = time();
-            // TODO implement pruning by max length or oldest item... 
             $this[$key] = $stack;
+            // TODO prune stack to maximum length
         }
         return $this;
     }
@@ -93,6 +93,15 @@ class Loco_data_RecentItems extends Loco_data_Option {
      */
     public function getBundles( $offset = 0, $count = null ){
         return $this->getItems('bundle', $offset, $count );
+    }
+
+
+    /**
+     * Check if a bundle has been recently used
+     * @return int timestamp item was added, 0 if absent
+     */
+    public function hasBundle( $id ){
+        return isset($this['bundle'][$id]) ? $this['bundle'][$id] : 0;
     }
 
 

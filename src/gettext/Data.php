@@ -23,9 +23,10 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         else if( 'MO' === $type ){
             $po = self::fromBinary( $file->getContents() );
         }
-        // else file type not editable
+        // else file type not parsable. not currently sniffing file header - use the right file extension.
         else {
-            throw new Loco_error_Exception( __('File is not a Gettext format') );
+            // translators: Error thrown when attemping to parse a file that is not PO, POT or MO
+            throw new Loco_error_Exception( sprintf( __('%s is not a Gettext file'), $file->basename() ) );
         }
         
         return $po;

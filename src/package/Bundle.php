@@ -628,10 +628,14 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return int
      */    
     public function getLastUpdated(){
-        $t = 0;
-        /* @var $project Loco_package_Project */
-        foreach( $this as $project ){
-            $t = max( $t, $project->getLastUpdated() );
+        // recent items is a convenient cache for checking last modified times
+        $t = Loco_data_RecentItems::get()->hasBundle( $this->getId() );
+        // else have to scan targets across all projects
+        if( 0 === $t ){
+            /* @var $project Loco_package_Project */
+            foreach( $this as $project ){
+                $t = max( $t, $project->getLastUpdated() );
+            }
         }
         return $t;
     }

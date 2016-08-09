@@ -47,6 +47,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         // Pre-populate PO headers with data that JavaScript doesn't have access to
         if( $locale = $this->get('locale') ){
             $data->localize( $locale );
+            $lname = $locale->getName() or $lname = (string) $locale;
+            $this->set( 'localeName', $lname );
         }
         
         // default is tp permit editing of any file

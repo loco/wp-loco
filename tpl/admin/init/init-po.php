@@ -44,11 +44,20 @@ $this->extend('../layout');
                                 <div>
                                     <span class="lang nolang"></span>
                                     <select id="loco-select-locale" name="select-locale">
-                                        <option value=""><?php esc_attr_e('No language selected','loco')?></option><?php
-                                        /* @var Loco_mvc_ViewParams $option */
-                                        foreach( $locales as $option ):?> 
-                                        <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
-                                        endforeach;?> 
+                                        <option value=""><?php esc_attr_e('No language selected','loco')?></option>
+                                        <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco' )?>">
+                                            <option value="en_US" lang="en">English (United States)</option><?php
+                                            /* @var Loco_mvc_ViewParams $option */
+                                            foreach( $installed as $option ):?> 
+                                            <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
+                                            endforeach;?> 
+                                        </optgroup>
+                                        <optgroup label="<?php esc_attr_e( 'Available languages', 'loco' )?>"><?php
+                                            /* @var Loco_mvc_ViewParams $option */
+                                            foreach( $locales as $option ):?> 
+                                            <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
+                                            endforeach;?> 
+                                        </optgroup>
                                     </select>
                                 </div>
                             </fieldset>

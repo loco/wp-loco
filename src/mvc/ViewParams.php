@@ -93,7 +93,8 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * Print property as a string-formatted number
      */
     public function n( $p, $dp = null ){
-        echo $this->escape( number_format_i18n( $this->__get($p), $dp ) );
+        // number_format_i18n is pre-escaped for HTML
+        echo number_format_i18n( $this->__get($p), $dp );
         return '';
     }
 

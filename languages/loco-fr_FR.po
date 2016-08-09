@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Loco Translate (v2 translations)\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2016-06-10 12:31+0000\n"
-"PO-Revision-Date: Thu Aug 04 2016 17:07:37 GMT+0100 (BST)\n"
+"PO-Revision-Date: Fri Aug 05 2016 19:49:35 GMT+0100 (BST)\n"
 "Last-Translator: admin <support@localise.biz>\n"
 "Language-Team: French (France)\n"
 "Language: fr-FR\n"
@@ -241,7 +241,7 @@ msgstr ""
 msgid "Loco plugin options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:203
+#: src/mvc/AdminRouter.php:204
 msgid "Page not found"
 msgstr ""
 
@@ -345,7 +345,7 @@ msgstr ""
 msgid "Setup options"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:192 src/admin/file/BaseController.php:96 
+#: src/admin/bundle/ViewController.php:192 src/admin/file/BaseController.php:97 
 #: src/admin/init/InitPoController.php:16 
 #: src/admin/init/InitPoController.php:44
 msgid "New language"
@@ -377,11 +377,15 @@ msgstr ""
 msgid "Editor"
 msgstr ""
 
-#: src/admin/file/BaseController.php:80 tpl/admin/bundle/inc-po-table.php:20
+#: src/admin/file/BaseController.php:80
+msgid "Source"
+msgstr ""
+
+#: src/admin/file/BaseController.php:81 tpl/admin/bundle/inc-po-table.php:20
 msgid "File info"
 msgstr ""
 
-#: src/admin/file/BaseController.php:81 tpl/admin/bundle/inc-po-table.php:47
+#: src/admin/file/BaseController.php:82 tpl/admin/bundle/inc-po-table.php:47
 msgid "Delete"
 msgstr ""
 
@@ -407,47 +411,47 @@ msgstr[1] ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: src/admin/file/EditController.php:108
+#: src/admin/file/EditController.php:110
 msgctxt "Editor button"
 msgid "Add"
 msgstr ""
 
-#: src/admin/file/EditController.php:109
+#: src/admin/file/EditController.php:111
 msgctxt "Editor button"
 msgid "Remove"
 msgstr ""
 
-#: src/admin/file/EditController.php:110
+#: src/admin/file/EditController.php:112
 msgctxt "Editor button"
 msgid "Help"
 msgstr ""
 
-#: src/admin/file/EditController.php:111
+#: src/admin/file/EditController.php:113
 msgctxt "Editor button"
 msgid "Save"
 msgstr ""
 
-#: src/admin/file/EditController.php:112
+#: src/admin/file/EditController.php:114
 msgctxt "Editor button"
 msgid "Sync"
 msgstr ""
 
-#: src/admin/file/EditController.php:113
+#: src/admin/file/EditController.php:115
 msgctxt "Editor button"
 msgid "Revert"
 msgstr ""
 
-#: src/admin/file/EditController.php:114
+#: src/admin/file/EditController.php:116
 msgctxt "Editor button"
 msgid "Fuzzy"
 msgstr ""
 
-#: src/admin/file/EditController.php:115
+#: src/admin/file/EditController.php:117
 msgctxt "Editor button"
 msgid "Download"
 msgstr ""
 
-#: src/admin/file/EditController.php:116
+#: src/admin/file/EditController.php:118
 msgid "Filter translations"
 msgstr ""
 
@@ -643,7 +647,8 @@ msgstr ""
 msgid "Confirm delete"
 msgstr ""
 
-#: tpl/admin/file/edit-po.php:15 tpl/admin/file/edit-pot.php:13
+#: tpl/admin/file/edit-po.php:13 tpl/admin/file/edit-pot.php:13 
+#: tpl/admin/file/view-po.php:14
 msgctxt "Modified time"
 msgid "Updated"
 msgstr ""

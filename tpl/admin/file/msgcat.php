@@ -1,0 +1,41 @@
+
+    <div class="panel">
+        <ol class="msgcat"><?php
+            foreach( $lines as $i => $line ):?> 
+            <li id="po-l<?php printf('%u',$i+1)?>"><?php
+            // may be totally blank line
+            if( '' === $line ){
+                echo '<span></span>';
+                continue;
+            }
+            // may be a comment line
+            if( '#' === $line{0} ){
+                // may be able to parse out references
+                if( ':' === $line{1} ){
+                    echo '<span class="po-refs">',preg_replace('/\\S+:\d+/', '<a href="/#\\0">\\0</a>', $params->escape($line) ),'</span>';
+                    continue;
+                }
+                // TODO parse out flags and formatting directives
+                // else normal comment
+                echo '<span class="po-comment">',$params->escape($line),'</span>';
+                continue;
+            }
+            // grab keyword if there is one before quoted string
+            if( preg_match('/^([^"\s]+)(\s+)/', $line, $r ) ){
+                list(, $keyword, $space ) = $r;
+                echo '<span class="po-word">',$params->escape($r[1]),'</span><span>',$params->escape($r[2]),'</span>';
+                $line = substr( $line, strlen($r[0]) );
+            }
+            // remainder of line should be a quoted string
+            if( preg_match('/^"(.+)"$/', $line, $r ) ){
+                echo '<span class="po-string">&quot;<span>',$params->escape($r[1]),'</span>&quot;</span>';
+                continue;
+            }
+            
+            // else print whatever junk is left of line
+            echo '<span class="po-junk">',$params->escape($line),'</span>';
+            
+            ?></li><?php
+            endforeach?>
+        </ol>
+    </div>

@@ -5,25 +5,33 @@
 class Loco_api_WordPressTranslations {
     
     /**
-     * @internal
-     */
-    private static function wp_depend( $func ){
-        if( ! function_exists($func) ){
-            require_once ABSPATH.'wp-admin/includes/translation-install.php';
-        }
-    }
-
-
+     * @var array
+     */    
+    private $installed;
 
     /**
      * Wrap wp_get_available_translations
-     * @return 
+     * @return array
      */
     public function getAvailableCore(){
-        self::wp_depend('wp_get_available_translations');
+        if( ! function_exists('wp_get_available_translations') ){
+            require_once ABSPATH.'wp-admin/includes/translation-install.php';
+        }
         return wp_get_available_translations();
     }
 
+
+    /**
+     * Check if a given locale is installed
+     * @return bool
+     */
+    public function isInstalled( $locale ){
+        if( ! isset($this->installed) ){
+            // wp-includes/l10n.php should always be included at runtime
+            $this->installed = array( 'en_US' => 1 ) + array_flip( get_available_languages() );
+        }
+        return array_key_exists( (string) $locale, $this->installed );
+    }
 
 
     /**

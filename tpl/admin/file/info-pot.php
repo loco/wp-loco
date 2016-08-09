@@ -7,9 +7,7 @@ $this->start('header');
 ?> 
 
     <div class="notice inline notice-info">
-        <h3>
-            Template file
-        </h3>
+        <h3><?php esc_html_e('Template file','loco')?></h3>
         <dl>
             <dt>File modified:</dt>
             <dd><?php $file->date('mtime')?></dd>
