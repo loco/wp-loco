@@ -611,51 +611,56 @@ abstract class LocoAdmin {
         $files = self::find( $dir, array('php','phtml') );
         return array_merge($files['php'], $files['phtml']);
     }
-    
-    
-    
+
+
+
     /**
      * Recursively find files of any given extensions
      */
-    private static function find( $dir, array $exts, $group = false ){
-        $match = '/\\.(?:'.implode('|',$exts).')$/';
-        return self::find_grouped( $dir, $match, array_fill_keys( $exts, array() ), true );
+    private static function find( $dir, array $exts ){
+        $found = array_fill_keys( $exts, array() );
+        if( is_readable($dir) && is_dir($dir) ){
+            $match = '/\\.(?:'.implode('|',$exts).')$/';
+            $found = self::find_grouped( $dir, $match, $found, true );
+        }
+        return $found;
     }
-    
-    
-    
+
+
+
     /**
      * @internal
      */
     public static function find_grouped( $dir, $match, array $found = array(), $recurse = false, $recursions = array() ){
-        $rs = opendir($dir);
-        while( $f = readdir($rs) ){
-            if( '.' === $f{0} ){
-                continue;
-            }
-            $path = $dir.'/'.$f;
-            if( ! file_exists($path) ){
-                // likely to be a symlink to outside PHP's open_basedir. file_exists call will have raised E_WARNING
-                continue;
-            }
-            if( is_link($path) ){
-                $path = realpath($path);
-                if( ! $path ){
+        if( $rs = opendir($dir) ){
+            while( $f = readdir($rs) ){
+                if( '.' === $f{0} ){
                     continue;
                 }
-            }
-            if( is_dir($path) ){
-                if( $recurse && ! isset($recursions[$path]) ){
-                    $recursions[$path] = true;
-                    $found = self::find_grouped( $path, $match, $found, true, $recursions );
+                $path = $dir.'/'.$f;
+                if( ! file_exists($path) ){
+                    // likely to be a symlink to outside PHP's open_basedir. file_exists call will have raised E_WARNING
+                    continue;
+                }
+                if( is_link($path) ){
+                    $path = realpath($path);
+                    if( ! $path ){
+                        continue;
+                    }
+                }
+                if( is_dir($path) ){
+                    if( $recurse && ! isset($recursions[$path]) ){
+                        $recursions[$path] = true;
+                        $found = self::find_grouped( $path, $match, $found, true, $recursions );
+                    }
+                }
+                else if( ! $match || preg_match($match,$path) ){
+                    $ext = strtolower( pathinfo($path,PATHINFO_EXTENSION ) );
+                    $found[$ext][] = $path;
                 }
             }
-            else if( ! $match || preg_match($match,$path) ){
-                $ext = strtolower( pathinfo($path,PATHINFO_EXTENSION ) );
-                $found[$ext][] = $path;
-            }
+            closedir($rs);
         }
-        closedir($rs);
         return $found;
     }
 
