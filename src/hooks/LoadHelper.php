@@ -65,10 +65,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             if( $_domain !== $domain ){
                 return false;
             }
-            // ensure official translations loaded first, but let custom strings override auto-updates
+            // ensure official translations loaded before global, but put our custom file first.
             $order = array (
-                $mopath,
                 $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
+                $mopath,
                 $wp_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
             );
         }
@@ -95,10 +95,14 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // recursively call load_textdomain with a lock on this process
         $loaded = false;
         $this->lock = true;
-        foreach( $order as $mopath ){
-            if( load_textdomain($domain,$mopath) ){
+        foreach( $order as $_mopath ){
+            if( load_textdomain($domain,$_mopath) ){
                 $loaded = true;
-                break;
+                // to be faithful to original loading process, avoid merging if canonical file is found.
+                // this means that missing custom strings will fall back on either the official OR global file.
+                if( $_mopath === $mopath ){
+                    break;
+                }
             }
         }
 

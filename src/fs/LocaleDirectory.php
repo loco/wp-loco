@@ -9,6 +9,7 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
      * - "plugin": bundled inside a plugin (official/author)
      * - "theme": bundled inside a theme (official/author)
      * - "wplang": under the global languages directory and probably installed by auto-updates
+     * - "loco": Loco protected directory
      * - "custom": anywhere else
      * 
      * @return string 
@@ -17,10 +18,10 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
         // paths must be compared with trailing slashes so "/foo" doesn't match "/foo-bar"
         $path = trailingslashit( $this->normalize() );
         
-        // anything under Loco's protected directory is ours        
+        // anything under Loco's protected directory is our location for custom overrides
         $prefix = trailingslashit( loco_constant('LOCO_LANG_DIR') );
         if( substr($path,0,strlen($prefix) ) === $prefix ){
-            return 'loco';
+            return 'custom';
         }
 
         // standard subdirectories of WP_LANG_DIR are under WordPress auto-update control
@@ -43,8 +44,8 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
             }
         }
         
-        // anything else is custom, which includes subdirectories of WP_LANG_DIR etc..
-        return 'custom';
+        // anything else, which includes subdirectories of WP_LANG_DIR etc..
+        return 'other';
     }
 
 
@@ -59,9 +60,10 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
             return __('Author','loco');
         case 'wplang':
             return __('System','loco');
-        case 'loco':
         case 'custom':
             return __('Custom','loco');
+        case 'other':
+            return __('Other','loco');
         }
         
         throw new InvalidArgumentException('Invalid location type: '.$id );
