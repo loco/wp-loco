@@ -203,5 +203,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
         return $this->initPot();
     }
+        
 
 } 

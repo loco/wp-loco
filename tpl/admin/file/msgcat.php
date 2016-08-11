@@ -21,13 +21,12 @@
                 continue;
             }
             // grab keyword if there is one before quoted string
-            if( preg_match('/^([^"\s]+)(\s+)/', $line, $r ) ){
-                list(, $keyword, $space ) = $r;
-                echo '<span class="po-word">',$params->escape($r[1]),'</span><span>',$params->escape($r[2]),'</span>';
+            if( preg_match('/^(msg[_a-z0-9\\[\\]]+)(\s+)/', $line, $r ) ){
+                echo '<span class="po-word">',$params->escape($r[1]),'</span><span class="po-space">',$params->escape($r[2]),'</span>';
                 $line = substr( $line, strlen($r[0]) );
             }
-            // remainder of line should be a quoted string
-            if( preg_match('/^"(.+)"$/', $line, $r ) ){
+            // remainder of line (or whole line) should be a quoted string
+            if( preg_match('/^"(.*)"\s*$/', $line, $r ) ){
                 echo '<span class="po-string">&quot;<span>',$params->escape($r[1]),'</span>&quot;</span>';
                 continue;
             }

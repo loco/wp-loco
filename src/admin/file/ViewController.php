@@ -61,7 +61,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
        
         // else is a PO or POT file 
         $this->enqueueScript('poview');//->enqueueScript('min/highlight');
-        $lines = preg_split('/\\R/', loco_ensure_utf8( $file->getContents() ) );
+        $lines = preg_split('/\\R/u', loco_ensure_utf8( $file->getContents() ) );
         $this->set( 'lines', $lines );
         
         // ajax parameters required for pulling reference sources

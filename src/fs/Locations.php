@@ -98,7 +98,7 @@ class Loco_fs_Locations extends ArrayObject {
     
     /**
      * Check if a given path begins with any of the registered ones
-     * @return bool
+     * @return bool whether path matched
      */    
     public function check( $path ){
         foreach( $this as $prefix => $length ){

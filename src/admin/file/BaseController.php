@@ -77,7 +77,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         $this->set( 'tabs', $tabs );
         $actions = array (
             'file-edit' => __('Editor','loco'),
-            //'file-view' => __('Source','loco'),
+            'file-view' => __('Source','loco'),
             'file-info' => __('File info','loco'),
             'file-delete' => __('Delete','loco'),
         );

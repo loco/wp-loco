@@ -13,6 +13,7 @@
         var link = event.target;
         if( link.hasAttribute('href') ){
             event.preventDefault();
+            getModal().html('<div class="loading"></div>').dialog('option','title','Loading..').off('dialogopen').dialog('open').on('dialogopen',onModalOpen);
             var postdata = $.extend( { ref:link.textContent, path:conf.popath }, conf.project||{} );
             loco.ajax.post( 'fsReference', postdata, onRefSource, onRefError );
             return false;
@@ -21,19 +22,18 @@
     // http://api.jqueryui.com/dialog/
     function getModal(){
         return $modal || ( $modal = $('<div id="loco-po-ref"></div>').dialog( {
-            'dialogClass'   : 'loco-modal',
-            //'minWidth'      : 640,
-            'modal'         : true,
-            'autoOpen'      : false,
-            'closeOnEscape' : true,
-            resizable       : false,
-            position        : { my: "bottom", at: "center", of: window }
+            dialogClass   : 'loco-modal',
+            modal         : true,
+            autoOpen      : false,
+            closeOnEscape : true,
+            resizable     : false,
+            height        : 500
         } ) );
     }
-    // when reference pulling fails
+    // when reference pulling fails (e.g. file not found, or line nonexistant)
     function onRefError( xhr, error, message ){
         $error = $('<p></p>').text( message );
-        getModal().html('').dialog('option','title','Error').append($error).dialog('open');
+        getModal().dialog('close').html('').dialog('option','title','Error').append($error).dialog('open');
     }
     // display reference source when received via ajax response
     function onRefSource( result ){
@@ -43,17 +43,25 @@
         }
         var i = -1,
             length = code.length,
-            target = result.line - result.start,
-            $ol = $('<ol></ol>').attr('class',result.type).attr('start', String(result.start||1) ), $li
-        ;
+            $ol = $('<ol></ol>').attr('class',result.type);
         while( ++i < length ){
-            $li = $('<li></li>').html( code[i] ).appendTo($ol);
-            if( i === target ){
-                $li.attr('class','highlighted');
-            }
+            $('<li></li>').html( code[i] ).appendTo($ol);
         }
-        //hljs.highlightBlock( $pre[0] );
-        getModal().html('').dialog('option','title', result.path+':'+result.line).append($ol).dialog('open');
+        // Highlight referenced line
+        $ol.find('li').eq( result.line - 1 ).attr('class','highlighted');
+        // TODO enable highlight toggling of other lines via click/drag etc..
+        getModal().dialog('close').html('').dialog('option','title', result.path+':'+result.line).append($ol).dialog('open');
+    }
+    
+    // scroll to first highlighted line of code once modal open
+    function onModalOpen( event, ui ){
+        var div = event.target,
+            line = $(div).find('li.highlighted')[0],
+            yAbs = line.offsetTop,                      // <- position of line relative to container
+            yVis = Math.floor( div.clientHeight / 2 ),  // <- target position of line relative to view port
+            yAdj = Math.max( 0, yAbs - yVis )           // scroll required to move line to visual position
+        ;
+        div.scrollTop = yAdj;
     }
 
 
