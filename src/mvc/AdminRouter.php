@@ -32,19 +32,16 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         // rendering hook for all menu items
         $render = array( $this, 'renderPage' );
         
-        // dashicons not available before 3.8
-        // $wp_38 = version_compare( $GLOBALS['wp_version'], '3.8', '>=' );
-        // $icon = $wp_38 ? 'dashicons-translation' : 'none';
-        
-        $label = __('Loco Translate','loco');
-        // translators: Page title for plugin home screen
-        $title = __('Loco, Translation Management','loco');
-        add_menu_page( $title, $label, $cap, 'loco', $render, 'dashicons-translation' );
-        // alternative label for first menu item which gets repeated from top level 
-        add_submenu_page( 'loco', $title, __('Home','loco'), $cap, 'loco', $render );
-
-        // submenu pages. no need to hook if permission would be denied.
+        // main loco pages, hooking only if has permission
         if( $user->has_cap($cap) ){
+
+            $label = __('Loco Translate','loco');
+            // translators: Page title for plugin home screen
+            $title = __('Loco, Translation Management','loco');
+            add_menu_page( $title, $label, $cap, 'loco', $render, 'dashicons-translation' );
+            // alternative label for first menu item which gets repeated from top level 
+            add_submenu_page( 'loco', $title, __('Home','loco'), $cap, 'loco', $render );
+
             $label = __('Themes','loco');
             // translators: Page title for theme translations
             $title = __('Theme translations &lsaquo; Loco','loco');
@@ -67,6 +64,13 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             // translators: Page title for Loco plugin settings
             $title = __('Loco plugin options','loco');
             add_submenu_page( 'loco', $title, $label, 'manage_options', 'loco-config', $render );
+        }
+
+        // legacy link redirect from previous slug
+        if( isset($_GET['page']) && 'loco-translate' === $_GET['page'] ){
+            if( wp_redirect( self::generate('') ) ){
+                exit(0); // <- required to avoid page permissions being checked
+            }
         }
     }
 
@@ -276,5 +280,5 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
         return $url;
     }
-    
+
 }

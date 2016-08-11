@@ -77,6 +77,16 @@ class Loco_data_RecentItems extends Loco_data_Option {
     }
 
 
+    /**
+     * @return int
+     */
+    private function hasItem( $key, $id ){
+        if( isset($this[$key]) && ( $items = $this[$key] ) && isset($items[$id]) ){
+            return $items[$id];
+        }
+        return 0;
+    }
+
 
     /**
      * Push bundle to the front of recent bundles stack
@@ -85,8 +95,8 @@ class Loco_data_RecentItems extends Loco_data_Option {
     public function pushBundle( Loco_package_Bundle $bundle ){
         return $this->push( $bundle, array( 'bundle' => $bundle->getId() ) );
     }
-    
-    
+
+
     /**
      * Get bundle IDs
      * @return array
@@ -101,7 +111,7 @@ class Loco_data_RecentItems extends Loco_data_Option {
      * @return int timestamp item was added, 0 if absent
      */
     public function hasBundle( $id ){
-        return isset($this['bundle'][$id]) ? $this['bundle'][$id] : 0;
+        return $this->hasItem( 'bundle', $id );
     }
 
 
