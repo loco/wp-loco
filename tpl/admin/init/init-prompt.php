@@ -23,6 +23,7 @@ $this->extend('../layout');
         <p>
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
             <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a>
+            <a class="button button-link has-icon icon-help" href="https://localise.biz/help/wordpress/translate-plugin/manual/templates" target="_blank"><?php esc_html_e('About templates','loco')?></a>
         </p>
     </div>
     

@@ -28,7 +28,10 @@
                 esc_html_e('File is protected','loco');
             endswitch;?></strong>:
             
-            <span>To modify the file system, click "Connect" and authenticate with the server.</span>
+            <span>
+                <?php esc_html_e('To modify the file system, click "Connect" and authenticate with the server','loco')?> 
+            </span>
+            <a class="button button-small" href="https://localise.biz/help/wordpress/translate-plugin/manual/filesystem"> ? </a>
             <button type="button" class="button button-small button-primary"><?php esc_html_e('Connect','loco')?></button>
         </p>
         <?php $fsFields->_e();?> 

@@ -5,12 +5,13 @@
 class Loco_fs_LocaleDirectory extends Loco_fs_Directory {  
 
     /**
-     * Get location identifier which signifies the type if translation storage 
+     * Get location identifier which signifies the type if translation storage.
+     * 
      * - "plugin": bundled inside a plugin (official/author)
-     * - "theme": bundled inside a theme (official/author)
+     * - "theme":  bundled inside a theme (official/author)
      * - "wplang": under the global languages directory and probably installed by auto-updates
-     * - "loco": Loco protected directory
-     * - "custom": anywhere else
+     * - "custom": Loco protected directory
+     * - "other":  anywhere else
      * 
      * @return string 
      */

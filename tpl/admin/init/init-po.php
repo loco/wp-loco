@@ -138,6 +138,7 @@ $this->extend('../layout');
     
             <p class="submit">
                 <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Create translations file','loco')?></button>
+                <a class="button button-link has-icon icon-help" href="https://localise.biz/help/wordpress/translate-plugin/manual/msginit" target="_blank"><?php esc_html_e('Help','loco')?></a>
             </p>
     
         </form>
