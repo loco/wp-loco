@@ -19,7 +19,7 @@ class Loco_gettext_SearchPaths extends Loco_fs_FileFinder {
                 return $file;
             }
         }
-    }    
+    }
 
 
 
@@ -27,12 +27,12 @@ class Loco_gettext_SearchPaths extends Loco_fs_FileFinder {
      * Build search paths from a given PO/POT file that references other files
      * @return Loco_gettext_SearchPaths
      */
-    public function init( Loco_fs_File $pofile ){
-        
-        $data = Loco_gettext_Data::load($pofile); // TODO avoid full parse, perhaps implement loco_parse_po_head(1)
-        $head = $data->getHeaders();
+    public function init( Loco_fs_File $pofile, LocoHeaders $head = null ){
+        if( is_null($head) ){
+            loco_require_lib('compiled/gettext.php');
+            $head = LocoPoHeaders::fromSource( $pofile->getContents() );
+        }
         $ninc = 0;
-
         foreach( array('Poedit') as $vendor ){
             $key = 'X-'.$vendor.'-Basepath';
             if( ! $head->has($key) ){

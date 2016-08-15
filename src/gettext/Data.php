@@ -203,6 +203,32 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
         return $this->initPot();
     }
-        
+
+
+
+    /**
+     * Remap proprietary base path when PO file is moving to another location.
+     * 
+     * @param Loco_fs_File the file that was originally extracted to (POT)
+     * @param Loco_fs_File the file that must now target references relative to itself
+     * @param string vendor name used in header keys
+     * @return bool whether base header was alterered
+     */
+    public function rebaseHeader( Loco_fs_File $origin, Loco_fs_File $target, $vendor ){
+        $base = $target->getParent();
+        $head = $this->getHeaders();
+        $key = 'X-'.$vendor.'-Basepath';
+        if( $key = $head->normalize($key) ){
+            $oldRelBase = $head[$key];    
+            $oldAbsBase = new Loco_fs_Directory($oldRelBase);
+            $oldAbsBase->normalize( $origin->getParent() );
+            $newRelBase = $oldAbsBase->getRelativePath($base);
+            // new base path is relative to $target location 
+            $head[$key] = $newRelBase;
+            return true;
+        }
+        return false;
+    }
+
 
 } 

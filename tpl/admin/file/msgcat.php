@@ -11,12 +11,14 @@
             // may be a comment line
             if( '#' === $line{0} ){
                 // may be able to parse out references
-                if( ':' === $line{1} ){
-                    echo '<span class="po-refs">',preg_replace('/\\S+:\d+/', '<a href="/#\\0">\\0</a>', $params->escape($line) ),'</span>';
-                    continue;
+                if( isset($line{1}) ){
+                    if( ':' === $line{1} ){
+                        echo '<span class="po-refs">',preg_replace('/\\S+:\d+/', '<a href="/#\\0">\\0</a>', $params->escape($line) ),'</span>';
+                        continue;
+                    }
+                    // TODO parse out flags and formatting directives
                 }
-                // TODO parse out flags and formatting directives
-                // else normal comment
+                // else treat as normal comment even if empty
                 echo '<span class="po-comment">',$params->escape($line),'</span>';
                 continue;
             }
