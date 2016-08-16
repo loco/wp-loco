@@ -2,7 +2,6 @@
 /**
  * Ajax "sync" route.
  * Performs the basic in-editor sync function from the old 1.x version. 
- * TODO replace with proper interactive merge functionality.
  */
 class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
     
@@ -18,11 +17,25 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         $project = $bundle->getProjectById( $post->domain );
         
         $file = new Loco_fs_File( $post->path );
-        $file->normalize( loco_constant('WP_CONTENT_DIR') );        
+        $base = loco_constant('WP_CONTENT_DIR');
+        $file->normalize( $base );        
         
+        // POT file always synced with source code (even if a PO being used as POT)
+        if( 'pot' === $post->type ){
+            $potfile = null;
+        }
+        // allow post data to force a template file path
+        else if( $path = $post->sync ){
+            $potfile = new Loco_fs_File($path);
+            $potfile->normalize( $base );
+        }
+        // else use project-configured template if one is defined
+        else {
+            $potfile = $project->getPot();
+        } 
         
-        // sync with POT if there is one and we're syncing to a PO
-        if( 'po' === $post->type && ( $potfile = $project->getPot() ) && $potfile->exists() ){
+        // sync with POT if it exists
+        if( $potfile && $potfile->exists() ){
             $this->set('pot', $potfile->basename() );
             $data = Loco_gettext_Data::load($potfile);
         }

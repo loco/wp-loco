@@ -20,6 +20,16 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
     /**
      * {@inheritdoc}
      */
+    public function getHelpTabs(){
+        return array (
+            __('Setup tab','loco') => $this->view('tab-bundle-setup'),
+        );
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function render(){
 
         $this->prepareNavigation()->add( __('Setup options','loco') );

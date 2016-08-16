@@ -64,6 +64,14 @@ $this->start('header');
     </div><?php
     endif;
     
+    /*if( $params->has('altpot') ):?> 
+    <div class="notice inline notice-debug">
+        <h3 class="has-icon">
+            Alternative template file
+        </h3>
+    </div><?php
+    endif;*/
+    
     else:?> 
     <div class="notice inline notice-debug">
         <h3 class="has-icon">

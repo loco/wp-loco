@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ * View renderer
  */
 class Loco_mvc_View implements IteratorAggregate {
 
@@ -35,13 +35,29 @@ class Loco_mvc_View implements IteratorAggregate {
 
 
     /**
-     * 
+     * @internal
      */
     public function __construct( array $args = array() ){
         $this->scope = new Loco_mvc_ViewParams( $args );
         $this->cwd = loco_plugin_root().'/tpl';
     }
-
+    
+    
+    /**
+     * Change base path for template paths
+     * @param string path relative to current directory
+     * @return Loco_mvc_View 
+     */
+    public function cd( $path ){
+        if( $path && '/' === $path{0} ){
+            $this->cwd = rtrim( loco_plugin_root().'/tpl'.$path );
+        }
+        else {
+            $this->cwd = rtrim( $this->cwd.'/'.$path );
+        }
+        return $this;
+    }    
+    
 
 
     /**
@@ -208,7 +224,14 @@ class Loco_mvc_View implements IteratorAggregate {
      */
     public function setTemplate( $tpl ){
         $file = new Loco_fs_File( $tpl.'.php' );
-        $file->normalize( $this->cwd );
+        // allow path to begin "/" meaning relative to tpl root
+        if( '/' === $tpl ){
+            $file->normalize( loco_plugin_root().'/tpl' );
+        }
+        // else treat relative path according to current template directory
+        else {
+            $file->normalize( $this->cwd );
+        }
         if( ! $file->exists() ){
             $debug = str_replace( loco_plugin_root().'/', '', $file->getPath() );
             throw new Loco_error_Exception( 'Template not found: '.$debug );

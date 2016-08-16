@@ -11,8 +11,7 @@ $this->start('header');
             Set up this bundle for translation
         </h3>
         <p>
-            If the following options don't work, try asking the author to make their bundle translatable with Loco.
-            <a href="https://localise.biz/help/wordpress/translate-plugin/authors" target="_blank" class="has-icon icon-help"><span>Help for authors</span></a>
+            If the following options don't work, try asking the author to make their bundle compatible with Loco Translate.
         </p>
         <p>
             <?php echo $credit;?> 

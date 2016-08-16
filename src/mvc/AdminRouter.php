@@ -116,7 +116,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
         // buffer errors during controller setup
         try {
-            $this->ctrl->_init( $_GET + $args );
+            $this->ctrl->_init( $_GET + $args, $screen );
             do_action('loco_admin_init', $this->ctrl );
         }
         catch( Loco_error_Exception $e ){

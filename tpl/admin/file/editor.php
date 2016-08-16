@@ -44,12 +44,6 @@ echo $header;
                     </div>
                 </fieldset>
             </form>
-
-            <form action="https://localise.biz/help/wordpress/translate-plugin/support" target="_self" class="aux">
-                <button class="button button-link has-icon icon-help" data-loco="help">
-                    <span><?php $ui->e('help')?></span>
-                </button>
-            </form>
             <form action="<?php $params->e('dlAction')?>" method="post" target="_blank" id="loco-download" class="aux">
                 <fieldset>
                     <button class="button button-link has-icon icon-download" data-loco="source" disabled title="<?php $ui->e('download')?>">

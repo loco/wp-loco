@@ -25,7 +25,6 @@ $this->extend('../layout');
         
             <p class="submit">
                 <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Create template','loco')?></button>
-                <a class="button button-link has-icon icon-help" href="https://localise.biz/help/wordpress/translate-plugin/manual/templates" target="_blank"><?php esc_html_e('Help','loco')?></a>
             </p>
 
         </form>

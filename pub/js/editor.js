@@ -22,6 +22,7 @@
         // form containing action buttons
         elForm = document.getElementById('loco-actions'),
         filePath = conf.popath,
+        syncPath = conf.potpath,
         
         // file system connect when file is locked
         elFilesys = document.getElementById('loco-fs'),
@@ -192,15 +193,19 @@
             syncParams = {
                 bundle: project.bundle,
                 domain: project.domain,
-                type: template ? 'pot' : 'po'
+                type: template ? 'pot' : 'po',
+                sync: syncPath||''
             };
             // enable syncing on button click
-            $(button).click( function(event){
-                event.preventDefault();
-                think();
-                doSyncAction( unthink );
-                return false;
-            } );
+            $(button)
+                .click( function(event){
+                    event.preventDefault();
+                    think();
+                    doSyncAction( unthink );
+                    return false;
+                } )
+                //.attr('title', syncPath ? sprintf( translate('Update from %s'), syncPath ) : translate('Update from source code') )
+            ;
             enable();
         }
         return true;
@@ -310,10 +315,10 @@
     }
 
 
-    // dummy function for enabling buttons that do nothing (or do something inherently)
+    /*/ dummy function for enabling buttons that do nothing (or do something inherently)
     function registerNoopButton( button ){
         return true;
-    }
+    }*/
     
 
     
@@ -416,7 +421,7 @@
 
     // initialize toolbar button actions
     var buttons = {
-        help: registerNoopButton,
+        // help: registerNoopButton,
         save: editable && registerSaveButton,
         sync: editable && registerSyncButton,
         revert: registerRevertButton,

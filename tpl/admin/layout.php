@@ -2,13 +2,9 @@
 /**
  * Base layout for all admin pages 
  */
-?><div class="wrap" id="loco">
+?><div class="wrap" id="loco"><?php 
 
-    <div class="logo">
-        Powered by <a href="https://localise.biz/" target="_blank">Loco</a>
-    </div>
-
-    <?php if( $this->has('breadcrumb') ):?>
+    if( $this->has('breadcrumb') ):?> 
     <h1>
         <ul><?php
             /* @var $item Loco_pages_ViewParams */
@@ -27,10 +23,14 @@
             endforeach?> 
         </ul>
     </h1><?php
-    endif?> 
+    else:?> 
+    <h1>
+        <?php $params->e('title')?> 
+    </h1><?php
+    endif;
 
     
-    <?php if( $this->has('tabs') ):?> 
+    if( $this->has('tabs') ):?> 
     <h2 class="nav-tab-wrapper"><?php
         /* @var $back Loco_pages_ViewParams *
         if( $back && $back->href ):?> 

@@ -20,6 +20,17 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
 
     /**
      * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-init-po'),
+        );
+    }
+
+
+
+    /**
+     * {@inheritdoc}
      *
     protected function prepareNavigation(){
         parent::prepareNavigation();
@@ -82,10 +93,9 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
             // forced source could be a POT (although UI should prevent it)
             if( $potfile->getSuffix() ){
-                $locale = $potfile->getLocale();
-                $name = $locale->getName() or $name = (string) $locale;
-                $this->set('sourceLocale', $name ); 
                 $copying = true;
+                $locale = $potfile->getLocale();
+                $this->set('sourceLocale', $locale );
             }
         }
         // else POT file may or may not be known, and may or may not exist

@@ -103,7 +103,6 @@ $this->extend('../layout');
                 <a class="button button-link has-icon icon-cog" href="<?php $parent->e('href')?>">Parent theme</a><?php
                 endif?> 
                 <a class="button button-link has-icon icon-download" href="<?php $params->e('xmlUrl')?>"><?php esc_html_e('XML','loco')?></a>
-                <a class="button button-link has-icon icon-help" href="https://localise.biz/help/wordpress/translate-plugin/manual/bundle-config" target="_blank"><?php esc_html_e('Help','loco')?></a>
             </p>
         </footer>
 

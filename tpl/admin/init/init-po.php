@@ -114,20 +114,30 @@ $this->extend('../layout');
                 if( $params->has('sourceLocale') ):?> 
                 <tbody>
                     <tr valign="top">
-                        <th scope="row">
-                            Template options:
+                        <th scope="row" rowspan="2">
+                            <?php esc_html_e('Template options')?>:
                         </th>
                         <td>
                             <p>
                                 <label>
                                     <input type="radio" name="strip" value="" />
-                                    Copy target translations from <?php $params->e('sourceLocale')?> 
+                                    <?php $params->f('sourceLocale', __('Copy target translations from "%s"','loco') )?> 
                                 </label>
                             </p>
                             <p>
                                 <label>
                                     <input type="radio" name="strip" value="1" checked />
-                                    Just copy English source strings
+                                    <?php esc_html_e('Just copy English source strings','loco')?> 
+                                </label>
+                            </p>
+                        </td>
+                    </tr>                    
+                    <tr valign="top">
+                        <td>
+                            <p>
+                                <label>
+                                    <input type="checkbox" name="link" value="" />
+                                    <?php $params->f('sourceLocale',__('Use "%s" as template when running Sync','loco') )?> 
                                 </label>
                             </p>
                         </td>
@@ -138,7 +148,6 @@ $this->extend('../layout');
     
             <p class="submit">
                 <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Create translations file','loco')?></button>
-                <a class="button button-link has-icon icon-help" href="https://localise.biz/help/wordpress/translate-plugin/manual/msginit" target="_blank"><?php esc_html_e('Help','loco')?></a>
             </p>
     
         </form>

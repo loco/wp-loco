@@ -46,6 +46,16 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
     }
 
     
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Advanced tab','loco') => $this->view('tab-bundle-conf'),
+        );
+    }
+    
     
     /**
      * {@inheritdoc}

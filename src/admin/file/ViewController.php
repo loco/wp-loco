@@ -21,6 +21,16 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
     /**
      * {@inheritdoc}
      */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-file-view'),
+        );
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function render(){
         
         // file must exist for editing

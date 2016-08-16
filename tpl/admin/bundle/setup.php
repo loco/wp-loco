@@ -26,7 +26,6 @@ echo $header;
         <div id="loco-remote-empty">
             <p>
                 <button type="button" class="button button-primary">Find config</button>
-                <a href="https://localise.biz/help/wordpress/translate-plugin/manual/bundle-setup#remote" class="button button-link has-icon icon-help"></a>
                 <span></span>
             </p>
         </div>
@@ -54,7 +53,6 @@ echo $header;
         </fieldset>
         <p>
             <input type="submit" class="button button-primary" name="xml-setup" value="Load config" />
-            <a href="https://localise.biz/help/wordpress/translate-plugin/manual/bundle-setup#xml" class="button button-link has-icon icon-help"></a>
         </p>
         <?php $xmlFields->_e()?> 
     </form><?php
@@ -74,7 +72,6 @@ echo $header;
         </p>
         <p>
             <input type="submit" class="button button-primary" name="auto-setup" value="Guess config" />
-            <a href="https://localise.biz/help/wordpress/translate-plugin/manual/bundle-setup#auto" class="button button-link has-icon icon-help"></a>
         </p>
         <?php $autoFields->_e()?> 
     </form><?php

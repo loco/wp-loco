@@ -62,7 +62,6 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         if( $source = $post->source ){
             $potfile = new Loco_fs_File( $source );
             $potfile->normalize( $base );
-            $source = $potfile->basename();
             $data = Loco_gettext_Data::load($potfile);
             // Remove target strings when copying PO 
             if( $post->strip ){
@@ -72,14 +71,13 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         // else parse POT file if project defines one that exists
         else if( ( $potfile = $project->getPot() ) && $potfile->exists() ){
             $data = Loco_gettext_Data::load($potfile);
-            $source = $potfile->basename();
         }
         // else extract directly from source code, assuming domain passed though from front end
         else {
             $extr = new Loco_gettext_Extraction( $bundle );
             $domain = (string) $project->getDomain();
             $data = $extr->addProject($project)->includeMeta()->getTemplate($domain);
-            $source = '';
+            $potfile = null;
         }
 
         // Let template define Project-Id-Version, else set header to current project name
@@ -87,6 +85,10 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         $vers = $data->getHeaders()->{'Project-Id-Version'};
         if( ! $vers || 'PACKAGE VERSION' === $vers ){
             $headers['Project-Id-Version'] = $project->getName();
+        }
+        // relative path from bundle root to the template/source this file was created from
+        if( $potfile && $post->link ){
+            $headers['X-Loco-Template'] = $potfile->getRelativePath( $bundle->getDirectoryPath() );
         }
 
         $data->localize( $locale, $headers );
@@ -99,7 +101,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             'poname' => $pofile->basename(),
             'posize' => $posize,
             'mosize' => $mosize,
-            'source' => $source, 
+            'source' => $potfile ? $potfile->basename() : '',
         ) );
         
         // push recent items on file creation

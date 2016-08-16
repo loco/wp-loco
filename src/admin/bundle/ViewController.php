@@ -14,9 +14,18 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         $bundle = $this->getBundle();
         $this->set('title', $bundle->getName() );
         $this->enqueueStyle('bundle');
-    }    
-    
-    
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-bundle-view'),
+        );
+    }
+
 
     /**
      * Generate a link for a specific file resource within a project

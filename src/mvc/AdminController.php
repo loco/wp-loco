@@ -42,11 +42,43 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     }
 
 
+    /**
+     * "admin_footer_text" filter, modifies admin footer only on Loco pages
+     */
+    public function filter_admin_footer_text(){
+        $url = apply_filters('loco_external', 'https://localise.biz/');
+        return '<span id="loco-credit">'.sprintf(__('Loco Translate is powered by <a href="%s">Loco</a>','loco'), esc_url($url) ).'</span>';
+    }
+
+    
+    /**
+     * "update_footer" filter, prints Loco version number in admin footer
+     */
+    public function filter_update_footer( $text ){
+        return sprintf( 'v%s', loco_plugin_version() );
+    }
+
 
     /**
      * {@inheritdoc}
      */
     public function init(){
+
+        // add contextual help tabs to current screen if there are any
+        if( $screen = get_current_screen() ){
+            $this->view->cd('/admin/help');
+            $tabs = $this->getHelpTabs();
+            // always append common help tabs
+            $tabs[ __('Help & support','loco') ] = $this->view->render('tab-support');
+            // set all tabs and common side bar
+            $i = 0;
+            foreach( $tabs as $title => $content ){
+                $id = sprintf('loco-help-%u', $i++ );
+                $screen->add_help_tab( compact('id','title','content') );
+            }
+            $screen->set_help_sidebar( $this->view->render('side-bar') );
+            $this->view->cd('/');
+        }
         
         // add common admin page resources
         $this->enqueueStyle('admin', array('wp-jquery-ui-dialog') );
@@ -78,6 +110,14 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         }*/
     }
 
+
+    /**
+     * All admin screens must define help tabs, eve if they return empty
+     * @return array
+     */
+    public function getHelpTabs(){
+        return array();
+    }
 
 
     /**
@@ -143,6 +183,5 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         
         return $this;
     }
-
 
 }

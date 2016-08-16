@@ -15,6 +15,16 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         $bundle = $this->getBundle();
         $this->set('title', __('New template','loco').' &lsaquo; '.$bundle );
     }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-init-pot'),
+        );
+    }
     
     
     /**

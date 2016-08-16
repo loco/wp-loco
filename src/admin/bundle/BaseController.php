@@ -130,6 +130,5 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         }
         return $fields;
     }
-
     
 }

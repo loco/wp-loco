@@ -19,6 +19,15 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
     }
 
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-file-edit'),
+        );
+    }
+
 
     /**
      * {@inheritdoc}
@@ -51,7 +60,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             $this->set( 'localeName', $lname );
         }
         
-        // default is tp permit editing of any file
+        // default is to permit editing of any file
         $readonly = false;
 
         
@@ -59,40 +68,62 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         try {
             $bundle = $this->getBundle();
             $project = $this->getProject();
-            $potfile = $project->getPot();
-            // ensure template always treated as POT even if using a PO as template
-            if( $locale && $potfile && $potfile->equal($file) ){
-                $locale = null;
-            }
-            /*/ else check whether PO requires syncing to POT 
-            else if( $potfile && ! $potfile->equal($file) ){
-                try {
-                    $potdata = Loco_gettext_Data::load( $potfile );
-                    if( ! $potdata->equalSource($data) ){
-                        // TODO notify some other way, because this warning will stick after sync has been performed.
-                        Loco_error_AdminNotices::warn( __('Translations are out of sync with the template file','loco') );
-                    }
-                }
-                catch( Exception $e ){
-                    throw new Loco_error_Exception("Template isn't valid, sync not available");
-                }
-            }*/
-            // Establish if save and sync is permitted based on template lock
-            if( $project->isPotLocked() && ( $potfile = $project->getPot() ) && $file->equal($potfile) ){
-                Loco_error_AdminNotices::warn('Template is protected from updates by the bundle configuration');
-                $readonly = true;
-            }
         }
         // Fine if not, this just means sync isn't possible.
         catch( Loco_error_Exception $e ){
             Loco_error_AdminNotices::debug( $e->getMessage() );
             $project = null;
         }
-
+            
+        // Establish PO/POT edit mode
+        if( $locale ){
+            // alternative POT file may be forced by PO headers
+            $head = $data->getHeaders();
+            if( $head->has('X-Loco-Template') ){
+                $potfile = new Loco_fs_File($head['X-Loco-Template']);
+                $potfile->normalize( $bundle->getDirectoryPath() );
+            }
+            // no way to get configured POT if invalid project
+            else if( is_null($project) ){
+                $potfile = null;
+            }
+            // else use project-configured template, assuming there is one
+            else if( $potfile = $project->getPot() ){
+                // Handle situation where project defines a localised file as the official template
+                if( $potfile->equal($file) ){
+                    $locale = null;
+                    $potfile = null;
+                }
+            }
+            if( $potfile ){
+                // Validate template file as long as it exists
+                if( $potfile->exists() ){
+                    $potdata = Loco_gettext_Data::load( $potfile );
+                    if( ! $potdata->equalSource($data) ){
+                        Loco_error_AdminNotices::debug( sprintf( __("Translations don't match template. Run sync to update from %s",'loco'), $potfile->basename() ) );
+                    }
+                }
+                // else template doesn't exist, so sync will be done to source code
+                else {
+                    // Loco_error_AdminNotices::debug( sprintf( __('Template file not found (%s)','loco'), $potfile->basename() ) );
+                    $potfile = null;
+                }
+            }
+        }
+        
+        // notify if template is locked (save and sync will be disabled)
+        if( is_null($locale) && $project && $project->isPotLocked() ){
+            Loco_error_AdminNotices::warn('Template is protected from updates by the bundle configuration');
+            $readonly = true;
+        }
+        
+        // back end expects paths relative to wp-content
+        $wp_content = loco_constant('WP_CONTENT_DIR');
         
         $this->set( 'js', new Loco_mvc_ViewParams( array(
             'podata' => $data->jsonSerialize(),
             'locale' => $locale ? $locale->jsonSerialize() : null,
+            'potpath' => $locale && $potfile ? $potfile->getRelativePath($wp_content) : null,
             'popath' => $this->get('path'),
             'readonly' => $readonly,
             'project' => $project ? array (

@@ -109,19 +109,6 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
 
     /**
-     * Print a property that holds a printf string with given arguments
-     *
-    public function f( $f, $p ){
-        $args = func_get_args();
-        $args[1] = $this->__get($p);
-        $s = call_user_func_array('sprintf', $args );
-        echo $this->escape($s);
-        return '';
-    }*/
-
-
-
-    /**
      * @return array
      */
     public function jsonSerialize(){

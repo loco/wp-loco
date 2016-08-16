@@ -15,7 +15,7 @@
                 <?php esc_html_e('Last updated','loco')?> 
             </th>
             <th data-sort-type="n">
-                <?php esc_html_e('Subsets','loco')?> 
+                <?php esc_html_e('Sets','loco')?> 
             </th>
         </thead>
         <tbody><?php

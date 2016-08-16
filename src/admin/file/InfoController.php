@@ -16,8 +16,16 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $bundle = $this->getBundle();
         $this->set('title', $file->basename().' &lsaquo; '.$bundle->getName() );
     }
-    
-    
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-file-info'),
+        );
+    }
     
     
     /**
@@ -111,7 +119,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     }
                 }
             }
-            // Do full parse to get all headers
+            // Do full parse to get stats and headers
             try {
                 $data = Loco_gettext_Data::load($file);
                 $head = $data->getHeaders();
@@ -124,6 +132,15 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 // access to meta stats, normally cached on listing pages
                 $meta = Loco_gettext_Metadata::create($file,$data);
                 $this->set( 'meta', $meta );
+                // allow PO header to specify alternative template for sync
+                if( $head->has('X-Loco-Template') ){
+                    $altpot = new Loco_fs_File($head['X-Loco-Template']);
+                    $altpot->normalize( $this->getBundle()->getDirectoryPath() );
+                    if( $altpot->exists() && ( ! $template || ! $template->equal($altpot) ) ){
+                        $this->set('altpot', true );
+                        $template = $altpot;
+                    }
+                }
                 // establish whether PO is in sync with POT
                 if( $template && ! $isTemplate && 'po' === $ext && $template->exists() ){
                     try {

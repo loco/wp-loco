@@ -4,12 +4,7 @@
  */
 
 $this->extend('layout');
-
 ?> 
-
-    <h1>
-        <?php $params->e('title');?> 
-    </h1>
     
     <div class="notice inline notice-info">
         <h3 class="has-icon">

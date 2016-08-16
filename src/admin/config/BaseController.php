@@ -24,6 +24,16 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
         }
     }
     
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-settings'),
+        );
+    }
     
     
 }
