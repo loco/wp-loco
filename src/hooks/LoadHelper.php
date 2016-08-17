@@ -1,8 +1,8 @@
 <?php
 /**
  * Text Domain loading helper.
- * 
- * This functionality is entirely optional. You can disable the plugin if you're not loading MO files from languages/loco
+ * Ensures custom translations can be loaded from `wp-content/languages/loco`.
+ * This functionality is optional. You can disable the plugin if you're not loading MO files from languages/loco
  */
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     
@@ -51,17 +51,15 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
-     * Hook allows us to interupt the text domain loading process and change the order files are attempted
-     * @return bool whether to stop WordPress loading the passed file
+     * `load_textdomain` action callback.
+     * Lets us load our custom translations before WordPress loads what it was going to anyway.
+     * We're deliberately not stopping WordPress loading $mopath, if it exists it will be merged on top of our custom strings.
+     * @return void
      */
-    public function filter_override_load_textdomain( $plugin_override, $domain, $mopath ){
-        // avoid recursion when we've already handled this domain load
+    public function on_load_textdomain( $domain, $mopath ){
+        // avoid recursion when we've already handled this domain
         if( $this->lock && isset($this->lock[$domain]) ){
-            return false;
-        }
-        // if some other process has modified override, we should honour it
-        if( $plugin_override ){
-            return true;
+            return;
         }
         // language roots
         $wp_lang_dir = trailingslashit( loco_constant('WP_LANG_DIR') );
@@ -73,9 +71,9 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             $this->context = null;
             // It shouldn't be possible to catch a different domain after setting context, but we'd better bail just in case
             if( $_domain !== $domain ){
-                return false;
+                return;
             }
-            $custom = $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo';
+            $mopath = $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo';
         }
 
         // else load_textdomain must have been called directly to bypass locale filters
@@ -83,21 +81,17 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             $snip = strlen($wp_lang_dir);
             // direct file loads must be under WP_LANG_DIR if we are to map them
             if( substr( dirname($mopath).'/', 0, $snip ) === $wp_lang_dir ){
-                $custom = substr_replace( $mopath, $lc_lang_dir, 0, $snip );
+                $mopath = substr_replace( $mopath, $lc_lang_dir, 0, $snip );
             }
             // else no way to map files from WP_LANG_DIR to LOCO_LANG_DIR
             else {
-                return false;
+                return;
             }
         }
         
         // Load our custom translations avoiding recursion back into this hook
         $this->lock[$domain] = true;
-        load_textdomain( $domain, $custom );
-
-        // Let WordPress continue with current load process, anything it manages to load will be merged on top of our custom strings
-        $this->context = null;
-        return false;
+        load_textdomain( $domain, $mopath );
     }
 
 }
