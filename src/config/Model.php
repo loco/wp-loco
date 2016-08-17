@@ -66,7 +66,7 @@ abstract class Loco_config_Model {
 
     /**
      * Evaluate a name constant pointing to a file location
-     * @param string one of 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH'
+     * @param string one of 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', or 'ABSPATH'
      */
     public function getDirectoryPath( $key = null ){
         if( is_null($key) ){
@@ -94,7 +94,7 @@ abstract class Loco_config_Model {
             // Map to a configured base path if target is not under our root. This makes XML more portable
             // matching order is most specific first, resulting in shortest path
             if( $relpath && ( '/' === $relpath{0} || '..' === substr($relpath,0,2) || $this->base === $this->getDirectoryPath('ABSPATH') ) ){
-                $bases = array( 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' );
+                $bases = array( 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' );
                 foreach( $bases as $key ){
                     if( ( $base = $this->getDirectoryPath($key) ) && $base !== $this->base ){
                         $base .= '/';

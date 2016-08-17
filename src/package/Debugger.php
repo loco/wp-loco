@@ -69,6 +69,11 @@ class Loco_package_Debugger implements IteratorAggregate {
             $this->warn("Author doesn't define the DomainPath header");
         }
         
+        // check validity of single-file plugins
+        if( $bundle->isSingleFile() && ! $bundle->getBootstrapPath() ){
+            $this->warn('Plugin is a single file, but bootstrap file is unknown');
+        }
+        
         // collecting only configured domains to match against source code
         $domains = array();
         $templates = array();

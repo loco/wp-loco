@@ -109,23 +109,29 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         }
         // may be able to set directory path if file exists in expected location
         if( ! $this->hasDirectoryPath() ){
-            $file = new Loco_fs_File( $slug );
-            $file->normalize( loco_constant('WP_PLUGIN_DIR') );
-            if( $file->exists() ){
-                $this->setDirectoryPath( $file->dirname() );
+            foreach( array('WP_PLUGIN_DIR','WPMU_PLUGIN_DIR') as $const ){
+                $file = new Loco_fs_File( $slug );
+                $file->normalize( loco_constant($const) );
+                if( $file->exists() ){
+                    $this->setDirectoryPath( $file->dirname() );
+                    break;
+                }
             }
         }
         // may be able to set bootstrap file if root directory is set
-        if( ! $this->getBootstrapPath() && $this->hasDirectoryPath() ){
-            $file = new Loco_fs_File( $slug );
-            $root = $this->getDirectoryPath();
-            if( ! $this->solo ){
-                $root = dirname($root);
+        if( ! $this->getBootstrapPath() ){
+            if( $this->hasDirectoryPath() ){
+                $file = new Loco_fs_File( $slug );
+                $root = $this->getDirectoryPath();
+                if( ! $this->solo ){
+                    $root = dirname($root);
+                }
+                $file->normalize( $root );
+                if( $file->exists() ){
+                    $this->setBootstrapPath( $file->getPath() );
+                }
             }
-            $file->normalize( $root );
-            if( $file->exists() ){
-                $this->setBootstrapPath( $file->getPath() );
-            }
+            // otherwise we have no information for establishing bootstrap file
         }
         return parent::setHandle( $slug );
     }
