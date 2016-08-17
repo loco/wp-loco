@@ -23,7 +23,7 @@ echo $header;
             <?php printf('%s file is writable',$file->type)?> 
         </h3>
         <p>
-            You can update these translations directory from the editor to the file system.
+            You can update these translations directly from the editor to the file system.
         </p>
         <p>
             <code><?php $file->ls()?></code>

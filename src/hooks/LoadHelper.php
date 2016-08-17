@@ -1,9 +1,8 @@
 <?php
 /**
  * Text Domain loading helper.
- * Allows MO files to be loaded in a custom order from alternative locations.
  * 
- * This functionality is entirely optional. Disable the plugin if you don't want it.
+ * This functionality is entirely optional. You can disable the plugin if you're not loading MO files from languages/loco
  */
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     
@@ -13,9 +12,9 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     private $context;
 
     /**
-     * @var bool
+     * @var array
      */    
-    private $lock;
+    private $lock = array();
 
 
     /**
@@ -24,6 +23,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */    
     public function filter_theme_locale( $locale, $domain ){
         $this->context = array( 'themes', $domain, $locale );
+        unset( $this->lock[$domain] );
         return $locale;
     }
 
@@ -35,7 +35,17 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */    
     public function filter_plugin_locale( $locale, $domain ){
         $this->context = array( 'plugins', $domain, $locale );
+        unset( $this->lock[$domain] );
         return $locale;
+    }
+
+
+    /**
+     * `unload_textdomain` action callback.
+     * Lets us release lock so that custom file may be loaded again (hopefully for another locale)
+     */
+    public function on_unload_textdomain( $domain ){
+        unset( $this->lock[$domain] );
     }
 
 
@@ -45,19 +55,19 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @return bool whether to stop WordPress loading the passed file
      */
     public function filter_override_load_textdomain( $plugin_override, $domain, $mopath ){
-        // avoid recursion when we are in our own loading loop
-        if( $this->lock ){
+        // avoid recursion when we've already handled this domain load
+        if( $this->lock && isset($this->lock[$domain]) ){
             return false;
         }
         // if some other process has modified override, we should honour it
         if( $plugin_override ){
             return true;
         }
-        // roots
+        // language roots
         $wp_lang_dir = trailingslashit( loco_constant('WP_LANG_DIR') );
         $lc_lang_dir = trailingslashit( loco_constant('LOCO_LANG_DIR') );
 
-        // if context is set, then theme or plugin initialized loading process
+        // if context is set, then a theme or plugin initialized the loading process properly
         if( is_array($this->context) ){
             list( $subdir, $_domain, $locale ) = $this->context;
             $this->context = null;
@@ -65,54 +75,29 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             if( $_domain !== $domain ){
                 return false;
             }
-            // ensure official translations loaded before global, but put our custom file first.
-            $order = array (
-                $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
-                $mopath,
-                $wp_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo',
-            );
+            $custom = $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo';
         }
 
-        // else load_textdomain must have been called directly.
+        // else load_textdomain must have been called directly to bypass locale filters
         else {
             $snip = strlen($wp_lang_dir);
-            // direct file loads should be under WP_LANG_DIR
+            // direct file loads must be under WP_LANG_DIR if we are to map them
             if( substr( dirname($mopath).'/', 0, $snip ) === $wp_lang_dir ){
-                $order = array (
-                    substr_replace( $mopath, $lc_lang_dir, 0, $snip ),
-                    $mopath,
-                );
+                $custom = substr_replace( $mopath, $lc_lang_dir, 0, $snip );
             }
             // else no way to map files from WP_LANG_DIR to LOCO_LANG_DIR
             else {
-                $order = array( $mopath );
+                return false;
             }
         }
         
-        // permit themes/plugins to modify the default loading order
-        $order = apply_filters( 'loco_load_textdomain_order', $order, $domain );
+        // Load our custom translations avoiding recursion back into this hook
+        $this->lock[$domain] = true;
+        load_textdomain( $domain, $custom );
 
-        // recursively call load_textdomain with a lock on this process
-        $loaded = false;
-        $this->lock = true;
-        foreach( $order as $_mopath ){
-            if( load_textdomain($domain,$_mopath) ){
-                $loaded = true;
-                // to be faithful to original loading process, avoid merging if canonical file is found.
-                // this means that missing custom strings will fall back on either the official OR global file.
-                if( $_mopath === $mopath ){
-                    break;
-                }
-            }
-        }
-
-        // release lock and terminiate previous loading thread
-        $this->lock = false;
+        // Let WordPress continue with current load process, anything it manages to load will be merged on top of our custom strings
         $this->context = null;
-
-        // returning false here will cause WordPress to make a redundant second attempt at loading the original $mopath, 
-        // however this is essential to ensure correct return value from load_textdomain. otherwise plugins may stop trying other locations.
-        return $loaded;
+        return false;
     }
 
 }

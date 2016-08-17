@@ -147,7 +147,7 @@ $this->extend('../layout');
             </table>
     
             <p class="submit">
-                <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Create translations file','loco')?></button>
+                <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Start translating','loco')?></button>
             </p>
     
         </form>

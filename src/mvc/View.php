@@ -50,7 +50,7 @@ class Loco_mvc_View implements IteratorAggregate {
      */
     public function cd( $path ){
         if( $path && '/' === $path{0} ){
-            $this->cwd = rtrim( loco_plugin_root().'/tpl'.$path );
+            $this->cwd = rtrim( loco_plugin_root().'/tpl'.$path, '/' );
         }
         else {
             $this->cwd = rtrim( $this->cwd.'/'.$path );
