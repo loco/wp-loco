@@ -7,7 +7,7 @@
 </h2>
 <p>
     If you need help using Loco Translate, please try reading our 
-    <a href="<?php echo esc_url( apply_filters('loco_external','https://localize.biz/help/wordpress/translate-plugin') )?>" target="_blank">help pages</a> first.
+    <a href="<?php echo esc_url( apply_filters('loco_external','https://localize.biz/wordpress/plugin') )?>" target="_blank">help pages</a> first.
     There's a lot of information there to help you understand how it all works.
 </p>
 <p>

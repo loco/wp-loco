@@ -15,7 +15,7 @@ $this->start('header');
         </p>
         <p>
             If you run into problems, try asking the author to make their bundle fully compatible with Loco.
-            <a href="https://localise.biz/help/wordpress/translate-plugin/authors" target="_blank" class="has-icon icon-help"><span>Help for authors</span></a>
+            <a href="https://localise.biz/wordpress/plugin/authors" target="_blank" class="has-icon icon-help"><span>Help for authors</span></a>
         </p>
         <p>
             <?php echo $credit;?> 

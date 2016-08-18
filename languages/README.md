@@ -1,5 +1,7 @@
 # Loco Translate translations
 
-This plugin is still in development, so please don't submit any translations yet.
+This the first release of version 2.0, so please don't submit any translations yet.
 
-All strings are tentative until 2.x becomes the stable branch.
+All English strings are likely to change regularly.
+
+Once strings are finalized the POT file will be updated.
