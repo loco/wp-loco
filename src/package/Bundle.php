@@ -305,7 +305,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      */
     public function setBootstrapPath( $path ){
         $this->boot = (string) $path;
-        // base directory is inferable from bootstrap path
+        // base directory can be inferred from bootstrap path
         if( ! $this->hasDirectoryPath() ){
             $this->setDirectoryPath( dirname($this->boot) );
         }

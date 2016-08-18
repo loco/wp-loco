@@ -9,7 +9,7 @@ abstract class Loco {
     const NS = 'loco-translate';
 
     /** plugin version */ 
-    const VERSION = '1.5.6';
+    const VERSION = '1.5.6-legacy';
     
     /* current plugin locale */
     private static $locale;

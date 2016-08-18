@@ -15,4 +15,15 @@ function loco_require(){
 }
   
 loco_require('loco-boot','loco-admin');
- 
+
+
+
+function loco_hack_legacy_version_string( array $all ){
+    $handle = plugin_basename( dirname( dirname(__FILE__) ).'/loco.php' );
+    if( isset($all[$handle]) ){
+        $all[$handle]['Version'] = Loco::VERSION;
+    }
+    return $all;
+} 
+
+add_filter('all_plugins', 'loco_hack_legacy_version_string', 11, 1 );

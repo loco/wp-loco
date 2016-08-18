@@ -47,7 +47,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      */
     public function filter_admin_footer_text(){
         $url = apply_filters('loco_external', 'https://localise.biz/');
-        return '<span id="loco-credit">'.sprintf(__('Loco Translate is powered by <a href="%s">Loco</a>','loco'), esc_url($url) ).'</span>';
+        return '<span id="loco-credit">'.sprintf( '<span>%s</span> <a href="%s" target="_blank">Loco</a>', esc_html(__('Loco Translate is powered by','loco')), esc_url($url) ).'</span>';
     }
 
     
@@ -56,6 +56,15 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      */
     public function filter_update_footer( $text ){
         return sprintf( 'v%s', loco_plugin_version() );
+    }
+
+
+    /**
+     * "loco_external" filter callback, campaignizes external links
+     */
+    public function filter_loco_external( $url ){
+        // TODO ...
+        return $url;
     }
 
 

@@ -32,7 +32,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
      */
     public function render(){
 
-        $this->prepareNavigation()->add( __('Setup options','loco') );
+        $this->prepareNavigation()->add( __('Bundle setup','loco') );
         $bundle = $this->getBundle();
         $action = 'setup:'.$bundle->getId();
  
@@ -89,7 +89,77 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
 
         // render according to current configuration method (save type)
         $configured = $this->get('force') or $configured = $bundle->isConfigured();
+
+        $notices = new ArrayIterator;
+        $this->set('notices', $notices );
         
+        // collect configuration warnings
+        foreach( $bundle as $project ){
+            $potfile = $project->getPot();
+            if( ! $potfile ){
+                $notices[] = sprintf('No translation template for "%s"', $project->getSlug() );
+            }
+        }
+        // if extra files found consider incomplete
+        if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
+            $unknown = $bundle->invert();
+            if( count($unknown) ){
+                $notices[] = "Bundle contains some files we don't understand";
+            }
+        }
+        
+        // display setup options if at least one option specified
+        $doconf = false;
+
+        // enable form to invoke auto-configuration
+        if( $this->get('auto') ){
+            $fields = new Loco_mvc_HiddenFields();
+            $fields->setNonce( 'auto-'.$action );
+            $this->set('autoFields', $fields );
+            $doconf = true;
+        }
+        
+        // enable form to paste XML config
+        if( $this->get('xml') ){
+            $fields = new Loco_mvc_HiddenFields();
+            $fields->setNonce( 'xml-'.$action );
+            $this->set('xmlFields', $fields );
+            $doconf = true;
+        }
+        
+        // enable form to paste JSON config (via remote lookup)
+        if( $this->get('json') ){
+            $fields = new Loco_mvc_HiddenFields( array(
+                'json-content' => '',
+                'version' => $info->Version,
+            ) );
+            $fields->setNonce( 'json-'.$action );
+            $this->set('jsonFields', $fields );
+            
+            // other information for looking up bundle via api
+            $this->set('vendorSlug', $bundle->getSlug() );
+            
+            // remote config is done via JavaScript
+            $this->enqueueScript('setup');
+            $apiBase = apply_filters( 'loco_api_url', 'https://localise.biz/api' );
+            $this->set('js', new Loco_mvc_ViewParams( array(
+                'apiUrl' => $apiBase.'/wp/'.strtolower( $bundle->getType() ),
+            ) ) );
+            $doconf = true;
+        }
+        
+        // display configurator if configurating
+        if( $doconf ){
+            return $this->view( 'admin/bundle/setup/conf' );
+        }
+        // else set configurator links back to self with required option
+        // ...
+        
+        
+        if( ! $configured || ! count($bundle) ){
+            return $this->view( 'admin/bundle/setup/none' );
+        }
+
         if( 'db' === $configured ){
             // form for resetting config
             $fields = new Loco_mvc_HiddenFields();
@@ -105,65 +175,12 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         if( 'file' === $configured ){
             return $this->view('admin/bundle/setup/author');
         }
-
-        if( 'meta' === $configured ){
-            while( count($bundle) ){
-                // if any projects are without a template path, consider incomplete 
-                foreach( $bundle as $project ){
-                    if( ! $project->getPot() ){
-                        // Loco_error_AdminNotices::debug( sprintf('No POT file configured for %s',$project->getSlug()) );
-                        break 2;
-                    }
-                }
-                // if extra files found consider incomplete
-                if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
-                    $unknown = $bundle->invert();
-                    if( count($unknown) ){
-                        // Loco_error_AdminNotices::debug("Bundle contains some files we don't understand");
-                        break;
-                    }
-                }
-                // ok meta configuration fully compatible
-                return $this->view('admin/bundle/setup/meta');
-            }
-        }
         
-        // form to invoke auto-configuration
-        $fields = new Loco_mvc_HiddenFields();
-        $fields->setNonce( 'auto-'.$action );
-        $this->set('autoFields', $fields );
-        
-        // form to paste XML config
-        $fields = new Loco_mvc_HiddenFields();
-        $fields->setNonce( 'xml-'.$action );
-        $this->set('xmlFields', $fields );
-        
-        // form to paste JSON config (via remote lookup)
-        $fields = new Loco_mvc_HiddenFields( array(
-            'json-content' => '',
-            'version' => $info->Version,
-        ) );
-        $fields->setNonce( 'json-'.$action );
-        $this->set('jsonFields', $fields );
-        
-        // other information for looking up bundle via api
-        $this->set('vendorSlug', $bundle->getSlug() );
-        
-        // remote config is done via JavaScript
-        $this->enqueueScript('setup');
-        $apiBase = apply_filters( 'loco_api_url', 'https://localise.biz/api' );
-        $this->set('js', new Loco_mvc_ViewParams( array(
-            'apiUrl' => $apiBase.'/wp/'.strtolower( $bundle->getType() ),
-        ) ) );
-
-        
-        // render different messaging if bundle is auto-configured, but has issues
-        if( $configured ){
+        if( count($notices) ){
             return $this->view('admin/bundle/setup/partial');
         }
         
-        // else render full setup options, from scratch.
-        return $this->view('admin/bundle/setup/none');
+        return $this->view('admin/bundle/setup/meta');
     }
     
 }

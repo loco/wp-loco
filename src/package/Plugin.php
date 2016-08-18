@@ -56,17 +56,14 @@ class Loco_package_Plugin extends Loco_package_Bundle {
                 'WP_PLUGIN_DIR' => 'get_plugins',
                 'WPMU_PLUGIN_DIR' => 'get_mu_plugins',
             );
-            foreach( $search as $const => $getter ){
+            foreach( $search as $base => $getter ){
                 if( $list = call_user_func($getter) ){
-                    $base = loco_constant($const);
                     foreach( $list as $handle => $data ){
                         if( isset($cached[$handle]) ){
                             Loco_error_AdminNotices::debug( sprintf('plugin conflict on %s', $handle) );
                             continue;
                         }
-                        $file = new Loco_fs_File( $handle );
-                        $file->normalize( $base );
-                        $data['path'] = $file->getPath();
+                        $data['basedir'] = $base;
                         $cached[$handle] = $data;
                     }
                 }
@@ -163,8 +160,10 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         // else plugin must be registered with WordPress
         else if( isset($cached[$handle]) ){
             $data = $cached[$handle];
-            $path = $data['path'];
-            $base = dirname($path);
+            // lazy resolve of boot path
+            $file = new Loco_fs_File( $handle );
+            $file->normalize( loco_constant($data['basedir']) );
+            $path = $file->getPath();
         }
         // else plugin is not known to WordPress
         else {

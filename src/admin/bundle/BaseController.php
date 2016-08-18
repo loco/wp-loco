@@ -102,8 +102,9 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         }
         $suffix = $this->get('action');
         $prefix = strtolower( $this->get('type') );
+        $getarg = array_intersect_key( $_GET, array('bundle'=>'') );
         foreach( $actions as $action => $name ){
-            $href = Loco_mvc_AdminRouter::generate( $prefix.'-'.$action, $_GET );
+            $href = Loco_mvc_AdminRouter::generate( $prefix.'-'.$action, $getarg );
             $tabs->add( $name, $href, $action === $suffix );
         }
         

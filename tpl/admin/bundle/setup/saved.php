@@ -2,8 +2,8 @@
 /**
  * Bundle is saved in database, but can be reset 
  */
-$this->extend('../../layout');
-
+$this->extend('../setup');
+$this->start('header');
 ?> 
 
     <div class="notice inline notice-info">
@@ -16,9 +16,8 @@ $this->extend('../../layout');
         <form action="" method="post" enctype="application/x-www-form-urlencoded">
             <p class="submit">
                 <input type="submit" name="reset-setup" class="button button-danger" value="Reset config" />
-                <a class="button button-link has-icon icon-cog" href="<?php $tabs[2]->e('href')?>">Customize</a>
+                <a href="<?php $tabs[2]->e('href')?>" class="button button-link has-icon icon-wrench"><?php esc_html_e('Edit config','loco')?></a>
             </p>
             <?php $reset->_e()?> 
         </form>
     </div>
-    

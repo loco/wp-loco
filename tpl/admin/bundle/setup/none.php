@@ -6,14 +6,13 @@ $this->extend('../setup');
 $this->start('header');
 ?> 
 
-    <div class="notice inline notice-info">
-        <h3 class="has-">
-            Set up this bundle for translation
+    <div class="notice inline notice-error">
+        <h3 class="has-icon">
+            <?php esc_html_e('Incompatible bundle','loco')?> 
         </h3>
         <p>
-            If the following options don't work, try asking the author to make their bundle compatible with Loco Translate.
+            <?php esc_html_e('This bundle isn\'t set up for translation properly.','loco')?> 
+            <?php esc_html_e('It needs configuring before you can do any translations.','loco')?> 
         </p>
-        <p>
-            <?php echo $credit;?> 
-        </p>
+        <?php echo $this->render('inc-nav')?> 
     </div>

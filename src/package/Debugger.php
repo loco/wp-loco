@@ -130,7 +130,8 @@ class Loco_package_Debugger implements IteratorAggregate {
                     // should only have one target due the way the inverter groups results
                     /* @var $dir Loco_fs_Directory */
                     foreach( $project->getConfiguredTargets() as $dir ){
-                        $this->warn('Unconfigured files found in "%s", possible domain name: "%s"', $dir->getRelativePath($base), $domain );
+                        $reldir = $dir->getRelativePath($base) or $stub = '.';
+                        $this->warn('Unconfigured files found in "%s", possible domain name: "%s"', $reldir, $domain );
                     }
                 }
             }

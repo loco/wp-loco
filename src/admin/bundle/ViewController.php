@@ -252,11 +252,12 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         
         // show error page if no projects could be extracted at all
         if( ! count($projects) ){
+            $this->set('name', $bundle->getName() );
             return $this->view( 'admin/bundle/incompat' );
         }
         
         // sniff additional unknown files if bundle is a theme or directory-based plugin that's been auto-detected
-        if( 'meta' === $configured ){
+        else if( 'meta' === $configured ){
             /*/ warn if bundle's default project has no template
             $project = $bundle->getDefaultProject();
             if( ! $project || ! $project->getPot() ){
