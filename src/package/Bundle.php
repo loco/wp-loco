@@ -300,11 +300,15 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
 
     /**
-     * Set primary PHP source file containing bundle bootstrap code, if applicable
+     * Set primary PHP source file containing bundle bootstrap code, if applicable.
      * @return Loco_package_Bundle
      */
     public function setBootstrapPath( $path ){
-        $this->boot = $path;
+        $this->boot = (string) $path;
+        // base directory is inferable from bootstrap path
+        if( ! $this->hasDirectoryPath() ){
+            $this->setDirectoryPath( dirname($this->boot) );
+        }
         return $this;
     }
 
