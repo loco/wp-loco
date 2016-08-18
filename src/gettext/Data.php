@@ -231,4 +231,19 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
+
+    /**
+     * @param string date format as Gettext states "YEAR-MO-DA HO:MI+ZONE"
+     * @return int
+     */
+    public static function parseDate( $podate ){
+        if( method_exists('DateTime', 'createFromFormat') ){
+            $objdate = DateTime::createFromFormat('Y-m-d H:iO', $podate);
+            if( $objdate instanceof DateTime ){
+                return $objdate->getTimestamp();
+            }
+        }
+        return strtotime($podate);
+    }
+
 } 

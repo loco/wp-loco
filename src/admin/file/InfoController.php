@@ -127,13 +127,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 $this->set( 'author', $author );
                 // date headers may not be same as file modification time (files copied to server etc..)
                 $podate = $head->trimmed( $locale ? 'PO-Revision-Date' : 'POT-Creation-Date' );
-                // Gettext format is officially "YEAR-MO-DA HO:MI+ZONE"
-                if( $objdate = DateTime::createFromFormat('Y-m-d H:iO', $podate) ){
-                    $potime = $objdate->getTimestamp();
-                }
-                else {
-                    $potime = strtotime($podate) or $potime = $file->modified();
-                }
+                $potime = Loco_gettext_Data::parseDate($podate) or $potime = $file->modified();
                 $this->set('potime', $potime );
                 // access to meta stats, normally cached on listing pages
                 $meta = Loco_gettext_Metadata::create($file,$data);
