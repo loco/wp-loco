@@ -136,7 +136,7 @@ $this->extend('../layout');
                         <td>
                             <p>
                                 <label>
-                                    <input type="checkbox" name="link" value="" />
+                                    <input type="checkbox" name="link" value="1" />
                                     <?php $params->f('sourceLocale',__('Use "%s" as template when running Sync','loco') )?> 
                                 </label>
                             </p>

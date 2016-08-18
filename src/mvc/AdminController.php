@@ -63,8 +63,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      * "loco_external" filter callback, campaignizes external links
      */
     public function filter_loco_external( $url ){
-        // TODO ...
-        return $url;
+        static $query;
+        if( ! isset($query) ){
+            $query = http_build_query( array( 'utm_campaign' => 'wp', 'utm_source' => 'admin' ), null, '&' );
+        }
+        return $url . ( strpos($url,'?') ? '&' : '?' ) . $query;
     }
 
 

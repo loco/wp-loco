@@ -4,6 +4,15 @@
  */
 class Loco_admin_RootController extends Loco_admin_list_BaseController {
 
+    /**
+     * {@inheritdoc}
+     */
+    public function getHelpTabs(){
+        return array (
+            __('Overview','default') => $this->view('tab-home'),
+        );
+    }
+
     
     /**
      * Render main entry home screen
@@ -50,6 +59,13 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
 
         // TODO favourites/starred
         
+        
+        // current locale notice
+        $tag = get_locale();
+        if( 'en_US' !== $tag ){
+            $locale = Loco_Locale::parse($tag);
+            $this->set( 'locale', $locale );
+        }
         return $this->view('admin/root');
     }
 
