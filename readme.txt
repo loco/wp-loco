@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 2.0.0
+Stable tag: 2.0.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,13 +85,19 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 2.0 =
+= 2.0.1 =
+* Added help link in settings page
+* Fixed opendir warnings in legacy code
+* Catching session errors during init
+* Removing meta row link when plugin not found
+
+= 2.0.0 =
 * First release of completely rebuilt version 2
 
 
 == Upgrade Notice ==
 
-= 2.0 =
+= 2.0.0 =
 * All new version!
 
 

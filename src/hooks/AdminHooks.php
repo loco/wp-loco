@@ -67,7 +67,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     public function on_plugin_action_links( $links, $plugin = '' ){
          try {
              if( $plugin && current_user_can('loco_admin') ){
-                // pre-empt failure later on if plugin is unkown
+                // pre-empt failure later on if plugin is unknown
                 $search = Loco_package_Plugin::get_plugins();
                 if( ! array_key_exists($plugin,$search) ){
                     throw new Exception('Plugin is not registered: '.$plugin );
