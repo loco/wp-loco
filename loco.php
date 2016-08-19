@@ -161,7 +161,7 @@ function loco_autoload( $name ){
         require $path;
     }
     else if( file_exists( $path = ABSPATH.'wp-admin/includes/class-'.strtr(strtolower($name),'_','-').'.php' ) ){
-        require $path;
+        require_once $path;
     }
 }
 
@@ -180,7 +180,7 @@ if( LOCO_LANG_DIR ){
 }
 
 
-// initialize hooks for main site or admin screens:
+// initialize hooks for admin screens
 if( is_admin() ){
     Loco_hooks_AdminHooks::init();
 }

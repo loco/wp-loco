@@ -632,7 +632,7 @@ abstract class LocoAdmin {
      * @internal
      */
     public static function find_grouped( $dir, $match, array $found = array(), $recurse = false, $recursions = array() ){
-        if( $rs = opendir($dir) ){
+        if( is_readable($dir) && is_dir($dir) && ( $rs = opendir($dir) ) ){
             while( $f = readdir($rs) ){
                 if( '.' === $f{0} ){
                     continue;
