@@ -72,8 +72,11 @@ class Loco_data_Session extends Loco_data_Serializable {
      * @internal
      */
     final public function __construct( array $raw = array() ){
-        parent::__construct( array() );
         $this->token = wp_get_session_token();
+        if( ! $this->token ){
+            throw new Loco_error_Exception('Failed to get session token');
+        }
+        parent::__construct( array() );
         $this->manager = WP_Session_Tokens::get_instance( get_current_user_id() );
         // populate object from stored session data
         $data = $this->getRaw();

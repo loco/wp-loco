@@ -60,6 +60,9 @@ $this->extend('../layout');
                                     <?php esc_html_e('Remember in session','loco')?> 
                                 </label>
                             </p>
+                            <span class="description">
+                                <a href="<?php echo esc_url(apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem#remote'))?>" target="_blank">See security notes</a>
+                            </span>
                         </fieldset>
                     </td>
                 </tr>

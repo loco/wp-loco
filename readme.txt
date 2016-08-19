@@ -85,6 +85,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.1 =
+* Added filesystem help link into settings page
+
 = 2.0 =
 * First release of completely rebuilt version 2
 
