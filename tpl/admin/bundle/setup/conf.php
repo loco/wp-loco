@@ -5,8 +5,9 @@
 $this->extend('../setup');
 $this->start('header');
 
+
    if( $params->has('jsonFields') ):?> 
-    <form action="<?php $params->e('self')?>" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic" id="loco-remote">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic" id="loco-remote">
         <h3>
             Check config repository 
         </h3>
@@ -44,7 +45,7 @@ $this->start('header');
 
 
     if( $params->has('xmlFields') ):?> 
-    <form action="<?php $params->e('self')?>" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
         <h3>
             XML setup
         </h3>
@@ -64,7 +65,7 @@ $this->start('header');
 
 
     if( $params->has('autoFields') ):?> 
-    <form action="<?php $params->e('self')?>" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
         <h3>
             Auto setup
         </h3>

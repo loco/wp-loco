@@ -252,7 +252,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
                         // possibility that additional text domains are being added
                         $project = $bundle->getProject($slug);
                         if( ! $project ){
-                            $project = new Loco_package_Project( new Loco_package_TextDomain($domain), $slug );
+                            $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
                             $bundle->addProject( $project );
                         }
                         
@@ -298,7 +298,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
                         // add current domain as translation project if not already set
                         // this avoids extra domains getting set before the default one
                         if( ! $bundle->getProject($slug) ){
-                            $project = new Loco_package_Project( new Loco_package_TextDomain($domain), $slug );
+                            $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
                             $bundle->addProject( $project );
                         }
                         break;

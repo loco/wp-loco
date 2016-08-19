@@ -4,8 +4,8 @@ Plugin Name: Loco Translate
 Plugin URI: https://wordpress.org/plugins/loco-translate/
 Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
-Version: 2.0.0-dev
-Author URI: https://localise.biz/help/wordpress/translate-plugin
+Version: 2.0.0
+Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco
 Domain Path: /languages/
 */
@@ -33,6 +33,7 @@ if( '1' === $loco_branch || ( '2' !== $loco_branch && false !== get_option('loco
 
 /**
  * Get absolute path to Loco primary plugin file
+ * @return string
  */
 function loco_plugin_file(){
     return __FILE__;
@@ -41,14 +42,16 @@ function loco_plugin_file(){
 
 /**
  * Get version of this plugin
+ * @return string
  */
 function loco_plugin_version(){
-    return '2.0.0-dev';
+    return '2.0.0';
 }
 
 
 /**
  * Get Loco plugin handle, used by WordPress to identify plugin as a relative path
+ * @return string
  */
 function loco_plugin_self(){
     static $handle;
@@ -59,6 +62,7 @@ function loco_plugin_self(){
 
 /**
  * Get absolute path to plugin root directory
+ * @return string
  */
 function loco_plugin_root(){
     static $root;
@@ -69,6 +73,7 @@ function loco_plugin_root(){
 
 /**
  * Check whether currently running in debug mode
+ * @return bool
  */
 function loco_debugging(){
     return apply_filters('loco_debug', WP_DEBUG );
@@ -77,6 +82,7 @@ function loco_debugging(){
 
 /**
  * Whether currently processing an Ajax request
+ * @return bool
  */
 function loco_doing_ajax(){
     return defined('DOING_AJAX') && DOING_AJAX;
@@ -85,6 +91,7 @@ function loco_doing_ajax(){
 
 /**
  * Evaluate a constant by name
+ * @return mixed
  */
 function loco_constant( $name ){
     $value = defined($name) ? constant($name) : null;
@@ -99,6 +106,7 @@ function loco_constant( $name ){
 
 /**
  * Abstract inclusion of any file under plugin root
+ * @return mixed
  */
 function loco_include( $relpath ){
     $path = loco_plugin_root().'/'.$relpath;
@@ -111,6 +119,7 @@ function loco_include( $relpath ){
 
 /**
  * Require dependant library once only
+ * @return void
  */
 function loco_require_lib( $path ){
     require_once loco_plugin_root().'/lib/'.$path;
@@ -119,6 +128,7 @@ function loco_require_lib( $path ){
 
 /**
  * Check PHP extension required by Loco and load polyfill if needed
+ * @return bool
  */
 function loco_check_extension( $name ){
     static $cache = array();
@@ -141,6 +151,7 @@ function loco_check_extension( $name ){
  * Class autoloader for Loco classes under src directory.
  * e.g. class "Loco_foo_FooBar" wil be found in "src/foo/FooBar.php"
  * Also does autoload for some WordPress classes, e.g. wp-filesystem-base => WP_Filesystem_Base
+ * @return void
  */
 function loco_autoload( $name ){
     if( 'Loco_' === substr($name,0,5) ){
@@ -163,12 +174,13 @@ if( ! defined('LOCO_LANG_DIR') ){
 }
 
 
-// text domain loading helper, required if custom file locations in use
-new Loco_hooks_LoadHelper;
+// text domain loading helper for custom file locations. disable by setting constant empty
+if( LOCO_LANG_DIR ){
+    new Loco_hooks_LoadHelper;
+}
 
 
 // initialize hooks for main site or admin screens:
 if( is_admin() ){
-    new Loco_hooks_AdminHooks;
+    Loco_hooks_AdminHooks::init();
 }
-

@@ -25,7 +25,7 @@ $this->extend('../layout');
             <?php echo esc_html( sprintf( __('Version %s','loco'), $version) );?> 
         </h3>
         <p>
-            You're running the latest stable version of Loco Translate. 
+            <?php esc_html_e("You're running the latest version of Loco Translate",'loco')?>  
         </p>
     </div><?php
     endif;?> 

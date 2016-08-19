@@ -93,7 +93,7 @@ class Loco_config_BundleReader {
             foreach( $model->query('project',$domainElement) as $projectElement ){
     
                 $name = $projectElement->getAttribute('name') or $name = $bundle->getName();
-                $project = new Loco_package_Project( $domain, $name );
+                $project = new Loco_package_Project( $bundle, $domain, $name );
                 if( $projectElement->hasAttribute('slug') ){
                     $project->setSlug( $projectElement->getAttribute('slug') );
                 }

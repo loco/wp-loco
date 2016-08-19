@@ -62,7 +62,7 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
         
         // current locale notice
         $tag = get_locale();
-        if( 'en_US' !== $tag ){
+        if( 'en_' !== substr($tag,0,3) ){
             $locale = Loco_Locale::parse($tag);
             $this->set( 'locale', $locale );
         }

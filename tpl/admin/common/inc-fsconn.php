@@ -2,7 +2,8 @@
 /**
  * Include standard file system connect dialog
  */
-
+ 
+    $help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem') );
 
     if( $fsFields->has('connection_type') ):?> 
     <form id="loco-fs" class="notice notice-info jshide">
@@ -31,7 +32,7 @@
             <span>
                 <?php esc_html_e('To modify the file system, click "Connect" and authenticate with the server','loco')?> 
             </span>
-            <a class="button button-small" href="https://localise.biz/wordpress/plugin/manual/filesystem"> ? </a>
+            <a class="button button-small" href="<?php echo $help?>" target="_blank"> ? </a>
             <button type="button" class="button button-small button-primary"><?php esc_html_e('Connect','loco')?></button>
         </p>
         <?php $fsFields->_e();?> 

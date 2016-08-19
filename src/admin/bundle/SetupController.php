@@ -56,6 +56,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
             }
             $this->saveBundle();
             $bundle = $this->getBundle();
+            $this->set('auto', null );
         }
         // execute XML-based config if posted
         else if( $post->has('xml-setup') && $this->checkNonce( 'xml-'.$action) ){
@@ -66,6 +67,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
             $reader->loadModel( $model );
             $this->saveBundle();
             $bundle = $this->getBundle();
+            $this->set('xml', null );
         }
         // execute JSON-based config if posted
         else if( $post->has('json-setup') && $this->checkNonce( 'json-'.$action) ){
@@ -76,6 +78,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
             $reader->loadModel( $model );
             $this->saveBundle();
             $bundle = $this->getBundle();
+            $this->set('json', null );
         }
         // execute reset if posted
         else if( $post->has('reset-setup') && $this->checkNonce( 'reset-'.$action) ){
@@ -104,7 +107,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
             $unknown = $bundle->invert();
             if( count($unknown) ){
-                $notices[] = "Bundle contains some files we don't understand";
+                $notices[] = "Extra translation files found, but we can't match them to a known set";
             }
         }
         

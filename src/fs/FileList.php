@@ -22,6 +22,19 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
 
     /**
+     * Like getArrayCopy, but exports string paths
+     * @return array
+     */
+    public function export(){
+        $a = array();
+        foreach( $this as $file ){
+            $a[] = (string) $file;
+        }
+        return $a;
+    }
+
+
+    /**
      * @internal
      */
     public function __toString(){

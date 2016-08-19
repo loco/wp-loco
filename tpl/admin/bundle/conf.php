@@ -28,19 +28,21 @@ $this->extend('../layout');
                         <th scope="row"><label for="<?php echo $id?>-name">Project name</label></th>
                         <td>
                             <input type="text" name="<?php echo $p->prefix?>[name]" value="<?php $p->e('name')?>" id="<?php echo $id?>-name" class="regular-text" />
-                            <span class="description"> </span>
+                            <p class="description">Descriptive name for this set of translatable strings</p>
                         </td>
                     </tr>
                     <tr valign="top">
                         <th scope="row"><label for="<?php echo $id?>-domain">Text domain</label></th>
                         <td>
                             <input type="text" name="<?php echo $p->prefix?>[domain]" value="<?php $p->e('domain')?>" id="<?php echo $id?>-domain" class="regular-text" />
+                            <p class="description">The namespace into which WordPress will load translated strings</p>
                         </td>
                     </tr>
                     <tr valign="top">
                         <th scope="row"><label for="<?php echo $id?>-slug">File prefix</label></th>
                         <td>
                             <input type="text" name="<?php echo $p->prefix?>[slug]" value="<?php $p->e('slug')?>" id="<?php echo $id?>-slug" class="regular-text" />
+                            <p class="description">Usually the same as the text domain, but don't leave blank unless you mean to</p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -51,6 +53,7 @@ $this->extend('../layout');
                                 <input type="checkbox" value="1" name="<?php echo $p->prefix?>[template][locked]" <?php empty($p->template['locked']) || print('checked');?> />
                                 Locked
                             </label>
+                            <p class="description">Relative path from bundle root to the official POT file</p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -64,6 +67,7 @@ $this->extend('../layout');
                                 <span class="description">Exclude:</span>
                                 <textarea name="<?php echo $p->prefix?>[target][exclude][path]" id="<?php echo $id?>-xtarget" rows="2" cols="30" class="large-text"><?php echo $p->escape( $p->target['exclude']['path'] )?></textarea>
                             </div>
+                            <p class="description">Folders within the bundle that contain author-supplied translations. (no wildcards)</p>
                         </td>
                     </tr>
                     <tr valign="top">
@@ -77,6 +81,7 @@ $this->extend('../layout');
                                 <span class="description">Exclude:</span>
                                 <textarea name="<?php echo $p->prefix?>[source][exclude][path]" id="<?php echo $id?>-xsource" rows="2" cols="30" class="large-text"><?php echo $p->escape( $p->source['exclude']['path'] )?></textarea>
                             </div>
+                           <p class="description">Files and folders within the bundle that contain localized PHP code. (no wildcards)</p>
                         </td>
                     </tr>
                 </tbody>
@@ -92,6 +97,7 @@ $this->extend('../layout');
                         <th scope="row"><label for="all-excl">Blocked paths:</label></th>
                         <td>
                             <textarea name="exclude[path]" id="all-excl" rows="3" cols="30" class="large-text"><?php echo $params->escape($excl['path'])?></textarea>
+                            <p class="description">Folders within the bundle that will never be searched for files. (no wildcards)</p>
                         </td>
                     </tr>
                 </tbody>

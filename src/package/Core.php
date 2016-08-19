@@ -84,7 +84,7 @@ class Loco_package_Core extends Loco_package_Bundle {
         $domain = new Loco_package_TextDomain('default');
         $domain->setCanonical( true );
         // front end subset, has empty name in WP
-        $project = $domain->createProject('Development');
+        $project = $domain->createProject( $bundle, 'Development');
         $project->setSlug('')
                 ->setPot( new Loco_fs_File($langDir.'/wordpress.pot') )
                 ->addSourceDirectory( $rootDir)
@@ -93,7 +93,7 @@ class Loco_package_Core extends Loco_package_Bundle {
                 ->excludeSourcePath( $rootDir.'/wp-includes/class-pop3.php')
         ;
         // "Administration" project (admin subset)
-        $project = $domain->createProject('Administration');
+        $project = $domain->createProject( $bundle, 'Administration');
         $project->setSlug('admin')
                 ->setPot( new Loco_fs_File($langDir.'/admin.pot') )
                 ->addSourceDirectory( $rootDir.'/wp-admin' )
@@ -104,7 +104,7 @@ class Loco_package_Core extends Loco_package_Bundle {
                 ->excludeSourcePath( $rootDir.'/wp-admin/includes/continents-cities.php')
         ;
         // "Network Admin" package (admin-network subset)
-        $project = $domain->createProject('Network Admin');
+        $project = $domain->createProject($bundle, 'Network Admin');
         $project->setSlug('admin-network')
                 ->setPot( new Loco_fs_File($langDir.'/admin-network.pot') )
                 ->addSourceDirectory( $rootDir.'/wp-admin/network' )
@@ -117,7 +117,7 @@ class Loco_package_Core extends Loco_package_Bundle {
 
         // Continents & Cities is its own text domain)
         $domain = new Loco_package_TextDomain('continents-cities');
-        $project = $domain->createProject('Continents & Cities');
+        $project = $domain->createProject( $bundle, 'Continents & Cities');
         $project->setPot( new Loco_fs_File( $langDir.'/continents-cities.pot') )
                 ->addSourceFile( $rootDir.'/wp-admin/includes/continents-cities.php' )
         ;

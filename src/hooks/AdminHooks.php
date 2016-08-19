@@ -4,6 +4,17 @@
  */
 class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
+
+    /**
+     * Main entry point from loco.php bootstrap file
+     * @return Loco_hooks_AdminHooks
+     */
+    public static function init(){
+        add_action('admin_notices', array('Loco_compat_Failure','print_hook_failure') );
+        return new Loco_hooks_AdminHooks;
+    }
+
+
     
     /**
      * {@inheritdoc}
@@ -36,6 +47,16 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             $domainPath = dirname( loco_plugin_self() ).'/languages';
             load_plugin_textdomain( 'loco', false, $domainPath );
         }
+    }
+
+
+
+    /**
+     * "admin_init" callback.
+     * Unhooks failure notice that would fire if this hook was not successful
+     */
+    public function on_admin_init(){
+        remove_action( 'admin_notices', array('Loco_compat_Failure','print_hook_failure') );
     }
 
 

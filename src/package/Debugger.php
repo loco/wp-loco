@@ -85,7 +85,19 @@ class Loco_package_Debugger implements IteratorAggregate {
                 $id = $project->getId();
                 $domain = (string) $project->getDomain();
                 $domains[$domain] = true;
-                // POT    
+                // Domain path[s] within bundle directory
+                $targets = array();
+                /* @var $dir Loco_fs_Directory */
+                foreach( $project->getConfiguredTargets() as $dir ){
+                    $targets[] = $dir->getRelativePath($base);
+                }
+                if( $targets ){
+                    $this->info('%u domain path[s] configured for "%s" -> %s', count($targets), $id, json_encode($targets,JSON_UNESCAPED_SLASHES) );
+                }
+                else {
+                    $this->warn('No domain paths configured for "%s"', $id );
+                }
+                // POT template file  
                 if( $potfile = $project->getPot() ){
                     if( $potfile->exists() ){
                         $this->good('Template file for "%s" exists at "%s"', $id, $potfile->getRelativePath($base) );

@@ -397,7 +397,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         else {
             $domain = new Loco_package_TextDomain($domainName);
         }
-        $project = $domain->createProject( $this->name );
+        $project = $domain->createProject( $this, $this->name );
         if( $this->solo ){
             $project->addSourceFile( $this->getBootstrapPath() );
         }
@@ -486,7 +486,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
             if( ! $this->getSlug() ){
                 $this->setSlug( $slug );
             }
-            $project = $domain->createProject( $this->name );
+            $project = $domain->createProject( $this, $this->name );
             // May have declared DomainPath
             $base = $this->getDirectoryPath();
             if( isset($header['DomainPath']) && ( $path = trim($header['DomainPath'],'/') ) ){

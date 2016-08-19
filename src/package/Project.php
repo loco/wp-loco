@@ -6,9 +6,16 @@
 class Loco_package_Project {
     
     /**
+     * Text Domain in which project lives
      * @var Loco_package_TextDomain
      */
     private $domain;
+    
+    /**
+     * Bundle in which project lives
+     * @var Loco_package_Bundle
+     */
+    private $bundle;
     
     /**
      * Friendly project name, e.g. "Network Admin"
@@ -92,8 +99,9 @@ class Loco_package_Project {
     /**
      * Construct project from its domain and a descriptive name
      */
-    public function __construct( Loco_package_TextDomain $domain, $name ){
+    public function __construct( Loco_package_Bundle $bundle, Loco_package_TextDomain $domain, $name ){
         $this->name = $name;
+        $this->bundle = $bundle;
         $this->domain = $domain;
         $this->slug = $domain->getName();
         // sources
@@ -454,7 +462,8 @@ class Loco_package_Project {
         return $this;
     }
 
-    
+
+
     /**
      * Get full path to template POT (file)
      * @return Loco_fs_File
@@ -463,9 +472,14 @@ class Loco_package_Project {
         if( ! $this->pot ){
             // attempt to match POT exactly under configured domain paths
             $name = $this->getSlug().'.pot';
-            foreach( $this->getConfiguredTargets() as $dir ){
+            $targets = $this->getConfiguredTargets()->export();
+            // permit POT file in the bundle root (i.e. outside domain path)
+            if( $this->isDomainDefault() && $this->bundle->hasDirectoryPath() ){
+                $targets[] = $this->bundle->getDirectoryPath();
+            }
+            foreach( $targets as $dir ){
                 $file = new Loco_fs_File( $name );
-                $file->normalize( (string) $dir );
+                $file->normalize( $dir );
                 if( $file->exists() ){
                     $this->pot = $file;
                     break;

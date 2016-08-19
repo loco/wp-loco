@@ -44,11 +44,11 @@ class Loco_package_TextDomain extends ArrayIterator {
 
 
     /**
-     * Create a named project in this instance of Text Domain
+     * Create a named project in a given bundle for this Text Domain
      * @return Loco_package_Project
      */
-    public function createProject( $name ){
-        $proj = new Loco_package_Project( $this, $name );
+    public function createProject( Loco_package_Bundle $bundle, $name ){
+        $proj = new Loco_package_Project( $bundle, $this, $name );
         $this[] = $proj;
 
         return $proj;

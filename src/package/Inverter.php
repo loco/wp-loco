@@ -146,7 +146,7 @@ abstract class Loco_package_Inverter {
             foreach( $sets as $slug => $dir ){
                 $name = ucfirst( strtr( $slug, '-_', '  ' ) );
                 $domain = new Loco_package_TextDomain( $slug );
-                $project = $domain->createProject( $name );
+                $project = $domain->createProject( $bundle, $name );
                 $project->addTargetDirectory($dir);
                 $bundle->addProject($project);
             }
