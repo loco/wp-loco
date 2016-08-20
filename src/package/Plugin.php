@@ -114,7 +114,9 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         $handle = $this->getHandle();
         $data = self::get_plugin($handle);
         if( ! is_array($data) ){
-            if( $path = $this->getBootstrapPath() ){
+            // permitting direct file access if file exists (tests)
+            $path = $this->getBootstrapPath();
+            if( $path && file_exists($path) ){
                 $data = get_plugin_data( $path, false, false );
             }
             else {

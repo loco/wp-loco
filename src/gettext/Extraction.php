@@ -28,8 +28,13 @@ class Loco_gettext_Extraction {
         $this->bundle = $bundle;
         $this->extractor = loco_wp_extractor();
         $this->extras = array();
-        // pull bundle's default metadata. these are translations that may not be encountered in files
         if( $default = $bundle->getDefaultProject() ){
+            $domain = (string) $default->getDomain();
+            // extract headers from theme PHP files
+            if( $bundle->isTheme() ){
+                $this->extractor->set_wp_theme( $domain );
+            }
+            // pull bundle's default metadata. these are translations that may not be encountered in files
             $extras = array();
             $header = $bundle->getHeaderInfo();
             foreach( $bundle->getMetaTranslatable() as $prop => $notes ){
@@ -40,7 +45,6 @@ class Loco_gettext_Extraction {
                 }
             }
             if( $extras ){
-                $domain = (string) $default->getDomain();
                 $this->extras[$domain] = $extras;
             }
         }
