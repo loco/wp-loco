@@ -55,7 +55,12 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      * "update_footer" filter, prints Loco version number in admin footer
      */
     public function filter_update_footer( $text ){
-        return sprintf( 'v%s', loco_plugin_version() );
+        $html = sprintf( '<span>v%s</span>', loco_plugin_version() );
+        if( $this->bench ){
+            $info = $this->get('debug');
+            $html .= sprintf('<span>%sms</span>', number_format($info->time,2) );
+        }
+        return $html;
     }
 
 

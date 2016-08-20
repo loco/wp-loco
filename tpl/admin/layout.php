@@ -61,15 +61,7 @@
     <div id="loco-content">
     <?php echo $this->_content;?> 
     </div>
-    
-    <?php if( $this->has('debug') ):?>
-    <!--footer id="loco-debug">
-        <p>
-            Took: <?php printf('%f seconds',$debug->time)?>
-        </p>
-    </footer--><?php
-    endif;?>         
-    
+
 </div>
 
 

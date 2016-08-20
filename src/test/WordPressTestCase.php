@@ -44,6 +44,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
+        wp_cache_flush();
         self::dropOptions();
     }
 
@@ -53,6 +54,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_mvc_PostParams::destroy();
         Loco_error_AdminNotices::destroy();
         Loco_package_Listener::destroy();
+        wp_cache_flush();
         // text domains should be unloaded at start of all tests
         $GLOBALS['l10n'] = array();
         // ensure test themes are registered and WordPress's cache is valid

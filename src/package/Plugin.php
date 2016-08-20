@@ -56,11 +56,12 @@ class Loco_package_Plugin extends Loco_package_Bundle {
                 'WP_PLUGIN_DIR' => 'get_plugins',
                 'WPMU_PLUGIN_DIR' => 'get_mu_plugins',
             );
-            foreach( $search as $base => $getter ){
+            foreach( $search as $const => $getter ){
                 if( $list = call_user_func($getter) ){
+                    $base = loco_constant($const);
                     foreach( $list as $handle => $data ){
                         if( isset($cached[$handle]) ){
-                            Loco_error_AdminNotices::debug( sprintf('plugin conflict on %s', $handle) );
+                            Loco_error_AdminNotices::debug( sprintf('Plugin conflict on %s', $handle) );
                             continue;
                         }
                         $data['basedir'] = $base;
@@ -68,6 +69,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
                     }
                 }
             }
+            $cached = apply_filters('loco_plugins_data', $cached );
             uasort( $cached, '_sort_uname_callback' );
             wp_cache_set('plugins', $cached, 'loco');
         }
@@ -75,20 +77,49 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     }
 
 
+
+    /**
+     * Get raw plugin data from WordPress registry, plus additional "basedir" field for resolving handle to actual file.
+     * @return string
+     */
+    public static function get_plugin( $handle ){
+        $search = self::get_plugins();
+        // plugin must be registered with WordPress
+        if( isset($search[$handle]) ){
+            $data = $search[$handle];
+        }
+        // else plugin is not known to WordPress
+        else {
+            $data = apply_filters( 'loco_missing_plugin', array(), $handle );
+        }
+        // plugin not valid if name absent from raw data
+        if( empty($data['Name']) ){
+            return null;
+        }
+        // basedir is added by our get_plugins function, but filtered arrays may not have done this
+        if( ! array_key_exists('basedir',$data) ){
+            Loco_error_AdminNotices::debug( sprintf('"basedir" property required to resolve %s',$handle) );
+            return null;
+        }
+
+        return $data;
+    }
+
+
+
     /**
      * {@inheritdoc}
      */
     public function getHeaderInfo(){
         $handle = $this->getHandle();
-        $cached = self::get_plugins();
-        if( isset($cached[$handle]) ){
-            $data = $cached[$handle];
-        }
-        else if( $path = $this->getBootstrapPath() ){
-            $data = get_plugin_data( $path, false, false );
-        }
-        else {
-            $data = array();
+        $data = self::get_plugin($handle);
+        if( ! is_array($data) ){
+            if( $path = $this->getBootstrapPath() ){
+                $data = get_plugin_data( $path, false, false );
+            }
+            else {
+                $data = array();
+            }
         }
         return new Loco_package_Header( $data );
     }
@@ -150,30 +181,17 @@ class Loco_package_Plugin extends Loco_package_Bundle {
      * @return Loco_package_Plugin
      */
     public static function create( $handle ){
-        $cached = self::get_plugins();
-        // permit internal tests to pass absolute path
-        if( '/' === $handle{0} && file_exists($handle) ){
-            $path = $handle;
-            $handle = plugin_basename( $path );
-            $data = get_plugin_data( $path, false, false );
+
+        // plugin must be registered with at least a name and "basedir"
+        $data = self::get_plugin($handle);
+        if( ! $data ){
+            throw new Loco_error_Exception( sprintf( __('Plugin not found: %s','loco'),$handle) );
         }
-        // else plugin must be registered with WordPress
-        else if( isset($cached[$handle]) ){
-            $data = $cached[$handle];
-            // lazy resolve of boot path
-            $file = new Loco_fs_File( $handle );
-            $file->normalize( loco_constant($data['basedir']) );
-            $path = $file->getPath();
-        }
-        // else plugin is not known to WordPress
-        else {
-            $data = array();
-        }
-        
-        // plugin only valid id Name key is present in raw data
-        if( empty($data['Name']) ){
-            throw new Loco_error_Exception( sprintf('Plugin not found: %s',$handle) );
-        }
+
+        // lazy resolve of base directory from "basedir" property that we added
+        $file = new Loco_fs_File( $handle );
+        $file->normalize( $data['basedir'] );
+        $base = $file->dirname();
         
         // handle and name is enough data to construct empty bundle
         $bundle = new Loco_package_Plugin( $handle, $data['Name'] );
@@ -191,7 +209,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         }
         
         // do initial configuration of bundle from metadata
-        $bundle->configure( dirname($path), $data );
+        $bundle->configure( $base, $data );
         
         return $bundle;
     }

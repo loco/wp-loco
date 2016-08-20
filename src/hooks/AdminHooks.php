@@ -66,12 +66,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     public function on_plugin_action_links( $links, $plugin = '' ){
          try {
-             if( $plugin && current_user_can('loco_admin') ){
-                // pre-empt failure later on if plugin is unknown
-                $search = Loco_package_Plugin::get_plugins();
-                if( ! array_key_exists($plugin,$search) ){
-                    throw new Exception('Plugin is not registered: '.$plugin );
-                }
+             if( $plugin && current_user_can('loco_admin') && Loco_package_Plugin::get_plugin($plugin) ){
                 // ok to add "translate" link into meta row
                 $href = Loco_mvc_AdminRouter::generate('plugin-view', array( 'bundle' => $plugin) );
                 $links[] = '<a href="'.esc_attr($href).'">'.esc_html__('Translate','loco').'</a>';
