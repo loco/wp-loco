@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 2.0.1
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,12 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 2.0.2 =
+* Fixed bug when absolute path used to get plugins
+* Added loco_plugins_data filter
+* Added theme Template Name header extraction
+* Minor copy amends
 
 = 2.0.1 =
 * Added help link in settings page

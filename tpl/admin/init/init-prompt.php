@@ -1,24 +1,24 @@
 <?php
 /**
- * 
+ * Notice before creating a PO that there is no POT
  */
 $this->extend('../layout');
 ?> 
     <div class="notice inline notice-warning">
         <h3 class="has-icon">
-            Translations template missing
+            <?php esc_html_e('Template missing','loco')?> 
         </h3><?php
         if( $params->has('pot') ):?> 
         <p>
-            This bundle's template file doesn't exist yet. We recommend you create it before adding languages.
+            <?php esc_html_e("This bundle's template file doesn't exist yet. We recommend you create it before adding languages".'loco')?>.
         </p><?php
         else:?> 
         <p>
-            This bundle doesn't define a POT template file.
+            <?php esc_html_e("This bundle doesn't define a translations template file",'loco')?>.
         </p><?php
         endif?> 
         <p>
-            Loco can sync directly with source code, but this isn't recommended and might be slow.
+            <?php esc_html_e("Loco can sync directly with the source code, but this can be slow if there are many files",'loco')?>.
         </p>
         <p>
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
@@ -26,4 +26,3 @@ $this->extend('../layout');
             <a class="button button-link has-icon icon-help" href="https://localise.biz/wordpress/plugin/manual/templates" target="_blank"><?php esc_html_e('About templates','loco')?></a>
         </p>
     </div>
-    
