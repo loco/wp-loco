@@ -5,7 +5,7 @@
 $this->extend('../layout');
 
 
-if( $warning ):?> 
+/*if( $warning ):?> 
 <div class="notice inline notice-warning">
     <p>
         <strong class="has-icon">Not fully configured</strong><br />
@@ -13,7 +13,7 @@ if( $warning ):?>
         <span>Click the <a href="<?php $tabs[1]->e('href')?>">setup</a> tab for more information.</span>
     </p>
 </div><?php
-endif;
+endif;*/
 
 
 /* @var $p Loco_mvc_ViewParams */

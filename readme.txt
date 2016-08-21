@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.0
 Tested up to: 4.6
-Stable tag: 2.0.2
+Stable tag: 2.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,6 +85,10 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.3 =
+* Added support for Windows servers
+* Removed incomplete config warning on bundle overview
+
 = 2.0.2 =
 * Fixed bug when absolute path used to get plugins
 * Added loco_plugins_data filter
@@ -103,8 +107,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.0 =
-* All new version!
+= 2.0.3 =
+* Various bug fixes and improvements
 
 
 == More info ==

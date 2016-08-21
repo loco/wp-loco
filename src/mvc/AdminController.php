@@ -167,6 +167,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     }
 
 
+
     /**
      * Shortcut for rending template from a simple array of arguments
      * @return string
