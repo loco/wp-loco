@@ -12,7 +12,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
     private function findSourceFile( $refpath ){
         
         /*/ absolute file path means no search paths required
-        if( '/' === $refpath{0} ){
+        if( Loco_fs_File::abs($refpath) ){
             $srcfile = new Loco_fs_File( $refpath );
             if( $srcfile->exists() ){
                 return $srcfile;

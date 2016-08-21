@@ -93,7 +93,7 @@ abstract class Loco_config_Model {
             $relpath = $file->getRelativePath( $this->base );
             // Map to a configured base path if target is not under our root. This makes XML more portable
             // matching order is most specific first, resulting in shortest path
-            if( $relpath && ( '/' === $relpath{0} || '..' === substr($relpath,0,2) || $this->base === $this->getDirectoryPath('ABSPATH') ) ){
+            if( $relpath && ( Loco_fs_File::abs($relpath) || '..' === substr($relpath,0,2) || $this->base === $this->getDirectoryPath('ABSPATH') ) ){
                 $bases = array( 'LOCO_LANG_DIR', 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' );
                 foreach( $bases as $key ){
                     if( ( $base = $this->getDirectoryPath($key) ) && $base !== $this->base ){

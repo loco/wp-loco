@@ -26,13 +26,73 @@ class Loco_fs_File {
      * @var string
      */
     private $base;
-    
-    
-    public function __construct( $path ){
-        $this->path = (string) $path;
+
+    /**
+     * Flag set when current path is relative
+     * @var bool
+     */
+    private $rel;
+
+
+    /**
+     * Check if a path is absolute and return fixed slashes for readability
+     * @return string fixed path, or "" if not absolute
+     */
+    public static function abs( $path ){
+        if( $path = (string) $path ){
+            $chr1 = $path{0};
+            // return unmodified path if starts "/"
+            if( '/' === $chr1 ){
+                return $path;
+            }
+            // Windows drive path if "X:" or network path if "\\"
+            if( isset($path{1}) ){
+                $chr2 = $path{1};
+                if( ':' === $chr2 ||  ( '\\' === $chr1 && '\\' === $chr2 ) ){
+                    return strtoupper($chr1).$chr2.strtr( substr($path,2), '\\', '/' );
+                }
+            }
+        }
+        // else path is relative, so return falsey string
+        return '';
     }
     
-    
+
+    /**
+     * @internal
+     */    
+    public function __construct( $path ){
+        $this->setPath( $path );
+    }
+
+
+    /**
+     * Internally set path value and flag whether relative or absolute
+     */
+    private function setPath( $path ){
+        $path = (string) $path;
+        if( $fixed = self::abs($path) ){
+            $path = $fixed;
+            $this->rel = false;
+        }
+        else {
+            $this->rel = true;
+        }
+        if( $path !== $this->path ){
+            $this->path = $path;
+            $this->info = null;
+        }
+        return $path;
+    }
+
+
+    /**
+     * @return array
+     */
+    public function isAbsolute(){
+        return ! $this->rel;
+    }
+
 
     /**
      * @internal
@@ -291,46 +351,53 @@ class Loco_fs_File {
      * @return string
      */
     public function normalize( $base = '' ){
+        if( $path = self::abs($base) ){
+            $base = $path;
+        }
         if( $base !== $this->base ){
             $path = $this->path;
             if( '' === $path ){
-                $this->path = $base;
+                $this->setPath($base);
             }
             else {
-                $a = explode('/',$path);
-                if( ! $base || '' === $a[0] ){
+                if( ! $this->rel || ! $base ){
                     $b = array();
                 }
-                else if( '/' === $base ){
-                    $b = array('');
-                }
                 else {
-                    $b = explode('/', $base);
+                    $b = self::explode( $base, array() );
                 }
-                foreach( $a as $s ){
-                    if( '' === $s ){
-                        if( $b ){
-                            continue;
-                        }
-                    }
-                    if( '.' === $s ){
-                        continue;
-                    }
-                    if( '..' === $s ){
-                        if( array_pop($b) ){
-                            continue;
-                        }
-                    }
-                    $b[] = $s;
-                }
-                $this->path = implode('/',$b);
+                $b = self::explode( $path, $b );
+                $this->setPath( implode('/',$b) );
             }
-            $this->info = null;
             $this->base = $base;
         }
         return $this->path;
     }
 
+
+    /**
+     * 
+     */
+    private static function explode( $path, array $b ){
+        $a = explode( '/', $path );
+        foreach( $a as $i => $s ){
+            if( '' === $s ){
+                if( 0 !== $i ){
+                    continue;
+                }
+            }
+            if( '.' === $s ){
+                continue;
+            }
+            if( '..' === $s ){
+                if( array_pop($b) ){
+                    continue;
+                }
+            }
+            $b[] = $s;
+        }
+        return $b;
+    }
 
 
     /**
@@ -339,7 +406,7 @@ class Loco_fs_File {
      */
     public function getRelativePath( $base ){
         $path = $this->normalize();
-        if( $path && '/' === $path{0} ){
+        if( $abspath = self::abs($path) ){
             // base may needs require normalizing
             $file = new Loco_fs_File($base);
             $base = $file->normalize();

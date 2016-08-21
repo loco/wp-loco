@@ -202,9 +202,9 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     public function exclude(){
         $this->invalidate();
         foreach( func_get_args() as $path ){
+            $file = new Loco_fs_File($path);
             // if path is absolute, add straight onto list
-            if( $path && '/' === $path{0} ){
-                $file = new Loco_fs_File($path);
+            if( $file->isAbsolute() ){
                 $file->normalize();
                 $this->excluded[] = $file;
             }

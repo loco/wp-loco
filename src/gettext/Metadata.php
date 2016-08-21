@@ -215,7 +215,7 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
 
     public function getPath( $absolute ){
         $path = $this['rpath'];
-        if( $absolute && '/' !== $path{0} ){
+        if( $absolute && ! Loco_fs_File::abs($path) ){
             $path = trailingslashit( loco_constant('WP_CONTENT_DIR') ).$path;
         }
         return $path;
