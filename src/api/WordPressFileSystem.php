@@ -105,13 +105,18 @@ class Loco_api_WordPressFileSystem {
         $this->creds_out = array();
         
         // observe settings held temporarily in session
-        $session = Loco_data_Session::get();
-        if( isset($session['loco-fs']) ){
-            $creds = $session['loco-fs'];
-            if( $this->tryCredentials($creds,$file) ){
-                $this->creds_in = array();
-                return true;
+        try {
+            $session = Loco_data_Session::get();
+            if( isset($session['loco-fs']) ){
+                $creds = $session['loco-fs'];
+                if( $this->tryCredentials($creds,$file) ){
+                    $this->creds_in = array();
+                    return true;
+                }
             }
+        }
+        catch( Exception $e ){
+            // tollerate session failure
         }
 
         $post = Loco_mvc_PostParams::get();
@@ -203,15 +208,23 @@ class Loco_api_WordPressFileSystem {
 
     /**
      * Set current credentials in session if settings allow
-     * @return void
+     * @return bool whether creds persisted
      */
     private function persistCredentials(){
-        $settings = Loco_data_Settings::get();
-        if( $settings['fs_persist'] ){
-            $session = Loco_data_Session::get();
-            $session['loco-fs'] = $this->creds_out;
-            $session->persist();
+        try {
+            $settings = Loco_data_Settings::get();
+            if( $settings['fs_persist'] ){
+                $session = Loco_data_Session::get();
+                $session['loco-fs'] = $this->creds_out;
+                $session->persist();
+                return true;
+            }
         }
+        catch( Exception $e ){
+            // tollerate session failure
+            Loco_error_AdminNotices::debug( $e->getMessage() );
+        }
+        return false;
     }    
 
 

@@ -17,6 +17,7 @@ class Loco_api_WordPressTranslations {
         if( ! function_exists('wp_get_available_translations') ){
             require_once ABSPATH.'wp-admin/includes/translation-install.php';
         }
+        // WordPress will raise Warning if offline
         return wp_get_available_translations();
     }
 

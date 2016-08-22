@@ -124,11 +124,18 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
             'loco-nonce' => wp_create_nonce('fsConnect'),
         ) );
         $this->set('fsFields', $fields );
-        // may have credentials saved in pseudo session
-        $session = Loco_data_Session::get();
-        if( isset($session['loco-fs']) ){
-            $fields['connection_type'] = $session['loco-fs']['connection_type'];
+
+        // may have fs credentials saved in session
+        try {
+            $session = Loco_data_Session::get();
+            if( isset($session['loco-fs']) ){
+                $fields['connection_type'] = $session['loco-fs']['connection_type'];
+            }
         }
+        catch( Exception $e ){
+            Loco_error_AdminNotices::debug( $e->getMessage() );
+        }
+
         return $fields;
     }
     

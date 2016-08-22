@@ -79,10 +79,16 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
                         $api->authorizeDelete($trash);
                         $trash->unlink();
                     }
-                    // redirect to bundle overview if we have one
-                    $n = count( $files );
-                    Loco_data_Session::get()->flash('success', sprintf( _n('File deleted','%u files deleted',$n,'loco'),$n) );
-                    Loco_data_Session::close();
+                    // flash message for display after redirect
+                    try {
+                        $n = count( $files );
+                        Loco_data_Session::get()->flash('success', sprintf( _n('File deleted','%u files deleted',$n,'loco'),$n) );
+                        Loco_data_Session::close();
+                    }
+                    catch( Exception $e ){
+                        // tollerate session failure
+                    }
+                    // redirect to bundle overview
                     $href = Loco_mvc_AdminRouter::generate( $this->get('type').'-view', array( 'bundle' => $this->get('bundle') ) );
                     if( wp_redirect($href) ){
                         exit;
