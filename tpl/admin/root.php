@@ -11,12 +11,8 @@ $this->extend('layout');
             Welcome to the all new version 2
         </h3>
         <p>
-            Thanks for using Loco Translate.
-            We've completely rebuilt our old plugin from the ground up, so please let us know in the <a href="https://wordpress.org/support/plugin/loco-translate" target="_blank">support forum</a> if you find any bugs.
-        </p>
-        <p>
-            If you get stuck, use the "Help" dropdown at the top of the screen or try our 
-            <a href="<?php echo esc_url(apply_filters('loco_external','https://localise.biz/wordpress/plugin'))?>">help pages</a>.
+            This is an early release of our completely rebuilt plugin. 
+            You can switch to <a href="<?php $params->e('rollback')?>"> version 1</a> if you want to keep using the old plugin.
         </p>
     </div><?php
 

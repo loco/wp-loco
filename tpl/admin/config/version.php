@@ -37,7 +37,7 @@ $this->extend('../layout');
         </h3>
         <p>
             If you have problems running the 2.x branch, you can revert back to the legacy version.<br />
-            Note that support for the 1.x branch has stopped. Help is only available for version 2.
+            Note that maintenance for the 1.x branch has stopped and there will be no further releases.
         </p>
         <p class="submit">
             <input type="submit" value="Enable legacy version" class="button" />

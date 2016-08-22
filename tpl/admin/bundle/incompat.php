@@ -8,7 +8,7 @@ $this->extend('../layout');
 <div class="notice inline notice-error">
     <p>
         <strong class="has-icon"><?php esc_html_e('Unconfigured bundle','loco')?></strong><br />
-        <span>This bundle isn't fully configured for translation.</span>
+        <span>This bundle isn't automatically compatible and requires configuration.</span><br />
         <span>Click the <a href="<?php $tabs[1]->e('href')?>">setup</a> tab for more information.</span>
     </p>
 </div>

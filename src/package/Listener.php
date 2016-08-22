@@ -226,45 +226,45 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
                 if( is_null($relative) ){
                     continue;
                 }
-                // theme *probably* lives directly under root
-                $stack = array();
-                foreach( explode( '/', dirname($relative) ) as $next ){
-                    $stack[] = $next;
-                    $handle = implode('/', $stack );
-                    $theme = new WP_Theme( $handle, $root );
-                    if( $theme->exists() ){
-                        $abspath = $root.'/'.$handle;
-                        // theme may have officially declared text domain
-                        if( $default = $theme->get('TextDomain') ){
-                            $this->domains[$handle] = $default;
-                        }
-                        // else set current domain as default if not already set
-                        else if ( ! isset($this->domains[$handle]) ){
-                            $this->domains[$handle] = $domain;
-                        }
-                        if( ! isset($this->domainPaths[$domain]) ){
-                            $this->domainPaths[$domain] = self::relative( $path, $abspath );
-                        }
-                        // theme bundle may already exist
-                        if( isset($this->themes[$handle]) ){
-                            $bundle = $this->themes[$handle];
-                        }
-                        // create default project for theme bundle
-                        else {
-                            $bundle = Loco_package_Theme::createFromTheme($theme);
-                            $this->themes[$handle] = $bundle;
-                        }
-                        // possibility that additional text domains are being added
-                        $project = $bundle->getProject($slug);
-                        if( ! $project ){
-                            $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
-                            $bundle->addProject( $project );
-                        }
-                        
-                        break;
-                    }
+                // theme's "stylesheet directory" must be immediately under this root
+                // passed path could root of theme, or any directory below it, but we only need the top level
+                $chunks = explode( '/', $relative, 2 );
+                $handle = current( $chunks );
+                if( ! $handle ){
+                    continue;
                 }
-                // bundle was a theme, even if we couldn't configure it
+                $theme = new WP_Theme( $handle, $root );
+                if( ! $theme->exists() ){
+                    continue;
+                }
+                $abspath = $root.'/'.$handle;
+                // theme may have officially declared text domain
+                if( $default = $theme->get('TextDomain') ){
+                    $this->domains[$handle] = $default;
+                }
+                // else set current domain as default if not already set
+                else if ( ! isset($this->domains[$handle]) ){
+                    $this->domains[$handle] = $domain;
+                }
+                if( ! isset($this->domainPaths[$domain]) ){
+                    $this->domainPaths[$domain] = self::relative( $path, $abspath );
+                }
+                // theme bundle may already exist
+                if( isset($this->themes[$handle]) ){
+                    $bundle = $this->themes[$handle];
+                }
+                // create default project for theme bundle
+                else {
+                    $bundle = Loco_package_Theme::createFromTheme($theme);
+                    $this->themes[$handle] = $bundle;
+                }
+                // possibility that additional text domains are being added
+                $project = $bundle->getProject($slug);
+                if( ! $project ){
+                    $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
+                    $bundle->addProject( $project );
+                }
+                // bundle was a theme, even if we couldn't configure it, so no point checking plugins
                 break 2;
             }
 

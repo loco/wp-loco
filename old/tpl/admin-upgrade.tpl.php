@@ -1,13 +1,13 @@
 <div class="wrap loco-admin">
     
     <h3>
-        Start using Loco Translate 2.0
+        Start using Loco Translate 2
     </h3>
     <p>
-        <strong>Version 1 of Loco Translate is now deprecated and support for it has stopped.</strong> 
+        <strong>Version 1 of Loco Translate is no longer maintained.</strong> 
     </p>
     <p>
-        Version 2.0 is a complete rebuild. <a href="https://localise.biz/help/wordpress/translate-plugin/changelog" target="_blank">See what's changed here</a>.<br />
+        Version 2 is a complete rebuild. <a href="https://localise.biz/help/wordpress/translate-plugin/changelog" target="_blank">See what's changed here</a>.<br />
         Because it's a major version increase, we're making the upgrade optional for the time being.
     </p>
     

@@ -88,6 +88,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.4 =
 * Reduced session failures to debug notices
 * Added wp_roles support for WP < 4.3
+* Fixed domain listener bugs
 
 = 2.0.3 =
 * Added support for Windows servers

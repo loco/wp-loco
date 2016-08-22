@@ -28,6 +28,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             // initialize Ajax router before hook fired so we can handle output buffering
             if( 'loco_' === substr($action,0,5)  && isset($_REQUEST['route']) ){
                 new Loco_mvc_AjaxRouter;
+                Loco_package_Listener::create();
             }
         }
         // @codeCoverageIgnoreEnd

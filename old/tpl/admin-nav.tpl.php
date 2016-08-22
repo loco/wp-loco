@@ -8,7 +8,7 @@
         <p>
             <strong>Legacy mode:</strong>
             You're running the old version of Loco Translate.
-            <a href="<?php echo esc_url(LocoAdmin::uri(array(),'upgrade'))?>">Start using the all new version 2.0.</a>
+            <a href="<?php echo esc_url(LocoAdmin::uri(array(),'upgrade'))?>">Start using the all new version 2.</a>
         </p>
     </div>
 

@@ -29,6 +29,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 'count' => count($bundle),
             );
         }
+        $this->set('themes', $themes );
 
         $plugins = array();
         /* @var $bundle Loco_package_Bundle */

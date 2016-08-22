@@ -66,6 +66,10 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
             $locale = Loco_Locale::parse($tag);
             $this->set( 'locale', $locale );
         }
+
+        // roll back link
+        $this->set( 'rollback', Loco_mvc_AdminRouter::generate('config-version') );
+
         return $this->view('admin/root');
     }
 
