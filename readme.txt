@@ -85,6 +85,10 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.4 =
+* Reduced session failures to debug notices
+* Added wp_roles support for WP < 4.3
+
 = 2.0.3 =
 * Added support for Windows servers
 * Removed incomplete config warning on bundle overview

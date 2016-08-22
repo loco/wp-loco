@@ -9,10 +9,22 @@ class Loco_data_Permissions {
     
     
     /**
+     * Polyfill for wp_roles which requires WP >= 4.3
+     */
+    private static function wp_roles(){
+        global $wp_roles;
+        if( ! isset($wp_roles) ){
+            get_role('ping');
+        }
+        return $wp_roles;
+    }
+
+
+    /**
      * @return array<WP_Role>
      */
     public function getRoles(){
-        $roles = wp_roles();
+        $roles = self::wp_roles();
         // lazy create "translator" role
         if( ! $roles->get_role('translator') ){
             $roles->add_role( 'translator', 'Translator', array( 'loco_admin' => true ) );
@@ -67,7 +79,7 @@ class Loco_data_Permissions {
             $label = _x( 'Translator', 'User role', 'loco' );
         }
         else {
-            $names = wp_roles()->role_names;
+            $names = self::wp_roles()->role_names;
             $label = isset($names[$id]) ? translate_user_role( $names[$id] ) : $id;
         }
         return $label;
