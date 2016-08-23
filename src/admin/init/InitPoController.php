@@ -37,21 +37,57 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $breadcrumb = $this->prepareNavigation();
         // "new" tab is confising when no project-scope navigation
         // $this->get('tabs')->add( __('New PO','loco'), '', true );
-
+        
+        // bundle mandatory, but project optional
         $bundle = $this->getBundle();
-        $project = $this->getProject();
 
-        $slug = $project->getSlug();
-        $domain = (string) $project->getDomain();
+        try {
+            $project = $this->getProject();
+            $slug = $project->getSlug();
+            $domain = (string) $project->getDomain();
+            $subhead = sprintf( __('Initializing new translations in "%s"','loco'), $slug?$slug:$domain );
+        }
+        catch( Loco_error_Exception $e ){
+            $project = null;
+            $subhead = __('Initializing new translations in unknown set','loco');
+        }
 
         $title = __('New language','loco');
-        $subhead = sprintf( __('Initializing new translations in "%s"','loco'), $slug?$slug:$domain );
         $this->set('subhead', $subhead );
         
         // navigate up to bundle listing page 
         $breadcrumb->add( $title );
         $this->set( 'breadcrumb', $breadcrumb );
         
+        // default locale is a placeholder
+        $locale = new Loco_Locale('zxx');
+        $content_dir = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
+        $copying = false;
+        
+        // Permit using any provided file a template instead of POT
+        if( $potpath = $this->get('source') ){
+            $potfile = new Loco_fs_LocaleFile($potpath);
+            $potfile->normalize( $content_dir );
+            if( ! $potfile->exists() ){
+                throw new Loco_error_Exception('Forced template argument must exist');
+            }
+            $copying = true;
+            // forced source could be a POT (although UI would normally prevent it)
+            if( $potfile->getSuffix() ){
+                $locale = $potfile->getLocale();
+                $this->set('sourceLocale', $locale );
+            }
+        }
+        // else project not configured. UI should prevent this by not offering msginit
+        else if( ! $project ){
+            throw new Loco_error_Exception('Cannot add new language to unconfigured set');
+        }
+        // else POT file may or may not be known, and may or may not exist
+        else {
+            $potfile = $project->getPot();
+        }
+
+
         // list available languages for dropdown list
         $locales = array();
         $installed = array();
@@ -70,36 +106,15 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
         $this->set( 'locales', $locales );
         $this->set( 'installed', $installed );
-        
-        // default locale is a placeholder
-        $locale = new Loco_Locale('zxx');
-        $content_dir = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
-        $copying = false;
-        
-        // Permit using any provided file a template instead of POT
-        if( $potpath = $this->get('source') ){
-            $potfile = new Loco_fs_LocaleFile($potpath);
-            $potfile->normalize( $content_dir );
-            if( ! $potfile->exists() ){
-                throw new Loco_error_Exception('Forced template argument must exist');
-            }
-            // forced source could be a POT (although UI should prevent it)
-            if( $potfile->getSuffix() ){
-                $copying = true;
-                $locale = $potfile->getLocale();
-                $this->set('sourceLocale', $locale );
-            }
-        }
-        // else POT file may or may not be known, and may or may not exist
-        else {
-            $potfile = $project->getPot();
-        }
-
 
         // Critical that user selects the correct save location:
-        // we can't reliably establish how the file will be loaded by theme/plugin code 
-        // TODO do shallow scan of functions.php etc..
-        $filechoice = $project->initLocaleFiles( $locale );
+        if( $project ){
+            $filechoice = $project->initLocaleFiles( $locale );
+        }
+        // without configured project we will only allow save to same location
+        else {
+            $filechoice = new Loco_fs_FileList;
+        }
 
         
         // show information about POT file if we are initialializing from template
@@ -198,7 +213,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             'loco-nonce' => $this->setNonce('msginit')->value,
             'type' => $bundle->getType(),
             'bundle' => $bundle->getHandle(),
-            'domain' => $project->getId(),
+            'domain' => $project ? $project->getId() : '',
             'source' => $this->get('source'),
         ) ) );
         

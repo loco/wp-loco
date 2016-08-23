@@ -40,6 +40,14 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritdoc}
      */
+    public function exists(){
+        return false;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function getContents(){
         return $this->contents;
     }

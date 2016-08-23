@@ -100,4 +100,17 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
         return $list;
     }
 
+
+
+    /**
+     * Merge another list of the SAME TYPE uniquely on top of current one
+     * @return Loco_fs_FileList
+     */
+    public function augment( loco_fs_FileList $list ){
+        foreach( $list as $file ){
+            $this->add( $file );
+        }
+        return $this;
+    }
+    
 }

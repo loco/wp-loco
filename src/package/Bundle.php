@@ -50,7 +50,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Method with which bundle has been configured
-     * @var string|false (file|db|meta)
+     * @var string|false (file|db|meta|internal)
      */
     private $saved = false;
 
@@ -461,7 +461,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Check whether bundle is manually configured, as opposed to guessed
-     * @return string (file|db|meta)
+     * @return string (file|db|meta|internal)
      */    
     public function isConfigured(){
         return $this->saved;

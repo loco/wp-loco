@@ -19,7 +19,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
      * @return Loco_package_Bundle
      */
     public function getBundle(){
-        if( ! isset($this->bundle) ){
+        if( ! $this->bundle ){
             $type = $this->get('type');
             $handle = $this->get('bundle');
             $this->bundle = Loco_package_Bundle::createType( $type, $handle );
@@ -68,9 +68,12 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         if( ! $this->project ){
             $bundle = $this->getBundle();
             $domain = $this->get('domain');
+            if( ! $domain ){
+                throw new Loco_error_Exception( sprintf('Translation set not known in %s', $bundle ) );
+            }
             $this->project = $bundle->getProjectById($domain);
             if( ! $this->project ){
-                throw new Loco_error_Exception( sprintf('Unknown translation project: %s not in %s', json_encode($domain), $bundle ) );
+                throw new Loco_error_Exception( sprintf('Unknown translation set: %s not in %s', json_encode($domain), $bundle ) );
             }
         }
 

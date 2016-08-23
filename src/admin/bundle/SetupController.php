@@ -100,14 +100,13 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         foreach( $bundle as $project ){
             $potfile = $project->getPot();
             if( ! $potfile ){
-                $notices[] = sprintf('No translation template for "%s"', $project->getSlug() );
+                $notices[] = sprintf('No translation template for the "%s" text domain', $project->getSlug() );
             }
         }
         // if extra files found consider incomplete
         if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
-            $unknown = $bundle->invert();
-            if( count($unknown) ){
-                $notices[] = "Extra translation files found, but we can't match them to a known set";
+            if( Loco_package_Inverter::export($bundle) ){
+                $notices[] = "Translation files found that can't be matched to a known set of strings";
             }
         }
         

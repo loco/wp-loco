@@ -501,7 +501,6 @@ class Loco_package_Project {
     }
 
 
-
     /**
      * Take a guess at most likely POT file under target locations
      * @return Loco_fs_File
@@ -616,6 +615,23 @@ class Loco_package_Project {
         return $list;
     }
 
+
+    /**
+     * @return Loco_fs_FileList
+     */
+    public function findNotLocaleFiles( $ext ){
+        $list = new Loco_fs_LocaleFileList;
+        $files = $this->getTargetFinder()->exportGroups();
+        /* @var $file Loco_fs_LocaleFile */
+        foreach( $files[$ext] as $file ){
+            $file = new Loco_fs_LocaleFile( $file );
+            // add file if it has no locale suffix and is inside the bundle
+            if( $file->hasPrefixOnly() && ! $file->underGlobalDirectory() ){
+                $list->add( $file );
+            }
+        }
+        return $list;
+    }
 
 
     /**

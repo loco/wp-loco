@@ -90,30 +90,53 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             ) );
         }
         
+        // PO/MO files
+        $po = $project->findLocaleFiles('po');
+        $mo = $project->findLocaleFiles('mo');
+        $p['po'] = $this->createProjectPairs( $project, $po, $mo );
+
+        // also pull invalid files so everything is available to the UI
+        $mo = $project->findNotLocaleFiles('mo');
+        $po = $project->findNotLocaleFiles('po')->augment( $project->findNotLocaleFiles('pot') );
+        $p['_po'] = $this->createProjectPairs( $project, $po, $mo );
+
+        // always offer msginit even if we find out later we can't extract any strings
+        $p['nav'][] = new Loco_mvc_ViewParams( array( 
+            'href' => $this->getProjectLink('msginit', $project ),
+            'name' => __('New language','loco'),
+            'icon' => 'add',
+        ) );
+
+        // offer template editing if permitted
+        if( ! $project->isPotLocked() ){
+            $pot = $project->getPot();
+            if( $pot && $pot->exists() ){
+                $p['pot'] = $pot;
+                $meta = Loco_gettext_Metadata::load($pot)->persist( 0, true );
+                $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                    'href' => $this->getResourceLink('file-edit', $project, $meta ),
+                    'name' => __('Edit template','loco'),
+                    'icon' => 'pencil',
+                ) );
+            }
+            // else offer creation of new Template
+            else {
+                $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                    'href' => $this->getProjectLink('xgettext', $project ),
+                    'name' => __('Create template','loco'),
+                    'icon' => 'add',
+                ) );
+            }
+        }
+        
         return $p;
     }
 
 
-
-    
     /**
-     * Initialize view parameters for all localised resources in a project.
-     * @return array collection of entries corresponding to available PO/MO pair.
+     * Collect PO/MO pairings, ignoring any PO that is in use as a template
      */
-    private function createProjectPairs( Loco_package_Project $project, Loco_fs_LocaleFileList $po, Loco_fs_LocaleFileList $mo ){
-
-        // populate official locale names for all found, or default to our own
-        $api = new Loco_api_WordPressTranslations;
-        $locales = $po->getLocales() + $mo->getLocales();
-        /* @var $locale Loco_Locale */
-        foreach( $locales as $tag => $locale ){
-            $locale->fetchName($api) or $locale->buildName() or $locale->setName($tag);
-        }
-        
-        // avoid listing PO that is configured as template
-        $pot = $project->getPot();
-        
-        // collate as unique [PO,MO] pairs
+    private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, Loco_fs_File $pot = null ){     
         $pairs = array();
         /* @var $pofile Loco_fs_LocaleFile */
         foreach( $po as $pofile ){
@@ -137,51 +160,78 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
                 $pairs[] = array( null, $mofile );
             }
         }
-        
-        
-        // build view data for each pairing
-        $sets = array();
+        return $pairs;
+    }
+
+    
+    /**
+     * Initialize view parameters for each row representing a localized resource pair
+     * @return array collection of entries corresponding to available PO/MO pair.
+     */
+    private function createProjectPairs( Loco_package_Project $project, Loco_fs_LocaleFileList $po, Loco_fs_LocaleFileList $mo ){
+        // populate official locale names for all found, or default to our own
+        if( $locales = $po->getLocales() + $mo->getLocales() ){
+            $api = new Loco_api_WordPressTranslations;
+            /* @var $locale Loco_Locale */
+            foreach( $locales as $tag => $locale ){
+                $locale->fetchName($api) or $locale->buildName() or $locale->setName($tag);
+            }
+        }
+        // collate as unique [PO,MO] pairs ensuring canonical template excluded
+        $pairs = $this->createPairs( $po, $mo, $project->getPot() );
+        $rows = array();
         foreach( $pairs as $pair ){
-            
             // favour PO file if it exists
             list( $pofile, $mofile ) = $pair;
             $file = $pofile or $file = $mofile;
-            
-            $tag = $file->getSuffix();
-            $locale = $locales[$tag];
-            $meta = Loco_gettext_Metadata::load($file)->persist( 0, true );
-
-            // Establish whether translations are official or otherwise
-            $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
-                
-            $data = array (
-                // locale info
-                'lcode' => $tag,
-                'lname' => $locale->getName(),
-                'lattr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
-                // file info
-                'meta' => $meta,
-                'name' => $file->basename(),
-                'time' => $file->modified(),
-                'todo' => $meta->countIncomplete(),
-                'total' => $meta->getTotal(),
-                // author / contrib
-                'store' => $dir->getTypeLabel( $dir->getTypeId() ),
-                // links
-                'info' => $this->getResourceLink('file-info', $project, $meta ),
-                'edit' => $this->getResourceLink('file-edit', $project, $meta ),
-                'delete' => $this->getResourceLink('file-delete', $project, $meta ),
-                'copy' => $this->getProjectLink('msginit', $project, array( 'source' => $meta->getPath(false) ) ),
-            );
-
-            $sets[] = new Loco_mvc_ViewParams( $data );
+            // establish locale, or assume invalid
+            $locale = null;
+            if( 'pot' !== $file->extension() ){
+                $tag = $file->getSuffix();
+                if( isset($locales[$tag]) ){
+                    $locale = $locales[$tag];
+                }
+            }
+            $rows[] = $this->createFileParams( $project, $file, $locale );
         }
 
-        // TODO sorting of sets
-        return $sets;
+        return $rows;
     }
-    
-    
+
+
+
+    /**
+     * 
+     */
+    private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
+        // Pull Gettext meta data from cache if possible
+        // TODO save write when cached version was used
+        $meta = Loco_gettext_Metadata::load($file)->persist( 0, true );
+        // Establish whether translations are official or otherwise
+        $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
+        // Retuen data required for PO table row
+        return new Loco_mvc_ViewParams( array (
+            // locale info
+            'lcode' => $locale ? (string) $locale : '',
+            'lname' => $locale ? $locale->getName() : '',
+            'lattr' => $locale ? 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"' : '',
+            // file info
+            'meta' => $meta,
+            'name' => $file->basename(),
+            'time' => $file->modified(),
+            'todo' => $meta->countIncomplete(),
+            'total' => $meta->getTotal(),
+            // author / contrib
+            'store' => $dir->getTypeLabel( $dir->getTypeId() ),
+            // links
+            'info' => $this->getResourceLink('file-info', $project, $meta ),
+            'edit' => $this->getResourceLink('file-edit', $project, $meta ),
+            'delete' => $this->getResourceLink('file-delete', $project, $meta ),
+            'copy' => $this->getProjectLink('msginit', $project, array( 'source' => $meta->getPath(false) ) ),
+        ) );
+    }
+
+
     
     /**
      * Prepare view parameters for all projects in a bundle
@@ -191,39 +241,8 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         $projects = array();
         /* @var $project Loco_package_Project */
         foreach( $bundle as $project ){
-            $p = $this->createProjectParams($project);
-            $po = $project->findLocaleFiles('po');
-            $mo = $project->findLocaleFiles('mo');
-            $p['po'] = $this->createProjectPairs( $project, $po, $mo );
-            // always offer msginit even if we find out later we can't extract any strings
-            $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                'href' => $this->getProjectLink('msginit', $project ),
-                'name' => __('New language','loco'),
-                'icon' => 'add',
-            ) );
-            // offer template editing if permitted
-            if( ! $project->isPotLocked() ){
-                $pot = $project->getPot();
-                if( $pot && $pot->exists() ){
-                    $meta = Loco_gettext_Metadata::load($pot)->persist( 0, true );
-                    $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                        'href' => $this->getResourceLink('file-edit', $project, $meta ),
-                        'name' => __('Edit template','loco'),
-                        'icon' => 'pencil',
-                    ) );
-                }
-                // else offer creation of new Template
-                else {
-                    $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                        'href' => $this->getProjectLink('xgettext', $project ),
-                        'name' => __('Create template','loco'),
-                        'icon' => 'add',
-                    ) );
-                }
-            }
-            $projects[] = $p;
+            $projects[] = $this->createProjectParams($project);
         }
-        
         return $projects;
     }
 
@@ -235,7 +254,9 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     public function render(){
 
         $this->prepareNavigation();
+        
         $bundle = $this->getBundle();
+        $this->set('name', $bundle->getName() );
         
         // bundle may not be fully configured
         $configured = $bundle->isConfigured();
@@ -248,30 +269,44 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
 
         // Collect all configured projects
         $projects = $this->createBundleListing( $bundle );
-        $this->set( 'projects', $projects );
-        
-        // show error page if no projects could be extracted at all
-        if( ! count($projects) ){
-            $this->set('name', $bundle->getName() );
-            return $this->view( 'admin/bundle/incompat' );
-        }
+        $unknown = array();
         
         // sniff additional unknown files if bundle is a theme or directory-based plugin that's been auto-detected
-        else if( 'meta' === $configured ){
-            /*/ warn if bundle's default project has no template
-            $project = $bundle->getDefaultProject();
-            if( ! $project || ! $project->getPot() ){
-                $configured = false;
-            }*/
-            if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){ 
-                $bundle = $bundle->invert();
-                if( count($bundle) ){
-                    $configured = false;
+        if( 'file' === $configured || 'internal' === $configured ){
+            // presumed complete
+        }
+        else if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
+            // TODO This needs absracting into the Loco_package_Inverter class
+            $prefixes = array();
+            $po = new Loco_fs_LocaleFileList;
+            $mo = new Loco_fs_LocaleFileList;
+            foreach( Loco_package_Inverter::export($bundle) as $ext => $files ){
+                $list = 'mo' === $ext ? $mo : $po;
+                foreach( $files as $file ){
+                    $file = new Loco_fs_LocaleFile($file);
+                    $list->addLocalized( $file );
+                    // Only look in system locations if locale is valid and domain/prefix available
+                    $locale = $file->getLocale();
+                    if( $locale->isValid() && ( $domain = $file->getPrefix() ) ){
+                        $prefixes[$domain] = true;
+                    }
                 }
             }
+            // pick up given files in system locations only
+            foreach( $prefixes as $domain => $_bool ){
+                $dummy = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), '' );
+                $bundle->addProject( $dummy ); // <- required to configure locations
+                $dummy->excludeTargetPath( $bundle->getDirectoryPath() );
+                $po->augment( $dummy->findLocaleFiles('po') );
+                $mo->augment( $dummy->findLocaleFiles('mo') );
+            }
+            // a fake project is required to disable functions that require a configured project
+            $dummy = new Loco_package_Project( $bundle, new Loco_package_TextDomain(''), '' );
+            $unknown = $this->createProjectPairs( $dummy, $po, $mo );
         }
         
-        $this->set( 'warning', ! $configured );
+        $this->set('projects', $projects );
+        $this->set('unknown', $unknown );
 
         return $this->view( 'admin/bundle/view' );
     }

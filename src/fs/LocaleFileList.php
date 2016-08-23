@@ -18,8 +18,9 @@ class Loco_fs_LocaleFileList extends Loco_fs_FileList {
         $i = count($this);
         $this->add( $file );
         if( count($this) !== $i ){
-            $key = $file->getSuffix();
-            $this->index[$key][] = $i;
+            if( $key = $file->getSuffix() ){
+                $this->index[$key][] = $i;
+            }
         }
         
         return $this;
@@ -44,13 +45,16 @@ class Loco_fs_LocaleFileList extends Loco_fs_FileList {
 
 
     /**
-     * Get a unique list of locales for which there are files
+     * Get a unique list of valid locales for which there are files
      * @return array<Loco_Locale>
      */
     public function getLocales(){
         $list = array();
         foreach( array_keys($this->index) as $tag ){
-            $list[$tag] = Loco_Locale::parse($tag);
+            $locale = Loco_Locale::parse($tag);
+            if( $locale->isValid() ){
+                $list[$tag] = $locale;
+            }
         }
         return $list;
     }
@@ -58,10 +62,10 @@ class Loco_fs_LocaleFileList extends Loco_fs_FileList {
 
 
     /**
-     * Merge another list of the same type into this one
+     * {@inheritdoc}
      * @return Loco_fs_LocaleFileList
      */
-    public function augment( Loco_fs_LocaleFileList $list ){
+    public function augment( Loco_fs_FileList $list ){
         foreach( $list as $file ){
             $this->addLocalized( $file );
         }

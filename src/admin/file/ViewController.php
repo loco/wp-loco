@@ -49,7 +49,6 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
             $project = $this->getProject();
         }
         catch( Exception $e ){
-            Loco_error_AdminNotices::debug( $e->getMessage() );
             $project = null;
         }    
             

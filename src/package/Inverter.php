@@ -4,13 +4,11 @@
  */
 abstract class Loco_package_Inverter {
     
-    
     /**
-     * Compile anything found under bundle root that isn't configured in $known
-     * @return Loco_package_Bundle
+     * Get all Gettext files that are not configured and valid in the given bundle
+     * @return array
      */
-    public static function compile( Loco_package_Bundle $bundle ){
-
+    public static function export( Loco_package_Bundle $bundle ){
         // search paths for inverted bundle will exclude global ignore paths, 
         // plus anything known to the current configuration which we'll add now.
         $finder = $bundle->getFileFinder();
@@ -37,14 +35,24 @@ abstract class Loco_package_Inverter {
                 }
             }
         }
+        // Do a deep scan of all files that haven't been seen, or been excluded:
+        // This will include files in global directories and inside the bundle.
+        return $finder->setRecursive(true)->followLinks(false)->group('po','mo','pot')->exportGroups();
+    }    
+    
+    
+    /**
+     * Compile anything found under bundle root that isn't configured in $known
+     * @return Loco_package_Bundle
+     */
+    public static function compile( Loco_package_Bundle $bundle ){
+        
+        $found = self::export($bundle);
         
         // done with original bundle now
         $bundle = clone $bundle;
         $bundle->clear();
         
-        // Do a deep scan of all files that haven't been seen, or been excluded:
-        $found = $finder->setRecursive(true)->followLinks(false)->group('po','mo','pot')->exportGroups();
-        unset($finder);
 
         // first iteration groups found files into common locations that should hopefully indicate translation sets
         $groups = array();
@@ -57,7 +65,7 @@ abstract class Loco_package_Inverter {
             /* @var $file Loco_fs_LocaleFile */
             foreach( $list as $file ){
                 // printf("Found: %s <br />\n", $file );
-                // This file is not known to part be part of a configured project
+                // This file is NOT known to be part of a configured project
                 $dir = $file->getParent();
                 $key = $dir->getRelativePath( $root );
                 //

@@ -87,6 +87,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.5 =
 * deferred missing tokenizer warning
+* allows editing of files in unconfigured sets
 
 = 2.0.4 =
 * Reduced session failures to debug notices

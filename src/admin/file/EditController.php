@@ -71,7 +71,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         }
         // Fine if not, this just means sync isn't possible.
         catch( Loco_error_Exception $e ){
-            Loco_error_AdminNotices::debug( $e->getMessage() );
+            Loco_error_AdminNotices::debug( sprintf("Sync is disabled because this file doesn't relate to a known set of translations", $bundle ) );
             $project = null;
         }
             
