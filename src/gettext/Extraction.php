@@ -25,6 +25,9 @@ class Loco_gettext_Extraction {
 
 
     public function __construct( Loco_package_Bundle $bundle ){
+        if( ! loco_check_extension('tokenizer') ){
+            throw new Loco_error_Exception('String extraction not available without required extension');
+        }
         $this->bundle = $bundle;
         $this->extractor = loco_wp_extractor();
         $this->extras = array();

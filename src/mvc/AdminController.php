@@ -129,15 +129,10 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         // common js utils
         $this->enqueueScript('min/admin', array('jquery-ui-dialog') );
         
-        // check all extensions on all pages so admin notices are shown
-        foreach( array('json','mbstring','tokenizer') as $ext ){
+        // check essential extensions on all pages so admin notices are shown
+        foreach( array('json','mbstring') as $ext ){
             loco_check_extension($ext);
         }
-
-        /*/ additional system checks
-        if( 2147483647 === PHP_INT_MAX ){
-            Loco_error_AdminNotices::warn( __("Your operating system is not 64 bit",'loco') );
-        }*/
     }
 
 

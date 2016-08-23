@@ -27,29 +27,27 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
     }
     
     
-    /**
-     * {@inheritdoc}
-     *
-    protected function prepareNavigation(){
-        parent::prepareNavigation();
-        $tabs = $this->get('tabs');
-        $tabs->add( __('New POT','loco'), '', true );
-    }*/
-    
-    
-    
+
     /**
      * {@inheritdoc}
      */
     public function render(){
         
         $breadcrumb = $this->prepareNavigation();
+        // "new" tab is confising when no project-scope navigation
+        // $this->get('tabs')->add( __('New POT','loco'), '', true );
+
         $bundle = $this->getBundle();
         $project = $this->getProject();
 
         $slug = $project->getSlug();
         $domain = (string) $project->getDomain();
         $this->set('domain', $domain );
+        
+        // Tokenizer required for string extraction
+        if( ! loco_check_extension('tokenizer') ){
+            return $this->view('admin/errors/no-tokenizer');
+        }
         
         // Establish default POT path whether it exists or not
         $pot = $project->getPot();

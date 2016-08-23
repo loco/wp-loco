@@ -31,21 +31,13 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
 
     /**
      * {@inheritdoc}
-     *
-    protected function prepareNavigation(){
-        parent::prepareNavigation();
-        $tabs = $this->get('tabs');
-        $tabs->add( __('New PO','loco'), '', true );
-    }*/
-
-
-
-    /**
-     * {@inheritdoc}
      */
     public function render(){
         
         $breadcrumb = $this->prepareNavigation();
+        // "new" tab is confising when no project-scope navigation
+        // $this->get('tabs')->add( __('New PO','loco'), '', true );
+
         $bundle = $this->getBundle();
         $project = $this->getProject();
 
@@ -137,6 +129,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             ) ) );
             // if forcing source extraction show brief description of source files
             if( $this->get('extract') ){
+                // Tokenizer required for string extraction
+                if( ! loco_check_extension('tokenizer') ){
+                    return $this->view('admin/errors/no-tokenizer');
+                }
                 $nfiles = count( $project->findSourceFiles() );
                 $summary = sprintf( _n('1 source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco'), number_format_i18n($nfiles) );
             }
