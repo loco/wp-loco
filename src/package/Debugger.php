@@ -50,6 +50,7 @@ class Loco_package_Debugger implements IteratorAggregate {
         }
 
         $base = $bundle->getDirectoryPath();
+        // $this->devel('Bundle root is %s',$base);
 
         // self-declarations provided by author in file headers
         $native = $bundle->getHeaderInfo();
