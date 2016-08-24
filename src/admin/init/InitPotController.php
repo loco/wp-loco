@@ -80,16 +80,31 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         // Avoiding full source scan until actioned, but calculate size to manage expectations
         $bytes = 0;
         $nfiles = 0;
+        $nskip = 0;
+        $largest = 0;
         $sources = $project->findSourceFiles();
+        // skip files larger than configured maximum
+        $opts = Loco_data_Settings::get();
+        $max = wp_convert_hr_to_bytes( $opts->max_php_size );
         /* @var $sourceFile Loco_fs_File */
         foreach( $sources as $sourceFile ){
-            $bytes += $sourceFile->size();
             $nfiles++;
+            $fsize = $sourceFile->size();
+            if( $fsize > $max ){
+                $nskip += 1;
+            }
+            else {
+                $bytes += $fsize;
+                $largest = max( $largest, $fsize );
+            }
         }
         $this->set( 'scan', new Loco_mvc_ViewParams( array (
             'bytes' => $bytes,
             'count' => $nfiles,
+            'skip' => $nskip,
             'size' => Loco_mvc_FileParams::renderBytes($bytes),
+            'large' => Loco_mvc_FileParams::renderBytes($max),
+            'largest' => Loco_mvc_FileParams::renderBytes($largest),
         ) ) );
         
         // file metadata

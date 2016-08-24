@@ -59,8 +59,18 @@ class Loco_gettext_Extraction {
      */
     public function addProject( Loco_package_Project $project ){
         $base = $this->bundle->getDirectoryPath();
+        // skip files larger than configured maximum
+        $opts = Loco_data_Settings::get();
+        $max = wp_convert_hr_to_bytes( $opts->max_php_size );
+        // *attempt* to raise memory limit to WP_MAX_MEMORY_LIMIT
+        if( function_exists('wp_raise_memory_limit') ){
+            wp_raise_memory_limit('loco');
+        }
         /* @var $file Loco_fs_File */
         foreach( $project->findSourceFiles() as $file ){
+            if( $file->size() > $max ){
+                continue;
+            }
             $tokens = token_get_all( $file->getContents() );
             $this->extractor->extract( $tokens, $file->getRelativePath($base) );
         }

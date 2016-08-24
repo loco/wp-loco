@@ -3,6 +3,9 @@
  * Notice before creating a PO that there is no POT
  */
 $this->extend('../layout');
+
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates');
+
 ?> 
     <div class="notice inline notice-warning">
         <h3 class="has-icon">
@@ -10,7 +13,7 @@ $this->extend('../layout');
         </h3><?php
         if( $params->has('pot') ):?> 
         <p>
-            <?php esc_html_e("This bundle's template file doesn't exist yet. We recommend you create it before adding languages".'loco')?>.
+            <?php esc_html_e("This bundle's template file doesn't exist yet. We recommend you create it before adding languages",'loco')?>.
         </p><?php
         else:?> 
         <p>
@@ -23,6 +26,6 @@ $this->extend('../layout');
         <p>
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
             <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a>
-            <a class="button button-link has-icon icon-help" href="https://localise.biz/wordpress/plugin/manual/templates" target="_blank"><?php esc_html_e('About templates','loco')?></a>
+            <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('About templates','loco')?></a>
         </p>
     </div>

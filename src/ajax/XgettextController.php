@@ -46,10 +46,13 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         $potsize = $potfile->putContents( (string) $data );
         
         // set response data for debugging
-        $this->set( 'debug', array (
-            'potname' => $potfile->basename(),
-            'potsize' => $potsize,
-        ) );
+        if( loco_debugging() ){
+            $this->set( 'debug', array (
+                'potname' => $potfile->basename(),
+                'potsize' => $potsize,
+                'total' => $ext->getTotal(),
+            ) );
+        }
 
         // push recent items on file creation
         // TODO push project and locale file

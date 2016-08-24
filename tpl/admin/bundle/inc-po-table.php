@@ -38,7 +38,7 @@
                             <span><?php $po->e('lname')?></span><?php
                             else:?> 
                             <span class="icon icon-file"></span>
-                            <span>--</span><?php
+                            <span>Template</span><?php
                             endif?> 
                         </a><?php
                         if( $domain ):?> 

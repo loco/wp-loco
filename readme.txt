@@ -86,8 +86,10 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 == Changelog ==
 
 = 2.0.5 =
-* deferred missing tokenizer warning
-* allows editing of files in unconfigured sets
+* Deferred missing tokenizer warning
+* Allows editing of files in unconfigured sets
+* Added maximum PHP file size for string extraction
+* Display of PHP fatal errors during Ajax
 
 = 2.0.4 =
 * Reduced session failures to debug notices

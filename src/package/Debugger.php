@@ -186,7 +186,12 @@ class Loco_package_Debugger implements IteratorAggregate {
                 $this->warn( $str.': %2$s', $num, $this->implodeKeys($missing) );
             }
             if( $extra = array_diff_key($realCounts,$domains) ){
+                
                 $this->info('%u unconfigured domain[s] found in source code: %s', count($extra), $this->implodeKeys($extra) );
+                /*/ debug other domains extracted
+                foreach( $extra as $name => $count ){
+                    $this->devel(' > %s (%u)', $name, $count );
+                }*/
                 // extracted domains could prove that declared domain is wrong
                 if( $missing ){
                     foreach( array_keys($extra) as $name ){
