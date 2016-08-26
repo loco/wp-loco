@@ -10,7 +10,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @return string
      */
     public function escape( $text ){
-        return htmlspecialchars( $text, ENT_COMPAT, 'UTF-8', false );
+        return htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
     }
 
 
