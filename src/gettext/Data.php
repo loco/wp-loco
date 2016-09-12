@@ -63,7 +63,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * Compile messages to binary MO format
      * @return string MO file source

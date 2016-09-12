@@ -141,6 +141,10 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                         $template = $altpot;
                     }
                 }
+                // missing or invalid headers are tollerated but developers should be notified
+                if( ! count($head) ){
+                    Loco_error_AdminNotices::debug(__('File does not have a valid header','loco'));
+                }
                 // establish whether PO is in sync with POT
                 if( $template && ! $isTemplate && 'po' === $ext && $template->exists() ){
                     try {
