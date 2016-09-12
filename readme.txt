@@ -85,6 +85,10 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.6 =
+* PO wrapping bugfix
+* Downgraded source code bugfix
+
 = 2.0.5 =
 * Deferred missing tokenizer warning
 * Allows editing of files in unconfigured sets
