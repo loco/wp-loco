@@ -89,6 +89,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * PO wrapping bugfix
 * Downgraded source code bugfix
 * Tolerating headerless POT files
+* Core bundle metadata tweaks
 
 = 2.0.5 =
 * Deferred missing tokenizer warning

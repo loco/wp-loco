@@ -22,6 +22,11 @@ class Loco_package_Core extends Loco_package_Bundle {
         return new Loco_package_Header( array (
             'TextDomain' => 'default',
             'DomainPath' => '/wp-content/languages/',
+            // dummy author info for core components
+            'Name' => __('WordPress core','loco'),
+            'Version' => $GLOBALS['wp_version'],
+            'Author' => __('The WordPress Team','default'),
+            'AuthorURI' => __('https://wordpress.org/','default'),
         ) );
     }
 
