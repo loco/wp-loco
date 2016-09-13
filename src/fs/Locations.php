@@ -88,6 +88,11 @@ class Loco_fs_Locations extends ArrayObject {
     public function __construct( array $paths ){
         $cache = array();
         foreach( $paths as $i => $path ){
+            // path should be normalized absolute path and be compared only with others of the same
+            $path = Loco_fs_File::abs($path);
+            if( ! $path ){
+                throw new InvalidArgumentException('Location must be absolute path');
+            }
             // path must have trailing slash, otherwise "/plugins/foobar" would match "/plugins/foo/"
             $path = trailingslashit($path);
             $cache[$path] = strlen($path);
@@ -98,9 +103,11 @@ class Loco_fs_Locations extends ArrayObject {
     
     /**
      * Check if a given path begins with any of the registered ones
+     * @param string absolute path
      * @return bool whether path matched
      */    
     public function check( $path ){
+        $path = Loco_fs_File::abs($path);
         foreach( $this as $prefix => $length ){
             if( substr($path,0,$length) === $prefix ){
                 return true;
