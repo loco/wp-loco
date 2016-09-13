@@ -85,6 +85,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.7 =
+* Fixed prototype.js conflict
+
 = 2.0.6 =
 * PO wrapping bugfix
 * Downgraded source code bugfix
