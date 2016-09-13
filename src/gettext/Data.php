@@ -151,7 +151,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         if( function_exists('wp_get_current_user') && ( $user = wp_get_current_user() ) ){
             $name = $user->get('display_name') or $name = 'nobody';
             $email = $user->get('user_email') or $email = 'nobody@localhost';
-            $required['Last-Translator'] = sprintf('%s <%s>',$name,$email);
+            $required['Last-Translator'] = apply_filters( 'loco_current_translator', sprintf('%s <%s>',$name,$email), $name, $email );
         }
         // only set absent or empty headers from default list
         foreach( $defaults as $key => $value ){

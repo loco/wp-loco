@@ -88,6 +88,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.7 =
 * Fixed prototype.js conflict
 * More Windows file path fixes
+* Added loco_current_translator filter
 
 = 2.0.6 =
 * PO wrapping bugfix
