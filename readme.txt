@@ -89,6 +89,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Fixed prototype.js conflict
 * More Windows file path fixes
 * Added loco_current_translator filter
+* Fixed false positive in extra files test
 
 = 2.0.6 =
 * PO wrapping bugfix
@@ -129,7 +130,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.5 =
+= 2.0.7 =
 * Various bug fixes and improvements
 
 

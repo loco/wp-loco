@@ -105,8 +105,13 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         }
         // if extra files found consider incomplete
         if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
-            if( Loco_package_Inverter::export($bundle) ){
-                $notices[] = "Translation files found that can't be matched to a known set of strings";
+            $unknown = Loco_package_Inverter::export($bundle);
+            $n = 0;
+            foreach( $unknown as $ext => $files ){
+                $n += count($files);
+            }
+            if( $n ){
+                $notices[] = sprintf( _n("One file can't be matched to a known set of strings","%s files can't be matched to a known set of strings",$n,'loco'), number_format($n) );
             }
         }
         
