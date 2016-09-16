@@ -79,9 +79,9 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
             'nonces' => array(
                 'fsReference' => wp_create_nonce('fsReference'),
             ),
-            'project' => $project ? array (
-                'bundle' => $this->getBundle()->getId(),
-                'domain' => $project->getId(),
+            'project' => $bundle ? array (
+                'bundle' => $bundle->getId(),
+                'domain' => $project ? $project->getId() : '',
             ) : null,
         ) ) ); 
 

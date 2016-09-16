@@ -85,6 +85,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.8 =
+* Source refs fix for files in unknown subsets
+
 = 2.0.7 =
 * Fixed prototype.js conflict
 * More Windows file path fixes
@@ -130,7 +133,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.7 =
+= 2.0.8 =
 * Various bug fixes and improvements
 
 
