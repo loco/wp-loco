@@ -87,6 +87,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.8 =
 * Source refs fix for files in unknown subsets
+* Converts PO formatting exceptions to PHP warnings
 
 = 2.0.7 =
 * Fixed prototype.js conflict
