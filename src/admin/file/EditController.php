@@ -147,6 +147,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
              'fuzzy'    => _x('Fuzzy','Editor button','loco'),
              'download' => _x('Download','Editor button','loco'),
              'filter'   => __('Filter translations','loco'),
+             'invs'     => _x('Show invisibles','Editor button','loco'),
+             'code'     => _x('Coding view','Editor button','loco'),
         ) ) );
 
         // Download form params

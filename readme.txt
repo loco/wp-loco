@@ -87,7 +87,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.8 =
 * Source refs fix for files in unknown subsets
-* Converts PO formatting exceptions to PHP warnings
+* Downgrades PO formatting exceptions to PHP warnings
+* Added “show invisibles” and code view to editor
 
 = 2.0.7 =
 * Fixed prototype.js conflict
@@ -167,6 +168,7 @@ The PO file editor supports the following keyboard shortcuts for faster translat
 * Clear translation: `Ctrl K`
 * Toggle Fuzzy: `Ctrl U`
 * Save PO / compile MO: `Ctrl S`
+* Toggle invisibles: `Shift Ctrl I`
 
 Mac users can use ⌘ Cmd instead of Ctrl.
 

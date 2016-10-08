@@ -221,6 +221,7 @@
         // state changes depending on whether an asset is selected and is fuzzy
         editor
             .on('poSelected', function( event, message ){
+                // TODO disable fuzzy button when message is untranslated
                 redraw( message && message.fuzzy() );
             } )
             .on( 'poFuzzy', function( event, message, newState ){
@@ -252,6 +253,35 @@
         $(button).click( function( event ){
             event.preventDefault();
             location.reload();
+            return false;
+        } );
+        return true;
+    };
+
+
+
+    function registerInvisiblesButton( button ){
+        button.disabled = false;
+        editor.on('poInvs', function( event, state ){
+            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+        });
+        $(button).click( function( event ){
+            event.preventDefault();
+            editor.setInvs( ! editor.getInvs() );
+            return false;
+        } );
+        return true;
+    }
+
+
+
+    function registerCodeviewButton( button ){
+         button.disabled = false;
+         $(button).click( function(event){
+            event.preventDefault();
+            var state = ! editor.getMode();
+            editor.setMode( state );
+            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
             return false;
         } );
         return true;
@@ -416,7 +446,7 @@
     loco.po.kbd
         .init( editor )
         .add( 'save', saveIfDirty )
-        .enable('copy','clear','enter','next','prev','fuzzy','save')
+        .enable('copy','clear','enter','next','prev','fuzzy','save','invis')
     ;
 
     // initialize toolbar button actions
@@ -425,6 +455,9 @@
         save: editable && registerSaveButton,
         sync: editable && registerSyncButton,
         revert: registerRevertButton,
+        // editor mode togglers
+        invs: registerInvisiblesButton,
+        code: registerCodeviewButton,
         // downloads / post-throughs
         source: registerDownloadButton,
         binary: template ? null : registerDownloadButton
