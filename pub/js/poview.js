@@ -5,8 +5,42 @@
     
     var loco = window.locoScope,
         conf = window.locoConf,
-        
+        view = document.getElementById('loco-po'),
         $modal;
+
+    // resize function fits scrollable viewport screen, accounting for headroom and touching bottom of screen.
+    var resize = function(){
+        function top( el, ancestor ){
+            var y = el.offsetTop||0;
+            while( ( el = el.offsetParent ) && el !== ancestor ){
+                y += el.offsetTop||0;
+            } 
+            return y;    
+        }
+        var fixHeight,
+            maxHeight = view.clientHeight - 2
+        ;
+        return function(){
+            var topBanner = top( view, document.body ),
+                winHeight = window.innerHeight,
+                setHeight = winHeight - topBanner - 20
+            ;
+            if( fixHeight !== setHeight ){
+                if( setHeight < maxHeight ){
+                    view.style.height = String(setHeight)+'px';
+                }
+                else {
+                    view.style.height = '';
+                }
+                fixHeight = setHeight;
+            }
+        };
+    }();    
+
+    // ensure outer resize is handled before editor's internal resize
+    resize();
+    $(window).resize( resize );
+
     
     // enable file reference links to open modal to ajax service
     $('ol.msgcat').click( function(event){
