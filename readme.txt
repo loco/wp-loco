@@ -89,6 +89,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Source refs fix for files in unknown subsets
 * Downgrades PO formatting exceptions to PHP warnings
 * Added “show invisibles” and code view to editor
+* Renamed function prefixes to avoid PHP 7 warnings
 * PO source view tweaks
 
 = 2.0.7 =

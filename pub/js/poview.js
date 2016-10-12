@@ -8,7 +8,7 @@
         view = document.getElementById('loco-po'),
         $modal;
 
-    // resize function fits scrollable viewport screen, accounting for headroom and touching bottom of screen.
+    // resize function fits scrollable viewport, accounting for headroom and touching bottom of screen.
     var resize = function(){
         function top( el, ancestor ){
             var y = el.offsetTop||0;
@@ -36,8 +36,6 @@
             }
         };
     }();    
-
-    // ensure outer resize is handled before editor's internal resize
     resize();
     $(window).resize( resize );
 

@@ -58,7 +58,7 @@ abstract class Loco {
     /**
      * Get path to this file, accounting for symlink problem
      */
-    private static function __file(){
+    private static function _this_file(){
         $here = __FILE__;
         // handle symlinking so path to this file is always under WP_PLUGIN_DIR
         $root = trailingslashit(WP_PLUGIN_DIR);
@@ -75,7 +75,7 @@ abstract class Loco {
      */
     public static function basedir(){
         static $dir;
-        isset($dir) or $dir = dirname( dirname( self::__file() ) );
+        isset($dir) or $dir = dirname( dirname( self::_this_file() ) );
         return $dir;    
     }
     

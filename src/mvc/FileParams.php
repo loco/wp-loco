@@ -70,7 +70,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * Override to get live information from file object
      */
     public function offsetGet( $prop ){
-        $getter = array( $this, '__'.$prop );
+        $getter = array( $this, '_get_'.$prop );
         if( is_callable($getter) ){
             return call_user_func( $getter );
         }
@@ -96,7 +96,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     /**
      * @return string
      */    
-    private function __name(){
+    private function _get_name(){
         return  $this->file->basename();
     }
 
@@ -104,7 +104,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     /**
      * @return string
      */    
-    private function __path(){
+    private function _get_path(){
         return  $this->file->getPath();
     }
 
@@ -112,7 +112,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     /**
      * @return string
      */
-    private function __relpath(){
+    private function _get_relpath(){
         $base = loco_constant('WP_CONTENT_DIR');
         return $this->file->getRelativePath($base);
     }
@@ -123,7 +123,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * + Added "Just now" when in the last 30 seconds
      * TODO possibly replace with custom function that includes "Yesterday" etc..
      */
-    private function __reltime(){
+    private function _get_reltime(){
         $time = $this->file->modified();
         $time_diff = time() - $time;
         // use same time format as posts listing when in future or more than a day ago
@@ -142,7 +142,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     /**
      * @return int
      */
-    private function __bytes(){
+    private function _get_bytes(){
         return $this->file->size();
     }
 
@@ -150,8 +150,8 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     /**
      * @return string
      */
-    private function __size(){
-        return self::renderBytes( $this->__bytes() );
+    private function _get_size(){
+        return self::renderBytes( $this->_get_bytes() );
     }
 
  
@@ -159,7 +159,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * Get octal file mode
      * @return string
      */
-    private function __imode(){
+    private function _get_imode(){
         $mode = new Loco_fs_FileMode( $this->file->mode() );
         return (string) $mode;
     }
@@ -169,7 +169,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * Get rwx file mode
      * @return string
      */
-    private function __smode(){
+    private function _get_smode(){
         $mode = new Loco_fs_FileMode( $this->file->mode() );
         return $mode->format();
     }
@@ -179,7 +179,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * Get file owner name
      * @return string
      */
-    private function __owner(){
+    private function _get_owner(){
         if( ( $uid = $this->file->uid() ) && function_exists('posix_getpwuid') && ( $a = posix_getpwuid($uid) ) ){
             return $a['name'];
         }
@@ -191,7 +191,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * Get group owner name
      * @return string
      */
-    private function __group(){
+    private function _get_group(){
         if( ( $gid = $this->file->gid() ) && function_exists('posix_getpwuid') && ( $a = posix_getgrgid($gid) ) ){
             return $a['name'];
         }
