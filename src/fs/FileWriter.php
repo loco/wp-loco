@@ -67,9 +67,9 @@ class Loco_fs_FileWriter {
         /*/ restrict file extensions to Gettext files for additional layer of security
         // disabled until configurable, too annoying when using safely (e.g. zip files)
         if( ( $ext = $this->file->extension() ) && ! preg_match('/^(po|mo|pot)~?$/',$ext) ){
-            throw new Loco_error_WriteException('Unwritable file extension: *.'.$ext.' disallowed');
+            throw new Loco_error_WriteException('Unwriteable file extension: *.'.$ext.' disallowed');
         }*/
-        // sanitize writable locations
+        // sanitize writeable locations
         $remote = ! $this->isDirect();
         $base = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
         $snip = strlen($base);
@@ -110,7 +110,6 @@ class Loco_fs_FileWriter {
     public function writable(){
         return ! $this->disabled() && $this->fs->is_writable( $this->getPath() );
     }
-
 
 
     /**

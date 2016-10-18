@@ -214,18 +214,34 @@
 
 
     function registerFuzzyButton( button ){
-        function redraw( state ){
-            button.disabled = ( null == state );
-            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+        var toggled = false, 
+            enabled = false
+        ;
+        function redraw( message, state ){
+            // fuzziness only makes sense when top-level string is translated
+            var allowed = message && message.translated(0) || false;
+            if( enabled !== allowed ){
+                button.disabled = ! allowed;
+                enabled = allowed;
+            }
+            // toggle on/off according to new fuzziness
+            if( state !== toggled ){
+                $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+                toggled = state;
+            }
         }
         // state changes depending on whether an asset is selected and is fuzzy
         editor
             .on('poSelected', function( event, message ){
-                // TODO disable fuzzy button when message is untranslated
-                redraw( message && message.fuzzy() );
+                redraw( message, message && message.fuzzy() || false );
+            } )
+            .on( 'poEmpty', function( event, blank, message, pluralIndex ){
+                if( 0 === pluralIndex && blank === enabled ){
+                    redraw( message, toggled );
+                }
             } )
             .on( 'poFuzzy', function( event, message, newState ){
-                redraw( newState );
+                redraw( message, newState );
             } )
         ;
         // click toggles current state
@@ -506,7 +522,8 @@
     // ok, editor ready
     updateStatus();
 
-    // clean up    
+    // clean up
+    delete window.locoConf;
     conf = buttons = null;
 
 

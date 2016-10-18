@@ -11,7 +11,7 @@ echo $header;
     if( ! $file->existant ):?> 
     <div class="notice inline notice-error">
         <h3 class="has-icon">
-            File doesn't exist
+            <?php esc_html_e("File doesn't exist",'loco')?> 
         </h3>
         <p>
             <code><?php $file->e('relpath')?></code>
@@ -20,10 +20,11 @@ echo $header;
     elseif( $file->writable ):?> 
     <div class="notice inline notice-success">
         <h3 class="has-icon">
-            <?php printf('%s file is writable',$file->type)?> 
+            <?php // Translators: Where %s is the type of file, e.g. "po"
+            echo esc_html( sprintf( __('%s file is writeable','loco'), $file->type ) )?> 
         </h3>
         <p>
-            You can update these translations directly from the editor to the file system.
+            <?php esc_html_e('You can update these translations directly from the editor to the file system','loco')?>.
         </p>
         <p>
             <code><?php $file->ls()?></code>
@@ -32,13 +33,14 @@ echo $header;
     else:?> 
     <div class="notice inline notice-locked">
         <h3 class="has-icon">
-            File is write-protected
+            <?php esc_html_e('File is write-protected','loco')?> 
         </h3>
         <p>
-            This file can't be updated directly by the web server.
+            <?php esc_html_e("This file can't be updated directly by the web server",'loco')?>.
         </p>
         <p>
-            To make changes you'll have to connect to the remote file system, or make the file writable by <?php $params->e('httpd')?>.
+            <?php // Translators: Where %s is the name (or number) of an operating system user
+            echo esc_html( sprintf( __("To make changes you'll have to connect to the remote file system, or make the file writeable by %s",'loco'), $params->httpd ) )?>.
         </p>
         <p>
             <code><?php $file->ls()?></code>
@@ -50,10 +52,11 @@ echo $header;
     if( ! $dir->existant ):?> 
     <div class="notice inline notice-error">
         <h3 class="has-icon">
-            Directory doesn't exist
+            <?php esc_html_e("Directory doesn't exist",'loco')?> 
         </h3>
         <p>
-            The containing directory for this file doesn't exist either
+            <?php // Translators: "either" meaning that the file itself can't exist without a containing directory
+            esc_html_e("The containing directory for this file doesn't exist either",'loco')?>.
         </p>
         <p>
             <code><?php $dir->e('relpath')?></code>
@@ -63,10 +66,11 @@ echo $header;
     elseif( $dir->writable ):?> 
     <div class="notice inline notice-success">
         <h3 class="has-icon">
-            Directory is writable
+            <?php esc_html_e('Directory is writeable','loco')?> 
         </h3>
         <p>
-            The containing directory is writable by <?php $params->e('httpd')?>, so you can add new files in the same location.
+            <?php // Translators: Where %s is the name (or number) of an operating system user
+            echo esc_html( sprintf( __('The containing directory is writeable by %s, so you can add new files in the same location','loco'), $params->httpd ) )?>.
         </p>
         <p>
             <code><?php $dir->ls()?></code>
@@ -74,7 +78,7 @@ echo $header;
         if( ! $file->deletable ):?> 
         <p>
             <span class="has-icon icon-warn"></span>
-            Note that the file may not be deletable due to additional ownership permissions.
+            <?php esc_html_e('Note that the file may not be deletable due to additional ownership permissions','loco')?>.
         </p><?php
         endif;?> 
     </div><?php
@@ -82,19 +86,18 @@ echo $header;
     else:?> 
     <div class="notice inline notice-locked">
         <h3 class="has-icon">
-            Directory is write-protected
+            <?php esc_html_e('Directory is write-protected','loco')?> 
         </h3>
         <p>
-            This directory can't be written to directly by the web server.
+            <?php esc_html_e("This directory can't be written to directly by the web server",'loco')?>.
         </p>
         <p>
-            To create new files here you'll have to connect to the remote file system, or make the directory writable by <?php $params->e('httpd')?>.
+            <?php // Translators: Where %s is the name (or number) of an operating system user
+            echo esc_html( sprintf( __("To create new files here you'll have to connect to the remote file system, or make the directory writeable by %s",'loco'), $params->httpd ) )?>.
         </p>
         <p>
             <code><?php $dir->ls()?></code>
         </p>
     </div><?php
     endif; 
-
-    
     

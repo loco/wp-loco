@@ -9,10 +9,10 @@ echo $header;
 ?> 
     <div class="notice inline notice-generic">
         <h3 class="has-icon">
-            Author details
+            <?php esc_html_e('Author details','loco')?> 
         </h3>
         <p>
-            If you have trouble translating this bundle, consider asking the author for help.
+            <?php esc_html_e('If you have trouble translating this bundle, consider asking the author for help','loco')?>.
         </p>
         <p>
             <?php echo $credit?> 

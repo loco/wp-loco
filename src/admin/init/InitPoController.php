@@ -88,20 +88,30 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
 
 
-        // list available languages for dropdown list
-        $locales = array();
-        $installed = array();
+        // start dropdown list with installed languages
+        $default = new Loco_Locale('en','US'); 
+        $installed = array(
+            new Loco_mvc_ViewParams( array(
+                'icon'  => $default->getIcon(),
+                'value' => (string) $default,
+                'label' => $default->buildName(),
+            ) )
+        );
+        // pull the same list of "available" languages as used in WordPress settings
         $api = new Loco_api_WordPressTranslations;
-        foreach( $api->getAvailableCore() as $key => $raw ){
-            $locale = Loco_Locale::parse($key);
+        $locales = array();
+        foreach( $api->getAvailableCore() as $tag => $raw ){
+            $locale = Loco_Locale::parse($tag);
             $vparam = new Loco_mvc_ViewParams( array(
-                'icon' => $locale->getIcon(),
+                'icon'  => $locale->getIcon(),
                 'value' => (string) $locale,
                 'label' => $locale->fetchName($api),
             ) );
-            $locales[] = $vparam;
-            if( $api->isInstalled($key) ){
+            if( $api->isInstalled($tag) ){
                 $installed[] = $vparam;
+            }
+            else {
+                $locales[] = $vparam;
             }
         }
         $this->set( 'locales', $locales );

@@ -19,9 +19,9 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             $this->set('info', Loco_mvc_FileParams::create($file) );
             return $this->view( 'admin/errors/file-isdir', array() );
         }
-        /*/ just warn if file isn't writable
+        /*/ just warn if file isn't writeable
         if( ! $file->writable() ){
-            $message = __("This file isn't writable. Click the 'File info' tab for help setting the right permissions",'loco');
+            $message = __("This file isn't writeable. Click the 'File info' tab for help setting the right permissions",'loco');
             Loco_error_AdminNotices::add( new Loco_error_Warning($message) ); // <- TODO add contextual help link
         }*/
         

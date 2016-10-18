@@ -9,28 +9,26 @@ $this->start('header');
     <div class="notice inline notice-info">
         <h3><?php esc_html_e('Template file','loco')?></h3>
         <dl>
-            <dt>File modified:</dt>
+            <dt><?php esc_html_e('File modified','loco')?>:</dt>
             <dd><?php $file->date('mtime')?></dd>
 
-            <dt>Last extracted:</dt>
+            <dt><?php esc_html_e('Last extracted','loco')?>:</dt>
             <dd><date><?php $params->date('potime')?></date></dd>
             
-            <dt>Source text:</dt>
+            <dt><?php esc_html_e('Source text','loco')?>:</dt>
             <dd><?php echo esc_html( $meta->getTotalSummary() )?></dd>
         </dl>
    </div>
     
     <?php 
     if( 'POT' !== $file->type && ! $params->isTemplate ):?> 
-    <div class="notice inline notice-warning">
+    <div class="notice inline notice-debug">
         <h3 class="has-icon">
-            Weird file name
+            Unconventional file name
         </h3>
         <p>
-            <?php printf("%s files should have a language code at the end of their names.",$file->type)?>
-        </p>
-        <p>
-            The author may intend this file to be used as a template, but templates should have the extension <strong>.pot</strong>
+            Template files should have the extension ".pot".<br />
+            If this is intended to be a translation file it should end with a language code.
         </p>
     </div><?php
     endif; 

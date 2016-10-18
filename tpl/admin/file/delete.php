@@ -12,7 +12,8 @@ $this->extend('../layout');
                 <span><?php esc_html_e('Confirm delete','loco')?></span>
             </h3>
             <p>
-                Are you sure you want to <strong>permanently</strong> delete the following file?
+                <?php
+                echo __('Are you sure you want to <strong>permanently</strong> delete the following file?','loco')?> 
             </p>
             <p>
                 <code><?php $info->e('relpath')?></code>

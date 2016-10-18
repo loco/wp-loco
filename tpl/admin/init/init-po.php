@@ -9,8 +9,8 @@ $this->extend('../layout');
     <?php if( $params->has('ext') ):?> 
     <div class="notice inline notice-info">
         <p>
-            You're creating translations directly from source code.
-            <a href="<?php $ext->e('link')?>" class="">Create template instead</a>.
+            <?php esc_html_e("You're creating translations directly from source code",'loco')?>.
+            <a href="<?php $ext->e('link')?>"><?php esc_html_e('Create template instead','loco')?></a>.
         </p>
     </div><?php
     endif?> 
@@ -45,8 +45,7 @@ $this->extend('../layout');
                                     <span class="lang nolang"></span>
                                     <select id="loco-select-locale" name="select-locale">
                                         <option value=""><?php esc_attr_e('No language selected','loco')?></option>
-                                        <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco' )?>">
-                                            <option value="en_US" lang="en">English (United States)</option><?php
+                                        <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco' )?>"><?php
                                             /* @var Loco_mvc_ViewParams $option */
                                             foreach( $installed as $option ):?> 
                                             <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
@@ -77,7 +76,9 @@ $this->extend('../layout');
                 <tbody class="loco-paths">   
                     <tr valign="top">
                         <th scope="row">
-                            <label>Choose a location:</label>
+                            <label>
+                                <?php esc_html_e('Choose a location','loco')?>:
+                            </label>
                         </th>
                         <td>
                             <p class="description"> </p>
@@ -115,7 +116,7 @@ $this->extend('../layout');
                 <tbody>
                     <tr valign="top">
                         <th scope="row" rowspan="2">
-                            <?php esc_html_e('Template options')?>:
+                            <?php esc_html_e('Template options','loco')?>:
                         </th>
                         <td>
                             <p>

@@ -57,14 +57,18 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
     public function getTypeLabel( $id ){
         switch( $id ){
         case 'theme':
-        case 'plugin':
-            return __('Author','loco');
-        case 'wplang':
-            return __('System','loco');
-        case 'custom':
-            return __('Custom','loco');
+        case 'plugin': 
+            // Translators: Refers to bundled plugin or theme translation files - i.e. those supplied by the author
+            return _x('Author','File location','loco');
+        case 'wplang': 
+            // Translators: Refers to system-installed translation files - i.e. those under WP_LANG_DIR  
+            return _x('System','File location','loco');
+        case 'custom': 
+            // Translators: Refers to translation files in Loco's custom/protected directory
+            return _x('Custom','File location','loco');
         case 'other':
-            return __('Other','loco');
+            // Translators: Refers to translation files in an alternative location that isn't Author, System or Custom.
+            return _x('Other','File location','loco');
         }
         
         throw new InvalidArgumentException('Invalid location type: '.$id );

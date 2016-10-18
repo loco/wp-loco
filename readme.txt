@@ -90,7 +90,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Downgrades PO formatting exceptions to PHP warnings
 * Added “show invisibles” and code view to editor
 * Renamed function prefixes to avoid PHP 7 warnings
-* PO source view tweaks
+* Better support for gettext flags in PHP extractor
+* PO view and edit UI tweaks
 
 = 2.0.7 =
 * Fixed prototype.js conflict

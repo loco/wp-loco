@@ -8,7 +8,7 @@
     if( $fsFields->has('connection_type') ):?> 
     <form id="loco-fs" class="notice notice-info jshide">
         <p>
-            <span>Remote file system connected (<?php $fsFields->e('connection_type')?>)</span>
+            <span><?php esc_html_e('Connected to remote file system','loco')?> (<?php $fsFields->e('connection_type')?>)</span>
         </p>
         <?php $fsFields->_e();?> 
     </form><?php
@@ -30,7 +30,7 @@
             endswitch;?></strong>:
             
             <span>
-                <?php esc_html_e('To modify the file system, click "Connect" and authenticate with the server','loco')?> 
+                <?php esc_html_e('To modify the file system, click "Connect" and authenticate with the server','loco')?>.
             </span>
             <a class="button button-small" href="<?php echo $help?>" target="_blank"> ? </a>
             <button type="button" class="button button-small button-primary"><?php esc_html_e('Connect','loco')?></button>

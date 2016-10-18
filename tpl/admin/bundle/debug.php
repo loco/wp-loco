@@ -3,11 +3,9 @@
  * Show bundle diagnostics
  */
 $this->extend('../layout');
-
 ?> 
-
     <p>
-        This information is for developers to find problems in the bundle setup.
+        <?php esc_html_e('This information is for developers to find problems in the bundle setup','loco')?>.
     </p>
     <p data-vendor="<?php $meta->e('vendor')?>">
         <?php echo $meta->author?> 

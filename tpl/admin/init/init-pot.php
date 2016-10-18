@@ -11,9 +11,12 @@ $this->extend('../layout');
         <p>
             <?php esc_html_e('Source files to scan:','loco')?> 
             <strong><?php $scan->n('count')?></strong>
-            <span>(<?php $scan->e('size')?> on disk)</span><?php
+            <span>(<?php 
+            // Translators: Where %s is the size of a file
+            $scan->f( 'size', __('%s on disk','loco') )?>)</span><?php
+            // Translators: Where %2$s is the size of a file
             if( $n = $scan->skip ):?> 
-            <em><?php echo esc_html( sprintf( _n('Excludes one file over %2$s','Excludes %s files over %s',$n,'loco'), $n, $scan->large ) );?>.</em><?php
+            <em><?php echo esc_html( sprintf( _n('Excludes one file over %2$s','Excludes %s files over %2$s',$n,'loco'), $n, $scan->large ) );?>.</em><?php
             endif?> 
         </p>
         <p>

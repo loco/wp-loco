@@ -15,6 +15,16 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
+    /**
+     * Call load_plugin_textdomain for "loco" domain
+     * @return bool
+     */
+    private static function init_l10n(){
+        $domainPath = dirname( loco_plugin_self() ).'/languages';
+        return load_plugin_textdomain( 'loco', false, $domainPath );
+    }
+
+
     
     /**
      * {@inheritdoc}
@@ -29,6 +39,8 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             if( 'loco_' === substr($action,0,5)  && isset($_REQUEST['route']) ){
                 new Loco_mvc_AjaxRouter;
                 Loco_package_Listener::create();
+                // translations required for Ajax actions
+                self::init_l10n();
             }
         }
         // @codeCoverageIgnoreEnd
@@ -45,11 +57,9 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
                 }
             }
             // we'll need our own translations on all admin pages not just our own, for menu items etc..
-            $domainPath = dirname( loco_plugin_self() ).'/languages';
-            load_plugin_textdomain( 'loco', false, $domainPath );
+            self::init_l10n();
         }
     }
-
 
 
     /**

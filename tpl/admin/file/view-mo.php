@@ -8,7 +8,7 @@ $this->start('source');
 
      <div class="notice inline notice-info">
          <p>
-             File is in binary MO format
+             <?php esc_html_e('File is in binary MO format','loco')?>.
          </p>
      </div>
      

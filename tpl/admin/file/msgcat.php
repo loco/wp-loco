@@ -12,11 +12,16 @@
             if( '#' === $line{0} ){
                 // may be able to parse out references
                 if( isset($line{1}) ){
-                    if( ':' === $line{1} ){
+                    $symbol = $line{1};
+                    if( ':' === $symbol ){
                         echo '<span class="po-refs">',preg_replace('/\\S+:\d+/', '<a href="/#\\0">\\0</a>', $params->escape($line) ),'</span>';
                         continue;
                     }
-                    // TODO parse out flags and formatting directives
+                    // parse out flags and formatting directives
+                    else if( ',' === $symbol ){
+                        echo '<span class="po-flags">',preg_replace('/[-a-z]+/', '<em>\\0</em>', $params->escape($line) ),'</span>';
+                        continue;
+                    }
                 }
                 // else treat as normal comment even if empty
                 echo '<span class="po-comment">',$params->escape($line),'</span>';

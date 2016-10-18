@@ -77,7 +77,7 @@ class Loco_package_Core extends Loco_package_Bundle {
         $rootDir = loco_constant('ABSPATH');
         $langDir = loco_constant('WP_LANG_DIR');
         
-        $bundle = new Loco_package_Core('core', 'WordPress Core');
+        $bundle = new Loco_package_Core('core', __('WordPress Core','loco') );
         $bundle->setDirectoryPath( $rootDir );
         
         // Core config may be saved in DB, but not supporting bundled XML
