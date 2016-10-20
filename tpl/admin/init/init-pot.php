@@ -16,7 +16,7 @@ $this->extend('../layout');
             $scan->f( 'size', __('%s on disk','loco') )?>)</span><?php
             // Translators: Where %2$s is the size of a file
             if( $n = $scan->skip ):?> 
-            <em><?php echo esc_html( sprintf( _n('Excludes one file over %2$s','Excludes %s files over %2$s',$n,'loco'), $n, $scan->large ) );?>.</em><?php
+            <em><?php self::e( _n('Excludes one file over %2$s','Excludes %s files over %2$s',$n,'loco'), $n, $scan->large )?>.</em><?php
             endif?> 
         </p>
         <p>

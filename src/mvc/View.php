@@ -272,8 +272,21 @@ class Loco_mvc_View implements IteratorAggregate {
             'href' => Loco_mvc_AdminRouter::generate( $action, $args ),
         ) );
     }
-    
-    
+
+
+    /**
+     * Shorthand for `echo esc_html( sprintf( ...`
+     * @return void
+     */
+    private function e( $text ){
+        if( 1 < func_num_args() ){
+            $args = func_get_args();
+            $text = call_user_func_array( 'sprintf', $args );
+        }
+        echo htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
+        return '';
+    }    
+
 }
 
 

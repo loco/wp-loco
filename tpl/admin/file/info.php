@@ -21,7 +21,7 @@ echo $header;
     <div class="notice inline notice-success">
         <h3 class="has-icon">
             <?php // Translators: Where %s is the type of file, e.g. "po"
-            echo esc_html( sprintf( __('%s file is writeable','loco'), $file->type ) )?> 
+            self::e( __('%s file is writeable','loco'), $file->type )?> 
         </h3>
         <p>
             <?php esc_html_e('You can update these translations directly from the editor to the file system','loco')?>.
@@ -40,7 +40,7 @@ echo $header;
         </p>
         <p>
             <?php // Translators: Where %s is the name (or number) of an operating system user
-            echo esc_html( sprintf( __("To make changes you'll have to connect to the remote file system, or make the file writeable by %s",'loco'), $params->httpd ) )?>.
+            self::e( __("To make changes you'll have to connect to the remote file system, or make the file writeable by %s",'loco'), $params->httpd )?>.
         </p>
         <p>
             <code><?php $file->ls()?></code>
@@ -70,7 +70,7 @@ echo $header;
         </h3>
         <p>
             <?php // Translators: Where %s is the name (or number) of an operating system user
-            echo esc_html( sprintf( __('The containing directory is writeable by %s, so you can add new files in the same location','loco'), $params->httpd ) )?>.
+            self::e( __('The containing directory is writeable by %s, so you can add new files in the same location','loco'), $params->httpd )?>.
         </p>
         <p>
             <code><?php $dir->ls()?></code>
@@ -93,7 +93,7 @@ echo $header;
         </p>
         <p>
             <?php // Translators: Where %s is the name (or number) of an operating system user
-            echo esc_html( sprintf( __("To create new files here you'll have to connect to the remote file system, or make the directory writeable by %s",'loco'), $params->httpd ) )?>.
+            self::e( __("To create new files here you'll have to connect to the remote file system, or make the directory writeable by %s",'loco'), $params->httpd )?>.
         </p>
         <p>
             <code><?php $dir->ls()?></code>

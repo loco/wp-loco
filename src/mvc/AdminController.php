@@ -114,11 +114,12 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         $this->enqueueStyle('admin', array('wp-jquery-ui-dialog') );
 
         // js translations
+        /*/ TODO replace this with MO extract - this requires all JS l10n is shipped with plugin
         if( ( $lang = get_locale() ) && 'en_US' !== $lang ){
             if( file_exists( loco_plugin_root().'/pub/js/lang/'.$lang.'.js' ) ){
                 $this->enqueueScript('lang/'.$lang);
             }
-        }
+        }*/
         
         // load colour scheme is user has non-default
         $skin = get_user_option('admin_color');

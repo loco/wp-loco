@@ -8,13 +8,13 @@ $this->extend('../layout');
     if( $params->has('update') ):?> 
     <div class="notice inline notice-warning">
         <h3 class="has-icon">
-            <?php echo esc_html( sprintf( __('Version %s','loco'), $version) );?> 
+            <?php self::e( __('Version %s','loco'), $version )?> 
         </h3>
         <p>
             <?php esc_html_e( __('A newer version of Loco Translate is available for download','loco') )?>.
         </p>
         <p class="submit">
-            <a class="button button-primary" href="<?php echo $update_href?>"><?php echo esc_html( sprintf(__('Upgrade to %s','loco'),$update) )?></a>
+            <a class="button button-primary" href="<?php echo $update_href?>"><?php self::e(__('Upgrade to %s','loco'), $update )?></a>
             <a class="button button-link has-icon icon-ext" href="https://wordpress.org/plugins/loco-translate/installation/" target="_blank"><?php esc_html_e( __('Install manually','loco') )?></a>
         </p>
     </div><?php
@@ -22,7 +22,7 @@ $this->extend('../layout');
     else:?> 
     <div class="notice inline notice-success">
         <h3 class="has-icon">
-            <?php echo esc_html( sprintf( __('Version %s','loco'), $version) );?> 
+            <?php self::e( __('Version %s','loco'), $version)?> 
         </h3>
         <p>
             <?php esc_html_e("You're running the latest version of Loco Translate",'loco')?>  

@@ -99,7 +99,7 @@
     else:?> 
         <table class="wp-list-table widefat fixed striped">
             <tr>
-                <td><?php echo esc_html( sprintf( __('No translations found for "%s"','loco'), $domain ) )?></td>
+                <td><?php self::e( __('No translations found for "%s"','loco'), $domain )?></td>
             </tr>
         </table><?php    
     endif;

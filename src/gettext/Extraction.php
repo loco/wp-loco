@@ -35,7 +35,9 @@ class Loco_gettext_Extraction {
             $domain = (string) $default->getDomain();
             // extract headers from theme PHP files
             if( $bundle->isTheme() ){
-                $this->extractor->set_wp_theme( $domain );
+                $this->extractor->headerize( array (
+                    'Template Name' => 'Name of the template',
+                ), $domain );
             }
             // pull bundle's default metadata. these are translations that may not be encountered in files
             $extras = array();
@@ -54,6 +56,7 @@ class Loco_gettext_Extraction {
     }
 
 
+
     /**
      * @return Loco_gettext_Extraction
      */
@@ -68,11 +71,9 @@ class Loco_gettext_Extraction {
         }
         /* @var $file Loco_fs_File */
         foreach( $project->findSourceFiles() as $file ){
-            if( $file->size() > $max ){
-                continue;
+            if( $file->size() <= $max ){
+                $this->extractor->extractSource( $file->getContents(), $file->getRelativePath($base) );
             }
-            $tokens = token_get_all( $file->getContents() );
-            $this->extractor->extract( $tokens, $file->getRelativePath($base) );
         }
         return $this;
     }

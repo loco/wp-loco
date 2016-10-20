@@ -88,10 +88,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.8 =
 * Source refs fix for files in unknown subsets
 * Downgrades PO formatting exceptions to PHP warnings
-* Added “show invisibles” and code view to editor
 * Renamed function prefixes to avoid PHP 7 warnings
-* Better support for gettext flags in PHP extractor
-* PO view and edit UI tweaks
+* Better support for php-format and no-php-format flag
+* PO source and editor UI tweaks
 
 = 2.0.7 =
 * Fixed prototype.js conflict

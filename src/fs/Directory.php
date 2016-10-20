@@ -33,6 +33,9 @@ class Loco_fs_Directory extends Loco_fs_File {
      * @return bool
      */
     public function isRecursive(){
+        if( func_num_args() ){
+            throw new InvalidArgumentException('Did you mean to use setRecursive?');
+        }
         return $this->r;
     }
 

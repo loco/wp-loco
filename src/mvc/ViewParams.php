@@ -66,7 +66,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
         $text = $this->__get($p);
         if( 1 < func_num_args() ){
             $args = func_get_args();
-            $text = vprintf( $text, array_slice($args,1) );
+            $text = call_user_func_array( 'sprintf', $args );
         }
         echo $this->escape( $text );
         return '';

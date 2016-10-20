@@ -6,9 +6,6 @@
         <directory>src</directory>
         <directory>tpl</directory>
         <file>loco.php</file>
-        <exclude>
-          <directory>old</directory>
-        </exclude>
       </source>
       <target>
         <directory>languages</directory>

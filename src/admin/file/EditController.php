@@ -138,17 +138,27 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         ) ) );
         
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
-             'add'      => _x('Add','Editor button','loco'),
-             'del'      => _x('Remove','Editor button','loco'),
-             'help'     => _x('Help','Editor button','loco'),
-             'save'     => _x('Save','Editor button','loco'),
-             'sync'     => _x('Sync','Editor button','loco'),
-             'revert'   => _x('Revert','Editor button','loco'),
-             'fuzzy'    => _x('Fuzzy','Editor button','loco'),
-             'download' => _x('Download','Editor button','loco'),
+             // Translators: button for adding a new string when manually editing a POT file
+             'add'      => _x('Add','Editor','loco'),
+             // Translators: button for removing a string when manually editing a POT file
+             'del'      => _x('Remove','Editor','loco'),
+             'help'     => __('Help','loco'),
+             // Translators: Button that saves translations to disk
+             'save'     => _x('Save','Editor','loco'),
+             // Translators: Button that runs in-editor sync/operation
+             'sync'     => _x('Sync','Editor','loco'),
+             // Translators: Button that reloads current screen
+             'revert'   => _x('Revert','Editor','loco'),
+             // Translators: Button that toggles a translation's Fuzzy flag
+             'fuzzy'    => _x('Fuzzy','Editor','loco'),
+             // Translators: Button for downloading a PO, MO or POT file
+             'download' => _x('Download','Editor','loco'),
+             // Translators: Placeholder text for text filter above editor
              'filter'   => __('Filter translations','loco'),
-             'invs'     => _x('Show invisibles','Editor button','loco'),
-             'code'     => _x('Coding view','Editor button','loco'),
+             // Translators: Button that toggles invisible characters
+             'invs'     => _x('Show invisibles','Editor','loco'),
+             // Translators: Button that toggles between "code" and regular text editing modes
+             'code'     => _x('Coding view','Editor','loco'),
         ) ) );
 
         // Download form params
