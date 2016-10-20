@@ -8,6 +8,9 @@
         view = document.getElementById('loco-po'),
         $modal;
 
+    // OK to show view now. mat have taken long to render
+    $(view).removeClass('loading');
+
     // resize function fits scrollable viewport, accounting for headroom and touching bottom of screen.
     var resize = function(){
         function top( el, ancestor ){
@@ -36,6 +39,7 @@
             }
         };
     }();    
+
     resize();
     $(window).resize( resize );
 
@@ -95,6 +99,5 @@
         ;
         div.scrollTop = yAdj;
     }
-
-
+    
 }( window, document, jQuery );

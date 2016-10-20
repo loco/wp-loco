@@ -247,10 +247,9 @@ class Loco_Locale implements JsonSerializable {
      * @return string
      */
     public function getPluralFormsHeader(){
-        $p = $this->getPluralData();
-        return sprintf('nplurals=%u; plural=%s;', count($p[1]), $p[0] );
+        list( $equation, $forms ) = $this->getPluralData();
+        return sprintf('nplurals=%u; plural=%s;', count($forms), $equation );
     }
-
 
 
     /**

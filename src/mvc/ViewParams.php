@@ -118,6 +118,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     
     /**
      * Fetch whole object as JSON
+     * @return string
      */
     public function exportJson(){
         return json_encode( $this->jsonSerialize() );

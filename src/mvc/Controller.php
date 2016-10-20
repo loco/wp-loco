@@ -24,15 +24,6 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
 
 
     /**
-     * Post-construct initializer that may be overridden by child classes
-     * @return void
-     */
-    public function init(){
-        
-    }
-
-
-    /**
      * Default authorization check
      * @return Loco_mvc_Controller
      */

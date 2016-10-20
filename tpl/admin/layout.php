@@ -72,4 +72,3 @@ var locoConf = <?php echo $js->exportJson()?>;
 /*]]>*/
 </script><?php
 endif;
-

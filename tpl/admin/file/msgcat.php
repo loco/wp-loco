@@ -1,5 +1,5 @@
 
-    <div class="panel" id="loco-po">
+    <div class="panel loading" id="loco-po">
         <ol class="msgcat"><?php
             foreach( $lines as $i => $line ):?> 
             <li id="po-l<?php printf('%u',$i+1)?>"><?php

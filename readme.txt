@@ -91,6 +91,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Renamed function prefixes to avoid PHP 7 warnings
 * Better support for php-format and no-php-format flag
 * PO source and editor UI tweaks
+* Localised strings and implemented in js
 
 = 2.0.7 =
 * Fixed prototype.js conflict

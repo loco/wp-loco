@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 13:10+0000\n"
+"POT-Creation-Date: 2016-10-20 20:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -100,19 +100,19 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/error/Exception.php:31 src/js/strings.php:52
+#: src/error/Exception.php:31 src/js/Strings.php:59
 msgid "Error"
 msgstr ""
 
-#: src/error/Notice.php:19 src/js/strings.php:58
+#: src/error/Notice.php:19 src/js/Strings.php:65
 msgid "Notice"
 msgstr ""
 
-#: src/error/Success.php:19 src/js/strings.php:61
+#: src/error/Success.php:19 src/js/Strings.php:68
 msgid "OK"
 msgstr ""
 
-#: src/error/Warning.php:19 src/js/strings.php:55
+#: src/error/Warning.php:19 src/js/Strings.php:62
 msgid "Warning"
 msgstr ""
 
@@ -201,7 +201,7 @@ msgid "Other"
 msgstr ""
 
 #. Shows total string count at top of editor
-#: src/gettext/Metadata.php:191 src/js/strings.php:28
+#: src/gettext/Metadata.php:191 src/js/Strings.php:35
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
@@ -209,19 +209,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows percentage translated at top of editor
-#: src/gettext/Metadata.php:201 src/js/strings.php:31
+#: src/gettext/Metadata.php:201 src/js/Strings.php:38
 #, php-format
 msgid "%s%% translated"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: src/gettext/Metadata.php:203 src/js/strings.php:34
+#: src/gettext/Metadata.php:203 src/js/Strings.php:41
 #, php-format
 msgid "%s fuzzy"
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: src/gettext/Metadata.php:206 src/js/strings.php:37
+#: src/gettext/Metadata.php:206 src/js/Strings.php:44
 #, php-format
 msgid "%s untranslated"
 msgstr ""
@@ -231,18 +231,18 @@ msgid "Translate"
 msgstr ""
 
 #. Where %s is the name of the POT template file. Message appears after sync
-#: src/js/strings.php:7
+#: src/js/Strings.php:14
 #, php-format
 msgid "Merged from %s"
 msgstr ""
 
 #. Message appears after sync operation
-#: src/js/strings.php:10
+#: src/js/Strings.php:17
 msgid "Merged from source code"
 msgstr ""
 
 #. Summary of new strings after running in-editor Sync
-#: src/js/strings.php:13
+#: src/js/Strings.php:20
 #, php-format
 msgid "1 new string added"
 msgid_plural "%s new strings added"
@@ -250,7 +250,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Summary of existing strings that no longer exist after running in-editor Sync
-#: src/js/strings.php:16
+#: src/js/Strings.php:23
 #, php-format
 msgid "1 obsolete string removed"
 msgid_plural "%s obsolete strings removed"
@@ -258,105 +258,105 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Message appears after sync operation when nothing has changed. %s refers to a POT file.
-#: src/js/strings.php:19
+#: src/js/Strings.php:26
 #, php-format
 msgid "Already up to date with %s"
 msgstr ""
 
 #. Message appears after sync operation when nothing has changed
-#: src/js/strings.php:22
+#: src/js/Strings.php:29
 msgid "Already up to date with source code"
 msgstr ""
 
 #. Warning appears when user tries to refresh or navigate away when editor work is unsaved
-#: src/js/strings.php:25
+#: src/js/Strings.php:32
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""
 
-#: src/js/strings.php:40
+#: src/js/Strings.php:47
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
-#: src/js/strings.php:43
+#: src/js/Strings.php:50
 msgid "Check console output for debugging information"
 msgstr ""
 
-#: src/js/strings.php:46
+#: src/js/Strings.php:53
 msgid "Server returned invalid data"
 msgstr ""
 
-#: src/js/strings.php:49
+#: src/js/Strings.php:56
 msgid "Unknown error"
 msgstr ""
 
 #. Label for the window pane holding the original English text -and-
 #. List heading showing preview of English text for each item
-#: src/js/strings.php:65
+#: src/js/Strings.php:72
 msgctxt "Editor"
 msgid "Source text"
 msgstr ""
 
 #. Where %s is the name of the language, e.g. "French translation"
-#: src/js/strings.php:68
+#: src/js/Strings.php:75
 #, php-format
 msgctxt "Editor"
 msgid "%s translation"
 msgstr ""
 
 #. Label for the window pane holding message context
-#: src/js/strings.php:71
+#: src/js/Strings.php:78
 msgctxt "Editor"
 msgid "Context"
 msgstr ""
 
 #. Label for the window pane for entering translator comments
-#: src/js/strings.php:74
+#: src/js/Strings.php:81
 msgctxt "Editor"
 msgid "Comments"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/js/strings.php:77
+#: src/js/Strings.php:84
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/js/strings.php:80
+#: src/js/Strings.php:87
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/strings.php:83
+#: src/js/Strings.php:90
 msgctxt "Editor"
 msgid "Source text not loaded"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/strings.php:86
+#: src/js/Strings.php:93
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/strings.php:89
+#: src/js/Strings.php:96
 msgctxt "Editor"
 msgid "Translation not loaded"
 msgstr ""
 
 #. List heading showing preview of translated text for each item
-#: src/js/strings.php:92
+#: src/js/Strings.php:99
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
-#: src/mvc/AdminController.php:50
-msgid "Loco Translate is powered by"
+#: src/mvc/AdminController.php:56
+msgid "Help & support"
 msgstr ""
 
-#: src/mvc/AdminController.php:102
-msgid "Help & support"
+#: src/mvc/AdminController.php:114
+msgid "Loco Translate is powered by"
 msgstr ""
 
 #. Name of the plugin
