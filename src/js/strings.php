@@ -10,10 +10,10 @@ __("Merged from %s",'loco');
 __("Merged from source code",'loco');
 
 // Summary of new strings after running in-editor Sync
-_n("1 new string added","%s new strings added",0);
+_n("1 new string added","%s new strings added",0,'loco');
 
 // Summary of existing strings that no longer exist after running in-editor Sync
-_n("1 obsolete string removed","%s obsolete strings removed",0);
+_n("1 obsolete string removed","%s obsolete strings removed",0,'loco');
 
 // Message appears after sync operation when nothing has changed. %s refers to a POT file.
 __("Already up to date with %s",'loco');
@@ -25,7 +25,7 @@ __("Already up to date with source code",'loco');
 __("Your changes will be lost if you continue without saving",'loco');
 
 // Shows total string count at top of editor
-_n("1 string","%s strings",0);
+_n("1 string","%s strings",0,'loco');
 
 // Shows percentage translated at top of editor
 __("%s%% translated",'loco');

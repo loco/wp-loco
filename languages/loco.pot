@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 12:59+0000\n"
+"POT-Creation-Date: 2016-10-20 13:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -200,7 +200,8 @@ msgctxt "File location"
 msgid "Other"
 msgstr ""
 
-#: src/gettext/Metadata.php:191
+#. Shows total string count at top of editor
+#: src/gettext/Metadata.php:191 src/js/strings.php:28
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
@@ -239,6 +240,22 @@ msgstr ""
 #: src/js/strings.php:10
 msgid "Merged from source code"
 msgstr ""
+
+#. Summary of new strings after running in-editor Sync
+#: src/js/strings.php:13
+#, php-format
+msgid "1 new string added"
+msgid_plural "%s new strings added"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Summary of existing strings that no longer exist after running in-editor Sync
+#: src/js/strings.php:16
+#, php-format
+msgid "1 obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] ""
+msgstr[1] ""
 
 #. Message appears after sync operation when nothing has changed. %s refers to a POT file.
 #: src/js/strings.php:19
