@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-20 20:35+0000\n"
+"POT-Creation-Date: 2016-10-21 12:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -351,11 +351,11 @@ msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
-#: src/mvc/AdminController.php:56
+#: src/mvc/AdminController.php:45
 msgid "Help & support"
 msgstr ""
 
-#: src/mvc/AdminController.php:114
+#: src/mvc/AdminController.php:102
 msgid "Loco Translate is powered by"
 msgstr ""
 
