@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.0
 Tested up to: 4.6.1
-Stable tag: 2.0.7
+Stable tag: 2.0.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -174,10 +174,3 @@ The PO file editor supports the following keyboard shortcuts for faster translat
 * Toggle invisibles: `Shift Ctrl I`
 
 Mac users can use ⌘ Cmd instead of Ctrl.
-
-
-== Translators ==
-
-Many thanks to the translators of version 1.
-
-Please don’t submit translations for version 2 yet. English strings are still being finalised.
