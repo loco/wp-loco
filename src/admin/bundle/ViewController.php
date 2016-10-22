@@ -79,7 +79,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         // POT template file
         $file = $project->getPot();
         if( $file && $file->exists() ){
-            $meta = Loco_gettext_Metadata::load($file)->persist( 0, true );
+            $meta = Loco_gettext_Metadata::load($file)->persistIfDirty( 0, true );
             $p['pot'] = new Loco_mvc_ViewParams( array(
                 // POT info
                 'name' => $file->basename(),
@@ -112,7 +112,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             $pot = $project->getPot();
             if( $pot && $pot->exists() ){
                 $p['pot'] = $pot;
-                $meta = Loco_gettext_Metadata::load($pot)->persist( 0, true );
+                $meta = Loco_gettext_Metadata::load($pot)->persistIfDirty( 0, true );
                 $p['nav'][] = new Loco_mvc_ViewParams( array( 
                     'href' => $this->getResourceLink('file-edit', $project, $meta ),
                     'name' => __('Edit template','loco'),
@@ -206,7 +206,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
         // Pull Gettext meta data from cache if possible
         // TODO save write when cached version was used
-        $meta = Loco_gettext_Metadata::load($file)->persist( 0, true );
+        $meta = Loco_gettext_Metadata::load($file)->persistIfDirty( 0, true );
         // Establish whether translations are official or otherwise
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
         // Retuen data required for PO table row

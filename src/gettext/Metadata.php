@@ -62,7 +62,6 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
             'rpath' => $po->getRelativePath( loco_constant('WP_CONTENT_DIR') ),
         ) );
         // pull from cache if exists and has not been modified
-        // TODO cache enabled filter / debug mode switch
         if( $nocache || ! $meta->fetch() || $bytes !== $meta['bytes'] || $mtime !== $meta['mtime'] ){
             // not available from cache, or cache is invalidated
             $meta['bytes'] = $bytes;
@@ -77,12 +76,10 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
             catch( Exception $e ){
                 $meta['valid'] = false;
             }
-            // TODO set flag so we know whether uncached data needs caching again
-            /*if( ! $nocache ){
-               ... 
-            }*/
         }
-    
+        /*/ debug cache status after fetching transient: dirty means a miss and will require call to persist.
+        Loco_error_AdminNotices::debug( sprintf('%s for %s', $meta->isDirty() ? 'MISS' : 'HIT', $meta['rpath'] ) );*/
+
         return $meta;
     }
 

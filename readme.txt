@@ -1,7 +1,7 @@
 === Plugin Name ===
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
-Requires at least: 4.0
+Requires at least: 4.1
 Tested up to: 4.6.1
 Stable tag: 2.0.8
 License: GPLv2 or later
@@ -84,6 +84,11 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 
 == Changelog ==
+
+= 2.0.9 =
+* Bumped minimum WordPress version to 4.1
+* Some optimisation of transient caching
+* Fixed settings bug and missing hash table class
 
 = 2.0.8 =
 * Source refs fix for files in unknown subsets

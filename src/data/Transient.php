@@ -28,6 +28,7 @@ abstract class Loco_data_Transient extends Loco_data_Serializable {
             $data = $this->getSerializable();
             set_transient( $key, $data, $ttl );
             $this->lazy = null;
+            $this->clean();
         }
         else {
             $this->lazy = $ttl;
@@ -37,13 +38,12 @@ abstract class Loco_data_Transient extends Loco_data_Serializable {
     }
 
 
-
     /**
      * Commit to transient cache on object destruction
      */
     final public function __destruct(){
         if( is_int($this->lazy) ){
-            $this->persist( $this->lazy, true );
+            $this->persistIfDirty( $this->lazy, true );
         }
     }
 

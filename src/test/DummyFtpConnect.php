@@ -22,6 +22,12 @@ class WP_Filesystem_Debug extends WP_Filesystem_Base {
     
     private $authed;
 
+    /**
+     * @var WP_Error
+     */
+    public $errors;
+
+
     public function __construct( array $opt ) {
         $this->options = $opt;
         $this->method = 'ftp';

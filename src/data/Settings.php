@@ -125,6 +125,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
      */
     public function persist(){
         $this->version = loco_plugin_version();
+        $this->clean();
         return update_option('loco_settings', $this->getSerializable() );
     }
 
@@ -144,6 +145,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
             // could ensure redundant keys are removed, but no need currently
             // $data = array_intersect_key( $data, self::$defaults );
             $this->exchangeArray( $data );
+            $this->clean();
             return true;
         }
         return false;
@@ -157,11 +159,13 @@ class Loco_data_Settings extends Loco_data_Serializable {
      */
     public function migrate(){
         $existed = (bool) get_option('loco_settings');
-        // Populate new format from legacy 1.x options
-        $this->gen_hash = get_option('loco-translate-gen_hash','0');
-        $this->use_fuzzy = get_option('loco-translate-use_fuzzy', '1' );
-        $this->num_backups = get_option('loco-translate-num_backups','1');
-        $this->persist();
+        // Populate new format from legacy 1.x options, but only on first run
+        if( ! $existed ){
+            $this->gen_hash = get_option('loco-translate-gen_hash','0');
+            $this->use_fuzzy = get_option('loco-translate-use_fuzzy', '1' );
+            $this->num_backups = get_option('loco-translate-num_backups','1');
+            $this->persist();
+        }
         // currently the only upgrade could be 1.x => 2.0
         // deliberately keeping the old options due to legacy switching feature
         return ! $existed;

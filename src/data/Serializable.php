@@ -4,12 +4,16 @@
  */
 abstract class Loco_data_Serializable extends ArrayObject {
 
-    
     /**
      * Object version, can be used for validation and migrations.
      * @var string|int|float
      */
     private $v = 0;
+
+    /**
+     * @var bool
+     */
+    private $dirty;
 
     /**
      * Commit serialized data to WordPress storage
@@ -19,18 +23,68 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
 
     /**
-     * Alias property getter through ArrayObject implementation 
+     * {@inheritdoc}
      */
-    public function __get( $prop ){
-        return $this[$prop];
+    public function __construct( array $data = array() ){
+        $this->setFlags( ArrayObject::ARRAY_AS_PROPS );
+        parent::__construct( $data );
+        $this->dirty = (bool) $data;
     }
 
 
     /**
-     * Alias property setter through ArrayObject implementation 
+     * Check if object's properties have change since last clean
+     * @return bool
      */
-    public function __set( $prop, $value ){
-        $this[$prop] = $value;
+    public function isDirty(){
+        return $this->dirty;
+    }
+
+
+    /**
+     * Make not dirty
+     * @return Loco_data_Serializable
+     */
+    protected function clean(){
+        $this->dirty = false;
+        return $this;
+    }
+
+
+
+    /**
+     * Call persist method only if has changed since last clean
+     * @return Loco_data_Serializable
+     */
+    public function persistIfDirty(){
+        if( $this->isDirty() ){
+            $params = func_get_args();
+            call_user_func_array( array($this,'persist'), $params );
+        }
+        return $this;
+    }
+
+
+
+    /**
+     * @override so we can set dirty flag
+     */
+    public function offsetSet( $prop, $value ){
+        if( ! isset($this[$prop]) || $value !== $this[$prop] ){
+            parent::offsetSet( $prop, $value );
+            $this->dirty = true;
+        }
+    }
+
+
+    /**
+     * @override so we can set dirty flag
+     */
+    public function offsetUnset( $prop ){
+        if( isset($this[$prop]) ){
+            parent::offsetUnset($prop);
+            $this->dirty = true;
+        }
     }
 
 
@@ -38,7 +92,10 @@ abstract class Loco_data_Serializable extends ArrayObject {
      * @return Loco_data_Serializable
      */
     public function setVersion( $version ){
-        $this->v = $version;
+        if( $version !== $this->v ){
+            $this->v = $version;
+            $this->dirty = true;
+        }
         return $this;
     }
 
@@ -84,6 +141,9 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
         // ok to populate ArrayObject
         $this->exchangeArray( $data['d'] );
+        
+        // because object is being restored, probably from disk. this make it clean now
+        $this->dirty = false;
 
         return $this;
     }    
