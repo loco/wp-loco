@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.1
 Tested up to: 4.6.1
-Stable tag: 2.0.8
+Stable tag: 2.0.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,7 +88,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.9 =
 * Bumped minimum WordPress version to 4.1
 * Some optimisation of transient caching
-* Fixed settings bug and missing hash table class
+* Fixed hash table settings bug
 
 = 2.0.8 =
 * Source refs fix for files in unknown subsets

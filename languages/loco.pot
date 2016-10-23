@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-21 12:03+0000\n"
+"POT-Creation-Date: 2016-10-23 09:48+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -201,7 +201,7 @@ msgid "Other"
 msgstr ""
 
 #. Shows total string count at top of editor
-#: src/gettext/Metadata.php:191 src/js/Strings.php:35
+#: src/gettext/Metadata.php:188 src/js/Strings.php:35
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
@@ -209,19 +209,19 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows percentage translated at top of editor
-#: src/gettext/Metadata.php:201 src/js/Strings.php:38
+#: src/gettext/Metadata.php:198 src/js/Strings.php:38
 #, php-format
 msgid "%s%% translated"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: src/gettext/Metadata.php:203 src/js/Strings.php:41
+#: src/gettext/Metadata.php:200 src/js/Strings.php:41
 #, php-format
 msgid "%s fuzzy"
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: src/gettext/Metadata.php:206 src/js/Strings.php:44
+#: src/gettext/Metadata.php:203 src/js/Strings.php:44
 #, php-format
 msgid "%s untranslated"
 msgstr ""
