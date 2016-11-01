@@ -21,7 +21,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * `theme_locale` filter callback.
      * Signals the beginning of a "load_theme_textdomain" process
      */    
-    public function filter_theme_locale( $locale, $domain ){
+    public function filter_theme_locale( $locale, $domain = '' ){
         $this->context = array( 'themes', $domain, $locale );
         unset( $this->lock[$domain] );
         return $locale;
@@ -32,8 +32,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `plugin_locale` filter callback.
      * Signals the beginning of a "load_plugin_textdomain" process
-     */    
-    public function filter_plugin_locale( $locale, $domain ){
+     */
+    public function filter_plugin_locale( $locale, $domain = '' ){
         $this->context = array( 'plugins', $domain, $locale );
         unset( $this->lock[$domain] );
         return $locale;
