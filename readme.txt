@@ -85,6 +85,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.10-dev =
+* Allows missing domain argument in plugin_locale filter
+
 = 2.0.9 =
 * Bumped minimum WordPress version to 4.1
 * Some optimisation of transient caching
