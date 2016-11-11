@@ -38,10 +38,8 @@ echo $header;
                     </button>
                 </fieldset><?php
                 endif?> 
-                <fieldset>
-                    <div class="loco-clearable">
-                        <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php $ui->e('filter')?>" autocomplete="off" disabled />
-                    </div>
+                <fieldset class="loco-clearable">
+                    <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php $ui->e('filter')?>" autocomplete="off" disabled />
                 </fieldset>
                 <fieldset>
                     <button class="button has-icon only-icon icon-pilcrow" data-loco="invs" disabled title="<?php $ui->e('invs')?>">

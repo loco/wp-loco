@@ -3,6 +3,7 @@
  * List of bundles
  */
 ?> 
+
     <table class="wp-list-table widefat fixed striped">
         <thead>
             <th data-sort-type="s">

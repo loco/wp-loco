@@ -89,6 +89,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Allows missing domain argument in plugin_locale filter
 * Reverted editor changes that disabled readonly text
 * Added invisibles and coding editor switches
+* Added table filtering via text query
 
 = 2.0.9 =
 * Bumped minimum WordPress version to 4.1

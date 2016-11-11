@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-10 16:12+0000\n"
+"POT-Creation-Date: 2016-11-11 09:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -685,7 +685,7 @@ msgstr ""
 #. Button that toggles invisible characters
 #: src/admin/file/EditController.php:159
 msgctxt "Editor"
-msgid "Show invisibles"
+msgid "Toggle invisibles"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
@@ -778,7 +778,7 @@ msgstr ""
 msgid "Descriptive name for this set of translatable strings"
 msgstr ""
 
-#: tpl/admin/bundle/conf.php:41 tpl/admin/list/inc-table.php:12
+#: tpl/admin/bundle/conf.php:41 tpl/admin/list/inc-table.php:13
 msgid "Text domain"
 msgstr ""
 
@@ -940,17 +940,17 @@ msgid ""
 "files are for"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:32 tpl/admin/bundle/view.php:49
+#: tpl/admin/bundle/view.php:32 tpl/admin/bundle/view.php:51
 #, php-format
 msgid ""
 "Click the <a href=\"%s\">setup</a> tab to complete the bundle configuration"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:45
+#: tpl/admin/bundle/view.php:47
 msgid "unconfigured"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:48
+#: tpl/admin/bundle/view.php:50
 msgid ""
 "This bundle isn't automatically compatible and requires configuring before "
 "you can use all the functions of Loco Translate"
@@ -975,6 +975,10 @@ msgstr ""
 
 #: tpl/admin/common/inc-fsconn.php:36
 msgid "Connect"
+msgstr ""
+
+#: tpl/admin/common/inc-table-filter.php:5
+msgid "Filter list"
 msgstr ""
 
 #: tpl/admin/config/settings.php:13 tpl/admin/config/settings.php:17
@@ -1380,15 +1384,15 @@ msgstr ""
 msgid "About templates"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:9
+#: tpl/admin/list/inc-table.php:10
 msgid "Bundle name"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:15
+#: tpl/admin/list/inc-table.php:16
 msgid "Last updated"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:18
+#: tpl/admin/list/inc-table.php:19
 msgid "Sets"
 msgstr ""
 

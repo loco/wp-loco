@@ -32,7 +32,9 @@ if( $unknown ):?>
                 printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco'), $tabs[1]->href )?>.
             </p>
         </div>
-        <?php echo $this->render('inc-po-table', array( 'pairs' => $unknown, 'domain' => null ) )?> 
+        <?php 
+        echo $this->render('../common/inc-table-filter');
+        echo $this->render('inc-po-table', array( 'pairs' => $unknown, 'domain' => null ) )?> 
     </div><?php
 endif;
    

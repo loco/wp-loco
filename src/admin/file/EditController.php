@@ -156,7 +156,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
              // Translators: Placeholder text for text filter above editor
              'filter'   => __('Filter translations','loco'),
              // Translators: Button that toggles invisible characters
-             'invs'     => _x('Show invisibles','Editor','loco'),
+             'invs'     => _x('Toggle invisibles','Editor','loco'),
              // Translators: Button that toggles between "code" and regular text editing modes
              'code'     => _x('Toggle code view','Editor','loco'),
         ) ) );
