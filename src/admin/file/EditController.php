@@ -158,7 +158,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
              // Translators: Button that toggles invisible characters
              'invs'     => _x('Show invisibles','Editor','loco'),
              // Translators: Button that toggles between "code" and regular text editing modes
-             'code'     => _x('Coding view','Editor','loco'),
+             'code'     => _x('Toggle code view','Editor','loco'),
         ) ) );
 
         // Download form params

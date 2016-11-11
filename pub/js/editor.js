@@ -292,29 +292,33 @@
 
 
     function registerInvisiblesButton( button ){
+        var $button = $(button);
         button.disabled = false;
         editor.on('poInvs', function( event, state ){
-            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+            $button[ state ? 'addClass' : 'removeClass' ]('inverted');
         });
-        $(button).click( function( event ){
+        $button.click( function( event ){
             event.preventDefault();
             editor.setInvs( ! editor.getInvs() );
             return false;
         } );
+        locoScope.tooltip.init($button);
         return true;
     }
 
 
 
     function registerCodeviewButton( button ){
+         var $button = $(button);
          button.disabled = false;
-         $(button).click( function(event){
+         $button.click( function(event){
             event.preventDefault();
-            var state = ! editor.getMode();
-            editor.setMode( state );
-            $(button)[ state ? 'addClass' : 'removeClass' ]('inverted');
+            var state = ! editor.getMono();
+            editor.setMono( state );
+            $button[ state ? 'addClass' : 'removeClass' ]('inverted');
             return false;
         } );
+        locoScope.tooltip.init($button);
         return true;
     };
 

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-10-23 09:48+0000\n"
+"POT-Creation-Date: 2016-11-10 16:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -691,7 +691,7 @@ msgstr ""
 #. Button that toggles between "code" and regular text editing modes
 #: src/admin/file/EditController.php:161
 msgctxt "Editor"
-msgid "Coding view"
+msgid "Toggle code view"
 msgstr ""
 
 #: src/admin/file/InfoController.php:146
