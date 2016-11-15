@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-11-11 09:15+0000\n"
+"POT-Creation-Date: 2016-11-15 16:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -392,16 +392,22 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:63 src/admin/config/BaseController.php:17
+#: src/mvc/AdminRouter.php:63 src/admin/config/PrefsController.php:48
+#: src/admin/config/SettingsController.php:68
+#: src/admin/config/VersionController.php:35 tpl/admin/help/tab-settings.php:2
+msgid "Plugin settings"
+msgstr ""
+
+#: src/mvc/AdminRouter.php:64 src/mvc/AdminRouter.php:69
 msgid "Settings"
 msgstr ""
 
-#. Page title for Loco plugin settings
-#: src/mvc/AdminRouter.php:65
-msgid "Loco plugin options"
+#: src/mvc/AdminRouter.php:68 src/admin/config/BaseController.php:19
+#: src/admin/config/PrefsController.php:13
+msgid "User options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:213
+#: src/mvc/AdminRouter.php:217
 msgid "Page not found"
 msgstr ""
 
@@ -572,16 +578,17 @@ msgid "Create template"
 msgstr ""
 
 #: src/admin/config/BaseController.php:18
+msgid "Site options"
+msgstr ""
+
+#: src/admin/config/BaseController.php:20
+#: src/admin/config/VersionController.php:13
 msgid "Version"
 msgstr ""
 
+#: src/admin/config/PrefsController.php:32
 #: src/admin/config/SettingsController.php:30
 msgid "Settings saved"
-msgstr ""
-
-#: src/admin/config/SettingsController.php:68
-#: src/admin/config/VersionController.php:34 tpl/admin/help/tab-settings.php:2
-msgid "Plugin settings"
 msgstr ""
 
 #: src/admin/file/BaseController.php:79
@@ -977,8 +984,16 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: tpl/admin/common/inc-table-filter.php:5
+#: tpl/admin/common/inc-table-filter.php:4
 msgid "Filter list"
+msgstr ""
+
+#: tpl/admin/config/prefs.php:13 tpl/admin/config/prefs.php:17
+msgid "Translator credit"
+msgstr ""
+
+#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:108
+msgid "Save settings"
 msgstr ""
 
 #: tpl/admin/config/settings.php:13 tpl/admin/config/settings.php:17
@@ -1027,10 +1042,6 @@ msgstr ""
 
 #: tpl/admin/config/settings.php:91
 msgid "Allow full access to these roles"
-msgstr ""
-
-#: tpl/admin/config/settings.php:108
-msgid "Save settings"
 msgstr ""
 
 #: tpl/admin/config/version.php:11 tpl/admin/config/version.php:25
@@ -1269,10 +1280,14 @@ msgstr ""
 
 #: tpl/admin/help/tab-settings.php:5
 msgid ""
-"These options apply to all users of Loco Translate across the current site"
+"Site options apply to all users of Loco Translate across the current site"
 msgstr ""
 
-#: tpl/admin/help/tab-settings.php:8
+#: tpl/admin/help/tab-settings.php:6
+msgid "User options apply to your WordPress login, across all sites"
+msgstr ""
+
+#: tpl/admin/help/tab-settings.php:9
 msgid "Full documentation"
 msgstr ""
 
