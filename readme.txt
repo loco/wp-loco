@@ -90,6 +90,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Reverted editor changes that disabled readonly text
 * Added invisibles and coding editor switches
 * Added table filtering via text query
+* Added Last-Translator user preference
 
 = 2.0.9 =
 * Bumped minimum WordPress version to 4.1

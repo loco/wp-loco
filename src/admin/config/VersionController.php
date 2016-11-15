@@ -10,6 +10,7 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
      */
     public function init(){
         parent::init();
+        $this->set( 'title', __('Version','loco') );
         // handle legacy degradation
         $nonce = $this->setNonce('downgrade');
         try {

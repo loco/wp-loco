@@ -60,10 +60,13 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
         // settings page only for users with manage_options permission:
         if( $super ){
-            $label = __('Settings','loco');
-            // translators: Page title for Loco plugin settings
-            $title = __('Loco plugin options','loco');
-            add_submenu_page( 'loco', $title, $label, 'manage_options', 'loco-config', $render );
+            $title = __('Plugin settings','loco');
+            add_submenu_page( 'loco', $title, __('Settings','loco'), 'manage_options', 'loco-config', $render );
+        }
+        // but all users need access to user preferences which live under this privileged page
+        else if( $user->has_cap($cap) ){
+            $title = __('User options','loco');
+            add_submenu_page( 'loco', $title, __('Settings','loco'), $cap, 'loco-config-user', $render );
         }
 
         // legacy link redirect from previous slug
@@ -163,6 +166,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             'debug' => 'Debug',
             // site-wide plugin configurations
             'config' => 'config_Settings',
+            'config-user' => 'config_Prefs',
             'config-version' => 'config_Version',
             // bundle type listings
             'theme'  => 'list_Themes',

@@ -12,7 +12,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
     
 
     /**
-     * Available optipons and their defaults
+     * Available options and their defaults
      * @var array
      */
     private static $defaults = array (
