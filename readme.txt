@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity
 Requires at least: 4.1
 Tested up to: 4.6.1
-Stable tag: 2.0.9
+Stable tag: 2.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -85,7 +85,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 2.0.10-dev =
+= 2.0.10 =
 * Allows missing domain argument in plugin_locale filter
 * Reverted editor changes that disabled readonly text
 * Added invisibles and coding editor switches
@@ -150,7 +150,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.8 =
+= 2.0.10 =
 * Various bug fixes and improvements
 
 
