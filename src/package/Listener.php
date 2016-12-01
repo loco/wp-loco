@@ -128,7 +128,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
 
     /**
-     * Get a Text Domain that's uniquely assigned to a bundle
+     * Get primary Text Domain that's uniquely assigned to a bundle
      * @param string theme or plugin relative path
      */
     public function getDomain( $handle ){

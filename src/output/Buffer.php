@@ -1,8 +1,7 @@
 <?php
 /**
  * For buffering accidental output caused by themes and other plugins.
- * TODO log junk output?
- * TODO collect raised notices?
+ * Also used in template rendering.
  */
 class Loco_output_Buffer {
 
@@ -50,10 +49,37 @@ class Loco_output_Buffer {
 
 
     /**
-     * @return Loco_mvc_Buffer
+     * @return Loco_output_Buffer
      */
     public function open(){
-        // Check if output has been generated before we've had a chance to buffer it
+        self::check();
+        if( ! ob_start() ){
+            throw new RuntimeException('Failed to start output buffering');
+        }
+        $this->ob_level = ob_get_level();
+        return $this;
+    }
+
+
+
+    /**
+     * @return Loco_output_Buffer
+     */
+    public function close(){
+        // collect output from our nested buffers
+        $this->output = self::flush( $this->ob_level );
+        $this->ob_level = null;
+        return $this;
+    }
+
+
+
+    /**
+     * Check that output has not been sent and no content will be flushed if the script were to exit now
+     * @throws Loco_error_Exception
+     * @return void
+     */
+    public static function check(){
         if( headers_sent($file,$line) ){
             $file = str_replace( trailingslashit( loco_constant('ABSPATH') ), '', $file );
             $message = sprintf( __('Loco interrupted by output from %s:%u','loco'), $file, $line );
@@ -64,20 +90,18 @@ class Loco_output_Buffer {
             }
             // @codeCoverageIgnoreEnd
         }
-        $this->ob_level = ob_get_level();
-        ob_start();
-        return $this;
     }
 
 
 
     /**
-     * @return Loco_mvc_Buffer
+     * @internal
+     * @param int highest buffer to flush
+     * @return string
      */
-    public function close(){
-        // close all output buffers including our own so we are guaranteed a clean exit
-        $last = 0;
-        $this->output = '';
+    private static function flush( $min ){
+        $last = -1;    
+        $output = '';
         while( $level = ob_get_level() ){
             // avoid "impossible" infinite loop
             // @codeCoverageIgnoreStart
@@ -85,17 +109,29 @@ class Loco_output_Buffer {
                 throw new Exception('Failed to close output buffer');
             }
             // @codeCoverageIgnoreEnd
-            // avoid closing buffers opened before our own
-            if( $level <= $this->ob_level ){
+            if( $level < $min ){
                 break;
             }
-            $this->output .= ob_get_contents();
-            ob_end_clean();
+            $output .= ob_get_contents();
+            ob_get_clean();
             $last = $level;
         }
-        
-        $this->ob_level = null;
-        return $this;
+        return $output;
     }
-    
+
+
+
+    /**
+     * Destroy all output buffers
+     * @return void
+     */
+    public static function clear(){
+        $junk = self::flush(0);
+        if( $bytes = strlen($junk) ){
+            do_action( 'loco_buffer_cleared', $junk );
+            $message = sprintf("Cleared %s of buffered output", Loco_mvc_FileParams::renderBytes($bytes) );
+            Loco_error_AdminNotices::debug( $message );
+        }
+    }
+
 } 

@@ -90,12 +90,12 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         foreach( $sources as $sourceFile ){
             $nfiles++;
             $fsize = $sourceFile->size();
+            $largest = max( $largest, $fsize );
             if( $fsize > $max ){
                 $nskip += 1;
             }
             else {
                 $bytes += $fsize;
-                $largest = max( $largest, $fsize );
             }
         }
         $this->set( 'scan', new Loco_mvc_ViewParams( array (

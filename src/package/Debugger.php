@@ -55,7 +55,20 @@ class Loco_package_Debugger implements IteratorAggregate {
         // self-declarations provided by author in file headers
         $native = $bundle->getHeaderInfo();
         if( $value = $native->TextDomain ){
-            $this->good('Primary text domain declared by author as "%s"', $value);
+            $this->info('WordPress says primary text domain is "%s"', $value);
+            // WordPress 4.6 changes mean this header could be a fallback and not actually declared by author
+            if( $bundle->isPlugin() ){
+                $map = array ( 'TextDomain' => 'Text Domain' );
+                $raw = get_file_data( $bundle->getBootstrapPath(), $map, 'plugin' );
+                if( empty($raw['TextDomain']) ){
+                    $this->warn('Author doesn\'t define the TextDomain header, WordPress guessed it');
+                }
+            }
+            // Warn if WordPress-assumed text domain is not configured. plugin/theme headers won't be translated
+            $domains = $bundle->getDomains();
+            if( ! isset($domains[$value]) ){
+                $this->warn('Expected text domain "%s" is not configured', $value );
+            }
         }
         else {
             $this->warn("Author doesn't define the TextDomain header");

@@ -64,6 +64,17 @@ class Loco_package_Plugin extends Loco_package_Bundle {
                             Loco_error_AdminNotices::debug( sprintf('Plugin conflict on %s', $handle) );
                             continue;
                         }
+                        // WordPress 4.6 introduced TextDomain header fallback @37562 see https://core.trac.wordpress.org/changeset/37562/
+                        // if we don't force the original text domain header we can't know if a bundle is misconfigured. This leads to silent errors.
+                        // this has a performance overhead, and also results in "unconfigured" messages that users may not have had in previous releases.
+                        /*/ TODO perhaps implement a plugin setting that forces original headers
+                        $file = new Loco_fs_File($base.'/'.$handle);
+                        if( $file->exists() ){
+                            $map = array( 'TextDomain' => 'Text Domain' );
+                            $raw = get_file_data( $file->getPath(), $map, 'plugin' );
+                            $data['TextDomain'] = $raw['TextDomain'];
+                        }*/
+                        // set resolved base directory before caching our copy of plugin data
                         $data['basedir'] = $base;
                         $cached[$handle] = $data;
                     }
@@ -80,7 +91,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
 
     /**
      * Get raw plugin data from WordPress registry, plus additional "basedir" field for resolving handle to actual file.
-     * @return string
+     * @return array
      */
     public static function get_plugin( $handle ){
         $search = self::get_plugins();
@@ -96,7 +107,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         if( empty($data['Name']) ){
             return null;
         }
-        // basedir is added by our get_plugins function, but filtered arrays may not have done this
+        // basedir is added by our get_plugins function, but filtered arrays could be broken
         if( ! array_key_exists('basedir',$data) ){
             Loco_error_AdminNotices::debug( sprintf('"basedir" property required to resolve %s',$handle) );
             return null;
@@ -198,15 +209,20 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         // handle and name is enough data to construct empty bundle
         $bundle = new Loco_package_Plugin( $handle, $data['Name'] );
 
-        // plugin may not declare its own Text Domain
-        if( empty($data['TextDomain']) ){
-            // We may have intercepted domain loading information from listener
-            $listener = Loco_package_Listener::singleton();
-            if( $domain = $listener->getDomain($handle) ){
+        // check if listener heard the real text domain, but only use when none declared
+        // This will not longer happen since WP 4.6 header fallback, but we could warn about it
+        $listener = Loco_package_Listener::singleton();
+        if( $domain = $listener->getDomain($handle) ){
+            if( empty($data['TextDomain']) ){
                 $data['TextDomain'] = $domain;
                 if( empty($data['DomainPath']) ){
                     $data['DomainPath'] = $listener->getDomainPath($domain);
                 }
+            }
+            // ideally would only warn on certain pages, but unsure where to place this logic other than here
+            // TODO possibly allow bundle to hold errors/warnings as part of its config. 
+            else if( $data['TextDomain'] !== $domain ){
+                Loco_error_AdminNotices::debug( sprintf("Plugin loaded text domain '%s' but WordPress knows it as '%s'",$domain, $data['TextDomain']) );
             }
         }
         

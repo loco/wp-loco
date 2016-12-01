@@ -19,4 +19,12 @@ class Loco_error_Debug extends Loco_error_Exception {
         return __('Debug','loco');
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLevel(){
+        return Loco_error_Exception::LEVEL_DEBUG;
+    }
+
 }

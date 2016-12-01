@@ -19,4 +19,12 @@ class Loco_error_Success extends Loco_error_Exception {
         return __('OK','loco');
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLevel(){
+        return Loco_error_Exception::LEVEL_INFO;
+    }
+
 }

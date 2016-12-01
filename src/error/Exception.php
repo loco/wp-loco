@@ -4,14 +4,63 @@
  */
 class Loco_error_Exception extends Exception implements JsonSerializable {
     
-    
+    const LEVEL_ERROR   = 0;
+    const LEVEL_WARNING = 1;
+    const LEVEL_DEBUG   = 2;
+    const LEVEL_INFO    = 3;
+
+
+    /**
+     * Override file in which exception was thrown
+     * @var string
+     */
+    private $_file;
+
+    /**
+     * Override line number from where exception was thrown
+     * @var int
+     */
+    private $_line;
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRealFile(){
+        $file = $this->_file or $file = parent::getFile();
+        return $file;
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRealLine(){
+        $line = $this->_line or $line = parent::getLine();
+        return $line;
+    }
+
+
+
+    /**
+     * @internal
+     * @return Loco_error_Exception
+     */
+    public function setCallee( array $callee ){
+        $this->_file = $callee['file'];
+        $this->_line = $callee['line'];
+        return $this;
+    }
+
+
+
     /**
      * Get view template for rendering error to HTML.
      * @return string path relative to root tpl directory
      */
     public function getTemplate(){
         return 'admin/errors/generic';
-    }    
+    }
 
 
     /**
@@ -20,6 +69,15 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      */
     public function getType(){
         return 'error';
+    }
+
+
+    /**
+     * Get verbosity level
+     * @return int
+     */
+    public function getLevel(){
+        return self::LEVEL_ERROR;
     }
 
 

@@ -19,4 +19,12 @@ class Loco_error_Warning extends Loco_error_Exception {
         return __('Warning','loco');
     }
 
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLevel(){
+        return Loco_error_Exception::LEVEL_WARNING;
+    }
+
 }

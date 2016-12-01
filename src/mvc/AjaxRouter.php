@@ -84,6 +84,10 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
      */
     public function on_wp_ajax_loco_json(){
         $json = $this->renderAjax();
+        // avoid outputing junk in JSON stream
+        Loco_output_Buffer::clear();
+        Loco_output_Buffer::check();
+        // output stream is clear, we can flush JSON
         header('Content-Length: '.strlen($json), true );
         header('Content-Type: application/json; charset=UTF-8', true );
         // avoid hijacking of exit via wp_die_ajax_handler. Tests call renderAjax directly.
@@ -165,11 +169,11 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             $this->buffer->close();
             $this->buffer = null;
         }
-
         return $json;
     }
-    
-    
+
+
+
     /**
      * Execute ajax controller to render something other than JSON
      * @return string|Exception
@@ -189,14 +193,11 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             $data = $e;
         }
-        
         if( $this->buffer ){
             $this->buffer->close();
             $this->buffer = null;
         }
-
         return $data;
     }
-    
 
 }
