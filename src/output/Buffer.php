@@ -4,11 +4,10 @@
  * Also used in template rendering.
  */
 class Loco_output_Buffer {
-
     
     /**
-     * The previous output buffering level before we started buffering
-     * @var int usually 0 unless another buffer was opened before this one.
+     * The output buffering level opened by this instance
+     * @var int usually 1 unless another buffer was opened before this one.
      */    
     private $ob_level;
 
@@ -41,9 +40,7 @@ class Loco_output_Buffer {
      * Ensure buffers closed if something terminates before we close gracefully
      */
     public function __destruct(){
-        if( is_int($this->ob_level) ){
-            $this->close();
-        }
+        $this->close();
     }
 
 
@@ -66,16 +63,18 @@ class Loco_output_Buffer {
      * @return Loco_output_Buffer
      */
     public function close(){
-        // collect output from our nested buffers
-        $this->output = self::flush( $this->ob_level );
-        $this->ob_level = null;
+        if( is_int($this->ob_level) ){
+            // collect output from our nested buffers
+            $this->output = self::flush( $this->ob_level );
+            $this->ob_level = null;
+        }
         return $this;
     }
 
 
 
     /**
-     * Check that output has not been sent and no content will be flushed if the script were to exit now
+     * Check the current script has not produced unbuffered output
      * @throws Loco_error_Exception
      * @return void
      */
