@@ -52,7 +52,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
             if( loco_debugging() && ini_get('error_log') ){
                 $file = new Loco_fs_File( $error->getRealFile() );
                 $path = $file->getRelativePath( loco_plugin_root() );
-                error_log( sprintf('[Loco.%s] "%s" in %s#%u', $error->getType(), $error->getMessage(), $path, $error->getRealLine() ), 0 );
+                error_log( sprintf('[Loco.%s] "%s" in %s:%u', $error->getType(), $error->getMessage(), $path, $error->getRealLine() ), 0 );
             }
         }
         return $error;
@@ -78,7 +78,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
 
     /**
-     * Raise a generic warning message
+     * Raise a generic info message
      * @return Loco_error_Notice
      */
     public static function info( $message ){

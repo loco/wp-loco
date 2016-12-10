@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.6.1
+Tested up to: 4.7
 Stable tag: 2.0.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -88,6 +88,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.11-dev =
 * Extra debug logging and error diagnostics
 * Forcefully clear output buffers before Ajax flush
+* Bumped WordPress version to 4.7
 
 = 2.0.10 =
 * Allows missing domain argument in plugin_locale filter
