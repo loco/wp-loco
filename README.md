@@ -26,8 +26,9 @@ If you want to use a stable release listed in the WordPress plugin directory, yo
     $ git fetch origin --tags
     $ git checkout tags/x.y.z
     
-Be sure to check the latest version by typing `git tag` and replacing `x.y.z` in above example.
+Be sure to check out the latest version, replacing `x.y.z` in above example with the release number shown below.
 
+[![Latest Version](https://img.shields.io/github/release/loco/wp-loco.svg?style=flat-square)](https://github.com/loco/wp-loco/releases)
 
 ## Contributing
 
