@@ -103,7 +103,12 @@ class Loco_package_Project {
         $this->name = $name;
         $this->bundle = $bundle;
         $this->domain = $domain;
-        $this->slug = $domain->getName();
+        // take default slug from domain, avoiding wildcard
+        $slug = $domain->getName();
+        if( '*' === $slug ){
+            $slug = '';
+        }
+        $this->slug = $slug;
         // sources
         $this->sfiles = new Loco_fs_FileList;
         $this->spaths = new Loco_fs_FileList;
