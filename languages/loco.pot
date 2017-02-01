@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2016-12-22 12:03+0000\n"
+"POT-Creation-Date: 2017-02-01 11:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -83,7 +83,7 @@ msgstr ""
 msgid "the web server"
 msgstr ""
 
-#: src/config/FormModel.php:135
+#: src/config/FormModel.php:146
 msgid "Text Domain cannot be empty"
 msgstr ""
 
@@ -411,20 +411,20 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:153
+#: src/mvc/AjaxRouter.php:155
 #, php-format
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:158
+#: src/mvc/AjaxRouter.php:160
 msgid "Ajax controller returned empty JSON"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:185
+#: src/mvc/AjaxRouter.php:187
 msgid "Download action not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:190
+#: src/mvc/AjaxRouter.php:192
 msgid "Download controller returned empty output"
 msgstr ""
 

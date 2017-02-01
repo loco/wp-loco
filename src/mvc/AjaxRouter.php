@@ -36,7 +36,9 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 
 
 
-
+    /**
+     * Create a new ajax router and starts buffering output immediately
+     */
     public function __construct(){
         $this->buffer = Loco_output_Buffer::start();
         parent::__construct();

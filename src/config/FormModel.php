@@ -67,7 +67,11 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
                 // collect text if child is a <path> node
                 if( 'path' === $name ){
                     $file = $this->evaluateFileElement($child);
-                    $texts[] = $file->getRelativePath( $this->getDirectoryPath() );
+                    $path = $file->getRelativePath( $this->getDirectoryPath() );
+                    if( '' === $path ){
+                        $path = '.';
+                    }
+                    $texts[] = $path;
                 }
                 // else could be simple key to next depth
                 else if( is_array($branch[$name]) ){
@@ -93,7 +97,14 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
         }
         // set compiled path values if any collected
         if( $texts ){
-            $branch['path'] = implode("\n", $texts );
+            $value = implode("\n", $texts );
+            // display single root path as empty, but not when additional paths defined
+            if( '.' === $value ){
+                $branch['path'] = '';
+            }
+            else {
+                $branch['path'] = $value;
+            }
         }
         return $branch;
     }
