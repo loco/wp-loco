@@ -87,6 +87,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.12-dev
 * Minor fix for root path configs
+* Added alternative PHP extensions setting
 
 = 2.0.11 =
 * Extra debug logging and error diagnostics

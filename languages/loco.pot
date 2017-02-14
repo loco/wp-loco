@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-01 11:09+0000\n"
+"POT-Creation-Date: 2017-02-14 16:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -992,7 +992,7 @@ msgstr ""
 msgid "Translator credit"
 msgstr ""
 
-#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:108
+#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:114
 msgid "Save settings"
 msgstr ""
 
@@ -1016,31 +1016,35 @@ msgstr ""
 msgid "Skip PHP files larger than:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:51 tpl/admin/config/settings.php:55
+#: tpl/admin/config/settings.php:49
+msgid "Alternative PHP file extensions:"
+msgstr ""
+
+#: tpl/admin/config/settings.php:57 tpl/admin/config/settings.php:61
 msgid "Backing up PO files"
 msgstr ""
 
-#: tpl/admin/config/settings.php:59
+#: tpl/admin/config/settings.php:65
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:67 tpl/admin/config/settings.php:71
+#: tpl/admin/config/settings.php:73 tpl/admin/config/settings.php:77
 msgid "File system credentials"
 msgstr ""
 
-#: tpl/admin/config/settings.php:76
+#: tpl/admin/config/settings.php:82
 msgid "Remember in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:81
+#: tpl/admin/config/settings.php:87
 msgid "See security notes"
 msgstr ""
 
-#: tpl/admin/config/settings.php:87
+#: tpl/admin/config/settings.php:93
 msgid "Grant access to roles"
 msgstr ""
 
-#: tpl/admin/config/settings.php:91
+#: tpl/admin/config/settings.php:97
 msgid "Allow full access to these roles"
 msgstr ""
 

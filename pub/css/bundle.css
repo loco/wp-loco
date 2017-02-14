@@ -1,1 +1,15 @@
-table.wp-list-table td>a,table.wp-list-table td>time{display:inline-block;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;-o-text-overflow:ellipsis;-ms-text-overflow:ellipsis}form.loco-filter{float:right}@media only screen and (max-width: 1024px){table.wp-list-table a.row-title{max-width:100px}}
+/** Bundle overview screen showing project listings */
+/* line 9, httpdocs/static/sass/wp/bundle.scss */
+table.wp-list-table td > a, table.wp-list-table td > time { display: inline-block; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; -o-text-overflow: ellipsis; -ms-text-overflow: ellipsis; }
+
+/* line 18, httpdocs/static/sass/wp/bundle.scss */
+form.loco-filter { float: right; }
+
+@media only screen and (max-width: 1024px) { /* line 23, httpdocs/static/sass/wp/bundle.scss */
+  table.wp-list-table { /*/ collapse progress down to just text - no progress bar
+div.progress .t { display: none;
+}*/ }
+  /* line 25, httpdocs/static/sass/wp/bundle.scss */
+  table.wp-list-table a.row-title { max-width: 100px; } }
+
+/*# sourceMappingURL=bundle.css.map */

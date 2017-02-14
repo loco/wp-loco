@@ -1,1 +1,16 @@
-form#loco-poinit .loco-locales fieldset{float:left;margin-right:2em}form#loco-poinit .loco-locales fieldset.disabled span.lang{visibility:hidden !important}form#loco-poinit .loco-locales fieldset span.nolang{background:#999}form#loco-poinit .loco-locales fieldset>label span{width:20px;text-align:center;display:inline-block;margin-right:4px}form#loco-poinit .loco-paths label>span{width:20px;display:inline-block}
+/** styles for po init screen */
+/* line 4, httpdocs/static/sass/wp/poinit.scss */
+form#loco-poinit { /*tbody.disabled { opacity: 0.2;
+}*/ }
+/* line 7, httpdocs/static/sass/wp/poinit.scss */
+form#loco-poinit .loco-locales fieldset { float: left; margin-right: 2em; }
+/* line 10, httpdocs/static/sass/wp/poinit.scss */
+form#loco-poinit .loco-locales fieldset.disabled span.lang { visibility: hidden !important; }
+/* line 13, httpdocs/static/sass/wp/poinit.scss */
+form#loco-poinit .loco-locales fieldset span.nolang { background: #999; }
+/* line 18, httpdocs/static/sass/wp/poinit.scss */
+form#loco-poinit .loco-locales fieldset > label span { width: 20px; text-align: center; display: inline-block; margin-right: 4px; }
+/* line 34, httpdocs/static/sass/wp/poinit.scss */
+form#loco-poinit .loco-paths label > span { width: 20px; display: inline-block; }
+
+/*# sourceMappingURL=poinit.css.map */

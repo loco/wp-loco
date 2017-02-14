@@ -322,7 +322,11 @@ class Loco_package_Project {
     private function getSourceFinder(){
         if( ! $this->source ){    
             $source = new Loco_fs_FileFinder;
-            $source->setRecursive(true)->group('php');
+            // .php extensions configured in plugin options
+            $conf = Loco_data_Settings::get();
+            $exts = $conf->php_alias or $exts = array('php');
+            $source->setRecursive(true)->groupBy( $exts );
+            /* @var $file Loco_fs_File */
             foreach( $this->spaths as $file ){
                 $path = realpath( (string) $file );    
                 if( $path && is_dir($path) ){
@@ -580,8 +584,10 @@ class Loco_package_Project {
         // augment file list from directories unless already done so
         if( ! $source->isCached() ){
             $crawled = $source->exportGroups();
-            foreach( $crawled['php'] as $file ){
-                $this->sfiles->add($file);
+            foreach( $crawled as $ext => $files ){
+                foreach( $files as $file ){
+                    $this->sfiles->add($file);
+                }
             }
         }
         return $this->sfiles;

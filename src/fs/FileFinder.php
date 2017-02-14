@@ -184,10 +184,19 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
      * @return Loco_fs_FileFinder
      */
     public function group(){
+        return $this->groupBy( func_get_args() );
+    }
+
+
+    /**
+     * Group results by file extensions given in array
+     * @return Loco_fs_FileFinder
+     */
+    public function groupBy( array $exts ){
         $this->invalidate();
         $this->exts = array();
-        foreach( func_get_args() as $ext ){
-            $this->exts[$ext] = new Loco_fs_FileList;
+        foreach( $exts as $ext ){
+            $this->exts[ trim($ext,'*.') ] = new Loco_fs_FileList;
         }
         return $this;
     }

@@ -1,1 +1,13 @@
-#loco.wrap .notice-info dl{margin-top:0;display:inline-block}#loco.wrap .notice-info dl dt,#loco.wrap .notice-info dl dd{line-height:1.4em}#loco.wrap .notice-info dl dt{font-weight:bold;color:#555}#loco.wrap .notice-info dl dd{margin-left:0;margin-bottom:0.8em}#loco.wrap .notice-info dl div.progress .l{display:none}
+/** PO file info panel */
+/* line 7, httpdocs/static/sass/wp/fileinfo.scss */
+#loco.wrap .notice-info dl { margin-top: 0; display: inline-block; }
+/* line 9, httpdocs/static/sass/wp/fileinfo.scss */
+#loco.wrap .notice-info dl dt, #loco.wrap .notice-info dl dd { line-height: 1.4em; }
+/* line 12, httpdocs/static/sass/wp/fileinfo.scss */
+#loco.wrap .notice-info dl dt { font-weight: bold; color: #555; }
+/* line 16, httpdocs/static/sass/wp/fileinfo.scss */
+#loco.wrap .notice-info dl dd { margin-left: 0; margin-bottom: 0.8em; }
+/* line 23, httpdocs/static/sass/wp/fileinfo.scss */
+#loco.wrap .notice-info dl div.progress .l { display: none; }
+
+/*# sourceMappingURL=fileinfo.css.map */

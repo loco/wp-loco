@@ -42,7 +42,13 @@ $this->extend('../layout');
                                 <label for="loco--max_php_size">
                                     <?php esc_html_e('Skip PHP files larger than:','loco')?> 
                                 </label>
-                                <input type="text" size="5" name="opts[max_php_size]" id="loco--max_php_size" value="<?php echo esc_attr( $opts->max_php_size)?>" />
+                                <input type="text" size="5" name="opts[max_php_size]" id="loco--max_php_size" value="<?php echo esc_attr( $opts->max_php_size)?>" placeholder="100K" />
+                            </p>
+                            <p>
+                                <label for="loco--php_alias">
+                                    <?php esc_html_e('Alternative PHP file extensions:','loco')?> 
+                                </label>
+                                <input type="text" name="opts[php_alias]" id="loco--php_alias" value="<?php echo esc_attr( implode(' ',$opts->php_alias) )?>" placeholder="php" />
                             </p>
                         </fieldset>
                     </td>
