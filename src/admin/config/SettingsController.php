@@ -11,9 +11,10 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
     public function init(){
         parent::init();
         
-        // plugin settings
+        // set current plugin options and defaults for placeholders
         $opts = Loco_data_Settings::get();
         $this->set( 'opts', $opts );
+        $this->set( 'dflt', Loco_data_Settings::create() );
         
         // roles and capabilities
         $perms = new Loco_data_Permissions;

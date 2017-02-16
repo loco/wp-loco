@@ -199,7 +199,7 @@ class Loco_package_Project {
         $name = $this->getDomain()->getName();
         // default if slug matches text domain.
         // else special case for Core "default" domain which has empty slug
-        return $slug === $name || ( 'default' === $name && '' === $slug );
+        return $slug === $name || ( 'default' === $name && '' === $slug ) || 1 === count($this->bundle);
     }
 
 
@@ -545,8 +545,8 @@ class Loco_package_Project {
                 }
             }
         }
-        // Failed to find correctly named POT file.
-        // if a single POT file is found letuse it
+        // Failed to find correctly named POT file,
+        // but if a single POT file is found we'll use it.
         if( 1 === count($files['pot']) ){
             return $files['pot'][0];
         }

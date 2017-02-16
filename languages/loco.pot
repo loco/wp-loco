@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-02-14 16:50+0000\n"
+"POT-Creation-Date: 2017-02-16 12:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -393,7 +393,7 @@ msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:63 src/admin/config/PrefsController.php:48
-#: src/admin/config/SettingsController.php:68
+#: src/admin/config/SettingsController.php:69
 #: src/admin/config/VersionController.php:35 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
 msgstr ""
@@ -587,7 +587,7 @@ msgid "Version"
 msgstr ""
 
 #: src/admin/config/PrefsController.php:32
-#: src/admin/config/SettingsController.php:30
+#: src/admin/config/SettingsController.php:31
 msgid "Settings saved"
 msgstr ""
 
@@ -992,7 +992,7 @@ msgstr ""
 msgid "Translator credit"
 msgstr ""
 
-#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:114
+#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:127
 msgid "Save settings"
 msgstr ""
 
@@ -1017,34 +1017,42 @@ msgid "Skip PHP files larger than:"
 msgstr ""
 
 #: tpl/admin/config/settings.php:49
-msgid "Alternative PHP file extensions:"
+msgid "Scan PHP files with extensions:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:57 tpl/admin/config/settings.php:61
+#: tpl/admin/config/settings.php:57
+msgid "POT template files"
+msgstr ""
+
+#: tpl/admin/config/settings.php:62
+msgid "Look for non-standard names:"
+msgstr ""
+
+#: tpl/admin/config/settings.php:70 tpl/admin/config/settings.php:74
 msgid "Backing up PO files"
 msgstr ""
 
-#: tpl/admin/config/settings.php:65
+#: tpl/admin/config/settings.php:78
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:73 tpl/admin/config/settings.php:77
+#: tpl/admin/config/settings.php:86 tpl/admin/config/settings.php:90
 msgid "File system credentials"
 msgstr ""
 
-#: tpl/admin/config/settings.php:82
+#: tpl/admin/config/settings.php:95
 msgid "Remember in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:87
+#: tpl/admin/config/settings.php:100
 msgid "See security notes"
 msgstr ""
 
-#: tpl/admin/config/settings.php:93
+#: tpl/admin/config/settings.php:106
 msgid "Grant access to roles"
 msgstr ""
 
-#: tpl/admin/config/settings.php:97
+#: tpl/admin/config/settings.php:110
 msgid "Allow full access to these roles"
 msgstr ""
 
