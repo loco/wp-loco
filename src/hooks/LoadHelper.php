@@ -57,8 +57,17 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @return void
      */
     public function on_load_textdomain( $domain, $mopath ){
-        // avoid recursion when we've already handled this domain
-        if( $this->lock && isset($this->lock[$domain]) ){
+        $key = '';
+        // domains may be split into multiple files
+        $name = pathinfo( $mopath, PATHINFO_FILENAME );
+        if( $lpos = strrpos( $name, '-') ){
+            $slug = substr( $name, 0, $lpos );
+            if( $slug !== $domain ){
+                $key = $slug;
+            }
+        }
+        // avoid recursion when we've already handled this domain/slug
+        if( isset($this->lock[$domain][$key]) ){
             return;
         }
         // language roots
@@ -90,7 +99,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         }
         
         // Load our custom translations avoiding recursion back into this hook
-        $this->lock[$domain] = true;
+        $this->lock[$domain][$key] = true;
         load_textdomain( $domain, $mopath );
     }
 

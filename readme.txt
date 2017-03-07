@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.7.2
+Tested up to: 4.7.3
 Stable tag: 2.0.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -88,6 +88,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.12-dev
 * Minor fix for root path configs
 * Added alternative PHP extensions setting
+* Bumped WP version to 4.7.3
+* LoadHelper fix for core files
 
 = 2.0.11 =
 * Extra debug logging and error diagnostics

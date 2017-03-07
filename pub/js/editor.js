@@ -94,14 +94,14 @@
 
 
     function debugMerge( console, result ){
-         var i = -1;
-         while( ++i < result.add.length ){
+         var i = -1, t = result.add.length;
+         while( ++i < t ){
              console.log(' + '+result.add[i].source() );
          }
-         i = -1;
-         while( ++i < result.del.length ){
+         i = -1, t = result.del.length;
+         while( ++i < t ){
              console.log(' - '+result.del[i].source() );
-         }        
+         }
     }
 
 
