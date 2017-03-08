@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-08 13:40+0000\n"
+"POT-Creation-Date: 2017-03-08 17:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -25,11 +25,11 @@ msgstr ""
 msgid "Invalid locale"
 msgstr ""
 
-#: src/admin/Navigation.php:41 src/mvc/AdminRouter.php:45
+#: src/admin/Navigation.php:41 src/mvc/AdminRouter.php:44
 msgid "Themes"
 msgstr ""
 
-#: src/admin/Navigation.php:44 src/mvc/AdminRouter.php:50
+#: src/admin/Navigation.php:44 src/mvc/AdminRouter.php:49
 msgid "Plugins"
 msgstr ""
 
@@ -91,7 +91,7 @@ msgstr ""
 msgid "XML supplied is empty"
 msgstr ""
 
-#: src/data/Permissions.php:111
+#: src/data/Permissions.php:149
 msgctxt "User role"
 msgid "Translator"
 msgstr ""
@@ -360,54 +360,54 @@ msgid "Loco Translate is powered by"
 msgstr ""
 
 #. Name of the plugin
-#: src/mvc/AdminRouter.php:38
+#: src/mvc/AdminRouter.php:37
 msgid "Loco Translate"
 msgstr ""
 
 #. Page title for plugin home screen
-#: src/mvc/AdminRouter.php:40
+#: src/mvc/AdminRouter.php:39
 msgid "Loco, Translation Management"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:43
+#: src/mvc/AdminRouter.php:42
 msgid "Home"
 msgstr ""
 
 #. Page title for theme translations
-#: src/mvc/AdminRouter.php:47
+#: src/mvc/AdminRouter.php:46
 msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
 #. Page title for plugin translations
-#: src/mvc/AdminRouter.php:52
+#: src/mvc/AdminRouter.php:51
 msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:55
+#: src/mvc/AdminRouter.php:54
 msgid "WordPress"
 msgstr ""
 
 #. Page title for core WordPress translations
-#: src/mvc/AdminRouter.php:57
+#: src/mvc/AdminRouter.php:56
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:62 src/admin/config/PrefsController.php:48
+#: src/mvc/AdminRouter.php:61 src/admin/config/PrefsController.php:48
 #: src/admin/config/SettingsController.php:77
 #: src/admin/config/VersionController.php:35 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:63 src/mvc/AdminRouter.php:68
+#: src/mvc/AdminRouter.php:62 src/mvc/AdminRouter.php:67
 msgid "Settings"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:67 src/admin/config/BaseController.php:19
+#: src/mvc/AdminRouter.php:66 src/admin/config/BaseController.php:19
 #: src/admin/config/PrefsController.php:13
 msgid "User options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:217
+#: src/mvc/AdminRouter.php:216
 msgid "Page not found"
 msgstr ""
 
