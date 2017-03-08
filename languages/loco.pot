@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-07 11:23+0000\n"
+"POT-Creation-Date: 2017-03-08 12:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "XML supplied is empty"
 msgstr ""
 
-#: src/data/Permissions.php:79
+#: src/data/Permissions.php:104
 msgctxt "User role"
 msgid "Translator"
 msgstr ""

@@ -51,7 +51,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                 'value' => '1',
                 'label' => $perms->getRoleName($id),
                 'name' => 'caps['.$id.'][loco_admin]',
-                'attrs'  => $role->has_cap('manage_options') ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
+                'attrs' => $perms->isSuperRole($role) ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
             ) );
         }
         

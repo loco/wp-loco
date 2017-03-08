@@ -1,8 +1,9 @@
 <?php
 /**
- * Abstraction of WordPress roles and capabilities and how they apply to Loco
+ * Abstraction of WordPress roles and capabilities and how they apply to Loco.
+ * 
  * - Currently only one capability exists, proving full access "loco_admin"
- * - Any user with "manage_options" permission automatically inherits this permission
+ * - Any user with super admin privileges automatically inherits this permission
  * - A single custom role is added called "translator"
  */
 class Loco_data_Permissions {
@@ -40,6 +41,18 @@ class Loco_data_Permissions {
     }
 
 
+
+    /**
+     * Check if role is super admin, and therefore should never be denied Loco access
+     * @param WP_Role WordPress role object to check
+     * @return bool
+     */
+    public function isSuperRole( WP_Role $role ){
+        return $role->has_cap('update_core');
+    }
+
+
+
     /**
      * Completely remove all Loco permissions, as if uninstalling
      * @return Loco_data_Permissions
@@ -48,7 +61,7 @@ class Loco_data_Permissions {
         /* @var $role WP_Role */
         foreach( $this->getRoles() as $role ){
             foreach( self::$caps as $cap ){
-                $role->remove_cap( $cap );
+                $role->has_cap($cap) && $role->remove_cap($cap);
             }
         }
         // we'll only remove our custom role if it has no capabilities 
@@ -63,13 +76,13 @@ class Loco_data_Permissions {
 
 
     /**
-     * Reset to default: roles include no Loco capabilities unless they have manage_options
+     * Reset to default: roles include no Loco capabilities unless they have super admin privileges
      * @return Loco_data_Permissions
      */
     public function reset(){
         /* @var $role WP_Role */
         foreach( $this->getRoles() as $role ){
-            $is_admin = $role->has_cap('manage_options');
+            $is_admin = $this->isSuperRole($role);
             foreach( self::$caps as $cap ){
                 if( $is_admin ){
                     $role->has_cap($cap) || $role->add_cap($cap);
