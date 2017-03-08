@@ -90,6 +90,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Added alternative PHP extensions setting
 * Bumped WP version to 4.7.3
 * LoadHelper fix for core files
+* Allow revoking of permissions from translator role
 
 = 2.0.11 =
 * Extra debug logging and error diagnostics

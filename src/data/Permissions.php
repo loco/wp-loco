@@ -7,9 +7,16 @@
  */
 class Loco_data_Permissions {
     
+    /**
+     * Loco capabilities applicable to roles
+     * @var array
+     */
+    private static $caps = array('loco_admin');
+    
     
     /**
      * Polyfill for wp_roles which requires WP >= 4.3
+     * @return WP_Roles
      */
     private static function wp_roles(){
         global $wp_roles;
@@ -25,7 +32,7 @@ class Loco_data_Permissions {
      */
     public function getRoles(){
         $roles = self::wp_roles();
-        // lazy create "translator" role
+        // lazy create "translator" role with loco_admin access by default
         if( ! $roles->get_role('translator') ){
             $roles->add_role( 'translator', 'Translator', array( 'loco_admin' => true ) );
         }
@@ -40,7 +47,9 @@ class Loco_data_Permissions {
     public function remove(){
         /* @var $role WP_Role */
         foreach( $this->getRoles() as $role ){
-            $role->remove_cap('loco_admin');
+            foreach( self::$caps as $cap ){
+                $role->remove_cap( $cap );
+            }
         }
         // we'll only remove our custom role if it has no capabilities 
         // this avoids breaking other plugins that use it, or added it.
@@ -54,17 +63,20 @@ class Loco_data_Permissions {
 
 
     /**
-     * Reset to default: roles include no Loco capabilities unless they have manage_options or are custom "translator" role
+     * Reset to default: roles include no Loco capabilities unless they have manage_options
      * @return Loco_data_Permissions
      */
     public function reset(){
         /* @var $role WP_Role */
         foreach( $this->getRoles() as $role ){
-            if( $role->has_cap('manage_options') || 'translator' === $role->name ){
-                $role->add_cap('loco_admin');
-            }
-            else {
-                $role->remove_cap('loco_admin');
+            $is_admin = $role->has_cap('manage_options');
+            foreach( self::$caps as $cap ){
+                if( $is_admin ){
+                    $role->has_cap($cap) || $role->add_cap($cap);
+                }
+                else {
+                    $role->has_cap($cap) && $role->remove_cap($cap);
+                }
             }
         }
         return $this;
@@ -98,9 +110,10 @@ class Loco_data_Permissions {
         foreach( $caps as $id => $checked ){
             if( isset($roles[$id]) ){
                 $role = $roles[$id];
-                foreach( array('loco_admin') as $cap ){
-                    if( ! empty($checked[$cap]) && ! $role->has_cap($cap) ){
-                        $role->add_cap($cap);
+                /* @var $role WP_Role */
+                foreach( self::$caps as $cap ){
+                    if( ! empty($checked[$cap]) ){
+                        $role->has_cap($cap) || $role->add_cap($cap);
                     }
                 } 
             }
