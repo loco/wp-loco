@@ -22,10 +22,9 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         $user = wp_get_current_user();
         $super = is_super_admin( $user->ID );
         
-        // avoid admin lockout before permissions can be initialized
-        if( $super && ! $user->has_cap($cap) ){
-            $perms = new Loco_data_Permissions;
-            $perms->reset();
+        // Ensure Loco permissions are set up for the first time, or nobody will have access at all
+        if( ! get_role('translator') || ( $super && ! is_multisite() && ! $user->has_cap($cap) ) ){
+            Loco_data_Permissions::init();
             $user->get_role_caps(); // <- rebuild
         }
 

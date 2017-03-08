@@ -28,15 +28,49 @@ class Loco_data_Permissions {
     }
 
 
+
+    /**
+     * Set up default roles and capabilities
+     * @return WP_Roles
+     */
+    public static function init(){
+        $roles = self::wp_roles();
+        $apply = array();
+        // absense of translator role indicates first run
+        // by default we'll initially allow full access to anyone that can manage_options
+        if( ! $roles->get_role('translator') ){
+            // lazy create "translator" role
+            $apply['translator'] = $roles->add_role( 'translator', 'Translator', array() );
+            /* @var $role WP_Role */
+            foreach( $roles->role_objects as $id => $role ){
+                if( $role->has_cap('manage_options') ){
+                    $apply[$id] = $role;
+                }
+            }
+        }
+        // fix broken permissions whereby super admin cannot access Loco at all.
+        // this could happen if another plugin added the translator role before hand.
+        if( ! isset($apply['administrator']) && ! is_multisite() ){
+            $apply['administrator'] = $roles->get_role('administrator');
+        }
+        /* @var $role WP_Role */
+        foreach( $apply as $role ){
+            if( $role instanceof WP_Role ){
+                foreach( self::$caps as $cap ){
+                    $role->has_cap($cap) || $role->add_cap($cap);
+                }
+            }
+        }
+        return $roles;
+    }
+
+
+
     /**
      * @return array<WP_Role>
      */
     public function getRoles(){
         $roles = self::wp_roles();
-        // lazy create "translator" role with loco_admin access by default
-        if( ! $roles->get_role('translator') ){
-            $roles->add_role( 'translator', 'Translator', array( 'loco_admin' => true ) );
-        }
         return $roles->role_objects;
     }
 
@@ -82,16 +116,20 @@ class Loco_data_Permissions {
     }
 
 
+
     /**
      * Reset to default: roles include no Loco capabilities unless they have super admin privileges
-     * @return Loco_data_Permissions
+     * @param bool whether to prevent current user from locking themselves out of the plugin.
+     * @return array<WP_Role>
      */
     public function reset(){
+        $roles = $this->getRoles();
         /* @var $role WP_Role */
-        foreach( $this->getRoles() as $role ){
-            $is_admin = $this->isProtectedRole($role);
+        foreach( $roles as $role ){
+            // always provide access to site admins on first run
+            $grant = $this->isProtectedRole($role);
             foreach( self::$caps as $cap ){
-                if( $is_admin ){
+                if( $grant ){
                     $role->has_cap($cap) || $role->add_cap($cap);
                 }
                 else {
@@ -99,7 +137,7 @@ class Loco_data_Permissions {
                 }
             }
         }
-        return $this;
+        return $roles;
     }
 
 
@@ -125,8 +163,7 @@ class Loco_data_Permissions {
      */
     public function populate( array $caps ){
         // drop all permissions before adding (cos checkboxes)
-        $this->reset();
-        $roles = $this->getRoles();
+        $roles = $this->reset();
         foreach( $caps as $id => $checked ){
             if( isset($roles[$id]) ){
                 $role = $roles[$id];
