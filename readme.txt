@@ -91,6 +91,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Bumped WP version to 4.7.3
 * LoadHelper fix for core files
 * Allow revoking of permissions from translator role
+* Allow network admins to deny access to site admins
 
 = 2.0.11 =
 * Extra debug logging and error diagnostics

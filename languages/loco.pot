@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-08 12:26+0000\n"
+"POT-Creation-Date: 2017-03-08 13:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -91,7 +91,7 @@ msgstr ""
 msgid "XML supplied is empty"
 msgstr ""
 
-#: src/data/Permissions.php:104
+#: src/data/Permissions.php:111
 msgctxt "User role"
 msgid "Translator"
 msgstr ""
@@ -392,17 +392,17 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:63 src/admin/config/PrefsController.php:48
-#: src/admin/config/SettingsController.php:69
+#: src/mvc/AdminRouter.php:62 src/admin/config/PrefsController.php:48
+#: src/admin/config/SettingsController.php:77
 #: src/admin/config/VersionController.php:35 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:64 src/mvc/AdminRouter.php:69
+#: src/mvc/AdminRouter.php:63 src/mvc/AdminRouter.php:68
 msgid "Settings"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:68 src/admin/config/BaseController.php:19
+#: src/mvc/AdminRouter.php:67 src/admin/config/BaseController.php:19
 #: src/admin/config/PrefsController.php:13
 msgid "User options"
 msgstr ""

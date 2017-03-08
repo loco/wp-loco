@@ -45,13 +45,21 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         }
 
         $this->set('caps', $caps = new Loco_mvc_ViewParams );
+        // there is no distinct role for network admin, so we'll fake it for UI
+        if( is_multisite() ){
+            $caps[''] = new Loco_mvc_ViewParams( array(
+                'label' => __('Super Admin','default'),
+                'name' => 'dummy-admin-cap',
+                'attrs' => 'checked disabled'
+            ) );
+        }
         /* @var $role WP_Role */
         foreach( $perms->getRoles() as $id => $role ){
             $caps[$id] = new Loco_mvc_ViewParams( array(
                 'value' => '1',
                 'label' => $perms->getRoleName($id),
                 'name' => 'caps['.$id.'][loco_admin]',
-                'attrs' => $perms->isSuperRole($role) ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
+                'attrs' => $perms->isProtectedRole($role) ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
             ) );
         }
         

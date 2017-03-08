@@ -43,12 +43,19 @@ class Loco_data_Permissions {
 
 
     /**
-     * Check if role is super admin, and therefore should never be denied Loco access
+     * Check if role is protected such that user cannot lock themselves out when modifying settings
      * @param WP_Role WordPress role object to check
      * @return bool
      */
-    public function isSuperRole( WP_Role $role ){
-        return $role->has_cap('update_core');
+    public function isProtectedRole( WP_Role $role ){
+        // if current user has this role and is not the super user, prevent lock-out
+        $user = wp_get_current_user();
+        if( $user instanceof WP_User && ! is_super_admin($user->ID) && $user->has_cap('manage_options') ){
+            return in_array( $role->name, $user->roles, true );
+        }
+        // admin users of single site install must never be denied access
+        // note that there is no such thing as a network admin role, but network admins have all permissions
+        return is_multisite() ? false : $role->has_cap('delete_users');
     }
 
 
@@ -82,7 +89,7 @@ class Loco_data_Permissions {
     public function reset(){
         /* @var $role WP_Role */
         foreach( $this->getRoles() as $role ){
-            $is_admin = $this->isSuperRole($role);
+            $is_admin = $this->isProtectedRole($role);
             foreach( self::$caps as $cap ){
                 if( $is_admin ){
                     $role->has_cap($cap) || $role->add_cap($cap);
