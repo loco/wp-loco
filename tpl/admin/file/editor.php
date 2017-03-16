@@ -65,8 +65,8 @@ echo $header;
             </form>
         </nav>
         
-        <div id="loco-editor-inner" class="loco-editor loading">
-            <span>Loading..</span>
+        <div id="loco-editor-inner">
+            <div class="loco-loading"></div>
         </div>
         
     </div>

@@ -38,7 +38,6 @@
     ;
 
 
-
     /**
      * 
      */
@@ -159,11 +158,11 @@
         }        
         function think(){
             disable();
-            $(button).addClass('loading');
+            $(button).addClass('loco-loading');
         }
         function unthink(){
             enable();
-            $(button).removeClass('loading');
+            $(button).removeClass('loco-loading');
         }
         saveParams = $.extend( { path: filePath }, conf.project||{} );
 
@@ -189,11 +188,11 @@
             }
             function think(){
                 disable();
-                $(button).addClass('loading');
+                $(button).addClass('loco-loading');
             }
             function unthink(){
                 enable();
-                $(button).removeClass('loading');
+                $(button).removeClass('loco-loading');
             }
             // Only permit sync when document is saved
             editor

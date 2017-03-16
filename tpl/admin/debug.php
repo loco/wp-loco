@@ -12,5 +12,5 @@ $this->extend('layout');
     ?> 
 
     <form>
-        <button class="button button-primary button-large has-icon icon-save loading" disabled>Test spinner</button>
+        <button class="button button-primary button-large has-icon icon-save loco-loading" disabled>Test spinner</button>
     </form>

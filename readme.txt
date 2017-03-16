@@ -85,6 +85,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.13-dev
+* CSS conflict fixes
+
 = 2.0.12
 * Minor fix for root path configs
 * Added alternative PHP extensions setting

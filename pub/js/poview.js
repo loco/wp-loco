@@ -9,7 +9,7 @@
         $modal;
 
     // OK to show view now. mat have taken long to render
-    $(view).removeClass('loading');
+    $(view).removeClass('loco-loading');
 
     // resize function fits scrollable viewport, accounting for headroom and touching bottom of screen.
     var resize = function(){
@@ -49,7 +49,7 @@
         var link = event.target;
         if( link.hasAttribute('href') ){
             event.preventDefault();
-            getModal().html('<div class="loading"></div>').dialog('option','title','Loading..').off('dialogopen').dialog('open').on('dialogopen',onModalOpen);
+            getModal().html('<div class="loco-loading"></div>').dialog('option','title','Loading..').off('dialogopen').dialog('open').on('dialogopen',onModalOpen);
             var postdata = $.extend( { ref:link.textContent, path:conf.popath }, conf.project||{} );
             loco.ajax.post( 'fsReference', postdata, onRefSource, onRefError );
             return false;
