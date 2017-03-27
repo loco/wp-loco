@@ -45,7 +45,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
      *
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->view('tab-file-delete'),
+            __('Overview','default') => $this->viewSnippet('tab-file-delete'),
         );
     }*/
 

@@ -9,7 +9,7 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
      */
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->view('tab-home'),
+            __('Overview','default') => $this->viewSnippet('tab-home'),
         );
     }
 

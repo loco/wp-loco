@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-16 17:49+0000\n"
+"POT-Creation-Date: 2017-03-27 16:40+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -97,6 +97,7 @@ msgid "Translator"
 msgstr ""
 
 #: src/error/Debug.php:19 src/admin/bundle/BaseController.php:104
+#: src/admin/config/BaseController.php:23
 msgid "Debug"
 msgstr ""
 
@@ -351,11 +352,11 @@ msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
-#: src/mvc/AdminController.php:45
+#: src/mvc/AdminController.php:46
 msgid "Help & support"
 msgstr ""
 
-#: src/mvc/AdminController.php:102
+#: src/mvc/AdminController.php:109
 msgid "Loco Translate is powered by"
 msgstr ""
 
@@ -407,7 +408,7 @@ msgstr ""
 msgid "User options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:216
+#: src/mvc/AdminRouter.php:217
 msgid "Page not found"
 msgstr ""
 
@@ -584,6 +585,10 @@ msgstr ""
 #: src/admin/config/BaseController.php:20
 #: src/admin/config/VersionController.php:13
 msgid "Version"
+msgstr ""
+
+#: src/admin/config/DebugController.php:13
+msgid "System diagnostics"
 msgstr ""
 
 #: src/admin/config/PrefsController.php:32

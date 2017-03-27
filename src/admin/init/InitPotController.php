@@ -22,7 +22,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
      */
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->view('tab-init-pot'),
+            __('Overview','default') => $this->viewSnippet('tab-init-pot'),
         );
     }
     

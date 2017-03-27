@@ -19,6 +19,9 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
                 'user'  => __('User options','loco'),
                 'version'  => __('Version','loco'),
             );
+            if( loco_debugging() ){
+                $actions['debug'] = __('Debug','loco');
+            }
             $suffix = (string) $this->get('action');
             foreach( $actions as $action => $name ){
                 $href = Loco_mvc_AdminRouter::generate( 'config-'.$action, $_GET );
@@ -34,7 +37,7 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
      */
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->view('tab-settings'),
+            __('Overview','default') => $this->viewSnippet('tab-settings'),
         );
     }
     

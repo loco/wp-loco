@@ -166,6 +166,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             // site-wide plugin configurations
             'config' => 'config_Settings',
             'config-user' => 'config_Prefs',
+            'config-debug' => 'config_Debug',
             'config-version' => 'config_Version',
             // bundle type listings
             'theme'  => 'list_Themes',
@@ -220,7 +221,12 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
         catch( Exception $e ){
             $ctrl = new Loco_admin_ErrorController;
-            $ctrl->_init( array() );
+            try {
+                $ctrl->_init( array() );
+            }
+            catch( Exception $_e ){
+                // avoid errors during error rendering
+            }
             echo $ctrl->renderError($e);
         }
         // ensure session always shutdown cleanly after render
