@@ -32,6 +32,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'fs_persist' => false,
         // skip PHP source files this size or larger
         'max_php_size' => '100K',
+        // whether to prepend PO and POT files with UTF-8 byte order mark
+        'po_utf8_bom' => false,
         /*/ Legacy options from 1.x branch:
         // whether to use external msgfmt command (1), or internal (default)
         'use_msgfmt' => false,

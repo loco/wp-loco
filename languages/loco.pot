@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-03-27 16:40+0000\n"
+"POT-Creation-Date: 2017-03-28 12:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -58,15 +58,15 @@ msgstr ""
 msgid "PO file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:88 src/ajax/SaveController.php:106
+#: src/ajax/SaveController.php:88 src/ajax/SaveController.php:105
 msgid "POT file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:97
+#: src/ajax/SaveController.php:96
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:101
+#: src/ajax/SaveController.php:100
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
@@ -997,67 +997,71 @@ msgstr ""
 msgid "Translator credit"
 msgstr ""
 
-#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:127
+#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:133
 msgid "Save settings"
 msgstr ""
 
 #: tpl/admin/config/settings.php:13 tpl/admin/config/settings.php:17
-msgid "Compiling MO files"
+msgid "Saving PO/POT files"
 msgstr ""
 
 #: tpl/admin/config/settings.php:22
-msgid "Generate hash tables"
+msgid "Add UTF-8 byte order mark (BOM)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:28
-msgid "Include Fuzzy strings"
-msgstr ""
-
-#: tpl/admin/config/settings.php:35 tpl/admin/config/settings.php:39
-msgid "Extracting strings"
-msgstr ""
-
-#: tpl/admin/config/settings.php:43
-msgid "Skip PHP files larger than:"
-msgstr ""
-
-#: tpl/admin/config/settings.php:49
-msgid "Scan PHP files with extensions:"
-msgstr ""
-
-#: tpl/admin/config/settings.php:57
-msgid "POT template files"
-msgstr ""
-
-#: tpl/admin/config/settings.php:62
-msgid "Look for non-standard names:"
-msgstr ""
-
-#: tpl/admin/config/settings.php:70 tpl/admin/config/settings.php:74
-msgid "Backing up PO files"
-msgstr ""
-
-#: tpl/admin/config/settings.php:78
+#: tpl/admin/config/settings.php:27
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:86 tpl/admin/config/settings.php:90
+#: tpl/admin/config/settings.php:35 tpl/admin/config/settings.php:39
+msgid "Compiling MO files"
+msgstr ""
+
+#: tpl/admin/config/settings.php:44
+msgid "Generate hash tables"
+msgstr ""
+
+#: tpl/admin/config/settings.php:50
+msgid "Include Fuzzy strings"
+msgstr ""
+
+#: tpl/admin/config/settings.php:57 tpl/admin/config/settings.php:61
+msgid "Extracting strings"
+msgstr ""
+
+#: tpl/admin/config/settings.php:65
+msgid "Skip PHP files larger than:"
+msgstr ""
+
+#: tpl/admin/config/settings.php:71
+msgid "Scan PHP files with extensions:"
+msgstr ""
+
+#: tpl/admin/config/settings.php:79
+msgid "POT template files"
+msgstr ""
+
+#: tpl/admin/config/settings.php:84
+msgid "Look for non-standard names:"
+msgstr ""
+
+#: tpl/admin/config/settings.php:92 tpl/admin/config/settings.php:96
 msgid "File system credentials"
 msgstr ""
 
-#: tpl/admin/config/settings.php:95
+#: tpl/admin/config/settings.php:101
 msgid "Remember in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:100
+#: tpl/admin/config/settings.php:106
 msgid "See security notes"
 msgstr ""
 
-#: tpl/admin/config/settings.php:106
+#: tpl/admin/config/settings.php:112
 msgid "Grant access to roles"
 msgstr ""
 
-#: tpl/admin/config/settings.php:110
+#: tpl/admin/config/settings.php:116
 msgid "Allow full access to these roles"
 msgstr ""
 

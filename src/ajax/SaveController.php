@@ -64,7 +64,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         }
                 
         // commit file directly to disk
-        $bytes = $pofile->putContents( $data );
+        $bytes = $pofile->putContents( $data->msgcat() );
         $mtime = $pofile->modified();
 
         // push recent items on file creation
@@ -90,9 +90,8 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         // Compile MO file unless saving template
         if( $locale ){
             try {
-                $data = $data->msgfmt();
                 $mofile = $pofile->cloneExtension('mo');
-                $bytes = $mofile->putContents( $data );
+                $bytes = $mofile->putContents( $data->msgfmt() );
                 $this->set( 'mobytes', $bytes );
                 Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco') );
             }

@@ -93,7 +93,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
 
         $data->localize( $locale, $headers );
 
-        $posize = $pofile->putContents( (string) $data );
+        $posize = $pofile->putContents( $data->msgcat() );
         $mosize = $mofile->putContents( $data->msgfmt() );
         
         // set debug response data

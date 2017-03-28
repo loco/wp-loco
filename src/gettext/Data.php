@@ -82,6 +82,21 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
+     * Get final UTF-8 string for writing to file
+     * @return string
+     */
+    public function msgcat(){
+        $po = (string) $this;
+        // Prepend byte order mark only if configured
+        if( Loco_data_Settings::get()->po_utf8_bom ){
+            $po = "\xEF\xBB\xBF".$po;
+        }
+        return $po;
+    }
+
+
+
+    /**
      * @return array
      */
     public function jsonSerialize(){
