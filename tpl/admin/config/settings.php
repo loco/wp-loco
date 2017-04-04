@@ -10,28 +10,6 @@ $this->extend('../layout');
         <table class="form-table">
             <tbody>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Saving PO/POT files','loco')?></th>
-                    <td>
-                        <fieldset>
-                            <legend class="screen-reader-text">
-                                <span><?php esc_html_e('Saving PO/POT files','loco')?></span>
-                            </legend>
-                            <p>
-                                <label for="loco--po-utf8-bom">
-                                    <input type="checkbox" name="opts[po_utf8_bom]" value="1" id="loco--po-utf8-bom"<?php echo $opts->po_utf8_bom?' checked':''?> />
-                                    <?php esc_html_e('Add UTF-8 byte order mark (BOM)','loco')?> 
-                                </label>
-                            </p>
-                            <p>
-                                <label for="loco--num-backups">
-                                    <?php esc_html_e('Number of backups to keep of each file:','loco')?> 
-                                </label>
-                                <input type="number" min="0" max="99" size="2" name="opts[num_backups]" id="loco--num_backups" value="<?php printf('%u',$opts->num_backups)?>" />
-                            </p>
-                        </fieldset>
-                    </td>
-                </tr>
-                <tr>
                     <th scope="row"><?php esc_html_e('Compiling MO files','loco')?></th>
                     <td>
                         <fieldset>
@@ -74,7 +52,29 @@ $this->extend('../layout');
                             </p>
                         </fieldset>
                     </td>
-                </tr>                
+                </tr>
+                <tr>
+                    <th scope="row"><?php esc_html_e('Saving PO/POT files','loco')?></th>
+                    <td>
+                        <fieldset>
+                            <legend class="screen-reader-text">
+                                <span><?php esc_html_e('Saving PO/POT files','loco')?></span>
+                            </legend>
+                            <p>
+                                <label for="loco--num-backups">
+                                    <?php esc_html_e('Number of backups to keep of each file:','loco')?> 
+                                </label>
+                                <input type="number" min="0" max="99" size="2" name="opts[num_backups]" id="loco--num_backups" value="<?php printf('%u',$opts->num_backups)?>" />
+                            </p>
+                            <p>
+                                <label for="loco--po-utf8-bom">
+                                    <input type="checkbox" name="opts[po_utf8_bom]" value="1" id="loco--po-utf8-bom"<?php echo $opts->po_utf8_bom?' checked':''?> />
+                                    <?php esc_html_e('Add UTF-8 byte order mark','loco')?> (<?php esc_html_e('Not recommended','loco')?>) 
+                                </label>
+                            </p>
+                        </fieldset>
+                    </td>
+                </tr>
                 <!--tr>
                     <th scope="row"><?php esc_html_e('POT template files','loco')?></th>
                     <td>

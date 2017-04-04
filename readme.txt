@@ -87,6 +87,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.13-dev
 * CSS conflict fixes
+* Added option for UTF-8 byte order mark
+* Printf highlighting observes no-php-format flag 
 
 = 2.0.12
 * Minor fix for root path configs

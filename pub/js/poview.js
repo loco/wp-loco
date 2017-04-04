@@ -93,7 +93,7 @@
     function onModalOpen( event, ui ){
         var div = event.target,
             line = $(div).find('li.highlighted')[0],
-            yAbs = line.offsetTop,                      // <- position of line relative to container
+            yAbs = line && line.offsetTop || 0,         // <- position of line relative to container
             yVis = Math.floor( div.clientHeight / 2 ),  // <- target position of line relative to view port
             yAdj = Math.max( 0, yAbs - yVis )           // scroll required to move line to visual position
         ;
