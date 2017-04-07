@@ -36,10 +36,13 @@ class Loco_data_Permissions {
     public static function init(){
         $roles = self::wp_roles();
         $apply = array();
-        // absense of translator role indicates first run
+        // ensure translator role has admin access
+        if( $translator = $roles->get_role('translator') ){
+            $apply['translator'] = $translator;
+        }
+        // else absense of translator role indicates first run
         // by default we'll initially allow full access to anyone that can manage_options
-        if( ! $roles->get_role('translator') ){
-            // lazy create "translator" role
+        else {
             $apply['translator'] = $roles->add_role( 'translator', 'Translator', array() );
             /* @var $role WP_Role */
             foreach( $roles->role_objects as $id => $role ){
@@ -53,10 +56,13 @@ class Loco_data_Permissions {
         if( ! isset($apply['administrator']) && ! is_multisite() ){
             $apply['administrator'] = $roles->get_role('administrator');
         }
+        // ensure all roles have admin access in addition to Loco capabilities
+        $caps = self::$caps;
+        $caps[] = 'read';
         /* @var $role WP_Role */
         foreach( $apply as $role ){
             if( $role instanceof WP_Role ){
-                foreach( self::$caps as $cap ){
+                foreach( $caps as $cap ){
                     $role->has_cap($cap) || $role->add_cap($cap);
                 }
             }
@@ -108,7 +114,7 @@ class Loco_data_Permissions {
         // we'll only remove our custom role if it has no capabilities 
         // this avoids breaking other plugins that use it, or added it.
         if( $role = get_role('translator') ){
-            if( ! $role->capabilities ){
+            if( ! $role->capabilities || array('read') === array_keys($role->capabilities) ){
                 remove_role('translator');
             }
         }

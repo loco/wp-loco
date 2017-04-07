@@ -35,6 +35,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
+        Loco_data_Permissions::init();
         self::dropOptions();
     }
 
@@ -197,6 +198,15 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     
 
    protected function login( $role = 'administrator' ){
+       
+       $wpRole = get_role($role);
+       if( ! $wpRole ){
+           throw new Exception('No such role, '.$role );
+       }
+       else if( ! $wpRole->capabilities ){
+           throw new Exception( $role.' role has no capabilities' );
+       }
+       
         $user = self::factory()->user->create( array( 'role' => $role ) );
         if( $user instanceof WP_Error ){
             foreach( $user->get_error_messages() as $message ){
