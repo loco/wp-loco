@@ -35,8 +35,10 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
-        Loco_data_Permissions::init();
         self::dropOptions();
+        // start with default permissions as if fresh install
+        remove_role('translator');
+        Loco_data_Permissions::init();
     }
 
     
