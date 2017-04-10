@@ -70,6 +70,15 @@ class Loco_data_Permissions {
 
 
     /**
+     * @internal
+     */
+    public function __construct(){
+        self::init();
+    }
+
+
+
+    /**
      * @return array<WP_Role>
      */
     public function getRoles(){

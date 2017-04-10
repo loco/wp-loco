@@ -17,7 +17,6 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         $this->set( 'dflt', Loco_data_Settings::create() );
         
         // roles and capabilities
-        Loco_data_Permissions::init();
         $perms = new Loco_data_Permissions;
 
         // handle save action 
