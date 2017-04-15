@@ -85,13 +85,13 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 2.0.13
+= 2.0.13 =
 * CSS conflict fixes
 * Added option for UTF-8 byte order mark
 * Printf highlighting observes no-php-format flag
 * Fixed issue with translator role losing “read” permission
 
-= 2.0.12
+= 2.0.12 =
 * Minor fix for root path configs
 * Added alternative PHP extensions setting
 * Bumped WP version to 4.7.3
