@@ -28,14 +28,17 @@ abstract class Loco_data_Option extends Loco_data_Serializable {
      */
     public function fetch(){
         $key = 'loco_'.$this->getKey();
-        $data = get_option( $key );
-        try {
-            $this->setUnserialized($data);
+        if( $data = get_option($key) ){
+            try {
+                $this->setUnserialized($data);
+                return true;
+            }
+            catch( InvalidArgumentException $e ){
+                // suppress validation error
+                // @codeCoverageIgnore
+            }
         }
-        catch( InvalidArgumentException $e ){
-            return false;
-        }
-        return true;
+        return false;
     }
     
     
