@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
 Tested up to: 4.7.5
-Stable tag: 2.0.13
+Stable tag: 2.0.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -80,16 +80,19 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 1. Translating strings in the browser with the Loco PO Editor
 2. Showing translation progress for theme language files
+3. PO source view with text filter and clickable file references
 
 
 
 == Changelog ==
 
-= 2.0.14-dev =
+= 2.0.14 =
 * Editor improvements inc. column sorting
 * Added warnings that legacy version will be removed
 * Added PO source view text filtering
 * Added _fs_nonce for 4.7.5 compatibility
+* Migrated to canonical text domain 
+* Removed wp class autoloading
 
 = 2.0.13 =
 * CSS conflict fixes
@@ -176,7 +179,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.13 =
+= 2.0.14 =
 * Various bug fixes and improvements
 
 

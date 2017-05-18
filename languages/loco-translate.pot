@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-18 15:26+0000\n"
+"POT-Creation-Date: 2017-05-18 16:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -478,6 +478,10 @@ msgstr ""
 #: src/package/Plugin.php:201
 #, php-format
 msgid "Plugin not found: %s"
+msgstr ""
+
+#: tpl/admin/root.php:16
+msgid "Welcome to Loco Translate"
 msgstr ""
 
 #. 1: help URL, 2: forum URL; Must be HTML encoded

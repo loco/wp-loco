@@ -13,7 +13,7 @@ $this->extend('layout');
             You can switch to <a href="<?php $params->e('rollback')?>"> version 1</a> if you want to keep using the old plugin.<br />
         </p><?php
         else:?> 
-        <h3>Welcome to Loco Translate</h3><?php
+        <h3><?php esc_attr_e('Welcome to Loco Translate','loco-translate')?></h3><?php
         endif?> 
         <p><?php 
             // translators: 1: help URL, 2: forum URL; Must be HTML encoded 
