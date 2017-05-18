@@ -21,16 +21,10 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     private static function init_l10n(){
         $domainPath = dirname( loco_plugin_self() ).'/languages';
-        $loaded = load_plugin_textdomain( 'loco-translate', false, $domainPath );
-        // note that official text domain "loco-translate" was migrated from legacy plugin in v2.0.14
-        // TODO check if transitional text domain contains v2 translations
-        /*if( ! $loaded && load_plugin_textdomain('loco',false,$domainPath) ){
-        }*/
-        return $loaded;
+        return load_plugin_textdomain( 'loco-translate', false, $domainPath );
     }
 
 
-    
     /**
      * {@inheritdoc}
      */
