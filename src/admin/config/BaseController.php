@@ -15,12 +15,12 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
             $tabs = new Loco_admin_Navigation;
             $this->set( 'tabs', $tabs );
             $actions = array (
-                ''  => __('Site options','loco'),
-                'user'  => __('User options','loco'),
-                'version'  => __('Version','loco'),
+                ''  => __('Site options','loco-translate'),
+                'user'  => __('User options','loco-translate'),
+                'version'  => __('Version','loco-translate'),
             );
             if( loco_debugging() ){
-                $actions['debug'] = __('Debug','loco');
+                $actions['debug'] = __('Debug','loco-translate');
             }
             $suffix = (string) $this->get('action');
             foreach( $actions as $action => $name ){

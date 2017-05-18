@@ -152,12 +152,12 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             // respond with deferred failure from initAjax
             if( ! $this->ctrl ){
                 $route = isset($_REQUEST['route']) ? $_REQUEST['route'] : '';
-                throw new Loco_error_Exception( sprintf( __('Ajax route not found: "%s"','loco'), $route ) );
+                throw new Loco_error_Exception( sprintf( __('Ajax route not found: "%s"','loco-translate'), $route ) );
             }
             // else execute controller to get json output
             $json = $this->ctrl->render();
             if( is_null($json) || ! isset($json{0})  ){
-                throw new Loco_error_Exception( __('Ajax controller returned empty JSON','loco') );
+                throw new Loco_error_Exception( __('Ajax controller returned empty JSON','loco-translate') );
             }
         }
         catch( Loco_error_Exception $e ){
@@ -184,12 +184,12 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         try {
             // respond with deferred failure from initAjax
             if( ! $this->ctrl ){
-                throw new Loco_error_Exception( __('Download action not found','loco') );
+                throw new Loco_error_Exception( __('Download action not found','loco-translate') );
             }
             // else execute controller to get raw output
             $data = $this->ctrl->render();
             if( is_null($data) || ! isset($data{0})  ){
-                throw new Loco_error_Exception( __('Download controller returned empty output','loco') );
+                throw new Loco_error_Exception( __('Download controller returned empty output','loco-translate') );
             }
         }
         catch( Exception $e ){

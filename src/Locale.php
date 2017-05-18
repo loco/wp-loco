@@ -202,7 +202,7 @@ class Loco_Locale implements JsonSerializable {
             }
         }
         else {
-            $this->name = __('Invalid locale','loco');
+            $this->name = __('Invalid locale','loco-translate');
         }
         return $this->name;
     }

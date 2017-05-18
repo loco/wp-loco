@@ -21,7 +21,7 @@ class Loco_admin_bundle_DebugController extends Loco_admin_bundle_BaseController
      */
     public function render(){
 
-        $this->prepareNavigation()->add( __('Bundle diagnostics','loco') );
+        $this->prepareNavigation()->add( __('Bundle diagnostics','loco-translate') );
 
         $bundle = $this->getBundle();
         $debugger = new Loco_package_Debugger($bundle);

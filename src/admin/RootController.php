@@ -20,7 +20,7 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
     public function render(){
         
         // translators: home screen title where %s is the version number
-        $this->set('title', sprintf( __('Loco Translate %s','loco'), loco_plugin_version() ) );
+        $this->set('title', sprintf( __('Loco Translate %s','loco-translate'), loco_plugin_version() ) );
 
         // user may have manually upgraded to version 2
         if( '2' === get_option('loco-branch',false) ){

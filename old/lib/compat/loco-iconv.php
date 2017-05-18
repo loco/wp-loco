@@ -10,7 +10,7 @@ function loco_compat_iconv( $in_charset, $out_charset, $str ){
 }
 
 if( ! extension_loaded('iconv') && WP_DEBUG && ( ! defined('DOING_AJAX') || ! DOING_AJAX ) ){
-    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-translate'), 'iconv' ) );
+    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-legacy'), 'iconv' ) );
 }
 
 if( ! function_exists('iconv') ){

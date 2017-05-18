@@ -25,11 +25,11 @@ endforeach;
 if( $unknown ):?> 
     <div class="loco-project">
         <div class="notice inline notice-info">
-            <h2><?php esc_html_e('Additional files found','loco')?></h2>
+            <h2><?php esc_html_e('Additional files found','loco-translate')?></h2>
             <p>
                 <?php
-                esc_html_e("This bundle isn't fully configured, so we don't know what the following files are for",'loco')?>. <?php
-                printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco'), $tabs[1]->href )?>.
+                esc_html_e("This bundle isn't fully configured, so we don't know what the following files are for",'loco-translate')?>. <?php
+                printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href )?>.
             </p>
         </div>
         <?php 
@@ -44,11 +44,11 @@ endif;
 else:?> 
 <div class="loco-project">
     <div class="notice inline notice-error">
-        <h2><?php $params->e('name')?> <span>(<?php esc_html_e('unconfigured','loco')?>)</span></h2>
+        <h2><?php $params->e('name')?> <span>(<?php esc_html_e('unconfigured','loco-translate')?>)</span></h2>
         <p>
             <?php
-            esc_html_e("This bundle isn't automatically compatible and requires configuring before you can use all the functions of Loco Translate",'loco')?>. <?php
-            printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco'), $tabs[1]->href )?>.
+            esc_html_e("This bundle isn't automatically compatible and requires configuring before you can use all the functions of Loco Translate",'loco-translate')?>. <?php
+            printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href )?>.
         </p>
     </div>
 </div><?php

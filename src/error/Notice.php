@@ -16,7 +16,7 @@ class Loco_error_Notice extends Loco_error_Exception {
      * {@inheritdoc}
      */
     public function getTitle(){
-        return __('Notice','loco');
+        return __('Notice','loco-translate');
     }
 
 

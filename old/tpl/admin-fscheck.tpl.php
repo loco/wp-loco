@@ -4,10 +4,10 @@
  * @var LocoPackage $package
  */
 $nav = array (
-    __('Packages','loco-translate') => array( 'href' => LocoAdmin::uri() ),
-    __('Settings','loco-translate') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
+    __('Packages','loco-legacy') => array( 'href' => LocoAdmin::uri() ),
+    __('Settings','loco-legacy') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
     // 
-    __('File check','loco-translate') => array( 'icon' => 'admin-tools' ),
+    __('File check','loco-legacy') => array( 'icon' => 'admin-tools' ),
 ); 
 ?>
 
@@ -16,7 +16,7 @@ $nav = array (
     <?php Loco::render('admin-nav', compact('nav') );?> 
     
     <h2>
-        <?php Loco::h( sprintf( __('File system permissions for %s','loco-translate'), $name ) )?> 
+        <?php Loco::h( sprintf( __('File system permissions for %s','loco-legacy'), $name ) )?> 
     </h2><?php
 
     /* @var $package LocoPackage */  
@@ -40,7 +40,7 @@ $nav = array (
 
     if( $warnings = $package->get_author_warnings() ):?> 
     <h2>
-        <?php Loco::h( sprintf( __('Other potential issues with %s','loco-translate'), $name ) ) ?> 
+        <?php Loco::h( sprintf( __('Other potential issues with %s','loco-legacy'), $name ) ) ?> 
     </h2>
     
     <ul class="loco-list"><?php
@@ -54,8 +54,8 @@ $nav = array (
     
     
     <p class="submit">
-        <a class="button-primary" href="<?php Loco::h( LocoAdmin::uri() )?>"><?php Loco::h( __('Back','loco-translate') )?></a>
-        <a class="button" href="https://localise.biz/help/wordpress/translate-plugin/support" target="_blank"><?php Loco::h( __('Get help','loco-translate') )?></a>
+        <a class="button-primary" href="<?php Loco::h( LocoAdmin::uri() )?>"><?php Loco::h( __('Back','loco-legacy') )?></a>
+        <a class="button" href="https://localise.biz/help/wordpress/translate-plugin/support" target="_blank"><?php Loco::h( __('Get help','loco-legacy') )?></a>
     </p>
 
     

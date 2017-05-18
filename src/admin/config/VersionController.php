@@ -10,7 +10,7 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
      */
     public function init(){
         parent::init();
-        $this->set( 'title', __('Version','loco') );
+        $this->set( 'title', __('Version','loco-translate') );
         // handle legacy degradation
         $nonce = $this->setNonce('downgrade');
         try {
@@ -32,7 +32,7 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
      */
     public function render(){
         
-        $title = __('Plugin settings','loco');
+        $title = __('Plugin settings','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
         

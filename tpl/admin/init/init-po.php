@@ -9,8 +9,8 @@ $this->extend('../layout');
     <?php if( $params->has('ext') ):?> 
     <div class="notice inline notice-info">
         <p>
-            <?php esc_html_e("You're creating translations directly from source code",'loco')?>.
-            <a href="<?php $ext->e('link')?>"><?php esc_html_e('Create template instead','loco')?></a>.
+            <?php esc_html_e("You're creating translations directly from source code",'loco-translate')?>.
+            <a href="<?php $ext->e('link')?>"><?php esc_html_e('Create template instead','loco-translate')?></a>.
         </p>
     </div><?php
     endif?> 
@@ -32,26 +32,26 @@ $this->extend('../layout');
                     <tr valign="top">
                         <th scope="row">
                             <label for="loco-select-locale">
-                                <?php esc_html_e('Choose a language','loco')?>:
+                                <?php esc_html_e('Choose a language','loco-translate')?>:
                             </label>
                         </th>
                         <td>
                             <fieldset>
                                 <label for="loco-use-selector">
                                     <span><input type="radio" name="use-selector" value="1" checked id="loco-use-selector" /></span>
-                                    <?php esc_attr_e('WordPress language','loco')?>:
+                                    <?php esc_attr_e('WordPress language','loco-translate')?>:
                                 </label>
                                 <div>
                                     <span class="lang nolang"></span>
                                     <select id="loco-select-locale" name="select-locale">
-                                        <option value=""><?php esc_attr_e('No language selected','loco')?></option>
-                                        <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco' )?>"><?php
+                                        <option value=""><?php esc_attr_e('No language selected','loco-translate')?></option>
+                                        <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco-translate' )?>"><?php
                                             /* @var Loco_mvc_ViewParams $option */
                                             foreach( $installed as $option ):?> 
                                             <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
                                             endforeach;?> 
                                         </optgroup>
-                                        <optgroup label="<?php esc_attr_e( 'Available languages', 'loco' )?>"><?php
+                                        <optgroup label="<?php esc_attr_e( 'Available languages', 'loco-translate' )?>"><?php
                                             /* @var Loco_mvc_ViewParams $option */
                                             foreach( $locales as $option ):?> 
                                             <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
@@ -63,7 +63,7 @@ $this->extend('../layout');
                             <fieldset class="disabled">
                                 <label>
                                     <span><input type="radio" name="use-selector" value="0" /></span>
-                                    <?php esc_attr_e('Custom language','loco')?>:
+                                    <?php esc_attr_e('Custom language','loco-translate')?>:
                                 </label>
                                 <div>
                                     <span class="lang nolang"></span>
@@ -77,7 +77,7 @@ $this->extend('../layout');
                     <tr valign="top">
                         <th scope="row">
                             <label>
-                                <?php esc_html_e('Choose a location','loco')?>:
+                                <?php esc_html_e('Choose a location','loco-translate')?>:
                             </label>
                         </th>
                         <td>
@@ -116,19 +116,19 @@ $this->extend('../layout');
                 <tbody>
                     <tr valign="top">
                         <th scope="row" rowspan="2">
-                            <?php esc_html_e('Template options','loco')?>:
+                            <?php esc_html_e('Template options','loco-translate')?>:
                         </th>
                         <td>
                             <p>
                                 <label>
                                     <input type="radio" name="strip" value="" />
-                                    <?php $params->f('sourceLocale', __('Copy target translations from "%s"','loco') )?> 
+                                    <?php $params->f('sourceLocale', __('Copy target translations from "%s"','loco-translate') )?> 
                                 </label>
                             </p>
                             <p>
                                 <label>
                                     <input type="radio" name="strip" value="1" checked />
-                                    <?php esc_html_e('Just copy English source strings','loco')?> 
+                                    <?php esc_html_e('Just copy English source strings','loco-translate')?> 
                                 </label>
                             </p>
                         </td>
@@ -138,7 +138,7 @@ $this->extend('../layout');
                             <p>
                                 <label>
                                     <input type="checkbox" name="link" value="1" />
-                                    <?php $params->f('sourceLocale',__('Use "%s" as template when running Sync','loco') )?> 
+                                    <?php $params->f('sourceLocale',__('Use "%s" as template when running Sync','loco-translate') )?> 
                                 </label>
                             </p>
                         </td>
@@ -148,7 +148,7 @@ $this->extend('../layout');
             </table>
     
             <p class="submit">
-                <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Start translating','loco')?></button>
+                <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Start translating','loco-translate')?></button>
             </p>
     
         </form>

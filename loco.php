@@ -6,7 +6,7 @@ Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
 Version: 2.0.14-dev
 Author URI: https://localise.biz/wordpress/plugin
-Text Domain: loco
+Text Domain: loco-translate
 Domain Path: /languages/
 */
 
@@ -137,7 +137,7 @@ function loco_check_extension( $name ){
             $cache[$name] = true;
         }
         else {
-            Loco_error_AdminNotices::warn( sprintf( __('Loco requires the "%s" PHP extension. Ask your hosting provider to install it','loco'), $name ) );
+            Loco_error_AdminNotices::warn( sprintf( __('Loco requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
             $class = 'Loco_compat_'.ucfirst($name).'Extension.php';
             $cache[$name] = class_exists( $class );
         }

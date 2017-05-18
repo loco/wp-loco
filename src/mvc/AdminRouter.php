@@ -34,37 +34,37 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         // main loco pages, hooking only if has permission
         if( $user->has_cap($cap) ){
 
-            $label = __('Loco Translate','loco');
+            $label = __('Loco Translate','loco-translate');
             // translators: Page title for plugin home screen
-            $title = __('Loco, Translation Management','loco');
+            $title = __('Loco, Translation Management','loco-translate');
             add_menu_page( $title, $label, $cap, 'loco', $render, 'dashicons-translation' );
             // alternative label for first menu item which gets repeated from top level 
-            add_submenu_page( 'loco', $title, __('Home','loco'), $cap, 'loco', $render );
+            add_submenu_page( 'loco', $title, __('Home','loco-translate'), $cap, 'loco', $render );
 
-            $label = __('Themes','loco');
+            $label = __('Themes','loco-translate');
             // translators: Page title for theme translations
-            $title = __('Theme translations &lsaquo; Loco','loco');
+            $title = __('Theme translations &lsaquo; Loco','loco-translate');
             add_submenu_page( 'loco', $title, $label, $cap, 'loco-theme', $render );
 
-            $label = __('Plugins', 'loco');
+            $label = __('Plugins', 'loco-translate');
             // translators: Page title for plugin translations
-            $title = __('Plugin translations &lsaquo; Loco','loco');
+            $title = __('Plugin translations &lsaquo; Loco','loco-translate');
             add_submenu_page( 'loco', $title, $label, $cap, 'loco-plugin', $render );
 
-            $label = __('WordPress', 'loco');
+            $label = __('WordPress', 'loco-translate');
             // translators: Page title for core WordPress translations
-            $title = __('Core translations &lsaquo; Loco', 'loco');
+            $title = __('Core translations &lsaquo; Loco', 'loco-translate');
             add_submenu_page( 'loco', $title, $label, $cap, 'loco-core', $render );
             
             // settings page only for users with manage_options permission in addition to Loco access:
             if( $user->has_cap('manage_options') ){
-                $title = __('Plugin settings','loco');
-                add_submenu_page( 'loco', $title, __('Settings','loco'), 'manage_options', 'loco-config', $render );
+                $title = __('Plugin settings','loco-translate');
+                add_submenu_page( 'loco', $title, __('Settings','loco-translate'), 'manage_options', 'loco-config', $render );
             }
             // but all users need access to user preferences which require standard Loco access permission
             else {
-                $title = __('User options','loco');
-                add_submenu_page( 'loco', $title, __('Settings','loco'), $cap, 'loco-config-user', $render );
+                $title = __('User options','loco-translate');
+                add_submenu_page( 'loco', $title, __('Settings','loco-translate'), $cap, 'loco-config-user', $render );
             }
         }
 
@@ -214,7 +214,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         try {
             // show deferred failure from initPage
             if( ! $this->ctrl ){
-                throw new Loco_error_Exception( __('Page not found','loco') );
+                throw new Loco_error_Exception( __('Page not found','loco-translate') );
             }
             // display loco admin page
             echo $this->ctrl->render();

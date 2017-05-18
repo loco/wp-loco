@@ -43,7 +43,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
                 $this->view->cd('/admin/help');
                 $tabs = $this->getHelpTabs();
                 // always append common help tabs
-                $tabs[ __('Help & support','loco') ] = $this->view->render('tab-support');
+                $tabs[ __('Help & support','loco-translate') ] = $this->view->render('tab-support');
                 // set all tabs and common side bar
                 $i = 0;
                 foreach( $tabs as $title => $content ){
@@ -106,7 +106,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      */
     public function filter_admin_footer_text(){
         $url = apply_filters('loco_external', 'https://localise.biz/');
-        return '<span id="loco-credit">'.sprintf( '<span>%s</span> <a href="%s" target="_blank">Loco</a>', esc_html(__('Loco Translate is powered by','loco')), esc_url($url) ).'</span>';
+        return '<span id="loco-credit">'.sprintf( '<span>%s</span> <a href="%s" target="_blank">Loco</a>', esc_html(__('Loco Translate is powered by','loco-translate')), esc_url($url) ).'</span>';
     }
 
     
@@ -197,14 +197,14 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $view->set( 'js', $jsConf );
         }
         // localize script if translations in memory
-        if( is_textdomain_loaded('loco') ){
+        if( is_textdomain_loaded('loco-translate') ){
             $strings = new Loco_js_Strings;
             $jsConf['wpl10n'] = $strings->compile();
             $strings->unhook();
             unset( $strings );
             // add currently loaded locale for passing plural equation into js.
             // note that plural rules come from our data, because MO is not trusted.
-            $tag = apply_filters( 'plugin_locale', get_locale(), 'loco' );
+            $tag = apply_filters( 'plugin_locale', get_locale(), 'loco-translate' );
             $jsConf['wplang'] = Loco_Locale::parse($tag);
         }
         // take benchmark for debugger to be rendered in footer

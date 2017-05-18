@@ -14,7 +14,7 @@ try {
     }
     
     if( ! current_user_can(Loco::admin_capablity()) ){
-        throw new Exception( __('User does not have permission to manage translations','loco-translate'), 403 );
+        throw new Exception( __('User does not have permission to manage translations','loco-legacy'), 403 );
     }
     
     $incphp = isset($action) ? dirname(__FILE__).'/'.$action.'.php' : '';

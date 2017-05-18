@@ -10,7 +10,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
      */
     public function render(){
         
-        $title = __('System diagnostics','loco');
+        $title = __('System diagnostics','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
         

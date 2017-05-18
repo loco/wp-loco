@@ -9,7 +9,7 @@ function loco_compat_token_get_all(){
 }
  
 if( ! extension_loaded('tokenizer') && WP_DEBUG && ( ! defined('DOING_AJAX') || ! DOING_AJAX ) ){
-    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-translate'), 'tokenizer' ) );
+    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-legacy'), 'tokenizer' ) );
 }
 
 if( ! function_exists('token_get_all') ){

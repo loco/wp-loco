@@ -21,7 +21,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         }
         /*/ just warn if file isn't writeable
         if( ! $file->writable() ){
-            $message = __("This file isn't writeable. Click the 'File info' tab for help setting the right permissions",'loco');
+            $message = __("This file isn't writeable. Click the 'File info' tab for help setting the right permissions",'loco-translate');
             Loco_error_AdminNotices::add( new Loco_error_Warning($message) ); // <- TODO add contextual help link
         }*/
         
@@ -76,10 +76,10 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         $tabs = new Loco_admin_Navigation;
         $this->set( 'tabs', $tabs );
         $actions = array (
-            'file-edit' => __('Editor','loco'),
-            'file-view' => __('Source','loco'),
-            'file-info' => __('File info','loco'),
-            'file-delete' => __('Delete','loco'),
+            'file-edit' => __('Editor','loco-translate'),
+            'file-view' => __('Source','loco-translate'),
+            'file-info' => __('File info','loco-translate'),
+            'file-delete' => __('Delete','loco-translate'),
         );
         $suffix = $this->get('action');
         $prefix = $this->get('type');
@@ -94,7 +94,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             $args = array( 'bundle' => $bundle->getHandle(), 'domain' => $project->getId() );
             $this->set( 'msginit', new Loco_mvc_ViewParams( array (
                 'href' => Loco_mvc_AdminRouter::generate( $prefix.'-msginit', $args ),
-                'text' => __('New language','loco'),
+                'text' => __('New language','loco-translate'),
             ) ) );
         }
         catch( Exception $e ){

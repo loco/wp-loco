@@ -18,4 +18,4 @@
     }
     
     
-    throw new Exception( __('Invalid data posted to server','loco-translate'), 422 );
+    throw new Exception( __('Invalid data posted to server','loco-legacy'), 422 );

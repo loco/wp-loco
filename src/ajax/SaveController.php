@@ -58,7 +58,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
                 $backups->prune($num_backups);
             }
             catch( Exception $e ){
-                $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco');
+                $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco-translate');
                 Loco_error_AdminNotices::info( sprintf( $message, $pofile->getParent()->basename() ) );
             }
         }
@@ -85,7 +85,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         $this->set('datetime', Loco_mvc_ViewParams::date_i18n($mtime) );
         
         // Intial message refers to PO/POT save success
-        $success = $locale ? __('PO file saved','loco') : __('POT file saved','loco');
+        $success = $locale ? __('PO file saved','loco-translate') : __('POT file saved','loco-translate');
         
         // Compile MO file unless saving template
         if( $locale ){
@@ -93,16 +93,16 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
                 $mofile = $pofile->cloneExtension('mo');
                 $bytes = $mofile->putContents( $data->msgfmt() );
                 $this->set( 'mobytes', $bytes );
-                Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco') );
+                Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco-translate') );
             }
             catch( Exception $e ){
                 Loco_error_AdminNotices::add( $e );
-                Loco_error_AdminNotices::info( __('PO file saved, but MO file compilation failed','loco') );
+                Loco_error_AdminNotices::info( __('PO file saved, but MO file compilation failed','loco-translate') );
                 $this->set( 'mobytes', 0 );
             }
         }
         else {
-            Loco_error_AdminNotices::success( __('POT file saved','loco') );
+            Loco_error_AdminNotices::success( __('POT file saved','loco-translate') );
         }
 
         return parent::render();

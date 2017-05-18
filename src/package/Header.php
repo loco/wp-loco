@@ -74,13 +74,13 @@ class Loco_package_Header {
             }
         }
         else {
-            $author = __('Unknown author','loco');
+            $author = __('Unknown author','loco-translate');
         }
         
         $html = sprintf( __('"%s" %s by %s','default'), esc_html($this->Name), $this->Version, $author );
         
         if( ( $link = $this->PluginURI ) || ( $link = $this->ThemeURI ) ){
-            $html .= sprintf( ' &mdash; <a href="%s" target="_blank">%s</a>', esc_url($link), __('Visit official site','loco') );
+            $html .= sprintf( ' &mdash; <a href="%s" target="_blank">%s</a>', esc_url($link), __('Visit official site','loco-translate') );
         }
         
         return $html;

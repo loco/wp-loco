@@ -10,7 +10,7 @@ $this->start('header');
         <span class="<?php echo $locale->getIcon()?>" lang="<?php echo $locale->lang?>"> </span>
         <span><?php $params->e('localeName')?>:</span>
         <span class="loco-meta">
-            <span><?php echo esc_html_x('Updated','Modified time','loco')?>:</span>
+            <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
             <span id="loco-po-modified"><?php $params->date('modified')?></span>
             &ndash;
             <span id="loco-po-status"></span>

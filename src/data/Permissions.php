@@ -158,7 +158,7 @@ class Loco_data_Permissions {
      */
     public function getRoleName( $id ){
         if( 'translator' === $id ){
-            $label = _x( 'Translator', 'User role', 'loco' );
+            $label = _x( 'Translator', 'User role', 'loco-translate' );
         }
         else {
             $names = self::wp_roles()->role_names;

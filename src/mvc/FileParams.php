@@ -132,7 +132,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
         }
         if( $time_diff < 30 ){
             // translators: relative time when something happened in the last 30 seconds
-            return __('Just now','loco');
+            return __('Just now','loco-translate');
         }
         return sprintf( __('%s ago','default'), human_time_diff($time) );
     }

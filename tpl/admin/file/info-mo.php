@@ -11,16 +11,16 @@ $this->start('header');
             <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"> </span>
             <span><?php $locale->e('name')?></span>
             <code><?php $locale->e('code')?></code>
-            <span>&mdash; <?php esc_html_e('compiled','loco')?></span>
+            <span>&mdash; <?php esc_html_e('compiled','loco-translate')?></span>
         </h3>
         <dl>
-            <dt><?php esc_html_e('File modified','loco')?>:</dt>
+            <dt><?php esc_html_e('File modified','loco-translate')?>:</dt>
             <dd><?php $file->date('mtime')?></dd>
 
-            <dt><?php esc_html_e('Last translation','loco')?>:</dt>
+            <dt><?php esc_html_e('Last translation','loco-translate')?>:</dt>
             <dd><?php $params->e('author')?> &mdash; <date><?php $params->date('potime')?></date></dd>
             
-            <dt><?php esc_html_e('Compiled translations','loco')?>:</dt>
+            <dt><?php esc_html_e('Compiled translations','loco-translate')?>:</dt>
             <dd>
                 <?php echo esc_html( $meta->getTotalSummary() )?> 
             </dd>
@@ -31,10 +31,10 @@ $this->start('header');
     if( ! $sibling->existant ):?> 
     <div class="notice inline notice-warning">
         <h3 class="has-icon">
-            <?php esc_html_e('PO file missing','loco')?> 
+            <?php esc_html_e('PO file missing','loco-translate')?> 
         </h3>
         <p>
-            <?php esc_html_e("We can't find the original PO file from which this was compiled",'loco')?>.
+            <?php esc_html_e("We can't find the original PO file from which this was compiled",'loco-translate')?>.
         </p>
     </div><?php
     endif;

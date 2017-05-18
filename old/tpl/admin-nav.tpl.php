@@ -32,11 +32,11 @@
         endforeach?> 
 
         <a href="https://localise.biz/about/gettext?<?php Loco::h( Loco::utm_query('nav') )?>" class="nav-tab nav-tab-loco" target="_blank">
-            <?php Loco::h(__('Powered by','loco-translate'))?> 
-            <?php Loco::h(__('Loco, Translation Management','loco-translate'))?> 
+            <?php Loco::h(__('Powered by','loco-legacy'))?> 
+            <?php Loco::h(__('Loco, Translation Management','loco-legacy'))?> 
         </a>
     </h2>
     
     <!--[if lt IE 9]><?php
-    LocoAdmin::warning( __( $ignore = 'Your browser is out of date!').' '.Loco::html( __('Loco may not work as expected','loco-translate') ) );
+    LocoAdmin::warning( __( $ignore = 'Your browser is out of date!').' '.Loco::html( __('Loco may not work as expected','loco-legacy') ) );
     ?><![endif]-->

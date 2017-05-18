@@ -123,7 +123,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             try {
                 $data = Loco_gettext_Data::load($file);
                 $head = $data->getHeaders();
-                $author = $head->trimmed('Last-Translator') or $author = __('Unknown author','loco');
+                $author = $head->trimmed('Last-Translator') or $author = __('Unknown author','loco-translate');
                 $this->set( 'author', $author );
                 // date headers may not be same as file modification time (files copied to server etc..)
                 $podate = $head->trimmed( $locale ? 'PO-Revision-Date' : 'POT-Creation-Date' );
@@ -143,7 +143,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 }
                 // missing or invalid headers are tollerated but developers should be notified
                 if( ! count($head) ){
-                    Loco_error_AdminNotices::debug(__('File does not have a valid header','loco'));
+                    Loco_error_AdminNotices::debug(__('File does not have a valid header','loco-translate'));
                 }
                 // establish whether PO is in sync with POT
                 if( $template && ! $isTemplate && 'po' === $ext && $template->exists() ){
@@ -160,7 +160,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 if( $locale && ( $value = $head['Language'] ) ){
                     $check = (string) Loco_Locale::parse($value);
                     if( $check !== $code ){
-                        Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco'), $value, $code ) );
+                        Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code ) );
                     }
                 }
             }

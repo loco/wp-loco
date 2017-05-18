@@ -28,7 +28,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                     $opts->populate( $post->opts )->persist();
                     $perms->populate( $post->has('caps') ? $post->caps : array() );
                     // done update
-                    Loco_error_AdminNotices::success( __('Settings saved','loco') );
+                    Loco_error_AdminNotices::success( __('Settings saved','loco-translate') );
                     // remove saved params if persistant options unset
                     if( ! $opts['fs_persist'] ){
                         $session = Loco_data_Session::get();
@@ -74,7 +74,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
      */
     public function render(){
         
-        $title = __('Plugin settings','loco');
+        $title = __('Plugin settings','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
         

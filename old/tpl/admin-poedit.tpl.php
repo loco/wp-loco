@@ -3,8 +3,8 @@
  * PO file editor screen
  */
 $nav = array (
-    __('Packages','loco-translate') => array( 'href' => LocoAdmin::uri() ),
-    __('Settings','loco-translate') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
+    __('Packages','loco-legacy') => array( 'href' => LocoAdmin::uri() ),
+    __('Settings','loco-legacy') => array( 'href' => LocoAdmin::uri( array(), 'settings' ), 'icon' => 'admin-settings' ),
     //
     $name => array( 'icon' => 'POT' === $type ? 'edit' : 'translation' ),
 );  
@@ -29,7 +29,7 @@ $modified or $pofiles[] = $path;
         <span class="<?php echo $locale->icon_class()?>"></span> <?php 
         Loco::h( $locale->get_name() )?>:<?php
         else:
-        Loco::h( __('Template file','loco-translate') )?>: <?php
+        Loco::h( __('Template file','loco-legacy') )?>: <?php
         endif;
         
         // print switcher if more than one file available
@@ -37,7 +37,7 @@ $modified or $pofiles[] = $path;
         <form action="#" class="loco-switcher">
             <select onchange="void function(u){ u && location.assign(u) }( this.options[this.options.selectedIndex].value);">
                 <option value="">
-                    <?php Loco::h(_x('Switch to...','Dropdown label','loco-translate'))?> 
+                    <?php Loco::h(_x('Switch to...','Dropdown label','loco-legacy'))?> 
                 </option><?php
                 // drop down of files in package
                 $poname = str_replace( '.mo', '.po', basename( $path ) );
@@ -54,12 +54,12 @@ $modified or $pofiles[] = $path;
         endif?> 
         
         <span class="loco-meta">
-            <?php Loco::h( _x('Updated','Modified time','loco-translate') )?>:
+            <?php Loco::h( _x('Updated','Modified time','loco-legacy') )?>:
             <span id="loco-po-modified">
             <?php if( $modified ):?> 
                  <?php Loco::h($modified)?>
             <?php else:?> 
-                <em><?php Loco::h( __('never','loco-translate') )?></em>
+                <em><?php Loco::h( __('never','loco-legacy') )?></em>
             <?php endif?> 
             </span>
             &mdash;
@@ -84,14 +84,14 @@ $modified or $pofiles[] = $path;
                 <input type="hidden" name="<?php Loco::h($k)?>" value="<?php Loco::h($v)?>" /><?php
                 endforeach?> 
                 <button class="button loco-save" data-loco="save" type="submit" disabled>
-                    <span><?php Loco::h( _x('Save','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Save','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php" method="post">
                 <input type="hidden" name="po" value="" />
                 <input type="hidden" name="action" value="loco-download" />
                 <input type="hidden" name="path" value="<?php Loco::h($path)?>" />
-                <button class="button loco-download" data-loco="download_po" type="submit" disabled title="<?php Loco::h( _x('Download','Editor button','loco-translate') )?> PO">
+                <button class="button loco-download" data-loco="download_po" type="submit" disabled title="<?php Loco::h( _x('Download','Editor button','loco-legacy') )?> PO">
                     <span><?php echo $locale ? 'PO' : 'POT' ?></span>
                 </button>
             </form><?php
@@ -100,7 +100,7 @@ $modified or $pofiles[] = $path;
                 <input type="hidden" name="po" value="" />
                 <input type="hidden" name="action" value="loco-download" />
                 <input type="hidden" name="path" value="<?php Loco::h( preg_replace('/\.po$/','.mo',$path) )?>" />
-                <button class="button loco-download" data-loco="download_mo" type="submit" disabled title="<?php Loco::h( _x('Download','Editor button','loco-translate') )?> MO">
+                <button class="button loco-download" data-loco="download_mo" type="submit" disabled title="<?php Loco::h( _x('Download','Editor button','loco-legacy') )?> MO">
                     <span>MO</span>
                 </button>
             </form><?php 
@@ -112,37 +112,37 @@ $modified or $pofiles[] = $path;
                 <input type="hidden" name="<?php Loco::h($k)?>" value="<?php Loco::h($v)?>" /><?php
                 endforeach?> 
                 <button class="button loco-sync" data-loco="sync" disabled>
-                    <span><?php Loco::h( _x('Sync','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Sync','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php" method="get">
                 <button class="button loco-revert" data-loco="revert" disabled>
-                    <span><?php Loco::h( _x('Revert','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Revert','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php">
                 <button class="button loco-add" data-loco="add" disabled>
-                    <span><?php Loco::h( _x('Add','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Add','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php">
                 <button class="button loco-del" data-loco="del" disabled>
-                    <span><?php Loco::h( _x('Del','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Del','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php">
                 <button class="button loco-fuzzy" data-loco="fuzzy" disabled>
-                    <span><?php Loco::h( _x('Fuzzy','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Fuzzy','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
             <form action="<?php echo $phpbase?>/loco-fail.php" id="loco-filter">
                 <div class="loco-clearable">
-                    <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php Loco::h(__('Filter translations','loco-translate'))?>" autocomplete="off" disabled />
+                    <input type="text" maxlength="100" name="q" id="loco-search" placeholder="<?php Loco::h(__('Filter translations','loco-legacy'))?>" autocomplete="off" disabled />
                 </div>
             </form>
             <form action="https://localise.biz/help/wordpress/translate-plugin/support" target="_blank" class="loco-right">
                 <button class="button loco-help" data-loco="help" type="submit">
-                    <span><?php Loco::h( _x('Help','Editor button','loco-translate') )?></span>
+                    <span><?php Loco::h( _x('Help','Editor button','loco-legacy') )?></span>
                 </button>
             </form>
         </nav>

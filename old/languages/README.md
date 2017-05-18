@@ -1,6 +1,9 @@
-# Legacy versions translations
+# Legacy version translations
 
 Many thanks to the translators of version 1.x
+
+Please note that this branch of Loco Translate is deprecated.
+Version 2.x is the active branch.
 
 
 * Dutch translations by [Niels Geryl](http://hetwittepaard.be)

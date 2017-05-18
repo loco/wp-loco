@@ -7,16 +7,16 @@
     <table class="wp-list-table widefat fixed striped">
         <thead>
             <th data-sort-type="s">
-                <?php esc_html_e('Bundle name', 'loco')?> 
+                <?php esc_html_e('Bundle name', 'loco-translate')?> 
             </th>
             <th data-sort-type="s">
-                <?php esc_html_e('Text domain','loco')?> 
+                <?php esc_html_e('Text domain','loco-translate')?> 
             </th>
             <th data-sort-type="n">
-                <?php esc_html_e('Last updated','loco')?> 
+                <?php esc_html_e('Last updated','loco-translate')?> 
             </th>
             <th data-sort-type="n">
-                <?php esc_html_e('Sets','loco')?> 
+                <?php esc_html_e('Sets','loco-translate')?> 
             </th>
         </thead>
         <tbody><?php

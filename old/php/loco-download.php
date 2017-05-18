@@ -18,7 +18,7 @@ try {
     }
     
     if( ! current_user_can(Loco::admin_capablity()) ){
-        throw new Exception( __('User does not have permission to manage translations','loco-translate'), 403 );
+        throw new Exception( __('User does not have permission to manage translations','loco-legacy'), 403 );
     }
 
     if( empty($po) ){
@@ -72,7 +72,7 @@ try {
             error_log( $Ex->getMessage(), 0 );
         }
         if( ! $mo ){
-            throw new Exception( sprintf( __('Failed to compile MO file with %s, check your settings','loco-translate'), WHICH_MSGFMT ) );
+            throw new Exception( sprintf( __('Failed to compile MO file with %s, check your settings','loco-legacy'), WHICH_MSGFMT ) );
         }
     }
 

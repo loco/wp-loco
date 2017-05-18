@@ -10,7 +10,7 @@ function loco_compat_mb_detect_encoding( $str, array $encoding_list, $strict ){
 }
 
 if( ! extension_loaded('mbstring') && WP_DEBUG && ( ! defined('DOING_AJAX') || ! DOING_AJAX ) ){
-    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-translate'), 'mbstring' ) );
+    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-legacy'), 'mbstring' ) );
 }
 
 if( ! function_exists('mb_detect_encoding') ){

@@ -13,7 +13,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $this->enqueueStyle('poinit');
         //
         $bundle = $this->getBundle();
-        $this->set('title', __('New language','loco').' &lsaquo; '.$bundle );
+        $this->set('title', __('New language','loco-translate').' &lsaquo; '.$bundle );
     }
 
 
@@ -36,7 +36,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         
         $breadcrumb = $this->prepareNavigation();
         // "new" tab is confising when no project-scope navigation
-        // $this->get('tabs')->add( __('New PO','loco'), '', true );
+        // $this->get('tabs')->add( __('New PO','loco-translate'), '', true );
         
         // bundle mandatory, but project optional
         $bundle = $this->getBundle();
@@ -45,14 +45,14 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $project = $this->getProject();
             $slug = $project->getSlug();
             $domain = (string) $project->getDomain();
-            $subhead = sprintf( __('Initializing new translations in "%s"','loco'), $slug?$slug:$domain );
+            $subhead = sprintf( __('Initializing new translations in "%s"','loco-translate'), $slug?$slug:$domain );
         }
         catch( Loco_error_Exception $e ){
             $project = null;
-            $subhead = __('Initializing new translations in unknown set','loco');
+            $subhead = __('Initializing new translations in unknown set','loco-translate');
         }
 
-        $title = __('New language','loco');
+        $title = __('New language','loco-translate');
         $this->set('subhead', $subhead );
         
         // navigate up to bundle listing page 
@@ -131,7 +131,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         if( $potfile && $potfile->exists() ){
             $meta = Loco_gettext_Metadata::load($potfile);
             $total = $meta->getTotal();
-            $summary = sprintf( _n('One string found in %2$s','%s strings found in %s',$total,'loco'), number_format($total), $potfile->basename() );
+            $summary = sprintf( _n('One string found in %2$s','%s strings found in %s',$total,'loco-translate'), number_format($total), $potfile->basename() );
             $this->set( 'pot', new Loco_mvc_ViewParams( array(
                 'name' => $potfile->basename(),
                 'path' => $meta->getPath(false),
@@ -150,7 +150,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         else {
             $this->set( 'ext', new Loco_mvc_ViewParams( array(
                 'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-xgettext', $_GET ),
-                'text' => __('Create template','loco'),
+                'text' => __('Create template','loco-translate'),
             ) ) );
             // if forcing source extraction show brief description of source files
             if( $this->get('extract') ){
@@ -159,13 +159,13 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     return $this->view('admin/errors/no-tokenizer');
                 }
                 $nfiles = count( $project->findSourceFiles() );
-                $summary = sprintf( _n('1 source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco'), number_format_i18n($nfiles) );
+                $summary = sprintf( _n('1 source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco-translate'), number_format_i18n($nfiles) );
             }
             // else prompt for template creation before continuing
             else {
                 $this->set( 'skip', new Loco_mvc_ViewParams( array(
                     'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $_GET + array( 'extract' => '1' ) ),
-                    'text' => __('Skip template','loco'),
+                    'text' => __('Skip template','loco-translate'),
                 ) ) );
                 // POT could still be defined, it might just not exist yet
                 if( $potfile ){

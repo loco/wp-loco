@@ -36,7 +36,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     protected function saveBundle(){
         $custom = new Loco_config_CustomSaved;
         if( $custom->setBundle($this->bundle)->persist() ){
-            Loco_error_AdminNotices::success( __('Configuration saved','loco') );
+            Loco_error_AdminNotices::success( __('Configuration saved','loco-translate') );
         }
         // invalidate bundle in memory so next fetch is re-configured from DB
         $this->bundle = null;
@@ -52,7 +52,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     protected function resetBundle(){
         $option = $this->bundle->getCustomConfig();
         if( $option && $option->remove() ){
-            Loco_error_AdminNotices::success( __('Configuration reset','loco') );
+            Loco_error_AdminNotices::success( __('Configuration reset','loco-translate') );
             // invalidate bundle in memory so next fetch falls back to auto-config
             $this->bundle = null;
         }
@@ -96,12 +96,12 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         $tabs = new Loco_admin_Navigation;
         $this->set( 'tabs', $tabs );
         $actions = array (
-            'view'  => __('Overview','loco'),
-            'setup' => __('Setup','loco'),
-            'conf'  => __('Advanced','loco'),
+            'view'  => __('Overview','loco-translate'),
+            'setup' => __('Setup','loco-translate'),
+            'conf'  => __('Advanced','loco-translate'),
         );
         if( loco_debugging() ){
-            $actions['debug'] = __('Debug','loco');
+            $actions['debug'] = __('Debug','loco-translate');
         }
         $suffix = $this->get('action');
         $prefix = strtolower( $this->get('type') );

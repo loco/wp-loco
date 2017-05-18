@@ -13,7 +13,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
         $this->enqueueScript('config');
         $bundle = $this->getBundle();
         // translators: where %s is a plugin or theme
-        $this->set( 'title', sprintf( __('Configure %s','loco'),$bundle->getName() ) );
+        $this->set( 'title', sprintf( __('Configure %s','loco-translate'),$bundle->getName() ) );
 
         $post = Loco_mvc_PostParams::get();
         // always set a nonce for current bundle
@@ -52,7 +52,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
      */
     public function getHelpTabs(){
         return array (
-            __('Advanced tab','loco') => $this->viewSnippet('tab-bundle-conf'),
+            __('Advanced tab','loco-translate') => $this->viewSnippet('tab-bundle-conf'),
         );
     }
     
@@ -125,7 +125,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
         );
         $this->set( 'xmlUrl', Loco_mvc_AjaxRouter::generate( 'DownloadConf', $args ) );
         
-        $this->prepareNavigation()->add( __('Advanced configuration','loco') );
+        $this->prepareNavigation()->add( __('Advanced configuration','loco-translate') );
         return $this->view('admin/bundle/conf', compact('conf','base','name','excl') );
     }    
     

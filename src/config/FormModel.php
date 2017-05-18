@@ -143,7 +143,7 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
                 continue;
             }
             if( empty($conf['domain']) ){
-                throw new InvalidArgumentException( __('Text Domain cannot be empty','loco') );
+                throw new InvalidArgumentException( __('Text Domain cannot be empty','loco-translate') );
             }
             $domains[ $conf['domain'] ][] = $project = $dom->createElement('project');
             // project attributes

@@ -471,27 +471,27 @@ abstract class LocoPackage {
         foreach( $this->pot as $path ){
             $dirs[ dirname($path) ] = 1;
             if( ! is_writable($path) ){
-                throw new Exception( __('Some files not writable','loco-translate') );
+                throw new Exception( __('Some files not writable','loco-legacy') );
             }
         }
         foreach( $this->po as $paths ){
             foreach( $paths as $path ){
                 $dirs[ dirname($path) ] = 1;
                 if( ! is_writable($path) ){
-                    throw new Exception( __('Some files not writable','loco-translate') );
+                    throw new Exception( __('Some files not writable','loco-legacy') );
                 }
                 if( ! file_exists( preg_replace('/\.po$/', '.mo', $path) ) ){
-                    throw new Exception( __('Some files missing','loco-translate') );
+                    throw new Exception( __('Some files missing','loco-legacy') );
                 }
             }
         }
         $dir = $this->lang_dir();
         if( ! is_writable($dir) ){
-            throw new Exception( sprintf( __('"%s" folder not writable','loco-translate'), basename($dir) ) );
+            throw new Exception( sprintf( __('"%s" folder not writable','loco-legacy'), basename($dir) ) );
         }
         foreach( array_keys($dirs) as $path ){
             if( ! is_writable($path) ){
-                throw new Exception( sprintf( __('"%s" folder not writable','loco-translate'), basename($dir) ) );
+                throw new Exception( sprintf( __('"%s" folder not writable','loco-legacy'), basename($dir) ) );
             }
         }
     }    
@@ -512,19 +512,19 @@ abstract class LocoPackage {
         $paths = array();
         foreach( $this->pot as $path ){
             $dirs[ dirname($path) ] = 1;
-            $paths[$path] = is_writable($path) ? '' : __('POT file not writable','loco-translate');
+            $paths[$path] = is_writable($path) ? '' : __('POT file not writable','loco-legacy');
         }
         foreach( $this->po as $pos ){
             foreach( $pos as $path ){
                 $dirs[ dirname($path) ] = 1;
-                $paths[$path] = is_writable($path) ? '' : __('PO file not writable','loco-translate');
+                $paths[$path] = is_writable($path) ? '' : __('PO file not writable','loco-legacy');
                 $path = preg_replace('/\.po$/', '.mo', $path );
-                $paths[$path] = file_exists($path) ? ( is_writeable($path) ? '' : __('MO file not writable','loco-translate') ) : __('MO file not found','loco-translate');
+                $paths[$path] = file_exists($path) ? ( is_writeable($path) ? '' : __('MO file not writable','loco-legacy') ) : __('MO file not found','loco-legacy');
             }
         }
         // run directory checks and sort final list alphabetically
         foreach( array_keys($dirs) as $dir ){
-            $paths[$dir] = is_writable($dir) ? '' : ( is_dir($dir) ? __('Folder not writable','loco-translate') : __('Folder not found','loco-translate') );
+            $paths[$dir] = is_writable($dir) ? '' : ( is_dir($dir) ? __('Folder not writable','loco-legacy') : __('Folder not found','loco-legacy') );
         }
         ksort( $paths );
         return $paths;    
@@ -543,20 +543,20 @@ abstract class LocoPackage {
             $domain = $this->get_original('TextDomain');
             if( ! $domain ){
                 $domain = $this->get_domain();
-                $warn[] = sprintf(__('%s does not declare a "Text Domain"','loco-translate'),$camelType).' .. '.sprintf(__('Loco has guessed "%s"','loco-translate'), $domain );
+                $warn[] = sprintf(__('%s does not declare a "Text Domain"','loco-legacy'),$camelType).' .. '.sprintf(__('Loco has guessed "%s"','loco-legacy'), $domain );
             }
             // check package declares "Domain Path"
             $path = $this->get_original('Domain Path');
             if( ! $domain ){
-                $warn[] = sprintf(__('%s does not declare a "Domain Path"','loco-translate'),$camelType).' .. '.sprintf(__('Loco has guessed "%s"','loco-translate'), $this->domainpath );
+                $warn[] = sprintf(__('%s does not declare a "Domain Path"','loco-legacy'),$camelType).' .. '.sprintf(__('Loco has guessed "%s"','loco-legacy'), $this->domainpath );
             }
             // check POT exists and looks correct
             $path = $this->get_pot($domain);
             if( ! $path ){
-                $warn[] = sprintf( __('%s has no POT file. Create one at "%s/%s.pot" if you need one.','loco-translate'), $camelType, $this->domainpath, $domain );
+                $warn[] = sprintf( __('%s has no POT file. Create one at "%s/%s.pot" if you need one.','loco-legacy'), $camelType, $this->domainpath, $domain );
             }
             else if( $domain.'.pot' !== basename($path) ){
-                $warn[] = sprintf( __('%s has a strange POT file name (%s). A better name would be "%s.pot"','loco-translate'), $camelType, basename($path), $domain );
+                $warn[] = sprintf( __('%s has a strange POT file name (%s). A better name would be "%s.pot"','loco-legacy'), $camelType, basename($path), $domain );
             }
             // TODO check references to other domains in xgettext
         }
@@ -565,7 +565,7 @@ abstract class LocoPackage {
         foreach( $meta['po'] as $po_data ){
             $wplang = $po_data['locale']->get_code() or $wplang = $po_data['locale']->get_name();
             if( ! LocoLocale::is_valid_wordpress($wplang) ){
-                $warn[] = sprintf( __('%s is not an official WordPress language','loco-translate'), $wplang );
+                $warn[] = sprintf( __('%s is not an official WordPress language','loco-legacy'), $wplang );
             }
         }
         return $warn;

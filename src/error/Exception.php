@@ -86,7 +86,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      * @return string
      */
     public function getTitle(){
-        return __('Error','loco');
+        return __('Error','loco-translate');
     }
 
 

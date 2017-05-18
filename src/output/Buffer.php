@@ -81,7 +81,7 @@ class Loco_output_Buffer {
     public static function check(){
         if( headers_sent($file,$line) ){
             $file = str_replace( trailingslashit( loco_constant('ABSPATH') ), '', $file );
-            $message = sprintf( __('Loco interrupted by output from %s:%u','loco'), $file, $line );
+            $message = sprintf( __('Loco interrupted by output from %s:%u','loco-translate'), $file, $line );
             // @codeCoverageIgnoreStart
             // There's no way to handle junk output once it's flushed. exit unpleasantly unless in test
             if( ! defined('LOCO_TEST') ){

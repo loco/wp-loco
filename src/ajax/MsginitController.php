@@ -55,7 +55,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         // target MO shouldn't exist either, but we don't want to overwrite it without asking
         $mofile = $pofile->cloneExtension('mo');
         if( $mofile->exists() ){
-            throw new Loco_error_Exception( __('MO file exists for this language already. Delete it first','loco') );
+            throw new Loco_error_Exception( __('MO file exists for this language already. Delete it first','loco-translate') );
         }
         
         // Permit forcing of any parsable file as strings template

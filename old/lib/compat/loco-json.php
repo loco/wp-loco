@@ -10,7 +10,7 @@ function loco_compat_json_encode( $value ){
 }
 
 if( ! extension_loaded('json_encode') && WP_DEBUG && ( ! defined('DOING_AJAX') || ! DOING_AJAX ) ){
-    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-translate'), 'json_encode' ) );
+    LocoAdmin::warning( sprintf( __('PHP extension "%s" is not installed. If you experience problems you should install it','loco-legacy'), 'json_encode' ) );
 }
 
 if( ! function_exists('json_encode') ){

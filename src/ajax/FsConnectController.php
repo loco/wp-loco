@@ -31,7 +31,7 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
                 $this->set( 'valid', $api->getOutputCredentials() );
                 $this->set( 'creds', $api->getInputCredentials() );
                 $this->set( 'method', $api->getFileSystem()->method );
-                $this->set( 'success', __('Connected to remote file system','loco') );
+                $this->set( 'success', __('Connected to remote file system','loco-translate') );
             }
             else {
                 $this->set( 'authed', false );

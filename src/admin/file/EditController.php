@@ -15,7 +15,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         $file = $this->get('file');
         $bundle = $this->getBundle();
         // translators: %1$s is the file name, %2$s is the bundle name
-        $this->set('title', sprintf( __('Editing %1$s in %2$s','loco'), $file->basename(), $bundle ) );
+        $this->set('title', sprintf( __('Editing %1$s in %2$s','loco-translate'), $file->basename(), $bundle ) );
     }
 
 
@@ -100,12 +100,12 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 if( $potfile->exists() ){
                     $potdata = Loco_gettext_Data::load( $potfile );
                     if( ! $potdata->equalSource($data) ){
-                        Loco_error_AdminNotices::debug( sprintf( __("Translations don't match template. Run sync to update from %s",'loco'), $potfile->basename() ) );
+                        Loco_error_AdminNotices::debug( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) );
                     }
                 }
                 // else template doesn't exist, so sync will be done to source code
                 else {
-                    // Loco_error_AdminNotices::debug( sprintf( __('Template file not found (%s)','loco'), $potfile->basename() ) );
+                    // Loco_error_AdminNotices::debug( sprintf( __('Template file not found (%s)','loco-translate'), $potfile->basename() ) );
                     $potfile = null;
                 }
             }
@@ -139,26 +139,26 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
              // Translators: button for adding a new string when manually editing a POT file
-             'add'      => _x('Add','Editor','loco'),
+             'add'      => _x('Add','Editor','loco-translate'),
              // Translators: button for removing a string when manually editing a POT file
-             'del'      => _x('Remove','Editor','loco'),
-             'help'     => __('Help','loco'),
+             'del'      => _x('Remove','Editor','loco-translate'),
+             'help'     => __('Help','loco-translate'),
              // Translators: Button that saves translations to disk
-             'save'     => _x('Save','Editor','loco'),
+             'save'     => _x('Save','Editor','loco-translate'),
              // Translators: Button that runs in-editor sync/operation
-             'sync'     => _x('Sync','Editor','loco'),
+             'sync'     => _x('Sync','Editor','loco-translate'),
              // Translators: Button that reloads current screen
-             'revert'   => _x('Revert','Editor','loco'),
+             'revert'   => _x('Revert','Editor','loco-translate'),
              // Translators: Button that toggles a translation's Fuzzy flag
-             'fuzzy'    => _x('Fuzzy','Editor','loco'),
+             'fuzzy'    => _x('Fuzzy','Editor','loco-translate'),
              // Translators: Button for downloading a PO, MO or POT file
-             'download' => _x('Download','Editor','loco'),
+             'download' => _x('Download','Editor','loco-translate'),
              // Translators: Placeholder text for text filter above editor
-             'filter'   => __('Filter translations','loco'),
+             'filter'   => __('Filter translations','loco-translate'),
              // Translators: Button that toggles invisible characters
-             'invs'     => _x('Toggle invisibles','Editor','loco'),
+             'invs'     => _x('Toggle invisibles','Editor','loco-translate'),
              // Translators: Button that toggles between "code" and regular text editing modes
-             'code'     => _x('Toggle code view','Editor','loco'),
+             'code'     => _x('Toggle code view','Editor','loco-translate'),
         ) ) );
 
         // Download form params
