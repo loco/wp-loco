@@ -17,7 +17,7 @@ class Loco_fs_FileWriter {
 
     public function __construct( Loco_fs_File $file ){
         $this->file = $file;
-        $this->connect( new WP_Filesystem_Direct(null) );
+        $this->connect( Loco_api_WordPressFileSystem::direct() );
     }
     
     

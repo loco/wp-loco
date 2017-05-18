@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.7.3
+Tested up to: 4.7.5
 Stable tag: 2.0.13
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -86,7 +86,10 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 == Changelog ==
 
 = 2.0.14-dev =
-* 
+* Editor improvements inc. column sorting
+* Added warnings that legacy version will be removed
+* Added PO source view text filtering
+* Added _fs_nonce for 4.7.5 compatibility
 
 = 2.0.13 =
 * CSS conflict fixes

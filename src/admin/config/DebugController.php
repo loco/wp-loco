@@ -29,6 +29,12 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'mbstring' => loco_check_extension('mbstring'),
         ) );
         
+        // PHP / env memory settings:
+        $memory = new Loco_mvc_PostParams( array(
+            'Memory limit' => ini_get('memory_limit'),
+            'WP_MAX_MEMORY_LIMIT' => loco_constant('WP_MAX_MEMORY_LIMIT'),
+        ) );
+        
         // ajaxing:
         $this->enqueueScript('debug');
         $this->set( 'js', new Loco_mvc_ViewParams( array (
@@ -43,7 +49,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP') );
         }
         
-        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding') ); 
+        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory') ); 
     }
     
 }

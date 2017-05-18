@@ -18,6 +18,20 @@ $this->extend('../layout');
         endforeach?> 
         </dl>
     </div>
+
+    <!--div class="panel">
+        <h3>Memory</h3>
+        <dl><?php
+        foreach( $memory as $key => $value ):?> 
+            <dt>
+                <?php echo $memory->escape($key)?>:
+            </dt>
+            <dd>
+                <?php $memory->e($key)?> 
+            </dd><?php
+        endforeach?> 
+        </dl>
+    </div-->
     
     <div class="panel">
         <h3>Unicode</h3>
@@ -29,7 +43,6 @@ $this->extend('../layout');
             <dd><?php echo $encoding->mbstring?'Yes':'No'?></dd>
         </dl>
     </div>
-
 
     <div class="panel">
         <h3>Ajax</h3>

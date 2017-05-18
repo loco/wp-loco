@@ -6,8 +6,8 @@
     <?php esc_html_e('Getting help with Loco Translate','loco')?> 
 </h2>
 <p>
-    If you need help using Loco Translate, please try reading our 
-    <a href="<?php echo esc_url( apply_filters('loco_external','https://localize.biz/wordpress/plugin') )?>" target="_blank">help pages</a> first.
+    If you need help using Loco Translate, please try our 
+    <a href="<?php echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') )?>" target="_blank">help pages</a> first.
     There's a lot of information there to help you understand how it all works.
 </p>
 <p>

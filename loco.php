@@ -21,9 +21,9 @@ if( function_exists('loco_require') ){
     return;
 }
 
-// run plugin in legacy mode if forced, or if upgraded from 1.x
-$loco_branch = get_option('loco-branch', false );
-if( '1' === $loco_branch || ( '2' !== $loco_branch && false !== get_option('loco-translate-use_msgfmt',false) ) ){
+
+// run plugin in legacy mode if forced by setting
+if( '1' === get_option('loco-branch',false) ){
     if( is_admin() ){
         require dirname(__FILE__).'/old/v1.php';
     }
@@ -149,7 +149,7 @@ function loco_check_extension( $name ){
 /**
  * Class autoloader for Loco classes under src directory.
  * e.g. class "Loco_foo_FooBar" wil be found in "src/foo/FooBar.php"
- * Also does autoload for some WordPress classes, e.g. wp-filesystem-base => WP_Filesystem_Base
+ * Also does autoload for polyfills under "src/compat"
  * @return void
  */
 function loco_autoload( $name ){
@@ -158,9 +158,6 @@ function loco_autoload( $name ){
     }
     else if( file_exists( $path = loco_plugin_root().'/src/compat/'.$name.'.php') ){
         require $path;
-    }
-    else if( file_exists( $path = ABSPATH.'wp-admin/includes/class-'.strtr(strtolower($name),'_','-').'.php' ) ){
-        require_once $path;
     }
 }
 

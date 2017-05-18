@@ -38,8 +38,7 @@
                             <span><?php $po->e('lname')?></span><?php
                             else:?> 
                             <span class="icon icon-file"></span>
-                            <span><?php
-                            esc_html_e('English','loco')?> (<?php esc_html_e('Template','loco')?>)</span><?php
+                            <span><?php esc_html_e('Template file','loco')?></span><?php
                             endif?> 
                         </a><?php
                         if( $domain ):?> 

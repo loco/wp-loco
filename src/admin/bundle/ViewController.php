@@ -219,6 +219,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'meta' => $meta,
             'name' => $file->basename(),
             'time' => $file->modified(),
+            'type' => strtoupper( $file->extension() ),
             'todo' => $meta->countIncomplete(),
             'total' => $meta->getTotal(),
             // author / contrib

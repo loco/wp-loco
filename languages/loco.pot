@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-04-10 10:35+0000\n"
+"POT-Creation-Date: 2017-05-18 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -74,12 +74,13 @@ msgstr ""
 msgid "Template file created"
 msgstr ""
 
-#: src/api/WordPressFileSystem.php:47
+#: src/api/WordPressFileSystem.php:61
 #, php-format
 msgid "%s already exists in this folder"
 msgstr ""
 
-#: src/compat/PosixExtension.php:90
+#. used when user name of web server process is unknown
+#: src/compat/PosixExtension.php:109
 msgid "the web server"
 msgstr ""
 
@@ -101,19 +102,19 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/error/Exception.php:89 src/js/Strings.php:59
+#: src/error/Exception.php:89 src/js/Strings.php:62
 msgid "Error"
 msgstr ""
 
-#: src/error/Notice.php:19 src/js/Strings.php:65
+#: src/error/Notice.php:19 src/js/Strings.php:68
 msgid "Notice"
 msgstr ""
 
-#: src/error/Success.php:19 src/js/Strings.php:68
+#: src/error/Success.php:19 src/js/Strings.php:71
 msgid "OK"
 msgstr ""
 
-#: src/error/Warning.php:19 src/js/Strings.php:62
+#: src/error/Warning.php:19 src/js/Strings.php:65
 msgid "Warning"
 msgstr ""
 
@@ -274,80 +275,85 @@ msgstr ""
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""
 
+#. When text filtering reduces to an empty view
 #: src/js/Strings.php:47
-msgid "Provide the following text when reporting a problem"
+msgid "Nothing matches the text filter"
 msgstr ""
 
 #: src/js/Strings.php:50
-msgid "Check console output for debugging information"
+msgid "Provide the following text when reporting a problem"
 msgstr ""
 
 #: src/js/Strings.php:53
-msgid "Server returned invalid data"
+msgid "Check console output for debugging information"
 msgstr ""
 
 #: src/js/Strings.php:56
+msgid "Server returned invalid data"
+msgstr ""
+
+#: src/js/Strings.php:59
 msgid "Unknown error"
 msgstr ""
 
 #. Label for the window pane holding the original English text -and-
 #. List heading showing preview of English text for each item
-#: src/js/Strings.php:72
+#: src/js/Strings.php:75
 msgctxt "Editor"
 msgid "Source text"
 msgstr ""
 
 #. Where %s is the name of the language, e.g. "French translation"
-#: src/js/Strings.php:75
+#: src/js/Strings.php:78
 #, php-format
 msgctxt "Editor"
 msgid "%s translation"
 msgstr ""
 
 #. Label for the window pane holding message context
-#: src/js/Strings.php:78
+#: src/js/Strings.php:81
 msgctxt "Editor"
 msgid "Context"
 msgstr ""
 
 #. Label for the window pane for entering translator comments
-#: src/js/Strings.php:81
+#: src/js/Strings.php:84
 msgctxt "Editor"
 msgid "Comments"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/js/Strings.php:84
+#: src/js/Strings.php:87
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/js/Strings.php:87
+#: src/js/Strings.php:90
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/Strings.php:90
+#: src/js/Strings.php:93
 msgctxt "Editor"
 msgid "Source text not loaded"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/Strings.php:93
+#: src/js/Strings.php:96
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/Strings.php:96
+#: src/js/Strings.php:99
 msgctxt "Editor"
 msgid "Translation not loaded"
 msgstr ""
 
 #. List heading showing preview of translated text for each item
-#: src/js/Strings.php:99
+#: src/js/Strings.php:102
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
@@ -447,14 +453,14 @@ msgstr ""
 msgid "WordPress Core"
 msgstr ""
 
-#: src/package/Debugger.php:181
+#: src/package/Debugger.php:182
 #, php-format
 msgid "One string extracted from source code for \"%2$s\""
 msgid_plural "%s strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Debugger.php:199
+#: src/package/Debugger.php:200
 #, php-format
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
@@ -474,32 +480,40 @@ msgstr ""
 msgid "Plugin not found: %s"
 msgstr ""
 
-#: tpl/admin/root.php:22
+#. 1: help URL, 2: forum URL; Must be HTML encoded
+#: tpl/admin/root.php:21
+#, php-format
+msgid ""
+"If you have any questions, please try our <a href=\"%1$s\">help pages</a> or "
+"ask in the <a href=\"%2$s\">support forum</a>."
+msgstr ""
+
+#: tpl/admin/root.php:31
 msgid "Recently updated:"
 msgstr ""
 
-#: tpl/admin/root.php:25
+#: tpl/admin/root.php:34
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 
-#: tpl/admin/root.php:34
+#: tpl/admin/root.php:43
 msgid "Active theme:"
 msgstr ""
 
-#: tpl/admin/root.php:38
+#: tpl/admin/root.php:47
 msgid "See all themes"
 msgstr ""
 
-#: tpl/admin/root.php:46
+#: tpl/admin/root.php:55
 msgid "Running plugins:"
 msgstr ""
 
-#: tpl/admin/root.php:49
+#: tpl/admin/root.php:58
 msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
 
-#: tpl/admin/root.php:53
+#: tpl/admin/root.php:62
 msgid "See all plugins"
 msgstr ""
 
@@ -608,7 +622,7 @@ msgstr ""
 msgid "File info"
 msgstr ""
 
-#: src/admin/file/BaseController.php:82 tpl/admin/bundle/inc-po-table.php:54
+#: src/admin/file/BaseController.php:82 tpl/admin/bundle/inc-po-table.php:53
 msgid "Delete"
 msgstr ""
 
@@ -809,8 +823,9 @@ msgid ""
 "Usually the same as the text domain, but don't leave blank unless you mean to"
 msgstr ""
 
-#: tpl/admin/bundle/conf.php:65 tpl/admin/file/edit-pot.php:10
-#: tpl/admin/file/info-pot.php:10 tpl/admin/file/view-pot.php:9
+#: tpl/admin/bundle/conf.php:65 tpl/admin/bundle/inc-po-table.php:41
+#: tpl/admin/file/edit-pot.php:10 tpl/admin/file/info-pot.php:10
+#: tpl/admin/file/view-pot.php:9
 msgid "Template file"
 msgstr ""
 
@@ -907,27 +922,19 @@ msgstr ""
 msgid "Folder"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:42
-msgid "English"
-msgstr ""
-
-#: tpl/admin/bundle/inc-po-table.php:42
-msgid "Template"
-msgstr ""
-
-#: tpl/admin/bundle/inc-po-table.php:48
+#: tpl/admin/bundle/inc-po-table.php:47
 msgid "Edit"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:51
+#: tpl/admin/bundle/inc-po-table.php:50
 msgid "Copy"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:57
+#: tpl/admin/bundle/inc-po-table.php:56
 msgid "Info"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:102
+#: tpl/admin/bundle/inc-po-table.php:101
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -989,8 +996,9 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: tpl/admin/common/inc-table-filter.php:4
-msgid "Filter list"
+#. text field placeholder
+#: tpl/admin/common/inc-table-filter.php:6
+msgid "Filter..."
 msgstr ""
 
 #: tpl/admin/config/prefs.php:13 tpl/admin/config/prefs.php:17

@@ -1,11 +1,14 @@
-
+<?php
+    
+    echo $this->render('../common/inc-table-filter');?> 
+    
     <div class="panel loco-loading" id="loco-po">
         <ol class="msgcat"><?php
             foreach( $lines as $i => $line ):?> 
             <li id="po-l<?php printf('%u',$i+1)?>"><?php
             // may be totally blank line
             if( '' === $line ){
-                echo '<span></span>';
+                echo '<span class="po-none"></span>';
                 continue;
             }
             // may be a comment line
@@ -13,18 +16,23 @@
                 // may be able to parse out references
                 if( isset($line{1}) ){
                     $symbol = $line{1};
+                    $line = substr($line,2);
                     if( ':' === $symbol ){
-                        echo '<span class="po-refs">',preg_replace('/\\S+:\d+/', '<a href="/#\\0">\\0</a>', $params->escape($line) ),'</span>';
-                        continue;
+                        echo '<span class="po-refs">#:',preg_replace('/\\S+:\d+/', '<a href="/#\\0" class="po-text">\\0</a>', $params->escape($line) ),'</span>';
                     }
                     // parse out flags and formatting directives
                     else if( ',' === $symbol ){
-                        echo '<span class="po-flags">',preg_replace('/[-a-z]+/', '<em>\\0</em>', $params->escape($line) ),'</span>';
-                        continue;
+                        echo '<span class="po-flags">#,<span class="po-text">',preg_replace('/[-a-z]+/', '<em>\\0</em>', $params->escape($line) ),'</span></span>';
+                    }
+                    // else treat as normal comment even if empty
+                    else {
+                        echo '<span class="po-comment">#',$symbol,'<span class="po-text">',$params->escape($line),'</span></span>';
                     }
                 }
-                // else treat as normal comment even if empty
-                echo '<span class="po-comment">',$params->escape($line),'</span>';
+                // else probably an empty comment
+                else {
+                    echo '<span class="po-comment">',$params->escape($line),'</span>';
+                }
                 continue;
             }
             // grab keyword if there is one before quoted string
@@ -34,7 +42,7 @@
             }
             // remainder of line (or whole line) should be a quoted string
             if( preg_match('/^"(.*)"\s*$/', $line, $r ) ){
-                echo '<span class="po-string">&quot;<span>',$params->escape($r[1]),'</span>&quot;</span>';
+                echo '<span class="po-string">&quot;<span class="po-text">',$params->escape($r[1]),'</span>&quot;</span>';
                 continue;
             }
             

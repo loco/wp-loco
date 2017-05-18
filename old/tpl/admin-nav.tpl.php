@@ -4,11 +4,12 @@
  */
 ?> 
 
-    <div class="notice inline notice-info">
+    <div class="notice inline notice-warning">
         <p>
-            <strong>Legacy mode:</strong>
+            <strong>Deprecation notice</strong><br />
             You're running the old version of Loco Translate.
-            <a href="<?php echo esc_url(LocoAdmin::uri(array(),'upgrade'))?>">Start using the all new version 2.</a>
+            The next major release of Loco Translate will no longer include the legacy plugin.
+            <a href="<?php echo esc_url(LocoAdmin::uri(array(),'upgrade'))?>">Switch to version 2 now.</a>
         </p>
     </div>
 

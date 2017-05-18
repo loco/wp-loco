@@ -36,8 +36,10 @@ $this->extend('../layout');
             Downgrade to 1.5.6
         </h3>
         <p>
-            If you have problems running the 2.x branch, you can revert back to the legacy version.<br />
-            Note that maintenance for the 1.x branch has stopped and there will be no further releases.
+            Maintenance for the 1.x branch has stopped and there will be no further releases.
+        </p>
+        <p>
+            You can run Loco Translate in legacy mode for the time being, but this feature will be removed in the next major release.
         </p>
         <p class="submit">
             <input type="submit" value="Enable legacy version" class="button" />

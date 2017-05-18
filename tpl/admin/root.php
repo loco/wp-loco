@@ -6,13 +6,22 @@
 $this->extend('layout');
 ?> 
     
-    <div class="notice inline notice-info">
-        <h3 class="has-icon">
-            Welcome to the all new version 2
-        </h3>
+    <div class="notice inline notice-info"><?php
+        if( $upgraded ):?> 
+        <h3>Welcome to the all new version 2</h3>
         <p>
-            This is an early release of our completely rebuilt plugin. 
-            You can switch to <a href="<?php $params->e('rollback')?>"> version 1</a> if you want to keep using the old plugin.
+            You can switch to <a href="<?php $params->e('rollback')?>"> version 1</a> if you want to keep using the old plugin.<br />
+        </p><?php
+        else:?> 
+        <h3>Welcome to Loco Translate</h3><?php
+        endif?> 
+        <p><?php 
+            // translators: 1: help URL, 2: forum URL; Must be HTML encoded 
+            printf(
+                __('If you have any questions, please try our <a href="%1$s">help pages</a> or ask in the <a href="%2$s">support forum</a>.','loco'),
+                esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') ),
+                'https://wordpress.org/support/plugin/loco-translate'
+            );?> 
         </p>
     </div><?php
 

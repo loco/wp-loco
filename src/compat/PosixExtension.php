@@ -1,15 +1,24 @@
 <?php
 /**
- * 
+ * Abstraction of PHP "posix" extension.
+ * Basic functionality substitution, but cannot get user/group names so falls back to numeric
  */
 abstract class Loco_compat_PosixExtension {
-    
 
+    /**
+     * @param int
+     */
     private static $uid = null;
 
+    /**
+     * @param int
+     */
     private static $gid = null;
     
     
+    /**
+     * @return int
+     */
     public static function getuid(){
         if( is_null(self::$uid) ){
             // use posix function if extension available
@@ -25,6 +34,9 @@ abstract class Loco_compat_PosixExtension {
     }
 
     
+    /**
+     * @return int
+     */
     public static function getgid(){
         if( is_null(self::$gid) ){
             // use posix function if extension available
@@ -40,8 +52,8 @@ abstract class Loco_compat_PosixExtension {
     }
 
 
-
     /**
+     * Attempt to get effective user ID by reading a temporary file
      * @return int
      */
     public static function getuidViaTempDir(){
@@ -58,6 +70,7 @@ abstract class Loco_compat_PosixExtension {
 
 
     /**
+     * Attempt to get effective group ID by reading a temporary file
      * @return int
      */
     public static function getgidViaTempDir(){
@@ -84,9 +97,15 @@ abstract class Loco_compat_PosixExtension {
             return $info['name'];
         }
         // @codeCoverageIgnoreStart
-        if( false !== stripos(PHP_SAPI,'apache') ){
-            return 'Apache';
+        foreach( array('apache','nginx') as $name ){
+            if( false !== stripos(PHP_SAPI,$name) ){
+                return $name;
+            }
+            if( isset($_SERVER['SERVER_SOFTWARE']) && false !== stripos($_SERVER['SERVER_SOFTWARE'],$name)  ){
+                return $name;
+            }
         }
+        // translators: used when user name of web server process is unknown
         return __('the web server','loco');
         // @codeCoverageIgnoreEnd
      }

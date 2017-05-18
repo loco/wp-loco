@@ -28,16 +28,30 @@ class Loco_api_WordPressFileSystem {
      */
     private $creds_out = array();
 
-    
+
+    /**
+     * Create direct filesystem accessor
+     * @return WP_Filesystem_Direct
+     */
+    public static function direct(){
+        // Emulate WP_Filesystem to avoid FS_METHOD and filters overriding "direct" type
+        if( ! class_exists('WP_Filesystem_Direct',false) ){
+            require_once ABSPATH.'wp-admin/includes/class-wp-filesystem-base.php';
+            require_once ABSPATH.'wp-admin/includes/class-wp-filesystem-direct.php';
+        }
+        return new WP_Filesystem_Direct(null);
+    }
+
+
     /**
      * Get HTML form rendered by request_filesystem_credentials
      * @return string
      */
     public function getForm(){
         return $this->form;
-    }    
+    }
 
-    
+
     /**
      * Authorize for the creation of a file that does not exist
      * @return bool whether file system is authorized NOT necessarily whether file is creatable
@@ -81,8 +95,8 @@ class Loco_api_WordPressFileSystem {
     public function authorizeWrite( Loco_fs_File $file ){
         return ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file);
     }
-    
-    
+
+
 
     /**
      * Authorize connection for any operations, regardless of whether direct file system is available.
@@ -91,7 +105,7 @@ class Loco_api_WordPressFileSystem {
     public function authorizeConnect( Loco_fs_File $file ){
         return $this->authorize($file);
     }
-    
+
 
 
     /**
@@ -120,7 +134,7 @@ class Loco_api_WordPressFileSystem {
         }
 
         $post = Loco_mvc_PostParams::get();
-        $dflt = array( 'hostname' => '', 'username' => '', 'password' => '', 'public_key' => '', 'private_key' => '', 'connection_type' => '');
+        $dflt = array( 'hostname' => '', 'username' => '', 'password' => '', 'public_key' => '', 'private_key' => '', 'connection_type' => '', '_fs_nonce' => '' );
         $this->creds_in = array_intersect_key( $post->getArrayCopy(), $dflt );
         
         // deliberately circumventing call to `get_filesystem_method`
@@ -197,7 +211,6 @@ class Loco_api_WordPressFileSystem {
             $this->fs = $GLOBALS['wp_filesystem'];
             // hook new file system into write context (specifying that connect has already been performed)
             $file->getWriteContext()->connect( $this->fs, false );
-            //
             $this->creds_out = $creds;
             return true;
         }
@@ -256,7 +269,7 @@ class Loco_api_WordPressFileSystem {
      */
     public function getFileSystem(){
         if( ! $this->fs ){
-            $this->fs = new WP_Filesystem_Direct( null );
+            $this->fs = self::direct();
         }
         return $this->fs;     
     }

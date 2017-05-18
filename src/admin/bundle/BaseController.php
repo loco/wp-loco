@@ -124,7 +124,8 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         $fields = new Loco_mvc_HiddenFields( array(
             'auth' => $type,
             'path' => $path,
-            'loco-nonce' => wp_create_nonce('fsConnect'),
+            'loco-nonce' => wp_create_nonce('fsConnect'), // <- used for our ajax action
+            '_fs_nonce' => wp_create_nonce('filesystem-credentials'), // <- WP 4.7.5 added security fix
         ) );
         $this->set('fsFields', $fields );
 

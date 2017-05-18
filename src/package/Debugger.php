@@ -177,9 +177,10 @@ class Loco_package_Debugger implements IteratorAggregate {
             // $this->good("%u string[s] can be extracted from source code for %s", $total, $this->implodeKeys($counts) );
             foreach( array_intersect_key($counts, $domains) as $domain => $count ){
                 if( isset($realCounts[$domain]) ){
+                    $count = $counts[$domain];
                     $realCount = $realCounts[$domain];
                     $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', $realCount, 'loco' );
-                    $this->good( $str, number_format($realCount), $domain );
+                    $this->good( $str.' (%s including metadata)', number_format($realCount), $domain, number_format($count) );
                 }
                 else {
                     $this->warn('No strings extracted from source code for "%s"', $domain );

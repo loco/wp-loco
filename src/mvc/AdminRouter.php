@@ -137,7 +137,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
     /**
      * Convert WordPress internal WPScreen $id into route prefix for an admin page controller
-     * @return array
+     * @return string
      */
     private static function screenToPage( WP_Screen $screen ){
         // Hooked menu slug is either "toplevel_page_loco" or "{title}_page_loco-{page}"
