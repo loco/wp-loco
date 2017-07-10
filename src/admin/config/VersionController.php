@@ -11,7 +11,7 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
     public function init(){
         parent::init();
         $this->set( 'title', __('Version','loco-translate') );
-        // handle legacy degradation
+        /*/ legacy downgrade to 1.x is disabled as of 2.0.15
         $nonce = $this->setNonce('downgrade');
         try {
             if( $this->checkNonce($nonce->action) ){
@@ -22,8 +22,7 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
         }
         catch( Loco_error_Exception $e ){
             Loco_error_AdminNotices::add($e);
-        }
-        
+        }*/
     }
 
 

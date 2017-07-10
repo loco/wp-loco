@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-05-18 16:00+0000\n"
+"POT-Creation-Date: 2017-07-10 11:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: loco.php:140
+#: loco.php:131
 #, php-format
 msgid ""
 "Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
@@ -401,7 +401,7 @@ msgstr ""
 
 #: src/mvc/AdminRouter.php:61 src/admin/config/PrefsController.php:48
 #: src/admin/config/SettingsController.php:77
-#: src/admin/config/VersionController.php:35 tpl/admin/help/tab-settings.php:2
+#: src/admin/config/VersionController.php:34 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
 msgstr ""
 
@@ -480,44 +480,44 @@ msgstr ""
 msgid "Plugin not found: %s"
 msgstr ""
 
-#: tpl/admin/root.php:16
+#: tpl/admin/root.php:10
 msgid "Welcome to Loco Translate"
 msgstr ""
 
 #. 1: help URL, 2: forum URL; Must be HTML encoded
-#: tpl/admin/root.php:21
+#: tpl/admin/root.php:14
 #, php-format
 msgid ""
 "If you have any questions, please try our <a href=\"%1$s\">help pages</a> or "
 "ask in the <a href=\"%2$s\">support forum</a>."
 msgstr ""
 
-#: tpl/admin/root.php:31
+#: tpl/admin/root.php:24
 msgid "Recently updated:"
 msgstr ""
 
-#: tpl/admin/root.php:34
+#: tpl/admin/root.php:27
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 
-#: tpl/admin/root.php:43
+#: tpl/admin/root.php:36
 msgid "Active theme:"
 msgstr ""
 
-#: tpl/admin/root.php:47
+#: tpl/admin/root.php:40
 msgid "See all themes"
 msgstr ""
 
-#: tpl/admin/root.php:55
+#: tpl/admin/root.php:48
 msgid "Running plugins:"
 msgstr ""
 
-#: tpl/admin/root.php:58
+#: tpl/admin/root.php:51
 msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
 
-#: tpl/admin/root.php:62
+#: tpl/admin/root.php:55
 msgid "See all plugins"
 msgstr ""
 

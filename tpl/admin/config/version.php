@@ -31,19 +31,14 @@ $this->extend('../layout');
     endif;?> 
     
     
-    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
+    <div class="notice inline notice-generic">
         <h3>
             Downgrade to 1.5.6
         </h3>
         <p>
-            Maintenance for the 1.x branch has stopped and there will be no further releases.
+            Maintenance and support for the 1.x branch has stopped and there will be no further releases.<br />
+            The only way to run the old version of Loco Translate is by installing it manually from the 
+            <a href="https://github.com/loco/wp-loco/tree/1.x">Git archive</a>.
         </p>
-        <p>
-            You can run Loco Translate in legacy mode for the time being, but this feature will be removed in the next major release.
-        </p>
-        <p class="submit">
-            <input type="submit" value="Enable legacy version" class="button" />
-            <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
-        </p>
-    </form>
+    </div>
     

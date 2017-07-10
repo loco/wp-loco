@@ -22,19 +22,6 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
         // translators: home screen title where %s is the version number
         $this->set('title', sprintf( __('Loco Translate %s','loco-translate'), loco_plugin_version() ) );
 
-        // user may have manually upgraded to version 2
-        if( '2' === get_option('loco-branch',false) ){
-            $this->set('upgraded', 'forced');
-        }
-        // else may have been automatically upgraded from 1.x
-        else if( false !== get_option('loco-translate-use_msgfmt',false) ){
-            $this->set('upgraded', 'auto');
-        }
-        // else show normal welcome message
-        else {
-            $this->set('upgraded', false);
-        }
-
         // Show currently active theme on home page
         $theme = Loco_package_Theme::create(null);
         $this->set('theme', $this->bundleParam($theme) );

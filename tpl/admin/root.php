@@ -5,18 +5,11 @@
 
 $this->extend('layout');
 ?> 
-    
-    <div class="notice inline notice-info"><?php
-        if( $upgraded ):?> 
-        <h3>Welcome to the all new version 2</h3>
-        <p>
-            You can switch to <a href="<?php $params->e('rollback')?>"> version 1</a> if you want to keep using the old plugin.<br />
-        </p><?php
-        else:?> 
-        <h3><?php esc_attr_e('Welcome to Loco Translate','loco-translate')?></h3><?php
-        endif?> 
-        <p><?php 
-            // translators: 1: help URL, 2: forum URL; Must be HTML encoded 
+
+    <div class="notice inline notice-info">
+        <h3><?php esc_attr_e('Welcome to Loco Translate','loco-translate')?></h3>
+        <p><?php
+            // translators: 1: help URL, 2: forum URL; Must be HTML encoded
             printf(
                 __('If you have any questions, please try our <a href="%1$s">help pages</a> or ask in the <a href="%2$s">support forum</a>.','loco-translate'),
                 esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') ),

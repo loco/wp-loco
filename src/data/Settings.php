@@ -158,20 +158,25 @@ class Loco_data_Settings extends Loco_data_Serializable {
 
 
     /**
-     * Run migration in case plugin has been upgraded since settings last saved
+     * Run migration in case plugin has been upgraded from 1.x => 2.x since settings last saved
      * @return bool whether upgrade has occured
      */
     public function migrate(){
         $existed = (bool) get_option('loco_settings');
-        // Populate new format from legacy 1.x options, but only on first run
+        // migrate 1.x branch settings if first run of 2.x
         if( ! $existed ){
             $this->gen_hash = get_option('loco-translate-gen_hash','0');
             $this->use_fuzzy = get_option('loco-translate-use_fuzzy', '1' );
             $this->num_backups = get_option('loco-translate-num_backups','1');
             $this->persist();
         }
-        // currently the only upgrade could be 1.x => 2.0
-        // deliberately keeping the old options due to legacy switching feature
+        // running of plugin in 1.x legacy mode is disabled as of 2.0.15
+        if( false !== get_option('loco-branch',false) ){
+            delete_option('loco-branch');
+            delete_option('loco-translate-gen_hash');
+            delete_option('loco-translate-use_fuzzy');
+            delete_option('loco-translate-num_backups');
+        }
         return ! $existed;
     }
     

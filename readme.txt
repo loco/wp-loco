@@ -86,6 +86,11 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.15 =
+* Permanently removed legacy version 1.x
+* Fixed bug where editor code view was not redrawn on resize
+* Fixed bug where fuzzy flag caused format flag to be ignored
+
 = 2.0.14 =
 * Editor improvements inc. column sorting
 * Added warnings that legacy version will be removed
