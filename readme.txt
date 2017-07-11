@@ -90,6 +90,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Permanently removed legacy version 1.x
 * Fixed bug where editor code view was not redrawn on resize
 * Fixed bug where fuzzy flag caused format flag to be ignored
+* Purging wp object cache when active plugin list changes
 
 = 2.0.14 =
 * Editor improvements inc. column sorting

@@ -91,6 +91,38 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
 
     /**
+     * Purge in-memory caches that may be persisted by object caching plugins
+     */
+    private function purge_wp_cache(){
+        global $wp_object_cache;
+        if( function_exists('wp_cache_delete') && method_exists($wp_object_cache,'delete') ){
+            wp_cache_delete('plugins','loco');
+        }
+    }
+
+
+
+    /**
+     * pre_update_option_{$option} filter callback for $option = "active_plugins"
+     */
+    public function filter_pre_update_option_active_plugins( $value = null ){
+        $this->purge_wp_cache();
+        return $value;
+    }
+
+
+
+    /**
+     * pre_update_site_option_{$option} filter callback for $option = "active_sitewide_plugins"
+     */
+    public function filter_pre_update_site_option_active_sitewide_plugins( $value = null ){
+        $this->purge_wp_cache();
+        return $value;
+    }
+
+
+
+    /**
      * deactivate_plugin action callback
      *
     public function on_deactivate_plugin( $plugin, $network = false ){
@@ -99,6 +131,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             // "DELETE FROM ___ WHERE `option_name` LIKE '_transient_loco_%' OR `option_name` LIKE '_transient_timeout_loco_%'";
         }
     }*/
+
 
 
     /*public function filter_all( $hook ){
