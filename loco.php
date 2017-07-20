@@ -140,14 +140,14 @@ function loco_check_extension( $name ){
 /**
  * Class autoloader for Loco classes under src directory.
  * e.g. class "Loco_foo_FooBar" wil be found in "src/foo/FooBar.php"
- * Also does autoload for polyfills under "src/compat"
+ * Also does autoload for polyfills under "src/compat" if classname < 20 chars
  * @return void
  */
 function loco_autoload( $name ){
     if( 'Loco_' === substr($name,0,5) ){
         loco_include( 'src/'.strtr( substr($name,5), '_', '/' ).'.php' );
     }
-    else if( file_exists( $path = loco_plugin_root().'/src/compat/'.$name.'.php') ){
+    else if( ! isset($name{20}) && file_exists( $path = loco_plugin_root().'/src/compat/'.$name.'.php') ){
         require $path;
     }
 }
