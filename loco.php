@@ -86,7 +86,7 @@ function loco_doing_ajax(){
  */
 function loco_constant( $name ){
     $value = defined($name) ? constant($name) : null;
-    // for security reasons values can only be modified in tests
+    // constant values will only be modified in tests
     if( defined('LOCO_TEST') && LOCO_TEST ){
         $value = apply_filters('loco_constant', $value, $name );
         $value = apply_filters('loco_constant_'.$name, $value );
@@ -96,7 +96,7 @@ function loco_constant( $name ){
 
 
 /**
- * Abstract inclusion of any file under plugin root
+ * Runtime inclusion of any file under plugin root
  * @return mixed
  */
 function loco_include( $relpath ){

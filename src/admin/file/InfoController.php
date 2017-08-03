@@ -50,7 +50,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $this->set('file', $info );
         $info['type'] = strtoupper($ext);
         if( $file->exists() ){
-            $info['existant'] = true;
+            $info['existent'] = true;
             $info['writable'] = $file->writable();
             $info['deletable'] = $file->deletable();
             $info['mtime'] = $file->modified();
@@ -62,7 +62,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $this->set('dir', $info );
         $info['type'] = $dir->getTypeId();
         if( $dir->exists() && $dir->isDirectory() ){
-            $info['existant'] = true;
+            $info['existent'] = true;
             $info['writable'] = $dir->writable();
         }
         
@@ -87,7 +87,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
 
         // file will be Gettext most likely            
         if( 'pot' === $ext || 'po' === $ext || 'mo' === $ext ){
-            // treat as templte until locale verified
+            // treat as template until locale verified
             $tpl = 'admin/file/info-pot';
             // don't attempt to pull locale of template file
             if( 'pot' !== $ext && ! $isTemplate ){
@@ -114,7 +114,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     $info = Loco_mvc_FileParams::create($sibling);
                     $this->set( 'sibling', $info );
                     if( $sibling->exists() ){
-                        $info['existant'] = true;
+                        $info['existent'] = true;
                         $info['writable'] = $sibling->writable();
                     }
                 }
@@ -162,6 +162,11 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     if( $check !== $code ){
                         Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code ) );
                     }
+                }
+                // Count source text for templates only (assumed English)
+                if( 'pot' === $ext || $isTemplate ){
+                    $counter = new Loco_gettext_WordCount($data);
+                    $this->set('words', $counter->count() );
                 }
             }
             catch( Exception $e ){

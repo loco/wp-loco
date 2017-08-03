@@ -66,7 +66,7 @@ class Loco_package_Debugger implements IteratorAggregate {
             }
             // Warn if WordPress-assumed text domain is not configured. plugin/theme headers won't be translated
             $domains = $bundle->getDomains();
-            if( ! isset($domains[$value]) ){
+            if( ! isset($domains[$value]) && ! isset($domains['*']) ){
                 $this->warn('Expected text domain "%s" is not configured', $value );
             }
         }
@@ -98,6 +98,10 @@ class Loco_package_Debugger implements IteratorAggregate {
             foreach( $bundle as $project ){
                 $id = $project->getId();
                 $domain = (string) $project->getDomain();
+                if( '*' === $domain ){
+                    $this->devel('Wildcard text domain configured for %s', $project );
+                    $domain = '';
+                }
                 $domains[$domain] = true;
                 // Domain path[s] within bundle directory
                 $targets = array();
@@ -180,10 +184,10 @@ class Loco_package_Debugger implements IteratorAggregate {
                     $count = $counts[$domain];
                     $realCount = $realCounts[$domain];
                     $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', $realCount, 'loco-translate' );
-                    $this->good( $str.' (%s including metadata)', number_format($realCount), $domain, number_format($count) );
+                    $this->good( $str.' (%s including metadata)', number_format($realCount), $domain?$domain:'*', number_format($count) );
                 }
                 else {
-                    $this->warn('No strings extracted from source code for "%s"', $domain );
+                    $this->warn('No strings extracted from source code for "%s"', $domain?$domain:'*' );
                 }
                 // check POT agrees with extracted count, but only if domain has single POT (i.e. not split across files on purpose)
                 if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){

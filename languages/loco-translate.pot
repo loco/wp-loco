@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-10 11:09+0000\n"
+"POT-Creation-Date: 2017-08-03 12:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -453,14 +453,14 @@ msgstr ""
 msgid "WordPress Core"
 msgstr ""
 
-#: src/package/Debugger.php:182
+#: src/package/Debugger.php:186
 #, php-format
 msgid "One string extracted from source code for \"%2$s\""
 msgid_plural "%s strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Debugger.php:200
+#: src/package/Debugger.php:204
 #, php-format
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
@@ -475,7 +475,7 @@ msgstr ""
 msgid "Visit official site"
 msgstr ""
 
-#: src/package/Plugin.php:201
+#: src/package/Plugin.php:203
 #, php-format
 msgid "Plugin not found: %s"
 msgstr ""
@@ -1224,6 +1224,13 @@ msgstr ""
 #: tpl/admin/file/info-pot.php:18
 msgid "Source text"
 msgstr ""
+
+#: tpl/admin/file/info-pot.php:19
+#, php-format
+msgid "1 word"
+msgid_plural "%s words"
+msgstr[0] ""
+msgstr[1] ""
 
 #: tpl/admin/file/info.php:14
 msgid "File doesn't exist"

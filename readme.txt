@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.7.5
+Tested up to: 4.8.1
 Stable tag: 2.0.14
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -91,7 +91,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Fixed bug where editor code view was not redrawn on resize
 * Fixed bug where fuzzy flag caused format flag to be ignored
 * Fixed bug where autoloader responded to very long class names
-* Purging wp object cache when active plugin list changes
+* Purging WP object cache when active plugin list changes
+* Added experimental source word count into POT info tab
+* Bumped WP compatibility to 4.8.1
 
 = 2.0.14 =
 * Editor improvements inc. column sorting
@@ -186,7 +188,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.14 =
+= 2.0.15 =
 * Various bug fixes and improvements
 
 

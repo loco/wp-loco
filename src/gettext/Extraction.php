@@ -33,6 +33,11 @@ class Loco_gettext_Extraction {
         $this->extras = array();
         if( $default = $bundle->getDefaultProject() ){
             $domain = (string) $default->getDomain();
+            // wildcard stands in for empty text domain
+            if( '*' === $domain ){
+                $domain = '';
+                $this->extractor->setDomain('');
+            }
             // extract headers from theme PHP files
             if( $bundle->isTheme() ){
                 $this->extractor->headerize( array (

@@ -16,7 +16,7 @@ $this->start('header');
             <dd><date><?php $params->date('potime')?></date></dd>
             
             <dt><?php esc_html_e('Source text','loco-translate')?>:</dt>
-            <dd><?php echo esc_html( $meta->getTotalSummary() )?></dd>
+            <dd><?php echo esc_html( $meta->getTotalSummary() )?> <span>(<?php echo sprintf( _n('1 word','%s words', $words, 'loco-translate'), number_format_i18n($words) )?>)</span></dd>
         </dl>
    </div>
     

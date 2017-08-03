@@ -215,7 +215,7 @@ class Loco_fs_FileWriter {
         while( $parent = $here->getParent() ){
             array_unshift( $stack, $this->mapPath( $here->getPath() ) );
             if( $parent->exists() ){
-                // have existant directory, now build full path
+                // have existent directory, now build full path
                 foreach( $stack as $path ){
                     if( ! $fs->mkdir( $path, $mode ) ){
                         throw new Loco_error_WriteException( __('Failed to create directory','loco-translate') );

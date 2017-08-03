@@ -8,7 +8,7 @@ echo $header;
 
   
     <?php
-    if( ! $file->existant ):?> 
+    if( ! $file->existent ):?> 
     <div class="notice inline notice-error">
         <h3 class="has-icon">
             <?php esc_html_e("File doesn't exist",'loco-translate')?> 
@@ -49,7 +49,7 @@ echo $header;
     endif;
 
 
-    if( ! $dir->existant ):?> 
+    if( ! $dir->existent ):?> 
     <div class="notice inline notice-error">
         <h3 class="has-icon">
             <?php esc_html_e("Directory doesn't exist",'loco-translate')?> 
