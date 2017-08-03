@@ -19,18 +19,28 @@ $this->extend('../layout');
         </p>
     </div><?php
 
+    elseif( $params->has('devel') ):?> 
+    <div class="notice inline notice-debug">
+        <h3 class="has-icon">
+            <?php self::e( __('Version %s','loco-translate'), $version )?> 
+        </h3>
+        <p>
+            <?php esc_html_e("You're running a development snapshot of Loco Translate",'loco-translate')?> 
+        </p>
+    </div><?php
+
     else:?> 
     <div class="notice inline notice-success">
         <h3 class="has-icon">
             <?php self::e( __('Version %s','loco-translate'), $version)?> 
         </h3>
         <p>
-            <?php esc_html_e("You're running the latest version of Loco Translate",'loco-translate')?>  
+            <?php esc_html_e("You're running the latest version of Loco Translate",'loco-translate')?> 
         </p>
     </div><?php
     endif;?> 
-    
-    
+
+
     <div class="notice inline notice-generic">
         <h3>
             Downgrade to 1.5.6

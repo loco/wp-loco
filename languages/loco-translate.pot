@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-03 12:01+0000\n"
+"POT-Creation-Date: 2017-08-03 12:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -401,7 +401,7 @@ msgstr ""
 
 #: src/mvc/AdminRouter.php:61 src/admin/config/PrefsController.php:48
 #: src/admin/config/SettingsController.php:77
-#: src/admin/config/VersionController.php:34 tpl/admin/help/tab-settings.php:2
+#: src/admin/config/VersionController.php:22 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
 msgstr ""
 
@@ -1082,6 +1082,7 @@ msgid "Allow full access to these roles"
 msgstr ""
 
 #: tpl/admin/config/version.php:11 tpl/admin/config/version.php:25
+#: tpl/admin/config/version.php:35
 #, php-format
 msgid "Version %s"
 msgstr ""
@@ -1092,6 +1093,10 @@ msgid "Upgrade to %s"
 msgstr ""
 
 #: tpl/admin/config/version.php:28
+msgid "You're running a development snapshot of Loco Translate"
+msgstr ""
+
+#: tpl/admin/config/version.php:38
 msgid "You're running the latest version of Loco Translate"
 msgstr ""
 

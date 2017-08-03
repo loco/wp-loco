@@ -11,18 +11,6 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
     public function init(){
         parent::init();
         $this->set( 'title', __('Version','loco-translate') );
-        /*/ legacy downgrade to 1.x is disabled as of 2.0.15
-        $nonce = $this->setNonce('downgrade');
-        try {
-            if( $this->checkNonce($nonce->action) ){
-                update_option('loco-branch', '1', true );
-                $legacy = add_query_arg( array('page'=>'loco-translate'), admin_url('admin.php') );
-                wp_redirect( $legacy );
-            }
-        }
-        catch( Loco_error_Exception $e ){
-            Loco_error_AdminNotices::add($e);
-        }*/
     }
 
 
@@ -45,14 +33,16 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
                 $old = $updates->checked[$key];
                 $new = $updates->response[$key]->new_version;
                 $diff = version_compare( $new, $old );
+                // if current version is lower than latest, prompt update
                 if( 1 === $diff ){
-                    // current version is lower than latest
                     $this->setUpdate( $new );
                 }
-                /*else {
-                    // current version is a future release (dev branch probably)
-                }*/
             }
+        }
+
+        // notify if running a development snapshot, but only if ahead of latest stable
+        if( '-dev' === substr($version,-4) ){
+            $this->set( 'devel', true );
         }
 
         // $this->setUpdate('2.0.1-debug');
