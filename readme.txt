@@ -86,6 +86,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.16 =
+*
+
 = 2.0.15 =
 * Permanently removed legacy version 1.x
 * Fixed bug where editor code view was not redrawn on resize
@@ -188,7 +191,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.15 =
+= 2.0.16 =
 * Various bug fixes and improvements
 
 

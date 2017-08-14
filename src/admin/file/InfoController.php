@@ -164,7 +164,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     }
                 }
                 // Count source text for templates only (assumed English)
-                if( 'pot' === $ext || $isTemplate ){
+                if( 'admin/file/info-pot' === $tpl ){
                     $counter = new Loco_gettext_WordCount($data);
                     $this->set('words', $counter->count() );
                 }
