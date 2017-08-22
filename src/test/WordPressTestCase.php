@@ -74,7 +74,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         );
         // tests should always dictate the file system method, which defaults to direct
         add_filter('filesystem_method', array($this,'filter_fs_method') );
-        add_filter('loco_constant_DISALLOW_FILE_MODS', array($this,'filter_fs_allow') );
+        add_filter('loco_constant_DISALLOW_FILE_MODS', array($this,'filter_fs_disallow') );
+        add_filter('file_mod_allowed', array($this,'filter_fs_allow') ); // <- wp 4.8
         // capture cookies so we can test what is set 
         add_filter('loco_setcookie', array($this,'captureCookie'), 10, 1 );
         $this->cookies_set = array();
@@ -170,6 +171,14 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @internal
      */
     public function filter_fs_allow(){
+        return $this->fs_allow;
+    }
+
+
+    /**
+     * @internal
+     */
+    public function filter_fs_disallow(){
         return ! $this->fs_allow;
     }    
 

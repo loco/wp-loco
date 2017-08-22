@@ -87,7 +87,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 == Changelog ==
 
 = 2.0.16 =
-*
+* File writer observes wp_is_file_mod_allowed
 
 = 2.0.15 =
 * Permanently removed legacy version 1.x
