@@ -251,7 +251,7 @@ class Loco_fs_FileWriter {
     public function disabled(){
         // WordPress >= 4.8
         if( function_exists('wp_is_file_mod_allowed') ){
-            return ! wp_is_file_mod_allowed('loco');
+            return ! wp_is_file_mod_allowed('download_language_pack');
         }
         // fall back to direct constant check
         return (bool) loco_constant('DISALLOW_FILE_MODS');
