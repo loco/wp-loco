@@ -88,6 +88,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.16 =
 * File writer observes wp_is_file_mod_allowed
+* Fixed progress bug in editor for locales with nplurals=1
+* Made plural form categories translatable for editor UI
 
 = 2.0.15 =
 * Permanently removed legacy version 1.x

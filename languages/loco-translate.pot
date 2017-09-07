@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-08-03 12:24+0000\n"
+"POT-Creation-Date: 2017-09-07 18:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -23,6 +23,42 @@ msgstr ""
 
 #: src/Locale.php:205
 msgid "Invalid locale"
+msgstr ""
+
+#. Plural category for languages that have no plurals
+#: src/Locale.php:243
+msgctxt "Plural category"
+msgid "All forms"
+msgstr ""
+
+#. Plural category for singular quantity
+#: src/Locale.php:250
+msgctxt "Plural category"
+msgid "One"
+msgstr ""
+
+#. Plural category used in some multi-plural languages
+#: src/Locale.php:252
+msgctxt "Plural category"
+msgid "Two"
+msgstr ""
+
+#. Plural category used in some multi-plural languages
+#: src/Locale.php:254
+msgctxt "Plural category"
+msgid "Few"
+msgstr ""
+
+#. Plural category used in some multi-plural languages
+#: src/Locale.php:256
+msgctxt "Plural category"
+msgid "Many"
+msgstr ""
+
+#. General plural category not covered by other forms
+#: src/Locale.php:258
+msgctxt "Plural category"
+msgid "Other"
 msgstr ""
 
 #: src/admin/Navigation.php:41 src/mvc/AdminRouter.php:44

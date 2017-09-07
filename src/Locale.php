@@ -232,13 +232,38 @@ class Loco_Locale implements JsonSerializable {
      * @return array
      */
     public function getPluralData(){
+        $cache = $this->plurals;
         if( ! $this->plurals ){
             $db = Loco_data_CompiledData::get('plurals');
             $lc = $this->lang;
             $id = isset($db[$lc]) ? $db[$lc] : 0;
-            $this->plurals = $db[''][$id];
+            $cache = $db[''][$id];
+            // Translators: Plural category for languages that have no plurals
+            if( '0' === $cache[0] ){
+                $cache[1] = array( _x('All forms','Plural category','loco-translate') );
+            }
+            // else translate all implemented plural forms
+            // for meaning of categories, see http://cldr.unicode.org/index/cldr-spec/plural-rules
+            else {
+                $forms = array(
+                    // Translators: Plural category for singular quantity
+                    'one' => _x('One','Plural category','loco-translate'),
+                    // Translators: Plural category used in some multi-plural languages
+                    'two' => _x('Two','Plural category','loco-translate'),
+                    // Translators: Plural category used in some multi-plural languages
+                    'few' => _x('Few','Plural category','loco-translate'),
+                    // Translators: Plural category used in some multi-plural languages
+                    'many' => _x('Many','Plural category','loco-translate'),
+                    // Translators: General plural category not covered by other forms
+                    'other' => _x('Other','Plural category','loco-translate'),
+                );
+                foreach( $cache[1] as $k => $v ){
+                    $cache[1][$k] = $forms[$v];
+                }
+            }
+            $this->plurals = $cache;
         }
-        return $this->plurals;
+        return $cache;
     }
 
 
