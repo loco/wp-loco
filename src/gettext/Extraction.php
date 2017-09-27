@@ -23,7 +23,22 @@ class Loco_gettext_Extraction {
      */
     private $extras;
 
+    /**
+     * List of files skipped due to memory limit
+     * @var Loco_fs_FileList
+     */
+    private $skipped;
 
+    /**
+     * Size in bytes of largest file encountered
+     * @var int
+     */
+    private $maxbytes = 0;
+
+
+    /**
+     * Initialize extractor for a given bundle
+     */
     public function __construct( Loco_package_Bundle $bundle ){
         if( ! loco_check_extension('tokenizer') ){
             throw new Loco_error_Exception('String extraction not available without required extension');
@@ -76,7 +91,13 @@ class Loco_gettext_Extraction {
         }
         /* @var $file Loco_fs_File */
         foreach( $project->findSourceFiles() as $file ){
-            if( $file->size() <= $max ){
+            $size = $file->size();
+            $this->maxbytes = max( $this->maxbytes, $size );
+            if( $size > $max ){
+                $list = $this->skipped or $list = ( $this->skipped = new Loco_fs_FileList() );
+                $list->add( $file );
+            }
+            else {
                 $this->extractor->extractSource( $file->getContents(), $file->getRelativePath($base) );
             }
         }
@@ -118,9 +139,9 @@ class Loco_gettext_Extraction {
         $raw = $this->extractor->filter( $domain );
         $data = new Loco_gettext_Data( $raw );
         return $data->templatize();
-    }    
-    
-    
+    }
+
+
     /**
      * Get total number of strings extracted from all domains, excluding additional metadata
      * @return int
@@ -128,5 +149,24 @@ class Loco_gettext_Extraction {
     public function getTotal(){
         return $this->extractor->getTotal();
     }
-     
+
+
+    /**
+     * Get list of files skipped, or null if none were skipped
+     * @return Loco_fs_FileList | null
+     */
+    public function getSkipped(){
+        return $this->skipped;
+    }
+
+
+    /**
+     * Get size in bytes of largest file encountered, even if skipped.
+     * This is the value required of the max_php_size plugin setting to extract all files
+     * @return int
+     */
+    public function getMaxPhpSize(){
+        return $this->maxbytes;
+    }
+
 }

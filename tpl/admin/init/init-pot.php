@@ -13,12 +13,19 @@ $this->extend('../layout');
             <strong><?php $scan->n('count')?></strong>
             <span>(<?php 
             // Translators: Where %s is the size of a file
-            $scan->f( 'size', __('%s on disk','loco-translate') )?>)</span><?php
+            $scan->f( 'size', __('%s on disk','loco-translate') );?>, <?php
+            // Translators: Where %s is the size of a file
+            $scan->f( 'largest', __('largest is %s','loco-translate') )?>)</span>
+        </p><?php
+        if( $n = $scan->skip ):?> 
+        <p>
+            <em><?php 
             // Translators: Where %2$s is the size of a file
-            if( $n = $scan->skip ):?> 
-            <em><?php self::e( _n('Excludes one file over %2$s','Excludes %s files over %2$s',$n,'loco-translate'), $n, $scan->large )?>.</em><?php
-            endif?> 
-        </p>
+            self::e( _n('Excludes one file over %2$s','Excludes %s files over %2$s',$n,'loco-translate'), $n, $scan->large )?>.
+            <a class="icon icon-help" href="<?php echo esc_url(apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/skipped-files'))?>" target="_blank"><span class="screen-reader-text">Help</span></a>
+            </em>
+        </p><?php
+        endif?> 
         <p>
             <?php esc_html_e('Strings will be extracted to:','loco-translate')?> 
             <code class="path"><?php $pot->e('relpath')?></code>

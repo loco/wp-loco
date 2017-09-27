@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-07 18:17+0000\n"
+"POT-Creation-Date: 2017-09-27 14:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -105,6 +105,18 @@ msgstr ""
 #: src/ajax/SaveController.php:100
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
+
+#. Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
+#: src/ajax/SyncController.php:57
+#, php-format
+msgid ""
+"One file has been skipped because it's %3$s. (Max is %2$s). Check all "
+"strings are present before saving."
+msgid_plural ""
+"%s files over %2$s have been skipped. (Largest is %3$s). Check all strings "
+"are present before saving."
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/ajax/XgettextController.php:63
 msgid "Template file created"
@@ -628,7 +640,7 @@ msgid "Edit template"
 msgstr ""
 
 #: src/admin/bundle/ViewController.php:126
-#: src/admin/init/InitPoController.php:153 tpl/admin/init/init-pot.php:33
+#: src/admin/init/InitPoController.php:153 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
 
@@ -1448,15 +1460,21 @@ msgstr ""
 msgid "%s on disk"
 msgstr ""
 
+#. Where %s is the size of a file
+#: tpl/admin/init/init-pot.php:18
+#, php-format
+msgid "largest is %s"
+msgstr ""
+
 #. Where %2$s is the size of a file
-#: tpl/admin/init/init-pot.php:19
+#: tpl/admin/init/init-pot.php:24
 #, php-format
 msgid "Excludes one file over %2$s"
 msgid_plural "Excludes %s files over %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/init/init-pot.php:23
+#: tpl/admin/init/init-pot.php:30
 msgid "Strings will be extracted to:"
 msgstr ""
 
