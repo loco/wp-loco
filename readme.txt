@@ -91,6 +91,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Fixed progress bug in editor for locales with nplurals=1
 * Made plural form categories translatable for editor UI
 * Sync-from-source raises warning when files are skipped
+* Added hack for extracting from .twig as per .php
 * Bumped WP compatibility to 4.8.2
 
 = 2.0.15 =
