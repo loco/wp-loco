@@ -27,7 +27,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         // alternative names for POT files in priority order
         'pot_alias' => array( 'default.po', 'en_US.po', 'en.po' ),
         // alternative file extensions for PHP files
-        'php_alias' => array( 'php' ),
+        'php_alias' => array( 'php', 'twig' ),
         // whether to remember file system credentials in session
         'fs_persist' => false,
         // skip PHP source files this size or larger
