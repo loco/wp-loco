@@ -122,6 +122,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         
         $this->set( 'js', new Loco_mvc_ViewParams( array(
             'podata' => $data->jsonSerialize(),
+            'powrap' => (int) Loco_data_Settings::get()->po_width,
             'locale' => $locale ? $locale->jsonSerialize() : null,
             'potpath' => $locale && $potfile ? $potfile->getRelativePath($wp_content) : null,
             'popath' => $this->get('path'),

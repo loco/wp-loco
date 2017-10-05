@@ -92,6 +92,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Made plural form categories translatable for editor UI
 * Sync-from-source raises warning when files are skipped
 * Added hack for extracting from .twig as per .php
+* Added warning when child themes declare parent text domain
+* Added option to control PO line wrapping
 * Bumped WP compatibility to 4.8.2
 
 = 2.0.15 =

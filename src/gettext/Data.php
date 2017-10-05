@@ -86,6 +86,9 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return string
      */
     public function msgcat(){
+        // set maximum line width, zero or >= 15
+        $this->wrap( Loco_data_Settings::get()->po_width );
+        // concat by casting to string
         $po = (string) $this;
         // Prepend byte order mark only if configured
         if( Loco_data_Settings::get()->po_utf8_bom ){

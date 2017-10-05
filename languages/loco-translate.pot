@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-09-27 14:50+0000\n"
+"POT-Creation-Date: 2017-10-05 14:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -599,7 +599,11 @@ msgstr ""
 msgid "Advanced tab"
 msgstr ""
 
-#: src/admin/bundle/ConfController.php:128 tpl/admin/bundle/setup/core.php:17
+#: src/admin/bundle/ConfController.php:95
+msgid "Child theme declares the same Text Domain as the parent theme"
+msgstr ""
+
+#: src/admin/bundle/ConfController.php:139 tpl/admin/bundle/setup/core.php:17
 #: tpl/admin/bundle/setup/inc-nav.php:19
 msgid "Advanced configuration"
 msgstr ""
@@ -710,64 +714,64 @@ msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:142
+#: src/admin/file/EditController.php:143
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:144
+#: src/admin/file/EditController.php:145
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
-#: src/admin/file/EditController.php:145
+#: src/admin/file/EditController.php:146
 msgid "Help"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:147
+#: src/admin/file/EditController.php:148
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:149
+#: src/admin/file/EditController.php:150
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:151
+#: src/admin/file/EditController.php:152
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:153
+#: src/admin/file/EditController.php:154
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:155
+#: src/admin/file/EditController.php:156
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:157
+#: src/admin/file/EditController.php:158
 msgid "Filter translations"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:160
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:161
+#: src/admin/file/EditController.php:162
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -1057,7 +1061,7 @@ msgstr ""
 msgid "Translator credit"
 msgstr ""
 
-#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:133
+#: tpl/admin/config/prefs.php:28 tpl/admin/config/settings.php:139
 msgid "Save settings"
 msgstr ""
 
@@ -1093,39 +1097,43 @@ msgstr ""
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:72
+#: tpl/admin/config/settings.php:71
+msgid "Maximum line length (zero disables wrapping)"
+msgstr ""
+
+#: tpl/admin/config/settings.php:78
 msgid "Add UTF-8 byte order mark"
 msgstr ""
 
-#: tpl/admin/config/settings.php:72
+#: tpl/admin/config/settings.php:78
 msgid "Not recommended"
 msgstr ""
 
-#: tpl/admin/config/settings.php:79
+#: tpl/admin/config/settings.php:85
 msgid "POT template files"
 msgstr ""
 
-#: tpl/admin/config/settings.php:84
+#: tpl/admin/config/settings.php:90
 msgid "Look for non-standard names:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:92 tpl/admin/config/settings.php:96
+#: tpl/admin/config/settings.php:98 tpl/admin/config/settings.php:102
 msgid "File system credentials"
 msgstr ""
 
-#: tpl/admin/config/settings.php:101
+#: tpl/admin/config/settings.php:107
 msgid "Remember in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:106
+#: tpl/admin/config/settings.php:112
 msgid "See security notes"
 msgstr ""
 
-#: tpl/admin/config/settings.php:112
+#: tpl/admin/config/settings.php:118
 msgid "Grant access to roles"
 msgstr ""
 
-#: tpl/admin/config/settings.php:116
+#: tpl/admin/config/settings.php:122
 msgid "Allow full access to these roles"
 msgstr ""
 

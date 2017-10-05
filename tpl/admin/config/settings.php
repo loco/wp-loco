@@ -67,6 +67,12 @@ $this->extend('../layout');
                                 <input type="number" min="0" max="99" size="2" name="opts[num_backups]" id="loco--num_backups" value="<?php printf('%u',$opts->num_backups)?>" />
                             </p>
                             <p>
+                                <label for="loco--po-width">
+                                    <?php esc_html_e('Maximum line length (zero disables wrapping)','loco-translate')?> 
+                                </label>
+                                <input type="number" min="0" max="999" size="2" name="opts[po_width]" id="loco--po-width" value="<?php printf('%u',$opts->po_width)?>" />
+                            </p>
+                            <p>
                                 <label for="loco--po-utf8-bom">
                                     <input type="checkbox" name="opts[po_utf8_bom]" value="1" id="loco--po-utf8-bom"<?php echo $opts->po_utf8_bom?' checked':''?> />
                                     <?php esc_html_e('Add UTF-8 byte order mark','loco-translate')?> (<?php esc_html_e('Not recommended','loco-translate')?>) 
