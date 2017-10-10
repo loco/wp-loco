@@ -102,20 +102,37 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $locales = array();
         foreach( $api->getAvailableCore() as $tag => $raw ){
             $locale = Loco_Locale::parse($tag);
+            $tag = (string) $locale;
             $vparam = new Loco_mvc_ViewParams( array(
+                'value' => $tag,
                 'icon'  => $locale->getIcon(),
-                'value' => (string) $locale,
                 'label' => $locale->fetchName($api),
             ) );
             if( $api->isInstalled($tag) ){
-                $installed[] = $vparam;
+                $installed[$tag] = $vparam;
             }
             else {
-                $locales[] = $vparam;
+                $locales[$tag] = $vparam;
             }
         }
+        // Pick up any non-standard languages installed
+        foreach( $api->getInstalledCore() as $tag ){
+            if( ! array_key_exists($tag,$installed) ){
+                $locale = Loco_Locale::parse($tag);
+                if( $locale->isValid() ){
+                    $tag = (string) $tag;
+                    // We may not have names for these, so just the language tag will show
+                    $installed[$tag] = new Loco_mvc_ViewParams( array(
+                        'value' => $tag,
+                        'icon'  => $locale->getIcon(),
+                        'label' => $locale->ensureName($api),
+                    ) );
+                }
+            }
+        }
+        //
         $this->set( 'locales', $locales );
-        $this->set( 'installed', $installed );
+        $this->set( 'installed', array_values($installed) );
 
         // Critical that user selects the correct save location:
         if( $project ){

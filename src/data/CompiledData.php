@@ -3,7 +3,7 @@
  * Static, read-only caching of data held in serialized files.
  * Used for pre-built arrays of information such as plural forms.
  */
-class Loco_data_CompiledData implements ArrayAccess {
+class Loco_data_CompiledData implements ArrayAccess, Countable {
     
     /**
      * @var array
@@ -62,5 +62,8 @@ class Loco_data_CompiledData implements ArrayAccess {
     public function offsetSet( $k, $v ){
         throw new RuntimeException('Read only');
     }
-    
+
+    public function count(){
+        return count($this->data);
+    }
 }

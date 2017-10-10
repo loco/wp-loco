@@ -86,6 +86,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.0.17 =
+* Unofficial languages showing in “Installed” dropdown
+
 = 2.0.16 =
 * File writer observes wp_is_file_mod_allowed
 * Fixed progress bug in editor for locales with nplurals=1
@@ -198,7 +201,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.16 =
+= 2.0.17 =
 * Various bug fixes and improvements
 
 

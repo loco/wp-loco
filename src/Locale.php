@@ -157,8 +157,8 @@ class Loco_Locale implements JsonSerializable {
         $this->tag['variant'] = strtolower($this->tag['variant']);
         return $this;
     }
-    
-    
+
+
     /**
      * Resolve this locale's "official" name from WordPress's translation api
      * @return string English name currently set
@@ -169,7 +169,7 @@ class Loco_Locale implements JsonSerializable {
             $this->setName( $raw['english_name'], $raw['native_name'] );
         }
         return $this->name;
-    }    
+    }
 
 
 
@@ -207,6 +207,25 @@ class Loco_Locale implements JsonSerializable {
         return $this->name;
     }
 
+
+    /**
+     * Ensure locale has a label, even if it has to fall back to language code or error
+     * @return string
+     */
+    public function ensureName( Loco_api_WordPressTranslations $api ){
+        $name = $this->name;
+        if( ! $name ){
+            $name = $this->fetchName($api);
+            if( ! $name ){
+                $name = $this->buildName();
+                if( ! $name ){
+                    $name = (string) $this;
+                }
+            }
+            $this->setName( $name );
+        }
+        return $name;
+    }
 
 
     /**
