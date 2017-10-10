@@ -95,10 +95,9 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 $code = (string) $locale;
                 if( $locale->isValid() ){
                     $api = new Loco_api_WordPressTranslations;
-                    $locale->fetchName( $api );
                     $this->set( 'locale', new Loco_mvc_ViewParams( array(
                         'code' => $code,
-                        'name' => $locale->getName(),
+                        'name' => $locale->ensureName($api),
                         'icon' => $locale->getIcon(),
                         'lang' => $locale->lang,
                     ) ) );

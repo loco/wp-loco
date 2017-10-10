@@ -174,7 +174,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             $api = new Loco_api_WordPressTranslations;
             /* @var $locale Loco_Locale */
             foreach( $locales as $tag => $locale ){
-                $locale->fetchName($api) or $locale->buildName() or $locale->setName($tag);
+                $locale->ensureName($api);
             }
         }
         // collate as unique [PO,MO] pairs ensuring canonical template excluded

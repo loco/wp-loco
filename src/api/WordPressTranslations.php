@@ -81,7 +81,7 @@ class Loco_api_WordPressTranslations {
     public function getLocale( $tag ){
         $obj = Loco_Locale::parse($tag);
         if( $obj->isValid() ){
-            $obj->fetchName( $this );
+            $obj->ensureName( $this );
         }
         return $obj;
     }

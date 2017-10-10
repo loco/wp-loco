@@ -54,7 +54,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         else {
             $locale = $file->getLocale();
             if( $locale->isValid() ){
-                $locale->fetchName( new Loco_api_WordPressTranslations ) or $locale->buildName();
+                $locale->ensureName( new Loco_api_WordPressTranslations );
             }
             else {
                 $locale = null;
