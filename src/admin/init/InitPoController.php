@@ -106,7 +106,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $vparam = new Loco_mvc_ViewParams( array(
                 'value' => $tag,
                 'icon'  => $locale->getIcon(),
-                'label' => $locale->fetchName($api),
+                'label' => $locale->ensureName($api),
             ) );
             if( $api->isInstalled($tag) ){
                 $installed[$tag] = $vparam;
@@ -130,9 +130,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 }
             }
         }
-        //
+
+        // two locale lists built for "installed" and "available" dropdowns
         $this->set( 'locales', $locales );
-        $this->set( 'installed', array_values($installed) );
+        $this->set( 'installed', $installed );
 
         // Critical that user selects the correct save location:
         if( $project ){
@@ -143,7 +144,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $filechoice = new Loco_fs_FileList;
         }
 
-        
+
         // show information about POT file if we are initialializing from template
         if( $potfile && $potfile->exists() ){
             $meta = Loco_gettext_Metadata::load($potfile);
