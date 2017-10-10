@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-10-05 14:00+0000\n"
+"POT-Creation-Date: 2017-10-10 09:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -26,37 +26,37 @@ msgid "Invalid locale"
 msgstr ""
 
 #. Plural category for languages that have no plurals
-#: src/Locale.php:243
+#: src/Locale.php:262
 msgctxt "Plural category"
 msgid "All forms"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:250
+#: src/Locale.php:269
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:252
+#: src/Locale.php:271
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:254
+#: src/Locale.php:273
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:256
+#: src/Locale.php:275
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:258
+#: src/Locale.php:277
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
@@ -515,7 +515,7 @@ msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/package/Header.php:77 src/admin/file/InfoController.php:126
+#: src/package/Header.php:77 src/admin/file/InfoController.php:125
 msgid "Unknown author"
 msgstr ""
 
@@ -644,7 +644,7 @@ msgid "Edit template"
 msgstr ""
 
 #: src/admin/bundle/ViewController.php:126
-#: src/admin/init/InitPoController.php:153 tpl/admin/init/init-pot.php:40
+#: src/admin/init/InitPoController.php:171 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
 
@@ -776,11 +776,11 @@ msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
-#: src/admin/file/InfoController.php:146
+#: src/admin/file/InfoController.php:145
 msgid "File does not have a valid header"
 msgstr ""
 
-#: src/admin/file/InfoController.php:163
+#: src/admin/file/InfoController.php:162
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -794,21 +794,21 @@ msgstr ""
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:134
+#: src/admin/init/InitPoController.php:152
 #, php-format
 msgid "One string found in %2$s"
 msgid_plural "%s strings found in %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:162
+#: src/admin/init/InitPoController.php:180
 #, php-format
 msgid "1 source file will be scanned for translatable strings"
 msgid_plural "%s source files will be scanned for translatable strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:168
+#: src/admin/init/InitPoController.php:186
 msgid "Skip template"
 msgstr ""
 
