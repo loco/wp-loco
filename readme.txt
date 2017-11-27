@@ -90,6 +90,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Unofficial languages showing in “Installed” dropdown
 * Added WordPress system file warning
 * Fixed extraction bug where comment confused with file header
+* Fixed issue where src attributes requested during HTML strip
 * Bumped WP compatibility to 4.9
 
 = 2.0.16 =
