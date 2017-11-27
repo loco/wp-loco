@@ -199,6 +199,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         // there is no point checking whether any of these file exist, because we don't know what language will be chosen yet.
         $locations = array();
         $preferred = null;
+        $filesystem = new Loco_api_WordPressFileSystem;
         /* @var $pofile Loco_fs_File */
         foreach( $filechoice as $pofile ){
             $parent = new Loco_fs_LocaleDirectory( $pofile->dirname() );
@@ -223,9 +224,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 'parent' => Loco_mvc_FileParams::create( $parent ),
                 'hidden' => $pofile->getRelativePath($content_dir),
                 'holder' => str_replace( (string) $locale, '<span>&lt;locale&gt;</span>', $pofile->basename() ),
+                'unsafe' => $filesystem->isAutoUpdatable($pofile),
             ) );
             // use first writable (or createable) location as default option
-            if( is_null($preferred) && ! $params['locked'] ){
+            if( is_null($preferred) && ! $params['locked'] && ! $params['unsafe'] ){
                 $preferred = $pofile;
                 $params['checked'] = 'checked';
             }

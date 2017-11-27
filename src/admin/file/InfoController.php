@@ -54,6 +54,11 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             $info['writable'] = $file->writable();
             $info['deletable'] = $file->deletable();
             $info['mtime'] = $file->modified();
+            // Notify if file is managed by WordPress
+            $api = new Loco_api_WordPressFileSystem;
+            if( $api->isAutoUpdatable($file) ){
+                $info['autoupdate'] = true;
+            }
         }
         
         // location info

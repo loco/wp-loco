@@ -90,6 +90,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         Loco_output_Buffer::clear();
         Loco_output_Buffer::check();
         // output stream is clear, we can flush JSON
+        header('HTTP/1.1 200 OK', true, 200 );
         header('Content-Length: '.strlen($json), true );
         header('Content-Type: application/json; charset=UTF-8', true );
         // avoid hijacking of exit via wp_die_ajax_handler. Tests call renderAjax directly.

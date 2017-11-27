@@ -36,7 +36,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      */
     protected static function dropOptions(){
         global $wpdb;
-        $query = $wpdb->prepare( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE '%s'", array('loco_%','_transient_loco_%','_transient_timeout_loco_%') );
+        $query = $wpdb->prepare( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE '%s' OR option_name LIKE '%s'", array('loco_%','_%_loco_%') );
         if( $results = $wpdb->get_results($query,ARRAY_N) ){
             foreach( $results as $row ){
                 list( $option_name ) = $row;

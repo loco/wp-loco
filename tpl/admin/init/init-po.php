@@ -106,6 +106,11 @@ $this->extend('../layout');
                                     <?php $choice->locked && print('<!-- no direct fs -->')?> 
                                 </label>
                             </p><?php
+                            /*if( $choice->unsafe ):?> TODO
+                            <p class="description has-icon icon-warn">
+                                This location may not be safe from WordPress updates
+                            </p><?php
+                            endif;*/ 
                         endforeach?> 
                         </td>
                     </tr><?php

@@ -285,4 +285,38 @@ class Loco_api_WordPressFileSystem {
     }
 
 
+
+    /**
+     * Check if a location is safe from WordPress automatic updates
+     * @return bool
+     */
+    public function isAutoUpdatable( Loco_fs_File $file ){
+        // all paths safe from auto-updates if auto-updates are completely disabled
+        // WordPress >= 4.8 can disable auto updates completely with "automatic_updater" context
+        if( function_exists('wp_is_file_mod_allowed') && ! wp_is_file_mod_allowed('automatic_updater') ){
+            return false;
+        }
+        if( apply_filters( 'automatic_updater_disabled', loco_constant('AUTOMATIC_UPDATER_DISABLED') ) ) {
+            return false;
+        }
+        // TODO provide a useful context for the update offer passed to filters
+        // WordPress updater will have taken this from API data which we don't have here. 
+        $item = new stdClass;
+        // any theme or plugin locations are unsafe if themes/plugins can be updated
+        if( $file->underThemeDirectory() ){
+            return apply_filters( 'auto_update_theme', true, $item );
+        }
+        if( $file->underPluginDirectory() ){
+            return apply_filters( 'auto_update_plugin', true, $item );
+        }
+        // global languages subdirectories other than plugins and themes are deemed safe
+        $sub = $file->getParent()->getRelativePath( loco_constant('WP_LANG_DIR') );
+        if( '' === $sub || 'themes' === $sub || 'plugins' === $sub ){
+            return apply_filters( 'auto_update_translation', true, $item );
+        }
+        // else safe (not auto-updatable)
+        return false;
+    }
+        
+
 }

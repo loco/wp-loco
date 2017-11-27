@@ -479,7 +479,7 @@ class Loco_fs_File {
 
 
     /**
-     * Check if path is under a global system directory 
+     * Check if path is under the global system directory 
      * @return bool
      */
     public function underGlobalDirectory(){

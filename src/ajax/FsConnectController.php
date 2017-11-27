@@ -32,6 +32,10 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
                 $this->set( 'creds', $api->getInputCredentials() );
                 $this->set( 'method', $api->getFileSystem()->method );
                 $this->set( 'success', __('Connected to remote file system','loco-translate') );
+                // Warn if file is managed by WordPress
+                if( $api->isAutoUpdatable($file) ){
+                    $this->set('warning', __('This file is managed by WordPress updates','loco-translate') );
+                }
             }
             else {
                 $this->set( 'authed', false );

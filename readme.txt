@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.8.2
+Tested up to: 4.9
 Stable tag: 2.0.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -88,6 +88,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown
+* Added WordPress system file warning
+* Fixed extraction bug where comment confused with file header
+* Bumped WP compatibility to 4.9
 
 = 2.0.16 =
 * File writer observes wp_is_file_mod_allowed

@@ -3,7 +3,7 @@
  * Static, read-only caching of data held in serialized files.
  * Used for pre-built arrays of information such as plural forms.
  */
-class Loco_data_CompiledData implements ArrayAccess, Countable {
+class Loco_data_CompiledData implements ArrayAccess, Countable, IteratorAggregate {
     
     /**
      * @var array
@@ -65,5 +65,13 @@ class Loco_data_CompiledData implements ArrayAccess, Countable {
 
     public function count(){
         return count($this->data);
+    }
+    
+    /**
+     * Implements IteratorAggregate::getIterator
+     * @return ArrayIterator
+     */
+    public function getIterator(){
+        return new ArrayIterator( $this->data );
     }
 }
