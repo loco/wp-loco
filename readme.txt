@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.9
+Tested up to: 4.9.1
 Stable tag: 2.0.16
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -91,7 +91,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Added WordPress system file warning
 * Fixed extraction bug where comment confused with file header
 * Fixed issue where src attributes requested during HTML strip
-* Bumped WP compatibility to 4.9
+* Add loco_admin_init hook into ajax router for consistency
+* Bumped WP compatibility to 4.9.1
 
 = 2.0.16 =
 * File writer observes wp_is_file_mod_allowed

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-11-16 07:52+0000\n"
+"POT-Creation-Date: 2017-11-30 16:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -470,20 +470,20 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:156
+#: src/mvc/AjaxRouter.php:161
 #, php-format
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:161
+#: src/mvc/AjaxRouter.php:166
 msgid "Ajax controller returned empty JSON"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:188
+#: src/mvc/AjaxRouter.php:193
 msgid "Download action not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:193
+#: src/mvc/AjaxRouter.php:198
 msgid "Download controller returned empty output"
 msgstr ""
 
