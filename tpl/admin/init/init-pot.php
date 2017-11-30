@@ -2,8 +2,8 @@
 /**
  * Intitialize a new POT template file
  */
- 
 $this->extend('../layout');
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates');
 ?> 
 
     <div class="notice inline notice-generic">
@@ -38,6 +38,7 @@ $this->extend('../layout');
         
             <p class="submit">
                 <button type="submit" class="button button-large button-primary" disabled><?php esc_html_e('Create template','loco-translate')?></button>
+                <a href="<?php echo esc_url($help)?>" class="button button-large button-link has-icon icon-help" target="_blank"><?php esc_html_e("About templates",'loco-translate')?></a>
             </p>
 
         </form>

@@ -3,9 +3,7 @@
  * Notice before creating a PO that there is no POT
  */
 $this->extend('../layout');
-
 $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates');
-
 ?> 
     <div class="notice inline notice-warning">
         <h3 class="has-icon">

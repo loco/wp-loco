@@ -88,10 +88,10 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown
-* Added WordPress system file warning
 * Fixed extraction bug where comment confused with file header
-* Fixed issue where src attributes requested during HTML strip
+* Fixed issue where src attributes requested from server during HTML strip
 * Add loco_admin_init hook into ajax router for consistency
+* Minor help link and layout tweaks
 * Bumped WP compatibility to 4.9.1
 
 = 2.0.16 =

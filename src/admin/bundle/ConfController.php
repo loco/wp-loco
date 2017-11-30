@@ -135,6 +135,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
             'type' => $bundle->getType()  
         );
         $this->set( 'xmlUrl', Loco_mvc_AjaxRouter::generate( 'DownloadConf', $args ) );
+        $this->set( 'manUrl', apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/bundle-config') );
         
         $this->prepareNavigation()->add( __('Advanced configuration','loco-translate') );
         return $this->view('admin/bundle/conf', compact('conf','base','name','excl') );

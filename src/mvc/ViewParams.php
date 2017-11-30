@@ -159,6 +159,17 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
         return esc_attr( $this->__get($p) );
     }*/
 
+    
+
+    /**
+     * @return Loco_mvc_ViewParams
+     */
+    public function sort( $callback ){
+        $raw = $this->getArrayCopy();
+        uasort( $raw, $callback );
+        $this->exchangeArray( $raw );
+        return $this;
+    }
 
     
     

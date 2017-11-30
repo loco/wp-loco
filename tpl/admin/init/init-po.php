@@ -2,8 +2,8 @@
 /**
  * Intitialize a new PO translations file
  */
- 
 $this->extend('../layout');
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/msginit');
 ?> 
 
     <?php if( $params->has('ext') ):?> 
@@ -32,7 +32,7 @@ $this->extend('../layout');
                     <tr valign="top">
                         <th scope="row">
                             <label for="loco-select-locale">
-                                <?php esc_html_e('Choose a language','loco-translate')?>:
+                                1. <?php esc_html_e('Choose a language','loco-translate')?>:
                             </label>
                         </th>
                         <td>
@@ -77,11 +77,11 @@ $this->extend('../layout');
                     <tr valign="top">
                         <th scope="row">
                             <label>
-                                <?php esc_html_e('Choose a location','loco-translate')?>:
+                                2. <?php esc_html_e('Choose a location','loco-translate')?>:
                             </label>
                         </th>
                         <td>
-                            <p class="description"> </p>
+                            <a href="<?php echo esc_url($help)?>#locations" class="has-icon icon-help" target="_blank"><?php esc_html_e("What's this?",'loco-translate')?></a>
                         </td>
                     </tr><?php
                     $choiceId = 0;
@@ -103,14 +103,8 @@ $this->extend('../layout');
                                     <input type="radio" name="select-path" value="<?php echo $offset?>" <?php echo $choice->checked?> />
                                     <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" />
                                     <code class="path"><?php $parent->e('relpath')?>/<?php echo $choice->holder?></code>
-                                    <?php $choice->locked && print('<!-- no direct fs -->')?> 
                                 </label>
                             </p><?php
-                            /*if( $choice->unsafe ):?> TODO
-                            <p class="description has-icon icon-warn">
-                                This location may not be safe from WordPress updates
-                            </p><?php
-                            endif;*/ 
                         endforeach?> 
                         </td>
                     </tr><?php
@@ -120,9 +114,14 @@ $this->extend('../layout');
                 if( $params->has('sourceLocale') ):?> 
                 <tbody>
                     <tr valign="top">
-                        <th scope="row" rowspan="2">
-                            <?php esc_html_e('Template options','loco-translate')?>:
+                        <th scope="row" rowspan="3">
+                            3. <?php esc_html_e('Template options','loco-translate')?>:
                         </th>
+                        <td>
+                            <a href="<?php echo esc_url($help)?>#copy" class="has-icon icon-help" target="_blank"><?php esc_html_e("What's this?",'loco-translate')?></a>
+                        </td>
+                    </tr>
+                    <tr valign="top" class="compact">
                         <td>
                             <p>
                                 <label>
@@ -138,7 +137,7 @@ $this->extend('../layout');
                             </p>
                         </td>
                     </tr>                    
-                    <tr valign="top">
+                    <tr valign="top" class="compact">
                         <td>
                             <p>
                                 <label>

@@ -221,11 +221,15 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
             $params = new Loco_mvc_ViewParams( array (
                 'locked' => ! $parent->writable(),
+                'unsafe' => $filesystem->isAutoUpdatable($pofile),
                 'parent' => Loco_mvc_FileParams::create( $parent ),
                 'hidden' => $pofile->getRelativePath($content_dir),
                 'holder' => str_replace( (string) $locale, '<span>&lt;locale&gt;</span>', $pofile->basename() ),
-                'unsafe' => $filesystem->isAutoUpdatable($pofile),
             ) );
+            // note that location may be vulnerable to overwites
+            if( $params['unsafe'] ){
+                $this->set('has_unsafe', true );
+            }
             // use first writable (or createable) location as default option
             if( is_null($preferred) && ! $params['locked'] && ! $params['unsafe'] ){
                 $preferred = $pofile;

@@ -107,11 +107,9 @@ echo $header;
             <?php esc_html_e('WordPress system file','loco-translate')?> 
         </h3>
         <p>
-            <?php esc_html_e('This file is managed by WordPress updates','loco-translate')?>.
+            <?php esc_html_e('This file location is managed by WordPress updates','loco-translate')?>.
             <?php esc_html_e("It's not recommended to edit this file directly",'loco-translate')?>.
-        </p>
-        <p>
-            <a class="button button-link has-icon icon-help" target="_blank" href="<?php 
+            <a target="_blank" href="<?php 
                 echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/files-deleted') )?>"><?php
                 esc_html_e('See FAQ','loco-translate');
             ?></a>
