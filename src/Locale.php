@@ -265,6 +265,8 @@ class Loco_Locale implements JsonSerializable {
             // for meaning of categories, see http://cldr.unicode.org/index/cldr-spec/plural-rules
             else {
                 $forms = array(
+                    // Translators: Plural category for zero quantity
+                    'zero' => _x('Zero','Plural category','loco-translate'),
                     // Translators: Plural category for singular quantity
                     'one' => _x('One','Plural category','loco-translate'),
                     // Translators: Plural category used in some multi-plural languages
@@ -277,7 +279,9 @@ class Loco_Locale implements JsonSerializable {
                     'other' => _x('Other','Plural category','loco-translate'),
                 );
                 foreach( $cache[1] as $k => $v ){
-                    $cache[1][$k] = $forms[$v];
+                    if( isset($forms[$v]) ){
+                        $cache[1][$k] = $forms[$v];
+                    }
                 }
             }
             $this->plurals = $cache;

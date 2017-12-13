@@ -9,6 +9,9 @@ $this->start('header');
     <div class="notice inline notice-info">
         <h3><?php esc_html_e('Template file','loco-translate')?></h3>
         <dl>
+            <dt><?php self::e( __('File size','loco-translate') )?>:</dt>
+            <dd><?php $file->e('size')?></dd>
+
             <dt><?php esc_html_e('File modified','loco-translate')?>:</dt>
             <dd><?php $file->date('mtime')?></dd>
 

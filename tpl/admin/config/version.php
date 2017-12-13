@@ -38,17 +38,4 @@ $this->extend('../layout');
             <?php esc_html_e("You're running the latest version of Loco Translate",'loco-translate')?> 
         </p>
     </div><?php
-    endif;?> 
-
-
-    <div class="notice inline notice-generic">
-        <h3>
-            Downgrade to 1.5.6
-        </h3>
-        <p>
-            Maintenance and support for the 1.x branch has stopped and there will be no further releases.<br />
-            The only way to run the old version of Loco Translate is by installing it manually from the 
-            <a href="https://github.com/loco/wp-loco/tree/1.x">Git archive</a>.
-        </p>
-    </div>
-    
+    endif;

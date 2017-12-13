@@ -479,6 +479,24 @@ class Loco_fs_File {
 
 
     /**
+     * Check if path is under wp-content directory 
+     * @return bool
+     */
+    public function underContentDirectory(){
+        return Loco_fs_Locations::getContent()->check( $this->path );
+    }
+
+
+    /**
+     * Check if path is under WordPress root directory (ABSPATH) 
+     * @return bool
+     */
+    public function underWordPressDirectory(){
+        return Loco_fs_Locations::getRoot()->check( $this->path );
+    }
+
+
+    /**
      * Check if path is under the global system directory 
      * @return bool
      */
@@ -568,6 +586,36 @@ class Loco_fs_File {
         $this->getWriteContext()->putContents($data);
         $this->clearStat();
         return $this->size();
+    }
+
+
+
+    /**
+     * Establish what part of the WordPress file system this is.
+     * Value is that used by WP_Automatic_Updater::should_update.
+     * @return string "core", "plugin", "theme" or "translation"
+     */
+    public function getUpdateType(){
+        // global languages directory root, and canonical subdirectories
+        $dirpath = (string) ( $this->isDirectory() ? $this : $this->getParent() );
+        if( $sub = Loco_fs_Locations::getGlobal()->rel($dirpath) ){
+            if( '.' === $sub || 'themes' === $sub || 'plugins' === $sub ){
+                return 'translation';
+            }
+        }
+        // theme and plugin locations can be at any depth
+        else if( $this->underThemeDirectory() ){
+            return 'theme';
+        }
+        else if( $this->underPluginDirectory() ){
+            return 'plugin';
+        }
+        // core locations are under WordPress root, but not under wp-content
+        else if( $this->underWordPressDirectory() && ! $this->underContentDirectory() ){
+            return 'core';
+        }
+        // else not an update type
+        return '';
     }
     
 }

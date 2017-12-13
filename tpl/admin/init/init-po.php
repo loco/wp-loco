@@ -3,18 +3,33 @@
  * Intitialize a new PO translations file
  */
 $this->extend('../layout');
-$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/msginit');
-?> 
 
-    <?php if( $params->has('ext') ):?> 
+    // warn if doing direct extraction
+    if( $params->has('ext') ):?> 
     <div class="notice inline notice-info">
         <p>
             <?php esc_html_e("You're creating translations directly from source code",'loco-translate')?>.
             <a href="<?php $ext->e('link')?>"><?php esc_html_e('Create template instead','loco-translate')?></a>.
         </p>
     </div><?php
-    endif?> 
-            
+    endif;
+
+
+    /*/ warning to show/hide when locations are marked unsafe
+    if( $params->has('fsNotice') ):?> 
+    <div id="loco-fs-info" class="has-nav notice inline notice-info jshide">
+        <p>
+            <strong class="has-icon"><?php esc_html_e('Warning','loco-translate')?>:</strong>
+            <span><?php $params->e('fsNotice')?>.</span>
+        </p>
+        <nav>
+            <a href="<?php echo $help?>#locations" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
+            <span>|</span>
+            <a href="<?php echo esc_url(Loco_mvc_AdminRouter::generate('config'))?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
+        </nav>
+    </div><?php
+    endif*/?> 
+
 
     <div class="notice inline notice-generic">
 
@@ -81,7 +96,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                             </label>
                         </th>
                         <td>
-                            <a href="<?php echo esc_url($help)?>#locations" class="has-icon icon-help" target="_blank"><?php esc_html_e("What's this?",'loco-translate')?></a>
+                            <a href="<?php $help->e('href')?>#locations" class="has-icon icon-help" target="_blank"><?php $help->e('text')?></a>
                         </td>
                     </tr><?php
                     $choiceId = 0;
@@ -98,10 +113,16 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                         foreach( $location['paths'] as $choice ): 
                             $parent = $choice['parent']; 
                             $offset = sprintf('%u',++$choiceId);?> 
-                            <p>
+                            <p><?php
+                                if( $choice->disabled ):?> 
+                                <label class="for-disabled">
+                                    <span class="icon icon-lock"></span>
+                                    <input type="radio" name="select-path" class="disabled" disabled /><?php
+                                else:?> 
                                 <label>
                                     <input type="radio" name="select-path" value="<?php echo $offset?>" <?php echo $choice->checked?> />
-                                    <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" />
+                                    <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" /><?php
+                                endif?> 
                                     <code class="path"><?php $parent->e('relpath')?>/<?php echo $choice->holder?></code>
                                 </label>
                             </p><?php
@@ -118,7 +139,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                             3. <?php esc_html_e('Template options','loco-translate')?>:
                         </th>
                         <td>
-                            <a href="<?php echo esc_url($help)?>#copy" class="has-icon icon-help" target="_blank"><?php esc_html_e("What's this?",'loco-translate')?></a>
+                            <a href="<?php $help->e('href')?>#copy" class="has-icon icon-help" target="_blank"><?php $help->e('text')?></a>
                         </td>
                     </tr>
                     <tr valign="top" class="compact">

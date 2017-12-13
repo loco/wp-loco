@@ -30,6 +30,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'php_alias' => array( 'php', 'twig' ),
         // whether to remember file system credentials in session
         'fs_persist' => false,
+        // prevent modification of files in system folders (0:off, 1:warn, 2:block)
+        'fs_protect' => 1,
         // skip PHP source files this size or larger
         'max_php_size' => '100K',
         // whether to prepend PO and POT files with UTF-8 byte order mark

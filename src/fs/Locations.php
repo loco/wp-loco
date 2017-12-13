@@ -5,6 +5,18 @@
 class Loco_fs_Locations extends ArrayObject {
     
     /**
+     * Singleton of WordPress root directory
+     * @var Loco_fs_Locations
+     */    
+    private static $roots;
+    
+    /**
+     * Singleton of wp-content directory
+     * @var Loco_fs_Locations
+     */    
+    private static $conts;
+    
+    /**
      * Singleton of global languages directories
      * @var Loco_fs_Locations
      */    
@@ -29,11 +41,38 @@ class Loco_fs_Locations extends ArrayObject {
      * Clear static caches.
      */
     public static function clear(){
+        self::$roots = null;
+        self::$conts = null;
         self::$langs = null;
         self::$theme = null;
         self::$plugin = null;
     }
 
+
+    /**
+     * @return Loco_fs_Locations 
+     */
+    public static function getRoot(){
+        if( ! self::$roots ){
+            self::$roots = new Loco_fs_Locations( array(
+                loco_constant('ABSPATH'),
+            ) );
+        }
+        return self::$roots;
+    }
+
+
+    /**
+     * @return Loco_fs_Locations 
+     */
+    public static function getContent(){
+        if( ! self::$conts ){
+            self::$conts = new Loco_fs_Locations( array(
+                loco_constant('WP_CONTENT_DIR'),
+            ) );
+        }
+        return self::$conts;
+    }
 
 
     /**
@@ -107,13 +146,31 @@ class Loco_fs_Locations extends ArrayObject {
      * @return bool whether path matched
      */    
     public function check( $path ){
-        $path = Loco_fs_File::abs($path);
+        $path = Loco_fs_File::abs($path).'/';
         foreach( $this as $prefix => $length ){
-            if( substr($path,0,$length) === $prefix ){
+            if( $prefix === $path || substr($path,0,$length) === $prefix ){
                 return true;
             }
         }
         return false;
+    }
+    
+    
+    /**
+     * Match location and return the relative subpath.
+     * Note that exact match is returned as "." indicating self
+     * @return string | null
+     */
+    public function rel( $path ){
+        $path = Loco_fs_File::abs($path).'/';
+        foreach( $this as $prefix => $length ){
+            if( $prefix === $path ){
+                return '.';
+            }
+            if( substr($path,0,$length) === $prefix ){
+                return dirname( substr($path,$length) );
+            }
+        }
     }
     
     

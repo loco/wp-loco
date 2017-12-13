@@ -30,6 +30,62 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
 
 
     /**
+     * Sort to the left the best option for saving new translation files
+     * @return Loco_mvc_ViewParams
+     */
+    private function sortPreferred( array $choices ){
+        usort( $choices, array(__CLASS__,'_onSortPreferred') );
+        $best = current( $choices );
+        if( $best && ! $best['disabled'] ){
+            return $best;
+        }
+    }
+
+    
+
+    /**
+     * @internal
+     */
+    public static function _onSortPreferred( Loco_mvc_ViewParams $a, Loco_mvc_ViewParams $b ){
+        $x = self::scoreFileChoice($a);
+        $y = self::scoreFileChoice($b);
+        return $x === $y ? 0 : ( $x > $y ? -1 : 1 );
+    }
+    
+    
+    /**
+     * Score an individual file choice for sorting preferred
+     * @return int
+     */
+    private static function scoreFileChoice( Loco_mvc_ViewParams $p ){
+        $score = 0;
+        if( $p['writable'] ){
+            $score++;
+        }
+        if( $p['disabled'] ){
+            $score -= 2;
+        }
+        if( $p['systype'] ){
+            $score--;
+        }
+        return $score;
+    }
+
+
+
+    /**
+     * @internal 
+     */
+    public static function _onSortLocationKeys( $a, $b ){
+        static $order = array('custom' => 4, 'wplang' => 3, 'theme' => 2, 'plugin' => 2, 'other' => 1 );
+        $x = $order[$a];
+        $y = $order[$b];
+        return $x === $y ? 0 : ( $x > $y ? -1 : 1 );
+    }
+
+
+
+    /**
      * {@inheritdoc}
      */
     public function render(){
@@ -194,12 +250,12 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
         $this->set( 'summary', $summary );
         
-
         // group established locations into types (offical, etc..) 
         // there is no point checking whether any of these file exist, because we don't know what language will be chosen yet.
+        $sortable = array();
         $locations = array();
-        $preferred = null;
-        $filesystem = new Loco_api_WordPressFileSystem;
+        $fs_protect = Loco_data_Settings::get()->fs_protect;
+        $fs_failure = null;
         /* @var $pofile Loco_fs_File */
         foreach( $filechoice as $pofile ){
             $parent = new Loco_fs_LocaleDirectory( $pofile->dirname() );
@@ -219,26 +275,47 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     // Loco_error_AdminNotices::warn( $e->getMessage() );
                 }
             }
-            $params = new Loco_mvc_ViewParams( array (
-                'locked' => ! $parent->writable(),
-                'unsafe' => $filesystem->isAutoUpdatable($pofile),
+            // folder may be unwritable (requiring connect to create file) or may be denied under security settings
+            try {
+                $disabled = false;
+                $systype = $parent->getUpdateType();
+                $context = $parent->getWriteContext()->authorize();
+                $writable = $context->writable();
+            }
+            catch( Loco_error_WriteException $e ){
+                $fs_failure = $e->getMessage();
+                $disabled = true;
+                $writable = false;
+            }
+            $choice = new Loco_mvc_ViewParams( array (
+                'checked' => '',
+                'writable' => $writable,
+                'disabled' => $disabled,
+                'systype' => $systype,
                 'parent' => Loco_mvc_FileParams::create( $parent ),
                 'hidden' => $pofile->getRelativePath($content_dir),
                 'holder' => str_replace( (string) $locale, '<span>&lt;locale&gt;</span>', $pofile->basename() ),
             ) );
-            // note that location may be vulnerable to overwites
-            if( $params['unsafe'] ){
-                $this->set('has_unsafe', true );
+            // may need to show system file warnings
+            if( $systype && $fs_protect ){
+                $choice['syswarn'] = true;
             }
-            // use first writable (or createable) location as default option
-            if( is_null($preferred) && ! $params['locked'] && ! $params['unsafe'] ){
-                $preferred = $pofile;
-                $params['checked'] = 'checked';
-            }
-            $locations[$typeId]['paths'][] = $params;
+            $sortable[] = $choice;
+            $locations[$typeId]['paths'][] = $choice;
         }
+
+        // display locations in runtime preference order
+        uksort( $locations, array(__CLASS__,'_onSortLocationKeys') );
         $this->set( 'locations', $locations );
 
+        // pre-select best (safest/writable) option
+        if( $preferred = $this->sortPreferred( $sortable ) ){
+            $preferred['checked'] = 'checked';
+        }
+        // else show total lock message. probably file mods disallowed
+        else if( $fs_failure ){
+            $this->set('fsLocked', $fs_failure );
+        }
         
         // hidden fields to pass through to Ajax endpoint
         $this->set('hidden', new Loco_mvc_ViewParams( array(
@@ -251,8 +328,13 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             'source' => $this->get('source'),
         ) ) );
         
+        $this->set('help', new Loco_mvc_ViewParams( array(
+            'href' => apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/msginit'),
+            'text' => __("What's this?",'loco-translate'),
+        ) ) );
+
         // file system prompts will be handled when paths are selected (i.e. we don't have one yet)
-        $this->prepareFsConnect( 'create', '' );
+        $this->prepareFsConnect( 'create', '', true );
         
         $this->enqueueScript('poinit');
         return $this->view( 'admin/init/init-po', array() );

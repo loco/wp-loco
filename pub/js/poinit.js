@@ -7,7 +7,7 @@
         loco = window.locoScope,
         fsHook = document.getElementById('loco-fs'),
         elForm = document.getElementById('loco-poinit'),
-        fsConn = loco.fs.init( fsHook )
+        fsConn = fsHook && loco.fs.init( fsHook )
     ;
 
 
@@ -77,18 +77,18 @@
             var pairs = $(elOpts).serializeArray(), pair = pairs[0];
             return pair && pair.value || null;
         }
-        function getSelected(){
+        function getSelected( name ){
             var index = getIndex();
-            return index && elForm['path['+index+']'];
+            return index && elForm[name+'['+index+']'];
         }
         function getValue(){
-            var elField = getSelected();
+            var elField = getSelected('path');
             return elField && elField.value;
         }
         function getLabel(){
-            var elField = getSelected();
+            var elField = getSelected('path');
             return elField && $(elField.parentNode).find('code.path').text();
-        } 
+        }
         /*$(elForm['path[0]']).focus( function(){
             elOpts[0].checked = true;
         } );*/
@@ -131,6 +131,9 @@
             else {
                 setFormDisabled( false );
             }
+            // connection back end won't warn about system files, so we'll toggle notice here
+            // actually no need as user will be warned when they go through to the edit screen
+            // $('#loco-fs-info')[ pathSelector.typ() ? 'removeClass' : 'addClass' ]('jshide');
         }
     }
     

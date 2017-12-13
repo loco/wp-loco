@@ -24,8 +24,6 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
         $file->normalize($base);
         
         try {
-            $file->getWriteContext()->authorize();
-            //
             if( call_user_func( $auth, $file ) ){
                 $this->set( 'authed', true );
                 $this->set( 'valid', $api->getOutputCredentials() );
@@ -37,13 +35,12 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
                 $this->set( 'authed', false );
                 $this->set( 'prompt', $api->getForm() );
             }
-            
         }
         catch( Loco_error_WriteException $e ){
             $this->set('authed', false );
             $this->set('reason', $e->getMessage() );
         }
-        
+
         return parent::render();
     }
 

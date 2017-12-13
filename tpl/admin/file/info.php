@@ -33,7 +33,7 @@ echo $header;
     else:?> 
     <div class="notice inline notice-locked">
         <h3 class="has-icon">
-            <?php esc_html_e('File is write-protected','loco-translate')?> 
+            <?php esc_html_e('Write protected','loco-translate')?> 
         </h3>
         <p>
             <?php esc_html_e("This file can't be updated directly by the web server",'loco-translate')?>.
@@ -86,7 +86,7 @@ echo $header;
     else:?> 
     <div class="notice inline notice-locked">
         <h3 class="has-icon">
-            <?php esc_html_e('Directory is write-protected','loco-translate')?> 
+            <?php esc_html_e('Write protected','loco-translate')?> 
         </h3>
         <p>
             <?php esc_html_e("This directory can't be written to directly by the web server",'loco-translate')?>.
@@ -102,16 +102,15 @@ echo $header;
     endif;
     
     if( $file->autoupdate ):?> 
-    <div class="notice inline notice-warning">
-        <h3 class="has-icon">
-            <?php esc_html_e('WordPress system file','loco-translate')?> 
+    <div class="notice inline notice-info">
+        <h3 class="has-icon"><?php 
+            esc_html_e('WordPress updates','loco-translate')?> 
         </h3>
-        <p>
-            <?php esc_html_e('This file location is managed by WordPress updates','loco-translate')?>.
-            <?php esc_html_e("It's not recommended to edit this file directly",'loco-translate')?>.
+        <p><?php 
+            esc_html_e("Files in this location can be modified or deleted by WordPress automatic updates",'loco-translate')?>.
             <a target="_blank" href="<?php 
                 echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/files-deleted') )?>"><?php
-                esc_html_e('See FAQ','loco-translate');
+                esc_html_e("What's this?",'loco-translate');
             ?></a>
         </p>
     </div><?php

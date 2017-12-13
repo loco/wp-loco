@@ -239,13 +239,17 @@ class Loco_fs_FileWriter {
         if( $this->disabled() ){
             throw new Loco_error_WriteException( __('File modification is disallowed by your WordPress config','loco-translate') );
         }
+        // deny system file changes (fs_protect = 2)
+        if( 1 < Loco_data_Settings::get()->fs_protect && $this->file->getUpdateType() ){
+            throw new Loco_error_WriteException( __('Modification of installed files is disallowed by the plugin settings','loco-translate') );
+        }
         return $this;
     } 
 
 
 
     /**
-     * Check if file system modification is banned
+     * Check if file system modification is banned at WordPress level
      * @return bool
      */
     public function disabled(){

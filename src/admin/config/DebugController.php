@@ -4,6 +4,13 @@
  */
 class Loco_admin_config_DebugController extends Loco_admin_config_BaseController {
 
+    
+    private function memory_size( $raw ){
+        $bytes = wp_convert_hr_to_bytes($raw);
+        $value = Loco_mvc_FileParams::renderBytes($bytes);
+        return $value;//.' ('.number_format($bytes).')';
+    }
+
 
     /**
      * {@inheritdoc}
@@ -31,8 +38,11 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         
         // PHP / env memory settings:
         $memory = new Loco_mvc_PostParams( array(
-            'Memory limit' => ini_get('memory_limit'),
-            'WP_MAX_MEMORY_LIMIT' => loco_constant('WP_MAX_MEMORY_LIMIT'),
+            'WP_MEMORY_LIMIT' => $this->memory_size( loco_constant('WP_MEMORY_LIMIT') ),
+            'WP_MAX_MEMORY_LIMIT' => $this->memory_size( loco_constant('WP_MAX_MEMORY_LIMIT') ),
+            'PHP memory_limit' => $this->memory_size( ini_get('memory_limit') ),
+            'PHP post_max_size' => $this->memory_size( ini_get('post_max_size') ),
+            //'PHP upload_max_filesize' => $this->memory_size( ini_get('upload_max_filesize') ),
         ) );
         
         // ajaxing:
@@ -40,6 +50,17 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         $this->set( 'js', new Loco_mvc_ViewParams( array (
             'nonces' => array( 'ping' => wp_create_nonce('ping') ),
         ) ) );
+        
+        // File system access
+        $dir = new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ;
+        $ctx = new Loco_fs_FileWriter( $dir );
+        $fs = new Loco_mvc_PostParams( array(
+            'langdir' => $dir->getRelativePath( loco_constant('ABSPATH') ),
+            'writable' => $ctx->writable(),
+            'disabled' => $ctx->disabled(),
+            'protected' => 'TODO' /*Loco_data_Settings::get()->fs_protect*/
+        ) );
+        
         
         // alert to known system setting problems
         if( get_magic_quotes_gpc() ){
@@ -49,7 +70,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP') );
         }
         
-        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory') ); 
+        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs') ); 
     }
     
 }

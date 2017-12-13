@@ -4,6 +4,8 @@
  */
 
 $this->extend('../layout');
+
+$fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem') );
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">
@@ -95,22 +97,39 @@ $this->extend('../layout');
                     </td>
                 </tr-->
                 <tr>
-                    <th scope="row"><?php esc_html_e('File system credentials','loco-translate')?></th>
+                    <th scope="row"><?php esc_html_e('File system access','loco-translate')?></th>
                     <td>
                         <fieldset>
                             <legend class="screen-reader-text">
-                                <span><?php esc_html_e('File system credentials','loco-translate')?></span>
+                                <span><?php esc_html_e('File system access','loco-translate')?></span>
                             </legend>
                             <p>
                                 <label for="loco--fs-persist">
                                     <input type="checkbox" name="opts[fs_persist]" value="1" id="loco--fs-persist"<?php echo $opts->fs_persist?' checked':''?> />
-                                    <?php esc_html_e('Remember in session','loco-translate')?> 
+                                    <?php esc_html_e('Save credentials in session','loco-translate')?> 
+                                    (<?php esc_html_e('Not recommended','loco-translate')?>) 
                                 </label>
                             </p>
-                            <span class="description">
-                                <a href="<?php echo esc_url(apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem#remote'))?>" target="_blank"><?php 
-                                    esc_html_e('See security notes','loco-translate')?></a>
-                            </span>
+                            <p><?php
+                                esc_html_e('Modification of installed files','loco-translate');?>:
+                                <select name="opts[fs_protect]" id="loco--fs-protect">
+                                    <option value="0"><?php
+                                        esc_html_e('Allow','loco-translate');
+                                    ?></option>
+                                    <option value="1"<?php echo 1 === $opts->fs_protect?' selected':''?>><?php
+                                        esc_html_e('Allow (with warning)','loco-translate');
+                                    ?></option>
+                                    <option value="2"<?php echo 2 === $opts->fs_protect?' selected':''?>><?php
+                                        esc_html_e('Disallow','loco-translate');
+                                    ?></option>
+                                </select>
+                            </p>
+                            <p>
+                                <span class="description">
+                                    <a href="<?php echo $fs_help?>" target="_blank"><?php
+                                        esc_html_e('About file system access','loco-translate')?></a>
+                                </span>
+                            </p>
                         </fieldset>
                     </td>
                 </tr>

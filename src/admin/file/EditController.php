@@ -190,10 +190,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             }
         }
 
-        // File system connect if any operations likely to fail
-        if( ! $writable ){
-            $this->prepareFsConnect( 'connect', $this->get('path') );
-        }
+        // Remote file system required if file is not directly writable
+        $this->prepareFsConnect( 'update', $this->get('path'), ! $writable );
         
         // set simpler title for breadcrumb
         $this->set('title', $file->basename() );

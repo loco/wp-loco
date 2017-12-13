@@ -138,11 +138,8 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
         }
         
         $this->set( 'locked', $locked );
+        $this->prepareFsConnect( 'delete', $this->get('path'), $locked );
         
-        if( $locked ){
-            $this->prepareFsConnect( 'delete', $this->get('path') );
-        }
-
         $this->enqueueScript('delete');
         return $this->view('admin/file/delete');
     }

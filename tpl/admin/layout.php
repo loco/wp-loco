@@ -51,10 +51,10 @@
     <div id="loco-notices"><?php 
         // flush message buffer
         do_action('loco_admin_notices');
-        // standard file system lock dialogue
+        // standard file system dialogues
         if( $params->has('fsFields') ):
             echo $this->render('common/inc-fsconn');
-        endif?> 
+        endif;?> 
     </div>
 
 

@@ -13,6 +13,9 @@ $this->start('header');
             <code><?php $locale->e('code')?></code>
         </h3>
         <dl>
+            <dt><?php self::e( __('File size','loco-translate') )?>:</dt>
+            <dd><?php $file->e('size')?></dd>
+
             <dt><?php self::e( __('File modified','loco-translate') )?>:</dt>
             <dd><?php $file->date('mtime')?></dd>
 

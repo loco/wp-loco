@@ -11,11 +11,11 @@
 
     // enable disable form submission
     
-    function setFormDisabled( disabled ){
+    /*function setFormDisabled( disabled ){
         $(elForm).find('button.button-primary').each( function( i, button ){
             button.disabled = disabled;
         } );
-    }
+    }*/
 
     
     // Submit form to Ajax end point when ..erm.. submitted
@@ -37,7 +37,7 @@
     $(elForm)
         .submit( process );
 
-    setFormDisabled( false );
+    //setFormDisabled( false );
     
     if( fsHook ){
         loco.fs.init(fsHook).setForm( elForm );

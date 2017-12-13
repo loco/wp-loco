@@ -50,6 +50,16 @@ class Loco_api_WordPressFileSystem {
     public function getForm(){
         return $this->form;
     }
+    
+    
+    /**
+     * @throws Loco_error_WriteException
+     * @return bool always true
+     */
+    public function preAuthorize( Loco_fs_File $file ){
+        $file->getWriteContext()->authorize();
+        return true;
+    }
 
 
     /**
@@ -60,7 +70,7 @@ class Loco_api_WordPressFileSystem {
         if( $file->exists() ){
             throw new Loco_error_WriteException( sprintf( __('%s already exists in this folder','loco-translate'), $file->basename() ) );
         }
-        return $file->creatable() || $this->authorize($file);
+        return $this->preAuthorize($file) && ( $file->creatable() || $this->authorize($file) );
     }
     
     
@@ -69,10 +79,11 @@ class Loco_api_WordPressFileSystem {
      * @return bool whether file system is authorized NOT necessarily whether file is updatable
      */
     public function authorizeUpdate( Loco_fs_File $file ){
+        $this->preAuthorize($file);
         if( ! $file->exists() ){
             throw new Loco_error_WriteException("File doesn't exist, try authorizeCreate");
         }
-        return $file->writable() || $this->authorize($file);
+        return $this->preAuthorize($file) && ( $file->writable() || $this->authorize($file) );
     }
     
     
@@ -81,10 +92,11 @@ class Loco_api_WordPressFileSystem {
      * @return bool whether file system is authorized NOT necessarily whether file is removable
      */
     public function authorizeDelete( Loco_fs_File $file ){
+        $this->preAuthorize($file);
         if( ! $file->exists() ){
             throw new Loco_error_WriteException("Can't delete a file that doesn't exist");
         }
-        return $file->deletable() || $this->authorize($file);
+        return $this->preAuthorize($file) && ( $file->deletable() || $this->authorize($file) );
     }
 
 
@@ -93,9 +105,8 @@ class Loco_api_WordPressFileSystem {
      * @return bool whether file system is authorized
      */
     public function authorizeWrite( Loco_fs_File $file ){
-        return ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file);
+        return $this->preAuthorize($file) && ( ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file) );
     }
-
 
 
     /**
@@ -103,7 +114,7 @@ class Loco_api_WordPressFileSystem {
      * @return bool whether file system is authorized
      */    
     public function authorizeConnect( Loco_fs_File $file ){
-        return $this->authorize($file);
+        return $this->preAuthorize($file) && $this->authorize($file);
     }
 
 
@@ -287,36 +298,61 @@ class Loco_api_WordPressFileSystem {
 
 
     /**
-     * Check if a location is safe from WordPress automatic updates
+     * Check if file system modification is banned at WordPress level
+     * @return bool
+     */
+    public function isFileModAllowed( Loco_fs_File $file ){
+        // WordPress >= 4.8
+        if( function_exists('wp_is_file_mod_allowed') ){
+            $context = apply_filters( 'loco_file_mod_allowed_context', 'download_language_pack', $file );
+            return ! wp_is_file_mod_allowed( $context );
+        }
+        // fall back to direct constant check
+        return (bool) loco_constant('DISALLOW_FILE_MODS');
+    }
+
+
+
+    /**
+     * Check if a file is safe from WordPress automatic updates
      * @return bool
      */
     public function isAutoUpdatable( Loco_fs_File $file ){
         // all paths safe from auto-updates if auto-updates are completely disabled
-        // WordPress >= 4.8 can disable auto updates completely with "automatic_updater" context
-        if( function_exists('wp_is_file_mod_allowed') && ! wp_is_file_mod_allowed('automatic_updater') ){
+        if( $this->isAutoUpdateDenied() ){
             return false;
         }
         if( apply_filters( 'automatic_updater_disabled', loco_constant('AUTOMATIC_UPDATER_DISABLED') ) ) {
             return false;
         }
-        // TODO provide a useful context for the update offer passed to filters
-        // WordPress updater will have taken this from API data which we don't have here. 
-        $item = new stdClass;
-        // any theme or plugin locations are unsafe if themes/plugins can be updated
-        if( $file->underThemeDirectory() ){
-            return apply_filters( 'auto_update_theme', true, $item );
-        }
-        if( $file->underPluginDirectory() ){
-            return apply_filters( 'auto_update_plugin', true, $item );
-        }
-        // global languages subdirectories other than plugins and themes are deemed safe
-        $sub = $file->getParent()->getRelativePath( loco_constant('WP_LANG_DIR') );
-        if( '' === $sub || 'themes' === $sub || 'plugins' === $sub ){
-            return apply_filters( 'auto_update_translation', true, $item );
+        // Auto-updates aren't denied, so ascertain location "type" and run through the same filters as should_update()
+        if( $type = $file->getUpdateType() ){
+            // TODO provide a useful context for the update offer passed to filters
+            // WordPress updater will have taken this from remote API data which we don't have here. 
+            $item = new stdClass;
+            return apply_filters( 'auto_update_'.$type, true, $item );
         }
         // else safe (not auto-updatable)
         return false;
     }
-        
+
+
+
+    /**
+     * Check if systen is configured to deny auto-updates
+     * @return bool
+     */
+    public function isAutoUpdateDenied(){
+        // WordPress >= 4.8 can disable auto updates completely with "automatic_updater" context
+        if( function_exists('wp_is_file_mod_allowed') && ! wp_is_file_mod_allowed('automatic_updater') ){
+            return true;
+        }
+        // else simply observe AUTOMATIC_UPDATER_DISABLED constant
+        if( apply_filters( 'automatic_updater_disabled', loco_constant('AUTOMATIC_UPDATER_DISABLED') ) ) {
+            return true;
+        }
+        // else nothing explicitly denying updates
+        return false;
+    }
 
 }
