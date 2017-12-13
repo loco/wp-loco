@@ -42,7 +42,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         
         // force the use of remote file system when configured from front end
         $api = new Loco_api_WordPressFileSystem;
-        if( $post->has('connection_type') ){
+        if( $post->has('connection_type') && 'direct' !== $post->connection_type ){
             $api->authorizeConnect( $pofile );
         }
         // else do a pre-auth to catch other filesystem blocks

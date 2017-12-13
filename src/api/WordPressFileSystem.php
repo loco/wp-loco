@@ -298,22 +298,6 @@ class Loco_api_WordPressFileSystem {
 
 
     /**
-     * Check if file system modification is banned at WordPress level
-     * @return bool
-     */
-    public function isFileModAllowed( Loco_fs_File $file ){
-        // WordPress >= 4.8
-        if( function_exists('wp_is_file_mod_allowed') ){
-            $context = apply_filters( 'loco_file_mod_allowed_context', 'download_language_pack', $file );
-            return ! wp_is_file_mod_allowed( $context );
-        }
-        // fall back to direct constant check
-        return (bool) loco_constant('DISALLOW_FILE_MODS');
-    }
-
-
-
-    /**
      * Check if a file is safe from WordPress automatic updates
      * @return bool
      */
