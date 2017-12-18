@@ -6,30 +6,46 @@ loco_require_lib('compiled/gettext.php');
  * Wrapper for array forms of parsed PO data
  */
 class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
-        
     
+    
+    /**
+     * Normalize file extension to internal type
+     * @return string "po", "pot" or "mo"
+     */
+    private static function ext( Loco_fs_File $file ){
+        $ext = rtrim( strtolower( $file->extension() ), '~' );
+        if( 'po' === $ext || 'pot' === $ext || 'mo' === $ext ){
+            return $ext;
+        }
+        // translators: Error thrown when attemping to parse a file that is not PO, POT or MO
+        throw new Loco_error_Exception( sprintf( __('%s is not a Gettext file'), $file->basename() ) );
+    }
+
+
+
     /**
      * @return Loco_gettext_Data
      */
     public static function load( Loco_fs_File $file ){
-        
-        $type = strtoupper( $file->extension() );
-        
-        // parse PO
-        if( 'PO' === $type || 'POT' === $type ){
-            $po = self::fromSource( $file->getContents() );
+        if( 'mo' === self::ext($file) ){
+            return self::fromBinary( $file->getContents() );
         }
-        // parse MO
-        else if( 'MO' === $type ){
-            $po = self::fromBinary( $file->getContents() );
+        return self::fromSource( $file->getContents() );
+    }
+
+
+
+    /**
+     * Like load but just pulls header, saving a full parse. PO only
+     * @return Loco_gettext_Data
+     */
+    public static function head( Loco_fs_File $file ){
+        if( 'mo' === self::ext($file) ){
+            throw new InvalidArgumentException('PO only');
         }
-        // else file type not parsable. not currently sniffing file header - use the right file extension.
-        else {
-            // translators: Error thrown when attemping to parse a file that is not PO, POT or MO
-            throw new Loco_error_Exception( sprintf( __('%s is not a Gettext file'), $file->basename() ) );
-        }
-        
-        return $po;
+        return new Loco_gettext_Data( array(
+            array( 'source' => '', 'target' => LocoPoHeaders::snip( $file->getContents() ) )
+        ) );
     }
 
 

@@ -44,26 +44,17 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
             return false;
         }
         // if backups are enabled, we need to be able to create new files too (i.e. update parent directory)
-        if( Loco_data_Settings::get()->num_backups && ! $this->api->authorizeUpdate( $file->getParent() ) ){
+        if( Loco_data_Settings::get()->num_backups && ! $this->api->authorizeCopy($file) ){
             return false;
         }
         // updating file may also recompile binary, which may or may not exist
         $files = new Loco_fs_Siblings( $file );
         if( $file = $files->getBinary() ){
-            return $file->exists() ? $this->api->authorizeUpdate($file) : $this->api->authorizeCreate($file);
+            return $this->api->authorizeSave($file);
         }
         // else no dependants to update
         return true;
     }
-
-
-    
-    /**
-     * @return bool
-     *
-    private function authorizeConnect( Loco_fs_File $file ){
-        return $this->api->authorizeConnect($file);
-    }*/
 
 
 

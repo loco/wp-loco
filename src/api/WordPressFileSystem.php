@@ -57,8 +57,8 @@ class Loco_api_WordPressFileSystem {
     public function getForm(){
         return $this->form;
     }
-    
-    
+
+
     /**
      * @throws Loco_error_WriteException
      * @return bool always true
@@ -68,6 +68,8 @@ class Loco_api_WordPressFileSystem {
             $file->getWriteContext()->authorize();
             $this->fs_allowed = true;
         }
+        // Disconnecting remote file system ensures the auth functions always start with direct file access
+        $file->getWriteContext()->disconnect();
         return true;
     }
 
@@ -95,6 +97,29 @@ class Loco_api_WordPressFileSystem {
             throw new Loco_error_WriteException("File doesn't exist, try authorizeCreate");
         }
         return $file->writable() || $this->authorize($file);
+    }
+
+
+    /**
+     * Authorize for update or creation, depending whether file exists
+     * @return bool
+     */
+    public function authorizeSave( Loco_fs_File $file ){
+        $this->preAuthorize($file);
+        return ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file);
+    }
+
+
+    /**
+     * Authorize for copy, meaning file must exist and directory be writable
+     * @return bool
+     */
+    public function authorizeCopy( Loco_fs_File $file ){
+        $this->preAuthorize($file);
+        if( ! $file->exists() ){
+            throw new Loco_error_WriteException("Can't copy a file that doesn't exist");
+        }
+        return $file->creatable() || $this->authorize($file);
     }
     
     
@@ -132,7 +157,6 @@ class Loco_api_WordPressFileSystem {
      * Call before output started, because buffers.
      */
     private function authorize( Loco_fs_File $file ){
-        
         // may already have authorized successfully
         // TODO unsure whether to pass $disconnected
         if( $fs = $this->fs ){

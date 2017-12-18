@@ -72,7 +72,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
      * @return bool
      */
     public function writable(){
-        return $this->master->getParent()->writable();
+        return $this->master->exists() && $this->master->getParent()->writable();
     }
 
 

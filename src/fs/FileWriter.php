@@ -17,7 +17,7 @@ class Loco_fs_FileWriter {
 
     public function __construct( Loco_fs_File $file ){
         $this->file = $file;
-        $this->connect( Loco_api_WordPressFileSystem::direct() );
+        $this->disconnect();
     }
     
     
@@ -47,6 +47,16 @@ class Loco_fs_FileWriter {
             throw new Loco_error_WriteException( __('Failed to connect to remote server','loco-translate') );
         }
         $this->fs = $fs;
+        return $this;
+    }
+    
+    
+    /**
+     * Revert to direct file system connection
+     * @return Loco_fs_FileWriter
+     */
+    public function disconnect(){
+        $this->fs = Loco_api_WordPressFileSystem::direct();
         return $this;
     }
 
@@ -191,7 +201,7 @@ class Loco_fs_FileWriter {
                 throw new Loco_error_WriteException( __("Parent directory doesn't exist",'loco-translate') );
             }
             // else reason for failure is not established
-            throw new Loco_error_WriteException( __('Failed to save file','loco-translate') );
+            throw new Loco_error_WriteException( __('Failed to save file','loco-translate').': '.$file->basename() );
         }
         
         return $this;

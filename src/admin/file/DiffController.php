@@ -95,15 +95,31 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
         $this->set( 'enabled', $enabled );
 
         $files = array();
-        
         $wp_content = loco_constant('WP_CONTENT_DIR');
         $paths = array( $file->getRelativePath($wp_content) );
         
+        $podate = 'pot' === $file->extension() ? 'POT-Creation-Date' : 'PO-Revision-Date'; 
         $backups = new Loco_fs_Revisions($file);
+
         foreach( $backups->getPaths() as $path ){
             $tmp = new Loco_fs_File( $path );
             $info = Loco_mvc_FileParams::create($tmp);
-            $info['mtime'] = $backups->getTimestamp($path);
+            // time file was snapshotted is actually the time the next version was updated
+            // $info['mtime'] = $backups->getTimestamp($path);
+            // pull "real" update time, meaning when the revision was last updated as current version
+            try {
+                $head = Loco_gettext_Data::head($tmp)->getHeaders();
+                if( $value = $head->trimmed($podate) ){
+                    $info['potime'] = Loco_gettext_Data::parseDate($value);
+                }
+                else {
+                    throw new Loco_error_Exception('Backup has no '.$podate.' field');
+                }
+            }
+            catch( Exception $e ){
+                Loco_error_AdminNotices::debug( $e->getMessage() );
+                continue;
+            }
             $paths[] = $tmp->getRelativePath($wp_content);
             $files[] = $info;
         }

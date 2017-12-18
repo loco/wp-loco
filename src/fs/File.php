@@ -103,8 +103,8 @@ class Loco_fs_File {
 
 
     /**
-     * Copy write context with oursel
-     * @return 
+     * Copy write context with our file reference
+     * @return Loco_fs_File
      */
     private function cloneWriteContext( Loco_fs_FileWriter $context = null ){
         if( $context ){

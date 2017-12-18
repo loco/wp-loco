@@ -13,7 +13,7 @@ $help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/p
         </h3>
         <p><?php
         if( $enabled ):
-            esc_html_e('Backup files are written when you save translation files from Loco Translate editor','loco-translate');
+            esc_html_e('Backup files will be written when you save translations from Loco Translate editor','loco-translate');
         else:
             esc_html_e('File backups are disabled in your plugin settings','loco-translate');
         endif?>.

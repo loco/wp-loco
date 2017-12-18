@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-18 15:58+0000\n"
+"POT-Creation-Date: 2017-12-18 18:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1251,7 +1251,7 @@ msgstr ""
 
 #: tpl/admin/errors/no-backups.php:16
 msgid ""
-"Backup files are written when you save translation files from Loco Translate "
+"Backup files will be written when you save translations from Loco Translate "
 "editor"
 msgstr ""
 

@@ -25,8 +25,8 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
                 /* @var $file Loco_mvc_FileParams */
                 foreach( $files as $i => $file ):?> 
                 <div class="diff-meta jshide">
-                    <span><?php $file->f('reltime','Backup saved %s')?></span><br />
-                    <time><?php $file->date('mtime',$dfmt)?></time><br />
+                    <span><?php $file->e('name')?></span><br />
+                    <time><?php $file->date('potime',$dfmt)?></time><br />
                     <button type="submit" class="button button-primary" name="backup" value="<?php $file->e('relpath')?>"><?php esc_html_e('Restore','loco-translate')?></button>
                     <button type="submit" class="button button-danger" name="delete" value="<?php $file->e('relpath')?>"><?php esc_html_e('Delete','loco-translate')?></button>
                 </div><?php

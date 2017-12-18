@@ -124,7 +124,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * TODO possibly replace with custom function that includes "Yesterday" etc..
      */
     private function _get_reltime(){
-        $time = $this->file->modified();
+        $time = $this->has('mtime') ? $this['mtime'] : $this->file->modified();
         $time_diff = time() - $time;
         // use same time format as posts listing when in future or more than a day ago
         if( $time_diff < 0 || $time_diff >= 86400 ){
