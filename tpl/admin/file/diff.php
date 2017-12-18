@@ -27,9 +27,10 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
                 <div class="diff-meta jshide">
                     <span><?php $file->f('reltime','Backup saved %s')?></span><br />
                     <time><?php $file->date('mtime',$dfmt)?></time><br />
-                    <button type="submit" class="button button-primary" name="backup" value="<?php $file->e('relpath')?>">Restore</button>
+                    <button type="submit" class="button button-primary" name="backup" value="<?php $file->e('relpath')?>"><?php esc_html_e('Restore','loco-translate')?></button>
+                    <button type="submit" class="button button-danger" name="delete" value="<?php $file->e('relpath')?>"><?php esc_html_e('Delete','loco-translate')?></button>
                 </div><?php
-                endforeach;?> 
+                endforeach?> 
             </div><?php
             /* @var $hidden Loco_mvc_HiddenFields */
             $hidden->_e();?> 

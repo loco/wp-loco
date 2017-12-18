@@ -24,6 +24,8 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
             if( $this->checkNonce($action) ){
                 try {
                     $post = Loco_mvc_PostParams::get();
+                    $api = new Loco_api_WordPressFileSystem;
+                    // Restore
                     if( $path = $post->backup ){
                         $target = new Loco_fs_File( $path );
                         $target->normalize( loco_constant('WP_CONTENT_DIR') );
@@ -31,7 +33,6 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
                         $source = $target->getContents();
                         $data = Loco_gettext_Data::fromSource( $source );
                         // authorize master for file modification
-                        $api = new Loco_api_WordPressFileSystem;
                         $api->authorizeUpdate($pofile);
                         // backup current master before restoring
                         $backups = new Loco_fs_Revisions($pofile);
@@ -50,6 +51,14 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
                         // prune to configured level after success
                         $backups->prune( $num_backups );
                         $backups = null;
+                    }
+                    // Delete
+                    else if( $path = $post->delete ){
+                        $target = new Loco_fs_File( $path );
+                        $target->normalize( loco_constant('WP_CONTENT_DIR') );
+                        $api->authorizeDelete( $target );
+                        $target->unlink();
+                        Loco_error_AdminNotices::success( __('File deleted','loco-translate') );
                     }
                     else {
                         throw new Loco_error_Exception('Nothing selected');
@@ -89,7 +98,7 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
         
         $wp_content = loco_constant('WP_CONTENT_DIR');
         $paths = array( $file->getRelativePath($wp_content) );
-
+        
         $backups = new Loco_fs_Revisions($file);
         foreach( $backups->getPaths() as $path ){
             $tmp = new Loco_fs_File( $path );

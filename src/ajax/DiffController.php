@@ -1,10 +1,10 @@
 <?php
 /**
- * Ajax "diff" route, for rending PO/POT file diffs
+ * Ajax "diff" route, for rendering PO/POT file diffs
  */
 class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
-    
-    
+
+
     /**
      * {@inheritdoc}
      */
@@ -43,6 +43,6 @@ class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
         
         return parent::render();
     }
-    
-    
+
+
 }

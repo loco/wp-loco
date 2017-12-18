@@ -14,8 +14,8 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
             $siblings = new Loco_fs_Siblings( $file );
         }
         catch( InvalidArgumentException $e ){
-            $type = strtoupper( $file->extension() );
-            throw new Loco_error_Exception( sprintf('Refusing to delete a %s file',$type) );
+            $ext = $file->extension();
+            throw new Loco_error_Exception( sprintf('Refusing to delete a %s file', strtoupper($ext) ) );
         }
         return $siblings->expand();
     }

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-18 13:18+0000\n"
+"POT-Creation-Date: 2017-12-18 15:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -671,7 +671,7 @@ msgid_plural "%s files can't be matched to a known set of strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/bundle/ViewController.php:106 src/admin/file/BaseController.php:99
+#: src/admin/bundle/ViewController.php:106 src/admin/file/BaseController.php:94
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:111
 msgid "New language"
@@ -704,28 +704,29 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/file/BaseController.php:79
+#: src/admin/file/BaseController.php:74
 msgid "Editor"
 msgstr ""
 
-#: src/admin/file/BaseController.php:80
+#: src/admin/file/BaseController.php:75
 msgid "Source"
 msgstr ""
 
-#: src/admin/file/BaseController.php:81 tpl/admin/bundle/inc-po-table.php:20
-#: tpl/admin/file/diff.php:61
+#: src/admin/file/BaseController.php:76 tpl/admin/bundle/inc-po-table.php:20
+#: tpl/admin/file/diff.php:62
 msgid "File info"
 msgstr ""
 
-#: src/admin/file/BaseController.php:82
+#: src/admin/file/BaseController.php:77 tpl/admin/file/diff.php:30
 msgid "Restore"
 msgstr ""
 
-#: src/admin/file/BaseController.php:83 tpl/admin/bundle/inc-po-table.php:53
+#: src/admin/file/BaseController.php:78 tpl/admin/bundle/inc-po-table.php:53
+#: tpl/admin/file/diff.php:31
 msgid "Delete"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:56
+#: src/admin/file/DeleteController.php:56 src/admin/file/DiffController.php:61
 #, php-format
 msgid "File deleted"
 msgid_plural "%u files deleted"
@@ -745,11 +746,11 @@ msgid_plural "%u dependant files will also be deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/DiffController.php:49
+#: src/admin/file/DiffController.php:50
 msgid "File restored"
 msgstr ""
 
-#: src/admin/file/DiffController.php:65 src/admin/file/DiffController.php:83
+#: src/admin/file/DiffController.php:74 src/admin/file/DiffController.php:92
 #, php-format
 msgid "Restore %s"
 msgstr ""
@@ -1287,7 +1288,7 @@ msgid ""
 "file?"
 msgstr ""
 
-#: tpl/admin/file/diff.php:58
+#: tpl/admin/file/diff.php:59
 msgid "Revision saved"
 msgstr ""
 

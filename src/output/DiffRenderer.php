@@ -6,7 +6,7 @@ require_once ABSPATH . WPINC . '/Text/Diff/Renderer/inline.php';
 require_once ABSPATH . WPINC . '/wp-diff.php';
 
 /**
- * Diff renderer extending the one WordPress uses for post revisions.
+ * Diff renderer extending that which WordPress uses for post revisions.
  */
 class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
 
@@ -37,8 +37,8 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
         // like wp_text_diff but avoiding whitespace normalization
         // uses deprecated signature for 'auto' in case of old WordPress
         $diff = new Text_Diff (
-            preg_split( '/\\R/', loco_ensure_utf8( $lhs->getContents() ) ),
-            preg_split( '/\\R/', loco_ensure_utf8( $rhs->getContents() ) )
+            preg_split( '/\\R/u', loco_ensure_utf8( $lhs->getContents() ) ),
+            preg_split( '/\\R/u', loco_ensure_utf8( $rhs->getContents() ) )
         );
         return $this->render( $diff );
     }
