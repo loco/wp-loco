@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-13 13:15+0000\n"
+"POT-Creation-Date: 2017-12-18 13:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:32
+#: src/ajax/FsConnectController.php:95
 msgid "Connected to remote file system"
 msgstr ""
 
@@ -89,26 +89,26 @@ msgstr ""
 msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
-#: src/ajax/SaveController.php:65
+#: src/ajax/SaveController.php:73
 #, php-format
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
 "backups"
 msgstr ""
 
-#: src/ajax/SaveController.php:92
+#: src/ajax/SaveController.php:100
 msgid "PO file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:92 src/ajax/SaveController.php:109
+#: src/ajax/SaveController.php:100 src/ajax/SaveController.php:117
 msgid "POT file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:100
+#: src/ajax/SaveController.php:108
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:104
+#: src/ajax/SaveController.php:112
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
@@ -128,7 +128,7 @@ msgstr[1] ""
 msgid "Template file created"
 msgstr ""
 
-#: src/api/WordPressFileSystem.php:71
+#: src/api/WordPressFileSystem.php:82
 #, php-format
 msgid "%s already exists in this folder"
 msgstr ""
@@ -156,7 +156,7 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/error/Exception.php:89 src/js/Strings.php:62
+#: src/error/Exception.php:95 src/js/Strings.php:62
 msgid "Error"
 msgstr ""
 
@@ -466,6 +466,7 @@ msgstr ""
 
 #: src/mvc/AdminRouter.php:62 src/mvc/AdminRouter.php:67
 #: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:35
+#: tpl/admin/errors/no-backups.php:24
 msgid "Settings"
 msgstr ""
 
@@ -474,7 +475,7 @@ msgstr ""
 msgid "User options"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:217
+#: src/mvc/AdminRouter.php:218
 msgid "Page not found"
 msgstr ""
 
@@ -601,27 +602,27 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:147
+#: src/admin/bundle/BaseController.php:148
 msgid "Creating this file requires permission"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:150
+#: src/admin/bundle/BaseController.php:151
 msgid "Deleting this file requires permission"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:153
+#: src/admin/bundle/BaseController.php:154
 msgid "Saving this file requires permission"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:172
+#: src/admin/bundle/BaseController.php:168
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:175
+#: src/admin/bundle/BaseController.php:171
 msgid "This directory is managed by WordPress, be careful what you delete"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:178
+#: src/admin/bundle/BaseController.php:174
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
@@ -670,7 +671,7 @@ msgid_plural "%s files can't be matched to a known set of strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/bundle/ViewController.php:106 src/admin/file/BaseController.php:97
+#: src/admin/bundle/ViewController.php:106 src/admin/file/BaseController.php:99
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:111
 msgid "New language"
@@ -712,32 +713,46 @@ msgid "Source"
 msgstr ""
 
 #: src/admin/file/BaseController.php:81 tpl/admin/bundle/inc-po-table.php:20
+#: tpl/admin/file/diff.php:61
 msgid "File info"
 msgstr ""
 
-#: src/admin/file/BaseController.php:82 tpl/admin/bundle/inc-po-table.php:53
+#: src/admin/file/BaseController.php:82
+msgid "Restore"
+msgstr ""
+
+#: src/admin/file/BaseController.php:83 tpl/admin/bundle/inc-po-table.php:53
 msgid "Delete"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:85
+#: src/admin/file/DeleteController.php:56
 #, php-format
 msgid "File deleted"
 msgid_plural "%u files deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/DeleteController.php:104
-#: src/admin/file/DeleteController.php:122
+#: src/admin/file/DeleteController.php:75
+#: src/admin/file/DeleteController.php:93
 #, php-format
 msgid "Delete %s"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:129
+#: src/admin/file/DeleteController.php:98
 #, php-format
 msgid "One dependant file will also be deleted"
 msgid_plural "%u dependant files will also be deleted"
 msgstr[0] ""
 msgstr[1] ""
+
+#: src/admin/file/DiffController.php:49
+msgid "File restored"
+msgstr ""
+
+#: src/admin/file/DiffController.php:65 src/admin/file/DiffController.php:83
+#, php-format
+msgid "Restore %s"
+msgstr ""
 
 #. %1$s is the file name, %2$s is the bundle name
 #: src/admin/file/EditController.php:18
@@ -751,64 +766,64 @@ msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:143
+#: src/admin/file/EditController.php:142
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:145
+#: src/admin/file/EditController.php:144
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
-#: src/admin/file/EditController.php:146
+#: src/admin/file/EditController.php:145
 msgid "Help"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:148
+#: src/admin/file/EditController.php:147
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:150
+#: src/admin/file/EditController.php:149
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:152
+#: src/admin/file/EditController.php:151
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:154
+#: src/admin/file/EditController.php:153
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:156
+#: src/admin/file/EditController.php:155
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:158
+#: src/admin/file/EditController.php:157
 msgid "Filter translations"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:160
+#: src/admin/file/EditController.php:159
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:162
+#: src/admin/file/EditController.php:161
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -901,7 +916,7 @@ msgstr ""
 msgid "Descriptive name for this set of translatable strings"
 msgstr ""
 
-#: tpl/admin/bundle/conf.php:41 tpl/admin/list/inc-table.php:13
+#: tpl/admin/bundle/conf.php:41 tpl/admin/list/inc-table.php:14
 msgid "Text domain"
 msgstr ""
 
@@ -1073,6 +1088,7 @@ msgid ""
 msgstr ""
 
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:33
+#: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
 msgstr ""
 
@@ -1228,6 +1244,20 @@ msgid ""
 "it"
 msgstr ""
 
+#: tpl/admin/errors/no-backups.php:12
+msgid "No previous file revisions"
+msgstr ""
+
+#: tpl/admin/errors/no-backups.php:16
+msgid ""
+"Backup files are written when you save translation files from Loco Translate "
+"editor"
+msgstr ""
+
+#: tpl/admin/errors/no-backups.php:18
+msgid "File backups are disabled in your plugin settings"
+msgstr ""
+
 #: tpl/admin/errors/no-tokenizer.php:11
 msgid "About the Tokenizer"
 msgstr ""
@@ -1255,6 +1285,10 @@ msgstr ""
 msgid ""
 "Are you sure you want to <strong>permanently</strong> delete the following "
 "file?"
+msgstr ""
+
+#: tpl/admin/file/diff.php:58
+msgid "Revision saved"
 msgstr ""
 
 #: tpl/admin/file/edit-po.php:13 tpl/admin/file/edit-pot.php:12
@@ -1571,15 +1605,15 @@ msgid ""
 "are many files"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:10
+#: tpl/admin/list/inc-table.php:11
 msgid "Bundle name"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:16
+#: tpl/admin/list/inc-table.php:17
 msgid "Last updated"
 msgstr ""
 
-#: tpl/admin/list/inc-table.php:19
+#: tpl/admin/list/inc-table.php:20
 msgid "Sets"
 msgstr ""
 

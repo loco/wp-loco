@@ -520,7 +520,7 @@ class Loco_fs_File {
 
     /**
      * Copy this file for real
-     * @throws Loco_error_Exception
+     * @throws Loco_error_WriteException
      * @return Loco_fs_File new file
      */
     public function copy( $dest ){
@@ -534,7 +534,7 @@ class Loco_fs_File {
 
     /**
      * Delete this file for real
-     * @throws Loco_error_Exception
+     * @throws Loco_error_WriteException
      * @return Loco_fs_File
      */
     public function unlink(){

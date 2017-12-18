@@ -134,7 +134,6 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'nonces' => $readonly ? null : array (
                 'save' => wp_create_nonce('save'),
                 'sync' => wp_create_nonce('sync'),
-                'fsConnect' => wp_create_nonce('fsConnect'),
             ),
         ) ) );
         
@@ -171,27 +170,9 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         ) );
         $this->set( 'dlFields', $hidden->setNonce('download') );
         $this->set( 'dlAction', admin_url('admin-ajax.php','relative') );
-        
-        // validate file system writableness for all operations involved in save
-        $writable = $file->writable();
-        
-        // Check in advance if MO file can be compiled in this directory
-        if( $writable ){
-            $dummy = $file->cloneExtension('mo');
-            if( ! ( $dummy->exists() ? $dummy->writable() : $dummy->creatable() ) ){
-                $writable = false;
-            }
-            // Check in advance if backups will work in this directory
-            else if( Loco_data_Settings::get()->num_backups ){
-                $dummy = new Loco_fs_File( $file->dirname().'/does-not-exist.po~' );
-                if( ! $dummy->creatable() ){
-                    $writable = false;
-                }
-            }
-        }
 
         // Remote file system required if file is not directly writable
-        $this->prepareFsConnect( 'update', $this->get('path'), ! $writable );
+        $this->prepareFsConnect( 'update', $this->get('path') );
         
         // set simpler title for breadcrumb
         $this->set('title', $file->basename() );

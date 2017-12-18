@@ -6,18 +6,20 @@
 
     <table class="wp-list-table widefat fixed striped">
         <thead>
-            <th data-sort-type="s">
-                <?php esc_html_e('Bundle name', 'loco-translate')?> 
-            </th>
-            <th data-sort-type="s">
-                <?php esc_html_e('Text domain','loco-translate')?> 
-            </th>
-            <th data-sort-type="n">
-                <?php esc_html_e('Last updated','loco-translate')?> 
-            </th>
-            <th data-sort-type="n">
-                <?php esc_html_e('Sets','loco-translate')?> 
-            </th>
+            <tr>
+                <th data-sort-type="s">
+                    <?php esc_html_e('Bundle name', 'loco-translate')?> 
+                </th>
+                <th data-sort-type="s">
+                    <?php esc_html_e('Text domain','loco-translate')?> 
+                </th>
+                <th data-sort-type="n">
+                    <?php esc_html_e('Last updated','loco-translate')?> 
+                </th>
+                <th data-sort-type="n">
+                    <?php esc_html_e('Sets','loco-translate')?> 
+                </th>
+            </tr>
         </thead>
         <tbody><?php
             /* @var $bundle Loco_pages_ViewParams */ 

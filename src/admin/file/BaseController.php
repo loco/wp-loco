@@ -79,8 +79,10 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             'file-edit' => __('Editor','loco-translate'),
             'file-view' => __('Source','loco-translate'),
             'file-info' => __('File info','loco-translate'),
+            'file-diff' => __('Restore','loco-translate'),
             'file-delete' => __('Delete','loco-translate'),
         );
+ 
         $suffix = $this->get('action');
         $prefix = $this->get('type');
         foreach( $actions as $action => $name ){

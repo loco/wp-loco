@@ -6,9 +6,16 @@
 class Loco_api_WordPressFileSystem {
     
     /**
+     * Currently authenticated file system connection
      * @var WP_Filesystem_Direct
      */
     private $fs;
+    
+    /**
+     * Whether global file modifications have already passed check
+     * @var bool
+     */
+    private $fs_allowed;
     
     /**
      * Credentials form HTML echoed from request_filesystem_credentials
@@ -57,7 +64,10 @@ class Loco_api_WordPressFileSystem {
      * @return bool always true
      */
     public function preAuthorize( Loco_fs_File $file ){
-        $file->getWriteContext()->authorize();
+        if( ! $this->fs_allowed ){
+            $file->getWriteContext()->authorize();
+            $this->fs_allowed = true;
+        }
         return true;
     }
 
@@ -67,13 +77,14 @@ class Loco_api_WordPressFileSystem {
      * @return bool whether file system is authorized NOT necessarily whether file is creatable
      */
     public function authorizeCreate( Loco_fs_File $file ){
+        $this->preAuthorize($file);
         if( $file->exists() ){
             throw new Loco_error_WriteException( sprintf( __('%s already exists in this folder','loco-translate'), $file->basename() ) );
         }
-        return $this->preAuthorize($file) && ( $file->creatable() || $this->authorize($file) );
+        return $file->creatable() || $this->authorize($file);
     }
-    
-    
+
+
     /**
      * Authorize for the update of a file that does exist
      * @return bool whether file system is authorized NOT necessarily whether file is updatable
@@ -83,7 +94,7 @@ class Loco_api_WordPressFileSystem {
         if( ! $file->exists() ){
             throw new Loco_error_WriteException("File doesn't exist, try authorizeCreate");
         }
-        return $this->preAuthorize($file) && ( $file->writable() || $this->authorize($file) );
+        return $file->writable() || $this->authorize($file);
     }
     
     
@@ -96,25 +107,22 @@ class Loco_api_WordPressFileSystem {
         if( ! $file->exists() ){
             throw new Loco_error_WriteException("Can't delete a file that doesn't exist");
         }
-        return $this->preAuthorize($file) && ( $file->deletable() || $this->authorize($file) );
+        return $file->deletable() || $this->authorize($file);
     }
 
 
     /**
-     * Authorizes update or create, depending on whether file exists
-     * @return bool whether file system is authorized
-     */
-    public function authorizeWrite( Loco_fs_File $file ){
-        return $this->preAuthorize($file) && ( ( $file->exists() ? $file->writable() : $file->creatable() ) || $this->authorize($file) );
-    }
-
-
-    /**
-     * Authorize connection for any operations, regardless of whether direct file system is available.
+     * Connect file to credentials in posted data. Used when established in advance what connection is needed
      * @return bool whether file system is authorized
      */    
     public function authorizeConnect( Loco_fs_File $file ){
-        return $this->preAuthorize($file) && $this->authorize($file);
+        $this->preAuthorize($file);
+        // front end may have posted that "direct" connection will work
+        $post = Loco_mvc_PostParams::get();
+        if( 'direct' === $post->connection_type ){
+            return true;
+        }
+        return $this->authorize($file);
     }
 
 
@@ -124,7 +132,20 @@ class Loco_api_WordPressFileSystem {
      * Call before output started, because buffers.
      */
     private function authorize( Loco_fs_File $file ){
+        
+        // may already have authorized successfully
+        // TODO unsure whether to pass $disconnected
+        if( $fs = $this->fs ){
+            $file->getWriteContext()->connect( $fs, false );
+            return true;
+        }
+        
+        // may have already failed authorization
+        if( $this->form ){
+            return false;
+        }
     
+        // else begin new auth
         $this->fs = null;
         $this->form = '';
         $this->creds_out = array();
@@ -158,6 +179,11 @@ class Loco_api_WordPressFileSystem {
                 return false;
             }
         }
+        // direct fileystem if ok if front end already posted it
+        else if( 'direct' === $post->connection_type ){
+            return true;
+        }
+        // else perform same logic as request_filesystem_credentials does to establish type
         else if( 'ssh' === $post->connection_type && extension_loaded('ssh2') && function_exists('stream_get_contents') ){
             $type = 'ssh2';
         }
@@ -280,19 +306,9 @@ class Loco_api_WordPressFileSystem {
      */
     public function getFileSystem(){
         if( ! $this->fs ){
-            $this->fs = self::direct();
+            return self::direct();
         }
         return $this->fs;     
-    }
-
-
-
-    /**
-     * Check if filesystem access is direct
-     * @return bool
-     */
-    public function isDirect(){
-        return 'direct' === $this->getFileSystem()->method;
     }
 
 

@@ -26,7 +26,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
 
         $pofile = new Loco_fs_LocaleFile( $path );
         $pofile->normalize( loco_constant('WP_CONTENT_DIR') );
-        
+
         // ensure we only deal with PO/POT source files.
         // posting of MO file paths is permitted when PO is missing, but we're about to fix that
         $ext = $pofile->extension();
@@ -42,26 +42,34 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         
         // force the use of remote file system when configured from front end
         $api = new Loco_api_WordPressFileSystem;
-        if( $post->has('connection_type') && 'direct' !== $post->connection_type ){
-            $api->authorizeConnect( $pofile );
+        if( $poexists = $pofile->exists() ){
+            $api->authorizeUpdate( $pofile );
         }
-        // else do a pre-auth to catch other filesystem blocks
         else {
-            $api->preAuthorize($pofile);
+            $api->authorizeCreate( $pofile );
         }
-        
+       
         // data posted must be valid
         $data = Loco_gettext_Data::fromSource( $post->data );
+        
+        // WordPress-ize some headers that differ in JavaScript libs
+        $head = $data->getHeaders();
+        if( $locale ){
+            $head['Language'] = strtr( $locale, '-', '_' );
+        }
         
         // backup existing file BEFORE overwriting
         // file system write context will carry through when revisions clone pofile
         if( $num_backups = Loco_data_Settings::get()->num_backups ){
             try {
                 $backups = new Loco_fs_Revisions( $pofile );
-                $backups->create();
+                // TODO how to authorize directory differently from $pofile?
+                // it could happen that update works direct, but creation requires connection (or vise-versa) 
+                $poexists && $backups->create();
                 $backups->prune($num_backups);
             }
             catch( Exception $e ){
+                Loco_error_AdminNotices::debug( $e->getMessage() );
                 $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco-translate');
                 Loco_error_AdminNotices::info( sprintf( $message, $pofile->getParent()->basename() ) );
             }

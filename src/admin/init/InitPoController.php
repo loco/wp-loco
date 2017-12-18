@@ -334,7 +334,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         ) ) );
 
         // file system prompts will be handled when paths are selected (i.e. we don't have one yet)
-        $this->prepareFsConnect( 'create', '', true );
+        $this->prepareFsConnect( 'create', '' );
         
         $this->enqueueScript('poinit');
         return $this->view( 'admin/init/init-po', array() );

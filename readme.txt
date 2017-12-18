@@ -89,9 +89,11 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.0.18 =
 * Add `fs_protect` setting to avoid overwriting system files
 * Fixed bug in connect dialogue where errors not redisplayed
-* Success notices disappear after 5 seconds
+* Minor improvements to inline notices
 * Removed downgrade notice under version tab
 * Fixed extraction bug where file header confused with comment
+* Resolved some inconsistencies between PHP and JS utilities
+* Added Restore tab with diff display
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown

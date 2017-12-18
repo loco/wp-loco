@@ -118,49 +118,45 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
     /**
      * Prepare file system connect
+     * @param string "create", "update", "delete"
+     * @param string path relative to wp-content
      * @return Loco_mvc_HiddenFields
      */
-    protected function prepareFsConnect( $type, $path, $remote ){
+    protected function prepareFsConnect( $type, $relpath ){
 
         $fields = new Loco_mvc_HiddenFields( array(
             'auth' => $type,
-            'path' => $path,
-            'loco-nonce' => '',
+            'path' => $relpath,
+            'loco-nonce' => wp_create_nonce('fsConnect'),
+            '_fs_nonce' => wp_create_nonce('filesystem-credentials'), // <- WP 4.7.5 added security fix
         ) ) ;
         $this->set('fsFields', $fields );
 
-        if( $remote ){
-            $fields['loco-nonce'] = wp_create_nonce('fsConnect'); // <- used for our ajax action
-            $fields['_fs_nonce'] = wp_create_nonce('filesystem-credentials'); // <- WP 4.7.5 added security fix
-            // may have fs credentials saved in session
-            try {
-                $session = Loco_data_Session::get();
-                if( isset($session['loco-fs']) ){
-                    $fields['connection_type'] = $session['loco-fs']['connection_type'];
-                }
-            }
-            catch( Exception $e ){
-                Loco_error_AdminNotices::debug( $e->getMessage() );
-            }
-            // specific instruction based on auth type
-            if( 'create' === $type ){
-                $this->set('fsPrompt', __('Creating this file requires permission','loco-translate') );
-            }
-            else if( 'delete' === $type ){
-                $this->set('fsPrompt', __('Deleting this file requires permission','loco-translate') );
-            }
-            else {
-                $this->set('fsPrompt', __('Saving this file requires permission','loco-translate') );
+        // may have fs credentials saved in session
+        try {
+            $session = Loco_data_Session::get();
+            if( isset($session['loco-fs']) ){
+                $fields['connection_type'] = $session['loco-fs']['connection_type'];
             }
         }
-        // else direct filesystem connection
-        else if( $path ){
-            $fields['connection_type'] = 'direct';
+        catch( Exception $e ){
+            Loco_error_AdminNotices::debug( $e->getMessage() );
+        }
+
+        // specific wording based on file operation type
+        if( 'create' === $type ){
+            $this->set('fsPrompt', __('Creating this file requires permission','loco-translate') );
+        }
+        else if( 'delete' === $type ){
+            $this->set('fsPrompt', __('Deleting this file requires permission','loco-translate') );
+        }
+        else {
+            $this->set('fsPrompt', __('Saving this file requires permission','loco-translate') );
         }
         
         // Run pre-checks that may determine file should not be written
-        if( $path ){
-            $file = new Loco_fs_File( $path );
+        if( $relpath ){
+            $file = new Loco_fs_File( $relpath );
             $file->normalize( loco_constant('WP_CONTENT_DIR') );
             // total file system block makes connection type irrelevent
             try {

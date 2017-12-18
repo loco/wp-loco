@@ -2,7 +2,7 @@
 /**
  * Include standard file system connect dialog
  */
-    
+
     $help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem') );
 
     // Total file lock prevents any kind of update, regardless of connection
