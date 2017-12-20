@@ -94,6 +94,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Fixed extraction bug where file header confused with comment
 * Resolved some inconsistencies between PHP and JS utilities
 * Added Restore tab with diff display
+* Added `loco_settings` hook
+* Prevented editor from changing PO document order
+* Added default string sorting to extracted strings
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown

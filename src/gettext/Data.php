@@ -99,13 +99,14 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Get final UTF-8 string for writing to file
+     * @param bool whether to sort output, generally only for extracting strings
      * @return string
      */
-    public function msgcat(){
+    public function msgcat( $sort = false ){
         // set maximum line width, zero or >= 15
         $this->wrap( Loco_data_Settings::get()->po_width );
-        // concat by casting to string
-        $po = (string) $this;
+        // concat with default text sorting if specified
+        $po = $this->render( $sort ? array( 'LocoPoIterator', 'compare' ) : null );
         // Prepend byte order mark only if configured
         if( Loco_data_Settings::get()->po_utf8_bom ){
             $po = "\xEF\xBB\xBF".$po;

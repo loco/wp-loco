@@ -71,6 +71,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
             $opts = self::create();
             $opts->fetch();
             self::$current = $opts;
+            // allow hooks to modify settings
+            do_action('loco_settings', $opts );
         }
         return $opts;
     }

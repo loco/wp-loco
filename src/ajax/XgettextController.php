@@ -43,7 +43,7 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
             'Project-Id-Version' => $project->getName(),
         );
         
-        $potsize = $potfile->putContents( $data->msgcat() );
+        $potsize = $potfile->putContents( $data->msgcat(true) );
         
         // set response data for debugging
         if( loco_debugging() ){

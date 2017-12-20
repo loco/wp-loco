@@ -5,6 +5,7 @@ require_once ABSPATH . WPINC . '/Text/Diff/Renderer.php';
 require_once ABSPATH . WPINC . '/Text/Diff/Renderer/inline.php';
 require_once ABSPATH . WPINC . '/wp-diff.php';
 
+
 /**
  * Diff renderer extending that which WordPress uses for post revisions.
  */
@@ -30,7 +31,7 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
      */
     public function renderFiles( Loco_fs_File $lhs, Loco_fs_File $rhs ){
         loco_require_lib('compiled/gettext.php');
-        // *attempt* to raise memory limit to WP_MAX_MEMORY_LIMIT
+        // attempt to raise memory limit to WP_MAX_MEMORY_LIMIT
         if( function_exists('wp_raise_memory_limit') ){
             wp_raise_memory_limit('loco');
         }
@@ -67,7 +68,7 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
      * {@inheritdoc}
      */
     public function _startBlock( $header ) {
-        return '<tbody><!--'.$header."-->\n";
+        return '<tbody data-diff="'.esc_attr($header)."\">\n";
     }
 
 
@@ -80,3 +81,18 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
     }
 
 }
+
+
+
+/**
+ * @internal
+ *
+class LocoDiffVisitor extends Loco_hooks_Hookable {
+
+    public function filter_process_text_diff_html( $processed_line, $line, $type ){
+        return json_encode( compact('processed_line', 'line', 'type'), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE );
+    }
+
+}
+*/
+

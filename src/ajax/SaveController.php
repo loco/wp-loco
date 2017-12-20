@@ -46,6 +46,12 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         // data posted must be valid
         $data = Loco_gettext_Data::fromSource( $post->data );
         
+        // ensure same sort order as current file (if it exists)
+        if( $poexists = $pofile->exists() ){
+            
+        }
+        
+        
         // WordPress-ize some headers that differ in JavaScript libs
         $head = $data->getHeaders();
         if( $locale ){
@@ -54,7 +60,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         
         // backup existing file BEFORE overwriting
         $num_backups = Loco_data_Settings::get()->num_backups;
-        if( $num_backups && $pofile->exists() ){
+        if( $num_backups && $poexists ){
             try {
                 $api->authorizeCopy( $pofile );
                 $backups = new Loco_fs_Revisions( $pofile );

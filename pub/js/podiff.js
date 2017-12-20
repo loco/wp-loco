@@ -46,6 +46,36 @@
     }
     
     
+    // applying line numbers in JS is easier than hacking HTML on the back end, because dom is parsed
+    function applyLineNumbers( i, tbody ){
+        var i, cells,
+            rows = tbody.getElementsByTagName('tr'),
+            nrow = rows.length,
+            data = tbody.getAttribute('data-diff').split(/\D+/),
+            xmin = data[0], xmax = data[1], 
+            ymin = data[2], ymax = data[3]
+        ;
+        /*function lpad( n, max ){
+            var str = String( n ),
+                len = String(max).length;
+            while( str.length < len ){
+                str = '\xA0'+str;
+            }
+            return str;
+        }*/
+        function apply( td, num, max ){
+            if( num <= max ){
+                $('<span></span>').text( String(num) ).prependTo( td );
+            }
+        }
+        for( i = 0; i < nrow; i++ ){
+            cells = rows[i].getElementsByTagName('td');
+            apply( cells[0], xmin++, xmax );
+            apply( cells[2], ymin++, ymax );
+        }
+    }
+    
+    
     
     function loadDiff( offset ){
         if( xhr ){
@@ -70,7 +100,7 @@
                 if( _xhr === xhr ){
                     if( src = r && r.html ){
                         cache[offset] = src;
-                        setContent( src );
+                        setContent( src ).find('tbody').each( applyLineNumbers );
                         hideLoading();
                     }
                     else {
