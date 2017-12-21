@@ -37,11 +37,10 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
         }
         // like wp_text_diff but avoiding whitespace normalization
         // uses deprecated signature for 'auto' in case of old WordPress
-        $diff = new Text_Diff (
+        return $this->render( new Text_Diff (
             preg_split( '/\\R/u', loco_ensure_utf8( $lhs->getContents() ) ),
             preg_split( '/\\R/u', loco_ensure_utf8( $rhs->getContents() ) )
-        );
-        return $this->render( $diff );
+        ) );
     }
 
 
@@ -81,18 +80,3 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
     }
 
 }
-
-
-
-/**
- * @internal
- *
-class LocoDiffVisitor extends Loco_hooks_Hookable {
-
-    public function filter_process_text_diff_html( $processed_line, $line, $type ){
-        return json_encode( compact('processed_line', 'line', 'type'), JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE );
-    }
-
-}
-*/
-

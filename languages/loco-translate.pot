@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-12-20 19:28+0000\n"
+"POT-Creation-Date: 2017-12-21 12:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: src/fs/FileWriter.php:183
+#: src/fs/FileWriter.php:175
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
@@ -554,11 +554,11 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:238
+#: src/fs/FileWriter.php:230
 msgid "Failed to build directory path"
 msgstr ""
 
-#: src/fs/FileWriter.php:132
+#: src/fs/FileWriter.php:124
 #, php-format
 msgid "Failed to chmod %s"
 msgstr ""
@@ -567,28 +567,28 @@ msgstr ""
 msgid "Failed to connect to remote server"
 msgstr ""
 
-#: src/fs/FileWriter.php:152
+#: src/fs/FileWriter.php:144
 #, php-format
 msgid "Failed to copy %s to %s"
 msgstr ""
 
-#: src/ajax/SaveController.php:72
+#: src/ajax/SaveController.php:67
 #, php-format
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:231
+#: src/fs/FileWriter.php:223
 msgid "Failed to create directory"
 msgstr ""
 
-#: src/fs/FileWriter.php:167
+#: src/fs/FileWriter.php:159
 #, php-format
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:204
+#: src/fs/FileWriter.php:196
 msgid "Failed to save file"
 msgstr ""
 
@@ -648,7 +648,7 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:250
+#: src/fs/FileWriter.php:242
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -947,7 +947,7 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:254
+#: src/fs/FileWriter.php:246
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
@@ -1081,7 +1081,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/fs/FileWriter.php:201
+#: src/fs/FileWriter.php:193
 msgid "Parent directory doesn't exist"
 msgstr ""
 
@@ -1101,7 +1101,7 @@ msgstr ""
 msgid "Permission denied"
 msgstr ""
 
-#: src/fs/FileWriter.php:197
+#: src/fs/FileWriter.php:189
 msgid "Permission denied to update file"
 msgstr ""
 
@@ -1185,19 +1185,19 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/ajax/SaveController.php:100
+#: src/ajax/SaveController.php:94
 msgid "PO file saved"
 msgstr ""
 
-#: src/ajax/SaveController.php:109
+#: src/ajax/SaveController.php:103
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:113
+#: src/ajax/SaveController.php:107
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
-#: src/ajax/SaveController.php:100 src/ajax/SaveController.php:118
+#: src/ajax/SaveController.php:94 src/ajax/SaveController.php:112
 msgid "POT file saved"
 msgstr ""
 
@@ -1217,7 +1217,7 @@ msgstr ""
 msgid "Recently updated:"
 msgstr ""
 
-#: src/fs/FileWriter.php:149
+#: src/fs/FileWriter.php:141
 msgid "Refusing to copy over an existing file"
 msgstr ""
 
@@ -1241,6 +1241,12 @@ msgstr ""
 
 #: tpl/admin/file/diff.php:59
 msgid "Revision saved"
+msgstr ""
+
+#. Where %s is a file name
+#: src/ajax/DiffController.php:47
+#, php-format
+msgid "Revisions are identical, you can delete %s"
 msgstr ""
 
 #: tpl/admin/root.php:48

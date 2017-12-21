@@ -104,7 +104,7 @@
                         hideLoading();
                     }
                     else {
-                        setError('Unknown error');
+                        setError( r && r.error || 'Unknown error' );
                     }
                 }
             }, 

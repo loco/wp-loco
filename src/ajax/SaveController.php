@@ -26,6 +26,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
 
         $pofile = new Loco_fs_LocaleFile( $path );
         $pofile->normalize( loco_constant('WP_CONTENT_DIR') );
+        $poexists = $pofile->exists();
 
         // ensure we only deal with PO/POT source files.
         // posting of MO file paths is permitted when PO is missing, but we're about to fix that
@@ -46,19 +47,13 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         // data posted must be valid
         $data = Loco_gettext_Data::fromSource( $post->data );
         
-        // ensure same sort order as current file (if it exists)
-        if( $poexists = $pofile->exists() ){
-            
-        }
-        
-        
-        // WordPress-ize some headers that differ in JavaScript libs
-        $head = $data->getHeaders();
+        // WordPress-ize some headers that differ from JavaScript libs
         if( $locale ){
+            $head = $data->getHeaders();
             $head['Language'] = strtr( $locale, '-', '_' );
         }
         
-        // backup existing file BEFORE overwriting
+        // backup existing file before overwriting, but still allow if backups fails
         $num_backups = Loco_data_Settings::get()->num_backups;
         if( $num_backups && $poexists ){
             try {
@@ -79,11 +74,10 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         $bytes = $pofile->putContents( $data->msgcat() );
         $mtime = $pofile->modified();
 
-        // push recent items on file creation
+        // add bundle to recent items on file creation
         try {
             $bundle = $this->getBundle();
             Loco_data_RecentItems::get()->pushBundle( $bundle )->persist();
-            // TODO push project and locale file
         }
         catch( Exception $e ){
             // editor permitted to save files not in a bundle, so catching failures

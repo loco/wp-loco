@@ -20,7 +20,7 @@ class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
         $lhs = new Loco_fs_File( $post->lhs ); $lhs->normalize($dir);
         $rhs = new Loco_fs_File( $post->rhs ); $rhs->normalize($dir);
         
-        // file security checks
+        // avoid diffing non Gettext source files
         $exts = array_flip( array( 'pot', 'pot~', 'po', 'po~' ) );
 
         /* @var $file Loco_fs_File */
@@ -39,7 +39,17 @@ class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
         
         // OK to diff files as HTML table
         $renderer = new Loco_output_DiffRenderer;
-        $this->set( 'html', $renderer->renderFiles( $rhs, $lhs ) );
+        $emptysrc = $renderer->_startDiff().$renderer->_endDiff();
+        $tablesrc = $renderer->renderFiles( $rhs, $lhs );
+
+        if( $tablesrc === $emptysrc ){
+            // translators: Where %s is a file name
+            $message = __('Revisions are identical, you can delete %s','loco-translate');
+            $this->set( 'error', sprintf( $message, $rhs->basename() ) );
+        }
+        else {
+            $this->set( 'html', $tablesrc );
+        }
         
         return parent::render();
     }

@@ -72,28 +72,20 @@ class Loco_fs_FileWriter {
 
     /**
      * @internal
+     * map virtual path for remote file system
      */
     private function mapPath( $path ){
-        /*/ restrict file extensions to Gettext files for additional layer of security
-        // disabled until configurable, too annoying when using safely (e.g. zip files)
-        if( ( $ext = $this->file->extension() ) && ! preg_match('/^(po|mo|pot)~?$/',$ext) ){
-            throw new Loco_error_WriteException('Unwriteable file extension: *.'.$ext.' disallowed');
-        }*/
-        // sanitize writeable locations
-        $remote = ! $this->isDirect();
-        $base = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
-        $snip = strlen($base);
-        if( substr( $path, 0, $snip ) !== $base ){
-            if( $remote ){
-                throw new Loco_error_WriteException('Remote path must be under WP_CONTENT_DIR');
+        if( ! $this->isDirect() ){
+            $base = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
+            $snip = strlen($base);
+            if( substr( $path, 0, $snip ) !== $base ){
+                // fall back to default path in case of symlinks
+                $base = rtrim(ABSPATH,'/').'/wp-content';
+                $snip = strlen($base);
+                if( substr( $path, 0, $snip ) !== $base ){
+                    throw new Loco_error_WriteException('Remote path must be under WP_CONTENT_DIR');
+                }
             }
-            /*/ Allowing direct file system access, because symlinks and also get_temp_dir()
-            else {
-                throw new Loco_error_WriteException('Direct path must be under WP_CONTENT_DIR');
-            }*/
-        }
-        // map virtual path for remote file system
-        if( $remote ){
             $virt = $this->fs->wp_content_dir();
             if( false === $virt ){
                 throw new Loco_error_WriteException('Failed to find WP_CONTENT_DIR via remote connection');
@@ -104,7 +96,7 @@ class Loco_fs_FileWriter {
         return $path;
     }
 
-    
+
     /**
      * Test if a direct (not remote) file system
      * @return bool
