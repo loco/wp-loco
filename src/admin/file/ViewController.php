@@ -56,11 +56,13 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
         try {
             $this->set('modified', $file->modified() );
             $data = Loco_gettext_Data::load( $file );
-            $this->set( 'meta', Loco_gettext_Metadata::create($file, $data) );
         }
         catch( Exception $e ){
             Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
+            $data = Loco_gettext_Data::dummy();
         }
+
+        $this->set( 'meta', Loco_gettext_Metadata::create($file, $data) );
 
         // binary MO will be hex-formated in template
         if( 'mo' === $type ){
