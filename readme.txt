@@ -86,7 +86,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
-= 2.0.18 =
+= 2.1.0 =
 * Add `fs_protect` setting to avoid overwriting system files
 * Fixed bug in connect dialogue where errors not redisplayed
 * Minor improvements to inline notices
@@ -97,6 +97,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Added `loco_settings` hook
 * Prevented editor from changing PO document order
 * Added default string sorting to extracted strings
+* Added "Languages" section for grouping files by locale
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown
@@ -219,7 +220,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.0.18 =
+= 2.1.0 =
 * Various bug fixes and improvements
 
 

@@ -38,6 +38,10 @@ class Loco_api_WordPressTranslations {
         // wp-includes/l10n.php should always be included at runtime
         if( ! is_array($this->installed) ){
             $this->installed = get_available_languages();
+            // en_US is implicitly installed
+            if( ! in_array('en_US',$this->installed) ){
+                array_unshift( $this->installed, 'en_US' );
+            }
         }
         return $this->installed;
     }
@@ -48,7 +52,7 @@ class Loco_api_WordPressTranslations {
      */
     private function getInstalledHash(){
         if( ! is_array($this->installed_hash) ){
-            $this->installed_hash = array( 'en_US' => 1 ) + array_flip( $this->getInstalledCore() );
+            $this->installed_hash = array_flip( $this->getInstalledCore() );
         }
         return $this->installed_hash;
     }

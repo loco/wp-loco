@@ -44,20 +44,9 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     private function getProjectLink( $page, Loco_package_Project $project, array $args = array() ){
         $args['bundle'] = $this->get('bundle');
         $args['domain'] = $project->getId();
-        return $this->getLink( $page, $args );
-    }
-
-
-
-    /**
-     * Generate a link for the same type of bundle as this one
-     * @return string
-     */
-    private function getLink( $page, array $args ){
         $route = strtolower( $this->get('type') ).'-'.$page;
         return Loco_mvc_AdminRouter::generate( $route, $args );
     }
-
 
 
     /**
@@ -205,11 +194,13 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      */
     private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
         // Pull Gettext meta data from cache if possible
-        // TODO save write when cached version was used
         $meta = Loco_gettext_Metadata::load($file)->persistIfDirty( 0, true );
-        // Establish whether translations are official or otherwise
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
-        // Retuen data required for PO table row
+        // routing arguments
+        $args = array (
+            'path' => $meta->getPath(false), 
+        );
+        // Return data required for PO table row
         return new Loco_mvc_ViewParams( array (
             // locale info
             'lcode' => $locale ? (string) $locale : '',
@@ -222,13 +213,13 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'type' => strtoupper( $file->extension() ),
             'todo' => $meta->countIncomplete(),
             'total' => $meta->getTotal(),
-            // author / contrib
+            // author / system / custom / other
             'store' => $dir->getTypeLabel( $dir->getTypeId() ),
             // links
-            'info' => $this->getResourceLink('file-info', $project, $meta ),
-            'edit' => $this->getResourceLink('file-edit', $project, $meta ),
-            'delete' => $this->getResourceLink('file-delete', $project, $meta ),
-            'copy' => $this->getProjectLink('msginit', $project, array( 'source' => $meta->getPath(false) ) ),
+            'info' => $this->getProjectLink('file-info', $project, $args ),
+            'edit' => $this->getProjectLink('file-edit', $project, $args ),
+            'delete' => $this->getProjectLink('file-delete', $project, $args ),
+            'copy' => $this->getProjectLink('msginit', $project, $args ),
         ) );
     }
 

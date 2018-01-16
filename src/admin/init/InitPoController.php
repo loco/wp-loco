@@ -121,7 +121,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $copying = false;
         
         // Permit using any provided file a template instead of POT
-        if( $potpath = $this->get('source') ){
+        if( $potpath = $this->get('path') ){
             $potfile = new Loco_fs_LocaleFile($potpath);
             $potfile->normalize( $content_dir );
             if( ! $potfile->exists() ){
@@ -144,46 +144,31 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
 
 
-        // start dropdown list with installed languages
-        $default = new Loco_Locale('en','US'); 
-        $installed = array(
-            new Loco_mvc_ViewParams( array(
-                'icon'  => $default->getIcon(),
-                'value' => (string) $default,
-                'label' => $default->buildName(),
-            ) )
-        );
-        // pull the same list of "available" languages as used in WordPress settings
-        $api = new Loco_api_WordPressTranslations;
         $locales = array();
+        $installed = array();
+        $api = new Loco_api_WordPressTranslations;
+        // pull installed list first, this will include en_US and any non-standard languages installed
+        foreach( $api->getInstalledCore() as $tag ){
+            if( $locale = Loco_Locale::parse($tag) ){
+                $tag = (string) $tag;
+                // We may not have names for these, so just the language tag will show
+                $installed[$tag] = new Loco_mvc_ViewParams( array(
+                    'value' => $tag,
+                    'icon'  => $locale->getIcon(),
+                    'label' => $locale->ensureName($api),
+                ) );
+            }
+        }
+        // pull the same list of "available" languages as used in WordPress settings
         foreach( $api->getAvailableCore() as $tag => $raw ){
             $locale = Loco_Locale::parse($tag);
             $tag = (string) $locale;
-            $vparam = new Loco_mvc_ViewParams( array(
-                'value' => $tag,
-                'icon'  => $locale->getIcon(),
-                'label' => $locale->ensureName($api),
-            ) );
-            if( $api->isInstalled($tag) ){
-                $installed[$tag] = $vparam;
-            }
-            else {
-                $locales[$tag] = $vparam;
-            }
-        }
-        // Pick up any non-standard languages installed
-        foreach( $api->getInstalledCore() as $tag ){
-            if( ! array_key_exists($tag,$installed) ){
-                $locale = Loco_Locale::parse($tag);
-                if( $locale->isValid() ){
-                    $tag = (string) $tag;
-                    // We may not have names for these, so just the language tag will show
-                    $installed[$tag] = new Loco_mvc_ViewParams( array(
-                        'value' => $tag,
-                        'icon'  => $locale->getIcon(),
-                        'label' => $locale->ensureName($api),
-                    ) );
-                }
+            if( $locale->isValid() && ! array_key_exists($tag,$installed) ){
+                $locales[$tag] = new Loco_mvc_ViewParams( array(
+                    'value' => $tag,
+                    'icon'  => $locale->getIcon(),
+                    'label' => $locale->ensureName($api),
+                ) );
             }
         }
 
@@ -325,7 +310,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             'type' => $bundle->getType(),
             'bundle' => $bundle->getHandle(),
             'domain' => $project ? $project->getId() : '',
-            'source' => $this->get('source'),
+            'source' => $potpath,
         ) ) );
         
         $this->set('help', new Loco_mvc_ViewParams( array(

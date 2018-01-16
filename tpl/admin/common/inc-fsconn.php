@@ -15,7 +15,7 @@
         <nav>
             <a href="<?php echo $help?>#wp" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
             <span>|</span>
-            <a href="<?php echo esc_url(Loco_mvc_AdminRouter::generate('config'))?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
+            <a href="<?php $this->route('config')->e('href')?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
         </nav>
     </div><?php
  
@@ -32,7 +32,7 @@
         <nav>
             <a href="<?php echo $help?>#wp" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
             <span>|</span>
-            <a href="<?php echo esc_url(Loco_mvc_AdminRouter::generate('config'))?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
+            <a href="<?php $this->route('config')->e('href')?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
         </nav>
     </div><?php
     endif?> 

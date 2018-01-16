@@ -55,6 +55,11 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             // translators: Page title for core WordPress translations
             $title = __('Core translations &lsaquo; Loco', 'loco-translate');
             add_submenu_page( 'loco', $title, $label, $cap, 'loco-core', $render );
+
+            $label = __('Languages', 'loco-translate');
+            // translators: Page title for installed languages page
+            $title = __('Languages &lsaquo; Loco', 'loco-translate');
+            add_submenu_page( 'loco', $title, $label, $cap, 'loco-lang', $render );
             
             // settings page only for users with manage_options permission in addition to Loco access:
             if( $user->has_cap('manage_options') ){
@@ -172,11 +177,13 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             'theme'  => 'list_Themes',
             'plugin' => 'list_Plugins',
             'core'   => 'list_Core',
+            'lang'   => 'list_Locales',
             // bundle level views
             '{type}-view' => 'bundle_View',
             '{type}-conf' => 'bundle_Conf',
             '{type}-setup' => 'bundle_Setup',
             '{type}-debug' => 'bundle_Debug',
+            'lang-view' => 'bundle_Locale',
             // file initialization
             '{type}-msginit'   => 'init_InitPo',
             '{type}-xgettext'  => 'init_InitPot',

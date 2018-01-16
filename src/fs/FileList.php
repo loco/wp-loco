@@ -43,7 +43,8 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
 
     /**
-     * Generate a unique key for file.
+     * Generate a unique key for file
+     * @return string
      */
     private function hash( Loco_fs_File $file ){
         $path = $file->normalize();

@@ -132,7 +132,7 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * @return Loco_Locale
-     */    
+     */
     public function setName( $english_name, $native_name = '' ){
         $this->name = $english_name;
         $this->_name = $native_name;
@@ -220,9 +220,9 @@ class Loco_Locale implements JsonSerializable {
                 $name = $this->buildName();
                 if( ! $name ){
                     $name = (string) $this;
+                    $this->setName( $name );
                 }
             }
-            $this->setName( $name );
         }
         return $name;
     }

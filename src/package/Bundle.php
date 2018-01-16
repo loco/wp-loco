@@ -103,8 +103,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
             throw new Loco_error_Exception('Unexpected bundle type: '.$type );
         }  
         return $bundle;
-    } 
- 
+    }
+
  
     /**
      * Construct from WordPress handle and friendly name

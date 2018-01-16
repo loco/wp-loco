@@ -14,7 +14,7 @@
                     <?php esc_html_e('Text domain','loco-translate')?> 
                 </th>
                 <th data-sort-type="n">
-                    <?php esc_html_e('Last updated','loco-translate')?> 
+                    <?php esc_html_e('Last modified','loco-translate')?> 
                 </th>
                 <th data-sort-type="n">
                     <?php esc_html_e('Sets','loco-translate')?> 

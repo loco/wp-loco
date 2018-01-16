@@ -36,7 +36,7 @@ class Loco_package_Project {
     private $dpaths;
 
     /**
-     * Additional system domain path[s] added separately from bindle config
+     * Additional system domain path[s] added separately from bundle config
      * @var Loco_fs_FileList
      */
     private $gpaths;
@@ -189,6 +189,14 @@ class Loco_package_Project {
         return $this->domain;
     }
 
+    
+    /**
+     * @var Loco_package_Bundle
+     */
+    public function getBundle(){
+        return $this->bundle;
+    }
+
 
     /**
      * Whether project is the default for its domain.
@@ -257,7 +265,7 @@ class Loco_package_Project {
      * @return Loco_fs_FileFinder
      */
     private function getTargetFinder(){    
-        if( ! $this->target ){        
+        if( ! $this->target ){
             $target = new Loco_fs_FileFinder;
             $target->setRecursive(false)->group('pot','po','mo');
             foreach( $this->dpaths as $path ){

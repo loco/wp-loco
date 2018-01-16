@@ -17,6 +17,21 @@ $this->extend('layout');
             );?> 
         </p>
     </div><?php
+    
+    /*if( $params->has('locale') ):?> 
+    <div>
+        <h2>
+            <?php esc_attr_e('Active language:','loco-translate')?> 
+        </h2>
+        <p>
+            <span <?php echo $locale->attr?>> </span>
+            <?php $locale->e('name')?> 
+        </p>
+        <p>
+            <a href="<?php $this->route('lang')->e('href')?>" class="button button-link has-raquo"><?php esc_html_e('See all languages','loco-translate')?></a>
+        </p>
+    </div><?php
+    endif;*/
 
     if( $recent ):?> 
     <div>
