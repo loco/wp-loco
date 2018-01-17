@@ -149,7 +149,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $api = new Loco_api_WordPressTranslations;
         // pull installed list first, this will include en_US and any non-standard languages installed
         foreach( $api->getInstalledCore() as $tag ){
-            if( $locale = Loco_Locale::parse($tag) ){
+            $locale = Loco_Locale::parse($tag);
+            if( $locale->isValid() ){
                 $tag = (string) $tag;
                 // We may not have names for these, so just the language tag will show
                 $installed[$tag] = new Loco_mvc_ViewParams( array(

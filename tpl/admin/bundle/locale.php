@@ -6,13 +6,18 @@
 $this->extend('../layout');
 ?> 
 
-    <!--div>
-        <h2>
-            <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"> </span>
-            <code><?php $locale->e('code')?></code>
-        </h2>
-    </div--><?php
+    <div class="notice inline notice-info">
+        <h3>
+            <span <?php echo $locale->attr?>><code><?php $locale->e('code')?></code></span> 
+            <?php $locale->e('name')?> 
+        </h3>
+        <dl>
+            <dt><?php self::e( __('Last modified','loco-translate') )?>:</dt>
+            <dd><?php $params->date('modified')?></dd>
+        </dl>
+    </div>
 
+    <?php
     foreach( $translations as $t => $group ): $type = $types[$t];?> 
     <div class="loco-projects">
         <h3>
@@ -86,7 +91,7 @@ $this->extend('../layout');
                         <!-- no percentage for template -->
                     </td>
                     <td data-sort-value="-1">
-                        -- <!-- no pendingfor template -->
+                        -- <!-- no pending for template -->
                     </td><?php
                     endif?> 
 

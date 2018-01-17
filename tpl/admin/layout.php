@@ -23,7 +23,7 @@
             endforeach?> 
         </ul>
     </h1><?php
-    else:?> 
+    elseif( $this->has('title') ):?> 
     <h1>
         <?php $params->e('title')?> 
     </h1><?php

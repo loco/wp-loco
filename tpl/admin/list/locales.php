@@ -40,14 +40,13 @@ echo $this->render('../common/inc-table-filter');
                 <?php $p->e('lcode')?> 
             </td>
             <td data-sort-value="<?php $p->f('time','%u')?>">
-                <?php $p->time ? $p->date('time') : print '--'?> 
+                <time datetime="<?php $p->date('time','c')?>"><?php $p->time ? $p->date('time') : print '--'?></time>
             </td>
             <td data-sort-value="<?php $p->e('nfiles')?>">
                 <?php $p->n('nfiles',0)?>
             </td>
-            <td>
-                <?php /*$p->is_active && print('<span class="icon icon-ok"></span>')*/?> 
-                <?php $p->e('used') ?> 
+            <td class="loco-<?php echo $p->active?'is':'not' ?>-active">
+                <?php $p->e('used')?> 
             </td>
         </tr><?php
         endforeach?> 

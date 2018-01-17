@@ -32,17 +32,17 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
                         // parse PO. we'll need it for MO compile anyway
                         $source = $target->getContents();
                         $data = Loco_gettext_Data::fromSource( $source );
-                        // authorize master for file modification
-                        $api->authorizeUpdate($pofile);
                         // backup current master before restoring
                         $backups = new Loco_fs_Revisions($pofile);
                         if( $num_backups = Loco_data_Settings::get()->num_backups ){
+                            $api->authorizeCopy($pofile);
                             $backups->create();
                         }
+                        // authorize master for file modification
+                        $api->authorizeUpdate($pofile);
                         // recompile binary if it exists
                         $mofile = $pofile->cloneExtension('mo');
                         if( $mofile->exists() ){
-                            $api->authorizeUpdate( $mofile );
                             $mofile->putContents( $data->msgfmt() );
                         }
                         // replacing source file last in case of failures

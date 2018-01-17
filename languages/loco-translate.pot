@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-16 12:46+0000\n"
+"POT-Creation-Date: 2018-01-17 18:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -74,7 +74,7 @@ msgid_plural "%s obsolete strings removed"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:221
+#: src/admin/init/InitPoController.php:222
 #, php-format
 msgid "1 source file will be scanned for translatable strings"
 msgid_plural "%s source files will be scanned for translatable strings"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "About the Tokenizer"
 msgstr ""
 
-#: tpl/admin/root.php:51
+#: tpl/admin/root.php:41
 msgid "Active theme:"
 msgstr ""
 
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Beginner's guide"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:39
+#: tpl/admin/file/info-po.php:38
 msgid "Binary file missing"
 msgstr ""
 
@@ -217,7 +217,7 @@ msgstr ""
 msgid "Bundle diagnostics"
 msgstr ""
 
-#: tpl/admin/bundle/locale.php:27 tpl/admin/list/inc-table.php:11
+#: tpl/admin/bundle/locale.php:32 tpl/admin/list/inc-table.php:11
 msgid "Bundle name"
 msgstr ""
 
@@ -305,7 +305,7 @@ msgstr ""
 msgid "Connected to remote file system"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:50 tpl/admin/bundle/locale.php:59
+#: tpl/admin/bundle/inc-po-table.php:50 tpl/admin/bundle/locale.php:64
 msgid "Copy"
 msgstr ""
 
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:212
+#: src/admin/init/InitPoController.php:213
 #: src/admin/bundle/ViewController.php:115 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
@@ -342,7 +342,7 @@ msgid "Debug"
 msgstr ""
 
 #: src/admin/file/BaseController.php:78 tpl/admin/file/diff.php:31
-#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:62
+#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:67
 msgid "Delete"
 msgstr ""
 
@@ -373,7 +373,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:121 tpl/admin/common/inc-fsconn.php:16
+#: src/admin/bundle/LocaleController.php:125 tpl/admin/common/inc-fsconn.php:16
 #: tpl/admin/common/inc-fsconn.php:33 tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
 msgstr ""
@@ -390,7 +390,7 @@ msgstr ""
 msgid "Download controller returned empty output"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:47 tpl/admin/bundle/locale.php:56
+#: tpl/admin/bundle/inc-po-table.php:47 tpl/admin/bundle/locale.php:61
 msgid "Edit"
 msgstr ""
 
@@ -612,7 +612,7 @@ msgid "File doesn't exist"
 msgstr ""
 
 #: src/admin/file/BaseController.php:76 tpl/admin/file/diff.php:62
-#: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:36
+#: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:41
 msgid "File info"
 msgstr ""
 
@@ -653,7 +653,7 @@ msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
 #: tpl/admin/file/info-mo.php:20 tpl/admin/file/info-pot.php:15
-#: tpl/admin/file/info-po.php:19
+#: tpl/admin/file/info-po.php:18
 msgid "File modified"
 msgstr ""
 
@@ -670,7 +670,7 @@ msgid "File restored"
 msgstr ""
 
 #: tpl/admin/file/info-mo.php:17 tpl/admin/file/info-pot.php:12
-#: tpl/admin/file/info-po.php:16
+#: tpl/admin/file/info-po.php:15
 msgid "File size"
 msgstr ""
 
@@ -707,7 +707,7 @@ msgstr ""
 msgid "Find config"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:26 tpl/admin/bundle/locale.php:42
+#: tpl/admin/bundle/inc-po-table.php:26 tpl/admin/bundle/locale.php:47
 msgid "Folder"
 msgstr ""
 
@@ -766,7 +766,7 @@ msgid "https://wordpress.org/plugins/loco-translate/"
 msgstr ""
 
 #. 1: help URL, 2: forum URL; Must be HTML encoded
-#: tpl/admin/root.php:14
+#: tpl/admin/root.php:18
 #, php-format
 msgid ""
 "If you have any questions, please try our <a href=\"%1$s\">help pages</a> or "
@@ -789,7 +789,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:52
+#: tpl/admin/file/info-po.php:51
 msgid "In sync with template"
 msgstr ""
 
@@ -801,7 +801,7 @@ msgstr ""
 msgid "Include Fuzzy strings"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:65
+#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:70
 msgid "Info"
 msgstr ""
 
@@ -814,8 +814,8 @@ msgstr ""
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:108
-#: src/admin/list/LocalesController.php:25 tpl/admin/init/init-po.php:63
+#: src/admin/bundle/LocaleController.php:111
+#: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:63
 msgid "Installed languages"
 msgstr ""
 
@@ -864,12 +864,13 @@ msgstr ""
 msgid "Last extracted"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:39
-#: tpl/admin/list/locales.php:19 tpl/admin/list/inc-table.php:17
+#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:15
+#: tpl/admin/bundle/locale.php:44 tpl/admin/list/locales.php:19
+#: tpl/admin/list/inc-table.php:17
 msgid "Last modified"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:23 tpl/admin/file/info-po.php:22
+#: tpl/admin/file/info-mo.php:23 tpl/admin/file/info-po.php:21
 msgid "Last translation"
 msgstr ""
 
@@ -954,7 +955,7 @@ msgstr ""
 msgid "Merged from source code"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:83
+#: tpl/admin/file/info-po.php:82
 msgid "Missing template"
 msgstr ""
 
@@ -1085,14 +1086,14 @@ msgid_plural "%s strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:193
+#: src/admin/init/InitPoController.php:194
 #, php-format
 msgid "One string found in %2$s"
 msgid_plural "%s strings found in %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/file/info-po.php:63
+#: tpl/admin/file/info-po.php:62
 msgid "Out of sync with template"
 msgstr ""
 
@@ -1116,7 +1117,7 @@ msgstr ""
 msgid "Partially configured bundle"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:17 tpl/admin/bundle/locale.php:33
+#: tpl/admin/bundle/inc-po-table.php:17 tpl/admin/bundle/locale.php:38
 msgid "Pending"
 msgstr ""
 
@@ -1145,7 +1146,7 @@ msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
-#: src/admin/bundle/LocaleController.php:137
+#: src/admin/bundle/LocaleController.php:141
 msgid "Plugins"
 msgstr ""
 
@@ -1192,7 +1193,7 @@ msgid "Zero"
 msgstr ""
 
 #. Where %s is the name of a template file
-#: tpl/admin/file/info-po.php:67
+#: tpl/admin/file/info-po.php:66
 #, php-format
 msgid ""
 "PO file has different source strings to \"%s\". Try running Sync before "
@@ -1200,7 +1201,7 @@ msgid ""
 msgstr ""
 
 #. Where %s is the name of a template file
-#: tpl/admin/file/info-po.php:56
+#: tpl/admin/file/info-po.php:55
 #, php-format
 msgid "PO file has the same source strings as \"%s\""
 msgstr ""
@@ -1237,7 +1238,7 @@ msgstr ""
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
-#: tpl/admin/root.php:39
+#: tpl/admin/root.php:29
 msgid "Recently updated:"
 msgstr ""
 
@@ -1273,7 +1274,7 @@ msgstr ""
 msgid "Revisions are identical, you can delete %s"
 msgstr ""
 
-#: tpl/admin/root.php:63
+#: tpl/admin/root.php:53
 msgid "Running plugins:"
 msgstr ""
 
@@ -1301,15 +1302,15 @@ msgstr ""
 msgid "Scan PHP files with extensions:"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:128
+#: src/admin/bundle/LocaleController.php:132
 msgid "See all Core files"
 msgstr ""
 
-#: tpl/admin/root.php:70 src/admin/bundle/LocaleController.php:138
+#: tpl/admin/root.php:60 src/admin/bundle/LocaleController.php:142
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:55 src/admin/bundle/LocaleController.php:133
+#: tpl/admin/root.php:45 src/admin/bundle/LocaleController.php:137
 msgid "See all themes"
 msgstr ""
 
@@ -1363,7 +1364,7 @@ msgstr ""
 msgid "Skip PHP files larger than:"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:227
+#: src/admin/init/InitPoController.php:228
 msgid "Skip template"
 msgstr ""
 
@@ -1442,8 +1443,13 @@ msgid ""
 "same location"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:120
+#: src/admin/bundle/LocaleController.php:124
 msgid "The core translations are not installed for this language"
+msgstr ""
+
+#: tpl/admin/root.php:12
+#, php-format
+msgid "The language of this site is %s"
 msgstr ""
 
 #. Help tip for "Text domain" field in advanced bundle config
@@ -1462,16 +1468,16 @@ msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
-#: src/admin/bundle/LocaleController.php:132
+#: src/admin/bundle/LocaleController.php:136
 msgid "Themes"
 msgstr ""
 
-#: tpl/admin/root.php:66
+#: tpl/admin/root.php:56
 msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:87
+#: tpl/admin/file/info-po.php:86
 msgid ""
 "These translations are not linked to a POT file. Sync operations will "
 "extract strings directly from source code."
@@ -1593,8 +1599,8 @@ msgstr ""
 msgid "Translate themes and plugins directly in WordPress"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:25 tpl/admin/bundle/inc-po-table.php:14
-#: tpl/admin/bundle/locale.php:30
+#: tpl/admin/file/info-po.php:24 tpl/admin/bundle/inc-po-table.php:14
+#: tpl/admin/bundle/locale.php:35
 msgid "Translation progress"
 msgstr ""
 
@@ -1603,7 +1609,7 @@ msgstr ""
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
 
-#: tpl/admin/root.php:42
+#: tpl/admin/root.php:32
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 
@@ -1681,7 +1687,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:42
+#: tpl/admin/file/info-po.php:41
 msgid "We can't find the binary MO file that belongs with these translations"
 msgstr ""
 
@@ -1695,11 +1701,11 @@ msgid ""
 "If we know your bundle, we'll configure it for you automatically"
 msgstr ""
 
-#: tpl/admin/root.php:10
+#: src/admin/RootController.php:71
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:318 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:319 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr ""
 
@@ -1707,7 +1713,7 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: src/package/Core.php:80 src/admin/bundle/LocaleController.php:127
+#: src/package/Core.php:80 src/admin/bundle/LocaleController.php:131
 msgid "WordPress Core"
 msgstr ""
 

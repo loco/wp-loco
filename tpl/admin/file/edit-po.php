@@ -6,8 +6,8 @@ $this->extend('editor');
 $this->start('header');
 ?> 
 
-    <h3 class="title">
-        <span class="<?php echo $locale->getIcon()?>" lang="<?php echo $locale->lang?>"> </span>
+    <h3>
+        <span class="<?php echo $locale->getIcon()?>" lang="<?php echo $locale->lang?>"><code><?php (string) $locale?></code></span>
         <span><?php $params->e('localeName')?>:</span>
         <span class="loco-meta">
             <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>

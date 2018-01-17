@@ -12,7 +12,7 @@ $this->start('source');
             <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
             <span id="loco-po-modified"><?php $params->date('modified')?></span>
             &ndash;
-            <span id="loco-po-status"><?php echo esc_html( $meta->getProgressSummary() )?></span>
+            <span id="loco-po-status"><?php self::e( $meta->getProgressSummary() )?></span>
         </span>
     </h3>
     

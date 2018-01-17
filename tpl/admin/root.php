@@ -7,7 +7,11 @@ $this->extend('layout');
 ?> 
 
     <div class="notice inline notice-info">
-        <h3><?php esc_attr_e('Welcome to Loco Translate','loco-translate')?></h3>
+        <p>
+            <span <?php echo $locale->attr?>><code><?php $locale->e('code')?></code></span> <?php
+            printf( esc_html( __('The language of this site is %s','loco-translate') ), $locale->link )?>. 
+            <!--a href="<?php $locale->e('opts')?>"><?php esc_html_e('Settings','default')?></a-->
+        </p>
         <p><?php
             // translators: 1: help URL, 2: forum URL; Must be HTML encoded
             printf(
@@ -17,26 +21,12 @@ $this->extend('layout');
             );?> 
         </p>
     </div><?php
-    
-    /*if( $params->has('locale') ):?> 
-    <div>
-        <h2>
-            <?php esc_attr_e('Active language:','loco-translate')?> 
-        </h2>
-        <p>
-            <span <?php echo $locale->attr?>> </span>
-            <?php $locale->e('name')?> 
-        </p>
-        <p>
-            <a href="<?php $this->route('lang')->e('href')?>" class="button button-link has-raquo"><?php esc_html_e('See all languages','loco-translate')?></a>
-        </p>
-    </div><?php
-    endif;*/
+
 
     if( $recent ):?> 
     <div>
         <h2>
-            <?php esc_attr_e('Recently updated:','loco-translate')?> 
+            <?php esc_html_e('Recently updated:','loco-translate')?> 
         </h2>
         <p>
             <?php esc_html_e("Translations have been recently modified in the following bundles",'loco-translate')?>:
@@ -48,7 +38,7 @@ $this->extend('layout');
 
     <div>
         <h2>
-            <?php esc_attr_e('Active theme:','loco-translate')?> 
+            <?php esc_html_e('Active theme:','loco-translate')?> 
         </h2><?php
         echo $this->render('list/inc-table', array( 'bundles' => array($theme) ) )?> 
         <p>
@@ -60,7 +50,7 @@ $this->extend('layout');
     <?php if( $plugins ):?> 
     <div>
         <h2>
-            <?php esc_attr_e('Running plugins:','loco-translate')?> 
+            <?php esc_html_e('Running plugins:','loco-translate')?> 
         </h2>
         <p>
             <?php esc_html_e('These plugins have recently loaded translation files into the admin area','loco-translate')?>:

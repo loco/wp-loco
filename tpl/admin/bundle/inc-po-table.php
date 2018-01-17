@@ -86,7 +86,7 @@
                          <a href="<?php $po->e('info')?>"><?php $po->e('name')?></a>
                     </td>
                     <td data-sort-value="<?php $po->f('time','%u')?>">
-                        <time datetime="<?php $po->date('time','Y-m-d H:i:s')?>"><?php $po->date('time')?></time>
+                        <time datetime="<?php $po->date('time','c')?>"><?php $po->date('time')?></time>
                     </td>
                     <td>
                         <?php $po->e('store')?> 

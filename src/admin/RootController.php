@@ -57,17 +57,19 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
         $this->set('recent', $bundles );
         
 
-        /*/ current locale and link to all installed locales
-        $tag = get_locale();
-        if( $locale = Loco_Locale::parse($tag) ){
-            $api = new Loco_api_WordPressTranslations;
-            $this->set( 'locale', new Loco_mvc_ViewParams( array(
-                'name' => $locale->ensureName($api),
-                'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
-            ) ) );
-            
-        }*/
-
+        // current locale and related links
+        $locale = Loco_Locale::parse( get_locale() );
+        $tag = (string) $locale;
+        $this->set( 'locale', new Loco_mvc_ViewParams( array(
+            'code' => $tag,
+            'name' => ( $name = $locale->ensureName( new Loco_api_WordPressTranslations ) ),
+            'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
+            'link' => '<a href="'.esc_url(Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$tag) )).'">'.esc_html($name).'</a>',
+            'opts' => admin_url('options-general.php').'#WPLANG',
+        ) ) );
+        
+        $this->set('title', __('Welcome to Loco Translate','loco-translate') );
+        
         return $this->view('admin/root');
     }
 

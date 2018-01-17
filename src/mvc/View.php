@@ -271,7 +271,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * Shorthand for `echo esc_html( sprintf( ...`
      * @return void
      */
-    private function e( $text ){
+    private static function e( $text ){
         if( 1 < func_num_args() ){
             $args = func_get_args();
             $text = call_user_func_array( 'sprintf', $args );

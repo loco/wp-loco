@@ -1,8 +1,18 @@
 <?php
 /**
- * 
+ * Lists all installed locales.
+ * WordPress decides what is "installed" based on presence of core translation files
  */
 class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function init(){
+        parent::init();
+        $this->enqueueStyle('locale');
+    }
 
 
 
@@ -27,19 +37,23 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
         $used = array();
         $locales = array();
         $api = new Loco_api_WordPressTranslations;
+        
+        $active = get_locale();
 
-        // list which sites have which language as WPLANG setting
-        if( is_multisite() ){
+        // list which sites have each language as their WPLANG setting
+        if( $multisite = is_multisite() ){
+            $this->set('multisite',true);
             /* @var WP_Site $site */
             foreach( get_sites() as $site ){
-                $tag = get_blog_option( $site->blog_id, 'WPLANG') or $tag = 'en_US';
-                $name = get_blog_option( $site->blog_id, 'blogname' );
+                $id = (int) $site->blog_id;
+                $tag = get_blog_option( $id, 'WPLANG') or $tag = 'en_US';
+                $name = get_blog_option( $id, 'blogname' );
                 $used[$tag][] = $name;
             }
         }
         // else single site shows tick instead of site name
         else {
-            $used[ get_locale() ][] = '✓';
+            $used[$active][] = '✓';
         }
 
         // add installed languages to file crawler
@@ -59,7 +73,8 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
                     'lname' => $locale->ensureName($api),
                     'lattr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
                     'href' => Loco_mvc_AdminRouter::generate('lang-view',$args),
-                    'used' => isset($used[$tag]) ? implode( ', ', $used[$tag] ) : '',
+                    'used' => isset($used[$tag]) ? implode( ', ', $used[$tag] ) : ( $multisite ? '--' : '' ),
+                    'active' => $active === $tag,
                 ) );
             }
         }

@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
 Requires at least: 4.1
-Tested up to: 4.9.1
+Tested up to: 4.9.2
 Stable tag: 2.0.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Prevented editor from changing PO document order
 * Added default string sorting to extracted strings
 * Added "Languages" section for grouping files by locale
+* Bumped WP compatibility to 4.9.2
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown

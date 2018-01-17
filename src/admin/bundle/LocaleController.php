@@ -1,8 +1,8 @@
 <?php
 /**
- * pseudo-bundle, lists all files available in a single locale
+ * Pseudo-bundle view, lists all files available in a single locale
  */
-class Loco_admin_bundle_LocaleController extends Loco_admin_bundle_BaseController {
+class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
     
     /**
      * @var Loco_Locale
@@ -14,13 +14,14 @@ class Loco_admin_bundle_LocaleController extends Loco_admin_bundle_BaseControlle
      * {@inheritdoc}
      */
     public function init(){
+        parent::init();
         $tag = $this->get('locale');
         $locale = Loco_Locale::parse($tag);
         if( $locale->isValid() ){
             $api = new Loco_api_WordPressTranslations;
             $this->set('title', $locale->ensureName($api) );
             $this->locale = $locale;
-            $this->enqueueStyle('locale');
+            $this->enqueueStyle('locale')->enqueueStyle('fileinfo');
         }
     }
 
@@ -56,6 +57,7 @@ class Loco_admin_bundle_LocaleController extends Loco_admin_bundle_BaseControlle
         // Get PO files for this locale
         $files = $package->findLocaleFiles();
         $translations = array();
+        $modified = 0;
         $nfiles = 0;
 
         // source locale means we want to see POT instead of translations
@@ -66,6 +68,7 @@ class Loco_admin_bundle_LocaleController extends Loco_admin_bundle_BaseControlle
         /* @var Loco_fs_File */
         foreach( $files as $file ){
             $nfiles++;
+            $modified = max( $modified, $file->modified() );
             $project = $package->getProject($file);
             // do similarly to Loco_admin_bundle_ViewController::createFileParams
             $meta = Loco_gettext_Metadata::load($file)->persistIfDirty( 0, true );
@@ -108,7 +111,8 @@ class Loco_admin_bundle_LocaleController extends Loco_admin_bundle_BaseControlle
         $title = __( 'Installed languages', 'loco-translate' );
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title, Loco_mvc_AdminRouter::generate('lang') );
-        $breadcrumb->add( $locale->getName() );
+        //$breadcrumb->add( $locale->getName() );
+        $breadcrumb->add( $tag );
 
         // It's unlikely that an "installed" language would have no files, but could happen if only MO on disk
         if( 0 === $nfiles ){
@@ -144,11 +148,10 @@ class Loco_admin_bundle_LocaleController extends Loco_admin_bundle_BaseControlle
             'code' => $tag,
             'name' => $locale->getName(),
             '_name' => $locale->getNativeName(),
-            'icon' => $locale->getIcon(),
-            'lang' => $locale->lang,
+            'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
         ) ) );
 
-        return $this->view( 'admin/bundle/locale', compact('breadcrumb','translations','types') );
+        return $this->view( 'admin/bundle/locale', compact('breadcrumb','translations','types','nfiles','modified') );
     }
 
     
