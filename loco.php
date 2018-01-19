@@ -169,5 +169,5 @@ if( LOCO_LANG_DIR ){
 
 // initialize hooks for admin screens
 if( is_admin() ){
-    Loco_hooks_AdminHooks::init();
+    new Loco_hooks_AdminHooks;
 }

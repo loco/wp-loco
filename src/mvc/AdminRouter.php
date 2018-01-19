@@ -126,13 +126,21 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             Loco_error_AdminNotices::debug( $e->getMessage() );
         }
-        // buffer errors during controller setup
+        // catch errors during controller setup
         try {
             $this->ctrl->_init( $_GET + $args );
             do_action('loco_admin_init', $this->ctrl );
         }
         catch( Loco_error_Exception $e ){
-            Loco_error_AdminNotices::add( $e );
+            $this->ctrl = new Loco_admin_ErrorController;
+            // can't afford an error during an error
+            try {
+                $this->ctrl->_init( array( 'error' => $e ) );
+            }
+            catch( Exception $_e ){
+                Loco_error_AdminNotices::debug( $_e->getMessage() );
+                Loco_error_AdminNotices::add($e);
+            }
         }
 
         return $this->ctrl;

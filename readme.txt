@@ -98,6 +98,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Prevented editor from changing PO document order
 * Added default string sorting to extracted strings
 * Added "Languages" section for grouping files by locale
+* Fixed bug where translations loaded before user profile language set
 * Bumped WP compatibility to 4.9.2
 
 = 2.0.17 =

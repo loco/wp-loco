@@ -6,29 +6,22 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
 
     /**
-     * Main entry point from loco.php bootstrap file
-     * @return Loco_hooks_AdminHooks
+     * "admin_notices" callback, 
+     * If this is hooked and not unhooked then auto-hooks using annotations have failed.
      */
-    public static function init(){
-        add_action('admin_notices', array('Loco_compat_Failure','print_hook_failure') );
-        return new Loco_hooks_AdminHooks;
+    public static function print_hook_failure(){
+        echo '<div class="notice error"><p><strong>Error:</strong> Loco Translate failed to start up</p></div>';
     }
 
-
-    /**
-     * Call load_plugin_textdomain for "loco" domain
-     * @return bool
-     */
-    private static function init_l10n(){
-        $domainPath = dirname( loco_plugin_self() ).'/languages';
-        return load_plugin_textdomain( 'loco-translate', false, $domainPath );
-    }
 
 
     /**
      * {@inheritdoc}
      */
     public function __construct(){
+        // renders failure notice if plugin failed to start up admin hooks.
+        add_action( 'admin_notices', array(__CLASS__,'print_hook_failure') );
+        // initialize hooks
         parent::__construct();
         // Ajax router will be called directly in tests
         // @codeCoverageIgnoreStart
@@ -36,16 +29,14 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
             // initialize Ajax router before hook fired so we can handle output buffering
             if( 'loco_' === substr($action,0,5)  && isset($_REQUEST['route']) ){
-                new Loco_mvc_AjaxRouter;
+                $this->router = new Loco_mvc_AjaxRouter;
                 Loco_package_Listener::create();
-                // translations required for Ajax actions
-                self::init_l10n();
             }
         }
         // @codeCoverageIgnoreEnd
         // page router required on all pages as it hooks in the menu
         else {
-            new Loco_mvc_AdminRouter;
+            $this->router = new Loco_mvc_AdminRouter;
             // we don't know we will render a page yet, but we need to listen for text domain hooks as early as possible
             if( isset($_GET['page']) && 'loco' === substr($_GET['page'],0,4) ){
                 Loco_package_Listener::create();
@@ -55,18 +46,22 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
                     // would trigger upgrade handlers here in future releases
                 }
             }
-            // we'll need our own translations on all admin pages not just our own, for menu items etc..
-            self::init_l10n();
         }
     }
 
 
+
     /**
-     * "admin_init" callback.
-     * Unhooks failure notice that would fire if this hook was not successful
+     * "admin_menu" callback.
      */
-    public function on_admin_init(){
-        remove_action( 'admin_notices', array('Loco_compat_Failure','print_hook_failure') );
+    public function on_admin_menu(){
+        // This earliest we need translations, and admin user locale should be set by now
+        if( $this->router ){
+            $domainPath = dirname( loco_plugin_self() ).'/languages';
+            load_plugin_textdomain( 'loco-translate', false, $domainPath );
+        }
+        // Unhook failure notice that would fire if this hook was not successful
+        remove_action( 'admin_notices', array(__CLASS__,'print_hook_failure') );
     }
 
 
