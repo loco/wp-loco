@@ -256,7 +256,7 @@ class Loco_Locale implements JsonSerializable {
             $db = Loco_data_CompiledData::get('plurals');
             $lc = $this->lang;
             $id = isset($db[$lc]) ? $db[$lc] : 0;
-            $cache = $db[''][$id];
+            $cache = apply_filters( 'loco_locale_plurals', $db[''][$id], $this );
             // Translators: Plural category for languages that have no plurals
             if( '0' === $cache[0] ){
                 $cache[1] = array( _x('All forms','Plural category','loco-translate') );

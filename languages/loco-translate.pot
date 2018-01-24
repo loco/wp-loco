@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-17 18:08+0000\n"
+"POT-Creation-Date: 2018-01-19 17:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1101,7 +1101,7 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:225
+#: src/mvc/AdminRouter.php:233
 msgid "Page not found"
 msgstr ""
 
@@ -1583,7 +1583,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:82
+#: src/hooks/AdminHooks.php:77
 msgid "Translate"
 msgstr ""
 

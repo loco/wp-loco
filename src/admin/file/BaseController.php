@@ -4,6 +4,19 @@
  * Root > List > Bundle > Resource
  */
 abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseController {
+    
+    /**
+     * @var Loco_Locale
+     */
+    private $locale;
+
+
+    /**
+     * @return Loco_Locale
+     */
+    protected function getLocale(){
+        return $this->locale;
+    }
 
 
     /**
@@ -48,20 +61,27 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         // else file may have a locale suffix (unless invalid, such as "default.po")
         else {
             $locale = $file->getLocale();
-            if( $locale->isValid() ){
-                $locale->ensureName( new Loco_api_WordPressTranslations );
-            }
-            else {
-                $locale = null;
-            }
+        }
+        
+        if( $locale && $locale->isValid() ){
+            $this->locale = $locale;
+            $code = (string) $locale;
+            $this->set( 'locale', new Loco_mvc_ViewParams( array(
+                'code' => $code,
+                'lang' => $locale->lang,
+                'icon' => $locale->getIcon(),
+                'name' => $locale->ensureName( new Loco_api_WordPressTranslations ),
+                'href' => Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$code) ),
+            ) ) );
+        }
+        else {
+            $this->set( 'locale', null );
         }
 
         $this->set('file', $file );
         $this->set('filetype', strtoupper($ext) );
         $this->set('title', $file->basename() );
-        $this->set('locale', $locale );        
-        
-        
+    
         // navigate up to root from this bundle sub view
         $bundle = $this->getBundle();
         $breadcrumb = Loco_admin_Navigation::createBreadcrumb( $bundle );

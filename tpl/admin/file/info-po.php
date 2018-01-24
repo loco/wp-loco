@@ -8,8 +8,10 @@ $this->start('header');
 
     <div class="notice inline notice-info">
         <h3>
-            <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
-            <span><?php $locale->e('name')?></span>
+            <a href="<?php $locale->e('href')?>">
+                <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
+                <span><?php $locale->e('name')?></span>
+            </a>
         </h3>
         <dl>
             <dt><?php self::e( __('File size','loco-translate') )?>:</dt>

@@ -89,9 +89,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
 
         
         // treat as PO if file name has locale
-        if( $locale = $this->get('locale') ){
-            $lname = $locale->getName() or $lname = (string) $locale;
-            $this->set( 'localeName', $lname );
+        if( $this->getLocale() ){
             return $this->view('admin/file/view-po' );
         }
 

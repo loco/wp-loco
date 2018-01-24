@@ -8,9 +8,10 @@ $this->start('header');
 
     <div class="notice inline notice-info">
         <h3>
-            <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"> </span>
-            <span><?php $locale->e('name')?></span>
-            <code><?php $locale->e('code')?></code>
+            <a href="<?php $locale->e('href')?>">
+                <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
+                <span><?php $locale->e('name')?></span>
+            </a>
             <span>&mdash; <?php esc_html_e('compiled','loco-translate')?></span>
         </h3>
         <dl>

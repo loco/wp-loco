@@ -5,9 +5,11 @@
 $this->extend('view');
 $this->start('source');
 ?> 
-    <h3 class="title">
-        <span class="<?php echo $locale->getIcon()?>" lang="<?php echo $locale->lang?>"> </span>
-        <span><?php $params->e('localeName')?>:</span>
+    <h3>
+        <a href="<?php $locale->e('href')?>">
+            <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
+            <span><?php $locale->e('name')?></span>
+        </a>
         <span class="loco-meta">
             <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
             <span id="loco-po-modified"><?php $params->date('modified')?></span>

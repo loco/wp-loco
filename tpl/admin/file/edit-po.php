@@ -7,8 +7,10 @@ $this->start('header');
 ?> 
 
     <h3>
-        <span class="<?php echo $locale->getIcon()?>" lang="<?php echo $locale->lang?>"><code><?php (string) $locale?></code></span>
-        <span><?php $params->e('localeName')?>:</span>
+        <a href="<?php $locale->e('href')?>">
+            <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
+            <span><?php $locale->e('name')?></span>
+        </a>
         <span class="loco-meta">
             <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
             <span id="loco-po-modified"><?php $params->date('modified')?></span>

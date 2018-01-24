@@ -121,7 +121,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         
         // files may be available for language even if not installed (i.e. no core files on disk)
         if( ! $installed || ! isset($translations['core']) ){
-            Loco_error_AdminNotices::warn( __('The core translations are not installed for this language','loco-translate') )
+            Loco_error_AdminNotices::warn( __('No core translation files are installed for this language','loco-translate') )
                 ->addLink('https://codex.wordpress.org/Installing_WordPress_in_Your_Language', __('Documentation','loco-translate') );
         }
 

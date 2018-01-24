@@ -10,11 +10,11 @@ $this->extend('../layout');
         <h3>
             <span <?php echo $locale->attr?>><code><?php $locale->e('code')?></code></span> 
             <?php $locale->e('name')?> 
+            <span class="loco-meta">
+                <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
+                <span><?php $params->date('modified')?></span>
+            </span>
         </h3>
-        <dl>
-            <dt><?php self::e( __('Last modified','loco-translate') )?>:</dt>
-            <dd><?php $params->date('modified')?></dd>
-        </dl>
     </div>
 
     <?php
