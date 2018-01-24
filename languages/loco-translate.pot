@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-19 17:44+0000\n"
+"POT-Creation-Date: 2018-01-24 17:30+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -197,7 +197,7 @@ msgstr ""
 msgid "Beginner's guide"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:38
+#: tpl/admin/file/info-po.php:40
 msgid "Binary file missing"
 msgstr ""
 
@@ -260,11 +260,11 @@ msgid ""
 "Click the <a href=\"%s\">setup</a> tab to complete the bundle configuration"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:14
+#: tpl/admin/file/info-mo.php:15
 msgid "compiled"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:26
+#: tpl/admin/file/info-mo.php:27
 msgid "Compiled translations"
 msgstr ""
 
@@ -341,7 +341,7 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:78 tpl/admin/file/diff.php:31
+#: src/admin/file/BaseController.php:98 tpl/admin/file/diff.php:31
 #: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:67
 msgid "Delete"
 msgstr ""
@@ -408,7 +408,7 @@ msgstr ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: src/admin/file/BaseController.php:74
+#: src/admin/file/BaseController.php:94
 msgid "Editor"
 msgstr ""
 
@@ -420,7 +420,7 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:142
+#: src/admin/file/EditController.php:140
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
@@ -444,13 +444,13 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:155
+#: src/admin/file/EditController.php:153
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:153
+#: src/admin/file/EditController.php:151
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -462,19 +462,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:144
+#: src/admin/file/EditController.php:142
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:151
+#: src/admin/file/EditController.php:149
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:147
+#: src/admin/file/EditController.php:145
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -499,19 +499,19 @@ msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:149
+#: src/admin/file/EditController.php:147
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:161
+#: src/admin/file/EditController.php:159
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:157
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -603,7 +603,7 @@ msgid_plural "%u files deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/InfoController.php:150
+#: src/admin/file/InfoController.php:143
 msgid "File does not have a valid header"
 msgstr ""
 
@@ -611,7 +611,7 @@ msgstr ""
 msgid "File doesn't exist"
 msgstr ""
 
-#: src/admin/file/BaseController.php:76 tpl/admin/file/diff.php:62
+#: src/admin/file/BaseController.php:96 tpl/admin/file/diff.php:62
 #: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:41
 msgid "File info"
 msgstr ""
@@ -652,8 +652,8 @@ msgstr ""
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:20 tpl/admin/file/info-pot.php:15
-#: tpl/admin/file/info-po.php:18
+#: tpl/admin/file/info-mo.php:21 tpl/admin/file/info-pot.php:15
+#: tpl/admin/file/info-po.php:20
 msgid "File modified"
 msgstr ""
 
@@ -669,8 +669,8 @@ msgstr ""
 msgid "File restored"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:17 tpl/admin/file/info-pot.php:12
-#: tpl/admin/file/info-po.php:15
+#: tpl/admin/file/info-mo.php:18 tpl/admin/file/info-pot.php:12
+#: tpl/admin/file/info-po.php:17
 msgid "File size"
 msgstr ""
 
@@ -694,7 +694,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:157
+#: src/admin/file/EditController.php:155
 msgid "Filter translations"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:145
+#: src/admin/file/EditController.php:143
 msgid "Help"
 msgstr ""
 
@@ -789,7 +789,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:51
+#: tpl/admin/file/info-po.php:53
 msgid "In sync with template"
 msgstr ""
 
@@ -840,7 +840,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/admin/file/InfoController.php:167
+#: src/admin/file/InfoController.php:160
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -864,13 +864,12 @@ msgstr ""
 msgid "Last extracted"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:15
-#: tpl/admin/bundle/locale.php:44 tpl/admin/list/locales.php:19
-#: tpl/admin/list/inc-table.php:17
+#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:44
+#: tpl/admin/list/locales.php:19 tpl/admin/list/inc-table.php:17
 msgid "Last modified"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:23 tpl/admin/file/info-po.php:21
+#: tpl/admin/file/info-mo.php:24 tpl/admin/file/info-po.php:23
 msgid "Last translation"
 msgstr ""
 
@@ -955,7 +954,7 @@ msgstr ""
 msgid "Merged from source code"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:82
+#: tpl/admin/file/info-po.php:84
 msgid "Missing template"
 msgstr ""
 
@@ -972,14 +971,15 @@ msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
 #: tpl/admin/file/view-pot.php:11 tpl/admin/file/edit-pot.php:12
-#: tpl/admin/file/view-po.php:12 tpl/admin/file/edit-po.php:13
+#: tpl/admin/file/view-po.php:14 tpl/admin/file/edit-po.php:15
+#: tpl/admin/bundle/locale.php:14
 msgctxt "Modified time"
 msgid "Updated"
 msgstr ""
 
 #: src/admin/init/InitPoController.php:16
-#: src/admin/init/InitPoController.php:111 src/admin/file/BaseController.php:94
-#: src/admin/bundle/ViewController.php:95
+#: src/admin/init/InitPoController.php:111
+#: src/admin/file/BaseController.php:114 src/admin/bundle/ViewController.php:95
 msgid "New language"
 msgstr ""
 
@@ -994,6 +994,10 @@ msgstr ""
 #: src/admin/init/InitPotController.php:115
 #, php-format
 msgid "New translations template for \"%s\""
+msgstr ""
+
+#: src/admin/bundle/LocaleController.php:124
+msgid "No core translation files are installed for this language"
 msgstr ""
 
 #: tpl/admin/errors/no-locale.php:11
@@ -1093,7 +1097,7 @@ msgid_plural "%s strings found in %s"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/file/info-po.php:62
+#: tpl/admin/file/info-po.php:64
 msgid "Out of sync with template"
 msgstr ""
 
@@ -1193,7 +1197,7 @@ msgid "Zero"
 msgstr ""
 
 #. Where %s is the name of a template file
-#: tpl/admin/file/info-po.php:66
+#: tpl/admin/file/info-po.php:68
 #, php-format
 msgid ""
 "PO file has different source strings to \"%s\". Try running Sync before "
@@ -1201,12 +1205,12 @@ msgid ""
 msgstr ""
 
 #. Where %s is the name of a template file
-#: tpl/admin/file/info-po.php:55
+#: tpl/admin/file/info-po.php:57
 #, php-format
 msgid "PO file has the same source strings as \"%s\""
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:37
+#: tpl/admin/file/info-mo.php:38
 msgid "PO file missing"
 msgstr ""
 
@@ -1255,7 +1259,7 @@ msgstr ""
 msgid "Reset config"
 msgstr ""
 
-#: src/admin/file/BaseController.php:77 tpl/admin/file/diff.php:30
+#: src/admin/file/BaseController.php:97 tpl/admin/file/diff.php:30
 msgid "Restore"
 msgstr ""
 
@@ -1368,7 +1372,7 @@ msgstr ""
 msgid "Skip template"
 msgstr ""
 
-#: src/admin/file/BaseController.php:75
+#: src/admin/file/BaseController.php:95
 msgid "Source"
 msgstr ""
 
@@ -1443,10 +1447,6 @@ msgid ""
 "same location"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:124
-msgid "The core translations are not installed for this language"
-msgstr ""
-
 #: tpl/admin/root.php:12
 #, php-format
 msgid "The language of this site is %s"
@@ -1477,7 +1477,7 @@ msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:86
+#: tpl/admin/file/info-po.php:88
 msgid ""
 "These translations are not linked to a POT file. Sync operations will "
 "extract strings directly from source code."
@@ -1599,12 +1599,12 @@ msgstr ""
 msgid "Translate themes and plugins directly in WordPress"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:24 tpl/admin/bundle/inc-po-table.php:14
+#: tpl/admin/file/info-po.php:26 tpl/admin/bundle/inc-po-table.php:14
 #: tpl/admin/bundle/locale.php:35
 msgid "Translation progress"
 msgstr ""
 
-#: src/admin/file/EditController.php:103
+#: src/admin/file/EditController.php:101
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
@@ -1629,7 +1629,7 @@ msgstr ""
 msgid "Unexpected file type"
 msgstr ""
 
-#: src/package/Header.php:77 src/admin/file/InfoController.php:130
+#: src/package/Header.php:77 src/admin/file/InfoController.php:123
 msgid "Unknown author"
 msgstr ""
 
@@ -1687,11 +1687,11 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:41
+#: tpl/admin/file/info-po.php:43
 msgid "We can't find the binary MO file that belongs with these translations"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:40
+#: tpl/admin/file/info-mo.php:41
 msgid "We can't find the original PO file from which this was compiled"
 msgstr ""
 
