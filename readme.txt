@@ -1,7 +1,8 @@
 === Plugin Name ===
 Contributors: timwhitlock
-Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual
+Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
+Requires PHP: 5.2.4
 Tested up to: 4.9.2
 Stable tag: 2.0.17
 License: GPLv2 or later
@@ -25,7 +26,7 @@ Features include:
 * Support for PO features including comments, references and plural forms
 * PO source view with clickable source code references
 * Protected language directory for saving custom translations
-* Configurable PO file backups
+* Configurable PO file backups with diff and restore capability
 * Built-in WordPress locale codes
 
 
@@ -46,7 +47,7 @@ Translators: To translate a theme into your language, follow these steps:
 
 1. Create the protected languages directory at `wp-content/languages/loco/themes`
 2. Ensure this directory writeable by the web server
-3. Find the theme in the list at *Loco Translate > Themes*
+3. Find your theme in the list at *Loco Translate > Themes*
 4. Click `+ New language` and follow the on-screen prompts.
 
 
@@ -67,7 +68,7 @@ More information on using the plugin is [available here](https://localise.biz/wo
 
 = How do I use it? = 
 
-Try our [beginner's guide](https://localise.biz/wordpress/plugin/beginners), or the more [technical overview](https://localise.biz/wordpress/plugin/overview) if you’re familiar with WordPress localization.
+Try our [Guides and Tutorials](https://localise.biz/wordpress/plugin#guides) and be sure to check the [Most asked questions](https://localise.biz/wordpress/plugin/faqs) if you have a problem.
 
 = How do I get help? =
 
@@ -99,6 +100,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Added default string sorting to extracted strings
 * Added "Languages" section for grouping files by locale
 * Fixed bug where translations loaded before user profile language set
+* Added loco_locale_plurals filter for customising plural rules
 * Bumped WP compatibility to 4.9.2
 
 = 2.0.17 =
@@ -228,18 +230,22 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == More info ==
 
-* [About the plugin](https://localise.biz/wordpress/plugin/beginners)
-* [Beginner's guide to translating a theme](https://localise.biz/wordpress/plugin/beginners)
-* [Technical overview](https://localise.biz/wordpress/plugin/overview)
+* [About the plugin](https://localise.biz/wordpress/plugin)
+* [User manual](https://localise.biz/wordpress/plugin/manual)
+* [Beginner's guide](https://localise.biz/wordpress/plugin/beginners)
+* [Customizing translations](https://localise.biz/wordpress/plugin/custom-translations)
+* [Translating child themes](https://localise.biz/wordpress/plugin/child-themes)
 * [Getting help](https://localise.biz/wordpress/plugin/support)
 
 == Coming soon ==
 
 These features are on our todo list. There's no particular timeframe for any of them and they're in no particular order:
 
-* Integration with Google and Bing for automatic translation
-* Integration with Loco API for collaborative translation
-* Screens showing installed bundles per language
+* Integration with automatic translation services
+* Integration with Loco API for cloud storage and collaboration
+* Global search for finding strings across all bundles
+* Advanced Merge/Sync screen to replace the basic in-editor sync
+* Starred/Favourited bundles for quicker dashboard access
 
 
 == Keyboard shortcuts ==
