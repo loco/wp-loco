@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-24 17:30+0000\n"
+"POT-Creation-Date: 2018-01-30 11:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -420,7 +420,7 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:140
+#: src/admin/file/EditController.php:146
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
@@ -444,13 +444,13 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:153
+#: src/admin/file/EditController.php:159
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:151
+#: src/admin/file/EditController.php:157
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -462,19 +462,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:142
+#: src/admin/file/EditController.php:148
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:149
+#: src/admin/file/EditController.php:155
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:145
+#: src/admin/file/EditController.php:151
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -499,19 +499,19 @@ msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:147
+#: src/admin/file/EditController.php:153
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:165
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:157
+#: src/admin/file/EditController.php:163
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -694,7 +694,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:155
+#: src/admin/file/EditController.php:161
 msgid "Filter translations"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:143
+#: src/admin/file/EditController.php:149
 msgid "Help"
 msgstr ""
 
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Installed languages"
 msgstr ""
 
-#: src/Locale.php:205
+#: src/Locale.php:208
 msgid "Invalid locale"
 msgstr ""
 
@@ -840,7 +840,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/admin/file/InfoController.php:160
+#: src/admin/file/InfoController.php:161
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -1155,43 +1155,43 @@ msgid "Plugins"
 msgstr ""
 
 #. Plural category for languages that have no plurals
-#: src/Locale.php:262
+#: src/Locale.php:286
 msgctxt "Plural category"
 msgid "All forms"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:275
+#: src/Locale.php:300
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:277
+#: src/Locale.php:302
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:271
+#: src/Locale.php:296
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:279
+#: src/Locale.php:304
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:273
+#: src/Locale.php:298
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:269
+#: src/Locale.php:294
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
@@ -1604,7 +1604,7 @@ msgstr ""
 msgid "Translation progress"
 msgstr ""
 
-#: src/admin/file/EditController.php:101
+#: src/admin/file/EditController.php:96
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""

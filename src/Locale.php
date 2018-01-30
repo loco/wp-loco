@@ -41,9 +41,12 @@ class Loco_Locale implements JsonSerializable {
         }
         return $locale;
     }
-    
 
 
+
+    /**
+     * Construct from subtags NOT from composite tag. See self::parse
+     */
     public function __construct( $lang = '', $region = '', $variant = '' ){
         $this->tag = compact('lang','region','variant');
     }
@@ -246,48 +249,70 @@ class Loco_Locale implements JsonSerializable {
 
 
     /**
-     * Get raw plural data
+     * Get plural data with translated forms
      * @internal
-     * @return array
+     * @return array [ (string) equation, (array) forms ]
      */
     public function getPluralData(){
         $cache = $this->plurals;
-        if( ! $this->plurals ){
-            $db = Loco_data_CompiledData::get('plurals');
+        if( ! $cache ){
             $lc = $this->lang;
+            $db = Loco_data_CompiledData::get('plurals');
             $id = isset($db[$lc]) ? $db[$lc] : 0;
-            $cache = apply_filters( 'loco_locale_plurals', $db[''][$id], $this );
-            // Translators: Plural category for languages that have no plurals
-            if( '0' === $cache[0] ){
-                $cache[1] = array( _x('All forms','Plural category','loco-translate') );
-            }
-            // else translate all implemented plural forms
-            // for meaning of categories, see http://cldr.unicode.org/index/cldr-spec/plural-rules
-            else {
-                $forms = array(
-                    // Translators: Plural category for zero quantity
-                    'zero' => _x('Zero','Plural category','loco-translate'),
-                    // Translators: Plural category for singular quantity
-                    'one' => _x('One','Plural category','loco-translate'),
-                    // Translators: Plural category used in some multi-plural languages
-                    'two' => _x('Two','Plural category','loco-translate'),
-                    // Translators: Plural category used in some multi-plural languages
-                    'few' => _x('Few','Plural category','loco-translate'),
-                    // Translators: Plural category used in some multi-plural languages
-                    'many' => _x('Many','Plural category','loco-translate'),
-                    // Translators: General plural category not covered by other forms
-                    'other' => _x('Other','Plural category','loco-translate'),
-                );
-                foreach( $cache[1] as $k => $v ){
-                    if( isset($forms[$v]) ){
-                        $cache[1][$k] = $forms[$v];
-                    }
-                }
-            }
-            $this->plurals = $cache;
+            $cache = $this->setPlurals( $db[''][$id] );
         }
         return $cache;
     }
+
+
+    /**
+     * @return int
+     */
+    public function getPluralCount(){
+        $raw = $this->getPluralData();
+        return count( $raw[1] );
+    }
+
+
+
+    /**
+     * @return array
+     */
+    private function setPlurals( array $raw ){
+        $raw = apply_filters( 'loco_locale_plurals', $raw, $this );
+        // handle languages with no plural forms, where n is always 0
+        if( ! isset($raw[1][1]) ){
+            // Translators: Plural category for languages that have no plurals
+            $raw[1] = array( _x('All forms','Plural category','loco-translate') );
+            $raw[0] = '0';
+        }
+        // else translate all implemented plural forms
+        // for meaning of categories, see http://cldr.unicode.org/index/cldr-spec/plural-rules
+        else {
+            $forms = array(
+                // Translators: Plural category for zero quantity
+                'zero' => _x('Zero','Plural category','loco-translate'),
+                // Translators: Plural category for singular quantity
+                'one' => _x('One','Plural category','loco-translate'),
+                // Translators: Plural category used in some multi-plural languages
+                'two' => _x('Two','Plural category','loco-translate'),
+                // Translators: Plural category used in some multi-plural languages
+                'few' => _x('Few','Plural category','loco-translate'),
+                // Translators: Plural category used in some multi-plural languages
+                'many' => _x('Many','Plural category','loco-translate'),
+                // Translators: General plural category not covered by other forms
+                'other' => _x('Other','Plural category','loco-translate'),
+            );
+            foreach( $raw[1] as $k => $v ){
+                if( isset($forms[$v]) ){
+                    $raw[1][$k] = $forms[$v];
+                }
+            }
+        }
+        $this->plurals = $raw;
+        return $raw;
+    }
+
 
 
     /**
@@ -298,6 +323,39 @@ class Loco_Locale implements JsonSerializable {
         list( $equation, $forms ) = $this->getPluralData();
         return sprintf('nplurals=%u; plural=%s;', count($forms), $equation );
     }
+
+
+
+    /**
+     * Apply PO style Plural-Forms header.
+     * @param string e.g. "nplurals=2; plural=n != 1;"
+     * @return Loco_Locale
+     */
+    public function setPluralFormsHeader( $str ){
+        if( ! preg_match('/^nplurals=(\\d);\s*plural=([ +\\-\\/*%!=<>|&?:()n0-9]+);?$/', $str, $match ) ){
+            throw new InvalidArgumentException('Invalid Plural-Forms header, '.json_encode($str) );
+        }
+        $cache = $this->getPluralData();
+        $exprn = $match[2];
+        // always alter if equation differs
+        if( $cache[0] !== $exprn ){
+            $this->plurals[0] = $exprn;
+            // alter number of forms if changed
+            $nplurals = max( 1, (int) $match[1] );
+            if( $nplurals !== count($cache[1]) ){
+                // named forms must also change, but Plural-Forms cannot contain this information
+                // as a cheat, we'll assume first form always "one" and last always "other"
+                for( $i = 1; $i < $nplurals; $i++ ){
+                    $name = 1 === $i ? 'one' : sprintf('Plural %u',$i);
+                    $forms[] = $name;
+                }
+                $forms[] = 'other';
+                $this->setPlurals( array($exprn,$forms) );
+            }
+        }
+        return $this;
+    }
+
 
 
     /**

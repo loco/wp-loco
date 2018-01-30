@@ -153,11 +153,21 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                         // ignore invalid template in this context
                     }
                 }
-                // language sanity check. Developer warning if file name disagrees with PO header
-                if( $locale && ( $value = $head['Language'] ) ){
-                    $check = (string) Loco_Locale::parse($value);
-                    if( $check !== $code ){
-                        Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code ) );
+                // Language header sanity checks, raising developer (debug) warnings
+                if( $locale ){
+                    if( $value = $head['Language'] ){
+                        $check = (string) Loco_Locale::parse($value);
+                        if( $check !== $code ){
+                            Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code ) );
+                        }
+                    }
+                    if( $value = $head['Plural-Forms'] ){
+                        try {
+                            $locale->setPluralFormsHeader($value);
+                        }
+                        catch( InvalidArgumentException $e ){
+                            Loco_error_AdminNotices::debug( sprintf('Plural-Forms header is invalid, "%s"',$value) );
+                        }
                     }
                 }
                 // Count source text for templates only (assumed English)

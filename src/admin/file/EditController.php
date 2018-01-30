@@ -53,15 +53,11 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             $data = Loco_gettext_Data::dummy();
         }
 
-        // Pre-populate PO headers with data that JavaScript doesn't have access to
-        if( $locale = $this->getLocale() ){
-            $data->localize( $locale );
-        }
-        
+        $head = $data->getHeaders();
+
         // default is to permit editing of any file
         $readonly = false;
 
-        
         // Establish if file belongs to a configured project
         try {
             $bundle = $this->getBundle();
@@ -74,11 +70,10 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         }
             
         // Establish PO/POT edit mode
-        if( $locale ){
+        if( $locale = $this->getLocale() ){
             // alternative POT file may be forced by PO headers
-            $head = $data->getHeaders();
-            if( $head->has('X-Loco-Template') ){
-                $potfile = new Loco_fs_File($head['X-Loco-Template']);
+            if( $value = $head['X-Loco-Template'] ){
+                $potfile = new Loco_fs_File($value);
                 $potfile->normalize( $bundle->getDirectoryPath() );
             }
             // no way to get configured POT if invalid project
@@ -107,6 +102,17 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                     $potfile = null;
                 }
             }
+            // allow PO file to dictate its own Plural-Forms
+            if( $value = $head['Plural-Forms'] ){
+                try {
+                    $locale->setPluralFormsHeader($value);
+                }
+                catch( InvalidArgumentException $e ){
+                    // ignore invalid Plural-Forms
+                }
+            }
+            // fill in missing PO headers now locale is fully resolved
+            $data->localize($locale);
         }
         
         // notify if template is locked (save and sync will be disabled)
