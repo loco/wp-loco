@@ -59,14 +59,25 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
 
         // current locale and related links
         $locale = Loco_Locale::parse( get_locale() );
+        $api = new Loco_api_WordPressTranslations;
         $tag = (string) $locale;
-        $this->set( 'locale', new Loco_mvc_ViewParams( array(
+        $this->set( 'siteLocale', new Loco_mvc_ViewParams( array(
             'code' => $tag,
-            'name' => ( $name = $locale->ensureName( new Loco_api_WordPressTranslations ) ),
+            'name' => ( $name = $locale->ensureName($api) ),
             'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
             'link' => '<a href="'.esc_url(Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$tag) )).'">'.esc_html($name).'</a>',
-            'opts' => admin_url('options-general.php').'#WPLANG',
+            //'opts' => admin_url('options-general.php').'#WPLANG',
         ) ) );
+        
+        // user's "admin" language may differ and is worth showing
+        $locale = Loco_Locale::parse( get_user_locale() );
+        $alt = (string) $locale;
+        if( $tag !== $alt ){
+            $this->set( 'adminLocale', new Loco_mvc_ViewParams( array(
+                'name' => ( $name = $locale->ensureName($api) ),
+                'link' => '<a href="'.esc_url(Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$tag) )).'">'.esc_html($name).'</a>',
+            ) ) );
+        }
         
         $this->set('title', __('Welcome to Loco Translate','loco-translate') );
         

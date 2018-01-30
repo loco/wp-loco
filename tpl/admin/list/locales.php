@@ -31,7 +31,7 @@ echo $this->render('../common/inc-table-filter');
         foreach( $locales as $p ):?> 
         <tr>
             <td>
-                <a href="<?php $p->e('href')?>">
+                <a href="<?php $p->e('href')?>" class="row-title">
                     <span <?php echo $p->lattr?>><code><?php $p->e('lcode')?></code></span>
                     <span><?php $p->e('lname')?></span>
                 </a>

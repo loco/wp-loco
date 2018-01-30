@@ -7,10 +7,12 @@ $this->extend('layout');
 ?> 
 
     <div class="notice inline notice-info">
-        <p>
-            <span <?php echo $locale->attr?>><code><?php $locale->e('code')?></code></span> <?php
-            printf( esc_html( __('The language of this site is %s','loco-translate') ), $locale->link )?>. 
-            <!--a href="<?php $locale->e('opts')?>"><?php esc_html_e('Settings','default')?></a-->
+        <p class="has-lang">
+            <span <?php echo $siteLocale->attr?>><code><?php $siteLocale->e('code')?></code></span>
+            <span><?php printf( esc_html( __('The language of this site is %s.','loco-translate') ), $siteLocale->link );?> 
+            <?php if( $params->has('adminLocale') ):
+            printf( esc_html( __('Your admin language is %s.','loco-translate') ), $adminLocale->link );
+            endif?></span>
         </p>
         <p><?php
             // translators: 1: help URL, 2: forum URL; Must be HTML encoded

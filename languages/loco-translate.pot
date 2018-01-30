@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-30 11:58+0000\n"
+"POT-Creation-Date: 2018-01-30 13:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -112,7 +112,7 @@ msgstr ""
 msgid "About the Tokenizer"
 msgstr ""
 
-#: tpl/admin/root.php:41
+#: tpl/admin/root.php:43
 msgid "Active theme:"
 msgstr ""
 
@@ -766,7 +766,7 @@ msgid "https://wordpress.org/plugins/loco-translate/"
 msgstr ""
 
 #. 1: help URL, 2: forum URL; Must be HTML encoded
-#: tpl/admin/root.php:18
+#: tpl/admin/root.php:20
 #, php-format
 msgid ""
 "If you have any questions, please try our <a href=\"%1$s\">help pages</a> or "
@@ -1242,7 +1242,7 @@ msgstr ""
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
-#: tpl/admin/root.php:29
+#: tpl/admin/root.php:31
 msgid "Recently updated:"
 msgstr ""
 
@@ -1278,7 +1278,7 @@ msgstr ""
 msgid "Revisions are identical, you can delete %s"
 msgstr ""
 
-#: tpl/admin/root.php:53
+#: tpl/admin/root.php:55
 msgid "Running plugins:"
 msgstr ""
 
@@ -1310,11 +1310,11 @@ msgstr ""
 msgid "See all Core files"
 msgstr ""
 
-#: tpl/admin/root.php:60 src/admin/bundle/LocaleController.php:142
+#: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:142
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:45 src/admin/bundle/LocaleController.php:137
+#: tpl/admin/root.php:47 src/admin/bundle/LocaleController.php:137
 msgid "See all themes"
 msgstr ""
 
@@ -1449,7 +1449,7 @@ msgstr ""
 
 #: tpl/admin/root.php:12
 #, php-format
-msgid "The language of this site is %s"
+msgid "The language of this site is %s."
 msgstr ""
 
 #. Help tip for "Text domain" field in advanced bundle config
@@ -1472,7 +1472,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: tpl/admin/root.php:56
+#: tpl/admin/root.php:58
 msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
@@ -1609,7 +1609,7 @@ msgstr ""
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
 
-#: tpl/admin/root.php:32
+#: tpl/admin/root.php:34
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 
@@ -1701,7 +1701,7 @@ msgid ""
 "If we know your bundle, we'll configure it for you automatically"
 msgstr ""
 
-#: src/admin/RootController.php:71
+#: src/admin/RootController.php:82
 msgid "Welcome to Loco Translate"
 msgstr ""
 
@@ -1780,6 +1780,11 @@ msgstr ""
 
 #: tpl/admin/config/version.php:38
 msgid "You're running the latest version of Loco Translate"
+msgstr ""
+
+#: tpl/admin/root.php:14
+#, php-format
+msgid "Your admin language is %s."
 msgstr ""
 
 #. Warning appears when user tries to refresh or navigate away when editor work is unsaved

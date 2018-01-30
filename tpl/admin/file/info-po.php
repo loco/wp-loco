@@ -8,7 +8,7 @@ $this->start('header');
 
     <div class="notice inline notice-info">
         <h3>
-            <a href="<?php $locale->e('href')?>">
+            <a href="<?php $locale->e('href')?>" class="has-lang">
                 <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
                 <span><?php $locale->e('name')?></span>
             </a>

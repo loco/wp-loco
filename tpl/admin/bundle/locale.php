@@ -7,9 +7,9 @@ $this->extend('../layout');
 ?> 
 
     <div class="notice inline notice-info">
-        <h3>
+        <h3 class="has-lang">
             <span <?php echo $locale->attr?>><code><?php $locale->e('code')?></code></span> 
-            <?php $locale->e('name')?> 
+            <span><?php $locale->e('name')?></span>
             <span class="loco-meta">
                 <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
                 <span><?php $params->date('modified')?></span>
