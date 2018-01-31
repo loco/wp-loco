@@ -5,7 +5,7 @@
 $this->extend('view');
 $this->start('source');
 ?> 
-    <h3 class="title">
+    <h3 class="has-lang">
         <span><?php esc_html_e('Template file','loco-translate')?>:</span>
         <span class="loco-meta">
             <span><?php echo esc_html_x('Updated','Modified time','loco-translate')?>:</span>
