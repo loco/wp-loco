@@ -168,6 +168,11 @@ class Loco_api_WordPressFileSystem {
         if( $this->form ){
             return false;
         }
+        
+        // network access may be disabled
+        if( ! apply_filters('loco_allow_remote', true ) ){
+            throw new Loco_error_WriteException('Remote connection required, but network access is disabled');
+        }
     
         // else begin new auth
         $this->fs = null;

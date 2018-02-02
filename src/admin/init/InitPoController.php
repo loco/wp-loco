@@ -161,10 +161,9 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
         }
         // pull the same list of "available" languages as used in WordPress settings
-        foreach( $api->getAvailableCore() as $tag => $raw ){
-            $locale = Loco_Locale::parse($tag);
-            $tag = (string) $locale;
-            if( $locale->isValid() && ! array_key_exists($tag,$installed) ){
+        /* @var $locale Loco_Locale */
+        foreach( $api->getAvailableCore() as $tag => $locale ){
+            if( ! array_key_exists($tag,$installed) ){
                 $locales[$tag] = new Loco_mvc_ViewParams( array(
                     'value' => $tag,
                     'icon'  => $locale->getIcon(),

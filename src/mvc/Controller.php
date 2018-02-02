@@ -82,5 +82,32 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
         }
         return $posted;
     }
-        
+
+
+    /**
+     * Filter calback for `translations_api'
+     * Ensures silent failure of translations_api when network disabled, see $this->getAvailableCore
+     */
+    public function filter_translations_api( $value = false ){
+        if( apply_filters('loco_allow_remote', true ) ){
+            return $value;
+        }
+        // returning error here has the safe effect as returning empty translations list
+        return new WP_Error( -1, 'Translations API blocked by loco_allow_remote filter' );
+    }
+    
+
+    /**
+     * Filter callback for `pre_http_request`
+     * Ensures fatal error if we failed to handle offline mode earlier.
+     */
+    public function filter_pre_http_request( $value = false ){
+        if( apply_filters('loco_allow_remote', true ) ){
+            return $value;
+        }
+        // little point returning WP_Error error because WordPress will just show "unexpected error" 
+        throw new Loco_error_Exception('HTTP request blocked by loco_allow_remote filter' );
+    }
+
+
 }

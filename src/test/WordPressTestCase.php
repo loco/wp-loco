@@ -97,6 +97,12 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
             'SERVER_PROTOCOL' => 'HTTP/1.0',
             'HTTP_USER_AGENT' => 'Loco/'.get_class($this),
         );
+        // remove all filters before adding
+        remove_all_filters('filesystem_method');
+        remove_all_filters('loco_constant_DISALLOW_FILE_MODS');
+        remove_all_filters('file_mod_allowed');
+        remove_all_filters('loco_file_mod_allowed_context');
+        remove_all_filters('loco_setcookie');
         // tests should always dictate the file system method, which defaults to direct
         add_filter('filesystem_method', array($this,'filter_fs_method') );
         add_filter('loco_constant_DISALLOW_FILE_MODS', array($this,'filter_fs_disallow') );
@@ -107,7 +113,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $this->cookies_set = array();
     }
 
-
+    
     /**
      * {@inheritdoc}
      */
@@ -299,10 +305,30 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
 
 
     /**
+     * Disallow network access
+     * @return void
+     */
+    protected function disable_network(){
+        remove_all_filters('loco_allow_remote');
+        add_filter('loco_allow_remote', '__return_false' );
+    }
+
+
+    /**
+     * Enable network access
+     * @return void
+     */
+    protected function enable_network(){
+        remove_all_filters('loco_allow_remote');
+    }
+
+
+    /**
      * Switch loco_debugging on
      * @return void
      */
     protected function enable_debug(){
+        remove_all_filters('loco_debug');
         add_filter('loco_debug', '__return_true' );
     }
 
@@ -312,6 +338,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @return void
      */
     protected function disable_debug(){
+        remove_all_filters('loco_debug');
         add_filter('loco_debug', '__return_false' );
     }
 
@@ -331,6 +358,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      */    
     protected function enable_locale( $locale ){
          $this->locale = $locale;
+         remove_all_filters('locale');
          add_filter('locale', array($this,'_filter_locale') );
     }
 
@@ -348,6 +376,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @return void
      */
     public function enable_test_content_dir(){
+        remove_all_filters('loco_constant_WP_CONTENT_DIR');
         add_filter('loco_constant_WP_CONTENT_DIR', array($this,'_filter_wp_content_dir'), 10, 0 );
     }
 
@@ -364,6 +393,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @internal
      */
     public function capture_redirects(){
+        remove_all_filters('wp_redirect');
         add_filter('wp_redirect', array($this,'filter_wp_redirect'), 10, 2 ); 
     }
     

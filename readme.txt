@@ -102,6 +102,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Fixed bug where translations loaded before user profile language set
 * Added loco_locale_plurals filter for customising plural rules
 * Allowing PO files to enforce their own Plural-Forms rules
+* Added `loco_allow_remote` filter for debugging remote problems
 * Bumped WP compatibility to 4.9.2
 
 = 2.0.17 =

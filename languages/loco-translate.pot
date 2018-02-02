@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-01-30 13:54+0000\n"
+"POT-Creation-Date: 2018-02-02 11:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -971,8 +971,7 @@ msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
 #: tpl/admin/file/view-pot.php:11 tpl/admin/file/edit-pot.php:12
-#: tpl/admin/file/view-po.php:14 tpl/admin/file/edit-po.php:15
-#: tpl/admin/bundle/locale.php:14
+#: tpl/admin/bundle/locale.php:14 tpl/admin/common/inc-po-header.php:8
 msgctxt "Modified time"
 msgid "Updated"
 msgstr ""

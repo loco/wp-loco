@@ -3,12 +3,17 @@
  * Represents a WordPress locale
  */
 class Loco_Locale implements JsonSerializable {
-    
+
     /**
      * @var array
      */
     private $tag;
-    
+
+    /**
+     * @var string
+     */
+    private $str;
+
     /**
      * Name in English
      * @var string
@@ -27,7 +32,12 @@ class Loco_Locale implements JsonSerializable {
      */
     private $plurals;
 
-    
+    /**
+     * Validity cache
+     * @var bool
+     */
+    private $valid;
+
     /**
      * @return Loco_Locale
      */
@@ -46,6 +56,7 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * Construct from subtags NOT from composite tag. See self::parse
+     * Note that this skips normalization and validation steps
      */
     public function __construct( $lang = '', $region = '', $variant = '' ){
         $this->tag = compact('lang','region','variant');
@@ -68,6 +79,7 @@ class Loco_Locale implements JsonSerializable {
      * @return Loco_Locale
      */
     public function setSubtags( array $tag ){
+        $this->valid = false;
         $default = array( 'lang' => '', 'region' => '', 'variant' => '' );
         // disallow setting of unsupported tags
         if( $bad = array_diff_key($tag, $default) ){
@@ -86,17 +98,44 @@ class Loco_Locale implements JsonSerializable {
         if( is_array($tag['variant']) ){
             $tag['variant'] = implode('_',$tag['variant']);
         }
+        // normalize case
+        $tag['lang'] = strtolower($tag['lang']);
+        $tag['region'] = strtoupper($tag['region']);
+        $tag['variant'] = strtolower($tag['variant']);
+        // set subtags and invalidate cache of language tag
         $this->tag = $tag;
+        $this->str = null;
+        $this->valid = true;
 
         return $this;
-    }     
+    }
+
+
+    /**
+     * @return Loco_Locale
+     */
+    public function normalize(){
+       try {
+           $this->setSubtags( $this->tag );
+       }
+       catch( Loco_error_LocaleException $e ){
+           $this->str = '';
+           $this->name = 'Invalid locale';
+       }
+       return $this;
+    }
 
 
     /**
      * @return string
      */    
     public function __toString(){
-        return implode('_',array_filter($this->tag));
+        $str = $this->str;
+        if( is_null($str) ){
+            $str = implode('_',array_filter($this->tag));
+            $this->str = $str;
+        }
+        return $str;
     }
 
 
@@ -147,18 +186,10 @@ class Loco_Locale implements JsonSerializable {
      * Test whether locale is valid
      */    
     public function isValid(){
-        return (bool) $this->tag['lang']; // && 'zxx' !== $this->tag['lang'];
-    }
-
-
-    /**
-     * @return Loco_Locale
-     */
-    public function normalize(){
-        $this->tag['lang'] = strtolower($this->tag['lang']);
-        $this->tag['region'] = strtoupper($this->tag['region']);
-        $this->tag['variant'] = strtolower($this->tag['variant']);
-        return $this;
+        if( is_null($this->valid) ){
+            $this->normalize();
+        }
+        return $this->valid;
     }
 
 
@@ -167,13 +198,13 @@ class Loco_Locale implements JsonSerializable {
      * @return string English name currently set
      */    
     public function fetchName( Loco_api_WordPressTranslations $api ){
-        $tag = $this->normalize()->__toString();
-        if( $raw = $api->getLocaleData($tag) ){
-            $this->setName( $raw['english_name'], $raw['native_name'] );
+        $tag = (string) $this;
+        // pull from WordPress translations API if network allowed
+        if( $locale = $api->getLocale($tag) ){
+            $this->setName( $locale->getName(), $locale->getNativeName() );
         }
         return $this->name;
     }
-
 
 
     /**
@@ -219,8 +250,10 @@ class Loco_Locale implements JsonSerializable {
         $name = $this->name;
         if( ! $name ){
             $name = $this->fetchName($api);
+            // failing that, build own own name from components
             if( ! $name ){
                 $name = $this->buildName();
+                // last resort, use tag as name
                 if( ! $name ){
                     $name = (string) $this;
                     $this->setName( $name );
@@ -245,7 +278,6 @@ class Loco_Locale implements JsonSerializable {
         
         return $a;
     }
-
 
 
     /**
