@@ -91,8 +91,15 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             if( $potfile ){
                 // Validate template file as long as it exists
                 if( $potfile->exists() ){
-                    $potdata = Loco_gettext_Data::load( $potfile );
-                    if( ! $potdata->equalSource($data) ){
+                    try {
+                        $potdata = Loco_gettext_Data::load( $potfile );
+                    }
+                    catch( Exception $e ){
+                        // translators: Where %s is the name of the invalid POT file
+                        Loco_error_AdminNotices::warn( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
+                        $potfile = null;
+                    }
+                    if( $potfile && ! $potdata->equalSource($data) ){
                         Loco_error_AdminNotices::debug( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) );
                     }
                 }

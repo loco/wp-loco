@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-02 11:41+0000\n"
+"POT-Creation-Date: 2018-02-03 12:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -74,7 +74,7 @@ msgid_plural "%s obsolete strings removed"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:222
+#: src/admin/init/InitPoController.php:221
 #, php-format
 msgid "1 source file will be scanned for translatable strings"
 msgid_plural "%s source files will be scanned for translatable strings"
@@ -319,7 +319,7 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:213
+#: src/admin/init/InitPoController.php:212
 #: src/admin/bundle/ViewController.php:115 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
@@ -420,7 +420,7 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:146
+#: src/admin/file/EditController.php:153
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
@@ -444,13 +444,13 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:166
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:157
+#: src/admin/file/EditController.php:164
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -462,19 +462,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:148
+#: src/admin/file/EditController.php:155
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:155
+#: src/admin/file/EditController.php:162
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:151
+#: src/admin/file/EditController.php:158
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -499,19 +499,19 @@ msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:153
+#: src/admin/file/EditController.php:160
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:165
+#: src/admin/file/EditController.php:172
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:163
+#: src/admin/file/EditController.php:170
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -694,7 +694,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:161
+#: src/admin/file/EditController.php:168
 msgid "Filter translations"
 msgstr ""
 
@@ -745,7 +745,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:149
+#: src/admin/file/EditController.php:156
 msgid "Help"
 msgstr ""
 
@@ -819,7 +819,7 @@ msgstr ""
 msgid "Installed languages"
 msgstr ""
 
-#: src/Locale.php:208
+#: src/Locale.php:239
 msgid "Invalid locale"
 msgstr ""
 
@@ -1071,7 +1071,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
-#: src/ajax/SyncController.php:57
+#: src/ajax/SyncController.php:62
 #, php-format
 msgid ""
 "One file has been skipped because it's %3$s. (Max is %2$s). Check all "
@@ -1089,7 +1089,7 @@ msgid_plural "%s strings extracted from source code for \"%s\""
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/init/InitPoController.php:194
+#: src/admin/init/InitPoController.php:193
 #, php-format
 msgid "One string found in %2$s"
 msgid_plural "%s strings found in %s"
@@ -1154,43 +1154,43 @@ msgid "Plugins"
 msgstr ""
 
 #. Plural category for languages that have no plurals
-#: src/Locale.php:286
+#: src/Locale.php:318
 msgctxt "Plural category"
 msgid "All forms"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:300
+#: src/Locale.php:332
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:302
+#: src/Locale.php:334
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:296
+#: src/Locale.php:328
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:304
+#: src/Locale.php:336
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:298
+#: src/Locale.php:330
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:294
+#: src/Locale.php:326
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
@@ -1367,7 +1367,7 @@ msgstr ""
 msgid "Skip PHP files larger than:"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:228
+#: src/admin/init/InitPoController.php:227
 msgid "Skip template"
 msgstr ""
 
@@ -1603,7 +1603,13 @@ msgstr ""
 msgid "Translation progress"
 msgstr ""
 
-#: src/admin/file/EditController.php:96
+#. Where %s is the name of the invalid POT file
+#: src/ajax/SyncController.php:47 src/admin/file/EditController.php:99
+#, php-format
+msgid "Translation template is invalid (%s)"
+msgstr ""
+
+#: src/admin/file/EditController.php:103
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
@@ -1704,7 +1710,7 @@ msgstr ""
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:319 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:318 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr ""
 

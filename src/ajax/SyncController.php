@@ -40,7 +40,12 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         // sync with POT if it exists
         if( $potfile && $potfile->exists() ){
             $this->set('pot', $potfile->basename() );
-            $data = Loco_gettext_Data::load($potfile);
+            try {
+                $data = Loco_gettext_Data::load($potfile);
+            }
+            catch( Exception $e ){
+                throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
+            }
         }
         // else sync with source code
         else {
