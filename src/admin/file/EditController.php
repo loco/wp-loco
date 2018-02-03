@@ -103,16 +103,16 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 }
             }
             // allow PO file to dictate its own Plural-Forms
-            if( $value = $head['Plural-Forms'] ){
+            if( $locale ){
                 try {
-                    $locale->setPluralFormsHeader($value);
+                    $locale->setPluralFormsHeader( $head['Plural-Forms'] );
                 }
                 catch( InvalidArgumentException $e ){
                     // ignore invalid Plural-Forms
                 }
+                // fill in missing PO headers now locale is fully resolved
+                $data->localize($locale);
             }
-            // fill in missing PO headers now locale is fully resolved
-            $data->localize($locale);
         }
         
         // notify if template is locked (save and sync will be disabled)
