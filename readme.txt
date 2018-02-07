@@ -104,6 +104,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Allowing PO files to enforce their own Plural-Forms rules
 * Added `loco_allow_remote` filter for debugging remote problems
 * Updated plural forms from Unicode CLDR
+* PHP extractor avoids repeated comments
 * Bumped WP compatibility to 4.9.4
 
 = 2.0.17 =

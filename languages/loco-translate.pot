@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 10:12+0000\n"
+"POT-Creation-Date: 2018-02-07 11:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1071,7 +1071,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
-#: src/ajax/SyncController.php:62
+#: src/ajax/SyncController.php:63
 #, php-format
 msgid ""
 "One file has been skipped because it's %3$s. (Max is %2$s). Check all "
@@ -1604,7 +1604,7 @@ msgid "Translation progress"
 msgstr ""
 
 #. Where %s is the name of the invalid POT file
-#: src/ajax/SyncController.php:47 src/admin/file/EditController.php:99
+#: src/ajax/SyncController.php:48 src/admin/file/EditController.php:99
 #, php-format
 msgid "Translation template is invalid (%s)"
 msgstr ""

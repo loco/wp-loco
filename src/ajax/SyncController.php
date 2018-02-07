@@ -44,6 +44,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 $data = Loco_gettext_Data::load($potfile);
             }
             catch( Exception $e ){
+                // translators: Where %s is the name of the invalid POT file
                 throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
             }
         }

@@ -72,7 +72,7 @@ class Loco_fs_FileWriter {
 
     /**
      * @internal
-     * map virtual path for remote file system
+     * Map virtual path for remote file system
      */
     private function mapPath( $path ){
         if( ! $this->isDirect() ){
