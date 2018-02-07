@@ -129,7 +129,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         $types = array(
             'core' => new Loco_mvc_ViewParams( array(
                 'name' => __('WordPress Core','loco-translate'),
-                'text' => __('See all Core files','loco-translate'), 
+                'text' => __('See all core translations','loco-translate'), 
                 'href' => Loco_mvc_AdminRouter::generate('core') 
             ) ),
             'theme' => new Loco_mvc_ViewParams( array(

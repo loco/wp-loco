@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-03 12:23+0000\n"
+"POT-Creation-Date: 2018-02-07 10:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1306,7 +1306,7 @@ msgid "Scan PHP files with extensions:"
 msgstr ""
 
 #: src/admin/bundle/LocaleController.php:132
-msgid "See all Core files"
+msgid "See all core translations"
 msgstr ""
 
 #: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:142
