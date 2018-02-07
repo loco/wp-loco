@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 4.9.2
+Tested up to: 4.9.4
 Stable tag: 2.0.17
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -104,7 +104,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Allowing PO files to enforce their own Plural-Forms rules
 * Added `loco_allow_remote` filter for debugging remote problems
 * Updated plural forms from Unicode CLDR
-* Bumped WP compatibility to 4.9.3
+* Bumped WP compatibility to 4.9.4
 
 = 2.0.17 =
 * Unofficial languages showing in “Installed” dropdown
