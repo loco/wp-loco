@@ -46,46 +46,53 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $path = $file->getPath();
         
         // file info
-        $info = Loco_mvc_FileParams::create( $file );
-        $this->set('file', $info );
-        $info['type'] = strtoupper($ext);
+        $finfo = Loco_mvc_FileParams::create( $file );
+        $this->set('file', $finfo );
+        $finfo['type'] = strtoupper($ext);
         if( $file->exists() ){
-            $info['existent'] = true;
-            $info['writable'] = $file->writable();
-            $info['deletable'] = $file->deletable();
-            $info['mtime'] = $file->modified();
+            $finfo['existent'] = true;
+            $finfo['writable'] = $file->writable();
+            $finfo['deletable'] = $file->deletable();
+            $finfo['mtime'] = $file->modified();
             // Notify if file is managed by WordPress
             $api = new Loco_api_WordPressFileSystem;
             if( $api->isAutoUpdatable($file) ){
-                $info['autoupdate'] = true;
+                $finfo['autoupdate'] = true;
             }
         }
         
         // location info
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
-        $info = Loco_mvc_FileParams::create( $dir );
-        $this->set('dir', $info );
-        $info['type'] = $dir->getTypeId();
+        $dinfo = Loco_mvc_FileParams::create( $dir );
+        $this->set('dir', $dinfo );
+        $dinfo['type'] = $dir->getTypeId();
         if( $dir->exists() && $dir->isDirectory() ){
-            $info['existent'] = true;
-            $info['writable'] = $dir->writable();
+            $dinfo['existent'] = true;
+            $dinfo['writable'] = $dir->writable();
         }
+        
+        // collect note worthy problems with file headers
+        $debugging = loco_debugging();
+        $debug = array();
         
         // get the name of the webserver for information purposes
         $this->set('httpd', Loco_compat_PosixExtension::getHttpdUser() );
         
         // unknown file template if required
         $locale = null;
+        $project = null;
         $tpl = 'admin/file/info-other';
-        
+
         // we should know the project the file belongs to, but permitting orphans for debugging
         try {
             $project = $this->getProject();
             $template = $project->getPot();
             $isTemplate = $template && $file->equal($template);
             $this->set('isTemplate', $isTemplate );
+            $this->set('project', $project );
         }
         catch( Loco_error_Exception $e ){
+            $debug[] = $e->getMessage();
             $isTemplate = false;
             $template = null;
         }
@@ -134,13 +141,8 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     $altpot = new Loco_fs_File($head['X-Loco-Template']);
                     $altpot->normalize( $this->getBundle()->getDirectoryPath() );
                     if( $altpot->exists() && ( ! $template || ! $template->equal($altpot) ) ){
-                        $this->set('altpot', true );
                         $template = $altpot;
                     }
-                }
-                // missing or invalid headers are tollerated but developers should be notified
-                if( ! count($head) ){
-                    Loco_error_AdminNotices::debug(__('File does not have a valid header','loco-translate'));
                 }
                 // establish whether PO is in sync with POT
                 if( $template && ! $isTemplate && 'po' === $ext && $template->exists() ){
@@ -153,21 +155,31 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                         // ignore invalid template in this context
                     }
                 }
-                // Language header sanity checks, raising developer (debug) warnings
-                if( $locale ){
-                    if( $value = $head['Language'] ){
-                        $check = (string) Loco_Locale::parse($value);
-                        if( $check !== $code ){
-                            Loco_error_AdminNotices::debug( sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code ) );
+                if( $debugging ){
+                    // missing or invalid headers are tollerated but developers should be notified
+                    if( $debugging && ! count($head) ){
+                        $debug[] = __('File does not have a valid header','loco-translate');
+                    }
+                    // Language header sanity checks, raising developer (debug) warnings
+                    if( $locale ){
+                        if( $value = $head['Language'] ){
+                            $check = (string) Loco_Locale::parse($value);
+                            if( $check !== $code ){
+                                $debug[]= sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code );
+                            }
+                        }
+                        if( $value = $head['Plural-Forms'] ){
+                            try {
+                                $locale->setPluralFormsHeader($value);
+                            }
+                            catch( InvalidArgumentException $e ){
+                                $debug[] = sprintf('Plural-Forms header is invalid, "%s"',$value);
+                            }
                         }
                     }
-                    if( $value = $head['Plural-Forms'] ){
-                        try {
-                            $locale->setPluralFormsHeader($value);
-                        }
-                        catch( InvalidArgumentException $e ){
-                            Loco_error_AdminNotices::debug( sprintf('Plural-Forms header is invalid, "%s"',$value) );
-                        }
+                    // Other sanity checks
+                    if( $project && ( $value = $head['Project-Id-Version'] ) && $value !== $project->getName() ){
+                        $debug[] = sprintf('Project-Id-Version header is "%s" but project is "%s"', $value, $project );
                     }
                 }
                 // Count source text for templates only (assumed English)
@@ -176,10 +188,14 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     $this->set('words', $counter->count() );
                 }
             }
-            catch( Exception $e ){
+            catch( Loco_error_Exception $e ){
                 $this->set('error', $e->getMessage() );
                 $tpl = 'admin/file/info-other';
             }
+        }
+        
+        if( $debugging && $debug ){
+            $this->set( 'debug', new Loco_mvc_ViewParams($debug) );
         }
 
         return $this->view( $tpl );

@@ -115,4 +115,13 @@ echo $header;
         </p>
     </div><?php
     endif;
-    
+
+    if( $params->has('debug') ):?> 
+    <div class="notice inline notice-debug">
+        <h3 class="has-icon">Developer notes</h3>
+        <div><?php
+        foreach( $debug as $prop => $raw ):?> 
+        <p><?php $debug->e($prop)?></p><?php
+        endforeach?> 
+    </div><?php
+    endif;

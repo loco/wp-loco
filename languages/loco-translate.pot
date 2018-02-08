@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-08 10:09+0000\n"
+"POT-Creation-Date: 2018-02-08 12:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -603,7 +603,7 @@ msgid_plural "%u files deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/InfoController.php:143
+#: src/admin/file/InfoController.php:161
 msgid "File does not have a valid header"
 msgstr ""
 
@@ -840,7 +840,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/admin/file/InfoController.php:161
+#: src/admin/file/InfoController.php:168
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -954,7 +954,7 @@ msgstr ""
 msgid "Merged from source code"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:84
+#: tpl/admin/file/info-po.php:77
 msgid "Missing template"
 msgstr ""
 
@@ -1477,7 +1477,7 @@ msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:88
+#: tpl/admin/file/info-po.php:81
 msgid ""
 "These translations are not linked to a POT file. Sync operations will "
 "extract strings directly from source code."
@@ -1635,7 +1635,7 @@ msgstr ""
 msgid "Unexpected file type"
 msgstr ""
 
-#: src/package/Header.php:77 src/admin/file/InfoController.php:123
+#: src/package/Header.php:77 src/admin/file/InfoController.php:130
 msgid "Unknown author"
 msgstr ""
 

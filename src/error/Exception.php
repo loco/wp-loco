@@ -139,7 +139,10 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
         if( $e instanceof Loco_error_Exception ){
             return $e;
         }
-        return new Loco_error_Exception( $e->getMessage(), $e->getCode(), $e );
+        $me = new Loco_error_Exception( $e->getMessage(), $e->getCode(), $e );
+        $me->_file = $e->getFile();
+        $me->_line = $e->getLine();
+        return $me;
     }    
     
 }

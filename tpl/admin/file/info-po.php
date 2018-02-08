@@ -59,7 +59,7 @@ $this->start('header');
     </div><?php
 
     else:?> 
-    <div class="notice inline notice-debug">
+    <div class="notice inline notice-info">
         <h3 class="has-icon">
             <?php self::e( __('Out of sync with template','loco-translate') )?> 
         </h3>
@@ -70,15 +70,8 @@ $this->start('header');
     </div><?php
     endif;
     
-    /*if( $params->has('altpot') ):?> 
-    <div class="notice inline notice-debug">
-        <h3 class="has-icon">
-            Alternative template file
-        </h3>
-    </div><?php
-    endif;*/
-    
-    else:?> 
+    // only showing missing template warning when project was matched. Avoids confusion if something went wrong
+    elseif( $params->has('project') ):?> 
     <div class="notice inline notice-debug">
         <h3 class="has-icon">
             <?php self::e( __('Missing template','loco-translate') )?> 
