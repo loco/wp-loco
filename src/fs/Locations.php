@@ -172,7 +172,7 @@ class Loco_fs_Locations extends ArrayObject {
                 return '.';
             }
             if( substr($path,0,$length) === $prefix ){
-                return dirname( substr($path,$length) );
+                return rtrim( substr($path,$length), "/" );
             }
         }
     }

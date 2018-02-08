@@ -599,7 +599,8 @@ class Loco_fs_File {
         // global languages directory root, and canonical subdirectories
         $dirpath = (string) ( $this->isDirectory() ? $this : $this->getParent() );
         if( $sub = Loco_fs_Locations::getGlobal()->rel($dirpath) ){
-            if( '.' === $sub || 'themes' === $sub || 'plugins' === $sub ){
+            list($root) = explode('/', $sub, 2 );
+            if( '.' === $root || 'themes' === $root || 'plugins' === $root ){
                 return 'translation';
             }
         }

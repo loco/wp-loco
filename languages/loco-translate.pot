@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-07 11:50+0000\n"
+"POT-Creation-Date: 2018-02-08 10:09+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1037,6 +1037,7 @@ msgid "Nothing matches the text filter"
 msgstr ""
 
 #: src/js/Strings.php:68 src/error/Notice.php:19
+#: tpl/admin/common/inc-fsconn.php:29
 msgid "Notice"
 msgstr ""
 
@@ -1688,7 +1689,6 @@ msgid "Visit official site"
 msgstr ""
 
 #: src/js/Strings.php:65 src/error/Warning.php:19
-#: tpl/admin/common/inc-fsconn.php:29
 msgid "Warning"
 msgstr ""
 

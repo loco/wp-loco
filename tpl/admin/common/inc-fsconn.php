@@ -26,7 +26,7 @@
     if( $params->has('fsWarning') ):?> 
     <div id="loco-fs-warn" class="has-nav notice inline notice-info jshide">
         <p>
-            <strong class="has-icon"><?php esc_html_e('Warning','loco-translate')?>:</strong>
+            <strong class="has-icon"><?php esc_html_e('Notice','loco-translate')?>:</strong>
             <span><?php echo esc_html($fsWarning)?>.</span>
         </p>
         <nav>
