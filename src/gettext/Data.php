@@ -168,7 +168,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'Report-Msgid-Bugs-To' => '',
             'POT-Creation-Date' => $date,
         );
-        // Project-Id-Version permitted to 
         // headers that must always override when localizing
         $required = array (
             'PO-Revision-Date' => $date,

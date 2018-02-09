@@ -87,6 +87,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.1.1 =
+* Setting `Project-Id-Version` on new POT files
+
 = 2.1.0 =
 * Add `fs_protect` setting to avoid overwriting system files
 * Fixed bug in connect dialogue where errors not redisplayed
@@ -228,7 +231,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.1.0 =
+= 2.1.1 =
 * Various bug fixes and improvements
 
 
