@@ -216,6 +216,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             // author / system / custom / other
             'store' => $dir->getTypeLabel( $dir->getTypeId() ),
             // links
+            'view' => $this->getProjectLink('file-view', $project, $args ),
             'info' => $this->getProjectLink('file-info', $project, $args ),
             'edit' => $this->getProjectLink('file-edit', $project, $args ),
             'delete' => $this->getProjectLink('file-delete', $project, $args ),
