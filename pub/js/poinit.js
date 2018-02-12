@@ -36,7 +36,7 @@
         }
         function getLocale(){
             var value = getValue();
-            return value ? loco.locale.parse(value) : loco.locale.cast( {lang:'zxx'} );
+            return value ? loco.locale.parse(value) : loco.locale.clone( {lang:'zxx'} );
         }
         function onModeChange(){
             redrawMode( isSelectMode() );

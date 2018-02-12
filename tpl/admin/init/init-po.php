@@ -96,7 +96,7 @@ $this->extend('../layout');
                             </label>
                         </th>
                         <td>
-                            <a href="<?php $help->e('href')?>#locations" class="has-icon icon-help" target="_blank"><?php $help->e('text')?></a>
+                            <a href="<?php $help->e('href')?>#locations" class="has-icon icon-help" target="_blank" tabindex="-1"><?php $help->e('text')?></a>
                         </td>
                     </tr><?php
                     $choiceId = 0;
@@ -139,7 +139,7 @@ $this->extend('../layout');
                             3. <?php esc_html_e('Template options','loco-translate')?>:
                         </th>
                         <td>
-                            <a href="<?php $help->e('href')?>#copy" class="has-icon icon-help" target="_blank"><?php $help->e('text')?></a>
+                            <a href="<?php $help->e('href')?>#copy" class="has-icon icon-help" target="_blank" tabindex="-1"><?php $help->e('text')?></a>
                         </td>
                     </tr>
                     <tr valign="top" class="compact">

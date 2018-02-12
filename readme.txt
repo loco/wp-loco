@@ -90,6 +90,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.1.1 =
 * Setting `Project-Id-Version` on new POT files
 * Added source view to quick links in file tables
+* Supporting only WordPress style locale codes
 
 = 2.1.0 =
 * Add `fs_protect` setting to avoid overwriting system files
