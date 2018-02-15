@@ -124,7 +124,9 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         // exporting headers non-scalar so js doesn't have to parse them
         try {
             $headers = $this->getHeaders();
-            $po[0]['target'] = $headers->getArrayCopy();
+            if( count($headers) && '' === $po[0]['source'] ){
+                $po[0]['target'] = $headers->getArrayCopy();
+            }
         }
         // suppress header errors when serializing
         // @codeCoverageIgnoreStart
