@@ -91,6 +91,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Setting `Project-Id-Version` on new POT files
 * Added source view to quick links in file tables
 * Supporting only WordPress style locale codes
+* Editor screen tolerates missing PO headers
+* Ajax debugging improvements for issue reporting
 
 = 2.1.0 =
 * Add `fs_protect` setting to avoid overwriting system files

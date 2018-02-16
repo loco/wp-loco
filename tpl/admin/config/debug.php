@@ -69,5 +69,23 @@ $this->extend('../layout');
     
                 <dt>File mods disallowed:</dt>
                 <dd><?php echo $fs->disabled?'Yes':'No'?></dd>
+                
+                <dt>File mod safety level:</dt>
+                <dd><?php $fs->e('fs_protect')?></dd>
+                
+            </dl>
+        </div>
+
+        <div class="panel" id="loco-debug">
+            <h3>Debug settings</h3>
+            <dl><?php
+            foreach( $debug as $key => $value ):?> 
+                <dt>
+                    <?php echo $debug->escape($key)?>:
+                </dt>
+                <dd>
+                    <?php $debug->e($key)?> 
+                </dd><?php
+            endforeach?> 
             </dl>
         </div>

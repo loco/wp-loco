@@ -196,6 +196,10 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $jsConf = new Loco_mvc_ViewParams;
             $view->set( 'js', $jsConf );
         }
+        // additional debugging info when enabled
+        if( loco_debugging() ){
+            $jsConf['WP_DEBUG'] = true;
+        }
         // localize script if translations in memory
         if( is_textdomain_loaded('loco-translate') ){
             $strings = new Loco_js_Strings;

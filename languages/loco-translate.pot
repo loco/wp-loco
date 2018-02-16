@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-12 10:43+0000\n"
+"POT-Creation-Date: 2018-02-16 12:50+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -337,6 +337,7 @@ msgid "Custom language"
 msgstr ""
 
 #: src/error/Debug.php:19 src/admin/config/BaseController.php:23
+#: src/admin/config/DebugController.php:13
 #: src/admin/bundle/BaseController.php:104
 msgid "Debug"
 msgstr ""
@@ -1238,7 +1239,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: src/js/Strings.php:50
+#: src/js/Strings.php:56
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
@@ -1318,7 +1319,8 @@ msgstr ""
 msgid "See all themes"
 msgstr ""
 
-#: src/js/Strings.php:56
+#. Generic error when external process broke an Ajax request
+#: src/js/Strings.php:50
 msgid "Server returned invalid data"
 msgstr ""
 
@@ -1400,7 +1402,7 @@ msgstr ""
 msgid "Support forum"
 msgstr ""
 
-#: src/admin/config/DebugController.php:20
+#: src/admin/config/DebugController.php:44
 msgid "System diagnostics"
 msgstr ""
 

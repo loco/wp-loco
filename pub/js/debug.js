@@ -17,16 +17,27 @@
         $('#loco-ajax-url').text( window.ajaxurl );
     }
     
+    
+    
     // check UTF-8 passes to Ajax and back without a problem
-    loco.ajax.post( 'ping', {echo:'\u039F\u039A \u2713'},
-        function( data, status, xhr ){
-            $('#loco-ajax-check').text( data.ping||'FAILED' );
-        },
-        function( xhr, error, message ){
-            var text = $('<pre>'+xhr.responseText+'</pre>').text();
-            $('#loco-ajax-check').text( text||'FAILED' );
+
+    function onAjaxTestPass( data, status, xhr ){
+        if( data && data.ping ){
+            $('#loco-ajax-check').text( data.ping );
         }
-    );
+        else {
+            onAjaxTestFail( xhr, status, data && data.error && data.error.message );
+        }
+    }
+    
+    function onAjaxTestFail( xhr, error, message ){
+        if( 'success' !== error ){
+            message = loco.ajax.parse( loco.ajax.strip( xhr.responseText ) );
+        }
+        $('#loco-ajax-check').text( 'FAILED: '+message ).addClass('loco-danger');
+    }
+    
+    loco.ajax.post( 'ping', {echo:'\u039F\u039A \u2713'}, onAjaxTestPass, onAjaxTestFail );
         
 
 
