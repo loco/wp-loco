@@ -93,6 +93,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Supporting only WordPress style locale codes
 * Editor screen tolerates missing PO headers
 * Ajax debugging improvements for issue reporting
+* Added loco_parse_locale action callback
 
 = 2.1.0 =
 * Add `fs_protect` setting to avoid overwriting system files

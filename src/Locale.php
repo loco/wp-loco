@@ -49,6 +49,7 @@ class Loco_Locale implements JsonSerializable {
         catch( Exception $e ){
             // isValid should return false
         }
+        do_action( 'loco_parse_locale', $locale, $tag );
         return $locale;
     }
 
@@ -66,12 +67,23 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * @internal
-     * Allow read-only access to subtags
+     * Allow read access to subtags
      */
     public function __get( $t ){
         return isset($this->tag[$t]) ? $this->tag[$t] : '';
     }
 
+
+    /**
+     * @internal
+     * Allow write access to subtags
+     */
+    public function __set( $t, $s ){
+        if( isset($this->tag[$t]) ){
+            $this->tag[$t] = $s;
+            $this->setSubtags( $this->tag );
+        }
+    }
 
 
     /**
