@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-16 17:08+0000\n"
+"POT-Creation-Date: 2018-02-16 17:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1402,7 +1402,7 @@ msgstr ""
 msgid "Support forum"
 msgstr ""
 
-#: src/admin/config/DebugController.php:44
+#: src/admin/config/DebugController.php:47
 msgid "System diagnostics"
 msgstr ""
 
