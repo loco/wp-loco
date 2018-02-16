@@ -27,10 +27,13 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
     /**
      * @internal
      */
-    private function rel_path( $path ){
+    private function rel_path( $path, $default = '' ){
         if( is_string($path) && $path && '/' === $path[0] ){
             $file = new Loco_fs_File( $path );
             $path = $file->getRelativePath(ABSPATH);
+        }
+        else if( ! $path ){
+            $path = '(none)';
         }
         return $path;
     }
@@ -49,8 +52,13 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         $versions = new Loco_mvc_ViewParams( array (
             'Loco Translate' => loco_plugin_version(),
             'WordPress' => $GLOBALS['wp_version'],
-            'PHP' => phpversion(),
+            'PHP' => phpversion().' ('.PHP_SAPI.')',
+            'Server' => isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : ( function_exists('apache_get_version') ? apache_get_version() : '' ),
         ) );
+        // we want to know about modules in case there are security mods installed known to break functionality
+        if( function_exists('apache_get_modules') && ( $mods = preg_grep('/^mod_/',apache_get_modules() ) ) ){
+            $versions['Server'] .= ' + '.implode(', ',$mods);
+        }
         
         // utf8 / encoding:
         $encoding = new Loco_mvc_ViewParams( array (

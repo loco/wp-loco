@@ -8,14 +8,14 @@ $this->extend('../layout');
         <div class="panel" id="loco-versions">
             <h3>Versions</h3>
             <dl><?php
-            foreach( $versions as $key => $value ):?> 
+            foreach( $versions as $key => $value ): if( $value ):?> 
                 <dt>
                     <?php echo $versions->escape($key)?>:
                 </dt>
                 <dd>
                     <code class="path"><?php $versions->e($key)?></code>
                 </dd><?php
-            endforeach?> 
+            endif; endforeach?> 
             </dl>
         </div>
     
