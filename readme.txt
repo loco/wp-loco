@@ -87,6 +87,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.1.2 =
+* Fixed undeclared property in admin hook
+
 = 2.1.1 =
 * Setting `Project-Id-Version` on new POT files
 * Added source view to quick links in file tables
@@ -236,7 +239,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.1.1 =
+= 2.1.2 =
 * Various bug fixes and improvements
 
 

@@ -4,6 +4,11 @@
  */
 class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
+    /**
+     * @var Loco_mvc_AdminRouter
+     */
+    private $router;
+
 
     /**
      * "admin_notices" callback, 

@@ -97,7 +97,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         // Debug and error log settings
         $debug = new Loco_mvc_PostParams( array(
             'WP_DEBUG' => loco_constant('WP_DEBUG') ? 'On' : 'Off',
-            'WP_DEBUG_LOG' => $this->rel_path( loco_constant('WP_DEBUG_LOG') ),
+            'WP_DEBUG_LOG' => loco_constant('WP_DEBUG_LOG') ? 'On' : 'Off',
             'WP_DEBUG_DISPLAY' => loco_constant('WP_DEBUG_DISPLAY') ? 'On' : 'Off',
             'PHP display_errors' => ini_get('display_errors')  ? 'On' : 'Off',
             'PHP log_errors' => ini_get('log_errors')  ? 'On' : 'Off',
