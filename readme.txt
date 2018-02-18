@@ -82,6 +82,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 1. Translating strings in the browser with the Loco PO Editor
 2. Showing translation progress for theme language files
 3. PO source view with text filter and clickable file references
+4. Restore tab showing PO diff view with revert function
+5. Showing access to translations by installed language
 
 
 
