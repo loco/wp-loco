@@ -70,13 +70,15 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
         ) ) );
         
         // user's "admin" language may differ and is worth showing
-        $locale = Loco_Locale::parse( get_user_locale() );
-        $alt = (string) $locale;
-        if( $tag !== $alt ){
-            $this->set( 'adminLocale', new Loco_mvc_ViewParams( array(
-                'name' => ( $name = $locale->ensureName($api) ),
-                'link' => '<a href="'.esc_url(Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$tag) )).'">'.esc_html($name).'</a>',
-            ) ) );
+        if( function_exists('get_user_locale') ){
+            $locale = Loco_Locale::parse( get_user_locale() );
+            $alt = (string) $locale;
+            if( $tag !== $alt ){
+                $this->set( 'adminLocale', new Loco_mvc_ViewParams( array(
+                    'name' => ( $name = $locale->ensureName($api) ),
+                    'link' => '<a href="'.esc_url(Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$tag) )).'">'.esc_html($name).'</a>',
+                ) ) );
+            }
         }
         
         $this->set('title', __('Welcome to Loco Translate','loco-translate') );
