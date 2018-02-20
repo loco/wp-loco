@@ -58,6 +58,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         $files = $package->findLocaleFiles();
         $translations = array();
         $modified = 0;
+        $npofiles = 0;
         $nfiles = 0;
 
         // source locale means we want to see POT instead of translations
@@ -68,6 +69,9 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         /* @var Loco_fs_File */
         foreach( $files as $file ){
             $nfiles++;
+            if( 'pot' !== $file->extension() ){
+                $npofiles++;
+            }
             $modified = max( $modified, $file->modified() );
             $project = $package->getProject($file);
             // do similarly to Loco_admin_bundle_ViewController::createFileParams
@@ -152,7 +156,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
             'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
         ) ) );
 
-        return $this->view( 'admin/bundle/locale', compact('breadcrumb','translations','types','nfiles','modified') );
+        return $this->view( 'admin/bundle/locale', compact('breadcrumb','translations','types','npofiles','modified') );
     }
 
     

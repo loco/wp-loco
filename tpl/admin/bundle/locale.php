@@ -30,13 +30,15 @@ $this->extend('../layout');
                 <tr>
                     <th data-sort-type="s">
                         <?php esc_html_e('Bundle name','loco-translate')?> 
-                    </th>
+                    </th><?php
+                    if( $npofiles ):?> 
                     <th colspan="2" data-sort-type="n">
                         <?php esc_html_e('Translation progress','loco-translate')?> 
                     </th>
                     <th data-sort-type="n">
                         <?php esc_html_e('Pending','loco-translate')?> 
-                    </th>
+                    </th><?php
+                    endif?> 
                     <th data-sort-type="s">
                         <?php esc_html_e('File info','loco-translate')?> 
                     </th>
@@ -74,7 +76,7 @@ $this->extend('../layout');
                             </span>
                         </nav>
                     </td><?php
-
+                    if( $npofiles ):
                     if( 'PO' === $po->type ):?> 
                     <td data-sort-value="<?php echo $po->meta->getPercent()?>">
                         <?php $po->meta->printProgress()?> 
@@ -96,6 +98,7 @@ $this->extend('../layout');
                     <td data-sort-value="-1">
                         -- <!-- no pending for template -->
                     </td><?php
+                    endif;
                     endif?> 
 
                     <td data-sort-value="<?php $po->e('name')?>">
