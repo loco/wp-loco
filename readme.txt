@@ -92,6 +92,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 = 2.1.2 =
 * Fixed undeclared property in admin hook
 * Fixed incompatibility with older WordPress
+* Fixed incorrect millisecond reporting in footer
 * Removed locale progress column for en_US locale
 
 = 2.1.1 =

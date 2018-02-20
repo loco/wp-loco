@@ -116,7 +116,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     public function filter_update_footer( $text ){
         $html = sprintf( '<span>v%s</span>', loco_plugin_version() );
         if( $this->bench && ( $info = $this->get('_debug') ) ){
-            $html .= sprintf('<span>%sms</span>', number_format($info->time,2) );
+            $msec = 1000 * $info['time']; // <- microtime is floating seconds
+            $html .= sprintf('<span>%sms</span>', number_format_i18n($msec,0) );
         }
         return $html;
     }
@@ -196,10 +197,6 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $jsConf = new Loco_mvc_ViewParams;
             $view->set( 'js', $jsConf );
         }
-        // additional debugging info when enabled
-        if( loco_debugging() ){
-            $jsConf['WP_DEBUG'] = true;
-        }
         // localize script if translations in memory
         if( is_textdomain_loaded('loco-translate') ){
             $strings = new Loco_js_Strings;
@@ -216,6 +213,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $this->set('_debug', new Loco_mvc_ViewParams( array( 
                 'time' => microtime(true) - $this->bench,
             ) ) );
+            // additional debugging info when enabled
+            $jsConf['WP_DEBUG'] = true;
         }
         return $view->render( $tpl );
     }
