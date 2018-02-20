@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.2-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-18 10:24+0000\n"
+"POT-Creation-Date: 2018-02-20 10:24+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -305,7 +305,7 @@ msgstr ""
 msgid "Connected to remote file system"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:67
+#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:69
 msgid "Copy"
 msgstr ""
 
@@ -343,7 +343,7 @@ msgid "Debug"
 msgstr ""
 
 #: src/admin/file/BaseController.php:98 tpl/admin/file/diff.php:31
-#: tpl/admin/bundle/inc-po-table.php:59 tpl/admin/bundle/locale.php:73
+#: tpl/admin/bundle/inc-po-table.php:59 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
 
@@ -374,7 +374,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:126 tpl/admin/common/inc-fsconn.php:16
+#: src/admin/bundle/LocaleController.php:130 tpl/admin/common/inc-fsconn.php:16
 #: tpl/admin/common/inc-fsconn.php:33 tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
 msgstr ""
@@ -391,7 +391,7 @@ msgstr ""
 msgid "Download controller returned empty output"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:47 tpl/admin/bundle/locale.php:61
+#: tpl/admin/bundle/inc-po-table.php:47 tpl/admin/bundle/locale.php:63
 msgid "Edit"
 msgstr ""
 
@@ -613,7 +613,7 @@ msgid "File doesn't exist"
 msgstr ""
 
 #: src/admin/file/BaseController.php:96 tpl/admin/file/diff.php:62
-#: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:41
+#: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
 
@@ -708,7 +708,7 @@ msgstr ""
 msgid "Find config"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:26 tpl/admin/bundle/locale.php:47
+#: tpl/admin/bundle/inc-po-table.php:26 tpl/admin/bundle/locale.php:49
 msgid "Folder"
 msgstr ""
 
@@ -802,7 +802,7 @@ msgstr ""
 msgid "Include Fuzzy strings"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:70
+#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:72
 msgid "Info"
 msgstr ""
 
@@ -815,7 +815,7 @@ msgstr ""
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:112
+#: src/admin/bundle/LocaleController.php:116
 #: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:63
 msgid "Installed languages"
 msgstr ""
@@ -865,7 +865,7 @@ msgstr ""
 msgid "Last extracted"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:44
+#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:46
 #: tpl/admin/list/locales.php:19 tpl/admin/list/inc-table.php:17
 msgid "Last modified"
 msgstr ""
@@ -996,7 +996,7 @@ msgstr ""
 msgid "New translations template for \"%s\""
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:125
+#: src/admin/bundle/LocaleController.php:129
 msgid "No core translation files are installed for this language"
 msgstr ""
 
@@ -1122,7 +1122,7 @@ msgstr ""
 msgid "Partially configured bundle"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:17 tpl/admin/bundle/locale.php:38
+#: tpl/admin/bundle/inc-po-table.php:17 tpl/admin/bundle/locale.php:39
 msgid "Pending"
 msgstr ""
 
@@ -1151,7 +1151,7 @@ msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
-#: src/admin/bundle/LocaleController.php:142
+#: src/admin/bundle/LocaleController.php:146
 msgid "Plugins"
 msgstr ""
 
@@ -1307,15 +1307,15 @@ msgstr ""
 msgid "Scan PHP files with extensions:"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:133
+#: src/admin/bundle/LocaleController.php:137
 msgid "See all core translations"
 msgstr ""
 
-#: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:143
+#: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:147
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:47 src/admin/bundle/LocaleController.php:138
+#: tpl/admin/root.php:47 src/admin/bundle/LocaleController.php:142
 msgid "See all themes"
 msgstr ""
 
@@ -1470,7 +1470,7 @@ msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
-#: src/admin/bundle/LocaleController.php:137
+#: src/admin/bundle/LocaleController.php:141
 msgid "Themes"
 msgstr ""
 
@@ -1602,7 +1602,7 @@ msgid "Translate themes and plugins directly in WordPress"
 msgstr ""
 
 #: tpl/admin/file/info-po.php:26 tpl/admin/bundle/inc-po-table.php:14
-#: tpl/admin/bundle/locale.php:35
+#: tpl/admin/bundle/locale.php:36
 msgid "Translation progress"
 msgstr ""
 
@@ -1686,7 +1686,7 @@ msgstr ""
 msgid "Version %s"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:50 tpl/admin/bundle/locale.php:64
+#: tpl/admin/bundle/inc-po-table.php:50 tpl/admin/bundle/locale.php:66
 msgid "View"
 msgstr ""
 
@@ -1712,7 +1712,7 @@ msgid ""
 "If we know your bundle, we'll configure it for you automatically"
 msgstr ""
 
-#: src/admin/RootController.php:82
+#: src/admin/RootController.php:84
 msgid "Welcome to Loco Translate"
 msgstr ""
 
@@ -1724,7 +1724,7 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: src/package/Core.php:80 src/admin/bundle/LocaleController.php:132
+#: src/package/Core.php:80 src/admin/bundle/LocaleController.php:136
 msgid "WordPress Core"
 msgstr ""
 
