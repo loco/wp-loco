@@ -116,8 +116,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     public function filter_update_footer( $text ){
         $html = sprintf( '<span>v%s</span>', loco_plugin_version() );
         if( $this->bench && ( $info = $this->get('_debug') ) ){
-            $msec = 1000 * $info['time']; // <- microtime is floating seconds
-            $html .= sprintf('<span>%sms</span>', number_format_i18n($msec,0) );
+            $html .= sprintf('<span>%ss</span>', number_format_i18n($info['time'],2) );
         }
         return $html;
     }
