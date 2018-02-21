@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 4.9.4
-Stable tag: 2.1.1
+Stable tag: 2.1.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -94,7 +94,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 * Fixed incompatibility with older WordPress
 * Fixed incorrect millisecond reporting in footer
 * Removed locale progress column for en_US locale
-* Tweaks to debugging and logging
+* Tweaks to debugging and error logging
 
 = 2.1.1 =
 * Setting `Project-Id-Version` on new POT files
