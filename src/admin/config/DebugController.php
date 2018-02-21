@@ -75,6 +75,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'PHP memory_limit' => $this->memory_size( ini_get('memory_limit') ),
             'PHP post_max_size' => $this->memory_size( ini_get('post_max_size') ),
             //'PHP upload_max_filesize' => $this->memory_size( ini_get('upload_max_filesize') ),
+            'PHP max_execution_time' => ini_get('max_execution_time') ?: '0',
         ) );
         
         // Ajaxing:

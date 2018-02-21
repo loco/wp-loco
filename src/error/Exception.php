@@ -3,11 +3,11 @@
  * Generic exception that we know has come from the Loco plugin
  */
 class Loco_error_Exception extends Exception implements JsonSerializable {
-    
+
     const LEVEL_ERROR   = 0;
     const LEVEL_WARNING = 1;
     const LEVEL_DEBUG   = 2;
-    const LEVEL_INFO    = 3;
+    const LEVEL_NOLOG   = 3;
 
 
     /**

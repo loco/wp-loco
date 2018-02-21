@@ -55,7 +55,7 @@ $this->extend('../layout');
     
         <div class="panel" id="loco-sizes">
             <h3>
-                Size limits
+                Limits
                 <a href="#loco-sizes" class="loco-anchor" aria-hidden="true"></a>
             </h3>
             <dl><?php

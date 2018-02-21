@@ -65,7 +65,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
             catch( Exception $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );
                 $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco-translate');
-                Loco_error_AdminNotices::info( sprintf( $message, $pofile->getParent()->basename() ) );
+                Loco_error_AdminNotices::warn( sprintf( $message, $pofile->getParent()->basename() ) );
             }
         }
 
@@ -103,7 +103,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
                 Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco-translate') );
             }
             catch( Exception $e ){
-                Loco_error_AdminNotices::info( $e->getMessage() );
+                Loco_error_AdminNotices::debug( $e->getMessage() );
                 Loco_error_AdminNotices::warn( __('PO file saved, but MO file compilation failed','loco-translate') );
                 $this->set( 'mobytes', 0 );
             }
