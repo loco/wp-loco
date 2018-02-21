@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.2-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-02-20 10:24+0000\n"
+"POT-Creation-Date: 2018-02-21 10:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1037,7 +1037,7 @@ msgstr ""
 msgid "Nothing matches the text filter"
 msgstr ""
 
-#: src/js/Strings.php:68 src/error/Notice.php:19
+#: src/js/Strings.php:68 src/error/Notice.php:20
 #: tpl/admin/common/inc-fsconn.php:29
 msgid "Notice"
 msgstr ""
