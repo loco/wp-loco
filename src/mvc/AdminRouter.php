@@ -201,6 +201,8 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-file-info' => 'file_Info',
             '{type}-file-diff' => 'file_Diff',
             '{type}-file-delete' => 'file_Delete',
+            // test routes that don't actually exist
+            'test-no-class' => 'test_NonExistantClass',
         );
         if( ! $page ){
             $page = $action;
@@ -282,8 +284,11 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         if( loco_debugging() ){
             $tmp = array();
             $class = self::pageToClass( substr($page,5), $action, $tmp );
-            if( ! $class || ! class_exists($class) ){
-                throw new InvalidArgumentException( sprintf('Invalid admin route: %s => %s', json_encode($route), json_encode($class) ) );
+            if( ! $class ){
+                throw new UnexpectedValueException( sprintf('Invalid admin route: %s', json_encode($route) ) );
+            }
+            else {
+                class_exists( $class, true ); // <- autoloader will throw if not class found
             }
         }
         // if url found, it should contain the page

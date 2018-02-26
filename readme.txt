@@ -89,6 +89,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.1.3 =
+* Minor refactor of debug mode routing check 
+
 = 2.1.2 =
 * Fixed undeclared property in admin hook
 * Fixed incompatibility with older WordPress
@@ -245,7 +248,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.1.2 =
+= 2.1.3 =
 * Various bug fixes and improvements
 
 
