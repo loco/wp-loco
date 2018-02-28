@@ -152,7 +152,6 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         $this->set( 'locale', new Loco_mvc_ViewParams( array(
             'code' => $tag,
             'name' => $locale->getName(),
-            '_name' => $locale->getNativeName(),
             'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
         ) ) );
 

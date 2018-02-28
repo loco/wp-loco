@@ -83,8 +83,12 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_error_AdminNotices::destroy();
         Loco_package_Listener::destroy();
         wp_cache_flush();
-        // text domains should be unloaded at start of all tests
+        // text domains should be unloaded at start of all tests, and locale reset
+        unset( $GLOBALS['locale'] );
         $GLOBALS['l10n'] = array();
+        $this->enable_locale('en_US');
+        $this->assertSame( 'en_US', get_locale(), 'Ensure test site is English to start');
+        $this->assertSame( 'en_US', get_user_locale(),'Ensure test site is English to start');
         // ensure test themes are registered and WordPress's cache is valid
         register_theme_directory( LOCO_TEST_DATA_ROOT.'/themes' );
         $sniff = get_theme_roots();
@@ -111,6 +115,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         // capture cookies so we can test what is set 
         add_filter('loco_setcookie', array($this,'captureCookie'), 10, 1 );
         $this->cookies_set = array();
+        $this->enable_network();
     }
 
     
@@ -356,8 +361,9 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * Temporarily enable a specific locale
      * @return void
      */    
-    protected function enable_locale( $locale ){
-         $this->locale = $locale;
+    protected function enable_locale( $tag ){
+         $locale = Loco_Locale::parse($tag);
+         $this->locale = (string) $locale;
          remove_all_filters('locale');
          add_filter('locale', array($this,'_filter_locale') );
     }

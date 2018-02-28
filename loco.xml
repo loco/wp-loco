@@ -15,24 +15,8 @@
       </template>
     </project>
   </domain>
-  <!--domain name="loco-legacy">
-    <project name="Legacy version (1.x)" slug="loco-legacy">
-      <source>
-        <directory>old</directory>
-        <exclude>
-          <directory>old/languages</directory>
-        </exclude>
-      </source>
-      <target>
-        <directory>old/languages</directory>
-      </target>
-      <template>
-        <file>old/languages/loco-legacy.pot</file>
-      </template>
-    </project>
-  </domain-->
   <exclude>
-    <directory>old</directory>
+    <directory>tmp</directory>
     <directory>lib</directory>
     <directory>pub</directory>
     <directory>test</directory>

@@ -5,14 +5,22 @@
 class Loco_Locale implements JsonSerializable {
 
     /**
+     * Language subtags
      * @var array
      */
     private $tag;
 
     /**
+     * Cached composite tag 
      * @var string
      */
-    private $str;
+    private $_tag;
+
+    /**
+     * Cached icon css class
+     * @var string
+     */
+    private $icon;
 
     /**
      * Name in English
@@ -116,7 +124,8 @@ class Loco_Locale implements JsonSerializable {
         $tag['variant'] = strtolower($tag['variant']);
         // set subtags and invalidate cache of language tag
         $this->tag = $tag;
-        $this->str = null;
+        $this->_tag = null;
+        $this->icon = null;
         $this->valid = true;
 
         return $this;
@@ -131,8 +140,10 @@ class Loco_Locale implements JsonSerializable {
            $this->setSubtags( $this->tag );
        }
        catch( Loco_error_LocaleException $e ){
-           $this->str = '';
+           $this->_tag = '';
+           $this->icon = null;
            $this->name = 'Invalid locale';
+           $this->_name = null;
        }
        return $this;
     }
@@ -142,28 +153,43 @@ class Loco_Locale implements JsonSerializable {
      * @return string
      */    
     public function __toString(){
-        $str = $this->str;
+        $str = $this->_tag;
         if( is_null($str) ){
             $str = implode('_',array_filter($this->tag));
-            $this->str = $str;
+            $this->_tag = $str;
         }
         return $str;
     }
 
 
     /**
-     * @return string
+     * Get stored name in current display language.
+     * Note that no dynamic translation of English name is performed, but can be altered with loco_parse_locale filter
+     * @return string | null
      */    
     public function getName(){
-        return (string) $this->name;
+        if( $name = $this->name ){
+            // use canonincal native name only when current language matches
+            // deliberately not matching whole tag such that fr_CA would show native name of fr_FR
+            if( $_name = $this->getNativeName() ){
+                $locale = self::parse( function_exists('get_user_locale') ? get_user_locale() : get_locale() );
+                if( $this->lang === $locale->lang ){
+                    $name = $_name;
+                }
+            }
+            return $name;
+        }
     }
 
 
     /**
-     * @return string
+     * Get canonical native name as defined by WordPress
+     * @return string | null
      */    
     public function getNativeName(){
-        return (string) $this->_name;
+        if( $name = $this->_name ){
+            return $name;
+        }
     }
 
 
@@ -171,16 +197,35 @@ class Loco_Locale implements JsonSerializable {
      * @return string
      */    
     public function getIcon(){
-        $tag = array();
-        if( ! $this->tag['lang'] ){
-            $tag[] = 'lang lang-zxx';
-        }
-        foreach( $this->tag as $class => $code ){
-            if( $code ){
-                $tag[] = $class.' '.$class.'-'.$code;
+        $icon = $this->icon;
+        if( is_null($icon) ){
+            $tag = array();
+            if( ! $this->tag['lang'] ){
+                $tag[] = 'lang lang-zxx';
             }
+            foreach( $this->tag as $class => $code ){
+                if( $code ){
+                    $tag[] = $class.' '.$class.'-'.$code;
+                }
+            }
+            $icon = strtolower( implode(' ',$tag) );
+            $this->icon = $icon;
         }
-        return strtolower( implode(' ',$tag) );
+        return $icon;
+    }
+
+
+    /**
+     * @return Loco_Locale
+     */
+    public function setIcon( $css ){
+        if( $css ){
+            $this->icon = (string) $css;
+        }
+        else {
+            $this->icon = null;
+        }
+        return $this;
     }
 
 
@@ -188,8 +233,8 @@ class Loco_Locale implements JsonSerializable {
      * @return Loco_Locale
      */
     public function setName( $english_name, $native_name = '' ){
-        $this->name = $english_name;
-        $this->_name = $native_name;
+        $this->name = apply_filters('loco_locale_name', $english_name, $native_name );
+        $this->_name = (string) $native_name;
         return $this;
     }
 
@@ -215,7 +260,7 @@ class Loco_Locale implements JsonSerializable {
         if( $locale = $api->getLocale($tag) ){
             $this->setName( $locale->getName(), $locale->getNativeName() );
         }
-        return $this->name;
+        return $this->getName();
     }
 
 
@@ -248,9 +293,9 @@ class Loco_Locale implements JsonSerializable {
             }
         }
         else {
-            $this->name = __('Invalid locale','loco-translate');
+            $this->setName( __('Invalid locale','loco-translate') );
         }
-        return $this->name;
+        return $this->getName();
     }
 
 
@@ -259,7 +304,7 @@ class Loco_Locale implements JsonSerializable {
      * @return string
      */
     public function ensureName( Loco_api_WordPressTranslations $api ){
-        $name = $this->name;
+        $name = $this->getName();
         if( ! $name ){
             $name = $this->fetchName($api);
             // failing that, build own own name from components
@@ -281,7 +326,7 @@ class Loco_Locale implements JsonSerializable {
      */
     public function jsonSerialize(){
         $a = $this->tag;
-        $a['label'] = $this->name;
+        $a['label'] = $this->getName();
         // plural data expected by editor
         $p = $this->getPluralData();
         $a['pluraleq'] = $p[0];

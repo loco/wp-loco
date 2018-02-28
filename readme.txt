@@ -91,6 +91,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 = 2.1.3 =
 * Minor refactor of debug mode routing check 
+* Added loco_locale_name filter and updated locale data
 
 = 2.1.2 =
 * Fixed undeclared property in admin hook
