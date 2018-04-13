@@ -537,8 +537,14 @@
     // ready to render editor
     editor.load( messages );
     
+    // locale should be cast to full object once set in editor
+    if( locale = editor.targetLocale ){
+        locale.isRTL() && $(innerDiv).addClass('trg-rtl');
+    }
     // enable template mode when no target locale 
-    editor.targetLocale || editor.unlock();
+    else {
+        editor.unlock();
+    }
 
     // ok, editor ready
     updateStatus();

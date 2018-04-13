@@ -3,8 +3,8 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 4.9.4
-Stable tag: 2.1.2
+Tested up to: 4.9.5
+Stable tag: 2.1.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -90,8 +90,12 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 == Changelog ==
 
 = 2.1.3 =
-* Minor refactor of debug mode routing check 
 * Added loco_locale_name filter and updated locale data
+* Fixed editor column sorting to update as values change
+* Supporting RTL text in editor preview rows
+* Minor refactor of debug mode routing check 
+* Minor PO parser improvements
+* Bumped WP compatibility to 4.9.5
 
 = 2.1.2 =
 * Fixed undeclared property in admin hook

@@ -76,7 +76,7 @@ class Loco_package_Header {
         else {
             $author = __('Unknown author','loco-translate');
         }
-        
+        // translators: Author credit: "<product>" <version> by <author>
         $html = sprintf( __('"%s" %s by %s','default'), esc_html($this->Name), $this->Version, $author );
         
         if( ( $link = $this->PluginURI ) || ( $link = $this->ThemeURI ) ){
