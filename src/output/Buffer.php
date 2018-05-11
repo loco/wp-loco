@@ -17,7 +17,6 @@ class Loco_output_Buffer {
      */    
     private $output = '';
 
-
     /**
      * @return string
      */    
@@ -25,7 +24,7 @@ class Loco_output_Buffer {
          return $this->output;
     }
 
-    
+
     /**
      * @return Loco_output_Buffer
      */
@@ -44,7 +43,6 @@ class Loco_output_Buffer {
     }
 
 
-
     /**
      * @return Loco_output_Buffer
      */
@@ -58,7 +56,6 @@ class Loco_output_Buffer {
     }
 
 
-
     /**
      * @return Loco_output_Buffer
      */
@@ -70,7 +67,6 @@ class Loco_output_Buffer {
         }
         return $this;
     }
-
 
 
     /**
@@ -90,7 +86,6 @@ class Loco_output_Buffer {
             // @codeCoverageIgnoreEnd
         }
     }
-
 
 
     /**
@@ -119,7 +114,6 @@ class Loco_output_Buffer {
     }
 
 
-
     /**
      * Destroy all output buffers
      * @return void
@@ -133,4 +127,4 @@ class Loco_output_Buffer {
         }
     }
 
-} 
+}

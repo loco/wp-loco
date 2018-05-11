@@ -67,7 +67,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'json' => json_decode('"\\u039f\\u039a \\u2713"'),
             'mbstring' => loco_check_extension('mbstring'),
         ) );
-        
+
         // PHP / env memory settings:
         $memory = new Loco_mvc_PostParams( array(
             'WP_MEMORY_LIMIT' => $this->memory_size( loco_constant('WP_MEMORY_LIMIT') ),
@@ -75,8 +75,13 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'PHP memory_limit' => $this->memory_size( ini_get('memory_limit') ),
             'PHP post_max_size' => $this->memory_size( ini_get('post_max_size') ),
             //'PHP upload_max_filesize' => $this->memory_size( ini_get('upload_max_filesize') ),
-            'PHP max_execution_time' => ini_get('max_execution_time') ?: '0',
+            'PHP max_execution_time' => (string) ini_get('max_execution_time'),
         ) );
+
+        // Check if raising memory limit works (wp>=4.6)
+        if( function_exists('wp_is_ini_value_changeable') && wp_is_ini_value_changeable('memory_limit') ){
+            $memory['PHP memory_limit'] .= ' (changeable)';
+        }
         
         // Ajaxing:
         $this->enqueueScript('debug');

@@ -5,12 +5,10 @@ require_once ABSPATH . WPINC . '/Text/Diff/Renderer.php';
 require_once ABSPATH . WPINC . '/Text/Diff/Renderer/inline.php';
 require_once ABSPATH . WPINC . '/wp-diff.php';
 
-
 /**
  * Diff renderer extending that which WordPress uses for post revisions.
  */
 class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
-
 
     /**
      * {@inheritdoc}
@@ -22,7 +20,6 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
             'trailing_context_lines' => 1,
         ) );
     }
-
 
 
     /**
@@ -44,14 +41,12 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
     }
 
 
-
     /**
      * {@inheritdoc}
      */
     public function _startDiff() {
         return "<table class=\"diff\">\n";
     }
-
 
 
     /**
@@ -62,14 +57,12 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
     }
 
 
-
     /**
      * {@inheritdoc}
      */
     public function _startBlock( $header ) {
         return '<tbody data-diff="'.esc_attr($header)."\">\n";
     }
-
 
 
     /**

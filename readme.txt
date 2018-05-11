@@ -89,6 +89,9 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Changelog ==
 
+= 2.1.4 =
+* 
+
 = 2.1.3 =
 * Added loco_locale_name filter and updated locale data
 * Fixed editor column sorting to update as values change
@@ -253,7 +256,7 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 
 == Upgrade Notice ==
 
-= 2.1.3 =
+= 2.1.4 =
 * Various bug fixes and improvements
 
 
