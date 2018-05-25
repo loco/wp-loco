@@ -90,7 +90,8 @@ Help is provided via the [plugin support forum](https://wordpress.org/support/pl
 == Changelog ==
 
 = 2.1.4 =
-* 
+* Bumped WP compatibility to 4.9.6
+* Hooked in privacy policy suggestion
 
 = 2.1.3 =
 * Added loco_locale_name filter and updated locale data
