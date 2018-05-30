@@ -92,6 +92,9 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 == Changelog ==
 
+= 2.1.5 =
+* Updated locale data
+
 = 2.1.4 =
 * Bumped WP compatibility to 4.9.6
 * Hooked in privacy policy suggestion
@@ -260,7 +263,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 == Upgrade Notice ==
 
-= 2.1.4 =
+= 2.1.5 =
 * Various bug fixes and improvements
 
 
