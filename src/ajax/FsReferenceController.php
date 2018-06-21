@@ -32,7 +32,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         }
 
         // check against PO file location when no search paths or search paths failed
-	    $srcfile = new Loco_fs_File($refpath);
+        $srcfile = new Loco_fs_File($refpath);
         $srcfile->normalize( $pofile->dirname() );
         if( $srcfile->exists() ){
         	return $srcfile;
