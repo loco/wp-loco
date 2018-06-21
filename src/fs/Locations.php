@@ -118,7 +118,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @internal
+     *
      */
     public function __construct( array $paths ){
         parent::__construct( array() );

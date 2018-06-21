@@ -77,7 +77,7 @@ class Loco_gettext_SearchPaths extends Loco_fs_FileFinder {
             }
         }
 
-        // Add po file location if no propietary headers used
+        // Add po file location if no proprietary headers used
         if( ! $ninc ){
             $this->addRoot( $pofile->dirname() );
         }
