@@ -346,7 +346,6 @@ class Loco_fs_File {
     }
 
 
-
     /**
      * Normalize path for string comparison, resolves redundant dots and slashes.
      * @param string path to prefix

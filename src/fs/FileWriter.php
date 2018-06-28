@@ -71,12 +71,11 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * @internal
      * Map virtual path for remote file system
      */
     private function mapPath( $path ){
         if( ! $this->isDirect() ){
-            $base = untrailingslashit( loco_constant('WP_CONTENT_DIR') );
+            $base = untrailingslashit( Loco_fs_File::abs(loco_constant('WP_CONTENT_DIR')) );
             $snip = strlen($base);
             if( substr( $path, 0, $snip ) !== $base ){
                 // fall back to default path in case of symlinks
