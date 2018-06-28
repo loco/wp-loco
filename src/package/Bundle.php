@@ -249,7 +249,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
             return $this->root->getPath();
         }
         // without a root directory return WordPress root
-        return rtrim(ABSPATH,'/');
+        return untrailingslashit(ABSPATH);
     }
 
 

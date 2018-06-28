@@ -69,7 +69,7 @@ class Loco_fs_Locations extends ArrayObject {
         if( ! self::$conts ){
             self::$conts = new Loco_fs_Locations( array(
                 loco_constant('WP_CONTENT_DIR'),  // <- defined WP_CONTENT_DIR
-                rtrim(ABSPATH,'/').'/wp-content', // <- default /wp-content
+                trailingslashit(ABSPATH).'wp-content', // <- default /wp-content
             ) );
         }
         return self::$conts;
@@ -150,7 +150,7 @@ class Loco_fs_Locations extends ArrayObject {
      * @return bool whether path matched
      */    
     public function check( $path ){
-        $path = Loco_fs_File::abs($path).'/';
+        $path = trailingslashit( Loco_fs_File::abs($path) );
         foreach( $this as $prefix => $length ){
             if( $prefix === $path || substr($path,0,$length) === $prefix ){
                 return true;
@@ -166,13 +166,13 @@ class Loco_fs_Locations extends ArrayObject {
      * @return string | null
      */
     public function rel( $path ){
-        $path = Loco_fs_File::abs($path).'/';
+        $path = trailingslashit( Loco_fs_File::abs($path) );
         foreach( $this as $prefix => $length ){
             if( $prefix === $path ){
                 return '.';
             }
             if( substr($path,0,$length) === $prefix ){
-                return rtrim( substr($path,$length), "/" );
+                return untrailingslashit( substr($path,$length) );
             }
         }
     }

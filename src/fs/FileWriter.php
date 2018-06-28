@@ -76,11 +76,11 @@ class Loco_fs_FileWriter {
      */
     private function mapPath( $path ){
         if( ! $this->isDirect() ){
-            $base = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
+            $base = untrailingslashit( loco_constant('WP_CONTENT_DIR') );
             $snip = strlen($base);
             if( substr( $path, 0, $snip ) !== $base ){
                 // fall back to default path in case of symlinks
-                $base = rtrim(ABSPATH,'/').'/wp-content';
+                $base = trailingslashit(ABSPATH).'wp-content';
                 $snip = strlen($base);
                 if( substr( $path, 0, $snip ) !== $base ){
                     throw new Loco_error_WriteException('Remote path must be under WP_CONTENT_DIR');
@@ -90,7 +90,7 @@ class Loco_fs_FileWriter {
             if( false === $virt ){
                 throw new Loco_error_WriteException('Failed to find WP_CONTENT_DIR via remote connection');
             }
-            $virt = rtrim( $virt, '/' );
+            $virt = untrailingslashit( $virt );
             $path = substr_replace( $path, $virt, 0, $snip );
         }
         return $path;

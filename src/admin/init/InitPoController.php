@@ -117,7 +117,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         
         // default locale is a placeholder
         $locale = new Loco_Locale('zxx');
-        $content_dir = rtrim( loco_constant('WP_CONTENT_DIR'), '/' );
+        $content_dir = untrailingslashit( loco_constant('WP_CONTENT_DIR') );
         $copying = false;
         
         // Permit using any provided file a template instead of POT

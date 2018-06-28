@@ -46,7 +46,7 @@ abstract class Loco_config_Model {
      * @return void
      */
     public function setDirectoryPath( $path, $key = null ){
-        $path = rtrim( $path, '/' );
+        $path = untrailingslashit($path);
         if( is_null($key) ){
             $this->base = $path;
         }
@@ -76,7 +76,7 @@ abstract class Loco_config_Model {
             $value = $this->dirs[$key];
         }
         else {
-            $value = rtrim( loco_constant($key), '/' );
+            $value = untrailingslashit( loco_constant($key) );
         }
 
         return $value;

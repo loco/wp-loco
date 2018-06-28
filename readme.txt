@@ -94,6 +94,8 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 = 2.1.5 =
 * Updated locale data
+* Minor fix to file reference resolution
+* Fixed windows paths with trailing backslash
 
 = 2.1.4 =
 * Bumped WP compatibility to 4.9.6

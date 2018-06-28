@@ -15,8 +15,8 @@ class Loco_package_Theme extends Loco_package_Bundle {
      */
     public function getSystemTargets(){
         return array ( 
-            rtrim( loco_constant('LOCO_LANG_DIR'), '/' ).'/themes',
-            rtrim( loco_constant('WP_LANG_DIR'), '/' ).'/themes',
+            trailingslashit( loco_constant('LOCO_LANG_DIR') ).'themes',
+            trailingslashit( loco_constant('WP_LANG_DIR') ).'themes',
         );
     }
 

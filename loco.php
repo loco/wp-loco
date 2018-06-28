@@ -157,7 +157,7 @@ spl_autoload_register( 'loco_autoload', false );
 
 // provide safe directory for custom translations that won't be deleted during auto-updates
 if( ! defined('LOCO_LANG_DIR') ){
-    define( 'LOCO_LANG_DIR', rtrim(loco_constant('WP_LANG_DIR'),'/').'/loco' );
+    define( 'LOCO_LANG_DIR', trailingslashit(loco_constant('WP_LANG_DIR')).'loco' );
 }
 
 
