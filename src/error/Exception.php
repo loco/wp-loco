@@ -47,9 +47,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
     }
 
 
-
     /**
-     * @internal
      * @return Loco_error_Exception
      */
     public function setCallee( array $callee ){
@@ -57,7 +55,6 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
         $this->_line = $callee['line'];
         return $this;
     }
-
 
 
     /**

@@ -12,13 +12,13 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 
     /**
      * @var Loco_output_Buffer
-     */    
+     */
     private $buffer;
-
-
 
     /**
      * Generate a GET request URL containing required routing parameters
+     * @param string
+     * @param array
      * @return string
      */
     public static function generate( $route, array $args = array() ){
@@ -35,7 +35,6 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
     }
 
 
-
     /**
      * Create a new ajax router and starts buffering output immediately
      */
@@ -43,7 +42,6 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         $this->buffer = Loco_output_Buffer::start();
         parent::__construct();
     }
-
 
 
     /**
@@ -70,7 +68,6 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         }
     }
 
-
     
     /**
      * @return string
@@ -84,29 +81,22 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
     }
 
 
-
     /**
-     * Common ajax hook for all Loco admin JSON requests 
+     * Common ajax hook for all Loco admin JSON requests
+     * Note that tests call renderAjax directly.
      * @codeCoverageIgnore
      */
     public function on_wp_ajax_loco_json(){
         $json = $this->renderAjax();
-        // avoid outputing junk in JSON stream
-        Loco_output_Buffer::clear();
-        Loco_output_Buffer::check();
-        // output stream is clear, we can flush JSON
-        header('HTTP/1.1 200 OK', true, 200 );
-        header('Content-Length: '.strlen($json), true );
-        header('Content-Type: application/json; charset=UTF-8', true );
-        // avoid hijacking of exit via wp_die_ajax_handler. Tests call renderAjax directly.
-        echo $json;
-        exit(0);
+	    $this->exitScript( $json, array (
+	        'Content-Type' => 'application/json; charset=UTF-8',
+	    ) );
     }
-
 
 
     /**
      * Additional ajax hook for download actions that won't be JSON
+     * Note that tests call renderDownload directly.
      * @codeCoverageIgnore
      */
     public function on_wp_ajax_loco_download(){
@@ -124,33 +114,53 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             $data = (string) $data;
             $ext = null;
         }
-        // set content type header appropriate for supported file extensions
-        if( ! headers_sent() ){
-            $mimes = array(
-                'mo'   => 'application/x-gettext-translation',
-                'po'   => 'application/x-gettext',
-                'pot'  => 'application/x-gettext',
-                'xml'  => 'text/xml',
-                'json' => 'application/json',
-            );
-            if( $ext && isset($mimes[$ext]) ){
-                header('Content-Type: '.$mimes[$ext].'; charset=UTF-8', true );
-                header('Content-Disposition: attachment; filename='.$file->basename(), true );
-            }
-            else {
-                header('Content-Type: text/plain; charset=UTF-8', true );
-            }
-            header('Content-Length: '.strlen($data), true );
+        $mimes = array (
+            'mo'   => 'application/x-gettext-translation',
+            'po'   => 'application/x-gettext',
+            'pot'  => 'application/x-gettext',
+            'xml'  => 'text/xml',
+            'json' => 'application/json',
+        );
+        $headers = array();
+	    if( $ext && isset($mimes[$ext]) ){
+            $headers['Content-Type'] = $mimes[$ext].'; charset=UTF-8';
+            $headers['Content-Disposition'] = 'attachment; filename='.$file->basename();
         }
-        // avoid hijacking of exit via wp_die_ajax_handler. Tests call renderDownload directly.
-        echo $data;
-        exit(0);
+        else {
+	        $headers['Content-Type'] = 'text/plain; charset=UTF-8';
+        }
+        $this->exitScript( $data, $headers );
     }
 
 
+	/**
+	 * Exit script before WordPress shutdown, avoids hijacking of exit via wp_die_ajax_handler.
+	 * Also gives us a final chance to check for output buffering problems.
+	 * @codeCoverageIgnore
+	 * @param string
+	 * @param array
+	 */
+    private function exitScript( $str, array $headers ){
+	    try {
+	    	Loco_output_Buffer::clear();
+	    	$this->buffer = null;
+		    Loco_output_Buffer::check();
+		    $headers['Content-Length'] = strlen($str);
+		    foreach( $headers as $name => $value ){
+			    header( $name.': '.$value, true );
+		    }
+	    }
+	    catch( Exception $e ){
+		    Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
+		    $str = $e->getMessage();
+	    }
+    	echo $str;
+    	exit(0);
+    }
+
 
     /**
-     * Execute ajax controller to render JSON response body
+     * Execute Ajax controller to render JSON response body
      * @return string
      */
     public function renderAjax(){
@@ -173,13 +183,9 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             $e = new Loco_error_Exception( $e->getMessage(), $e->getCode() );
             $json = json_encode( array( 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ) );
         }
-        if( $this->buffer ){
-            $this->buffer->close();
-            $this->buffer = null;
-        }
+        $this->buffer->discard();
         return $json;
     }
-
 
 
     /**
@@ -201,10 +207,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             $data = $e;
         }
-        if( $this->buffer ){
-            $this->buffer->close();
-            $this->buffer = null;
-        }
+	    $this->buffer->discard();
         return $data;
     }
 

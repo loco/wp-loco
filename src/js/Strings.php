@@ -89,6 +89,15 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // Label for the plural form of the original English text
         _x("Plural","Editor",'loco-translate');
 
+        //
+        _x("Untranslated","Editor",'loco-translate');
+
+        //
+        _x("Translated","Editor",'loco-translate');
+
+        //
+        _x("Fuzzy","Editor",'loco-translate');
+
         // Label for the source text window when no translation selected
         _x("Source text not loaded","Editor",'loco-translate');
 

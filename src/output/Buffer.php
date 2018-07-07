@@ -49,7 +49,7 @@ class Loco_output_Buffer {
     public function open(){
         self::check();
         if( ! ob_start() ){
-            throw new RuntimeException('Failed to start output buffering');
+            throw new Loco_error_Exception('Failed to start output buffering');
         }
         $this->ob_level = ob_get_level();
         return $this;
@@ -62,52 +62,45 @@ class Loco_output_Buffer {
     public function close(){
         if( is_int($this->ob_level) ){
             // collect output from our nested buffers
-            $this->output = self::flush( $this->ob_level );
+            $this->output = self::collect( $this->ob_level );
             $this->ob_level = null;
         }
         return $this;
     }
 
 
-    /**
-     * Check the current script has not produced unbuffered output
-     * @throws Loco_error_Exception
-     * @return void
-     */
-    public static function check(){
-        if( headers_sent($file,$line) ){
-            $file = str_replace( trailingslashit( loco_constant('ABSPATH') ), '', $file );
-            $message = sprintf( __('Loco interrupted by output from %s:%u','loco-translate'), $file, $line );
-            // @codeCoverageIgnoreStart
-            // There's no way to handle junk output once it's flushed. exit unpleasantly unless in test
-            if( ! defined('LOCO_TEST') ){
-                throw new Loco_error_Exception( $message );
-            }
-            // @codeCoverageIgnoreEnd
-        }
+	/**
+	 * Trash all open buffers, logging any junk output collected
+	 * @return void
+	 */
+    public function discard(){
+    	$this->close();
+	    if( '' !== $this->output ){
+		    self::log_junk( $this->output );
+		    $this->output = '';
+	    }
     }
 
 
     /**
-     * @internal
-     * @param int highest buffer to flush
+     * Collect output buffered to a given level
+     * @param int highest buffer to flush, 0 being the root
      * @return string
      */
-    private static function flush( $min ){
-        $last = -1;    
+    public static function collect( $min ){
+        $last = 0;
         $output = '';
         while( $level = ob_get_level() ){
-            // avoid "impossible" infinite loop
             // @codeCoverageIgnoreStart
             if( $level === $last ){
-                throw new Exception('Failed to close output buffer');
+                throw new Loco_error_Exception('Failed to close output buffer');
             }
             // @codeCoverageIgnoreEnd
             if( $level < $min ){
                 break;
             }
-            $output .= ob_get_contents();
-            ob_get_clean();
+            // output is appended inside out:
+            $output = ob_get_clean().$output;
             $last = $level;
         }
         return $output;
@@ -115,16 +108,38 @@ class Loco_output_Buffer {
 
 
     /**
-     * Destroy all output buffers
+     * Forcefully destroy all open buffers and log any bytes already buffered.
      * @return void
      */
     public static function clear(){
-        $junk = self::flush(0);
-        if( $bytes = strlen($junk) ){
-            do_action( 'loco_buffer_cleared', $junk );
-            $message = sprintf("Cleared %s of buffered output", Loco_mvc_FileParams::renderBytes($bytes) );
-            Loco_error_AdminNotices::debug( $message );
-        }
+        $junk = self::collect(0);
+	    if( '' !== $junk ){
+		    self::log_junk($junk);
+	    }
     }
+
+
+    /**
+     * Check output has not already been flushed.
+     * @throws Loco_error_Exception
+     */
+    public static function check(){
+	    if( headers_sent($file,$line) && 'cli' !== PHP_SAPI ){
+		    $file = str_replace( trailingslashit( loco_constant('ABSPATH') ), '', $file );
+		    throw new Loco_error_Exception( sprintf( __('Loco interrupted by output from %s:%u','loco-translate'), $file, $line ) );
+	    }
+    }
+
+
+	/**
+	 * Debug collection of junk output
+	 * @param string
+	 */
+    private static function log_junk( $junk ){
+    	$bytes = strlen($junk);
+		$message = sprintf("Cleared %s of buffered output", Loco_mvc_FileParams::renderBytes($bytes) );
+		Loco_error_AdminNotices::debug( $message );
+		do_action( 'loco_buffer_cleared', $junk );
+	}
 
 }

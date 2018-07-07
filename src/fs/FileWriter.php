@@ -30,7 +30,6 @@ class Loco_fs_FileWriter {
     }
     
 
-
     /**
      * Connect to alternative file system context
      * @return Loco_fs_FileWriter

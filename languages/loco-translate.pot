@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.1.4-dev\n"
+"Project-Id-Version: Loco Translate 2.1.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-05-25 11:55+0000\n"
+"POT-Creation-Date: 2018-07-07 11:25+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: src/fs/FileWriter.php:175
+#: src/fs/FileWriter.php:174
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
@@ -446,7 +446,7 @@ msgid "Context"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/Strings.php:96
+#: src/js/Strings.php:105
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
@@ -458,7 +458,7 @@ msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:164
+#: src/js/Strings.php:99 src/admin/file/EditController.php:164
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -501,7 +501,7 @@ msgid "Source text"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/Strings.php:93
+#: src/js/Strings.php:102
 msgctxt "Editor"
 msgid "Source text not loaded"
 msgstr ""
@@ -524,16 +524,26 @@ msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
 
+#: src/js/Strings.php:96
+msgctxt "Editor"
+msgid "Translated"
+msgstr ""
+
 #. List heading showing preview of translated text for each item
-#: src/js/Strings.php:102
+#: src/js/Strings.php:111
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/Strings.php:99
+#: src/js/Strings.php:108
 msgctxt "Editor"
 msgid "Translation not loaded"
+msgstr ""
+
+#: src/js/Strings.php:93
+msgctxt "Editor"
+msgid "Untranslated"
 msgstr ""
 
 #: tpl/admin/errors/file-missing.php:14
@@ -562,11 +572,11 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:230
+#: src/fs/FileWriter.php:229
 msgid "Failed to build directory path"
 msgstr ""
 
-#: src/fs/FileWriter.php:124
+#: src/fs/FileWriter.php:123
 #, php-format
 msgid "Failed to chmod %s"
 msgstr ""
@@ -575,7 +585,7 @@ msgstr ""
 msgid "Failed to connect to remote server"
 msgstr ""
 
-#: src/fs/FileWriter.php:144
+#: src/fs/FileWriter.php:143
 #, php-format
 msgid "Failed to copy %s to %s"
 msgstr ""
@@ -587,16 +597,16 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:223
+#: src/fs/FileWriter.php:222
 msgid "Failed to create directory"
 msgstr ""
 
-#: src/fs/FileWriter.php:159
+#: src/fs/FileWriter.php:158
 #, php-format
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:196
+#: src/fs/FileWriter.php:195
 msgid "Failed to save file"
 msgstr ""
 
@@ -656,7 +666,7 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:242
+#: src/fs/FileWriter.php:241
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -974,7 +984,7 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:246
+#: src/fs/FileWriter.php:245
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
@@ -1117,7 +1127,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/fs/FileWriter.php:193
+#: src/fs/FileWriter.php:192
 msgid "Parent directory doesn't exist"
 msgstr ""
 
@@ -1137,7 +1147,7 @@ msgstr ""
 msgid "Permission denied"
 msgstr ""
 
-#: src/fs/FileWriter.php:189
+#: src/fs/FileWriter.php:188
 msgid "Permission denied to update file"
 msgstr ""
 
@@ -1254,7 +1264,7 @@ msgstr ""
 msgid "Recently updated:"
 msgstr ""
 
-#: src/fs/FileWriter.php:141
+#: src/fs/FileWriter.php:140
 msgid "Refusing to copy over an existing file"
 msgstr ""
 
