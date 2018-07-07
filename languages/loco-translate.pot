@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-07 11:25+0000\n"
+"POT-Creation-Date: 2018-07-07 19:03+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/"
 
-#: src/fs/FileWriter.php:174
+#: src/fs/FileWriter.php:173
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
@@ -148,11 +148,11 @@ msgstr ""
 msgid "Advanced tab"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:166
+#: src/mvc/AjaxRouter.php:176
 msgid "Ajax controller returned empty JSON"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:161
+#: src/mvc/AjaxRouter.php:171
 #, php-format
 msgid "Ajax route not found: \"%s\""
 msgstr ""
@@ -344,7 +344,7 @@ msgid "Custom language"
 msgstr ""
 
 #: src/error/Debug.php:19 src/admin/config/BaseController.php:23
-#: src/admin/config/DebugController.php:13
+#: src/admin/config/DebugController.php:12
 #: src/admin/bundle/BaseController.php:104
 msgid "Debug"
 msgstr ""
@@ -390,11 +390,11 @@ msgstr ""
 msgid "Domain path"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:193
+#: src/mvc/AjaxRouter.php:199
 msgid "Download action not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:198
+#: src/mvc/AjaxRouter.php:204
 msgid "Download controller returned empty output"
 msgstr ""
 
@@ -552,7 +552,7 @@ msgid ""
 "it"
 msgstr ""
 
-#: src/js/Strings.php:62 src/error/Exception.php:95
+#: src/js/Strings.php:62 src/error/Exception.php:92
 msgid "Error"
 msgstr ""
 
@@ -572,20 +572,20 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:229
+#: src/fs/FileWriter.php:228
 msgid "Failed to build directory path"
 msgstr ""
 
-#: src/fs/FileWriter.php:123
+#: src/fs/FileWriter.php:122
 #, php-format
 msgid "Failed to chmod %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:47
+#: src/fs/FileWriter.php:46
 msgid "Failed to connect to remote server"
 msgstr ""
 
-#: src/fs/FileWriter.php:143
+#: src/fs/FileWriter.php:142
 #, php-format
 msgid "Failed to copy %s to %s"
 msgstr ""
@@ -597,16 +597,16 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:222
+#: src/fs/FileWriter.php:221
 msgid "Failed to create directory"
 msgstr ""
 
-#: src/fs/FileWriter.php:158
+#: src/fs/FileWriter.php:157
 #, php-format
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:195
+#: src/fs/FileWriter.php:194
 msgid "Failed to save file"
 msgstr ""
 
@@ -666,7 +666,7 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:241
+#: src/fs/FileWriter.php:240
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -913,7 +913,7 @@ msgid ""
 "are many files"
 msgstr ""
 
-#: src/output/Buffer.php:80
+#: src/output/Buffer.php:129
 #, php-format
 msgid "Loco interrupted by output from %s:%u"
 msgstr ""
@@ -984,7 +984,7 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:245
+#: src/fs/FileWriter.php:244
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
@@ -1127,7 +1127,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/fs/FileWriter.php:192
+#: src/fs/FileWriter.php:191
 msgid "Parent directory doesn't exist"
 msgstr ""
 
@@ -1147,7 +1147,7 @@ msgstr ""
 msgid "Permission denied"
 msgstr ""
 
-#: src/fs/FileWriter.php:188
+#: src/fs/FileWriter.php:187
 msgid "Permission denied to update file"
 msgstr ""
 
@@ -1264,7 +1264,7 @@ msgstr ""
 msgid "Recently updated:"
 msgstr ""
 
-#: src/fs/FileWriter.php:140
+#: src/fs/FileWriter.php:139
 msgid "Refusing to copy over an existing file"
 msgstr ""
 
