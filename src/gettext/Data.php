@@ -6,8 +6,7 @@ loco_require_lib('compiled/gettext.php');
  * Wrapper for array forms of parsed PO data
  */
 class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
-    
-    
+
     /**
      * Normalize file extension to internal type
      * @return string "po", "pot" or "mo"
@@ -22,7 +21,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * @return Loco_gettext_Data
      */
@@ -32,7 +30,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         }
         return self::fromSource( $file->getContents() );
     }
-
 
 
     /**
@@ -49,7 +46,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * @param string assumed PO source
      * @return Loco_gettext_Data
@@ -59,7 +55,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * @param string assumed MO bytes
      * @return Loco_gettext_Data
@@ -67,7 +62,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     public static function fromBinary( $bin ){
         return new Loco_gettext_Data( loco_parse_mo($bin) );
     }
-
 
 
     /**
@@ -96,7 +90,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * Get final UTF-8 string for writing to file
      * @param bool whether to sort output, generally only for extracting strings
@@ -113,7 +106,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         }
         return $po;
     }
-
 
 
     /**
@@ -136,7 +128,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * Export to JSON for JavaScript editor
      * @return string
@@ -144,7 +135,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     public function exportJson(){
         return json_encode( $this->jsonSerialize() );
     }
-
 
 
     /**
@@ -156,7 +146,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         return md5( implode("\1",$data) );
     }
 
-    
     
     /**
      * @return Loco_gettext_Data
@@ -218,7 +207,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * @return Loco_gettext_Data
      */
@@ -247,7 +235,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
-
     /**
      * Remap proprietary base path when PO file is moving to another location.
      * 
@@ -271,7 +258,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         }
         return false;
     }
-
 
 
     /**

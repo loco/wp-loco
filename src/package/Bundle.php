@@ -323,10 +323,11 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     
     /**
      * Add all projects defined in a TextDomain
+     * @param Loco_package_TextDomain
      * @return Loco_package_Bundle
      */
     public function addDomain( Loco_package_TextDomain $domain ){
-        /* @var $proj Loco_package_Project */
+        /* @var Loco_package_Project $proj */
         foreach( $domain as $proj ){
             $this->addProject($proj);
         }

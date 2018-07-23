@@ -1,6 +1,6 @@
 <?php
 /**
- * Intitialize a new PO translations file
+ * Initialize a new PO translations file
  */
 $this->extend('../layout');
 

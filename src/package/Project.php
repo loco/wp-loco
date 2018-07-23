@@ -224,6 +224,7 @@ class Loco_package_Project {
 
     /**
      * Add a global search path where translation files may live
+     * @param string | Loco_fs_Directory
      * @return Loco_package_Project
      */
     public function addSystemTargetDirectory( $location ){
@@ -270,7 +271,7 @@ class Loco_package_Project {
             $target->setRecursive(false)->group('pot','po','mo');
             foreach( $this->dpaths as $path ){
                 // TODO search need not be recursive if it was the configured DomainPath
-                // currenly no way to know at this point, so recursing by default.
+                // currently no way to know at this point, so recursing by default.
                 $target->addRoot( (string) $path, true );
             }
             foreach( $this->gpaths as $path ){
@@ -654,7 +655,8 @@ class Loco_package_Project {
 
 
     /**
-     * Intialize choice of PO file paths for a given locale
+     * Initialize choice of PO file paths for a given locale
+     * @param Loco_Locale locale to initialize translation files for
      * @return Loco_fs_FileList
      */
     public function initLocaleFiles( Loco_Locale $locale ){

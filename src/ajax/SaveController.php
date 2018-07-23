@@ -3,8 +3,7 @@
  * Ajax "save" route, for saving editor contents to disk
  */
 class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
-    
-    
+
     /**
      * {@inheritdoc}
      */
@@ -89,10 +88,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         $this->set('poname', $pofile->basename() );
         $this->set('modified', $mtime);
         $this->set('datetime', Loco_mvc_ViewParams::date_i18n($mtime) );
-        
-        // Intial message refers to PO/POT save success
-        $success = $locale ? __('PO file saved','loco-translate') : __('POT file saved','loco-translate');
-        
+
         // Compile MO file unless saving template
         if( $locale ){
             try {

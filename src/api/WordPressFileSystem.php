@@ -191,7 +191,7 @@ class Loco_api_WordPressFileSystem {
             }
         }
         catch( Exception $e ){
-            // tollerate session failure
+            // tolerate session failure
         }
 
         $post = Loco_mvc_PostParams::get();
@@ -208,7 +208,7 @@ class Loco_api_WordPressFileSystem {
                 return false;
             }
         }
-        // direct fileystem if ok if front end already posted it
+        // direct filesystem if ok if front end already posted it
         else if( 'direct' === $post->connection_type ){
             return true;
         }
@@ -300,7 +300,7 @@ class Loco_api_WordPressFileSystem {
             }
         }
         catch( Exception $e ){
-            // tollerate session failure
+            // tolerate session failure
             Loco_error_AdminNotices::debug( $e->getMessage() );
         }
         return false;

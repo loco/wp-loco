@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-07-07 19:03+0000\n"
+"POT-Creation-Date: 2018-07-23 09:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -590,7 +590,7 @@ msgstr ""
 msgid "Failed to copy %s to %s"
 msgstr ""
 
-#: src/ajax/SaveController.php:67
+#: src/ajax/SaveController.php:66
 #, php-format
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
@@ -1232,19 +1232,15 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/ajax/SaveController.php:94
-msgid "PO file saved"
-msgstr ""
-
-#: src/ajax/SaveController.php:103
+#: src/ajax/SaveController.php:99
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:107
+#: src/ajax/SaveController.php:103
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
-#: src/ajax/SaveController.php:94 src/ajax/SaveController.php:112
+#: src/ajax/SaveController.php:108
 msgid "POT file saved"
 msgstr ""
 
