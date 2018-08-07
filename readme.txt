@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 4.9.6
+Tested up to: 4.9.8
 Stable tag: 2.1.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,7 +98,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Fixed windows paths with trailing backslash
 * Fixed ssh-keys toggling issue
 * Rejigged buffer handling during Ajax
-* Bumped WP compatibility to 4.9.7
+* Bumped WP compatibility to 4.9.8
 
 = 2.1.4 =
 * Bumped WP compatibility to 4.9.6
