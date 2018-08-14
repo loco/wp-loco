@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 4.9.8
-Stable tag: 2.1.4
+Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
