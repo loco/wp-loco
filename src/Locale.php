@@ -169,7 +169,7 @@ class Loco_Locale implements JsonSerializable {
      */    
     public function getName(){
         if( $name = $this->name ){
-            // use canonincal native name only when current language matches
+            // use canonical native name only when current language matches
             // deliberately not matching whole tag such that fr_CA would show native name of fr_FR
             if( $_name = $this->getNativeName() ){
                 $locale = self::parse( function_exists('get_user_locale') ? get_user_locale() : get_locale() );
@@ -347,7 +347,7 @@ class Loco_Locale implements JsonSerializable {
         if( ! $cache ){
             $lc = $this->lang;
             $db = Loco_data_CompiledData::get('plurals');
-            $id = isset($db[$lc]) ? $db[$lc] : 0;
+            $id = $lc && isset($db[$lc]) ? $db[$lc] : 0;
             $cache = $this->setPlurals( $db[''][$id] );
         }
         return $cache;

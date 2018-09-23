@@ -170,7 +170,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'Content-Type' => 'text/plain; charset=UTF-8',
             'Content-Transfer-Encoding' => '8bit',
             'X-Generator' => 'Loco https://localise.biz/',
-            //'X-WordPress' => sprintf('Loco Translate %s, WP %s', loco_plugin_version(), $GLOBALS['wp_version'] ),
+            'X-Loco-Version' => sprintf('%s; wp-%s', loco_plugin_version(), $GLOBALS['wp_version'] ),
         );
         // set actual last translator from WordPress login when possible
         if( function_exists('get_current_user_id') && get_current_user_id() ){
