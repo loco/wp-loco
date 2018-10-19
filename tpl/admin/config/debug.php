@@ -32,10 +32,7 @@ $this->extend('../layout');
                 <dd><?php echo $encoding->OK?> <span id="loco-utf8-check"><?php echo $encoding->tick?></span></dd>
 
                 <dt>Multibyte support:</dt>
-                <dd><?php echo $encoding->mbstring?'Yes':'No'?></dd>
-
-                <dt>Byte lengths:</dt>
-                <dd><?php echo 2 === strlen("\xC2\xA3")?'OK':'<span class="loco-danger">ERROR</span>'?></dd>
+                <dd><?php echo $encoding->mbstring?></dd>
             </dl>
         </div>
     

@@ -65,8 +65,13 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'OK' => "\xCE\x9F\xCE\x9A",
             'tick' => "\xE2\x9C\x93",
             'json' => json_decode('"\\u039f\\u039a \\u2713"'),
-            'mbstring' => loco_check_extension('mbstring'),
+            'mbstring' => loco_check_extension('mbstring') ? "\xCE\x9F\xCE\x9A \xE2\x9C\x93" : 'No',
         ) );
+
+        // Sanity check mbstring.func_overload
+        if( 2 !== strlen("\xC2\xA3") ){
+            $encoding->mbstring = 'Error, disable mbstring.func_overload';
+        }
 
         // PHP / env memory settings:
         $memory = new Loco_mvc_PostParams( array(
