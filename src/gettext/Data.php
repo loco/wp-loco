@@ -78,6 +78,9 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return string MO file source
      */
     public function msgfmt(){
+        if( 2 !== strlen("\xC2\xA3") ){
+            throw new Loco_error_Exception('Refusing to compile MO file. Please disable mbstring.func_overload'); // @codeCoverageIgnore
+        }
         $mo = new LocoMo( $this, $this->getHeaders() );
         $opts = Loco_data_Settings::get();
         if( $opts->gen_hash ){

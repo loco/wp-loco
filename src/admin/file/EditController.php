@@ -109,8 +109,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                     $potfile = null;
                 }
             }
-            // allow PO file to dictate its own Plural-Forms
             if( $locale ){
+                // allow PO file to dictate its own Plural-Forms
                 try {
                     $locale->setPluralFormsHeader( $head['Plural-Forms'] );
                 }
@@ -119,6 +119,11 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 }
                 // fill in missing PO headers now locale is fully resolved
                 $data->localize($locale);
+                
+                // If MO file will be compiled, check for library/config problems
+                if ( 2 !== strlen( "\xC2\xA3" ) ) {
+                    Loco_error_AdminNotices::warn('Your mbstring configuration will result in corrupt MO files. Please ensure mbstring.func_overload is disabled');
+                }
             }
         }
         

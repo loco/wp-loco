@@ -95,6 +95,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 = 2.1.6 =
 * Fix for empty language code when getting plural rules
 * Added X-Loco-Version header to generated Gettext files
+* Added sanity check for mbstring.func_overload madness
 
 = 2.1.5 =
 * Updated locale data

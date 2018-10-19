@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.6-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-09-23 12:23+0000\n"
+"POT-Creation-Date: 2018-10-19 09:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -428,7 +428,7 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:153
+#: src/admin/file/EditController.php:158
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
@@ -452,13 +452,13 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:166
+#: src/admin/file/EditController.php:171
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/js/Strings.php:99 src/admin/file/EditController.php:164
+#: src/js/Strings.php:99 src/admin/file/EditController.php:169
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -470,19 +470,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:155
+#: src/admin/file/EditController.php:160
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:162
+#: src/admin/file/EditController.php:167
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:158
+#: src/admin/file/EditController.php:163
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -507,19 +507,19 @@ msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:160
+#: src/admin/file/EditController.php:165
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:172
+#: src/admin/file/EditController.php:177
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:170
+#: src/admin/file/EditController.php:175
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -712,7 +712,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:168
+#: src/admin/file/EditController.php:173
 msgid "Filter translations"
 msgstr ""
 
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:156
+#: src/admin/file/EditController.php:161
 msgid "Help"
 msgstr ""
 
@@ -918,7 +918,7 @@ msgstr ""
 msgid "Loco interrupted by output from %s:%u"
 msgstr ""
 
-#: loco.php:131
+#: loco.php:133
 #, php-format
 msgid ""
 "Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
