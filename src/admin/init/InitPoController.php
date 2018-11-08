@@ -226,13 +226,16 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $_GET + array( 'extract' => '1' ) ),
                     'text' => __('Skip template','loco-translate'),
                 ) ) );
-                $this->set( 'conf', new Loco_mvc_ViewParams( array(
-                    'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-conf', array_intersect_key($_GET,array('bundle'=>'')) ),
-                    'text' => __('Assign template','loco-translate'),
-                ) ) );
                 // POT could still be defined, it might just not exist yet
                 if( $potfile ){
                     $this->set('pot', Loco_mvc_FileParams::create($potfile) );
+                }
+                // else offer assignment of a new file
+                else {
+                    $this->set( 'conf', new Loco_mvc_ViewParams( array(
+                        'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-conf', array_intersect_key($_GET,array('bundle'=>'')) ),
+                        'text' => __('Assign template','loco-translate'),
+                    ) ) );
                 }
                 return $this->view('admin/init/init-prompt');
             }
