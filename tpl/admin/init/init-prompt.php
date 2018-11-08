@@ -24,6 +24,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
         <p>
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
             <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a>
+            <a href="<?php $conf->e('link')?>" class="button button-link has-icon icon-wrench"><?php $conf->e('text')?></a>
             <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('About templates','loco-translate')?></a>
         </p>
     </div>

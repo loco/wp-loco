@@ -91,7 +91,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
     public function render(){
         
         $breadcrumb = $this->prepareNavigation();
-        // "new" tab is confising when no project-scope navigation
+        // "new" tab is confusing when no project-scope navigation
         // $this->get('tabs')->add( __('New PO','loco-translate'), '', true );
         
         // bundle mandatory, but project optional
@@ -186,7 +186,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
 
 
-        // show information about POT file if we are initialializing from template
+        // show information about POT file if we are initializing from template
         if( $potfile && $potfile->exists() ){
             $meta = Loco_gettext_Metadata::load($potfile);
             $total = $meta->getTotal();
@@ -203,7 +203,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 $filechoice->add( $pofile );
             }
             /// else if POT is in a folder we don't know about, we may as well add to the choices
-            // TODO this means another utilty function in project for prefixing rules on individual location
+            // TODO this means another utility function in project for prefixing rules on individual location
         }
         // else no template exists, so we prompt to extract from source
         else {
@@ -225,6 +225,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 $this->set( 'skip', new Loco_mvc_ViewParams( array(
                     'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $_GET + array( 'extract' => '1' ) ),
                     'text' => __('Skip template','loco-translate'),
+                ) ) );
+                $this->set( 'conf', new Loco_mvc_ViewParams( array(
+                    'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-conf', array_intersect_key($_GET,array('bundle'=>'')) ),
+                    'text' => __('Assign template','loco-translate'),
                 ) ) );
                 // POT could still be defined, it might just not exist yet
                 if( $potfile ){

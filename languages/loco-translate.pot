@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.6-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-10-19 09:27+0000\n"
+"POT-Creation-Date: 2018-11-08 10:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -104,7 +104,7 @@ msgstr ""
 msgid "About Loco Translate"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:27 tpl/admin/init/init-pot.php:42
+#: tpl/admin/init/init-prompt.php:28 tpl/admin/init/init-pot.php:42
 msgid "About templates"
 msgstr ""
 
@@ -184,6 +184,10 @@ msgstr ""
 msgid ""
 "Are you sure you want to <strong>permanently</strong> delete the following "
 "file?"
+msgstr ""
+
+#: src/admin/init/InitPoController.php:231
+msgid "Assign template"
 msgstr ""
 
 #: tpl/admin/bundle/setup.php:12
@@ -1733,7 +1737,7 @@ msgstr ""
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:318 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:322 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr ""
 

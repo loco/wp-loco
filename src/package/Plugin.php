@@ -234,7 +234,4 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         return $bundle;
     }
     
-    
-    
-    
 }

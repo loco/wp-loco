@@ -147,7 +147,7 @@ class Loco_gettext_Extraction {
      * @return int
      */
     public function getTotal(){
-        return $this->extractor->getTotal();
+        return $this->extractor->count();
     }
 
 

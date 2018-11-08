@@ -471,6 +471,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Do basic configuration from bundle meta data (file headers)
+     * @param array header tags from theme or plugin bootstrapper
      * @return bool whether configured
      */
     public function configureMeta( array $header ){
@@ -681,9 +682,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     }
 
 
-
     /**
-     * Create a copy of this bundle containg any files found that aren't currently configured
+     * Create a copy of this bundle containing any files found that aren't currently configured
      * @return Loco_package_Bundle
      */
     public function invert(){
