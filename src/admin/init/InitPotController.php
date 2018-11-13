@@ -34,7 +34,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
     public function render(){
         
         $breadcrumb = $this->prepareNavigation();
-        // "new" tab is confising when no project-scope navigation
+        // "new" tab is confusing when no project-scope navigation
         // $this->get('tabs')->add( __('New POT','loco-translate'), '', true );
 
         $bundle = $this->getBundle();

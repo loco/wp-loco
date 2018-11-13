@@ -7,6 +7,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
 
 
     /**
+     * @param string
      * @return Loco_fs_File
      */
     private function findSourceFile( $refpath ){
@@ -49,7 +50,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             }
             
             // check relative to parent theme root
-            if( $bundle->isTheme() && ( $parent = $bundle->getParentTheme() ) ){
+            if( $bundle->isTheme() && ( $parent = $bundle->getParent() ) ){
                 $srcfile = new Loco_fs_File( $refpath );
                 $srcfile->normalize( $parent->getDirectoryPath() );
                 if( $srcfile->exists() ){
@@ -99,8 +100,11 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         // find file or fail
         list( , $refpath, $refline ) = $r;
         $srcfile = $this->findSourceFile($refpath);
-        
-        $type = strtolower( $srcfile->extension() );
+
+        // get file type from registered file extensions:
+        $conf = Loco_data_Settings::get();
+        $type = $conf->ext2type( $srcfile->extension() );
+
         $this->set('type', $type );
         $this->set('line', (int) $refline );
         $this->set('path', $srcfile->getRelativePath( loco_constant('WP_CONTENT_DIR') ) );
@@ -108,10 +112,29 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         // source code will be HTML-tokenized into multiple lines
         $code = array();
         
-        // PHP is the most likely format. highlighting on back end because tokenizer provides more control than highlight.js
-        if( 'php' === $type ) {
+        // observe the same size limits for source highlighting as for string extraction as tokenizing will use the same amount of juice
+        $maxbytes = wp_convert_hr_to_bytes( $conf->max_php_size );
+        
+        // tokenizers require gettext utilities, easiest just to ping the extraction library
+        if( ! class_exists('Loco_gettext_Extraction',true) ){
+            throw new RuntimeException('Failed to load tokenizers'); // @codeCoverageIgnore
+        }
+        
+        // PHP is the most likely format. 
+        if( 'php' === $type && ( $srcfile->size() <= $maxbytes ) && loco_check_extension('tokenizer') ) {
+            $tokens = new LocoPHPTokens( token_get_all( $srcfile->getContents() ) );
+        }
+        else if( 'js' === $type ){
+            $tokens = new LocoJsTokens( $srcfile->getContents() );
+        }
+        else {
+            $tokens = null;
+        }
+
+        // highlighting on back end because tokenizer provides more control than highlight.js
+        if( $tokens instanceof LocoTokensInterface ){
             $thisline = 1;
-            foreach( token_get_all( $srcfile->getContents() ) as $tok ){
+            while( $tok = $tokens->advance() ){
                 if( is_array($tok) ){
                     // line numbers added in PHP 5.2.2 - WordPress minimum is 5.2.4
                     list( $t, $str, $startline ) = $tok;
@@ -140,14 +163,14 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                 }
             }
         }
-        /*/ TODO permit limited other file types, but without back end highlighting
-        else if( ){
+        // permit limited other file types, but without back end highlighting
+        else if( 'js' === $type || 'twig' === $type || 'php' === $type ){
             foreach( preg_split( '/\\R/u', $srcfile->getContents() ) as $line ){
                 $code[] = '<code>'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
             }
-        }*/
+        }
         else {
-            throw new Loco_error_Exception( sprintf('%s source view not supported', $type) );
+            throw new Loco_error_Exception( sprintf('%s source view not supported', $type) ); // @codeCoverageIgnore
         }
  
         if( ! isset($code[$refline-1]) ){

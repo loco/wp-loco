@@ -66,7 +66,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
      * Get parent bundle if theme is a child
      * @return Loco_package_Theme
      */
-    public function getParentTheme(){
+    public function getParent(){
         return $this->parent;
     }
 

@@ -270,6 +270,7 @@ class Loco_fs_File {
 
 
     /**
+     * Get file modification time as unix timestamp in seconds
      * @return int
      */
     public function modified(){
@@ -278,6 +279,7 @@ class Loco_fs_File {
 
 
     /**
+     * Get file size in bytes
      * @return int
      */
     public function size(){

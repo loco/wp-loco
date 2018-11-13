@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.6-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-08 10:31+0000\n"
+"POT-Creation-Date: 2018-11-13 18:41+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -96,7 +96,7 @@ msgid_plural "%s words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/config/settings.php:130
+#: tpl/admin/config/settings.php:136
 msgid "About file system access"
 msgstr ""
 
@@ -120,7 +120,7 @@ msgstr ""
 msgid "Add set"
 msgstr ""
 
-#: tpl/admin/config/settings.php:80
+#: tpl/admin/config/settings.php:86
 msgid "Add UTF-8 byte order mark"
 msgstr ""
 
@@ -157,15 +157,15 @@ msgstr ""
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
-#: tpl/admin/config/settings.php:117
+#: tpl/admin/config/settings.php:123
 msgid "Allow"
 msgstr ""
 
-#: tpl/admin/config/settings.php:120
+#: tpl/admin/config/settings.php:126
 msgid "Allow (with warning)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:141
+#: tpl/admin/config/settings.php:147
 msgid "Allow full access to these roles"
 msgstr ""
 
@@ -381,7 +381,7 @@ msgstr ""
 msgid "Directory is writeable"
 msgstr ""
 
-#: tpl/admin/config/settings.php:123
+#: tpl/admin/config/settings.php:129
 msgid "Disallow"
 msgstr ""
 
@@ -696,7 +696,7 @@ msgstr ""
 msgid "File size"
 msgstr ""
 
-#: tpl/admin/config/settings.php:100 tpl/admin/config/settings.php:104
+#: tpl/admin/config/settings.php:106 tpl/admin/config/settings.php:110
 msgid "File system access"
 msgstr ""
 
@@ -763,7 +763,7 @@ msgstr ""
 msgid "Go to WordPress Core"
 msgstr ""
 
-#: tpl/admin/config/settings.php:137
+#: tpl/admin/config/settings.php:143
 msgid "Grant access to roles"
 msgstr ""
 
@@ -957,11 +957,11 @@ msgstr ""
 msgid "Loco, Translation Management"
 msgstr ""
 
-#: tpl/admin/config/settings.php:92
+#: tpl/admin/config/settings.php:98
 msgid "Look for non-standard names:"
 msgstr ""
 
-#: tpl/admin/config/settings.php:73
+#: tpl/admin/config/settings.php:79
 msgid "Maximum line length (zero disables wrapping)"
 msgstr ""
 
@@ -984,7 +984,7 @@ msgstr ""
 msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
-#: tpl/admin/config/settings.php:114
+#: tpl/admin/config/settings.php:120
 msgid "Modification of installed files"
 msgstr ""
 
@@ -1043,7 +1043,7 @@ msgstr ""
 msgid "no wildcards"
 msgstr ""
 
-#: tpl/admin/config/settings.php:80 tpl/admin/config/settings.php:110
+#: tpl/admin/config/settings.php:86 tpl/admin/config/settings.php:116
 msgid "Not recommended"
 msgstr ""
 
@@ -1063,7 +1063,7 @@ msgstr ""
 msgid "Notice"
 msgstr ""
 
-#: tpl/admin/config/settings.php:67
+#: tpl/admin/config/settings.php:73
 msgid "Number of backups to keep of each file:"
 msgstr ""
 
@@ -1248,7 +1248,7 @@ msgstr ""
 msgid "POT file saved"
 msgstr ""
 
-#: tpl/admin/config/settings.php:87
+#: tpl/admin/config/settings.php:93
 msgid "POT template files"
 msgstr ""
 
@@ -1304,20 +1304,24 @@ msgstr ""
 msgid "Save config"
 msgstr ""
 
-#: tpl/admin/config/settings.php:109
+#: tpl/admin/config/settings.php:115
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:158 tpl/admin/config/prefs.php:28
+#: tpl/admin/config/settings.php:164 tpl/admin/config/prefs.php:28
 msgid "Save settings"
 msgstr ""
 
-#: tpl/admin/config/settings.php:59 tpl/admin/config/settings.php:63
+#: tpl/admin/config/settings.php:65 tpl/admin/config/settings.php:69
 msgid "Saving PO/POT files"
 msgstr ""
 
 #: src/admin/bundle/BaseController.php:154
 msgid "Saving this file requires permission"
+msgstr ""
+
+#: tpl/admin/config/settings.php:57
+msgid "Scan JavaScript files with extensions:"
 msgstr ""
 
 #: tpl/admin/config/settings.php:51

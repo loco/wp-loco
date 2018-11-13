@@ -97,6 +97,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Added X-Loco-Version header to generated Gettext files
 * Added sanity check for mbstring.func_overload madness
 * Added "Assign template" link on missing template page
+* Added JavaScript string extraction (experimental)
 
 = 2.1.5 =
 * Updated locale data

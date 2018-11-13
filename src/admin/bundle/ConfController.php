@@ -69,7 +69,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
 
 
         // parent themes are inherited into bundle, we don't want them in the child theme config
-        if( $bundle->isTheme() && ( $parent = $bundle->getParentTheme() ) ){
+        if( $bundle->isTheme() && ( $parent = $bundle->getParent() ) ){
             $this->set( 'parent', new Loco_mvc_ViewParams( array(
                 'name' => $parent->getName(),
                 'href' => Loco_mvc_AdminRouter::generate('theme-conf', array( 'bundle' => $parent->getSlug() ) + $_GET ),

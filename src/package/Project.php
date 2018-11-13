@@ -341,7 +341,9 @@ class Loco_package_Project {
             // .php extensions configured in plugin options
             $conf = Loco_data_Settings::get();
             $exts = $conf->php_alias or $exts = array('php');
-            $source->setRecursive(true)->groupBy( $exts );
+            // Only add .js extensions if enabled
+            $exts = array_merge( $exts, (array) $conf->jsx_alias );
+            $source->setRecursive(true)->groupBy($exts);
             /* @var $file Loco_fs_File */
             foreach( $this->spaths as $file ){
                 $path = realpath( (string) $file );    

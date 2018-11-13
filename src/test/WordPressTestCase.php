@@ -95,6 +95,9 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         if( ! isset($sniff['empty-theme']) ){
             delete_site_transient( 'theme_roots' );
         }
+        // test plugins require a filter as multiple roots not supported in wp
+        remove_all_filters('loco_missing_plugin');
+        add_filter( 'loco_missing_plugin', array(__CLASS__,'filter_allows_fake_plugins_to_exist'), 10, 2 );
         // avoid WordPress missing index notices
         $GLOBALS['_SERVER'] += array (
             'HTTP_HOST' => 'localhost',
@@ -289,7 +292,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         }
         // simulate wp_set_auth_cookie. Can't actually set cookie cos headers
         $_COOKIE[LOGGED_IN_COOKIE] = wp_generate_auth_cookie( $user->ID, time()+60, 'logged_in' );
-        $debug = array( 'name' => $this->getName(), 'token' => wp_get_session_token() ,'uid' => $user->ID );
+        // $debug = array( 'name' => $this->getName(), 'token' => wp_get_session_token() ,'uid' => $user->ID );
         // forcing new session instance
         new Loco_data_Session;
     }
@@ -410,6 +413,17 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     public function filter_wp_redirect( $location, $status ){
         $this->redirect = func_get_args();
         return false;
+    }
+
+
+    public static function filter_allows_fake_plugins_to_exist( array $data, $handle ){
+        $file = LOCO_TEST_DATA_ROOT.'/plugins/'.$handle;
+        if( file_exists($file) ) {
+            $data = get_plugin_data($file);
+            $snip = -strlen($handle);
+            $data['basedir'] = substr($file,0,--$snip);
+        }
+        return $data;
     }
 
 

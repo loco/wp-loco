@@ -152,6 +152,17 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
 
     /**
+     * Get parent bundle if possible
+     * @codeCoverageIgnore
+     * @return Loco_package_Bundle|null
+     */
+    public function getParent(){
+        trigger_error( $this->getType().' bundles cannot have parents. Check isTheme first', E_USER_NOTICE );
+        return null;
+    }
+
+
+    /**
      * @return bool
      */
     public function isPlugin(){
