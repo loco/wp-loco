@@ -100,6 +100,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Added JavaScript string extraction (experimental)
 * Editor supports sprintf-js when javascript-format tag present
 * Fix for duplicate comments when end punctuation differs
+* Marking msgctxt more clearly in editor views
 * Bumped WP compatibility to 5.0 (beta)
 
 = 2.1.5 =
