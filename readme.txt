@@ -98,6 +98,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Added sanity check for mbstring.func_overload madness
 * Added "Assign template" link on missing template page
 * Added JavaScript string extraction (experimental)
+* Fix for duplicate comments when end punctuation differs
 * Bumped WP compatibility to 5.0 (beta)
 
 = 2.1.5 =

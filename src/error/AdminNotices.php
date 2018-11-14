@@ -27,9 +27,9 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         return self::$singleton;
     } 
 
-
     
     /**
+     * @param Loco_error_Exception
      * @return Loco_error_Exception
      */
     public static function add( Loco_error_Exception $error ){
@@ -44,7 +44,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         }
         // if exception wasn't thrown we have to do some work to establish where it was invoked
         if( __FILE__ === $error->getFile() ){
-            $stack = debug_backtrace();
+            $stack = debug_backtrace(0,2);
             $error->setCallee( $stack[1] );
         }
         // Log messages of minimum priority and up, depending on debug mode
@@ -64,7 +64,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a success message
-     * @return Loco_error_Success
+     * @param string
+     * @return Loco_error_Exception
      */
     public static function success( $message ){
         return self::add( new Loco_error_Success($message) );
@@ -73,7 +74,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a warning message
-     * @return Loco_error_Warning
+     * @param string
+     * @return Loco_error_Exception
      */
     public static function warn( $message ){
         return self::add( new Loco_error_Warning($message) );
@@ -82,7 +84,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a generic info message
-     * @return Loco_error_Notice
+     * @param string
+     * @return Loco_error_Exception
      */
     public static function info( $message ){
         return self::add( new Loco_error_Notice($message) );
@@ -91,6 +94,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a debug notice, if debug is enabled
+     * @param string
      * @return Loco_error_Debug
      */
     public static function debug( $message ){
