@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 4.9.8
+Tested up to: 5.0.0
 Stable tag: 2.1.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -98,6 +98,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Added sanity check for mbstring.func_overload madness
 * Added "Assign template" link on missing template page
 * Added JavaScript string extraction (experimental)
+* Bumped WP compatibility to 5.0 (beta)
 
 = 2.1.5 =
 * Updated locale data

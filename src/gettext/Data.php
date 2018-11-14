@@ -151,6 +151,8 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     
     /**
+     * @param Loco_Locale
+     * @param array custom headers
      * @return Loco_gettext_Data
      */
     public function localize( Loco_Locale $locale, array $custom = null ){
@@ -229,6 +231,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'Content-Type' => 'text/plain; charset=UTF-8',
             'Content-Transfer-Encoding' => '8bit',
             'X-Generator' => 'Loco https://localise.biz/',
+            'X-Loco-Version' => sprintf('%s; wp-%s', loco_plugin_version(), $GLOBALS['wp_version'] ),
         );
         foreach( $required as $key => $value ){
             $headers[$key] = $value;
