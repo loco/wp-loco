@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.0.0
-Stable tag: 2.1.5
+Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -92,7 +92,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 == Changelog ==
 
-= 2.1.6 =
+= 2.2.0 =
 * Fix for empty language code when getting plural rules
 * Added X-Loco-Version header to generated Gettext files
 * Added sanity check for mbstring.func_overload madness
@@ -280,7 +280,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 == Upgrade Notice ==
 
-= 2.1.6 =
+= 2.2.0 =
 * Various bug fixes and improvements
 
 
