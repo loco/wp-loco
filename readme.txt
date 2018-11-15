@@ -93,7 +93,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 == Changelog ==
 
 = 2.2.1 =
-* ...
+* Fixed bug where plural tabs not displaying RTL
 
 = 2.2.0 =
 * Fix for empty language code when getting plural rules
