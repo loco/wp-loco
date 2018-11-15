@@ -142,6 +142,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 	 */
     private function exitScript( $str, array $headers ){
 	    try {
+            do_action('loco_admin_shutdown');
 	    	Loco_output_Buffer::clear();
 	    	$this->buffer = null;
 		    Loco_output_Buffer::check();

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.1.6-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-14 19:15+0000\n"
+"POT-Creation-Date: 2018-11-15 16:27+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -149,11 +149,11 @@ msgstr ""
 msgid "Advanced tab"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:176
+#: src/mvc/AjaxRouter.php:177
 msgid "Ajax controller returned empty JSON"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:171
+#: src/mvc/AjaxRouter.php:172
 #, php-format
 msgid "Ajax route not found: \"%s\""
 msgstr ""
@@ -395,11 +395,11 @@ msgstr ""
 msgid "Domain path"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:199
+#: src/mvc/AjaxRouter.php:200
 msgid "Download action not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:204
+#: src/mvc/AjaxRouter.php:205
 msgid "Download controller returned empty output"
 msgstr ""
 
