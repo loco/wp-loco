@@ -92,6 +92,9 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 == Changelog ==
 
+= 2.2.1 =
+* ...
+
 = 2.2.0 =
 * Fix for empty language code when getting plural rules
 * Added X-Loco-Version header to generated Gettext files
@@ -280,7 +283,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 
 == Upgrade Notice ==
 
-= 2.2.0 =
+= 2.2.1 =
 * Various bug fixes and improvements
 
 
