@@ -42,12 +42,18 @@ if( ! function_exists('mb_list_encodings') ){
 
 if( ! function_exists('mb_strlen') ){
     function mb_strlen( $str, $encoding = null ){
-        return Loco_compat_MbstringExtension::mb_strlen( $str );
+        return Loco_compat_MbstringExtension::mb_strlen( $str, $encoding );
     }
 }
 
 if( ! function_exists('mb_convert_encoding') ){
     function mb_convert_encoding( $str, $to_encoding, $from_encoding = null ){
         return Loco_compat_MbstringExtension::mb_convert_encoding( $str, $to_encoding, $from_encoding );
+    }
+}
+
+if( ! function_exists('mb_encoding_aliases') ){
+    function mb_encoding_aliases(){
+        return false;
     }
 }

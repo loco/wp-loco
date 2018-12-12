@@ -48,6 +48,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
 
     /**
+     * @param array frame from debug_backtrace
      * @return Loco_error_Exception
      */
     public function setCallee( array $callee ){
@@ -103,14 +104,16 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
             'class' => get_class($this),
             'title' => $this->getTitle(),
             'message' => $this->getMessage(),
-            //'file' => str_replace( ABSPATH, '', $this->getFile() ),
-            //'line' => $this->getLine(),
+            //'file' => str_replace( ABSPATH, '', $this->getRealFile() ),
+            //'line' => $this->getRealLine()
         );
     }
 
 
     /**
      * Push navigation links into error. Use for help pages etc..
+     * @param string
+     * @param string
      * @return Loco_error_Exception
      */
     public function addLink( $href, $text ){
@@ -119,17 +122,17 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
     }
 
 
-    /**
-     * @return array
-     */
-     public function getLinks(){
-         return $this->links;
-     }
-
+   /**
+    * @return array
+    */
+    public function getLinks(){
+        return $this->links;
+    }
 
 
     /**
      * Convert generic exception to one of ours
+     * @param Exception original error
      * @return Loco_error_Exception
      */
     public static function convert( Exception $e ){

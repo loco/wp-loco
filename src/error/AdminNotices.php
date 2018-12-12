@@ -44,8 +44,13 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         }
         // if exception wasn't thrown we have to do some work to establish where it was invoked
         if( __FILE__ === $error->getFile() ){
-            $stack = debug_backtrace(0,2);
-            $error->setCallee( $stack[1] );
+            $stack = debug_backtrace(0);
+            if( is_array($stack) && 1 < count($stack) ){
+                $callee = $stack[1];
+                if( is_array($callee) ){
+                    $error->setCallee($callee);
+                }
+            }
         }
         // Log messages of minimum priority and up, depending on debug mode
         // note that non-debug level is in line with error_reporting set by WordPress (notices ignored)

@@ -304,6 +304,8 @@ class Loco_fs_File {
 
     /**
      * Set file mode
+     * @param int file mode integer e.g 0664
+     * @param bool whether to set recursively (directories)
      * @return Loco_fs_File
      */
     public function chmod( $mode, $recursive = false ){

@@ -37,6 +37,8 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         // The front end posts a template path, so we must replace the actual locale code
         $base = loco_constant('WP_CONTENT_DIR');
         $path = $post->path[ $post['select-path'] ];
+        // The request_filesystem_credentials function will try to access the "path" field later
+        $_POST['path'] = $path;
 
         $pofile = new Loco_fs_LocaleFile( $path );
         if( $suffix !== $pofile->getSuffix() ){
