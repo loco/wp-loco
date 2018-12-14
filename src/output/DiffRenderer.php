@@ -35,8 +35,8 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
         // like wp_text_diff but avoiding whitespace normalization
         // uses deprecated signature for 'auto' in case of old WordPress
         return $this->render( new Text_Diff (
-            preg_split( '/\\R/u', loco_ensure_utf8( $lhs->getContents() ) ),
-            preg_split( '/\\R/u', loco_ensure_utf8( $rhs->getContents() ) )
+            preg_split( '/(?:\\n|\\r\\n?)/', Loco_gettext_Data::ensureUtf8( $lhs->getContents() ) ),
+            preg_split( '/(?:\\n|\\r\\n?)/', Loco_gettext_Data::ensureUtf8( $rhs->getContents() ) )
         ) );
     }
 

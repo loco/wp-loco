@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.1.6-dev\n"
+"Project-Id-Version: Loco Translate 2.2.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-11-15 16:27+0000\n"
+"POT-Creation-Date: 2018-12-14 19:39+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,9 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.1.6-dev; wp-5.0-beta4-43896"
+"X-Loco-Version: 2.2.1-dev; wp-5.0.1"
 
-#: src/fs/FileWriter.php:173
+#: src/fs/FileWriter.php:184
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
@@ -36,8 +36,8 @@ msgid "%s file is writeable"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: src/js/Strings.php:44 src/gettext/Metadata.php:200
-#, php-format
+#: pub/js/editor.js:407 src/gettext/Metadata.php:200
+#, javascript-format
 msgid "%s fuzzy"
 msgstr ""
 
@@ -48,19 +48,19 @@ msgid "%s on disk"
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: src/js/Strings.php:47 src/gettext/Metadata.php:203
-#, php-format
+#: pub/js/editor.js:409 src/gettext/Metadata.php:203
+#, javascript-format
 msgid "%s untranslated"
 msgstr ""
 
 #. Shows percentage translated at top of editor
-#: src/js/Strings.php:41 src/gettext/Metadata.php:198
-#, php-format
+#: pub/js/editor.js:405 src/gettext/Metadata.php:198
+#, javascript-format
 msgid "%s%% translated"
 msgstr ""
 
 #. Summary of new strings after running in-editor Sync
-#: src/js/Strings.php:23
+#: pub/js/editor.js:68
 #, php-format
 msgid "1 new string added"
 msgid_plural "%s new strings added"
@@ -68,7 +68,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Summary of existing strings that no longer exist after running in-editor Sync
-#: src/js/Strings.php:26
+#: pub/js/editor.js:70
 #, php-format
 msgid "1 obsolete string removed"
 msgid_plural "%s obsolete strings removed"
@@ -83,7 +83,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows total string count at top of editor
-#: src/js/Strings.php:38 src/gettext/Metadata.php:188
+#: pub/js/editor.js:401 src/gettext/Metadata.php:188
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
@@ -171,13 +171,13 @@ msgid "Allow full access to these roles"
 msgstr ""
 
 #. Message appears after sync operation when nothing has changed. %s refers to a POT file.
-#: src/js/Strings.php:29
-#, php-format
+#: pub/js/editor.js:79
+#, javascript-format
 msgid "Already up to date with %s"
 msgstr ""
 
 #. Message appears after sync operation when nothing has changed
-#: src/js/Strings.php:32
+#: pub/js/editor.js:83
 msgid "Already up to date with source code"
 msgstr ""
 
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Check config repository"
 msgstr ""
 
-#: src/js/Strings.php:53
+#: src/js/Strings.php:70
 msgid "Check console output for debugging information"
 msgstr ""
 
@@ -426,8 +426,8 @@ msgid "Editor"
 msgstr ""
 
 #. Where %s is the name of the language, e.g. "French translation"
-#: src/js/Strings.php:78
-#, php-format
+#: src/js/Strings.php:96
+#, javascript-format
 msgctxt "Editor"
 msgid "%s translation"
 msgstr ""
@@ -439,19 +439,19 @@ msgid "Add"
 msgstr ""
 
 #. Label for the window pane for entering translator comments
-#: src/js/Strings.php:84
+#: src/js/Strings.php:102
 msgctxt "Editor"
 msgid "Comments"
 msgstr ""
 
 #. Label for the window pane holding message context
-#: src/js/Strings.php:81
+#: src/js/Strings.php:99
 msgctxt "Editor"
 msgid "Context"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/Strings.php:105
+#: src/js/Strings.php:123
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
@@ -463,13 +463,13 @@ msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/js/Strings.php:99 src/admin/file/EditController.php:169
+#: src/js/Strings.php:117 src/admin/file/EditController.php:169
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/js/Strings.php:90
+#: src/js/Strings.php:108
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
@@ -493,20 +493,20 @@ msgid "Save"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/js/Strings.php:87
+#: src/js/Strings.php:105
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
 
-#. Label for the window pane holding the original English text -and-
+#. Label for the window pane holding the original English text
 #. List heading showing preview of English text for each item
-#: src/js/Strings.php:75
+#: src/js/Strings.php:92
 msgctxt "Editor"
 msgid "Source text"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/Strings.php:102
+#: src/js/Strings.php:120
 msgctxt "Editor"
 msgid "Source text not loaded"
 msgstr ""
@@ -529,24 +529,24 @@ msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
 
-#: src/js/Strings.php:96
+#: src/js/Strings.php:114
 msgctxt "Editor"
 msgid "Translated"
 msgstr ""
 
 #. List heading showing preview of translated text for each item
-#: src/js/Strings.php:111
+#: src/js/Strings.php:129
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/Strings.php:108
+#: src/js/Strings.php:126
 msgctxt "Editor"
 msgid "Translation not loaded"
 msgstr ""
 
-#: src/js/Strings.php:93
+#: src/js/Strings.php:111
 msgctxt "Editor"
 msgid "Untranslated"
 msgstr ""
@@ -557,7 +557,7 @@ msgid ""
 "it"
 msgstr ""
 
-#: src/js/Strings.php:62 src/error/Exception.php:92
+#: src/js/Strings.php:79 src/error/Exception.php:93
 msgid "Error"
 msgstr ""
 
@@ -577,20 +577,20 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:228
+#: src/fs/FileWriter.php:242
 msgid "Failed to build directory path"
 msgstr ""
 
-#: src/fs/FileWriter.php:122
+#: src/fs/FileWriter.php:132
 #, php-format
 msgid "Failed to chmod %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:46
+#: src/fs/FileWriter.php:52
 msgid "Failed to connect to remote server"
 msgstr ""
 
-#: src/fs/FileWriter.php:142
+#: src/fs/FileWriter.php:152
 #, php-format
 msgid "Failed to copy %s to %s"
 msgstr ""
@@ -602,16 +602,16 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:221
+#: src/fs/FileWriter.php:235
 msgid "Failed to create directory"
 msgstr ""
 
-#: src/fs/FileWriter.php:157
+#: src/fs/FileWriter.php:168
 #, php-format
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:194
+#: src/fs/FileWriter.php:208
 msgid "Failed to save file"
 msgstr ""
 
@@ -671,7 +671,7 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:240
+#: src/fs/FileWriter.php:254
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -967,13 +967,13 @@ msgid "Maximum line length (zero disables wrapping)"
 msgstr ""
 
 #. Where %s is the name of the POT template file. Message appears after sync
-#: src/js/Strings.php:17
-#, php-format
+#: pub/js/editor.js:61
+#, javascript-format
 msgid "Merged from %s"
 msgstr ""
 
 #. Message appears after sync operation
-#: src/js/Strings.php:20
+#: pub/js/editor.js:65
 msgid "Merged from source code"
 msgstr ""
 
@@ -981,7 +981,7 @@ msgstr ""
 msgid "Missing template"
 msgstr ""
 
-#: src/ajax/MsginitController.php:58
+#: src/ajax/MsginitController.php:60
 msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
@@ -989,7 +989,7 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:244
+#: src/fs/FileWriter.php:258
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
@@ -1055,11 +1055,11 @@ msgid ""
 msgstr ""
 
 #. When text filtering reduces to an empty view
-#: src/js/Strings.php:14
+#: pub/js/poview.js:70
 msgid "Nothing matches the text filter"
 msgstr ""
 
-#: src/js/Strings.php:68 src/error/Notice.php:20
+#: src/js/Strings.php:85 src/error/Notice.php:20
 #: tpl/admin/common/inc-fsconn.php:29
 msgid "Notice"
 msgstr ""
@@ -1072,7 +1072,7 @@ msgstr ""
 msgid "Official configuration"
 msgstr ""
 
-#: src/js/Strings.php:71 src/error/Success.php:19
+#: src/js/Strings.php:88 src/error/Success.php:19
 msgid "OK"
 msgstr ""
 
@@ -1132,7 +1132,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/fs/FileWriter.php:191
+#: src/fs/FileWriter.php:205
 msgid "Parent directory doesn't exist"
 msgstr ""
 
@@ -1152,7 +1152,7 @@ msgstr ""
 msgid "Permission denied"
 msgstr ""
 
-#: src/fs/FileWriter.php:187
+#: src/fs/FileWriter.php:199
 msgid "Permission denied to update file"
 msgstr ""
 
@@ -1257,7 +1257,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: src/js/Strings.php:56
+#: src/js/Strings.php:73
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
@@ -1265,7 +1265,7 @@ msgstr ""
 msgid "Recently updated:"
 msgstr ""
 
-#: src/fs/FileWriter.php:139
+#: src/fs/FileWriter.php:149
 msgid "Refusing to copy over an existing file"
 msgstr ""
 
@@ -1342,7 +1342,7 @@ msgid "See all themes"
 msgstr ""
 
 #. Generic error when external process broke an Ajax request
-#: src/js/Strings.php:50
+#: src/js/Strings.php:67
 msgid "Server returned invalid data"
 msgstr ""
 
@@ -1611,7 +1611,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:97
+#: src/hooks/AdminHooks.php:101
 msgid "Translate"
 msgstr ""
 
@@ -1667,7 +1667,7 @@ msgstr ""
 msgid "Unknown author"
 msgstr ""
 
-#: src/js/Strings.php:59
+#: src/js/Strings.php:76
 msgid "Unknown error"
 msgstr ""
 
@@ -1720,7 +1720,7 @@ msgstr ""
 msgid "Visit official site"
 msgstr ""
 
-#: src/js/Strings.php:65 src/error/Warning.php:19
+#: src/js/Strings.php:82 src/error/Warning.php:19
 msgid "Warning"
 msgstr ""
 
@@ -1825,6 +1825,6 @@ msgid "Your admin language is %s."
 msgstr ""
 
 #. Warning appears when user tries to refresh or navigate away when editor work is unsaved
-#: src/js/Strings.php:35
+#: pub/js/editor.js:135
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""

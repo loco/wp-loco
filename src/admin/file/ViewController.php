@@ -64,15 +64,15 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
 
         $this->set( 'meta', Loco_gettext_Metadata::create($file, $data) );
 
-        // binary MO will be hex-formated in template
+        // binary MO will be hex-formatted in template
         if( 'mo' === $type ){
             $this->set('bin', $file->getContents() );
             return $this->view('admin/file/view-mo' );
         }
-       
+        
         // else is a PO or POT file 
         $this->enqueueScript('poview');//->enqueueScript('min/highlight');
-        $lines = preg_split('/\\R/u', loco_ensure_utf8( $file->getContents() ) );
+        $lines = preg_split('/(?:\\n|\\r\\n?)/', Loco_gettext_Data::ensureUtf8( $file->getContents() ) );
         $this->set( 'lines', $lines );
         
         // ajax parameters required for pulling reference sources

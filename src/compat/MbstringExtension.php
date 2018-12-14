@@ -7,12 +7,16 @@
  */
 abstract class Loco_compat_MbstringExtension {
     
-    public static function mb_detect_encoding( $str, array $encoding_list, $strict ){
-        return '';    
+    public static function mb_detect_encoding( $str, array $encoding_list = null, $strict = null ){
+        // return ! $str || preg_match('/^(?:[\\0-\\x7F]|[\\xC0-\\xDF][\\x80-\\xBF]|[\\xE0-\\xEF][\\x80-\\xBF]{2}|[\\xF0-\\xFF][\\x80-\\xBF]{3})+$/',$str)
+        return ! $str || preg_match('/./u',$str)
+         ? 'UTF-8' 
+         : 'ISO-8859-1'
+         ;
     }
 
     public static function mb_list_encodings(){
-        return array();
+        return array('UTF-8','ISO-8859-1');
     }
 
     public static function mb_strlen( $str, $encoding = null ){

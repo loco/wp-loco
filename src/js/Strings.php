@@ -10,40 +10,57 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
      */ 
     public function compile(){
 
-        // When text filtering reduces to an empty view
+        /* When text filtering reduces to an empty view
+         * references: pub/js/poview.js:70 */
         __("Nothing matches the text filter",'loco-translate');
 
-        // Where %s is the name of the POT template file. Message appears after sync
+        /* Where %s is the name of the POT template file. Message appears after sync
+         * references: pub/js/editor.js:61
+         * xgettext: javascript-format */
         __("Merged from %s",'loco-translate');
 
-        // Message appears after sync operation
+        /* Message appears after sync operation
+         * references: pub/js/editor.js:65 */
         __("Merged from source code",'loco-translate');
 
-        // Summary of new strings after running in-editor Sync
+        /* Summary of new strings after running in-editor Sync
+         * references: pub/js/editor.js:68 */
         _n("1 new string added","%s new strings added",0,'loco-translate');
 
-        // Summary of existing strings that no longer exist after running in-editor Sync
+        /* Summary of existing strings that no longer exist after running in-editor Sync
+         * references: pub/js/editor.js:70 */
         _n("1 obsolete string removed","%s obsolete strings removed",0,'loco-translate');
 
-        // Message appears after sync operation when nothing has changed. %s refers to a POT file.
+        /* Message appears after sync operation when nothing has changed. %s refers to a POT file.
+         * references: pub/js/editor.js:79
+         * xgettext: javascript-format */
         __("Already up to date with %s",'loco-translate');
 
-        // Message appears after sync operation when nothing has changed
+        /* Message appears after sync operation when nothing has changed
+         * references: pub/js/editor.js:83 */
         __("Already up to date with source code",'loco-translate');
 
-        // Warning appears when user tries to refresh or navigate away when editor work is unsaved
+        /* Warning appears when user tries to refresh or navigate away when editor work is unsaved
+         * references: pub/js/editor.js:135 */
         __("Your changes will be lost if you continue without saving",'loco-translate');
 
-        // Shows total string count at top of editor
+        /* Shows total string count at top of editor
+         * references: pub/js/editor.js:401 */
         _n("1 string","%s strings",0,'loco-translate');
 
-        // Shows percentage translated at top of editor
+        /* Shows percentage translated at top of editor
+         * references: pub/js/editor.js:405
+         * xgettext: javascript-format */
         __("%s%% translated",'loco-translate');
 
-        // Shows number of fuzzy strings at top of editor
+        /* Shows number of fuzzy strings at top of editor
+         * references: pub/js/editor.js:407
+         * xgettext: javascript-format */
         __("%s fuzzy",'loco-translate');
 
-        // Shows number of untranslated strings at top of editor
+        /* Shows number of untranslated strings at top of editor
+         * references: pub/js/editor.js:409
+         * xgettext: javascript-format */
         __("%s untranslated",'loco-translate');
 
         // Generic error when external process broke an Ajax request
@@ -70,11 +87,12 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         //
         __("OK",'loco-translate');
 
-        /* Label for the window pane holding the original English text -and-
+        /* Label for the window pane holding the original English text
          * List heading showing preview of English text for each item */
         _x("Source text","Editor",'loco-translate');
 
-        // Where %s is the name of the language, e.g. "French translation"
+        /* Where %s is the name of the language, e.g. "French translation"
+         * xgettext: javascript-format */
         _x("%s translation","Editor",'loco-translate');
 
         // Label for the window pane holding message context
