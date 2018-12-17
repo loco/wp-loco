@@ -131,7 +131,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP') );
         }
 
-        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug','ob') );
+        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug') );
     }
     
 }
