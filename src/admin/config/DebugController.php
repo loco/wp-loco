@@ -47,7 +47,11 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         $title = __('System diagnostics','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
-        
+
+        // extensions that are normally enabled in PHP by default
+        loco_check_extension('json');
+        loco_check_extension('ctype');
+
         // product versions:
         $versions = new Loco_mvc_ViewParams( array (
             'Loco Translate' => loco_plugin_version(),

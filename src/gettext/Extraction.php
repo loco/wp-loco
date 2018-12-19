@@ -41,6 +41,8 @@ class Loco_gettext_Extraction {
      * @param Loco_package_Bundle
      */
     public function __construct( Loco_package_Bundle $bundle ){
+        loco_check_extension('ctype');
+        loco_check_extension('mbstring');
         if( ! loco_check_extension('tokenizer') ){
             throw new Loco_error_Exception('String extraction not available without required extension');
         }
