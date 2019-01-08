@@ -242,6 +242,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set root directory for bundle. e.g. theme or plugin directory
+     * @param string
      * @return Loco_package_Bundle
      */
     public function setDirectoryPath( $path ){
@@ -285,7 +286,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Create a file searcher from root location, excluding that which is excluded
-     * @return Loco_fs_file_Finder
+     * @return Loco_fs_FileFinder
      */
     public function getFileFinder(){
         $root = $this->getDirectoryPath();

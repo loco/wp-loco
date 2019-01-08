@@ -43,7 +43,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
     
     
     /**
-     * @var Loco_Locale
+     * @return Loco_Locale
      */
     public function getLocale(){
         if( ! $this->locale ){
@@ -58,8 +58,8 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
     }
 
 
-
     /**
+     * @param Loco_locale
      * @return Loco_fs_LocaleFile
      */
     public function cloneLocale( Loco_locale $locale ){
@@ -80,7 +80,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
     
 
     /**
-     * Get prefix (or stem) from name that comes before locale suffix
+     * Get prefix (or stem) from name that comes before locale suffix.
      * @return string
      */
     public function getPrefix(){
@@ -99,7 +99,6 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
     }
 
 
-    
     /**
      * Test if file is suffix only, e.g. "en_US.po"
      * @return bool
@@ -110,7 +109,6 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
     }
 
 
-    
     /**
      * Test if file is prefix only, e.g. "incorrect.po"
      * @return bool

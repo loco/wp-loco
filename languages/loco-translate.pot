@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2018-12-14 19:39+0000\n"
+"POT-Creation-Date: 2019-01-08 16:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.1-dev; wp-5.0.1"
+"X-Loco-Version: 2.2.1-dev; wp-5.0.2"
 
 #: src/fs/FileWriter.php:184
 #, php-format
@@ -36,7 +36,7 @@ msgid "%s file is writeable"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: pub/js/editor.js:407 src/gettext/Metadata.php:200
+#: src/js/Strings.php:48 src/gettext/Metadata.php:200
 #, javascript-format
 msgid "%s fuzzy"
 msgstr ""
@@ -48,19 +48,19 @@ msgid "%s on disk"
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: pub/js/editor.js:409 src/gettext/Metadata.php:203
+#: src/js/Strings.php:52 src/gettext/Metadata.php:203
 #, javascript-format
 msgid "%s untranslated"
 msgstr ""
 
 #. Shows percentage translated at top of editor
-#: pub/js/editor.js:405 src/gettext/Metadata.php:198
+#: src/js/Strings.php:44 src/gettext/Metadata.php:198
 #, javascript-format
 msgid "%s%% translated"
 msgstr ""
 
 #. Summary of new strings after running in-editor Sync
-#: pub/js/editor.js:68
+#: src/js/Strings.php:24
 #, php-format
 msgid "1 new string added"
 msgid_plural "%s new strings added"
@@ -68,7 +68,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Summary of existing strings that no longer exist after running in-editor Sync
-#: pub/js/editor.js:70
+#: src/js/Strings.php:27
 #, php-format
 msgid "1 obsolete string removed"
 msgid_plural "%s obsolete strings removed"
@@ -83,7 +83,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows total string count at top of editor
-#: pub/js/editor.js:401 src/gettext/Metadata.php:188
+#: src/js/Strings.php:40 src/gettext/Metadata.php:188
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
@@ -136,7 +136,7 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:101
+#: src/admin/bundle/BaseController.php:97
 msgid "Advanced"
 msgstr ""
 
@@ -171,13 +171,13 @@ msgid "Allow full access to these roles"
 msgstr ""
 
 #. Message appears after sync operation when nothing has changed. %s refers to a POT file.
-#: pub/js/editor.js:79
+#: src/js/Strings.php:31
 #, javascript-format
 msgid "Already up to date with %s"
 msgstr ""
 
 #. Message appears after sync operation when nothing has changed
-#: pub/js/editor.js:83
+#: src/js/Strings.php:34
 msgid "Already up to date with source code"
 msgstr ""
 
@@ -237,7 +237,7 @@ msgstr ""
 msgid "Bundle setup"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:174
+#: src/admin/bundle/BaseController.php:170
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
@@ -246,7 +246,7 @@ msgstr ""
 msgid "Check config repository"
 msgstr ""
 
-#: src/js/Strings.php:70
+#: src/js/Strings.php:58
 msgid "Check console output for debugging information"
 msgstr ""
 
@@ -284,11 +284,11 @@ msgstr ""
 msgid "Compiling MO files"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:55
+#: src/admin/bundle/BaseController.php:53
 msgid "Configuration reset"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:39
+#: src/admin/bundle/BaseController.php:38
 msgid "Configuration saved"
 msgstr ""
 
@@ -340,7 +340,7 @@ msgstr ""
 msgid "Create template instead"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:148
+#: src/admin/bundle/BaseController.php:144
 msgid "Creating this file requires permission"
 msgstr ""
 
@@ -350,7 +350,7 @@ msgstr ""
 
 #: src/error/Debug.php:19 src/admin/config/BaseController.php:23
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:104
+#: src/admin/bundle/BaseController.php:100
 msgid "Debug"
 msgstr ""
 
@@ -365,7 +365,7 @@ msgstr ""
 msgid "Delete %s"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:151
+#: src/admin/bundle/BaseController.php:147
 msgid "Deleting this file requires permission"
 msgstr ""
 
@@ -426,127 +426,127 @@ msgid "Editor"
 msgstr ""
 
 #. Where %s is the name of the language, e.g. "French translation"
-#: src/js/Strings.php:96
+#: src/js/Strings.php:84
 #, javascript-format
 msgctxt "Editor"
 msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:158
+#: src/admin/file/EditController.php:159
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. Label for the window pane for entering translator comments
-#: src/js/Strings.php:102
+#: src/js/Strings.php:90
 msgctxt "Editor"
 msgid "Comments"
 msgstr ""
 
 #. Label for the window pane holding message context
-#: src/js/Strings.php:99
+#: src/js/Strings.php:87
 msgctxt "Editor"
 msgid "Context"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/Strings.php:123
+#: src/js/Strings.php:111
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:171
+#: src/admin/file/EditController.php:172
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/js/Strings.php:117 src/admin/file/EditController.php:169
+#: src/js/Strings.php:105 src/admin/file/EditController.php:170
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/js/Strings.php:108
+#: src/js/Strings.php:96
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:160
+#: src/admin/file/EditController.php:161
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:167
+#: src/admin/file/EditController.php:168
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:163
+#: src/admin/file/EditController.php:164
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/js/Strings.php:105
+#: src/js/Strings.php:93
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
 
 #. Label for the window pane holding the original English text
 #. List heading showing preview of English text for each item
-#: src/js/Strings.php:92
+#: src/js/Strings.php:80
 msgctxt "Editor"
 msgid "Source text"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/Strings.php:120
+#: src/js/Strings.php:108
 msgctxt "Editor"
 msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:165
+#: src/admin/file/EditController.php:166
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:177
+#: src/admin/file/EditController.php:178
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:175
+#: src/admin/file/EditController.php:176
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
 
-#: src/js/Strings.php:114
+#: src/js/Strings.php:102
 msgctxt "Editor"
 msgid "Translated"
 msgstr ""
 
 #. List heading showing preview of translated text for each item
-#: src/js/Strings.php:129
+#: src/js/Strings.php:117
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/Strings.php:126
+#: src/js/Strings.php:114
 msgctxt "Editor"
 msgid "Translation not loaded"
 msgstr ""
 
-#: src/js/Strings.php:111
+#: src/js/Strings.php:99
 msgctxt "Editor"
 msgid "Untranslated"
 msgstr ""
@@ -557,7 +557,7 @@ msgid ""
 "it"
 msgstr ""
 
-#: src/js/Strings.php:79 src/error/Exception.php:93
+#: src/js/Strings.php:67 src/error/Exception.php:93
 msgid "Error"
 msgstr ""
 
@@ -717,7 +717,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:173
+#: src/admin/file/EditController.php:174
 msgid "Filter translations"
 msgstr ""
 
@@ -768,7 +768,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:161
+#: src/admin/file/EditController.php:162
 msgid "Help"
 msgstr ""
 
@@ -848,6 +848,10 @@ msgstr ""
 
 #: tpl/admin/bundle/setup/none.php:15
 msgid "It needs configuring before you can do any translations"
+msgstr ""
+
+#: src/ajax/SaveController.php:141
+msgid "JSON compilation failed"
 msgstr ""
 
 #: tpl/admin/init/init-po.php:156
@@ -967,13 +971,13 @@ msgid "Maximum line length (zero disables wrapping)"
 msgstr ""
 
 #. Where %s is the name of the POT template file. Message appears after sync
-#: pub/js/editor.js:61
+#: src/js/Strings.php:18
 #, javascript-format
 msgid "Merged from %s"
 msgstr ""
 
 #. Message appears after sync operation
-#: pub/js/editor.js:65
+#: src/js/Strings.php:21
 msgid "Merged from source code"
 msgstr ""
 
@@ -1055,11 +1059,11 @@ msgid ""
 msgstr ""
 
 #. When text filtering reduces to an empty view
-#: pub/js/poview.js:70
+#: src/js/Strings.php:14
 msgid "Nothing matches the text filter"
 msgstr ""
 
-#: src/js/Strings.php:85 src/error/Notice.php:20
+#: src/js/Strings.php:73 src/error/Notice.php:20
 #: tpl/admin/common/inc-fsconn.php:29
 msgid "Notice"
 msgstr ""
@@ -1072,7 +1076,7 @@ msgstr ""
 msgid "Official configuration"
 msgstr ""
 
-#: src/js/Strings.php:88 src/error/Success.php:19
+#: src/js/Strings.php:76 src/error/Success.php:19
 msgid "OK"
 msgstr ""
 
@@ -1082,8 +1086,8 @@ msgstr ""
 
 #: src/admin/file/DeleteController.php:98
 #, php-format
-msgid "One dependant file will also be deleted"
-msgid_plural "%u dependant files will also be deleted"
+msgid "One dependent file will also be deleted"
+msgid_plural "%u dependent files will also be deleted"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -1124,7 +1128,7 @@ msgstr[1] ""
 msgid "Out of sync with template"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:99
+#: src/admin/bundle/BaseController.php:95
 msgid "Overview"
 msgstr ""
 
@@ -1237,15 +1241,15 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/ajax/SaveController.php:99
+#: src/ajax/SaveController.php:100
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:103
+#: src/ajax/SaveController.php:105
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
-#: src/ajax/SaveController.php:108
+#: src/ajax/SaveController.php:112
 msgid "POT file saved"
 msgstr ""
 
@@ -1257,7 +1261,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: src/js/Strings.php:73
+#: src/js/Strings.php:61
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
@@ -1317,7 +1321,7 @@ msgstr ""
 msgid "Saving PO/POT files"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:154
+#: src/admin/bundle/BaseController.php:150
 msgid "Saving this file requires permission"
 msgstr ""
 
@@ -1342,7 +1346,7 @@ msgid "See all themes"
 msgstr ""
 
 #. Generic error when external process broke an Ajax request
-#: src/js/Strings.php:67
+#: src/js/Strings.php:55
 msgid "Server returned invalid data"
 msgstr ""
 
@@ -1367,7 +1371,7 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:100
+#: src/admin/bundle/BaseController.php:96
 msgid "Setup"
 msgstr ""
 
@@ -1561,7 +1565,7 @@ msgstr ""
 msgid "This directory can't be written to directly by the web server"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:171
+#: src/admin/bundle/BaseController.php:167
 msgid "This directory is managed by WordPress, be careful what you delete"
 msgstr ""
 
@@ -1569,7 +1573,7 @@ msgstr ""
 msgid "This file can't be updated directly by the web server"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:168
+#: src/admin/bundle/BaseController.php:164
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
@@ -1611,7 +1615,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:101
+#: src/hooks/AdminHooks.php:102
 msgid "Translate"
 msgstr ""
 
@@ -1633,12 +1637,12 @@ msgid "Translation progress"
 msgstr ""
 
 #. Where %s is the name of the invalid POT file
-#: src/ajax/SyncController.php:48 src/admin/file/EditController.php:99
+#: src/ajax/SyncController.php:48 src/admin/file/EditController.php:100
 #, php-format
 msgid "Translation template is invalid (%s)"
 msgstr ""
 
-#: src/admin/file/EditController.php:103
+#: src/admin/file/EditController.php:104
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
@@ -1667,7 +1671,7 @@ msgstr ""
 msgid "Unknown author"
 msgstr ""
 
-#: src/js/Strings.php:76
+#: src/js/Strings.php:64
 msgid "Unknown error"
 msgstr ""
 
@@ -1720,7 +1724,7 @@ msgstr ""
 msgid "Visit official site"
 msgstr ""
 
-#: src/js/Strings.php:82 src/error/Warning.php:19
+#: src/js/Strings.php:70 src/error/Warning.php:19
 msgid "Warning"
 msgstr ""
 
@@ -1825,6 +1829,6 @@ msgid "Your admin language is %s."
 msgstr ""
 
 #. Warning appears when user tries to refresh or navigate away when editor work is unsaved
-#: pub/js/editor.js:135
+#: src/js/Strings.php:37
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""

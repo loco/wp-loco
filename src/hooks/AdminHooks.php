@@ -72,6 +72,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
+    
     /**
      * "admin_menu" callback.
      */

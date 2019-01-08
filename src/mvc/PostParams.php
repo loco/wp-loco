@@ -22,14 +22,12 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
     }
 
 
-
     /**
      * @return void
      */
     public static function destroy(){
         self::$singleton = null;
     }
-
 
 
     /**
@@ -46,7 +44,6 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
             // else reverse wp_magic_quotes (assumes no other process has hacked the array)
             else {
                 $post = stripslashes_deep( $_POST );
-                $post['wp_hacked'] = true;
             }
         }
         return new Loco_mvc_PostParams( $post );

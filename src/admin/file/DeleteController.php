@@ -95,7 +95,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
         // warn about additional files that will be deleted along with this
         if( $deps = array_slice($files,1) ){
             $count = count($deps);
-            $this->set('warn', sprintf( _n( 'One dependant file will also be deleted', '%u dependant files will also be deleted', $count, 'loco-translate' ), $count ) );
+            $this->set('warn', sprintf( _n( 'One dependent file will also be deleted', '%u dependent files will also be deleted', $count, 'loco-translate' ), $count ) );
             $infos = array();
             foreach( $deps as $depfile ){
                 $infos[] = Loco_mvc_FileParams::create( $depfile );

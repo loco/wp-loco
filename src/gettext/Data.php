@@ -148,6 +148,35 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
+     * Compile JED flavour JSON
+     * @param string text domain for JED metadata
+     * @param LocoPoMessage[] pre-compiled messages
+     * @return string
+     */
+    public function jedize( $domain, array $po ){
+        $head = $this->getHeaders();
+        // start locale_data with JED header
+        $data = array( '' => array (
+            'domain' => $domain,
+            'lang' => $head['language'],
+            'plural-forms' => $head['plural-forms'],
+        ) );
+        /* @var LocoPoMessage $msg */
+        foreach( $po as $msg ){
+            $data[ $msg->getKey() ] = $msg->getMsgstrs();
+        }
+        return json_encode( array (
+            'translation-revision-date' => $head['po-revision-date'],
+            'generator' => $head['x-generator'],
+            'domain' => $domain,
+            'locale_data' => array (
+                $domain => $data,
+            ),
+        ), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+    }
+
+
+    /**
      * @return array
      */
     public function jsonSerialize(){

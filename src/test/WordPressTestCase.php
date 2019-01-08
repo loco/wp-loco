@@ -173,6 +173,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @return string JSON
      */
     protected function renderAjax(){
+        wp_magic_quotes(); // <- I hate this, but it's what WP does!
         $router = new Loco_mvc_AjaxRouter;
         $router->on_init();
         return $router->renderAjax();

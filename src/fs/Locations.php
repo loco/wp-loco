@@ -118,7 +118,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     *
+     * @param array
      */
     public function __construct( array $paths ){
         parent::__construct( array() );
@@ -163,6 +163,7 @@ class Loco_fs_Locations extends ArrayObject {
     /**
      * Match location and return the relative subpath.
      * Note that exact match is returned as "." indicating self
+     * @param string
      * @return string | null
      */
     public function rel( $path ){

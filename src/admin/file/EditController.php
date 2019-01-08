@@ -65,6 +65,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         }
         // Fine if not, this just means sync isn't possible.
         catch( Loco_error_Exception $e ){
+            Loco_error_AdminNotices::add( $e );
             Loco_error_AdminNotices::debug( sprintf("Sync is disabled because this file doesn't relate to a known set of translations", $bundle ) );
             $project = null;
         }
@@ -145,7 +146,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'readonly' => $readonly,
             'project' => $project ? array (
                 'bundle' => $bundle->getId(),
-                'domain' => $project->getId(),
+                'domain' => (string) $project->getDomain(),
             ) : null,
             'nonces' => $readonly ? null : array (
                 'save' => wp_create_nonce('save'),

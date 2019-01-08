@@ -28,7 +28,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     }
 
 
-
     /**
      * Commit bundle config to database
      * @return Loco_admin_bundle_BaseController 
@@ -44,7 +43,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     }
 
 
-
     /**
      * Remove bundle config from database
      * @return Loco_admin_bundle_BaseController 
@@ -58,7 +56,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         }
         return $this;
     }
-
 
 
     /**
@@ -79,7 +76,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
         return $this->project;
     }
-
 
 
     /**

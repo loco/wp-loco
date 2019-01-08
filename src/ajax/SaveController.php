@@ -47,7 +47,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         $data = Loco_gettext_Data::fromSource( $post->data );
         
         // WordPress-ize some headers that differ from JavaScript libs
-        if( $locale ){
+        if( $compile = (bool) $locale ){
             $head = $data->getHeaders();
             $head['Language'] = strtr( $locale, '-', '_' );
         }
@@ -80,6 +80,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         }
         catch( Exception $e ){
             // editor permitted to save files not in a bundle, so catching failures
+            $bundle = null;
         }
         
         // start success data with bytes written and timestamp
@@ -89,25 +90,59 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         $this->set('modified', $mtime);
         $this->set('datetime', Loco_mvc_ViewParams::date_i18n($mtime) );
 
-        // Compile MO file unless saving template
-        if( $locale ){
+        // Compile MO and JSON files unless saving template
+        if( $compile ){
             try {
                 $mofile = $pofile->cloneExtension('mo');
                 $api->authorizeSave( $mofile );
                 $bytes = $mofile->putContents( $data->msgfmt() );
                 $this->set( 'mobytes', $bytes );
                 Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco-translate') );
+                
             }
             catch( Exception $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );
                 Loco_error_AdminNotices::warn( __('PO file saved, but MO file compilation failed','loco-translate') );
                 $this->set( 'mobytes', 0 );
+                // prevent further compilation if MO failed
+                $compile = false;
             }
         }
         else {
             Loco_error_AdminNotices::success( __('POT file saved','loco-translate') );
         }
 
+        // Compile a single JSON translations for WordPress >= 5
+        // This takes any message that references a .js file, but does not compile separate per-script JSONs [yet].
+        if( $compile && $bundle && function_exists('wp_set_script_translations') ){
+            $bytes = 0;
+            try {
+                $domain = $this->get('domain');
+                $base = $pofile->dirname().'/'.$pofile->filename();
+                foreach( $data->exportRefs('\\.jsx?') as $ref => $messages ){
+                    // hash file reference according to WordPress logic (see load_script_textdomain)
+                    // this means relative file reference MUST be correct in PO file. Not currently resolving against search paths.
+                    if( '.min.js' === substr($ref,-7) ) {
+                        $ref = substr($ref,0,-7).'.js';
+                    }
+                    // referenced file must exist in bundle, or will never be loaded and so not require a .json file
+                    $file = new Loco_fs_File( $bundle->getDirectoryPath().'/'.$ref );
+                    if( $file->exists() ){
+                        $file = new Loco_fs_File( $base.'-'.md5($ref).'.json' );
+                        $bytes += $file->putContents( $data->jedize($domain,$messages) );
+                    }
+                    else {
+                        Loco_error_AdminNotices::warn( sprintf('%s not found in bundle',$ref) );
+                    }
+                }
+            }
+            catch( Exception $e ){
+                Loco_error_AdminNotices::debug( $e->getMessage() );
+                Loco_error_AdminNotices::warn( __('JSON compilation failed','loco-translate') );
+            }
+            $this->set( 'jsbytes', $bytes );
+        }
+        
         return parent::render();
     }
     

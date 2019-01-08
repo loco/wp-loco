@@ -41,7 +41,7 @@ class Loco_fs_Siblings {
      */
     public function expand(){
         $siblings = array();
-        // Source and binary:
+        // Source and binary pair
         foreach( array( $this->po, $this->mo ) as $file ){
             if( $file && $file->exists() ){
                 $siblings[] = $file;
@@ -51,6 +51,21 @@ class Loco_fs_Siblings {
         $revs = new Loco_fs_Revisions( $this->po );
         foreach( $revs->getPaths() as $path ){
             $siblings[] = new Loco_fs_File( $path );
+        }
+        // JSON exports, unless in POT mode:
+        if( 'po' === $this->po->extension() ){
+            $name = $this->po->filename();
+            $finder = new Loco_fs_FileFinder( $this->po->dirname() );
+            $regex = '/^'.preg_quote($name,'/').'-[0-9a-f]{32}$/';
+            /* @var $file Loco_fs_File */
+            foreach( $finder->group('json')->exportGroups() as $files ) {
+                foreach( $files as $file ){
+                    $match = $file->filename();
+                    if( $match === $name || preg_match($regex,$match) ) {
+                        $siblings[] = $file;
+                    }
+                }
+            }
         }
 
         return $siblings;
@@ -64,7 +79,6 @@ class Loco_fs_Siblings {
     public function getSource(){
         return $this->po;
     }
-
 
 
     /**

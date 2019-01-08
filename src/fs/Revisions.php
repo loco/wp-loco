@@ -57,7 +57,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
                         $writer->delete(false);
                     }
                     catch( Loco_error_WriteException $e ){
-                        // avoiding fatals as pruning is non-critical operation
+                        // avoiding fatal error because pruning is non-critical operation
                         Loco_error_AdminNotices::debug( $e->getMessage() );
                     }
                 }
@@ -103,9 +103,9 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
 
 
-
     /**
-     * Delete oldest backups until we have maximuim of $num_backups remaining
+     * Delete oldest backups until we have maximum of $num_backups remaining
+     * @param int
      * @return Loco_fs_Revisions
      */
     public function prune( $num_backups ){

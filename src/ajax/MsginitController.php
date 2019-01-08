@@ -60,6 +60,12 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             throw new Loco_error_Exception( __('MO file exists for this language already. Delete it first','loco-translate') );
         }
         
+        /*/ Same should go for primary .json file
+        $jsfile = $pofile->cloneExtension('json');
+        if( $jsfile->exists() ){
+            throw new Loco_error_Exception( __('JSON file exists for this language already. Delete it first','loco-translate') );
+        }*/
+        
         // Permit forcing of any parsable file as strings template
         if( $source = $post->source ){
             $potfile = new Loco_fs_File( $source );

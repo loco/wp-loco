@@ -190,6 +190,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Group results by file extensions given in array
+     * @param array file extensions
      * @return Loco_fs_FileFinder
      */
     public function groupBy( array $exts ){
@@ -200,7 +201,6 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
         }
         return $this;
     }
-
 
 
     /**
