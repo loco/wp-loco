@@ -125,10 +125,13 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
                     if( '.min.js' === substr($ref,-7) ) {
                         $ref = substr($ref,0,-7).'.js';
                     }
+                    // filter similarly to WP's `load_script_textdomain_relative_path` which is called from `load_script_textdomain`
+                    $ref = apply_filters( 'loco_script_relative_path', $ref, $domain );
                     // referenced file must exist in bundle, or will never be loaded and so not require a .json file
                     $file = new Loco_fs_File( $bundle->getDirectoryPath().'/'.$ref );
-                    if( $file->exists() ){
+                    if( $file->exists() && ! $file->isDirectory() ){
                         $file = new Loco_fs_File( $base.'-'.md5($ref).'.json' );
+                        $api->authorizeSave( $file );
                         $bytes += $file->putContents( $data->jedize($domain,$messages) );
                     }
                     else {

@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 5.0.2
+Tested up to: 5.0.3
 Stable tag: 2.2.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -96,7 +96,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Experimental generation of JSON language packs
 * Fixed bug where plural tabs not displaying RTL
 * Various improvements to PO parser incl. better charset handling
-* Bumped WP compatibility to 5.0.2
+* Bumped WP compatibility to 5.0.3
 
 = 2.2.0 =
 * Fix for empty language code when getting plural rules
