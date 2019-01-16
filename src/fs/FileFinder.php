@@ -74,19 +74,20 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * List of file extensions to filter on and group by
-     * @var array
+     * @var Loco_fs_FileList[]
      */
     private $exts;
 
     /**
      * List of directory names to exclude from recursion
-     * @var array
+     * @var Loco_fs_File[]
      */
     private $excluded;     
               
 
     /**
      * Create initial list of directories to search
+     * @param string default root to start
      */
     public function __construct( $root = '' ){
         $this->roots = new Loco_fs_FileList;
@@ -147,7 +148,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
 
     /**
-     * @return array
+     * @return Loco_fs_FileList[]
      */
     public function exportGroups(){
         $this->cached || $this->export();

@@ -117,8 +117,8 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         if( $compile && $bundle && function_exists('wp_set_script_translations') ){
             $bytes = 0;
             try {
-                $domain = $this->get('domain');
                 $base = $pofile->dirname().'/'.$pofile->filename();
+                list($domain) = Loco_package_Project::splitId( $this->get('domain') );
                 foreach( $data->exportRefs('\\.jsx?') as $ref => $messages ){
                     // hash file reference according to WordPress logic (see load_script_textdomain)
                     // this means relative file reference MUST be correct in PO file. Not currently resolving against search paths.

@@ -93,6 +93,8 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
             $largest = max( $largest, $fsize );
             if( $fsize > $max ){
                 $nskip += 1;
+                // uncomment to log which files are too large to be scanned
+                // Loco_error_AdminNotices::debug( sprintf('%s is %s',$sourceFile,Loco_mvc_FileParams::renderBytes($fsize)) );
             }
             else {
                 $bytes += $fsize;

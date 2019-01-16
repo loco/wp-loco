@@ -92,7 +92,7 @@ class Loco_gettext_Extraction {
         foreach( $project->findSourceFiles() as $file ){
             $type = $opts->ext2type( $file->extension() );
             $extr = loco_wp_extractor($type);
-            if( 'js' !== $type ){
+            if( 'js' !== $type ) {
                 // skip large files for PHP, because token_get_all is hungry
                 $size = $file->size();
                 $this->maxbytes = max( $this->maxbytes, $size );
@@ -108,7 +108,7 @@ class Loco_gettext_Extraction {
                     ), (string) $project->getDomain() );
                 }
             }
-            $this->extracted->extractSource( $extr, $file->getContents(), $file->getRelativePath($base) );
+            $this->extracted->extractSource( $extr, $file->getContents(), $file->getRelativePath( $base ) );
         }
         return $this;
     }

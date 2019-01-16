@@ -126,6 +126,20 @@ class Loco_package_Project {
 
 
     /**
+     * Split project ID into domain and slug.
+     * null and "" are meaningfully different. "" means deliberately empty slug, whereas null means default
+     * @param string <domain>[.<slug>]
+     * @return string[] [ <domain>, <slug> ]
+     */
+    public static function splitId( $id ){
+        $r = preg_split('/(?<!\\\\)\\./', $id, 2 );
+        $domain = stripcslashes($r[0]);
+        $slug = isset($r[1]) ? stripcslashes($r[1]) : $domain;
+        return array( $domain, $slug );
+    }
+
+
+    /**
      * Get ID identifying project uniquely within a bundle
      * @return string
      */
@@ -359,7 +373,7 @@ class Loco_package_Project {
 
 
     /**
-     * utility excludes current exclude paths from target finder
+     * Utility excludes current exclude paths from target finder
      * @param Loco_fs_FileFinder
      * @return Loco_fs_FileFinder
      */
@@ -604,7 +618,13 @@ class Loco_package_Project {
         if( ! $source->isCached() ){
             $crawled = $source->exportGroups();
             foreach( $crawled as $ext => $files ){
+                /* @var Loco_fs_File $file */
                 foreach( $files as $file ){
+                    $name = $file->filename();
+                    // skip "{name}.min.{ext}" but only if "{name}.{ext}" exists
+                    if( '.min' === substr($name,-4) && file_exists( $file->dirname().'/'.substr($name,0,-4).'.'.$ext ) ){
+                        continue;
+                    }
                     $this->sfiles->add($file);
                 }
             }

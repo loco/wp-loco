@@ -146,7 +146,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'readonly' => $readonly,
             'project' => $project ? array (
                 'bundle' => $bundle->getId(),
-                'domain' => (string) $project->getDomain(),
+                'domain' => (string) $project->getId(),
             ) : null,
             'nonces' => $readonly ? null : array (
                 'save' => wp_create_nonce('save'),

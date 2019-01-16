@@ -16,7 +16,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         $bundle = Loco_package_Bundle::fromId( $post->bundle );
         $project = $bundle->getProjectById( $post->domain );
         if( ! $project instanceof Loco_package_Project ){
-            throw new Loco_error_Exception('No such project');
+            throw new Loco_error_Exception('No such project '.$post->domain);
         }
         
         $file = new Loco_fs_File( $post->path );

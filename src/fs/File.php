@@ -106,6 +106,7 @@ class Loco_fs_File {
 
     /**
      * Copy write context with our file reference
+     * @param Loco_fs_FileWriter 
      * @return Loco_fs_File
      */
     private function cloneWriteContext( Loco_fs_FileWriter $context = null ){
@@ -525,6 +526,7 @@ class Loco_fs_File {
 
     /**
      * Copy this file for real
+     * @param string new path
      * @throws Loco_error_WriteException
      * @return Loco_fs_File new file
      */

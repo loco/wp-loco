@@ -212,7 +212,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
     
     
     /**
-     * Map a file extension to registered types
+     * Map a file extension to registered types, defaults to "php"
      * @param string
      * @return string php, js or twig
      */

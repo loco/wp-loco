@@ -26,7 +26,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Full path to root directory of bundle
-     * @var string
+     * @var Loco_fs_Directory
      */
     private $root;
 
@@ -82,6 +82,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Construct bundle from unique ID containing type and handle
+     * @param string
      * @return Loco_package_Bundle
      */
     public static function fromId( $id ){
@@ -91,6 +92,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     
     /**
+     * @param string
+     * @param string
      * @return Loco_package_Bundle
      * @throws Loco_error_Exception
      */
@@ -108,15 +111,18 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
  
     /**
      * Construct from WordPress handle and friendly name
+     * @param string
+     * @param string
      */
     public function __construct( $handle, $name ){
+        parent::__construct( array() );
         $this->setHandle($handle)->setName($name);
         $this->xpaths = new Loco_fs_FileList;
     }
 
 
     /**
-     * Refetch this bundle from its currently saved location
+     * Re-fetch this bundle from its currently saved location
      * @return Loco_package_Bundle
      */
     public function reload(){
@@ -194,6 +200,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set friendly name of bundle
+     * @param string
      * @return Loco_package_Bundle
      */
     public function setName( $name ){
@@ -204,6 +211,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set short name of bundle which may or may not match unique handle
+     * @param string
      * @return Loco_package_Bundle
      */
     public function setSlug( $slug ){
@@ -213,7 +221,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
 
     /**
-     * Set internal handle registered with WordPress for this bundle type 
+     * Set internal handle registered with WordPress for this bundle type
+     * @param string
      * @return Loco_package_Bundle
      */
     public function setHandle( $handle ){
@@ -276,6 +285,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Add a path for excluding from all projects
+     * @param Loco_fs_File|string
      * @return Loco_package_Bundle
      */
     public function excludeLocation( $path ){
@@ -350,6 +360,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * Add a translation project to bundle.
      * Note that this always adds without checking uniqueness. Call hasProject first if it could be a duplicate
+     * @param Loco_package_Project
      * @return Loco_package_Bundle
      */
     public function addProject( Loco_package_Project $project ){
@@ -578,6 +589,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * Get unique translation project by text domain (and optionally slug)
      * TODO would prefer to avoid iteration, but slug can be changed at any time
+     * @param string
+     * @param string | null
      * @return Loco_package_Project
      */
     public function getProject( $domain, $slug = null ){
@@ -615,6 +628,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     
     /**
      * Test if project already exists in bundle
+     * @param Loco_package_Project
      * @return bool
      */
     public function hasProject( Loco_package_Project $project ){
@@ -665,9 +679,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return Loco_package_Project
      */
     public function getProjectById( $id ){
-        $r = preg_split('/(?<!\\\\)\\./', $id, 2 );
-        $domain = stripcslashes($r[0]);
-        $slug = isset($r[1]) ? stripcslashes($r[1]) : null;
+        list( $domain, $slug ) = Loco_package_Project::splitId($id);
         return $this->getProject( $domain, $slug );
     }
 
