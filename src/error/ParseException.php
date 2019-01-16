@@ -9,7 +9,6 @@ class Loco_error_ParseException extends Loco_error_Exception {
      */
     private $context;
 
-
     /**
      * @param int line number
      * @param int column number
@@ -21,7 +20,6 @@ class Loco_error_ParseException extends Loco_error_Exception {
         // If line given as 0 then treat column as offset in an unknown number of lines
         if( 0 === $line ){
             $lines = preg_split( '/\\r?\\n/', substr($source,0,$column));
-            var_dump( substr($source,0,$column), compact('line','column','lines') );
             $line = count($lines);
             $column = strlen( end($lines) );
         }
@@ -29,7 +27,6 @@ class Loco_error_ParseException extends Loco_error_Exception {
         // this requires that full source is passed in, so line number must be real
         if( loco_debugging() ){
             $lines = preg_split( '/\\r?\\n/', $source, $line+1 );
-            var_dump( compact('line','column','lines') );
             $offset = $line - 1;
             if( isset($lines[$offset]) ){
                 $this->context = $lines[$offset] ."\n". str_repeat(' ', max(0,$column) ).'^';
