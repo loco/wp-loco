@@ -112,8 +112,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
             Loco_error_AdminNotices::success( __('POT file saved','loco-translate') );
         }
 
-        // Compile a single JSON translations for WordPress >= 5
-        // This takes any message that references a .js file, but does not compile separate per-script JSONs [yet].
+        // Compile JSON translations for WordPress >= 5
         if( $compile && $bundle && function_exists('wp_set_script_translations') ){
             $bytes = 0;
             try {

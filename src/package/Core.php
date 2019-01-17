@@ -66,7 +66,6 @@ class Loco_package_Core extends Loco_package_Bundle {
     }
 
 
-
     /**
      * Manually define the core WordPress translations as a single bundle
      * Projects are those included in standard WordPress downloads: [default], "admin", "admin-network" and "continents-cities"
@@ -98,6 +97,16 @@ class Loco_package_Core extends Loco_package_Bundle {
                 ->excludeSourcePath( $rootDir.'/wp-admin')
                 ->excludeSourcePath( $rootDir.'/wp-content')
                 ->excludeSourcePath( $rootDir.'/wp-includes/class-pop3.php')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/codemirror')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/crop')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/imgareaselect')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/jcrop')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/jquery')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/mediaelement')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/plupload')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/swfupload')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/thickbox')
+                ->excludeSourcePath( $rootDir.'/wp-includes/js/tw-sack.js')
         ;
         // "Administration" project (admin subset)
         $project = $domain->createProject( $bundle, 'Administration');
