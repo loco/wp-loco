@@ -31,6 +31,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         $post = $this->validate();
         $bundle = $this->getBundle();
         $project = $this->getProject( $bundle );
+        $domain = (string) $project->getDomain();
         $locale = $this->getLocale();
         $suffix = (string) $locale;
         
@@ -53,18 +54,17 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         $api = new Loco_api_WordPressFileSystem;
         $api->authorizeCreate( $pofile );
         
-        
-        // target MO shouldn't exist either, but we don't want to overwrite it without asking
+        // Target MO probably doesn't exist, but we don't want to overwrite it without asking
         $mofile = $pofile->cloneExtension('mo');
         if( $mofile->exists() ){
             throw new Loco_error_Exception( __('MO file exists for this language already. Delete it first','loco-translate') );
         }
-        
-        /*/ Same should go for primary .json file
-        $jsfile = $pofile->cloneExtension('json');
-        if( $jsfile->exists() ){
+
+        // Same for JSON file, but WordPress >= only 5
+        $jsfile = function_exists('wp_set_script_translations') ? $pofile->cloneExtension('json') : null;
+        if( $jsfile && $jsfile->exists() ){
             throw new Loco_error_Exception( __('JSON file exists for this language already. Delete it first','loco-translate') );
-        }*/
+        }
         
         // Permit forcing of any parsable file as strings template
         if( $source = $post->source ){
@@ -83,7 +83,6 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         // else extract directly from source code, assuming domain passed though from front end
         else {
             $extr = new Loco_gettext_Extraction( $bundle );
-            $domain = (string) $project->getDomain();
             $data = $extr->addProject($project)->includeMeta()->getTemplate($domain);
             $potfile = null;
         }
@@ -103,12 +102,14 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
 
         $posize = $pofile->putContents( $data->msgcat() );
         $mosize = $mofile->putContents( $data->msgfmt() );
+        $jssize = $jsfile && ( $sub = $data->splitJs() ) ? $jsfile->putContents($data->jedize($domain,$sub)) : 0;
         
         // set debug response data
         $this->set( 'debug', array (
             'poname' => $pofile->basename(),
             'posize' => $posize,
             'mosize' => $mosize,
+            'jssize' => $jssize,
             'source' => $potfile ? $potfile->basename() : '',
         ) );
         

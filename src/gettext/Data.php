@@ -148,6 +148,18 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
+     * Split JavaScript messages out of document, based on file reference mapping
+     * @return array
+     */
+    public function splitJs(){
+        // TODO take file extension from config
+        $messages = $this->splitRefs( array('js'=>'js','jsx'=>'js') );
+        return isset($messages['js']) ? $messages['js'] : array();
+    }
+    
+
+
+    /**
      * Compile JED flavour JSON
      * @param string text domain for JED metadata
      * @param LocoPoMessage[] pre-compiled messages
@@ -165,6 +177,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         foreach( $po as $msg ){
             $data[ $msg->getKey() ] = $msg->getMsgstrs();
         }
+        // pretty formatting for debugging
+        $json_options = 0;
+        if( Loco_data_Settings::get()->jed_pretty ){
+            $json_options |= loco_constant('JSON_PRETTY_PRINT') | loco_constant('JSON_UNESCAPED_SLASHES') | loco_constant('JSON_UNESCAPED_UNICODE');
+        }
         return json_encode( array (
             'translation-revision-date' => $head['po-revision-date'],
             'generator' => $head['x-generator'],
@@ -172,7 +189,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'locale_data' => array (
                 $domain => $data,
             ),
-        ), JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE );
+        ), $json_options );
     }
 
 

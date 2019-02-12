@@ -130,7 +130,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         
         // notify if template is locked (save and sync will be disabled)
         if( is_null($locale) && $project && $project->isPotLocked() ){
-            Loco_error_AdminNotices::warn('Template is protected from updates by the bundle configuration');
+            $this->set('fsDenied', true );
             $readonly = true;
         }
         

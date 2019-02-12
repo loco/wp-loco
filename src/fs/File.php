@@ -551,9 +551,9 @@ class Loco_fs_File {
     }
 
 
-
     /**
      * Copy this object with an alternative file extension
+     * @param string new extension
      * @return Loco_fs_File
      */
     public function cloneExtension( $ext ){
@@ -570,7 +570,6 @@ class Loco_fs_File {
     }
 
 
-
     /**
      * Ensure full parent directory tree exists
      * @return Loco_fs_Directory
@@ -585,16 +584,15 @@ class Loco_fs_File {
     }
 
 
-
     /**
-     * @return int bytes written to file
+     * @param string file contents
+     * @return int number of bytes written to file
      */
     public function putContents( $data ){
         $this->getWriteContext()->putContents($data);
         $this->clearStat();
         return $this->size();
     }
-
 
 
     /**

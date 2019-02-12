@@ -251,6 +251,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         /* @var Loco_fs_File $pofile */
         foreach( $filechoice as $pofile ){
             $parent = new Loco_fs_LocaleDirectory( $pofile->dirname() );
+            $systype = $parent->getUpdateType();
             $typeId = $parent->getTypeId();
             if( ! isset($locations[$typeId]) ){
                 $locations[$typeId] = new Loco_mvc_ViewParams( array(
@@ -269,15 +270,14 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
             // folder may be unwritable (requiring connect to create file) or may be denied under security settings
             try {
-                $disabled = false;
-                $systype = $parent->getUpdateType();
                 $context = $parent->getWriteContext()->authorize();
                 $writable = $context->writable();
+                $disabled = false;
             }
             catch( Loco_error_WriteException $e ){
                 $fs_failure = $e->getMessage();
-                $disabled = true;
                 $writable = false;
+                $disabled = true;
             }
             $choice = new Loco_mvc_ViewParams( array (
                 'checked' => '',

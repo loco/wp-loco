@@ -43,7 +43,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
     /**
      * Make not dirty
-     * @return Loco_data_Serializable
+     * @return self
      */
     protected function clean(){
         $this->dirty = false;
@@ -54,7 +54,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
     /**
      * Call persist method only if has changed since last clean
-     * @return Loco_data_Serializable
+     * @return static
      */
     public function persistIfDirty(){
         if( $this->isDirty() ){
@@ -67,7 +67,8 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
 
     /**
-     * @override so we can set dirty flag
+     * {@inheritdoc}
+     * override so we can set dirty flag
      */
     public function offsetSet( $prop, $value ){
         if( ! isset($this[$prop]) || $value !== $this[$prop] ){
@@ -78,7 +79,8 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
 
     /**
-     * @override so we can set dirty flag
+     * {@inheritdoc}
+     * override so we can set dirty flag
      */
     public function offsetUnset( $prop ){
         if( isset($this[$prop]) ){
@@ -89,7 +91,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
 
     /**
-     * @return Loco_data_Serializable
+     * @return self
      */
     public function setVersion( $version ){
         if( $version !== $this->v ){
@@ -125,7 +127,8 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
     /**
      * Restore object state from array as returned from getSerializable
-     * @return Loco_data_Serializable
+     * @param array
+     * @return self
      */    
     protected function setUnserialized( $data ){
 

@@ -116,11 +116,10 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         if( $compile && $bundle && function_exists('wp_set_script_translations') ){
             $bytes = 0;
             try {
-                $base = $pofile->dirname().'/'.$pofile->filename();
                 list($domain) = Loco_package_Project::splitId( $this->get('domain') );
+                /*/ hash file reference according to WordPress logic (see load_script_textdomain)
+                $base = $pofile->dirname().'/'.$pofile->filename();
                 foreach( $data->exportRefs('\\.jsx?') as $ref => $messages ){
-                    // hash file reference according to WordPress logic (see load_script_textdomain)
-                    // this means relative file reference MUST be correct in PO file. Not currently resolving against search paths.
                     if( '.min.js' === substr($ref,-7) ) {
                         $ref = substr($ref,0,-7).'.js';
                     }
@@ -136,6 +135,12 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
                     else {
                         Loco_error_AdminNotices::warn( sprintf('%s not found in bundle',$ref) );
                     }
+                }*/
+                // single JSON file containing all .js ref from this file
+                if( $messages = $data->splitJs() ){
+                    $file = $pofile->cloneExtension('json');
+                    $api->authorizeSave( $file );
+                    $bytes = $file->putContents( $data->jedize($domain,$messages) );
                 }
             }
             catch( Exception $e ){

@@ -82,6 +82,7 @@ function loco_doing_ajax(){
 
 /**
  * Evaluate a constant by name
+ * @param string
  * @return mixed
  */
 function loco_constant( $name ){
@@ -121,6 +122,7 @@ function loco_require_lib( $path ){
 
 /**
  * Check PHP extension required by Loco and load polyfill if needed
+ * @param string
  * @return bool
  */
 function loco_check_extension( $name ) {

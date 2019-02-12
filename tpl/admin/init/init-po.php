@@ -5,6 +5,7 @@
 $this->extend('../layout');
 
     // warn if doing direct extraction
+    /* @var Loco_mvc_ViewParams $ext */
     if( $params->has('ext') ):?> 
     <div class="notice inline notice-info">
         <p>
@@ -37,7 +38,7 @@ $this->extend('../layout');
         <p><?php $params->e('summary')?></p>
 
         <form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-poinit"><?php
-    
+            /* @var Loco_mvc_ViewParams $hidden */
             foreach( $hidden as $name => $value ):?> 
             <input type="hidden" name="<?php echo $name?>" value="<?php $hidden->e($name)?>" /><?php
             endforeach;?> 
@@ -52,8 +53,8 @@ $this->extend('../layout');
                         </th>
                         <td>
                             <fieldset>
-                                <label for="loco-use-selector">
-                                    <span><input type="radio" name="use-selector" value="1" checked id="loco-use-selector" /></span>
+                                <label for="loco-use-selector-1">
+                                    <span><input type="radio" name="use-selector" value="1" checked id="loco-use-selector-1" /></span>
                                     <?php esc_attr_e('WordPress language','loco-translate')?>:
                                 </label>
                                 <div>
@@ -61,13 +62,13 @@ $this->extend('../layout');
                                     <select id="loco-select-locale" name="select-locale">
                                         <option value=""><?php esc_attr_e('No language selected','loco-translate')?></option>
                                         <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco-translate' )?>"><?php
-                                            /* @var Loco_mvc_ViewParams $option */
+                                            /* @var Loco_mvc_ViewParams[] $installed */
                                             foreach( $installed as $option ):?> 
                                             <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
                                             endforeach;?> 
                                         </optgroup>
                                         <optgroup label="<?php esc_attr_e( 'Available languages', 'loco-translate' )?>"><?php
-                                            /* @var Loco_mvc_ViewParams $option */
+                                            /* @var Loco_mvc_ViewParams[] $locales */
                                             foreach( $locales as $option ):?> 
                                             <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
                                             endforeach;?> 
@@ -76,7 +77,7 @@ $this->extend('../layout');
                                 </div>
                             </fieldset>
                             <fieldset class="disabled">
-                                <label>
+                                <label for="loco-user-selector-0">
                                     <span><input type="radio" name="use-selector" value="0" /></span>
                                     <?php esc_attr_e('Custom language','loco-translate')?>:
                                 </label>
@@ -100,7 +101,7 @@ $this->extend('../layout');
                         </td>
                     </tr><?php
                     $choiceId = 0;
-                    /* @var $location Loco_mvc_ViewParams */
+                    /* @var Loco_mvc_ViewParams[] $locations */
                     foreach( $locations as $typeId => $location ):?> 
                     <tr class="compact">
                         <td>
@@ -109,7 +110,8 @@ $this->extend('../layout');
                             </p>
                         </td>
                         <td><?php
-                        /* @var $parent Loco_mvc_FileParams */
+                        /* @var Loco_mvc_FileParams $choice */
+                        /* @var Loco_mvc_FileParams $parent */
                         foreach( $location['paths'] as $choice ): 
                             $parent = $choice['parent']; 
                             $offset = sprintf('%u',++$choiceId);?> 

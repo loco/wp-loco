@@ -51,6 +51,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
 
     /**
      * Initialize view parameters for a project
+     * @param Loco_package_Project
      * @return Loco_mvc_ViewParams
      */
     private function createProjectParams( Loco_package_Project $project ){
@@ -96,26 +97,36 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'icon' => 'add',
         ) );
 
-        // offer template editing if permitted
-        if( ! $project->isPotLocked() ){
-            $pot = $project->getPot();
+        $pot = $project->getPot();
+        
+        // prevent editing of POT when config prohibits
+        if( $project->isPotLocked() ) {
             if( $pot && $pot->exists() ){
-                $p['pot'] = $pot;
                 $meta = Loco_gettext_Metadata::load($pot)->persistIfDirty( 0, true );
-                $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                    'href' => $this->getResourceLink('file-edit', $project, $meta ),
-                    'name' => __('Edit template','loco-translate'),
-                    'icon' => 'pencil',
+                $p['nav'][] = new Loco_mvc_ViewParams( array(
+                    'href' => $this->getResourceLink('file-view', $project, $meta ),
+                    'name' => __('View template','loco-translate'),
+                    'icon' => 'file',
                 ) );
             }
-            // else offer creation of new Template
-            else {
-                $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                    'href' => $this->getProjectLink('xgettext', $project ),
-                    'name' => __('Create template','loco-translate'),
-                    'icon' => 'add',
-                ) );
-            }
+        }
+        // offer template editing if permitted
+        else if( $pot && $pot->exists() ){
+            $p['pot'] = $pot;
+            $meta = Loco_gettext_Metadata::load($pot)->persistIfDirty( 0, true );
+            $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                'href' => $this->getResourceLink('file-edit', $project, $meta ),
+                'name' => __('Edit template','loco-translate'),
+                'icon' => 'pencil',
+            ) );
+        }
+        // else offer creation of new Template
+        else {
+            $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                'href' => $this->getProjectLink('xgettext', $project ),
+                'name' => __('Create template','loco-translate'),
+                'icon' => 'add',
+            ) );
         }
         
         return $p;
@@ -224,10 +235,10 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         ) );
     }
 
-
     
     /**
      * Prepare view parameters for all projects in a bundle
+     * @param Loco_package_Bundle
      * @return array<Loco_mvc_ViewParams>
      */
     private function createBundleListing( Loco_package_Bundle $bundle ){
@@ -238,7 +249,6 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         }
         return $projects;
     }
-
 
 
     /**
@@ -269,7 +279,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             // presumed complete
         }
         else if( $bundle->isTheme() || ( $bundle->isPlugin() && ! $bundle->isSingleFile() ) ){
-            // TODO This needs absracting into the Loco_package_Inverter class
+            // TODO This needs abstracting into the Loco_package_Inverter class
             $prefixes = array();
             $po = new Loco_fs_LocaleFileList;
             $mo = new Loco_fs_LocaleFileList;

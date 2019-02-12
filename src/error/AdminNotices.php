@@ -59,9 +59,15 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
             $file = new Loco_fs_File( $error->getRealFile() );
             $path = $file->getRelativePath( loco_plugin_root() );
             $text = sprintf('[Loco.%s] "%s" in %s:%u', $error->getType(), $error->getMessage(), $path, $error->getRealLine() );
-            // This writes to default PHP log, but note that WP_DEBUG_LOG may have set that to wp-content/debug.log.
+            // separate error log in CWD for tests
+            if( 'cli' === PHP_SAPI && defined('LOCO_TEST') && LOCO_TEST ){
+                error_log( '['.date('c').'] '.$text."\n", 3, 'debug.log' );
+            }
+            // Else write to default PHP log, but note that WordPress may have set this to wp-content/debug.log.
             // If no `error_log` is set this will send message to the SAPI, so check your httpd/fast-cgi errors too.
-            error_log( $text, 0 );
+            else {
+                error_log( $text, 0 );
+            }
         }
         return $error;
     }
