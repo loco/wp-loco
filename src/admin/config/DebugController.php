@@ -63,12 +63,12 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         if( function_exists('apache_get_modules') && ( $mods = preg_grep('/^mod_/',apache_get_modules() ) ) ){
             $versions['Server'] .= ' + '.implode(', ',$mods);
         }
-        // other extensions may cause issues too
-        if( extension_loaded('Zend OPcache') && ini_get('opcache.enable') ){
-            $versions['PHP'] .= ' + OPcache';
-            /*if( ! ini_get('opcache.save_comments') ){
-                Loco_error_AdminNotices::warn('opcache.save_comments is disabled. This may cause problems');
-            }*/
+
+        // byte code cache (currently only checking for Zend OPcache)
+        if( function_exists('opcache_get_configuration') && ini_get('opcache.enable') ){
+            $info = opcache_get_configuration();
+            $vers = $info['version'];
+            $versions[ $vers['opcache_product_name'] ] = ' '.$vers['version'];
         }
         
         // utf8 / encoding:
