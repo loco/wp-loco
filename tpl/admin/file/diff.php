@@ -35,12 +35,10 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
             /* @var $hidden Loco_mvc_HiddenFields */
             $hidden->_e();?> 
         </form>
-        <div class="revisions-diff-frame">
+        <div class="revisions-diff-frame jsonly">
             <div class="revisions-diff">
                 <div class="loading-indicator"><span class="spinner"></span></div>
-                <div class="diff">
-                    <noscript>This page requires JavaScript</noscript>
-                </div>
+                <div class="diff"></div>
              </div>
         </div>
     </div>

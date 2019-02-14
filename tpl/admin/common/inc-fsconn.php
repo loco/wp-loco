@@ -47,7 +47,7 @@
     </div><?php
     endif?> 
         
-    <form id="loco-fs" class="has-nav notice inline notice-locked jshide">
+    <form id="loco-fs" class="has-nav notice inline notice-locked jshide jsonly">
         <p>
             <strong class="has-icon"><?php
                 // Translators: When a file or folder cannot be modified due to filesystem permissions

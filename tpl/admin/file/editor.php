@@ -64,8 +64,8 @@ echo $header;
                 $dlFields->_e();?> 
             </form>
         </nav>
-        
-        <div id="loco-editor-inner">
+
+        <div id="loco-editor-inner" class="jsonly">
             <div class="loco-loading"></div>
         </div>
         

@@ -48,8 +48,8 @@ $this->extend('../layout');
                 <dt>JSON decoding:</dt>
                 <dd><?php echo $encoding->json?></dd>
     
-                <dt>Ajax test result:</dt>
-                <dd id="loco-ajax-check"><span class="inline-spinner"> </span></dd>
+                <dt class="jsonly">Ajax test result:</dt>
+                <dd class="jsonly" id="loco-ajax-check"><span class="inline-spinner"> </span></dd>
             </dl>
         </div>
     

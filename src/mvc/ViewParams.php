@@ -4,9 +4,9 @@
  */
 class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     
-    
     /**
      * Default escape function for view type is HTML
+     * @param string
      * @return string
      */
     public function escape( $text ){
@@ -14,9 +14,11 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     }
 
 
-
     /**
      * format integer as string date, including time according to user settings
+     * @param int unix timestamp
+     * @param string date format
+     * @return string
      */
      public static function date_i18n( $u, $f = null ){
         static $tf, $df, $tz;
@@ -41,6 +43,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
     /**
      * @internal
+     * @param string property name
      * @return mixed
      */
     public function __get( $p ){
@@ -49,6 +52,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
 
     /**
+     * @param string property name
      * @return bool
      */
     public function has( $p ){
@@ -60,7 +64,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * Print escaped property value
      * @param string property key
      * @param mixed optional arguments to substitute into value
-     * @return void
+     * @return string empty string
      */
     public function e( $p ){
         $text = $this->__get($p);
@@ -76,6 +80,9 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     
     /**
      * Print property as string date, including time
+     * @param string property name
+     * @param string date format
+     * @return string empty string
      */ 
     public function date( $p, $f = null ){
         if( $u = $this->__get($p) ){
@@ -91,6 +98,9 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
     /**
      * Print property as a string-formatted number
+     * @param string property name
+     * @param int optional decimal places
+     * @return string empty string
      */
     public function n( $p, $dp = null ){
         // number_format_i18n is pre-escaped for HTML
@@ -102,6 +112,9 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     /**
      * Print property with passed formatting string
      * e.g. $params->f('name', 'My name is %s' );
+     * @param string property name
+     * @param string formatting string
+     * @return string empty string
      */
     public function f( $p, $f = '%s' ){
         echo $this->escape( sprintf( $f, $this->__get($p) ) );
@@ -127,6 +140,8 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     
     
     /**
+     * Merge parameters into ours
+     * @param ArrayObject
      * @return Loco_mvc_ViewParams
      */
     public function concat( ArrayObject $more ){
@@ -137,7 +152,6 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     }
 
 
-
     /**
      * Debugging function
      * @codeCoverageIgnore
@@ -145,23 +159,10 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     public function dump(){
         echo '<pre>',$this->escape( json_encode( $this->getArrayCopy(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE ) ),'</pre>';
     }
-
-
-
-    // The following are all aliases for WordPress output functions in formatting.php
-    
-
-    /*public function html( $p ){
-        return esc_html( $this->__get($p) );
-    }*/
-
-    /*public function attr( $p ){
-        return esc_attr( $this->__get($p) );
-    }*/
-
     
 
     /**
+     * @param callable
      * @return Loco_mvc_ViewParams
      */
     public function sort( $callback ){
@@ -171,6 +172,4 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
         return $this;
     }
 
-    
-    
 }

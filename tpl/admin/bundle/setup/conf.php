@@ -7,7 +7,7 @@ $this->start('header');
 
 
    if( $params->has('jsonFields') ):?> 
-    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic" id="loco-remote">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic jsonly" id="loco-remote">
         <h3>
             <?php esc_html_e('Check config repository','loco-translate')?>  
         </h3>
