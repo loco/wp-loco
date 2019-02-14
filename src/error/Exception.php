@@ -11,6 +11,12 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
 
     /**
+     * Links to help docs etc.. to show along side error message
+     * @var array
+     */
+    private $links = array();
+
+    /**
      * Override file in which exception was thrown
      * @var string
      */
@@ -23,27 +29,53 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
     private $_line;
 
     /**
-     * Links to help docs etc.. to show along side error message
-     * @var array
-     */
-    private $links = array();
-
-
-    /**
      * {@inheritdoc}
      */
-    public function getRealFile(){
-        $file = $this->_file or $file = parent::getFile();
-        return $file;
+    public function __construct( $message = '', $code = 0, $previous = null ) {
+        parent::__construct( $message, $code, $previous );
     }
 
 
     /**
-     * {@inheritdoc}
+     * @return Throwable
+     */
+    private function getRootException(){
+        $current = $this;
+        // note that getPrevious is absent in PHP < 5.3
+        while( method_exists($current,'getPrevious') && ( $next = $current->getPrevious() ) ){
+            $current = $next;
+        }
+        return $current;
+    }
+
+
+    /**
+     * @return string
+     */
+    public function getRealFile(){
+        if( $this->_file ){
+            return $this->_file;
+        }
+        return $this->getRootException()->getFile();
+    }
+
+
+    /**
+     * @return int
      */
     public function getRealLine(){
-        $line = $this->_line or $line = parent::getLine();
-        return $line;
+        if( $this->_line ){
+            return $this->getLine();
+        }
+        return $this->getRootException()->getLine();
+    }
+
+
+    /**
+     * @return array
+     */
+    public function getRealTrace(){
+        return $this->getRootException()->getTrace();
     }
 
 
@@ -139,10 +171,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
         if( $e instanceof Loco_error_Exception ){
             return $e;
         }
-        $me = new Loco_error_Exception( $e->getMessage(), $e->getCode(), $e );
-        $me->_file = $e->getFile();
-        $me->_line = $e->getLine();
-        return $me;
+        return new Loco_error_Exception( $e->getMessage(), $e->getCode(), $e );
     }    
     
 }

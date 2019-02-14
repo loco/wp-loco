@@ -1,6 +1,10 @@
 <?php
 /**
  * Abstracts information about a file into a view parameter object.
+ * 
+ * @property string $name
+ * @property string $path
+ * @property string $relpath
  */
 class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     

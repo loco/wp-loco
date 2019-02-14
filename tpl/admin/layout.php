@@ -45,8 +45,10 @@
     <div id="loco-notices">
         <noscript>
             <div class="notice inline notice-danger">
-                <h3 class="has-icon icon-warn">JavaScript is disabled</h3>
-                <p>Loco Translate requires JavaScript for most functions to work as expected.</p>
+                <p>
+                    <strong class="has-icon icon-warn">JavaScript disabled:</strong>
+                    <span>Loco Translate requires JavaScript for most functions to work as expected.</span>
+                </p>
             </div>
         </noscript><?php 
         // flush message buffer

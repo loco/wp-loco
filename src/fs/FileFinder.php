@@ -288,7 +288,6 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     }
 
 
-
     /**
      * Read next valid file path from root directories
      * @return Loco_fs_File
@@ -297,6 +296,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
         $path = null;
         if( is_resource($this->dir) ){
             while( $f = readdir($this->dir) ){
+                // dot-files always excluded
                 if( '.' === $f{0} ){
                     continue;
                 }

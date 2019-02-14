@@ -157,9 +157,16 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @codeCoverageIgnore
      */
     public function dump(){
-        echo '<pre>',$this->escape( json_encode( $this->getArrayCopy(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE ) ),'</pre>';
+        echo '<pre>',$this->escape( json_encode( $this->__debugInfo(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE ) ),'</pre>';
     }
-    
+
+    /**
+     * @codeCoverageIgnore
+     */
+    public function __debugInfo() {
+        return $this->getArrayCopy();
+    }
+
 
     /**
      * @param callable

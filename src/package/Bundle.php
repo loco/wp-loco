@@ -275,6 +275,22 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
 
     /**
+     * @return string[]
+     */
+    public function getVendorRoots(){
+        $dirs = array();
+        $base = (string) $this->getDirectoryPath();
+        foreach( array('node_modules','vendor') as $f ){
+            $path = $base.'/'.$f;
+            if( is_dir($path) ){
+                $dirs[] = $path;
+            }
+        }
+        return $dirs;
+    }
+
+
+    /**
      * Get file locations to exclude from all projects in bundle. These are effectively "hidden"
      * @return Loco_fs_FileList
      */
@@ -535,6 +551,10 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
             // else add bundle root as default source file location
             else {
                 $project->addSourceDirectory( $base );
+            }
+            // automatically block common vendor locations
+            foreach( $this->getVendorRoots() as $root ){
+                $this->excludeLocation($root);
             }
             // default domain added
             $this->addProject($project);

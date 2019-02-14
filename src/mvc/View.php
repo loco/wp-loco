@@ -269,7 +269,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Shorthand for `echo esc_html( sprintf( ...`
-     * @return void
+     * @return string
      */
     private static function e( $text ){
         if( 1 < func_num_args() ){
@@ -278,7 +278,7 @@ class Loco_mvc_View implements IteratorAggregate {
         }
         echo htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
         return '';
-    }    
+    }
 
 }
 
