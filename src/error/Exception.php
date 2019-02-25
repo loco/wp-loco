@@ -80,12 +80,15 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
 
     /**
-     * @param array frame from debug_backtrace
+     * @param int number of levels up from callee
      * @return Loco_error_Exception
      */
-    public function setCallee( array $callee ){
+    public function setCallee( $depth = 0 ){
+        $stack = debug_backtrace(0);
+        $callee = $stack[$depth];
         $this->_file = $callee['file'];
         $this->_line = $callee['line'];
+        // TODO could also log the stack trace from $depth upwards, but not required unless being logged or thrown
         return $this;
     }
 

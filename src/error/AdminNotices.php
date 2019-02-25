@@ -44,13 +44,14 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         }
         // if exception wasn't thrown we have to do some work to establish where it was invoked
         if( __FILE__ === $error->getFile() ){
-            $stack = debug_backtrace(0);
+            /*$stack = debug_backtrace(0);
             if( is_array($stack) && 1 < count($stack) ){
                 $callee = $stack[1];
                 if( is_array($callee) ){
                     $error->setCallee($callee);
                 }
-            }
+            }*/
+            $error->setCallee(1);
         }
         // Log messages of minimum priority and up, depending on debug mode
         // note that non-debug level is in line with error_reporting set by WordPress (notices ignored)
@@ -79,7 +80,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * @return Loco_error_Exception
      */
     public static function success( $message ){
-        return self::add( new Loco_error_Success($message) );
+        $notice = new Loco_error_Success($message);
+        return self::add( $notice->setCallee(1) );
     }
 
 
@@ -89,7 +91,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * @return Loco_error_Exception
      */
     public static function warn( $message ){
-        return self::add( new Loco_error_Warning($message) );
+        $notice = new Loco_error_Warning($message);
+        return self::add( $notice->setCallee(1) );
     }
 
 
@@ -99,7 +102,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * @return Loco_error_Exception
      */
     public static function info( $message ){
-        return self::add( new Loco_error_Notice($message) );
+        $notice = new Loco_error_Notice($message);
+        return self::add( $notice->setCallee(1) );
     }
 
 
@@ -110,6 +114,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      */
     public static function debug( $message ){
         $notice = new Loco_error_Debug($message);
+        $notice->setCallee(1);
         loco_debugging() and self::add( $notice );
         return $notice;
     }
