@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-02-14 11:50+0000\n"
+"POT-Creation-Date: 2019-03-01 20:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.1-dev; wp-5.0.3"
+"X-Loco-Version: 2.2.1-dev; wp-5.1"
 
 #: src/fs/FileWriter.php:184
 #, php-format
@@ -386,7 +386,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:130 tpl/admin/common/inc-fsconn.php:16
+#: src/admin/bundle/LocaleController.php:129 tpl/admin/common/inc-fsconn.php:16
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
 msgstr ""
@@ -557,7 +557,7 @@ msgid ""
 "it"
 msgstr ""
 
-#: src/js/Strings.php:67 src/error/Exception.php:93
+#: src/js/Strings.php:67 src/error/Exception.php:128
 msgid "Error"
 msgstr ""
 
@@ -841,7 +841,7 @@ msgstr ""
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:116
+#: src/admin/bundle/LocaleController.php:115
 #: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:64
 msgid "Installed languages"
 msgstr ""
@@ -854,20 +854,12 @@ msgstr ""
 msgid "It needs configuring before you can do any translations"
 msgstr ""
 
-#: src/ajax/SaveController.php:148
-msgid "JSON compilation failed"
-msgstr ""
-
-#: src/ajax/MsginitController.php:66
-msgid "JSON file exists for this language already. Delete it first"
-msgstr ""
-
 #: tpl/admin/init/init-po.php:158
 msgid "Just copy English source strings"
 msgstr ""
 
 #. relative time when something happened in the last 30 seconds
-#: src/mvc/FileParams.php:135
+#: src/mvc/FileParams.php:139
 msgid "Just now"
 msgstr ""
 
@@ -1030,7 +1022,7 @@ msgstr ""
 msgid "New translations template for \"%s\""
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:129
+#: src/admin/bundle/LocaleController.php:128
 msgid "No core translation files are installed for this language"
 msgstr ""
 
@@ -1185,7 +1177,7 @@ msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
-#: src/admin/bundle/LocaleController.php:146
+#: src/admin/bundle/LocaleController.php:145
 msgid "Plugins"
 msgstr ""
 
@@ -1345,15 +1337,15 @@ msgstr ""
 msgid "Scan PHP files with extensions:"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:137
+#: src/admin/bundle/LocaleController.php:136
 msgid "See all core translations"
 msgstr ""
 
-#: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:147
+#: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:146
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:47 src/admin/bundle/LocaleController.php:142
+#: tpl/admin/root.php:47 src/admin/bundle/LocaleController.php:141
 msgid "See all themes"
 msgstr ""
 
@@ -1508,7 +1500,7 @@ msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
-#: src/admin/bundle/LocaleController.php:141
+#: src/admin/bundle/LocaleController.php:140
 msgid "Themes"
 msgstr ""
 
@@ -1706,7 +1698,7 @@ msgstr ""
 msgid "User options apply to your WordPress login, across all sites"
 msgstr ""
 
-#: src/data/Permissions.php:161
+#: src/data/Permissions.php:156
 msgctxt "User role"
 msgid "Translator"
 msgstr ""
@@ -1770,7 +1762,7 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: src/package/Core.php:79 src/admin/bundle/LocaleController.php:136
+#: src/package/Core.php:79 src/admin/bundle/LocaleController.php:135
 msgid "WordPress Core"
 msgstr ""
 

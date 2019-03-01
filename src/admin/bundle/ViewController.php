@@ -69,7 +69,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         // POT template file
         $file = $project->getPot();
         if( $file && $file->exists() ){
-            $meta = Loco_gettext_Metadata::load($file)->persistIfDirty( 0, true );
+            $meta = Loco_gettext_Metadata::load($file);
             $p['pot'] = new Loco_mvc_ViewParams( array(
                 // POT info
                 'name' => $file->basename(),
@@ -102,7 +102,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         // prevent editing of POT when config prohibits
         if( $project->isPotLocked() ) {
             if( $pot && $pot->exists() ){
-                $meta = Loco_gettext_Metadata::load($pot)->persistIfDirty( 0, true );
+                $meta = Loco_gettext_Metadata::load($pot);
                 $p['nav'][] = new Loco_mvc_ViewParams( array(
                     'href' => $this->getResourceLink('file-view', $project, $meta ),
                     'name' => __('View template','loco-translate'),
@@ -113,7 +113,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         // offer template editing if permitted
         else if( $pot && $pot->exists() ){
             $p['pot'] = $pot;
-            $meta = Loco_gettext_Metadata::load($pot)->persistIfDirty( 0, true );
+            $meta = Loco_gettext_Metadata::load($pot);
             $p['nav'][] = new Loco_mvc_ViewParams( array( 
                 'href' => $this->getResourceLink('file-edit', $project, $meta ),
                 'name' => __('Edit template','loco-translate'),
@@ -186,6 +186,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             $file = $pofile or $file = $mofile;
             // establish locale, or assume invalid
             $locale = null;
+            /* @var Loco_fs_LocaleFile $file */
             if( 'pot' !== $file->extension() ){
                 $tag = $file->getSuffix();
                 if( isset($locales[$tag]) ){
@@ -205,7 +206,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      */
     private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
         // Pull Gettext meta data from cache if possible
-        $meta = Loco_gettext_Metadata::load($file)->persistIfDirty( 0, true );
+        $meta = Loco_gettext_Metadata::load($file);
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
         // routing arguments
         $args = array (

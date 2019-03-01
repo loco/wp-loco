@@ -60,11 +60,11 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             throw new Loco_error_Exception( __('MO file exists for this language already. Delete it first','loco-translate') );
         }
 
-        // Same for JSON file, but WordPress >= only 5
+        /*/ Same for JSON file, but WordPress >= only 5
         $jsfile = function_exists('wp_set_script_translations') ? $pofile->cloneExtension('json') : null;
         if( $jsfile && $jsfile->exists() ){
             throw new Loco_error_Exception( __('JSON file exists for this language already. Delete it first','loco-translate') );
-        }
+        }*/
         
         // Permit forcing of any parsable file as strings template
         if( $source = $post->source ){
@@ -102,14 +102,14 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
 
         $posize = $pofile->putContents( $data->msgcat() );
         $mosize = $mofile->putContents( $data->msgfmt() );
-        $jssize = $jsfile && ( $sub = $data->splitJs() ) ? $jsfile->putContents($data->jedize($domain,$sub)) : 0;
+        //$jssize = $jsfile && ( $sub = $data->splitJs() ) ? $jsfile->putContents($data->jedize($domain,$sub)) : 0;
         
         // set debug response data
         $this->set( 'debug', array (
             'poname' => $pofile->basename(),
             'posize' => $posize,
             'mosize' => $mosize,
-            'jssize' => $jssize,
+            //'jssize' => $jssize,
             'source' => $potfile ? $potfile->basename() : '',
         ) );
         

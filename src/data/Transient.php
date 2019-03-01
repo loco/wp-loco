@@ -5,10 +5,10 @@
 abstract class Loco_data_Transient extends Loco_data_Serializable {
 
     /**
-     * Lifespan to persist object in transient cache on shutdown
-     * @var int
+     * Lifespan to persist object in transient cache
+     * @var int seconds
      */
-    private $lazy;
+    private $ttl = 0;
     
     /**
      * Get short suffix for use as end of cache key.
@@ -17,36 +17,18 @@ abstract class Loco_data_Transient extends Loco_data_Serializable {
      */
     abstract public function getKey();
 
-
     /**
      * Persist object in WordPress cache
+     * @param int
+     * @param bool
      * @return Loco_data_Transient
      */
-    public function persist( $ttl = 0, $immediate = false ){
-        if( $immediate ){
-            $key = 'loco_'.$this->getKey();
-            $data = $this->getSerializable();
-            set_transient( $key, $data, $ttl );
-            $this->lazy = null;
-            $this->clean();
-        }
-        else {
-            $this->lazy = $ttl;
-        }
-
+    public function persist(){
+        $key = 'loco_'.$this->getKey();
+        set_transient( $key, $this->getSerializable(), $this->ttl );
+        $this->clean();
         return $this;
     }
-
-
-    /**
-     * Commit to transient cache on object destruction
-     */
-    final public function __destruct(){
-        if( is_int($this->lazy) ){
-            $this->persistIfDirty( $this->lazy, true );
-        }
-    }
-
 
 
     /**
@@ -54,7 +36,6 @@ abstract class Loco_data_Transient extends Loco_data_Serializable {
      * @return bool whether object existed in cache
      */
     public function fetch(){
-        $v = $this->getVersion();
         $key = 'loco_'.$this->getKey();
         $data = get_transient( $key );
         try {
@@ -64,7 +45,33 @@ abstract class Loco_data_Transient extends Loco_data_Serializable {
         catch( InvalidArgumentException $e ){
             return false;
         }
-    }    
-
+    }
     
+    
+    /**
+     * @param int
+     * @return self
+     */
+    public function setLifespan( $ttl ){
+        $this->ttl = (int) $ttl;
+        return $this;
+    }
+    
+    
+    /**
+     * Set keep-alive interval
+     * @param int
+     * @return self
+     */
+    public function keepAlive( $timeout ){
+        $time = $this->getTimestamp();
+        // legacy objects (with ttl=0) had no timestamp, so will always be touched.
+        // make dirty if this number of seconds has elapsed since last persisted.
+        if( time() > ( $time + $timeout ) ){
+            $this->touch()->persistLazily();
+        }
+        return $this;
+    }
+    
+
 }
