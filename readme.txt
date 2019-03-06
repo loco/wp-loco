@@ -93,7 +93,6 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 == Changelog ==
 
 = 2.2.1 =
-* Experimental generation of JSON language packs
 * Fixed bug where plural tabs not displaying RTL
 * Various improvements to PO parser incl. better charset handling
 * Excluding node_modules and vendor directories by default
