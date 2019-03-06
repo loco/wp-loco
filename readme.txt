@@ -97,6 +97,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Various improvements to PO parser incl. better charset handling
 * Excluding node_modules and vendor directories by default
 * Transients now have maximum lifespan of 10 days, refreshed after 24h
+* Symlink fix for followed theme paths detected outside theme
 * Bumped WP compatibility to 5.1
 
 = 2.2.0 =

@@ -8,9 +8,9 @@ class Loco_fs_File {
      * @var Loco_fs_FileWriter
      */
     private $w;
-    
+
     /**
-     * Full original path to file
+     * Path to file
      * @var string
      */
     private $path;
@@ -36,6 +36,7 @@ class Loco_fs_File {
 
     /**
      * Check if a path is absolute and return fixed slashes for readability
+     * @param string
      * @return string fixed path, or "" if not absolute
      */
     public static function abs( $path ){
@@ -60,6 +61,7 @@ class Loco_fs_File {
 
     /**
      * Create file with initial, unvalidated path
+     * @param string
      */    
     public function __construct( $path ){
         $this->setPath( $path );

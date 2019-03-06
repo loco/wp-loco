@@ -639,8 +639,9 @@ class Loco_package_Project {
      * @return Loco_fs_LocaleFileList
      */
     public function findLocaleFiles( $ext ){
+        $finder = $this->getTargetFinder();
         $list = new Loco_fs_LocaleFileList;
-        $files = $this->getTargetFinder()->exportGroups();
+        $files = $finder->exportGroups();
         $prefix = $this->getSlug(); 
         $domain = $this->domain->getName();
         $default = $this->isDomainDefault();
@@ -653,11 +654,15 @@ class Loco_package_Project {
             }
             // else in some cases a suffix-only file like "el.po" can match
             else if( $default && $file->hasSuffixOnly() ){
-                // 1. theme files under their own directory
+                // theme files under their own directory
                 if( $file->underThemeDirectory() ){
                     $list->addLocalized( $file );
                 }
-                // 2. WordPress core "default" domain, default project
+                // check followed links if they were originally under theme dir
+                else if( ( $link = $finder->getFollowed($file) ) && $link->underThemeDirectory() ){
+                    $list->addLocalized( $file );
+                }
+                // WordPress core "default" domain, default project
                 else if( 'default' === $domain ){
                     $list->addLocalized( $file );
                 }
