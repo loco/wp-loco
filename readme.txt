@@ -98,6 +98,7 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 * Excluding node_modules and vendor directories by default
 * Transients now have maximum lifespan of 10 days, refreshed after 24h
 * Symlink fix for followed theme paths detected outside theme
+* Deprecated config repository lookup
 * Bumped WP compatibility to 5.1
 
 = 2.2.0 =

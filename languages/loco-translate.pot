@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-01 20:08+0000\n"
+"POT-Creation-Date: 2019-03-08 17:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -101,10 +101,6 @@ msgstr[1] ""
 msgid "About file system access"
 msgstr ""
 
-#: tpl/admin/help/side-bar.php:9
-msgid "About Loco Translate"
-msgstr ""
-
 #: tpl/admin/init/init-prompt.php:30 tpl/admin/init/init-pot.php:42
 msgid "About templates"
 msgstr ""
@@ -113,7 +109,7 @@ msgstr ""
 msgid "About the Tokenizer"
 msgstr ""
 
-#: tpl/admin/root.php:43
+#: tpl/admin/root.php:35
 msgid "Active theme:"
 msgstr ""
 
@@ -205,10 +201,6 @@ msgid ""
 "editor"
 msgstr ""
 
-#: tpl/admin/help/side-bar.php:12
-msgid "Beginner's guide"
-msgstr ""
-
 #: tpl/admin/file/info-po.php:40
 msgid "Binary file missing"
 msgstr ""
@@ -242,7 +234,7 @@ msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
-#: tpl/admin/bundle/setup/conf.php:12 tpl/admin/bundle/setup/inc-nav.php:25
+#: tpl/admin/bundle/setup/conf.php:12
 msgid "Check config repository"
 msgstr ""
 
@@ -756,7 +748,7 @@ msgstr ""
 msgid "Generate hash tables"
 msgstr ""
 
-#: tpl/admin/bundle/setup/inc-nav.php:28
+#: tpl/admin/bundle/setup/inc-nav.php:25
 msgid "Get help with this"
 msgstr ""
 
@@ -780,6 +772,10 @@ msgstr ""
 msgid "Help & support"
 msgstr ""
 
+#: tpl/admin/help/side-bar.php:12
+msgid "Help and tutorials"
+msgstr ""
+
 #: src/mvc/AdminRouter.php:42
 msgid "Home"
 msgstr ""
@@ -790,14 +786,6 @@ msgstr ""
 
 #. URI of the plugin
 msgid "https://wordpress.org/plugins/loco-translate/"
-msgstr ""
-
-#. 1: help URL, 2: forum URL; Must be HTML encoded
-#: tpl/admin/root.php:20
-#, php-format
-msgid ""
-"If you have any questions, please try our <a href=\"%1$s\">help pages</a> or "
-"ask in the <a href=\"%2$s\">support forum</a>."
 msgstr ""
 
 #: tpl/admin/bundle/setup.php:15
@@ -1076,6 +1064,10 @@ msgstr ""
 msgid "Official configuration"
 msgstr ""
 
+#: tpl/admin/help/side-bar.php:9
+msgid "Official plugin page"
+msgstr ""
+
 #: src/js/Strings.php:76 src/error/Success.php:19
 msgid "OK"
 msgstr ""
@@ -1269,7 +1261,7 @@ msgstr ""
 msgid "Read only"
 msgstr ""
 
-#: tpl/admin/root.php:31
+#: tpl/admin/root.php:23
 msgid "Recently updated:"
 msgstr ""
 
@@ -1305,7 +1297,7 @@ msgstr ""
 msgid "Revisions are identical, you can delete %s"
 msgstr ""
 
-#: tpl/admin/root.php:55
+#: tpl/admin/root.php:47
 msgid "Running plugins:"
 msgstr ""
 
@@ -1341,11 +1333,11 @@ msgstr ""
 msgid "See all core translations"
 msgstr ""
 
-#: tpl/admin/root.php:62 src/admin/bundle/LocaleController.php:146
+#: tpl/admin/root.php:54 src/admin/bundle/LocaleController.php:146
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:47 src/admin/bundle/LocaleController.php:141
+#: tpl/admin/root.php:39 src/admin/bundle/LocaleController.php:141
 msgid "See all themes"
 msgstr ""
 
@@ -1428,10 +1420,6 @@ msgstr ""
 msgid "Strings will be extracted to:"
 msgstr ""
 
-#: tpl/admin/help/side-bar.php:15
-msgid "Support forum"
-msgstr ""
-
 #: src/admin/config/DebugController.php:47
 msgid "System diagnostics"
 msgstr ""
@@ -1504,7 +1492,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: tpl/admin/root.php:58
+#: tpl/admin/root.php:50
 msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
@@ -1651,7 +1639,7 @@ msgstr ""
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
 
-#: tpl/admin/root.php:34
+#: tpl/admin/root.php:26
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 

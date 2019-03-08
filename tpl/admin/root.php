@@ -14,14 +14,6 @@ $this->extend('layout');
             printf( esc_html( __('Your admin language is %s.','loco-translate') ), $adminLocale->link );
             endif?></span>
         </p>
-        <p><?php
-            // translators: 1: help URL, 2: forum URL; Must be HTML encoded
-            printf(
-                __('If you have any questions, please try our <a href="%1$s">help pages</a> or ask in the <a href="%2$s">support forum</a>.','loco-translate'),
-                esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') ),
-                'https://wordpress.org/support/plugin/loco-translate'
-            );?> 
-        </p>
     </div><?php
 
 

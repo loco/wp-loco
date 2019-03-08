@@ -22,8 +22,5 @@
         <a href="<?php $tabs[1]->e('href')?>&amp;xml=1" class="button button-link has-icon icon-upload"><?php esc_html_e('Import config from XML','loco-translate')?></a>
     </p>
     <p>
-        <a href="<?php $tabs[1]->e('href')?>&amp;json=1" class="button button-link has-icon icon-database"><?php esc_html_e('Check config repository','loco-translate')?></a>
-    </p>
-    <p>
         <a href="<?php echo $help?>" class="button button-link has-icon icon-help" target="_blank"><?php esc_html_e('Get help with this','loco-translate')?></a>
     </p>

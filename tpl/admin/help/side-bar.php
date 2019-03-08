@@ -6,11 +6,8 @@
     <strong><?php esc_html_e('For more information:','default')?></strong>
 </p>
 <p>
-    <a href="<?php echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') )?>" target="_blank"><?php esc_html_e('About Loco Translate','loco-translate')?></a>
+    <a href="<?php echo esc_url( apply_filters('loco_external','https://wordpress.org/plugins/loco-translate/') )?>" target="_blank"><?php esc_html_e('Official plugin page','loco-translate')?></a>
 </p>
 <p>
-    <a href="<?php echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/beginners') )?>" target="_blank"><?php esc_html_e('Beginner\'s guide','loco-translate')?></a>
-</p>
-<p>
-    <a href="https://wordpress.org/support/plugin/loco-translate" target="_blank"><?php esc_html_e('Support forum','loco-translate')?></a>
+    <a href="<?php echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') )?>" target="_blank"><?php esc_html_e('Help and tutorials','loco-translate')?></a>
 </p>
