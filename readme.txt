@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.1.0
-Stable tag: 2.2.0
+Stable tag: 2.2.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -30,16 +30,11 @@ Features include:
 * Built-in WordPress locale codes
 
 
-Official [Loco](https://localise.biz/) WordPress plugin by <a href="//twitter.com/timwhitlock">@timwhitlock</a> / <a rel="author" href="https://plus.google.com/106703751121449519322">Tim Whitlock</a>
+Official [Loco](https://localise.biz/) WordPress plugin by Tim Whitlock. 
+For more information please visit our [plugin page](https://localise.biz/wordpress/plugin).
 
 
 == Installation ==
-
-= Installing manually: =
-
-1. Unzip all files to the `/wp-content/plugins/loco-translate` directory
-2. Log into WordPress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
-3. Go to *Loco Translate > Home* in the left-hand menu to start translating
 
 = Basic usage: =
 
@@ -60,6 +55,12 @@ Developers: To translate your own theme or plugin for distribution, follow these
 5. Click `+ New language` and follow the on-screen prompts to add your own translations.
 
 
+= Installing manually: =
+
+1. Unzip all files to the `wp-content/plugins/loco-translate` directory
+2. Log into WordPress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
+3. Go to *Loco Translate > Home* in the left-hand menu to start translating
+
 
 More information on using the plugin is [available here](https://localise.biz/wordpress/plugin).
 
@@ -68,16 +69,20 @@ More information on using the plugin is [available here](https://localise.biz/wo
 
 = How do I use it? = 
 
-Try our [Guides and Tutorials](https://localise.biz/wordpress/plugin#guides) and be sure to check the [Most asked questions](https://localise.biz/wordpress/plugin/faqs) if you have a problem.
+Try our [Guides and Tutorials](https://localise.biz/wordpress/plugin#guides).
 
 = How do I get help? =
 
-Please see [getting help with Loco Translate](https://localise.biz/wordpress/plugin/support) and note that personal support by email is not available for this plugin. 
-Help is provided via the [plugin support forum](https://wordpress.org/support/plugin/loco-translate) only.
+If you have a problem using Loco Translate, please try our [help pages](https://localise.biz/wordpress/plugin).
+There's a lot of information there to help you understand how it works and the most common pitfalls to avoid.
 
-= Is it GDPR compliant? =
+To report a bug please start a new topic in the [support forum](https://wordpress.org/support/plugin/loco-translate),
+but please check the [FAQs](https://localise.biz/wordpress/plugin/faqs) for similar issues first.
+If you decide to submit a bug report please post enough [relevant detail](https://localise.biz/wordpress/plugin/faqs/debug-info) for us to reproduce your issue.
 
-Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugin/privacy).
+= Is my data protected? =
+
+We don't collect your data or snoop on you. See the [plugin privacy notice](https://localise.biz/wordpress/plugin/privacy).
 
 
 == Screenshots ==
@@ -292,25 +297,6 @@ Sure thing. See the [plugin privacy notice](https://localise.biz/wordpress/plugi
 = 2.2.1 =
 * Various bug fixes and improvements
 
-
-== More info ==
-
-* [About the plugin](https://localise.biz/wordpress/plugin)
-* [User manual](https://localise.biz/wordpress/plugin/manual)
-* [Beginner's guide](https://localise.biz/wordpress/plugin/beginners)
-* [Customizing translations](https://localise.biz/wordpress/plugin/custom-translations)
-* [Translating child themes](https://localise.biz/wordpress/plugin/child-themes)
-* [Getting help](https://localise.biz/wordpress/plugin/support)
-
-== Coming soon ==
-
-These features are on our todo list. There's no particular timeframe for any of them and they're in no particular order:
-
-* Integration with automatic translation services
-* Integration with Loco API for cloud storage and collaboration
-* Global search for finding strings across all bundles
-* Advanced Merge/Sync screen to replace the basic in-editor sync
-* Starred/Favourited bundles for quicker dashboard access
 
 
 == Keyboard shortcuts ==
