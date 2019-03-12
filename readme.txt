@@ -97,6 +97,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.2.2 =
+* 
+
 = 2.2.1 =
 * Fixed bug where plural tabs not displaying RTL
 * Various improvements to PO parser incl. better charset handling
