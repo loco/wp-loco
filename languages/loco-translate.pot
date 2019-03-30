@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.2.1\n"
+"Project-Id-Version: Loco Translate 2.2.2-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-08 18:17+0000\n"
+"POT-Creation-Date: 2019-03-30 11:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,9 +13,9 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.1; wp-5.1"
+"X-Loco-Version: 2.2.2-dev; wp-5.1.1"
 
-#: ../../../wp-config.php:1
+#: src/fs/FileWriter.php:184
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
@@ -107,6 +107,10 @@ msgstr ""
 
 #: tpl/admin/errors/no-tokenizer.php:11
 msgid "About the Tokenizer"
+msgstr ""
+
+#: tpl/admin/errors/file-sec.php:14
+msgid "Access to this file is blocked for security reasons"
 msgstr ""
 
 #: tpl/admin/root.php:35
@@ -346,7 +350,7 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:98 tpl/admin/file/diff.php:31
+#: src/admin/file/BaseController.php:107 tpl/admin/file/diff.php:31
 #: tpl/admin/bundle/inc-po-table.php:59 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
@@ -413,7 +417,7 @@ msgstr ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: src/admin/file/BaseController.php:94
+#: src/admin/file/BaseController.php:103
 msgid "Editor"
 msgstr ""
 
@@ -607,6 +611,10 @@ msgstr ""
 msgid "Failed to save file"
 msgstr ""
 
+#: tpl/admin/errors/file-sec.php:11
+msgid "File access disallowed"
+msgstr ""
+
 #: tpl/admin/errors/no-backups.php:18
 msgid "File backups are disabled in your plugin settings"
 msgstr ""
@@ -618,7 +626,7 @@ msgid_plural "%u files deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/InfoController.php:161
+#: src/admin/file/InfoController.php:158
 msgid "File does not have a valid header"
 msgstr ""
 
@@ -626,7 +634,7 @@ msgstr ""
 msgid "File doesn't exist"
 msgstr ""
 
-#: src/admin/file/BaseController.php:96 tpl/admin/file/diff.php:60
+#: src/admin/file/BaseController.php:105 tpl/admin/file/diff.php:60
 #: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
@@ -834,7 +842,7 @@ msgstr ""
 msgid "Installed languages"
 msgstr ""
 
-#: src/Locale.php:296
+#: src/Locale.php:300
 msgid "Invalid locale"
 msgstr ""
 
@@ -855,7 +863,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/admin/file/InfoController.php:168
+#: src/admin/file/InfoController.php:165
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -993,7 +1001,7 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:111
-#: src/admin/file/BaseController.php:114 src/admin/bundle/ViewController.php:96
+#: src/admin/file/BaseController.php:123 src/admin/bundle/ViewController.php:96
 msgid "New language"
 msgstr ""
 
@@ -1174,43 +1182,43 @@ msgid "Plugins"
 msgstr ""
 
 #. Plural category for languages that have no plurals
-#: src/Locale.php:375
+#: src/Locale.php:379
 msgctxt "Plural category"
 msgid "All forms"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:389
+#: src/Locale.php:393
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:391
+#: src/Locale.php:395
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:385
+#: src/Locale.php:389
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:393
+#: src/Locale.php:397
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:387
+#: src/Locale.php:391
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:383
+#: src/Locale.php:387
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
@@ -1278,7 +1286,7 @@ msgstr ""
 msgid "Reset config"
 msgstr ""
 
-#: src/admin/file/BaseController.php:97 tpl/admin/file/diff.php:30
+#: src/admin/file/BaseController.php:106 tpl/admin/file/diff.php:30
 msgid "Restore"
 msgstr ""
 
@@ -1396,7 +1404,7 @@ msgstr ""
 msgid "Skip template"
 msgstr ""
 
-#: src/admin/file/BaseController.php:95
+#: src/admin/file/BaseController.php:104
 msgid "Source"
 msgstr ""
 
@@ -1659,7 +1667,7 @@ msgstr ""
 msgid "Unexpected file type"
 msgstr ""
 
-#: src/package/Header.php:77 src/admin/file/InfoController.php:130
+#: src/package/Header.php:77 src/admin/file/InfoController.php:127
 msgid "Unknown author"
 msgstr ""
 
