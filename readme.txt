@@ -98,6 +98,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.2.2 =
+* Security fixes for reading sensitive files
 * Fixed old PHP version error in data files
 * Bumped WP compatibility to 5.1.1
 

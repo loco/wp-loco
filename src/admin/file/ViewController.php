@@ -34,6 +34,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
     public function render(){
         
         // file must exist for editing
+        /* @var Loco_fs_File $file */
         $file = $this->get('file');
         $name = $file->basename();
         $type = strtolower( $file->extension() );
@@ -57,7 +58,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
             $this->set('modified', $file->modified() );
             $data = Loco_gettext_Data::load( $file );
         }
-        catch( Exception $e ){
+        catch( Loco_error_ParseException $e ){
             Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
             $data = Loco_gettext_Data::dummy();
         }

@@ -15,7 +15,7 @@ msgstr ""
 "X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.2.1; wp-5.1"
 
-#: src/fs/FileWriter.php:184
+#: ../../../wp-config.php:1
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""

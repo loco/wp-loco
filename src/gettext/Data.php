@@ -13,7 +13,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return string "po", "pot" or "mo"
      * @throws Loco_error_Exception
      */
-    private static function ext( Loco_fs_File $file ){
+    public static function ext( Loco_fs_File $file ){
         $ext = rtrim( strtolower( $file->extension() ), '~' );
         if( 'po' === $ext || 'pot' === $ext || 'mo' === $ext ){
             return $ext;

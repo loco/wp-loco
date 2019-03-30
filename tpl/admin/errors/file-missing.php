@@ -14,6 +14,6 @@ $this->extend('../layout');
             <?php esc_html_e("Either this file is missing or the server doesn't have permission to access it",'loco-translate')?>:
         </p>
         <p>
-            <code class="path"><?php echo $params->e('path')?></code>
+            <code class="path"><?php $params->e('path')?></code>
         </p>
     </div>

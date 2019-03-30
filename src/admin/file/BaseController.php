@@ -21,6 +21,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
 
     /**
      * Check file is valid or return error
+     * @param Loco_fs_File
      * @return string rendered error
      */
     protected function getFileError( Loco_fs_File $file = null ){
@@ -32,7 +33,16 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             $this->set('info', Loco_mvc_FileParams::create($file) );
             return $this->view( 'admin/errors/file-isdir', array() );
         }
-        
+        // security validations
+        try {
+            Loco_gettext_Data::ext( $file );
+            // TODO also need to block access to files outside content directory
+            // this is more difficult as can symlink into and out of the tree.
+        }
+        catch( Exception $e ){
+            return $this->view( 'admin/errors/file-sec', array( 'reason' => $e->getMessage() ) );
+        }
+
         return '';
     }
 
@@ -52,9 +62,8 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         }
         $file = new Loco_fs_LocaleFile( $path );
         $file->normalize( loco_constant('WP_CONTENT_DIR') );
-
+        $ext = strtolower( $file->extension() );
         // POT file has no locale
-        $ext = $file->extension();
         if( 'pot' === $ext ){
             $locale = null;
         }

@@ -93,17 +93,29 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         
         // reference must parse as <path>:<line>
         $ref = $post->ref;
-        if( ! preg_match('/^(.+):(\d+)$/', $ref, $r ) ){
+        if( ! preg_match('/^(.+):(\\d+)$/', $ref, $r ) ){
             throw new InvalidArgumentException('Invalid file reference, '.$ref );
         }
         
         // find file or fail
         list( , $refpath, $refline ) = $r;
         $srcfile = $this->findSourceFile($refpath);
+        
+        // deny access to sensitive files
+        if( 'wp-config.php' === $srcfile->basename() ){
+            throw new InvalidArgumentException('File access disallowed');
+        }
+        
+        // validate allowed source file types 
+        $conf = Loco_data_Settings::get();
+        $ext = strtolower( $srcfile->extension() );
+        $allow = array_merge( array('php','js'), $conf->php_alias, $conf->jsx_alias );
+        if( ! in_array($ext,$allow,true) ){
+            throw new InvalidArgumentException('File extension disallowed, '.$ext );
+        }
 
         // get file type from registered file extensions:
-        $conf = Loco_data_Settings::get();
-        $type = $conf->ext2type( $srcfile->extension() );
+        $type = $conf->ext2type( $ext );
 
         $this->set('type', $type );
         $this->set('line', (int) $refline );
