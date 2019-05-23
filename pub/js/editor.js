@@ -8,7 +8,7 @@
         
         syncParams = null,
         saveParams = null,
-        ajaxUpload = conf.multipart && window.FormData && window.Blob,
+        ajaxUpload = conf.multipart,
         
         // UI translation
         translator = loco.l10n,
@@ -37,6 +37,12 @@
         saveButton,
         innerDiv = document.getElementById('loco-editor-inner')
     ;
+    
+    
+    // warn if ajax uploads are enabled but not supported
+    if( ajaxUpload && ! ( window.FormData && window.Blob ) ){
+        ajaxUpload = false;
+    }
 
 
     /**
