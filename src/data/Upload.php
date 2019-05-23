@@ -1,4 +1,4 @@
- <?php
+<?php
  /**
   * Simple wrapper for transient file uploads carrying PO data.
   * Doesn't move or persist uploaded files, so doesn't call wp_handle_upload()
@@ -50,7 +50,11 @@
         default:
             throw new Loco_error_UploadException('Unknown file upload error',$code);
         }
-        // upload ok according to PHP
+        // mime check is largely pointless but may as well check as we'll only send one type
+        if( 'application/x-gettext' !== $data['type'] ){
+            throw new Loco_error_UploadException('Unsupported file type, expected PO or POT file');
+        }
+        // upload is OK according to PHP, but check it's really readable and not empty
         $path = $data['tmp_name'];
         $file = new Loco_fs_File($path);
         if( ! $file->exists() ){
@@ -58,10 +62,6 @@
         }
         if( 0 === $file->size() ){
             throw new Loco_error_UploadException('Uploaded file contains no data',UPLOAD_ERR_NO_FILE);
-        }
-        // mime check is largely pointless but while we're here..
-        if( 'application/x-gettext' !== $data['type'] ){
-            throw new Loco_error_UploadException('Unsupported file type, expected PO or POT file');
         }
         // file is really ok
         $this->file = $file;
