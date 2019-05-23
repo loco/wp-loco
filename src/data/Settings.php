@@ -15,6 +15,7 @@
  * @property bool $po_utf8_bom Whether to prepend PO and POT files with UTF-8 byte order mark
  * @property string $po_width PO/POT file maximum line width (wrapping) zero to disable
  * @property bool $jed_pretty Whether to pretty print JSON JED files
+ * @property bool $ajax_files Whether to submit PO data as concrete files
  */
 class Loco_data_Settings extends Loco_data_Serializable {
 
@@ -43,6 +44,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'po_utf8_bom' => false,
         'po_width' => '79',
         'jed_pretty' => false,
+        'ajax_files' => false,
     );
 
 

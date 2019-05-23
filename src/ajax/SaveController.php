@@ -43,8 +43,14 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         // force the use of remote file system when configured from front end
         $api = new Loco_api_WordPressFileSystem;
 
-        // data posted must be valid
-        $data = Loco_gettext_Data::fromSource( $post->data );
+        // data posted may be either 'multipart/form-data' (recommended for large files)
+        if( isset($_FILES['po']) ){
+            $data = Loco_gettext_Data::fromSource( Loco_data_Upload::src('po') );
+        }
+        // else 'application/x-www-form-urlencoded' by default
+        else {
+            $data = Loco_gettext_Data::fromSource( $post->data );
+        }
         
         // WordPress-ize some headers that differ from JavaScript libs
         if( $compile = (bool) $locale ){

@@ -140,6 +140,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         $this->set( 'js', new Loco_mvc_ViewParams( array(
             'podata' => $data->jsonSerialize(),
             'powrap' => (int) Loco_data_Settings::get()->po_width,
+            'multipart' => (bool) Loco_data_Settings::get()->ajax_files,
             'locale' => $locale ? $locale->jsonSerialize() : null,
             'potpath' => $locale && $potfile ? $potfile->getRelativePath($wp_content) : null,
             'popath' => $this->get('path'),
@@ -153,7 +154,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 'sync' => wp_create_nonce('sync'),
             ),
         ) ) );
-        
+        var_dump( $this->get('js')->multipart );
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
              // Translators: button for adding a new string when manually editing a POT file
              'add'      => _x('Add','Editor','loco-translate'),

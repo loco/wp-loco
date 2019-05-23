@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 5.1.1
+Tested up to: 5.2.1
 Stable tag: 2.2.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -96,6 +96,10 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 
 == Changelog ==
+
+= 2.2.3-dev =
+* Added experimental support for PO file uploads
+* Bumped WP compatibility to 5.2.1
 
 = 2.2.2 =
 * Security fixes for reading sensitive files
@@ -299,7 +303,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.2.2 =
+= 2.2.3 =
 * Various bug fixes and improvements
 
 

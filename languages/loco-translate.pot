@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.2.2-dev\n"
+"Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-03-30 11:42+0000\n"
+"POT-Creation-Date: 2019-05-23 18:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.2.2-dev; wp-5.1.1"
+"X-Loco-Version: 2.2.3-dev; wp-5.2.1"
 
 #: src/fs/FileWriter.php:184
 #, php-format
@@ -97,7 +97,7 @@ msgid_plural "%s words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/config/settings.php:136
+#: tpl/admin/config/settings.php:142
 msgid "About file system access"
 msgstr ""
 
@@ -158,15 +158,15 @@ msgstr ""
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
-#: tpl/admin/config/settings.php:123
+#: tpl/admin/config/settings.php:129
 msgid "Allow"
 msgstr ""
 
-#: tpl/admin/config/settings.php:126
+#: tpl/admin/config/settings.php:132
 msgid "Allow (with warning)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:147
+#: tpl/admin/config/settings.php:153
 msgid "Allow full access to these roles"
 msgstr ""
 
@@ -378,7 +378,7 @@ msgstr ""
 msgid "Directory is writeable"
 msgstr ""
 
-#: tpl/admin/config/settings.php:129
+#: tpl/admin/config/settings.php:135
 msgid "Disallow"
 msgstr ""
 
@@ -429,7 +429,7 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:160
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
@@ -453,13 +453,13 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:172
+#: src/admin/file/EditController.php:173
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/js/Strings.php:105 src/admin/file/EditController.php:170
+#: src/js/Strings.php:105 src/admin/file/EditController.php:171
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -471,19 +471,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:161
+#: src/admin/file/EditController.php:162
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:168
+#: src/admin/file/EditController.php:169
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:164
+#: src/admin/file/EditController.php:165
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -508,19 +508,19 @@ msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:166
+#: src/admin/file/EditController.php:167
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:178
+#: src/admin/file/EditController.php:179
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:176
+#: src/admin/file/EditController.php:177
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -591,7 +591,7 @@ msgstr ""
 msgid "Failed to copy %s to %s"
 msgstr ""
 
-#: src/ajax/SaveController.php:66
+#: src/ajax/SaveController.php:72
 #, php-format
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
@@ -701,7 +701,7 @@ msgstr ""
 msgid "File size"
 msgstr ""
 
-#: tpl/admin/config/settings.php:106 tpl/admin/config/settings.php:110
+#: tpl/admin/config/settings.php:112 tpl/admin/config/settings.php:116
 msgid "File system access"
 msgstr ""
 
@@ -721,7 +721,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:174
+#: src/admin/file/EditController.php:175
 msgid "Filter translations"
 msgstr ""
 
@@ -768,11 +768,11 @@ msgstr ""
 msgid "Go to WordPress Core"
 msgstr ""
 
-#: tpl/admin/config/settings.php:143
+#: tpl/admin/config/settings.php:149
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:162
+#: src/admin/file/EditController.php:163
 msgid "Help"
 msgstr ""
 
@@ -958,7 +958,7 @@ msgstr ""
 msgid "Loco, Translation Management"
 msgstr ""
 
-#: tpl/admin/config/settings.php:98
+#: tpl/admin/config/settings.php:104
 msgid "Look for non-standard names:"
 msgstr ""
 
@@ -985,7 +985,7 @@ msgstr ""
 msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
-#: tpl/admin/config/settings.php:120
+#: tpl/admin/config/settings.php:126
 msgid "Modification of installed files"
 msgstr ""
 
@@ -1044,7 +1044,7 @@ msgstr ""
 msgid "no wildcards"
 msgstr ""
 
-#: tpl/admin/config/settings.php:86 tpl/admin/config/settings.php:116
+#: tpl/admin/config/settings.php:86 tpl/admin/config/settings.php:122
 msgid "Not recommended"
 msgstr ""
 
@@ -1241,19 +1241,19 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/ajax/SaveController.php:100
+#: src/ajax/SaveController.php:106
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:105
+#: src/ajax/SaveController.php:111
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
-#: src/ajax/SaveController.php:112
+#: src/ajax/SaveController.php:118
 msgid "POT file saved"
 msgstr ""
 
-#: tpl/admin/config/settings.php:93
+#: tpl/admin/config/settings.php:99
 msgid "POT template files"
 msgstr ""
 
@@ -1313,11 +1313,11 @@ msgstr ""
 msgid "Save config"
 msgstr ""
 
-#: tpl/admin/config/settings.php:115
+#: tpl/admin/config/settings.php:121
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:164 tpl/admin/config/prefs.php:28
+#: tpl/admin/config/settings.php:170 tpl/admin/config/prefs.php:28
 msgid "Save settings"
 msgstr ""
 

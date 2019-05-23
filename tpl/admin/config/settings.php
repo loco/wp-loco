@@ -83,7 +83,13 @@ $fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpres
                             <p>
                                 <label for="loco--po-utf8-bom">
                                     <input type="checkbox" name="opts[po_utf8_bom]" value="1" id="loco--po-utf8-bom"<?php echo $opts->po_utf8_bom?' checked':''?> />
-                                    <?php esc_html_e('Add UTF-8 byte order mark','loco-translate')?> (<?php esc_html_e('Not recommended','loco-translate')?>) 
+                                    <?php esc_html_e('Add UTF-8 byte order mark','loco-translate')?> (<?php esc_html_e('Not recommended','loco-translate')?>)
+                                </label>
+                            </p>
+                            <p>
+                                <label for="loco--ajax-files">
+                                    <input type="checkbox" name="opts[ajax_files]" value="1" id="loco--ajax-files"<?php echo $opts->ajax_files?' checked':''?> />
+                                    Submit PO data as multipart file uploads (Experimental)
                                 </label>
                             </p>
                         </fieldset>

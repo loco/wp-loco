@@ -1,6 +1,6 @@
 <?php
 /**
- * Ajax "download" route, for outputing raw gettext file contents.
+ * Ajax "download" route, for outputting raw gettext file contents.
  */
 class Loco_ajax_DownloadController extends Loco_mvc_AjaxController {
 
