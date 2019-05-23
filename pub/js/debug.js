@@ -9,7 +9,7 @@
         tick = span[0].textContent
     ;
     if( 1 !== tick.length || 0x2713 !== tick.charCodeAt(0) ){
-        loco.notices.warning("This page has a problem rendering UTF-8").stick();
+        loco.notices.warn("This page has a problem rendering UTF-8").stick();
     }
     
     // show custom endpoint if set in global
