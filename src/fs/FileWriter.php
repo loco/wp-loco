@@ -10,7 +10,7 @@ class Loco_fs_FileWriter {
     private $file;
 
     /**
-     * @var WP_Filesystem_Direct
+     * @var WP_Filesystem_Base
      */
     private $fs;
 
@@ -183,6 +183,11 @@ class Loco_fs_FileWriter {
         if( $file->isDirectory() ){
             throw new Loco_error_WriteException( sprintf( __('"%s" is a directory, not a file','loco-translate'), $file->basename() ) );
         }
+        // file having no parent directory is likely an error, like a relative path.
+        $dir = $file->getParent();
+        if( ! $dir ){
+            throw new Loco_error_WriteException( sprintf('Bad file path "%s"',$file) );
+        }
         // avoid chmod of existing file
         if( $file->exists() ){
             $mode = $file->mode();
@@ -191,20 +196,25 @@ class Loco_fs_FileWriter {
         else {
             $mode = defined('FS_CHMOD_FILE') ? FS_CHMOD_FILE : 0644;
         }
+        $fs = $this->fs;
         $path = $this->getPath();
-        while( ! $this->fs->put_contents( $path, $data, $mode ) ){
+        while( ! $fs->put_contents($path,$data,$mode) ){
             // provide useful reason for failure if possible
-            if( $file->exists() && ! $this->fs->is_writable($path) ){
-                Loco_error_AdminNotices::debug( sprintf('File not writable, cannot update %s',$path) );
+            if( $file->exists() && ! $file->writable() ){
+                Loco_error_AdminNotices::debug( sprintf('File not writable via "%s" method, check permissions on %s',$fs->method,$path) );
                 throw new Loco_error_WriteException( __("Permission denied to update file",'loco-translate') );
             }
-            // full directory path may not exist. we won't create it, but user should be warned
-            if( ( $dir = $file->getParent() ) && ! $dir->exists() ){
-                $path = $dir->getRelativePath( loco_constant('WP_CONTENT_DIR') );
-                Loco_error_AdminNotices::debug( sprintf('Directory not found via "%s" method, ensure "wp-content/%s" exists and is writable',$this->fs->method,$path) );
-                throw new Loco_error_WriteException( __("Parent directory doesn't exist",'loco-translate') );
+            // full directory path may not exist. create and retry.
+            if( ! $dir->exists() && $this->mkdir($dir) && $fs->put_contents($path,$data,$mode) ){
+                break;
+            }
+            // directory path may not be writable by same fs context
+            if( ! $dir->writable() ){
+                Loco_error_AdminNotices::debug( sprintf('Directory not writable via "%s" method; check permissions for %s',$fs->method,$dir) );
+                throw new Loco_error_WriteException( __("Parent directory isn't writable",'loco-translate') );
             }
             // else reason for failure is not established
+            Loco_error_AdminNotices::debug( sprintf('Unknown write failure via "%s" method; check %s',$fs->method,$path) );
             throw new Loco_error_WriteException( __('Failed to save file','loco-translate').': '.$file->basename() );
         }
         
@@ -212,26 +222,30 @@ class Loco_fs_FileWriter {
     }
 
 
-
     /**
+     * Create current directory context
+     * @param Loco_fs_File optional directory
      * @return bool
      * @throws Loco_error_WriteException
      */
-     public function mkdir(){
+     public function mkdir( Loco_fs_File $here = null ) {
+        if( is_null($here) ){
+            $here = $this->file;
+        }
         $this->authorize();
         $fs = $this->fs;
         // may have bypassed definition of FS_CHMOD_DIR
         $mode = defined('FS_CHMOD_DIR') ? FS_CHMOD_DIR : 0755;
         // find first ancestor that exists while building tree
         $stack = array();
-        $here = $this->file;
         /* @var $parent Loco_fs_Directory */
         while( $parent = $here->getParent() ){
             array_unshift( $stack, $this->mapPath( $here->getPath() ) );
             if( $parent->exists() ){
                 // have existent directory, now build full path
                 foreach( $stack as $path ){
-                    if( ! $fs->mkdir( $path, $mode ) ){
+                    if( ! $fs->mkdir($path,$mode) ){
+                        Loco_error_AdminNotices::debug( sprintf('mkdir(%s,%03o) failed via "%s" method;',var_export($path,1),$mode,$fs->method) );
                         throw new Loco_error_WriteException( __('Failed to create directory','loco-translate') );
                     }
                 }
@@ -239,9 +253,9 @@ class Loco_fs_FileWriter {
             }
             $here = $parent;
         }
+        // refusing to create directory when the entire path is missing. e.g. "/bad"
         throw new Loco_error_WriteException( __('Failed to build directory path','loco-translate') );
     }
-
 
 
     /**
@@ -259,7 +273,6 @@ class Loco_fs_FileWriter {
         }
         return $this;
     } 
-
 
 
     /**

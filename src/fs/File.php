@@ -410,7 +410,8 @@ class Loco_fs_File {
 
     /**
      * Get path relative to given location, unless path is already relative
-     * @return string
+     * @param string base path
+     * @return string path relative to given base
      */
     public function getRelativePath( $base ){
         $path = $this->normalize();
@@ -425,7 +426,7 @@ class Loco_fs_File {
                 if( isset($path{$length}) ){
                     return substr( $path, $length );
                 }
-                // else paths were idenitcal
+                // else paths were identical
                 return '';
             }
             // else attempt to find nearest common root
@@ -444,7 +445,6 @@ class Loco_fs_File {
         // else return unmodified
         return $path;
     }
-
 
 
     /**
@@ -514,16 +514,17 @@ class Loco_fs_File {
 
 
     /**
-     * @return Loco_fs_Directory
+     * @return Loco_fs_Directory|null
      */
     public function getParent(){
+        $dir = null;
         $path = $this->dirname();
         if( '.' !== $path && $this->path !== $path ){ 
             $dir = new Loco_fs_Directory( $path );
             $dir->cloneWriteContext( $this->w );
-            return $dir;
         }
-    }    
+        return $dir;
+    }
     
 
     /**
