@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-28 19:15+0000\n"
+"POT-Creation-Date: 2019-05-28 20:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Connected to remote file system"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:72
+#: tpl/admin/bundle/inc-po-table.php:57 tpl/admin/bundle/locale.php:72
 msgid "Copy"
 msgstr ""
 
@@ -351,7 +351,7 @@ msgid "Debug"
 msgstr ""
 
 #: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:31
-#: tpl/admin/bundle/inc-po-table.php:62 tpl/admin/bundle/locale.php:78
+#: tpl/admin/bundle/inc-po-table.php:63 tpl/admin/bundle/locale.php:78
 msgid "Delete"
 msgstr ""
 
@@ -399,7 +399,7 @@ msgstr ""
 msgid "Download controller returned empty output"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:47 tpl/admin/bundle/locale.php:63
+#: tpl/admin/bundle/inc-po-table.php:48 tpl/admin/bundle/locale.php:63
 msgid "Edit"
 msgstr ""
 
@@ -635,7 +635,7 @@ msgid "File doesn't exist"
 msgstr ""
 
 #: src/admin/file/BaseController.php:105 tpl/admin/file/diff.php:60
-#: tpl/admin/bundle/inc-po-table.php:20 tpl/admin/bundle/locale.php:43
+#: tpl/admin/bundle/inc-po-table.php:22 tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
 
@@ -741,7 +741,7 @@ msgstr ""
 msgid "Find config"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:26 tpl/admin/bundle/locale.php:49
+#: tpl/admin/bundle/inc-po-table.php:28 tpl/admin/bundle/locale.php:49
 msgid "Folder"
 msgstr ""
 
@@ -831,7 +831,7 @@ msgstr ""
 msgid "Include Fuzzy strings"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:69
+#: tpl/admin/bundle/inc-po-table.php:54 tpl/admin/bundle/locale.php:69
 msgid "Info"
 msgstr ""
 
@@ -866,7 +866,7 @@ msgstr ""
 msgid "Just now"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:11
+#: tpl/admin/bundle/inc-po-table.php:13
 msgid "Language"
 msgstr ""
 
@@ -894,7 +894,7 @@ msgstr ""
 msgid "Last extracted"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:23 tpl/admin/bundle/locale.php:46
+#: tpl/admin/bundle/inc-po-table.php:25 tpl/admin/bundle/locale.php:46
 #: tpl/admin/list/locales.php:19 tpl/admin/list/inc-table.php:17
 msgid "Last modified"
 msgstr ""
@@ -1006,7 +1006,7 @@ msgctxt "Modified time"
 msgid "Updated"
 msgstr ""
 
-#: src/admin/file/BaseController.php:107 tpl/admin/bundle/inc-po-table.php:59
+#: src/admin/file/BaseController.php:107 tpl/admin/bundle/inc-po-table.php:60
 #: tpl/admin/bundle/locale.php:75
 msgid "Move"
 msgstr ""
@@ -1055,7 +1055,7 @@ msgstr ""
 msgid "No previous file revisions"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:107
+#: tpl/admin/bundle/inc-po-table.php:108
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -1176,7 +1176,7 @@ msgstr ""
 msgid "Partially configured bundle"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:17 tpl/admin/bundle/locale.php:39
+#: tpl/admin/bundle/inc-po-table.php:19 tpl/admin/bundle/locale.php:39
 msgid "Pending"
 msgstr ""
 
@@ -1461,7 +1461,7 @@ msgid "System diagnostics"
 msgstr ""
 
 #: tpl/admin/file/view-pot.php:9 tpl/admin/file/edit-pot.php:10
-#: tpl/admin/file/info-pot.php:10 tpl/admin/bundle/inc-po-table.php:41
+#: tpl/admin/file/info-pot.php:10 tpl/admin/bundle/inc-po-table.php:42
 #: tpl/admin/bundle/conf.php:65
 msgid "Template file"
 msgstr ""
@@ -1669,7 +1669,7 @@ msgstr ""
 msgid "Translate themes and plugins directly in WordPress"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:26 tpl/admin/bundle/inc-po-table.php:14
+#: tpl/admin/file/info-po.php:26 tpl/admin/bundle/inc-po-table.php:16
 #: tpl/admin/bundle/locale.php:36
 msgid "Translation progress"
 msgstr ""
@@ -1754,7 +1754,7 @@ msgstr ""
 msgid "Version %s"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:50 tpl/admin/bundle/locale.php:66
+#: tpl/admin/bundle/inc-po-table.php:51 tpl/admin/bundle/locale.php:66
 msgid "View"
 msgstr ""
 
