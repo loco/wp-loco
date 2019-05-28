@@ -154,9 +154,13 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         
         // moving files will require deletion permission on current file location
         // plus write permission on target location, but we don't know what that is yet.
-        $fields = $this->prepareFsConnect('move',$current);
+        $fields = $this->prepareFsConnect('move','');
         $fields['dest'] = '';
-
+        // we want the path, but not until a destination is chosen
+        $this->set( 'js', new Loco_mvc_ViewParams( array(
+            'path' => $current
+        ) ) );
+        
         $this->enqueueScript('move');
         return $this->view('admin/file/move-po');
     }

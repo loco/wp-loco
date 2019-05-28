@@ -16,19 +16,20 @@
     }
 
     function onFsConnect( valid ){
-        console.log('onFsConnect: ',valid );
         setFormDisabled( ! ( valid && destPath ) );
     }
     
-    function validate(){
-        var newPath = $(elForm.dest).val();
-        if( newPath && newPath !== destPath ){
-            destPath = newPath;
-            console.log(destPath);
-            setFormDisabled(true);
-            // check whether chosen target can be moved to
-            fsHook.dest.value = newPath;
-            fsConn.connect();
+    function validate(event){
+        var radio = event.target || {};
+        if( 'dest' === radio.name && radio.checked ){
+            var newPath = radio.value;
+            if( newPath && newPath !== destPath ){
+                destPath = newPath;
+                setFormDisabled(true);
+                // check whether chosen target can be moved to
+                fsHook.dest.value = newPath;
+                fsConn.connect();
+            }
         }
     }
 
@@ -42,6 +43,7 @@
     
     if( fsHook && elForm ){
         fsConn = window.locoScope.fs.init(fsHook).setForm(elForm).listen(onFsConnect);
+        elForm.path.value = locoConf.path;
         $(elForm).change(validate).submit(process);
     }
 
