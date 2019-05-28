@@ -259,15 +259,6 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     'paths' => array(),
                 ) );
             }
-            // lazy build of directory path, suppressing errors
-            if( ! $parent->exists() ){
-                try {
-                    $parent->mkdir();
-                }
-                catch( Exception $e ){
-                    // Loco_error_AdminNotices::warn( $e->getMessage() );
-                }
-            }
             // folder may be unwritable (requiring connect to create file) or may be denied under security settings
             try {
                 $context = $parent->getWriteContext()->authorize();
@@ -310,7 +301,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
         
         // hidden fields to pass through to Ajax endpoint
-        $this->set('hidden', new Loco_mvc_ViewParams( array(
+        $this->set('hidden', new Loco_mvc_HiddenFields( array(
             'action' => 'loco_json',
             'route' => 'msginit',
             'loco-nonce' => $this->setNonce('msginit')->value,

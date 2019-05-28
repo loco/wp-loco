@@ -11,6 +11,7 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
     
     
     /**
+     * @param Loco_fs_File existing file path (must exist)
      * @return bool
      */
     private function authorizeDelete( Loco_fs_File $file ){
@@ -21,19 +22,28 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
                 return false;
             }
         }
-        // else no dependants failed deltable test
+        // else no dependants failed deletable test
         return true;
+    }
+    
+    
+    /**
+     * @param Loco_fs_File file being moved (must exist)
+     * @param Loco_fs_File target path (should not exist)
+     * @return bool
+     */
+    private function authorizeMove( Loco_fs_File $source, Loco_fs_File $target = null ){
+        return $this->api->authorizeMove($source,$target);
     }
 
 
-
     /**
+     * @param Loco_fs_File new file path (should not exist)
      * @return bool
      */
     private function authorizeCreate( Loco_fs_File $file ){
         return $this->api->authorizeCreate($file);
     }
-
 
 
     /**
@@ -57,28 +67,32 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
     }
 
 
-
     /**
      * {@inheritdoc}
      */
     public function render(){
-        
+        // establish operation being authorized (create,delete,etc..)
         $post = $this->validate();
-
         $func = 'authorize'.ucfirst($post->auth);
         $auth = array( $this, $func );
         if( ! is_callable($auth) ){
             throw new Loco_error_Exception('Unexpected file operation');
         }
-        
+        // all auth methods require at least one file argument
         $file = new Loco_fs_File( $post->path );
         $base = loco_constant('WP_CONTENT_DIR');
         $file->normalize($base);
-        
-        $this->api = new Loco_api_WordPressFileSystem;
-        
+        $args = array($file);
+        // some auth methods also require a destination/target (move,copy,etc..)
+        if( $dest = $post->dest ){
+            $file = new Loco_fs_File($dest);
+            $file->normalize($base);
+            $args[] = $file;
+        }
+        // call auth method and respond with status and prompt HTML if connect required
         try {
-            if( call_user_func( $auth, $file ) ){
+            $this->api = new Loco_api_WordPressFileSystem;
+            if( call_user_func_array($auth,$args) ){
                 $this->set( 'authed', true );
                 $this->set( 'valid', $this->api->getOutputCredentials() );
                 $this->set( 'creds', $this->api->getInputCredentials() );

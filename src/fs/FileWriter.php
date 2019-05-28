@@ -144,17 +144,47 @@ class Loco_fs_FileWriter {
         $this->authorize();
         $source = $this->getPath();
         $target = $this->mapPath( $copy->getPath() );
-        // bugs in WP file system "exists" methods mean forcing $overwrite, but checking reliably first
+        // bugs in WP file system "exists" methods means we must force $overwrite=true; so checking file existence first
         if( $copy->exists() ){
+            Loco_error_AdminNotices::debug(sprintf('Cannot copy %s to %s (target already exists)',$source,$target));
             throw new Loco_error_WriteException( __('Refusing to copy over an existing file','loco-translate') );
         }
-        if( ! $this->fs->copy( $source, $target, true ) ){
+        // ensure target directory exists, although in most cases copy will be in situ
+        $parent = $copy->getParent();
+        if( $parent && ! $parent->exists() ){
+            $this->mkdir($parent);
+        }
+        // perform WP file system copy method
+        if( ! $this->fs->copy($source,$target,true) ){
+            Loco_error_AdminNotices::debug(sprintf('Failed to copy %s to %s via "%s" method',$source,$target,$this->fs->method));
             throw new Loco_error_WriteException( sprintf( __('Failed to copy %s to %s','loco-translate'), basename($source), basename($target) ) );
         }
 
         return $this;
     }
 
+
+    /**
+     * @param Loco_fs_File target file with new path
+     * @return Loco_fs_FileWriter
+     * @throws Loco_error_WriteException
+     */
+    public function move( Loco_fs_File $dest ){
+        $orig = $this->file;
+        try {
+            // target should have been authorized to create the new file
+            $context = clone $dest->getWriteContext();
+            $context->setFile($orig);
+            $context->copy($dest);
+            // source should have been authorized to delete the original file
+            $this->delete(false);
+            return $this;
+        }
+        catch( Loco_error_WriteException $e ){
+            Loco_error_AdminNotices::debug('copy/delete failure: '.$e->getMessage() );
+            throw new Loco_error_WriteException( sprintf( 'Failed to move %s', $orig->basename() ) );
+        }
+    }
 
 
     /**
@@ -195,19 +225,20 @@ class Loco_fs_FileWriter {
         // may have bypassed definition of FS_CHMOD_FILE
         else {
             $mode = defined('FS_CHMOD_FILE') ? FS_CHMOD_FILE : 0644;
+            // new file may also require directory path building
+            if( ! $dir->exists() ){
+                $this->mkdir($dir);
+            }
         }
         $fs = $this->fs;
         $path = $this->getPath();
-        while( ! $fs->put_contents($path,$data,$mode) ){
+        if( ! $fs->put_contents($path,$data,$mode) ){
             // provide useful reason for failure if possible
             if( $file->exists() && ! $file->writable() ){
                 Loco_error_AdminNotices::debug( sprintf('File not writable via "%s" method, check permissions on %s',$fs->method,$path) );
                 throw new Loco_error_WriteException( __("Permission denied to update file",'loco-translate') );
             }
-            // full directory path may not exist. create and retry.
-            if( ! $dir->exists() && $this->mkdir($dir) && $fs->put_contents($path,$data,$mode) ){
-                break;
-            }
+            // directory path should exist or have thrown error earlier.
             // directory path may not be writable by same fs context
             if( ! $dir->writable() ){
                 Loco_error_AdminNotices::debug( sprintf('Directory not writable via "%s" method; check permissions for %s',$fs->method,$dir) );

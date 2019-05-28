@@ -525,7 +525,7 @@ class Loco_fs_File {
         }
         return $dir;
     }
-    
+
 
     /**
      * Copy this file for real
@@ -537,8 +537,20 @@ class Loco_fs_File {
         $copy = clone $this;
         $copy->path = $dest;
         $copy->clearStat();
-        $this->getWriteContext()->copy( $copy );
+        $this->getWriteContext()->copy($copy);
         return $copy;
+    }
+
+
+    /**
+     * Move/rename this file for real
+     * @param Loco_fs_File target file with new path
+     * @throws Loco_error_WriteException
+     * @return Loco_fs_File original file that should no longer exist
+     */
+    public function move( Loco_fs_File $dest ){
+        $this->getWriteContext()->move($dest);
+        return $this->clearStat();
     }
 
 

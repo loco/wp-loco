@@ -146,6 +146,9 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         else if( 'delete' === $type ){
             $this->set('fsPrompt', __('Deleting this file requires permission','loco-translate') );
         }
+        else if( 'move' === $type ){
+            $this->set('fsPrompt', __('This move operation requires permission','loco-translate') );
+        }
         else {
             $this->set('fsPrompt', __('Saving this file requires permission','loco-translate') );
         }
@@ -154,7 +157,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         if( $relpath ){
             $file = new Loco_fs_File( $relpath );
             $file->normalize( loco_constant('WP_CONTENT_DIR') );
-            // total file system block makes connection type irrelevent
+            // total file system block makes connection type irrelevant
             try {
                 $api = new Loco_api_WordPressFileSystem;
                 $api->preAuthorize($file);
@@ -165,6 +168,9 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
                     }
                     else if( 'delete' === $type ){
                         $this->set('fsWarning', __('This directory is managed by WordPress, be careful what you delete','loco-translate' ) );
+                    }
+                    else if( 'move' === $type ){
+                        $this->set('fsWarning', __('This directory is managed by WordPress. Removed files may be restored during updates','loco-translate' ) );
                     }
                     else {
                         $this->set('fsWarning', __('Changes to this file may be overwritten or deleted when you update WordPress','loco-translate' ) );

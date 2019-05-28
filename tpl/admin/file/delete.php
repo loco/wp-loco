@@ -31,6 +31,6 @@ $this->extend('../layout');
             </p>
         </div>
         <?php
-        /* @var $hidden Loco_mvc_HiddenFields */
+        /* @var Loco_mvc_HiddenFields $hidden */
         $hidden->_e();?> 
     </form>

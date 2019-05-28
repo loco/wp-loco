@@ -17,8 +17,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     private $subdir;
     
     /**
-     * whether directories all read into memory
-     * @var Loco_fs_FileList
+     * Whether directories all read into memory
+     * @var bool
      */
     private $cached;
 
@@ -29,19 +29,19 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     private $cache;
     
     /**
-     * internal array pointer for whole list of paths
+     * Internal array pointer for whole list of paths
      * @var int
      */
     private $i;
     
     /**
-     * internal pointer for directory being read
+     * Internal pointer for directory being read
      * @var int
      */
     private $d;
     
     /**
-     * current directory being read
+     * Current directory being read
      * @var resource
      */
     private $dir;
@@ -447,12 +447,17 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     }
 
 
-
+    /**
+     * @return int
+     */
     public function key(){
         return $this->i;
     }
 
 
+    /**
+     * @return bool
+     */
     public function valid(){
         // may be in lazy state after rewind
         // must do initial read now in case list is empty

@@ -60,6 +60,8 @@ class Loco_api_WordPressFileSystem {
 
 
     /**
+     * Pre-auth checks for superficial file system blocks and disconnects any active remotes
+     * @param Loco_fs_File
      * @throws Loco_error_WriteException
      * @return bool always true
      */
@@ -76,6 +78,7 @@ class Loco_api_WordPressFileSystem {
 
     /**
      * Authorize for the creation of a file that does not exist
+     * @param Loco_fs_File
      * @return bool whether file system is authorized NOT necessarily whether file is creatable
      */
     public function authorizeCreate( Loco_fs_File $file ){
@@ -89,6 +92,7 @@ class Loco_api_WordPressFileSystem {
 
     /**
      * Authorize for the update of a file that does exist
+     * @param Loco_fs_File
      * @return bool whether file system is authorized NOT necessarily whether file is updatable
      */
     public function authorizeUpdate( Loco_fs_File $file ){
@@ -102,6 +106,7 @@ class Loco_api_WordPressFileSystem {
 
     /**
      * Authorize for update or creation, depending whether file exists
+     * @param Loco_fs_File
      * @return bool
      */
     public function authorizeSave( Loco_fs_File $file ){
@@ -111,7 +116,8 @@ class Loco_api_WordPressFileSystem {
 
 
     /**
-     * Authorize for copy, meaning file must exist and directory be writable
+     * Authorize for copy (to same directory), meaning source file must exist and directory be writable
+     * @param Loco_fs_File
      * @return bool
      */
     public function authorizeCopy( Loco_fs_File $file ){
@@ -121,10 +127,32 @@ class Loco_api_WordPressFileSystem {
         }
         return $file->creatable() || $this->authorize($file);
     }
+
+
+    /**
+     * Authorize for move (to another path if given).
+     * @param Loco_fs_File file being moved (must exist)
+     * @param Loco_fs_File target path (should not exist)
+     * @return bool
+     */
+    public function authorizeMove( Loco_fs_File $source, Loco_fs_File $target = null ){
+        // authorize source separately, in charge of its own deletion
+        $this->preAuthorize($source);
+        if( ! $source->exists() ){
+            throw new Loco_error_WriteException("Can't move a file that doesn't exist");
+        }
+        $result = $source->deletable() || $this->authorize($source);
+        // authorize target separately, in charge of copying original which it must also be able to read.
+        if( $target && ! $this->authorizeCreate($target) && $result ){
+            $result = false;
+        }
+        return $result;
+    }
     
     
     /**
      * Authorize for the removal of an existing file
+     * @param Loco_fs_File
      * @return bool whether file system is authorized NOT necessarily whether file is removable
      */
     public function authorizeDelete( Loco_fs_File $file ){
@@ -138,6 +166,7 @@ class Loco_api_WordPressFileSystem {
 
     /**
      * Connect file to credentials in posted data. Used when established in advance what connection is needed
+     * @param Loco_fs_File
      * @return bool whether file system is authorized
      */    
     public function authorizeConnect( Loco_fs_File $file ){
@@ -155,6 +184,8 @@ class Loco_api_WordPressFileSystem {
     /**
      * Wraps `request_filesystem_credentials` negotiation to obtain a remote connection and buffer WordPress form outout
      * Call before output started, because buffers.
+     * @param Loco_fs_File
+     * @return bool
      */
     private function authorize( Loco_fs_File $file ){
         // may already have authorized successfully
@@ -184,7 +215,7 @@ class Loco_api_WordPressFileSystem {
             $session = Loco_data_Session::get();
             if( isset($session['loco-fs']) ){
                 $creds = $session['loco-fs'];
-                if( $this->tryCredentials($creds,$file) ){
+                if( is_array($creds) && $this->tryCredentials($creds,$file) ){
                     $this->creds_in = array();
                     return true;
                 }
@@ -239,9 +270,10 @@ class Loco_api_WordPressFileSystem {
         // capture WordPress output during negotiation.
         $buffer = Loco_output_Buffer::start();
 
-        if( $creds = request_filesystem_credentials( '', $type, false, $context, $extra ) ){
+        $creds = request_filesystem_credentials( '', $type, false, $context, $extra );
+        if( is_array($creds) ){
             // credentials passed through, should allow connect if they are correct
-            if( $this->tryCredentials( $creds?$creds:array(), $file ) ){
+            if( $this->tryCredentials($creds,$file) ){
                 $this->persistCredentials();
                 return true;
             }
@@ -268,6 +300,8 @@ class Loco_api_WordPressFileSystem {
 
     /**
      * @internal
+     * @param array credentials returned from request_filesystem_credentials
+     * @param Loco_fs_File file to authorize write context
      * @return bool when credentials connected ok
      */
     private function tryCredentials( array $creds, Loco_fs_File $file ){

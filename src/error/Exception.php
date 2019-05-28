@@ -94,6 +94,27 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
 
     /**
+     * Write this error to file regardless of log level
+     * @param Loco_error_Exception
+     * @return void
+     */
+    public function log(){
+        $file = new Loco_fs_File( $this->getRealFile() );
+        $path = $file->getRelativePath( loco_plugin_root() );
+        $text = sprintf('[Loco.%s] "%s" in %s:%u', $this->getType(), $this->getMessage(), $path, $this->getRealLine() );
+        // separate error log in CWD for tests
+        if( 'cli' === PHP_SAPI && defined('LOCO_TEST') && LOCO_TEST ){
+            error_log( '['.date('c').'] '.$text."\n", 3, 'debug.log' );
+        }
+        // Else write to default PHP log, but note that WordPress may have set this to wp-content/debug.log.
+        // If no `error_log` is set this will send message to the SAPI, so check your httpd/fast-cgi errors too.
+        else {
+            error_log( $text, 0 );
+        }
+    }
+
+
+    /**
      * Get view template for rendering error to HTML.
      * @return string path relative to root tpl directory
      */

@@ -52,6 +52,7 @@ class Loco_fs_LocaleDirectory extends Loco_fs_Directory {
 
     /**
      * Get translated version of getTypeId
+     * @param string id
      * @return string
      */
     public function getTypeLabel( $id ){

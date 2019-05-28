@@ -38,11 +38,8 @@ $this->extend('../layout');
         <p><?php $params->e('summary')?></p>
 
         <form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-poinit"><?php
-            /* @var Loco_mvc_ViewParams $hidden */
-            foreach( $hidden as $name => $value ):?> 
-            <input type="hidden" name="<?php echo $name?>" value="<?php $hidden->e($name)?>" /><?php
-            endforeach;?> 
-            
+            /* @var Loco_mvc_HiddenFields $hidden */
+            $hidden->_e();?> 
             <table class="form-table">
                 <tbody class="loco-locales">
                     <tr valign="top">
@@ -105,9 +102,7 @@ $this->extend('../layout');
                     foreach( $locations as $typeId => $location ):?> 
                     <tr class="compact">
                         <td>
-                            <p class="description">
-                                <?php $location->e('label')?>:
-                            </p>
+                            <p class="description"><?php $location->e('label')?>:</p>
                         </td>
                         <td><?php
                         /* @var Loco_mvc_FileParams $choice */

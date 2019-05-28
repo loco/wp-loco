@@ -7,6 +7,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
 
     /**
      * Expand single path to all files that will be deleted
+     * @param Loco_fs_File primary file being deleted, probably the PO
      * @return array
      */
     private function expandFiles( Loco_fs_File $file ){
@@ -42,7 +43,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
             // attempt delete if valid nonce posted back
             if( $this->checkNonce($action) ){
                 $api = new Loco_api_WordPressFileSystem;
-                // delete dependant files, so that master always exists if any others fail
+                // delete dependant files first, so master still exists if others fail
                 $files = array_reverse( $this->expandFiles($file) );
                 try {
                     /* @var $trash Loco_fs_File */
@@ -57,7 +58,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
                         Loco_data_Session::close();
                     }
                     catch( Exception $e ){
-                        // tollerate session failure
+                        // tolerate session failure
                     }
                     // redirect to bundle overview
                     $href = Loco_mvc_AdminRouter::generate( $this->get('type').'-view', array( 'bundle' => $this->get('bundle') ) );
@@ -70,7 +71,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
                 }
             }
         }
-
+        // set page title before render sets inline title
         $bundle = $this->getBundle();
         $this->set('title', sprintf( __('Delete %s','loco-translate'), $file->basename() ).' &lsaquo; '.$bundle->getName() );
     }

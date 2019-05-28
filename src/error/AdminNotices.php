@@ -44,31 +44,13 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         }
         // if exception wasn't thrown we have to do some work to establish where it was invoked
         if( __FILE__ === $error->getFile() ){
-            /*$stack = debug_backtrace(0);
-            if( is_array($stack) && 1 < count($stack) ){
-                $callee = $stack[1];
-                if( is_array($callee) ){
-                    $error->setCallee($callee);
-                }
-            }*/
             $error->setCallee(1);
         }
         // Log messages of minimum priority and up, depending on debug mode
         // note that non-debug level is in line with error_reporting set by WordPress (notices ignored)
         $priority = loco_debugging() ? Loco_error_Exception::LEVEL_DEBUG : Loco_error_Exception::LEVEL_WARNING;
         if( $error->getLevel() <= $priority ){
-            $file = new Loco_fs_File( $error->getRealFile() );
-            $path = $file->getRelativePath( loco_plugin_root() );
-            $text = sprintf('[Loco.%s] "%s" in %s:%u', $error->getType(), $error->getMessage(), $path, $error->getRealLine() );
-            // separate error log in CWD for tests
-            if( 'cli' === PHP_SAPI && defined('LOCO_TEST') && LOCO_TEST ){
-                error_log( '['.date('c').'] '.$text."\n", 3, 'debug.log' );
-            }
-            // Else write to default PHP log, but note that WordPress may have set this to wp-content/debug.log.
-            // If no `error_log` is set this will send message to the SAPI, so check your httpd/fast-cgi errors too.
-            else {
-                error_log( $text, 0 );
-            }
+            $error->log();
         }
         return $error;
     }
@@ -81,6 +63,17 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      */
     public static function success( $message ){
         $notice = new Loco_error_Success($message);
+        return self::add( $notice->setCallee(1) );
+    }
+
+
+    /**
+     * Raise a failure message
+     * @param string
+     * @return Loco_error_Exception
+     */
+    public static function err( $message ){
+        $notice = new Loco_error_Exception($message);
         return self::add( $notice->setCallee(1) );
     }
 

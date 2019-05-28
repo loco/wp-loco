@@ -200,6 +200,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-file-edit' => 'file_Edit',
             '{type}-file-info' => 'file_Info',
             '{type}-file-diff' => 'file_Diff',
+            '{type}-file-move' => 'file_Move',
             '{type}-file-delete' => 'file_Delete',
             // test routes that don't actually exist
             'test-no-class' => 'test_NonExistantClass',
