@@ -2,6 +2,8 @@
 /**
  * Table of localised file pairs in a project
  */
+
+    /* @var Loco_mvc_ViewParams[] $pairs */
     if( $pairs ):?> 
 
         <table class="wp-list-table widefat fixed striped">
@@ -28,7 +30,6 @@
                 </tr>
             </thead>
             <tbody><?php
-                /* @var Loco_mvc_ViewParams $po */
                 foreach( $pairs as $po ): $ispo = (bool) $po->lcode;?> 
                 <tr>
                     <td class="has-row-actions" data-sort-value="<?php $po->e('lname')?>">

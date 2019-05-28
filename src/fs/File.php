@@ -384,7 +384,9 @@ class Loco_fs_File {
 
 
     /**
-     * 
+     * @param string
+     * @param string[]
+     * @return array
      */
     private static function explode( $path, array $b ){
         $a = explode( '/', $path );
