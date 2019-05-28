@@ -68,9 +68,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
 
     /**
-     * Add a file uniquely collection
-     * @param Loco_fs_File
-     * @return bool whether file was added (and didn't already exist)
+     * {@inheritDoc}
      */
     public function add( Loco_fs_File $file ){
         $hash = $this->hash( $file );

@@ -386,26 +386,24 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     }
 
 
-
     /**
-     * Implement FileListInterface::add
-     * @param Loco_fs_File
-     * @return void
+     * {@inheritDoc}
      */
     public function add( Loco_fs_File $file ){
         if( $this->exts ){
             $ext = $file->extension();
             if( ! isset($this->exts[$ext]) ){
-                return;
+                return false;
             }
             $this->exts[$ext]->add($file);
         }
         if( $this->cache->add($file) ){
-            $this->i ++;
+            $this->i++;
+            return true;
         }
+        return false;
     }
 
-    
 
     /**
      * @return int
