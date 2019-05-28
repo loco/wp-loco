@@ -32,7 +32,6 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         $potfile = new Loco_fs_File( $target.'/'.$name );
         $api = new Loco_api_WordPressFileSystem;
         $api->authorizeCreate($potfile);
-        
         // Do extraction and grab only given domain's strings
         $ext = new Loco_gettext_Extraction( $bundle );
         $domain = $project->getDomain()->getName();

@@ -200,9 +200,11 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     }
 
 
-
     /**
-     * 
+     * @param Loco_package_Project
+     * @param Loco_fs_File
+     * @param Loco_Locale
+     * @return Loco_mvc_ViewParams
      */
     private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
         // Pull Gettext meta data from cache if possible
@@ -231,6 +233,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'view' => $this->getProjectLink('file-view', $project, $args ),
             'info' => $this->getProjectLink('file-info', $project, $args ),
             'edit' => $this->getProjectLink('file-edit', $project, $args ),
+            'move' => $this->getProjectLink('file-move', $project, $args ),
             'delete' => $this->getProjectLink('file-delete', $project, $args ),
             'copy' => $this->getProjectLink('msginit', $project, $args ),
         ) );

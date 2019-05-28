@@ -107,6 +107,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
                 'view' =>   Loco_mvc_AdminRouter::generate( $type.'-file-view', $args ),
                 'info' =>   Loco_mvc_AdminRouter::generate( $type.'-file-info', $args ),
                 'edit' =>   Loco_mvc_AdminRouter::generate( $type.'-file-edit', $args ),
+                'move' =>   Loco_mvc_AdminRouter::generate( $type.'-file-move', $args ),
                 'delete' => Loco_mvc_AdminRouter::generate( $type.'-file-delete', $args ),
                 'copy' =>   Loco_mvc_AdminRouter::generate( $type.'-msginit', $args ),
             ) );

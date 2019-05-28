@@ -43,7 +43,6 @@
     
     if( fsHook && elForm ){
         fsConn = window.locoScope.fs.init(fsHook).setForm(elForm).listen(onFsConnect);
-        elForm.path.value = locoConf.path;
         $(elForm).change(validate).submit(process);
     }
 

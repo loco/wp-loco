@@ -104,6 +104,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             'file-view' => __('Source','loco-translate'),
             'file-info' => __('File info','loco-translate'),
             'file-diff' => __('Restore','loco-translate'),
+            'file-move' => __('Move','loco-translate'),
             'file-delete' => __('Delete','loco-translate'),
         );
  

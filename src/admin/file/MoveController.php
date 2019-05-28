@@ -25,6 +25,8 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             // set up view now in case of late failure
             $fields = new Loco_mvc_HiddenFields( array() );
             $fields->setNonce( $action );
+            $fields['auth'] = 'move';
+            $fields['path'] = $this->get('path');
             $this->set( 'hidden', $fields );
             // attempt move if valid nonce posted back
             while( $this->checkNonce($action) ){
@@ -156,10 +158,6 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         // plus write permission on target location, but we don't know what that is yet.
         $fields = $this->prepareFsConnect('move','');
         $fields['dest'] = '';
-        // we want the path, but not until a destination is chosen
-        $this->set( 'js', new Loco_mvc_ViewParams( array(
-            'path' => $current
-        ) ) );
         
         $this->enqueueScript('move');
         return $this->view('admin/file/move-po');

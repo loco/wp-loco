@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-28 15:40+0000\n"
+"POT-Creation-Date: 2019-05-28 19:15+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -313,7 +313,7 @@ msgstr ""
 msgid "Connected to remote file system"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:69
+#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:72
 msgid "Copy"
 msgstr ""
 
@@ -350,8 +350,8 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:107 tpl/admin/file/diff.php:31
-#: tpl/admin/bundle/inc-po-table.php:59 tpl/admin/bundle/locale.php:75
+#: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:31
+#: tpl/admin/bundle/inc-po-table.php:62 tpl/admin/bundle/locale.php:78
 msgid "Delete"
 msgstr ""
 
@@ -382,7 +382,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:129 tpl/admin/common/inc-fsconn.php:16
+#: src/admin/bundle/LocaleController.php:130 tpl/admin/common/inc-fsconn.php:16
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
 msgstr ""
@@ -684,7 +684,7 @@ msgstr ""
 msgid "File modified"
 msgstr ""
 
-#: src/admin/file/MoveController.php:69
+#: src/admin/file/MoveController.php:71
 #, php-format
 msgid "File moved"
 msgid_plural "%u files moved"
@@ -831,7 +831,7 @@ msgstr ""
 msgid "Include Fuzzy strings"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:56 tpl/admin/bundle/locale.php:72
+#: tpl/admin/bundle/inc-po-table.php:53 tpl/admin/bundle/locale.php:69
 msgid "Info"
 msgstr ""
 
@@ -844,7 +844,7 @@ msgstr ""
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:115
+#: src/admin/bundle/LocaleController.php:116
 #: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:61
 msgid "Installed languages"
 msgstr ""
@@ -1006,7 +1006,12 @@ msgctxt "Modified time"
 msgid "Updated"
 msgstr ""
 
-#: src/admin/file/MoveController.php:90 src/admin/file/MoveController.php:153
+#: src/admin/file/BaseController.php:107 tpl/admin/bundle/inc-po-table.php:59
+#: tpl/admin/bundle/locale.php:75
+msgid "Move"
+msgstr ""
+
+#: src/admin/file/MoveController.php:92 src/admin/file/MoveController.php:155
 #, php-format
 msgid "Move %s"
 msgstr ""
@@ -1017,7 +1022,7 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:111
-#: src/admin/file/BaseController.php:123 src/admin/bundle/ViewController.php:96
+#: src/admin/file/BaseController.php:124 src/admin/bundle/ViewController.php:96
 msgid "New language"
 msgstr ""
 
@@ -1034,7 +1039,7 @@ msgstr ""
 msgid "New translations template for \"%s\""
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:128
+#: src/admin/bundle/LocaleController.php:129
 msgid "No core translation files are installed for this language"
 msgstr ""
 
@@ -1050,7 +1055,7 @@ msgstr ""
 msgid "No previous file revisions"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:104
+#: tpl/admin/bundle/inc-po-table.php:107
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -1114,7 +1119,7 @@ msgid_plural "%s files can't be matched to a known set of strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/MoveController.php:73
+#: src/admin/file/MoveController.php:75
 #, php-format
 msgid "One file could not be moved"
 msgid_plural "%u files could not be moved"
@@ -1200,7 +1205,7 @@ msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
-#: src/admin/bundle/LocaleController.php:145
+#: src/admin/bundle/LocaleController.php:146
 msgid "Plugins"
 msgstr ""
 
@@ -1360,15 +1365,15 @@ msgstr ""
 msgid "Scan PHP files with extensions:"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:136
+#: src/admin/bundle/LocaleController.php:137
 msgid "See all core translations"
 msgstr ""
 
-#: tpl/admin/root.php:54 src/admin/bundle/LocaleController.php:146
+#: tpl/admin/root.php:54 src/admin/bundle/LocaleController.php:147
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:39 src/admin/bundle/LocaleController.php:141
+#: tpl/admin/root.php:39 src/admin/bundle/LocaleController.php:142
 msgid "See all themes"
 msgstr ""
 
@@ -1465,7 +1470,7 @@ msgstr ""
 msgid "Template file already exists"
 msgstr ""
 
-#: src/ajax/XgettextController.php:63
+#: src/ajax/XgettextController.php:62
 msgid "Template file created"
 msgstr ""
 
@@ -1519,7 +1524,7 @@ msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
-#: src/admin/bundle/LocaleController.php:140
+#: src/admin/bundle/LocaleController.php:141
 msgid "Themes"
 msgstr ""
 
@@ -1791,7 +1796,7 @@ msgstr ""
 msgid "WordPress"
 msgstr ""
 
-#: src/package/Core.php:79 src/admin/bundle/LocaleController.php:135
+#: src/package/Core.php:79 src/admin/bundle/LocaleController.php:136
 msgid "WordPress Core"
 msgstr ""
 

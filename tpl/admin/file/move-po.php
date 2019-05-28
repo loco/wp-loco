@@ -28,7 +28,7 @@ $this->extend('../layout');
                         <p><?php
                             if( $choice->active ):?> 
                             <label>
-                                <span class="icon icon-ok"></span><?php
+                                <input type="radio" name="dest" value="" disabled checked /><?php
                             else:?> 
                             <label>
                                 <input type="radio" name="dest" value="<?php $choice->e('path')?>" /><?php

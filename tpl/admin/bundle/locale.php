@@ -51,7 +51,7 @@ $this->extend('../layout');
                 </tr>
             </thead>
             <tbody><?php
-                /* @var $po Loco_pages_ViewParams */
+                /* @var Loco_mvc_ViewParams $po */
                 foreach( $group as $po ): ?> 
                 <tr>
                     <td class="has-row-actions" data-sort-value="<?php $po->e('lname')?>">
@@ -66,10 +66,13 @@ $this->extend('../layout');
                                 <a href="<?php $po->e('view')?>"><?php esc_html_e('View','loco-translate')?></a> |
                             </span>
                             <span>
+                                <a href="<?php $po->e('info')?>"><?php esc_html_e('Info','loco-translate')?></a> |
+                            </span>
+                            <span>
                                 <a href="<?php $po->e('copy')?>"><?php esc_html_e('Copy','loco-translate')?></a> |
                             </span>
                             <span>
-                                <a href="<?php $po->e('info')?>"><?php esc_html_e('Info','loco-translate')?></a> |
+                                <a href="<?php $po->e('move')?>"><?php esc_html_e('Move','loco-translate')?></a> |
                             </span>
                             <span class="trash">
                                 <a href="<?php $po->e('delete')?>"><?php esc_html_e('Delete','loco-translate')?></a>
