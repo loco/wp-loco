@@ -37,6 +37,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
     /**
      * Construct from master file (current version)
+     * @param Loco_fs_File
      */
     public function __construct( Loco_fs_File $file ){
         $this->master = $file;
@@ -148,6 +149,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
             $this->paths = array();
             $regex = $this->getRegExp();
             $finder = new Loco_fs_FileFinder( $this->master->dirname() );
+            $finder->setRecursive(false);
             /* @var $file Loco_fs_File */
             foreach( $finder as $file ){
                 if( preg_match( $regex, $file->basename(), $r ) ){
@@ -164,6 +166,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     
     /**
      * Parse a file path into a timestamp
+     * @param string
      * @return int
      */
     public function getTimestamp( $path ){
@@ -193,6 +196,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     /**
      * Delete file when object removed from memory.
      * Previously unlinked on shutdown, but doesn't work with WordPress file system abstraction
+     * @param string
      * @return void
      */
     public function unlinkLater($path){

@@ -11,7 +11,8 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
     private $unique = array();
     
     /**
-     * Override to ensure original list is indexed
+     * Construct with initial list if files
+     * @param Loco_fs_File[]
      */
     public function __construct( $a = array() ){
         parent::__construct( array() );
@@ -36,6 +37,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * @internal
+     * @return string
      */
     public function __toString(){
         return implode( "\n", $this->getArrayCopy() );
@@ -44,6 +46,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Generate a unique key for file
+     * @param Loco_fs_File
      * @return string
      */
     private function hash( Loco_fs_File $file ){
@@ -57,7 +60,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
 
     /**
-     * @codeCoverageIgnore
+     * {@inheritDoc}
      */
     public function offsetSet( $index, $value ){
         throw new Exception('Use Loco_fs_FileList::add');
@@ -66,21 +69,23 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Add a file uniquely collection
-     * @return Loco_fs_FileList
+     * @param Loco_fs_File
+     * @return bool whether file was added (and didn't already exist)
      */
     public function add( Loco_fs_File $file ){
         $hash = $this->hash( $file );
-        if( ! isset($this->unique[$hash]) ){
-            $this->unique[$hash] = true;
-            parent::offsetSet( null, $file );
+        if( isset($this->unique[$hash]) ){
+            return false;
         }
-        
-        return $this;
+        $this->unique[$hash] = true;
+        parent::offsetSet( null, $file );
+        return true;
     }
 
 
     /**
      * Check if given file is already in list
+     * @param Loco_fs_File
      * @return bool
      */
     public function has( Loco_fs_File $file ){
@@ -91,6 +96,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Get a copy of list with only files not contained in passed list
+     * @param Loco_fs_FileList
      * @return Loco_fs_FileList
      */
     public function diff( Loco_fs_FileList $not_in ){
@@ -105,6 +111,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Merge another list of the SAME TYPE uniquely on top of current one
+     * @param Loco_fs_FileList
      * @return Loco_fs_FileList
      */
     public function augment( loco_fs_FileList $list ){

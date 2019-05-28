@@ -73,7 +73,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     private $symlinks = true;
 
     /**
-     * Registry of followed links by their resolved path
+     * Registry of followed links by their original path
      * @var Loco_fs_FileList
      */
     private $linked;
@@ -367,9 +367,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
                     continue;
                 }
                 // file represented as object containing original path
-                $file = new Loco_fs_File( $path );
+                $file = new Loco_fs_File($path);
                 $this->add( $file );
-                $this->i++;
                 return $file;
             }
             $this->close();
@@ -391,6 +390,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * Implement FileListInterface::add
      * @param Loco_fs_File
+     * @return void
      */
     public function add( Loco_fs_File $file ){
         if( $this->exts ){
@@ -398,9 +398,11 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
             if( ! isset($this->exts[$ext]) ){
                 return;
             }
-            $this->exts[$ext]->add( $file );
+            $this->exts[$ext]->add($file);
         }
-        $this->cache->add( $file );
+        if( $this->cache->add($file) ){
+            $this->i ++;
+        }
     }
 
     
