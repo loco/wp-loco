@@ -73,7 +73,8 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
     public function render(){
         // establish operation being authorized (create,delete,etc..)
         $post = $this->validate();
-        $func = 'authorize'.ucfirst($post->auth);
+        $type = $post->auth;
+        $func = 'authorize'.ucfirst($type);
         $auth = array( $this, $func );
         if( ! is_callable($auth) ){
             throw new Loco_error_Exception('Unexpected file operation');
@@ -102,6 +103,21 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
             else if( $html = $this->api->getForm() ){
                 $this->set( 'authed', false );
                 $this->set( 'prompt', $html );
+                // supporting text based on file operation type explains why auth is required
+                if( 'create' === $type ){
+                    $message = __('Creating this file requires permission','loco-translate');
+                }
+                else if( 'delete' === $type ){
+                    $message = __('Deleting this file requires permission','loco-translate');
+                }
+                else if( 'move' === $type ){
+                    $message = __('This move operation requires permission','loco-translate');
+                }
+                else {
+                    $message = __('Saving this file requires permission','loco-translate');
+                }
+                // message is printed before default text, so needs delimiting.s
+                $this->set('message',$message.'.');
             }
             else {
                 throw new Loco_error_Exception('Failed to get credentials form');

@@ -53,8 +53,8 @@
                 // Translators: When a file or folder cannot be modified due to filesystem permissions
                 esc_html_e('Write protected','loco-translate')?>:
             </strong>
-            <span><?php
-                $params->e('fsPrompt')?>.
+            <span id="loco-fs-msg">
+                <!-- specific reason to be loaded by ajax -->
             </span>
             <span><?php 
                 esc_html_e('Click "Connect" to authenticate with the server','loco-translate')?>.</span>

@@ -139,20 +139,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
             Loco_error_AdminNotices::debug( $e->getMessage() );
         }
 
-        // specific wording based on file operation type
-        if( 'create' === $type ){
-            $this->set('fsPrompt', __('Creating this file requires permission','loco-translate') );
-        }
-        else if( 'delete' === $type ){
-            $this->set('fsPrompt', __('Deleting this file requires permission','loco-translate') );
-        }
-        else if( 'move' === $type ){
-            $this->set('fsPrompt', __('This move operation requires permission','loco-translate') );
-        }
-        else {
-            $this->set('fsPrompt', __('Saving this file requires permission','loco-translate') );
-        }
-        
         // Run pre-checks that may determine file should not be written
         if( $relpath ){
             $file = new Loco_fs_File( $relpath );

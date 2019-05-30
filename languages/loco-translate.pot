@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 11:13+0000\n"
+"POT-Creation-Date: 2019-05-30 11:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -233,7 +233,7 @@ msgstr ""
 msgid "Bundle setup"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:176
+#: src/admin/bundle/BaseController.php:162
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
@@ -309,7 +309,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:100
+#: src/ajax/FsConnectController.php:101
 msgid "Connected to remote file system"
 msgstr ""
 
@@ -336,7 +336,7 @@ msgstr ""
 msgid "Create template instead"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:144
+#: src/ajax/FsConnectController.php:108
 msgid "Creating this file requires permission"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Delete %s"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:147
+#: src/ajax/FsConnectController.php:111
 msgid "Deleting this file requires permission"
 msgstr ""
 
@@ -1352,7 +1352,7 @@ msgstr ""
 msgid "Saving PO/POT files"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:153
+#: src/ajax/FsConnectController.php:117
 msgid "Saving this file requires permission"
 msgstr ""
 
@@ -1592,11 +1592,11 @@ msgstr ""
 msgid "This directory can't be written to directly by the web server"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:170
+#: src/admin/bundle/BaseController.php:156
 msgid "This directory is managed by WordPress, be careful what you delete"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:173
+#: src/admin/bundle/BaseController.php:159
 msgid ""
 "This directory is managed by WordPress. Removed files may be restored during "
 "updates"
@@ -1606,7 +1606,7 @@ msgstr ""
 msgid "This file can't be updated directly by the web server"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:167
+#: src/admin/bundle/BaseController.php:153
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
@@ -1614,7 +1614,7 @@ msgstr ""
 msgid "This information is for developers to find problems in the bundle setup"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:150
+#: src/ajax/FsConnectController.php:114
 msgid "This move operation requires permission"
 msgstr ""
 
