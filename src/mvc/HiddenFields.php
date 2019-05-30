@@ -19,6 +19,7 @@ class Loco_mvc_HiddenFields extends Loco_mvc_ViewParams {
 
     /**
      * Add a nonce field 
+     * @param string action passed to wp_create_nonce
      * @return Loco_mvc_HiddenFields
      */
     public function setNonce( $action ){
@@ -29,6 +30,7 @@ class Loco_mvc_HiddenFields extends Loco_mvc_ViewParams {
 
     /**
      * Load postdata fields
+     * @param Loco_mvc_PostParams post data
      * @return Loco_mvc_HiddenFields
      */
     public function addPost( Loco_mvc_PostParams $post ){

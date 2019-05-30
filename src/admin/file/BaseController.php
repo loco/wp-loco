@@ -66,13 +66,15 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         // POT file has no locale
         if( 'pot' === $ext ){
             $locale = null;
+            $localised = false;
         }
         // else file may have a locale suffix (unless invalid, such as "default.po")
         else {
             $locale = $file->getLocale();
+            $localised = $locale->isValid();
         }
         
-        if( $locale && $locale->isValid() ){
+        if( $localised ){
             $this->locale = $locale;
             $code = (string) $locale;
             $this->set( 'locale', new Loco_mvc_ViewParams( array(
@@ -104,15 +106,18 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             'file-view' => __('Source','loco-translate'),
             'file-info' => __('File info','loco-translate'),
             'file-diff' => __('Restore','loco-translate'),
-            'file-move' => __('Move','loco-translate'),
+            'file-move' => $localised ? __('Relocate','loco-translate') : null,
             'file-delete' => __('Delete','loco-translate'),
         );
  
         $suffix = $this->get('action');
         $prefix = $this->get('type');
+        $args = array_intersect_key($_GET,array('path'=>1,'bundle'=>1,'domain'=>1));
         foreach( $actions as $action => $name ){
-            $href = Loco_mvc_AdminRouter::generate( $prefix.'-'.$action, $_GET );
-            $tabs->add( $name, $href, $action === $suffix );
+            if( is_string($name) ){
+                $href = Loco_mvc_AdminRouter::generate( $prefix.'-'.$action, $args );
+                $tabs->add( $name, $href, $action === $suffix );
+            }
         }
         
         // Provide common language creation link if project scope is is valid

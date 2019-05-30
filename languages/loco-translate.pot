@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-28 20:06+0000\n"
+"POT-Creation-Date: 2019-05-30 11:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -350,8 +350,8 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:31
-#: tpl/admin/bundle/inc-po-table.php:63 tpl/admin/bundle/locale.php:78
+#: src/admin/file/BaseController.php:110 tpl/admin/file/diff.php:31
+#: tpl/admin/bundle/inc-po-table.php:60 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
 
@@ -417,7 +417,7 @@ msgstr ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: src/admin/file/BaseController.php:103
+#: src/admin/file/BaseController.php:105
 msgid "Editor"
 msgstr ""
 
@@ -634,7 +634,7 @@ msgstr ""
 msgid "File doesn't exist"
 msgstr ""
 
-#: src/admin/file/BaseController.php:105 tpl/admin/file/diff.php:60
+#: src/admin/file/BaseController.php:107 tpl/admin/file/diff.php:60
 #: tpl/admin/bundle/inc-po-table.php:22 tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
@@ -684,7 +684,7 @@ msgstr ""
 msgid "File modified"
 msgstr ""
 
-#: src/admin/file/MoveController.php:71
+#: src/admin/file/MoveController.php:79
 #, php-format
 msgid "File moved"
 msgid_plural "%u files moved"
@@ -1006,23 +1006,18 @@ msgctxt "Modified time"
 msgid "Updated"
 msgstr ""
 
-#: src/admin/file/BaseController.php:107 tpl/admin/bundle/inc-po-table.php:60
-#: tpl/admin/bundle/locale.php:75
-msgid "Move"
-msgstr ""
-
-#: src/admin/file/MoveController.php:92 src/admin/file/MoveController.php:155
+#: src/admin/file/MoveController.php:100 src/admin/file/MoveController.php:127
 #, php-format
 msgid "Move %s"
 msgstr ""
 
-#: tpl/admin/file/move-po.php:58
+#: tpl/admin/file/move.php:24
 msgid "Move files"
 msgstr ""
 
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:111
-#: src/admin/file/BaseController.php:124 src/admin/bundle/ViewController.php:96
+#: src/admin/file/BaseController.php:129 src/admin/bundle/ViewController.php:96
 msgid "New language"
 msgstr ""
 
@@ -1055,7 +1050,7 @@ msgstr ""
 msgid "No previous file revisions"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:108
+#: tpl/admin/bundle/inc-po-table.php:105
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -1119,7 +1114,7 @@ msgid_plural "%s files can't be matched to a known set of strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/MoveController.php:75
+#: src/admin/file/MoveController.php:83
 #, php-format
 msgid "One file could not be moved"
 msgid_plural "%u files could not be moved"
@@ -1160,7 +1155,7 @@ msgstr ""
 msgid "Overview"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:236
+#: src/mvc/AdminRouter.php:243
 msgid "Page not found"
 msgstr ""
 
@@ -1310,11 +1305,15 @@ msgstr ""
 msgid "Relative path from bundle root to the official POT file"
 msgstr ""
 
+#: src/admin/file/BaseController.php:109
+msgid "Relocate"
+msgstr ""
+
 #: tpl/admin/bundle/conf.php:159 tpl/admin/bundle/setup/saved.php:18
 msgid "Reset config"
 msgstr ""
 
-#: src/admin/file/BaseController.php:106 tpl/admin/file/diff.php:30
+#: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:30
 msgid "Restore"
 msgstr ""
 
@@ -1432,7 +1431,7 @@ msgstr ""
 msgid "Skip template"
 msgstr ""
 
-#: src/admin/file/BaseController.php:104
+#: src/admin/file/BaseController.php:106
 msgid "Source"
 msgstr ""
 

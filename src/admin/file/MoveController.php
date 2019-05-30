@@ -15,10 +15,6 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         /* @var Loco_fs_File $file */
         if( $file->exists() && ! $file->isDirectory() ){
             $files = new Loco_fs_Siblings($file);
-            // currently only supporting localized file relocation
-            if( 'po' !== $files->getSource()->extension() ){
-                throw new Loco_error_Exception('Invalid file type for moving a translation set');
-            }
             // nonce action will be specific to file for extra security
             $path = $file->getPath();
             $action = 'move:'.$path;
@@ -27,7 +23,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             $fields->setNonce( $action );
             $fields['auth'] = 'move';
             $fields['path'] = $this->get('path');
-            $this->set( 'hidden', $fields );
+            $this->set('hidden',$fields );
             // attempt move if valid nonce posted back
             while( $this->checkNonce($action) ){
                 // Chosen location should be valid as a posted "dest" parameter
@@ -35,18 +31,30 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                     Loco_error_AdminNotices::err('No destination posted');
                     break;
                 }
+                $target = new Loco_fs_LocaleFile( Loco_mvc_PostParams::get()->dest );
+                $ext = $target->extension();
+                // primary file extension should only be permitted to change between po and pot
+                if( $ext !== $file->extension() && 'po' !== $ext && 'pot' !== $ext ){
+                    Loco_error_AdminNotices::err('Invalid file extension, *.po or *.pot only');
+                    break;
+                }
+                $target->normalize( loco_constant('WP_CONTENT_DIR') );
+                $target_dir = $target->getParent()->getPath();
+                // Primary file gives template remapping, so all files are renamed with same stub.
+                // this can only be one of three things: (en -> en) or (foo-en -> en) or (en -> foo-en)
+                // suffix will then consist of file extension, plus any other stuff like backup file date.
+                $target_base = $target->filename();
+                $source_snip = strlen( $file->filename() );
                 // buffer all files to move to preempt write failures
                 $movable = array();
-                // PO files give base name remapping, depending on text domain presence
-                // this can only be one of three things: (en -> en) or (foo-en -> en) or (en -> foo-en)
-                $template = new Loco_fs_LocaleFile( Loco_mvc_PostParams::get()->dest );
-                $target_base = $template->filename();
-                $source_snip = strlen($file->filename());
-                $target_dir = $template->getParent()->normalize(loco_constant('WP_CONTENT_DIR'));
                 $api = new Loco_api_WordPressFileSystem;
                 foreach( $files->expand() as $source ){
-                    $suffix = substr($source->basename(),$source_snip);
+                    $suffix = substr( $source->basename(), $source_snip ); // <- e.g. "-backup.po~"
                     $target = new Loco_fs_File( $target_dir.'/'.$target_base.$suffix );
+                    // permit valid change of file extension on primary source file (po/pot)
+                    if( $source === $files->getSource() && $target->extension() !== $ext ){
+                        $target = $target->cloneExtension($ext);
+                    }
                     if( ! $api->authorizeMove($source,$target) ) {
                         Loco_error_AdminNotices::err('Failed to authorize relocation of '.$source->basename() );
                         break 2;
@@ -102,23 +110,42 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             return $fail;
         }
         // relocation requires knowing text domain and locale
-        $project = $this->getProject();
+        try {
+            $project = $this->getProject();
+        }
+        catch( Loco_error_Exception $e ){
+            Loco_error_AdminNotices::warn($e->getMessage());
+            $project = null;
+        }
         $files = new Loco_fs_Siblings($file);
         $file = new Loco_fs_LocaleFile( $files->getSource() );
         $locale = $file->getLocale();
-        if( ! $locale || ! $locale->isValid() ){
-            throw new Loco_error_Exception('Only able to relocation localized files');
-        }
+        // switch between canonical move and custom file path mode
+        $custom = is_null($project) || $this->get('custom') || 'po' !== $file->extension() || ! $locale->isValid();
+        // common page elements:
+        $this->set('files',$files->expand() );
+        $this->set('title', sprintf( __('Move %s','loco-translate'), $file->filename() ) );
+        $this->enqueueScript('move');
         // set info for existing file location
         $content_dir = loco_constant('WP_CONTENT_DIR');
+        $current = $file->getRelativePath($content_dir);
         $parent = new Loco_fs_LocaleDirectory( $file->dirname() );
         $typeId = $parent->getTypeId();
         $this->set('current', new Loco_mvc_ViewParams(array(
             'path' => $parent->getRelativePath($content_dir),
             'type' => $parent->getTypeLabel($typeId),
         )) );
+        // moving files will require deletion permission on current file location
+        // plus write permission on target location, but we don't know what that is yet.
+        $fields = $this->prepareFsConnect('move','');
+        $fields['dest'] = '';
+        // custom file move template (POT mode)
+        if( $custom ){
+            $this->get('hidden')->offsetSet('custom','1');
+            $this->set('file', Loco_mvc_FileParams::create($file) );
+            return $this->view('admin/file/move-pot');
+        }
         // establish valid locations for translation set, which may include current:
-        $current = $file->getRelativePath($content_dir);
         $filechoice = $project->initLocaleFiles($locale);
         // start with current location so always first in list
         $locations = array();
@@ -149,17 +176,8 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             ) );
             $locations[$typeId]['paths'][] = $choice;
         }
-
-        $this->set('files',$files->expand() );
         $this->set('locations', $locations );
-        $this->set('title', sprintf( __('Move %s','loco-translate'), $file->basename() ) );
-        
-        // moving files will require deletion permission on current file location
-        // plus write permission on target location, but we don't know what that is yet.
-        $fields = $this->prepareFsConnect('move','');
-        $fields['dest'] = '';
-        
-        $this->enqueueScript('move');
+        $this->set('advanced', $_SERVER['REQUEST_URI'].'&custom=1' );
         return $this->view('admin/file/move-po');
     }
 

@@ -2,15 +2,13 @@
 /**
  * Confirmation form for moving localized files to a new location.
  */
-$this->extend('../layout');
+$this->extend('move');
+$this->start('source');
 
 /* @var Loco_mvc_ViewParams $current */
 /* @var Loco_mvc_ViewParams[] $locations */
-?>
+?> 
 
-<form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-move"><?php
-    /* @var Loco_mvc_HiddenFields $hidden */
-    $hidden->_e();?> 
     <div class="notice inline notice-generic">
         <h2>
             Choose a new location for these translations
@@ -43,20 +41,3 @@ $this->extend('../layout');
             </tbody>
         </table>
     </div>
-    <div class="notice inline notice-info">
-        <h2>
-            Confirm relocation
-        </h2>
-        <p>
-            The following files will be moved/renamed to the new location:<?php
-            /* @var Loco_fs_File[] $files */
-            foreach( $files as $file ):
-            echo '<div>',$params->escape( $file->basename() ),'</div>';
-            endforeach?> 
-        </p>
-        <p class="submit">
-            <button type="submit" class="button button-primary" disabled><?php esc_html_e('Move files','loco-translate')?></button>
-        </p>
-    </div>
-</form>
-

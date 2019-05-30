@@ -71,9 +71,6 @@ $this->extend('../layout');
                             <span>
                                 <a href="<?php $po->e('copy')?>"><?php esc_html_e('Copy','loco-translate')?></a> |
                             </span>
-                            <span>
-                                <a href="<?php $po->e('move')?>"><?php esc_html_e('Move','loco-translate')?></a> |
-                            </span>
                             <span class="trash">
                                 <a href="<?php $po->e('delete')?>"><?php esc_html_e('Delete','loco-translate')?></a>
                             </span>

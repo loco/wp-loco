@@ -34,7 +34,6 @@ class Loco_fs_Siblings {
     }
 
 
-
     /**
      * Get all dependant files (including self) that actually exist on disk
      * @return Loco_fs_File[]
@@ -70,7 +69,6 @@ class Loco_fs_Siblings {
 
         return $siblings;
     }
-
 
 
     /**

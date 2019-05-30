@@ -99,6 +99,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.2.3-dev =
 * Added experimental support for PO file uploads
+* Added relocation tab for moving translation sets
 * Creation of missing directories when writing new files
 * Fixed duplicate file addition when iterating over symlink
 * Bumped WP compatibility to 5.2.1

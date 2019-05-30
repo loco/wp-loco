@@ -6,7 +6,8 @@
     var fsConn,
         destPath,
         fsHook = document.getElementById('loco-fs'),
-        elForm = document.getElementById('loco-move')
+        elForm = document.getElementById('loco-move'),
+        origPath = elForm.path.value
     ;
 
     function setFormDisabled( disabled ){
@@ -20,15 +21,17 @@
     }
     
     function validate(event){
-        var radio = event.target || {};
-        if( 'dest' === radio.name && radio.checked ){
-            var newPath = radio.value;
-            if( newPath && newPath !== destPath ){
-                destPath = newPath;
+        var field = event.target||{}, value;
+        if( 'dest' === field.name && ( field.checked || 'text' === field.type ) ){
+            value = field.value;
+            if( value && value !== destPath ){
+                destPath = value;
                 setFormDisabled(true);
-                // check whether chosen target can be moved to
-                fsHook.dest.value = newPath;
-                fsConn.connect();
+                // check chosen target permissions
+                if( origPath !== value ){
+                    fsHook.dest.value = value;
+                    fsConn.connect();
+                }
             }
         }
     }

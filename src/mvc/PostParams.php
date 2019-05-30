@@ -50,11 +50,11 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
     }
 
 
-
     /**
      * Construct postdata from a series of value pairs.
      * This is used in tests to simulate how a form is serialized and posted
      * 
+     * @param array
      * @return Loco_mvc_PostParams
      */
     public static function fromSerial( array $serial ){
@@ -65,7 +65,6 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
         parse_str( implode('&',$pairs), $parsed );
         return new Loco_mvc_PostParams( $parsed );
     }
-
 
 
     /**
