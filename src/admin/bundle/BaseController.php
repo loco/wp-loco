@@ -130,9 +130,11 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
         // may have fs credentials saved in session
         try {
-            $session = Loco_data_Session::get();
-            if( isset($session['loco-fs']) ){
-                $fields['connection_type'] = $session['loco-fs']['connection_type'];
+            if( Loco_data_Settings::get()->fs_persist ){
+                $session = Loco_data_Session::get();
+                if( isset($session['loco-fs']) ){
+                    $fields['connection_type'] = $session['loco-fs']['connection_type'];
+                }
             }
         }
         catch( Exception $e ){
@@ -147,21 +149,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
             try {
                 $api = new Loco_api_WordPressFileSystem;
                 $api->preAuthorize($file);
-                // else just warn if file is sensitive (system)
-                if( Loco_data_Settings::get()->fs_protect && $file->getUpdateType() ){
-                    if( 'create' === $type ){
-                        $this->set('fsWarning', __('This file may be overwritten or deleted when you update WordPress','loco-translate' ) );
-                    }
-                    else if( 'delete' === $type ){
-                        $this->set('fsWarning', __('This directory is managed by WordPress, be careful what you delete','loco-translate' ) );
-                    }
-                    else if( 'move' === $type ){
-                        $this->set('fsWarning', __('This directory is managed by WordPress. Removed files may be restored during updates','loco-translate' ) );
-                    }
-                    else {
-                        $this->set('fsWarning', __('Changes to this file may be overwritten or deleted when you update WordPress','loco-translate' ) );
-                    }
-                }
             }
             catch( Loco_error_WriteException $e ){
                 $this->set('fsLocked', $e->getMessage() );

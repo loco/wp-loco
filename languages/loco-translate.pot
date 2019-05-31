@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-31 12:57+0000\n"
+"POT-Creation-Date: 2019-05-31 13:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -233,7 +233,7 @@ msgstr ""
 msgid "Bundle setup"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:114 src/admin/bundle/BaseController.php:162
+#: src/ajax/FsConnectController.php:114
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
@@ -305,7 +305,7 @@ msgstr[1] ""
 msgid "Confirm delete"
 msgstr ""
 
-#: tpl/admin/common/inc-fsconn.php:61
+#: tpl/admin/common/inc-fsconn.php:60
 msgid "Connect"
 msgstr ""
 
@@ -1592,11 +1592,11 @@ msgstr ""
 msgid "This directory can't be written to directly by the web server"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:108 src/admin/bundle/BaseController.php:156
+#: src/ajax/FsConnectController.php:108
 msgid "This directory is managed by WordPress, be careful what you delete"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:111 src/admin/bundle/BaseController.php:159
+#: src/ajax/FsConnectController.php:111
 msgid ""
 "This directory is managed by WordPress. Removed files may be restored during "
 "updates"
@@ -1606,7 +1606,7 @@ msgstr ""
 msgid "This file can't be updated directly by the web server"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:105 src/admin/bundle/BaseController.php:153
+#: src/ajax/FsConnectController.php:105
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 

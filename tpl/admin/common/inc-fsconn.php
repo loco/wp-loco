@@ -53,16 +53,13 @@
                 <!-- specific reason to be loaded by ajax -->
             </span>
             <span><?php 
-                esc_html_e('Click "Connect" to authenticate with the server','loco-translate')?>.</span>
-        </p><?php
-        // remote connect button required when not pre-authed
-        if( ! $fsFields->has('connection_type') ):?> 
+                esc_html_e('Click "Connect" to authenticate with the server','loco-translate')?>.
+            </span>
+        </p>
         <nav>
             <button type="button" class="button button-small button-primary"><?php esc_html_e('Connect','loco-translate')?></button>
             <a class="button button-small" href="<?php echo $help?>#remote" target="_blank"> ? </a>
         </nav><?php
-        // else form will remain hidden
-        endif;
         $fsFields->_e();?> 
     </form><?php
     endif;
