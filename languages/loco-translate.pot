@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.2.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-05-30 11:54+0000\n"
+"POT-Creation-Date: 2019-05-31 12:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -233,7 +233,7 @@ msgstr ""
 msgid "Bundle setup"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:162
+#: src/ajax/FsConnectController.php:114 src/admin/bundle/BaseController.php:162
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
@@ -258,7 +258,7 @@ msgstr ""
 msgid "Choose a location"
 msgstr ""
 
-#: tpl/admin/common/inc-fsconn.php:60
+#: tpl/admin/common/inc-fsconn.php:56
 msgid "Click \"Connect\" to authenticate with the server"
 msgstr ""
 
@@ -305,7 +305,7 @@ msgstr[1] ""
 msgid "Confirm delete"
 msgstr ""
 
-#: tpl/admin/common/inc-fsconn.php:65
+#: tpl/admin/common/inc-fsconn.php:61
 msgid "Connect"
 msgstr ""
 
@@ -336,7 +336,7 @@ msgstr ""
 msgid "Create template instead"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:108
+#: src/ajax/FsConnectController.php:124
 msgid "Creating this file requires permission"
 msgstr ""
 
@@ -361,7 +361,7 @@ msgstr ""
 msgid "Delete %s"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:111
+#: src/ajax/FsConnectController.php:127
 msgid "Deleting this file requires permission"
 msgstr ""
 
@@ -383,7 +383,7 @@ msgid "Disallow"
 msgstr ""
 
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/common/inc-fsconn.php:16
-#: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:22
+#: tpl/admin/common/inc-fsconn.php:41 tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
 msgstr ""
 
@@ -1076,7 +1076,7 @@ msgid "Nothing matches the text filter"
 msgstr ""
 
 #: src/js/Strings.php:73 src/error/Notice.php:20
-#: tpl/admin/common/inc-fsconn.php:39
+#: tpl/admin/common/inc-fsconn.php:37
 msgid "Notice"
 msgstr ""
 
@@ -1352,7 +1352,7 @@ msgstr ""
 msgid "Saving PO/POT files"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:117
+#: src/ajax/FsConnectController.php:133
 msgid "Saving this file requires permission"
 msgstr ""
 
@@ -1392,7 +1392,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:45
+#: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
 #: tpl/admin/errors/no-backups.php:24
 msgid "Settings"
 msgstr ""
@@ -1592,11 +1592,11 @@ msgstr ""
 msgid "This directory can't be written to directly by the web server"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:156
+#: src/ajax/FsConnectController.php:108 src/admin/bundle/BaseController.php:156
 msgid "This directory is managed by WordPress, be careful what you delete"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:159
+#: src/ajax/FsConnectController.php:111 src/admin/bundle/BaseController.php:159
 msgid ""
 "This directory is managed by WordPress. Removed files may be restored during "
 "updates"
@@ -1606,7 +1606,7 @@ msgstr ""
 msgid "This file can't be updated directly by the web server"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:153
+#: src/ajax/FsConnectController.php:105 src/admin/bundle/BaseController.php:153
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
@@ -1614,7 +1614,7 @@ msgstr ""
 msgid "This information is for developers to find problems in the bundle setup"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:114
+#: src/ajax/FsConnectController.php:130
 msgid "This move operation requires permission"
 msgstr ""
 
@@ -1813,7 +1813,7 @@ msgstr ""
 
 #. When a file or folder cannot be modified due to filesystem permissions
 #: tpl/admin/file/info.php:36 tpl/admin/file/info.php:89
-#: tpl/admin/common/inc-fsconn.php:54
+#: tpl/admin/common/inc-fsconn.php:50
 msgid "Write protected"
 msgstr ""
 
