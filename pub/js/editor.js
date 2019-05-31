@@ -42,7 +42,7 @@
     // warn if ajax uploads are enabled but not supported
     if( ajaxUpload && ! ( window.FormData && window.Blob ) ){
         ajaxUpload = false;
-        loco.notices.warn("You enabled ajax file uploads, but your browser doesn't support this feature");
+        loco.notices.warn("Your browser doesn't support ajax file uploads. Falling back to standard postdata");
     }
 
 
