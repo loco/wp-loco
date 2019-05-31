@@ -31,29 +31,25 @@
 
 
     // else render remote connection form
-    else:
-        
-    if( $params->has('fsWarning') ):?> 
+    else:?> 
     <div id="loco-fs-warn" class="has-nav notice inline notice-info jshide">
         <p>
             <strong class="has-icon"><?php esc_html_e('Notice','loco-translate')?>:</strong>
-            <span><?php echo esc_html($fsWarning)?>.</span>
+            <span class="loco-msg"><!-- warning to be loaded by ajax --></span>
         </p>
         <nav>
             <a href="<?php echo $help?>#wp" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
             <span>|</span>
             <a href="<?php $this->route('config')->e('href')?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
         </nav>
-    </div><?php
-    endif?> 
-        
+    </div>
     <form id="loco-fs" class="has-nav notice inline notice-locked jshide jsonly">
         <p>
             <strong class="has-icon"><?php
                 // Translators: When a file or folder cannot be modified due to filesystem permissions
                 esc_html_e('Write protected','loco-translate')?>:
             </strong>
-            <span id="loco-fs-msg">
+            <span class="loco-msg">
                 <!-- specific reason to be loaded by ajax -->
             </span>
             <span><?php 

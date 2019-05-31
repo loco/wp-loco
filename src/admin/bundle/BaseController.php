@@ -148,7 +148,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
                 $api = new Loco_api_WordPressFileSystem;
                 $api->preAuthorize($file);
                 // else just warn if file is sensitive (system)
-                if( Loco_data_Settings::get()->fs_protect && ( $systype = $file->getUpdateType() ) ){
+                if( Loco_data_Settings::get()->fs_protect && $file->getUpdateType() ){
                     if( 'create' === $type ){
                         $this->set('fsWarning', __('This file may be overwritten or deleted when you update WordPress','loco-translate' ) );
                     }
@@ -170,6 +170,5 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         
         return $fields;
     }
-
 
 }
