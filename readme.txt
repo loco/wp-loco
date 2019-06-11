@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.2.1
-Stable tag: 2.2.2
+Stable tag: 2.3.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -97,8 +97,11 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
-= 2.2.3-dev =
-* Added experimental support for PO file uploads
+= 2.3.1 =
+* 
+
+= 2.3.0 =
+* Added experimental support for multipart uploads
 * Added relocation tab for moving translation sets
 * Creation of missing directories when writing new files
 * Fixed duplicate file addition when iterating over symlink
@@ -306,7 +309,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.2.3 =
+= 2.3.1 =
 * Various bug fixes and improvements
 
 
