@@ -98,7 +98,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.3.1 =
-* 
+* default POT getter now looks in "lang" directory 
 
 = 2.3.0 =
 * Added experimental support for multipart uploads

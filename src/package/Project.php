@@ -323,6 +323,16 @@ class Loco_package_Project {
         return $finder;
     }
 
+
+    /**
+     * Check if target file or directory is excluded
+     * @param Loco_fs_File PO or POT file
+     * @return bool
+     */
+    private function isTargetExcluded( Loco_fs_File $file ){
+        return $this->xgpaths->has($file) || $this->xdpaths->has($file);
+    }
+
     
     /**
      * Add a path for excluding in a recursive target file search
@@ -513,19 +523,32 @@ class Loco_package_Project {
      */
     public function getPot(){
         if( ! $this->pot ){
-            // attempt to match POT exactly under configured domain paths
             $name = $this->getSlug().'.pot';
-            $targets = $this->getConfiguredTargets()->export();
-            // permit POT file in the bundle root (i.e. outside domain path)
-            if( $this->isDomainDefault() && $this->bundle->hasDirectoryPath() ){
-                $targets[] = $this->bundle->getDirectoryPath();
-            }
-            foreach( $targets as $dir ){
-                $file = new Loco_fs_File( $name );
-                $file->normalize( $dir );
-                if( $file->exists() ){
-                    $this->pot = $file;
-                    break;
+            if( '.pot' !== $name ){
+                // find under configured domain paths
+                $targets = $this->getConfiguredTargets()->copy();
+                // always permit POT file in the bundle root (i.e. outside domain path)
+                if( $this->isDomainDefault() && $this->bundle->hasDirectoryPath() ){
+                    $root = $this->bundle->getDirectoryPath();
+                    $targets->add( new Loco_fs_Directory($root) );
+                    // look in alternative language directories if only root is configured
+                    if( 1 === count($targets) ){
+                        foreach( array('languages','language','lang','l10n','i18n') as $d ) {
+                            $alt = new Loco_fs_Directory($root.'/'.$d);
+                            if( ! $this->isTargetExcluded($alt) ){
+                                $targets->add($alt);
+                            }
+                        }
+                     }
+                }
+                // pot check is for exact name and not recursive
+                foreach( $targets as $dir ){
+                    $file = new Loco_fs_File($name);
+                    $file->normalize( $dir->getPath() );
+                    if( $file->exists() && ! $this->isTargetExcluded($file) ){
+                        $this->pot = $file;
+                        break;
+                    }
                 }
             }
         }

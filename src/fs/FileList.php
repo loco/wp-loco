@@ -23,6 +23,16 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
 
     /**
+     * Use instead of clone because that does weird things to ArrayIterator instances.
+     * Note that this does NOT clone individual file members.
+     * @return Loco_fs_FileList
+     */
+    public function copy(){
+        return new Loco_fs_FileList( $this->getArrayCopy() );
+    }
+    
+
+    /**
      * Like getArrayCopy, but exports string paths
      * @return array
      */
