@@ -31,14 +31,25 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
 
 
     /**
+     * Check if either magic_quotes_gpc or magic_quotes_runtime are enabled.
+     * Note that get_magic_quotes_gpc and get_magic_quotes_runtime are deprecated as of PHP 7.4 and always return false
+     * @return bool
+     */
+    private static function has_magic_quotes(){
+        return version_compare(PHP_VERSION,'7.4','<') && ( get_magic_quotes_gpc() || get_magic_quotes_runtime() );
+    }
+
+
+    /**
      * Construct clean postdata from current HTTP request
      * @return Loco_mvc_PostParams
      */
      public static function create(){
         $post = array();
         if( 'POST' === $_SERVER['REQUEST_METHOD'] ){
-            // attempt to use clean input if available and unslashed
-            if( ( $raw = file_get_contents('php://input') ) && ! get_magic_quotes_gpc() && ! get_magic_quotes_runtime() ){
+            // attempt to use clean input if available (without added slashes)
+            $raw = (string) file_get_contents('php://input');
+            if( '' !== $raw && ! self::has_magic_quotes() ){
                 parse_str( $raw, $post );
             }
             // else reverse wp_magic_quotes (assumes no other process has hacked the array)

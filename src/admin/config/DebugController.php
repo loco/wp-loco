@@ -134,12 +134,14 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
 			'zlib.output_handler' => ini_get('zlib.output_handler'),
 	    ) ) );*/
         
-        // alert to known system setting problems
-        if( get_magic_quotes_gpc() ){
-            Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_gpc" enabled. We recommend you disable this in PHP') );
-        }
-        if( get_magic_quotes_runtime() ){
-            Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP') );
+        // alert to known system setting problems:
+        if( version_compare(PHP_VERSION,'7.4','<') ){
+            if( get_magic_quotes_gpc() ){
+                Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_gpc" enabled. We recommend you disable this in PHP') );
+            }
+            if( get_magic_quotes_runtime() ){
+                Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP') );
+            }
         }
 
         return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug') );
