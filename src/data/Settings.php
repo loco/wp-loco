@@ -161,28 +161,18 @@ class Loco_data_Settings extends Loco_data_Serializable {
      */
     public function migrate(){
         $updated = false;
-        /*/ Branch 1.x is three years old. Migrations scrapped
-        $existed = (bool) get_option('loco_settings');
-        // migrate 1.x branch settings if first run of 2.x
+        /*$existed = (bool) get_option('loco_settings');
         if( ! $existed ){
-            $this->gen_hash = get_option('loco-translate-gen_hash','0');
-            $this->use_fuzzy = get_option('loco-translate-use_fuzzy', '1' );
-            $this->num_backups = get_option('loco-translate-num_backups','1');
-            $this->persist();
-        }
-        // running of plugin in 1.x legacy mode is disabled as of 2.0.15
-        if( false !== get_option('loco-branch',false) ){
-            delete_option('loco-branch');
-            delete_option('loco-translate-gen_hash');
-            delete_option('loco-translate-use_fuzzy');
-            delete_option('loco-translate-num_backups');
-        }*/
-        /*/ TODO Forcefully enable Ajax file uploads unless deliberately switched off
-        if( ! $this->ajax_files ){
-            $this->ajax_files = true;
             $this->persist();
             $updated = true;
         }*/
+        // Forcefully enable Ajax file uploads if upgrading from a version before 2.3.1
+        if( ! $this->ajax_files && version_compare($this->version,'2.3.1','<') ){
+            $this->ajax_files = true;
+            $this->persist();
+            Loco_error_AdminNotices::debug('Upgraded from '.$this->version);
+            $updated = true;
+        }
         return $updated;
     }
 
