@@ -156,21 +156,14 @@ class Loco_data_Settings extends Loco_data_Serializable {
 
 
     /**
-     * Run migration in case plugin has been upgraded from 1.x => 2.x since settings last saved
+     * Run migration in case plugin has been upgraded since settings last saved
      * @return bool whether upgrade has occurred
      */
     public function migrate(){
         $updated = false;
-        /*$existed = (bool) get_option('loco_settings');
-        if( ! $existed ){
+        // Always update version number in settings after an upgrade
+        if( version_compare($this->version,loco_plugin_version(),'<') ){
             $this->persist();
-            $updated = true;
-        }*/
-        // Forcefully enable Ajax file uploads if upgrading from a version before 2.3.1
-        if( ! $this->ajax_files && version_compare($this->version,'2.3.1','<') ){
-            $this->ajax_files = true;
-            $this->persist();
-            Loco_error_AdminNotices::debug('Upgraded from '.$this->version);
             $updated = true;
         }
         return $updated;

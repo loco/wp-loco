@@ -26,16 +26,14 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
         // current plugin version
         $version = loco_plugin_version();
         
-        // check for auto-update availabilty
+        // check for auto-update availability
         if( $updates = get_site_transient('update_plugins') ){
             $key = loco_plugin_self();
-            if( isset($updates->checked[$key]) && isset($updates->response[$key]) ){
-                $old = $updates->checked[$key];
-                $new = $updates->response[$key]->new_version;
-                $diff = version_compare( $new, $old );
+            if( isset($updates->response[$key]) ){
+                $latest = $updates->response[$key]->new_version;
                 // if current version is lower than latest, prompt update
-                if( 1 === $diff ){
-                    $this->setUpdate( $new );
+                if( version_compare($version,$latest,'<') ){
+                    $this->setUpdate($latest);
                 }
             }
         }
@@ -52,7 +50,8 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
 
 
     /**
-     * @internal
+     * @param string version
+     * @return void
      */
     private function setUpdate( $version ){
         $action = 'upgrade-plugin_'.loco_plugin_self();
