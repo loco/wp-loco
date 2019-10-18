@@ -101,6 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Default POT getter now looks in "lang" directory
 * Not calling deprecated magic quotes functions under PHP 7.4
 * Fixed issue with conflicting page hooks
+* Ajax file uploads now enabled by default
+* Removed legacy option migrations from 1.x branch
 * Bumped WP compatibility to 5.2.4
 
 = 2.3.0 =

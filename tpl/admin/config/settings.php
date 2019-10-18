@@ -4,8 +4,8 @@
  */
 
 $this->extend('../layout');
-
 $fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem') );
+/* @var Loco_data_Settings $opts */
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">
@@ -89,7 +89,7 @@ $fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpres
                             <p>
                                 <label for="loco--ajax-files">
                                     <input type="checkbox" name="opts[ajax_files]" value="1" id="loco--ajax-files"<?php echo $opts->ajax_files?' checked':''?> />
-                                    Submit PO data as multipart file uploads (Experimental)
+                                    <?php esc_html_e('Enable Ajax file uploads','loco-translate')?> (<?php esc_html_e('Recommended','loco-translate')?>)
                                 </label>
                             </p>
                         </fieldset>

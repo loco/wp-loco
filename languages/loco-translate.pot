@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-09-05 18:48+0000\n"
+"POT-Creation-Date: 2019-10-18 09:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1-dev; wp-5.2.3"
+"X-Loco-Version: 2.3.1-dev; wp-5.2.4"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -129,7 +129,7 @@ msgstr ""
 msgid "Additional files found"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:69
+#: src/hooks/AdminHooks.php:67
 #, php-format
 msgid ""
 "Administrators and auditors may wish to review Loco's <a href=\"%s\">plugin "
@@ -553,6 +553,10 @@ msgid ""
 "it"
 msgstr ""
 
+#: tpl/admin/config/settings.php:92
+msgid "Enable Ajax file uploads"
+msgstr ""
+
 #: src/js/Strings.php:67 src/error/Exception.php:149
 msgid "Error"
 msgstr ""
@@ -946,7 +950,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:67
+#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:65
 msgid "Loco Translate"
 msgstr ""
 
@@ -1296,6 +1300,10 @@ msgstr ""
 msgid "Recently updated:"
 msgstr ""
 
+#: tpl/admin/config/settings.php:92
+msgid "Recommended"
+msgstr ""
+
 #: src/fs/FileWriter.php:150
 msgid "Refusing to copy over an existing file"
 msgstr ""
@@ -1622,7 +1630,7 @@ msgstr ""
 msgid "This page was expecting a file, but the path is actually a directory"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:68
+#: src/hooks/AdminHooks.php:66
 msgid "This plugin doesn't collect any data from public website visitors."
 msgstr ""
 
@@ -1652,7 +1660,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:102
+#: src/hooks/AdminHooks.php:100
 msgid "Translate"
 msgstr ""
 

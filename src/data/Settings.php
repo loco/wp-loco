@@ -15,7 +15,7 @@
  * @property bool $po_utf8_bom Whether to prepend PO and POT files with UTF-8 byte order mark
  * @property string $po_width PO/POT file maximum line width (wrapping) zero to disable
  * @property bool $jed_pretty Whether to pretty print JSON JED files
- * @property bool $ajax_files Whether to submit PO data as concrete files
+ * @property bool $ajax_files Whether to submit PO data as concrete files (requires Blob support in Ajax)
  */
 class Loco_data_Settings extends Loco_data_Serializable {
 
@@ -44,7 +44,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'po_utf8_bom' => false,
         'po_width' => '79',
         'jed_pretty' => false,
-        'ajax_files' => false,
+        'ajax_files' => true,
     );
 
 
@@ -113,8 +113,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         }
         else if( is_array($default) ){
             if( ! is_array($value) ){
-                // TODO use a standard CSV split for array values?
-                $value = preg_split( '/[\s,]+/', trim($value), -1, PREG_SPLIT_NO_EMPTY );
+                $value = preg_split( '/[\\s,]+/', trim($value), -1, PREG_SPLIT_NO_EMPTY );
             }
         }
         else {
@@ -161,6 +160,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * @return bool whether upgrade has occurred
      */
     public function migrate(){
+        $updated = false;
+        /*/ Branch 1.x is three years old. Migrations scrapped
         $existed = (bool) get_option('loco_settings');
         // migrate 1.x branch settings if first run of 2.x
         if( ! $existed ){
@@ -175,8 +176,14 @@ class Loco_data_Settings extends Loco_data_Serializable {
             delete_option('loco-translate-gen_hash');
             delete_option('loco-translate-use_fuzzy');
             delete_option('loco-translate-num_backups');
-        }
-        return ! $existed;
+        }*/
+        /*/ TODO Forcefully enable Ajax file uploads unless deliberately switched off
+        if( ! $this->ajax_files ){
+            $this->ajax_files = true;
+            $this->persist();
+            $updated = true;
+        }*/
+        return $updated;
     }
 
 

@@ -42,7 +42,7 @@
     // warn if ajax uploads are enabled but not supported
     if( ajaxUpload && ! ( window.FormData && window.Blob ) ){
         ajaxUpload = false;
-        loco.notices.warn("Your browser doesn't support ajax file uploads. Falling back to standard postdata");
+        loco.notices.warn("Your browser doesn't support Ajax file uploads. Falling back to standard postdata");
     }
 
 
@@ -143,9 +143,8 @@
         }
         // submit PO as concrete file if configured
         if( ajaxUpload ){
-            var fname = String(postData.path).split('/').pop() || 'untitled.po';
             postData = initMultiPart(postData);
-            postData.append('po', new Blob([String(messages)],{type:'application/x-gettext'}), fname );
+            postData.append('po', new Blob([String(messages)],{type:'application/x-gettext'}), String(postData.path).split('/').pop()||'untitled.po' );
         }
         else {
             postData.data = String(messages);
