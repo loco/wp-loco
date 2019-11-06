@@ -95,6 +95,7 @@ class Loco_data_Preferences extends Loco_data_Serializable {
 
     /**
      * Populate all settings from raw postdata. 
+     * @param array
      * @return Loco_data_Preferences
      */
     public function populate( array $data ){
@@ -108,6 +109,20 @@ class Loco_data_Preferences extends Loco_data_Serializable {
             }
         }
         return $this;
+    }
+    
+    
+    /**
+     * Get default Last-Translator credit
+     * @return string
+     */
+    public function default_credit(){
+        $user = wp_get_current_user();
+        $name = (string) $user->get('display_name');
+        if( $user->get('user_login') === $name ){
+            $name = '';
+        }
+        return $name;
     }
 
 }

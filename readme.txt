@@ -98,7 +98,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.3.2 =
-* Removed email address from default Last-Translator credit
+* Removed login/email from default Last-Translator credit
 
 = 2.3.1 =
 * Default POT getter now looks in "lang" directory
