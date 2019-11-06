@@ -1,6 +1,8 @@
 <?php
 /**
  * Data object persisted as a WordPress user meta entry under the loco_prefs key
+ * 
+ * @property string $credit Last-Translator credit, defaults to current display name
  */
 class Loco_data_Preferences extends Loco_data_Serializable {
 
@@ -21,7 +23,6 @@ class Loco_data_Preferences extends Loco_data_Serializable {
      * @var array
      */
     private static $defaults = array (
-        // text to use in Last-Translator credit
         'credit' => '',
     );
 

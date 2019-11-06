@@ -4,6 +4,8 @@
  */
 
 $this->extend('../layout');
+/* @var string $credit Default Last-Translator value */
+/* @var Loco_data_Preferences $opts */
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">

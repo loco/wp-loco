@@ -97,6 +97,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.3.2 =
+* Removed email address from default Last-Translator credit
+
 = 2.3.1 =
 * Default POT getter now looks in "lang" directory
 * Not calling deprecated magic quotes functions under PHP 7.4
@@ -314,7 +317,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.3.1 =
+= 2.3.2 =
 * Various bug fixes and improvements
 
 

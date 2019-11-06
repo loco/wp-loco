@@ -262,15 +262,14 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         // set actual last translator from WordPress login when possible
         if( function_exists('get_current_user_id') && get_current_user_id() ){
             $user = wp_get_current_user();
-            $name = $user->get('display_name') or $name = 'nobody';
-            $email = $user->get('user_email') or $email = 'nobody@localhost';
-            // set user's preferred last translator credit if configured
+            $name = $user->get('display_name');
+            // set user's preferred Last-Translator credit if configured
             $prefs = Loco_data_Preferences::get();
-            $credit = $prefs->credit;
-            if( ! $credit ){
-                $credit = sprintf('%s <%s>', $name, $email );
+            $credit = (string) $prefs->credit;
+            if( '' === $credit ){
+                $credit = $name;
             }
-            $required['Last-Translator'] = apply_filters( 'loco_current_translator', $credit, $name, $email );
+            $required['Last-Translator'] = apply_filters( 'loco_current_translator', $credit, $name, $user->get('user_email') );
         }
         // only set absent or empty headers from default list
         foreach( $defaults as $key => $value ){
