@@ -70,7 +70,6 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
-    
     /**
      * "admin_menu" callback.
      */
@@ -87,6 +86,9 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
     /**
      * plugin_action_links action callback
+     * @param string[]
+     * @param string
+     * @return string[]
      */
     public function on_plugin_action_links( $links, $plugin = '' ){
          try {
@@ -107,7 +109,6 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
-
     /**
      * Purge in-memory caches that may be persisted by object caching plugins
      */
@@ -119,9 +120,10 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
-
     /**
      * pre_update_option_{$option} filter callback for $option = "active_plugins"
+     * @param array active plugins
+     * @return array
      */
     public function filter_pre_update_option_active_plugins( $value = null ){
         $this->purge_wp_cache();
@@ -129,9 +131,10 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
-
     /**
      * pre_update_site_option_{$option} filter callback for $option = "active_sitewide_plugins"
+     * @param array active sitewide plugins
+     * @return array
      */
     public function filter_pre_update_site_option_active_sitewide_plugins( $value = null ){
         $this->purge_wp_cache();

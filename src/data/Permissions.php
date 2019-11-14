@@ -36,7 +36,8 @@ class Loco_data_Permissions {
         $roles = self::wp_roles();
         $apply = array();
         // ensure translator role exists and is not locked out
-        if( $role = $roles->get_role('translator') ){
+        $role = $roles->get_role('translator');
+        if( $role instanceof WP_Role ){
             $role->has_cap('read') || $role->add_cap('read');
         }
         // else absence of translator role indicates first run
