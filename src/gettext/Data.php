@@ -28,10 +28,21 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return Loco_gettext_Data
      */
     public static function load( Loco_fs_File $file ){
-        if( 'mo' === self::ext($file) ){
-            return self::fromBinary( $file->getContents() );
+        $type = strtoupper( self::ext($file) );
+        // catch parse errors so we can inform user of which file is bad
+        try {
+            if( 'MO' === $type ){
+                return self::fromBinary( $file->getContents() );
+            }
+            else {
+                return self::fromSource( $file->getContents() );
+            }
         }
-        return self::fromSource( $file->getContents() );
+        catch( Loco_error_ParseException $e ){
+            $path = $file->getRelativePath( loco_constant('WP_CONTENT_DIR') );
+            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file',$path,$type) );
+            throw new Loco_error_ParseException( sprintf('Invalid %s file: %s',$type,basename($path)) );
+        }
     }
 
 

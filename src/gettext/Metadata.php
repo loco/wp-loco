@@ -69,11 +69,16 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
             try {
                 $data = Loco_gettext_Data::load($po)->getArrayCopy();
                 $meta['valid'] = true;
-                $meta['stats'] = self::stats( $data );
+                $meta['stats'] = self::stats($data);
             }
             catch( Exception $e ){
                 $meta['valid'] = false;
+                $meta['error'] = $e->getMessage();
             }
+        }
+        // show cached debug notice as if file was being parsed 
+        else if( $meta->offsetExists('error') ){
+            Loco_error_AdminNotices::debug($meta['error'].': '.$meta['rpath']);
         }
         // persist on shutdown with a useful TTL and keepalive
         // Maximum lifespan: 10 days. Refreshed if accessed a day after being cached.
