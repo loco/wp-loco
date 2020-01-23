@@ -58,11 +58,12 @@ class Loco_gettext_WordCount implements Countable {
 
     /**
      * Very simple word count, only suitable for latin characters, and biased toward English.
+     * @param string
      * @return int
      */
     public static function simpleCount( $str ){
         $n = 0;
-        if( isset($str{0}) ){
+        if( is_string($str) && '' !== $str ){
 
             // TODO should we strip PHP string formatting?
             // e.g. "Hello %s" currently counts as 2 words.

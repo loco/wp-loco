@@ -12,10 +12,10 @@
                 continue;
             }
             // may be a comment line
-            if( '#' === $line{0} ){
+            if( '#' === substr($line,0,1) ){
                 // may be able to parse out references
-                if( isset($line{1}) ){
-                    $symbol = $line{1};
+                $symbol = (string) substr($line,1,1);
+                if( '' !== $symbol ){
                     $line = substr($line,2);
                     if( ':' === $symbol ){
                         echo '<span class="po-refs">#:',preg_replace('/\\S+:\d+/', '<a href="/#\\0" class="po-text">\\0</a>', $params->escape($line) ),'</span>';
@@ -36,7 +36,7 @@
                 continue;
             }
             // grab keyword if there is one before quoted string
-            if( preg_match('/^(msg[_a-z0-9\\[\\]]+)(\s+)/', $line, $r ) ){
+            if( preg_match('/^(msg[_a-z0-9\\[\\]]+)(\\s+)/', $line, $r ) ){
                 echo '<span class="po-word">',$params->escape($r[1]),'</span><span class="po-space">',$params->escape($r[2]),'</span>';
                 $line = substr( $line, strlen($r[0]) );
             }

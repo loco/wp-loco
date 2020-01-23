@@ -99,7 +99,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.3.2 =
 * Removed login/email from default Last-Translator credit
-* Bumped WP compatibility to 5.3
+* Bumped WP compatibility to 5.3.2
+* Fixed some PHP 7.4 deprecations
 
 = 2.3.1 =
 * Default POT getter now looks in "lang" directory

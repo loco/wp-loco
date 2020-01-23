@@ -335,7 +335,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
         if( is_resource($this->dir) ){
             while( $f = readdir($this->dir) ){
                 // dot-files always excluded
-                if( '.' === $f{0} ){
+                if( '.' === substr($f,0,1) ){
                     continue;
                 }
                 $path = $this->cwd.'/'.$f;
