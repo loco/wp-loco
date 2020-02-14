@@ -426,7 +426,7 @@ class Loco_fs_File {
             // if we are below given base path, return ./relative
             if( substr($path,0,$length) === $base ){
                 ++$length;
-                if( isset($path{$length}) ){
+                if( strlen($path) > $length ){
                     return substr( $path, $length );
                 }
                 // else paths were identical

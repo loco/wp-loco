@@ -26,7 +26,7 @@ $this->start('source');
             $rowfmt = sprintf( '%%0%uX | ', strlen( sprintf( '%02X', $cols * floor( $bytes / $cols ) ) ) );
             
             for( $b = 0; $b < $bytes; $b++ ){
-                $c = $bin{$b};
+                $c = substr($bin,$b,1);
                 $n = ord($c);
                 // print byte offset
                 if( ! $line ){
