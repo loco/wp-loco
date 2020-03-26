@@ -179,10 +179,14 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     public function setDirectoryPath( $path ){
         parent::setDirectoryPath($path);
         // plugin bootstrap file can be inferred from base directory + handle
+        // e.g. if base is "/path/to/foo" and handle is "foo/bar.php" we can derive "/path/to/foo/bar.php"
         if( ! $this->getBootstrapPath() ){
-            $file = new Loco_fs_File( basename( $this->getHandle() ) );
-            $file->normalize( $path );
-            $this->setBootstrapPath( $file->getPath() );
+            $handle = $this->getHandle();
+            if( '' !== $handle ) {
+                $file = new Loco_fs_File( basename($handle) );
+                $file->normalize( $path );
+                $this->setBootstrapPath( $file->getPath() );
+            }
         }
 
         return $this;

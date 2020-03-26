@@ -37,7 +37,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     private $xpaths;
 
     /**
-     * Full path to PHP bootsrap file
+     * Full path to PHP bootstrap file
      * @var string
      */
     private $boot;
@@ -339,13 +339,19 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set primary PHP source file containing bundle bootstrap code, if applicable.
+     * @param string path to PHP file
      * @return Loco_package_Bundle
      */
     public function setBootstrapPath( $path ){
-        $this->boot = (string) $path;
+        $path = (string) $path;
+        // sanity check this is a PHP file even if it doesn't exist
+        if( '.php' !== substr($path,-4) ){
+            throw new Loco_error_Exception('Bootstrap file should end .php'.$path );
+        }
+        $this->boot = $path;
         // base directory can be inferred from bootstrap path
         if( ! $this->hasDirectoryPath() ){
-            $this->setDirectoryPath( dirname($this->boot) );
+            $this->setDirectoryPath( dirname($path) );
         }
         return $this;
     }

@@ -19,6 +19,7 @@ class Loco_config_BundleReader {
 
 
     /**
+     * @param Loco_fs_File loco.xml file
      * @return Loco_package_Bundle
      */
     public function loadXml( Loco_fs_File $file ){
