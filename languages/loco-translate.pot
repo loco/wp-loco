@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.3.1\n"
+"Project-Id-Version: Loco Translate 2.3.2-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-18 10:23+0000\n"
+"POT-Creation-Date: 2020-03-26 19:54+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.1; wp-5.2.4"
+"X-Loco-Version: 2.3.2-dev; wp-5.3.2"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -36,7 +36,7 @@ msgid "%s file is writeable"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: src/js/Strings.php:48 src/gettext/Metadata.php:200
+#: src/js/Strings.php:48 src/gettext/Metadata.php:205
 #, javascript-format
 msgid "%s fuzzy"
 msgstr ""
@@ -48,13 +48,13 @@ msgid "%s on disk"
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: src/js/Strings.php:52 src/gettext/Metadata.php:203
+#: src/js/Strings.php:52 src/gettext/Metadata.php:208
 #, javascript-format
 msgid "%s untranslated"
 msgstr ""
 
 #. Shows percentage translated at top of editor
-#: src/js/Strings.php:44 src/gettext/Metadata.php:198
+#: src/js/Strings.php:44 src/gettext/Metadata.php:203
 #, javascript-format
 msgid "%s%% translated"
 msgstr ""
@@ -83,7 +83,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows total string count at top of editor
-#: src/js/Strings.php:40 src/gettext/Metadata.php:188
+#: src/js/Strings.php:40 src/gettext/Metadata.php:193
 #, php-format
 msgid "1 string"
 msgid_plural "%s strings"
@@ -1187,12 +1187,12 @@ msgstr ""
 msgid "Permission denied to update file"
 msgstr ""
 
-#: src/package/Plugin.php:203
+#: src/package/Plugin.php:207
 #, php-format
 msgid "Plugin not found: %s"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:66 src/admin/config/PrefsController.php:48
+#: src/mvc/AdminRouter.php:66 src/admin/config/PrefsController.php:42
 #: src/admin/config/VersionController.php:22
 #: src/admin/config/SettingsController.php:77 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
@@ -1352,7 +1352,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:170 tpl/admin/config/prefs.php:28
+#: tpl/admin/config/settings.php:170 tpl/admin/config/prefs.php:29
 msgid "Save settings"
 msgstr ""
 
@@ -1405,7 +1405,7 @@ msgstr ""
 msgid "Settings"
 msgstr ""
 
-#: src/admin/config/PrefsController.php:32
+#: src/admin/config/PrefsController.php:26
 #: src/admin/config/SettingsController.php:31
 msgid "Settings saved"
 msgstr ""
@@ -1660,7 +1660,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:100
+#: src/hooks/AdminHooks.php:102
 msgid "Translate"
 msgstr ""
 
@@ -1696,7 +1696,7 @@ msgstr ""
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 
-#: tpl/admin/config/prefs.php:13 tpl/admin/config/prefs.php:17
+#: tpl/admin/config/prefs.php:14 tpl/admin/config/prefs.php:18
 msgid "Translator credit"
 msgstr ""
 
@@ -1739,7 +1739,7 @@ msgstr ""
 msgid "User options apply to your WordPress login, across all sites"
 msgstr ""
 
-#: src/data/Permissions.php:156
+#: src/data/Permissions.php:157
 msgctxt "User role"
 msgid "Translator"
 msgstr ""
