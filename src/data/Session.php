@@ -122,7 +122,6 @@ class Loco_data_Session extends Loco_data_Serializable {
     }
 
 
-
     /**
      * Persist object in WordPress usermeta table
      * @return Loco_data_Session
@@ -134,7 +133,6 @@ class Loco_data_Session extends Loco_data_Serializable {
         $this->dirty = false;
         return $this;
     }
-
 
 
     /**
@@ -155,28 +153,27 @@ class Loco_data_Session extends Loco_data_Serializable {
 
     /**
      * @param string name of messages bag, e.g. "errors"
-     * @param mixed optionally put data in rather than getting data out
+     * @param string optionally put message in rather than getting data out
      * @return mixed
      */
     public function flash( $bag, $data = null ){
         if( isset($data) ){
             $this->dirty = true;
             $this[$bag][] = $data;
-            return;
         }
         // else get first object in bag and remove before returning
-        if( isset($this[$bag]) ){
+        else if( isset($this[$bag]) ){
             if( $data = array_shift($this[$bag]) ){
                 $this->dirty = true;
                 return $data;
             }
         }
+        return null;
     }    
 
 
-
     /**
-     * @internal
+     * {@inheritDoc}
      */
     public function offsetSet( $index, $newval ){
         if( ! isset($this[$index]) || $newval !== $this[$index] ){
@@ -186,9 +183,8 @@ class Loco_data_Session extends Loco_data_Serializable {
     }
 
 
-
     /**
-     * @internal
+     * {@inheritDoc}
      */
     public function offsetUnset( $index ){
         if( isset($this[$index]) ){
