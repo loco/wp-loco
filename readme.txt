@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.4
-Stable tag: 2.3.1
+Stable tag: 2.3.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,8 +99,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.3.2 =
 * Removed login/email from default Last-Translator credit
-* Bumped WP compatibility to 5.3.2
-* Fixed some PHP 7.4 deprecations
+* Bumped WP compatibility to 5.4
+* Fixed PHP 7.4 deprecations
 
 = 2.3.1 =
 * Default POT getter now looks in "lang" directory
