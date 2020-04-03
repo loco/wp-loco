@@ -97,6 +97,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.3.3 =
+* Fixed fatal error when class not found
+
 = 2.3.2 =
 * Removed login/email from default Last-Translator credit
 * Bumped WP compatibility to 5.4
