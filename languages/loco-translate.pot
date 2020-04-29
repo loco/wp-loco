@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.3.2-dev\n"
+"Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-03-31 12:22+0000\n"
+"POT-Creation-Date: 2020-04-29 16:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.2-dev; wp-5.4-RC5-47533"
+"X-Loco-Version: 2.3.4-dev; wp-5.4"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -258,6 +258,10 @@ msgstr ""
 msgid "Choose a location"
 msgstr ""
 
+#: tpl/admin/file/move-po.php:14
+msgid "Choose a new location for these translations"
+msgstr ""
+
 #: tpl/admin/common/inc-fsconn.php:56
 msgid "Click \"Connect\" to authenticate with the server"
 msgstr ""
@@ -303,6 +307,10 @@ msgstr[1] ""
 
 #: tpl/admin/file/delete.php:12
 msgid "Confirm delete"
+msgstr ""
+
+#: tpl/admin/file/move.php:14
+msgid "Confirm relocation"
 msgstr ""
 
 #: tpl/admin/common/inc-fsconn.php:60
@@ -555,6 +563,10 @@ msgstr ""
 
 #: tpl/admin/config/settings.php:92
 msgid "Enable Ajax file uploads"
+msgstr ""
+
+#: tpl/admin/file/move-pot.php:14
+msgid "Enter a new location for this file"
 msgstr ""
 
 #: src/js/Strings.php:67 src/error/Exception.php:149
@@ -1509,6 +1521,12 @@ msgid ""
 "The containing directory is writeable by %s, so you can add new files in the "
 "same location"
 msgstr ""
+
+#: tpl/admin/file/move.php:17
+msgid "The following file will be moved/renamed to the new location:"
+msgid_plural "The following files will be moved/renamed to the new location:"
+msgstr[0] ""
+msgstr[1] ""
 
 #: tpl/admin/root.php:12
 #, php-format

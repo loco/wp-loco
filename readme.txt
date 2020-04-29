@@ -98,7 +98,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.3.4 =
-* 
+* Updated translatable strings
 
 = 2.3.3 =
 * Fixed fatal error when class not found

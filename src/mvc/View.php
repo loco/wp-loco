@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
+
 /**
  * View renderer
  */
@@ -266,6 +267,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Shorthand for `echo esc_html( sprintf( ...`
+     * @param string
      * @return string
      */
     private static function e( $text ){

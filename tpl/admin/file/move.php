@@ -11,10 +11,10 @@ $this->extend('../layout');
     echo $source?> 
     <div class="notice inline notice-info">
         <h2>
-            Confirm relocation
+            <?php self::e( __('Confirm relocation','loco-translate') );?> 
         </h2>
         <p>
-            The following files will be moved/renamed to the new location:<?php
+            <?php self::e(_n('The following file will be moved/renamed to the new location:','The following files will be moved/renamed to the new location:',count($files),'loco-translate'));
             /* @var Loco_fs_File[] $files */
             foreach( $files as $file ):
                 echo '<div>',$params->escape( $file->basename() ),'</div>';
