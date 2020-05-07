@@ -23,6 +23,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Pre-init call invoked by router
+     * @param array
      * @return Loco_mvc_AdminController
      */    
     final public function _init( array $args ){
@@ -184,7 +185,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $view->set( $prop, $value );
         }
         // ensure JavaScript config always present
-        if( $jsConf = $view->js ){
+        if( $view->has('js') ){
+            $jsConf = $view->js;
             if( ! $jsConf instanceof Loco_mvc_ViewParams ){
                 throw new InvalidArgumentException('Bad "js" view parameter');
             }
@@ -251,7 +253,13 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         if( $base = $this->baseurl ){
             $href = $base.'/pub/js/'.$name.'.js';
             $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
-            wp_enqueue_script( 'loco-js-'.strtr($name,'/','-'), $href, $deps, $vers, true );
+            $id = 'loco-js-'.strtr($name,'/','-');
+            // Currently allowing other plugins to break our scripts. Next version will be tamper-proof.
+            // Developers wishing to create unofficial add-ons should do so without removing our code.
+            if( wp_script_is($id,'enqueued') ){
+                Loco_error_AdminNotices::debug('Another plugin has modified scripts on this page. It may not work correctly');
+            }
+            wp_enqueue_script( $id, $href, $deps, $vers, true );
             return $this;
         }
         throw new Loco_error_Exception('Too early to enqueueScript('.json_encode($name,JSON_UNESCAPED_SLASHES).')');

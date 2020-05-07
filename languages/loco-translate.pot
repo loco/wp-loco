@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-04-29 16:46+0000\n"
+"POT-Creation-Date: 2020-05-07 17:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.3.4-dev; wp-5.4"
+"X-Loco-Version: 2.3.4-dev; wp-5.4.1"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -799,7 +799,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/mvc/AdminController.php:46
+#: src/mvc/AdminController.php:48
 msgid "Help & support"
 msgstr ""
 
@@ -972,7 +972,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/mvc/AdminController.php:109
+#: src/mvc/AdminController.php:111
 msgid "Loco Translate is powered by"
 msgstr ""
 
@@ -1199,7 +1199,7 @@ msgstr ""
 msgid "Permission denied to update file"
 msgstr ""
 
-#: src/package/Plugin.php:207
+#: src/package/Plugin.php:208
 #, php-format
 msgid "Plugin not found: %s"
 msgstr ""
