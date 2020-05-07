@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 17:34+0000\n"
+"POT-Creation-Date: 2020-05-07 19:13+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -101,7 +101,7 @@ msgstr[1] ""
 msgid "About file system access"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:30 tpl/admin/init/init-pot.php:42
+#: tpl/admin/init/init-prompt.php:27 tpl/admin/init/init-pot.php:42
 msgid "About templates"
 msgstr ""
 
@@ -779,7 +779,7 @@ msgstr ""
 msgid "Generate hash tables"
 msgstr ""
 
-#: tpl/admin/bundle/setup/inc-nav.php:25
+#: tpl/admin/init/init-prompt.php:40 tpl/admin/bundle/setup/inc-nav.php:25
 msgid "Get help with this"
 msgstr ""
 
@@ -799,7 +799,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/mvc/AdminController.php:48
+#: src/mvc/AdminController.php:47
 msgid "Help & support"
 msgstr ""
 
@@ -935,12 +935,6 @@ msgstr ""
 msgid "Locked"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:22
-msgid ""
-"Loco can sync directly with the source code, but this can be slow if there "
-"are many files"
-msgstr ""
-
 #: src/output/Buffer.php:129
 #, php-format
 msgid "Loco interrupted by output from %s:%u"
@@ -972,7 +966,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/mvc/AdminController.php:111
+#: src/mvc/AdminController.php:110
 msgid "Loco Translate is powered by"
 msgstr ""
 
@@ -1744,8 +1738,7 @@ msgid "Upgrade to %s"
 msgstr ""
 
 #: tpl/admin/init/init-po.php:163
-#, php-format
-msgid "Use \"%s\" as template when running Sync"
+msgid "Use this file as template when running Sync"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:71 src/admin/config/PrefsController.php:13
@@ -1876,6 +1869,10 @@ msgstr ""
 #: tpl/admin/file/info.php:27
 msgid ""
 "You can update these translations directly from the editor to the file system"
+msgstr ""
+
+#: tpl/admin/init/init-prompt.php:36
+msgid "You can use existing translations as a template using the Copy feature"
 msgstr ""
 
 #: tpl/admin/init/init-po.php:12

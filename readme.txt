@@ -99,6 +99,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.3.4 =
 * Updated translatable strings
+* Added missing template recommendation
 * Alerting in debug mode when scripts are tampered with
 
 = 2.3.3 =

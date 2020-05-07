@@ -160,7 +160,7 @@ $this->extend('../layout');
                             <p>
                                 <label>
                                     <input type="checkbox" name="link" value="1" />
-                                    <?php $params->f('sourceLocale',__('Use "%s" as template when running Sync','loco-translate') )?> 
+                                    <?php esc_html_e('Use this file as template when running Sync','loco-translate')?> 
                                 </label>
                             </p>
                         </td>

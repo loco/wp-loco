@@ -19,14 +19,24 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
         </p><?php
         endif?> 
         <p>
-            <?php esc_html_e("Loco can sync directly with the source code, but this can be slow if there are many files",'loco-translate')?>.
-        </p>
-        <p>
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
             <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a><?php
             if( $this->has('conf') ):?> 
             <a href="<?php $conf->e('link')?>" class="button button-link has-icon icon-wrench"><?php $conf->e('text')?></a><?php
             endif?> 
             <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('About templates','loco-translate')?></a>
+        </p>
+    </div><?php
+
+    $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/template-missing');
+    ?> 
+    <div class="notice inline notice-info">
+        <h3 class="has-icon">Tip</h3>
+        <p>
+            <?php esc_html_e('You can use existing translations as a template using the Copy feature','loco-translate')?> 
+        </p>
+        <p>
+            <a class="button button-link has-icon icon-back" href="<?php $tabs[0]->e('href')?>"><?php esc_html_e('Back','default')?></a>
+            <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('Get help with this','loco-translate')?></a>
         </p>
     </div>
