@@ -93,6 +93,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
 
     /**
      * Get raw plugin data from WordPress registry, plus additional "basedir" field for resolving handle to actual file.
+     * @param string relative file path used as handle e.g. loco-translate/loco.php
      * @return array
      */
     public static function get_plugin( $handle ){

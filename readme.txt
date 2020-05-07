@@ -99,6 +99,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.3.4 =
 * Updated translatable strings
+* Alerting to unofficial add-ons reported to cause issues
 
 = 2.3.3 =
 * Fixed fatal error when class not found
