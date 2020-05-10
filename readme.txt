@@ -101,6 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Updated translatable strings
 * Added missing template recommendation
 * Alerting in debug mode when scripts are tampered with
+* Fix for Hello Dolly installed into folder
+* Bumped WordPress version to 5.4.1
 
 = 2.3.3 =
 * Fixed fatal error when class not found

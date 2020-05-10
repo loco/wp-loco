@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-07 19:13+0000\n"
+"POT-Creation-Date: 2020-05-10 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -455,7 +455,7 @@ msgid "Context"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/Strings.php:111
+#: src/js/Strings.php:114
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
@@ -467,7 +467,7 @@ msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/js/Strings.php:105 src/admin/file/EditController.php:170
+#: src/admin/file/EditController.php:170
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -510,9 +510,14 @@ msgid "Source text"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/Strings.php:108
+#: src/js/Strings.php:111
 msgctxt "Editor"
 msgid "Source text not loaded"
+msgstr ""
+
+#: src/js/Strings.php:108
+msgctxt "Editor"
+msgid "Suggest translation"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
@@ -527,6 +532,11 @@ msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
+#: src/js/Strings.php:105
+msgctxt "Editor"
+msgid "Toggle Fuzzy"
+msgstr ""
+
 #. Button that toggles invisible characters
 #: src/admin/file/EditController.php:176
 msgctxt "Editor"
@@ -539,13 +549,13 @@ msgid "Translated"
 msgstr ""
 
 #. List heading showing preview of translated text for each item
-#: src/js/Strings.php:117
+#: src/js/Strings.php:120
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/Strings.php:114
+#: src/js/Strings.php:117
 msgctxt "Editor"
 msgid "Translation not loaded"
 msgstr ""
@@ -1648,8 +1658,8 @@ msgstr ""
 
 #: tpl/admin/bundle/alias.php:14
 msgid ""
-"This plugin doesn't have its own translation files, but its metadata can be "
-"translated in the core Admin bundle"
+"This plugin doesn't have its own translation files, but can be translated in "
+"the default text domain"
 msgstr ""
 
 #. Author of the plugin

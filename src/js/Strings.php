@@ -102,7 +102,10 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         _x("Translated","Editor",'loco-translate');
 
         //
-        _x("Fuzzy","Editor",'loco-translate');
+        _x("Toggle Fuzzy","Editor",'loco-translate');
+
+        //
+        _x("Suggest translation","Editor",'loco-translate');
 
         // Label for the source text window when no translation selected
         _x("Source text not loaded","Editor",'loco-translate');
