@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-10 10:10+0000\n"
+"POT-Creation-Date: 2020-05-12 11:06+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -455,7 +455,7 @@ msgid "Context"
 msgstr ""
 
 #. Label for the context window when no translation selected
-#: src/js/Strings.php:114
+#: src/js/Strings.php:111
 msgctxt "Editor"
 msgid "Context not loaded"
 msgstr ""
@@ -467,7 +467,7 @@ msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/admin/file/EditController.php:170
+#: src/js/Strings.php:105 src/admin/file/EditController.php:170
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -510,14 +510,9 @@ msgid "Source text"
 msgstr ""
 
 #. Label for the source text window when no translation selected
-#: src/js/Strings.php:111
-msgctxt "Editor"
-msgid "Source text not loaded"
-msgstr ""
-
 #: src/js/Strings.php:108
 msgctxt "Editor"
-msgid "Suggest translation"
+msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
@@ -532,11 +527,6 @@ msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
-#: src/js/Strings.php:105
-msgctxt "Editor"
-msgid "Toggle Fuzzy"
-msgstr ""
-
 #. Button that toggles invisible characters
 #: src/admin/file/EditController.php:176
 msgctxt "Editor"
@@ -549,13 +539,13 @@ msgid "Translated"
 msgstr ""
 
 #. List heading showing preview of translated text for each item
-#: src/js/Strings.php:120
+#: src/js/Strings.php:117
 msgctxt "Editor"
 msgid "Translation"
 msgstr ""
 
 #. Label for the translation editing window when no translation selected
-#: src/js/Strings.php:117
+#: src/js/Strings.php:114
 msgctxt "Editor"
 msgid "Translation not loaded"
 msgstr ""
@@ -789,7 +779,7 @@ msgstr ""
 msgid "Generate hash tables"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:40 tpl/admin/bundle/setup/inc-nav.php:25
+#: tpl/admin/bundle/setup/inc-nav.php:25
 msgid "Get help with this"
 msgstr ""
 
@@ -1400,6 +1390,10 @@ msgstr ""
 msgid "See all themes"
 msgstr ""
 
+#: tpl/admin/init/init-prompt.php:40
+msgid "See FAQ"
+msgstr ""
+
 #. Generic error when external process broke an Ajax request
 #: src/js/Strings.php:55
 msgid "Server returned invalid data"
@@ -1477,6 +1471,10 @@ msgstr ""
 
 #: tpl/admin/init/init-pot.php:30
 msgid "Strings will be extracted to:"
+msgstr ""
+
+#: tpl/admin/init/init-prompt.php:34
+msgid "Suggestion"
 msgstr ""
 
 #: src/admin/config/DebugController.php:47
@@ -1882,7 +1880,7 @@ msgid ""
 msgstr ""
 
 #: tpl/admin/init/init-prompt.php:36
-msgid "You can use existing translations as a template using the Copy feature"
+msgid "You can use existing translations as a template using the Copy feature."
 msgstr ""
 
 #: tpl/admin/init/init-po.php:12

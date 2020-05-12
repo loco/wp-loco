@@ -254,10 +254,10 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $href = $base.'/pub/js/'.$name.'.js';
             $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
             $id = 'loco-js-'.strtr($name,'/','-');
-            // Currently allowing other plugins to break our scripts. Next version will be tamper-proof.
+            // Currently allowing other plugins to break our scripts. Next version will not.
             // Developers wishing to create unofficial add-ons should do so without removing our code.
             if( wp_script_is($id,'enqueued') ){
-                Loco_error_AdminNotices::debug('Another plugin has modified scripts on this page. It may not work correctly');
+                Loco_error_AdminNotices::debug('Another plugin has attempted to modify scripts on this page. It may not work correctly.');
             }
             wp_enqueue_script( $id, $href, $deps, $vers, true );
             return $this;

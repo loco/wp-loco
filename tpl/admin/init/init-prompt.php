@@ -31,12 +31,12 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
     $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/template-missing');
     ?> 
     <div class="notice inline notice-info">
-        <h3 class="has-icon">Tip</h3>
+        <h3 class="has-icon"><?php esc_html_e('Suggestion','loco-translate')?></h3>
         <p>
-            <?php esc_html_e('You can use existing translations as a template using the Copy feature','loco-translate')?> 
+            <?php esc_html_e('You can use existing translations as a template using the Copy feature.','loco-translate')?> 
         </p>
         <p>
             <a class="button button-link has-icon icon-back" href="<?php $tabs[0]->e('href')?>"><?php esc_html_e('Back','default')?></a>
-            <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('Get help with this','loco-translate')?></a>
+            <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('See FAQ','loco-translate')?></a>
         </p>
     </div>
