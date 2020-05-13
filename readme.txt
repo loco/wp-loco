@@ -102,6 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Added missing template recommendation
 * Alerting in debug mode when scripts are tampered with
 * Fix for Hello Dolly installed into folder
+* Removed translation column in POT edit mode
 * Bumped WordPress version to 5.4.1
 
 = 2.3.3 =
