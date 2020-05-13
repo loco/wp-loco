@@ -72,7 +72,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $debugging = loco_debugging();
         $debug = array();
         
-        // get the name of the webserver for information purposes
+        // get the name of the web server for information purposes
         $this->set('httpd', Loco_compat_PosixExtension::getHttpdUser() );
         
         // unknown file template if required

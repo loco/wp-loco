@@ -62,9 +62,12 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                 'attrs' => $perms->isProtectedRole($role) ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
             ) );
         }
-        
-        
-        
+        // allow/deny warning levels
+        $this->set('verbose', new Loco_mvc_ViewParams( array(
+            0 => __('Allow','loco-translate'),
+            1 => __('Allow (with warning)','loco-translate'),
+            2 => __('Disallow','loco-translate'),
+        ) ) );
     }
 
 

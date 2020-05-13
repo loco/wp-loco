@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-12 11:06+0000\n"
+"POT-Creation-Date: 2020-05-13 12:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -97,7 +97,7 @@ msgid_plural "%s words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/config/settings.php:142
+#: tpl/admin/config/settings.php:145
 msgid "About file system access"
 msgstr ""
 
@@ -158,15 +158,15 @@ msgstr ""
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
-#: tpl/admin/config/settings.php:129
+#: src/admin/config/SettingsController.php:67
 msgid "Allow"
 msgstr ""
 
-#: tpl/admin/config/settings.php:132
+#: src/admin/config/SettingsController.php:68
 msgid "Allow (with warning)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:153
+#: tpl/admin/config/settings.php:156
 msgid "Allow full access to these roles"
 msgstr ""
 
@@ -386,10 +386,11 @@ msgstr ""
 msgid "Directory is writeable"
 msgstr ""
 
-#: tpl/admin/config/settings.php:135
+#: src/admin/config/SettingsController.php:69
 msgid "Disallow"
 msgstr ""
 
+#: src/admin/file/EditController.php:143
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/common/inc-fsconn.php:16
 #: tpl/admin/common/inc-fsconn.php:41 tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -425,6 +426,10 @@ msgstr ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
+#: tpl/admin/config/settings.php:135
+msgid "Editing of POT (template) files"
+msgstr ""
+
 #: src/admin/file/BaseController.php:105
 msgid "Editor"
 msgstr ""
@@ -437,7 +442,7 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:169
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
@@ -461,13 +466,13 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:172
+#: src/admin/file/EditController.php:182
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
 
 #. Button that toggles a translation's Fuzzy flag
-#: src/js/Strings.php:105 src/admin/file/EditController.php:170
+#: src/js/Strings.php:105 src/admin/file/EditController.php:180
 msgctxt "Editor"
 msgid "Fuzzy"
 msgstr ""
@@ -479,19 +484,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:161
+#: src/admin/file/EditController.php:171
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:168
+#: src/admin/file/EditController.php:178
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:164
+#: src/admin/file/EditController.php:174
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -516,19 +521,19 @@ msgid "Source text not loaded"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:166
+#: src/admin/file/EditController.php:176
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:178
+#: src/admin/file/EditController.php:188
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:176
+#: src/admin/file/EditController.php:186
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -744,7 +749,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:174
+#: src/admin/file/EditController.php:184
 msgid "Filter translations"
 msgstr ""
 
@@ -791,11 +796,11 @@ msgstr ""
 msgid "Go to WordPress Core"
 msgstr ""
 
-#: tpl/admin/config/settings.php:149
+#: tpl/admin/config/settings.php:152
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:162
+#: src/admin/file/EditController.php:172
 msgid "Help"
 msgstr ""
 
@@ -975,10 +980,6 @@ msgstr ""
 msgid "Loco, Translation Management"
 msgstr ""
 
-#: tpl/admin/config/settings.php:104
-msgid "Look for non-standard names:"
-msgstr ""
-
 #: tpl/admin/config/settings.php:79
 msgid "Maximum line length (zero disables wrapping)"
 msgstr ""
@@ -1002,12 +1003,18 @@ msgstr ""
 msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
-#: tpl/admin/config/settings.php:126
+#. @var Loco_mvc_ViewParams $verbose
+#: tpl/admin/config/settings.php:127
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:303
+#: src/fs/FileWriter.php:304
 msgid "Modification of installed files is disallowed by the plugin settings"
+msgstr ""
+
+#: src/fs/FileWriter.php:309
+msgid ""
+"Modification of POT (template) files is disallowed by the plugin settings"
 msgstr ""
 
 #: tpl/admin/file/view-pot.php:11 tpl/admin/file/edit-pot.php:12
@@ -1200,7 +1207,7 @@ msgstr ""
 
 #: src/mvc/AdminRouter.php:66 src/admin/config/PrefsController.php:42
 #: src/admin/config/VersionController.php:22
-#: src/admin/config/SettingsController.php:77 tpl/admin/help/tab-settings.php:2
+#: src/admin/config/SettingsController.php:80 tpl/admin/help/tab-settings.php:2
 msgid "Plugin settings"
 msgstr ""
 
@@ -1358,7 +1365,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:170 tpl/admin/config/prefs.php:29
+#: tpl/admin/config/settings.php:173 tpl/admin/config/prefs.php:29
 msgid "Save settings"
 msgstr ""
 
@@ -1410,8 +1417,8 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
-#: tpl/admin/errors/no-backups.php:24
+#: src/admin/file/EditController.php:142 tpl/admin/common/inc-fsconn.php:18
+#: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
 msgid "Settings"
 msgstr ""
 
@@ -1640,6 +1647,13 @@ msgstr ""
 
 #: tpl/admin/bundle/debug.php:8
 msgid "This information is for developers to find problems in the bundle setup"
+msgstr ""
+
+#. Warning when POT file is opened in the file editor. It can be disabled in settings.
+#: src/admin/file/EditController.php:141
+msgid ""
+"This is NOT a translation file. Manual editing of source strings is not "
+"recommended."
 msgstr ""
 
 #: src/ajax/FsConnectController.php:130

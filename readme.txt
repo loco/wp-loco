@@ -101,8 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Updated translatable strings
 * Added missing template recommendation
 * Alerting in debug mode when scripts are tampered with
-* Fix for Hello Dolly installed into folder
+* Fix for Hello Dolly being installed into a folder
 * Removed translation column in POT edit mode
+* Added setting to prevent 'translating' of POT files
 * Bumped WordPress version to 5.4.1
 
 = 2.3.3 =

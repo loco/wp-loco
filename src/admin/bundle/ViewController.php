@@ -100,7 +100,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         $pot = $project->getPot();
         
         // prevent editing of POT when config prohibits
-        if( $project->isPotLocked() ) {
+        if( $project->isPotLocked() || 1 < Loco_data_Settings::get()->pot_protect ) {
             if( $pot && $pot->exists() ){
                 $meta = Loco_gettext_Metadata::load($pot);
                 $p['nav'][] = new Loco_mvc_ViewParams( array(
