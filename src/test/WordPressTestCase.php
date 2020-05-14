@@ -163,7 +163,15 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $screen = get_current_screen();
         $action = isset($_GET['action']) ? $_GET['action'] : null;
         $router->initPage( $screen, $action );
-        return get_echo( array($router,'renderPage') );
+        $html = get_echo( array($router,'renderPage') );
+        // ensure further hooks fired as WordPress continues to render admin footer
+        do_action('in_admin_footer');
+        do_action('admin_footer','');
+        get_echo( 'do_action', array('admin_print_footer_scripts') );
+        // Capture late errors flushed on destruct
+        // $data = Loco_error_AdminNotices::destroyAjax();
+        $html .= get_echo( array(Loco_error_AdminNotices::get(),'on_loco_admin_notices') );
+        return $html;
     }
 
 

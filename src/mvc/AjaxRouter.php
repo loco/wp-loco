@@ -54,13 +54,9 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             // autoloader will throw error if controller class doesn't exist
             $this->ctrl = new $class;
             $this->ctrl->_init( $_REQUEST );
-            // hook name compatible with AdminRouter
+            // hook name compatible with AdminRouter, plus additional action for ajax hooks to set up
             do_action('loco_admin_init', $this->ctrl );
-            // previous hook name is deprecated
-            if( has_action('loco_controller_init') ){
-                Loco_error_AdminNotices::debug('`loco_controller_init` is deprecated, use `loco_admin_init`');
-                do_action('loco_controller_init', $this->ctrl );
-            }
+            do_action('loco_ajax_init', $this->ctrl );
         }
         catch( Loco_error_Exception $e ){
             $this->ctrl = null;
@@ -70,6 +66,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 
     
     /**
+     * @param string
      * @return string
      */
     private static function routeToClass( $route ){

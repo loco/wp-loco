@@ -30,6 +30,38 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
 
 
     /**
+     * @param bool whether po files is in read-only mode
+     * @return array
+     */
+    private function getNonces( $readonly ){
+        $nonces = array();
+        foreach( $readonly ? array('fsReference') : array('sync','save','fsReference','apis') as $name ){
+            $nonces[$name] = wp_create_nonce($name);
+        }
+        return $nonces;
+    }
+
+
+    /**
+     * @param bool whether po files is in read-only mode
+     * @return array
+     */
+    private function getApiProviders( $readonly ){
+        return $readonly ? null : array_values( array_filter(Loco_api_Providers::export(),array(__CLASS__,'filterApiProvider') ) );
+    }
+
+
+    /**
+     * @internal
+     * @param string[]
+     * @return bool
+     */
+    private static function filterApiProvider( array $api ){
+        return (bool) $api['key'];
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function render(){
@@ -159,10 +191,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 'bundle' => $bundle->getId(),
                 'domain' => (string) $project->getId(),
             ) : null,
-            'nonces' => $readonly ? null : array (
-                'save' => wp_create_nonce('save'),
-                'sync' => wp_create_nonce('sync'),
-            ),
+            'nonces' => $this->getNonces($readonly),
+            'apis' => $locale ? $this->getApiProviders($readonly) : null,
         ) ) );
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
              // Translators: button for adding a new string when manually editing a POT file
@@ -176,8 +206,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
              'sync'     => _x('Sync','Editor','loco-translate'),
              // Translators: Button that reloads current screen
              'revert'   => _x('Revert','Editor','loco-translate'),
-             // Translators: Button that toggles a translation's Fuzzy flag
-             'fuzzy'    => _x('Fuzzy','Editor','loco-translate'),
+             // Translators: Button that opens window for auto-translating
+             'auto'     => _x('Auto','Editor','loco-translate'),
              // Translators: Button for downloading a PO, MO or POT file
              'download' => _x('Download','Editor','loco-translate'),
              // Translators: Placeholder text for text filter above editor

@@ -53,7 +53,6 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                 'attrs' => 'checked disabled'
             ) );
         }
-        /* @var $role WP_Role */
         foreach( $perms->getRoles() as $id => $role ){
             $caps[$id] = new Loco_mvc_ViewParams( array(
                 'value' => '1',

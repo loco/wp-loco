@@ -15,3 +15,8 @@ $this->start('header');
             <span id="loco-po-status"></span>
         </span>
     </h3>
+
+
+    <div id="loco-auto" title="Error">
+        <p>Template files cannot be translated</p>
+    </div>

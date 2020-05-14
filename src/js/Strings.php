@@ -33,6 +33,32 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // Message appears after sync operation when nothing has changed
         __("Already up to date with source code",'loco-translate');
 
+        //
+        __("%s unique source strings.",'loco-translate');
+
+        /* characters meaning individual unicode characters of source text
+         * xgettext: javascript-format */
+        __("%s characters will be sent for translation.",'loco-translate');
+
+        /* %s%% is a percentage, e.g. 50%
+         * xgettext: javascript-format */
+        __("Translation progress %s%%",'loco-translate');
+
+        //
+        __("Translation job aborted with %s strings remaining",'loco-translate');
+
+        //
+        __("Use this translation",'loco-translate');
+
+        //
+        __("Suggested translations",'loco-translate');
+
+        //
+        __("Loading suggestions",'loco-translate');
+
+        //
+        __("Keep this translation",'loco-translate');
+
         // Warning appears when user tries to refresh or navigate away when editor work is unsaved
         __("Your changes will be lost if you continue without saving",'loco-translate');
 
@@ -102,7 +128,10 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         _x("Translated","Editor",'loco-translate');
 
         //
-        _x("Fuzzy","Editor",'loco-translate');
+        _x("Toggle Fuzzy","Editor",'loco-translate');
+
+        //
+        _x("Suggest translation","Editor",'loco-translate');
 
         // Label for the source text window when no translation selected
         _x("Source text not loaded","Editor",'loco-translate');

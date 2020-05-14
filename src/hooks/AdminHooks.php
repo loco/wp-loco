@@ -45,8 +45,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             if( isset($_GET['page']) && 'loco' === substr($_GET['page'],0,4) ){
                 Loco_package_Listener::create();
                 // trigger post-upgrade process if required
-                $opts = Loco_data_Settings::get();
-                $opts->migrate();
+                Loco_data_Settings::get()->migrate();
             }
         }
     }

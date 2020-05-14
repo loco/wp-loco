@@ -4,6 +4,8 @@
  */
 $this->extend('info');
 $this->start('header');
+/* @var Loco_mvc_FileParams $file */
+/* @var Loco_gettext_Metadata $meta */
 ?> 
 
     <div class="notice inline notice-info">
@@ -13,12 +15,12 @@ $this->start('header');
             <dd><?php $file->e('size')?></dd>
 
             <dt><?php esc_html_e('File modified','loco-translate')?>:</dt>
-            <dd><?php $file->date('mtime')?></dd>
+            <dd><time><?php $file->date('mtime')?></time></dd>
 
             <dt><?php esc_html_e('Last extracted','loco-translate')?>:</dt>
-            <dd><date><?php $params->date('potime')?></date></dd>
+            <dd><time><?php $params->date('potime')?></time></dd>
             
-            <dt><?php esc_html_e('Source text','loco-translate')?>:</dt>
+            <dt><?php echo esc_html_x('Source text','Editor','loco-translate')?>:</dt>
             <dd><?php echo esc_html( $meta->getTotalSummary() )?> <span>(<?php echo sprintf( _n('1 word','%s words', $words, 'loco-translate'), number_format_i18n($words) )?>)</span></dd>
         </dl>
    </div>

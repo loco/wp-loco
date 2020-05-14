@@ -4,6 +4,8 @@
  */
 $this->extend('info');
 $this->start('header');
+/* @var Loco_mvc_FileParams $file */
+/* @var Loco_gettext_Metadata $meta */
 ?> 
 
     <div class="notice inline notice-info">
@@ -18,7 +20,7 @@ $this->start('header');
             <dd><?php $file->e('size')?></dd>
 
             <dt><?php self::e( __('File modified','loco-translate') )?>:</dt>
-            <dd><?php $file->date('mtime')?></dd>
+            <dd><time><?php $file->date('mtime')?></time></dd>
 
             <dt><?php self::e( __('Last translation','loco-translate') )?>:</dt>
             <dd><?php $params->e('author')?> &mdash; <date><?php $params->date('potime')?></date></dd>

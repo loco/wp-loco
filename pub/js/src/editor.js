@@ -5,6 +5,7 @@
     
     var loco = window.locoScope,
         conf = window.locoConf,
+        fileRefs = loco.po.ref.init(loco,conf),
         
         syncParams = null,
         saveParams = null,
@@ -35,16 +36,25 @@
         // Editor components
         editor,
         saveButton,
-        innerDiv = document.getElementById('loco-editor-inner')
+        innerDiv = document.getElementById('loco-editor-inner'),
+        
+        // validation and suggestions
+        translationClients,
+        translationApiKeys = conf.apis || [],
+        suggestionCache = {},
+        
+        // modal windows
+        $suggestModal,
+        $translateModal
     ;
     
-    
+
     // warn if ajax uploads are enabled but not supported
     if( ajaxUpload && ! ( window.FormData && window.Blob ) ){
         ajaxUpload = false;
         loco.notices.warn("Your browser doesn't support Ajax file uploads. Falling back to standard postdata");
     }
-
+    
 
     /**
      * 
@@ -109,6 +119,315 @@
          while( ++i < t ){
              console.log(' - '+result.del[i].source() );
          }
+    }
+
+
+
+    // API client getters
+    function createTranslationClients() {
+        var i = -1, info, clients = [], keys = translationApiKeys, num = keys.length;
+        while( ++i < num ){
+            try {
+                info = keys[i];
+                clients.push( loco.apis.create(info) );
+            }
+            catch( Er ){
+                loco.notices.error( String(Er) );
+            }
+        }
+        return clients;
+    }
+    
+    function getTranslationClients(){
+        return translationClients || ( translationClients = createTranslationClients() );
+    }
+    
+    function getTranslationClient(id){
+        // not indexed as object, annoyingly.
+        var client, clients = getTranslationClients(), num = clients.length, i = -1;
+        while( ++i < num ){
+            client = clients[i];
+            if( client.getId() === id ){
+                return client;
+            }
+        }
+        loco.notices.error('No '+id+' client');
+    }
+    
+    
+    // Calling external translation providers
+    
+    function onHintEvent( /*event*/ ){
+        translationApiKeys.length ? loadSuggestions() : loadUnconfiguredApis();
+    }
+    
+    
+    function getTranslationModal(){
+        if( ! $translateModal ){
+            $translateModal = $('#loco-auto');
+            // http://api.jqueryui.com/dialog/
+            $translateModal.dialog({
+                dialogClass: 'loco-modal',
+                appendTo: '#loco.wrap',
+                title: $translateModal.attr('title'),
+                modal: true,
+                closeOnEscape: true,
+                resizable: false,
+                position: { my: "top", at: "top", of: '#loco-content' }
+            } );
+        }
+        return $translateModal;
+    }
+    
+    
+
+    function loadUnconfiguredApis(){
+        getTranslationModal().dialog('open');
+    }
+    
+    
+    function initAutoTranslate(){
+        var job,
+            credit,
+            translated = 0,
+            t = translator,
+            flagFuzzy = false,
+            $modal = getTranslationModal().dialog('open'),
+            $form = $modal.find('form'),
+            $butt = $form.find('button.button-primary'),
+            $stat = $('#loco-job-progress')
+        ;
+        function enable(){
+            $butt[0].disabled = false;
+        }
+        function disable(){
+            $butt[0].disabled = true;
+        }
+        function think(){
+            $butt.addClass('loco-loading');
+        }
+        function unthink(){
+            $butt.removeClass('loco-loading');
+        }
+        function showStatus( message ){
+            $stat.text(message);
+        }
+        // calculate job with current spec. not async. should be fast
+        function refreshJob( elForm ){
+            var apiId = $(elForm['api']).val(),
+                client = getTranslationClient(apiId),
+                overwrite = elForm['existing'].checked
+            ;
+            showStatus('Calculating....'); // <- won't render sync!
+            job = client.createJob();
+            job.init( messages, overwrite );
+            credit = client.toString();
+            showStatus(
+                sprintf( t._('%s unique source strings.'), job.length.format(0) )+' '+
+                // translators: characters meaning individual unicode characters of source text
+                sprintf( t._('%s characters will be sent for translation.'), job.chars.format(0) ) 
+            );
+            // job ready for dispatch. 
+            job.length ? enable() : disable();
+        }
+        // refresh job if specification changes
+        function onJobChange( event ){
+            var elField = event.target, f = elField.name;
+            if( 'api' === f || 'existing' === f ){
+                refreshJob(elField.form);
+            }
+            return true;
+        }
+        // dispatch job if form submitted
+        function onJobDispatch( event ){
+            event.preventDefault();
+            think();
+            disable();
+            onProgress(0);
+            flagFuzzy = event.target['fuzzy'].checked;
+            job.dispatch().done(onJobComplete).each(onEachTranslatedMessage).prog(onProgress);
+        }
+        function onEachTranslatedMessage(message){
+            if( job ){
+                flagFuzzy && message.fuzzy(0,true);
+                editor.pasteMessage(message);
+                if( message === editor.active ){
+                    editor.setStatus(message);
+                }
+                editor.unsave(message,0);
+                translated++;
+            }
+        }
+        // can't redraw translated count between messages, but can between batches!
+        function onProgress(didBatches,numBatches){
+            var percent = numBatches ? 100*didBatches/numBatches : 0;
+            // translators: %s%% is a percentage, e.g. 50%
+            showStatus( sprintf( t._('Translation progress %s%%'),percent.format(0)) );
+        }
+        function onJobComplete(){
+            unthink();
+            if( job ){
+                var remaining = job.length - translated;
+                if( remaining > 0 ) {
+                    translated && loco.notices.warn( sprintf( t._('Translation job aborted with %s strings remaining'),remaining.format(0) ) );
+                }
+                if( translated > 0 ){
+                    loco.notices.success( sprintf(t._('%s strings translated via '+credit), translated.format(0) ) ).stick();
+                    // update stats and reindex 
+                    updateStatus();
+                    editor.rebuildSearch();
+                }
+                job = null;
+                editor.fire('poAbort'); // <- hack allows re-enable of Auto buttons.
+            }
+            // close and destroy modal without recursion
+            if( $modal ){
+                $modal.off('dialogclose').dialog('close');
+                $modal = null;
+             }
+        }
+        // destructor
+        function onCloseModal(){
+            job.abort();
+            $modal = null;
+            onJobComplete();
+        }
+        // clean UI for new run
+        unthink();
+        disable();
+        // initialize default job and listen for changes to spec
+        $form.off('submit change')
+        refreshJob( $form[0] );
+        $form.on('change',onJobChange).on('submit',onJobDispatch);
+        $modal.off('dialogclose').on('dialogclose',onCloseModal)
+    }
+
+
+
+    function loadSuggestions(){
+        var t = translator,
+            message = editor.current(),
+            index = editor.getTargetOffset(),
+            source = message && message.source(null,index),
+            langAtts = 'lang="'+String(locale)+'" dir="'+(locale.isRTL()?'RTL':'LTR')+'"'
+        ;
+        if( source ){
+            function createSuggestionClosure( source, target ){
+                return function(event){
+                    event.preventDefault();
+                    event.stopPropagation();
+                    destroyScope();
+                    // use this translation.
+                    var message = editor.current(), index = editor.getTargetOffset();
+                    if( message && message.source(null,index) === source ){
+                        message.translate(target,index);
+                        editor.focus().reloadMessage(message)
+                        // editor.fuzzy(true,message,index); // TODO make optional
+                    }
+                    else {
+                        loco.notices.warn('Source changed since suggestion');
+                    }
+                }
+            }
+            function completeSuggestion( source, target, locale, client ){
+                var id = client.getId(), href = client.getUrl(), name = String(client), $div = placeholders && placeholders[id];
+                $div && $div.replaceWith( $('<div class="loco-api loco-api-'+id+'"></div>')
+                    .append( $('<a class="loco-api-credit" target="_blank"></a>').attr('href',href).text(name) )
+                    .append( $('<blockquote '+langAtts+'></blockquote>').text(target||'[FAILED]') )
+                    .append( $('<button class="button button-primary"></button>').text(t._('Use this translation')).on('click',createSuggestionClosure(source,target)) )
+                );
+                // adjust position after each write
+                $modal.dialog('option','position', { my: "center", at: "center", of: window });
+                // are we done?
+                if( ++loaded === length ){
+                    $modal && $modal.dialog('option','title', t._('Suggested translations')+' — '+locale.label );
+                }
+            }
+            function initSuggestion( client ){
+                var $div = $('<div class="loco-api loco-api-loading"></div>').text('Calling '+client+' ...');
+                placeholders[ client.getId() ] = $div;
+                return $div;
+            }
+            function destroyScope( closeEvent ){
+                if( $modal && null == closeEvent ) {
+                    $modal.dialog('close');
+                }
+                $modal = null;
+                placeholders = null;
+                // TODO abort existing requests not yet returned
+            }
+            // closure ensures client that made call is available
+            function createCallbackClosure( client ){
+                return function( source, target, locale ){
+                    cached[ client.getId() ] = target;
+                    completeSuggestion(source, target, locale, client );
+                }
+            }
+            // http://api.jqueryui.com/dialog/
+            function getModal(){
+                return $suggestModal || ( $suggestModal = $('<div id="loco-hint"></div>').dialog( {
+                    dialogClass   : 'loco-modal',
+                    modal         : true,
+                    autoOpen      : false,
+                    closeOnEscape : true,
+                    resizable     : false,
+                    minHeight     : 400
+                } ) );
+            }
+            // open modal for loading suggestions, starting with source
+            var $modal = getModal().html('').append( $('<div class="loco-api"><p>Source text:</p></div>').append( $('<blockquote lang="en"></blockquote>').text(source) ) )
+                .dialog('option','title', t._('Loading suggestions')+'...' )
+                .off('dialogclose').on('dialogclose',destroyScope)
+                .dialog('open')
+            ;
+            // show existing translation if there is one
+            var target = message.translation(index);
+            if( target ){
+                $('<div class="loco-api"><p>Current translation:</p></div>')
+                    .append( $('<blockquote '+langAtts+'></blockquote>').text(target) )
+                    .append( $('<button class="button"></button>').text(t._('Keep this translation')).on('click',function(event){
+                        event.preventDefault();
+                        destroyScope();
+                    }) )
+                    .appendTo($modal)
+                ;
+            }
+            // request translation from each api in *parallel* browser should handle queueing if required
+            var client, clientId, clients = getTranslationClients(), length = clients.length, i = -1,
+                cached = suggestionCache[source] || ( suggestionCache[source] = {} ),
+                placeholders = {},
+                loaded = 0
+            ;
+            while( ++i < length ){
+                client = clients[i];
+                $modal.append( initSuggestion(client) );
+                // setTimeout( completeSuggestion, fakeDelay*(i+1), source,source,locale,client);
+                clientId = client.getId();
+                if( cached[clientId] ){
+                    completeSuggestion(source,cached[clientId],locale,client);
+                }
+                else {
+                    client.translate( source, locale, createCallbackClosure(client) );
+                }
+            }
+        }
+    }
+
+
+    /**
+     * Capture clicks on file references
+     */
+    function onMetaClick( event, target ){
+        function tryTag( node, name ){
+            if( node.tagName === name ){
+                return node;
+            }
+            return node.getElementsByTagName(name)[0];
+        }
+        var codeEl = tryTag(target,'CODE');
+        if( codeEl ){
+            fileRefs.load( codeEl.textContent );
+        } 
     }
 
 
@@ -254,9 +573,36 @@
         return true;
     }
     
+    
+    function registerAutoTranslateButton( button ){
+        function disable(){
+            button.disabled = true;
+        }
+        function enable(){
+            button.disabled = false;
+        }
+        // like Sync, only allow processing when file is saved
+        editor
+            .on('poUnsaved', function(){
+                disable();
+            } )
+            .on('poSave poAbort', function(){
+                enable();
+            } )
+        ;
+        // click opens modal unless open already
+        $(button).click( function( event ){
+            event.preventDefault();
+            initAutoTranslate();
+            return false;
+        } );
+        enable();
+        return true;
+    }
+    
 
 
-    function registerFuzzyButton( button ){
+    /*function registerFuzzyButton( button ){
         var toggled = false, 
             enabled = false
         ;
@@ -294,7 +640,7 @@
             return false;
         } );
         return true;
-    };
+    };*/
 
 
 
@@ -342,8 +688,8 @@
          $button.click( function(event){
             event.preventDefault();
             var state = ! editor.getMono();
-            editor.setMono( state );
             $button[ state ? 'addClass' : 'removeClass' ]('inverted');
+            editor.setMono(state);
             return false;
         } );
         locoScope.tooltip.init($button);
@@ -511,8 +857,9 @@
     ;
     loco.po.kbd
         .init( editor )
-        .add( 'save', saveIfDirty )
-        .enable('copy','clear','enter','next','prev','fuzzy','save','invis')
+        .add('save', saveIfDirty )
+        .add('hint', locale && editable && onHintEvent || noop )
+        .enable('copy','clear','enter','next','prev','fuzzy','save','invis','hint')
     ;
 
     // initialize toolbar button actions
@@ -524,7 +871,7 @@
         // editor mode togglers
         invs: registerInvisiblesButton,
         code: registerCodeviewButton,
-        // downloads / post-throughs
+        // download buttons
         source: registerDownloadButton,
         binary: template ? null : registerDownloadButton
     };
@@ -535,8 +882,8 @@
     }
     // PO only
     else {
-        buttons.fuzzy = registerFuzzyButton;
-    };
+        buttons.auto = registerAutoTranslateButton;
+    }
     $('#loco-toolbar').find('button').each( function(i,el){
         var id = el.getAttribute('data-loco'), register = buttons[id];
         register && register(el,id) || $(el).hide();
@@ -557,7 +904,9 @@
             updateStatus();
             window.onbeforeunload = null;
         } )
-        .on( 'poUpdate', updateStatus );
+        .on('poHint', onHintEvent )
+        .on('poUpdate', updateStatus )
+        .on('poMeta', onMetaClick )
     ;
     
     // load raw message data
@@ -567,7 +916,8 @@
     editor.load( messages );
     
     // locale should be cast to full object once set in editor
-    if( locale = editor.targetLocale ){
+    locale = editor.targetLocale;
+    if( locale ){
         locale.isRTL() && $(innerDiv).addClass('trg-rtl');
     }
     // enable template mode when no target locale 

@@ -18,7 +18,7 @@
                 if( '' !== $symbol ){
                     $line = substr($line,2);
                     if( ':' === $symbol ){
-                        echo '<span class="po-refs">#:',preg_replace('/\\S+:\d+/', '<a href="/#\\0" class="po-text">\\0</a>', $params->escape($line) ),'</span>';
+                        echo '<span class="po-refs">#:',preg_replace('/\\S+:\d+/', '<a href="#\\0" class="po-text">\\0</a>', $params->escape($line) ),'</span>';
                     }
                     // parse out flags and formatting directives
                     else if( ',' === $symbol ){

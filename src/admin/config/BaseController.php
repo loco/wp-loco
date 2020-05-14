@@ -16,8 +16,9 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
             $this->set( 'tabs', $tabs );
             $actions = array (
                 ''  => __('Site options','loco-translate'),
-                'user'  => __('User options','loco-translate'),
-                'version'  => __('Version','loco-translate'),
+                'user' => __('User options','loco-translate'),
+                'apis' => __('API keys','loco-translate'),
+                'version' => __('Version','loco-translate'),
             );
             if( loco_debugging() ){
                 $actions['debug'] = __('Debug','loco-translate');

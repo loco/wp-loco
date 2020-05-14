@@ -22,8 +22,13 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     private $baseurl;
 
     /**
+     * @var string[]
+     */
+    private $scripts = array();
+    
+
+    /**
      * Pre-init call invoked by router
-     * @param array
      * @return Loco_mvc_AdminController
      */    
     final public function _init( array $args ){
@@ -74,7 +79,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         }
         
         // core minimized admin.js loaded on all pages before any other Loco scripts
-        $this->enqueueScript('min/admin', array('jquery-ui-dialog') );
+        $this->enqueueScript('admin', array('jquery-ui-dialog') );
         
         $this->init();
         return $this;
@@ -174,6 +179,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Render template for echoing into admin screen
+     * @param string template name
+     * @param array template arguments
      * @return string
      */
     public function view( $tpl, array $args = array() ){
@@ -186,7 +193,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         }
         // ensure JavaScript config always present
         if( $view->has('js') ){
-            $jsConf = $view->js;
+            $jsConf = $view->get('js');
             if( ! $jsConf instanceof Loco_mvc_ViewParams ){
                 throw new InvalidArgumentException('Bad "js" view parameter');
             }
@@ -195,6 +202,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             $jsConf = new Loco_mvc_ViewParams;
             $view->set( 'js', $jsConf );
         }
+        // deregister legacy scripts in case another plugin tried to hijack them
+        wp_deregister_script('loco-js-editor');
+        wp_deregister_script('loco-js-min-admin');
+        // TODO perhaps do some kind of in-script check validation check
+        // $jsConf->offsetSet('$v',loco_plugin_version() );
         // localize script if translations in memory
         if( is_textdomain_loaded('loco-translate') ){
             $strings = new Loco_js_Strings;
@@ -218,9 +230,9 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     }
 
 
-
     /**
      * Shortcut to render template without full page arguments as per view
+     * @param string
      * @return string
      */
     public function viewSnippet( $tpl ){
@@ -228,42 +240,64 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     }
 
 
-
     /**
      * Add CSS to head
+     * @param string stem name of file, e.g "editor"
+     * @param string[] dependencies of this stylesheet
      * @return Loco_mvc_Controller
      */
     public function enqueueStyle( $name, array $deps = array() ){
-        if( $base = $this->baseurl ){
-            $href = $base.'/pub/css/'.$name.'.css';
-            $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
-            wp_enqueue_style( 'loco-'.strtr($name,'/','-'), $href, $deps, $vers, 'all' );
-            return $this;
+        $base = $this->baseurl;
+        if( ! $base ){
+            throw new Loco_error_Exception('Too early to enqueueStyle('.var_export($name,1).')');
         }
-        throw new Loco_error_Exception('Too early to enqueueStyle('.json_encode($name,JSON_UNESCAPED_SLASHES).')');
+        $id = 'loco-translate-css-'.strtr($name,'/','-');
+        // css always minified. sass in build env only
+        $href = $base.'/pub/css/'.$name.'.css';
+        $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
+        wp_enqueue_style( $id, $href, $deps, $vers, 'all' );
+        return $this;
     }
-
 
 
     /**
      * Add JavaScript to footer
+     * @param string stem name of file, e.g "editor"
+     * @param string[] dependencies of this script
      * @return Loco_mvc_Controller
      */
     public function enqueueScript( $name, array $deps = array() ){
-        if( $base = $this->baseurl ){
-            $href = $base.'/pub/js/'.$name.'.js';
-            $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
-            $id = 'loco-js-'.strtr($name,'/','-');
-            // Currently allowing other plugins to break our scripts. Next version will not.
-            // Developers wishing to create unofficial add-ons should do so without removing our code.
-            if( wp_script_is($id,'enqueued') ){
-                Loco_error_AdminNotices::debug('Another plugin has attempted to modify scripts on this page. It may not work correctly.');
-            }
-            wp_enqueue_script( $id, $href, $deps, $vers, true );
-            return $this;
+        $base = $this->baseurl;
+        if( ! $base ){
+            throw new Loco_error_Exception('Too early to enqueueScript('.var_export($name,1).')');
         }
-        throw new Loco_error_Exception('Too early to enqueueScript('.json_encode($name,JSON_UNESCAPED_SLASHES).')');
+        // use minimized javascript file. hook into script_loader_src to point at development source
+        $href = $base.'/pub/js/min/'.$name.'.js';
+        $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
+        $id = 'loco-translate-js-'.strtr($name,'/','-');
+        wp_enqueue_script( $id, $href, $deps, $vers, true );
+        $this->scripts[$id] = $href;
+        return $this;
     }
 
+
+    /**
+     * @internal 
+     * @param string
+     * @param string
+     * @param string
+     * @return string
+     */
+    public function filter_script_loader_tag( $tag, $handle, $src ){
+        if( array_key_exists($handle,$this->scripts) ) {
+            $base = $this->baseurl.'/pub/js/';
+            $snip = strlen($base);
+            if( substr($src,0,$snip) !== $base ){
+                Loco_error_AdminNotices::warn('Another plugin attempted to modify scripts on this page. If you experience problems, please let us know.');//->addLink('#','Get help with this');
+            }
+        }
+        return $tag;
+    }
+    
 
 }

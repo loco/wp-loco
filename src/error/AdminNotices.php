@@ -142,7 +142,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         return $data;
     }
 
-
     
     /**
      * @return void
@@ -150,7 +149,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     private function flush(){
         if( $this->errors ){
             $htmls = array();
-            /* $var $error Loco_error_Exception */
+            /* @var Loco_error_Exception $error */
             foreach( $this->errors as $error ){
                 $html = sprintf (
                     '<p><strong class="has-icon">%s:</strong> <span>%s</span></p>',
@@ -171,7 +170,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
             echo implode("\n", $htmls),"\n";
         }
     }
-
 
 
     /**
@@ -201,7 +199,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     public function on_loco_admin_init(){
         $this->inline = true;
     }
-
 
 
     /**

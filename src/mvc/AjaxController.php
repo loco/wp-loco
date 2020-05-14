@@ -19,7 +19,8 @@ abstract class Loco_mvc_AjaxController extends Loco_mvc_Controller {
 
     /**
      * Pre-init call invoked by router
-     * @return Loco_mvc_AjaxController
+     * @param mixed[]
+     * @return void
      */    
     final public function _init( array $args ){
         $this->auth();

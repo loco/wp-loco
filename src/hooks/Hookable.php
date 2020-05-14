@@ -20,8 +20,6 @@ abstract class Loco_hooks_Hookable {
 
         $ref = new ReflectionClass( $this ); 
         $reg = array();
-
-        /* @var $method ReflectionMethod */
         foreach( $ref->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ){
             $func = $method->name;
             // support filter_{filter_hook} methods
@@ -52,7 +50,6 @@ abstract class Loco_hooks_Hookable {
 
         $this->hooks = $reg;
     }
-
 
 
     /**

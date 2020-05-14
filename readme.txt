@@ -20,6 +20,7 @@ It also provides localization tools for developers, such as extracting strings a
 Features include:
 
 * Built-in translation editor within WordPress admin
+* Integration with automatic translation APIs
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
@@ -96,6 +97,10 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 
 == Changelog ==
+
+= 2.4.0
+* Added support for third party translation APIs
+* Added file references to editor when in code view
 
 = 2.3.4 =
 * Updated translatable strings
@@ -332,8 +337,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.3.4 =
-* Various bug fixes and improvements
+= 2.4.0 =
+* Various improvements including automatic translation support
 
 
 
@@ -351,5 +356,6 @@ The PO file editor supports the following keyboard shortcuts for faster translat
 * Toggle Fuzzy: `Ctrl U`
 * Save PO / compile MO: `Ctrl S`
 * Toggle invisibles: `Shift Ctrl I`
+* Suggest translation: `Ctrl J`
 
 Mac users can use ⌘ Cmd instead of Ctrl.

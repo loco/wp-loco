@@ -183,6 +183,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             'debug' => 'Debug',
             // site-wide plugin configurations
             'config' => 'config_Settings',
+            'config-apis' => 'config_Apis',
             'config-user' => 'config_Prefs',
             'config-debug' => 'config_Debug',
             'config-version' => 'config_Version',

@@ -5,7 +5,7 @@
 abstract class Loco_data_Serializable extends ArrayObject {
 
     /**
-     * Object version, can be used for validation and migrations.
+     * Object/schema version (not plugin version) can be used for validation and migrations
      * @var string|int|float
      */
     private $v = 0;

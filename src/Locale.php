@@ -51,6 +51,7 @@ class Loco_Locale implements JsonSerializable {
     private $valid;
 
     /**
+     * @param string
      * @return Loco_Locale
      */
     public static function parse( $tag ){
@@ -70,6 +71,9 @@ class Loco_Locale implements JsonSerializable {
     /**
      * Construct from subtags NOT from composite tag. See self::parse
      * Note that this skips normalization and validation steps
+     * @param string
+     * @param string
+     * @param string
      */
     public function __construct( $lang = '', $region = '', $variant = '' ){
         $this->tag = compact('lang','region','variant');
