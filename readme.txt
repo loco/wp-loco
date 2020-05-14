@@ -104,6 +104,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Fix for Hello Dolly being installed into a folder
 * Removed translation column in POT edit mode
 * Added setting to prevent 'translating' of POT files
+* Enabled some linkable translations using wp_kses
 * Bumped WordPress version to 5.4.1
 
 = 2.3.3 =

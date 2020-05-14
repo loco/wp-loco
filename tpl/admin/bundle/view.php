@@ -4,7 +4,8 @@
  */
 $this->extend('../layout');
 
-/* @var $p Loco_mvc_ViewParams */
+/* @var Loco_mvc_ViewParams[] $projects */
+/* @var Loco_mvc_ViewParams[] $unknown */
 if( $projects ):
 foreach( $projects as $p ): ?> 
     <div class="loco-project" id="loco-<?php $p->e('id')?>"><?php
@@ -29,7 +30,11 @@ if( $unknown ):?>
             <p>
                 <?php
                 esc_html_e("This bundle isn't fully configured, so we don't know what the following files are for",'loco-translate')?>. <?php
-                printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href )?>.
+                // Translators: %s is a URL. Keep the <a> tag intact
+                echo wp_kses(
+                    sprintf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href ),
+                    array('a'=>array('href'=>true)), array('http','https')
+                );?>.
             </p>
         </div>
         <?php 
@@ -48,7 +53,10 @@ else:?>
         <p>
             <?php
             esc_html_e("This bundle isn't automatically compatible and requires configuring before you can use all the functions of Loco Translate",'loco-translate')?>. <?php
-            printf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href )?>.
+            echo wp_kses(
+                sprintf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href ),
+                array('a'=>array('href'=>true)), array('http','https')
+            );?>.
         </p>
     </div>
 </div><?php

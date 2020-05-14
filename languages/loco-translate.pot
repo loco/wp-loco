@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.3.4-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-13 12:28+0000\n"
+"POT-Creation-Date: 2020-05-14 10:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -125,7 +125,7 @@ msgstr ""
 msgid "Add UTF-8 byte order mark"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:28
+#: tpl/admin/bundle/view.php:29
 msgid "Additional files found"
 msgstr ""
 
@@ -266,7 +266,8 @@ msgstr ""
 msgid "Click \"Connect\" to authenticate with the server"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:32 tpl/admin/bundle/view.php:51
+#. %s is a URL. Keep the <a> tag intact
+#: tpl/admin/bundle/view.php:35 tpl/admin/bundle/view.php:57
 #, php-format
 msgid ""
 "Click the <a href=\"%s\">setup</a> tab to complete the bundle configuration"
@@ -953,7 +954,7 @@ msgid ""
 msgstr ""
 
 #. change "en" in the URL to your language if it's available at http://php.net/docs.php
-#: tpl/admin/errors/no-tokenizer.php:15
+#: tpl/admin/errors/no-tokenizer.php:17
 msgid ""
 "Loco requires the <a href=\"http://php.net/manual/en/book.tokenizer.php\" "
 "target=\"_blank\">Tokenizer extension</a> to scan PHP source code for "
@@ -961,7 +962,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:65
+#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:64
 msgid "Loco Translate"
 msgstr ""
 
@@ -1577,13 +1578,13 @@ msgstr ""
 msgid "This bundle doesn't define a translations template file"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:50
+#: tpl/admin/bundle/view.php:55
 msgid ""
 "This bundle isn't automatically compatible and requires configuring before "
 "you can use all the functions of Loco Translate"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:31
+#: tpl/admin/bundle/view.php:32
 msgid ""
 "This bundle isn't fully configured, so we don't know what the following "
 "files are for"
@@ -1664,7 +1665,7 @@ msgstr ""
 msgid "This page was expecting a file, but the path is actually a directory"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:66
+#: src/hooks/AdminHooks.php:65
 msgid "This plugin doesn't collect any data from public website visitors."
 msgstr ""
 
@@ -1694,7 +1695,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:102
+#: src/hooks/AdminHooks.php:104
 msgid "Translate"
 msgstr ""
 
@@ -1734,7 +1735,7 @@ msgstr ""
 msgid "Translator credit"
 msgstr ""
 
-#: tpl/admin/bundle/view.php:47
+#: tpl/admin/bundle/view.php:52
 msgid "unconfigured"
 msgstr ""
 
@@ -1881,7 +1882,8 @@ msgid ""
 "settings"
 msgstr ""
 
-#: tpl/admin/errors/no-tokenizer.php:19
+#. %s is a URL. Keep the <a> tag intact
+#: tpl/admin/errors/no-tokenizer.php:25
 #, php-format
 msgid ""
 "You can still translate any bundle that has a <a href=\"%s\" "
