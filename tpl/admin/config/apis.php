@@ -86,10 +86,10 @@ $docs = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
 
     <div class="notice inline">
         <p>
-            <strong class="has-icon">Disclaimer:</strong>
+            <strong class="has-icon">Important:</strong>
             <span>
-                Your usage of these APIs is subject to their specific terms of use. This is an arrangement between yourself and the service provider and may incur costs.
-                Please see <a href="<?php self::e($docs)?>#legal">full disclaimer</a>.
+                Your usage of third party services is subject to their specific terms of use and may incur costs.
+                <a href="<?php self::e($docs)?>#legal" target="_blank">See full disclaimer</a>.
             </span>
         </p>
     </div>  

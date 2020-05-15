@@ -38,7 +38,8 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
      */
     public function getHelpTabs(){
         return array (
-            __('Overview','default') => $this->viewSnippet('tab-settings'),
+            __('Overview','default') => $this->viewSnippet('tab-config'),
+            __('API keys','loco-translate') => $this->viewSnippet('tab-config-apis'),
         );
     }
     

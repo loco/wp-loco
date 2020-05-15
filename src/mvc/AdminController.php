@@ -29,6 +29,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Pre-init call invoked by router
+     * @param mixed[]
      * @return Loco_mvc_AdminController
      */    
     final public function _init( array $args ){
