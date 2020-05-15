@@ -23,7 +23,7 @@ $this->extend('../layout');
         <p class="submit">
             <button type="submit" class="button button-primary" disabled><?php esc_html_e('Move files','loco-translate')?></button><?php
             if( $params->has('advanced') ):?> 
-            <a href="<?php $params->e('advanced')?>" class="button button-link">Advanced</a><?php
+            <a href="<?php $params->e('advanced')?>" class="button button-link"><?php esc_html_e('Advanced','loco-translate')?></a><?php
             endif?> 
         </p>
     </div>
