@@ -293,8 +293,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         if( array_key_exists($handle,$this->scripts) ) {
             $base = $this->baseurl.'/pub/js/';
             $snip = strlen($base);
-            if( substr($src,0,$snip) !== $base ){
-                Loco_error_AdminNotices::warn('Another plugin attempted to modify scripts on this page. If you experience problems, please let us know.');//->addLink('#','Get help with this');
+            if( substr($src,0,$snip) !== $base || false !== strpos($src,'..') ){
+                Loco_error_AdminNotices::warn('Another plugin attempted to modify scripts on this page. If you experience problems, please let us know.');
+                Loco_error_AdminNotices::debug( $src.' does not belong to this plugin. It could be a hack attempt' );
+                // this will lose any legitimate filters we've added ourselves. (likely only under local dev)
+                $tag = str_replace($src,$this->scripts[$handle],$tag);
             }
         }
         return $tag;
