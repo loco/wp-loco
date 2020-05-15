@@ -16,12 +16,6 @@ if( ! function_exists('is_admin') ){
 }
 
 
-// legacy plugin should not be installed at the same time
-if( function_exists('loco_require') ){
-    return;
-}
-
-
 /**
  * Get absolute path to Loco primary plugin file
  * @return string

@@ -1,11 +1,10 @@
 <?php
 /**
  * Ajax "sync" route.
- * Performs the basic in-editor sync function from the old 1.x version. 
+ * Extracts strings from source (POT or code) and returns to the browser for in-editor merge.
  */
 class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
-    
-    
+
     /**
      * {@inheritdoc}
      */

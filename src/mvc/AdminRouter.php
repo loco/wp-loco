@@ -72,13 +72,6 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
                 add_submenu_page( 'loco', $title, __('Settings','loco-translate'), $cap, 'loco-config-user', $render );
             }
         }
-
-        // legacy link redirect from previous v1.x slug
-        if( isset($_GET['page']) && 'loco-translate' === $_GET['page'] ){
-            if( wp_redirect( self::generate('') ) ){
-                exit(0); // <- required to avoid page permissions being checked
-            }
-        }
     }
 
 

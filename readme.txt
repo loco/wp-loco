@@ -101,6 +101,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.0
 * Added support for third party translation APIs
 * Added file references to editor when in code view
+* Removed remnants of legacy version 1.x
 
 = 2.3.4 =
 * Updated translatable strings
