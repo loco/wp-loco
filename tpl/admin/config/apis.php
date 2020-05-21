@@ -6,10 +6,11 @@
 $this->extend('../layout');
 /* @var Loco_mvc_ViewParams[] $apis */
 /* @var Loco_mvc_ViewParams $nonce */
-$docs = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers');
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers');
 ?> 
 
 <form action="" method="post" enctype="application/x-www-form-urlencoded">
+    <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
     <table class="form-table">
         <tbody><?php
             // GOOGLE
@@ -73,7 +74,7 @@ $docs = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                             <label for="loco--yandex_api_key">
                                 <?php esc_html_e(__('API key','loco-translate'))?>:
                             </label>
-                            <input type="text" size="100" name="api[yandex][key]" id="loco--yandex_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
+                            <input type="text" size="90" name="api[yandex][key]" id="loco--yandex_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
                         </p>
                         <p>
                             <span class="description"><a href="https://tech.yandex.com/translate/" target="_blank" tabindex="-1">https://tech.yandex.com/translate/</a></span>
@@ -86,16 +87,16 @@ $docs = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
 
     <div class="notice inline">
         <p>
-            <strong class="has-icon">Important:</strong>
+            <strong class="has-icon"><?php esc_html_e('Important','loco-translate')?>:</strong>
             <span>
-                Your usage of third party services is subject to their specific terms of use and may incur costs.
-                <a href="<?php self::e($docs)?>#legal" target="_blank">See full disclaimer</a>.
+                <?php esc_html_e('Third party services are subject to their own terms of use and may incur costs from the provider','loco-translate')?>.
+                <a href="<?php self::e($help)?>#legal" target="_blank" tabindex="-1"><?php esc_html_e('See full disclaimer','loco-translate')?></a>.
             </span>
         </p>
     </div>  
 
     <p class="submit">
         <input type="submit" class="button-primary" value="<?php esc_html_e('Save settings','loco-translate')?>" />
-        <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
+        <a class="button button-link" href="<?php self::e($help)?>" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
     </p>
 </form>

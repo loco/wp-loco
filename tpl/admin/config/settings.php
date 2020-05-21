@@ -4,11 +4,14 @@
  */
 
 $this->extend('../layout');
-$fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem') );
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/settings');
+$fs_help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem');
 /* @var Loco_data_Settings $opts */
+/* @var Loco_data_Settings $dflt */
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
         <table class="form-table">
             <tbody>
                 <tr>
@@ -141,7 +144,7 @@ $fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpres
                             </p>
                             <p>
                                 <span class="description">
-                                    <a href="<?php echo $fs_help?>" target="_blank"><?php
+                                    <a href="<?php self::e($fs_help)?>" target="_blank"><?php
                                         esc_html_e('About file system access','loco-translate')?></a>
                                 </span>
                             </p>
@@ -171,6 +174,6 @@ $fs_help = esc_url( apply_filters('loco_external','https://localise.biz/wordpres
         </table>
         <p class="submit">
             <input type="submit" class="button-primary" value="<?php esc_html_e('Save settings','loco-translate')?>" />
-            <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
+            <a class="button button-link" href="<?php self::e($help)?>" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
         </p>
     </form>

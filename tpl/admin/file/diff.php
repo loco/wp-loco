@@ -43,7 +43,7 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
         </div>
     </div>
     
-    
+    <?php /*
     <!--hr />
     
     <h3>Advanced</h3>
@@ -62,7 +62,6 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
                 </tr>
             </thead>
             <tbody><?php
-               /* @var $file Loco_mvc_FileParams */
                 foreach( $files as $i => $file ):?> 
                 <tr>
                     <td>
@@ -81,6 +80,6 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
             <button type="submit" class="button button-danger"><?php esc_html_e('Restore selected','default')?></button>
         </p>
         <?php
-        /* @var $hidden Loco_mvc_HiddenFields */
         $hidden->_e();?> 
     </form-->
+    */

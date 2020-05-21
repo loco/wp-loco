@@ -20,12 +20,10 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // Message appears after sync operation
         __("Merged from source code",'loco-translate');
 
-        /* Summary of new strings after running in-editor Sync
-         * xgettext: javascript-format */
+        // Summary of new strings after running in-editor Sync
         _n("1 new string added","%s new strings added",0,'loco-translate');
 
-        /* Summary of existing strings that no longer exist after running in-editor Sync
-         * xgettext: javascript-format */
+        // Summary of existing strings that no longer exist after running in-editor Sync
         _n("1 obsolete string removed","%s obsolete strings removed",0,'loco-translate');
 
         /* Message appears after sync operation when nothing has changed. %s refers to a POT file.
@@ -46,7 +44,7 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
          * xgettext: javascript-format */
         __("Translation progress %s%%",'loco-translate');
 
-        // 
+        //
         _n("Translation job aborted with one string remaining","Translation job aborted with %s strings remaining",0,'loco-translate');
 
         /* e.g. via Google Translate
@@ -74,8 +72,7 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // Warning appears when user tries to refresh or navigate away when editor work is unsaved
         __("Your changes will be lost if you continue without saving",'loco-translate');
 
-        /* Shows total string count at top of editor
-         * xgettext: javascript-format */
+        // Shows total string count at top of editor
         _n("1 string","%s strings",0,'loco-translate');
 
         /* Shows percentage translated at top of editor

@@ -8,15 +8,15 @@ $this->start('header');
 echo $this->render('../common/inc-po-header');
 
 
-
 /* @var Loco_mvc_ViewParams $js */
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers');
+
 // inline modal for auto-translate. Note that modal will be placed outside of #loco.wrap element
-// TODO could populate with default user options and/or remember settings
 if( $js->apis ):?> 
 <div id="loco-auto" class="loco-batch" title="<?php esc_html_e('Auto-translate this file','loco-translate');?>">
     <form action="#">
         <fieldset>
-            <select name="api"><?php foreach( $js->apis as $api ):?> 
+            <select name="api" id="auto-api"><?php foreach( $js->apis as $api ):?> 
                 <option value="<?php self::e($api['id'])?>"><?php self::e($api['name'])?></option><?php 
                 endforeach?> 
             </select>
@@ -25,13 +25,13 @@ if( $js->apis ):?>
             <p>
                 <label for="auto-existing">
                     <input type="checkbox" id="auto-existing" name="existing" />
-                    Overwrite existing translations
+                    <?php esc_html_e('Overwrite existing translations','loco-translate')?> 
                 </label>
             </p>
             <p>
                 <label for="auto-fuzzy">
                     <input type="checkbox" id="auto-fuzzy" name="fuzzy" />
-                    Mark new translations as Fuzzy
+                    <?php esc_html_e('Mark new translations as Fuzzy','loco-translate')?> 
                 </label>
             </p>
             <blockquote id="loco-job-progress">
@@ -39,8 +39,11 @@ if( $js->apis ):?>
             </blockquote>
             <p>
                 <button type="submit" class="button button-primary has-icon icon-translate">
-                    <span>Translate</span>
+                    <span><?php esc_html_e('Translate','loco-translate')?></span>
                 </button>
+                <a href="<?php self::e($help)?>" class="button button-link has-icon icon-help" target="_blank"><?php
+                    esc_html_e('Help','loco-translate');
+                ?></a>
             </p>
         </fieldset>
     </form>
@@ -58,9 +61,9 @@ else:?>
         <a href="<?php $this->route('config-apis')->e('href')?>" class="has-icon icon-cog"><?php
             esc_html_e('Settings','loco-translate');
         ?></a>
-        <a href="#" class="has-icon icon-help"><?php
+        <a href="<?php self::e($help)?>" class="has-icon icon-help" target="_blank"><?php
             esc_html_e('Help','loco-translate');
-         ?></a>
+        ?></a>
     </nav>
 </div><?php
 endif;

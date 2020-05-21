@@ -1,261 +1,12176 @@
-(function(z,y,l,S){var p=function(){var d={};return{register:function(g,l){d[g]=l},require:function(g,l){var n=d[g];if(!n)throw Error('CommonJS error: failed to require("'+l+'")');return n}}}();p.register("$1",function(d,g,l){function n(m){var c=typeof m;if("string"===c)if(/[^ <>!=()%^&|?:n0-9]/.test(m))console.error("Invalid plural: "+m);else return new Function("n","return "+m);"function"!==c&&(m=function(b){return 1!=b});return m}d.init=function(m){function c(a,c,e){return(a=b[a])&&a[e]?a[e]:c||
-""}m=n(m);var b={};return{_:function(a){return c(a,a,0)},_x:function(a,b){return c(b+"\u0004"+a,a,0)},_n:function(a,b,e){e=Number(m(e));isNaN(e)&&(e=0);return c(a,e?b:a,e)},load:function(a){b=a||{};return this},pluraleq:function(a){m=n(a);return this}}};return d}({},z,y));p.register("$2",function(d,g,l){Array.prototype.indexOf||(Array.prototype.indexOf=function(d){if(null==this)throw new TypeError;var m,c=Object(this),b=c.length>>>0;if(0===b)return-1;m=0;1<arguments.length&&(m=Number(arguments[1]),
-m!=m?m=0:0!=m&&Infinity!=m&&-Infinity!=m&&(m=(0<m||-1)*Math.floor(Math.abs(m))));if(m>=b)return-1;for(m=0<=m?m:Math.max(b-Math.abs(m),0);m<b;m++)if(m in c&&c[m]===d)return m;return-1});return d}({},z,y));p.register("$3",function(d,g,l){d.trim=function(d,m){for(m||(m=" \n");d&&-1!==m.indexOf(d.substr(0,1));)d=d.substr(1);for(;d&&-1!==m.indexOf(d.substr(-1));)d=d.substr(0,d.length-1);return d};d.sprintf=function(d){var m=0,c,b=[].slice.call(arguments,1);return d.replace(/%(s|u|%)/g,function(a,h){if("%"===
-h)return"%";c=b[m++];return String(c)||""})};return d}({},z,y));p.register("$57",function(d,g,l){function n(){var c=b;a&&(c="("+a+") "+c);l.title=c}function m(a){a||(a=c);a!==b&&(b=a,n())}var c=l.title,b=c,a=0;d.set=function(a){m(a);return d};d.get=function(){return b};d.replace=function(a,c){m(b.replace(a,c));return d};d.badge=function(b){isNaN(b=Number(b))&&(b=0);b!==a&&(a=b,n());return d};return d}({},z,y));p.register("$47",function(d,g,l){function n(a){b||g._gat&&(b=_gat._createTracker(m,"loco"));
-if(b){var h=a.shift();b[h].apply(b,a)}else c&&c.push(a);return d}var m,c,b;d._init=function(a){if(m=a.code){c=g._gaq||(g._gaq=[]);c.push(["_setAccount",m]);c.push(["_gat._anonymizeIp"]);c.push(["_setDomainName",a.host]);c.push(["_trackPageview"]);a=l.createElement("script");a.type="text/javascript";a.async=!0;a.src=("https:"==l.location.protocol?"https://ssl":"http://www")+".google-analytics.com/ga.js";var b=l.getElementsByTagName("script")[0];b.parentNode.insertBefore(a,b)}return d};d.event=function(a,
-b,c,f){return n(["_trackEvent",a||"",b||"",c||"",f||0])};d.page=function(a,b){var c={page:a||location.pathname+location.hash,title:b||p.require("$57","title.js").get()};return n(["_trackPageview",c])};return d}({},z,y));p.register("$48",function(d,g,l){function n(b,a){if(m)m[b](a);else g.ga&&ga(b,a);return d}var m,c;d._init=function(b){b.code&&(function(a,b,c,f,k,v,A){a.GoogleAnalyticsObject=k;a[k]=a[k]||function(){(a[k].q=a[k].q||[]).push(arguments)};a[k].l=1*new Date;v=b.createElement(c);A=b.getElementsByTagName(c)[0];
-v.async=1;v.src=f;A.parentNode.insertBefore(v,A)}(g,l,"script","//www.google-analytics.com/analytics.js","ga"),ga("create",b.code,{alwaysSendReferrer:!0,userId:b.uid}),ga("set","anonymizeIp",!0),b.custom&&n("set",b.custom),d.page(),ga(function(a){m=a}));return d};d.event=function(b,a,c,e){return n("send",{hitType:"event",eventCategory:b||"",eventAction:a||"",eventLabel:c||"",eventValue:Number(e||0)})};d.page=function(b,a){var h={hitType:"pageview",page:b||location.pathname+location.hash,title:a||
-p.require("$57","title.js").get()};h.location=location.protocol+"//"+location.hostname+h.page;c&&n("set",{referrer:c});c=h.location;return n("send",h)};d.reset=function(){c=location.href;var b={page:location.pathname+location.hash,title:p.require("$57","title.js").get(),location:c};n("set",b);return d};return d}({},z,y));p.register("$35",function(d,g,C){function n(a,b){l(a).click(function(a){m&&m.event(b,"click",this.getAttribute("href")||"");return!0});a=null;return d}var m,c=location.hostname,b=
-"/help"===location.pathname.substr(0,5);d.init=function(a){!m&&a&&(c=a.host||(a.host=c),m=a.legacy?p.require("$47","legacy.js"):p.require("$48","universal.js"),m._init(a));return d};d.link=function(a){for(var h=a.getAttribute("href");h&&"#"!==h;){if(0===h.indexOf("#"))return n(a,"anchor");if("/help"===h.substr(0,5)&&!b)a.setAttribute("target","_blank");else if(0===h.indexOf("http")||0===h.indexOf("//")){if(-1!==h.indexOf(c)&&/^(https?:)*\/\/([^\/]+)/.exec(h)&&c===RegExp.$2)break;a.setAttribute("target",
-"_blank");n(a,"external")}break}return d};d.page=function(){m&&m.page.apply(m,arguments);return d};d.event=function(){m&&m.event.apply(m,arguments);return d};d.reset=function(){m&&m.reset&&m.reset();return d};return d}({},z,y));p.register("$49",function(d,g,p){function n(a){return 27===a.keyCode&&u&&w?(J(),a.preventDefault(),!1):!0}function m(){if(u){var a=g.innerWidth,b=g.innerHeight;a!==H&&(H=a,K(F));b!==s&&(s=b,r&&c())}return!0}function c(){var a=h.outerHeight(!0)-r.clientHeight;r.style.maxHeight=
-String(s-a)+"px"}function b(a){a?(k.show(),e.addClass("has-title")):(k.hide(),e.removeClass("has-title"))}var a,h,e,f,k,v,A,r,u=!1,w=!1,q=!1,B,E,H,F,s,D=d.init=function(){if(!a){a=l('<div id="overlay"></div>');h=l('<div class="overlay-frame"></div>');e=l('<div class="overlay-container"></div>');k=l('<div class="overlay-title"><span class="icon"></span><span class="title">Untitled</span></div>');v=l("<nav></nav>");A=l('<a class="overlay-close" href="#"><span>x</span></a>');f=l('<div class="overlay-bg"></div>');
-a.append(h.append(e)).append(f).prependTo(p.body);l(p).on("keydown",n);l(g).resize(m);H=g.innerWidth;s=g.innerHeight;E=e.outerWidth(!0)-e.width()+(h.innerWidth()-h.width());B=parseInt(e.css("width"));if(!B||isNaN(B))B=e.width();v.hide().prependTo(h);k.append(A.hide()).hide().prependTo(h);a.hide()}return a},K=d.width=function(a){var b=D();if(null===a)h.css("width",""),e.css("width","");else{a=a||B||640;x=a+E;F=a;var f=H;x>f?(x=f,a=x-E,b.addClass("spill")):b.removeClass("spill");h.css("width",x+"px");
-e.css("width",a+"px")}return d};d.autoSize=function(){var a=D(),b=B||0;e.children().each(function(a,f){b=Math.max(b,l(f).outerWidth(!0))});K(b);if(r=a.find("div.overlay-scroll")[0])s=g.innerHeight,c();return d};d.css=function(a){D().attr("class",a);return d};d.think=function(){D().addClass("loading");return d};d.unthink=function(){D().removeClass("loading");return d};d.html=function(a){D();g.innerShiv&&(a=innerShiv(a,!1));return e.html(a)};d.append=function(a){D();a instanceof jQuery||(a=l(a));e.append(a);
-return d};var J=d.close=function(b){if(u){var f=function(){D().hide();l(p.body).removeClass("has-overlay");u=!1;e.html("");u=null;a.trigger("overlayClosed",[d])};null==b&&(b=300);a.trigger("overlayClosing",[d]);b?a.fadeOut(b,f):f()}return d};d.title=function(a,f){D();var c="",v=k.find("span");f&&/^lang lang-(\w+)/.exec(f)&&(c=RegExp.$1);v.eq(0).attr("class",f||"no-icon").attr("lang",c);q=a||"";v.eq(1).text(q);null!=a?b(!0):w||b(!1);return d};d.enableClose=function(){D();w=!0;A.off("click").on("click",
-function(){J();return!1});b(!0);A.show();return d};d.disableClose=function(){D();w=!1;A.hide();u&&q||b(!1);return d};d.enableNav=function(a){v.append(a);v.show();return d};d.disableNav=function(){v.html("").hide();return d};d.open=function(){D();e.html("");K(B);a.attr("class","");l(p.body).addClass("has-overlay");D().show();u||(u=!0,m());d.title(null);w&&b(!0);a.trigger("overlayOpened",[d]);return d};d.active=function(){return u};d.listen=function(a){D().on("overlayClosed",a);return d};d.unlisten=
-function(a){D().off("overlayClosed",a);return d};return d}({},z,y));p.register("$10",function(d,g,p){function n(b,a){this.$element=l(b);this.options=a;this.enabled=!0;this.fixTitle()}d.init=function(b,a){var h={fade:!0,offset:5,delayIn:m,delayOut:c,anchor:b.attr("data-anchor"),gravity:b.attr("data-gravity")||"s"};a&&(h=l.extend({},h,a));b.tipsy(h)};d.delays=function(b,a){m=b||150;c=a||100};d.kill=function(){l("div.tipsy").remove()};d.text=function(b,a){a.data("tipsy").setTitle(b)};var m,c;d.delays();
-l(p.body).on("overlayOpened overlayClosing",function(b){d.kill();return!0});n.prototype={show:function(){var b=this.getTitle();if(b&&this.enabled){var a=this.tip();a.find(".tipsy-inner")[this.options.html?"html":"text"](b);a[0].className="tipsy";a.remove().css({top:0,left:0}).prependTo(p.body);var b=(b=this.options.anchor)?this.$element.find(b):this.$element,b=l.extend({},b.offset(),{width:b[0].offsetWidth,height:b[0].offsetHeight}),c=a[0].offsetWidth,e=a[0].offsetHeight,f="function"==typeof this.options.gravity?
-this.options.gravity.call(this.$element[0]):this.options.gravity,k;switch(f.charAt(0)){case "n":k={top:b.top+b.height+this.options.offset,left:b.left+b.width/2-c/2};break;case "s":k={top:b.top-e-this.options.offset,left:b.left+b.width/2-c/2};break;case "e":k={top:b.top+b.height/2-e/2,left:b.left-c-this.options.offset};break;case "w":k={top:b.top+b.height/2-e/2,left:b.left+b.width+this.options.offset}}2==f.length&&("w"==f.charAt(1)?k.left=b.left+b.width/2-15:k.left=b.left+b.width/2-c+15);a.css(k).addClass("tipsy-"+
-f);a.find(".tipsy-arrow")[0].className="tipsy-arrow tipsy-arrow-"+f.charAt(0);this.options.className&&a.addClass("function"==typeof this.options.className?this.options.className.call(this.$element[0]):this.options.className);a.addClass("in")}},hide:function(){this.tip().remove()},fixTitle:function(){var b=this.$element,a=b.attr("title")||"";(a||"string"!==typeof b.attr("original-title"))&&b.attr("original-title",a).removeAttr("title")},getTitle:function(){var b,a=this.$element,c=this.options;this.fixTitle();
-"string"==typeof c.title?b=a.attr("title"==c.title?"original-title":c.title):"function"==typeof c.title&&(b=c.title.call(a[0]));return(b=(""+b).replace(/(^\s*|\s*$)/,""))||c.fallback},setTitle:function(b){var a=this.$element;a.attr("default-title")||a.attr("default-title",this.getTitle());null==b&&(b=a.attr("default-title")||this.getTitle());a.attr("original-title",b);if(this.$tip)this.$tip.find(".tipsy-inner")[this.options.html?"html":"text"](b)},tip:function(){this.$tip||(this.$tip=l('<div class="tipsy"></div>').html('<div class="tipsy-arrow"></div><div class="tipsy-inner"></div>'),
-this.$tip.data("tipsy-pointee",this.$element[0]));return this.$tip},validate:function(){this.$element[0].parentNode||(this.hide(),this.options=this.$element=null)},enable:function(){this.enabled=!0},disable:function(){this.hide();this.enabled=!1},toggleEnabled:function(){this.enabled=!this.enabled}};l.fn.tipsy=function(b){function a(a){var f=l.data(a,"tipsy");f||(f=new n(a,l.fn.tipsy.elementOptions(a,b)),l.data(a,"tipsy",f));return f}function c(){var f=a(this),k=b.delayIn;f.hoverState="in";0==k?f.show():
-(f.fixTitle(),setTimeout(function(){"in"==f.hoverState&&f.show()},k))}function e(){var f=a(this),c=b.delayOut;f.hoverState="out";0==c?f.hide():(f.tip().removeClass("in"),setTimeout(function(){"out"==f.hoverState&&f.hide()},c))}b=l.extend({},l.fn.tipsy.defaults,b);b.live||this.each(function(){a(this)});if("manual"!=b.trigger){var f=b.live?"live":"bind",k="hover"==b.trigger?"mouseleave":"blur";this[f]("hover"==b.trigger?"mouseenter":"focus",c)[f](k,e)}return this};l.fn.tipsy.defaults={className:null,
-delayIn:0,delayOut:0,fade:!1,fallback:"",gravity:"n",html:!1,live:!1,offset:0,opacity:0.8,title:"title",trigger:"hover",anchor:null};l.fn.tipsy.elementOptions=function(b,a){return l.metadata?l.extend({},a,l(b).metadata()):a};l.fn.tipsy.autoNS=function(){return l(this).offset().top>l(p).scrollTop()+l(g).height()/2?"s":"n"};l.fn.tipsy.autoWE=function(){return l(this).offset().left>l(p).scrollLeft()+l(g).width()/2?"e":"w"};l.fn.tipsy.autoBounds=function(b,a){return function(){var c=a[0],e=1<a.length?
-a[1]:!1,f=l(p).scrollTop()+b,k=l(p).scrollLeft()+b,v=l(this);v.offset().top<f&&(c="n");v.offset().left<k&&(e="w");l(g).width()+l(p).scrollLeft()-v.offset().left<b&&(e="e");l(g).height()+l(p).scrollTop()-v.offset().top<b&&(c="s");return c+(e?e:"")}};return d}({},z,y));p.register("$8",function(d,g,p){d.listen=function(d,m){function c(){r[e?"show":"hide"]()}function b(a){A&&d.setAttribute("size",2+a.length);e=a;c();return a}function a(){f=null;m(e)}function h(){var c=d.value;v&&c===v&&(c="");c!==e&&
-(f&&clearTimeout(f),b(c),k?f=setTimeout(a,k):a())}var e,f;d=d instanceof jQuery?d[0]:d;var k=150,v=g.attachEvent&&d.getAttribute("placeholder"),A=1===Number(d.size),r=l('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').click(function(){d.value="";h();return!1});b(d.value);l(d).on("input blur focus",function(){h();return!0}).after(r);c();return{delay:function(a){k=a},ping:function(c){c?(f&&clearTimeout(f),c=d.value,v&&c===v&&(c=""),b(c),a(),c=void 0):c=h();return c},val:function(a){if(null==
-a)return e;f&&clearTimeout(f);d.value=b(a);c()},el:function(){return d},blur:function(a){return l(d).on("blur",a)}}};return d}({},z,y));p.register("$52",function(d,g,p){function n(b,a,h,e,f){function k(){m&&clearTimeout(m);u&&u.fadeOut(400,function(){l(this).remove();u=null});return!1}function v(){d();-1!==e&&(m=setTimeout(k,e||2E3));u.off("mouseleave").on("mouseenter",d)}function d(){m&&clearTimeout(m);m=null;u.off("mouseenter").on("mouseleave",v)}var m;c||(c=p.createElement("div"),c.id="growls",
-p.body.appendChild(c));var u=l('<div class="growl growl-'+h+'"><div><a class="close" href="#"><span>X</span></a><span class="badge"></span><p class="message"></p><small class="caption"></small></div></div>');u.find("p").text(b||"Empty message");a?u.find("small").text(a):u.find("small").remove();if(f.length){f.push({label:"Cancel",callback:k,css:"cancel"});var w,q=l('<form action="#" class="dialog"></form>');a=function(a,b){w=l('<input type="button" value="'+b.label+'" class="butt '+(b.css||"")+'" />');
-w.click(function(a){"function"===typeof b.callback&&b.callback(a,{close:k})});q.append(w);return w};for(b=0;b<f.length;b++)a(b,f[b]);u.append(q)}l(c).prepend(u.hide().fadeIn(400));u.find("a").click(k);v()}var m,c;d.init=function(){if(!m)return m=g.alert,g.alert=function(b){b=String(b).split("\n");var a=b[1]&&b.slice(1).join("\n");d.alert(b[0],a)},d};d.debug=function(b){m(b);return d};d.alert=function(b,a,c,e,f){try{return n(b,a||"",c||"alert",e||4E3,f||[]),!0}catch(k){return b+="\n\n--\n"+(k.message||
-k),m.call(g,b),!1}};d.success=function(b,a,c){return d.alert(b,a,"success",c||2E3)};d.dialog=function(b,a,c,e){return d.alert(b,a,e||"alert",-1,c)};return d}({},z,y));p.register("$40",function(d,g,C){function n(b){var a;(a=b.alert)&&alert(a);(a=b.success)&&p.require("$52","growl.js").success.apply(null,a.push?a:[a]);if(a=b.download)g.location.assign(a);else if(a=b.redirect)if(0===a.indexOf("/modal/"))b.modal={url:a};else return g.location.assign(a),!1;else if(b.reload)return g.location.reload(),!1;
-(a=b.modal)&&p.require("$36","modal.js").replace(a);(a=b.async)&&m(a.job_id,a.title)}function m(b,a){var c=p.require("$49","overlay.js");c.open().disableClose().css("modal-processing").html('<div class="wrap"><h2>'+(a||"Please wait")+"</h2></div>");p.require("$53","async.js").init(b).delay(500).timeout(2E4).listen("error",function(a){c.css("modal-error").enableClose().title("Error");c.html("<h2>"+(a||"Unknown error")+"</h2>")}).listen("complete",function(a){c.close();c=null;a&&n(a)}).start()}var c=
-{401:"Authorization Required",422:"Invalid data sent to server",404:"Not Found",500:"Server Error",502:"Bad Gateway",503:"Service unavailable",504:"Gateway timeout"};d.jsonLink=function(b){if(!b)return"";b=b.split("?");b[0]=b[0].replace(/(\.[a-z0-9]{1,4})?$/i,".json");return b.join("?")};d.errorData=function(b,a,h){var e,f;h=b.responseText;a=b.status;if(!h&&0===a)return null;try{e=l.parseJSON(h)||{}}catch(k){e={},f=c[b.status]||k.message||k}e.error=f||e.error||e.statusText||b.statusText||c[a]||"Unknown Error";
-return e};d.ajax=function(b,a,h,e){function f(a){function b(a){var f=a&&a[0];if(!f||C.contains&&!C.contains(f))a=l(C.body);return a}var f=b(e);f.trigger("locoAjaxSuccess",[a]);var c=a.events;if(c&&c.length)for(var k,q=p.require("$35","ga.js");k=c.shift();)f=b(f),f.trigger(k,[a]),q.event("ajax",k);if(!1===n(a))return!1;h&&h();return!0}function k(k,e,m){if("abort"!==e){var u=k.status,w,q=b.statusCode;if(200===u||!q||!q[u])if(401===u)p.require("$36","modal.js").load("/modal/user/ping.json?r="+encodeURIComponent(location.pathname),
-c[u]);else{if("parsererror"===e)g.console&&console.error&&console.error(u,k.responseText),w=404===u?"Ajax service not found":/^\s+Fatal error/.test(k.responseText)?"Fatal server error from Ajax request":"Bad Ajax response";else{var B=d.errorData(k,e,m);B&&B.error&&(w=B.error)}"function"===typeof a&&!1===a(null,w,u,k)?h&&h():B&&B.data&&!f(B.data)||(alert(w||"Unknown Ajax error"),h&&h())}}}(b.headers||(b.headers={}))["X-Loco-Csrf"]=g.loco&&G.csrf||"";b.error=k;b.success=function(b,e,d){if(!b||"object"!==
-typeof b)return k(d,"unknown");(b.status||b.error)&&alert(b.error||b.statusText||d.statusText||c[b.status]||"Unknown Error");"function"===typeof a&&!1===a(b&&b.data?b.data:b,null,e,d)?h&&h():b&&b.data?f(b.data):h&&h()};-1!==b.url.indexOf(".json")&&(b.dataType="json");return l.ajax(b)};return d}({},z,y));p.register("$53",function(d,g,l){d.init=function(d){function m(a,b){for(var f=-1,c,k=B[a]||[];++f<k.length;)(c=k[f])&&c.apply&&c.apply(null,b||[])}function c(a){e();h();m("error",[a])}function b(){var a=
-r+"ms",b=Math.round(r/1E3);1<b&&(a=b+" seconds");c("Job timeout after "+a)}function a(a,b){if(!a||b)a={state:"error",message:b};try{var f=a.state||"error";switch(f){case "queued":case "started":case "starting":case "progress":var q=a.progress||0,u=a.message||f;q!==v&&(e(),v=q);m("progress",[v,u,"state"]);k();break;case "done":var d=a.data,w=a.message||"Done";v=100;e();h();m("complete",[d,w]);break;case "error":c(a.message||"Unknown error tracking job progress");break;default:c("Unexpected job status: "+
-f)}}catch(A){c(A.message||A)}}function h(){w&&(clearTimeout(w),w=null)}function e(){u&&(clearTimeout(u),u=null)}function f(){var b={dataType:"json",url:A};p.require("$40","http.js").ajax(b,a)}function k(){h();w=setTimeout(f,q);u||(u=setTimeout(b,r))}var v=0,A="/ajax/async/poll/"+d+".json",r=1E4,u,w,q=100,B={error:[],complete:[],progress:[]};return{start:function(){e();k();return this},stop:function(){e();h();return this},delay:function(a){q=a;return this},timeout:function(a){r=a;return this},listen:function(a,
-b){var f=B[a];if(f)f.push(b);else throw Error(a+" is not a valid async event");return this}}};return d}({},z,y));p.register("$36",function(d,g,C){function n(a){a.stopPropagation();a.preventDefault();return!1}function m(){k||(k=p.require("$49","overlay.js"),k.listen(h));return k}function c(){var a=r.length-1,b=r[a],f=l('<a class="has-icon icon-back" data-gravity="w">Back</a>').attr("href",b[0]).attr("title",b[1]).click(function(f){if(r[a]===b&&B())return p.require("$10","tooltip.js").kill(),n(f)});
-k.enableNav(f);p.require("$10","tooltip.js").init(f)}function b(a,b,f){a=a.split("#");var c=a[0],c=c+(-1===c.indexOf("?")?"?":"&"),c=c+(encodeURIComponent(b)+"="+encodeURIComponent(f));a[0]=c;return a.join("#")}function a(a,b){var f=m().autoSize(),k=f.init();p.require("$19","html.js").init(k);b&&b.lock&&f.disableClose();r.length&&c();k.find("[data-script]").each(function(a,f){f=l(f);for(var c=-1,k,q=f.attr("data-script").split(" ");++c<q.length;)k=q[c],A[k]?A[k](f,b||{}):alert("Unknown script "+k)});
-k.trigger("locoModalLoaded",[f,a||"",b||{}]);var q=k.find("form")[0],v;if(q)a:for(f=0;f<q.elements.length;f++)switch(k=q.elements[f],k.type){case "text":case "email":case "textarea":v=Number(k.getAttribute("tabindex"));if(isNaN(v)||100>v)continue a;l(k).focus();break a}}function h(){u=null;r=[];return!0}function e(a){var b=l(a.currentTarget),c=b.attr("data-modal");if("back"===c){if(B())return n(a);c="close"}if("close"===c){q();var k=b.attr("href");if(k&&-1!==k.indexOf("#!"))return!0}else{var v="submit"===
-a.type,h=b.attr("title")||b.attr("data-title"),k=b.attr("href")||b.attr("action"),e=v?b.serialize():"",b=v?b.attr("method"):"get";w(k,h,b,e,"modal "+(c||f(k)))}return n(a)}function f(a){return"http"===a.substr(0,4)?a.split("/").slice(3,6).join("-"):a.split("/").slice(1,4).join("-")}var k,v=p.require("$35","ga.js"),A={},r=[],u,w=d.load=function(f,c,q,h,e){var A=u;u=[].slice.call(arguments);A&&f!==A[0]&&(r.push(A),f=b(f,"r",A[0]));A=m();A.active()||A.open().css("modal").html('<div class="loading"></div>');
-A.title("Loading ..").disableClose().disableNav();A.think();var A=f.split("#"),B=A[1];B&&(f=A[0]);var A=p.require("$40","http.js"),g={type:q||"get",data:h||"",url:A.jsonLink(f)};A.ajax(g,function(b,d,m){var A=b&&b.html;if(!A)return b&&b.redirect?(u=r.pop()||null,w(b.redirect,c,q,h,e)):(b=l('<h3 class="error"></h3>').text(d||"Unknown error"),d=l('<footer class="buttonset"><a href="/" data-modal="close" class="has-icon icon-ok">Close</a></footer>'),b=l('<div class="basic"></div>').append(b).append(d),
-d="Error",m&&200!==m&&(d+=" "+m),k.unthink().enableClose().title(d).html("").append(b),p.require("$19","html.js").init(k.init())),!1;c=b.title||c||"Untitled";u&&(u[1]=c);k.unthink().enableClose().title(c,b.icon).width(null).css(e||"modal").autoSize().html(A);m=b.js||{};B&&(m["#"]=B);a(f,m);v.page(f,c);k.init().one("overlayClosed",function(){v.reset()});return!0});return d},q=d.close=function(){m().close();return d},B=d.back=function(){if(previous=r.pop())return u=r[r.length-2],w.apply(null,previous),
-!0};d.reload=function(){u&&w.apply(null,u)};d.postback=function(a){u&&(u[2]="post",u[3]=a,w.apply(null,u))};d.initLink=function(a){a.click(e)};d.initForm=function(a){l(a).submit(e)};d.replace=function(b){var c=m(),k=b&&b.html,q=b&&b.url,v=b&&b.title,h=b&&b.action;if(q)k=r.length-1,k=0<=k?r[k][0]:void 0,q===k?B():w(q,v,"","",b&&b.css||"modal "+f(q));else if(k)c.open().html(k),v&&c.enableClose().title(v),a("",b&&b.js);else if("function"===typeof d[h])d[h]();return c};d.find=function(a){return m().init().find(a)};
-d.script=function(a,b){if(b){if("function"!==typeof b.run)throw Error(a+" macro has no run function");A[a]=b.run;return d}return A[a]};d.hash=function(a){var b=a.hash;"#/modal/"===b.substr(0,8)&&(b=b.substr(1),a.hash="",d.replace({url:b}))};return d}({},z,y));p.register("$22",{"\u00e1":"a","\u00e0":"a","\u0103":"a","\u1eaf":"a","\u1eb1":"a","\u1eb5":"a","\u1eb3":"a","\u00e2":"a","\u1ea5":"a","\u1ea7":"a","\u1eab":"a","\u1ea9":"a","\u01ce":"a","\u00e5":"a","\u01fb":"a","\u00e4":"a","\u01df":"a","\u00e3":"a",
-"\u0227":"a","\u01e1":"a","\u0105":"a","\u0101":"a","\u1ea3":"a","\u0201":"a","\u0203":"a","\u1ea1":"a","\u1eb7":"a","\u1ead":"a","\u1e01":"a","\u01fd":"\u00e6","\u01e3":"\u00e6","\u1e03":"b","\u1e05":"b","\u1e07":"b","\u0107":"c","\u0109":"c","\u010d":"c","\u010b":"c","\u00e7":"c","\u1e09":"c","\u010f":"d","\u1e0b":"d","\u1e11":"d","\u0111":"d","\u1e0d":"d","\u1e13":"d","\u1e0f":"d","\u00f0":"d","\ua77a":"d","\u01c6":"\u01f3","\u00e9":"e","\u00e8":"e","\u0115":"e","\u00ea":"e","\u1ebf":"e","\u1ec1":"e",
-"\u1ec5":"e","\u1ec3":"e","\u011b":"e","\u00eb":"e","\u1ebd":"e","\u0117":"e","\u0229":"e","\u1e1d":"e","\u0119":"e","\u0113":"e","\u1e17":"e","\u1e15":"e","\u1ebb":"e","\u0205":"e","\u0207":"e","\u1eb9":"e","\u1ec7":"e","\u1e19":"e","\u1e1b":"e","\u1e1f":"f","\ua77c":"f","\u01f5":"g","\u011f":"g","\u011d":"g","\u01e7":"g","\u0121":"g","\u0123":"g","\u1e21":"g","\ua7a1":"g","\u1d79":"g","\u0125":"h","\u021f":"h","\u1e27":"h","\u1e23":"h","\u1e29":"h","\u0127":"h","\u210f":"h","\u1e25":"h","\u1e2b":"h",
-"\u1e96":"h","\u00ed":"i","\u00ec":"i","\u012d":"i","\u00ee":"i","\u01d0":"i","\u00ef":"i","\u1e2f":"i","\u0129":"i","\u012f":"i","\u012b":"i","\u1ec9":"i","\u0209":"i","\u020b":"i","\u1ecb":"i","\u1e2d":"i","\u0135":"j","\u01f0":"j","\u1e31":"k","\u01e9":"k","\u0137":"k","\ua7a3":"k","\u1e33":"k","\u1e35":"k","\u013a":"l","\u013e":"l","\u013c":"l","\u0142":"l","\u1e37":"l","\u1e39":"l","\u1e3d":"l","\u1e3b":"l","\u0140":"l","\u1e3f":"m","\u1e41":"m","\u1e43":"m","\u0144":"n","\u01f9":"n","\u0148":"n",
-"\u00f1":"n","\u1e45":"n","\u0146":"n","\ua7a5":"n","\u1e47":"n","\u1e4b":"n","\u1e49":"n","\u00f3":"o","\u00f2":"o","\u014f":"o","\u00f4":"o","\u1ed1":"o","\u1ed3":"o","\u1ed7":"o","\u1ed5":"o","\u01d2":"o","\u00f6":"o","\u022b":"o","\u0151":"o","\u00f5":"o","\u1e4d":"o","\u1e4f":"o","\u022d":"o","\u022f":"o","\u0231":"o","\u00f8":"o","\u01ff":"o","\u01eb":"o","\u01ed":"o","\u014d":"o","\u1e53":"o","\u1e51":"o","\u1ecf":"o","\u020d":"o","\u020f":"o","\u01a1":"o","\u1edb":"o","\u1edd":"o","\u1ee1":"o",
-"\u1edf":"o","\u1ee3":"o","\u1ecd":"o","\u1ed9":"o","\u1e55":"p","\u1e57":"p","\u0155":"r","\u0159":"r","\u1e59":"r","\u0157":"r","\ua7a7":"r","\u0211":"r","\u0213":"r","\u1e5b":"r","\u1e5d":"r","\u1e5f":"r","\ua783":"r","\u015b":"s","\u1e65":"s","\u015d":"s","\u0161":"s","\u1e67":"s","\u1e61":"s","\u015f":"s","\ua7a9":"s","\u1e63":"s","\u1e69":"s","\u0219":"s","\u017f":"s","\ua785":"s","\u1e9b":"s","\u0165":"t","\u1e97":"t","\u1e6b":"t","\u0163":"t","\u1e6d":"t","\u021b":"t","\u1e71":"t","\u1e6f":"t",
-"\ua787":"t","\u00fa":"u","\u00f9":"u","\u016d":"u","\u00fb":"u","\u01d4":"u","\u016f":"u","\u00fc":"u","\u01d8":"u","\u01dc":"u","\u01da":"u","\u01d6":"u","\u0171":"u","\u0169":"u","\u1e79":"u","\u0173":"u","\u016b":"u","\u1e7b":"u","\u1ee7":"u","\u0215":"u","\u0217":"u","\u01b0":"u","\u1ee9":"u","\u1eeb":"u","\u1eef":"u","\u1eed":"u","\u1ef1":"u","\u1ee5":"u","\u1e73":"u","\u1e77":"u","\u1e75":"u","\u1e7d":"v","\u1e7f":"v","\u1e83":"w","\u1e81":"w","\u0175":"w","\u1e98":"w","\u1e85":"w","\u1e87":"w",
-"\u1e89":"w","\u1e8d":"x","\u1e8b":"x","\u00fd":"y","\u1ef3":"y","\u0177":"y","\u1e99":"y","\u00ff":"y","\u1ef9":"y","\u1e8f":"y","\u0233":"y","\u1ef7":"y","\u1ef5":"y","\u017a":"z","\u1e91":"z","\u017e":"z","\u017c":"z","\u1e93":"z","\u1e95":"z","\u01ef":"\u0292","\u1f00":"\u03b1","\u1f04":"\u03b1","\u1f84":"\u03b1","\u1f02":"\u03b1","\u1f82":"\u03b1","\u1f06":"\u03b1","\u1f86":"\u03b1","\u1f80":"\u03b1","\u1f01":"\u03b1","\u1f05":"\u03b1","\u1f85":"\u03b1","\u1f03":"\u03b1","\u1f83":"\u03b1","\u1f07":"\u03b1",
-"\u1f87":"\u03b1","\u1f81":"\u03b1","\u03ac":"\u03b1","\u1f71":"\u03b1","\u1fb4":"\u03b1","\u1f70":"\u03b1","\u1fb2":"\u03b1","\u1fb0":"\u03b1","\u1fb6":"\u03b1","\u1fb7":"\u03b1","\u1fb1":"\u03b1","\u1fb3":"\u03b1","\u1f10":"\u03b5","\u1f14":"\u03b5","\u1f12":"\u03b5","\u1f11":"\u03b5","\u1f15":"\u03b5","\u1f13":"\u03b5","\u03ad":"\u03b5","\u1f73":"\u03b5","\u1f72":"\u03b5","\u1f20":"\u03b7","\u1f24":"\u03b7","\u1f94":"\u03b7","\u1f22":"\u03b7","\u1f92":"\u03b7","\u1f26":"\u03b7","\u1f96":"\u03b7",
-"\u1f90":"\u03b7","\u1f21":"\u03b7","\u1f25":"\u03b7","\u1f95":"\u03b7","\u1f23":"\u03b7","\u1f93":"\u03b7","\u1f27":"\u03b7","\u1f97":"\u03b7","\u1f91":"\u03b7","\u03ae":"\u03b7","\u1f75":"\u03b7","\u1fc4":"\u03b7","\u1f74":"\u03b7","\u1fc2":"\u03b7","\u1fc6":"\u03b7","\u1fc7":"\u03b7","\u1fc3":"\u03b7","\u1f30":"\u03b9","\u1f34":"\u03b9","\u1f32":"\u03b9","\u1f36":"\u03b9","\u1f31":"\u03b9","\u1f35":"\u03b9","\u1f33":"\u03b9","\u1f37":"\u03b9","\u03af":"\u03b9","\u1f77":"\u03b9","\u1f76":"\u03b9",
-"\u1fd0":"\u03b9","\u1fd6":"\u03b9","\u03ca":"\u03b9","\u0390":"\u03b9","\u1fd3":"\u03b9","\u1fd2":"\u03b9","\u1fd7":"\u03b9","\u1fd1":"\u03b9","\u1f40":"\u03bf","\u1f44":"\u03bf","\u1f42":"\u03bf","\u1f41":"\u03bf","\u1f45":"\u03bf","\u1f43":"\u03bf","\u03cc":"\u03bf","\u1f79":"\u03bf","\u1f78":"\u03bf","\u1fe4":"\u03c1","\u1fe5":"\u03c1","\u1f50":"\u03c5","\u1f54":"\u03c5","\u1f52":"\u03c5","\u1f56":"\u03c5","\u1f51":"\u03c5","\u1f55":"\u03c5","\u1f53":"\u03c5","\u1f57":"\u03c5","\u03cd":"\u03c5",
-"\u1f7b":"\u03c5","\u1f7a":"\u03c5","\u1fe0":"\u03c5","\u1fe6":"\u03c5","\u03cb":"\u03c5","\u03b0":"\u03c5","\u1fe3":"\u03c5","\u1fe2":"\u03c5","\u1fe7":"\u03c5","\u1fe1":"\u03c5","\u1f60":"\u03c9","\u1f64":"\u03c9","\u1fa4":"\u03c9","\u1f62":"\u03c9","\u1fa2":"\u03c9","\u1f66":"\u03c9","\u1fa6":"\u03c9","\u1fa0":"\u03c9","\u1f61":"\u03c9","\u1f65":"\u03c9","\u1fa5":"\u03c9","\u1f63":"\u03c9","\u1fa3":"\u03c9","\u1f67":"\u03c9","\u1fa7":"\u03c9","\u1fa1":"\u03c9","\u03ce":"\u03c9","\u1f7d":"\u03c9",
-"\u1ff4":"\u03c9","\u1f7c":"\u03c9","\u1ff2":"\u03c9","\u1ff6":"\u03c9","\u1ff7":"\u03c9","\u1ff3":"\u03c9","\u0491":"\u0433","\u0450":"\u0435","\u0451":"\u0435","\u04c2":"\u0436","\u045d":"\u0438","\u04e3":"\u0438","\u04ef":"\u0443"});p.register("$7",function(d,g,l){d.init=function(){function d(a){return k[a]||a}function m(a,b,f,c){b=a.split(b);for(var k=b.length;0!==k--;)(a=b[k])&&null==c[a]&&(f.push(a),c[a]=!0);return f}function c(a){return m(String(a||"").toLowerCase().replace(e,d),f,[],{})}function b(a,
-b){for(var c=[],k={},w,q=b.length,B=f;0!==q--;)(w=b[q])&&m(String(w||"").toLowerCase().replace(e,d),B,c,k);h[a]=c}function a(a,b){var f=[],c=-1,k=h,q=k.length,e,d,m,g,l,D,n=a.length,J=b?!0:!1;a:for(;++c<q;)if(m=k[c],null!=m&&(g=m.length)){l=0;b:for(;l<n;l++){D=a[l];for(e=0;e<g;e++)if(d=m[e],0===d.indexOf(D))continue b;continue a}f.push(J?b[c]:c)}return f}var h=[],e=/[^a-z0-9]/g,f=/[\-_\s.?!;:,*^+=~`"(){}<>\[\]\/\\\u00a0\u1680\u180e\u2000-\u206f\u2e00-\u2e7f\u3000-\u303f]+/,k=p.require("$22","flatten.json");
-return{split:c,pull:function(b,f){return a(b,f)},find:function(b,f){return a(c(b),f)},add:function(a,b){h[a]=c(b)},push:function(a){b(h.length,a)},index:function(a,f){b(a,f)},size:function(){return h.length},clear:function(){h=[]},remove:function(a){h[a]=null}}};return d}({},z,y));p.register("$50",function(d,g,l){d.create=function(){var d=[],m=p.require("$7","fulltext.js").init();return{add:function(c,b){m.add(d.length,b);d.push(c);return this},find:function(c){return m.find(c,d)},clear:function(){d=
-[];m.clear();return this}}};return d}({},z,y));p.register("$37",function(d,g,C){function n(c){-1===c.indexOf("?")&&(c="/auto/"+c+".json?q=");this.url=c;this.dead={}}function m(){this.dict=p.require("$50","dict.js").create()}d.init=function(c){function b(){if("hint"!==K){var a=s.val()&&!(I&&I.val())&&null==g&&!q;T[a?"addClass":"removeClass"]("error")}}function a(a){I&&I.val(a)}function h(){C.show();var a=s.outerWidth(!1),b=s.outerHeight(!1),f=s.css("margin-top");f&&(f=parseInt(f),isNaN(f)||(b+=f));
-a-=2;C.css("top",b+"px").css("minWidth",a+"px");q=!0}function e(){C.hide();q=!1}function f(){C.html("");e();w=0;F=g=null}function k(a){f();var c;for(c=0;c<a.length;c++){var k=c,q=a[c],e=q.value,u=q.lang||e.lang,m=l('<span class="label"></span>').text(q.label),D=l('<div class="auto-comp-result"></div>'),r=void 0,E=void 0;if(E=q.icon)r=l("<span></span>").attr("class",E).appendTo(D),u?(r.attr("lang",u),q.lang=u):-1!==E.indexOf("lang-"+e)&&(r.attr("lang",e),q.lang=e);for(E in q)D.data(E,q[E]);D.append(m);
-v(k,D)}(w=a.length)?(B&&h(),d(0)):(d(null),b(),T.trigger("locoAutonone",[]))}function v(a,b){C.append(b);b.click(function(f){f.stopPropagation();d(a,b);u();return!1});return b}function d(b,f){F&&(F.removeClass("selected"),F=null);g=null;null==b?a(""):(f||(f=C.find("div.auto-comp-result").eq(b)),f.length&&(f.addClass("selected"),g=b,F=f))}function r(a){if(w){var b=w-1;null==g?a=0<a?0:b:(a=g+a,0>a?a=b:a>b&&(a=0));return d(a)}}function u(){if(null==g)z.val(""),a("");else{var c=C.find("div.auto-comp-result").eq(g),
-k=c.data()||{label:"Error"},q=k.value,h=k.label;a(q);z.val(h);e();c=c.clone();c.data(k);f();v(0,c);w=1;d(0,c);b();c.trigger("locoAutocomp",[q,h,c])}}var w=0,q=!1,B=!1,E=c.form,g=null,F=null,s=l(c),D=s.attr("name"),K=s.attr("data-mode"),J=s.attr("data-provider"),I="hint"!==K&&l('<input type="hidden" value="" name="'+D+'" />').appendTo(E),T=l('<div class="auto-comp-wrap"></div>').replaceAll(s),C=l('<div class="auto-comp-drop"></div>');J&&(J=new n(J));I&&s.attr("name","_"+D);s.attr("autocomplete")||
-s.attr("autocomplete","off");T.append(s).append(C);e();s.focus(function(){B=!0;1<w&&h()}).blur(function(){B=!1;b()}).keydown(function(a){function b(){a.preventDefault();a.stopPropagation();return!1}switch(a.keyCode){case 27:q&&(a.stopPropagation(),e(),s.blur());break;case 40:w&&(q?r(1):h());break;case 38:q&&r(-1);break;case 13:if(q)return u(),b();if(!g&&"hint"!==K)return b()}return!0});var z=p.require("$8","LocoTextListener.js").listen(s,function(a){J&&J.fetch(a,k)});(E=s.attr("data-pre"))&&(E=l.parseJSON(E))&&
-E.value&&E.label?(k([E]),u()):!c.value||I&&I.val()||!J||J.fetch(c.value,function(a){k(a);u()});return{$:s,val:function(){return I&&I.val()},clear:f,reset:function(){f();s.val("");a("");z.ping()},force:function(b,c){f();a(c||"");z.val(b)},preload:function(a){w&&f();J=new m;var b,c;for(b in a)c=a[b],J.add(c)},mode:function(a){K=a},provide:function(a){J=new n(a)}}};n.prototype.fetch=function(c,b){if(!c)return b&&b([]),this.dead={},this;var a,h=this.dead;for(a in h)if(0===c.indexOf(a))return b&&b([]),
-this;a={dataType:"json",url:this.url+encodeURIComponent(c)};p.require("$40","http.js").ajax(a,function(a){var f=a&&a.results;f&&(b&&a.query&&a.query===c&&b(a.results),f.length||(h[c]=0));return!0});return this};m.prototype.add=function(c){var b=c.fulltext||c.label||c.value;b&&this.dict.add(c,b)};m.prototype.fetch=function(c,b){var a=c?this.dict.find(c):[];b&&b(a);return this};return d}({},z,y));p.register("$9",function(d,g,C){function n(a){a.stopPropagation();a.preventDefault();return!1}function m(a,
-b,c){c.off().mouseup(function(c){c.stopPropagation();a.selectIndex(b,!0);return!1}).mouseover(function(){l(this).addClass("over");a.hover=b;return!0}).mouseout(function(){l(this).removeClass("over");a.hover=-1;return!0});return c}function c(a){h===a&&(l(g).off("resize scroll",b),h=null);return a}function b(){h&&h.resize()}function a(a){if(a){var b,c=a[0],h=c.id,e=c.title,d=c.disabled,m=[],q=[],B,E=-1,g=c.options.length,F=this.selectedIcon||"";this.id=h||"";this.name=c.name||"";this.prefix=c.getAttribute("data-prefix");
-for(this.defaultIcon=c.getAttribute("data-icon")||"icon no-icon";++E<g;)b=c.options[E],B=l(b),b.selected&&m.push(E),q.push([B.val(),B.text(),B.attr("data-icon")||F,b.disabled,B.attr("lang")]);this.hidden||(this.hidden=l('<input type="hidden" name="'+this.name+'" value="" />').appendTo(c.form));this.list=l("<ul></ul>").mouseup(n);this.icon=l('<span class="icon"> </span>');this.selection=l('<span class="label"></span>');this.handle=l('<a class="handle" href="#"></a>').attr("tabindex",a.attr("tabindex")||
-"").append(this.icon).append(this.selection);b=l('<div class="selector"></div>').addClass(c.className).append(this.handle).append(this.list).replaceAll(c);h&&b.attr("id",h);e&&a.hasClass("hastip")&&(b.attr("title",e),p.require("$10","tooltip.js").init(b));this.wrapper=b;this.up=b.hasClass("up");for(this.clearOptions();b=q.shift();)this.addOption.apply(this,b);d?this.disable():this.enable();this.close();if(g=m.length)for(E=0;E<g;E++)this.selectIndex(m[E]);else E=c.selectedIndex,null!=E&&0<=E&&this.selectIndex(E)}}
-d.create=function(b){return new a(b)};d.extend=function(b){b.parent=a;b.prototype=new a};var h,e=a.prototype;e.enable=function(){var a=this;a.bound?a.wrapper.removeClass("disabled"):(a.handle.click(function(a){a.preventDefault();return!1}).mouseover(function(b){return a.onRollover(b)}).mouseout(function(b){return a.onRollout(b)}).mousedown(function(b){return a.onPress(b)}).keydown(function(b){return a.onKeydown(b)}),l(C).mouseup(function(b){return a.onRelease(b)}).keydown(function(b){return a.onGlobalKeydown(b)}),
-a.bound=!0)};e.disable=function(){this.wrapper.addClass("disabled")};e.isDisabled=function(){return this.wrapper.hasClass("disabled")};e.onRollover=function(){return this.over=!0};e.onRollout=function(){this.over=!1;return!0};e.onPress=function(a){return this.active?this.over?(this.close(),a.stopPropagation(),a.preventDefault(),!1):!0:(this.open(),a.stopPropagation(),a.preventDefault(),this.handle.focus(),!1)};e.onRelease=function(){this.active&&!this.over&&this.close();return!0};e.onGlobalKeydown=
-function(a){if(this.active)switch(a.keyCode){case 27:return this.close(),n(a);case 40:return this.hoverNext(1),n(a);case 38:return this.hoverNext(-1),n(a);case 13:if(-1!=this.hover)return this.selectIndex(this.hover,!0),this.hoverItem(-1),this.close(),n(a)}return!0};e.onKeydown=function(a){return this.active||40!==a.keyCode?!0:(this.open(),n(a))};e.resize=function(){var a=this.list,b=this.handle,c=b.outerWidth()||0,h=a.outerWidth()||0,e;this.up?(e=a.outerHeight(),a.css("top","-"+(e+2)+"px")):(e=b.outerHeight()||
-0,e+=2,a.css("top",e+"px"),b=e+p.require("$19","html.js").top(b[0]),e=g.innerHeight-Math.max(0,b-g.pageYOffset),e-=4,a.css("max-height",e+"px"));c>h&&(c-=h-a.width(),a.css("min-width",String(c)+"px"))};e.open=function(){var a=this.list,k=this.wrapper,e=k.data("tipsy");this.active=!0;this.hover=-1;k.addClass("active");a.show().scrollTop(0);e&&e.disable();this!==h&&(h&&c(h),l(g).on("resize scroll",b),h=this);this.resize()};e.close=function(){var a=this.wrapper,b=a.data("tipsy");this.list.hide();this.active=
-!1;-1!==this.hover&&(this.getElement(this.hover).removeClass("over"),this.hover=-1);a.removeClass("active");b&&b.enable();c(this)};e.hoverItem=function(a,b){-1!==this.hover&&this.getElement(this.hover).removeClass("over");this.hover=a;-1!==a&&(b=b||this.getElement(a),b.addClass("over"))};e.hoverNext=function(a){var b=this.hover,c=this.options.length,h,e=null;for(-1===b&&0>a&&(b=c);c;){b+=a;if(0>b){this.close();break}else b>=c&&(b=0);if((h=this.options[b])&&!h.disabled&&!h.hidden){this.hoverItem(b);
-break}if(null==e)e=b;else if(e===b)break}};e.enableChange=function(a){this.eventName=a;this.eventData=[].slice.call(arguments,1);return this};e.enableConfirm=function(a){this.confirm=a;return this};e.clearOptions=function(){this.index={};this.length=0;this.options=[];this.list.html("");this.hidden.val("");this.idx=this.hover=-1;this.dict=null;return this};e.destroy=function(){this.clearOptions();this.hidden.remove()};e.addOption=function(a,b,c,h,e){var d=this.options.length,w=l("<span></span>").addClass(c||
-"icon no-icon"),q=l('<span class="label"></span>').text(b||a),q=l("<li></li>").append(w).append(q).appendTo(this.list);14<d&&this.getDict().add(d,b);e?e=e.split("-").shift():c&&-1!==c.indexOf("lang-"+a)&&(e=a);e&&w.attr("lang",e);q.attr("data-option",d);this.options[d]={value:a,text:b,lang:e||"",icon:c};this.index[a]=d;this.length=d+1;h?this.disableIndex(d):m(this,d,q);return d};e.getDict=function(){return this.dict||(this.dict=this.createDict())};e.createDict=function(){var a=this,b=p.require("$7",
-"fulltext.js").init(),c=l('<input type="text" placeholder="&#x1F50D;"/>').appendTo(l('<form class="clearable"></form>').submit(n).insertBefore(a.getElement(0)));p.require("$8","LocoTextListener.js").listen(c,function(h){0===(""===h?a.unfilter():a.filter(b.find(h)))?c.addClass("error"):c.removeClass("error")});l.each(a.options,function(a,c){b.add(a,c.text)});return b};e.filter=function(a){var b=-1,c=this.length,h,e=-1,d=a.length;if(d===c)this.unfilter();else{for(;++e<d;){for(h=a[e];++b<h;)this.hideIndex(b);
-this.showIndex(b)}for(;++b<c;)this.hideIndex(b)}return d};e.unfilter=function(){for(var a=-1,b=this.length;++a<b;)this.showIndex(a);return b};e.disableOption=function(a){return this.disableIndex(this.index[a])};e.enableOption=function(a){return this.enableIndex(this.index[a])};e.disableIndex=function(a){var b=this.options[a];b&&!b.disabled&&(b.disabled=!0,this.getElement(a).addClass("disabled").off());return this};e.enableIndex=function(a){var b=this.options[a];b&&b.disabled&&(b.disabled=null,m(this,
-a,this.getElement(a)).removeClass("disabled"));return this};e.hideIndex=function(a){var b=this.options[a];b&&!b.hidden&&(b.hidden=!0,this.getElement(a).hide())};e.showIndex=function(a){var b=this.options[a];b&&b.hidden&&(b.hidden=null,this.getElement(a).show())};e.each=function(a){for(var b=-1,c=this.options,h=c.length;++b<h;)a(b,c[b]);return this};e.reIndex=function(){var a=-1,b={},c,h=this.dict,e=this.options,d=e.length;for(h&&h.clear();++a<d;)c=e[a],b[c.value]=a,h&&h.add(a,c.text),c.disabled||
-m(this,a,this.getElement(a));this.index=b;this.length=d};e.selectValue=function(a,b){return this.selectIndex(this.index[a],b)};e.hasValue=function(a){return null!=this.index[a]};e.hasIndex=function(a){return this.length>a};e.getIndex=function(){return this.idx};e.selectIndex=function(a,b){var c=this.options[a];if(c){var h=this,e=h.idx,d=c.value,m=c.icon||h.defaultIcon,q=function(){null!=e&&h.getElement(e).removeClass("active");h.getElement(a).addClass("active");h.setLabel(c.text).setIcon(m,c.lang);
-h.hidden.val(d);h.idx=a;b&&h.change()};e===a?h.hidden.val(d):b?"function"===typeof h.confirm?h.confirm.call(null,c,function(a){a&&q()}):h.beforeChange(d)&&q():q();h.active&&h.close()}return this};e.setLabel=function(a){this.selection.text(a);(a=this.prefix)&&this.selection.prepend(l('<span class="prefix"></span>').text(a));return this};e.setIcon=function(a,b){this.icon.attr("class",a).attr("lang",b||"");return this};e.val=function(){var a=this.options[this.idx];return a&&a.value};e.change=function(){var a=
-this.val(),b=this.save,c=this.eventName||"change",h=[a].concat(this.eventData||[]);this.wrapper.trigger(c,h);b&&b(a);this.hidden.triggerHandler("change");return this};e.beforeChange=function(a){var b=l.Event("locoBeforeSelect");this.wrapper.trigger(b,[a]);return!b.isDefaultPrevented()};e.renameOption=function(a,b){var c=this.index[a],h=this.options[c];h&&(h.text=b,this.getElement(c).find("span.label").text(b),c===this.idx&&this.setLabel(b));return this};e.removeOption=function(a){var b=this.index[a],
-c=this.options[b];c&&(a=this.val(),this.getElement(b).remove(),this.options.splice(b,1),this.reIndex(),a===c.value?this.selectIndex(0,!0):this.selectValue(a,!1))};e.getElement=function(a){return this.list.find("li").eq(a)};e.getWrapper=function(){return this.wrapper};e.tip=function(){return this.getWrapper().data("tipsy")};e.$=function(a,b){l.fn[a].apply(this.wrapper,b||[]);return this};e.persist=function(a){var b=this.id||this.name,c=a.fetch(b);null!=c&&this.selectValue(c,!0);this.save=function(c){a.store(b,
-c)};return this};e.listen=function(a){return this.on(this.eventName||"change",a)};e.on=function(a,b){this.wrapper.on(a,b);return this};e=null;return d}({},z,y));p.register("$38",function(d,g,C){function n(d){var c=[],b=l([]);this.hidden=b;this.selected=c;this.selectedIcon="icon icon-checkbox";this.constructor.call(this,d);this.wrapper.addClass("multi");for(var a,h,e,f=l('<input type="checkbox" name="'+this.name+'[]" />')[0],k=this.options,v=k.length,g=-1;++g<v;)a=this.getElement(g)[0],e=f.cloneNode(!0),
-c[g]&&(e.checked=!0),e.setAttribute("value",k[g].value),b.push(a.appendChild(e));(h=this.defaultIcon)&&this.setIcon(h);(h=d.attr("title"))?this.setLabel(h):this.wrapper.addClass("no-title")}d.create=function(d){return new n(d)};p.require("$9","LocoSelector.js").extend(n);g=n.prototype;g.selectIndex=function(d,c){return this.setIndexState(d,!this.selected[d],c)};g.setIndexState=function(d,c,b){var a=this.options[d],h=this.getElement(d),e=this.hidden[d],f=this.selected;a&&c!==f[d]&&(f[d]=c,h[c?"addClass":
-"removeClass"]("checked"),e&&(e.checked=c),b&&this.change());return this};g.selectValue=function(d,c){if(null==d.pop)return n.parent.prototype.selectValue.call(this,d,c);for(var b=this.selected.slice(),a=this.options.length,h=this.index||{},e=!1,f=-1,k=-1;++f<a;)b[f]&&(e=!0),b[f]=!1;if(a=d.length)for(;++k<a;)f=h[d[k]],null==f?e=!0:!1===b[f]&&(e=b[f]=!0);if(e){for(f in b)this.setIndexState(f,b[f]);c&&this.change()}return this};g.val=function(){for(var d=[],c=this.options,b=this.selected,a=b.length,
-h=-1;++h<a;)b[h]&&d.push(c[h].value);return d};g=null;return d}({},z,y));p.register("$51",function(d,g,l){function n(c,b){for(var a=String(c);b>a.length;)a="0"+a;return a}function m(c){var b=c%10;if(1===b){if(11!==c)return"st"}else if(2===b){if(12!==c)return"nd"}else if(3===b&&13!==c)return"rd";return"th"}d.formatter=function(){return{format:function(c,b){var a=this;return b.replace(/%[YmdHisMjSghAa]/g,function(b){return a[b.charAt(1)](c)})},Y:function(c){return String(c.getFullYear())},m:function(c){return n(1+
-c.getFullMonth(),2)},M:function(c){return"Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec".split(" ")[c.getMonth()]},d:function(c){return n(c.getDate(),2)},H:function(c){return n(c.getHours(),2)},i:function(c){return n(c.getMinutes(),2)},s:function(c){return n(c.getSeconds(),2)},j:function(c){return String(c.getDate())},S:function(c){return m(c.getDate())},g:function(c){c=c.getHours();return String(0===c?12:12<c?c-12:c)},h:function(c){return n(this.g(c),2)},a:function(c){return 12>c.getHours()?"am":
-"pm"},A:function(c){return 12>c.getHours()?"AM":"PM"}}};return d}({},z,y));p.register("$39",function(d,g,C){function n(b){var c=b.id,d=h||(h=[]),u=e||(e={}),w=b.getAttribute("datetime"),w=k(w);if(!isNaN(w))return c||(c="tick"+ ++f,b.setAttribute("id",c)),b={id:c,el:b,dt:new Date(w),st:b.textContent},u[c]||d.push(b),u[c]=b,a||(a=setTimeout(m,200)),b}function m(){for(var b=h,f=b.length,d={},k=[];0<f--;)ticker=b[f],c(ticker)&&(k.push(ticker),d[ticker.id]=ticker);k.length?(h=k,e=d,a=setTimeout(m,3E4)):
-a=e=h=null}function c(a){var c=a.el;if(C.contains&&!C.contains(c))return!1;strDate=b(a.dt,new Date,!0);if(""===strDate)return!1;strDate!==a.st&&(l(c).text(strDate),a.st=strDate);return!0}function b(a,b,c){var f=b.getTime(),h=a.getTime(),q=f-h;if(6E4>q)return"Just now";if(36E5>q)return a=Math.floor(q/6E4),String(a)+" minute"+(1===a?"":"s")+" ago";if(864E5>q&&b.getDate()===a.getDate()&&b.getMonth()===a.getMonth()&&b.getFullYear()===a.getFullYear())return a=Math.round(q/36E5),"About "+String(a)+" hour"+
-(1===a?"":"s")+" ago";if(c)return"";c=Math.floor(f/864E5)-Math.floor(h/864E5);f=p.require("$51","date.js").formatter();q=f.format(a," %g:%i %A");return 1>=c&&(b.setHours(0),b.setMinutes(0),b.setSeconds(0),b=b.getTime()-864E5,h>=b)?"Yesterday at"+q:11>c?c+" days ago at"+q:f.format(a,"%M %j%S %Y,")+q}var a,h,e,f=0,k=Date.parse||function(){return Number.NaN};d.onEach=function(a,b){n(b)};d.update=function(a){c(n(a))};d.rel=b;return d}({},z,y));p.register("$19",function(d,g,C){var n=g.ieVersion;d.ie=function(c){return c?
-n<=c:n};var m=d.init=function(c){c?c instanceof jQuery||(c=l(c)):c=l(C.body);var b=p.require("$35","ga.js"),a=p.require("$20","forms.js"),h=p.require("$36","modal.js"),e=p.require("$37","LocoAutoComplete.js"),f=p.require("$9","LocoSelector.js"),k=p.require("$38","LocoMultiSelector.js"),m=p.require("$10","tooltip.js");c.find("form").each(function(b,c){var d=l(c);n&&10>n&&a.placeholders(d);c.getAttribute("data-modal")?h.initForm(c):c.hasAttribute("action")&&"#"!==d.attr("action").charAt(0)&&!c.target&&
-a.jsonify(c);d.find("input.auto-comp").each(function(a,b){e.init(b)});d.find("select.selector").each(function(a,b){b.hasAttribute("multiple")?k.create(l(b)):f.create(l(b))});d.hasClass("hasreveal")&&a.revealify(d);d.find("button.hastip").each(function(a,b){m.init(l(b))})});c.find("a").each(function(a,c){-1!==c.className.indexOf("hastip")&&m.init(l(c));"/modal/"===String(c.getAttribute("href")).substr(0,7)||c.getAttribute("data-modal")?h.initLink(l(c)):b.link(c)});c.find("time.tick").each(p.require("$39",
-"tick.js").onEach);a=h=e=c=null;return d};d.$=function(c){return l(g.innerShiv?innerShiv(c,!1):c)};l.fn._html=function(c){return null!=c?(c=this.html(g.innerShiv?innerShiv(c,!1):c),m(this),c):j.html()};l.fn.macro=function(c,b){if("function"!==typeof c.run)throw Error("macro has no run function");c.run(this,b||{});return this};d.el=function(c,b){var a=C.createElement(c||"div");b&&(a.className=b);return a};d.txt=function(c){return C.createTextNode(c||"")};d.h=function(){function c(){h=/[<>&]/g;d=/(\r\n|\n|\r)/g;
-f=/(?:https?):\/\/(\S+)/ig;k=location.hostname;c=null}function b(a){return"&#"+a.charCodeAt(0)+";"}function a(a,b){return'<a href="'+a+'" target="'+(b.indexOf(k)?"_blank":"_top")+'">'+b+"</a>"}var h,d,f,k;return function(k,m){c&&c();var g=k.replace(h,b);m&&(g=g.replace(f,a).replace(d,"<br />"));return g}}();d.noop=function(c){c&&(c.preventDefault(),c.stopPropagation(),l(c.target).blur());return!1};d.top=function(c,b){b||(b=C.body);for(var a=c.offsetTop||0;(c=c.offsetParent)&&c!==b;)a+=c.offsetTop||
-0;return a};d.left=function(c,b){b||(b=C.body);for(var a=c.offsetLeft||0;(c=c.offsetParent)&&c!==b;)a+=c.offsetLeft||0;return a};return d}({},z,y));p.register("$20",function(d,g,C){function n(b){function a(){b.value===f&&(b.value="",d.removeClass("placeheld"));return!0}function c(){""===b.value&&(b.value=f,d.addClass("placeheld"));return!0}var d=l(b);if(!d.hasClass("auto-comp")){var f=d.attr("placeholder");if(f)return d.focus(a).blur(c),c(),{kill:function(){a();d.off("focus",a).off("blur",c)}}}}var m=
-d.enable=function(b){function a(a,b){b.getAttribute("data-was-disabled")||(b.disabled=!1)}b.find(".button").removeClass("loading");b.find("button").each(a);b.find("input").each(a);b.find("select").each(a);b.find("textarea").each(a);g.attachEvent&&b.hasClass("has-placeholders")&&d.placeholders(b);b.removeClass("disabled").trigger("locoEnable");delete b._disabled},c=d.disable=function(b){function a(a,b){b.disabled?b.setAttribute("data-was-disabled","true"):b.disabled=!0}b._disabled||(b.find(".button").addClass("loading"),
-b.find("button").each(a),b.find("input").each(a),b.find("select").each(a),b.find("textarea").each(a),b.addClass("disabled").trigger("locoDisable"),b._disabled=!0)};d.jsonify=function(b,a,h){b instanceof jQuery||(b=l(b));b.disable||(l.fn.disable=function(){c(this);return this},l.fn.enable=function(){m(this);this.placehold&&this.placehold();return this});var d="";b.find('[type="submit"]').click(function(a){a&&a.target&&a.target.name&&(d=encodeURIComponent(a.target.name)+"="+encodeURIComponent(a.target.value));
-return!0});b.submit(function(c){if(c&&c.isDefaultPrevented&&c.isDefaultPrevented()||h&&!1===h(c))return!1;var k=b.serialize(),k=k.replace(/%0D%0A/g,"%0A");d&&(k&&(k+="&"),k+=d,d="");b.disable();var m=p.require("$40","http.js"),k={url:m.jsonLink(b.attr("action")),type:b.attr("method"),data:k};m.ajax(k,a,function(){b.enable()},b);c.preventDefault();c.stopPropagation();return!1})};d.revealify=function(b){b=b.closest("form");b.find("div[data-reveal-if]").each(function(a,c){function d(a){var b;b=g;q=q||
-a.target;if("."===u)b=Boolean(q&&q[w]),g&&(b=!b);else{var c,h,e=l(q.form).serializeArray();for(h in e)e[h].name===r&&(c=e[h].value);"!="===u&&(b=!b);b=b?w!==c:w===c}if(b!==m)if(m=b,a)f[m?"slideDown":"slideUp"](200);else f[m?"show":"hide"]();return!0}var f=l(c),k=/^(\!?)([_\w\-\[\]]+)(\.|!?=)(.*)$/.exec(f.attr("data-reveal-if"));if(k){var m,g=k[1]?!0:!1,r=k[2],u=k[3],w=k[4],k=b[0][r];if(k.type||null==k.length)k=[k];a=k.length;for(var q;0!==a--;)q=k[a],d(),l(q).change(d).removeClass("jshide");k=k=q=
-null}});b=null};d.linkify=function(b){var a=b.getAttribute("data-icon");if(a){var c=l(b),d=l("<a> </a>");d.attr("href",b.form.action);d.attr("class",c.attr("class"));d.attr("tabindex",c.attr("tabindex"));c.attr("tabindex","-1");d.text(c.val());a&&l("<span></span>").prependTo(d).addClass(a);c.hide().after(d);d.click(function(a){c.click();return!1})}};d.placeholders=function(b){var a,c=[];b.find("input[placeholder]").each(function(b,f){"password"!==f.type&&(a=n(f))&&c.push(a)});c.length&&(b.submit(function(){for(var a in c)c[a].kill()}),
-b.addClass("has-placeholders"),a=i=null)};return d}({},z,y));p.register("$4",function(d,g,C){function n(a,b,c){function f(){d();h=setTimeout(b,c)}function d(){h&&clearTimeout(h);h=null}var h;f();l(a).mouseenter(d).mouseleave(f);return{die:function(){d();l(a).off("mouseenter mouseleave")}}}function m(a,b){a.fadeTo(b,0,function(){a.slideUp(b,function(){a.remove();l(g).triggerHandler("resize")})});return a}function c(a,b){function c(b){f[e]=null;m(l(a),250);h&&h.die();var d;if(d=b)b.stopPropagation(),
-b.preventDefault(),d=!1;return d}function d(b){h&&h.die();return h=n(a,c,b)}var h,e,u,D=l(a),v=D.find("button");0===v.length&&(D.addClass("is-dismissible"),v=l('<button type="button" class="notice-dismiss"> </a>').appendTo(D));v.off("click").click(c);l(g).triggerHandler("resize");k();e=f.length;f.push(c);b&&(h=d(b));return{link:function(b,c){var d=c||b,f=l(a).find("nav"),d=l("<nav></nav>").append(l("<a></a>").attr("href",b).text(d));u?(u.push(d.html()),f.html(u.join("<span> | </span>"))):(u=[d.html()],
-l(a).addClass("has-nav").append(d));return this},stick:function(){h&&h.die();h=null;f[e]=null;return this},slow:function(a){d(a||1E4);return this}}}function b(a,b,c){var d=p.require("$19","html.js");a=l('<div class="notice notice-'+a+' loco-notice inline"></div>').prependTo(l("#loco-notices"));var f=l(d.el("p"));c=l(d.el("span")).text(c);b=l(d.el("strong","has-icon")).text(b+": ");f.append(b).append(c).appendTo(a);return a}function a(a,d,f,h){a=b(f,d,a).css("opacity","0").fadeTo(500,1);l(g).triggerHandler("resize");
-return c(a,h)}function h(b){return a(b,A,"warning")}function e(){l("#loco-notices").find("div.notice").each(function(a,b){if(-1===b.className.indexOf("jshide")){var d=-1===b.className.indexOf("notice-success")?null:5E3;c(b,d)}})}var f=[],k=Date.now||function(){return(new Date).getTime()},v,A,r,u;d.error=function(b){return a(b,v,"error")};d.warn=h;d.info=function(b){return a(b,r,"info")};d.success=function(b){return a(b,u,"success",5E3)};d.warning=h;d.log=function(){g.console&&console.log&&console.log.apply(console,
-arguments)};d.debug=function(a,b){g.console&&console.error&&(console.error("Loco Error: "+a),b&&console.debug&&console.debug(b))};d.clear=function(){for(var a=-1,b,c=f,h=c.length;++a<h;)(b=c[a])&&b.call&&b();f=[];return d};d.create=b;d.raise=function(a){(d[a.type]||d.error).call(d,a.message)};d.convert=c;d.init=function(a){v=a._("Error");A=a._("Warning");r=a._("Notice");u=a._("OK");setTimeout(e,1E3);return d};return d}({},z,y));p.register("$5",function(d,g,C){function n(a){var b=l("<pre>"+a+"</pre>").text();
-b&&(b=b.replace(/[\r\n]+/g,"\n").replace(/(^|\n)\s+/g,"$1").replace(/\s+$/,""));b||(b=a)||(b="Blank response from server");return b}function m(a){return(a=a.split(/[\r\n]/)[0])?(a=a.replace(/ +in +\S+ on line \d+/,""),a=a.replace(/^[()! ]+Fatal error:\s*/,"")):t._("Server returned invalid data")}function c(a,b,c){a[b]=c}function b(a,b,c){a.push({name:b,value:c})}function a(a,b,c){a.append(b,c)}function h(a,b,c,d){function h(b,d,q){if("abort"!==d){var v=f||{_:function(a){return a}},D=b.status,g=b.responseText,
-w=n(g),l=b.getResponseHeader("Content-Type")||"text/html",r=b.getResponseHeader("Content-Length")||g.length;"success"===d&&q?e.error(q):(e.error(m(w)+".\n"+v._("Check console output for debugging information")),e.debug("Ajax failure for "+a,{status:D,error:d,message:q,output:g}),"parsererror"===d&&(q="Response not JSON"),e.log([v._("Provide the following text when reporting a problem")+":","----","Status "+D+' "'+(q||v._("Unknown error"))+'" ('+l+" "+r+" bytes)",w,"===="].join("\n")));c&&c.call&&
-c(b,d,q);k=b}}d.url=v;d.dataType="json";var e=p.require("$4","notices.js").clear();k=null;return l.ajax(d).fail(h).done(function(a,c,d){var f=a&&a.data,k=a&&a.notices,m=k&&k.length;for(!f||a.error?h(d,c,a&&a.error&&a.error.message):b&&b(f,c,d);m--;)e.raise(k[m])})}var e={},f,k,v=g.ajaxurl||"/wp-admin/admin-ajax.php";d.init=function(a){e=a.nonces||e;return d};d.localise=function(a){f=a;return d};d.xhr=function(){return k};d.strip=n;d.parse=m;d.submit=function(a,b,c){function d(){f.removeClass("loading");
-p.require("$20","forms.js").enable(f)}var f=l(a),e=f.serialize();f.addClass("loading");p.require("$20","forms.js").disable(f);return h(a.route.value,function(a,c,f){d();b&&b(a,c,f)},function(a,b,f){d();c&&c(a,b,f)},{type:a.method,data:e})};d.post=function(d,f,k,m){var q,v=!0;f=f||{};(q=e[d])||(g.console&&console.error&&console.error('No nonce for "'+d+'"'),q="");var E=q;g.FormData&&f instanceof FormData?(v=!1,q=a):q=Array.isArray(f)?b:c;q(f,"action","loco_json");q(f,"route",d);q(f,"loco-nonce",E);
-return h(d,k,m,{type:"post",data:f,processData:v,contentType:v?"application/x-www-form-urlencoded; charset=UTF-8":!1})};d.setNonce=function(a,b){e[a]=b;return d};return d}({},z,y));p.register("$21",{arab:1,aran:1,hebr:1,nkoo:1,syrc:1,syrn:1,syrj:1,syre:1,samr:1,mand:1,mend:1,thaa:1,adlm:1,cprt:1,phnx:1,armi:1,prti:1,phli:1,phlp:1,phlv:1,avst:1,mani:1,khar:1,orkh:1,ital:1,lydi:1,ar:1,ary:1,ckb:1,dv:1,fa:1,he:1,nqo:1,ps:1,ur:1,yi:1});p.register("$6",function(d,g,l){function n(){}var m,c=p.require("$21",
-"rtl.json");d.init=function(){return new n};d.cast=function(b){return b instanceof n?b:"string"===typeof b?d.parse(b):d.clone(b)};d.clone=function(b){var a,c=new n;for(a in b)c[a]=b[a];return c};d.parse=function(b){if(!(m||(m=/^([a-z]{2,3})(?:[-_]([a-z]{2}))?(?:[-_]([a-z0-9]{3,8}))?$/i)).exec(b))return null;var a=new n;a.lang=RegExp.$1.toLowerCase();if(b=RegExp.$2)a.region=b.toUpperCase();if(b=RegExp.$3)a.variant=b.toLowerCase();return a};g=n.prototype;g.isValid=function(){return!!this.lang};g.isKnown=
-function(){var b=this.lang;return!(!b||"zxx"===b)};g.toString=function(b){b=b||"-";var a,c=this.lang||"zxx";if(a=this.region)c+=b+a;if(a=this.variant)c+=b+a;return c};g.getIcon=function(){for(var b=3,a,c,d=["variant","region","lang"],f=[];0!==b--;)if(a=d[b],c=this[a])f.push(a),f.push(a+"-"+c.toLowerCase());return f.join(" ")};g.isRTL=function(){return!!c[String(this.lang).toLowerCase()]};g=null;return d}({},z,y));p.register("$41",function(d,g,l){function n(){}var m,c,b=p.require("$21","rtl.json");
-d.init=function(){return new n};d.cast=function(a){return a instanceof n?a:"string"===typeof a?d.parse(a):d.clone(a)};d.clone=function(a){var b,c=new n;for(b in a)c[b]=a[b];return c};d.parse=function(a){m||(c=/[-_+]/,m=/^([a-z]{2,3})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?(?:-([0-9][a-z0-9]{3,8}|[a-z0-9]{5,8}))?(?:-([a-z]-[-a-z]+))?$/i);a=String(a).split(c).join("-");if(!m.exec(a))return null;var b=new n;b.lang=RegExp.$1.toLowerCase();if(a=RegExp.$2)b.script=a.charAt(0).toUpperCase()+a.substr(1).toLowerCase();
-if(a=RegExp.$3)b.region=a.toUpperCase();if(a=RegExp.$4)b.variant=a.toLowerCase();if(a=RegExp.$5)b.extension=a;return b};g=n.prototype;g.isValid=function(){return!!this.lang};g.isKnown=function(){var a=this.lang;return!(!a||"zxx"===a)};g.toString=function(a){a=a||"-";var b,c=this.lang||"zxx";if(b=this.script)c+=a+b;if(b=this.region)c+=a+b;if(b=this.variant)c+=a+b;if(b=this.extension)c+=a+b;return c};g.getIcon=function(){for(var a=4,b,c,d=["variant","region","script","lang"],k=[];0!==a--;)if(b=d[a],
-c=this[b])c.join&&(c=c.join("-")),1===a&&3===c.length?k.push("region-m49"):k=k.concat([b,b+"-"+c.toLowerCase()]);return k.join(" ")};g.isRTL=function(){return!!b[String(this.script||this.lang).toLowerCase()]};g=null;return d}({},z,y));p.register("$42",function(d,g,l){function n(a){g.console&&console.error&&console.error(a)}function m(){n("Method not implemented")}function c(){}function b(a){}c.prototype.toString=function(){return"[Undefined]"};b.prototype._validate=function(a){var b,d,f=!0;for(b in this)d=
-this[b],d===m?(n(a+"."+b+"() must be implemented"),f=!1):d instanceof c&&(n(a+"."+b+" must be defined"),f=!1);return f};d.init=function(a,d){var e,f=new b;if(a)for(e=a.length;0!==e--;)f[a[e]]=m;if(d)for(e=d.length;0!==e--;)f[d[e]]=new c;return f};d.validate=function(a){var b=/function (\w+)\(/.exec(a.toString())?RegExp.$1:"";a.prototype._validate(b||"Object")};return d}({},z,y));p.register("$58",function(d,g,l){var n=g.requestAnimationFrame,m=g.cancelAnimationFrame,c=0;if(!n||!m)for(var b in{ms:1,
-moz:1,webkit:1,o:1})if(n=g[b+"RequestAnimationFrame"])if(m=g[b+"CancelAnimationFrame"]||g[b+"CancelRequestAnimationFrame"])break;n&&m||(n=function(b){var d=a();timeToCall=Math.max(0,16-(d-c));nextTime=d+timeToCall;timerId=g.setTimeout(function(){b(nextTime)},timeToCall);c=nextTime;return timerId},m=function(a){clearTimeout(a)});var a=Date.now||function(){return(new Date).getTime()};d.loop=function(a,b){function c(){v=n(c,b);a(d++)}var d=0,v;c();return{stop:function(){v&&m(v);v=null}}};return d}({},
-z,y));p.register("$54",function(d,g,l){function n(a,c,d,f){if(b){var h=d;d=function(a){if((a.MSPOINTER_TYPE_TOUCH||"touch")===a.pointerType)return h(a)}}a.addEventListener(c,d,f);return{unbind:function(){a.removeEventListener(c,d,f)}}}function m(a){a.preventDefault();a.stopPropagation();return!1}var c,b=!!g.navigator.msPointerEnabled,a=b?"MSPointerDown":"touchstart",h=b?"MSPointerMove":"touchmove",e=b?"MSPointerUp":"touchend";d.ok=function(a){null==c&&(c="function"===typeof l.body.addEventListener);
-c&&a&&a(d);return c};d.ms=function(){return b};d.dragger=function(b,c){function d(a){b.addEventListener(a,g[a],!1)}function k(a){b.removeEventListener(a,g[a],!1)}var g={};g[a]=function(b){f(b,function(d,f){f.type=a;c(b,f,q)});d(h);d(e);return!0};g[e]=function(a){k(h);k(e);f(a,function(b,d){d.type=e;c(a,d,q)});return!0};g[h]=function(a){f(a,function(b,d){d.type=h;c(a,d,q)});return m(a)};d(a);var q={kill:function(){k(a);k(h);k(e);b=q=c=null}};return q};d.swiper=function(c,d,g){function u(a){c.addEventListener(a,
-F[a],!1)}function w(a){c.removeEventListener(a,F[a],!1)}function q(){l&&l.stop();l=null}var l,E,n,F={},s=[],D=[],K=[];F[a]=function(a){E=!1;q();var b=k();f(a,function(a,c){s[a]=b;D[a]=c.clientX;K[a]=c.clientY});n=c.scrollLeft;return!0};F[e]=function(a){f(a,function(a,b){var c=k()-s[a],f=D[a]-b.clientX,c=Math.abs(f)/c;d(c,f?0>f?-1:1:0)});n=null;return!0};F[h]=function(a){var b,d;null==n||f(a,function(a,c){b=D[a]-c.clientX;d=K[a]-c.clientY});if(d&&Math.abs(d)>Math.abs(b))return E=!0;b&&(E=!0,c.scrollLeft=
-Math.max(0,n+b));return m(a)};if(!b||g)u(a),u(h),u(e),b&&(c.className+=" mstouch");return{kill:function(){w(a);w(h);w(e);q()},swiped:function(){return E},ms:function(){return b},snap:function(a){b&&!g&&(c.style["-ms-scroll-snap-points-x"]="snapInterval(0px,"+a+"px)",c.style["-ms-scroll-snap-type"]="mandatory",c.style["-ms-scroll-chaining"]="none")},scroll:function(a,b,d){q();var f=c.scrollLeft,h=a>f?1:-1,k=Math[1===h?"min":"max"],e=Math.round(16*b*h);return l=p.require("$58","fps.js").loop(function(b){b&&
-(f=Math.max(0,k(a,f+e)),c.scrollLeft=f,a===f&&(q(),d&&d(f)))},c)}}};d.start=function(b,c){return n(b,a,c,!1)};d.move=function(a,b){return n(a,h,b,!1)};d.end=function(a,b){return n(a,e,b,!1)};var f=d.each=function(a,c){if(b)(a.MSPOINTER_TYPE_TOUCH||"touch")===a.pointerType&&c(0,a);else for(var d=-1,f=(a.originalEvent||a).changedTouches||[];++d<f.length;)c(d,f[d])},k=Date.now||function(){return(new Date).getTime()};return d}({},z,y));p.register("$59",function(d,g,p){d.init=function(d){function m(){h.style.top=
-String(-d.scrollTop)+"px";return!0}function c(){var a=h;a.textContent=d.value;a.innerHTML=a.innerHTML.replace(/[ \t]/g,b).split(/(?:\n|\r\n?)/).join('<span class="eol crlf"></span>\r\n')+'<span class="eol eof"></span>';return!0}function b(a){return'<span class="x'+a.charCodeAt(0).toString(16)+'">'+a+"</span>"}var a=d.parentNode,h=a.insertBefore(p.createElement("div"),d);l(d).on("input",c).on("scroll",m);l(a).addClass("has-mirror");h.className="ta-mirror";var e=d.offsetWidth-d.clientWidth;2<e&&(h.style.marginRight=
-String(e-2)+"px");c();m();return{kill:function(){l(d).off("input",c).off("scroll",m);a.removeChild(h);h=null;l(a).removeClass("has-mirror")}}};return d}({},z,y));p.register("$29",function(d,g,l){function n(b,a){for(var c=0,d=-1,f=a&&g[a],k=m[b]||[],v=k.length;++d<v;)callback=k[d],"function"===typeof callback&&(callback(f),c++);return c}var m={},c;d.load=function(b,a,c){function d(){v&&(clearTimeout(v),v=null);A&&(A.onreadystatechange=null,A=A=A.onload=null);b&&(delete m[b],b=null)}function f(a,f){var k=
-A&&A.readyState;if(f||!k||"loaded"===k||"complete"===k)f||n(b,c),d()}function k(){if(0===n(b))throw Error('Failed to load "'+(c||b)+'"');d()}if(c&&g[c])"function"===typeof a&&a(g[c]);else if(null!=m[b])m[b].push(a);else{m[b]=[a];var v=setTimeout(k,4E3),A=l.createElement("script");A.setAttribute("src",b);A.setAttribute("async","true");A.onreadystatechange=f;A.onload=f;A.onerror=k;A.onabort=d;l.getElementsByTagName("head")[0].appendChild(A)}};d.stat=function(b){var a;if(!(a=c)){for(var d,e,f=l.getElementsByTagName("script"),
-k=-1,m=f.length;++k<m;)if(a=f[k].getAttribute("src"))if(d=a.indexOf("/lib/vendor"),-1!==d){e=a.substr(0,d);break}a=c=e||"/static"}return a+b};return d}({},z,y));p.register("$14",function(d,g,C){function n(a,b){a.setReadOnly(!1);a.on("change",function(a,c){return b.val(c.getValue())});a.on("focus",function(){return b.focus()});a.on("blur",function(){return b.blur()})}function m(a){a.off("change");a.off("focus");a.off("blur")}function c(a){m(a);a.setReadOnly(!0);a.setHighlightGutterLine(!1);a.setHighlightActiveLine(!1)}
-function b(b,c){function d(){this.HighlightRules=f}var f=a(c),h=b.require,e=h("ace/lib/oop");e.inherits(f,h("ace/mode/text_highlight_rules").TextHighlightRules);e.inherits(d,h("ace/mode/text").Mode);return new d}function a(a){return function(){var b={start:[{token:"empty_line",regex:/^$/},{token:"constant.language",regex:"(?:&#[0-9]+;)|(?:&#x[0-9a-fA-F]+;)|(?:&[a-zA-Z0-9_:\\.-]+;)"},{token:"constant.language",regex:/<!\[CDATA\[/},{token:"constant.language",regex:/\]\]>/},{token:"locked",regex:/<(?:xliff:)?(?:g|ph)[^>]*>[^<]*<\/(?:xliff:)?(?:g|ph)>/},
-{token:"locked",regex:/<(?:xliff:)?(bx|ex|x)[^\/>]*\/>/},{token:"constant.language",regex:/<\/?[:a-z]+[^>]*>/}]},c=h(a);"icu"===a?b={start:b.start.concat([{token:"icu-quoted",regex:/'([{}][^']*)?'/},{token:"printf",regex:"{[^!-/:-@\\[-^{-~\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a9\u00ab\u00ac\u00ae\u00b0\u00b1\u00b6\u00bb\u00bf\u00d7\u00f7\\u2010-\\u2027\\u2030-\\u203E\\u2041-\\u2053\\u2055-\\u205E\\u2190-\\u245F\\u2500-\\u2775\\u2794-\\u2BFF\\u2E00-\\u2E7F\\u3001-\\u3003\\u3008-\\u3020\\u3030\\uFD3E\\uFD3F\\uFE45\\uFE46]+(,[\\s\\u0085\\u200E\\u200F\\u2028\\u2029]*(?:number|date|time|spellout|ordinal|duration)[\\s\\u0085\\u200E\\u200F\\u2028\\u2029]*(,[\\s\\u0085\\u200E\\u200F\\u2028\\u2029]*[^{}]+)?)?}"},
-{token:"icu",regex:/{/,next:"icuName"},{token:"icu",regex:/}/,next:"icuType"}]),icuName:[{token:"icu",regex:"[\\s\\u0085\\u200E\\u200F\\u2028\\u2029]+"},{token:"icu.name",regex:"[^\\s\\u0085\\u200E\\u200F\\u2028\\u2029!-/:-@\\[-^{-~\u00a1\u00a2\u00a3\u00a4\u00a5\u00a6\u00a7\u00a9\u00ab\u00ac\u00ae\u00b0\u00b1\u00b6\u00bb\u00bf\u00d7\u00f7\\u2010-\\u2027\\u2030-\\u203E\\u2041-\\u2053\\u2055-\\u205E\\u2190-\\u245F\\u2500-\\u2775\\u2794-\\u2BFF\\u2E00-\\u2E7F\\u3001-\\u3003\\u3008-\\u3020\\u3030\\uFD3E\\uFD3F\\uFE45\\uFE46]+",
-next:"icuType"},{defaultToken:"icu",next:"icuType"}],icuType:[{token:"icu",regex:/[{}]/,next:"start"},{defaultToken:"icu"}]}:c&&b.start.push({token:"printf",regex:c});this.$rules=b}}function h(a){switch(a){case "objc":return/%(?:\d+\$)?[-+'0# ]*\d*(?:\.\d+|\.\*(?:\d+\$)?)?(?:hh?|ll?|[qjzTL])?[sScCdDioOuUxXfFeEgGaAp%@]/;case "java":return/%(?:\d+\$)?[-+,(0# ]*\d*(?:\.\d+)?(?:[bBhHsScCdoxXeEfgGaA%n]|[tT][HIklMSLNpzZsQBbhAaCYyjmdeRTrDFc])/;case "php":return/%(?:\d+\$)?(?:'.|[-+0 ])*\d*(?:\.\d+)?[suxXbcdeEfFgGo%]/;
-case "python":return/%(?:\([a-z]+\))?[-+0# ]*(?:\d+|\*)?(?:\.\d+|\.\*)?(?:[hlL])?[sdiouxXeEfFgGcra%]/;case "javascript":return/%(?:[1-9]\d*\$)?\+?(?:0|'[^$])?-?\d*(?:\.\d+)?[b-gijostTuvxX%]/;case "auto":return/%(?:\d+\$|\([a-z]+\))?(?:[-+0]?\d*(\.\d+)?[duxoefgaDUXOEFGA]|[@scSC%])/;case f:return e||"%%"}}var e,f="auto";d.init=function(a,d,h){var e,u=!1,w=h||f,q=a.parentNode,B=q.appendChild(C.createElement("div"));l(q).addClass("has-proxy has-ace");p.require("$29","remote.js").load("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js",
-function(f){if(B){if(!f)throw Error("Failed to load code editor");e=f.edit(B);var q=e.session,h=e.renderer;e.$blockScrolling=Infinity;e.setShowInvisibles(u);e.setWrapBehavioursEnabled(!1);e.setBehavioursEnabled(!1);e.setHighlightActiveLine(!1);q.setUseSoftTabs(!1);h.setShowGutter(!0);h.setPadding(10);h.setScrollMargin(8);q.setMode(b(f,w));e.setValue(a.value,-1);q.setUseWrapMode(!0);d?n(e,d):c(e)}},"ace");return{kill:function(){e&&(m(e),e.destroy(),e=null);B&&(q.removeChild(B),l(q).removeClass("has-proxy has-ace"),
-B=null);return this},disable:function(){e&&c(e);d=null;return this},enable:function(a){d=a;e&&n(e,a);return this},resize:function(){e&&e.resize();return this},val:function(a){e&&a!==e.getValue()&&e.setValue(a,-1);return this},invs:function(a){a=a||!1;u!==a&&(u=a,e&&e.setShowInvisibles(a));return this},strf:function(a){a=a||f;a!==w&&(w=a,e&&e.session.setMode(b(g.ace,a)));return this},focus:function(){return this}}};d.strf=function(a,b){f=a;e=b;return d};return d}({},z,y));p.register("$60",function(d,
-g,C){function n(a,b){function c(){return b.val(a.getContent())}a.on("input",c);a.on("change",c);a.on("focus",function(){return b.focus()});a.on("blur",function(){return b.blur()});a.setMode("design")}function m(a){a.off("input");a.off("change");a.off("focus");a.off("blur")}function c(a){m(a);a.setMode("readonly")}var b=0;d.load=function(a){var b=p.require("$29","remote.js");b.load(b.stat("/lib/tinymce.min.js"),a,"tinymce");return d};d.init=function(a,h){function e(a){A=a;r="<p>"===a.substr(0,3)&&
-"</p>"===a.substr(-4);return a.replace(/(<\/?)script/ig,"$1loco:script")}function f(a){k=a;a._getContent=a.getContent;a.getContent=function(a){a=this._getContent(a);a=a.replace(/(<\/?)loco:script/ig,"$1script");if(!r&&"<p>"===a.substr(0,3)&&"</p>"===a.substr(-4)){var b=a.substr(3,a.length-7);if(b===A||-1===b.indexOf("</p>"))a=b}return a};a._setContent=a.setContent;a.setContent=function(a,b){return this._setContent(e(a),b)};h?(n(a,h),h.reset()):c(a);l(q).removeClass("loading")}var k,g=!1,A="",r=!1,
-u=a.parentNode,w=u.parentNode,q=u.appendChild(C.createElement("div")),B=w.insertBefore(C.createElement("nav"),u);B.id="_tb"+String(++b);l(u).addClass("has-proxy has-mce");l(q).addClass("mce-content-body loading").html(e(a.value));d.load(function(a){if(!a)throw Error("Failed to load HTML editor");q&&a.init({inline:!0,target:q,hidden_input:!1,theme:"modern",skin:!1,plugins:"link lists",browser_spellcheck:!0,menubar:!1,fixed_toolbar_container:"#"+B.id,toolbar:"formatselect | bold italic link unlink | bullist numlist outdent indent",
-block_formats:"Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h4;Heading 4=h4;Heading 5=h5;Heading 6=h6;",forced_root_block:"p",relative_urls:!1,convert_urls:!1,remove_script_host:!1,document_base_url:"",allow_script_urls:!1,formats:{alignleft:{classes:"alignleft"},alignright:{selector:"p,h1,h2,h3,h4,span,strong,em,a",classes:"alignright"},aligncenter:{selector:"p,h1,h2,h3,h4,span,strong,em,a",classes:"aligncenter"},strikethrough:{inline:"del"}},fix_list_elements:!0,extended_valid_elements:"span,b,i,u,loco:script",
-entities:"38,amp,60,lt,62,gt,160,nbsp",entity_encoding:"named",keep_styles:!1,init_instance_callback:f})});return{val:function(b){b=e(b);null==k?(a.value=b,l(q).html(b)):k.getContent()!==b&&k.setContent(b);h&&h.val(b);return this},kill:function(){k&&(h&&h.val(k.getContent()),m(k),k.destroy(),k=null);q&&(u.removeChild(q),l(u).removeClass("has-proxy has-mce"),q=null);B&&(w.removeChild(B),B=null);return this},enable:function(a){h=a;k&&n(k,a);return this},disable:function(){k&&c(k);h=null;return this},
-focus:function(){k&&h&&k.focus();return this},invs:function(a){a=a||!1;g!==a&&(g=a,l(u)[a?"addClass":"removeClass"]("show-invs"));return this}}};return d}({},z,y));p.register("$55",function(d,g,C){function n(b){function a(){m&&(g.off("input",d),m=!1)}function d(){var a=b.value;a!==u&&(g.trigger("changing",[a,u]),u=a)}function e(){d();m&&w!==u&&g.trigger("changed",[u])}function f(){c=b;w=u;m||(g.on("input",d),m=!0);g.trigger("editFocus");n.addClass("has-focus");return!0}function k(){c===b&&(c=null);
-g.trigger("editBlur");n.removeClass("has-focus");m&&(e(),a());return!0}var m=!1,g=l(b),n=l(b.parentNode),u=b.value,w;g.blur(k).focus(f);return{val:function(a){u!==a&&(b.value=a,g.triggerHandler("input"),u=a);return!0},kill:function(){a();g.off("blur",k).off("focus",f)},fire:function(){u=null;d()},ping:e,blur:k,focus:f,reset:function(){w=u=b.value}}}function m(b){this.e=b}var c;d._new=function(b){return new m(b)};d.init=function(b){var a=new m(b);b.disabled?(b.removeAttribute("disabled"),a.disable()):
-b.readOnly?a.disable():a.enable();return a};TextAreaPrototype=m.prototype;TextAreaPrototype.destroy=function(){this.unlisten();var b=this.p;b&&(b.kill(),this.p=null);this.e=null};TextAreaPrototype.reload=function(b,a){var c=this.l;c&&!a&&(this.disable(),c=null);this.val(b||"");a&&!c&&this.enable();return this};TextAreaPrototype.val=function(b){var a=this.e;if(null==b)return a.value;var c=this.l,d=this.p;d&&d.val(b);c&&c.val(b);c||a.value===b||(a.value=b,l(a).triggerHandler("input"));return this};
-TextAreaPrototype.fire=function(){this.l&&this.l.fire();return this};TextAreaPrototype.ping=function(){this.l&&this.l.ping();return this};TextAreaPrototype.focus=function(){var b=this.p;b?b.focus():l(this.e).focus()};TextAreaPrototype.focused=function(){return c&&c===this.el};TextAreaPrototype.parent=function(){return this.e.parentNode};TextAreaPrototype.attr=function(b,a){var c=this.e;if(1===arguments.length)return c.getAttribute(b);null==a?c.removeAttribute(b):c.setAttribute(b,a);return this};TextAreaPrototype.editable=
-function(){return!!this.l};TextAreaPrototype.enable=function(){var b=this.p;this.e.removeAttribute("readonly");this.listen();b&&b.enable&&b.enable(this.l);return this};TextAreaPrototype.disable=function(){var b=this.p;this.e.setAttribute("readonly",!0);this.unlisten();b&&b.disable&&b.disable();return this};TextAreaPrototype.listen=function(){var b=this.l;b&&b.kill();this.l=n(this.e);return this};TextAreaPrototype.unlisten=function(){var b=this.l;b&&(b.kill(),this.l=null);return this};TextAreaPrototype.setInvs=
-function(b,a){var c=this.i||!1;if(a||c!==b)this._i&&(this._i.kill(),delete this._i),(c=this.p)?c.invs&&c.invs(b):b&&(this._i=p.require("$59","mirror.js").init(this.e)),this.i=b;return this};TextAreaPrototype.getInvs=function(){return this.i||!1};TextAreaPrototype.setMode=function(b){var a=this.p,d=this.i||!1;b!==(this.m||"")&&(this.m=b,a&&a.kill(),this.p=a="code"===b?p.require("$14","ace.js").init(this.e,this.l,this["%"]):"html"===b?p.require("$60","mce.js").init(this.e,this.l):null,this.setInvs(d,
-!0),c&&this.focus());return this};TextAreaPrototype.setStrf=function(b){this["%"]=b;"code"===this.m&&this.p.strf(b);return this};TextAreaPrototype.name=function(b){this.e.setAttribute("name",b);return this};TextAreaPrototype.placeholder=function(b){this.e.setAttribute("placeholder",b);return this};TextAreaPrototype.redraw=function(){var b=this.p;b&&b.resize&&b.resize()};TextAreaPrototype=null;return d}({},z,y));p.register("$56",function(d,g,p){function n(a){var b=g.console;b&&b.error&&b.error(a)}
-function m(a){var b=p.createElement("div");a&&b.setAttribute("class",a);return b}function c(a){return function(){a.resize();return this}}function b(a){return function(b){for(var c=b.target,d=c.$index;null==d&&"DIV"!==c.nodeName&&(c=c.parentElement);)d=c.$index;null!=d&&(b.stopImmediatePropagation(),a.select(d));return!0}}function a(a){return function(){a.redrawDirty()&&a.redraw();return!0}}function h(a){return function(b){var c;c=b.keyCode;if(40===c)c=1;else if(38===c)c=-1;else return!0;if(b.shiftKey||
-b.ctrlKey||b.metaKey||b.altKey)return!0;a.selectNext(c);b.stopPropagation();b.preventDefault();return!1}}function e(a,b,c){function d(a){n("row["+a+"] disappeared");return{cellVal:function(){return""}}}return function(f){var e=b||0,h=c?-1:1,k=a.rows||[];f.sort(function(a,b){return h*(k[a]||d(a)).cellVal(e).localeCompare((k[b]||d(b)).cellVal(e))})}}function f(a){this.w=a}function k(a){this.t=a;this.length=0}function v(a,b,c){var d=p.createElement("div");d.className=c||"";this._=d;this.d=b||[];this.i=
-a||0;this.length=b.length}function A(a){this.live=a;this.rows=[]}d.create=function(a){return new f(a)};var r=f.prototype;r.init=function(d){var f=this.w,e=f.id,k=f.splity(e+"-thead",e+"-tbody"),g=k[0],k=k[1],n=[],p=[],r=[],D=[];if(d)this.ds=d,this.idxs=p,this._idxs=null;else if(!(d=this.ds))throw Error("No datasource");g.css.push("wg-thead");k.css.push("wg-tbody");d.eachCol(function(a,b,c){r[a]=e+"-col-"+b;D[a]=c||b});for(var K=m(),A=-1,I=r.length,C=m("wg-cols"),z=g.splitx.apply(g,r);++A<I;)z[A].header(D[A]),
-C.appendChild(K.cloneNode(!1)).setAttribute("for",r[A]);d.eachRow(function(a,b,c){n[a]=new v(a,b,c);p[a]=a});this.rows=n;this.cols=C;this.ww=null;this.root=K=k.body;this.head=g;g.redraw=c(this);g=k.fixed=z[0].bodyY()||20;f.lock().resize(g,k);f.css.push("is-table");f.restyle();this.sc?this._re_sort(I):d.sort&&d.sort(p);this.redrawDirty();this.render();l(K).attr("tabindex","-1").on("keydown",h(this)).on("mousedown",b(this)).on("scroll",a(this));return this};r.clear=function(){for(var a=this.pages||
-[],b=a.length;0!==b--;)a[b].destroy();this.pages=[];this.sy=this.mx=this.mn=this.vh=null;void 0;return this};r.render=function(){for(var a,b,c=[],d=this.rows||[],f=-1,e,k=this.idxs,h=k.length,m=this.idxr={},g=this.r,l=this._r,v=this.root,n=this.cols;++f<h;){0===f%100&&(a=n.cloneNode(!0),b=new A(a),b.h=2200,b.insert(v),c.push(b));e=k[f];m[e]=f;a=d[e];if(null==a)throw Error("Render error, no data at ["+e+"]");a.page=b;b.rows.push(a)}b&&100!==b.size()&&b.sleepH(22);this.pages=c;this.mx=this.mn=null;
-this.redrawDirty();this.redraw();null==g?null!=l&&(a=d[l])&&a.page&&(delete this._r,this.select(l,!0)):(a=d[g])&&a.page?this.select(g,!0):(this.deselect(),this._r=g);return this};r.resize=function(){var a=-1,b=this.ww||(this.ww=[]),c=this.w,d=c.cells[0],f=d.body.childNodes,e=f.length,k=this.pages||[],h=k.length;for(c.redraw.call(d);++a<e;)b[a]=f[a].style.width;if(h){c=this.mx;for(a=this.mn;a<=c;a++)k[a].widths(b);this.redrawDirty()&&this.redraw()}};r.redrawDirty=function(){var a=!1,b=this.root,c=
-b.scrollTop,b=b.clientHeight;this.sy!==c&&(a=!0,this.sy=c);this.vh!==b&&(a=!0,this.vh=b);return a};r.redraw=function(){for(var a=0,b=-1,c=null,d=null,f=this.ww,e=this.sy,k=this.vh,h=this.mn,m=this.mx,g=Math.max(0,e-100),e=k+e+100,l=this.pages||[],v=l.length;++b<v&&!(a>e);)k=l[b],a+=k.height(),a<g||(null===c&&(c=b),d=b,k.rendered||k.render(f));if(h!==c){if(null!==h&&c>h)for(b=h;b<c;b++){k=l[b];if(!k)throw Error("Shit!");k.rendered&&k.sleep()}this.mn=c}if(m!==d){if(null!==m&&d<m)for(b=m;b>d;b--)k=l[b],
-k.rendered&&k.sleep();this.mx=d}};r.selected=function(){return this.r};r.thead=function(){return this.w.cells[0]};r.tbody=function(){return this.w.cells[1]};r.tr=function(a){return(a=this.row(a))?a.cells():[]};r.row=function(a){return this.rows[a]};r.td=function(a,b){return this.tr(a)[b]};r.next=function(a,b,c){null==c&&(c=this.r||0);var d=this.idxs,f=d.length,e=(this.idxr||{})[c];for(c=e;c!==(e+=a)&&!(0<=e&&f>e);)if(b&&f)e=1===a?-1:f,b=!1;else return null;c=d[e];return null==c||null==this.rows[c]?
-(n("Bad next: ["+e+"] does not map to data row"),null):c};r.selectNext=function(a,b,c){a=this.next(a,b);null!=a&&this.r!==a&&this.select(a,c);return this};r.deselect=function(a){var b=this.r;null!=b&&(this.r=null,l(this.tr(b)).removeClass("selected"),this.w.fire("wgRowDeselect",[b,a]));return this};r.selectRow=function(a,b){return this.select(this.idxs[a])};r.select=function(a,b){var c=this.rows[a],d=c&&c.page;if(!d)return this.deselect(!1),n("Row is filtered out"),this;this.deselect(!0);var f,e=
-this.w.cells[1];d.rendered||(f=d.top(),e.scrollY(f),this.redrawDirty()&&this.redraw());if(!c.rendered)return d.rendered||n("Failed to render page"),n("Row ["+c.i+"] not rendered"),this;d=c.cells();l(d).addClass("selected");this.r=a;b||(f=e.scrollY(),l(this.root).focus(),f!==e.scrollY()&&e.scrollY(f));e.scrollTo(d[0],!0);this.w.fire("wgRowSelect",[a,c.data()]);return this};r.unfilter=function(){this._idxs&&(this.idxs=this._sort(this._idxs),this._idxs=null,this.clear().render());return this};r.filter=
-function(a){this._idxs||(this._idxs=this.idxs);this.idxs=this._sort(a);return this.clear().render()};r.each=function(a){for(var b,c=-1,d=this.rows||[],f=this.idxs||[],e=f.length;++c<e;)b=f[c],a(d[b],c,b);return this};r.sortable=function(a){var b=this.sc||(this.sc=new k(this));b.has(a)||b.add(a);return this};r._re_sort=function(a){var b=-1,c=this.sc,d=c.active;for(this.sc=c=new k(this);++b<a;)c.add(b);d&&(b=this.head.indexOf(d.id),-1===b&&(b=Math.min(d.idx,a-1)),this.sort(b,d.desc));return this};r._sort=
-function(a,b){b?(this.s=b,b(a)):(b=this.s)&&b(a);return a};r.sort=function(a,b){this._sort(this.idxs,e(this,a,b));this.sc.activate(a,b);return this};r=null;r=k.prototype;r.has=function(a){return null!=this[a]};r.add=function(a){var b=this,c=b.t.head.cells[a];b[a]={desc:null,idx:a,id:c.id};b.length++;c.addClass("wg-sortable").on("click",function(c){if("header"===c.target.nodeName.toLowerCase())return c.stopImmediatePropagation(),b.toggle(a),!1});return b};r.toggle=function(a){this.t.sort(a,!this[a].desc).clear().render();
-return this};r.activate=function(a,b){var c,d;c=this.active;var f=this[a],e=this.t.head.cells;c&&(d=e[c.idx])&&(d.removeClass(c.css),c!==f&&d.restyle());(d=e[a])?(f.desc=b,this.active=f,c="wg-"+(b?"desc":"asc"),d.addClass(c).restyle(),f.css=c):this.active=null;return this};r=null;r=v.prototype;r.render=function(a){var b,c=[],d=this._,f=this.length;if(d){for(this.c=c;0!==f--;)b=d.cloneNode(!1),c[f]=this.update(f,b),b.$index=this.i,a[f].appendChild(b);this._=null}else for(c=this.c;0!==f--;)a[f].appendChild(c[f]);
-this.rendered=!0;return this};r.update=function(a,b){var c=b||this.c[a]||{},d=(this.d[a]||function(){})()||"\u00a0";null==d.innerHTML?c.textContent=d:c.innerHTML=d.innerHTML;return c};r.cells=function(){return this.c||[this._]};r.data=function(){for(var a=-1,b=[],c=this.length;++a<c;)b[a]=this.cellVal(a);return b};r.destroy=function(){this.page=null;this.rendered=!1};r.cellVal=function(a){a=this.d[a]()||"";return String(a.textContent||a)};r=null;r=A.prototype;r.size=function(){return this.rows.length};
-r.insert=function(a){var b=this.h,c=m("wg-dead");c.style.height=String(b)+"px";a.appendChild(c);return this.dead=c};r.top=function(){return(this.rendered?this.live:this.dead).offsetTop};r.height=function(){var a=this.h;null==a&&(this.h=a=this.rendered?this.live.firstChild.offsetHeight:this.dead.offsetHight);a||n("row has zero height");return a};r.render=function(a){for(var b,c=-1,d=this.rows,f=d.length,e=this.dead,k=this.live,h=k.childNodes;++c<f;)b=d[c],b.rendered||b.render(h);f=a.length;for(c=0;c<
-f;c++)h[c].style.width=a[c];e.parentNode.replaceChild(k,e);this.rendered=!0;this.h=null;return this};r.sleep=function(){var a=this.height(),b=this.live,c=this.dead;c.style.height=String(a)+"px";b.parentNode.replaceChild(c,b);this.rendered=!1;this.h=a;return this};r.sleepH=function(a){a*=this.rows.length;var b=this.dead;b&&(b.style.height=String(a)+"px");this.rendered||(this.h=a);return this};r.widths=function(a){for(var b=this.live.childNodes,c=a.length;0!==c--;)b[c].style.width=a[c];return this};
-r.destroy=function(){var a=this.rendered?this.live:this.dead,b=this.rows,c=b.length;for(a.parentNode.removeChild(a);0!==c--;)b[c].destroy()};r=null;return d}({},z,y));p.register("$43",function(d,g,C){function n(a,b){var c=a.id,d=c&&r[c],f=d&&d.parent();if(!d||!f)return null;var e=f.dir===A,c=e?"X":"Y",h="page"+c,e=e?v:k,m=e(f.el),c=b["offset"+c],g=f.el,l=g.className;null==c&&(c=b[h]-e(a));c&&(m+=c);g.className=l+" is-resizing";return{done:function(){g.className=l},move:function(a){f.resize(a[h]-m,
-d);return!0}}}function m(a,c){function d(){l(C).off("mousemove",f);w&&(w.done(),w=null);return!0}function f(a){w?w.move(a):d();return!0}if(w)return!0;w=n(a.target,a);if(!w)return!0;l(C).one("mouseup",d).on("mousemove",f);return b(a)}function c(a,b){var c=b.type;"touchmove"===c?w&&w.move(b):"touchstart"===c?w=n(a.target,b):"touchend"===c&&w&&(w.done(),w=null)}function b(a){a.stopPropagation();a.preventDefault();return!1}function a(a){var b=u;b&&b.redraw();a&&a.redraw();return u=a}function h(b,c){var d=
-l(c).on("editFocus",function(){d.trigger("wgFocus",[a(b)])}).on("editBlur",function(){d.trigger("wgBlur",[a(null)])})}function e(a){var b=a.id,c=a.className;this.id=b;this.el=a;this.pos=this.index=0;this.css=[c||"wg-root","wg-cell"];this._cn=c;r[b]=this;this.clear()}var f=p.require("$19","html.js"),k=f.top,v=f.left,A=1,r={},u,w=!1;d.init=function(a){var b=new e(a);b.redraw();p.require("$54","touch.js").ok(function(b){b.dragger(a,c)});l(a).mousedown(m);return b};g=e.prototype;g.fire=function(a,b){var c=
-l.Event(a);c.cell=this;l(this.el).trigger(c,b);return this};g.each=function(a){for(var b=-1,c=this.cells,d=c.length;++b<d;)a(c[b],b);return this};g.indexOf=function(a){return(a=r[a.id||String(a)])&&a.pid===this.id?a.index:-1};g.on=function(){return this.$("on",arguments)};g.off=function(){return this.$("off",arguments)};g.find=function(a){return l(this.el).find(a)};g.$=function(a,b){l.fn[a].apply(l(this.el),b);return this};g.addClass=function(a){this.css.push(a);return this};g.removeClass=function(a){a=
-this.css.indexOf(a);-1!==a&&this.css.splice(a,1);return this};g.parent=function(){return this.pid&&r[this.pid]};g.splitx=function(){return this._split(A,arguments)};g.splity=function(){return this._split(2,arguments)};g._split=function(a,b){(this.length||this.field)&&this.clear();for(var c=-1,d,k=b.length,h=1/k,m=0;++c<k;){d=f.el();this.body.appendChild(d);for(var g=d,l=b[c],v=l,n=1;r[l];)l=v+"-"+ ++n;g.id=l;d=new e(d);d.index=c;d.pid=this.id;d._locale(this.lang,this.rtl);d.pos=m;m+=h;this.cells.push(d);
-this.length++}this.dir=a;this.redraw();return this.cells};g.destroy=function(){this.clear();delete r[this.id];var a=this.el;a.innerHTML="";this.body=null;a.className=this._cn||"";l(a).off();return this};g.exists=function(){return this===r[this.id]};g.clear=function(){for(var a=this.el,b=this.cells,c=this.field,d=this.body,e=this.nav,k=this.length||0;0!==k--;)delete r[b[k].destroy().id];this.cells=[];this.length=0;e&&(a.removeChild(e),this.nav=null);d&&(c&&(f.ie()&&l(d).triggerHandler("blur"),c.destroy(),
-this.field=null),this.table&&(this.table=null),a===d.parentNode&&a.removeChild(d));this.body=a.appendChild(f.el("","wg-body"));this._h=null;return this};g.resize=function(a,b){if(!b&&(b=this.cells[1],!b))return;var c=b.index,d=this.cells,f=l(this.el)[this.dir===A?"width":"height"](),e=d[c+1],c=d[c-1];pad=(b.body||b.el.firstChild).offsetTop||0;max=(e?e.pos*f:f)-pad;min=c?c.pos*f:0;b.pos=Math.min(max,Math.max(min,a))/f;this.redraw();return this};g.distribute=function(a){for(var b=-1,c=0,d,f=this.cells,
-e=a.length;++b<e&&(d=f[++c]);)d.pos=Math.max(0,Math.min(1,a[b]));this.redraw();return this};g.distribution=function(){for(var a=[],b=0,c=this.cells,d=c.length-1;b<d;)a[b]=c[++b].pos;return a};g.restyle=function(){var a=this.css.concat();0===this.index?a.push("first"):a.push("not-first");this.dir&&(a.push("wg-split"),2===this.dir?a.push("wg-split-y"):a.push("wg-split-x"));this.t&&a.push("has-title");this.nav&&a.push("has-nav");this.field&&(a.push("is-field"),this.field.editable()?a.push("is-editable"):
-a.push("is-readonly"));a=a.join(" ");a!==this._css&&(this._css=a,this.el.className=a);return this};g.redraw=function(a){this.restyle();var b=this.el,c=this.body,d=this.field;if(c){var f,e=b.clientWidth||0,k=b.clientHeight||0,h=c.offsetTop||0,k=h>k?0:k-h;this._h!==k&&(this._h=k,c.style.height=String(k)+"px",f=d);this._w!==e&&(this._w=e,f=d);f&&f.redraw()}c=this.length;e=1;k=this.nav;for(h=2===this.dir?"height":"width";0!==c--;)d=this.cells[c],k?f=1:(d.fixed&&(d.pos=d.fixed/l(b)[h]()),f=e-d.pos,e=d.pos),
-d.el.style[h]=String(100*f)+"%",d.redraw(a);return this};g.contents=function(a,b){var c=this.el,d=this.body;if(null==a)return d.innerHTML;this.length?this.clear():d&&(c.removeChild(d),d=null);d||(this.body=d=c.appendChild(f.el("",b||"wg-content")),this._h=null,(c=this.lang)&&this._locale(c,this.rtl,!0));"string"===typeof a?l(d)._html(a):a&&this.append(a);this.redraw();return this};g.textarea=function(a,b){var c=this.field;if(c){var d=c.editable();c.reload(a,b);d!==b&&this.restyle()}else this.length&&
-this.clear(),d=f.el("textarea"),d.setAttribute("wrap","virtual"),d.value=a,this.contents(d),c=p.require("$55","field.js")._new(d)[b?"enable":"disable"](),h(this,d),this.field=c,this.restyle();this.lang||this.locale("en");return c};g.locale=function(a){a=p.require("$41","locale.js").cast(a);return this._locale(String(a),a.isRTL())};g._locale=function(a,b,c){var d=this.body;if(c||a!==this.lang)this.lang=a,d&&d.setAttribute("lang",a);if(c||b!==this.rtl)this.rtl=b,d&&d.setAttribute("dir",b?"RTL":"LTR");
-return this};g.editable=function(){var a=this.field;if(a)return a.editable()?a:null;var b=this.cells,c=b.length,d=this.navigated();if(null!=d)return b[d].editable();for(;++d<c;){for(d=0;d<c;c++);if(a=b[d].editable())return a}};g.eachTextarea=function(a){var b=this.field;b?a(b):this.each(function(b){b.eachTextarea(a)});return this};g.append=function(a){a&&(a.nodeType?f.init(this.body.appendChild(a)):f.init(l(a).appendTo(this.body)));return this};g.prepend=function(a){var b=this.body;if(a.nodeType){var c=
-b.firstChild;f.init(c?b.insertBefore(a,c):b.appendChild(a))}else f.init(l(a).prependTo(b));return this};g.before=function(a){var b=this.body;a.nodeType?f.init(this.el.insertBefore(a,b)):f.init(l(a).insertBefore(b));return this};g.header=function(a,b){if(null==a&&null==b)return this.el.getElementsByTagName("header")[0];this.t=f.txt(a||"");this.el.insertBefore(f.el("header",b),this.body).appendChild(this.t);this.redraw();return this};g.title=function(a){var b=this.t;if(b)return b.nodeValue=a||"",b;
-this.header(a);return this.t};g.titled=function(){var a=this.t;return a&&a.nodeValue};g.bodyY=function(){return k(this.body,this.el)};g.scrollY=function(a){if(S===a)return this.body.scrollTop;this.body.scrollTop=a};g.tabulate=function(a){var b=this.table;b?b.clear():b=p.require("$56","wgtable.js").create(this);b.init(a);return this.table=b};g.lock=function(){this.body.className+=" locked";return this};g.scrollTo=function(a,b){var c,d=this.body;c=d.scrollTop;var f=k(a,d);if(c>f)c=f;else{var e=d.clientHeight,
-f=f+l(a).outerHeight();if(e+c<f)c=f-e;else return}b?d.scrollTop=c:l(d).stop(!0).animate({scrollTop:c},250)};g.navigize=function(a,c){function d(a){var b=k[a],c=g[a],f=l(b.el).show();c.addClass("active");m=a;v.data("idx",a);b.fire("wgTabSelect",[a]);return f}var e=this,k=e.cells,h=e.nav,m,g=[];h&&e.el.removeChild(h);var h=e.nav=e.el.insertBefore(f.el("nav","wg-tabs"),e.body),v=l(h).on("click",function(a){var c=l(a.target).data("idx");if(null==c)return!0;if(null!=m){var f=g[m];l(k[m].el).hide();f.removeClass("active")}d(c);
-e.redraw();return b(a)});null==c&&(c=v.data("idx")||0);e.each(function(b,c){g[c]=l('<a href="#'+b.id+'"></a>').data("idx",c).text(a[c]).appendTo(v);b.pos=0;l(b.el).hide()});d(k[c]?c:0);e.lock();e.redraw();return e};g.navigated=function(){var a=this.nav;if(a)return l(a).data("idx")};g=null;return d}({},z,y));p.register("$23",function(d,g,C){function n(a){var b=[];a&&(a.saved()||b.push("po-unsaved"),a.fuzzy()?b.push("po-fuzzy"):a.flagged()&&b.push("po-flagged"),a.translation()||b.push("po-empty"),a.comment()&&
-b.push("po-comment"));return b.join(" ")}function m(a,b,c){b=l(a.title(b).parentNode);var d=b.find("span.lang");c?(c=p.require("$41","locale.js").cast(c),d.length||(d=l("<span></span>").prependTo(b)),d.attr("lang",c.lang).attr("class",c.getIcon()||"lang region region-"+(c.region||"zz").toLowerCase())):(d.remove(),c="en");a.locale(c);return b}function c(a,b,c){b.click(function(b){b.preventDefault();a.fire(c,[b.target])})}function b(){this.dirty=0}var a="poUpdate",h="changing",e="changed",f=0,k=1,v=
-2,A=3,r=4,u=5,w=/^\s+/,q,B,z=p.require("$3","string.js").sprintf,y=p.require("$19","html.js");d.extend=function(a){return a.prototype=new b};d.localise=function(a){B=a;return d};var F=function(){var a=C.createElement("p");return function(b){a.innerHTML=b.replace("src=","x=");return a.textContent}}(),s=b.prototype=p.require("$42","abstract.js").init(["getListColumns","getListHeadings","getListEntry"],["editable","t"]);s.init=function(){this.localise();this.editable={source:!0,target:!0};this.mode=
-"";this.html=!1;return this};s.localise=function(a){a||(a=B||p.require("$1","t.js").init());var b=[];b[f]=a._x("Source text","Editor")+":";b[A]=a._x("%s translation","Editor")+":";b[r]=a._x("Context","Editor")+":";b[u]=a._x("Comments","Editor")+":";b[k]=a._x("Single","Editor")+":";b[v]=a._x("Plural","Editor")+":";b[6]=a._x("Untranslated","Editor");b[7]=a._x("Translated","Editor");b[8]=a._x("Toggle Fuzzy","Editor");b[9]=a._x("Suggest translation","Editor");this.labels=b;this.t=a;return this};s.setRootCell=
-function(a){function b(a){c.redraw(!0,a);return!0}var c=p.require("$43","wingrid.js").init(a);l(g).on("resize",b);this.redraw=b;l(a).on("wgFocus wgBlur",function(a,b){a.stopPropagation();q=b});this.destroy=function(){c.destroy();l(g).off("resize",b)};this.rootDiv=a;return c};s.$=function(){return l(this.rootDiv)};s.setListCell=function(a){var b=this;b.listCell=a;a.on("wgRowSelect",function(a,c){b.loadMessage(b.po.row(c));return!0}).on("wgRowDeselect",function(a,c,d){d||b.loadNothing();return!0})};
-s.setSourceCell=function(a){this.sourceCell=a};s.setTargetCell=function(a){this.targetCell=a};s.next=function(a,b,c){for(var d=this.listTable,f=d.selected(),e=f,k,h=this.po;null!=(f=d.next(a,c,f));){if(e===f){f=null;break}if(b&&(k=h.row(f),k.translated(0)))continue;break}null!=f&&d.select(f,!0);return f};s.current=function(a){var b=this.active;if(null==a)return b;a?a.is(b)?this.reloadMessage(a):this.loadMessage(a):this.unloadActive();return this};s.getTargetOffset=function(){if(this.active)return this.targetCell&&
-this.targetCell.navigated()||0};s.getTargetEditable=function(){return this.editable.target&&this.targetCell&&this.targetCell.editable()};s.getSourceEditable=function(){return this.editable.source&&this.sourceCell&&this.sourceCell.editable()};s.getContextEditable=function(){return this.editable.context&&this.contextCell&&this.contextCell.editable()};s.getFirstEditable=function(){return this.getTargetEditable()||this.getSourceEditable()||this.getContextEditable()};s.searchable=function(a){a&&(this.dict=
-a,this.po&&this.rebuildSearch());return this.dict&&!0};s.rebuildSearch=function(){var a=-1,b=this.po.rows,c=b.length,d=this.dict;for(d.clear();++a<c;)d.add(a,b[a].toText())};s.filtered=function(){return this.lastSearch||""};s.filter=function(a,b){var c,d=this.listTable,f=this.lastFound,e=this.lastSearch;if(a){if(e===a)return f||0;if(e&&!f&&0===a.indexOf(e))return 0;c=this.dict.find(a)}this.lastSearch=e=a;this.lastFound=f=c?c.length:this.po.length;c?d.filter(c):d.unfilter();b||this.fire("poFilter",
-[e,f]);return f};s.countFiltered=function(){return this.lastSearch?this.lastFound:this.po.length};s.unsave=function(a,b){var c=!1;if(a){if(c=a.saved(b))this.dirty++,a.unsave(b),this.fire("poUnsaved",[a,b]);this.markUnsaved(a)}return c};s.markUnsaved=function(a){var b=this.po.indexOf(a);if((b=this.listTable.tr(b))&&b.length){var c=b[0].className;a=c.replace(/(?:^| +)po-[a-z]+/g,"")+" "+n(a);a!==c&&l(b).attr("class",a)}};s.save=function(a){var b=this.po;if(this.dirty||a)b.each(function(a,b){b.save()}),
-this.listCell.find("div.po-unsaved").removeClass("po-unsaved"),this.dirty=0,this.fire("poSave");return b};s.fire=function(a,b){var c=this.handle;if(c&&c[a]&&(c=c[a].apply(this,b||[]),!1===c))return!1;c=l.Event(a);this.$().trigger(c,b);return!c.isDefaultPrevented()};s.on=function(a,b){this.$().on(a,b);return this};s.getSorter=function(){return null};s.reload=function(){var a=this,b,c=a.listCell,d=a.listTable,f=a.po,e=f&&f.locale(),k=e&&e.isRTL(),h=f&&f.length||0;if(!f||!f.row)return c&&c.clear().header("Error").contents("Invalid messages list"),
-!1;a.targetLocale=e;a.lastSearch&&(a.lastSearch="",a.lastFound=h,a.fire("poFilter",["",h]));d&&(b=d.thead().distribution());a.listTable=d=c.tabulate({eachCol:function(b){var c,d,f=a.getListColumns(),e=a.getListHeadings();for(d in f)c=f[d],b(c,d,e[c])},eachRow:function(b){f.each(function(c,d){b(d.idx,a.getListEntry(d),n(d))})},sort:a.getSorter()});var m,c=a.getListColumns();for(m in c)d.sortable(c[m]);b&&d.thead().distribute(b);d.tbody().$(k?"addClass":"removeClass",["is-rtl"]);a.fire("poLoad");return!!h};
-s.load=function(a,b){this.po=a;this.dict&&this.rebuildSearch();this.reload()&&(-1!==b?this.listTable.selectRow(b||0):this.active&&this.unloadActive())};s.pasteMessage=function(a){var b,c=0;this.active===a&&((b=this.sourceCell)&&b.eachTextarea(function(b){b.val(a.source(null,c++))}),(b=this.contextCell)&&b.eachTextarea(function(b){b.val(a.context())}),b=this.targetCell)&&(c=0,b.eachTextarea(function(b){b.val(a.translation(c++))}));this.updateListCell(a,"source");this.updateListCell(a,"target");return this};
-s.reloadMessage=function(a){var b=this.sourceCell,c=this.targetCell,d;this.pasteMessage(a);b&&this.setSrcMeta(a,b)&&b.redraw();c&&(d=c.navigated()||0,d=this.setTrgMeta(a,d,c),!b&&this.setSrcMeta(a,c)&&(d=!0),d&&c.redraw());return this};s.setStatus=function(){return null};s.setSrcMeta=function(a,b){var d=[],f,e=!1,k=this.$smeta,h=this.labels,m=[],g=a.tags(),v=g&&g.length;if(f=a.context())m.push("<span>"+y.h(h[r])+"</span>"),m.push("<mark>"+y.h(f)+"</mark>");if(v&&this.getTag)for(m.push("<span>Tagged:</span>");0<=
---v;)(f=this.getTag(g[v]))&&m.push('<mark class="tag">'+y.h(f.mod_name)+"</mark>");m.length&&d.push(m.join(" "));if(this.getMono()&&(f=a.refs())&&(g=f.split(/\s/),v=g.length)){for(m=[];0<=--v;)f=g[v],m.push("<code>"+y.h(f)+"</code>");d.push('<p class="has-icon icon-file">'+m.join(" ")+"</p>")}(f=a.notes())&&d.push('<p class="has-icon icon-info">'+y.h(f,!0)+"</p>");d.length?(k||(k=b.find("div.meta"),k.length||(k=l('<div class="meta"></div>').insertAfter(b.header())),c(this,k,"poMeta"),this.$smeta=
-k),k.html(d.join("\n")).show(),y.init(k),e=!0):k&&k.text()&&(k.text("").hide(),e=!0);return e};s.setTrgMeta=function(a,b,c){var d=[],f=!1,e=this.$tmeta;b=(a=a.errors(b))&&a.length;var k;if(b)for(k=0;k<b;k++)d.push('<p class="has-icon icon-warn">'+y.h(a[k],!0)+".</p>");d.length?(e||(e=c.find("div.meta"),e.length||(e=l('<div class="meta"></div>').insertAfter(c.header())),this.$tmeta=e),e.html(d.join("\n")).show(),y.init(e),f=!0):e&&e.text()&&(e.text("").hide(),f=!0);return f};s.loadMessage=function(b){function c(a,
-b){var d=b?a.split(" "):a.split(" ",1);a=d[0];"="===a.charAt(0)&&(a=a.substr(1),a=["zero","one","two"][Number(a)]||a);d[0]=a.charAt(0).toUpperCase()+a.substr(1).toLowerCase();return d.join(" ")}function d(a,e){var h=S,l=O[f];a.off();a.titled()!==l&&m(a,l,e||"en");l=!1;s.setSrcMeta(b,a)&&(l=!0);if(b.plural()){var l=-1,n=[],p=[],r=a.id+"-",q=b.sourceForms()||e&&e.plurals||["One","Other"],A=q.length;if(2!==A||"="===q[0].charAt(0)&&"=1"!==q[0])for(;++l<A;)n[l]=r+String(l),p[l]=c(q[l])+":";else n=[r+"-0",
-r+"-1"],p=[O[k],O[v]];a.splity.apply(a,n);a.each(function(a,c){a.header(p[c]).textarea(b.source(null,c),h).setStrf(H).setMode(B).setInvs(y)});a.lock();h&&a.each(function(a,b){g(a,b)})}else l&&a.redraw(),a.textarea(b.source(),h).setStrf(H).setMode(B).setInvs(y),h&&g(a,0)}function g(c,d){c.on(h,function(a,c){b.source(c,d);0===d&&s.updateListCell(b,"source");s.unsave(b,d)}).on(e,function(){0===d&&s.po.reIndex(b);s.dict&&s.rebuildSearch();s.fire(a,[b])})}function l(a,d,f){P&&a.eachTextarea(function(a){a.ping()});
-a.off();var e=d.isKnown()&&d.label||"Target",e=z(O[A],e);a.titled()!==e&&m(a,e,d);e=!1;!this.sourceCell&&s.setSrcMeta(b,a)&&(e=!0);s.setTrgMeta(b,f,a)&&(e=!0);s.setStatus(b,f);if(b.pluralized()){var k=[],h=[],g=a.id+"-",v=b.targetForms()||d.plurals||["One","Other"],e=v.length,p=function(a){var b=v[a];h.push(b?c(b,!0):"Form "+a);k.push(g+String(a))};for(b.each(p);(d=k.length)<e;)p(d);a.splitx.apply(a,k);a.each(function(a,c){var d=P&&!b.disabled(c);a.textarea(b.translation(c),d).setStrf(H).setMode(B).setInvs(y);
-P&&n(a,c)});a.navigize(h,f||null).on("wgTabSelect",function(c,d){var f=P&&c.cell.editable();f&&f.focus();s.setTrgMeta(b,d,a);s.setStatus(b,d);s.fire("poTab",[d])})}else e&&a.redraw(),a.textarea(b.translation(),P&&!b.disabled(0)).setStrf(H).setMode(B).setInvs(y),P&&n(a,0)}function n(c,d){c.on(h,function(a,c,f){b.translate(c,d);0===d&&s.updateListCell(b,"target");b.fuzzy(d)?s.fuzzy(!1,b,d):s.unsave(b,d);""===c?(s.fire("poEmpty",[!0,b,d]),s.setStatus(b,d)):""===f&&(s.fire("poEmpty",[!1,b,d]),s.setStatus(b,
-d))}).on(e,function(){s.dict&&s.rebuildSearch();s.fire(a,[b])})}function p(c){c.off();var d=O[r];c.titled()!==d&&(m(c,d),s.setStatus(null));c.textarea(b.context(),!0).setMode(B).setInvs(y);Y&&c.on(h,function(a,c){b.context(c);s.updateListCell(b,"source");s.unsave(b,Q)}).on(e,function(){s.po.reIndex(b);s.dict&&s.rebuildSearch();s.fire(a,[b])})}function w(a){var c=O[u];a.titled()!==c&&m(a,c);a.off().on(h,function(a,c){b.comment(c);s.fire("poComment",[b,c]);s.unsave(b,Q)}).textarea(b.comment(),!0)}var s=
-this,B=s.mode,C=b.isHTML(),y=s.inv||!1,F=this.fmt||null,H=b.format()||null,G=b.is(s.active),Q=0,L=s.sourceCell,U=s.targetCell,V=s.contextCell,W=s.commentCell,P=s.editable.target,S=s.editable.source,Y=s.editable.context,R=q,Z=s.sourceLocale,X=s.targetLocale,O=s.labels;s.html!==C&&(s.html=C,"code"!==s.mode&&(B=C?"html":"",s.setMode(B)));s.active=b;L&&d(L,Z);V&&p(V);U&&X&&(Q=U.navigated()||0,l(U,X,Q));W&&w(W);R&&(R.exists()||(R=R.parent()),(C=R.editable())&&C.focus());F!==H&&(this.fmt=H);G||s.fire("poSelected",
-[b,Q])};s.unloadActive=function(){function a(b){b&&b.text("").hide()}function b(a){a&&a.off().clear()}a(this.$smeta);a(this.$tmeta);b(this.sourceCell);b(this.contextCell);b(this.targetCell);this.commentCell&&this.commentCell.off();this.active&&(this.fire("poDeselected",[this.active]),this.active=null);return this};s.loadNothing=function(){var a,b=this.t,c=this.mode||"",d=this.inv||!1,f=this.fmt;this.unloadActive();this.setStatus(null);(a=this.commentCell)&&a.textarea("",!1);if(a=this.sourceCell)a.textarea("",
-!1).setStrf(f).setMode(c).setInvs(d),a.title(b._x("Source text not loaded","Editor")+":");if(a=this.contextCell)a.textarea("",!1).setMode(c).setInvs(d),a.title(b._x("Context not loaded","Editor")+":");if(a=this.targetCell)a.textarea("",!1).setStrf(f).setMode(c).setInvs(d),a.title(b._x("Translation not loaded","Editor")+":");this.fire("poSelected",[null])};s.updateListCell=function(a,b){var c=this.getListColumns()[b],d=this.po.indexOf(a);(d=this.listTable.row(d))&&d.rendered&&d.update(c)};s.cellText=
-function(a){if(-1!==a.indexOf("<")||-1!==a.indexOf("&"))a=F(a);return a.replace(w,"")||"\u00a0"};s.fuzzy=function(a,b,c){b=b||this.active;var d=b.fuzzy(c);!0!==a||d?!1===a&&d&&this.flag(0,b,c)&&this.fire("poFuzzy",[b,!1,c]):this.flag(4,b,c)&&this.fire("poFuzzy",[b,!0,c]);return d};s.flag=function(b,c,d){if(!c){c=this.active;d=this.getTargetOffset();if(null==d)return null;d&&c.targetForms()&&(d=0)}var f=c.flagged(d);if(null==b)return f;if(f===b||b&&!c.translated(d)||!this.fire("poFlag",[b,f,c,d]))return!1;
-c.flag(b,d);this.fire(a,[c])&&this.unsave(c,d);this.setStatus(c,d);return!0};s.add=function(b,c){var d,f=this.po.get(b,c);f?d=this.po.indexOf(f):(d=this.po.length,f=this.po.add(b,c),this.load(this.po,-1),this.fire("poAdd",[f]),this.fire(a,[f]));this.lastSearch&&this.filter("");this.listTable.select(d);return f};s.del=function(b){if(b=b||this.active){var c=this.lastSearch,d=this.po.del(b);null!=d&&(this.unsave(b),this.fire("poDel",[b]),this.fire(a,[b]),this.reload(),this.dict&&this.rebuildSearch(),
-this.active&&this.active.equals(b)&&this.unloadActive(),this.po.length&&(c&&this.filter(c),this.active||(d=Math.min(d,this.po.length-1),this.listTable.select(d))))}};s.setMono=function(a){return this.setMode(a?"code":this.html?"html":"")};s.setMode=function(a){if(this.mode!==a){this.mode=a;this.callTextareas(function(b){b.setMode(a)});var b=this.active,c=this.sourceCell;b&&b.refs()&&c&&this.setSrcMeta(b,c)&&c.redraw()}return this};s.getMono=function(){return"code"===this.mode};s.setInvs=function(a){(this.inv||
-!1)!==a&&(this.inv=a,this.callTextareas(function(b){b.setInvs(a)}),this.fire("poInvs",[a]));return this};s.getInvs=function(){return this.inv||!1};s.callTextareas=function(a){var b=this.targetCell;b&&b.eachTextarea(a);(b=this.contextCell)&&b.eachTextarea(a);(b=this.sourceCell)&&b.eachTextarea(a);return this};s.focus=function(){var a=this.getTargetEditable();a&&a.focus();return this};s=null;return d}({},z,y));p.register("$24",function(d,g,l){Number.prototype.format=function(d){d=Math.pow(10,d||0);
-var m=Math.round(d*this)/d;d=[];var m=String(m),c=m.split("."),m=c[0],c=c[1],b=m.length;do d.unshift(m.substring(b-3,b));while(0<(b-=3));m=d.join(",");if(d=c){d=c;for(var a,c=d.length;"0"===d.charAt(--c);)a=c;a&&(d=substring(0,a));d=c=d}d&&(m+="."+c);return m};Number.prototype.percent=function(d){var m=0,c=this&&d?100*(this/d):0;if(0===c)return"0";if(100===c)return"100";if(99<c)c=Math.min(c,99.9),d=c.format(++m);else if(0.5>c){c=Math.max(c,1E-4);do d=c.format(++m);while("0"===d&&4>m);d=d.substr(1)}else d=
-c.format(0);return d};return d}({},z,y));p.register("$11",function(d,g,C){function n(){this.init()._validate();this.sourceLocale={lang:"en",label:"English",plurals:["One","Other"]}}function m(a){a=l('<button type="button" class="button button-small icon icon-'+a+' hastip"></button>');p.require("$10","tooltip.js").init(a);return a}function c(a){return m("cloud").attr("title",a.labels[8]+" (Ctrl-U)").click(function(b){b.preventDefault();a.focus().fuzzy(!a.fuzzy())})}function b(a){return m("robot").attr("title",
-a.labels[9]+" (Ctrl-J)").click(function(b){b.preventDefault();a.fire("poHint")})}g=p.require("$23","base.js");p.require("$24","number.js");d.init=function(a){var b=new n;a=b.setRootCell(a);var c=a.splity("po-list","po-edit"),d=c[0],k=c[1],c=k.splitx("po-trans","po-comment"),m=c[0],g=c[1].header("Loading.."),c=m.splity("po-source","po-target"),m=c[0].header("Loading.."),c=c[1].header("Loading..");a.distribute([0.34]);k.distribute([0.8]);b.setListCell(d);b.setSourceCell(m);b.setTargetCell(c);b.commentCell=
-g;b.editable.source=!1;return b};g=n.prototype=g.extend(n);g.getListHeadings=function(){var a=this.t||{_x:function(a){return a}},b=[a._x("Source text","Editor")];this.targetLocale&&(b[1]=a._x("Translation","Editor"));return b};g.getListColumns=function(){var a={source:0};this.targetLocale&&(a.target=1);return a};g.getListEntry=function(a){var b=this.cellText,c=[function(){var c,d=b(a.source()||""),e=a.context();return e?(c=C.createElement("p"),c.appendChild(C.createElement("mark")).innerText=e,c.appendChild(C.createTextNode("\u00a0"+
-d)),c):d}];this.targetLocale&&(c[1]=function(){return b(a.translation()||"")});return c};g.stats=function(){var a=this.po,b=a.length,c=0,d=0,k=0;a.each(function(a,b){b.fuzzy()?k++:b.translated()?c++:d++});return{t:b,p:c.percent(b)+"%",f:k,u:d}};g.unlock=function(){var a=this.targetLocale;this._unlocked||(this.editable={source:!0,context:!0,target:!1},this.po&&this.po.unlock(),this.contextCell=this.targetCell,delete this.targetCell,a&&(this._unlocked=a,delete this.targetLocale,this.reload(),this.fire("poLock",
-[!1])),this.active&&this.loadMessage(this.active))};g.lock=function(){var a=this._unlocked;a&&(this.targetLocale=a,delete this._unlocked,this.po&&this.po.lock(a),this.editable={source:!1,context:!1,target:!0},this.targetCell=this.contextCell,delete this.contextCell,this.reload(),this.fire("poLock",[!0,a]),this.active&&this.loadMessage(this.active))};g.locked=function(){return!this._unlocked};g.setStatus=function(a){var d=this.$tnav;if(null==a)d&&(d.remove(),this.$tnav=null);else{d||(this.$tnav=d=
-l("<nav></nav>").append(c(this)).append(b(this)).appendTo(this.targetCell.header()));var e=[];a.translated()?a.fuzzy()&&e.push("po-fuzzy"):e.push("po-empty");d.attr("class",e.join(" "))}};g.getSorter=function(){function a(a,c){var d=a.weight(),e=c.weight();return d===e?b(a,c):d>e?-1:1}function b(a,c){return a.hash().localeCompare(c.hash())}var c=this;return function(d){var k=c.po,m=c.locked()?a:b;d.sort(function(a,b){return m(k.row(a),k.row(b))})}};return d}({},z,y));p.register("$12",function(d,g,
-p){var n={copy:66,clear:75,save:83,fuzzy:85,next:40,prev:38,enter:13,invis:73,hint:74},m={38:!0,40:!0,73:!0},c={66:function(b,a){var c=a.current();c&&(c.normalize(),a.focus().pasteMessage(c))},75:function(b,a){var c=a.current();c&&(c.untranslate(),a.focus().pasteMessage(c))},85:function(b,a){a.focus().fuzzy(!a.fuzzy())},13:function(b,a){a.getFirstEditable()&&a.next(1,!0,!0)},40:function(b,a){var c=b.shiftKey;a.next(1,c,c)},38:function(b,a){var c=b.shiftKey;a.next(-1,c,c)},73:function(b,a){if(!b.shiftKey)return!1;
-a.setInvs(!a.getInvs())}};d.init=function(b,a){function d(a){if(a.isDefaultPrevented()||!a.metaKey&&!a.ctrlKey)return!0;var k=a.which;if(!e[k])return!0;var h=c[k];if(!h)throw Error("command undefined #"+k);if(a.altKey||a.shiftKey&&!m[k]||!1===h(a,b))return!0;a.stopPropagation();a.preventDefault();return!1}var e={};l(a||g).on("keydown",d);return{add:function(a,b){c[n[a]]=b;return this},enable:function(){var a,b;for(b in arguments)a=n[arguments[b]],e[a]=!0;return this},disable:function(){l(a||g).off("keydown",
-d);b=a=e=null}}};return d}({},z,y));p.register("$25",function(d,g,l){function n(){this.reIndex([])}d.init=function(){return new n};g=n.prototype;g.reIndex=function(d){for(var c={},b=-1,a=d.length;++b<a;)c[d[b]]=b;this.keys=d;this.length=b;this.ords=c};g.key=function(d,c){if(null==c)return this.keys[d];var b=this.keys[d],a=this.ords[c];if(c!==b){if(null!=a)throw Error("Clash with item at ["+a+"]");this.keys[d]=c;delete this.ords[b];this.ords[c]=d}return d};g.indexOf=function(d){d=this.ords[d];return null==
-d?-1:d};g.add=function(d,c){var b=this.ords[d];null==b&&(this.keys[this.length]=d,b=this.ords[d]=this.length++);this[b]=c;return b};g.get=function(d){return this[this.ords[d]]};g.has=function(d){return null!=this.ords[d]};g.del=function(d){this.cut(this.ords[d],1)};g.cut=function(d,c){c=c||1;var b=[].splice.call(this,d,c);this.keys.splice(d,c);this.reIndex(this.keys);return b};g.each=function(d){for(var c=-1,b=this.keys,a=this.length;++c<a;)d(b[c],this[c],c);return this};g.sort=function(d){for(var c=
--1,b=this.length,a,h=this.keys,e=this.ords,f=[];++c<b;)f[c]=[this[c],h[c]];f.sort(function(a,b){return d(a[0],b[0])});for(c=0;c<b;c++)a=f[c],this[c]=a[0],a=a[1],h[c]=a,e[a]=c;return this};g.join=function(d){return[].join.call(this,d)};g=null;return d}({},z,y));p.register("$26",function(d,g,l){function n(d,c){var b=RegExp("^.{0,"+(d-1)+"}["+c+"]"),a=RegExp("^[^"+c+"]+");return function(c,e){for(var f=c.length,k;f>d;){k=b.exec(c)||a.exec(c);if(null==k)break;k=k[0];e.push(k);k=k.length;f-=k;c=c.substr(k)}0!==
-f&&e.push(c);return e}}d.create=function(d){function c(a){return k[a]||"\\"+a}var b,a,h=/(?:\r\n|[\r\n\v\f\u2028\u2029])/g,e=/[ \r\n]+/g,f=/[\t\v\f\x07\x08\\\"]/g,k={"\t":"\\t","\v":"\\v","\f":"\\f","\u0007":"\\a","\b":"\\b"};if(null==d||isNaN(d=Number(d)))d=79;0<d&&(b=n(d-3," "),a=n(d-2,"-\u2013 \\.,:;\\?!\\)\\]\\}\\>"));return{pair:function(b,e){if(!e)return b+' ""';e=e.replace(f,c);var k=0;e=e.replace(h,function(){k++;return"\\n\n"});if(!(k||d&&d<e.length+b.length+3))return b+' "'+e+'"';var g=
-[b+' "'],l=e.split("\n");if(a)for(var n=-1,p=l.length;++n<p;)a(l[n],g);else g=g.concat(l);return g.join('"\n"')+'"'},prefix:function(a,b){var c=a.split(h);return b+c.join("\n"+b)},refs:function(a){a=a.replace(e," ",a);b&&(a=b(a,[]).join("\n#: "));return"#: "+a}}};return d}({},z,y));p.register("$44",function(d,g,l){function n(){this.length=0}d.init=function(){return new n};g=n.prototype;g.push=function(d){this[this.length++]=d;return this};g.sort=function(d){[].sort.call(this,d);return this};g.each=
-function(d){for(var c=-1,b=this.length;++c<b;)d(c,this[c]);return this};return d}({},z,y));p.register("$27",function(d,g,l){function n(){}d.extend=function(d){return d.prototype=new n};g=n.prototype=p.require("$42","abstract.js").init(["add","load"]);g.row=function(d){return this.rows[d]};g.lock=function(d){return this.locale(d||{lang:"zxx",label:"Unknown",nplurals:1,pluraleq:"n!=1"})};g.unlock=function(){var d=this.loc;this.loc=null;return d};g.locale=function(d){null==d?d=this.loc:this.loc=d=p.require("$41",
-"locale.js").cast(d);return d};g.each=function(d){this.rows.each(d);return this};g.indexOf=function(d){"object"!==typeof d&&(d=this.get(d));if(!d)return-1;null==d.idx&&(d.idx=this.rows.indexOf(d.hash()));return d.idx};g.get=function(d){return this.rows&&this.rows.get(d)};g.del=function(d){d=this.indexOf(d);if(-1!==d){var c=this.rows.cut(d,1);if(c&&c.length)return this.length=this.rows.length,this.rows.each(function(b,a,c){a.idx=c}),d}};g.reIndex=function(d,c){var b=this.indexOf(d),a=d.hash(),h=this.rows.indexOf(a);
-return h===b?b:-1!==h?(c=(c||0)+1,d.source("Error, duplicate "+String(c)+": "+d.source()),this.reIndex(d,c)):this.rows.key(b,a)};g.sort=function(d){this.rows.sort(d);return this};g["export"]=function(){for(var d=-1,c=this.rows,b=c.length,a=p.require("$44","list.js").init();++d<b;)a.push(c[d]);return a};g=null;return d}({},z,y));p.register("$28",function(d,g,l){function n(c,b,a){if(null==a)return c[b]||"";c[b]=a||"";return c}function m(){this._id=this.id=""}d.extend=function(c){return c.prototype=
-new m};g=m.prototype;g.flag=function(c,b){var a=this.flg||(this.flg=[]);if(null!=b)a[b]=c;else for(var d=Math.max(a.length,this.src.length,this.msg.length);0!==d--;)a[d]=c;return this};g.flagged=function(c){var b=this.flg||[];if(null!=c)return b[c]||0;for(c=b.length;0!==c--;)if(b[c])return!0;return!1};g.flags=function(){for(var c,b={},a=[],d=this.flg||[],e=d.length;0!==e--;)c=d[e],b[c]||(b[c]=!0,a.push(c));return a};g.flaggedAs=function(c,b){var a=this.flg||[];if(null!=b)return c===a[b]||0;for(var d=
-a.length;0!==d--;)if(a[d]===c)return!0;return!1};g.fuzzy=function(c,b){var a=this.flaggedAs(4,c);null!=b&&this.flag(b?4:0,c);return a};g.source=function(c,b){if(null==c)return this.src[b||0]||"";this.src[b||0]=c;return this};g.plural=function(c,b){if(null==c)return this.src[b||1]||"";this.src[b||1]=c||"";return this};g.sourceForms=function(){return this.srcF};g.targetForms=function(){return this.msgF};g.each=function(c){for(var b=-1,a=this.src,d=this.msg,e=Math.max(a.length,d.length);++b<e;)c(b,a[b],
-d[b]);return this};g.count=function(){return Math.max(this.src.length,this.msg.length)};g.pluralized=function(){return 1<this.src.length||1<this.msg.length};g.translate=function(c,b){this.msg[b||0]=c||"";return this};g.untranslate=function(c){if(null!=c)this.msg[c]="";else{var b=this.msg,a=b.length;for(c=0;c<a;c++)b[c]=""}return this};g.translation=function(c){return this.msg[c||0]||""};g.errors=function(c){return this.err&&this.err[c||0]||[]};g.translated=function(c){if(null!=c)return!!this.msg[c];
-var b=this.msg,a=b.length;for(c=0;c<a;c++)if(!b[c])return!1;return!0};g.untranslated=function(c){if(null!=c)return!this.msg[c];var b=this.msg,a=b.length;for(c=0;c<a;c++)if(b[c])return!1;return!0};g.comment=function(c){return n(this,"cmt",c)};g.notes=function(c){return n(this,"xcmt",c)};g.refs=function(c){return n(this,"rf",c)};g.format=function(c){return n(this,"fmt",c)};g.context=function(c){return n(this,"ctx",c)};g.tags=function(){return this.tg};g.toString=g.toText=function(){return this.src.concat(this.msg,
-this.id,this.ctx).join(" ")};g.weight=function(){var c=0;this.translation()||(c+=2);this.fuzzy()&&(c+=1);return c};g.equals=function(c){return this===c||this.hash()===c.hash()};g.hash=function(){return this.id};g.normalize=function(){for(var c=this.msg.length;0!==c--;)this.msg[c]=this.src[c]||""};g.disabled=function(c){return!!(this.lck||[])[c||0]};g.disable=function(c){(this.lck||(this.lck=[]))[c||0]=!0;return this};g.saved=function(c){var b=this.drt;if(null==b)return!0;if(null!=c)return!b[c];for(c=
-b.length;0!==c--;)if(b[c])return!1;return!0};g.unsave=function(c){(this.drt||(this.drt=[]))[c||0]=!0;return this};g.save=function(c){null==c?this.drt=null:(this.drt||(this.drt=[]))[c]=!1;return this};g.is=function(c){return c&&(c===this||c.idx===this.idx)};g.isHTML=function(c){if(null==c)return this.htm||!1;this.htm=c};g=null;return d}({},z,y));p.register("$13",function(d,g,l){function n(a){return{"Project-Id-Version":"PACKAGE VERSION","Report-Msgid-Bugs-To":"","POT-Creation-Date":a||"","PO-Revision-Date":a||
-"","Last-Translator":"","Language-Team":"",Language:"","Plural-Forms":"","MIME-Version":"1.0","Content-Type":"text/plain; charset=UTF-8","Content-Transfer-Encoding":"8bit"}}function m(a,b){var c=a||"";b&&(c+="\x00"+b);return c}function c(){return p.require("$25","collection.js").init()}function b(a){var b=g.console;b&&b.error&&b.error(a.message||String(a))}function a(a){return p.require("$26","format.js").create(a)}function h(a){this.locale(a);this.length=0;this.rows=c();this.head=n(this.now())}function e(a,
-b){this.src=[a||""];this.msg=[b||""]}d.create=function(a){return new h(a)};l=p.require("$27","messages.js").extend(h);l.now=function(){function a(b,c){for(var d=String(b);d.length<c;)d="0"+d;return d}var b=new Date,c=b.getUTCFullYear(),d=b.getUTCMonth()+1,e=b.getUTCDate(),h=b.getUTCHours(),b=b.getUTCMinutes();return a(c,4)+"-"+a(d,2)+"-"+a(e,2)+" "+a(h,2)+":"+a(b,2)+"+0000"};l.header=function(a,b){var c=this.head||(this.head={});if(null==b)return this.headers()[a]||"";c[a]=b||"";return this};l.headers=
-function(a){var b,c=this.now(),d=this.head||(this.head=n(c));if(null!=a){for(b in a)d[b]=a[b];return this}var e=this.locale();a={};for(b in d)a[b]=String(d[b]);e?(a.Language=String(e)||"zxx",a["Language-Team"]=e.label||a.Language,a["Plural-Forms"]="nplurals="+(e.nplurals||"2")+"; plural="+(e.pluraleq||"n!=1")+";",b="PO-Revision-Date"):(a.Language="",a["Plural-Forms"]="nplurals=INTEGER; plural=EXPRESSION;",a["PO-Revision-Date"]="YEAR-MO-DA HO:MI+ZONE",b="POT-Creation-Date");a[b]||(a[b]=c);a["X-Generator"]=
-"Loco https://localise.biz/";return a};l.get=function(a,b){var c=m(a,b);return this.rows.get(c)};l.add=function(a,c){a instanceof e||(a=new e(a));c&&a.context(c);var d=a.hash();this.rows.get(d)?(console.log(d),b("Duplicate message at index "+this.indexOf(a))):(a.idx=this.rows.add(d,a),this.length=this.rows.length);return a};l.load=function(a){for(var c=-1,d,h,g,l,m,n,p=(g=this.locale())&&g.nplurals||2,y=[];++c<a.length;)d=a[c],null==d.parent?(h=d.source||d.id,g=d.target||"",l=d.context,h||l?(m=new e(h,
-g),m._id=d._id,l&&m.context(l),d.flag&&m.flag(d.flag,0),d.comment&&m.comment(d.comment),d.notes&&m.notes(d.notes),d.refs&&m.refs(d.refs),m.format(d.format),d.message=m,this.add(m)):0===c&&"object"===typeof g&&(this.head=g,this.headcmt=d.comment)):y.push(d);for(c=-1;++c<y.length;)try{d=y[c];h=d.source||d.id;m=a[d.parent]&&a[d.parent].message;if(!m)throw Error("parent missing for plural "+h);n=d.plural;1===n&&m.plural(h);n>=p||(d.flag&&m.flag(d.flag,n),m.translate(d.target||"",n),d.format&&!m.format()&&
-m.format(d.format))}catch(z){b(z)}return this};l.merge=function(a){var d=this,e,h=a.header("POT-Creation-Date"),g=d.rows,m=[],l=[];a=a.rows;d.rows.each(function(b,c){null==a.get(b)&&l.push(c)});d.rows=c();a.each(function(a,c){try{(e=g.get(a))?e.merge(c):(e=c,m.push(e)),d.add(e)}catch(f){b(f)}});h&&d.header("POT-Creation-Date",h);return{add:m,del:l}};l.wrap=function(b){this.fmtr=a(b);return this};l.toString=function(){var b,c=this.locale(),d=[],h=[],g=this.headers(),m=!c,l=c&&c.nplurals||2,n=this.fmtr||
-a();g[c?"PO-Revision-Date":"POT-Creation-Date"]=this.now();for(b in g)h.push(b+": "+g[b]);h=new e("",h.join("\n"));h.comment(this.headcmt||"");m&&h.fuzzy(0,!0);d.push(h.toString());d.push("");this.rows.each(function(a,b){a&&(d.push(b.cat(n,m,l)),d.push(""))});return d.join("\n")};l=p.require("$28","message.js").extend(e);l.hash=function(){return m(this.source(),this.context())};l.toString=function(){return this.cat(a())};l.cat=function(a,b,c){var d,e=[],h;(h=this.cmt)&&e.push(a.prefix(h,"# "));(h=
-this.xcmt)&&e.push(a.prefix(h,"#. "));d=this.rf;if(h=this._id)d+=(d?" ":"")+"loco:"+h;d&&/\S/.test(d)&&e.push(a.refs(d));!b&&this.fuzzy()&&e.push("#, fuzzy");(h=this.fmt)&&e.push("#, "+h+"-format");(h=this.ctx)&&e.push(a.pair("msgctxt",h));e.push(a.pair("msgid",this.src[0]));if(null==this.src[1])e.push(a.pair("msgstr",b?"":this.msg[0]));else for(d=-1,e.push(a.pair("msgid_plural",this.src[1])),h=this.msg||["",""],c=c||h.length;++d<c;)e.push(a.pair("msgstr["+d+"]",b?"":h[d]||""));return e.join("\n")};
-l.compare=function(a,b){var c=this.weight(),d=a.weight();if(c>d)return 1;if(c<d)return-1;if(b){c=this.hash().toLowerCase();d=a.hash().toLowerCase();if(c<d)return 1;if(c>d)return-1}return 0};l.merge=function(a){this.rf=a.rf;this.fmt=a.fmt;this.cmt=a.cmt;this.xcmt=a.xcmt};l=l=null;return d}({},z,y));p.register("$15",function(d,g,p){d.init=function(d,g){function c(){return e||(e=l('<div id="loco-po-ref"></div>').dialog({dialogClass:"loco-modal loco-modal-wide",modal:!0,autoOpen:!1,closeOnEscape:!0,resizable:!1,
-height:500}))}function b(a,b,d){a=l("<p></p>").text(d);c().dialog("close").html("").dialog("option","title","Error").append(a).dialog("open")}function a(a){var b=a&&a.code;if(b){for(var d=-1,e=b.length,h=l("<ol></ol>").attr("class",a.type);++d<e;)l("<li></li>").html(b[d]).appendTo(h);h.find("li").eq(a.line-1).attr("class","highlighted");c().dialog("close").html("").dialog("option","title",a.path+":"+a.line).append(h).dialog("open")}}function h(a){a=a.target;var b=l(a).find("li.highlighted")[0],b=
-Math.max(0,(b&&b.offsetTop||0)-Math.floor(a.clientHeight/2));a.scrollTop=b}var e;return{load:function(e){c().html('<div class="loco-loading"></div>').dialog("option","title","Loading..").off("dialogopen").dialog("open").on("dialogopen",h);e=l.extend({ref:e,path:g.popath},g.project||{});d.ajax.post("fsReference",e,a,b)}}};return d}({},z,y));p.register("$30",function(d,g,l){function n(d){this.api=d;this.chars=0}d.create=function(d){return new n(d)};g=n.prototype;g.init=function(d,c){function b(a){var b=
-{length:0,html:a.html,sources:[]};n.push(b);return p[a.html?1:0]=b}function a(a,d){var m=a.source(null,d);if(m&&(a.untranslated(d)||c)){var n=l[m];if(n)n.push(a);else{var n=m.length,r=h.isHtml(m),r=p[r?1:0],y=r.sources;if(r.length+n>g||y.length===k)r=b(r),y=r.sources;y.push(m);l[m]=[a];r.length+=n;e+=n;f+=1}}}var h=this.api,e=0,f=0,k=50,g=5E3,l={},n=[],p=[];b({html:!1});b({html:!0});d.each(function(b,c){a(c,0);a(c,1)});p=null;this.map=l;this.chars=e;this.length=f;this.batches=n;this.locale=d.locale()};
-g.abort=function(){this.state="abort";return this};g.dispatch=function(){function d(a,b){function e(c,d,f){b!==f&&(a===d||1<c&&h.source(null,1)===a)&&(h.translate(b,c),p++,y++);return p}if(!c())return!1;if(!b)return g.stderr("Empty translation returned for: "+a),!0;var h,k=l[a]||[],m=k.length,n=-1,p;for(w++;++n<m;)if(h=k[n])p=0,h.each(e),p&&f("each",[h]);return!0}function c(){return"abort"===k.state?(g&&(g.abort(),e()),!1):!0}function b(){var b=n.shift(),c;b?(c=b.sources)&&c.length?g.batch(c,p,b.html,
-d).fail(a).always(h):h():e()}function a(){k.abort();e()}function h(){q++;f("prog",[q,C]);c()&&b()}function e(){g=n=null;f("done")}function f(a,b){for(var c=F[a]||[],d=c.length;0<=--d;)c[d].apply(null,b)}var k=this,g=k.api,l=k.map,n=k.batches||[],p=k.locale,w=0,q=0,y=0,z=k.length,C=n.length,F={done:[],each:[],prog:[]};k.state="";b();return{done:function(a){F.done.push(a);return this},each:function(a){F.each.push(a);return this},prog:function(a){F.prog.push(a);return this},stat:function(){return{todo:function(){return Math.max(z-
-w,0)},did:function(){return w}}}}};return d}({},z,y));p.register("$31",function(d,g,l){function n(){}d.create=function(d){d=n.prototype=new d;d.toString=function(){return"Yandex.Translate"};d.getId=function(){return"yandex"};d.getUrl=function(){return"https://translate.yandex.com/"};d.parseError=function(c){return c&&c.code&&200!==c.code&&c.message?String(this)+" error "+c.code+": "+c.message:""};d.batch=function(c,b,a,d){function e(a){for(var e=c.length,f=-1;++f<e&&!1!==d(c[f],a[f]||"",b););}var f=
-this;return f._call({url:"https://translate.yandex.net/api/v1.5/tr.json/translate?format="+(a?"html":"plain")+"&lang="+b.lang,method:"POST",traditional:!0,data:{key:f.key(),text:c}}).done(function(a,b,c){a&&200===a.code?e(a.text||[]):(f.stderr(f.parseError(a)||f.odderr(c)),e([]))}).fail(function(){e([])})};return new n};return d}({},z,y));p.register("$45",{zh:["zh","zh-TW"],he:["iw"],jv:["jw"]});p.register("$32",function(d,g,l){function n(){}d.create=function(d){d=n.prototype=new d;d.toString=function(){return"Google Translate"};
-d.getId=function(){return"google"};d.getUrl=function(){return"https://translate.google.com/"};d.parseError=function(c){if(c.error){for(var b=[],a=c.error.errors||[],d=a.length,e=-1;++e<d;)b.push(a[e].message||"");return String(this)+" error "+c.error.code+": "+b.join(";")}return""};d.batch=function(c,b,a,d){function e(a){for(var e=c.length,f=-1,k;++f<e&&(k=a[f]||{},!1!==d(c[f],k.translatedText||"",b)););}var f=this;a=a?"html":"text";var k=f.mapLang(b,p.require("$45","google.json"));return f._call({url:"https://translation.googleapis.com/language/translate/v2?source=en&target="+
-k+"&format="+a,method:"POST",traditional:!0,data:{key:f.key(),q:c}}).done(function(a){a.data?e(a.data.translations||[]):(f.stderr(f.parseError(a)||f.odderr(xhr)),e([]))}).fail(function(){e([])})};return new n};return d}({},z,y));p.register("$46",{pt:["pt","pt-pt"],sr:["sr-Cyrl","sr-Latn"],sr_RS:["sr-Cyrl"],tlh:["tlh-Latn","tlh-Piqd"],zh:["zh-Hans","zh-Hant"],zh_CN:["zh-Hans"],zh_HK:["zh-Hans"],zh_SG:["zh-Hans"],zh_TW:["zh-Hant"]});p.register("$33",function(d,g,l){function n(){}d.create=function(d){d=
-n.prototype=new d;d.toString=function(){return"Microsoft Translator text API"};d.getId=function(){return"microsoft"};d.getUrl=function(){return"https://aka.ms/MicrosoftTranslatorAttribution"};d.parseError=function(c){return c&&c.error?c.error.message:""};d.batch=function(c,b,a,d){function e(a){for(var e=-1,f;++e<g&&(f=a[e]||{},f=f.translations||[],f=f[0]||{},!1!==d(c[e],f.text||"",b)););}var f=this,k=[],g=c.length,l=-1;a=a?"html":"plain";for(var m=f.mapLang(b,p.require("$46","ms.json"));++l<g;)k.push({text:c[l]});
-return f._call({url:"https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to="+m+"&textType="+a,method:"POST",data:JSON.stringify(k),headers:{"Content-Type":"application/json; charset=UTF-8","Ocp-Apim-Subscription-Key":this.key(),"Ocp-Apim-Subscription-Region":f.param("region")||"global"}}).done(function(a){a&&a.length?e(a):(f.stderr(f.parseError(a)||f.odderr(xhr)),e([]))}).fail(function(){e([])})};return new n};return d}({},z,y));p.register("$34",function(d,g,p){function n(){}
-d.create=function(d){(n.prototype=new d).batch=function(c,b,a,d){function e(a){for(var e=c.length,f=-1;++f<e&&!1!==d(c[f],a[f],b););}var f=g.locoScope.ajax;a={hook:this.getId(),type:a?"html":"text",locale:String(b),sources:c};var k=l.Deferred();this.abortable(f.post("apis",a,function(a){e(a&&a.targets||[]);k.resolve()},function(){e([]);k.reject()}));return k.promise()};return new n};return d}({},z,y));p.register("$16",function(d,g,y){function n(){this.inf={}}function m(){var a=y.createElement("p"),
-b=/&(#\d+|#x[0-9a-f]|[a-z]+);/i,c=/<[a-z]+\s/i,d,k;return{sniff:function(g){if(g===d)return k;d=g;if(b.test(g)||c.test(g))if(a.innerHTML=g,a.textContent!==g)return k=!0;return k=!1}}}var c=n.prototype;c.init=function(a){this.inf=a||{}};c.param=function(a){return this.inf[a]||""};c.key=function(){return this.param("key")};c.getId=function(){return this.param("id")||"none"};c.getUrl=function(){return this.param("url")||"#"};c.toString=function(){return this.param("name")||this.getId()};c.stderr=function(a){var b=
-(g.locoScope||{}).notices||g.console;b&&b.error&&b.error(String(a))};c.odderr=function(){return String(this)+": Unknown failure"};c.parseError=function(a){return""};c.mapLang=function(a,b){var c=String(a),d=a.lang,g=b[c]||b[d]||[],l=g.length;if(0===l)return d;if(1<l)for(var c=c.toLowerCase(),d=-1,m;++d<l;)if(m=g[d],m.toLowerCase().replace("-","_")===c)return m;return g[0]};c.translate=function(a,b,c){return this.batch([a],b,this.isHtml(a),c)};c.batch=function(){return{always:function(a){a()}}};c._call=
-function(a){var b=this;a.cache=!0;a.dataType="json";a.error=function(a,c,d){try{var g=a.responseText,m=g&&l.parseJSON(g);d=m&&b.parseError(m)||d}catch(n){}b.stderr(String(b)+": "+d)};return b.abortable(l.ajax(a))};c.abortable=function(a){var b=this;a.always(function(){b.$r===a&&(b.$r=null)});return b.$r=a};c.abort=function(){var a=this.$r;a&&a.abort()};c.isHtml=function(a){return(b||(b=m())).sniff(a)};c.createJob=function(){return p.require("$30","job.js").create(this)};d.create=function(a){var b;
-b=a.id;b="yandex"===b?p.require("$31","yandex.js").create(n):"google"===b?p.require("$32","google.js").create(n):"microsoft"===b?p.require("$33","ms.js").create(n):p.require("$34","custom.js").create(n);b.init(a);return b};d.suggest=function(a,b,c,d){var g,l,m=a.length;for(g=0;g<m;g++)l=a[g],l.translate(b,c,d)};var b;return d}({},z,y));p.register("$17",function(d,g,p){d.init=function(d){function m(){M||(J.click(k),M=l('<div id="loco-fs-creds"></div>').dialog({dialogClass:"request-filesystem-credentials-dialog loco-modal",
-minWidth:580,modal:!0,autoOpen:!1,closeOnEscape:!0}).on("change",'input[name="connection_type"]',function(){this.checked&&l("#ssh-keys").toggleClass("hidden","ssh"!==l(this).val())}));return M}function c(){G&&(b(l(q)),G=!1);if(H&&L){var a=L,c=l(I);c.find("span.loco-msg").text(a);N||(c.removeClass("jshide").hide().fadeIn(500),N=!0)}else N&&(b(l(I)),N=!1)}function b(a){a.slideUp(250).fadeOut(250,function(){l(this).addClass("jshide")})}function a(){if(H)return M&&M.dialog("close"),c(),l(d).find('button[type="submit"]').attr("disabled",
-!1),l(g).triggerHandler("resize"),w&&w(!0),!0;s&&M?(G||(l(q).removeClass("jshide").hide().fadeIn(500),G=!0),N&&(b(l(I)),N=!1)):c();l(d).find('input[type="submit"]').attr("disabled",!0);w&&w(!1);return!1}function h(a){var b,c,d=u||{};for(b in d)d.hasOwnProperty(b)&&(c=d[b],a[b]?a[b].value=c:l('<input type="hidden" />').attr("name",b).appendTo(a).val(c))}function e(a){a.preventDefault();a=l(a.target).serializeArray();r(a);E=!0;return!1}function f(a){a.preventDefault();M.dialog("close");return!1}function k(a){a.preventDefault();
-M.dialog("open").find('input[name="connection_type"]').change();return!1}function v(b){H=b.authed;z=b.method;l(q).find("span.loco-msg").text(b.message||"Something went wrong.");L=b.warning||"";b.notice&&F.notices.info(b.notice);if(H)"direct"!==z&&(u=b.creds,h(d),E&&b.success&&F.notices.success(b.success)),a();else if(b.reason)F.notices.info(b.reason);else if(b=b.prompt){var c=m();c.html(b).find("form").submit(e);c.dialog("option","title",c.find("h2").remove().text());c.find("button.cancel-button").show().click(f);
-c.find('input[type="submit"]').addClass("button-primary");a();l(g).triggerHandler("resize")}else F.notices.error("Server didn't return credentials, nor a prompt for credentials")}function y(){a()}function r(a){E=!1;F.ajax.setNonce("fsConnect",K).post("fsConnect",a,v,y);return a}var u,w,q=d,z=null,E=!1,H=!1,F=g.locoScope,s=d.path.value,D=d.auth.value,K=d["loco-nonce"].value,J=l(q).find("button.button-primary"),I=p.getElementById(q.id+"-warn"),G=!1,N=!1,L="",M;F.notices.convert(I).stick();d.connection_type?
-(u={},u.connection_type=d.connection_type.value,H=!0):s&&D&&r({path:s,auth:D});a();return{applyCreds:function(a){if(a.nodeType)h(a);else{var b,c=u||{};for(b in c)c.hasOwnProperty(b)&&(a[b]=c[b])}return this},setForm:function(b){d=b;a();h(b);return this},connect:function(){s=d.path.value;D=d.auth.value;r(l(d).serializeArray());return this},listen:function(a){w=a;H&&a(!0);return this}}};return d}({},z,y));p.register("$18",function(d,g,y){function n(d,e,f,g){e="n"===f?c(e):b(e);g&&(e=a(e));return m([].sort,
-[e])(d)}function m(a,b){return function(c){a.apply(c,b);return c}}function c(a){return function(b,c){var d=b&&b[a]||0,g=c&&c[a]||0;return d===g?0:d>g?1:-1}}function b(a){return function(b,c){return(b&&b[a]||"").localeCompare(c&&c[a]||"")}}function a(a){return function(b,c){return-1*a(b,c)}}d.init=function(a){function b(a){var c=-1,d=a.length;for(l("tr",q).remove();++c<d;)q.appendChild(a[c].$)}function c(a){r=a?z.find(a,d):d.slice(0);w&&(a=g[w],r=n(r,w,a.type,a.desc));b(r)}var d=[],g=[],m=0,r,u,w,
-q=a.getElementsByTagName("tbody")[0],y=a.getElementsByTagName("thead")[0],z=p.require("$7","fulltext.js").init();y&&q&&(l("th",y).each(function(a,c){var f=c.getAttribute("data-sort-type");f&&(a=m,l(c).addClass("loco-sort").click(function(c){c.preventDefault();c=a;var f=g[c],h=f.type,m=!(f.desc=!f.desc);r=n(r||d.slice(0),c,h,m);b(r);u&&u.removeClass("loco-desc loco-asc");u=l(f.$).addClass(m?"loco-desc":"loco-asc").removeClass(m?"loco-asc":"loco-desc");w=c;return!1}),g[m]={$:c,type:f});c.hasAttribute("colspan")?
-m+=Number(c.getAttribute("colspan")):m++}),l("tr",q).each(function(a,b){var c,f,e,h=[],l={_:a,$:b},m=b.getElementsByTagName("td");for(f in g){c=m[f];(e=c.textContent.replace(/(^\s+|\s+$)/g,""))&&h.push(e);c.hasAttribute("data-sort-value")&&(e=c.getAttribute("data-sort-value"));switch(g[f].type){case "n":e=Number(e)}l[f]=e}d[a]=l;z.index(a,h)}),a=l('form.loco-filter input[type="text"]',a.parentNode),a.length&&(a=a[0],y=l(a.form),1<d.length?p.require("$8","LocoTextListener.js").listen(a,c):y.hide(),
-y.on("submit",function(a){a.preventDefault();return!1})))};return d}({},z,y));var G=z.locoScope||(z.locoScope={});z=z.locoConf||(z.locoConf={});y=p.require("$1","t.js").init();var L=z.wplang;p.require("$2","array.js");G.l10n=y;y.load(z.wpl10n);L&&y.pluraleq(L.pluraleq);G.string=p.require("$3","string.js");G.notices=p.require("$4","notices.js").init(y);G.ajax=p.require("$5","ajax.js").init(z).localise(y);G.locale=p.require("$6","wplocale.js");G.fulltext=p.require("$7","fulltext.js");G.watchtext=p.require("$8",
-"LocoTextListener.js").listen;G.selector=p.require("$9","LocoSelector.js").create;G.tooltip=p.require("$10","tooltip.js");G.po={ed:p.require("$11","poedit.js"),kbd:p.require("$12","hotkeys.js"),init:p.require("$13","po.js").create,ace:p.require("$14","ace.js").strf("php"),ref:p.require("$15","refs.js")};G.apis=p.require("$16","apis.js");G.fs=p.require("$17","fsconn.js");l("#loco.wrap table.wp-list-table").each(function(d,g){p.require("$18","tables.js").init(g)})})(window,document,window.jQuery);
+( function( window, document, $, undefined ){
+/**
+ * CommonJS runtime helper.
+ */ 
+var CommonJS = function(){
+    // internal registry of modules indexed by unique internal ID */
+    var modules = {};
+    // chuck error when module not included
+    function notFound( filename ){
+        throw new Error('Failed to require '+filename);
+    }
+    // expose public CommonJS object into scope
+    return {
+        // called by self-registering module
+        register: function ( hash, mod ){
+            modules[hash] = mod;
+        },
+        // called to access module's export object.
+        // used to force compilation of a module, e.g. require('utils/html');
+        require: function ( hash, filename ){
+            return modules[hash] || notFound(filename);
+        },
+        // as above, but only strict when forced.
+        // used when using first available like, e.g. include('foo') || include('bar',true)
+        include: function( hash, filename, strict ){
+            return modules[hash] || ( strict ? notFound(filename) : null );
+        }
+    };
+}();
+CommonJS.register("$1", function(exports,window,document){ /* module: js/utils/t.js */
+/**
+ * Create translator scope
+ * @return Object with methods ._, ._n, ._x, .load
+ */
+exports.init = function( pluralFunction ){
+
+    pluralFunction = checkPluralFunction( pluralFunction );
+    
+    /**
+     * raw data looks like:
+     * {
+     *    msgid: [ msgstr ],
+     *    msgctxt\x04msgid: [ msgstr ],
+     *    msgid: [ msgstr[0], msgstr[1] ]
+     * }
+     */    
+    var data = {};
+
+
+    /**
+     * Convert a number (n) to plural offset
+     */
+    function getPluralOffset( quantity ){
+        var offset = Number( pluralFunction(quantity) );
+        if( isNaN(offset) ){
+            //console.error('Plural function did not return a number for n='+quantity);
+            offset = 0;
+        }
+        return offset;
+    }
+
+
+    /**
+     * Get translation by key and offset, or return what was offered
+     */
+    function getFinalTranslation( key, fallback, offset ){
+        var translations = data[key];
+        if( translations && translations[offset] ){
+            return translations[offset];
+        }
+        return fallback||'';
+    }
+
+
+    /**
+     * Get a scalar translation from plain text key - always at offset [0]
+     */
+    function getText( msgid ){
+        return getFinalTranslation( msgid, msgid, 0 );
+    }
+
+
+    /**
+     * Get a scalar translation from key with context - always at offset [0]
+     */
+    function getTextWithContext( msgid, msgctxt ){
+        return getFinalTranslation( msgctxt+'\x04'+msgid, msgid, 0 );
+    }
+
+
+    /**
+     * Get a pluralized translation according to n
+     */
+    function getTextPluralForm( msgid, msgid_plural, n ){
+        var offset = getPluralOffset( n );
+        return getFinalTranslation( msgid, offset ? msgid_plural : msgid, offset );
+    }
+    
+    
+    return {
+        // expose semantic functions that can be extracted from JS as members
+        // this will work even when obfuscated, except that comments may be lost!
+        _:  getText,
+        _x: getTextWithContext,
+        _n: getTextPluralForm,
+        // expose methods to alter current localisations
+        load: function( newData ){
+            data = newData || {};
+            return this;
+        },
+        pluraleq: function( newFunc ){
+            pluralFunction = checkPluralFunction(newFunc);
+            return this;
+        }
+    };
+};
+
+
+
+
+/**
+ * Use germanic plural identity by default
+ * It may return Boolean or Number only
+ */
+function checkPluralFunction( newFunc ){
+    var type = typeof newFunc;
+
+    // allow string equation, but sanitize it
+    // this would allow someone to execute a function like "n()" but not much harm in that
+    if( 'string' === type ){
+        if( /[^ <>!=()%^&|?:n0-9]/.test(newFunc) ){
+            console.error('Invalid plural: '+newFunc);
+        }
+        else {
+            return new Function( 'n', 'return '+newFunc );
+        }
+    }
+
+    // else must be a function
+    if( 'function' !== type ){
+        newFunc = function( n ){
+            return n != 1;
+        };
+    }
+
+    return newFunc;
+}
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$2", function(exports,window,document){ /* module: js/wp/html.js */
+/**
+ * Replacement for utils/html when running in WordPress.
+ */
+
+
+// WordPress should provide jQuery migrate that reinstates $.browser
+exports.ie = function() {
+    var browser = $ && $.browser || {},
+        isMSIE = browser.msie && Number(browser.version) < 11
+    ;
+    browser = null;
+    // expose access to exports.ie() without version number
+    return function() {
+        return isMSIE;
+    };
+}();
+
+
+// Dummy. WP env doesn't need to do anything
+exports.init = function(){
+    return exports;
+}
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$3", function(exports,window,document){ /* module: js/shim/number.js */
+/**
+ * Simple number utilities
+ */
+
+
+function trimZeros( s ){
+    var snip,
+        index = s.length
+    ;
+    while( '0' === s.charAt(--index) ){
+        snip = index;
+    }
+    if( snip ){
+        s = s.substring(0,snip);
+    }
+    return s;
+}
+
+
+
+/**
+ * @return String
+ */
+Number.prototype.format = function( dp ){
+    var p = Math.pow(10,dp||0),
+        n = Math.round( p * this ) / p,
+        thousands = [],
+        strnumber = String(n),
+        parts = strnumber.split('.'),
+        strint = parts[0],
+        fraction = parts[1],
+        index = strint.length
+    ;
+
+    do {
+        thousands.unshift( strint.substring( index-3, index ) );
+    }
+    while (
+        ( index -= 3 ) > 0
+    );
+    strnumber = thousands.join(',');
+    
+    if( fraction && ( fraction = trimZeros(fraction) ) ){
+        strnumber += '.'+fraction;
+    }
+    
+    return strnumber;
+};
+
+
+
+
+
+/**
+ * Emulates loco_string_percent PHP function
+ * @return String
+ */
+Number.prototype.percent = function( total ){
+    var s,
+        dp = 0,
+        n = this,
+        p = n && total ? n / total * 100 : 0
+    ;
+    if( 0 === p ){
+        return '0';
+    }
+    if( 100 === p ){
+        return '100';
+    }
+    // fix 100% approximations, up to ceiling of 99.99%
+    if( p > 99 ){
+        /*p = Math.min( p, 99.99 );
+        do { s = p.format(++dp); }
+        while( '100' === s.substr(0,3) && dp < 2 );*/
+        // now capping at 99.9
+        p = Math.min( p, 99.9 );
+        s = p.format(++dp);
+    }
+    // fix 0% approximations, down to sane limit of 0.0001%
+    else if( p < 0.5 ){
+        p = Math.max( p, 0.0001 );
+        do { s = p.format(++dp); }
+        while( '0' === s && dp < 4 );
+        s = s.substr(1);
+    }
+    // else allow approximation
+    else {
+        s = p.format(0);
+    }
+    
+    return s;
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$4", function(exports,window,document){ /* module: js/shim/array.js */
+/**
+ * Shim Array prototype for IE<9
+ * https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf
+ */
+
+
+    if (!Array.prototype.indexOf) {
+      Array.prototype.indexOf = function (searchElement /*, fromIndex */ ) {
+        'use strict';
+        if (this == null) {
+          throw new TypeError();
+        }
+        var n, k, t = Object(this),
+            len = t.length >>> 0;
+    
+        if (len === 0) {
+          return -1;
+        }
+        n = 0;
+        if (arguments.length > 1) {
+          n = Number(arguments[1]);
+          if (n != n) { // shortcut for verifying if it's NaN
+            n = 0;
+          } else if (n != 0 && n != Infinity && n != -Infinity) {
+            n = (n > 0 || -1) * Math.floor(Math.abs(n));
+          }
+        }
+        if (n >= len) {
+          return -1;
+        }
+        for (k = n >= 0 ? n : Math.max(len - Math.abs(n), 0); k < len; k++) {
+          if (k in t && t[k] === searchElement) {
+            return k;
+          }
+        }
+        return -1;
+      };
+    }
+return exports;
+}({},window,document) );
+
+CommonJS.register("$5", function(exports,window,document){ /* module: js/utils/string.js */
+/**
+ * Common string utilities
+ */
+
+
+/**
+ * Trim a string on both sides.
+ * Note that native String.prototype.trim doesn't accept characters argument.
+ */
+exports.trim = function( s, chars ){
+    chars || ( chars = " \n" );
+    while( s && chars.indexOf( s.substr(0,1) ) !== -1 ){
+        s = s.substr(1);
+    }
+    while( s && chars.indexOf( s.substr(-1) ) !== -1 ){
+        s = s.substr(0, s.length-1 );
+    }
+    return s;
+};
+
+
+// crappy string formatter
+// TODO allow ordinal arguments
+// TODO actually cast data types
+// TODO padding
+exports.sprintf = function( str ){
+    var i = 0, param, params = [].slice.call( arguments, 1 );
+    return str.replace( /%([sud%])/g, function( match, token ){
+        if( '%' === token ){
+            return '%';
+        }
+        param = params[i++];
+        return String(param)||'';
+    } );
+};
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$20", function(exports,window,document){ /* module: js/shim/dom.js */
+/**
+ * DOM utilities
+ */
+
+
+
+function createOffsetCalculator( property ){
+    return function ( el, ancestor ) {
+        var value = el[property]||0;
+        while( ( el = el.offsetParent ) && el !== (ancestor||document.body) ){
+            value += el[property]||0;
+        }
+        return value;
+    }
+}
+
+
+/**
+ * Get absolute top position relative to a root element
+ */
+exports.top = createOffsetCalculator('offsetTop');
+
+
+/**
+ * Get absolute left position relative to a root element
+ */
+exports.left = createOffsetCalculator('offsetLeft');
+
+
+/**
+ * Short cut to create simple element
+ * @usage require('shim/dom').el('span')
+ * @return {HTMLElement}
+ */
+exports.el = function( nodeName, className ){
+    var el = document.createElement( nodeName||'div' );
+    className && ( el.className = className );
+    return el;
+};
+
+/**
+ * Short cut to create text node
+ * @usage html.txt('whatever');
+ * @return TextNode
+ */
+exports.txt = function( value ){
+    return document.createTextNode(value||'');
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$6", function(exports,window,document){ /* module: js/wp/notices.js */
+/**
+ * Module for handling WordPress Admin notices
+ */
+
+
+var batch = [],
+    timestamp,
+    now = Date.now || function(){ return new Date().getTime(); },
+    // translation placeholders
+    T_ERROR, T_WARNING, T_NOTICE, T_SUCCESS
+;
+
+
+function killEvent( event ){
+    event.stopPropagation();
+    event.preventDefault();
+    return false;
+}
+  
+
+// console error debug logging
+function debugError( message, debugdata ){
+    if( window.console && console.error ){
+        console.error( 'Loco Error: '+message );
+        if( debugdata && console.debug ){
+            console.debug( debugdata );
+        }
+    }
+}
+
+
+function debugLog(){
+    if( window.console && console.log ){
+        console.log.apply( console, arguments ); 
+    }
+}
+
+
+// add fade out and mouse stopper to dismissable error
+function initMessageTimer( el, closer, delay ){
+    var t;
+    function startTimer(){
+        stopTimer();
+        t = setTimeout( closer, delay );
+    }
+    function stopTimer(){
+        t && clearTimeout(t);
+        t = null;
+    }
+    function destroy(){
+        stopTimer();
+        $(el).off('mouseenter mouseleave');
+    }
+    startTimer();
+    $(el).mouseenter(stopTimer).mouseleave(startTimer);
+    return {
+        die: destroy
+    };
+}
+
+
+// close animation taken from wp-admin/js/common.js
+function closeMessage( $el, speed ){
+    $el.fadeTo( speed, 0, function() {
+        $el.slideUp( speed, function() {
+            $el.remove();
+            // this bit's mine. editor needs this.
+            $(window).triggerHandler('resize');
+        });
+    } );
+    return $el;
+}
+
+
+// make error dismissable
+function initMessage( el, flash ){
+    var auto, index, links, $el = $(el), $close = $el.find('button');
+    function closer( event ){
+        batch[index] = null;
+        closeMessage( $(el), 250 );
+        auto && auto.die();
+        return event && killEvent(event);
+    }
+    function makeSticky(){
+        auto && auto.die();
+        auto = null;
+        batch[index] = null;
+    }
+    function makeFlash(delay){
+        auto && auto.die();
+        auto = initMessageTimer(el,closer,delay);
+        return auto;
+    }
+    function addLink( href, text ){
+        var $nav = $(el).find('nav'),
+            $tmp = $('<nav></nav>').append( $('<a></a>').attr('href',href).text(text) )
+        ;
+        if( links ){
+            links.push( $tmp.html() );
+            $nav.html( links.join('<span> | </span>') );
+        }
+        else {
+            links = [ $tmp.html() ];
+            $(el).addClass('has-nav').append($tmp);
+        }
+    }
+    // adding dismiss button. Note that WordPress adds it too, unless we add this after page load.
+    if( 0 === $close.length ) {
+        $el.addClass('is-dismissible');
+        $close = $('<button type="button" class="notice-dismiss"> </a>').appendTo($el);
+    }
+    $close.off('click').click(closer);
+    $(window).triggerHandler('resize');
+    // mark time of last message initialized
+    timestamp = now();
+    index = batch.length;
+    batch.push( closer );
+    // auto-close after delay for flash messages
+    if( flash ){
+        auto = makeFlash(flash);
+    }
+    // return closure for keeping sticky if desired 
+    return {
+        link: function( href, text ){
+            addLink( href, text||href );
+            return this;
+        },
+        stick: function(){
+            makeSticky();
+            return this;
+        },
+        slow: function(delay){
+            makeFlash(delay||10000);
+            return this;
+        }
+    };
+}        
+
+
+function clearMessages(){
+    var i = -1, close, closers = batch, length = closers.length;
+    while( ++i < length ){
+        close = closers[i];
+        if( close && close.call ){
+            close();
+        }
+    }
+    batch = []; 
+    timestamp = null;
+    return exports;
+}
+
+
+function createMessage( type, label, message ){
+    var createElement = CommonJS.require("$20","dom.js").el,
+        el = $('<div class="notice notice-'+type+' loco-notice inline"></div>').prependTo( $('#loco-notices') ),
+        p  = $( createElement('p') ),
+        m  = $( createElement('span') ).text( message ),
+        s  = $( createElement('strong','has-icon') ).text( label+': ' )
+    ;
+    p.append(s).append(m).appendTo(el);
+    return el;
+}
+
+
+// pretty-ish display of messages in admin page
+function showMessage( message, label, type, flash ){
+    // note that fadeIn will would display:block when we may want display:flex, so setting opacity directly
+    var el = createMessage( type, label, message ).css('opacity','0').fadeTo(500,1);
+    $(window).triggerHandler('resize');
+    return initMessage( el, flash );
+}
+
+function showError( message ){
+    return showMessage( message, T_ERROR, 'error' );
+}
+
+function showWarning( message ){
+    return showMessage( message, T_WARNING, 'warning' );
+}
+
+function showNotice( message ){
+    return showMessage( message, T_NOTICE, 'info' );
+}
+
+function showSuccess( message ){
+    return showMessage( message, T_SUCCESS, 'success', 5000 );
+}
+
+// delayed
+function convertExisting(){
+    // deliberately only converting divs. other elements like forms must stay
+    // this also skips any hidden items as it's assumed they are script-controlled
+    $('#loco-notices').find('div.notice').each( function(i,el){
+        if( -1 === el.className.indexOf('jshide') ){
+            var flash = -1 === el.className.indexOf('notice-success') ? null : 5000;
+            initMessage( el, flash );
+        }
+    } );
+}
+
+
+// expose visual notices - names must match Loco_error_Exception types
+exports.error = showError;
+exports.warn = showWarning;
+exports.info = showNotice;
+exports.success = showSuccess;
+exports.warning = showWarning; // <- alias used from PHP generated divs
+
+// expose console notices
+exports.log = debugLog;
+exports.debug = debugError;
+
+// enable clearing of messages before showing more
+exports.clear = clearMessages;
+
+// expose generic HTML rendering
+exports.create = createMessage;
+
+// show backend notice which could be of various types
+exports.raise = function( err ){
+    var self = exports,
+        func = self[ err.type ] || self.error
+    ;
+    func.call( self, err.message );  
+};
+
+// make any element dismissible
+exports.convert = initMessage;
+
+// enable any static messages on page load
+exports.init = function( translator ){
+
+    // create all translations now
+    // TODO ensure these match the PHP strings (context??)
+    T_ERROR = translator._('Error');
+    T_WARNING = translator._('Warning');
+    T_NOTICE = translator._('Notice');
+    T_SUCCESS = translator._('OK');
+
+    // initial conversion is delayed to avoid page load scripts removing
+    setTimeout( convertExisting, 1000 );
+    
+    // TODO also listen for click.wp-dismiss-notice for when wp-admin/js/common.js closes so we can ping resize
+
+    return exports;
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$7", function(exports,window,document){ /* module: js/wp/ajax.js */
+/**
+ * Ajax via WordPress
+ */
+
+var nonces = {}, 
+    translator,
+    lastError,
+    ajaxurl = window.ajaxurl || '/wp-admin/admin-ajax.php'
+    //urlencode = window.encodeURIComponent
+;
+
+
+exports.init = function( conf ){
+    nonces = conf.nonces || nonces;
+    return exports;
+};
+
+exports.localise = function( t ){
+    translator = t;
+    return exports;
+};
+
+/**
+ * Get last failed XHR response
+ */
+exports.xhr = function(){
+    return lastError;
+};
+
+
+/**
+ * Shared utility for stripping server response HTML into neater text
+ */
+function stripHtmlResponse( htmlOutput ){
+    var textOutput = $('<pre>'+htmlOutput+'</pre>').text();
+    // trim text output, because it came from html
+    if( textOutput ){
+        textOutput = textOutput
+            .replace(/[\r\n]+/g, '\n' )  // <- redundant space
+            .replace(/(^|\n)\s+/g,'$1')  // <- leading spaces
+            .replace(/\s+$/,'')          // <- final trailing space
+        ;
+    }
+    // htmlOutput may not have produced anything worth looking at 
+    if( ! textOutput ){
+        textOutput = htmlOutput;
+        // urgh.. blank page errors....
+        if( ! textOutput ){
+            textOutput = 'Blank response from server';
+        }
+    }
+    return textOutput;
+};
+
+
+/**
+ * Shared utility for getting first meaningful line of stripped text
+ * e.g. <h2>Fatal error.... 
+ */
+function parseErrorResponse( textOutput ){
+    if( textOutput = textOutput.split(/[\r\n]/)[0] ){
+        // clean up sensitive/ugly file information
+        textOutput = textOutput.replace(/ +in +\S+ on line \d+/,'');
+        // clean up fatal error preamble
+        textOutput = textOutput.replace(/^[()! ]+Fatal error:\s*/,'');
+        // TODO parse out (and translate) common errors, e.g.  Allowed memory size of ....
+        return textOutput;
+    }
+    // Translators: Generic error when external process broke an Ajax request
+    return t._('Server returned invalid data');
+}
+
+exports.strip = stripHtmlResponse;
+exports.parse = parseErrorResponse;
+
+/** 
+ * Utility executes WP ajax hook via actual form
+ */
+function submitAjaxForm( form, onSuccess, onError ){
+    var $form = $(form),
+        postdata = $form.serialize()
+    ;
+    function disableField( i, f ){
+        if( f.disabled ){
+            // ensures fields we want disabled aren't re-enabled later
+            // this assumes we run disable before enable - likely!
+            f.setAttribute('data-was-disabled','true');
+        }
+        else {
+            f.disabled = true;
+        }
+    }
+    function enableField( i, f ){
+        // only enable field that wasn't previously disabled
+        if( ! f.getAttribute('data-was-disabled') ){
+            f.disabled = false;
+        }
+    }
+    function disableForm(j){
+        j.find('.button-primary').addClass('loading');
+        j.find('button').each( disableField );
+        j.find('input').each( disableField );
+        j.find('select').each( disableField );
+        j.find('textarea').each( disableField );
+        j.addClass('disabled loading');
+    }
+    function enableForm(j){
+        j.find('.button-primary').removeClass('loading');
+        j.find('button').each( enableField );
+        j.find('input').each( enableField );
+        j.find('select').each( enableField );
+        j.find('textarea').each( enableField );
+        j.removeClass('disabled loading');
+    }
+    function _onSuccess( data, status, xhr ){
+        enableForm($form);
+        onSuccess && onSuccess( data, status, xhr );
+    }
+    function _onError( xhr, error, message ){
+        enableForm($form);
+        onError && onError( xhr, error, message );
+    }
+    // disable form and show "loading" after serialize, but before submit
+    disableForm($form);
+    // form must contain "route" and "action" fields
+    // action field must always be "loco_json" for json response
+    return doGenericAjax( form.route.value, _onSuccess, _onError, {
+        type: form.method,
+        data: postdata
+    } );
+}
+
+
+function whoopsEmptyNonce(route){
+    if( window.console && console.error ){
+        console.error('No nonce for "'+route+'"');
+    }
+    return '';
+}
+
+
+/**
+ * @internal
+ */
+function objectAppend( obj, key, value ){
+    obj[key] = value;
+}
+
+
+/**
+ * @internal
+ */
+function arrayAppend( arr, key, value ){
+    arr.push( { name:key, value:value } );
+}
+
+
+/**
+ * @internal
+ */
+function formDataAppend( form, key, value ){
+    form.append(key,value);
+}
+
+
+/**
+ * Execute WP Ajax hook via POST with serializable field data
+ * @param {String} route
+ * @param {Object} postdata
+ * @param {Function} onSuccess
+ * @param {Function} onError
+ * @return {jqXHR} request object
+ */
+function postAjaxData( route, postdata, onSuccess, onError ){
+    var append,
+        urlEncoded = true,
+        data = postdata || {},
+        nonce = nonces[route] || whoopsEmptyNonce(route)
+    ;
+    // abstract FormData interface
+    if( window.FormData && ( data instanceof FormData ) ){
+        urlEncoded = false;
+        append = formDataAppend;
+    }
+    // format used by jQuery.serializeArray
+    else if( Array.isArray(data) ){
+        append = arrayAppend;
+    }
+    // else generic property setter
+    else {
+        append = objectAppend;
+    }
+    // add mandatory routing data
+    append(data,'action','loco_json');
+    append(data,'route',route);
+    append(data,'loco-nonce',nonce);
+    //
+    return doGenericAjax( route, onSuccess, onError, {
+        type: 'post',
+        data: data,
+        // prevent jQuery from stringifying FormData, but ensure normal object data is cast
+        processData: urlEncoded,
+        // to send 'multipart/form-data' we set false so jQuery adds the boundary for us!
+        contentType: urlEncoded ? 'application/x-www-form-urlencoded; charset=UTF-8' : false
+    } );
+}
+
+
+/**
+ * Generic Ajax entry point with error handling
+ * @param {String} debugString
+ * @param {Function} onSuccess
+ * @param {Function} onError
+ * @param {Object} options
+ * @return {jqXHR} request object https://api.jquery.com/jQuery.ajax/#jqXHR
+ */
+function doGenericAjax( debugString, onSuccess, onError, options ){
+
+    // onError wrapper.
+    function doFail( xhr, error, message ){
+        if( 'abort' === error ){
+            return;
+        }
+        var t = translator || { _: function(s){ return s; } },
+            status = xhr.status,
+            htmlOutput = xhr.responseText,
+            textOutput = stripHtmlResponse( htmlOutput ),
+            typeResond = xhr.getResponseHeader('Content-Type') || 'text/html',
+            byteLength = xhr.getResponseHeader('Content-Length') || htmlOutput.length
+        ;
+        // Ideally our back end handled the error and returned JSON. This we can display neatly on screen
+        if( 'success' === error && message ){
+            noticeApi.error( message );
+        }
+        // else either a non-JSON 200 server response. attempt to display useful first line
+        else {
+            noticeApi.error( parseErrorResponse(textOutput)+'.\n'+t._('Check console output for debugging information') ) ;
+            // generic display of proper failure
+            noticeApi.debug('Ajax failure for '+debugString, { status:status, error:error, message:message, output: htmlOutput } );
+            //not much point showing JSON parse errors when the response is almost certainly not JSON
+            if( 'parsererror' === error ){
+                message = 'Response not JSON';
+            } 
+            // user friendly console output, required for support requests
+            noticeApi.log( [
+                t._('Provide the following text when reporting a problem')+':',
+                '----',
+                'Status '+status+' "'+( message||t._('Unknown error') )+'" ('+typeResond+' '+byteLength+' bytes)',
+                textOutput,
+                '===='
+            ].join('\n') );
+        }
+        // call back if handler defined and callable
+        if( onError && onError.call ){
+            onError( xhr, error, message );
+        }
+        // call locoScope.xhr() to examine response
+        lastError = xhr;
+    }
+
+    // onSuccess wrapper handles good response which is actually bad.
+    function doSuccess( result, status, xhr ){
+        var data = result && result.data,
+            notices = result && result.notices,
+            notelen = notices && notices.length
+        ;
+        if( ! data || result.error ){
+            doFail( xhr, status, result && result.error && result.error.message );
+            // be warned that client code listening on "fail" handler will not know about this!
+            // https://stackoverflow.com/questions/61821026/how-to-trigger-fail-handlers-on-an-ajax-promise
+        }
+        else {
+            onSuccess && onSuccess( data, status, xhr );
+        }
+        // showing notices last so warnings appear before successes (prepending)
+        while( notelen-- ){
+            noticeApi.raise( notices[notelen] );
+        }
+    }
+    
+    // common options for all requests
+    options.url = ajaxurl;
+    options.dataType = 'json';
+    
+    // always clearing notices before a new ajax request (as a page reload would!)
+    var noticeApi = CommonJS.require("$6","notices.js").clear();
+    lastError = null;
+    return $.ajax(options).fail(doFail).done(doSuccess);
+} 
+
+
+
+
+
+
+
+exports.submit = submitAjaxForm;
+
+exports.post = postAjaxData;
+
+
+exports.setNonce = function( name, value ){
+    nonces[name] = value;
+    return exports;
+};
+
+
+/*exports.hasNonce = function( name ){
+    return !!nonces[name];
+};*/
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$21", {
+    "arab": 1,
+    "aran": 1,
+    "hebr": 1,
+    "nkoo": 1,
+    "syrc": 1,
+    "syrn": 1,
+    "syrj": 1,
+    "syre": 1,
+    "samr": 1,
+    "mand": 1,
+    "mend": 1,
+    "thaa": 1,
+    "adlm": 1,
+    "cprt": 1,
+    "phnx": 1,
+    "armi": 1,
+    "prti": 1,
+    "phli": 1,
+    "phlp": 1,
+    "phlv": 1,
+    "avst": 1,
+    "mani": 1,
+    "khar": 1,
+    "orkh": 1,
+    "ital": 1,
+    "lydi": 1,
+    "ar": 1,
+    "ary": 1,
+    "ckb": 1,
+    "dv": 1,
+    "fa": 1,
+    "he": 1,
+    "nqo": 1,
+    "ps": 1,
+    "ur": 1,
+    "yi": 1
+} ); // data: js/data/rtl.json
+
+CommonJS.register("$8", function(exports,window,document){ /* module: js/objects/wplocale.js */
+/**
+ * Simpler locale object for crappy non-standard WordPress locales
+ */
+
+var ParseRegEx, SplitRegEx, RTLData = CommonJS.require("$21","rtl.json");
+
+
+exports.init = function(){
+    return new Locale;
+};
+
+
+exports.cast = function( vanilla ){
+    if( vanilla instanceof Locale ){
+        return vanilla;
+    }
+    if( 'string' === typeof vanilla ){
+        return exports.parse(vanilla);
+    }
+    return exports.clone( vanilla );
+};
+    
+    
+exports.clone = function( source ){
+    var s, target = new Locale;
+    for( s in source ){
+        target[s] = source[s];
+    }
+    return target;
+};
+
+// Basic tag parser. 
+// Like loco_parse_wp_locale
+exports.parse = function( code ){
+    var grep = ParseRegEx || ( ParseRegEx = /^([a-z]{2,3})(?:[-_]([a-z]{2}))?(?:[-_]([a-z0-9]{3,8}))?$/i );
+    // return null if format doesn't match
+    if( ! grep.exec(code) ){
+        return null;
+    }
+    // primary language is mandatory
+    var loc = new Locale;
+    loc.lang = RegExp.$1.toLowerCase();
+    // everything else is optional
+    if( code = RegExp.$2 ){
+        loc.region = code.toUpperCase();
+    }
+    if( code = RegExp.$3 ){
+        loc.variant = code.toLowerCase();
+    }
+    return loc;
+};
+
+
+function Locale(){
+    
+}
+
+var LocalePrototype = Locale.prototype;
+
+
+LocalePrototype.isValid = function(){
+    return !! this.lang;
+};
+
+LocalePrototype.isKnown = function(){
+    var tag = this.lang;
+    return  !( ! tag || 'zxx' === tag );
+};
+
+
+LocalePrototype.toString = function( sep ){
+    sep = sep||'-';
+    var value,
+        self = this,
+        code = self.lang||'zxx'
+    ;
+    if( value = self.region ){
+        code += sep+value;
+    }
+    if( value = self.variant ){
+        code += sep+value;
+    }
+    return code;
+};
+
+
+LocalePrototype.getIcon = function(){
+    var i = 3,
+        prop, value,
+        tags = ['variant','region','lang'],
+        classes = []
+    ;
+    while( 0 !== i-- ){
+        prop = tags[i];
+        if( value = this[prop] ){
+            //classes = classes.concat( [ prop, prop+'-'+value.toLowerCase() ] );
+            classes.push( prop );
+            classes.push( prop+'-'+value.toLowerCase() );
+        }
+    }
+    return classes.join(' ');
+};
+
+
+
+LocalePrototype.isRTL = function(){
+    return !!RTLData[ String(this.lang).toLowerCase() ];
+};
+
+
+
+LocalePrototype = null;
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$22", {
+    "á": "a",
+    "à": "a",
+    "ă": "a",
+    "ắ": "a",
+    "ằ": "a",
+    "ẵ": "a",
+    "ẳ": "a",
+    "â": "a",
+    "ấ": "a",
+    "ầ": "a",
+    "ẫ": "a",
+    "ẩ": "a",
+    "ǎ": "a",
+    "å": "a",
+    "ǻ": "a",
+    "ä": "a",
+    "ǟ": "a",
+    "ã": "a",
+    "ȧ": "a",
+    "ǡ": "a",
+    "ą": "a",
+    "ā": "a",
+    "ả": "a",
+    "ȁ": "a",
+    "ȃ": "a",
+    "ạ": "a",
+    "ặ": "a",
+    "ậ": "a",
+    "ḁ": "a",
+    "ǽ": "æ",
+    "ǣ": "æ",
+    "ḃ": "b",
+    "ḅ": "b",
+    "ḇ": "b",
+    "ć": "c",
+    "ĉ": "c",
+    "č": "c",
+    "ċ": "c",
+    "ç": "c",
+    "ḉ": "c",
+    "ď": "d",
+    "ḋ": "d",
+    "ḑ": "d",
+    "đ": "d",
+    "ḍ": "d",
+    "ḓ": "d",
+    "ḏ": "d",
+    "ð": "d",
+    "ꝺ": "d",
+    "ǆ": "ǳ",
+    "é": "e",
+    "è": "e",
+    "ĕ": "e",
+    "ê": "e",
+    "ế": "e",
+    "ề": "e",
+    "ễ": "e",
+    "ể": "e",
+    "ě": "e",
+    "ë": "e",
+    "ẽ": "e",
+    "ė": "e",
+    "ȩ": "e",
+    "ḝ": "e",
+    "ę": "e",
+    "ē": "e",
+    "ḗ": "e",
+    "ḕ": "e",
+    "ẻ": "e",
+    "ȅ": "e",
+    "ȇ": "e",
+    "ẹ": "e",
+    "ệ": "e",
+    "ḙ": "e",
+    "ḛ": "e",
+    "ḟ": "f",
+    "ꝼ": "f",
+    "ǵ": "g",
+    "ğ": "g",
+    "ĝ": "g",
+    "ǧ": "g",
+    "ġ": "g",
+    "ģ": "g",
+    "ḡ": "g",
+    "ꞡ": "g",
+    "ᵹ": "g",
+    "ĥ": "h",
+    "ȟ": "h",
+    "ḧ": "h",
+    "ḣ": "h",
+    "ḩ": "h",
+    "ħ": "h",
+    "ℏ": "h",
+    "ḥ": "h",
+    "ḫ": "h",
+    "ẖ": "h",
+    "í": "i",
+    "ì": "i",
+    "ĭ": "i",
+    "î": "i",
+    "ǐ": "i",
+    "ï": "i",
+    "ḯ": "i",
+    "ĩ": "i",
+    "į": "i",
+    "ī": "i",
+    "ỉ": "i",
+    "ȉ": "i",
+    "ȋ": "i",
+    "ị": "i",
+    "ḭ": "i",
+    "ĵ": "j",
+    "ǰ": "j",
+    "ḱ": "k",
+    "ǩ": "k",
+    "ķ": "k",
+    "ꞣ": "k",
+    "ḳ": "k",
+    "ḵ": "k",
+    "ĺ": "l",
+    "ľ": "l",
+    "ļ": "l",
+    "ł": "l",
+    "ḷ": "l",
+    "ḹ": "l",
+    "ḽ": "l",
+    "ḻ": "l",
+    "ŀ": "l",
+    "ḿ": "m",
+    "ṁ": "m",
+    "ṃ": "m",
+    "ń": "n",
+    "ǹ": "n",
+    "ň": "n",
+    "ñ": "n",
+    "ṅ": "n",
+    "ņ": "n",
+    "ꞥ": "n",
+    "ṇ": "n",
+    "ṋ": "n",
+    "ṉ": "n",
+    "ó": "o",
+    "ò": "o",
+    "ŏ": "o",
+    "ô": "o",
+    "ố": "o",
+    "ồ": "o",
+    "ỗ": "o",
+    "ổ": "o",
+    "ǒ": "o",
+    "ö": "o",
+    "ȫ": "o",
+    "ő": "o",
+    "õ": "o",
+    "ṍ": "o",
+    "ṏ": "o",
+    "ȭ": "o",
+    "ȯ": "o",
+    "ȱ": "o",
+    "ø": "o",
+    "ǿ": "o",
+    "ǫ": "o",
+    "ǭ": "o",
+    "ō": "o",
+    "ṓ": "o",
+    "ṑ": "o",
+    "ỏ": "o",
+    "ȍ": "o",
+    "ȏ": "o",
+    "ơ": "o",
+    "ớ": "o",
+    "ờ": "o",
+    "ỡ": "o",
+    "ở": "o",
+    "ợ": "o",
+    "ọ": "o",
+    "ộ": "o",
+    "ṕ": "p",
+    "ṗ": "p",
+    "ŕ": "r",
+    "ř": "r",
+    "ṙ": "r",
+    "ŗ": "r",
+    "ꞧ": "r",
+    "ȑ": "r",
+    "ȓ": "r",
+    "ṛ": "r",
+    "ṝ": "r",
+    "ṟ": "r",
+    "ꞃ": "r",
+    "ś": "s",
+    "ṥ": "s",
+    "ŝ": "s",
+    "š": "s",
+    "ṧ": "s",
+    "ṡ": "s",
+    "ş": "s",
+    "ꞩ": "s",
+    "ṣ": "s",
+    "ṩ": "s",
+    "ș": "s",
+    "ſ": "s",
+    "ꞅ": "s",
+    "ẛ": "s",
+    "ť": "t",
+    "ẗ": "t",
+    "ṫ": "t",
+    "ţ": "t",
+    "ṭ": "t",
+    "ț": "t",
+    "ṱ": "t",
+    "ṯ": "t",
+    "ꞇ": "t",
+    "ú": "u",
+    "ù": "u",
+    "ŭ": "u",
+    "û": "u",
+    "ǔ": "u",
+    "ů": "u",
+    "ü": "u",
+    "ǘ": "u",
+    "ǜ": "u",
+    "ǚ": "u",
+    "ǖ": "u",
+    "ű": "u",
+    "ũ": "u",
+    "ṹ": "u",
+    "ų": "u",
+    "ū": "u",
+    "ṻ": "u",
+    "ủ": "u",
+    "ȕ": "u",
+    "ȗ": "u",
+    "ư": "u",
+    "ứ": "u",
+    "ừ": "u",
+    "ữ": "u",
+    "ử": "u",
+    "ự": "u",
+    "ụ": "u",
+    "ṳ": "u",
+    "ṷ": "u",
+    "ṵ": "u",
+    "ṽ": "v",
+    "ṿ": "v",
+    "ẃ": "w",
+    "ẁ": "w",
+    "ŵ": "w",
+    "ẘ": "w",
+    "ẅ": "w",
+    "ẇ": "w",
+    "ẉ": "w",
+    "ẍ": "x",
+    "ẋ": "x",
+    "ý": "y",
+    "ỳ": "y",
+    "ŷ": "y",
+    "ẙ": "y",
+    "ÿ": "y",
+    "ỹ": "y",
+    "ẏ": "y",
+    "ȳ": "y",
+    "ỷ": "y",
+    "ỵ": "y",
+    "ź": "z",
+    "ẑ": "z",
+    "ž": "z",
+    "ż": "z",
+    "ẓ": "z",
+    "ẕ": "z",
+    "ǯ": "ʒ",
+    "ἀ": "α",
+    "ἄ": "α",
+    "ᾄ": "α",
+    "ἂ": "α",
+    "ᾂ": "α",
+    "ἆ": "α",
+    "ᾆ": "α",
+    "ᾀ": "α",
+    "ἁ": "α",
+    "ἅ": "α",
+    "ᾅ": "α",
+    "ἃ": "α",
+    "ᾃ": "α",
+    "ἇ": "α",
+    "ᾇ": "α",
+    "ᾁ": "α",
+    "ά": "α",
+    "ά": "α",
+    "ᾴ": "α",
+    "ὰ": "α",
+    "ᾲ": "α",
+    "ᾰ": "α",
+    "ᾶ": "α",
+    "ᾷ": "α",
+    "ᾱ": "α",
+    "ᾳ": "α",
+    "ἐ": "ε",
+    "ἔ": "ε",
+    "ἒ": "ε",
+    "ἑ": "ε",
+    "ἕ": "ε",
+    "ἓ": "ε",
+    "έ": "ε",
+    "έ": "ε",
+    "ὲ": "ε",
+    "ἠ": "η",
+    "ἤ": "η",
+    "ᾔ": "η",
+    "ἢ": "η",
+    "ᾒ": "η",
+    "ἦ": "η",
+    "ᾖ": "η",
+    "ᾐ": "η",
+    "ἡ": "η",
+    "ἥ": "η",
+    "ᾕ": "η",
+    "ἣ": "η",
+    "ᾓ": "η",
+    "ἧ": "η",
+    "ᾗ": "η",
+    "ᾑ": "η",
+    "ή": "η",
+    "ή": "η",
+    "ῄ": "η",
+    "ὴ": "η",
+    "ῂ": "η",
+    "ῆ": "η",
+    "ῇ": "η",
+    "ῃ": "η",
+    "ἰ": "ι",
+    "ἴ": "ι",
+    "ἲ": "ι",
+    "ἶ": "ι",
+    "ἱ": "ι",
+    "ἵ": "ι",
+    "ἳ": "ι",
+    "ἷ": "ι",
+    "ί": "ι",
+    "ί": "ι",
+    "ὶ": "ι",
+    "ῐ": "ι",
+    "ῖ": "ι",
+    "ϊ": "ι",
+    "ΐ": "ι",
+    "ΐ": "ι",
+    "ῒ": "ι",
+    "ῗ": "ι",
+    "ῑ": "ι",
+    "ὀ": "ο",
+    "ὄ": "ο",
+    "ὂ": "ο",
+    "ὁ": "ο",
+    "ὅ": "ο",
+    "ὃ": "ο",
+    "ό": "ο",
+    "ό": "ο",
+    "ὸ": "ο",
+    "ῤ": "ρ",
+    "ῥ": "ρ",
+    "ὐ": "υ",
+    "ὔ": "υ",
+    "ὒ": "υ",
+    "ὖ": "υ",
+    "ὑ": "υ",
+    "ὕ": "υ",
+    "ὓ": "υ",
+    "ὗ": "υ",
+    "ύ": "υ",
+    "ύ": "υ",
+    "ὺ": "υ",
+    "ῠ": "υ",
+    "ῦ": "υ",
+    "ϋ": "υ",
+    "ΰ": "υ",
+    "ΰ": "υ",
+    "ῢ": "υ",
+    "ῧ": "υ",
+    "ῡ": "υ",
+    "ὠ": "ω",
+    "ὤ": "ω",
+    "ᾤ": "ω",
+    "ὢ": "ω",
+    "ᾢ": "ω",
+    "ὦ": "ω",
+    "ᾦ": "ω",
+    "ᾠ": "ω",
+    "ὡ": "ω",
+    "ὥ": "ω",
+    "ᾥ": "ω",
+    "ὣ": "ω",
+    "ᾣ": "ω",
+    "ὧ": "ω",
+    "ᾧ": "ω",
+    "ᾡ": "ω",
+    "ώ": "ω",
+    "ώ": "ω",
+    "ῴ": "ω",
+    "ὼ": "ω",
+    "ῲ": "ω",
+    "ῶ": "ω",
+    "ῷ": "ω",
+    "ῳ": "ω",
+    "ґ": "г",
+    "ѐ": "е",
+    "ё": "е",
+    "ӂ": "ж",
+    "ѝ": "и",
+    "ӣ": "и",
+    "ӯ": "у"
+} ); // data: js/data/flatten.json
+
+CommonJS.register("$9", function(exports,window,document){ /* module: js/utils/fulltext.js */
+/**
+ * New version of dict that should be faster and less generic.
+ * 
+ * TODO could escape differently according to field (e.g. slug vs name)
+ */
+exports.init = function(){
+    
+    var index = [],
+        anychar = /[^a-z0-9]/g,
+        //regxesc = /[\-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g,
+        boundary = /[\-_\s.?!;:,*^+=~`"(){}<>\[\]\/\\\u00a0\u1680\u180e\u2000-\u206f\u2e00-\u2e7f\u3000-\u303f]+/,
+        translit = CommonJS.require("$22","flatten.json")
+    ;
+
+
+    /**
+     * Normalize single character.
+     * Seems to make little difference whether lower-casing is done on whole string first
+     * TODO any native way to do this instead of custom lookup table? perhaps include lower-casing in table?
+     */
+    function normalizeChar( chr ){
+        //chr = chr.toLowerCase();
+        return translit[chr] || chr;
+    }
+
+
+    /**
+     * Normalize string in two steps
+     *  É -> é
+     *  é -> e
+     */
+    function normalizeText( text ){
+        return String(text||'').toLowerCase().replace( anychar, normalizeChar );
+    }
+    
+
+    function pushUnique( normalized, splitex, unique, words ){
+        var word,
+            split = normalized.split( splitex ),
+            length = split.length;
+        while( 0 !== length-- ){
+            word = split[length];
+            if( word && null == words[word] ){
+                unique.push( word );
+                words[word] = true;
+            }
+        }
+        return unique;
+   }
+   
+   
+   function split( text ){
+       return pushUnique( normalizeText(text), boundary, [], {} );
+   }
+
+   
+   function setIndex( idx, texts ){
+       var unique = [], words = {}, text, t = texts.length, splitex = boundary;
+       while( 0 !== t-- ){
+           if( text = texts[t] ){
+               pushUnique( normalizeText(text), splitex, unique, words );
+           }
+       }
+       index[idx] = unique;
+   }
+    
+
+    function find( stems, indexed ){
+        var result = [],
+            idx = -1,
+            _index = index,
+            length = _index.length,
+            //
+            w,
+            word,
+            words,
+            nwords,
+            //
+            s,
+            stem,
+            nstems = stems.length,
+            //stemLength,
+            // if no data to pull indexes from, we'll only return indexes
+            haveData = indexed ? true : false
+        ;
+        /*/ ? convert stems to regexp ?
+        for( s = 0; s < nstems; s++ ){
+            stems[s] = new RegExp( '^' + stems[s].replace( regxesc, '\\$&' ) );
+        }*/
+        nextIndex:
+        while( ++idx < length ){
+            words = _index[idx];
+            // each entry has multiple strings to match (unless empty slot)
+            if( null != words && ( nwords = words.length ) ){
+                // every stem must begin at last one word in item's index
+                nextStem:
+                for( s = 0; s < nstems; s++ ){
+                    stem = stems[s];
+                    // stemLength = stem.length;
+                    // only one word needs matching to match current stem
+                    for( w = 0; w < nwords; w++ ){
+                        word = words[w];
+                        // using fastest begining of string match
+                        //if( word.substr(0,stemLength) === stem ){
+                        // if( -1 !== word.indexOf(stem) ){
+                        if( 0 === word.indexOf(stem) ){
+                        //if( stem.test(word) ){
+                            //console.log('MATCH: '+stem+'% begins '+word+' in ['+idx+']');
+                            continue nextStem;
+                        }
+                    }
+                    // stem didn't match anything. item skipped.
+                    // console.log('NO MATCH for ['+idx+']');
+                    continue nextIndex;
+                }
+                // match if we got here
+                // console.log('FULL MATCH for ['+idx+']');
+                result.push( haveData ? indexed[idx] : idx );
+            }
+        }
+        return result;
+    }
+    
+    
+
+    return {
+        split: split,
+        // norm: normalizeText,
+        // find with pre-split query
+        pull: function( stems, indexed ){
+            return find( stems, indexed );
+        },
+        // find from full text query
+        find: function( query, indexed ){
+            return find( split(query), indexed );
+        },
+        // legacy support for single text argument
+        add: function( idx, text ){
+            index[idx] = split(text);
+        },
+        // add next item from split texts
+        push: function( texts ){
+            setIndex( index.length, texts );
+        },
+        // force given index from split texts
+        index: function( idx, texts ){
+            setIndex( idx, texts );
+        },
+        // get number of items indexed
+        size: function(){
+            return index.length;
+        },
+        // trash index
+        clear: function(){
+            index = [];
+        },
+        // remove single item from index
+        remove: function( idx ){
+            index[idx] = null;
+        }
+    };    
+    
+    
+    
+    
+};
+return exports;
+}({},window,document) );
+
+CommonJS.register("$10", function(exports,window,document){ /* module: js/ui/textfield/LocoTextListener.js */
+/**
+ * Text field change listener
+ */
+exports.listen = function( elText, callback ){
+    if( elText instanceof jQuery ){
+        elText = elText[0];
+    }
+    var value,
+        timer,
+        inputEvents = 'input blur focus', // removed paste as it fires input anyway
+        delay = 150, 
+        IE_placeholder = window.attachEvent && elText.getAttribute('placeholder'),
+        // if text field size is set to 1, we will dynamically change size to reflect length of value (as per facebook typeahead)
+        autosize = ( 1 === Number( elText.size ) ),
+        // clear button and redraw function
+        clearbutt = $('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').click( function(){
+            elText.value = '';
+            refresh();
+            return false;
+        } )
+    ;
+
+    function drawbutt(){
+        clearbutt[ value ? 'show' : 'hide' ]();
+    }
+
+    function setValue( newValue ){
+        if( autosize ){
+            // wide letters look bad unless size is larger than needed
+            elText.setAttribute('size', 2+newValue.length );
+        }
+        value = newValue;
+        drawbutt();
+        return newValue;
+    }
+
+    function onDelayedCallbackTimeout(){
+        timer = null;
+        callback( value );
+    }
+
+    // function which decides whether text has changed and fires after delay
+    function refresh(){
+        var newValue = elText.value;
+        if( IE_placeholder && newValue === IE_placeholder ){
+            newValue = '';
+        }
+        if( newValue !== value ){
+            timer && clearTimeout(timer);
+            setValue( newValue );
+            if( delay ){
+                timer = setTimeout( onDelayedCallbackTimeout, delay );
+            }
+            else {
+                onDelayedCallbackTimeout();
+            }
+        }
+    }
+    // as above but without delay or checking value
+    function forceRefresh(){
+        timer && clearTimeout(timer);
+        var newValue = elText.value;
+        if( IE_placeholder && newValue === IE_placeholder ){
+            newValue = '';
+        }
+        setValue( newValue );
+        onDelayedCallbackTimeout();
+    }
+    // activate text checking
+    function onTextInput(){
+        refresh();
+        return true;
+    }
+    
+    // initial value
+    setValue( elText.value );
+
+    $(elText)
+        .on( inputEvents, onTextInput )
+        .after( clearbutt );
+
+    drawbutt();
+    
+    // expose public methods
+    return {
+      // change delay
+      delay: function( d ) {
+          delay = d;
+      },
+      // cause listener to look at text without key interaction
+      ping: function( force ){
+          return force ? forceRefresh() : refresh();
+      },
+      // set new value externally without firing an event - or get value
+      val: function( newval ){
+          if( newval == null ){
+              return value;
+          }
+          timer && clearTimeout(timer);
+          elText.value = setValue(newval);
+          drawbutt();
+      },
+      // access to element
+      el: function(){
+          return elText;
+      },
+      // bind a blur handler because change event may not be fired and we may want to validate
+      blur: function( callback ){
+          return $(elText).on( 'blur', callback );
+      }
+    };
+};
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$11", function(exports,window,document){ /* module: js/ui/tooltip.js */
+/**
+ * CommonJS Wrapper for Tipsy jquery plugin
+ */
+
+
+
+/** 
+ * Init wrapper: Make a link tooltip enabled  
+ */
+exports.init = function( link, override ){
+
+    var options = {
+        fade: true, 
+        offset: 5,
+        delayIn: defaultOnDelay,
+        delayOut: defaultOffDelay,
+        anchor: link.attr('data-anchor'),
+        gravity: link.attr('data-gravity')||'s'
+    };
+    
+    if( override ){
+        options = $.extend({}, options, override );
+    }
+
+    link.tipsy( options );
+};
+
+
+
+// Everything else supports legacy functions
+
+
+
+/**
+ * allow configuration of default delays 
+ */
+exports.delays = function( onDelay, offDelay ){
+    defaultOnDelay = onDelay||150;   // 0.15s
+    defaultOffDelay = offDelay||100; // 0.10s
+};
+
+
+
+/** 
+ * Stops any tooltip[s] currently active 
+ */
+exports.kill = function(){
+    // nasty but works and seems not to break future rollovers
+    $('div.tipsy').remove();
+};
+
+
+
+/**
+ * Force new text in to tooltip - useful for after perform a contextual change while open
+ */
+exports.text = function( text, sourceElement ){
+    // assuming source element is jQuery instance of pointee
+    // TODO support global text change of current tip when sourceElement is empty
+    var tipsy = sourceElement.data('tipsy');
+    tipsy.setTitle( text );
+};
+
+
+// start with default delays
+var defaultOnDelay, defaultOffDelay;
+exports.delays();
+
+
+
+/**
+ * Stop tooltips when modal windows open and close // mouseout/leave in tipsy doesn't seem to be enough
+ */
+$(document.body).on('overlayOpened overlayClosing', function(event){
+    exports.kill();
+    return true;
+} );
+
+
+
+
+/**
+ * Modified Tipsy plugin
+ * https://github.com/jaz303/tipsy
+ * http://onehackoranother.com/projects/jquery/tipsy/
+ */
+function maybeCall(thing, ctx) {
+    return (typeof thing == 'function') ? (thing.call(ctx)) : thing;
+};
+
+/*function isElementInDOM(ele) {
+  while (ele = ele.parentNode) {
+    if (ele == document) return true;
+  }
+  return false;
+};*/
+
+function Tipsy(element, options) {
+    this.$element = $(element);
+    this.options = options;
+    this.enabled = true;
+    this.fixTitle();
+};
+
+Tipsy.prototype = {
+    show: function() {
+        var title = this.getTitle();
+        if (title && this.enabled) {
+            var $tip = this.tip();
+            
+            $tip.find('.tipsy-inner')[this.options.html ? 'html' : 'text'](title);
+            $tip[0].className = 'tipsy'; // reset classname in case of dynamic gravity
+            $tip.remove().css({top: 0, left: 0 /*, visibility: 'hidden', display: 'block'*/ }).prependTo(document.body);
+            
+            // TW: calculate position based on alternative target e.g. icon inside link
+            var selector = this.options.anchor,
+                $anchor  = selector ? this.$element.find(selector) : this.$element;
+            
+            var pos = $.extend({}, $anchor.offset(), {
+                width: $anchor[0].offsetWidth,
+                height: $anchor[0].offsetHeight
+            });
+            
+            var actualWidth = $tip[0].offsetWidth,
+                actualHeight = $tip[0].offsetHeight,
+                gravity = maybeCall(this.options.gravity, this.$element[0]);
+            
+            var tp;
+            switch (gravity.charAt(0)) {
+                case 'n':
+                    tp = {top: pos.top + pos.height + this.options.offset, left: pos.left + pos.width / 2 - actualWidth / 2};
+                    break;
+                case 's':
+                    tp = {top: pos.top - actualHeight - this.options.offset, left: pos.left + pos.width / 2 - actualWidth / 2};
+                    break;
+                case 'e':
+                    tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left - actualWidth - this.options.offset};
+                    break;
+                case 'w':
+                    tp = {top: pos.top + pos.height / 2 - actualHeight / 2, left: pos.left + pos.width + this.options.offset};
+                    break;
+            }
+            
+            if (gravity.length == 2) {
+                if (gravity.charAt(1) == 'w') {
+                    tp.left = pos.left + pos.width / 2 - 15;
+                } else {
+                    tp.left = pos.left + pos.width / 2 - actualWidth + 15;
+                }
+            }
+            
+            $tip.css(tp).addClass('tipsy-' + gravity);
+            $tip.find('.tipsy-arrow')[0].className = 'tipsy-arrow tipsy-arrow-' + gravity.charAt(0);
+            if (this.options.className) {
+                $tip.addClass(maybeCall(this.options.className, this.$element[0]));
+            }
+            
+            /*if (this.options.fade) {
+                $tip.stop().css({opacity: 0, display: 'block', visibility: 'visible'}).animate({opacity: this.options.opacity});
+            } else {
+                $tip.css({visibility: 'visible', opacity: this.options.opacity});
+            }*/
+            // Using CSS transitions
+            $tip.addClass('in');
+        }
+    },
+    
+    hide: function() {
+        /*if (this.options.fade) {
+            this.tip().stop().fadeOut(function() { $(this).remove(); });
+        } else {
+            this.tip().remove();
+        }*/
+       // sudden stop
+       this.tip().remove();
+    },
+    
+    fixTitle: function() {
+        var $e = this.$element, 
+            title = $e.attr('title')||'';
+        if( title || 'string' !== typeof $e.attr('original-title') ) {
+            $e.attr('original-title', title).removeAttr('title');
+        }
+    },
+    
+    getTitle: function() {
+        var title, $e = this.$element, o = this.options;
+        this.fixTitle();
+        if (typeof o.title == 'string') {
+            title = $e.attr(o.title == 'title' ? 'original-title' : o.title);
+        } else if (typeof o.title == 'function') {
+            title = o.title.call($e[0]);
+        }
+        title = ('' + title).replace(/(^\s*|\s*$)/, "");
+        return title || o.fallback;
+    },
+    
+    // TW added for immediate update of title text and saving of original
+    // confusingly original-title doesn't actually keep the original title.
+    setTitle: function( title ){
+        var $e = this.$element;
+        if( ! $e.attr('default-title') ){
+            $e.attr('default-title', this.getTitle() );
+        }
+        if( null == title ){
+            title = $e.attr('default-title')||this.getTitle();
+        }
+        $e.attr('original-title', title );
+        if( this.$tip ){
+            this.$tip.find('.tipsy-inner')[this.options.html ? 'html' : 'text'](title);
+        }
+    },
+    
+    tip: function() {
+        if (!this.$tip) {
+            this.$tip = $('<div class="tipsy"></div>').html('<div class="tipsy-arrow"></div><div class="tipsy-inner"></div>');
+            this.$tip.data('tipsy-pointee', this.$element[0]);
+        }
+        return this.$tip;
+    },
+    
+    validate: function() {
+        if (!this.$element[0].parentNode) {
+            this.hide();
+            this.$element = null;
+            this.options = null;
+        }
+    },
+    
+    enable: function() { 
+        this.enabled = true;
+    },
+
+    disable: function() {
+        this.hide();
+        this.enabled = false; 
+    },
+
+    toggleEnabled: function() { this.enabled = !this.enabled; }
+};
+
+$.fn.tipsy = function(options) {
+    
+    /*if (options === true) {
+        return this.data('tipsy');
+    }
+    else if( 'string' === typeof options ) {
+        var tipsy = this.data('tipsy');
+        tipsy && tipsy[options]();
+        return this;
+    }*/
+    
+    options = $.extend({}, $.fn.tipsy.defaults, options);
+    
+    function get(ele) {
+        var tipsy = $.data(ele, 'tipsy');
+        if (!tipsy) {
+            tipsy = new Tipsy(ele, $.fn.tipsy.elementOptions(ele, options));
+            $.data(ele, 'tipsy', tipsy);
+        }
+        return tipsy;
+    }
+    
+    function enter() {
+        var tipsy = get(this), delay = options.delayIn;
+        tipsy.hoverState = 'in';
+        if ( 0 == delay ) {
+            tipsy.show();
+        }
+        else {
+            tipsy.fixTitle();
+            setTimeout(function() { if (tipsy.hoverState == 'in') tipsy.show(); }, delay );
+        }
+    };
+    
+    function leave() {
+        var tipsy = get(this), delay = options.delayOut;
+        tipsy.hoverState = 'out';
+        if ( 0 == delay ) {
+            tipsy.hide();
+        } 
+        else {
+            tipsy.tip().removeClass('in'); // <- TW: starting CSS fadeout. ensure transition matches delayOut
+            setTimeout(function() { if (tipsy.hoverState == 'out') tipsy.hide(); }, delay);
+        }
+    };
+    
+    if (!options.live) this.each(function() { get(this); });
+    
+    if (options.trigger != 'manual') {
+        var binder   = options.live ? 'live' : 'bind',
+            eventIn  = options.trigger == 'hover' ? 'mouseenter' : 'focus',
+            eventOut = options.trigger == 'hover' ? 'mouseleave' : 'blur';
+        this[binder](eventIn, enter)[binder](eventOut, leave);
+    }
+    
+    return this;
+    
+};
+
+$.fn.tipsy.defaults = {
+    className: null,
+    delayIn: 0,
+    delayOut: 0,
+    fade: false,
+    fallback: '',
+    gravity: 'n',
+    html: false,
+    live: false,
+    offset: 0,
+    opacity: 0.8,
+    title: 'title',
+    trigger: 'hover',
+    // TW:
+    anchor: null
+};
+
+/*$.fn.tipsy.revalidate = function() {
+  $('.tipsy').each(function() {
+    var pointee = $.data(this, 'tipsy-pointee');
+    if (!pointee || !isElementInDOM(pointee)) {
+      $(this).remove();
+    }
+  });
+};*/
+
+// Overwrite this method to provide options on a per-element basis.
+// For example, you could store the gravity in a 'tipsy-gravity' attribute:
+// return $.extend({}, options, {gravity: $(ele).attr('tipsy-gravity') || 'n' });
+// (remember - do not modify 'options' in place!)
+$.fn.tipsy.elementOptions = function(ele, options) {
+    return $.metadata ? $.extend({}, options, $(ele).metadata()) : options;
+};
+
+$.fn.tipsy.autoNS = function() {
+    return $(this).offset().top > ($(document).scrollTop() + $(window).height() / 2) ? 's' : 'n';
+};
+
+$.fn.tipsy.autoWE = function() {
+    return $(this).offset().left > ($(document).scrollLeft() + $(window).width() / 2) ? 'e' : 'w';
+};
+
+/**
+ * yields a closure of the supplied parameters, producing a function that takes
+ * no arguments and is suitable for use as an autogravity function like so:
+ *
+ * @param margin (int) - distance from the viewable region edge that an
+ *        element should be before setting its tooltip's gravity to be away
+ *        from that edge.
+ * @param prefer (string, e.g. 'n', 'sw', 'w') - the direction to prefer
+ *        if there are no viewable region edges effecting the tooltip's
+ *        gravity. It will try to vary from this minimally, for example,
+ *        if 'sw' is preferred and an element is near the right viewable 
+ *        region edge, but not the top edge, it will set the gravity for
+ *        that element's tooltip to be 'se', preserving the southern
+ *        component.
+ */
+ $.fn.tipsy.autoBounds = function(margin, prefer) {
+    return function() {
+        var dir = {ns: prefer[0], ew: (prefer.length > 1 ? prefer[1] : false)},
+            boundTop = $(document).scrollTop() + margin,
+            boundLeft = $(document).scrollLeft() + margin,
+            $this = $(this);
+
+        if ($this.offset().top < boundTop) dir.ns = 'n';
+        if ($this.offset().left < boundLeft) dir.ew = 'w';
+        if ($(window).width() + $(document).scrollLeft() - $this.offset().left < margin) dir.ew = 'e';
+        if ($(window).height() + $(document).scrollTop() - $this.offset().top < margin) dir.ns = 's';
+
+        return dir.ns + (dir.ew ? dir.ew : '');
+    };
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$34", function(exports,window,document){ /* module: js/shim/string.js */
+
+
+// any modern browser should have localeCompare, but just in case
+if( ! ''.localeCompare ){
+    String.prototype.localeCompare = function(){
+        return 0;
+    };
+}
+
+
+// native trim only trims whitespace
+if( ! ''.trim ){
+	String.prototype.trim = function(){
+		return CommonJS.require("$5","string.js").trim(this,' \n\r\t');
+	};
+}
+
+
+
+
+// Escape text to HTML, and optionally linkify as per MVCView::h
+// Not really a shim, but very common and we always want it available
+exports.html = function(){
+    var rexChars,
+        rexBreak,
+        rexLinks,
+        hostName
+    ;
+    function init(){
+        rexChars = /[<>&]/g;
+        rexBreak = /(\r\n|\n|\r)/g;
+        rexLinks = /(?:https?):\/\/(\S+)/ig;
+        hostName = location.hostname;
+        init = null;
+    }
+    function replaceEnt( chr ){
+        return '&#'+chr.charCodeAt(0)+';';
+    }
+    function escapeText( text ){
+        return text.replace( rexChars, replaceEnt );
+    }
+    function linkReplace( href, label ){
+        return '<a href="'+href+'" target="'+(label.indexOf(hostName)?'_blank':'_top')+'">'+label+'</a>';
+    }
+    // this function is assigned to shim/string/html
+    return function( text, rich ){
+        init && init();
+        var html = escapeText(text);
+        if( rich ){
+            html = html.replace(rexLinks,linkReplace).replace(rexBreak,'<br />');
+        }
+        return html;
+    };
+}();
+return exports;
+}({},window,document) );
+
+CommonJS.register("$35", function(exports,window,document){ /* module: js/objects/locale.js */
+/**
+ * Emulate back end locale object functionality in JS
+ */
+
+var ParseRegEx, SplitRegEx, RTLData = CommonJS.require("$21","rtl.json");
+
+
+exports.init = function(){
+    return new Locale;
+};
+
+
+exports.cast = function( vanilla ){
+    if( vanilla instanceof Locale ){
+        return vanilla;
+    }
+    if( 'string' === typeof vanilla ){
+        return exports.parse(vanilla);
+    }
+    return exports.clone( vanilla );
+};
+    
+    
+exports.clone = function( source ){
+    var s, target = new Locale;
+    for( s in source ){
+        target[s] = source[s];
+    }
+    return target;
+};
+
+// Basic tag parser. 
+// Partially copied from PHP loco_parse_locale except only supports what Loco project locales support.
+// This parser is not as strict as the PHP parser because it's not used for inputing locales - only really for splitting up those already valid.
+exports.parse = function( code ){
+    if( ! ParseRegEx ){
+        SplitRegEx = /[-_+]/;
+        ParseRegEx =  /^([a-z]{2,3})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?(?:-([0-9][a-z0-9]{3,8}|[a-z0-9]{5,8}))?(?:-([a-z]-[-a-z]+))?$/i;
+        //              (1.lang         (2.script       (3.region                (4.variant                              (5.extension ----
+    }
+    // normalize code before parsing
+    code = String(code).split(SplitRegEx).join('-');
+    // return null if format doesn't match
+    if( ! ParseRegEx.exec(code) ){
+        return null;
+    }
+    // primary language is mandatory
+    var loc = new Locale;
+    loc.lang = RegExp.$1.toLowerCase();
+    // everything else is optional
+    if( code = RegExp.$2 ){
+        loc.script = code.charAt(0).toUpperCase()+code.substr(1).toLowerCase();
+    }
+    if( code = RegExp.$3 ){
+        loc.region = code.toUpperCase();
+    }
+    if( code = RegExp.$4 ){
+        loc.variant = code.toLowerCase();
+    }
+    if( code = RegExp.$5 ){
+        loc.extension = code;
+    }
+    return loc;
+};
+
+
+function Locale(){
+    
+}
+
+var LocalePrototype = Locale.prototype;
+
+
+LocalePrototype.isValid = function(){
+    return !! this.lang;
+};
+
+LocalePrototype.isKnown = function(){
+    var tag = this.lang;
+    return  !( ! tag || 'zxx' === tag );
+};
+
+
+LocalePrototype.toString = function( sep ){
+    sep = sep||'-';
+    var value,
+        self = this,
+        code = self.lang||'zxx'
+    ;
+    if( value = self.script ){
+        code += sep+value;
+    }
+    if( value = self.region ){
+        code += sep+value;
+    }
+    if( value = self.variant ){
+        code += sep+value;
+    }
+    if( value = self.extension ){
+        code += sep+value;
+    }
+    return code;
+};
+
+
+LocalePrototype.getIcon = function(){
+    var i = 4,
+        prop, value,
+        tags = ['variant','region','script','lang'],
+        classes = []
+    ;
+    while( 0 !== i-- ){
+        prop = tags[i];
+        if( value = this[prop] ){
+        	// variant/extension could be array
+        	if( value.join ){
+        		value = value.join('-');
+        	}
+            // special cases
+            if( 1 === i && 3 === value.length ){
+                classes.push('region-m49');
+            }
+            // else default
+            else {
+                classes = classes.concat( [ prop, prop+'-'+value.toLowerCase() ] );
+            }
+        }
+    }
+    return classes.join(' ');
+};
+
+
+
+LocalePrototype.isRTL = function(){
+    return !!RTLData[ String( this.script || this.lang ).toLowerCase() ];
+};
+
+
+
+LocalePrototype = null;
+return exports;
+}({},window,document) );
+
+CommonJS.register("$36", function(exports,window,document){ /* module: js/utils/abstract.js */
+/**
+ * Pseudo-abstract class functionality
+ */
+
+
+
+function stderr( message ){
+    window.console && console.error && console.error( message );
+}
+
+
+function AbstractFunction(){
+    stderr('Method not implemented');
+}
+
+function AbstractProperty(){
+    // does nothing
+}
+AbstractProperty.prototype.toString = function(){
+    return '[Undefined]';
+};
+
+
+function AbstractBase( name ){
+    // does nothing
+}
+
+AbstractBase.prototype._validate = function( className ){
+    var name, member, result = true;
+    for( name in this ){
+        member = this[name];
+        if( member === AbstractFunction ){
+            stderr( className+'.'+name+'() must be implemented');
+            result = false;
+        }
+        else if( member instanceof AbstractProperty ){
+            stderr( className+'.'+name+' must be defined');
+            result = false;
+        }
+    }
+    return result;
+};
+
+
+
+/**
+ * Create a prototype for extending classes with mandatory methods
+ * @usage MyFunc.prototype = require('utils/abstract').init( ['importantMethod',..], ['importantProperty',..] );
+ * @param Array list of abstract method names
+ * @param Array list of property names which must be defined, usually objects
+ * @return Object
+ */
+exports.init = function( methodNames, propertyNames ){
+    var i, proto = new AbstractBase;
+    if( methodNames ){
+        i = methodNames.length;
+        while( 0 !== i-- ){
+            proto[ methodNames[i] ] = AbstractFunction;
+        }
+    }
+    if( propertyNames ){
+        i = propertyNames.length;
+        while( 0 !== i-- ){
+            proto[ propertyNames[i] ] = new AbstractProperty;
+        }
+    }
+    return proto;
+};
+
+
+
+/**
+ * Validate a subclass, via its prototype on _validate member
+ */
+exports.validate = function( subClass ){
+    var className = /function (\w+)\(/.exec( subClass.toString() ) ? RegExp.$1 : '';
+    subClass.prototype._validate( className||'Object' );
+};
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$45", function(exports,window,document){ /* module: js/utils/fps.js */
+/**
+ * Abstraction of window.requestAnimationFrame
+ * See https://gist.github.com/1579671 for Polyfill
+ */
+
+
+// debug
+// var console = require('utils/console').init();
+
+var requestFrame = window.requestAnimationFrame, 
+    cancelFrame = window.cancelAnimationFrame,
+    lastTime = 0;
+
+
+
+// get vendor specific implementations of requestAnimationFrame
+// comment out to fall back to setInterval
+if( ! requestFrame || ! cancelFrame ){
+    var prefix;
+    for( prefix in { ms:1, moz:1, webkit:1, o:1 } ){
+        requestFrame = window[ prefix+'RequestAnimationFrame' ];
+        if( requestFrame ){
+            // have requestAnimationFrame, check for cancel which can have different names
+            cancelFrame = window[prefix+'CancelAnimationFrame'] || window[prefix+'CancelRequestAnimationFrame'];
+            if( cancelFrame ){
+                break;
+            }
+        }
+    }
+}
+//*/
+
+
+
+// Fall back to setInterval method - 16ms aims for 60fps (actually 62.5)
+//
+if( ! requestFrame || ! cancelFrame ){
+    // requestAnimationFrame polyfill
+    requestFrame = function( callback ){
+        var currTime   = now();
+            timeToCall = Math.max( 0, 16 - ( currTime - lastTime ) ),
+            nextTime   = currTime + timeToCall,
+            timerId    = window.setTimeout( function() { callback( nextTime ); }, timeToCall );
+        lastTime = nextTime;
+        return timerId;
+    };
+    // cancelAnimationFrame polyfill
+    cancelFrame = function(timerId) {
+        clearTimeout( timerId ); 
+    };
+}
+
+
+
+// Use Date.now if it's available
+//
+var now = Date.now || function(){
+    return new Date().getTime();
+};
+
+
+
+
+
+/**
+ * Do a setInterval style thing using requestAnimationFrame polyfill
+ * This method returns a frame number, rather than a timestamp.
+ */
+exports.loop = function( callback, element ){
+    var frame = 0,
+        requestId;
+
+    function loop(){
+        requestId = requestFrame( loop, element );
+        callback( frame++ );
+    }
+    loop();
+
+    return {
+        stop: function(){
+            requestId && cancelFrame(requestId);
+            requestId = null;
+        }
+    };
+};
+
+
+
+
+/**
+ * similar to above, except passes elapsed time instead of number of frames
+ * This will sync better to browser's actual ability to keep up 
+ *
+exports.interval = function( callback, element ){
+    var startTime = now(),
+        prevTime  = startTime,
+        requestId;
+
+    function loop( thisTime ){
+        requestId = requestFrame( loop, element );
+        callback( thisTime - prevTime, thisTime );
+        prevTime = thisTime;
+    }
+    loop( startTime );
+
+    return {
+        stop: function(){
+            requestId && cancelFrame(requestId);
+            requestId = null;
+        }
+    }
+}
+*/
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$42", function(exports,window,document){ /* module: js/utils/touch.js */
+/**
+ * Touch utilities
+ * Windows 8 will use MSPointerDown and MSPointerUp instead of touch events
+ * http://blogs.msdn.com/b/ie/archive/2011/09/20/touch-input-for-ie10-and-metro-style-apps.aspx
+ * http://msdn.microsoft.com/en-US/library/ie/hh673557.aspx
+ * http://jessefreeman.com/articles/from-webkit-to-windows-8-touch-events/
+ * 
+ * @todo IE11
+ * http://msdn.microsoft.com/en-gb/library/ie/dn304886(v=vs.85).aspx
+ */
+
+
+
+var supported,
+    msPointerEnabled  = !!window.navigator.msPointerEnabled,
+    EVENT_TOUCH_START = msPointerEnabled ? 'MSPointerDown' : 'touchstart', 
+    EVENT_TOUCH_MOVE  = msPointerEnabled ? 'MSPointerMove' : 'touchmove', 
+    EVENT_TOUCH_END   = msPointerEnabled ? 'MSPointerUp'   : 'touchend';
+    
+
+/**
+ * Test whether touch is supported
+ */
+exports.ok = function( callback ){
+    if( supported == null ){
+        // not actually true, but shouldn't raise errors on desktop
+        supported = 'function' === typeof document.body.addEventListener;
+    }
+    supported && callback && callback( exports );
+    return supported;
+};
+
+
+
+
+/**
+ * Test whether IE pointer events are in effect
+ */
+exports.ms = function(){
+    return msPointerEnabled;
+};
+
+
+/**
+ * Test if a pointer event is actually a touch event
+ */
+function msPointerEventIsTouch( event ){
+    return (event.MSPOINTER_TYPE_TOUCH||'touch') === event.pointerType;
+}
+
+//exports.mstouch = function( event ){
+//    return msPointerEnabled && msPointerEventIsTouch(event);
+//};
+
+
+
+/**
+ * Drag/move control
+ * @todo check IE10 event properties and abstract if necessary
+ */
+exports.dragger = function( el, callback ){
+    var listeners = {};
+
+    // touch start begins dragging action
+    listeners[ EVENT_TOUCH_START ] = function( event ){
+        eachTouchEvent( event, function( i, touch ){
+            touch.type = EVENT_TOUCH_START;
+            callback( event, touch, self );
+        } );
+        bind( EVENT_TOUCH_MOVE );
+        bind( EVENT_TOUCH_END );
+        return true;
+    };
+    
+    // end of touch, releases drag
+    listeners[ EVENT_TOUCH_END ] = function( event ){
+        unbind( EVENT_TOUCH_MOVE );
+        unbind( EVENT_TOUCH_END );
+        eachTouchEvent( event, function( i, touch ){
+            touch.type = EVENT_TOUCH_END;
+            callback( event, touch, self );
+        } );
+        return true;
+    };
+    
+    // move event only required for situation where touch doesn't automatically move scroll
+    listeners[ EVENT_TOUCH_MOVE ] = function( event ){
+        eachTouchEvent( event, function( i, touch ){
+            touch.type = EVENT_TOUCH_MOVE;
+            callback( event, touch, self );
+        } );
+        return killEvent(event); // <- critical
+    };
+    
+    /*/ debug -  I think these are Mozilla only
+    listeners['touchleave'] = listeners['touchcancel'] = function( event ){
+        console.log( event.type);
+        return true;
+    }
+    //*/
+    
+    
+   function bind( type ){
+        // TODO passive events, see supportsPassiveEvents below: 
+        el.addEventListener( type, listeners[type], false );
+    }
+    
+    function unbind( type ){
+        el.removeEventListener( type, listeners[type], false );
+    }
+    
+    // bind start event to original element
+    bind( EVENT_TOUCH_START );
+    
+    // expose public dragger functions
+    var self = {
+        kill: function(){
+            unbind( EVENT_TOUCH_START );
+            unbind( EVENT_TOUCH_MOVE );
+            unbind( EVENT_TOUCH_END );
+            el = self = callback = null;
+        }
+    };
+    return self;
+};
+
+
+
+   
+
+
+/**
+ * Swipe/scroll mechanism with speed measure and scroll animation built in
+ */
+exports.swiper = function( el, callback, msJS ){
+    
+    var loop,
+        swiped,
+        xscroll,
+        listeners = {},
+        tstarts = [],
+        xoffset = [],
+        yoffset = [];
+        
+        
+    // start of touch register initial touch point and time
+    listeners[ EVENT_TOUCH_START ] = function( event ){
+        swiped = false;
+        stopAnimation();
+        var t = now();
+        eachTouchEvent( event, function( i, e ){
+            tstarts[i] = t;
+            xoffset[i] = e.clientX;
+            yoffset[i] = e.clientY;
+        } );
+        xscroll = el.scrollLeft;
+        return true;
+    };
+    
+
+    // end of touch, calculate speed and call back
+    listeners[ EVENT_TOUCH_END ] = function( event ){
+        eachTouchEvent( event, function( i, e ){
+            var touchtime  = now() - tstarts[i],
+                touchmoved = xoffset[i] - e.clientX,
+                speed = Math.abs( touchmoved ) / touchtime, // <- pixels per millisecond
+                pxdir = touchmoved ? ( touchmoved < 0 ? -1 : 1 ) : 0; // direction
+            callback( speed, pxdir );
+        } );
+        xscroll = null;
+        return true;
+    };
+    
+    
+    // move event only required for situation where touch doesn't automatically move scroll
+    listeners[ EVENT_TOUCH_MOVE ] = function( event ){
+        var xmove, ymove;
+        ( xscroll == null ) || eachTouchEvent( event, function( i, e ){
+            xmove = xoffset[i] - e.clientX;
+            ymove = yoffset[i] - e.clientY;
+        } );
+        // check whether vertical move was greater than horizontal move
+        if( ymove && Math.abs(ymove) > Math.abs(xmove) ){
+            swiped = true;
+            return true;
+        }
+        // else move, if moved. (Surface will fire 0px move - issue #70 fix)
+        if( xmove ){
+            swiped = true;
+            el.scrollLeft = Math.max( 0, xscroll + xmove );
+        }
+        return killEvent(event);
+    };
+    
+    
+
+    function bind( type ){
+        el.addEventListener( type, listeners[type], false );
+    }
+    
+    function unbind( type ){
+        el.removeEventListener( type, listeners[type], false );
+    }
+    
+    function stopAnimation(){
+        loop && loop.stop();
+        loop = null;
+    }
+
+    // allow pure CSS solution
+    if( msPointerEnabled && ! msJS ){
+        // we'll set externally via 'snap' function
+    }
+    // else bind HTML5 touch events for js
+    else {
+        bind( EVENT_TOUCH_START );
+        bind( EVENT_TOUCH_MOVE );
+        bind( EVENT_TOUCH_END );
+        // ms requires overflow hidden - @todo how to detect touch before a touch??
+        if( msPointerEnabled ){
+            el.className += ' mstouch';
+        }
+    }
+    
+
+    // expose function to kill us off
+    return {
+        kill: function(){
+            unbind( EVENT_TOUCH_START );
+            unbind( EVENT_TOUCH_MOVE );
+            unbind( EVENT_TOUCH_END );
+            stopAnimation();
+        },
+        // check if swiper has swiped since last touch
+        swiped: function(){
+            return swiped;
+        },
+        //  check if IE10 touch-enabled
+        ms: function(){
+            return msPointerEnabled;
+        },
+        // set MS snap size
+        snap: function( size ){
+            if( msPointerEnabled && ! msJS ){
+                el.style['-ms-scroll-snap-points-x'] = 'snapInterval(0px,'+size+'px)';
+                el.style['-ms-scroll-snap-type'] = 'mandatory';
+                el.style['-ms-scroll-chaining'] = 'none';
+            }
+        },
+        // animate scrollLeft using animation module utils/fps
+        scroll: function( scrollTarget, speed, callback ){
+            stopAnimation();
+            var scrollNow = el.scrollLeft,
+                direction = scrollTarget > scrollNow ? 1 : -1,
+                maxfunc = Math[ direction === 1 ? 'min' : 'max' ],
+                ppf = Math.round( speed * 16 * direction ); // <- pixels per frame based on *expected* interval achieved at 60fps
+            // start interval loop    
+            loop = CommonJS.require("$45","fps.js").loop( function( frame ){
+                if( ! frame ){
+                    // first callback will always be 0
+                    return;
+                }
+                // ppf = Math.round( speed * interval );
+                scrollNow = Math.max( 0, maxfunc( scrollTarget, scrollNow + ppf ) );
+                el.scrollLeft = scrollNow;
+                if( scrollTarget === scrollNow ){ //|| scrollNow !== el.scrollLeft ){
+                    stopAnimation();
+                    callback && callback( scrollNow );
+                }
+            }, el );
+            return loop;
+        }        
+    };
+};
+
+
+
+
+// bind touchstart
+exports.start = function( el, callback ){
+    return makeBinding( el, EVENT_TOUCH_START, callback, false );
+};
+
+
+// bind touchmove
+exports.move = function( el, callback ){
+    return makeBinding( el, EVENT_TOUCH_MOVE, callback, false );
+};
+    
+
+// bind touchend
+exports.end = function( el, callback ){
+    return makeBinding( el, EVENT_TOUCH_END, callback, false );
+};
+    
+
+
+
+// generic bind with unbind accessor
+function makeBinding( el, type, callback, capture ){
+    if( msPointerEnabled ){
+        // only fire MS pointer events that are touch
+        var handler = callback;
+        callback = function(event){
+            if( msPointerEventIsTouch(event) ){
+                return handler(event);
+            }  
+        };
+    }
+    el.addEventListener( type, callback, capture );
+    return {
+        unbind: function(){
+            el.removeEventListener( type, callback, capture );
+        }
+    };
+}
+
+
+
+var eachTouchEvent = exports.each = function ( event, callback ){
+    // abstract microsoft's pointer events
+    if( msPointerEnabled ){
+        if( msPointerEventIsTouch(event) ){
+            callback( 0, event );
+        }
+        // else not a touch interaction
+        return;
+    }
+    // regular multi-touch support
+    var i = -1, 
+        touched = event.originalEvent || event,
+        changed = touched.changedTouches||[];
+    while( ++i < changed.length ){
+        callback( i, changed[i] );
+    }    
+};
+    
+    
+
+
+
+
+function killEvent( event ){
+    event.preventDefault();
+    event.stopPropagation();
+    return false;
+}
+
+
+var now = Date.now || function(){
+    return new Date().getTime();
+};
+
+
+// Passive events detection: https://www.chromestatus.com/feature/5745543795965952
+var supportsPassive;
+function supportsPassiveEvents(){
+	if( null == supportsPassive ){
+		// https://github.com/WICG/EventListenerOptions/blob/gh-pages/explainer.md
+		// Test via a getter in the options object to see if the passive property is accessed
+		supportsPassive = false;
+		try {
+		  var opts = Object.defineProperty({}, 'passive', {
+		    get: function() {
+		      supportsPassive = true;
+		    }
+		  });
+		  window.addEventListener("testPassive", null, opts);
+		  window.removeEventListener("testPassive", null, opts);
+		} catch (e) {}
+	}
+	return supportsPassive;
+}
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$46", function(exports,window,document){ /* module: js/ui/textarea/mirror.js */
+/**
+ * Textarea mirror:
+ * - Creates a floating DIV *in front* of textarea for overlaying 
+ * - currently only for showing invisibles, but multiple/optional processing could be added
+ */
+exports.init = function( elField ){
+    
+    /**
+     * Keep div vertically in line with textarea
+     * TODO Lags on slow browser - could hide while scrolling and render after timeout.
+     */
+    function mirrorScroll(){
+        elMirror.style.top = String( - elField.scrollTop )+'px';
+        return true;
+    }
+
+
+    /**
+     * Set mirror to contents of textarea
+     */
+    function mirrorText(){
+        var div = elMirror;
+        div.textContent = elField.value;
+        // show invisible characters:
+        div.innerHTML = div.innerHTML
+            .replace( /[ \t]/g, replacePrintableSpaces )                       // <- printable whitespace
+//          .replace( /[\v\f]/g, replaceUnprintableChardata )                  // <- unprintable chardata
+            .split(/(?:\n|\r\n?)/).join('<span class="eol crlf"></span>\r\n')  // <- end of line
+            +'<span class="eol eof"></span>'                                   // <- end of line and end of input
+        ;
+        return true;
+    }
+
+    
+    /**
+     * RegExp callback wraps legal whitespace in span elements
+     * CSS rules for .x{hex} classes will insert placeholder symbols at span:before
+     */
+    function replacePrintableSpaces( s ){
+        return '<span class="x'+s.charCodeAt(0).toString(16)+'">'+s+'</span>';
+    }
+
+    /**
+     * 
+     *
+    function replaceUnprintableChardata( s ){
+        return '<span class="ctrl x'+s.charCodeAt(0).toString(16)+'"></span>';
+    }*/
+
+
+    /**
+     * Discard current mirroring
+     */
+    function destroy(){
+        $(elField)
+            .off( 'input', mirrorText )
+            .off( 'scroll', mirrorScroll );
+        elParent.removeChild( elMirror );
+        elMirror = null;
+        $(elParent).removeClass('has-mirror');
+    }
+
+    
+    // Enable immediately
+
+    var elParent = elField.parentNode,
+        elMirror = elParent.insertBefore( document.createElement('div'), elField )
+    ;
+    
+    $(elField)
+        .on('input', mirrorText )
+        .on('scroll', mirrorScroll )
+    ;
+
+    $(elParent).addClass('has-mirror');
+    elMirror.className = 'ta-mirror';
+    
+    
+    // account for horizontal scrollbar on some platforms
+    var diff = elField.offsetWidth - elField.clientWidth;
+    if( diff > 2 ){
+        // hard coding 1px border as it's standard across Loco
+        //$(elMirror).css('margin-right', String(diff-2)+'px' );
+        elMirror.style.marginRight = String(diff-2)+'px';
+    }
+    
+        
+    
+    mirrorText();
+    mirrorScroll();
+
+
+    /**
+     * Expose common interface for all textarea plugins
+     */
+    return {
+        kill: destroy
+    };
+    
+    
+};
+return exports;
+}({},window,document) );
+
+CommonJS.register("$28", function(exports,window,document){ /* module: js/utils/remote.js */
+/**
+ * utils/remote
+ */
+
+var queue = {}, 
+    STATIC_BASE;
+
+
+/**
+ * Get Loco's own static base.
+ * All loco pages should include vendor library before any other scripts of its own
+ * TODO would be preferable to somehow known current script as this will not work in WordPress plugin (for example)
+ */
+function getStaticBase(){
+    var href, snip, base,
+        scripts = document.getElementsByTagName('script'), i = -1, t = scripts.length
+    ;
+    while( ++i < t ){
+        if( href = scripts[i].getAttribute('src') ){
+            snip = href.indexOf('/lib/vendor');
+            if( -1 !== snip ){
+                base = href.substr( 0, snip );
+                break;
+            }
+        }
+    }
+    return base || '/static';
+}
+
+
+
+/**
+ * Dispatch argument to url listeners 
+ * @return Number count of listeners called back to
+ */
+function dispatch( url, glob ){
+    var n = 0,
+        i = -1,
+        instance = glob && window[glob], 
+        callbacks = queue[url]||[], 
+        queuelength = callbacks.length
+    ;
+    while( ++i < queuelength ){
+        callback = callbacks[i];
+        if( 'function' === typeof callback ){
+            callback( instance );
+            n++;
+        }
+    }
+    return n;
+}
+
+
+/**
+ * @param {String} url of script to load
+ * @param {Function} callback function
+ * @param {String} glob Global variable name that indicates script already loaded
+ */
+exports.load = function( url, callback, glob ){
+
+    // if object sniffable, call back immediately
+	if( glob && window[glob] ){
+		if( 'function' === typeof callback ){
+			callback( window[glob] );
+		}
+		return;
+	}
+
+	// if object already requested, add to callback queue
+	if( null != queue[url] ){
+	    queue[url].push( callback );
+	    return;
+	}
+	
+	// start queue with current requester
+	queue[url] = [ callback ];
+	
+	// tidy up scope
+	function cleanup(){
+	    if( timeout ){
+            clearTimeout( timeout );
+            timeout = null;
+        }
+        if( s ){
+            s.onreadystatechange = null;
+            s = s.onload = null;
+            s = null;
+        }
+        if( url ){
+            delete queue[url];
+            url = null;
+        }
+	}
+
+    // script load callback function 
+    function onScript( _, isAbort ) {
+        var state = s && s.readyState;
+        if ( isAbort || ! state || 'loaded' === state || 'complete' === state ){
+            isAbort || dispatch( url, glob );
+            cleanup();
+        }
+    };
+    
+    function onError(){
+        if( 0 === dispatch( url ) ){
+            throw new Error('Failed to load "'+(glob||url)+'"');
+        }
+        cleanup();
+    }
+    	
+    // Set timeout for browsers that don't observe onerror
+    var timeout = setTimeout( onError, 4000 );
+
+	// request script with onload callback
+	var s = document.createElement('script');
+	s.setAttribute( 'src', url );
+	s.setAttribute('async', 'true');
+	s.onreadystatechange = onScript;
+    s.onload = onScript;
+    s.onerror = onError;
+    s.onabort = cleanup;
+    document.getElementsByTagName('head')[0].appendChild(s);
+    
+    /*return {
+        cancel: function(){
+            // meh.
+        }
+    };*/
+    
+};
+
+
+
+
+
+/**
+ * Prefix a path with Loco's static base
+ */
+exports.stat = function( path ){
+    var base = STATIC_BASE || ( STATIC_BASE = getStaticBase() );
+    return base + path;
+};
+
+
+
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$15", function(exports,window,document){ /* module: js/ui/textarea/ace.js */
+/**
+ * Code editor textarea plugin using Ace.
+ * https://ace.c9.io/
+ */
+
+var customPrintfRegEx,
+    defaultPrintfMode = 'auto';
+
+
+/**
+ * Activate a textarea.
+ * 
+ * @param textarea element
+ * @param object textarea listener if enabled
+ * @return object closure
+ */
+exports.init = function( ta, listener, syntax ){
+
+    // create a container div to hold the Ace DOM
+    // append element as a sibling to the real text field, and hide real text field
+    var editor,
+        invis = false,
+        printf = syntax || defaultPrintfMode,
+        wrapper = ta.parentNode,
+        container = wrapper.appendChild( document.createElement('div') )
+    ;
+
+    // Enforcing styles now avoids line-height jump when Ace editor is initialized
+    $(wrapper).addClass('has-proxy has-ace');
+
+
+    /**
+     * Discard this editor ensuring scope is garbage collected
+     */
+    function destroyProxy(){
+        if( editor ){
+            unbindProxy( editor );
+            editor.destroy();
+            editor = null;
+        }
+        if( container ){
+            wrapper.removeChild( container );
+            $(wrapper).removeClass('has-proxy has-ace');
+            container = null;
+        }
+    }
+    
+    
+    /**
+     * Change invisibles state
+     */
+    function setShowInvisibles( bool ){
+        if( invis !== bool ){
+            invis = bool;
+            editor && editor.setShowInvisibles( bool );
+        }
+    }
+
+    
+    /**
+     * Change print syntax mode
+     */
+    function setPrintfMode( mode ){    
+        if( mode !== printf ){
+            printf = mode;
+            // TODO would prefer to get "window.ace" from editor instance
+            editor && editor.session.setMode( createAceMode(window.ace,mode) );
+        }    
+    }
+
+    
+    
+    // load and initialize Ace editor into a new element
+    CommonJS.require("$28","remote.js").load( 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js', function( ace ){
+        if( ! container ){
+            return;
+        }
+        if( ! ace ){
+            throw new Error('Failed to load code editor');
+        }
+        // create a container div to hold the Ace DOM
+        // append element as a sibling to the real text field, and hide real text field
+        editor = ace.edit( container );
+        var session = editor.session,
+            renderer = editor.renderer
+        ;
+        // disable annoying warning
+        editor.$blockScrolling = Infinity;
+        
+        // set currently configured code editor options
+        editor.setShowInvisibles( invis );
+        editor.setWrapBehavioursEnabled(false); // <- tag auto-close
+        editor.setBehavioursEnabled(false);     // <- bracket balancing
+        editor.setHighlightActiveLine(false);
+        // editor.setKeyboardHandler(null); // <- doesn't work.
+
+        session.setUseSoftTabs(false);   // <- uses real tab characters rather than spaces :-o
+        // session.setUseWrapMode(true); // <- nicer than horizontal scroll, but has rendering issues
+
+        renderer.setShowGutter(true);   // <- line numbers
+        renderer.setPadding( 10 );      // <- can't do in CSS/ has to be accounted for in calculations
+        renderer.setScrollMargin( 8 );  // supposedly (top, bottom, left, right) but only top seems to do anything
+ 
+        // Set HTML mode, without full document linting
+        // https://groups.google.com/forum/#!msg/ace-discuss/_ugvULc9DX4/b7xi_u3_CQAJ
+        // session.setMode("ace/mode/html");
+        // session.setOption("useWorker", false);
+        
+        // set custom mode as new object 
+        session.setMode( createAceMode(ace,printf) );
+ 
+        // Ready to render current content (-1:start, 1:end)
+        editor.setValue( ta.value, -1 );
+        
+        // Rendering glitch avoided by setting this after content is set.
+        session.setUseWrapMode(true);
+
+        // if listener is active then field is editable
+        if( listener ){
+            bindProxy( editor, listener );
+        }
+        // else editor is disabled (syntax highlighting only)
+        // some disablement is handled in CSS, some bits require some code. 
+        else {
+            disableProxy( editor );
+        }
+        // ok, Ace enabled
+    }, 'ace' );
+
+
+    /**
+     * Expose common interface for all textarea plugins
+     */
+    return {
+        kill: function(){
+            destroyProxy();
+            return this;
+        },
+        disable: function(){
+            editor && disableProxy(editor);
+            listener = null;
+            return this;
+        },
+        enable: function( newListener ){
+            listener = newListener;
+            editor && bindProxy( editor, newListener );
+            return this;
+        },
+        resize: function(){
+            editor && editor.resize();
+            return this;
+        },
+        val: function( value ){
+            if( editor && value !== editor.getValue() ){
+                editor.setValue( value, -1 );
+            }
+            return this;
+        },
+        invs: function( bool ){
+            setShowInvisibles( bool||false );
+            return this;
+        },
+        strf: function( mode ){
+            setPrintfMode( mode||defaultPrintfMode );
+            return this;
+        },
+        focus: function(){
+            // TODO this? editor && editor.focus(); // not current required because arrow keys don't work in Ace :-/
+            return this;
+        }
+    };
+};
+
+
+
+/**
+ * __Globally__ set a default printf mode.
+ * Call before creating any editors.
+ */
+exports.strf = function( printfMode, customRegEx  ){
+    defaultPrintfMode = printfMode;
+    customPrintfRegEx = customRegEx;
+    return exports;
+};
+
+
+
+
+/**
+ * Listen to code editor changes so we can pass them to the real textarea
+ * focus/blur changes need to be proxied also
+ */ 
+function bindProxy( editor, listener ){
+    editor.setReadOnly( false );
+    editor.on( 'change', function( event, editor ){
+        return listener.val( editor.getValue() );
+    } );
+    editor.on( 'focus', function(/* event, editor */){
+        return listener.focus();
+    } );
+    editor.on( 'blur', function(/* event, editor */){
+        return listener.blur();
+    } );
+}
+
+
+
+/**
+ * Stop Ace passing events back to our listener
+ */
+function unbindProxy( editor ){
+    editor.off('change');
+    editor.off('focus');
+    editor.off('blur');
+}
+
+    
+    
+/**
+ * Make Ace editor readonly
+ */ 
+function disableProxy( editor ){
+    unbindProxy( editor );
+    editor.setReadOnly(true);
+    editor.setHighlightGutterLine( false );
+    editor.setHighlightActiveLine( false );
+};
+
+
+
+
+
+/**
+ * Get instance of custom Ace editor mode for Loco strings.
+ * It's a basic formatter with support for HTML entities and sprintf formatting strings.
+ * 
+ * @return CustomMode
+ */
+function createAceMode( ace, printfMode ){
+    
+    var CustomHighlightRules = createCustomHighlightRules( printfMode ),
+        req = ace['require'],
+        oop = req('ace/lib/oop')
+    ;
+    
+    function CustomMode(){
+        this.HighlightRules = CustomHighlightRules;
+    }
+
+    // CustomHighlightRules extends TextHighlightRules
+    oop.inherits ( 
+        CustomHighlightRules, 
+        req("ace/mode/text_highlight_rules").TextHighlightRules
+    );
+    
+    // CustomMode extends TextMode
+    oop.inherits (
+        CustomMode,
+        req("ace/mode/text").Mode
+    );
+    
+    return new CustomMode;
+}
+
+
+/**
+ * Closure for applying highlighting rules
+ */
+function createCustomHighlightRules( printfMode ) {
+    return function(){
+        var rules = createDefaultRules(),
+            printfRegEx = createPrintfRegExp(printfMode);
+
+        // ICU requires its own rule set
+        if( 'icu' === printfMode ){
+            rules = createIcuRules( rules.start );
+        }
+        // else add printf syntax, unless disabled.
+        else if( printfRegEx ){
+            rules.start.push( {
+                token: 'printf',
+                regex : printfRegEx
+            } );
+        }
+        // always default to plain text. (I think this is implied)
+        // rules.start.push( { defaultToken : "text" } );
+        
+        // apply rules
+        this.$rules = rules;
+    };
+}
+
+
+/**
+ * @param {string} format either a mode like "php" or a disabled mode like "no-php"
+ * @return {RegExp|null} pattern for "printf" token of given format
+ */
+function createPrintfRegExp( format ){
+    switch( format ){
+
+    case 'objc':
+        return /%(?:\d+\$)?[-+'0# ]*\d*(?:\.\d+|\.\*(?:\d+\$)?)?(?:hh?|ll?|[qjzTL])?[sScCdDioOuUxXfFeEgGaAp%@]/;
+
+    case 'java':
+        return /%(?:\d+\$)?[-+,(0# ]*\d*(?:\.\d+)?(?:[bBhHsScCdoxXeEfgGaA%n]|[tT][HIklMSLNpzZsQBbhAaCYyjmdeRTrDFc])/;
+
+    case 'php':
+        return /%(?:\d+\$)?(?:'.|[-+0 ])*\d*(?:\.\d+)?[suxXbcdeEfFgGo%]/;
+
+    case 'python':
+        return /%(?:\([a-z]+\))?[-+0# ]*(?:\d+|\*)?(?:\.\d+|\.\*)?(?:[hlL])?[sdiouxXeEfFgGcra%]/;
+        
+    case 'javascript':
+        return /%(?:[1-9]\d*\$)?\+?(?:0|'[^$])?-?\d*(?:\.\d+)?[b-gijostTuvxX%]/;
+        
+    // auto-syntax, use simple-ish rule with common/compatible tokens used across formats
+    // this allows common numeric types preceded by padding and precision, or simple string types.
+    case 'auto':
+        return /%(?:\d+\$|\([a-z]+\))?(?:[-+0]?\d*(\.\d+)?[duxoefgaDUXOEFGA]|[@scSC%])/;
+    
+    // or explicitly set custom mode
+    case defaultPrintfMode:
+        return customPrintfRegEx || '%%';
+    }
+}
+
+
+/**
+ * ICU is much more complex and recursive, so we can't use the same method as printf tokens.
+ * @param {object} start Default rules "start" state
+ * @return {object} Complete rule set for highlighter
+ */
+function createIcuRules( start ){
+
+    var // :Pattern_White_Space:
+        ws = '\\s\\u0085\\u200E\\u200F\\u2028\\u2029',
+        // :Pattern_Syntax:
+        sx = '!-/:-@\\[-^{-~¡¢£¤¥¦§©«¬®°±¶»¿×÷\\u2010-\\u2027\\u2030-\\u203E\\u2041-\\u2053\\u2055-\\u205E\\u2190-\\u245F\\u2500-\\u2775\\u2794-\\u2BFF\\u2E00-\\u2E7F\\u3001-\\u3003\\u3008-\\u3020\\u3030\\uFD3E\\uFD3F\\uFE45\\uFE46';
+
+    return {
+        start: start.concat( [
+            /*/ literal text is either quoted-quotable or unquoted-unquotable :)
+            { token: 'text',
+                regex: "[^'{}]+" // <- if we have this then we can't use default rules with HTML syntax etc..
+            },*/
+            { token: 'icu-quoted',
+              regex: /'([{}][^']*)?'/
+            },
+            // color code simple "leaf" rules like printf: {0} {foo} {n,number} {d,date,long}
+            // this should be most common embedded syntax with strict argType, but very permissive argStyle
+            { token: 'printf',
+              regex: '{[^'+sx+']+(,['+ws+']*(?:number|date|time|spellout|ordinal|duration)['+ws+']*(,['+ws+']*[^{}]+)?)?}'
+            },
+            // opening brace should begin a new complex argument.
+            { token: 'icu',
+              regex: /{/,
+              next: 'icuName'
+            },
+            // closing brace should mean going /back/into ICU rule (like plural or select)
+            { token: 'icu',
+              regex: /}/,
+              next: 'icuType'
+            }
+        ] ),
+        // state immediately after opening brace - sniffs nameOrNumber for highlighting
+        icuName: [
+            { token: 'icu',
+              regex: '['+ws+']+'
+            },
+            { token: 'icu.name',
+              regex: '[^'+ws+sx+']+',
+              next: 'icuType'
+            },
+            { defaultToken: 'icu',
+              next: 'icuType'
+            }
+        ],
+        // state at any other point within argType or argStyle syntax
+        // very simple. Just toggle escape when brace encountered, else color as syntax
+        // this allows recursive patterns like plural and select to break in and out of escape mode.
+        icuType : [
+            { token: 'icu',
+              regex: /[{}]/,
+              next: 'start'
+            },
+            { defaultToken: 'icu' }
+        ]
+        
+    };
+
+}
+
+
+function createDefaultRules(){
+    // Standard rules include HTML entities and common XML tags
+    // these should not interfere with any formatting rules
+    return { start: [
+        { token : "empty_line",
+          regex : /^$/
+        },
+        // &entities;
+        { token : "constant.language", // <- Textmate theme makes blue
+          regex : "(?:&#[0-9]+;)|(?:&#x[0-9a-fA-F]+;)|(?:&[a-zA-Z0-9_:\\.-]+;)"
+        },
+        // CDATA open
+        { token: "constant.language",
+          regex: /<!\[CDATA\[/
+        },
+        // CDATA close
+        { token: "constant.language",
+          regex: /\]\]>/
+        },
+        /*/ whole CDATA block (doesn't work over line-breaks
+        { token: "cdata",
+          regex: "<!\\[CDATA\\[.*]]>"
+        },*/
+        // XLIFF-style placeholders containing inner content <g>{stuff}</g>
+        { token: "locked",
+          regex: /<(?:xliff:)?(?:g|ph)[^>]*>[^<]*<\/(?:xliff:)?(?:g|ph)>/
+        },
+        // XLIFF-style placeholders without children <x id="foo" />
+        { token: "locked",
+          regex: /<(?:xliff:)?(bx|ex|x)[^\/>]*\/>/
+        },
+        // all other XML tags (allow edit)
+        { token: "constant.language",
+          regex: /<\/?[:a-z]+[^>]*>/
+        }
+    ] };
+}
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$47", function(exports,window,document){ /* module: js/ui/textarea/mce.js */
+/**
+ * TinyMCE proxy for textarea 
+ */
+
+var incrementor = 0;
+
+
+/**
+ * Bit of a lag when loading, so may want to call this to preload on some screens
+ * Latest version is 4.7.4 - Cloudflare does not include the inlite theme
+ * https://cdnjs.cloudflare.com/ajax/libs/tinymce/4.7.4/tinymce.min.js
+ */
+exports.load = function( callback ){
+    var remoteLib = CommonJS.require("$28","remote.js");
+    remoteLib.load( remoteLib.stat('/lib/tinymce.min.js'), callback, 'tinymce' );
+    //remoteLib.load( remoteLib.stat('/lib/debug/tinymce/tinymce.js'), callback, 'tinymce' );
+    return exports;
+};
+
+
+
+/**
+ * @param {HTMLElement} ta Textarea element
+ * @param {object} listener Textarea listener if enabled
+ */
+exports.init = function( ta, listener ){
+    
+    var editor,
+        invis = false,
+        initialHtml = '',
+        initialPara = false,
+        wrapper = ta.parentNode,
+        wrapperWrapper = wrapper.parentNode,
+        container = wrapper.appendChild( document.createElement('div') ),
+        toolbar = wrapperWrapper.insertBefore( document.createElement('nav'), wrapper )
+    ;
+
+    function beforeSetContent( value ){
+        initialHtml = value;
+        initialPara = '<p>' === value.substr(0,3) && '</p>' === value.substr(-4);
+        return value.replace(/(<\/?)script/ig, '$1loco:script' );
+    }
+    
+    function afterGetContent( value ){
+        value = value.replace(/(<\/?)loco:script/ig, '$1script' );
+        // has original text been wrapped in redundant root block?
+        if( ! initialPara && '<p>' === value.substr(0,3) && '</p>' === value.substr(-4) ){
+            // if text has changed, we'll only keep root block if no other breaks present (single line)
+            var innerHtml = value.substr(3,value.length-7);
+            if( innerHtml === initialHtml || -1 === innerHtml.indexOf('</p>') ){
+                value = innerHtml;
+            }
+        }
+        return value;
+    }
+
+    
+    // initial render while editor initializes
+    toolbar.id = '_tb'+String(++incrementor);
+    $(wrapper)
+        .addClass('has-proxy has-mce');
+    $(container)
+        .addClass('mce-content-body loading')
+        .html( beforeSetContent(ta.value) )
+    ;
+    
+    
+    /**
+     * Discard this editor ensuring scope is garbage collected
+     */
+    function destroyProxy(){
+        if( editor ){
+            listener && listener.val( editor.getContent() );
+            unbindProxy( editor );
+            editor.destroy();
+            editor = null;
+        }
+        if( container ){
+            wrapper.removeChild( container );
+            $(wrapper).removeClass('has-proxy has-mce');
+            container = null;
+        }
+        if( toolbar ){
+            wrapperWrapper.removeChild( toolbar );
+            toolbar = null;
+        }
+    }
+
+
+    /**
+     * Change invisibles state
+     */
+    function setShowInvisibles( bool ){
+        if( invis !== bool ){
+            invis = bool;
+            $(wrapper)[ bool ?'addClass':'removeClass' ]('show-invs');
+        }
+    }
+
+
+    /**
+     * "init_instance_callback" handler
+     */
+    function onEditorInit( ed ){
+        editor = ed;
+        // override getContent
+        ed._getContent = ed.getContent;
+        ed.getContent = function(arg){
+            return afterGetContent( this._getContent(arg) );
+        };
+        // override setContent
+        ed._setContent = ed.setContent;
+        ed.setContent = function(value, arg ){
+            //arg = arg || {};
+            //arg.format = 'html';
+            return this._setContent( beforeSetContent(value), arg );
+        };
+        // bind whether writable or not
+        if( listener ){
+            bindProxy( ed, listener );
+            listener.reset(); // <- late binding
+        }
+        else {
+            disableProxy( ed );
+        }
+        $(container).removeClass('loading');
+        /*/ debug
+        editor.on('keydown', function( event ){
+            return true;
+        } );*/
+    }    
+
+
+    // Load TinyMCE editor into container div (inline mode - no iframe) 
+    exports.load( function( tinymce ) {
+        if( ! tinymce ){
+            throw new Error('Failed to load HTML editor');
+        }
+        if( ! container ){
+            return;
+        }
+        // initialize editor instance
+        // https://www.tinymce.com/docs/configure/integration-and-setup/
+        tinymce.init( {
+            inline: true,
+            target: container,
+            hidden_input: false,
+            theme: 'modern', 
+            skin: false,
+            plugins: 'link lists',
+            browser_spellcheck: true,
+            menubar: false,
+            /* these things have no effect when inline
+            resize: true,            
+            statusbar: true,
+            height: ta.clientHeight || 100,
+            min_height: 100,*/
+            fixed_toolbar_container: '#'+toolbar.id,
+            toolbar: 'formatselect | bold italic link unlink | bullist numlist outdent indent',
+            block_formats: 'Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h4;Heading 4=h4;Heading 5=h5;Heading 6=h6;',
+            forced_root_block: 'p', // <- bah
+            relative_urls : false,
+            convert_urls  : false,
+            remove_script_host : false,
+            document_base_url : '',
+            allow_script_urls: false,
+            // override annoying inline styles
+            formats : {
+                alignleft   : { classes : 'alignleft' },
+                alignright  : { selector: 'p,h1,h2,h3,h4,span,strong,em,a', classes : 'alignright' },
+                aligncenter : { selector: 'p,h1,h2,h3,h4,span,strong,em,a', classes : 'aligncenter' },
+                strikethrough : { inline: 'del' }
+            },
+            fix_list_elements: true,
+            //verify_html: false,
+            //valid_elements: '*[*]',
+            //invalid_elements: 'script',
+            extended_valid_elements: 'span,b,i,u,loco:script',
+            entities: '38,amp,60,lt,62,gt,160,nbsp',
+            entity_encoding: 'named',
+            keep_styles: false,
+            // initialize when ready
+            init_instance_callback: onEditorInit
+        } );
+        
+    } );
+    
+    
+    /**
+     * Expose common interface for all textarea plugins
+     */
+    return {
+        val: function( value ){
+            value = beforeSetContent(value);
+            // it's possible that editor hasn't initialized
+            if( null == editor ){
+                ta.value = value;
+                $(container).html(value);
+            }
+            // if editor is loaded we can call setContent immediately
+            else if( editor.getContent() !== value ){
+                editor.setContent(value);
+            }
+            // setContent doesn't seem to fire change events. do we want it to?
+            listener && listener.val(value);
+            return this;
+        },
+        kill: function(){
+            destroyProxy();
+            return this;
+        },
+        enable: function( newListener ){
+            listener = newListener;
+            editor && bindProxy( editor, newListener );
+            return this;
+        },
+        disable: function(){
+            editor && disableProxy( editor );
+            listener = null;
+            return this;
+        },
+        focus: function(){
+            if( editor && listener ){
+                editor.focus();
+            }
+            return this;
+        },
+        invs: function( bool ){
+            //editor && editor.execCommand('mceVisualChars', false, bool ); // <- worthless
+            setShowInvisibles( bool||false );
+            return this;
+        }
+    };
+};
+
+
+
+/**
+ * Listen to editor changes so we can pass them to the real textarea
+ * focus/blur changes need to be proxied also
+ */ 
+function bindProxy( editor, listener ){
+    function onChange(){
+        return listener.val( editor.getContent() );
+    }
+    editor.on( 'input', onChange );
+    editor.on( 'change', onChange );
+    //
+    editor.on( 'focus', function(){
+        return listener.focus();
+    } );
+    editor.on( 'blur', function(){
+        return listener.blur();
+    } );
+    editor.setMode('design');
+}
+
+
+
+/**
+ * Stop passing events back to our listener
+ */
+function unbindProxy( editor ){
+    editor.off('input');
+    editor.off('change');
+    editor.off('focus');
+    editor.off('blur');
+}
+
+
+/**
+ * Make editor readonly
+ */
+function disableProxy( editor ){
+    unbindProxy( editor );
+    editor.setMode('readonly');
+}
+return exports;
+}({},window,document) );
+
+CommonJS.register("$43", function(exports,window,document){ /* module: js/ui/textarea/field.js */
+/**
+ * Abstracted textarea form field.
+ * - Wraps native textarea for basic editing and provides custom modes for "code" and "html"
+ * - Assists regular textareas with additional functions such as showing invisibles
+ */
+
+// only one form control can actually have focus at once
+var currentFocus;
+
+/**
+ * Quick create, without enable/disable business
+ */
+exports._new = function( elText ){
+    return new TextArea( elText );
+};
+
+
+/**
+ * Initialize from an existing textarea element
+ * @return TextArea
+ */
+exports.init = function( elText ){
+    var instance = new TextArea( elText );
+
+    // enable to start, base on disabled attribute
+    if( elText.disabled ){
+        elText.removeAttribute('disabled');
+        instance.disable();
+    }
+    else if( elText.readOnly ){
+        instance.disable();
+    }
+    else {
+        instance.enable();
+    }
+    
+    // set current language if lang attribute is set - NOT looking for closest ancestor
+    // This is now being handled on parent container instead, as it's easier for css hooks when textarea has siblings
+    // var attribute = instance.attr('lang');
+    // attribute && instance.locale(attribute);
+    
+    // observe maxlength attribute via counter utility
+    // works, but not currently enabled
+    // var attribute = instance.attr('maxlength');
+    // attribute && instance.max( Number(attribute) );
+
+    return instance;
+};
+
+
+/**
+ * Create a listening closure scope for text field content changes
+ */
+function createListener( target ){
+    var tracking = false,
+        $target = $(target),
+        $parent = $(target.parentNode),
+        currentValue = target.value,
+        initialValue
+    ;
+    function destroyListener(){
+        stopTracking();
+        $target.off('blur',onBlur).off('focus',onFocus);
+    }
+    function startTracking(){
+        initialValue = currentValue;
+        if( ! tracking ){
+            $target.on('input', checkValueChange );
+            tracking = true;
+        }
+    }
+    function restartTracking(){
+        currentValue = target.value;
+        initialValue = currentValue;
+    }
+    function stopTracking(){
+        if( tracking ){
+            $target.off('input', checkValueChange );
+            tracking = false;
+        }
+    }
+    function checkValueChange(){
+        var changedValue = target.value;
+        if( changedValue !== currentValue ){
+            $target.trigger( 'changing', [ changedValue, currentValue ] );
+            currentValue = changedValue;
+        }
+    }
+    function forceValueChangeEvent(){
+        currentValue = null; 
+        checkValueChange();
+    }
+    function checkFinalValue(){
+        if( tracking && initialValue !== currentValue ){
+            $target.trigger( 'changed', [ currentValue ] );
+        }
+        return true;
+    }
+    function changeValue( changedValue ){
+        if( currentValue !== changedValue ){
+            target.value = changedValue;
+            $target.triggerHandler('input');
+            currentValue = changedValue; // <- in case of event failure
+        }
+        return true;
+    }
+    function pingValueChange(){
+        checkValueChange();
+        checkFinalValue();
+    }
+    function onFocus(){
+        currentFocus = target;
+        startTracking();
+        // regular focus events don't bubble
+        $target.trigger('editFocus');
+        $parent.addClass('has-focus');
+        return true;
+    }
+    function onBlur(){
+        if( currentFocus === target ){
+            currentFocus = null;
+        }
+        // regular blur events don't bubble
+        $target.trigger('editBlur');
+        $parent.removeClass('has-focus');
+        if( tracking ){
+            pingValueChange();
+            stopTracking();
+        }
+        return true;
+    }
+    $target
+        // deactivate and track completion when editor exited
+        .blur( onBlur )
+        // activate when editable element entered
+        .focus( onFocus )
+    ;
+    // return a handle of some use
+    return {
+        val:  changeValue,
+        kill: destroyListener,
+        fire: forceValueChangeEvent,
+        ping: pingValueChange,
+        blur: onBlur,
+        focus: onFocus,
+        reset: restartTracking
+    };
+}
+
+
+
+/**
+ * Basic TextArea instance based on actual textarea element.
+ * 
+ * @property HTMLElement "e" (element)
+ * @property Object      "l" (listener)
+ * @property Number      "n" (max count)
+ * @property Boolean     "i" (invisibles)
+ * @property String      "m" (render mode)
+ * @property Object      "p" (plugin/proxy)
+ */
+function TextArea( elText ){
+    this.e = elText;
+}
+
+
+TextAreaPrototype = TextArea.prototype;
+
+
+/**
+ * Discard object
+ */
+TextAreaPrototype.destroy = function(){
+    this.unlisten();
+    var proxy = this.p;
+    if( proxy ) {
+        proxy.kill();
+        this.p = null;
+    }
+    this.e = null;
+};
+
+
+/**
+ * Set new text and editable state
+ */
+TextAreaPrototype.reload = function( value, editable ){
+    var listener = this.l;
+    // destroy listener if no longer editable
+    if( listener && ! editable ) {
+        this.disable();
+        listener = null;
+    }
+    // set new value without firing any change events
+    this.val( value || '' );
+    // start listening if required
+    if( editable && ! listener ){
+        this.enable();
+    }
+    return this;
+};
+
+
+/**
+ * Get/set current field value externally
+ * @return string|TextArea
+ */
+TextAreaPrototype.val = function( value ){
+    var elText = this.e;
+    if( null == value ){
+        return elText.value;
+    }
+    // must pass any external input via proxy/plugin if we're using one
+    // this avoids cyclic events as changes pass back to our listener.
+    var listener = this.l, proxy = this.p;
+    if( proxy ){
+        proxy.val( value );
+    }
+    // proxy should have set value on our listener, but we must make sure (setter is idempotent)
+    if( listener ){
+        listener.val( value );
+    }
+    // without a listener textarea is disabled, so set value quietly
+    // this may be true when we have a proxy, but must update text field.
+    if( ! listener && elText.value !== value ){
+        elText.value = value;
+        $(elText).triggerHandler('input');
+    }
+
+    return this; 
+};
+
+
+/**
+ * Force the textarea to trigger update handlers for its current value
+ * @return TextArea
+ */
+TextAreaPrototype.fire = function(){
+    this.l && this.l.fire();
+    return this;
+};
+
+
+/**
+ * Ping current value as if finished with it. 
+ * Call before unloading if no other event (like blur) would invoke change events 
+ * @return TextArea
+ */
+TextAreaPrototype.ping = function(){
+    this.l && this.l.ping();
+    return this;
+};
+
+
+/**
+ * Give our form-control element focus
+ * @return TextArea
+ */
+TextAreaPrototype.focus = function(){
+    var proxy = this.p;
+    if( proxy ){
+        proxy.focus();
+    }
+    else {
+        $(this.e).focus();
+    }
+};
+
+
+/**
+ * Check if our form-control element has focus 
+ */
+TextAreaPrototype.focused = function(){
+    return currentFocus && currentFocus === this.el;
+};
+
+
+/**
+ * Get handle on textarea's parent element
+ * @return HTMLElement
+ */
+TextAreaPrototype.parent = function(){
+    return this.e.parentNode;
+};
+
+
+/**
+ * Short cut to get/set textarea element property
+ * @return string|TextArea
+ */
+TextAreaPrototype.attr = function( prop, value ){
+    var elText = this.e;
+    if( 1 === arguments.length ){
+        return elText.getAttribute(prop);
+    }
+    if( null == value ){
+        elText.removeAttribute(prop);
+    }
+    else {
+        elText.setAttribute( prop, value );
+    }
+    return this;
+};
+
+
+/**
+ * Check if this field is enabled for editing
+ */
+TextAreaPrototype.editable = function(){
+    return !! this.l;
+};
+
+
+
+/**
+ * Enable for editing
+ * @return TextArea
+ */
+TextAreaPrototype.enable = function(){
+    var proxy = this.p, elText = this.e;
+    elText.removeAttribute('readonly');
+    this.listen();
+    // bind any current proxy editors
+    if( proxy && proxy.enable ){
+        proxy.enable( this.l );
+    }
+    return this;
+};
+
+
+
+/**
+ * Disable for non-editable field behaviour
+ * @return TextArea
+ */
+TextAreaPrototype.disable = function(){
+    var proxy = this.p, elText = this.e;
+    // stop textarea changes and events
+    elText.setAttribute('readonly',true);
+    this.unlisten();
+    // proxy editors must be disabled or at least stop sending events to our listener
+    if( proxy && proxy.disable ){
+        proxy.disable();
+    }
+    return this;
+};
+
+
+
+/**
+ * Start listening for changes
+ * @return TextArea
+ */
+TextAreaPrototype.listen = function(){
+    var listener = this.l;
+    listener && listener.kill();
+    this.l = createListener( this.e );
+    return this;
+};
+
+
+
+/**
+ * Stop listening for changes
+ * @return TextArea
+ */
+TextAreaPrototype.unlisten = function(){
+    var listener = this.l;
+    if( listener ) {
+        listener.kill();
+        this.l = null;
+    }
+    return this;
+};
+
+
+
+/**
+ * Enable/disable "Show invisibles"
+ * @return TextArea
+ */
+TextAreaPrototype.setInvs = function( newBool, force ){
+    var oldBool = this.i || false;
+    if( force || oldBool !== newBool ){
+        // Always destroy any existing mirroring
+        if( this._i ){
+            this._i.kill();
+            delete this._i;
+        }
+        // If proxy/plugin enabled, it may have its own invisibles switch
+        var proxy = this.p;
+        if( proxy ){
+            proxy.invs && proxy.invs( newBool );
+        }
+        // else enable custom mirroring to show invisibles without code view
+        else if( newBool ){
+            this._i = CommonJS.require("$46","mirror.js").init( this.e );
+        }
+        // new invisibles option set
+        this.i = newBool;
+    }
+    return this;
+};
+
+
+
+/**
+ * Get current "Show invisibles" setting
+ */
+TextAreaPrototype.getInvs = function(){
+    return this.i || false;
+};
+
+
+
+/**
+ * Switch rendering mode
+ * @param String ( "" | "code" | "html" )
+ * @return TextArea
+ */
+TextAreaPrototype.setMode = function( newMode ){
+    var proxy = this.p,
+        oldMode = this.m || '',
+        invMode = this.i || false
+    ;
+    if( newMode !== oldMode ){
+        // set new mode immediately to avoid async race conditions
+        this.m = newMode;
+        // destroy current mode if one is set
+        if( proxy ){
+            proxy.kill();
+        }
+        // enable new mode if applicable
+        if( 'code' === newMode ){
+            proxy = CommonJS.require("$15","ace.js").init( this.e, this.l, this['%'] );
+        }
+        else if( 'html' === newMode ){
+            proxy = CommonJS.require("$47","mce.js").init( this.e, this.l );
+        }
+        else {
+            proxy = null;
+        }
+        this.p = proxy;
+        this.setInvs( invMode, true );
+        // retain focus between editor modes
+        if( currentFocus ){
+            this.focus();
+        }
+        // mode switched ok (no current need for an event
+        // $(this.e).trigger('editMode',[newMode,oldMode]);
+    }
+    return this;
+};
+
+
+
+/**
+ * Switch "printf" syntax
+ * @param string (php|java|objc|auto)
+ */
+TextAreaPrototype.setStrf = function( newMode ){
+    this['%'] = newMode;
+    if( 'code' === this.m ){
+        this.p.strf( newMode );
+    }
+    return this;
+};
+
+
+
+/**
+ * Give the textarea element a field name
+ * @return TextArea
+ */
+TextAreaPrototype.name = function( name ){
+    this.e.setAttribute( 'name', name );
+    return this;
+};
+
+
+/**
+ * @return TextArea
+ */
+TextAreaPrototype.placeholder = function( text ){
+    this.e.setAttribute( 'placeholder', text );
+    return this;
+};
+
+
+/**
+ * Ping redraw, like if parent element has changed size
+ */
+TextAreaPrototype.redraw = function( /*event*/ ){
+    var proxy = this.p;
+    if( proxy && proxy.resize /*&& ! event*/ ){
+        proxy.resize();
+    }
+};
+
+
+
+TextAreaPrototype = null;
+
+
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$44", function(exports,window,document){ /* module: js/ui/wgtable.js */
+/**
+ * Table for use inside wingrid cell.
+ */
+
+exports.create = function( wingrid ){
+    return new WingridTable( wingrid );
+};
+
+
+/**
+ * Error reporting
+ */
+function stderr( message ){
+    var console = window.console;
+    console && console.error && console.error( message );
+};
+
+
+function createDiv( className ){
+    var el = document.createElement('div');
+    className && el.setAttribute('class',className);
+    return el;
+}
+
+
+
+/**
+ * Create a redraw proxy closure
+ */
+function proxyRedraw( table ){
+    // function returned will execute in the scope of the callee
+    return function(){
+        table.resize();
+        return this;
+    };
+}
+
+
+
+
+/**
+ * Create mousedown closure for selecting table row
+ */
+function createMouseDownSelector( table ){
+    return function( event ){
+        // Click is hopefully from somewhere inside a cell that knows its row index.
+        var target = event.target,
+            index = target.$index
+        ;
+        // it's possible for row div to have sub-elements (note that document is a node, but not an element)
+        // Warning: avoid using div elements, or drilling up will not work!
+        while( null == index && 'DIV' !== target.nodeName && ( target = target.parentElement ) ){
+            index = target.$index;
+        }
+        if( null != index ){
+            // must prevent cell resizing while allowing text selection
+            // event.preventDefault();
+            event.stopImmediatePropagation();
+            table.select(index);
+        }
+        return true;
+    };
+}
+
+/*
+function createPromotionHandler( table ){
+    var style = table.root.style;
+    table = null;
+    return function(){
+        style.backfaceVisibility = 'hidden';
+        //style.willChange = 'transform';
+        return true;
+    };
+};*/
+
+/*
+function createDemotionHandler( table ){
+    var style = table.root.style;
+    table = null;
+    return function(){
+        style.backfaceVisibility = '';
+        //style.willChange = '';
+        return true;
+    };
+};*/
+
+
+function createScrollHandler( table ){
+    return function(){
+        if( table.redrawDirty() ){
+            //console.debug('redraw dirty after scroll');
+            table.redraw();
+        }
+        return true;
+    };
+}
+
+
+
+/**
+ * Create keydown closure for navigating through table rows
+ */
+function createKeyDownSelector( table ){
+    return function( event ){
+        var dir, key = event.keyCode;
+        if( 40 === key ){
+            dir = 1; // down
+        }
+        else if( 38 === key ){
+            dir = -1; // up
+        }
+        else {
+            return true;
+        }
+        // arrow pressed, but ignore if modifier key down (other commands might be in control)
+        if( event.shiftKey || event.ctrlKey || event.metaKey || event.altKey ){
+            return true;
+        }
+        // ok to try move to next row
+        table.selectNext(dir);
+        // cancel key press
+        event.stopPropagation();
+        event.preventDefault();
+        return false;
+    };
+};
+
+
+
+/**
+ * Create sorting closure for table
+ * @return Function
+ */
+function createTableSorter( table, columnIdx, descending ){
+    // dummy getter should not be required, but safer to keep and debug as needed
+    function missingCell(i){
+        stderr('row['+i+'] disappeared');
+        return {
+            cellVal: function(){
+                return '';
+            }
+        };
+    }
+    // return actual sorting callback
+    return function( tosort ){
+        var c = columnIdx || 0,
+            d = descending ? -1 : 1,
+            rows = table.rows||[],
+            // Comparison closure holds original data and compares indexes
+            // Use for sorting a list of offsets, like a pre-filter
+            comp = function( i, j ){
+                return d * ( rows[i]||missingCell(i) ).cellVal(c).localeCompare( ( rows[j]||missingCell(j) ).cellVal(c) );
+            }
+        ;
+        tosort.sort( comp );
+    };
+}
+
+
+
+/**
+ * Object reference to table returned from wingrid.tabulate function
+ */
+function WingridTable( wingrid ){
+    this.w = wingrid;
+}
+
+
+var WingridTablePrototype = WingridTable.prototype;
+
+
+WingridTablePrototype.init = function( dataSource ){
+    var wingrid = this.w,
+        id = wingrid.id,
+        children = wingrid.splity( id+'-thead', id+'-tbody' ),
+        thead = children[0],
+        tbody = children[1],
+        rows = [],
+        order = [],
+        columnIds = [],
+        columnNames = []
+    ;
+    
+    // may be initializing a new data source
+    if( dataSource ){
+        this.ds = dataSource;
+        // set original order of rows for sorting.
+        this.idxs = order;
+        // new data means filter may no longer be valid
+        this._idxs = null;
+    }
+    // else if re-using data source we can keep filter and preserve current order
+    else if( dataSource = this.ds ){
+        // if currently sorted, we may lose the ability to sort on the same column later.
+        // so if we hold any stashed data, we must sort it against original data so it's order is frozen if restored.
+        // this._sort( this._idxs||[] );
+    }
+    // else client code screw up
+    else {
+        throw new Error('No datasource');
+    }
+   
+    // mark type of cells as such
+    thead.css.push('wg-thead');
+    tbody.css.push('wg-tbody');
+    
+    // pull data column names from header iterator
+    dataSource.eachCol( function( i, slug, heading ){
+        columnIds[i] = id+'-col-'+slug;
+        columnNames[i] = heading || slug;
+    } );
+
+    // split header window into faux <th> cells
+    var tplDiv = createDiv(),
+        colIndex = -1,
+        numCols = columnIds.length,
+        wgColsDiv = createDiv('wg-cols'),
+        theadCells = thead.splitx.apply( thead, columnIds );
+
+    // create body columns while setting column headers
+    while( ++colIndex < numCols ){
+        theadCells[colIndex].header( columnNames[colIndex] );
+        wgColsDiv.appendChild( tplDiv.cloneNode(false) ).setAttribute('for', columnIds[colIndex] );
+    }
+
+    // Create all available rows from full data source
+    dataSource.eachRow( function( index, colGetters, cssClass ){
+        rows[index] = new WingridRow( index, colGetters, cssClass );
+        order[index] = index; // <- start with identity mapping (no sort/no filter)
+    } );
+    
+    // Remember some stuff
+    this.rows = rows;
+    this.cols = wgColsDiv;
+    
+    // Invalidate some lazy properties
+    this.ww = null;
+
+    // a root element is required for receiving events and focus 
+    // TODO can we use the cell body or do we have to create a wrapper to avoid it getting killed?
+    var eventRoot = tbody.body;
+    this.root = eventRoot;
+    this.head = thead;
+
+    // Let header redraw sync body columns
+    thead.redraw = proxyRedraw( this );
+
+    // Collapse header 'row' and prevent resizing of head/body boundary
+    var headerHeight = tbody.fixed = theadCells[0].bodyY() ||  20;
+    wingrid.lock().resize( headerHeight, tbody );
+    
+    wingrid.css.push('is-table');
+    wingrid.restyle();
+
+    // if table has sorting context, it must be rebuilt as view will be sorted but look like it
+    if( this.sc ){
+        this._re_sort( numCols );
+    }
+    // else sort initial order if applicable
+    else if( dataSource.sort ){
+        dataSource.sort( order );
+    }
+    
+    // table still has no cells rendered, let's go:
+    this.redrawDirty();
+    this.render();
+
+    // enable interaction points on the focusable/scrollable wg-cols element
+    $(eventRoot)
+        .attr('tabindex','-1') // <- essential for focus to work so keys fire
+        .on('keydown', createKeyDownSelector(this) )
+        .on('mousedown', createMouseDownSelector(this) )
+        //.on('mouseenter', createPromotionHandler(this) ) 
+        //.on('mouseleave', createDemotionHandler(this) ) 
+        .on('scroll', createScrollHandler(this) )
+    ;
+
+    return this;    
+};
+
+
+
+/**
+ * Empty and detach all columns from DOM for rebuild.
+ * Note that this destroys DOM for redraw, but does not affect data 
+ * @return WingridTable 
+ */
+WingridTablePrototype.clear = function(){
+    // iteration is required to remove visible page reference in all rows
+    var pages = this.pages || [],
+        p = pages.length
+    ;
+    while( 0 !== p-- ){
+        pages[p].destroy();
+    }
+    this.pages = [];
+    this.vh = null;
+    this.mn = null;
+    this.mx = null;
+    this.sy = null;
+    // forcing a repaint now (by reading property) ensures new list starts at top. (wondering if this is desired)
+    void this.root.scrollTop;
+    return this;
+};
+
+
+
+/**
+ * Render table according to current filter
+ * Be sure to call this.clear() before calling this
+ * @return WingridTable 
+ */
+WingridTablePrototype.render = function(){
+    var row,
+        page,
+        pages = [],
+        rowsPerPage = 100,
+        pageHeight = rowsPerPage * 22,
+        rows = this.rows || [],
+        //
+        offset = -1, // <- visual order
+        index,       // <- original data index
+        //
+        order = this.idxs,
+        length = order.length,
+        reverseMap = ( this.idxr = {} ),
+        //
+        currentIndex = this.r,
+        stashedIndex = this._r,
+        // elements
+        pageDiv,
+        rootDiv = this.root,
+        pageDivTemplate = this.cols
+    ;
+    
+    while( ++offset < length ){
+        // create new page if needed
+        if( 0 === offset % rowsPerPage ){
+            pageDiv = pageDivTemplate.cloneNode(true);
+            page = new WingridRowsPage( pageDiv );
+            page.h = pageHeight;
+            page.insert( rootDiv );
+            pages.push( page );
+        }
+        // get original index of and set reverse lookup so we can get position from original data
+        index = order[ offset ];
+        reverseMap[ index ] = offset;
+        // push unrendered row into page
+        row = rows[ index ];
+        if( null == row ){
+            throw new Error('Render error, no data at ['+index+']');
+        }
+        row.page = page;
+        page.rows.push( row );
+    }
+    
+    // shorten last page if it's not full
+    if( page && page.size() !== rowsPerPage ){
+        page.sleepH( 22 );
+    }
+    
+    // Do initial paint
+    this.pages = pages;
+    this.mn = null;
+    this.mx = null;
+    this.redrawDirty();
+    this.redraw();
+    
+    
+    // re-instate stashed index if it has become available and (no other selection is active)
+    // note that current and stashed indexes refer to original data index, as without a physical row they can have no visual row index
+    if( null == currentIndex ){
+        if( null != stashedIndex ){
+            row = rows[ stashedIndex ];
+            if( row && row.page ){
+                delete this._r; // <- unstash
+                this.select( stashedIndex, true );
+            }
+        }
+    }
+    else {
+        row = rows[ currentIndex ];
+        // keep selected row in view after render
+        if( row && row.page ) {
+            this.select( currentIndex, true );
+        }
+        // deselect current row if it got filtered out
+        else {
+            this.deselect();
+            this._r = currentIndex; // <- stash
+        }
+    }
+    return this;
+};
+
+
+
+/**
+ * Redraw on size change (invoked from our wingrid cell change)
+ * also does row redraw in case size change caused visibilty change
+ */
+WingridTablePrototype.resize = function(){
+    var i = -1,
+        widths = this.ww || ( this.ww = [] ),
+        wingrid = this.w,
+        thead = wingrid.cells[0],
+        headerDivs = thead.body.childNodes,
+        numCols = headerDivs.length,
+        pages = this.pages || [],
+        npages = pages.length
+    ;
+    // original redraw function can be accessed via main window prototype
+    wingrid.redraw.call( thead );
+    // get required column widths from header cell
+    while( ++i < numCols ){
+        widths[i] = headerDivs[i].style.width;
+    }
+    // no point doing anything else if we have no pages.
+    if( ! npages ){
+        return;
+    }
+    // always set new widths on all visible rows
+    var first = this.mn, last = this.mx;
+    //console.log('applying widths for ('+first+'..'+last+') -> ['+widths.join(',')+']');
+    for( i = first; i <= last; i++ ){
+        pages[i].widths( widths );
+    }
+    if( this.redrawDirty() ){
+        //console.debug('redraw dirty after resize');
+        this.redraw();
+    }
+};
+
+
+
+/**
+ * Establish whether dimensions have changed that would require redraw
+ */
+WingridTablePrototype.redrawDirty = function(){
+    var changed = false,
+        eventRoot = this.root,
+        scrollY = eventRoot.scrollTop,
+        viewHeight = eventRoot.clientHeight
+    ;
+    if( this.sy !== scrollY ){
+        changed = true;
+        this.sy = scrollY;
+    }
+    if( this.vh !== viewHeight ){
+        changed = true;
+        this.vh = viewHeight;
+    }
+    /*if( ! this.ww ){
+        throw new Error('No widths set :(');    
+    }*/
+    return changed;
+};
+
+
+
+/**
+ * Paint visible rows according to current viewport
+ */
+WingridTablePrototype.redraw = function(){
+    var y = 0,
+        i = -1,
+        first = null,
+        last = null,
+        widths = this.ww,
+        scrollY = this.sy,
+        viewHeight = this.vh,
+        minVisible = this.mn,
+        maxVisible = this.mx,
+        minY = Math.max( 0, scrollY - 100 ),
+        maxY = viewHeight + scrollY + 100,
+        page,
+        pages = this.pages || [],
+        npages = pages.length
+    ;
+    // render all rows in current range and establish new end points for sleeping
+    while( ++i < npages ){
+        if( y > maxY ){
+            //console.log(' ['+i+'] is below range. '+y+' > '+maxY);
+            break;
+        }
+        page = pages[i];
+        y += page.height();
+        if( y < minY ){
+            //console.log(' ['+i+'] is above range, '+y+' < '+minY );
+            continue;
+        }
+        if( null === first ){
+            //console.log(' ['+i+'] is FIRST in range');
+            first = i;
+        }
+        last = i;
+        page.rendered || page.render(widths);
+    }
+    // unrender anything above, when scrolling down
+    if( minVisible !== first ){
+        if( null === minVisible ){
+            //
+        }
+        else if( first > minVisible ){
+            for( i = minVisible; i < first; i++ ){
+                page = pages[i];
+                if( ! page ){
+                    throw new Error('Shit!');
+                }
+                page.rendered && page.sleep();
+            }
+        }
+        this.mn = first;
+    }
+    // unrender anything below when scrolling up
+    if( maxVisible !== last ){
+        if( null === maxVisible ){
+            //
+        }
+        else if( last < maxVisible ){
+            for( i = maxVisible; i > last; i-- ){
+                page = pages[i];
+                page.rendered && page.sleep();
+            }
+        }
+        this.mx = last;
+    }
+};
+
+
+/**
+ * Current selected row index
+ * @return number
+ */
+WingridTablePrototype.selected = function(){
+    return this.r;
+};
+
+
+
+
+
+/**
+ * Get reference to table header WinGrid cell
+ * @return WinGrid
+ */
+WingridTablePrototype.thead = function(){
+    return this.w.cells[0];
+};
+
+
+
+/**
+ * Get reference to table body WinGrid cell
+ * @return WinGrid
+ */
+WingridTablePrototype.tbody = function(){
+    return this.w.cells[1];
+};
+
+
+/**
+ * Get array of cell div nodes
+ * @return HTMLElement[]
+ */
+WingridTablePrototype.tr = function( index ){
+    var row = this.row(index);
+    if( row ){
+        return row.cells();
+    }
+    return [];
+};
+
+
+/**
+ * Get single WingridRow objects
+ * @return WingridRow
+ */
+WingridTablePrototype.row = function( index ){
+    return this.rows[ index ];
+};
+
+
+/**
+ * Get single wg-td div
+ * @return HTMLDivElement
+ */
+WingridTablePrototype.td = function( index, colIndex ){
+    return this.tr(index)[ colIndex ];
+};
+
+
+
+/**
+ * Establish next selectable row from current.
+ * @param int 1 or -1
+ * @param bool whether to wrap iteration at either end
+ * @param int optional data index to start at, defaults to current, or [0] if there is no current
+ * @return int data index to be selected
+ */
+WingridTablePrototype.next = function( direction, wrap, index ){
+    if( null == index ){
+        index = this.r || 0;
+    }
+    var order = this.idxs,
+        numRows = order.length,
+        // iteration must be done on visual row offsets meaning table must be rendered
+        reverseMap = this.idxr || {},
+        offset = reverseMap[ index ],
+        ostart = offset
+    ;
+    
+    // outer loop increments offset until matched, broken or wrapped to start
+    while( ostart !== ( offset += direction ) ){
+        if( offset >= 0 && numRows > offset ){
+            // row should exist when in range as order should only contain rendered rows
+            break;
+        }
+        // row out of range, attempt one wrap only
+        if( wrap && numRows ){
+            offset = ( 1 === direction ? -1 : numRows );
+            wrap = false;
+            continue;
+        }
+        // nope, I give up
+        return null;
+    }
+
+    index = order[ offset ];
+    // sanity check when debugging:
+    if( null == index || null == this.rows[index] ){
+        stderr('Bad next: ['+offset+'] does not map to data row');
+        return null;
+    }
+
+    return index;
+};
+
+
+
+/**
+ * Actually select next selectable row
+ */
+WingridTablePrototype.selectNext = function( direction, wrap, noFocus ){
+    var index = this.next( direction, wrap );
+    if( null == index ){
+        // must be some kind of error
+    }
+    else if( this.r === index ){
+        // somehow the same as current row selection
+    }
+    else {
+        this.select( index, noFocus );
+    }
+    return this;
+};
+
+
+
+/**
+ * Deselect currently selected row
+ * @param bool whether ui is deselecting before selecting another
+ */
+WingridTablePrototype.deselect = function( willSelect ){
+    var index = this.r;
+    if( null != index ){
+        this.r = null;
+        $( this.tr(index) ).removeClass('selected');
+        this.w.fire( 'wgRowDeselect', [ index, willSelect ] );
+    }
+    return this;
+};
+
+
+/**
+ * Select by phsically rendered row offset.
+ * Most common use would be just selecting first in the list. Most internal functions use data index
+ */
+WingridTablePrototype.selectRow = function( rowOffset, noFocus ){
+    return this.select( this.idxs[rowOffset] );
+};
+
+
+/**
+ * Select by data row (not physically displayed row index)
+ * @param int original data index pointing to row data
+ * @param bool whether to avoid re-focusing after selection 
+ * @return WingridTable
+ */
+WingridTablePrototype.select = function( index, noFocus ){
+    var row = this.rows[ index ],
+        page = row && row.page
+    ;
+    // can't select filtered-out row, can we?
+    if( ! page ){
+        this.deselect( false );
+        stderr('Row is filtered out');
+        return this;
+    }
+    // deselect current row if one is selected
+    this.deselect( true );
+    // ok to select row
+    var y,
+        rowCells,
+        wingrid = this.w,
+        tbodyWin = wingrid.cells[1];
+
+    // if whole block is sleeping, jump roughly to position    
+    if( ! page.rendered ){
+        y = page.top();
+        tbodyWin.scrollY( y );
+        if( this.redrawDirty() ){
+            this.redraw();
+        }
+    }
+    // errors!
+    if( ! row.rendered ){
+        page.rendered || stderr('Failed to render page');
+        stderr('Row ['+row.i+'] not rendered');
+        return this;
+    }
+
+    // visually mark as selected and set current index
+    rowCells = row.cells();
+    $(rowCells).addClass('selected');
+    this.r = index;
+
+    // keep focus (for keyboard events)
+    if( ! noFocus ){
+        y = tbodyWin.scrollY();
+        $(this.root).focus();
+        // fix weird IE bug where focus on outer element loses scroll on inner element 
+        if( y !== tbodyWin.scrollY() ){
+            tbodyWin.scrollY( y );
+        }
+    }
+    
+    // move window scroll without animation so row is in view.
+    tbodyWin.scrollTo( rowCells[0], true );
+    
+    this.w.fire( 'wgRowSelect', [ index, row.data() ] );
+    return this;
+};
+
+
+/*
+ * Promote scrollable layer for performance. Note this makes removal from DOM more expensive!
+ *
+WingridTablePrototype.promote = function(){
+    this.p.style.backfaceVisibility = 'hidden';
+    return this;
+};*/
+
+
+
+/*
+ * Unpromote scrollable layer to avoid overhead associated with removal
+ *
+WingridTablePrototype.demote = function(){
+    this.p.style.backfaceVisibility = '';
+    return this;
+};*/
+
+
+
+/**
+ * Show all rows and unset filtered state
+ */
+WingridTablePrototype.unfilter = function(){
+    // restore stashed original list
+    if( this._idxs ){
+        // must resort list as sorting may have changed since stashed
+        this.idxs = this._sort( this._idxs );
+        this._idxs = null;
+        this.clear().render();
+    }
+    return this;
+};
+
+
+
+/**
+ * Apply a new set of filtered in row indexes
+ */
+WingridTablePrototype.filter = function( rowOffsets ){
+    // stash unfiltered list if not exists
+    if( ! this._idxs ){
+        this._idxs = this.idxs;
+    }
+    // set new sorted list of original data offsets
+    this.idxs = this._sort(rowOffsets);
+    return this.clear().render();
+};
+
+
+/**
+ * Apply a function to every renderable row, in order
+ * @return WingridTable
+ */
+WingridTablePrototype.each = function( callback ){
+    var index,
+        offset = -1,
+        rows = this.rows || [],
+        order = this.idxs || [],
+        length = order.length
+    ;
+    while( ++offset < length ){
+        index = order[ offset ];
+        // apply function with row and indexes
+        callback( rows[index], offset, index );
+    }
+    return this;
+};
+
+
+
+/**
+ * Make a given column sortable.
+ * Currently only sortable by simple text comparison
+ * @return WingridTable
+ */
+WingridTablePrototype.sortable = function( columnIdx ){
+    var context = this.sc || ( this.sc = new WingridTableSortingContext(this) );
+    context.has(columnIdx) || context.add(columnIdx);
+    return this;
+};
+
+
+
+/**
+ * @internal
+ * Rebuilds sortable state between header cell destructions
+ * Note that columns may have changed since last render, so we pass length
+ * @return WingridTable
+ */
+WingridTablePrototype._re_sort = function( length ){
+    var columnIdx = -1,
+        context = this.sc,
+        active = context.active;
+    // existing context must be destroyed to re-bind header cells
+    context = new WingridTableSortingContext(this);
+    this.sc = context;
+    // re-bind all sortable columns
+    while( ++columnIdx < length ){
+        context.add( columnIdx );
+    }
+    // render active state if there is one and can be mapped to current columns
+    if( active ){
+        columnIdx = this.head.indexOf(active.id);
+        // sorter no longer valid if column missing.
+        // sorting on closest column will cause sorting jump, but preferable to being unable to persist sorting in a column that doesn't exist
+        if( -1 === columnIdx ){
+            columnIdx = Math.min( active.idx, length-1 );
+        }
+        this.sort( columnIdx, active.desc );
+    }
+    return this;
+};
+
+
+
+/**
+ * @internal
+ * Pre-sort current indexes if a sort function exists.
+ * Sort function is kept in memory for when filtered lists are swapped out. 
+ * @return Array the object passed
+ */
+WingridTablePrototype._sort = function( order, doSort ){
+    // set new sorter if passed
+    if( doSort ){
+        this.s = doSort;
+        doSort( order );
+    }
+    // else use current of there is one
+    else if( doSort = this.s ){
+        doSort( order );
+    }
+    return order;
+};
+
+
+/**
+ * Create sorter, sort current indexes
+ * Remember to call clear().render() afterwards
+ * @return WingridTable
+ */
+WingridTablePrototype.sort = function( columnIdx, descending ){
+    // pass a new sorter to the pre-sort function
+    this._sort( this.idxs, createTableSorter( this, columnIdx, descending ) );
+    // set visual state of header cells via context
+    this.sc.activate( columnIdx, descending );
+    return this;
+};
+
+
+
+
+WingridTablePrototype = null;
+
+
+
+
+/**
+ * For maintaining table-wide sorting state
+ * Note that currently sorting is not compound, only one column is sorted at a time
+ */
+function WingridTableSortingContext( table ){
+    this.t = table;
+    this.length = 0;
+}
+
+var WingridTableSortingContextPrototype = WingridTableSortingContext.prototype;
+
+/**
+ * Check if column made sortable yet
+ * @return bool
+ */
+WingridTableSortingContextPrototype.has = function( columnIdx ){
+    return null != this[ columnIdx ];
+};
+
+/**
+ * Add given column to list of sortables and enable clickableness
+ * @return WingridTableSortingContext
+ */
+WingridTableSortingContextPrototype.add = function( columnIdx ){
+    var self = this, 
+        cell = self.t.head.cells[columnIdx]
+    ;
+    self[ columnIdx ] = { desc: null, idx: columnIdx, id: cell.id };
+    self.length ++;
+    cell
+        .addClass('wg-sortable')
+        // apply click action only on <header> element
+        .on('click', function(event){
+            if( 'header' === event.target.nodeName.toLowerCase() ){
+                event.stopImmediatePropagation();
+                self.toggle( columnIdx );
+                return false;
+            }
+        } )
+    ;
+    return self;
+};
+
+
+/**
+ * Activate sorting on a given column, reversing its direction at the same time
+ * @return WingridTableSortingContext
+ */
+WingridTableSortingContextPrototype.toggle = function( columnIdx ){
+    var state = this[columnIdx],
+        descending = ! state.desc;
+    // execute sort and re-render on table
+    this.t.sort( columnIdx, descending ).clear().render();
+    return this;
+};
+
+
+/**
+ * Set visual state of a given column
+ * @return WingridTableSortingContext
+ */
+WingridTableSortingContextPrototype.activate = function( columnIdx, descending ){
+    var css,
+        cell,
+        active = this.active,
+        state = this[columnIdx],
+        cells = this.t.head.cells
+    ;
+    // toggle off previously active sorting column
+    if( active && ( cell = cells[active.idx] ) ){
+        cell.removeClass( active.css );
+        if( active !== state ){
+            cell.restyle();
+        }
+    }
+    // set as current sorting column
+    if( cell = cells[columnIdx] ){
+        state.desc = descending;
+        this.active = state;
+        // enable CSS on current item
+        css = 'wg-'+( descending ? 'desc' : 'asc' );
+        cell.addClass( css ).restyle();
+        // remember css for disablement later
+        state.css = css;
+        // fire sorting event so editors can remember setting between views
+        // cell.fire('wgSorted', [ columnIdx, descending ] );
+    }
+    // else some error like switching between tables of different widths
+    else {
+        this.active = null;
+    }
+    return this;
+};
+
+
+WingridTableSortingContextPrototype = null;
+
+
+
+
+/**
+ * Object representing a single row of cells.
+ * Each cell is a separate div inside a pseudo "column" div
+ */
+function WingridRow( index, colGetters, cssClass ){
+    var template = document.createElement('div');
+    template.className = cssClass || '';
+    //
+    this._ = template;
+    this.d = colGetters || [];
+    this.i = index || 0; // <- original data index for row object
+    this.length = colGetters.length;
+}
+
+var WingridRowPrototype = WingridRow.prototype;
+
+
+/**
+ * Render cells visibly with actual data
+ */
+WingridRowPrototype.render = function( columns ){
+    var div,
+        divs = [],
+        template = this._,
+        colIndex = this.length
+    ;
+    // if we have a template, this is our first time
+    if( template ){
+        this.c = divs;
+        while( 0 !== colIndex-- ){
+            div = template.cloneNode(false);
+            divs[colIndex] = this.update( colIndex, div );
+            // make data index available to html element so event closures can operate without this object
+            div.$index = this.i;
+            columns[colIndex].appendChild(div);
+        }
+        this._ = null;
+    }
+    // else we can re-insert our saved elements. this is essential for not destroying visual changes during edits
+    else {
+        divs = this.c;
+        while( 0 !== colIndex-- ){
+            columns[colIndex].appendChild( divs[colIndex] );
+        }
+    }
+    this.rendered = true;
+    return this;
+};
+
+
+/**
+ * Update contents of given column from its value getter
+ */
+WingridRowPrototype.update = function( colIndex, cleanDiv ){
+    var div = cleanDiv || this.c[colIndex] || {},
+        getter = this.d[colIndex] || function(){},
+        nodeOrValue = getter() || '\xA0'
+    ;
+    // set literal text when string
+    if( null == nodeOrValue.innerHTML ) {
+        div.textContent = nodeOrValue;
+    }
+    // else set as rendered HTML. (note that outer element will be discarded)
+    else {
+        div.innerHTML = nodeOrValue.innerHTML;
+    }
+    return div;
+};
+
+
+/**
+ * Get array of cell divs.
+ * (if row is not rendered this will return the template div only)
+ * @return HTMLElement
+ */
+WingridRowPrototype.cells = function(){
+    return this.c || [ this._ ];
+};
+
+/**
+ * Get our row data as array of strings
+ * @return array
+ */
+WingridRowPrototype.data = function(){
+    var c = -1,
+        vals = [],
+        numcols = this.length
+    ;
+    while( ++c < numcols ){
+        vals[c] = this.cellVal(c);
+    }
+    return vals;
+};
+
+
+WingridRowPrototype.destroy = function(){
+    this.page = null;
+    this.rendered = false;
+};
+
+/**
+ * Get data value of a given cell
+ */
+WingridRowPrototype.cellVal = function( columnIdx ){
+    var value = this.d[ columnIdx ]() || '';
+    return String( value.textContent || value );
+};
+
+WingridRowPrototype = null;
+
+
+
+
+
+
+
+/**
+ * Object representing a "page" of rows
+ * @param HTMLDivElement wg-cols wrapping div holding multiple pseudo columns
+ */
+function WingridRowsPage( wgColsDiv ){
+    this.live = wgColsDiv;
+    this.rows = [];
+}
+
+
+var WingridRowsPagePrototype = WingridRowsPage.prototype;
+
+
+/**
+ * Get number of rows in page
+ */
+WingridRowsPagePrototype.size = function(){
+    return this.rows.length;
+};
+
+
+/**
+ * insert placeholder into DOM
+ * @return HTMLDivElement placeholder div
+ */
+WingridRowsPagePrototype.insert = function( parent ){
+    var h = this.h, // <- should have been set when constructed
+        div = createDiv('wg-dead')
+    ;
+    div.style.height = String(h)+'px';
+    // div.setAttribute('data-debug','unseen');
+    parent.appendChild( div );
+    this.dead = div;
+    return div;
+};
+
+
+/**
+ * Get top position of page inside scrolling area
+ * @return Number
+ */
+WingridRowsPagePrototype.top = function(){
+    var el = this.rendered ? this.live : this.dead;
+    return el.offsetTop;
+};
+
+
+/**
+ * Get/set physical height of page, assuming in DOM
+ */
+WingridRowsPagePrototype.height = function(){
+    var h = this.h;
+    if( null == h ){
+        // taking height from first column due to floating elements giving wrapper no physical height
+        if( this.rendered ){
+            h = this.live.firstChild.offsetHeight;
+        }
+        // else sleeping page should have fixed height
+        else {
+            h = this.dead.offsetHight;
+        }
+        // bad CSS may prevent container having a height
+        /*/ if scrolling is weird or pages aren't rendered, check this:
+        if( 0 === h ){
+            console.error('offsetHight is zero, check CSS');
+        }*/
+        this.h = h;
+    }
+    h || stderr('row has zero height');
+    return h;
+};
+
+
+/**
+ * Wake page up so it can be visible in viewport
+ */
+WingridRowsPagePrototype.render = function( widths ){
+    var row,
+        i = -1,
+        rows = this.rows,
+        length = rows.length,
+        deadDiv = this.dead,
+        liveDiv = this.live,
+        columns = liveDiv.childNodes
+    ;
+    // Rows may require lazy rendering of their inner contents
+    // they may also have been detached from DOM when page was cleared previously
+    while( ++i < length ){
+        row = rows[i];
+        row.rendered || row.render( columns );
+    }
+    // set widths too
+    length = widths.length;
+    for( i = 0; i < length; i++ ){
+        columns[i].style.width = widths[i];
+    }
+    // swap placeholder with populated rows
+    deadDiv.parentNode.replaceChild( liveDiv, deadDiv );
+    this.rendered = true;
+    this.h = null;
+    return this;
+};
+
+
+/**
+ * 
+ */
+WingridRowsPagePrototype.sleep = function(){
+    var h = this.height(),
+        liveDiv = this.live,
+        deadDiv = this.dead
+    ;
+    deadDiv.style.height = String(h)+'px';
+    // deadDiv.setAttribute('data-debug','sleeping');
+    //
+    liveDiv.parentNode.replaceChild( deadDiv, liveDiv );
+    this.rendered = false;
+    this.h = h;
+    return this;
+};
+
+
+/**
+ * Set a new sleeping height 
+ */
+WingridRowsPagePrototype.sleepH = function( itemHeight ){
+    var h = this.rows.length * itemHeight,
+        div = this.dead
+    ;
+    if( div ){
+        div.style.height = String(h)+'px';
+    }
+    if( ! this.rendered ){
+        this.h = h;
+    }
+    return this;
+};
+
+
+/**
+ * Apply columns widths (already obtained as string px)
+ */
+WingridRowsPagePrototype.widths = function( widths ){
+    var columns = this.live.childNodes, i = widths.length;
+    while( 0 !== i-- ){
+        columns[i].style.width = widths[i];
+    }
+    return this;
+};
+
+
+/**
+ * Page destructor.
+ */
+WingridRowsPagePrototype.destroy = function(){
+    var div = this.rendered ? this.live : this.dead,
+        rows = this.rows, 
+        i = rows.length
+    ;
+    // if we don't remove gracefully from the dom, IE won't be able to re-used our nodes
+    div.parentNode.removeChild( div );
+    // rows also need telling they're not rendered anymore
+    while( 0 !== i-- ){
+        rows[i].destroy();
+    }
+    
+};
+
+
+
+WingridRowsPagePrototype = null;
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$37", function(exports,window,document){ /* module: js/ui/wingrid.js */
+/**
+ * WinGrid - a grid of windows
+ */
+
+
+// libs
+var html = CommonJS.include("$41","html.js") || CommonJS.include("$2","html.js",true),
+    dom = CommonJS.require("$20","dom.js"),
+    elementTop = dom.top,
+    elementLeft = dom.left,
+
+    // Pseudo constants
+    SPLIT_X = 1,
+    SPLIT_Y = 2,
+
+    // global registry of windows
+    windows = {},
+    
+    // singleton of the editable item currently focused - there can be only one!
+    currentEditable,
+    
+    // global dragging state
+    dragger = false;
+
+
+
+/**
+ * Create a new top-level window from a root HTML Element
+ * @return Win
+ */
+exports.init = function( el ){
+    var window = new Win( el );
+    window.redraw();
+    // intercept events for dragging borders
+    CommonJS.require("$42","touch.js").ok( function( touch ){
+        touch.dragger( el, onTouchEvent );
+    } );
+    // always add mousedown, we'll just ignore if touched
+    $(el).mousedown( onMouseDown );
+    return window;
+};
+
+
+
+/**
+ * utility ensures identifiers are globally unique
+ */
+function uniqueId( id ){
+    var baseId = id,
+        i = 1;
+    while( windows[id] ){
+        id = baseId+'-'+(++i);
+    }
+    return id;
+}
+
+
+
+/**
+ * Utility creates a closure for scoped event callbacks
+ *
+function eventClosure( callback, scope ){
+    var args = [].slice.call( arguments, 2 );
+    return function( event ){
+        return callback.apply( scope, [event].concat(args) );
+    };
+}*/
+
+
+
+/**
+ * Dragging closure for resizing cells
+ * @param {HTMLElement} el Target element
+ * @return {Object} props Assigned to dragger variable
+ */
+function initDragger( el, props ){
+    var id = el.id,
+        child = id && windows[ id ],
+        parent = child && child.parent();
+    if( ! child || ! parent ){
+        // console.error( id+' has no parent cell, pid='+this.pid); // <- ensure root div has an ID!
+        return null;
+    }
+    // child pressed, control dragging and move via parent
+    var horizontal   = parent.dir === SPLIT_X,
+        XY           = horizontal ? 'X' : 'Y',
+        pagePosProp  = 'page'+XY,
+        offsetFunc   = horizontal ? elementLeft : elementTop,
+        // calculate relative position inside parent cell for child resize
+        globalOffset = offsetFunc( parent.el ),
+        // account for position within the child where interaction started
+        localOffset  = props[ 'offset'+XY],
+        // remember original CSS class of active element
+        movingElement = parent.el,
+        originalCSS = movingElement.className;
+    if( null == localOffset ){
+        localOffset = props[pagePosProp] - offsetFunc( el );
+    }
+    if( localOffset ){
+        globalOffset += localOffset;
+    }
+    // add a css hook for performance tweaks during drag
+    movingElement.className = originalCSS + ' is-resizing';
+    // expose dragging closure to client code
+    return {
+        done: function() {
+            // fire resize event so client code can save window distributions
+            // parent.fire( 'wgResized', [ parent.id, parent.distribution() ] );
+            // remove state class when finished
+            movingElement.className = originalCSS;
+        },
+        // move handler: calculate position relative to parent cell to control proportions
+        move: function( props ){
+            parent.resize( props[pagePosProp] - globalOffset, child );
+            return true;
+        }
+    };
+}
+
+
+
+
+
+/**
+ * Callback when mouse pressed inside grid
+ */
+function onMouseDown( event, touch ){
+    if( dragger ){
+        // probably using touch
+        return true;
+    }
+    dragger = initDragger( event.target, event );
+    if( ! dragger ){
+        // probably an internal click action
+        return true;
+    }
+    // stop dragging on mouse up
+    function onMouseUp(){
+        $(document).off( 'mousemove', onMouseMove );
+        if( dragger ){
+            dragger.done();
+            dragger = null;
+        }
+        return true;
+    }
+    // drag while mouse is pressed
+    function onMouseMove( event ){
+        dragger ? dragger.move(event) : onMouseUp();
+        return true;
+    }
+    $(document).one('mouseup', onMouseUp ).on( 'mousemove', onMouseMove );
+    return killEvent(event);
+}
+
+
+
+
+
+/**
+ * Callback on any touch event
+ */
+function onTouchEvent( event, touch ){
+    var type = touch.type;
+    // query our own abstracted touch.type property
+    if( 'touchmove' === type ){
+        dragger && dragger.move( touch );
+        return;
+    }
+    if( 'touchstart' === type ){
+        dragger = initDragger( event.target, touch );
+        return;
+    }
+    if( 'touchend' === type ){
+        if( dragger ){
+            dragger.done();
+            dragger = null;
+        }
+    }
+}
+
+
+
+function killEvent( event ){
+    event.stopPropagation();
+    event.preventDefault();
+    return false;
+}
+
+
+
+/**
+ * Utility abstracts %age attribute assignment
+ */
+function setDimensionAttribute( el, dimension, ratio, total ){
+    if( total ){
+        el.style[dimension] = String( Math.round( ratio * total ) )+'px';
+    }
+    else {
+        // @todo should we be rounding %ages too?
+        el.style[dimension] = String( 100 * ratio )+'%';
+    }
+}
+
+
+/**
+ * Handler for focus changing between cells
+ * Generally (when triggered by blur/focus events) will be from a cell to nothing, then nothing to a cell. 
+ */
+function changeEditableFocus( nowFocused ){
+    var wasFocused = currentEditable;
+    wasFocused && wasFocused.redraw();
+    nowFocused && nowFocused.redraw();
+    currentEditable = nowFocused;
+    return nowFocused;
+}
+
+
+/**
+ * Closure for tracking the one editable form control with focus
+ */
+function trackTextareaFocus( editingCell, elText ){
+    var $target = $(elText)
+        .on('editFocus', function(){
+            $target.trigger('wgFocus', [ changeEditableFocus(editingCell) ] );
+        } )
+        .on('editBlur', function(){
+            $target.trigger('wgBlur', [ changeEditableFocus(null) ] );
+        })
+    ;
+}
+
+
+/**
+ * Object representing a splittable window, which may or may not have child windows (cells)
+ */
+function Win( el ){
+    var id = el.id,
+        cn = el.className
+    ;
+    this.id = id;
+    this.el = el;
+    this.index = 0;
+    this.pos = 0;
+    this.css = [ cn||'wg-root', 'wg-cell' ];
+    this._cn = cn;
+    windows[id] = this;
+    this.clear();
+}
+
+
+var WinPrototype = Win.prototype;
+
+
+
+
+/**
+ * Fire an event from this window.
+ * TODO could also call directly on an array of attached listeners - reduce overhead of jQuery event handler!
+ */
+WinPrototype.fire = function( type, args ){
+    /*function trigger( target, type, args  ){
+        $(target).trigger( type, args );
+    }
+    setTimeout( trigger, 50, this.el, type, args );*/
+    var event = $.Event( type );
+    event.cell = this;
+    $(this.el).trigger( event, args );
+    return this;
+};
+
+
+
+/**
+ * iterate over split cells
+ */
+WinPrototype.each = function( callback ){
+    var i = -1, cells = this.cells, numCells = cells.length;
+    while( ++i < numCells ){
+        callback( cells[i], i );
+    }
+    return this;
+};
+
+
+/**
+ * Get offset of given cell
+ * TODO could simply maintain an index of this and save some code
+ */
+WinPrototype.indexOf = function( cell_or_id ){
+    var cellId = cell_or_id.id || String(cell_or_id),
+        child = windows[cellId]
+    ;
+    if( child && child.pid === this.id ){
+        return child.index;
+    }
+    return -1;
+};
+
+
+/**
+ * Bind to individual event in this cell
+ */
+WinPrototype.on = function(){
+    return this.$('on', arguments);
+};
+
+/**
+ * Unbind all events, or an individual event from this cell
+ */
+WinPrototype.off = function(){
+    return this.$('off', arguments);
+};
+
+/**
+ * Find any element under this cell
+ */
+WinPrototype.find = function( selector ){
+    return $(this.el).find( selector );
+};
+
+
+/**
+ * call any jquery function on this window's element
+ */
+WinPrototype.$ = function( func, args ){
+    $.fn[func].apply( $(this.el), args );
+    return this;
+};
+
+
+/**
+ * Push a class name onto this cell's CSS.
+ * @return Win
+ */
+WinPrototype.addClass = function( cssClass ){
+    // TODO handle uniqeuness of added classes
+    this.css.push( cssClass );
+    // remember to call restyle afterwards
+    return this;
+};
+
+
+/**
+ * Splice a class name from this cell's CSS
+ * @return Win
+ */
+WinPrototype.removeClass = function( cssClass ){
+    var i = this.css.indexOf(cssClass);
+    if( -1 !== i ){
+        this.css.splice( i, 1 );
+    }
+    // remember to call restyle afterwards
+    return this;
+};
+
+
+/**
+ * 
+ */
+WinPrototype.parent = function(){
+    return this.pid && windows[ this.pid ];
+};
+
+
+/**
+ * Split along X axis, meaning a left/right "vertical" split. 
+ */
+WinPrototype.splitx = function(){
+    return this._split( SPLIT_X, arguments );
+};
+
+
+/**
+ * Split along Y axis, meaning a top/bottom "horizontal" split. 
+ */
+WinPrototype.splity = function(){
+    return this._split( SPLIT_Y, arguments );
+};
+
+
+/**
+ * Split in either direction after first setting direction
+ * @return Array child cells created
+ */
+WinPrototype._split = function( dir, ids ){
+    // cannot split until empty
+    if( this.length || this.field ){
+        this.clear();
+    }
+    var i = -1, id, div, child,
+        num = ids.length,
+        inc = 1 /  num,
+        pos = 0;
+    // append child cells        
+    while( ++i < num ){
+        div = dom.el();
+        this.body.appendChild( div );
+        id = div.id = uniqueId( ids[i] );
+        child = new Win( div );
+        child.index = i;
+        child.pid = this.id;
+        child._locale( this.lang, this.rtl );
+        // set default position along axis for new child
+        child.pos = pos;
+        pos += inc;
+        this.cells.push( child );
+        this.length++;
+    }
+    this.dir = dir;
+    this.redraw();
+    return this.cells;
+};
+
+
+/**
+ * Completely destroy current cell
+ */
+WinPrototype.destroy = function(){
+    this.clear();
+    delete windows[this.id];
+    var rootDiv = this.el;
+    rootDiv.innerHTML = '';
+    this.body = null; // <- because clear created a new one and we just killed it.
+    rootDiv.className = this._cn||'';
+    $(rootDiv).off();
+    return this;
+};
+
+
+/**
+ * Test if window instance actually exists in grid
+ */
+WinPrototype.exists = function(){
+    // TODO is this enough - is it possible to check real DOM existance?
+    return this === windows[this.id];
+};
+
+
+/**
+ * Empty out cell body, but not header.
+ * This will also completely destroy (not just clear) child cells as they cannot exist without a parent.
+ */
+WinPrototype.clear = function(){
+    var elem = this.el,
+        cells = this.cells,
+        field = this.field,
+        body = this.body,
+        nav = this.nav,
+        i = this.length||0
+    ;
+    // clear children first
+    while( 0 !== i-- ){
+        delete windows[ cells[i].destroy().id ];
+    }
+    // empty vars
+    this.cells = [];
+    this.length = 0;
+    // destroy navigation of subtabs
+    if( nav ){
+        elem.removeChild(nav);
+        this.nav = null;
+    }
+    if( body ){
+        // IE bug: blur event won't fire when removed. 
+        // TODO, mutation events attached in textarea classes instead??
+        // TODO check this bug with new textarea abstraction
+        if( field ){
+            html.ie() && $(body).triggerHandler('blur');
+            field.destroy();
+            this.field = null;
+        }
+        if( this.table ){
+            // TODO unload table? 
+            this.table = null;
+        }
+        // IE11 throws a NotFoundError if body is nno longer in DOM
+        if( elem === body.parentNode ){
+            elem.removeChild(body);
+        }
+    }
+    this.body = elem.appendChild( dom.el('','wg-body') );
+    this._h = null; // <- invalidates cached height to ensure redraw
+    return this;
+};
+
+
+/**
+ * Resize child columns from a given point
+ */
+WinPrototype.resize = function( px, child ){
+    // child is the cell for whose left or top border the position represents
+    // by default it will be the second cell. the first cell is not resizable
+    if( ! child ){
+        child = this.cells[1];
+        if( ! child ){
+            return;
+        }
+    }
+    var idx  = child.index,
+        cells = this.cells,
+        size = $(this.el)[ this.dir === SPLIT_X ? 'width' : 'height' ](),
+        nextChild = cells[ idx+1 ],
+        prevChild = cells[ idx-1 ];
+        // don't collapse completely, or we'll lose the grabbers and title
+        pad = ( child.body || child.el.firstChild ).offsetTop || 0;
+        // maximum value for the offset is the available space, or the space before the next child
+        max = ( nextChild ? nextChild.pos * size : size ) - pad,
+        // minimum value is either zero, or the available space before the previous child
+        min = prevChild ? prevChild.pos * size : 0,
+    // calculate position 0 - 1 of child reference
+    child.pos = Math.min( max, Math.max( min, px ) ) / size;
+    // redraw parent if this cell is a table header needing to sync its widths to the rest of the table
+    // TODO would save bigger redraw if table window handled mirroring rather than drilling up to what is probably the root cell.
+    /*if( parent && parent.table ){
+        parent.redraw();
+    }
+    // else just redraw self
+    else {
+        this.redraw();
+    }*/
+    this.redraw();
+    return this;
+};
+
+
+/**
+ * Position child columns to pre-calculated relative positions (starting at second child)
+ * Number of arguments should be number of boundaries (i.e. one less than number of cells)
+ * e.g. to split in two [0.5] to split in three [0.33,0.67]
+ */
+WinPrototype.distribute = function( ratios ){
+    var b = -1, c = 0, cell, cells = this.cells, numBoundaries = ratios.length;
+    while( ++b < numBoundaries && ( cell = cells[++c] ) ){
+        cell.pos = Math.max( 0, Math.min( 1, ratios[b] ) );
+    }
+    this.redraw();
+    return this;
+};
+
+
+
+/**
+ * Get cell distribution for use with distribute
+ * @return Array for use with this.distribute.(ratios)
+ */
+WinPrototype.distribution = function(){
+    var ratios = [], i = 0, cells = this.cells, numBoundaries = cells.length - 1;
+    while( i < numBoundaries ){
+        ratios[i] = cells[++i].pos;
+    }
+    return ratios;
+};
+
+
+
+/**
+ * Recalculate full CSS classes of this cell only.
+ * TODO is array join faster than string concat, or not?
+ */
+WinPrototype.restyle = function(){
+    var css = this.css.concat();
+    if( this.index === 0 ){
+        css.push('first');
+    }
+    else {
+        css.push('not-first');
+    }
+    if( this.dir ){
+        css.push('wg-split');
+        if( SPLIT_Y === this.dir ){
+            css.push('wg-split-y');
+        }
+        else {
+            css.push('wg-split-x');            
+        }
+    }
+    if( this.t ){
+        css.push('has-title');
+    }
+    if( this.nav ){
+        css.push('has-nav');
+    }
+    // single function cell types
+    if( this.field ){
+        css.push('is-field');
+        if( this.field.editable() ){
+            css.push('is-editable');
+        }
+        else {
+            css.push('is-readonly');
+        }
+    }
+    css = css.join(' ');
+    if( css !== this._css ){
+        this._css = css;
+        this.el.className = css;
+        // TODO better to maintain dirty state of properties that affect CSS
+    }
+    return this;
+};
+
+
+
+/**
+ * TODO maintain dirty flags for CSS and size etc..
+ */
+WinPrototype.redraw = function( event ){
+    // always restyle when redrawing
+    this.restyle();
+
+    var elem = this.el,
+        body = this.body,
+        field = this.field;
+    // the height of our body element must be fixed, but it may be padded and/or margined
+    // width not required as they're block elements
+    if( body ){
+        var redrawField,
+            width = elem.clientWidth||0,
+            height = elem.clientHeight||0,
+            offset = body.offsetTop||0;
+        // console.log( this.id +' = '+height+'px - '+offset+'px = '+(height-offset)+'px' );
+        // offset can be greater tyan available height when collapsed right down to smaller than header.
+        if( offset > height ){            
+            height = 0;
+        }
+        else {
+            height -= offset;
+        }
+        // redraw required
+        if( this._h !== height ){
+            this._h = height;
+            // using box-sizing: border-box in CSS to save subtracting padding here
+            //console.log( [ $(body).height(), $(body).innerHeight() ] );
+            body.style.height = String(height)+'px';
+            // editor may require resize also
+            redrawField = field;
+        }
+        // only some elements require width-based redraw
+        if( this._w !== width ){
+            this._w = width;
+            redrawField = field;
+        }
+        if( redrawField ){
+            redrawField.redraw();
+        }
+    }
+        
+    // recurse in reverse
+    var i = this.length, 
+        child,
+        ratio,
+        lastPos = 1, 
+        navigable = this.nav,
+        dimension = this.dir === SPLIT_Y ? 'height' : 'width';
+    while( 0 !== i-- ){
+        child = this.cells[i];
+        if( navigable ){
+            // always 100% floating for navigable cells
+            ratio = 1;
+        }
+        else {
+            if( child.fixed ){
+                // cell has a pixed position in pixels from its anchor point
+                // new position must be calculated according to available space
+                // note that we're fixing from start of window, not previous sibling.
+                child.pos = child.fixed / $(elem)[ dimension ]();
+            }
+            ratio = lastPos - child.pos;
+            lastPos = child.pos;
+        }
+        setDimensionAttribute( child.el, dimension, ratio );
+        // I don't know why this was previously restyling child on redraw. Seems unecessary. surely if restyle had to be recursive, recursion could be in the restyle method instead.
+        child.redraw( event );
+    }
+
+    // this cell may require pseudo table adjusting to header cells    
+    // this.table && this.redrawTable();
+    
+    return this;
+};
+
+
+
+/**
+ * Set fake table columns according to resized header cells
+ *
+WinPrototype.redrawTable = function(){
+    var r,
+        i = -1,
+        thead = this.cells[0],
+        tbody = this.cells[1],
+        width = $(tbody.body).width(),
+        table = tbody.body.firstChild,
+        cols  = table.childNodes;
+    table.style.width = width+'px';
+    // recurse in reverse
+    var i = thead.length, 
+        child,
+        childPos,
+        lastPos = 1;
+    while( 0 !== i-- ){
+        child = thead.cells[i];
+        childPos = child.pos;
+        setDimensionAttribute( cols[i], 'width', lastPos - childPos );
+        lastPos = childPos;
+    }
+    return this;
+};*/
+
+
+
+/**
+ * Set content in a cell
+ */
+WinPrototype.contents = function( stuff, cssClass ){
+    var elem = this.el,
+        body = this.body
+    ;
+    if( null == stuff ){
+        return body.innerHTML;
+    }
+    if( this.length ){
+        this.clear();
+    }
+    else if( body ){
+        elem.removeChild( body );
+        body = null;
+    }
+    if( ! body ){
+        this.body = body = elem.appendChild( dom.el('', cssClass||'wg-content' ) );
+        this._h = null;
+        // reinstate previous locale if previously cleared  
+        var lang = this.lang;
+        if( lang ){
+            this._locale( lang, this.rtl, true );
+        }
+    }
+    if( 'string' === typeof stuff ){
+        $(body)._html( stuff );
+    }
+    else if( stuff ){
+        this.append( stuff );
+    }
+    //else {
+        //console.log( stuff );
+        //throw new Error('Bad stuff');
+    //}
+    this.redraw();
+    return this;
+};
+
+
+
+/**
+ * Set contents of a cell as an editable, or non-editable textarea
+ * @param {string} text initial text contents
+ * @param {boolean} editable whether text is editable
+ * @return TextArea current field used for editing
+ */
+WinPrototype.textarea = function( text, editable ){
+    var currentField = this.field;
+    if( currentField ){
+        var wasEditable = currentField.editable();
+        currentField.reload( text, editable );
+        if( wasEditable !== editable ){
+            this.restyle();
+        }
+    }
+    else {
+        if( this.length ){
+            this.clear();
+        }
+        var elText = dom.el('textarea');
+        elText.setAttribute('wrap','virtual');
+        elText.value = text;
+        this.contents( elText );
+        currentField = CommonJS.require("$43","field.js")._new(elText)[ editable ? 'enable' : 'disable' ]();
+        // maintain knowledge of the one editable area with focus
+        trackTextareaFocus( this, elText );
+        this.field = currentField;
+        this.restyle();
+    }
+    // textarea requires containing element always has a locale
+    if( ! this.lang ){
+        this.locale('en');
+    }
+
+    return currentField;
+};
+
+
+
+/**
+ * Set the locale of this window's inner content
+ * @return Win
+ */
+WinPrototype.locale = function( locale ){
+    locale = CommonJS.require("$35","locale.js").cast( locale );
+    return this._locale( String(locale), locale.isRTL() );
+};
+
+
+
+/**
+ * @internal
+ */
+WinPrototype._locale = function( lang, rtl, force ){
+    var body = this.body;
+    // set HTML lang attribute if changed, or if painting forced
+    if( force || lang !== this.lang ){
+        this.lang = lang;
+        body && body.setAttribute( 'lang', lang );
+    }
+    // set text direction attribute if changed
+    if( force || rtl !== this.rtl ){
+        this.rtl = rtl;
+        body && body.setAttribute( 'dir', rtl ? 'RTL' : 'LTR' );
+    }
+    return this;
+};
+
+
+
+
+/**
+ * Get this cell's editable field, or the first child cell that has one
+ * @return TextArea abstracted object
+ */
+WinPrototype.editable = function(){
+    // if cell is a field, return if editable
+    var textArea = this.field;
+    if( textArea ){
+        return textArea.editable() ? textArea : null;
+    }
+    // else descend into any child cells
+    var cells = this.cells, n = cells.length, i = this.navigated();
+    // if cell is tabbed, descend only into visible. 
+    if( null != i ){
+        return cells[i].editable();
+    }
+    // else return first editable across child cells
+    while( ++i < n ){
+    for( i = 0; i < n; n++ );
+        if( textArea = cells[i].editable() ){
+            return textArea;
+        }
+    }
+    // else no editable fields
+};
+
+
+/**
+ * Pass all textarea instances under this cell to a function
+ * Note that this iterator doesn't pass an index to the callback, because it doesn't maintain a counter through recursion
+ * @return Win
+ */
+WinPrototype.eachTextarea = function( callback ){
+    var self = this,
+        textArea = self.field
+    ;
+    if( textArea ){
+        callback( textArea );
+    }
+    else {
+        self.each( function( cell ){
+            cell.eachTextarea( callback );
+        } );
+    }
+    return this;
+};
+
+
+/**
+ * Append content to cell body
+ */
+WinPrototype.append = function( stuff ){
+    if( ! stuff ){
+        //throw new Error('Bad argument passed to .append');
+    }
+    else if( stuff.nodeType ){
+        html.init( this.body.appendChild(stuff) );
+    }
+    else {
+        html.init( $(stuff).appendTo(this.body) );
+    }
+    return this;
+};
+
+
+
+/**
+ * Prepend content to cell body
+ */
+WinPrototype.prepend = function( stuff ){
+    var body = this.body;
+    if( stuff.nodeType ){
+        var sibling = body.firstChild;
+        html.init( sibling ? body.insertBefore( stuff, sibling ) : body.appendChild(stuff) );
+    }
+    else {
+        html.init( $(stuff).prependTo(body) );
+    }
+    return this;
+};
+
+
+/**
+ * Add content immediately before the body (like a header)
+ */
+WinPrototype.before = function( stuff ){
+    var body = this.body;
+    if( stuff.nodeType ){
+        html.init( this.el.insertBefore( stuff, body ) );
+    }
+    else {
+        html.init( $(stuff).insertBefore(body) );
+    }
+    return this;
+};
+
+
+/**
+ * Give cell with content a title
+ */
+WinPrototype.header = function( title, cssClass ){
+    if( null == title && null == cssClass ){
+        return this.el.getElementsByTagName('header')[0];
+    }
+    this.t = dom.txt( title||'' );
+    this.el.insertBefore( dom.el('header', cssClass ), this.body ).appendChild( this.t );
+    this.redraw();
+    return this;
+};
+
+
+/**
+ * Alter cell title
+ */
+WinPrototype.title = function( title ){
+    var textNode = this.t;
+    if( textNode ){
+        textNode.nodeValue = title||'';
+        return textNode;
+    }
+    // else header not created yet
+    this.header( title );
+    return this.t;
+};
+
+
+/**
+ * Get the current title text
+ */
+WinPrototype.titled = function(){
+    var textNode = this.t;
+    return textNode && textNode.nodeValue;
+};
+
+
+
+
+/**
+ * Get positional offset of body in relation to root element. Generally this will give the height of the header
+ * @return int
+ */
+WinPrototype.bodyY = function(){
+    return elementTop( this.body, this.el );
+};
+
+
+/**
+ * Get vertical scroll of this cell, assuming it's scrollable
+ */
+WinPrototype.scrollY = function( y ){
+    if( undefined === y ){
+        return this.body.scrollTop;
+    }
+    this.body.scrollTop = y;
+};
+
+
+/**
+ * Split cell recursively into columns and then rows, using a utils/table instance
+ * @return WingridTable handle on table object
+ */
+WinPrototype.tabulate = function( dataSource ){
+    var table = this.table;
+    if( table ){
+        table.clear();
+    }
+    else {
+        table = CommonJS.require("$44","wgtable.js").create(this);
+    }
+    table.init( dataSource );
+    // setting after init because it will be inset during cell split
+    this.table = table;
+    return table;
+};
+
+
+WinPrototype.lock = function(){
+    this.body.className += ' locked';
+    return this;
+};
+
+
+
+/**
+ * Scroll body vertically to any element inside it.
+ */
+WinPrototype.scrollTo = function( target, noAnimate ){
+    /*/ debug
+    if( ! target || ! target.parentNode ){
+        console.log( target );
+        throw new Error('Cannot scrollTo this');
+    }*/
+    // ensure selected row is within scrolled viewport
+    var scroll,
+        body = this.body,
+        minY = body.scrollTop,
+        rowT = elementTop( target, body )
+    ;
+    // if top of row is above top of viewport we need to scroll up
+    if( minY > rowT ){
+        scroll = rowT;
+    }
+    // if bottom of row is below bottom of viewport we need to scroll down
+    else {
+        var bodH = body.clientHeight,
+            rowB = rowT + $(target).outerHeight();
+        if( ( bodH + minY ) < rowB ){
+            scroll = rowB - bodH;
+        }
+        else {
+            return;
+        }
+    }
+    if( noAnimate ){
+        body.scrollTop = scroll;
+    }
+    else {
+        $(body).stop(true).animate( { scrollTop: scroll }, 250 );
+    }
+};
+
+
+
+/**
+ * Convert child cells into navigable tabs
+ */
+WinPrototype.navigize = function( labels, defaultIndex ){
+    var self = this,
+        children = self.cells,
+        elem = self.nav,
+        activeIndex,
+        links = []
+    ;
+    function onClick( event ){
+        var link = $(event.target), 
+            index = link.data('idx');
+        if( null == index ){
+            return true; // somehow managed a click outside a button
+        }    
+        if( null != activeIndex ){
+            hide(activeIndex);
+        }
+        show(index);//.focus();
+        self.redraw();
+        return killEvent(event);
+    }
+    function show( index ){
+        var child = children[index],
+            $link = links[index],
+            $content = $(child.el).show();
+        $link.addClass('active');
+        // set new active index
+        activeIndex = index;
+        $nav.data('idx',index);
+        child.fire( 'wgTabSelect', [ index ] );
+        return $content;
+    }
+    function hide( index ){
+        var child = children[index],
+            $link = links[index],
+            $content = $(child.el).hide();
+        $link.removeClass('active');
+        return $content;
+    }
+
+    // cell may already be navigized // TODO should we keep same cell selection??   
+    if( elem ){
+        self.el.removeChild(elem);
+    }
+    // create new wg-tabs navigation element before content div
+    elem = self.nav = self.el.insertBefore( dom.el('nav','wg-tabs'), self.body );        
+    // enable navigation click action    
+    var $nav = $(elem).on('click',onClick);
+    // recall previous index and keep if possible
+    if( null == defaultIndex ){
+        defaultIndex = $nav.data('idx') || 0;
+    }
+    // add navigation items and prep hidden cells
+    self.each( function( child, index ){
+        links[index] = $('<a href="#'+child.id+'"></a>')
+            .data( 'idx', index )
+            .text( labels[index] )
+            .appendTo($nav)
+        ;
+        child.pos = 0;
+        $(child.el).hide();
+    } );
+    // ready to make visible
+    show( children[defaultIndex] ? defaultIndex : 0 );
+    self.lock();
+    self.redraw();
+    return self;
+};
+
+
+
+/**
+ * Get the child cell current cell is navigated to if navigized
+ */
+WinPrototype.navigated = function(){
+    var elem = this.nav;
+    if( elem ){
+        return $(elem).data('idx');
+    }
+};
+
+
+
+// clean up
+WinPrototype = null;
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$23", function(exports,window,document){ /* module: js/editor/base.js */
+/**
+ * Base class for all poedit-like editors
+ */
+
+CommonJS.require("$3","number.js");
+
+
+// pseudo-constants
+var EVENT_UPDATE = 'poUpdate',
+    EVENT_FILTER = 'poFilter',
+    EVENT_CHANGE = 'changing',
+    EVENT_CHANGED = 'changed',
+    
+    // Common translated labels stored in instances
+    LABEL_SOURCE_TEXT    = 0,
+    LABEL_SOURCE_SINGLE  = 1,
+    LABEL_SOURCE_PLURAL  = 2,
+    LABEL_TRANSLATION    = 3,
+    LABEL_CONTEXT        = 4,
+    LABEL_COMMENTS       = 5,
+    LABEL_UNTRANSLATED   = 6,
+    LABEL_TRANSLATED     = 7,
+    LABEL_FUZZY          = 8,
+    LABEL_HINT           = 9,
+
+    // pre-compiled RegExp
+    REGEX_LEADING_SPACE = /^\s+/,
+    
+    // The last grid cell to be focused for some kind of interaction (editing probably)
+    currentlyFocusedCell,
+
+    // default translator set before editor is constructed
+    defaultTranslator,
+    
+    // formatting libs
+    escHtml = CommonJS.require("$34","string.js").html,
+    sprintf = CommonJS.require("$5","string.js").sprintf
+;
+
+
+// inherit Editor base class by a specific editor
+exports.extend = function( subClass ){
+    return subClass.prototype = new Editor;
+};
+
+
+// set default translator before it's required in construction
+exports.localise = function( translator ){
+    defaultTranslator = translator;
+    return exports;
+};
+
+
+/**
+ * Simple HTML to Text stripper. Doesn't attempt to handle whitespace
+ */
+var stripHtml = function(){
+   var elem = document.createElement('p');
+   return function( htmlContent ){
+       // setting inner HTML without image src (display:none doesn't work)
+       elem.innerHTML = htmlContent.replace('src=','x=');
+       return elem.textContent;
+   };
+}();
+
+
+
+/**
+ * Compile className for row in message listing to indicate asset status
+ * This only deals with po- class names. anything else must be protected
+ */
+function messageRowCss( message ){
+    var css = [];
+    if( message ){
+        // add dirty state from any plural form
+        if( ! message.saved() ){
+            css.push('po-unsaved');
+        }
+        // specific fuzzy flag common to all editors
+        if( message.fuzzy() ){
+            css.push('po-fuzzy');
+        }
+        // else allow generic flag icon
+        else if( message.flagged() ){
+            css.push('po-flagged');
+            // css.push( 'po-flag-'+message.flags().join(' po-flag-') );
+        }
+        // TODO add custom flag getter for editors that support all Loco flags
+        message.translation() || css.push('po-empty');
+        message.comment() && css.push('po-comment');
+    }
+    return css.join(' ');
+}
+
+
+
+/**
+ * add locale information to message title next node
+ * @return HtmlElement H2 header that spans the cell
+ */
+function renderCellTitle( cell, text, locale ){
+    var head = $( cell.title(text).parentNode ),
+        icon = head.find('span.lang')
+    ;
+    // set language icon only if a locale is passed
+    if( locale ){
+        // set locale (note locale must be object with toString method)
+        locale = CommonJS.require("$35","locale.js").cast( locale );
+        icon.length || ( icon = $('<span></span>').prependTo(head) );
+        icon.attr('lang', locale.lang )
+            .attr('class', locale.getIcon() || 'lang region region-'+(locale.region||'zz').toLowerCase() );
+    }
+    else {
+        icon.remove();
+        locale = 'en';
+    }
+    // setting cell locale ensures text direction attribute exists
+    cell.locale( locale );
+    return head;
+}
+
+
+/**
+ * Create a generic event dispatcher based on a click of a jQuery element, passing original click target as arguments
+ * @return void
+ */
+function createGenericClickEvent( editor, $el, type ){
+    $el.click( function(event){
+        var allowClick = editor.fire( type, [event.target] );
+        allowClick || event.preventDefault();
+        return allowClick;
+    } );
+}
+
+
+
+/**
+ * @property {Boolean} $dirty whether editor has unsaved changes
+ * @property {String} $mode
+ * @property {Boolean} $html 
+ * @property {HTMLElement} $smeta Div for source text metadata
+ * @property {HTMLElement} $tmeta Div for target translation metadata
+ */
+function Editor(){
+    this.dirty = 0;
+}
+
+
+var EditorPrototype = Editor.prototype = CommonJS.require("$36","abstract.js").init( ['getListColumns','getListHeadings','getListEntry'], ['editable','t'] );
+
+
+/**
+ * Post construct initializer for real instances
+ */
+EditorPrototype.init = function(){
+    this.localise();
+    this.editable = {
+        source: true,
+        target: true
+    };
+    // default IDE mode is regular plain text
+    this.mode = '';
+    this.html = false;
+    // default "format" mode is auto (undefined)
+    // this.fmt = undefined;
+
+    return this;
+};
+
+
+/**
+ * Localize this editor instance either a pre-built translator object or default to identity function
+ * @return Editor self for chaining
+ */
+EditorPrototype.localise = function( translator ){
+    if( ! translator ){
+        translator = defaultTranslator || CommonJS.require("$1","t.js").init();
+    }
+    // set common labels re-used by base editor
+    var labels = [];
+    // Translators: Label for the window pane holding the original English text
+    labels[ LABEL_SOURCE_TEXT   ] = translator._x('Source text','Editor')+':';
+    // Translators: Where %s is the name of the language, e.g. "French translation"
+    labels[ LABEL_TRANSLATION   ] = translator._x('%s translation','Editor')+':';
+    // Translators: Label for the window pane holding message context
+    labels[ LABEL_CONTEXT       ] = translator._x('Context','Editor')+':';
+    // Translators: Label for the window pane for entering translator comments
+    labels[ LABEL_COMMENTS      ] = translator._x('Comments','Editor')+':';
+    // Translators: Label for the singular form of the original English text
+    labels[ LABEL_SOURCE_SINGLE ] = translator._x('Single','Editor')+':';
+    // Translators: Label for the plural form of the original English text
+    labels[ LABEL_SOURCE_PLURAL ] = translator._x('Plural','Editor')+':';
+    //
+    labels[ LABEL_UNTRANSLATED ] = translator._x('Untranslated','Editor');
+    labels[ LABEL_TRANSLATED ] = translator._x('Translated','Editor');
+    labels[ LABEL_FUZZY ] = translator._x('Toggle Fuzzy','Editor');
+    labels[ LABEL_HINT ] = translator._x('Suggest translation','Editor');
+    //
+    this.labels = labels;
+    this.t = translator;
+    return this; 
+};
+
+
+/**
+ * Set root WinGrid element
+ */
+EditorPrototype.setRootCell = function( rootDiv ){
+    var rootCell = CommonJS.require("$37","wingrid.js").init( rootDiv );
+    // redraw grid when browser window resizes
+    function onWindowResize( event ){
+        rootCell.redraw( true, event );
+        return true;
+    }
+    $(window).on( 'resize', onWindowResize );
+    this.redraw = onWindowResize;
+    // capture various wingrid events
+    $(rootDiv)
+        // track currently focused grid cell
+        .on('wgFocus wgBlur', function( event, cellOrNotCell ){
+            event.stopPropagation();
+            currentlyFocusedCell = cellOrNotCell; // <- blur sends no cell argument
+        } )
+    ;
+    // add destructor here, due to scope access
+    // this is the function that will get re-invoked, so we don't want multiple handlers
+    // other handlers, such as re-fitting the outer frame should look after themselves.
+    this.destroy = function(){
+        rootCell.destroy();
+        $(window).off('resize',onWindowResize);
+    };
+    this.rootDiv = rootDiv;
+    return rootCell;
+};
+
+
+/**
+ * Get handle on wingrid root div
+ * @return jQuery
+ */
+EditorPrototype.$ = function(){
+    return $(this.rootDiv);
+};
+
+
+/**
+ * Set list cell
+ */
+EditorPrototype.setListCell = function( listCell ){
+    var self = this;
+    self.listCell = listCell;
+    // listen for table row selection changes, but prevent two events when a selection causes a deselection
+    listCell
+        .on( 'wgRowSelect', function( event, selectedIndex ){
+            // TODO prevent redundant load of current item?
+            self.loadMessage( self.po.row(selectedIndex) );
+            return true;
+        } )
+        .on ( 'wgRowDeselect', function( event, deslectedIndex, willSelect ){
+            willSelect || self.loadNothing();
+            return true;
+        } )
+    ;
+};
+
+
+
+/**
+ * Set source cell
+ */
+EditorPrototype.setSourceCell = function( sourceCell ){
+    this.sourceCell = sourceCell;
+};
+
+
+/**
+ * Set target cell
+ */
+EditorPrototype.setTargetCell = function( targetCell ){
+    this.targetCell = targetCell;
+};
+
+
+/**
+ * Move list cell to the next item
+ */
+EditorPrototype.next = function( direction, skipTranslated, wrap ){
+   var table  = this.listTable,
+       rowIdx = table.selected(),
+       looped = rowIdx,
+       message, messages = this.po
+   ;
+   // standard move to next selectable row, passing current known row as starting point
+   while( null != ( rowIdx = table.next( direction, wrap, rowIdx ) ) ){
+       // loop protection
+       if( looped === rowIdx ){
+           rowIdx = null;
+           break;
+       }
+       // continue if message translated and we're skipping them
+       if( skipTranslated ){
+           message = messages.row(rowIdx);
+           if( message.translated(0) ){
+               continue;
+           }
+       }
+       // using this row index, assuming it's not null
+       break;
+   }
+   if( null != rowIdx ){
+       table.select( rowIdx, true ); // <- noFocus so cursor doesn't focus the table when we're editing.
+   }
+   return rowIdx;
+};
+
+
+
+/**
+ * Get/Set currently active message
+ */
+EditorPrototype.current = function( message ){
+    var active = this.active;
+    if( null == message ){
+        return active;
+    }
+    if( message ){
+        if( message.is(active) ){
+            this.reloadMessage(message); // <- forces update of current message
+        }
+        else {
+            this.loadMessage(message); // <- destroys and re-renders current message
+        }
+    }
+    else {
+        this.unloadActive(); // <- empties out all current fields
+    }
+    return this;
+};
+
+
+/**
+ * Get current plural index
+ * @return int || null
+ */
+EditorPrototype.getTargetOffset = function(){
+    if( this.active ) {
+        return this.targetCell && this.targetCell.navigated() || 0;
+    }
+};
+
+
+/**
+ * Get editable translation text field if translation is editable
+ */
+EditorPrototype.getTargetEditable = function(){
+    return this.editable.target && this.targetCell && this.targetCell.editable();
+};
+
+
+/**
+ * Get editable source text field if source is editable
+ */
+EditorPrototype.getSourceEditable = function(){
+    return this.editable.source && this.sourceCell && this.sourceCell.editable();
+};
+
+
+/**
+ * Get editable context text field if editable
+ */
+EditorPrototype.getContextEditable = function(){
+    return this.editable.context && this.contextCell && this.contextCell.editable();
+};
+
+
+/**
+ * Get any editable field in order target, source, context
+ */
+EditorPrototype.getFirstEditable = function(){
+    return this.getTargetEditable() || this.getSourceEditable() || this.getContextEditable();
+};
+
+
+
+/**
+ * Get/Set whether editor is searchable via dict instance
+ */
+EditorPrototype.searchable = function( newDict ){
+    if( newDict ){
+        this.dict = newDict;
+        this.po && this.rebuildSearch();
+    }
+    return this.dict && true;
+};
+
+
+
+/**
+ * Rebuild dictionary against current PO file
+ */    
+EditorPrototype.rebuildSearch = function(){
+    var self = this,
+        idx = -1,
+        messages = self.po.rows,
+        nmessages = messages.length,
+        dict = self.dict
+    ;
+    dict.clear();
+    // store message offsets against full text key
+    while( ++idx < nmessages ){
+        // this may search on text not visible in table:
+        dict.add( idx, messages[idx].toText() );
+        // this will search only that visible:
+        // dict.push( this.getListEntry(messages[idx]) );
+    }
+    // Why the hell was I resetting the filter here??
+    //self.lastSearch = '';
+    //self.lastFound = nmessages;
+    //this.dict.dump();
+};
+
+
+
+/**
+ * Test current text filter state
+ */
+EditorPrototype.filtered = function(){
+    return this.lastSearch||'';
+};
+
+
+/**
+ * Filter editor on search terms
+ */    
+EditorPrototype.filter = function( text, noEvent ){
+    var self = this, 
+        indexes, 
+        //meta = {}, 
+        //listCell = self.listCell,
+        listTable = self.listTable,
+        lastFound = self.lastFound,
+        lastSearch = self.lastSearch
+    ;
+    //var timer = require('utils/debug').timer('Finding "'+text+'"');
+    if( text ){
+        // avoid repeated lookup of current filter
+        if( lastSearch === text ){
+            return lastFound||0;
+        }
+        // avoid redundant lookup when dead end is made a more specific dead end
+        if( lastSearch && ! lastFound && 0 === text.indexOf(lastSearch) ){
+            return 0;
+        }
+        // do lookup return filtered in row offsets
+        // note that if table is ordered row offsets won't align with PO entries
+        indexes = self.dict.find( text );
+        //timer.lap(' > Found '+indexes.length+' in ');
+    }
+    self.lastSearch = lastSearch = text;
+    self.lastFound  = lastFound = indexes ? indexes.length : self.po.length;
+
+    // filter according to indexes matched - null means all:
+    indexes ? listTable.filter(indexes) : listTable.unfilter();
+    //timer.lap(' > Filtered in ').stop('Did all in ');
+
+    noEvent || self.fire( EVENT_FILTER, [ lastSearch, lastFound ] );
+    return lastFound;
+};
+
+
+/**
+ * Count rows not currently filtered out
+ * @return int
+ */
+EditorPrototype.countFiltered = function(){
+    return this.lastSearch ? this.lastFound : this.po.length;
+};
+
+
+/**
+ * Mark a message as unsaved and fire "dirty" event
+ * @return Boolean whether message was saved before this was called (indicating whether the state has changed)
+ */
+EditorPrototype.unsave = function( message, pluralIndex ){
+    var wasSaved = false;
+    if( message ){
+        // make dirty only if not already dirty
+        wasSaved = message.saved(pluralIndex);
+        if( wasSaved ){
+            this.dirty++;
+            message.unsave(pluralIndex);
+            this.fire('poUnsaved', [ message, pluralIndex ] );
+        }
+        // always run visual marker, as there's no way to know if specific flags changed since last edit
+        this.markUnsaved( message );
+    }
+    return wasSaved;
+};
+
+
+/**
+ * Abstract visual marking of unsaved message from unsave event above
+ * (Note that actually this marks any change in saved state, not just unsaved)
+ */
+EditorPrototype.markUnsaved = function( message ){
+    var self = this,
+        rowId = self.po.indexOf( message ),
+        table = self.listTable,
+        cells = table.tr(rowId)
+    ;
+    if( cells && cells.length ){
+        var currentStyle = cells[0].className,
+            initialStyle = currentStyle.replace(/(?:^| +)po-[a-z]+/g,''), // <- stripped of po-* styles
+            changedStyle = initialStyle+' '+messageRowCss( message )
+        ;
+        if( changedStyle !== currentStyle ){
+            $(cells).attr( 'class', changedStyle );
+        }
+    }
+    /*else {
+        console.error('Row ['+rowId+'] disappeared');
+    }*/
+};
+    
+    
+/**
+ * Reset all unsaved messages and fire poSave event if something was saved
+ */        
+EditorPrototype.save = function( force ){
+    var messages = this.po;
+    if( this.dirty || force ){
+        // clear all dirty flags in messages
+        messages.each( function( i, message ){
+            message.save(); // <- removes dirty state
+        } );
+        // this method of removing unsaved css should be fastest as long as browser has getElementsByClassName
+        this.listCell.find('div.po-unsaved').removeClass('po-unsaved');
+        this.dirty = 0;
+        this.fire('poSave');
+    }
+    return messages;
+};
+
+
+/**
+ * fire editor event
+ * @return {Boolean} whether default action may continue
+ */
+EditorPrototype.fire = function( type, args ){
+    var handlers = this.handle, returnValue;
+    // attempt to call internal handler if it exists
+    if( handlers && handlers[type] ){
+        returnValue = handlers[type].apply( this, args||[] );
+        if( false === returnValue ){
+            return false;
+        }
+    }
+    // fire DOM event
+    var event = $.Event( type );
+    this.$().trigger( event, args );
+    return ! event.isDefaultPrevented();
+};
+
+
+/**
+ * bind a dom event handler to the root node of the editor
+ */
+EditorPrototype.on = function( type, callback ){
+    this.$().on( type, callback );
+    return this;
+}
+
+
+/**
+ * By default no initial sorting will be done on document order (until columns selected).
+ * Child classes may override
+ * @return Function
+ */
+EditorPrototype.getSorter = function(){
+    return null;
+};
+
+  
+
+
+/**
+ * Clear UI and load the po object into list area
+ * @return Boolean whether assets exist
+ */
+EditorPrototype.reload = function(){
+    var self = this,
+        colWidths,
+        listCell = self.listCell,
+        listTable = self.listTable,
+        messages = self.po,
+        targetLocale = messages && messages.locale(),
+        targetReverse = targetLocale && targetLocale.isRTL(),
+        messagesLength = messages && messages.length || 0
+    ;
+    if( ! messages || ! messages.row ){
+        listCell && listCell.clear().header('Error').contents('Invalid messages list');
+        return false;
+    }
+
+    // set initial locale (absent when editing a template)
+    self.targetLocale = targetLocale;
+
+    // dummy filter reset, because table will be destroyed
+    if( self.lastSearch ){
+        self.lastSearch = '';
+        self.lastFound = messagesLength;
+        self.fire( EVENT_FILTER, [ '', messagesLength ] );
+    }
+
+    // remember scroll position during a reload of existing table
+    // var previousScroll = listTable && listTable.scroll();
+
+    // remember previous column widths for applying to new list
+    if( listTable ){
+        colWidths = listTable.thead().distribution();
+    }
+
+    // tabulate list cell with a table-like interface for populating cells
+    self.listTable = listTable = listCell.tabulate( {
+        eachCol: function( callback ){
+            var i, key, columns = self.getListColumns(), headings = self.getListHeadings();
+            // loop order may be reversed, but wgtable is handling that
+            for( key in columns ){
+                i = columns[key];
+                callback( i, key, headings[i] );
+            }
+        },
+        eachRow: function( callback ){
+            messages.each( function( msgid, message ){
+                callback( message.idx, self.getListEntry(message), messageRowCss(message) );
+            } );
+        },
+        sort: self.getSorter()
+    } );
+
+    // make all columns sortable, but don't change order until actioned by user
+    var colId, colOffsets = self.getListColumns();
+    for( colId in colOffsets ){
+        listTable.sortable( colOffsets[colId] );
+    }
+    
+    
+    // restore widths:
+    // TODO this looks odd when columns have been added, so only keep distribution if same or fewer columns
+    if( colWidths ){
+        listTable.thead().distribute( colWidths );
+    }
+
+    // set text direction for preview column as higher level CSS hook
+    // WARNING: this will be destroyed if table is redrawn. subclasses dealing with that for now.
+    listTable.tbody().$( targetReverse?'addClass':'removeClass', ['is-rtl'] );
+
+    self.fire('poLoad');
+    return !!messagesLength;
+};    
+
+
+
+
+/**
+ * Load all messages from document and select initial row
+ */
+EditorPrototype.load = function( newPO, selectIdx ){
+    //newPO._validate();
+    this.po = newPO;
+    this.dict && this.rebuildSearch();
+    if( this.reload() ){
+        if( -1 !== selectIdx ){
+            this.listTable.selectRow( selectIdx||0 ); 
+            //this.listTable.select( selectIdx||0 );
+        }
+        else if( this.active ){
+            this.unloadActive();
+        }
+    }
+};
+    
+
+
+/**
+ * Update current message by "pasting" contents of passed message into the editor
+ * @return Editor
+ */
+EditorPrototype.pasteMessage = function( message ){
+    var cell, index = 0;
+    // only paste into text fields if active
+    if( this.active === message ){
+        // start with 0-2 source cells
+        cell = this.sourceCell;
+        cell && cell.eachTextarea( function( field ){
+            field.val( message.source( null, index++ ) );
+        } );
+        // context cell, of which there can be only one!
+        cell = this.contextCell;
+        cell && cell.eachTextarea( function( field ){
+            field.val( message.context() );
+        } );
+        // target cell may be split into any number of plurals
+        cell = this.targetCell;
+        if( cell ){
+            index = 0;
+            cell.eachTextarea( function( field ){
+                field.val( message.translation(index++) );
+            } );
+        }
+    }
+    // we must update list in case fields didn't exist or not editable or not focused, and so resulted in no events
+    this.updateListCell( message, 'source' );
+    this.updateListCell( message, 'target' );
+    return this;
+};
+
+
+
+/**
+ * Redraw currently active message without destroying first
+ * Used to discreetly update properties during active editing
+ * @return Editor
+ */
+EditorPrototype.reloadMessage = function( message ){
+    var sourceCell = this.sourceCell, targetCell = this.targetCell, index, redraw;
+    this.pasteMessage( message );
+    // update other source properties
+    if( sourceCell ){
+        if( this.setSrcMeta(message,sourceCell) ){
+            sourceCell.redraw();
+        }
+    }
+    // update other target properties
+    if( targetCell ){
+        index = targetCell.navigated() || 0;
+        redraw = this.setTrgMeta( message, index, targetCell );
+        // without source cell we'll load notes into target 
+        if( ! sourceCell && this.setSrcMeta(message,targetCell) ){
+            redraw = true;
+        }
+        redraw && targetCell.redraw();
+    }
+    return this;
+};
+
+
+/**
+ * Set translation status/flag in target pane.
+ * This is default method does nothing. Override it for specific editors.
+ */
+EditorPrototype.setStatus = function(){
+    return null;
+};
+
+
+/**
+ * Set/clear notes and other meta info against source text
+ * @param {Message} message
+ * @param {Win} relatedCell
+ * @return boolean whether cell redraw may be required
+ */
+EditorPrototype.setSrcMeta = function( message, relatedCell ){
+    var h = escHtml,
+        lines = [],
+        value,
+        redraw = false,
+        $div = this.$smeta,
+        labels = this.labels,
+        // tags only in Loco project context
+        tag,
+        badges = [],
+        tagRefs = message.tags(),
+        numTags = tagRefs && tagRefs.length
+    ;
+    // compile context and tags as "badges"
+    value = message.context();
+    if( value ){
+        badges.push('<span>'+h(labels[LABEL_CONTEXT])+'</span>');
+        badges.push('<mark>'+h(value)+'</mark>');
+    }
+    // Tags are only supported in Loco projects, so getter method getTag will only be available in project editor
+    if( numTags && this.getTag ){
+        badges.push('<span>Tagged:</span>');
+        while( 0 <= --numTags ){
+            tag = this.getTag(tagRefs[numTags]);
+            tag && badges.push('<mark class="tag">'+h(tag.mod_name)+'</mark>');
+        }
+    }
+    if( badges.length ){
+        lines.push( badges.join(' ') );
+    }
+    // source code references - linkable only when source files are actually available (wp)
+    // only rendering when editor is on "code" mode. Requires redraw on toggle. better than hiding with css.
+    if( this.getMono() ){
+        value = message.refs();
+        if( value ){
+            tagRefs = value.split(/\s/);
+            numTags = tagRefs.length;
+            if( numTags ){
+                badges = [];
+                while( 0 <= --numTags ){
+                    value = tagRefs[numTags];
+                    badges.push('<code>'+h(value)+'</code>');
+                }
+                lines.push('<p class="has-icon icon-file">'+badges.join(' ')+'</p>');
+                // capture clicks on file reference <code> blocks via poRef event 
+            }
+        }
+    }
+    // Wordy notes field last (extracted comments)
+    value = message.notes();
+    if( value ) {
+        lines.push( '<p class="has-icon icon-info">'+h(value,true)+'</p>' );
+    }
+    if( lines.length ){
+        // lazy create meta div if needed in source cell if exists, else in target (single mode)
+        if( ! $div ){
+            $div = relatedCell.find('div.meta');
+            if( ! $div.length ){
+                $div = $('<div class="meta"></div>').insertAfter( relatedCell.header() );
+            }
+            createGenericClickEvent(this,$div,'poMeta');
+            this.$smeta = $div;
+        }
+        // set non-empty lines of HTML
+        $div.html( lines.join('\n') ).show();
+        redraw = true;
+    }
+    // else clear notes if element exists already
+    else if( $div && $div.text() ){
+        $div.text('').hide();
+        redraw = true;
+    }
+    // else no notes and notes not in dom, no redraw required
+    return redraw;
+};
+
+
+
+/**
+ * Set/clear errors against target text
+ * @param {Message} message
+ * @param {Number} pluralIndex plural index for target
+ * @param {Win} relatedCell
+ * @return bool whether cell redraw may be required
+ */
+EditorPrototype.setTrgMeta = function( message, pluralIndex, relatedCell ){
+    var h = escHtml,
+        lines = [],
+        redraw = false,
+        $div = this.$tmeta,
+        batches = message.errors(pluralIndex), 
+        numBatches = batches && batches.length, i
+    ;
+    // Show errors first as suggestions coming after may fix it
+    if( numBatches ){
+        for( i = 0; i < numBatches; i++ ) {
+            lines.push('<p class="has-icon icon-warn">' + h(batches[i],true) + '.</p>');
+        }
+    }
+    /*/ TODO suggestions and hints (possibly related to validation errors
+    batches = message.hints(pluralIndex);
+    numBatches = batches && batches.length;
+    if( numBatches ){
+        for( i = 0; i < numBatches; i++ ) {
+            lines.push('<p class="has-icon icon-robot">' + escHtml(batches[i],true) + '.</p>');
+        }
+    }*/
+    if( lines.length ) {
+        // lazy create meta div if needed in target cell if exists
+        if( ! $div ){
+            $div = relatedCell.find('div.meta');
+            if( ! $div.length ){
+                $div = $('<div class="meta"></div>').insertAfter( relatedCell.header() );
+            }
+            this.$tmeta = $div;
+        }
+        // set non-empty lines of HTML
+        $div.html( lines.join('\n') ).show();
+        redraw = true;
+    }
+    // else clear errors if element exists already
+    else if( $div && $div.text() ){
+        $div.text('').hide();
+        redraw = true;
+    }
+    return redraw;
+};
+
+
+
+/**
+ * Load a message into the edit area below list
+ */   
+EditorPrototype.loadMessage = function( message ){
+    var self = this,
+        edMode = self.mode,
+        escHTML = message.isHTML(),
+        invMode = self.inv || false,
+        oldFormat = this.fmt || null,
+        newFormat = message.format() || null,
+        reloading = message.is( self.active ),
+        // get data about source and target
+        pluralIndex  = 0,
+        sourceCell   = self.sourceCell,
+        targetCell   = self.targetCell, 
+        contextCell  = self.contextCell,
+        commentCell  = self.commentCell,
+        editTarget   = self.editable.target,
+        editSource   = self.editable.source,
+        editContext  = self.editable.context,
+        editingCell  = currentlyFocusedCell,
+        //preserveCell = reloading && editingCell,
+        sourceLocale = self.sourceLocale,
+        targetLocale = self.targetLocale,
+        labels       = self.labels
+    ;
+    // Text/HTML switch before cell value change
+    if( self.html !== escHTML ){
+        self.html = escHTML;
+        if( 'code' !== self.mode ){
+            edMode = escHTML ? 'html' : '';
+            self.setMode( edMode );
+        }
+    }
+    function toTitleCase( s ){
+        return s.charAt(0).toUpperCase() + s.substr(1).toLowerCase();
+    }
+    // normalize plural form label, stripping example number as required
+    function createPluralLabel( name, keepSuffix ){
+        var parts = keepSuffix ? name.split(' ') : name.split(' ',1);
+        name = parts[0];
+        // replace numeric quantity like "=1" with canonical tags
+        if( '=' === name.charAt(0) ){
+            name = name.substr(1);
+            name = ['zero','one','two'][ Number(name) ] || name;
+        }
+        parts[0] = toTitleCase(name);
+        return parts.join(' ');
+    }
+    // inner function renders source text window when ready
+    function setSourceWindow( sourceCell, sourceLocale ){
+        var editable = editSource,
+            cellTitle = labels[LABEL_SOURCE_TEXT]
+        ;
+        // always remove listeners because new event will operate on a new message
+        sourceCell.off();
+        // render Source text: title with flag from source locale if available
+        if( sourceCell.titled() !== cellTitle ){
+            renderCellTitle( sourceCell, cellTitle, sourceLocale||'en' );
+        }
+        // add notes now before cell height is recalculated
+        var redraw = false;
+        if( self.setSrcMeta(message,sourceCell) ){
+            redraw = true;
+        }
+        // Split source into plural forms if applicable
+        if( message.plural() ){
+            var i = -1,
+                pluralCellIds = [],
+                pluralCellTitles = [],
+                idPrefix = sourceCell.id+'-',
+                pluralForms = ( message.sourceForms() ||  ( sourceLocale && sourceLocale.plurals ) || ['One','Other'] ),
+                numPlurals = pluralForms.length
+            ;
+            // Use "Single:" "Plural:" labels for Germanic source. Legacy compatibility and most common / simplest case.
+            // note that plural may already be translated (WordPress) so we can't check for "one","other" :(
+            // however, we can check if exact quantity is used and know if it's not meant to be singular
+            if( 2 === numPlurals && ( '=' !== pluralForms[0].charAt(0) || '=1' === pluralForms[0] ) ){
+                pluralCellIds = [ idPrefix+'-0', idPrefix+'-1' ];
+                pluralCellTitles = [ labels[LABEL_SOURCE_SINGLE], labels[LABEL_SOURCE_PLURAL] ];
+            }
+            // else use whatever plural forms configured (but trimming the example quantity)
+            else {
+                while( ++i < numPlurals ){
+                    pluralCellIds[i] = idPrefix+String(i);
+                    pluralCellTitles[i] = createPluralLabel(pluralForms[i])+':';
+                }
+            }
+            // initialize pluralized source cells
+            sourceCell.splity.apply( sourceCell, pluralCellIds );
+            sourceCell.each( function(child,i){
+                child.header( pluralCellTitles[i] ).textarea( message.source(null,i), editable ).setStrf(newFormat).setMode(edMode).setInvs(invMode);
+            } );
+            // no resizing of plural panes:
+            sourceCell.lock();
+            // listen for plural source changes if editable
+            editable && sourceCell.each( function( child, i ){
+                bindSourceCell( child, i );
+            } );
+        }
+        // else singular item in source pane. most common.
+        else {
+            redraw && sourceCell.redraw();
+            sourceCell.textarea( message.source(), editable ).setStrf(newFormat).setMode(edMode).setInvs(invMode);
+            editable && bindSourceCell( sourceCell, 0 );
+        }
+    }
+
+    // creates listening closure with plural index    
+    // note that currently only 0 or 1 plural forms supported on source.
+    function bindSourceCell( cell, pluralIndex ){
+        cell
+        // visually update during source editing: 
+        .on( EVENT_CHANGE, function( event, newSource ){
+            message.source( newSource, pluralIndex );
+            if( 0 === pluralIndex ){    
+                self.updateListCell( message, 'source' );
+            }
+            self.unsave( message, pluralIndex );
+        } )
+        // re-index if source text changed after edit: 
+        .on( EVENT_CHANGED, function(){
+            if( 0 === pluralIndex ){
+                self.po.reIndex( message ); // <- TODO only required if message type indexes by text
+            }
+            self.dict && self.rebuildSearch();
+            self.fire( EVENT_UPDATE, [ message ] );
+        } );
+    }     
+
+    // inner function renders translation window when ready
+    function setTranslateWindow( targetCell, locale, pluralIndex ){
+        // force previous text area to commit last value before killing its handlers
+        // required for cases where no blur event occurred when switching between fields
+        editTarget && targetCell.eachTextarea( function(field){
+            field.ping();
+        } );
+        targetCell.off();
+        // render Translation: title with flag from locale object
+        var label = locale.isKnown() && locale.label || 'Target',
+            title = sprintf( labels[LABEL_TRANSLATION], label )
+        ;
+        // save redraw of header if title unchanged
+        if( targetCell.titled() !== title ){
+            renderCellTitle( targetCell, title, locale );
+        }
+        // add notes now before cell height is recalculated (only when no source cell: single mode)
+        var redraw = false;
+        if( ! this.sourceCell && self.setSrcMeta(message,targetCell) ){
+            redraw = true;
+        }
+        // set errors before rendering cell (cos resize)
+        if( self.setTrgMeta( message, pluralIndex, targetCell ) ){
+            redraw = true;
+        }
+        // enable flagging of current translation
+        self.setStatus( message, pluralIndex );
+        // add a tab for each plural form if asset pluralized
+        if( message.pluralized() ){
+            var i,
+                pluralCellIds = [],
+                pluralCellTitles = [],
+                idPrefix = targetCell.id+'-',
+                pluralForms = message.targetForms() || locale.plurals || [ 'One', 'Other' ],
+                numPlurals = pluralForms.length
+            ;
+            function pushForm( i ){
+                var name = pluralForms[i];
+                pluralCellTitles.push( name ? createPluralLabel(name,true) : 'Form '+i );
+                pluralCellIds.push( idPrefix+String(i) );
+            }
+            // add plural translations that are actually present in message. 
+            message.each( pushForm );
+            // pad plural targets with empty translations that should exist for locale
+            while( ( i = pluralCellIds.length ) < numPlurals ){
+                pushForm(i);
+            }
+            targetCell.splitx.apply( targetCell, pluralCellIds );
+            targetCell.each( function( child, i ){
+                var editable = editTarget && ! message.disabled(i);
+                child.textarea( message.translation(i), editable ).setStrf(newFormat).setMode(edMode).setInvs(invMode);
+                // listen for pluralized translation changes if target editable
+                editTarget && bindTargetCell( child, i );
+            } );
+            targetCell.navigize( pluralCellTitles, pluralIndex||null ).on('wgTabSelect', function( event, tabIndex ){
+                var textfield = editTarget && event.cell.editable();
+                textfield && textfield.focus();
+                self.setTrgMeta( message, tabIndex, targetCell );
+                self.setStatus( message, tabIndex );
+                self.fire('poTab', [ tabIndex ] );
+            } );
+        }
+        // else initialize singular asset, listen for changes when target editable
+        else {
+            redraw && targetCell.redraw();
+            targetCell.textarea( message.translation(), editTarget && ! message.disabled(0) ).setStrf(newFormat).setMode(edMode).setInvs(invMode);
+            editTarget && bindTargetCell( targetCell, 0 );
+        }
+    }
+    
+    // creates listening closure with plural index    
+    function bindTargetCell( cell, pluralIndex ){
+        cell
+        .on( EVENT_CHANGE, function( event, newTranslation, oldTranslation ){
+            message.translate( newTranslation, pluralIndex );
+            // update text in translation cell
+            if( 0 === pluralIndex ){
+                self.updateListCell( message, 'target' );
+            }
+            // clear fuzzy flag when translating
+            if( message.fuzzy(pluralIndex) ){
+                self.fuzzy( false, message, pluralIndex );
+            }
+            else {
+                self.unsave( message, pluralIndex );
+            }
+            // fire event indicating when translation toggles between translated and untranslated
+            // we need to also call setStatus, but note that this could fire twice (e.g. if invoked by fuzzy already)
+            if( '' === newTranslation ){
+                self.fire('poEmpty', [ true, message, pluralIndex ] );
+                self.setStatus( message, pluralIndex );
+            }
+            else if( '' === oldTranslation ){
+                self.fire('poEmpty', [ false, message, pluralIndex ] );
+                self.setStatus( message, pluralIndex );
+            }
+        } )
+        // re-index if translation text changed after edit:
+        .on( EVENT_CHANGED, function(){
+            self.dict && self.rebuildSearch();
+            self.fire( EVENT_UPDATE, [ message ] );
+        } );
+    }
+    
+    
+    // inner function renders asset context window when ready
+    function setContextWindow( contextCell ){
+        contextCell.off();
+        var cellTitle = labels[LABEL_CONTEXT];
+        if( contextCell.titled() !== cellTitle ){
+            renderCellTitle( contextCell, cellTitle );
+            // ensure translation status not displayed in context title
+            self.setStatus( null );
+        }
+        contextCell.textarea( message.context(), true ).setMode(edMode).setInvs(invMode);
+        // listen for context changes
+        editContext && contextCell
+            // visually update during context editing:
+            .on( EVENT_CHANGE, function( event, newContext ){
+                message.context( newContext );
+                // update text in source cell
+                self.updateListCell( message, 'source' );
+                self.unsave( message, pluralIndex );
+            } )
+            // re-index in document if context changed after edit:
+            .on( EVENT_CHANGED, function(){
+                self.po.reIndex( message );
+                self.dict && self.rebuildSearch();
+                self.fire( EVENT_UPDATE, [ message ] );
+            } )
+        ;
+    }
+    
+    function setCommentWindow( commentCell ){
+        var cellTitle = labels[LABEL_COMMENTS];
+        if( commentCell.titled() !== cellTitle ){
+            renderCellTitle( commentCell, cellTitle );
+        }
+        commentCell.off()
+            .on( EVENT_CHANGE, function( event, newComment ){
+                message.comment( newComment );
+                self.fire('poComment', [ message, newComment ] );
+                self.unsave( message, pluralIndex );
+            } )
+            .textarea( message.comment(), true )
+        ;
+    }
+    
+    
+    self.active = message;
+    
+    if( sourceCell ){
+        setSourceWindow( sourceCell, sourceLocale );
+    }
+    
+    if( contextCell ){
+        setContextWindow( contextCell );
+    } 
+
+    if( targetCell && targetLocale ){
+        // keeping navigated plural tab, but must be grabbed before cleared
+        pluralIndex = targetCell.navigated() || 0;
+        setTranslateWindow( targetCell, targetLocale, pluralIndex );
+    }
+
+    // allow direct comment editing if cell exists
+    // this is only single-block plain text commenting for simple editors.
+    if( commentCell /*&& commentCell !== preserveCell*/ ){
+        setCommentWindow( commentCell );
+    }
+    
+    // keep editing focus if possible (note: only establishes cell, specific plural fields will be forgotten)
+    if( editingCell ){
+        // handle plural to non-plural jumping
+        // could keep drilling up, but should be impossible for more than one nested depth.
+        if( ! editingCell.exists() ){
+            editingCell = editingCell.parent();
+        }
+        // focus in on any new field in the place of the previous
+        var editableText = editingCell.editable();
+        if( editableText ){
+            editableText.focus();
+        }
+    }
+
+    // may be switching "format" mode, dictated by source text properties
+    if( oldFormat !== newFormat ){
+        /*var $root = $(self.rootDiv);
+        if( newFormat ){
+            $root.addClass( newFormat+'-format');
+        }
+        if( oldFormat ){
+            $root.removeClass( oldFormat+'-format');
+        }*/
+        this.fmt = newFormat;
+    }
+    
+    // only fire select event if newly loaded
+    // possibly the wrong place for firing this, but lots of legacy to check before moving.
+    reloading || self.fire('poSelected', [ message, pluralIndex ] );
+};
+
+
+
+/**
+ * Unload previous translation, but keep current resize points - that means unbinding events too
+ */
+EditorPrototype.unloadActive = function(){
+    var self = this;
+    function emptyAndHide(cell){
+        cell && cell.text('').hide();
+    }
+    function offAndClear(cell){
+        cell && cell.off().clear();
+    }
+    emptyAndHide(self.$smeta);
+    emptyAndHide(self.$tmeta);
+    offAndClear(self.sourceCell);
+    offAndClear(self.contextCell);
+    offAndClear(self.targetCell);
+    // why was comment cell not clearing?
+    if( self.commentCell ) {
+        self.commentCell.off();
+    }
+    if( self.active ){
+        self.fire('poDeselected', [ self.active ] );
+        self.active = null;
+    }
+    return this;
+};
+    
+
+
+/**
+ * Load nothing into editing area
+ */
+EditorPrototype.loadNothing = function(){
+    var cell,
+        self = this,
+        translator = self.t, 
+        edMode = self.mode||'',
+        invMode = self.inv||false,
+        fmtMode = self.fmt
+    ;
+    self.unloadActive();
+    self.setStatus(null);
+    if( cell = self.commentCell ){
+        cell.textarea( '', false );
+    }
+    if( cell = self.sourceCell ){
+        cell.textarea( '', false ).setStrf(fmtMode).setMode(edMode).setInvs(invMode);
+        // Translators: Label for the source text window when no translation selected
+        cell.title( translator._x('Source text not loaded','Editor')+':' );
+    }
+    if( cell = self.contextCell ){
+        cell.textarea( '', false ).setMode(edMode).setInvs(invMode);
+        // Translators: Label for the context window when no translation selected
+        cell.title( translator._x('Context not loaded','Editor')+':' );
+    }
+    if( cell = self.targetCell ){
+        cell.textarea('', false ).setStrf(fmtMode).setMode(edMode).setInvs(invMode);
+        // Translators: Label for the translation editing window when no translation selected
+        cell.title( translator._x('Translation not loaded','Editor')+':' );
+    }
+    this.fire('poSelected', [ null ] );
+};
+
+
+
+/**
+ * Update table cell with new content as it is edited.
+ */
+EditorPrototype.updateListCell = function( message, colName ){
+    var colIdx = this.getListColumns()[ colName ],
+        rowIdx = this.po.indexOf( message ),
+        row = this.listTable.row(rowIdx)
+    ;
+    // note that not all rows will be rendered due to off-screen buffering!
+    if( row && row.rendered ){
+        row.update( colIdx );
+    }
+};
+
+
+
+/**
+ * Create text suitable for rendering in a list cell.
+ * Call this from getListEntry function for any fields that will also pass though updateListCell
+ */
+EditorPrototype.cellText = function( textContent ){
+    // strip and decode HTML if it looks like any tags or encoding are present.
+    // TODO make this optional, or use formatting instead of stripping...
+    if( -1 !== textContent.indexOf('<') || -1 !== textContent.indexOf('&') ){
+        textContent = stripHtml( textContent );
+    }
+    // Remove leading space, because indents look stupid in list rows
+    // Except if whole thing is a space use NBSP to stop cell collapsing
+    return textContent.replace(REGEX_LEADING_SPACE,'')||'\xA0';
+};
+
+
+/**
+ * Specific Fuzzy support.
+ * @return Boolean whether message was fuzzy before this was called
+ */
+EditorPrototype.fuzzy = function( setFuzzy, message, pluralIndex ){
+    message = message || this.active;
+    var wasFuzzy = message.fuzzy(pluralIndex);
+    if( true === setFuzzy && ! wasFuzzy ){
+        this.flag( 4, message, pluralIndex ) && this.fire('poFuzzy', [ message, true, pluralIndex ] );
+    }
+    else if( false === setFuzzy && wasFuzzy ){
+        this.flag( 0, message, pluralIndex ) && this.fire('poFuzzy', [ message, false, pluralIndex ] );
+    }
+    return wasFuzzy;
+};
+
+
+/**
+ * Generic flag/unflag support.
+ * @param {number} newFlag
+ * @param {Message} message
+ * @param {number} pluralIndex
+ * @return int|Boolean current flag, or whether new flag is set
+ */
+EditorPrototype.flag = function( newFlag, message, pluralIndex ){
+    if( ! message ){
+        message = this.active;
+        pluralIndex = this.getTargetOffset();
+        if( null == pluralIndex ) {
+            return null;
+        }
+        // flag as one if asset has embedded plurals
+        if( pluralIndex && message.targetForms() ){
+            pluralIndex = 0;
+        }
+    }
+    // query current flag if null passed
+    var oldFlag = message.flagged( pluralIndex );
+    if( null == newFlag ){
+        return oldFlag;
+    }
+    // return false if flag won't be changed
+    if( oldFlag === newFlag ) {
+        return false;
+    }
+    // ok to set new flag, unless untranslated
+    if ( newFlag && !message.translated(pluralIndex) ) {
+        // console.error('Refusing to flag empty string');
+        return false;
+    }
+    // poFlag event allows cancellation
+    if (!this.fire('poFlag', [newFlag, oldFlag, message, pluralIndex])) {
+        return false;
+    }
+    // setting new flag invokes update event and marks dirty
+    message.flag(newFlag, pluralIndex);
+    if (this.fire(EVENT_UPDATE, [message])) {
+        this.unsave(message, pluralIndex);
+    }
+    this.setStatus(message, pluralIndex);
+    return true;
+};
+
+
+/**
+ * Add new message, or select it if it exists
+ * @param {string} msgid
+ * @param {string} msgctxt
+ * @return Message
+ */
+EditorPrototype.add = function( msgid, msgctxt ){
+    var i, message = this.po.get( msgid, msgctxt );
+    if( message ){
+        i = this.po.indexOf( message );
+    }                
+    else {
+        i = this.po.length;
+        message = this.po.add( msgid, msgctxt );
+        // TODO sort, or at least prepend PO instead of appending
+        // TODO add row to table rather than rebuilding?
+        this.load( this.po, -1 );
+        this.fire('poAdd', [ message ] );
+        this.fire( EVENT_UPDATE, [ message ] );
+    }
+    if( this.lastSearch ){
+        this.filter('');
+    }
+    this.listTable.select(i);
+    return message;
+};
+
+
+
+/**
+ * Delete message from document and redraw table.
+ * could manipulate table inside wingrid, but seems messy
+ * @param {Message} message
+ */
+EditorPrototype.del = function( message ){
+    message = message || this.active;
+    if( ! message ){
+        return; // nothing to delete
+    }
+    var keepSearch = this.lastSearch,
+        i = this.po.del( message )
+    ;
+    if( null != i ){
+        this.unsave( message );
+        this.fire('poDel', [ message ] );
+        this.fire( EVENT_UPDATE, [ message ] );
+        // rebuild table view
+        this.reload();
+        // complete rebuild of dict // @todo better if I could just remove
+        this.dict && this.rebuildSearch();
+        // most likely deleted current message
+        this.active && this.active.equals(message) && this.unloadActive();
+        // select previous, or most sensible alternative
+        if( this.po.length ){
+            if( keepSearch ){
+                this.filter( keepSearch );
+            }
+            if( ! this.active ){
+                i = Math.min( i, this.po.length-1 );
+                this.listTable.select( i );
+            }
+        }
+    }    
+};
+
+
+
+/**
+ * Change editor monospace/coding mode state
+ * @param {Boolean} mono whether switching to appropriate IDE (true) or defaulting to regular view (false)
+ */
+EditorPrototype.setMono = function( mono ){
+    return this.setMode( mono ? 'code' : this.html ? 'html' : '' );
+};
+
+
+
+/**
+ * Set escape/render mode
+ * @param {string} newMode "code", "html" or ""
+ * @return Editor
+ */
+EditorPrototype.setMode = function( newMode ){
+    if( this.mode !== newMode ){
+        this.mode = newMode;
+        this.callTextareas( function(textarea){
+            textarea.setMode( newMode );
+        } );
+        // toggling view mode may display different metadata, which in turn will require a cell redraw
+        var message = this.active, relateCell = this.sourceCell;
+        message && message.refs() && relateCell && this.setSrcMeta(message,relateCell) && relateCell.redraw();
+    }
+    return this;
+};
+
+/**
+ * @return Boolean whether in monospace/code view
+ */
+EditorPrototype.getMono = function(){
+    return 'code' === this.mode;
+};
+
+
+/**
+ * Change editor "show invisibles" setting
+ * @param {Boolean} showInvisibles
+ * @return Editor
+ */
+EditorPrototype.setInvs = function( showInvisibles ){
+    var oldMode = this.inv||false;
+    if( oldMode !== showInvisibles ){
+        this.inv = showInvisibles;
+        this.callTextareas( function(textarea){
+            textarea.setInvs( showInvisibles );
+        } );
+        this.fire( 'poInvs', [ showInvisibles ] );
+    }
+    return this;
+};
+
+EditorPrototype.getInvs = function(){
+    return this.inv||false;
+};
+
+
+/**
+ * Call a function on all current source, context and target textarea instances
+ */
+EditorPrototype.callTextareas = function( applyFunction ){
+    function doApply( cell ){
+        cell && cell.eachTextarea( applyFunction );
+    }
+    doApply(this.targetCell);
+    doApply(this.contextCell);
+    doApply(this.sourceCell);
+    return this;
+};
+
+
+/**
+ * Focus the most obvious translation textarea
+ * @return Editor
+ */
+EditorPrototype.focus = function(){
+    var field = this.getTargetEditable();
+    if( field ){
+        field.focus();
+    }
+    return this;
+};
+
+
+
+
+EditorPrototype = null;
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$12", function(exports,window,document){ /* module: js/editor/poedit.js */
+/**
+ * POEdit style translation editor
+ */
+
+var parent = CommonJS.require("$23","base.js");
+
+
+/**
+ * Create a new editor in top level HTML element
+ */
+exports.init = function( rootDiv ){
+    var editor = new POEditor,
+        loadingLabel = 'Loading..';
+    
+    // Build and bind initial UI elements:
+    // split root window horizontally, assets at top, changing area at bottom
+    var rootCell = editor.setRootCell( rootDiv ),
+        children = rootCell.splity( 'po-list', 'po-edit'),
+        listCell = children[0],
+        editCell = children[1];
+    
+    // split edit cell into translating area and comment box
+    children = editCell.splitx( 'po-trans', 'po-comment' );
+    var localesCell = children[0],
+        commentCell = children[1].header(loadingLabel);
+
+    // split locales into source and target
+    children = localesCell.splity('po-source','po-target');
+    var sourceCell = children[0].header(loadingLabel),
+        targetCell = children[1].header(loadingLabel);
+    
+    // default proportions at startup
+    rootCell.distribute( [ 0.34 ] );
+    editCell.distribute( [ 0.8 ] );
+    
+    // bind source and target to list columns
+    editor.setListCell( listCell );
+    editor.setSourceCell( sourceCell );
+    editor.setTargetCell( targetCell );
+
+    // set other significant cells as object properties
+    editor.commentCell = commentCell;    
+    
+    // lock po editor by default
+    editor.editable.source = false;
+    return editor;
+};
+
+
+
+/**
+ * Editor subclass for "poedit"
+ */
+function POEditor(){
+    this.init()._validate(/*'POEditor'*/);
+    // Set default source locale
+    this.sourceLocale = { lang:'en', label:'English', plurals:[ 'One','Other' ] };
+}
+
+var POEditorPrototype = POEditor.prototype = parent.extend( POEditor );
+
+
+
+/**
+ * Implement getListHeadings to populate list cell header
+ */
+POEditorPrototype.getListHeadings = function(){
+    var t = this.t || { _x:function(s){return s;} },
+        // Translators: List heading showing preview of English text for each item
+        h = [ t._x('Source text','Editor') ]
+    ;
+    if( this.targetLocale ){
+        // Translators: List heading showing preview of translated text for each item
+        h[1] = t._x('Translation','Editor')
+    }
+    return h;
+};
+
+
+/**
+ * Implement getListColumns to know which column displays which field
+ */
+POEditorPrototype.getListColumns = function(){
+    var c = { source: 0 };
+    if( this.targetLocale ){
+        c.target = 1;
+    }
+    return c;
+};
+
+
+/**
+ * Implement getListEntry to create closure of column getters for a message
+ */
+POEditorPrototype.getListEntry = function( message ){
+    var flatten = this.cellText,
+        getters = [
+            // 0 (source)
+            function(){
+                var node,
+                    msgid = flatten( message.source()||'' ),
+                    msgctxt = message.context()
+                ;
+                if( msgctxt ){
+                    node = document.createElement('p');
+                    node.appendChild( document.createElement('mark') ).innerText = msgctxt;
+                    node.appendChild( document.createTextNode('\xA0'+msgid) );
+                    return node;
+                }
+                return msgid;
+            }
+        ]
+    ;
+    // 1 (target)
+    if( this.targetLocale ) {
+        getters[1] = function(){
+            return flatten(message.translation()||'');
+        };
+    }
+    return getters;
+};
+
+
+
+/**
+ * POEdit-specific stats.
+ * Note that plural offsets do not count in stats. translated means ALL forms translated. same for flags
+ */
+POEditorPrototype.stats = function(){      
+    var messages = this.po,
+        numStrings = messages.length,
+        numTrans = 0,
+        numEmpty = 0,
+        numFuzzy = 0
+    ;
+    messages.each( function( key, message ){
+        if( message.fuzzy() ){
+            numFuzzy++;
+        }
+        else if( message.translated() ){
+            numTrans++;
+        }
+        else {
+            numEmpty++;
+        }
+    } );            
+    return {
+        t: numStrings,
+        p: numTrans.percent(numStrings)+'%',
+        f: numFuzzy,
+        u: numEmpty
+   };
+};
+
+/**
+ * Allow editing of source strings (POT mode)
+ */
+POEditorPrototype.unlock = function(){
+    var self = this, locale = self.targetLocale;
+    if( ! self._unlocked ){
+        // define that source and context are editable in POT file
+        self.editable = {
+            source: true,
+            context: true,
+            target: false
+        };
+        if( self.po ){
+            self.po.unlock();
+        }
+        // swap translation cell to use for context
+        self.contextCell = self.targetCell;
+        delete self.targetCell;
+        // place target locale into temporary _unlocked property indicating unlocked (POT) mode
+        // there was never a locale to begin with, it won't be possible to lock again. which is fine
+        if( locale ){
+            self._unlocked = locale;
+            delete self.targetLocale;
+            this.reload();
+            self.fire( 'poLock', [ false ] );
+        }
+        // unlock done - in POT mode
+        self.active && self.loadMessage( self.active );
+    }
+};
+
+/**
+ * Prevent editing of source strings (standard PO mode)
+ */
+POEditorPrototype.lock = function(){
+    var self = this, locale = this._unlocked;
+    if( locale ){
+        // reinstate target locale from _unlocked property indicating locked (PO) mode
+        self.targetLocale = locale;
+        delete self._unlocked;
+        if( self.po ){
+            self.po.lock(locale);
+        }
+        // define that source is not editable, context is not shown and target is editable again
+        self.editable = {
+            source: false,
+            context: false,
+            target: true
+        };
+        // swap context function back to target translations
+        self.targetCell = self.contextCell;
+        delete self.contextCell; 
+        this.reload();
+        // lock done - back in PO mode
+        self.fire( 'poLock', [ true, locale ] );
+        self.active && self.loadMessage( self.active );
+    }
+};
+
+
+/**
+ * Whether in PO mode (not editing sources)
+ * @return {boolean}
+ */
+POEditorPrototype.locked = function(){
+    return !this._unlocked;
+};
+
+
+/**
+ * Render contextual UI for current translation.
+ * Namely Fuzzy toggle (Ctrl-U) and Suggest function (Ctrl-J)
+ */
+POEditorPrototype.setStatus = function( message /*, pluralIndex*/ ){
+    var $el = this.$tnav, labels = this.labels;
+    // remove navigation if no message passed (unload)
+    if( null == message ){
+        if( $el ){
+            $el.remove();
+            this.$tnav = null;
+        }
+        return;
+    }
+    // lazy create navigation container displaying status
+    if( ! $el ){
+        $el = $('<nav></nav>')
+            .append( createFuzzyButton(this) )
+            .append( createSuggestButton(this) )
+            .appendTo( this.targetCell.header() )
+        ;
+        this.$tnav = $el;
+    }
+    // flag top-level element to affect button styles
+    var classes = [];
+    if( message.translated() ){
+        if( message.fuzzy() ){
+            classes.push('po-fuzzy');
+        }
+    }
+    else {
+        classes.push('po-empty');
+    }
+    $el.attr('class',classes.join(' '));
+};
+
+
+
+
+
+
+/**
+ * Default sorter such that untranslated items appear first, then fuzzy. equal items being compared as string
+ * TODO would actually prefer to have columns for document order and status.
+ * @return Function
+ */
+POEditorPrototype.getSorter = function(){
+    function defaultWeightComparison( a, b ){
+        var x = a.weight(),
+            y = b.weight();
+        if( x === y ){
+            return defaultStringComparison( a, b );
+        }
+        if( x > y ){
+            return -1;
+        }
+        return 1;
+    }
+    function defaultStringComparison( a, b ){
+        return a.hash().localeCompare( b.hash() );
+    }
+    var self = this;
+    /* @return int -1 if a should be first, 1 if b, or zero if equal, which they should never be */
+    return function( order ){
+        var messages = self.po, 
+            compare = self.locked() ? defaultWeightComparison : defaultStringComparison
+        ;
+        order.sort( function( i, j ){
+            return compare( messages.row(i), messages.row(j) );
+        } );
+    };
+};
+
+
+/*
+POEditorPrototype.handle = {
+    poEmpty: function( isEmpty, message, pluralIndex ){
+        //this.setStatus( message, pluralIndex );
+        //console.log( 'poEmpty', isEmpty )
+    },
+    poFuzzy: function( message, state, pluralIndex ){
+        //console.log('poFuzzy', state );
+    },
+    poSelected: function( message, pluralIndex ) {
+        //console.log('poSelected', message.translation(pluralIndex) );
+    },
+    poTab: function( pluralIndex ) {
+        //console.log('poTab', pluralIndex );
+    }
+};
+*/
+
+
+
+// Note that these styles are compatible with WordPress for the plugin
+function createIconButton(icon){
+    var $button = $('<button type="button" class="button button-small icon icon-'+icon+' hastip"></button>');
+    CommonJS.require("$11","tooltip.js").init($button);
+    return $button; 
+}
+
+
+function createFuzzyButton( editor ){
+    return createIconButton('cloud')
+        .attr('title', editor.labels[8]+' (Ctrl-U)')
+        .click(function(event){
+            event.preventDefault();
+            editor.focus().fuzzy( ! editor.fuzzy() );
+        })
+    ;
+}
+
+
+function createSuggestButton( editor ){
+    return createIconButton('robot')
+        .attr('title', editor.labels[9]+' (Ctrl-J)')
+        .click(function(event){
+            event.preventDefault();
+            // Because suggestion method is not built into abstract editor, we can only fire an event on base.js
+            editor.fire('poHint');
+        })
+    ;
+}
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$13", function(exports,window,document){ /* module: js/editor/hotkeys.js */
+/**
+ * Common hotkey bindings for translation editors.
+ */
+
+var KEY_COPY  = 66, // "b"
+    KEY_CLEAR = 75, // "k"
+    KEY_SAVE  = 83, // "s"
+    KEY_FUZZY = 85, // "u"
+    KEY_PREV  = 38, // up arrow 
+    KEY_NEXT  = 40, // down arrow
+    KEY_ENTER = 13, // return
+    KEY_INVIS = 73, // "i"
+    KEY_HINT = 74,  // "j" <- suggest
+
+    keys = {
+        copy:  KEY_COPY,
+        clear: KEY_CLEAR,
+        save:  KEY_SAVE,
+        fuzzy: KEY_FUZZY,
+        next:  KEY_NEXT,
+        prev:  KEY_PREV,
+        enter: KEY_ENTER,   
+        invis: KEY_INVIS,
+        hint: KEY_HINT
+    },
+    
+    shiftable = {
+        38: true,
+        40: true,
+        73: true
+    },
+    
+    commands = {};
+
+
+
+/**
+ * Copy source text to target text
+ */
+commands[ KEY_COPY ] = function( event, editor ){
+    var asset = editor.current();
+    if( asset ){
+        asset.normalize();
+        // This works, but will copy all plurals, when we want only active.
+        editor.focus().pasteMessage(asset);
+    }
+};
+
+
+/**
+ * Clear target cell contents
+ */
+commands[ KEY_CLEAR ] = function( event, editor ){
+    var asset = editor.current();
+    if( asset ){
+        asset.untranslate();
+        // as with copy, this will blank out all plurals which may not be what we want.
+        editor.focus().pasteMessage(asset);
+    }
+};
+
+
+/**
+ * Mark current message as Fuzzy
+ */
+commands[ KEY_FUZZY ] = function( event, editor ){
+    editor.focus().fuzzy( ! editor.fuzzy() );
+};
+
+
+/**
+ * Commit current translation
+ */
+commands[ KEY_ENTER ] = function( event, editor ){
+    var field = editor.getFirstEditable();
+    // IE<=10 fails to find editable field when in split plural pane.
+    if( field ){
+        // field.blur();
+        // forceEditableUpdate( field, 'ping' );
+        nextTarget( editor, 1, true );
+    }
+};
+
+
+/**
+ * Move to next asset (optionally checking translated state)
+ */
+commands[ KEY_NEXT ] = function( event, editor ){
+   nextTarget( editor, 1, event.shiftKey );
+};
+
+
+/**
+ * Move to previous asset (optionally checking translated state)
+ */
+commands[ KEY_PREV ] = function( event, editor ){
+   nextTarget( editor, -1, event.shiftKey );
+};
+
+
+/**
+ * Toggle invisibles
+ */
+commands[ KEY_INVIS ] = function( event, editor ){
+    if( ! event.shiftKey ){
+        return false;
+    }
+    editor.setInvs( ! editor.getInvs() );
+};
+
+
+
+/**
+ * Force modified message to reload
+ *
+function forceEditableUpdate( field ){
+    if( field || ( field = editor.getFirstEditable() ) ){
+        field.fire();
+    }
+    return field;
+}*/
+
+
+
+/**
+ * Move editor to next asset in it list, optionally skipping already-translated assets
+ */
+function nextTarget( editor, direction, skipTranslated ){
+    editor.next( direction, skipTranslated, skipTranslated );
+}
+
+
+
+
+/**
+ * Command bindings
+ * @return {Object}
+ */
+exports.init = function( editor, listener ){
+    
+    // commands active in scope
+    var enabled = {};
+    
+    function onKeyDown(event){
+        if( event.isDefaultPrevented() ){
+            //console.error('stopped');
+            return true;
+        }
+        if( ! event.metaKey && ! event.ctrlKey ){
+            //console.error('no meta');
+            return true;
+        }
+        // Actual command initiated
+        var whichKey = event.which;
+        if( ! enabled[whichKey] ){
+            // console.error('not enabled', whichKey );
+            return true;
+        }
+        // Command or Ctrl is down during press
+        var command = commands[ whichKey ];
+        if( ! command ){
+            throw new Error('command undefined #'+whichKey );
+        }
+        
+        // Ignore if modifier key down (except that supported)
+        if( event.altKey ){
+            return true;
+        }
+        if( event.shiftKey && ! shiftable[whichKey] ){
+            return true;
+        }
+            
+        // execute command with editor interface provided
+        if( false === command( event, editor ) ){
+            return true;
+        }
+        
+        // command did not cancel, so we're owning this.
+        event.stopPropagation();
+        event.preventDefault();
+        return false;
+    }
+    
+    // listen for hot keys (Ctrl/Cmd)
+    $( listener||window ).on( 'keydown', onKeyDown );
+    
+    
+    // return binding method for enabling commands
+    return {
+        // add/overwrite a new command
+        add: function( key, callback ){
+            var code = keys[key];
+            commands[code] = callback;
+            return this;
+        },
+        // enable existing commands
+        enable: function(){
+            var code, i;
+            for( i in arguments ){
+                code = keys[ arguments[i] ];
+                enabled[code] = true;
+            }
+            return this;
+        },
+        // destroy bindings and scope
+        disable: function(){
+            $( listener||window ).off( 'keydown', onKeyDown );
+            editor = listener = enabled = null;
+        }
+    };
+};
+
+
+
+
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$24", function(exports,window,document){ /* module: js/utils/collection.js */
+/**
+ * Abstraction of simple array collection
+ */
+
+exports.init = function( /*obj*/ ){
+    return new Collection/*( obj )*/;
+};
+
+function Collection( /*obj*/ ){
+    this.reIndex( [] );
+    /*/ add initial data (not used)
+    if( obj ){
+        var key;
+        for( key in obj ){
+            this.add( key, obj[key] );
+        }
+    }*/
+}
+
+var CollectionPrototype = Collection.prototype;
+
+
+/* re-index ordinates from keys - does not affect any data values */
+CollectionPrototype.reIndex = function( keys ){
+    var a = {},
+        i = -1, 
+        t = keys.length
+    ;
+    while( ++i < t ){
+        a[ keys[i] ] = i;
+    }
+    this.keys = keys;
+    this.length = i;
+    this.ords = a;
+};
+
+
+CollectionPrototype.key = function( ord, newKey ){
+    if( null == newKey ){
+        return this.keys[ ord ];
+    }
+    // change key of item at ord */
+    var oldKey = this.keys[ord],
+        oldOrd = this.ords[newKey];
+    if( newKey !== oldKey ){
+        if( null != oldOrd ){
+            throw new Error('Clash with item at ['+oldOrd+']');
+        }
+        this.keys[ ord ] = newKey;
+        delete this.ords[ oldKey ];
+        this.ords[ newKey ] = ord;
+    }
+    return ord;
+};
+
+
+CollectionPrototype.indexOf = function( key ){
+    var ord = this.ords[ key ];
+    return null == ord ? -1 : ord;
+};
+
+
+CollectionPrototype.add = function( key, value ){
+    var ord = this.ords[key];
+    if( null == ord ){
+        this.keys[ this.length ] = key;
+        ord = this.ords[key] = this.length++;
+    }
+    this[ord] = value;
+    return ord;
+};
+
+
+CollectionPrototype.get = function( key ){
+    return this[ this.ords[key] ];
+};
+
+
+CollectionPrototype.has = function( key ){
+    return null != this.ords[key];
+};
+
+
+
+CollectionPrototype.del = function( key ){
+    var index = this.ords[key];
+    this.cut( index, 1 ); 
+};
+
+
+
+CollectionPrototype.cut = function( start, length ){
+    length = length || 1;
+    // splicing self should affect internal indexes
+    var items = [].splice.call( this, start, length );
+    // do same to internal key index
+    this.keys.splice( start, length );
+    // no need to re-index ordinates
+    this.reIndex( this.keys );
+    return items;
+};
+
+
+/**
+ * @param Function ( key, value, offset )
+ */
+CollectionPrototype.each = function( callback ){
+    var i = -1,
+        a = this,
+        k = a.keys,
+        t = a.length
+    ;
+    while( ++i < t ){
+        callback( k[i], a[i], i );
+    }
+    return this;
+};
+
+
+
+/**
+ * TODO would like to use [].sort.call( this, callback ), but no way to keep key association??
+ * this method means double iteration in addition to sorting call. Dislike.
+ */
+CollectionPrototype.sort = function( callback ){
+    var i = -1,
+        t = this.length,
+        key, keys = this.keys,
+        ords = this.ords,
+        pair, pairs = []
+    ;
+    // keep keys and values in temporary binding
+    while( ++i < t ){
+        pairs[i] = [ this[i], keys[i] ];
+    }
+    // do actual sorting from passed function
+    pairs.sort( function( a, b ){
+        return callback( a[0], b[0] );
+    } );
+    // rebuild collection in new order
+    for( i = 0; i < t; i++ ){
+        // swap out value
+        pair = pairs[i];
+        this[i] = pair[0];
+        // index
+        key = pair[1];
+        keys[i] = key;
+        ords[key] = i;
+    }
+
+    return this;
+};
+
+
+CollectionPrototype.join = function( glue ){
+    return [].join.call( this, glue );
+};
+
+
+CollectionPrototype = null;
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$25", function(exports,window,document){ /* module: js/file/gettext/format.js */
+/**
+ * Gettext PO file formatter 
+ *
+ * Creates a closure containing the desired wrapping width.
+ * Primarily constructed this way to save overhead of compiling RegExp.
+ * 
+ * @return Object providing the same interface as LocoPo static PHP class.
+ */
+exports.create = function( width ){
+    
+    var refswrap,
+        wordwrap,
+        REGEX_BREAK = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g,     // <- matches single break like \R
+        //REGEX_BREAK_MULTI = /[\r\n\v\f\u2028\u2029]+/g,       // <- matches any and all series of breaks as one stream
+        REGEX_REFS_SPACES = /[ \r\n]+/g,                      // <- whitespace observed in file references
+        REGEX_ESCAPABLE = /[\t\v\f\x07\x08\\\"]/g,            // <- characters that must be slashed, excluding line breaks
+        ESCAPE_LITERALS = {
+            '\t': '\\t',
+            '\v': '\\v',
+            '\f': '\\f',
+            '\x07': '\\a',
+            '\x08': '\\b'/*,
+            '\n': '\\n',
+            '\r': '\\r',*/
+        };
+
+    function addSlashesReplace(chr){
+        return ESCAPE_LITERALS[chr] || '\\'+chr;
+    }
+
+
+    // default width if invalid value
+    if( null == width || isNaN( width = Number(width) ) ){
+        width = 79;
+    }
+
+    // treat negative values as if 0 was specified
+    if( width > 0 ){
+        refswrap = createWrapper( width-3, ' ' );
+        wordwrap = createWrapper( width-2, '-– \\.,:;\\?!\\)\\]\\}\\>');
+    }
+    /*/ msgcat still wraps references with --no-wrap,  but not with --wrap=0
+    else {
+        refswrap = createWrapper( 76, ' ' );
+    }*/
+    
+    return {
+
+        /**
+         * JavaScript port of LocoPo::pair
+         */
+        pair: function( key, text ){
+            // quick exit for empty text
+            if( ! text ){
+                return key+' ""';
+            }
+            // escape entire string, excluding breaks
+            text = text.replace( REGEX_ESCAPABLE, addSlashesReplace );
+            // do special line break replacement
+            var nbr = 0;
+            text = text.replace( REGEX_BREAK, function(){
+                nbr++;
+                return '\\n\n';
+            } );
+            // If text has actual breaks, it will wrap even if we've not set a wrap
+            if( nbr ){
+                // yep
+            }
+            // if unwrapped line (including keyword, space and quotes) exceeds width, we must wrap
+            else if( width && width < ( text.length + key.length + 3 ) ){
+                // yep
+            }
+            // else no wrapping required, return unwrapped single line
+            else {
+                return key+' "'+text+'"';
+            }
+        
+            // The remaining text will be wrapped        
+            var lines = [ key+' "' ], 
+                split = text.split('\n');
+            // soft wrap each hard-broken line  
+            if( wordwrap ){
+                var i = -1,
+                    t = split.length;
+                while( ++i < t ){
+                    wordwrap( split[i], lines );
+                }
+            }
+            // else we have breaks, but no soft wrapping
+            else {
+                lines = lines.concat( split );
+            }
+            
+            return lines.join("\"\n\"")+'"';
+        },
+        
+        
+        
+        /**
+         * JavaScript port of LocoPo::prefix
+         */   
+        prefix: function( text, prefix ){
+            var lines = text.split( REGEX_BREAK );
+            return prefix+lines.join('\n'+prefix);
+        },
+
+        
+        /**
+         * JavaScript port of LocoPo::refs
+         */
+        refs: function( text ){
+            var prefix = '#: ';
+            text = text.replace( REGEX_REFS_SPACES, ' ', text );
+            if( refswrap ){
+                text = refswrap( text, [] ).join('\n'+prefix);
+            }
+            return prefix+text;
+        }
+    };
+};
+
+
+
+
+    
+    
+function createWrapper( width, chars ){
+    var REGEX_SOFT = new RegExp('^.{0,'+(width-1)+'}['+chars+']' ),
+        REGEX_LONG = new RegExp('^[^'+chars+']+');
+    // wrap a single line of text onto one or more lines
+    return function( text, lines ){
+        var length = text.length, matched, line, trunc;
+        while( length > width ){
+            matched = REGEX_SOFT.exec(text) || REGEX_LONG.exec(text);
+            if( null == matched ){
+                //throw new Error('Wrapping error neither '+REGEX_SOFT+' nor '+REGEX_LONG+' matches '+text );
+                break;
+            }
+            line = matched[0];
+            lines.push( line );
+            // truncate and next..
+            trunc = line.length;
+            length -= trunc;
+            text = text.substr( trunc );
+            /*if( ( '' === text && 0 !== length ) || ( 0 === length && '' !== text ) ){
+                throw new Error('Truncation error '+text);
+            }*/
+        }        
+        if( 0 !== length ){
+            lines.push( text );
+        }
+        return lines;
+    };
+}
+return exports;
+}({},window,document) );
+
+CommonJS.register("$38", function(exports,window,document){ /* module: js/utils/list.js */
+/**
+ * Like Collection, but no hashmap. more like basic array with simple utils
+ * 
+ */
+
+exports.init = function(){
+    return new List();
+};
+
+function List(){
+    this.length = 0;
+}
+
+var ListPrototype = List.prototype;
+
+
+ListPrototype.push = function( value ){
+    this[ this.length++ ] = value;
+    return this;
+};
+
+ListPrototype.sort = function( callback ){
+    [].sort.call( this, callback );
+    return this;
+};
+
+ListPrototype.each = function( callback ){
+    var  i = -1, length = this.length;
+    while( ++i < length ){
+        callback( i, this[i] );
+    }
+    return this;
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$26", function(exports,window,document){ /* module: js/file/messages.js */
+/**
+ * Generic messages document containing message instances
+ */
+
+
+exports.extend = function( subClass ){
+    return subClass.prototype = new Messages;
+};
+
+
+
+function Messages(){
+    
+}
+
+var MessagesPrototype = Messages.prototype = CommonJS.require("$36","abstract.js").init(['add','load']);
+
+
+/**
+ * Row getter
+ */
+MessagesPrototype.row = function( i ){
+    return this.rows[i];
+};
+
+
+/** 
+ * Place in editable-translation mode by setting new locale
+ * This comes from original POEdit concept where source strings are not editable during translation of targets
+ */
+MessagesPrototype.lock = function( locale ){
+    return this.locale( locale || { lang:'zxx', label:'Unknown', nplurals: 1, pluraleq: 'n!=1' } );
+};
+
+
+/**
+ * Place in "template" mode, returning previously locked locale
+ * See this.lock
+ */
+MessagesPrototype.unlock = function(){
+    var loc = this.loc;
+    this.loc = null;
+    return loc;
+};
+
+
+
+/**
+ * Default target locale setter
+ */
+MessagesPrototype.locale = function( locale ){
+    if( null == locale ){
+        locale = this.loc;
+    }
+    else {
+        locale = CommonJS.require("$35","locale.js").cast(locale);
+        this.loc = locale;
+    }
+    return locale;
+};
+
+
+/**
+ * Iterator
+ * @param {Function} callback Accepting ( key, message, offset )
+ */
+MessagesPrototype.each = function( callback ){
+    this.rows.each( callback );
+    return this;
+};
+
+
+/**
+ * Get the numeric index of a message in document
+ * Requires message to implement the hash method if idx property not set to start with
+ */
+MessagesPrototype.indexOf = function( message ){
+    if( 'object' !== typeof message ){
+        message = this.get( message );  // <- allow passing of id
+    }
+    if( ! message ){
+        return -1;
+    }
+    if( null == message.idx ){
+        message.idx = this.rows.indexOf( message.hash() );
+        // TODO could this return -1 ?
+    }
+    return message.idx;
+};
+
+
+/**
+ * Default message getter fetches by ID
+ * @return Message or null of not found
+ */
+MessagesPrototype.get = function( key ){
+    return this.rows && this.rows.get( key );
+};
+
+
+/**
+ * Remove a message from the document.
+ * @return int index if item removed
+ */
+MessagesPrototype.del = function( message ){
+    var ord = this.indexOf( message );
+    if( -1 !== ord ){
+        var removed = this.rows.cut( ord, 1 );
+        if( removed && removed.length ){
+            this.length = this.rows.length;
+            // cached messages indexes are now wrong:
+            this.rows.each( function( msgid, message, index ){
+                message.idx = index;
+            } );
+            return ord;
+        }
+    }
+};
+
+
+/**
+ * Re-index a message within this document.
+ */
+MessagesPrototype.reIndex = function( message, inc ){
+    var ord = this.indexOf(message),
+        key = message.hash(),
+        clash = this.rows.indexOf(key);
+    if( clash === ord ){
+        return ord;
+    }
+    if( -1 !== clash ){
+        inc = (inc||0)+1;
+        // @todo need a better way to handle this, perhaps fire an poError event
+        message.source( 'Error, duplicate '+String(inc)+': '+message.source() );
+        return this.reIndex( message, inc );
+    }
+    // safe to re-index this message in the document
+    return this.rows.key( ord, key );
+};
+
+
+/**
+ * Sort directly on collection, modifying document order
+ * @return Messages
+ */
+MessagesPrototype.sort = function( callback ){
+    this.rows.sort( callback );
+    return this;
+};
+
+
+/**
+ * Export rows as simple list detached from rows property which maintains document order
+ * @return List
+ */
+MessagesPrototype.export = function(){
+    var r = -1,
+        original = this.rows, 
+        length = original.length,
+        exported = CommonJS.require("$38","list.js").init()
+    ;
+    while( ++r < length ){
+        exported.push( original[r] );
+    }
+    return exported;
+};
+
+
+
+
+// clean up
+
+MessagesPrototype = null;
+return exports;
+}({},window,document) );
+
+CommonJS.register("$27", function(exports,window,document){ /* module: js/file/message.js */
+/**
+ * Generic message unit object for holding single source/target translation
+ * - Primarily designed for PO, but extendable for any format
+ * - Message can contain multiple strings for the purpose of plurals
+ */
+
+
+exports.extend = function( subClass ){
+    return subClass.prototype = new Message;
+};
+
+
+/**
+ * Simple overloaded string property getter/setter
+ * @access private
+ * @return {Message|String}
+ */
+function getSetString( message, prop, value ){
+    if( null == value ){
+        return message[prop]||'';
+    }
+    message[prop] = value||'';
+    return message;
+}
+
+
+/**
+ * Don't set object references via prototype - Set them in child constructor only
+ * @property {Array} drt Dirty state
+ * 
+ * @property {array} src Source texts
+ * @property {array} msg Translation texts
+ * @property {array} lck Lock state for each form 
+ * @property {array} err Errors for each form after validation
+ * @property {array} srcF source plural rules (when embedded)
+ * @property {array} msgF target plural rules (when embedded)
+ * @property {string} ctx Message context
+ * @property {string} rf File references
+ * @property {array} tg Tag references (projects only)
+ */
+function Message(){
+    this.id = '';
+    this._id = '';
+}
+
+
+var MessagePrototype = Message.prototype;
+
+/* set single flag for plural offset, or all offsets */
+MessagePrototype.flag = function( flag, offset ){
+    var flags = this.flg || ( this.flg = [] );
+    // ok to set flag on specific offset
+    if( null != offset ){
+        flags[ offset ] = flag;
+    }
+    else {
+        // Flag all forms in message
+        var i = Math.max( flags.length, this.src.length, this.msg.length );
+        while( 0 !== i-- ){
+            flags[i] = flag;
+        }
+    }
+    return this;
+};
+
+/* test whether flagged at plural index, or at all */
+MessagePrototype.flagged = function( offset ){
+    var flags = this.flg || [];
+    // with offset passed, return specific flag integer
+    if( null != offset ){
+        return flags[offset]||0;
+    }
+    // with no offset return boolean whether any non-zero flags set
+    var i = flags.length;
+    while( 0 !== i-- ){
+        if( flags[i] ){
+            return true;
+        }
+    }
+    return false;
+};
+
+
+/* get all unique flags across all offsets */
+MessagePrototype.flags = function(){
+    var f,
+        done = {},
+        unique = [],
+        flags = this.flg || [],
+        i = flags.length
+    ;
+    while( 0 !== i-- ){
+        f = flags[i];
+        if( ! done[f] ){
+            done[f] = true;
+            unique.push(f);
+        }
+    }
+    return unique;
+};
+
+
+/* test whether given flag is set on plural index or any index */
+MessagePrototype.flaggedAs = function( flag, offset ){
+    var flags = this.flg || [];
+    // with offset passed, return specific match
+    if( null != offset ){
+        return flag === flags[offset]||0;
+    }
+    // with no offset return boolean whether any flags match
+    var i = flags.length;
+    while( 0 !== i-- ){
+        if( flags[i] === flag ){
+            return true;
+        }
+    }
+    return false;
+};
+
+
+/* test whether flagged with fuzzy */
+MessagePrototype.fuzzy = function( offset, markFuzzy ){
+    var LOCO_FLAG_FUZZY = 4, 
+        wasFuzzy = this.flaggedAs( LOCO_FLAG_FUZZY, offset )
+    ;
+    if( null != markFuzzy ){
+        this.flag( markFuzzy ? LOCO_FLAG_FUZZY : 0, offset );
+    }
+    return wasFuzzy;
+};
+
+
+/* allow multiple source plurals by default */
+MessagePrototype.source = function( sourceText, offset ){
+    if( null == sourceText ){
+        return this.src[ offset||0 ] || '';
+    }
+    this.src[ offset||0 ] = sourceText;
+    return this;
+};
+
+
+MessagePrototype.plural = function( sourceText, offset ){
+    if( null == sourceText ){
+        return this.src[ offset||1 ] || '';
+    }
+    // else set plural source
+    this.src[ offset||1 ] = sourceText||'';
+    return this;
+};
+
+/**
+ * Get message-embedded plural rules for source locale, e.g. ["One","Other"]
+ * @return Array | null
+ */
+MessagePrototype.sourceForms = function(){
+    return this.srcF;
+};
+
+/**
+ * Get message-embedded plural rules for target locale, e.g. ["Zero","=1","Other"]
+ * @return Array | null
+ */
+MessagePrototype.targetForms = function(){
+    return this.msgF;
+};
+
+
+MessagePrototype.each = function( callback ){
+    var i = -1,
+        sources = this.src,
+        targets = this.msg,
+        longest = Math.max( sources.length, targets.length );
+    while( ++i < longest ){
+        callback( i, sources[i], targets[i] );
+    }
+    return this;
+};
+
+
+MessagePrototype.count = function(){
+    return Math.max( this.src.length, this.msg.length );
+};
+
+
+MessagePrototype.pluralized = function(){
+    return this.src.length > 1 || this.msg.length > 1;
+};
+
+
+MessagePrototype.translate = function( msgstr, i ){
+    this.msg[ i||0 ] = msgstr||'';
+    return this;
+};
+
+MessagePrototype.untranslate = function( i ){
+    if( null != i ){
+        this.msg[i] = '';
+    }
+    else {
+        var m = this.msg,
+            t = m.length;
+        for( i = 0; i < t; i++ ){
+            m[i] = '';
+        }
+    }
+    return this;
+};
+
+MessagePrototype.translation = function( i ){
+    return this.msg[ i||0 ]||'';
+};
+
+MessagePrototype.errors = function( i ){
+    //return ['Test error 1 ['+i+']', 'Test error 2 ['+i+']'];
+    return this.err && this.err[ i||0 ] || [];
+};
+
+/* TODO hints and suggestions?
+MessagePrototype.hints = function( i ){
+    return this.hnt && this.hnt[ i||0 ] || [];
+};
+MessagePrototype.hint = function( i, message ){
+
+};*/
+
+MessagePrototype.translated = function( i ){
+    // test if given form is translated
+    if( null != i ){
+        return !!this.msg[i];
+    }
+    // else return whether ALL forms translated
+    // watch out for empty redundant forms
+    var m = this.msg, t = m.length;
+    for( i = 0; i < t; i++ ){
+        if( ! m[i] ){
+            return false;
+        }
+    }
+    return true;
+};
+
+MessagePrototype.untranslated = function( i ){
+    // test if given form is empty
+    if( null != i ){
+        return !this.msg[i];
+    }
+    // else return whether ALL forms are empty
+    var m = this.msg, t = m.length;
+    for( i = 0; i < t; i++ ){
+        if( m[i] ){
+            return false;
+        }
+    }
+    return true;
+};
+
+
+MessagePrototype.comment = function( text ){
+    return getSetString(this,'cmt',text);
+};
+
+MessagePrototype.notes = function( text ){
+    return getSetString(this,'xcmt',text);
+};
+
+MessagePrototype.refs = function( text ){
+    return getSetString(this,'rf',text);
+};
+
+MessagePrototype.format = function( text ){
+    return getSetString(this,'fmt',text);
+};
+
+MessagePrototype.context = function( text ){
+    return getSetString(this,'ctx',text);
+};
+
+
+
+/**
+ * Tags are not supported by default (Loco projects only
+ * @return {Array|null}
+ */
+MessagePrototype.tags = function(){
+    return this.tg;
+};
+
+
+/**
+ * Convert message block to simple string
+ * Mainly used for search indexing
+ */
+MessagePrototype.toString = MessagePrototype.toText = function(){
+    return this.src.concat( this.msg, this.id, this.ctx ).join(' ');
+};
+
+
+/**
+ * Get a weight for sorting algorithm
+ */
+MessagePrototype.weight = function(){
+    var weight = 0;
+    if( ! this.translation() ){
+        weight += 2;
+    }
+    if( this.fuzzy() ){
+        weight += 1;
+    }
+    return weight;
+};
+
+
+/**
+ * Test if another message is identical to self
+ */
+MessagePrototype.equals = function( message2 ){
+    return this === message2 || this.hash() === message2.hash();
+    // return this === message2 || ( this.source() === message2.source() && this.context() === message2.context() ); // <- PO legacy
+};
+
+
+
+/**
+ * @abstract
+ */
+MessagePrototype.hash = function(){
+   return this.id; 
+};
+
+
+/**
+ * copy source texts to targets where they exist
+ */
+MessagePrototype.normalize = function(){
+    var i = this.msg.length;
+    while( 0 !== i-- ){
+        this.msg[i] = this.src[i]||'';
+    }
+};
+
+
+/**
+ * Test if message at offset is protected from editing 
+ * (default is no, unless explicitly locked)
+ */
+MessagePrototype.disabled = function( i ){
+    var locks = this.lck || [];
+    return !! locks[i||0];
+};
+
+
+/**
+ * Protect message from being edited - cases .disable to return true
+ */
+MessagePrototype.disable = function( i ){
+    var locks = this.lck || ( this.lck = [] );
+    locks[i||0] = true;
+    return this;
+};
+
+
+
+/**
+ * Test whether message is dirty (unsaved)
+ */
+MessagePrototype.saved = function( pluralIndex ){
+    var dirtyState = this.drt;
+    if( null == dirtyState ){
+        return true;
+    } 
+    // with plural index, test specific form
+    if( null != pluralIndex ){
+        return !dirtyState[pluralIndex];
+    }
+    // else at least something might be dirty 
+    var index = dirtyState.length;
+    while( 0 !== index-- ){
+        if( dirtyState[index] ){
+            return false;
+        }
+    }
+    return true;
+};
+
+
+/**
+ * Set dirty state for a specific plural index default to singular form
+ */
+MessagePrototype.unsave = function( pluralIndex ){
+    var dirtyState = this.drt || ( this.drt = [] ) ;
+    dirtyState[ pluralIndex||0 ] = true;
+    return this;
+};
+
+
+/**
+ * Clear dirty state for a specific plural index
+ */
+MessagePrototype.save = function( pluralIndex ){
+    // without plural index, clear dirty flag for all forms
+    if( null == pluralIndex ){
+        this.drt = null;
+    }
+    // with plural index, clear flag for specific form
+    else {
+        var dirtyState = this.drt || ( this.drt = [] ) ;
+        dirtyState[pluralIndex] = false;
+    }
+    return this;
+};
+
+
+/**
+ * Check if message is the same one as passed
+ */
+MessagePrototype.is = function( other ){
+    return other && ( other === this || other.idx === this.idx );
+};
+
+
+/**
+ * Check if message is escaped for HTML
+ */
+MessagePrototype.isHTML = function( bool ){
+    if( null == bool ){
+        return this.htm||false;
+    }
+    this.htm = bool;
+};
+
+
+/**
+ * Check for common translation errors.
+ * Works, but is this the best place for this when it can't be shared with other editors, such as the management view?
+ * @return Array list of problems found in plain english
+ *
+MessagePrototype.errors = function( pluralIndex ){
+    var errors = [],
+        source = this.src[pluralIndex||0]||'',
+        target = this.msg[pluralIndex||0]||'',
+        targetLength = target.length
+    ;
+    if( targetLength ){
+        var whitespace = String('\r\n\t '),
+            lastIndex = targetLength - 1,
+            lastChar = target.charAt(lastIndex)
+        ;
+        // check if target ends in whitespace that doesn't match the source text
+        if( -1 !== whitespace.indexOf(lastChar) && lastChar !== source.charAt(lastIndex) ){
+            errors.push("Translation has trailing space, but the source text doesn't match");
+        }
+    }
+    return errors;
+};*/
+
+
+// clean up 
+MessagePrototype = null;
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$14", function(exports,window,document){ /* module: js/file/gettext/po.js */
+/**
+ * Object for holding an internal representation of a PO file.
+ */
+
+
+// hard-coded PO file headers in correct order
+function commonHeaders ( datenow ){
+    return {
+        'Project-Id-Version': 'PACKAGE VERSION',
+        'Report-Msgid-Bugs-To': '',
+        'POT-Creation-Date': datenow||'',
+        'PO-Revision-Date': datenow||'',
+        'Last-Translator': '',
+        'Language-Team': '',
+        'Language': '',
+        'Plural-Forms': '',
+        'MIME-Version': '1.0',
+        'Content-Type': 'text/plain; charset=UTF-8',
+        'Content-Transfer-Encoding': '8bit'
+    };
+}
+
+
+
+/** create a hopefully unique string to index a message by source text (msgid) and context (msgctxt)  */
+function createMessageHash( msgid, msgctxt ){
+    var id = msgid||'';
+    // separate context with unprintable character guaranteed to never be used, a null byte
+    if( msgctxt ){
+        id += '\u0000'+msgctxt;
+    }    
+    return id;            
+}
+
+
+/* create a new collection to hold rows */
+function createMessageCollection(){
+    return CommonJS.require("$24","collection.js").init();
+}
+
+
+/* debuggers */
+function stderr( e ){
+    var console = window.console;
+    console && console.error && console.error( e.message||String(e) );
+}
+
+
+exports.create = function( locale ){
+    //return ( new GettextDocument(locale) )._validate('GettextDocument');
+    return new GettextDocument(locale);
+};
+
+
+
+function createFormatter( width ){
+    return CommonJS.require("$25","format.js").create( width );
+};
+
+
+
+/**
+ * PO document object.
+ */
+function GettextDocument( locale ){
+    this.locale( locale );
+    this.length = 0;
+    this.rows = createMessageCollection();
+    this.head = commonHeaders( this.now() );
+}
+
+var GettextDocumentPrototype = CommonJS.require("$26","messages.js").extend( GettextDocument );
+
+
+/**
+ * Gettext dates look like: "YEAR-MO-DA HO:MI+ZONE"
+ * Returning in universal time to save doing getTimezoneOffset calculation, e.g. -60 = +0100
+ */
+GettextDocumentPrototype.now = function(){
+    function pad( n, i ){
+        var s = String(n);
+        while( s.length < i ){
+            s = '0'+s;
+        }
+        return s;
+    }
+    var t = new Date,
+        y = t.getUTCFullYear(),
+        m = t.getUTCMonth() + 1,
+        d = t.getUTCDate(),
+        h = t.getUTCHours(),
+        i = t.getUTCMinutes()
+    ;
+    return pad(y,4)+'-'+pad(m,2)+'-'+pad(d,2)+' '+pad(h,2)+':'+pad(i,2)+'+0000';
+};
+
+
+/**
+ * Get/set a single header value, e.g. Project-Id-Version
+ */
+GettextDocumentPrototype.header = function( key, val ){
+    var head = this.head || ( this.head = {} ); 
+    if( null == val ){
+        return this.headers()[key]||'';
+    }
+    head[key] = val||'';
+    return this;
+};
+
+
+/**
+ * Get set all headers
+ */
+GettextDocumentPrototype.headers = function( headers ){
+    var key,
+        datefield,
+        date = this.now(),
+        head = this.head || ( this.head = commonHeaders(date) ); 
+    // set all passed headers if passed
+    if( null != headers ){
+        for( key in headers ){
+            head[key] = headers[key];
+        }
+        return this;
+    }
+    // else dereference headers and merge 
+    var locale = this.locale();
+    // keep all existing headers to start, only updating changed or forced values
+    headers = {};
+    for( key in head ){
+        headers[key] = String( head[key] );
+    }
+    // force PO and locale to override
+    if( locale ){
+        headers.Language = String(locale) || 'zxx';
+        headers['Language-Team'] = locale.label || headers.Language;
+        headers['Plural-Forms'] = 'nplurals='+( locale.nplurals||'2' )+'; plural='+( locale.pluraleq||'n!=1' )+';';
+        datefield = 'PO-Revision-Date';
+    }
+    // else editing a POT
+    else {
+        headers.Language = '';
+        headers['Plural-Forms'] = 'nplurals=INTEGER; plural=EXPRESSION;';
+        headers['PO-Revision-Date'] = 'YEAR-MO-DA HO:MI+ZONE';
+        datefield = 'POT-Creation-Date';
+    }
+    // only update date headers if not already set
+    if( ! headers[datefield] ){
+        headers[datefield] = date;
+    }
+    // force Loco headers to always override
+    headers['X-Generator'] = 'Loco https://localise.biz/';
+    return headers;
+};
+
+
+/* Get plural form strings
+GettextDocumentPrototype.plurals = function(){
+    if( this.loc ){
+        var nforms = this.loc.nplurals,
+            forms = this.loc.plurals;
+        // ensure other is added to forms
+        while( forms.length < nforms ){
+            forms.push('other');
+        }
+        return forms;
+    }
+};/*
+
+
+
+/**
+ * Get a message object by msgid
+ * @return GettextMessage or null of not found
+ */
+GettextDocumentPrototype.get = function( msgid, msgctxt ){
+    var key = createMessageHash( msgid, msgctxt );
+    return this.rows.get( key );
+};
+
+
+
+/**
+ * Adds a message and indexes.
+ * throws error if message already exists
+ * @param GettextMessage || string
+ * @param string optional context when passing msgid string
+ * @return GettextMessage
+ */
+GettextDocumentPrototype.add = function( message, context ){
+    if( ! ( message instanceof GettextMessage ) ){
+        message = new GettextMessage( message );
+    }
+    if( context ){
+        message.context( context );
+    }
+    var key = message.hash();
+    if( this.rows.get(key) ){
+        console.log( key );
+        stderr('Duplicate message at index '+this.indexOf(message) );
+    }
+    else {
+        message.idx = this.rows.add( key, message );
+        this.length = this.rows.length;
+    }
+    return message;
+};
+
+
+
+/**
+ * Import assets from the format used in Loco to extract messages from any file format
+ * @return GettextDocument
+ */
+GettextDocumentPrototype.load = function( assets ){
+    var i = -1, id, item, msgid, msgstr, msgctxt, message, pindex,
+        locale = this.locale(),
+        nplurals = locale && locale.nplurals || 2,
+        plurals = [];/* 
+        normals = [],
+        fuzzies = [],
+        untrans = [];*/
+    while( ++i < assets.length ){
+        item = assets[i];
+        // create message, unless depends on a parent
+        if( null == item.parent ){
+            msgid = item.source||item.id;
+            msgstr = item.target||'',
+            msgctxt = item.context;
+            if( msgid || msgctxt ){
+                message = new GettextMessage( msgid, msgstr );
+                // optional properties and metadata
+                message._id = item._id;
+                msgctxt && message.context( msgctxt );
+                item.flag && message.flag( item.flag, 0 );
+                item.comment && message.comment( item.comment );
+                item.notes && message.notes( item.notes );
+                item.refs && message.refs( item.refs );
+                message.format( item.format );
+                item.message = message;
+                /*/ add according to POEdit style priority list
+                if( ! message.translation() ){
+                    untrans.push( message );
+                }
+                else if( message.fuzzy() ){
+                    fuzzies.push( message );
+                }
+                else{
+                    normals.push( message );
+                }*/
+               this.add( message );
+            }
+            // else first message may contain headers we can set absolutely
+            else if( 0 === i && 'object' === typeof msgstr ){
+                this.head = msgstr;
+                this.headcmt = item.comment;
+            }
+        }
+        // else remember parent until all parents are added.
+        else {
+            plurals.push( item );
+        }
+    }
+    // add plurals collected to their parent messages
+    i = -1;
+    while( ++i < plurals.length ){
+        try {
+            item = plurals[i];
+            msgid = item.source || item.id;
+            message = assets[item.parent] && assets[item.parent].message;
+            if( ! message ){
+                throw new Error('parent missing for plural '+msgid );
+            }
+            pindex = item.plural;
+            if( 1 === pindex ){
+                message.plural( msgid );
+            }
+            // ignore plurals out of locale range
+            if( pindex >= nplurals ){
+                continue;
+            }
+            item.flag && message.flag( item.flag, pindex );
+            message.translate( item.target||'', pindex );
+            // let format be inherited from plural up to singular
+            if( item.format && ! message.format() ){
+                message.format( item.format );
+            }
+        }
+        catch( e ){
+            stderr( e );
+        }
+    }
+    // sort PO before finally indexing
+    //parents.sort( function ( messageA, messageB ){
+    //    return messageB.compare( messageA );
+    //} );
+    //return this._add( untrans, fuzzies, normals );
+    return this;
+};
+
+
+/**
+ * Add grouped messages to appear as sorted
+ * @return GettextDocument
+ *
+GettextDocumentPrototype._add = function( untrans, fuzzies, normals ){
+    var j, set, all = [ untrans, fuzzies, normals ];
+    for( i = 0; i < 3; i++ ){
+        set = all[i];
+        j = -1;
+        while( ++j < set.length ){
+            try {
+                this.add( set[j] );
+            }
+            catch( e ){
+                // probably duplicate, could index as a unique error
+                stderr( e );
+            }
+        }
+    }
+    return this;
+};*/
+
+
+
+/* 
+ * Perform a msgmerge operation.
+ * @param GettextDocument POT or PO reference
+ * @return Object stats in form { added: [], deleted: [] } 
+ */
+GettextDocumentPrototype.merge = function( ref ){
+    var self = this,
+        message,
+        newdate = ref.header('POT-Creation-Date'),
+        before  = self.rows,
+        //untrans = [],
+        //fuzzies = [],
+        //normals = [],
+        added   = [],
+        deleted = []
+    ;
+    ref = ref.rows;
+    // count all messages that will be lost        
+    self.rows.each( function( key, message ){
+        if( null == ref.get(key) ){
+            deleted.push( message );
+            //console.error(' - '+key );
+            //console.log( message );
+        }
+    } );
+    // set new def as self and return stats
+    self.rows = createMessageCollection();
+    // copy all references to new definitions, keeping existing ones
+    ref.each( function( key, template ){
+        try {
+            message = before.get(key);
+            // exists, merge metadata? Just merging file references as POT is authority on source
+            if( message ){
+                message.merge(template);
+            }
+            else {
+                message = template; // <- warning, this will result in same object reference
+                added.push( message );
+                //console.info(' + '+key );
+                //console.log( message );
+            }
+            /*/ pseudo-sorting, as per this.load
+            if( ! message.translation() ){
+                untrans.push( message );
+            }
+            else if( message.fuzzy() ){
+                fuzzies.push( message );
+            }
+            else{
+                normals.push( message );
+            }*/
+           self.add( message );
+        }
+        catch( e ){
+            stderr( e );
+        }
+    } );
+    
+    // don't change document order!!!!
+    // self._add( untrans, fuzzies, normals );
+    
+    // TODO fuzzy match added/deleted items?
+    
+    // inherit new POT-Creation-Date after update
+    if( newdate ){
+        self.header('POT-Creation-Date', newdate );
+    }
+    
+    return {
+        add: added,
+        del: deleted
+    };
+};
+
+
+/**
+ * Configure PO formatter with width
+ * @return GettextDocument
+ */
+GettextDocumentPrototype.wrap = function( width ){
+    this.fmtr = createFormatter( width );
+    return this;
+};
+
+
+
+/**
+ * Convert entire document to string
+ */
+GettextDocumentPrototype.toString = function(){
+    var key, 
+        loc = this.locale(),
+        lines = [], 
+        head = [], 
+        headers = this.headers(),
+        template = ! loc,
+        nplurals = loc && loc.nplurals || 2,
+        formatter = this.fmtr || createFormatter()
+    ;
+    // override date header as export is effectively a save point
+    headers[ loc ? 'PO-Revision-Date' : 'POT-Creation-Date' ] = this.now();
+    // add header as first message with empty msgid
+    for( key in headers ){
+        head.push( key + ': ' + headers[key] );
+    }
+    head = new GettextMessage( '', head.join('\n') );
+    head.comment( this.headcmt || '' );
+    // add prepend header if POT
+    if( template ){
+        // head.comment('Loco Gettext template');
+        head.fuzzy( 0, true );
+    }
+    lines.push( head.toString() );
+    lines.push('');
+    // add remaining messages
+    this.rows.each( function( key, message ){
+        if( key ){
+            lines.push( message.cat( formatter, template, nplurals ) );
+            lines.push('');
+        }
+    } );
+    return lines.join("\n");
+};
+
+
+
+
+/**
+ * Single message entity
+ */
+function GettextMessage( msgid, msgstr ){
+    this.src = [ msgid||'' ];
+    this.msg = [ msgstr||'' ];
+}
+
+
+var GettextMessagePrototype = CommonJS.require("$27","message.js").extend( GettextMessage );
+
+
+GettextMessagePrototype.hash = function(){
+    return createMessageHash( this.source(), this.context() );
+};
+
+
+/**
+ * Set source for PO style germanic source plurals only
+ *
+GettextMessagePrototype.setSource = function( msgid, msgid_plural ){
+    this.src[0] = msgid;
+    if( null != msgid_plural ){
+        this.src[1] = msgid_plural;
+    }
+    return this;
+};*/
+
+
+/**
+ * Default message to string conversion
+ */
+GettextMessagePrototype.toString = function(){
+    return this.cat( createFormatter() );
+};
+
+
+/**
+ * Convert message block to string.
+ * Called from PO document with pre-constructed formatting object
+ */
+GettextMessagePrototype.cat = function( formatter, template, nplurals ){
+    var i, line, lines = [], comments = [], value;
+    // # translator comments (editable by translator)
+    if( value = this.cmt ){
+        lines.push( formatter.prefix( value, '# ' ) );
+    }
+    // #. extracted comments (protected)
+    if( value = this.xcmt ){
+        lines.push( formatter.prefix( value, '#. ' ) );
+    }
+    // #: references plus special loco:_id reference
+    line = this.rf;
+    if( value = this._id ){
+        line += ( line ? ' ' : '' ) + 'loco:'+value;
+    }
+    if( line && /\S/.test(line) ){
+        lines.push( formatter.refs(line) );
+    }
+    // #, flags
+    if( ! template && this.fuzzy() ){
+        lines.push('#, fuzzy');
+    }
+    // c-format / php-format etc..
+    if( value = this.fmt ){
+        lines.push('#, '+value+'-format');
+    }
+    /*else if( null != value ){
+        lines.push('#, no-c-format');
+    }*/
+    // context:
+    if( value = this.ctx ){
+        lines.push( formatter.pair('msgctxt',value) );
+    }
+    // msgid:
+    lines.push( formatter.pair( 'msgid', this.src[0] ) );
+    // singular:
+    if( null == this.src[1] ){
+        lines.push( formatter.pair( 'msgstr', template ? '' : this.msg[0] ) );
+    }
+    // plural:
+    else {
+        i = -1;
+        lines.push( formatter.pair( 'msgid_plural', this.src[1] ) );
+        // msgstr[0->i]
+        value = this.msg || ['',''];
+        nplurals = nplurals || value.length;
+        while( ++i < nplurals ){
+            lines.push( formatter.pair( 'msgstr['+i+']', template ? '' : value[i]||'' ) );
+        }
+    }
+    return lines.join("\n");
+};
+
+
+
+/**
+ * compare ordering priority with another message
+ * @return int -1 if lower priority, 0 of equal, 1 if greater priority
+ */
+GettextMessagePrototype.compare = function( message, doAlpha ){
+    var a = this.weight(), 
+        b = message.weight();
+    if( a > b ){
+        // self has larger weighting - higher priority, 
+        return 1;
+    }
+    if( a < b ){
+        // other has larger weighting - higher priority
+        return -1;
+    }
+    // weightings the same - do alpha comparision if asked
+    if( doAlpha ){
+        a = this.hash().toLowerCase();
+        b = message.hash().toLowerCase();
+        if( a < b ){
+            // self is lower alphabetically - higher priority
+            return 1;
+        }
+        if( a > b ){
+            // other lower alphabetically - higher priority
+            return -1;
+        }
+    }
+    // else perfectly equal
+    return 0;
+};
+
+
+/**
+ * Copy metadata from POT to PO
+ */
+GettextMessagePrototype.merge = function( template ){
+    var message = this;
+    message.rf = template.rf;
+    message.fmt = template.fmt;
+    message.cmt = template.cmt;
+    message.xcmt = template.xcmt;
+}
+
+
+
+
+
+// clean up.
+GettextDocumentPrototype = GettextMessagePrototype = null;
+
+
+
+
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$16", function(exports,window,document){ /* module: js/wp/refs.js */
+/**
+ * Handle display of file references in PO files and linked source code / highlighting in modal window.
+ */
+
+exports.init = function ( loco, conf ) {
+
+    var $modal;
+    
+    // http://api.jqueryui.com/dialog/
+    function getModal(){
+        return $modal || ( $modal = $('<div id="loco-po-ref"></div>').dialog( {
+            dialogClass   : 'loco-modal loco-modal-wide',
+            modal         : true,
+            autoOpen      : false,
+            closeOnEscape : true,
+            resizable     : false,
+            height        : 500
+        } ) );
+    }
+    
+
+    // load file reference modal from any element containing reference text
+    function loadRef( text ){
+        getModal().html('<div class="loco-loading"></div>').dialog('option','title','Loading..').off('dialogopen').dialog('open').on('dialogopen',onModalOpen);
+        var postdata = $.extend( { ref:text, path:conf.popath }, conf.project||{} );
+        loco.ajax.post( 'fsReference', postdata, onRefSource, onRefError );
+    }
+    
+    
+    // when reference pulling fails (e.g. file not found, or line nonexistent)
+    function onRefError( xhr, error, message ){
+        var $error = $('<p></p>').text( message );
+        getModal().dialog('close').html('').dialog('option','title','Error').append($error).dialog('open');
+    }
+    
+    
+    // display reference source when received via ajax response
+    function onRefSource( result ){
+        var code = result && result.code;
+        if( ! code ){
+            return;
+        }
+        var i = -1,
+            length = code.length,
+            $ol = $('<ol></ol>').attr('class',result.type);
+        while( ++i < length ){
+            $('<li></li>').html( code[i] ).appendTo($ol);
+        }
+        // Highlight referenced line
+        $ol.find('li').eq( result.line - 1 ).attr('class','highlighted');
+        // TODO enable highlight toggling of other lines via click/drag etc..
+        getModal().dialog('close').html('').dialog('option','title', result.path+':'+result.line).append($ol).dialog('open');
+    }
+    
+    
+    // scroll to first highlighted line of code once modal open
+    function onModalOpen( event /*, ui*/ ){
+        var div = event.target,
+            line = $(div).find('li.highlighted')[0],
+            yAbs = line && line.offsetTop || 0,         // <- position of line relative to container
+            yVis = Math.floor( div.clientHeight / 2 ),  // <- target position of line relative to view port
+            yAdj = Math.max( 0, yAbs - yVis )           // scroll required to move line to visual position
+        ;
+        div.scrollTop = yAdj;
+    }
+    
+    // expose public functions for this PO file    
+    return {
+        load: loadRef
+    }
+    
+}
+return exports;
+}({},window,document) );
+
+CommonJS.register("$29", function(exports,window,document){ /* module: js/wp/job.js */
+/**
+ * For batching translatable text
+ */
+
+exports.create = function( apiClient ){
+    return new Job(apiClient);
+};
+
+
+function Job( apiClient ){
+    this.api = apiClient;
+    this.chars = 0;
+}
+
+
+var JobPrototype = Job.prototype;
+
+
+/**
+ * Collect a PO file into one or more batches for sending to api.
+ * @param {Messages} messages PO collection
+ * @param {Boolean} includeTranslated Whether to force collection of existing translations
+ */
+JobPrototype.init = function( messages, includeTranslated ){
+    var client = this.api,
+        totalChars = 0,
+        totalItems = 0,
+        maxItemsPerBatch = 50,
+        maxCharsPerBatch = 5000,
+        indexed = {},
+        batches = [],
+        buffers = []
+    ;
+    function flushBuffer( buffer ){
+        var newBuffer = { length:0, html:buffer.html, sources:[] };
+        batches.push( newBuffer );
+        buffers[ buffer.html ? 1 : 0 ] = newBuffer;
+        return newBuffer;
+    }
+    // translatable texts will be mapped into the document by source only. No context can be sent to API
+    function registerSource( source, message ){
+        // sources with multiple contexts will all be translated once and loaded back into multiple messages. 
+        var mapped = indexed[source];
+        if( mapped ){
+            mapped.push(message);
+            return;
+        }
+        // else a new source. If we could send context this would be redundant. But we can't.
+        var length = source.length,
+            isHtml = client.isHtml(source),
+            buffer = buffers[ isHtml ? 1 : 0 ],
+            sources = buffer.sources
+        ;
+        // preempt character and item overflow
+        if( (buffer.length+length) > maxCharsPerBatch || sources.length === maxItemsPerBatch ){
+            buffer = flushBuffer(buffer);
+            sources = buffer.sources;
+        }
+        // add source to current batch and add char length
+        sources.push(source);
+        indexed[source] = [message];
+        // increment totals
+        buffer.length += length;
+        totalChars += length;
+        totalItems += 1;
+    }
+    function registerMessage( message, pluralIndex ){
+        var source = message.source(null,pluralIndex);
+        if( source && ( message.untranslated(pluralIndex) || includeTranslated ) ){
+            registerSource( source, message );
+        }
+    }
+    // start with two buffers for html, and plain text
+    flushBuffer( {html:false} );
+    flushBuffer( {html:true} );
+    messages.each( function( hash, message ) {
+        registerMessage(message,0);
+        registerMessage(message,1);
+    } );
+    buffers = null;
+    // Done
+    this.map = indexed;
+    this.chars = totalChars;
+    this.length = totalItems;
+    this.batches = batches;
+    this.locale = messages.locale();
+}
+
+
+/**
+ * Allow external code stop active job
+ */
+JobPrototype.abort = function(){
+    this.state = 'abort';
+    return this;
+};
+
+
+
+/**
+ * Dispatch current batches to API
+ * This is async, so must be interruptable. We'll do that via progress object
+ * @return {Object}
+ */
+JobPrototype.dispatch = function(){
+    // call back for each individual translated source string
+    function onEachDone( source, target ){
+        // client must check return values between each callback if we are to be able to abort mid-iteration
+        if( ! checkState() ){
+            return false;
+        }
+        // empty target indicates failure, but doesn't mean all will fail
+        if( ! target ){
+            client.stderr('Empty translation returned for: '+source );
+            return true;
+        }
+        var message, messages = indexed[source] || [], num = messages.length, i = -1, updated;
+        // source done. increment and callback for each message that uses this source
+        didSources++;
+        // we'll set translation on all plural forms where source matches.
+        function eachForm(pluralIndex,currentSource,currentTarget){
+            if( target !== currentTarget && ( source === currentSource || ( pluralIndex>1 && message.source(null,1) === source ) ) ){
+                message.translate(target,pluralIndex);
+                updated++;
+                didUpdates++;
+            }
+            return updated;
+        }
+        while( ++i < num ) {
+            message = messages[i];
+            if( message ){
+                updated = 0;
+                message.each(eachForm);
+                updated && fire('each',[message]);
+            }
+        }
+        return true;
+    }
+    // allow external code to stop us dead. e.g. pressing cancel or closing window.
+    function checkState(){
+        if( 'abort' === self.state ){
+            if( client ){
+                client.abort();
+                onComplete();
+            }
+            return false;
+        }
+        return true;
+    }
+    function dispatchNext(){
+        var batch = batches.shift(), sources;
+        if( batch ){
+            sources = batch.sources;
+            if( sources && sources.length ){
+                client.batch( sources, locale, batch.html, onEachDone ).fail(onBatchFail).always(onBatchDone);
+            }
+            else {
+                onBatchDone(); // <- empty batch for some reason
+            }
+        }
+        else {
+            onComplete();
+        }
+    }
+    // if one batch fails, all batches fail
+    function onBatchFail(){
+        self.abort();
+        onComplete();
+    }
+    function onBatchDone( /*result,status,xhr*/ ){
+        didBatches++;
+        // TODO should we add a delay between batches?
+        fire('prog',[didBatches,numBatches]);
+        checkState() && dispatchNext();
+    }
+    function onComplete(){
+        batches = null;
+        client = null;
+        fire('done');
+    }
+    function fire( type, args ){
+        var callbacks = listeners[type] || [], i = callbacks.length;
+        while( --i >= 0 ){
+            callbacks[i].apply(null,args);
+        }
+    }
+    var self = this,
+        client = self.api,
+        indexed = self.map,
+        batches = self.batches || [],
+        locale = self.locale,
+        didSources = 0,
+        didBatches = 0,
+        didUpdates = 0,
+        numSources = self.length,
+        numBatches = batches.length,
+        listeners = {done:[],each:[],prog:[]}
+    ;
+    // start with not-aborted state
+    self.state = '';
+    dispatchNext();
+    //
+    return {
+        // register done handler for end of job
+        done: function(callback){
+            listeners.done.push(callback);
+            return this;
+        },
+        // register each handler for calling back each translation
+        each: function (callback) {
+            listeners.each.push(callback);
+            return this;
+        },
+        prog: function (callback) {
+            listeners.prog.push(callback);
+            return this;
+        },
+        // get stats about what has been processes, what was actually updated and how many are left
+        stat: function () {
+            return {
+                todo: function () {
+                    return Math.max( numSources-didSources, 0 );
+                },
+                did: function () {
+                    return didSources;
+                }
+            }
+        }
+    };
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$30", function(exports,window,document){ /* module: js/wp/apis/yandex.js */
+function YandexClient(){}
+
+/**
+ * Yandex translation API client: https://tech.yandex.com/translate/
+ * @return {YandexClient} Yandex API client instance
+ */
+exports.create = function( JsonClient ){
+
+    var YandexApiPrototype = YandexClient.prototype = new JsonClient;
+
+    /**
+     * https://tech.yandex.com/translate/doc/dg/concepts/design-requirements-docpage/
+     * "Powered by Yandex.Translate" must appear above or below the translation result.
+     * @return {string}
+     */
+    YandexApiPrototype.toString = function(){
+        return 'Yandex.Translate';
+    };
+
+    YandexApiPrototype.getId = function(){
+        return 'yandex';
+    };
+
+    YandexApiPrototype.getUrl = function(){
+        return 'https://translate.yandex.com/';
+    };
+
+    YandexApiPrototype.parseError = function( obj ){
+        if( obj && obj.code && 200 !== obj.code && obj.message ){
+            return String(this)+' error '+obj.code+': '+obj.message;
+        }
+        return '';
+    };
+
+    YandexApiPrototype.batch = function( sources, locale, html, callback ){
+        var self = this, 
+            format = html?'html':'plain';
+        // not bothering to consult list of supported languages. They are all lang tag only and api reports wrongly anyway
+        // var tag = this.mapLang( locale, require('wp/apis/data/yandex.json') );
+        function callbackEach( targets ){
+            var num = sources.length, i = -1;
+            while( ++i < num ){
+                if( false === callback( sources[i], targets[i]||'', locale ) ){
+                    break;
+                }
+            }
+        }
+        return self._call( {
+            url: 'https://translate.yandex.net/api/v1.5/tr.json/translate?format='+format+'&lang='+locale.lang,
+            method: 'POST',
+            traditional: true,
+            data: {
+                key: self.key(),
+                text: sources
+            }
+        } )
+        // response is array corresponding to text array sent. here is just one at a time.
+        .done( function(obj,status,xhr) {
+            if( obj && 200 === obj.code ){
+                callbackEach( obj.text||[] );
+            }
+            else {
+                self.stderr( self.parseError(obj)||self.odderr(xhr) );
+                callbackEach([]);
+            }
+        })
+        // failure will have already raised error in parent call
+        .fail( function(){
+            callbackEach([]);
+        });
+    };
+
+
+
+    return new YandexClient;
+};
+return exports;
+}({},window,document) );
+
+CommonJS.register("$39", {
+    "zh": [
+        "zh",
+        "zh-TW"
+    ],
+    "he": [
+        "iw"
+    ],
+    "jv": [
+        "jw"
+    ]
+} ); // data: js/wp/apis/data/google.json
+
+CommonJS.register("$31", function(exports,window,document){ /* module: js/wp/apis/google.js */
+function GoogleClient(){}
+
+/**
+ * Google translate API client: https://cloud.google.com/translate/docs/
+ * @return {GoogleClient} Google API client instance
+ */
+exports.create = function( JsonClient ){
+
+
+    var GoogleClientPrototype = GoogleClient.prototype = new JsonClient;
+
+    /**
+     * https://cloud.google.com/translate/attribution#attribution_and_logos
+     * Powered by Google Translate (should actually be an image!)
+     * @return {string}
+     */
+    GoogleClientPrototype.toString = function(){
+        return 'Google Translate';
+    };
+
+    GoogleClientPrototype.getId = function(){
+        return 'google';
+    };
+    
+    GoogleClientPrototype.getUrl = function(){
+       return 'https://translate.google.com/'; 
+    };
+
+
+    GoogleClientPrototype.parseError = function( obj ){
+        if( obj.error ){
+            var messages = [], errors = obj.error.errors || [], numErrors = errors.length, i = -1;
+            while( ++i < numErrors ){
+                messages.push( errors[i].message || '' );
+            }
+            return String(this)+' error '+obj.error.code+': '+messages.join(';');
+        }
+        return '';
+    };
+
+
+    /**
+     * https://cloud.google.com/translate/docs/reference/rest/v2/translate
+     * @param {Array} sources
+     * @param {Locale} locale
+     * @param {Boolean} html Whether to declare type is HTML
+     * @param {Function} callback
+     */
+    GoogleClientPrototype.batch = function( sources, locale, html, callback ){
+        // https://cloud.google.com/translate/docs/basic/setup-basic
+        var self = this,
+            format = html ? 'html' : 'text',
+            tag = self.mapLang( locale, CommonJS.require("$39","google.json") )
+        ;
+        // response looks like {data:{translations:[{translatedText}]}}
+        function callbackEach( translations ){
+            var num = sources.length, i = -1, translation;
+            while( ++i < num ){
+                translation = translations[i]||{};
+                if( false === callback( sources[i], translation.translatedText||'', locale ) ){
+                    break;
+                }
+            }
+        }
+        return self._call( {
+            url:'https://translation.googleapis.com/language/translate/v2?source=en&target='+tag+'&format='+format,
+            method: 'POST',
+            traditional: true,
+            data: {
+                key: self.key(),
+                q: sources
+            }
+        } )
+        .done( function(obj) {
+            if( obj.data ){
+                callbackEach( obj.data.translations||[] );
+            }
+            else {
+                self.stderr( self.parseError(obj)||self.odderr(xhr) );
+                callbackEach([]);
+            }
+        })
+        // failure will have already raised error in parent call
+        .fail( function(){
+            callbackEach([]);
+        });
+    };
+
+    
+    
+    return new GoogleClient;
+};
+return exports;
+}({},window,document) );
+
+CommonJS.register("$40", {
+    "pt": [
+        "pt",
+        "pt-pt"
+    ],
+    "sr": [
+        "sr-Cyrl",
+        "sr-Latn"
+    ],
+    "sr_RS": [
+        "sr-Cyrl"
+    ],
+    "tlh": [
+        "tlh-Latn",
+        "tlh-Piqd"
+    ],
+    "zh": [
+        "zh-Hans",
+        "zh-Hant"
+    ],
+    "zh_CN": [
+        "zh-Hans"
+    ],
+    "zh_HK": [
+        "zh-Hans"
+    ],
+    "zh_SG": [
+        "zh-Hans"
+    ],
+    "zh_TW": [
+        "zh-Hant"
+    ]
+} ); // data: js/wp/apis/data/ms.json
+
+CommonJS.register("$32", function(exports,window,document){ /* module: js/wp/apis/ms.js */
+function MicrosoftClient(){}
+
+/**
+ * Microsoft Translator Text API
+ * https://azure.microsoft.com/en-us/services/cognitive-services/translator-text-api/
+ * 
+ * API key nightmare:
+ * https://docs.microsoft.com/en-gb/azure/cognitive-services/translator/reference/v3-0-reference#authentication
+ * https://docs.microsoft.com/en-gb/azure/cognitive-services/cognitive-services-apis-create-account
+ * 
+ * TODO list of languages; API key not required:
+ * https://api.cognitive.microsofttranslator.com/languages?api-version=3%2E0
+
+ * @return {MicrosoftClient} Google API client instance
+ */
+exports.create = function( JsonClient ){
+
+    var MicrosoftClientPrototype = MicrosoftClient.prototype = new JsonClient;
+
+    /**
+     * https://www.microsoft.com/en-us/translator/business/attribution/
+     * Attribution not required apparently, but must adhere to guidelines when present and use logo
+     * @return {string}
+     */
+    MicrosoftClientPrototype.toString = function(){
+        return 'Microsoft Translator text API';
+    };
+
+    MicrosoftClientPrototype.getId = function(){
+        return 'microsoft';
+    };
+    
+    MicrosoftClientPrototype.getUrl = function(){
+        return 'https://aka.ms/MicrosoftTranslatorAttribution';
+    };
+
+    MicrosoftClientPrototype.parseError = function( obj ){
+        return obj && obj.error ? obj.error.message : '';
+    };
+
+
+    /**
+     * @param {Array} sources
+     * @param {Locale} locale
+     * @param {Boolean} html Whether to declare type is HTML
+     * @param {Function} callback
+     */
+    MicrosoftClientPrototype.batch = function( sources, locale, html, callback ){
+        var self = this,
+            json = [],
+            num = sources.length, i = -1,
+            format = html ? 'html' : 'plain',
+            tag = self.mapLang( locale, CommonJS.require("$40","ms.json") )
+        ;
+        // input text looks like '[{"text":"Hello"},{"text":"Goodbye"}]',
+        while( ++i < num ){
+            json.push( {text:sources[i]} );
+        }
+        function callbackEach( results ){
+            var i = -1, result, translations, translation;
+            while( ++i < num ){
+                result = results[i]||{};
+                translations = result.translations || [];
+                translation = translations[0]||{};
+                if( false === callback( sources[i], translation.text||'', locale ) ){
+                    break;
+                }
+            }
+        }
+        // https://docs.microsoft.com/en-gb/azure/cognitive-services/translator/reference/v3-0-translate
+        return self._call({
+            url:'https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=en&to='+tag+'&textType='+format,
+            method: 'POST',
+            data: JSON.stringify(json),
+            headers: {
+                'Content-Type': 'application/json; charset=UTF-8',
+                'Ocp-Apim-Subscription-Key': this.key(),
+                'Ocp-Apim-Subscription-Region': self.param('region') || 'global'
+            }
+        })
+        // Response looks like [{"translations":[{"text":"...","to":"..."}]}]
+        // where top-level array refers to input array.. no idea why there are potentially multiple results, but we will use first
+       .done( function(obj) {
+           if( obj && obj.length ){
+               callbackEach(obj);
+           }
+           else {
+               self.stderr( self.parseError(obj)||self.odderr(xhr) );
+               callbackEach([]);
+           }
+        })
+        // failure will have already raised error in parent call
+        .fail( function(){
+            callbackEach([]);
+        });
+    };
+    
+    
+
+    return new MicrosoftClient;
+};
+return exports;
+}({},window,document) );
+
+CommonJS.register("$33", function(exports,window,document){ /* module: js/wp/apis/custom.js */
+function CustomClient(){}
+
+/**
+ * Custom translation API calls WordPress Ajax service with Loco hooks
+ * @return {CustomClient} CustomClient API client instance
+ */
+
+exports.create = function(JsonClient){
+
+    var CustomClientPrototype = CustomClient.prototype = new JsonClient;
+
+    CustomClientPrototype.batch = function( sources, locale, html, callback ){
+        var locoAjax = window.locoScope.ajax,
+            postData = {
+                hook: this.getId(),
+                type: html?'html':'text',
+                locale:String(locale),
+                sources:sources
+            },
+            deferred = $.Deferred()
+        ;
+        // response is a simple array in root of data object passed from ajax lib
+        function callbackEach( translations ){
+            var num = sources.length, i = -1;
+            while( ++i < num ){
+                if( false === callback( sources[i], translations[i], locale ) ){
+                    break;
+                }
+            }
+        }
+        function onSuccess(obj){
+            callbackEach( obj && obj.targets || [] );
+            deferred.resolve();
+        }
+        function onFailure(){
+            callbackEach([]);
+            deferred.reject();  
+        }
+        // call our internal api hook on the back end
+        this.abortable( locoAjax.post('apis',postData,onSuccess,onFailure) );
+        // not returning jqXHR because successful responses may need to fail.
+        // https://stackoverflow.com/questions/61821026/how-to-trigger-fail-handlers-on-an-ajax-promise
+        return deferred.promise();
+    };
+
+    return new CustomClient;
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$17", function(exports,window,document){ /* module: js/wp/apis.js */
+/**
+ * Base class for calling external APIs
+ * 
+ * @method {String} translate
+ * @property {String} k API key for authenticated requests
+ */
+function JsonClient(){
+    this.inf = {};
+}
+
+var JsonClientPrototype = JsonClient.prototype;
+
+/**
+ * Most sane APIs will have just a simple API key
+ * @param {Object} info api credentials
+ */
+JsonClientPrototype.init = function( info ){
+    this.inf = info || {};
+};
+
+JsonClientPrototype.param = function(k){
+    return this.inf[k] || '';
+};
+
+JsonClientPrototype.key = function(){
+    return this.param('key');
+};
+
+JsonClientPrototype.getId = function(){
+    return this.param('id') || 'none';
+};
+
+JsonClientPrototype.getUrl = function(){
+    return this.param('url')||'#';
+};
+
+JsonClientPrototype.toString = function(){
+    return this.param('name') || this.getId();
+}
+
+JsonClientPrototype.stderr = function( message ){
+    var loco = window.locoScope || {},
+        errs = loco.notices || window.console
+    ;
+    errs && errs.error && errs.error( String(message) );
+};
+
+JsonClientPrototype.odderr = function( /*xhr.status*/ ){
+    return String(this)+': Unknown failure';
+};
+
+JsonClientPrototype.parseError = function( obj ){
+    return '';
+};
+
+JsonClientPrototype.mapLang = function( locale, tree ){
+    var wpTag = String(locale),
+        lang = locale.lang,
+        list = tree[wpTag] || tree[lang] || [],
+        length = list.length
+    ;
+    // if api doesn't support this language, it will probably fail in its own way, so just return language
+    // actually turns out that languages work even when the API's say they're not supported. e.g. Yandex supports hebrew but doesn't say so.
+    if( 0 === length ){
+        return lang;
+    }
+    // Find best match. Actually looking for exact match
+    if( 1 < length ){
+        wpTag = wpTag.toLowerCase();
+        var i = -1, apiTag;
+        while( ++i < length ){
+            apiTag = list[i];
+            if( apiTag.toLowerCase().replace('-','_') === wpTag ){
+                return apiTag;
+            }
+        }
+    }
+    // if no exact match in list, use first which should be less specific. i.e. pt-BR should use pt not pt-PT
+    return list[0];
+};
+
+
+/**
+ * Translate single source, with auto-detected type
+ * @param {String} source text
+ * @param {Locale} locale
+ * @param {Function} callback
+ * @return {Object} promise
+ */
+JsonClientPrototype.translate = function( source, locale, callback ){
+    return this.batch( [source], locale, this.isHtml(source), callback );
+};
+
+
+/**
+ * @abstract
+ * @return {Object}
+ */
+JsonClientPrototype.batch = function(){
+    // API child classes must implement batch()
+    return {always:function(x){x()}};
+};
+
+
+
+/**
+ * Virtually no point abstracting calls as apis differ too widely.
+ * Also no need to use Jsonp as all active APIs support CORS
+ * @param {Object} options
+ * @return {Object} jqXHR
+ */
+JsonClientPrototype._call = function(options) {
+    var self = this;
+    options.cache = true;
+    options.dataType = 'json';
+    options.error = function (xhr, error, message) {
+        // may be possible to parse error response as json
+        try {
+            var json = xhr.responseText,
+                blob = json && $.parseJSON(json)
+            ;
+            message = blob && self.parseError(blob) || message;
+        }
+        catch( e ){}
+        self.stderr( String(self)+': ' + message );
+    };
+    return self.abortable( $.ajax(options) );
+};
+
+
+/**
+ * This is split out so client can use the abort logic without going via this._call 
+ */
+JsonClientPrototype.abortable = function( jqXHR ){
+    var self = this;
+    // always unset current thread when done
+    jqXHR.always( function(){
+        if( self.$r === jqXHR ){
+            self.$r = null;
+        }
+    } );
+    self.$r = jqXHR;
+    return jqXHR;
+}
+
+
+
+/**
+ * Abort current transaction if possible
+ */
+JsonClientPrototype.abort = function(){
+    var xhr = this.$r;
+    if( xhr ){
+        xhr.abort();
+    }
+}
+
+
+
+/**
+ * Detect HTML data type
+ * @param {String} source
+ * @return {Boolean} true if HTML detected
+ */
+JsonClientPrototype.isHtml = function( source ){
+    return getHtmlSniffer().sniff(source);
+};
+
+
+/**
+ * Create a new batching job from this client.
+ * @return {Job}
+ */
+JsonClientPrototype.createJob = function(){
+    return CommonJS.require("$29","job.js").create(this);
+};
+
+
+/*
+ * @param {Object} info API credentials
+ * @return {JsonClient}
+ */
+exports.create = function( info ){
+    var client, id = info.id;
+    // yandex is easy to identify with /^trnsl\.1\.1/
+    if( 'yandex' === id ){
+        client = CommonJS.require("$30","yandex.js").create(JsonClient);
+    }
+    // not sure exactly how long a google api key is. Mine is /^[_0-9a-zA-Z]{39}/
+    else if( 'google' === id ){
+        client = CommonJS.require("$31","google.js").create(JsonClient);
+    }
+    else if( 'microsoft' === id ){
+        client = CommonJS.require("$32","ms.js").create(JsonClient);
+    }
+    /*else if( 'debug' === id ){
+        client = require('wp/apis/debug').create(JsonClient);
+    }*/
+    else {
+        client = CommonJS.require("$33","custom.js").create(JsonClient);
+    }
+    client.init(info);
+    return client;
+};
+
+
+/**
+ * Pull suggestions from multiple APIs and call back as each one is done
+ */
+exports.suggest = function( apis, source, locale, callback ){
+    var i, api, numApis = apis.length;
+    /* @var {JsonClient} api */
+    for( i = 0; i < numApis; i++ ){
+        api = apis[i];
+        api.translate( source, locale, callback );
+    }
+};
+
+
+
+var htmlSniffer;
+function getHtmlSniffer(){
+    return htmlSniffer || ( htmlSniffer = createHtmlSniffer() );
+}
+function createHtmlSniffer(){
+    var el = document.createElement('p'),
+        ENT_REGEX = /&(#\d+|#x[0-9a-f]|[a-z]+);/i,
+        TAG_REGEX = /<[a-z]+\s/i,
+        lastSource,
+        lastResult
+    ;
+    return { sniff: function( source ) {
+        if( source === lastSource ){
+            return lastResult;
+        }
+        lastSource = source;
+        // Sniffing HTML via regex, but only returning true if setting innerHTML produces innerText differing from source
+        if( ENT_REGEX.test(source) || TAG_REGEX.test(source) ){
+            el.innerHTML = source;
+            if( el.textContent !== source ){
+                // console.log('Detected as HTML: '+source);
+                lastResult = true;
+                return true;
+            }
+        }
+        lastResult = false;
+        return false;
+    } }
+}
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$18", function(exports,window,document){ /* module: js/wp/fsconn.js */
+/**
+ * WordPress file system connection
+ * - Takes a form with a file path field
+ * - Gets and displays UI from server
+ * - Posts authorization
+ * - populates and unlocks form.
+ */
+
+
+/**
+ * @param HTMLFormElement the original form containing "path" and "auth" fields. (use setForm after to receive creds into a different form)
+ */
+exports.init = function( elForm ){
+
+
+    var creds,
+        callback,
+        elHook = elForm,
+        method = null,
+        manual = false,
+        connected = false,
+        loco = window.locoScope,
+        path = elForm.path.value,
+        auth = elForm.auth.value,
+        nonce = elForm['loco-nonce'].value,
+        FIELD_CONNECTED = 'connection_type',
+        $button = $(elHook).find('button.button-primary'),
+        elWarning = document.getElementById( elHook.id+'-warn' ),
+        connectorVisible = false,
+        fsWarningVisible = false,
+        fsWarning = '',
+        $prompt;
+   
+   
+    /**
+     * http://api.jqueryui.com/dialog/
+     */
+    function getModal(){
+        if( ! $prompt ){
+            $button.click( clickOpenPrompt );
+            // we want top: 15% and max-height: 85% but no way to set it via jquery ui
+            $prompt = $('<div id="loco-fs-creds"></div>').dialog( {
+                'dialogClass'   : 'request-filesystem-credentials-dialog loco-modal',
+                'minWidth'      : 580,
+                'modal'         : true,
+                'autoOpen'      : false,
+                'closeOnEscape' : true
+            } )
+            // enable ssh-keys show/hide, as per WordPress updates.js
+            .on( 'change', 'input[name="connection_type"]', function(){
+                if( this.checked ){
+                    $('#ssh-keys').toggleClass( 'hidden', 'ssh' !== $(this).val() );
+                }
+            } );
+        }
+        return $prompt;
+    }
+    
+    
+    function showConnector(){
+        if( ! connectorVisible ){
+            showElement( $(elHook) );
+            connectorVisible = true;
+        }
+        // don't show warning at the same time as connect dialogue
+        hideWarning();
+    }
+    
+    function hideConnector(){
+        if( connectorVisible ){
+            hideElement( $(elHook) );
+            connectorVisible = false;
+        }
+        // show warning once initialized
+        if( connected && fsWarning ){
+            showWarning(fsWarning);
+        }
+        else {
+            hideWarning();
+        }
+    }
+
+
+    function showWarning( message ){
+        var $el = $(elWarning);
+        $el.find('span.loco-msg').text(message);
+        if( ! fsWarningVisible ){
+            showElement($el);
+            fsWarningVisible = true;
+        }
+    }
+
+    function hideWarning(){
+        if( fsWarningVisible ){
+            hideElement( $(elWarning) );
+            fsWarningVisible = false;
+        }
+    }
+
+
+    function hideElement($el){
+        $el.slideUp(250).fadeOut(250, function(){ $(this).addClass('jshide') } );
+    }
+
+    function showElement($el){
+        $el.removeClass('jshide').hide().fadeIn(500);
+    }
+
+
+    
+    
+    function redraw(){  
+        // enable primary form when connected
+        if( connected ){
+            if( $prompt ){
+                $prompt.dialog('close');
+            }
+            hideConnector();
+            $(elForm).find('button[type="submit"]').attr('disabled',false);
+            $(window).triggerHandler('resize');
+            callback && callback(true);
+            return true;
+        }
+        // else ensure connect dialogue is visible when there is a path
+        if( path && $prompt ){
+            showConnector();
+        }
+        // else we've not got a path to query yet or back end has not provided dialogue
+        else {
+            hideConnector();
+        }
+        disable();
+        return false;
+    }
+   
+
+
+    /**
+     * Lock parent form (file system requires auth)
+     */
+    function disable(){
+        $(elForm).find('input[type="submit"]').attr('disabled',true);
+        callback && callback( false );
+    }
+
+
+
+    function populateForm( form ){
+        var name, value, source = creds||{};
+        for( name in source ){
+        	if( source.hasOwnProperty(name) ){
+	            value = source[name];
+	            if( form[name] ){
+	                form[name].value = value;
+	            }
+	            else {
+	                $('<input type="hidden" />').attr('name',name).appendTo(form).val(value);
+	            }
+	        }
+        }
+    }
+    
+    function populateObject( obj ){
+        var name, source = creds||{};
+        for( name in source ){
+            if( source.hasOwnProperty(name) ){
+                obj[name] = source[name];
+            }
+        }
+        return obj;
+    }
+
+    
+    function onCredentialsSubmit( event ){
+        event.preventDefault();
+        var form = event.target,
+            data = $(form).serializeArray()
+        ;
+        connect( data );
+        manual = true;
+        return false;
+    }
+
+
+    function clickCancelPrompt( event ){
+        event.preventDefault();
+        $prompt.dialog('close');
+        return false;
+    }
+
+
+    function clickOpenPrompt( event ){
+        event.preventDefault();
+        $prompt.dialog('open').find('input[name="connection_type"]').change();
+        return false;
+    }
+
+
+    function onSuccess( r ){
+        connected = r.authed;
+        method = r.method;
+        // supporting texts whether successfull or not
+        $(elHook).find('span.loco-msg').text( r.message||'Something went wrong.' );
+        fsWarning = r.warning||'';
+        // regardless of connection status, we may have to show a warning notice
+        if( r.notice ){
+            loco.notices.info( r.notice );
+        }
+        // populate form with credentials once known to work
+        if( connected ){
+            if( 'direct' !== method ){
+                creds = r.creds;
+                populateForm( elForm );
+                // show success message, but only if auth was done via form submit
+                if( manual && r.success ){
+                    loco.notices.success( r.success );
+                }
+            }
+            redraw();
+            return;
+        }
+        // else failure
+        // may be a permanent failure if reason given
+        if( r.reason ){
+            loco.notices.info( r.reason );
+            return;
+        }
+        // back end should always provide a prompt when no auth and no error
+        var html = r.prompt;
+        if( ! html ) {
+            loco.notices.error("Server didn't return credentials, nor a prompt for credentials");
+            return;
+        }
+        // rebuild prompt modal and make some style tweaks
+        var modal = getModal();
+        modal.html(html).find('form').submit( onCredentialsSubmit );
+        modal.dialog('option','title', modal.find('h2').remove().text() );
+        modal.find('button.cancel-button').show().click( clickCancelPrompt );//.before('<a>Help?</a>');
+        modal.find('input[type="submit"]').addClass('button-primary');
+        redraw();
+        $(window).triggerHandler('resize');
+    }
+
+
+    function onError(){
+        redraw();
+    }
+
+    function connect( post ){
+        manual = false;
+        loco.ajax
+            .setNonce('fsConnect',nonce)
+            .post( 'fsConnect', post, onSuccess, onError );
+        return post;
+    }
+
+
+   // ensure warning isn't cleared when connection success appears.
+   loco.notices.convert(elWarning).stick();   
+   
+
+    // if credentials are automatic (saved in session etc..) we will have connection_type field
+    if( elForm[FIELD_CONNECTED] ){
+        creds = {};
+        creds[FIELD_CONNECTED] = elForm[FIELD_CONNECTED].value;
+        connected = true;
+    }
+    // else do initial connect request
+    else if( path && auth ){
+        connect( {path:path,auth:auth} );
+    }
+
+    redraw();
+
+
+    return {
+        // add credentials to a given object or form
+        applyCreds: function ( obj ){
+            if( obj.nodeType ){
+                populateForm( obj );
+            }
+            else {
+                populateObject( obj );
+            }
+            return this;
+        },
+        // set form to receive credential population on response
+        // ideally before response comes back, but applies anyway
+        setForm: function ( form ){
+            elForm = form;
+            redraw();
+            populateForm(form);
+            return this;
+        },
+        // force auth again from current form
+        // ensures current credentials posted, but with fresh path to authenticate
+        connect: function(){
+        	path = elForm.path.value;
+        	auth = elForm.auth.value;
+            connect( $(elForm).serializeArray() );
+            return this;
+        },
+        // listen for authentication results
+        // currently only supports one listener
+        listen: function( listener ){
+            callback = listener;
+            connected && listener(true);
+            return this;
+        }
+    };
+    
+};
+
+return exports;
+}({},window,document) );
+
+CommonJS.register("$19", function(exports,window,document){ /* module: js/wp/tables.js */
+/**
+ * Table sorting and filtering
+ */
+
+function sortItems( items, key, type, desc ){
+    var comparitor;
+    if( 'n' === type ){
+        comparitor = createNumericSortComparison(key);
+    }
+    else {
+        comparitor = createStringSortComparison(key);
+    }
+    if( desc ){
+        comparitor = reverseSortComparison(comparitor);
+    }
+    return createSortFunction( [].sort, [comparitor] )( items );
+}
+
+
+function createSortFunction( func, args ){
+    return function( list ){
+        func.apply( list, args );
+        return list;
+    };
+}
+
+
+function createNumericSortComparison( key ){
+    return function( a, b ){
+        var x = a && a[key]||0, 
+            y = b && b[key]||0;
+        if( x === y ){
+            return 0;
+        }
+        return x > y  ? 1 : -1;
+    };
+}
+
+
+function createStringSortComparison( key ){
+    return function( a, b ){
+        return ( a && a[key] || '' ).localeCompare( b && b[key] || '' );
+    };
+}
+
+
+function reverseSortComparison( sort ){
+    return function( a, b ){
+        return -1 * sort(a,b);
+    };
+}
+
+
+
+
+function createSortableTable( table ){    
+    // index table data so rows can be ordered and replaced
+    // TODO ideally need to be able to re-index table if cell data changes (not currently required)
+    // TODO also need to be careful if any HTML has events attached - can jQuery maintain them between DOM removal
+    // TODO saving order in local storage against table id attribute
+    var rows = [],
+        cols = [],
+        colId = 0,
+        visible, // <- currently renderable set of rows
+        sorted,  // <- currently sorted column
+        sortId,  // <- currently sorting on column index
+        body = table.getElementsByTagName('tbody')[0],
+        head = table.getElementsByTagName('thead')[0],
+        index = CommonJS.require("$9","fulltext.js").init()
+    ;
+    // quit if table has no head or body
+    if( ! head || ! body ){
+        return;
+    }
+    // redraw all table rows from passed set of rows
+    function redrawRows( rows ){
+        var i = -1, t = rows.length;
+        // graceful redraw removes rows (cos IE) and re-appends each row in order
+        $('tr',body).remove();
+        while( ++i < t ){
+            body.appendChild( rows[i].$ );
+        }
+    }
+    // sort table on a given column and re-insert rows
+    function sortByColumn( colId ){
+        var col = cols[colId],
+            type = col.type,
+            desc = ! ( col.desc = ! col.desc );
+        // console.debug('Sorting on ['+colId+'] '+(desc?'desc':'asc')+', type is '+type );
+        visible = sortItems( visible||rows.slice(0), colId, type, desc );
+        redrawRows( visible );
+        // set class to show currently sorted column and its direction
+        sorted && sorted.removeClass('loco-desc loco-asc');
+        sorted = $(col.$).addClass(desc?'loco-desc':'loco-asc').removeClass(desc?'loco-asc':'loco-desc');
+        sortId = colId;
+    }
+    // filter table on all columns given a search string
+    function filterRows( value ){
+        if( value ){
+            visible = index.find( value, rows );
+        }
+        else {
+            visible = rows.slice(0);
+        }
+        if( sortId ){
+            var col = cols[sortId];
+            visible = sortItems( visible, sortId, col.type, col.desc );
+        }
+        redrawRows( visible );        
+    }
+    // establish keys and their datatype
+    $('th',head).each( function( realId, th ){
+        var type = th.getAttribute('data-sort-type');
+        if( type ){
+            // dereference offset and fix for colspans
+            realId = colId;
+            // linkify header for sorting click
+            $(th).addClass('loco-sort').click( function(event){
+                event.preventDefault();
+                sortByColumn( realId );
+                return false;
+            } );
+            // register key (offset) and data type (sort method)
+            cols[colId] = { $:th, type:type };
+        }
+        // irritatingly colspan will throw off our indexes
+        // ok as long as we can match to data cells
+        if( th.hasAttribute('colspan') ){
+            colId += Number( th.getAttribute('colspan') );
+        }
+        else {
+            colId ++;
+        }
+    } );
+    // index all rows such that every item contains key, type and value
+    $('tr',body).each( function( rowId, tr ){
+        var td, colId,
+            value,
+            texts = [],
+            fields = { _: rowId, $: tr },
+            cells = tr.getElementsByTagName('td');
+        // add each column offset value as a comparable field
+        for( colId in cols ){
+            td = cells[colId];
+            // index raw cell value
+            value = td.textContent.replace(/(^\s+|\s+$)/g,'');
+            value && texts.push( value );
+            // sort on special value if defined
+            if( td.hasAttribute('data-sort-value') ){
+                value = td.getAttribute('data-sort-value');
+            }
+            // cast value if needed
+            switch( cols[colId].type ){
+                case 'n':
+                value = Number(value);
+                break;
+            }
+            fields[colId] = value;
+        }
+        rows[rowId] = fields;
+        index.index( rowId, texts );
+        // data cells had better not have colspans :-/
+        // if( td.hasAttribute('colspan') ){ .........
+    } );
+    // enable filter form if it exists in parent element 
+    var $input = $('form.loco-filter input[type="text"]', table.parentNode );
+    if( $input.length ){
+        var elText = $input[0],
+            $form  = $(elText.form)
+        ;
+        if( rows.length > 1 ){
+            CommonJS.require("$10","LocoTextListener.js").listen( elText, filterRows );
+        }
+        else {
+           $form.hide();
+        }
+        $form.on( 'submit', function( event ){
+            event.preventDefault();
+            return false;
+        } );
+    }
+}
+
+
+
+
+// expose utilities
+
+exports.init = createSortableTable;
+
+return exports;
+}({},window,document) );
+
+/**
+ * Expose most common JS modules to a global "locoScope" object
+ * Not using "loco" because it conflicts with element id.
+ * 
+ * This must load before page-specific script, but after translations.
+ */
+
+var loco = window.locoScope || ( window.locoScope = {} ),   
+    conf = window.locoConf  || ( window.locoConf = {} ),
+    l10n = CommonJS.require("$1","t.js").init(),
+    lang = conf.wplang
+;
+
+// polyfills and wp aliases
+CommonJS.require("$2","html.js");
+CommonJS.require("$3","number.js");
+CommonJS.require("$4","array.js");
+
+
+// expose translation access
+loco.l10n = l10n;
+l10n.load( conf.wpl10n );
+lang && l10n.pluraleq( lang.pluraleq );
+
+// formatting utilities
+loco.string = CommonJS.require("$5","string.js");
+
+// admin notices
+loco.notices = CommonJS.require("$6","notices.js").init( l10n );
+
+// ajax functions
+loco.ajax = CommonJS.require("$7","ajax.js").init( conf ).localise( l10n );
+
+// locale object casting
+loco.locale = CommonJS.require("$8","wplocale.js");
+
+// full text indexer
+loco.fulltext = CommonJS.require("$9","fulltext.js");
+
+// text field listener
+loco.watchtext = CommonJS.require("$10","LocoTextListener.js").listen;
+
+// tipsy tooltip
+loco.tooltip = CommonJS.require("$11","tooltip.js");
+
+// gettext utils
+loco.po = {
+    ed: CommonJS.require("$12","poedit.js"),
+    kbd: CommonJS.require("$13","hotkeys.js"),
+    init: CommonJS.require("$14","po.js").create,
+    ace: CommonJS.require("$15","ace.js").strf('php'),
+    ref: CommonJS.require("$16","refs.js")
+};
+
+// external apis (incl. machine translation providers)
+loco.apis = CommonJS.require("$17","apis.js");
+
+// file system connection
+loco.fs = CommonJS.require("$18","fsconn.js");
+
+// make all list tables sortable
+$('#loco.wrap table.wp-list-table').each( function( i, table ){
+    CommonJS.require("$19","tables.js").init( table );
+} );
+
+
+/*/ set page title if configured?
+if( conf.title ){
+    // format of actual title would be "%1$s &lsaquo; %2$s &#8212; WordPress" except it could be translated!
+    document.title = conf.title+' ‹ '+document.title;
+}*/
+
+} )( window, document, window.jQuery );

@@ -5,9 +5,11 @@
 
 $this->extend('../layout');
 /* @var Loco_data_Preferences $opts */
+$help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/settings');
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">
+        <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
         <table class="form-table">
             <tbody>
                 <tr>
@@ -27,6 +29,6 @@ $this->extend('../layout');
         </table>
         <p class="submit">
             <input type="submit" class="button-primary" value="<?php esc_html_e('Save settings','loco-translate')?>" />
-            <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
+            <a class="button button-link" href="<?php self::e($help)?>#user" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
         </p>
     </form>
