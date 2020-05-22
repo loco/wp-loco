@@ -28,6 +28,10 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
          * xgettext: javascript-format */
         _n("1 obsolete string removed","%s obsolete strings removed",0,'loco-translate');
 
+        /* Summary of existing translations where the source text has changed slightly
+         * xgettext: javascript-format */
+        _n("1 string marked Fuzzy","%s strings marked Fuzzy",0,'loco-translate');
+
         /* Message appears after sync operation when nothing has changed. %s refers to a POT file.
          * xgettext: javascript-format */
         __("Already up to date with %s",'loco-translate');

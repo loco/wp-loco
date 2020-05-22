@@ -1,4 +1,4 @@
-=== Plugin Name ===
+=== Loco Translate ===
 Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
@@ -68,11 +68,13 @@ More information on using the plugin is [available here](https://localise.biz/wo
 
 == Frequently Asked Questions ==
 
-= How do I use it? = 
+Please visit the [FAQs page](https://localise.biz/wordpress/plugin/faqs) on our website for the most common issues.
+
+= How do I use Loco Translate? = 
 
 Try our [Guides and Tutorials](https://localise.biz/wordpress/plugin#guides).
 
-= How do I get help? =
+= How do I get more help? =
 
 If you have a problem using Loco Translate, please try our [help pages](https://localise.biz/wordpress/plugin).
 There's a lot of information there to help you understand how it works and the most common pitfalls to avoid.
@@ -100,7 +102,10 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.4.0
 * Added support for third party translation APIs
-* Added file references to editor when in code view
+* Added file references to editor source pane in code view
+* Added fuzzy matching during editor Sync operation
+* Style changes including rearrangement of editor buttons
+* Elevated warnings when scripts are tampered with
 * Removed remnants of legacy version 1.x
 
 = 2.3.4 =
