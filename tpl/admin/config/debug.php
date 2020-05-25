@@ -52,7 +52,21 @@ $this->extend('../layout');
                 <dd class="jsonly" id="loco-ajax-check"><span class="inline-spinner"> </span></dd>
             </dl>
         </div>
-    
+
+        <div class="panel" id="loco-apis">
+            <h3>
+                Translation APIs
+                <a href="#loco-apis" class="loco-anchor" aria-hidden="true"></a>
+            </h3>
+            <dl><?php
+                /* @var Loco_mvc_ViewParams[] $apis */
+                foreach( $apis as $api ):?> 
+                <dt><?php $api->e('name')?>:</dt>
+                <dd class="jsonly" id="loco-api-<?php $api->e('id')?>"><span class="inline-spinner"> </span></dd><?php
+                endforeach?> 
+            </dl>
+        </div>
+
         <div class="panel" id="loco-sizes">
             <h3>
                 Limits
