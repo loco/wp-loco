@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.0-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-22 12:18+0000\n"
+"POT-Creation-Date: 2020-05-25 11:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -206,17 +206,6 @@ msgstr ""
 
 #: tpl/admin/config/settings.php:159
 msgid "Allow full access to these roles"
-msgstr ""
-
-#. Message appears after sync operation when nothing has changed. %s refers to a POT file.
-#: src/js/Strings.php:37
-#, javascript-format
-msgid "Already up to date with %s"
-msgstr ""
-
-#. Message appears after sync operation when nothing has changed
-#: src/js/Strings.php:40
-msgid "Already up to date with source code"
 msgstr ""
 
 #: src/admin/config/ApisController.php:12
@@ -1570,6 +1559,17 @@ msgstr ""
 
 #: tpl/admin/init/init-po.php:173
 msgid "Start translating"
+msgstr ""
+
+#. Message appears after sync operation, where %s refers to a POT file.
+#: src/js/Strings.php:37
+#, javascript-format
+msgid "Strings up to date with %s"
+msgstr ""
+
+#. Message appears after sync operation.
+#: src/js/Strings.php:40
+msgid "Strings up to date with source code"
 msgstr ""
 
 #: tpl/admin/init/init-pot.php:30

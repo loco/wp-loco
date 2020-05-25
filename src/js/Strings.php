@@ -32,12 +32,12 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
          * xgettext: javascript-format */
         _n("1 string marked Fuzzy","%s strings marked Fuzzy",0,'loco-translate');
 
-        /* Message appears after sync operation when nothing has changed. %s refers to a POT file.
+        /* Message appears after sync operation, where %s refers to a POT file.
          * xgettext: javascript-format */
-        __("Already up to date with %s",'loco-translate');
+        __("Strings up to date with %s",'loco-translate');
 
-        // Message appears after sync operation when nothing has changed
-        __("Already up to date with source code",'loco-translate');
+        // Message appears after sync operation.
+        __("Strings up to date with source code",'loco-translate');
 
         // xgettext: javascript-format
         __("%s unique source strings.",'loco-translate');
