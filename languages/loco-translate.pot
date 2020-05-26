@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.4.0\n"
+"Project-Id-Version: Loco Translate 2.4.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-25 13:53+0000\n"
+"POT-Creation-Date: 2020-05-26 10:10+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.0; wp-5.4.1"
+"X-Loco-Version: 2.4.1-dev; wp-5.4.1"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -397,7 +397,7 @@ msgid "Debug"
 msgstr ""
 
 #: src/admin/file/BaseController.php:110 tpl/admin/file/diff.php:31
-#: tpl/admin/bundle/inc-po-table.php:60 tpl/admin/bundle/locale.php:75
+#: tpl/admin/bundle/inc-po-table.php:63 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
 
@@ -1096,6 +1096,10 @@ msgctxt "Modified time"
 msgid "Updated"
 msgstr ""
 
+#: tpl/admin/bundle/inc-po-table.php:60
+msgid "Move"
+msgstr ""
+
 #: src/admin/file/MoveController.php:100 src/admin/file/MoveController.php:127
 #, php-format
 msgid "Move %s"
@@ -1144,7 +1148,7 @@ msgstr ""
 msgid "No translation APIs configured"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:105
+#: tpl/admin/bundle/inc-po-table.php:108
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""

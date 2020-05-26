@@ -100,6 +100,11 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.4.1
+* Current development version
+* Fixed deprecated use of array_key_exists
+* Minor UI tweaks
+
 = 2.4.0
 * Added support for third party translation APIs
 * Added file references to editor source pane in code view
@@ -343,8 +348,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.4.0 =
-* Various improvements including automatic translation support
+= 2.4.1 =
+* Various improvements and bugfixes
 
 
 
