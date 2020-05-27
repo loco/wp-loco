@@ -27,7 +27,7 @@ echo $this->render('../common/inc-table-filter');
             </tr>
         </thead>
         <tbody><?php
-        /* @var $p Loco_mvc_Params */
+        /* @var Loco_mvc_ViewParams[] $locales */
         foreach( $locales as $p ):?> 
         <tr>
             <td>
@@ -52,3 +52,14 @@ echo $this->render('../common/inc-table-filter');
         endforeach?> 
         </tbody>
     </table>
+
+    <?php
+    /* Unsure if we should observe locale whitelist on this screen.
+    if( $skipped ): $n = count($skipped);?> 
+    <div class="notice inline">
+        <p>
+            <span><?php self::e( _n('One more locale is hidden by your preferences','%d more locales are hidden by your preferences',$n,'loco-translate'), $n )?>.</span>
+            <span>(<?php echo implode(', ',$skipped)?>)</span>
+        </p>
+    </div><?php
+    endif;*/

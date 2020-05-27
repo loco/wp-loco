@@ -668,9 +668,14 @@ class Loco_package_Project {
         $prefix = $this->getSlug(); 
         $domain = $this->domain->getName();
         $default = $this->isDomainDefault();
+        $prefs = Loco_data_Preferences::get();
         /* @var $file Loco_fs_File */
         foreach( $files[$ext] as $file ){
             $file = new Loco_fs_LocaleFile( $file );
+            // restrict locale by user preference
+            if( $prefs && ! $prefs->has_locale( $file->getLocale() ) ){
+                continue;
+            }
             // add file if prefix matches and has a suffix. locale will be validated later
             if( $file->getPrefix() === $prefix && $file->getSuffix() ){
                 $list->addLocalized( $file );

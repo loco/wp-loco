@@ -80,7 +80,6 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
         }
         $this->set('locales', $locales );
         
-        
         // Count up unique PO files  
         foreach( $finder->findLocaleFiles() as $file ){
             if( preg_match('/(?:^|-)([_a-zA-Z]+).po$/', $file->basename(), $r ) ){
@@ -95,14 +94,14 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
         
         // POT files are in en_US locale
         $tag = 'en_US';
-        foreach( $finder->findTemplateFiles() as $file ){
-            $locales[$tag]['nfiles']++;
-            $locales[$tag]['time'] = max( $locales[$tag]['time'], $file->modified() );
+        if( array_key_exists($tag,$locales) ){
+            foreach( $finder->findTemplateFiles() as $file ){
+                $locales[$tag]['nfiles']++;
+                $locales[$tag]['time'] = max( $locales[$tag]['time'], $file->modified() );
+            }
         }
         
-
-        return $this->view( 'admin/list/locales' );
-        
+       return $this->view( 'admin/list/locales' );
     }
 
     

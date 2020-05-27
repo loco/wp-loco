@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-26 10:10+0000\n"
+"POT-Creation-Date: 2020-05-27 17:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -428,9 +428,9 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:186 src/admin/file/EditController.php:175
+#: src/data/Settings.php:168 src/admin/file/EditController.php:175
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:177
-#: tpl/admin/config/apis.php:100 tpl/admin/config/prefs.php:32
+#: tpl/admin/config/apis.php:100 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -925,7 +925,7 @@ msgstr ""
 msgid "Installed languages"
 msgstr ""
 
-#: src/Locale.php:304
+#: src/Locale.php:320
 msgid "Invalid locale"
 msgstr ""
 
@@ -1034,7 +1034,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/data/Settings.php:184
+#: src/data/Settings.php:166
 msgid ""
 "Loco Translate 2.4 supports third party translation providers. Set up your "
 "API keys in the plugin settings!"
@@ -1312,43 +1312,43 @@ msgid "Plugins"
 msgstr ""
 
 #. Plural category for languages that have no plurals
-#: src/Locale.php:383
+#: src/Locale.php:401
 msgctxt "Plural category"
 msgid "All forms"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:397
+#: src/Locale.php:415
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:399
+#: src/Locale.php:417
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:393
+#: src/Locale.php:411
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:401
+#: src/Locale.php:419
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:395
+#: src/Locale.php:413
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:391
+#: src/Locale.php:409
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
@@ -1452,7 +1452,7 @@ msgid "Save credentials in session"
 msgstr ""
 
 #: tpl/admin/config/settings.php:176 tpl/admin/config/apis.php:99
-#: tpl/admin/config/prefs.php:31
+#: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
 
@@ -1508,7 +1508,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: src/data/Settings.php:185 src/admin/file/EditController.php:174
+#: src/data/Settings.php:167 src/admin/file/EditController.php:174
 #: tpl/admin/file/edit-po.php:62 tpl/admin/common/inc-fsconn.php:18
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
 msgid "Settings"
@@ -1957,6 +1957,10 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:316 tpl/admin/file/info.php:113
 msgid "What's this?"
+msgstr ""
+
+#: tpl/admin/config/prefs.php:29 tpl/admin/config/prefs.php:33
+msgid "Whitelisted locales"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:54

@@ -112,25 +112,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * {@inheritdoc}
      */
     public function offsetSet( $prop, $value ){
-        if( ! isset(self::$defaults[$prop]) ){
-            throw new InvalidArgumentException('Invalid option, '.$prop );
-        }
-        $default = self::$defaults[$prop];
-        // cast to same type as default
-        if( is_bool($default) ){
-            $value = (bool) $value;
-        }
-        else if( is_int($default) ){
-            $value = (int) $value;
-        }
-        else if( is_array($default) ){
-            if( ! is_array($value) ){
-                $value = preg_split( '/[\\s,]+/', trim($value), -1, PREG_SPLIT_NO_EMPTY );
-            }
-        }
-        else {
-            $value = (string) $value;
-        }
+        $value = parent::cast($prop,$value,self::$defaults);
         parent::offsetSet( $prop, $value );
     }
 

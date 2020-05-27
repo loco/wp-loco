@@ -54,6 +54,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
+        Loco_data_Preferences::clear();
         self::dropOptions();
         // start with default permissions as if fresh install
         remove_role('translator');
@@ -69,6 +70,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
+        Loco_data_Preferences::clear();
         wp_cache_flush();
         self::dropOptions();
     }
