@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-05-27 17:16+0000\n"
+"POT-Creation-Date: 2020-06-08 13:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1433,6 +1433,10 @@ msgstr ""
 msgid "Restore %s"
 msgstr ""
 
+#: tpl/admin/config/prefs.php:29 tpl/admin/config/prefs.php:33
+msgid "Restrict locales"
+msgstr ""
+
 #. Where %s is a file name
 #: src/ajax/DiffController.php:47
 #, php-format
@@ -1957,10 +1961,6 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:316 tpl/admin/file/info.php:113
 msgid "What's this?"
-msgstr ""
-
-#: tpl/admin/config/prefs.php:29 tpl/admin/config/prefs.php:33
-msgid "Whitelisted locales"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:54

@@ -26,11 +26,11 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                     </td>
                 </tr>
                 <tr>
-                    <th scope="row"><?php esc_html_e('Whitelisted locales','loco-translate')?></th>
+                    <th scope="row"><?php esc_html_e('Restrict locales','loco-translate')?></th>
                     <td>
                         <fieldset>
                             <legend class="screen-reader-text">
-                                <span><?php esc_html_e('Whitelisted locales','loco-translate')?></span>
+                                <span><?php esc_html_e('Restrict locales','loco-translate')?></span>
                             </legend>
                             <p>
                                 <input type="text" size="64" name="opts[locales]" id="loco--locales" value="<?php echo esc_attr(implode(', ',$opts->locales) )?>" placeholder="en_US, ..." />

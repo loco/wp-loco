@@ -135,6 +135,10 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
 
     /**
      * Collect PO/MO pairings, ignoring any PO that is in use as a template
+     * @param Loco_fs_FileList PO files
+     * @param Loco_fs_FileList MO files
+     * @param Loco_fs_File POT file
+     * @return array[]
      */
     private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, Loco_fs_File $pot = null ){     
         $pairs = array();
@@ -166,6 +170,9 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     
     /**
      * Initialize view parameters for each row representing a localized resource pair
+     * @param Loco_package_Project
+     * @param Loco_fs_LocaleFileList localized PO files
+     * @param Loco_fs_LocaleFileList localized MO files
      * @return array collection of entries corresponding to available PO/MO pair.
      */
     private function createProjectPairs( Loco_package_Project $project, Loco_fs_LocaleFileList $po, Loco_fs_LocaleFileList $mo ){
@@ -289,15 +296,22 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             $prefixes = array();
             $po = new Loco_fs_LocaleFileList;
             $mo = new Loco_fs_LocaleFileList;
+            $prefs = Loco_data_Preferences::get();
             foreach( Loco_package_Inverter::export($bundle) as $ext => $files ){
                 $list = 'mo' === $ext ? $mo : $po;
                 foreach( $files as $file ){
                     $file = new Loco_fs_LocaleFile($file);
+                    $locale = $file->getLocale();
+                    if( $prefs && ! $prefs->has_locale($locale) ){
+                        continue;
+                    }
                     $list->addLocalized( $file );
                     // Only look in system locations if locale is valid and domain/prefix available
-                    $locale = $file->getLocale();
-                    if( $locale->isValid() && ( $domain = $file->getPrefix() ) ){
-                        $prefixes[$domain] = true;
+                    if( $locale->isValid() ){
+                        $domain = $file->getPrefix();
+                        if( $domain ) {
+                            $prefixes[$domain] = true;
+                        }
                     }
                 }
             }
