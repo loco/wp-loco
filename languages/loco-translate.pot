@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-08 13:57+0000\n"
+"POT-Creation-Date: 2020-06-30 11:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.1-dev; wp-5.4.1"
+"X-Loco-Version: 2.4.1-dev; wp-5.4.2"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -382,7 +382,7 @@ msgstr ""
 msgid "Create template instead"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:124
+#: src/ajax/FsConnectController.php:138
 msgid "Creating this file requires permission"
 msgstr ""
 
@@ -407,7 +407,7 @@ msgstr ""
 msgid "Delete %s"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:127
+#: src/ajax/FsConnectController.php:141
 msgid "Deleting this file requires permission"
 msgstr ""
 
@@ -1464,7 +1464,7 @@ msgstr ""
 msgid "Saving PO/POT files"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:133
+#: src/ajax/FsConnectController.php:147
 msgid "Saving this file requires permission"
 msgstr ""
 
@@ -1770,7 +1770,7 @@ msgid ""
 "recommended."
 msgstr ""
 
-#: src/ajax/FsConnectController.php:130
+#: src/ajax/FsConnectController.php:144
 msgid "This move operation requires permission"
 msgstr ""
 

@@ -116,8 +116,22 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
                     $this->set('warning',$message);
                 }
             }
-            else if( $html = $this->api->getForm() ){
+            else {
                 $this->set( 'authed', false );
+                // HTML form should be set when authorization failed
+                $html = $this->api->getForm();
+                if( '' === $html || ! is_string($html) ){
+                    // this is the only non-error case where form will not be set.
+                    if( 'direct' === loco_constant('FS_METHOD') ){
+                        $html = 'Remote connections are prevented by your WordPress configuration. Direct access only.';
+                    }
+                    // else an unknown error occurred when fetching output from request_filesystem_credentials
+                    else {
+                        $html = 'Failed to get credentials form';
+                    }
+                    // displaying error after clicking "connect" to avoid unnecessary warnings when operation may not be required
+                    $html = '<form><h2>Connection problem</h2><p>'.$html.'.</p></form>';
+                }
                 $this->set( 'prompt', $html );
                 // supporting text based on file operation type explains why auth is required
                 if( 'create' === $type ){
@@ -134,9 +148,6 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
                 }
                 // message is printed before default text, so needs delimiting.
                 $this->set('message',$message.'.');
-            }
-            else {
-                throw new Loco_error_Exception('Failed to get credentials form');
             }
         }
         catch( Loco_error_WriteException $e ){

@@ -231,6 +231,7 @@ class Loco_api_WordPressFileSystem {
             $type = FS_METHOD;
             // forcing direct access means request_filesystem_credentials will never give us a form :( 
             if( 'direct' === $type ){
+                Loco_error_AdminNotices::debug('Cannot connect remotely when FS_METHOD is "direct"');
                 return false;
             }
         }
@@ -286,8 +287,11 @@ class Loco_api_WordPressFileSystem {
             request_filesystem_credentials( '', $type, $error, $context, $extra );
         }
 
-        // now have unauthorized remote connection
+        // should now have unauthorized remote connection form
         $this->form = (string) $buffer->close();
+        if( '' === $this->form ){
+            Loco_error_AdminNotices::debug('Unknown error capturing output from request_filesystem_credentials');
+        }
         return false;
     }
 

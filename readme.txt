@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.1
 * Fixed bug mapping API languages
 * Added locale filter to user preferences
+* Added debugging for credential form failures
 * Fixed deprecated use of array_key_exists
 * Bumped WordPress version to 5.4.2
 * Minor UI tweaks
