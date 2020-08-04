@@ -275,7 +275,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         // use minimized javascript file. hook into script_loader_src to point at development source
         $href = $base.'/pub/js/min/'.$name.'.js';
         $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
-        $id = 'loco-translate-js-'.strtr($name,'/','-');
+        $id = 'loco-translate-'.strtr($name,'/','-');
         wp_enqueue_script( $id, $href, $deps, $vers, true );
         $this->scripts[$id] = $href;
         return $this;
