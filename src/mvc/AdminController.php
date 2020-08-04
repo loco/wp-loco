@@ -192,40 +192,40 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         foreach( $args as $prop => $value ){
             $view->set( $prop, $value );
         }
-        // ensure JavaScript config always present
-        if( $view->has('js') ){
-            $jsConf = $view->get('js');
-            if( ! $jsConf instanceof Loco_mvc_ViewParams ){
-                throw new InvalidArgumentException('Bad "js" view parameter');
-            }
+        // ensure JavaScript config present if any scripts are loaded
+        if( $view->has('js') ) {
+            $jsConf = $view->get( 'js' );
+        }
+        else if( $this->scripts ){
+            $jsConf = new Loco_mvc_ViewParams;
+            $this->set('js',$jsConf);
         }
         else {
-            $jsConf = new Loco_mvc_ViewParams;
-            $view->set( 'js', $jsConf );
+            $jsConf = null;
         }
-        // deregister legacy scripts in case another plugin tried to hijack them
-        wp_deregister_script('loco-js-editor');
-        wp_deregister_script('loco-js-min-admin');
-        // TODO perhaps do some kind of in-script check validation check
-        // $jsConf->offsetSet('$v',loco_plugin_version() );
-        // localize script if translations in memory
-        if( is_textdomain_loaded('loco-translate') ){
-            $strings = new Loco_js_Strings;
-            $jsConf['wpl10n'] = $strings->compile();
-            $strings->unhook();
-            unset( $strings );
-            // add currently loaded locale for passing plural equation into js.
-            // note that plural rules come from our data, because MO is not trusted.
-            $tag = apply_filters( 'plugin_locale', get_locale(), 'loco-translate' );
-            $jsConf['wplang'] = Loco_Locale::parse($tag);
+        if( $jsConf instanceof Loco_mvc_ViewParams ){
+            // ensure config has access to latest version information
+            // we will use this to ensure scripts are not cached by browser, or hijacked by other plugins
+            $jsConf->offsetSet('$v',loco_plugin_version() );
+            $jsConf->offsetSet('$js', array_keys($this->scripts) );
+            // localize script if translations in memory
+            if( is_textdomain_loaded('loco-translate') ){
+                $strings = new Loco_js_Strings;
+                $jsConf['wpl10n'] = $strings->compile();
+                $strings->unhook();
+                unset( $strings );
+                // add currently loaded locale for passing plural equation into js.
+                // note that plural rules come from our data, because MO is not trusted.
+                $tag = apply_filters( 'plugin_locale', get_locale(), 'loco-translate' );
+                $jsConf['wplang'] = Loco_Locale::parse($tag);
+                $jsConf['WP_DEBUG'] = loco_debugging();
+            }
         }
         // take benchmark for debugger to be rendered in footer
         if( $this->bench ){
             $this->set('_debug', new Loco_mvc_ViewParams( array( 
                 'time' => microtime(true) - $this->bench,
             ) ) );
-            // additional debugging info when enabled
-            $jsConf['WP_DEBUG'] = true;
         }
         return $view->render( $tpl );
     }
@@ -270,7 +270,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     public function enqueueScript( $name, array $deps = array() ){
         $base = $this->baseurl;
         if( ! $base ){
-            throw new Loco_error_Exception('Too early to enqueueScript('.var_export($name,1).')');
+            throw new Loco_error_Exception('Too early to enqueueScript('.json_encode($name).')');
         }
         // use minimized javascript file. hook into script_loader_src to point at development source
         $href = $base.'/pub/js/min/'.$name.'.js';
@@ -283,25 +283,20 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
 
     /**
-     * @internal 
+     * @internal
      * @param string
      * @param string
      * @param string
      * @return string
      */
-    public function filter_script_loader_tag( $tag, $handle, $src ){
-        if( array_key_exists($handle,$this->scripts) ) {
-            $base = $this->baseurl.'/pub/js/';
-            $snip = strlen($base);
-            if( substr($src,0,$snip) !== $base || false !== strpos($src,'..') ){
-                Loco_error_AdminNotices::warn('Another plugin attempted to modify scripts on this page. If you experience problems, please let us know.');
-                Loco_error_AdminNotices::debug( $src.' does not belong to this plugin. It could be a hack attempt' );
-                // this will lose any legitimate filters we've added ourselves. (likely only under local dev)
-                $tag = str_replace($src,$this->scripts[$handle],$tag);
+    public function filter_script_loader_tag( $tag, $id, $src ) {
+        if( array_key_exists($id,$this->scripts) ) {
+            // Add element id for in-dom verification of expected scripts
+            if( '<script ' === substr($tag,0,8) ){
+                $tag = '<script id="'.$id.'" '.substr($tag,8);
             }
         }
         return $tag;
     }
-    
 
 }

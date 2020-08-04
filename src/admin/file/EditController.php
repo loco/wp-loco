@@ -44,10 +44,15 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
 
     /**
      * @param bool whether po files is in read-only mode
-     * @return array
+     * @return array[]|null
      */
     private function getApiProviders( $readonly ){
-        return $readonly ? null : array_values( array_filter(Loco_api_Providers::export(),array(__CLASS__,'filterApiProvider') ) );
+        if( $readonly ){
+            return null;
+        }
+        $apis = array_filter( Loco_api_Providers::export(), array(__CLASS__,'filterApiProvider') );
+        usort($apis,array(__CLASS__,'sortApiProviders') );
+        return $apis;
     }
 
 
@@ -58,6 +63,16 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
      */
     private static function filterApiProvider( array $api ){
         return (bool) $api['key'];
+    }
+
+    /**
+     * @internal
+     * @param string[]
+     * @param string[]
+     * @return bool
+     */
+    private static function sortApiProviders( array $a, array $b ){
+        return strcasecmp($a['name'],$b['name']);
     }
 
 

@@ -17,7 +17,8 @@
  * @property string $po_width PO/POT file maximum line width (wrapping) zero to disable
  * @property bool $jed_pretty Whether to pretty print JSON JED files
  * @property bool $ajax_files Whether to submit PO data as concrete files (requires Blob support in Ajax)
- * 
+ *
+ * @property string $deepl_api_key API key for DeepL Translator
  * @property string $google_api_key API key for Google Translate
  * @property string $yandex_api_key API key for Yandex.Translate
  * @property string $microsoft_api_key API key for Microsoft Translator text API
@@ -53,6 +54,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'po_width' => '79',
         'jed_pretty' => false,
         'ajax_files' => true,
+        'deepl_api_key' => '',
         'google_api_key' => '',
         'yandex_api_key' => '',
         'microsoft_api_key' => '',

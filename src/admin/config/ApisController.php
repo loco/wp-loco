@@ -59,6 +59,12 @@ class Loco_admin_config_ApisController extends Loco_admin_config_BaseController 
         $title = __('Plugin settings','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
+
+        // common ui elements / labels
+        $this->set( 'ui', new Loco_mvc_ViewParams( array(
+            'api_key' => __('API key','loco-translate'),
+            'api_region' => __('API region','loco-translate'),
+        ) ) );
         
         return $this->view('admin/config/apis', compact('breadcrumb') );
     }

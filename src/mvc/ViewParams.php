@@ -123,6 +123,17 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
 
     /**
+     * Print property value for JavaScript
+     * @param string property name
+     * @return string empty string
+     */
+    public function j( $p ){
+        echo json_encode($this->__get($p) );
+        return '';
+    }
+
+
+    /**
      * @return array
      */
     public function jsonSerialize(){

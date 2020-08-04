@@ -15,7 +15,7 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         
         // API client id should be posted
         $hook = (string) $post->hook;
-
+        
         // API client must be hooked in using loco_api_providers filter
         // this normally filters on Loco_api_Providers::export() but should do the same with an empty array.
         $config = null;

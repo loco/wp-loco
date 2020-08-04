@@ -1,1 +1,1 @@
-!function(t,e,n){var o=t.locoScope,i=e.getElementById("loco-fs"),c=e.getElementById("loco-potinit");function r(t){var e=t&&t.redirect;e&&location.assign(e)}n(c).submit(function(t){return t.preventDefault(),o.ajax.submit(t.target,r),!1}),i&&o.fs.init(i).setForm(c)}(window,document,jQuery);
+!function(t,e,n){var o=t.loco,i=e.getElementById("loco-fs"),r=e.getElementById("loco-potinit");function c(t){var e=t&&t.redirect;e&&location.assign(e)}n(r).submit(function(t){return t.preventDefault(),o.ajax.submit(t.target,c),!1}),i&&o.fs.init(i).setForm(r)}(window,document,jQuery);

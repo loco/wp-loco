@@ -147,10 +147,11 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $locales = array();
         $installed = array();
         $api = new Loco_api_WordPressTranslations;
+        $prefs = Loco_data_Preferences::get();
         // pull installed list first, this will include en_US and any non-standard languages installed
         foreach( $api->getInstalledCore() as $tag ){
             $locale = Loco_Locale::parse($tag);
-            if( $locale->isValid() ){
+            if( $locale->isValid() && $prefs->has_locale($locale) ){
                 $tag = (string) $tag;
                 // We may not have names for these, so just the language tag will show
                 $installed[$tag] = new Loco_mvc_ViewParams( array(
@@ -161,9 +162,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
         }
         // pull the same list of "available" languages as used in WordPress settings
-        /* @var $locale Loco_Locale */
         foreach( $api->getAvailableCore() as $tag => $locale ){
-            if( ! array_key_exists($tag,$installed) ){
+            if( ! array_key_exists($tag,$installed) && $prefs->has_locale($locale) ){
                 $locales[$tag] = new Loco_mvc_ViewParams( array(
                     'value' => $tag,
                     'icon'  => $locale->getIcon(),

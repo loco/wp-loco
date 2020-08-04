@@ -12,7 +12,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Cache of core locale objects
-     * @var array
+     * @var Loco_Locale[]
      */
     private $locales;
 
@@ -44,7 +44,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Get fully fledged locale objects from available core translation data
-     * @return array<Loco_Locale>
+     * @return Loco_Locale[]
      */
     public function getAvailableCore(){
         $locales = $this->locales;
@@ -84,7 +84,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Wrap get_available_languages
-     * @return array
+     * @return string[]
      */
     public function getInstalledCore(){
         // wp-includes/l10n.php should always be included at runtime

@@ -4,6 +4,7 @@
  */
 
 $this->extend('../layout');
+/* @var Loco_mvc_ViewParams $ui */
 /* @var Loco_mvc_ViewParams[] $apis */
 /* @var Loco_mvc_ViewParams $nonce */
 $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers');
@@ -13,6 +14,27 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
     <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
     <table class="form-table">
         <tbody><?php
+            // DEEPL
+            $api = $apis['deepl']?> 
+            <tr>
+                <th scope="row"><?php $api->e('name')?></th>
+                <td>
+                    <fieldset>
+                        <legend class="screen-reader-text">
+                            <span><?php $ui->e('api_key')?></span>
+                        </legend>
+                        <p>
+                            <label for="loco--deepl_api_key">
+                                <?php $ui->e('api_key')?>:
+                            </label>
+                            <input type="text" size="50" name="api[deepl][key]" id="loco--deepl_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
+                        </p>
+                        <p>
+                            <span class="description"><a href="https://www.deepl.com/translator" target="_blank" tabindex="-1">https://www.deepl.com/translator</a></span>
+                        </p>
+                    </fieldset>
+                </td>
+            </tr><?php
             // GOOGLE
             $api = $apis['google']?> 
             <tr>
@@ -20,11 +42,11 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                 <td>
                     <fieldset>
                         <legend class="screen-reader-text">
-                            <span><?php esc_html_e(__('API key','loco-translate'))?></span>
+                            <span><?php $ui->e('api_key')?></span>
                         </legend>
                         <p>
                             <label for="loco--google_api_key">
-                                <?php esc_html_e(__('API key','loco-translate'))?>:
+                                <?php $ui->e('api_key')?>:
                             </label>
                             <input type="text" size="50" name="api[google][key]" id="loco--google_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
                         </p>
@@ -41,17 +63,17 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                 <td>
                     <fieldset>
                         <legend class="screen-reader-text">
-                            <span><?php esc_html_e(__('API key','loco-translate'))?></span>
+                            <span><?php $ui->e('api_key')?></span>
                         </legend>
                         <p>
                             <label for="loco--microsoft_api_key">
-                                <?php esc_html_e(__('API key','loco-translate'))?>:
+                                <?php $ui->e('api_key')?>:
                             </label>
                             <input type="text" size="50" name="api[microsoft][key]" id="loco--microsoft_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
                         </p>
                         <p>
                             <label for="loco--microsoft_api_region">
-                                <?php esc_html_e(__('API region','loco-translate'))?>:
+                                <?php $ui->e('api_region')?>:
                             </label>
                             <input type="text" size="20" name="api[microsoft][region]" id="loco--microsoft_api_region" value="<?php $api->e('region')?>" spellcheck="false" placeholder="global" />
                         </p>
@@ -68,11 +90,11 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                 <td>
                     <fieldset>
                         <legend class="screen-reader-text">
-                            <span><?php esc_html_e(__('API key','loco-translate'))?></span>
+                            <span><?php $ui->e('api_key')?></span>
                         </legend>
                         <p>
                             <label for="loco--yandex_api_key">
-                                <?php esc_html_e(__('API key','loco-translate'))?>:
+                                <?php $ui->e('api_key')?>:
                             </label>
                             <input type="text" size="90" name="api[yandex][key]" id="loco--yandex_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
                         </p>

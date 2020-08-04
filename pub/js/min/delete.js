@@ -1,1 +1,1 @@
-!function(e,o){var t=o.getElementById("loco-fs"),n=o.getElementById("loco-del");t&&n&&e.locoScope.fs.init(t).setForm(n)}(window,document,jQuery);
+!function(o,e){var n=e.getElementById("loco-fs"),t=e.getElementById("loco-del");n&&t&&o.loco.fs.init(n).setForm(t)}(window,document,window.jQuery);

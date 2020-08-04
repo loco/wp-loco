@@ -20,7 +20,7 @@ It also provides localization tools for developers, such as extracting strings a
 Features include:
 
 * Built-in translation editor within WordPress admin
-* Integration with automatic translation APIs
+* Integration with multiple automatic translation APIs
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
@@ -101,11 +101,13 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.1
-* Fixed bug mapping API languages
+* Fixed mapping of some API languages
 * Added locale filter to user preferences
 * Added debugging for credential form failures
 * Fixed deprecated use of array_key_exists
 * Bumped WordPress version to 5.4.2
+* Added DeepL API service provider
+* Improved script tampering detection
 * Minor UI tweaks
 
 = 2.4.0

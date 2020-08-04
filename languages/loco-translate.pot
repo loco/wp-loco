@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.1-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-06-30 11:35+0000\n"
+"POT-Creation-Date: 2020-08-04 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -208,10 +208,18 @@ msgstr ""
 msgid "Allow full access to these roles"
 msgstr ""
 
+#: src/admin/config/ApisController.php:65
+msgid "API key"
+msgstr ""
+
 #: src/admin/config/ApisController.php:12
 #: src/admin/config/BaseController.php:20
 #: src/admin/config/BaseController.php:42 tpl/admin/help/tab-config-apis.php:2
 msgid "API keys"
+msgstr ""
+
+#: src/admin/config/ApisController.php:66
+msgid "API region"
 msgstr ""
 
 #: tpl/admin/file/delete.php:16
@@ -279,7 +287,7 @@ msgstr ""
 msgid "Check config repository"
 msgstr ""
 
-#: src/js/Strings.php:101
+#: src/js/Strings.php:113
 msgid "Check console output for debugging information"
 msgstr ""
 
@@ -428,9 +436,9 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:168 src/admin/file/EditController.php:175
+#: src/data/Settings.php:170 src/admin/file/EditController.php:190
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:177
-#: tpl/admin/config/apis.php:100 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -482,13 +490,13 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:199
+#: src/admin/file/EditController.php:214
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. Button that opens window for auto-translating
-#: src/admin/file/EditController.php:210
+#: src/admin/file/EditController.php:225
 msgctxt "Editor"
 msgid "Auto"
 msgstr ""
@@ -512,7 +520,7 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:212
+#: src/admin/file/EditController.php:227
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
@@ -524,19 +532,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:201
+#: src/admin/file/EditController.php:216
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:208
+#: src/admin/file/EditController.php:223
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:204
+#: src/admin/file/EditController.php:219
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -566,13 +574,13 @@ msgid "Suggest translation"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:206
+#: src/admin/file/EditController.php:221
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:218
+#: src/admin/file/EditController.php:233
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -583,7 +591,7 @@ msgid "Toggle Fuzzy"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:216
+#: src/admin/file/EditController.php:231
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -624,7 +632,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:110 src/error/Exception.php:149
+#: src/js/Strings.php:98 src/error/Exception.php:149
 msgid "Error"
 msgstr ""
 
@@ -799,7 +807,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:214
+#: src/admin/file/EditController.php:229
 msgid "Filter translations"
 msgstr ""
 
@@ -850,7 +858,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:202 tpl/admin/file/edit-po.php:45
+#: src/admin/file/EditController.php:217 tpl/admin/file/edit-po.php:45
 #: tpl/admin/file/edit-po.php:65
 msgid "Help"
 msgstr ""
@@ -891,7 +899,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:90
+#: tpl/admin/config/apis.php:112
 msgid "Important"
 msgstr ""
 
@@ -1034,7 +1042,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/data/Settings.php:166
+#: src/data/Settings.php:168
 msgid ""
 "Loco Translate 2.4 supports third party translation providers. Set up your "
 "API keys in the plugin settings!"
@@ -1177,7 +1185,7 @@ msgstr ""
 msgid "Nothing needed updating"
 msgstr ""
 
-#: src/js/Strings.php:116 src/error/Notice.php:20
+#: src/js/Strings.php:104 src/error/Notice.php:20
 #: tpl/admin/common/inc-fsconn.php:37
 msgid "Notice"
 msgstr ""
@@ -1194,7 +1202,7 @@ msgstr ""
 msgid "Official plugin page"
 msgstr ""
 
-#: src/js/Strings.php:119 src/error/Success.php:19
+#: src/js/Strings.php:107 src/error/Success.php:19
 msgid "OK"
 msgstr ""
 
@@ -1391,7 +1399,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: src/js/Strings.php:104
+#: src/js/Strings.php:116
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
@@ -1455,7 +1463,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:176 tpl/admin/config/apis.php:99
+#: tpl/admin/config/settings.php:176 tpl/admin/config/apis.php:121
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1492,12 +1500,12 @@ msgstr ""
 msgid "See FAQ"
 msgstr ""
 
-#: tpl/admin/config/apis.php:93
+#: tpl/admin/config/apis.php:115
 msgid "See full disclaimer"
 msgstr ""
 
 #. Generic error when external process broke an Ajax request
-#: src/js/Strings.php:98
+#: src/js/Strings.php:110
 msgid "Server returned invalid data"
 msgstr ""
 
@@ -1512,7 +1520,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: src/data/Settings.php:167 src/admin/file/EditController.php:174
+#: src/data/Settings.php:169 src/admin/file/EditController.php:189
 #: tpl/admin/file/edit-po.php:62 tpl/admin/common/inc-fsconn.php:18
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
 msgid "Settings"
@@ -1681,7 +1689,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:92
+#: tpl/admin/config/apis.php:114
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"
@@ -1764,7 +1772,7 @@ msgid "This information is for developers to find problems in the bundle setup"
 msgstr ""
 
 #. Warning when POT file is opened in the file editor. It can be disabled in settings.
-#: src/admin/file/EditController.php:173
+#: src/admin/file/EditController.php:188
 msgid ""
 "This is NOT a translation file. Manual editing of source strings is not "
 "recommended."
@@ -1843,12 +1851,12 @@ msgid "Translation progress %s%%"
 msgstr ""
 
 #. Where %s is the name of the invalid POT file
-#: src/ajax/SyncController.php:47 src/admin/file/EditController.php:135
+#: src/ajax/SyncController.php:47 src/admin/file/EditController.php:150
 #, php-format
 msgid "Translation template is invalid (%s)"
 msgstr ""
 
-#: src/admin/file/EditController.php:130
+#: src/admin/file/EditController.php:145
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
@@ -1877,7 +1885,7 @@ msgstr ""
 msgid "Unknown author"
 msgstr ""
 
-#: src/js/Strings.php:107
+#: src/js/Strings.php:119
 msgid "Unknown error"
 msgstr ""
 
@@ -1937,7 +1945,7 @@ msgstr ""
 msgid "Visit official site"
 msgstr ""
 
-#: src/js/Strings.php:113 src/error/Warning.php:19
+#: src/js/Strings.php:101 src/error/Warning.php:19
 msgid "Warning"
 msgstr ""
 

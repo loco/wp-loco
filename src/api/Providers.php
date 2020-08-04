@@ -21,6 +21,11 @@ abstract class Loco_api_Providers {
         $settings = Loco_data_Settings::get();
         return array (
             array (
+                'id' => 'deepl',
+                'name' => 'DeepL Translator',
+                'key' => $settings->offsetGet('deepl_api_key'),
+            ),
+            array (
                 'id' => 'google',
                 'name' => 'Google Translate',
                 'key' => $settings->offsetGet('google_api_key'),

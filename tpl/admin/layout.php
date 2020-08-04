@@ -2,7 +2,7 @@
 /**
  * Base layout for all admin pages 
  */
-?><div class="wrap" id="loco"><?php 
+?><div class="wrap" id="loco-admin"><?php 
 
     if( $this->has('breadcrumb') ):?> 
     <h1>
@@ -56,7 +56,13 @@
         // standard file system dialogues
         if( $params->has('fsFields') ):
             echo $this->render('common/inc-fsconn');
-        endif;?> 
+        endif?> 
+        <div class="notice inline notice-danger jshide">
+            <p>
+                <strong class="has-icon icon-warn">JavaScript problem:</strong>
+                <span>.</span>
+            </p>
+        </div>
     </div>
 
 
@@ -68,11 +74,16 @@
 
 
 <?php 
-/* @var Loco_mvc_ViewParams $js */
-if( $this->has('js') ):?> 
-<script>
+if( $this->has('js') && $js instanceof Loco_mvc_ViewParams ):?><script>
 /*<![CDATA[*/
-window.locoConf = <?php echo $js->exportJson()?>;
+window.loco = { conf: <?php echo $js->exportJson()?> };
+document.addEventListener && document.addEventListener('DOMContentLoaded', function(loco){
+    return function() {
+        if( window.loco !== loco || ! loco.validate || ! loco.validate(<?php $js->j('$v')?>,<?php $js->j('$js')?>) ) {
+            document.getElementById('loco-content').innerHTML = '<div class="notice inline notice-danger"><p>Scripts on this page are not running as expected. Please empty all relevant caches and refresh the screen.<br />If the issue persists, try disabling other plugins that may be modifying the functionality of Loco Translate.</p></div>';
+        }
+    };
+}(loco) );
 /*]]>*/
 </script><?php
 endif;

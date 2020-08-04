@@ -94,18 +94,6 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
          * xgettext: javascript-format */
         __("%s untranslated",'loco-translate');
 
-        // Generic error when external process broke an Ajax request
-        __("Server returned invalid data",'loco-translate');
-
-        //
-        __("Check console output for debugging information",'loco-translate');
-
-        //
-        __("Provide the following text when reporting a problem",'loco-translate');
-
-        //
-        __("Unknown error",'loco-translate');
-
         //
         __("Error",'loco-translate');
 
@@ -117,6 +105,18 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
 
         //
         __("OK",'loco-translate');
+
+        // Generic error when external process broke an Ajax request
+        __("Server returned invalid data",'loco-translate');
+
+        //
+        __("Check console output for debugging information",'loco-translate');
+
+        //
+        __("Provide the following text when reporting a problem",'loco-translate');
+
+        //
+        __("Unknown error",'loco-translate');
 
         /* Label for the window pane holding the original English text
          * List heading showing preview of English text for each item */
