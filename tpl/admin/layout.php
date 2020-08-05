@@ -57,12 +57,6 @@
         if( $params->has('fsFields') ):
             echo $this->render('common/inc-fsconn');
         endif?> 
-        <div class="notice inline notice-danger jshide">
-            <p>
-                <strong class="has-icon icon-warn">JavaScript problem:</strong>
-                <span>.</span>
-            </p>
-        </div>
     </div>
 
 

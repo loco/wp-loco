@@ -206,7 +206,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         if( $jsConf instanceof Loco_mvc_ViewParams ){
             // ensure config has access to latest version information
             // we will use this to ensure scripts are not cached by browser, or hijacked by other plugins
-            $jsConf->offsetSet('$v',loco_plugin_version() );
+            $jsConf->offsetSet('$v', array( loco_plugin_version(), $GLOBALS['wp_version']) );
             $jsConf->offsetSet('$js', array_keys($this->scripts) );
             // localize script if translations in memory
             if( is_textdomain_loaded('loco-translate') ){
@@ -275,7 +275,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         // use minimized javascript file. hook into script_loader_src to point at development source
         $href = $base.'/pub/js/min/'.$name.'.js';
         $vers = apply_filters( 'loco_static_version', loco_plugin_version(), $href );
-        $id = 'loco-translate-'.strtr($name,'/','-');
+        $id = 'loco-translate-js-'.strtr($name,'/','-');
         wp_enqueue_script( $id, $href, $deps, $vers, true );
         $this->scripts[$id] = $href;
         return $this;
