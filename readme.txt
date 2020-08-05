@@ -100,7 +100,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
-= 2.4.1
+= 2.4.1 =
 * Fixed mapping of some API languages
 * Added locale filter to user preferences
 * Added debugging for credential form failures
@@ -110,7 +110,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Bumped WordPress version to 5.5
 * Added "modern" skin styles
 
-= 2.4.0
+= 2.4.0 =
 * Added support for third party translation APIs
 * Added file references to editor source pane in code view
 * Added fuzzy matching during editor Sync operation
