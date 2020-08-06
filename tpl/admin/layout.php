@@ -71,13 +71,28 @@
 if( $this->has('js') && $js instanceof Loco_mvc_ViewParams ):?><script>
 /*<![CDATA[*/
 window.loco = { conf: <?php echo $js->exportJson()?> };
-document.addEventListener && document.addEventListener('DOMContentLoaded', function(loco){
+document.addEventListener && document.addEventListener('DOMContentLoaded', function(loco,v,s){
     return function() {
-        if( window.loco !== loco || ! loco.validate || ! loco.validate(<?php $js->j('$v')?>,<?php $js->j('$js')?>) ) {
-            document.getElementById('loco-content').innerHTML = '<div class="notice inline notice-danger"><p>Scripts on this page are not running as expected. Please empty all relevant caches and refresh the screen.<br />If the issue persists, try disabling other plugins that may be modifying the functionality of Loco Translate.</p></div>';
+        function enumJs(s) {
+            var i = s.length;
+            while( 0 !== i-- ){
+                if( null == document.getElementById(s[i]) ){
+                    return false;
+                }
+            }
+            return true;
+        }
+        if( window.loco !== loco || ! loco.validate || ! loco.validate(v) || ! enumJs(s) ) {
+            var t = 'Scripts on this page are not running as expected. Please empty all relevant caches and refresh the screen.\nIf the issue persists, try disabling other plugins that may be modifying the functionality of Loco Translate.';
+            if( loco.notices && loco.notices.warn ){
+                loco.notices.warn(t).link('https://localise.biz/wordpress/plugin/faqs/script-warnings','See FAQ');
+            }
+            else {
+                throw new Error(t);
+            }
         }
     };
-}(loco) );
+}( loco, <?php $js->j('$v')?>, <?php $js->j('$js')?> ) );
 /*]]>*/
 </script><?php
 endif;

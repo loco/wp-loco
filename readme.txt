@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.4.2 =
+* Current development version
+
 = 2.4.1 =
 * Fixed mapping of some API languages
 * Added locale filter to user preferences
@@ -353,7 +356,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.4.1 =
+= 2.4.2 =
 * Various improvements and bugfixes
 
 
