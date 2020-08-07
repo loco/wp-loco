@@ -101,7 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.2 =
-* Current development version
+* Added loco_file_written hook
+* Improved script tampering warning
 
 = 2.4.1 =
 * Fixed mapping of some API languages

@@ -8,7 +8,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     private static $singleton;
 
     /**
-     * @var array
+     * @var Loco_error_Exception[]
      */
     private $errors = array();
 
@@ -115,7 +115,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Destroy and return buffer
-     * @return array
+     * @return Loco_error_Exception[]
      */
     public static function destroy(){
         if( $notices = self::$singleton ){
@@ -135,7 +135,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      */
     public static function destroyAjax(){
         $data = array();
-        /* @var $notice Loco_error_Exception */
         foreach( self::destroy() as $notice ){
             $data[] = $notice->jsonSerialize();
         }
@@ -149,7 +148,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     private function flush(){
         if( $this->errors ){
             $htmls = array();
-            /* @var Loco_error_Exception $error */
             foreach( $this->errors as $error ){
                 $html = sprintf (
                     '<p><strong class="has-icon">%s:</strong> <span>%s</span></p>',

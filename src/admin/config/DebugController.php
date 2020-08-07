@@ -158,11 +158,6 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             }
         }
         
-        // alert to third party plugins known to interfere with functioning of this plugin
-        if( class_exists('\\LocoAutoTranslateAddon\\LocoAutoTranslate',false) ){
-            Loco_error_AdminNotices::add( new Loco_error_Warning('Unoffical add-ons for Loco Translate may affect functionality. We cannot provide support when third party products are installed.') );
-        }
-
         return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug') );
     }
     

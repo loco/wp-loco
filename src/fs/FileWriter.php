@@ -248,7 +248,13 @@ class Loco_fs_FileWriter {
             Loco_error_AdminNotices::debug( sprintf('Unknown write failure via "%s" method; check %s',$fs->method,$path) );
             throw new Loco_error_WriteException( __('Failed to save file','loco-translate').': '.$file->basename() );
         }
-        
+        // trigger hook every time a file is written. This allows caches to be invalidated
+        try {
+            do_action( 'loco_file_written', $path );
+        }
+        catch( Exception $e ){
+            Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
+        }
         return $this;
     }
 
