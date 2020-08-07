@@ -13,14 +13,14 @@ Translate WordPress plugins and themes directly in your browser
 
 == Description ==
 
-Loco Translate provides in-browser editing of WordPress translation files.
+Loco Translate provides in-browser editing of WordPress translation files and integration with automatic translation services.
 
-It also provides localization tools for developers, such as extracting strings and generating templates.
+It also provides Gettext/localization tools for developers, such as extracting strings and generating templates.
 
 Features include:
 
 * Built-in translation editor within WordPress admin
-* Integration with multiple automatic translation APIs
+* Integration with translation APIs including DeepL, Google, Microsoft and Yandex
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
@@ -95,7 +95,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 3. PO source view with text filter and clickable file references
 4. Restore tab showing PO diff view with revert function
 5. Showing access to translations by installed language
-
+6. Suggestion feature showing results from several providers
 
 
 == Changelog ==
@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.2 =
 * Added loco_file_written hook
 * Improved script tampering warning
+* Added number keys for selecting suggestion
 
 = 2.4.1 =
 * Fixed mapping of some API languages
