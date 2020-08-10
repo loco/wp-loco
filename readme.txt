@@ -103,7 +103,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.2 =
 * Added loco_file_written hook
 * Improved script tampering warning
-* Added number keys for selecting suggestion
+* Added keypress for selecting auto-suggestion
+* Sync no longer copies msgstr fields by default
+* Style tweaks for WordPress 5.5
 
 = 2.4.1 =
 * Fixed mapping of some API languages

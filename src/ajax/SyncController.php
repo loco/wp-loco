@@ -20,7 +20,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         
         $file = new Loco_fs_File( $post->path );
         $base = loco_constant('WP_CONTENT_DIR');
-        $file->normalize( $base );        
+        $file->normalize($base);
         
         // POT file always synced with source code (even if a PO being used as POT)
         if( 'pot' === $post->type ){
@@ -29,15 +29,22 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         // allow post data to force a template file path
         else if( $path = $post->sync ){
             $potfile = new Loco_fs_File($path);
-            $potfile->normalize( $base );
+            $potfile->normalize($base);
         }
         // else use project-configured template if one is defined
         else {
             $potfile = $project->getPot();
-        } 
+        }
+        
+        // keep existing behaviour when template is missing, but add warning.
+        // Translators: %s will be replaced with the name of a missing POT file
+        if( $potfile && ! $potfile->exists() ){
+            Loco_error_AdminNotices::warn( sprintf( __('Falling back to source extraction because %s is missing','loco-translate'), $potfile->basename() ) );
+            $potfile = null;
+        }
         
         // sync with POT if it exists
-        if( $potfile && $potfile->exists() ){
+        if( $potfile ){
             $this->set('pot', $potfile->basename() );
             try {
                 $data = Loco_gettext_Data::load($potfile);
@@ -46,6 +53,12 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 // translators: Where %s is the name of the invalid POT file
                 throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
             }
+            // Force stripping of msgstr fields if template is user-defined and "copy translations" was not selected
+            // note that bundle-configured templates will be synced as is, so if PO is configured, msgstr will merge
+            if( 'pot' !== $potfile->extension() && ! $post->fallback ) {
+                $data->strip();
+            }
+
         }
         // else sync with source code
         else {
