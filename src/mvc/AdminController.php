@@ -208,17 +208,17 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
             // we will use this to ensure scripts are not cached by browser, or hijacked by other plugins
             $jsConf->offsetSet('$v', array( loco_plugin_version(), $GLOBALS['wp_version']) );
             $jsConf->offsetSet('$js', array_keys($this->scripts) );
+            $jsConf->offsetSet('WP_DEBUG', loco_debugging() );
             // localize script if translations in memory
             if( is_textdomain_loaded('loco-translate') ){
                 $strings = new Loco_js_Strings;
-                $jsConf['wpl10n'] = $strings->compile();
+                $jsConf->offsetSet('wpl10n',$strings->compile());
                 $strings->unhook();
                 unset( $strings );
                 // add currently loaded locale for passing plural equation into js.
                 // note that plural rules come from our data, because MO is not trusted.
                 $tag = apply_filters( 'plugin_locale', get_locale(), 'loco-translate' );
-                $jsConf['wplang'] = Loco_Locale::parse($tag);
-                $jsConf['WP_DEBUG'] = loco_debugging();
+                $jsConf->offsetSet('wplang', Loco_Locale::parse($tag) );
             }
         }
         // take benchmark for debugger to be rendered in footer
