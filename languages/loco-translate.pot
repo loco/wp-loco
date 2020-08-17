@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.4.2-dev\n"
+"Project-Id-Version: Loco Translate 2.4.3-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-08-10 12:48+0000\n"
+"POT-Creation-Date: 2020-08-17 13:08+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.2-dev; wp-5.5-RC2-48740"
+"X-Loco-Version: 2.4.3-dev; wp-5.5"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -436,7 +436,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:170 src/admin/file/EditController.php:190
+#: src/data/Settings.php:170 src/admin/file/EditController.php:196
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:177
 #: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -490,13 +490,13 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:215
+#: src/admin/file/EditController.php:221
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. Button that opens window for auto-translating
-#: src/admin/file/EditController.php:226
+#: src/admin/file/EditController.php:232
 msgctxt "Editor"
 msgid "Auto"
 msgstr ""
@@ -520,7 +520,7 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:228
+#: src/admin/file/EditController.php:234
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
@@ -532,19 +532,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:217
+#: src/admin/file/EditController.php:223
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:224
+#: src/admin/file/EditController.php:230
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:220
+#: src/admin/file/EditController.php:226
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -574,13 +574,13 @@ msgid "Suggest translation"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:222
+#: src/admin/file/EditController.php:228
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:234
+#: src/admin/file/EditController.php:240
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -591,7 +591,7 @@ msgid "Toggle Fuzzy"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:232
+#: src/admin/file/EditController.php:238
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -813,7 +813,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:230
+#: src/admin/file/EditController.php:236
 msgid "Filter translations"
 msgstr ""
 
@@ -864,7 +864,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/admin/file/EditController.php:218 tpl/admin/file/edit-po.php:45
+#: src/admin/file/EditController.php:224 tpl/admin/file/edit-po.php:45
 #: tpl/admin/file/edit-po.php:65
 msgid "Help"
 msgstr ""
@@ -1238,7 +1238,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
-#: src/ajax/SyncController.php:75
+#: src/ajax/SyncController.php:73
 #, php-format
 msgid ""
 "One file has been skipped because it's %3$s. (Max is %2$s). Check all "
@@ -1526,7 +1526,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: src/data/Settings.php:169 src/admin/file/EditController.php:189
+#: src/data/Settings.php:169 src/admin/file/EditController.php:195
 #: tpl/admin/file/edit-po.php:62 tpl/admin/common/inc-fsconn.php:18
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
 msgid "Settings"
@@ -1778,7 +1778,7 @@ msgid "This information is for developers to find problems in the bundle setup"
 msgstr ""
 
 #. Warning when POT file is opened in the file editor. It can be disabled in settings.
-#: src/admin/file/EditController.php:188
+#: src/admin/file/EditController.php:194
 msgid ""
 "This is NOT a translation file. Manual editing of source strings is not "
 "recommended."
@@ -1857,12 +1857,12 @@ msgid "Translation progress %s%%"
 msgstr ""
 
 #. Where %s is the name of the invalid POT file
-#: src/ajax/SyncController.php:54 src/admin/file/EditController.php:150
+#: src/ajax/SyncController.php:54 src/admin/file/EditController.php:156
 #, php-format
 msgid "Translation template is invalid (%s)"
 msgstr ""
 
-#: src/admin/file/EditController.php:145
+#: src/admin/file/EditController.php:151
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""

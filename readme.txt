@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.3 =
 * Improved fix for default syncing of msgstr fields
 * Reverted accidental removal of js debug flag
+* Removed use of jQuery.browser
 
 = 2.4.2 =
 * Added loco_file_written hook
