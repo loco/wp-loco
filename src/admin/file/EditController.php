@@ -119,12 +119,18 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             
         // Establish PO/POT edit mode
         $potfile = null;
+        $syncmode = null;
         $locale = $this->getLocale();
         if( $locale instanceof Loco_Locale ){
             // alternative POT file may be forced by PO headers
             if( $head->has('X-Loco-Template') ){
                 $potfile = new Loco_fs_File( $head['X-Loco-Template'] );
                 $potfile->normalize( $bundle->getDirectoryPath() );
+                // sync mode permits copying of translations since 2.4.3
+                // legacy sync behaviour was copy msgstr fields when they exist (no strip)
+                if( $head->has('X-Loco-Template-Mode') ){
+                    $syncmode = $head['X-Loco-Template-Mode'];
+                }
             }
             // else use project-configured template, assuming there is one
             // no way to get configured POT if invalid project
@@ -200,7 +206,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'multipart' => (bool) $settings->ajax_files,
             'locale' => $locale ? $locale->jsonSerialize() : null,
             'potpath' => $locale && $potfile ? $potfile->getRelativePath($wp_content) : null,
-            'fallback' => $locale ? $head['X-Loco-Fallback'] : null,
+            'syncmode' => $syncmode,
             'popath' => $this->get('path'),
             'readonly' => $readonly,
             'project' => $project ? array (

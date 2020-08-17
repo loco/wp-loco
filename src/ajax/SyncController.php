@@ -53,12 +53,10 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 // translators: Where %s is the name of the invalid POT file
                 throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
             }
-            // Force stripping of msgstr fields if template is user-defined and "copy translations" was not selected
-            // note that bundle-configured templates will be synced as is, so if PO is configured, msgstr will merge
-            if( 'pot' !== $potfile->extension() && ! $post->fallback ) {
+            // strip msgstr fields from PO files if template is user-defined and "copy translations" was not selected.
+            if( '1' === $post->strip ){
                 $data->strip();
             }
-
         }
         // else sync with source code
         else {
