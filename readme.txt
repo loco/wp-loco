@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.3 =
 * Improved fix for default syncing of msgstr fields
 * Reverted accidental removal of js debug flag
+* Minor fixes to API error messages
 * Removed use of jQuery.browser
 
 = 2.4.2 =
