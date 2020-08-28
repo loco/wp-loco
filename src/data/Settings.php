@@ -135,7 +135,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * @return bool whether settings where previously saved
      */
     public function fetch(){
-        if( $data = get_option('loco_settings') ){
+        $data = get_option('loco_settings');
+        if( is_array($data) ){
             $copy = new Loco_data_Settings;
             $copy->setUnserialized($data);
             // preserve any defaults not in previously saved data

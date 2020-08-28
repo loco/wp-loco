@@ -88,13 +88,15 @@ class Loco_data_Preferences extends Loco_data_Serializable {
      */
     public function fetch(){
         $data = get_user_meta( $this->user_id, 'loco_prefs', true );
-        try {
+        // See comments in Loco_data_Settings
+        if( is_array($data) ){
             $this->setUnserialized($data);
+            $copy = new Loco_data_Preferences;
+            $this->exchangeArray( $copy->getArrayCopy() + $this->getArrayCopy() );
+            $this->clean();
+            return true;
         }
-        catch( InvalidArgumentException $e ){
-            return false;
-        }
-        return true;
+        return false;
     }
 
 

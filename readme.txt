@@ -105,6 +105,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Reverted accidental removal of js debug flag
 * Minor fixes to API error messages
 * Removed use of jQuery.browser
+* Bugfix for new preferences in usermeta
 
 = 2.4.2 =
 * Added loco_file_written hook
