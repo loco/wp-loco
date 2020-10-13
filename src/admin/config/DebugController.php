@@ -73,13 +73,14 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         }
         
         // utf8 / encoding:
+        $cs = get_option('blog_charset');
         $encoding = new Loco_mvc_ViewParams( array (
             'OK' => "\xCE\x9F\xCE\x9A",
             'tick' => "\xE2\x9C\x93",
             'json' => json_decode('"\\u039f\\u039a \\u2713"'),
+            'charset' => $cs.' '.( preg_match('/^utf-?8$/i',$cs) ? "\xE2\x9C\x93" : '(not recommended)' ),
             'mbstring' => loco_check_extension('mbstring') ? "\xCE\x9F\xCE\x9A \xE2\x9C\x93" : 'No',
         ) );
-
         // Sanity check mbstring.func_overload
         if( 2 !== strlen("\xC2\xA3") ){
             $encoding->mbstring = 'Error, disable mbstring.func_overload';

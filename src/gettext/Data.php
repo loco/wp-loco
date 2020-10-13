@@ -10,12 +10,13 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * Normalize file extension to internal type
      * @param Loco_fs_File
-     * @return string "po", "pot" or "mo"
+     * @return string Normalized file extension "po", "pot" or "mo"
      * @throws Loco_error_Exception
      */
     public static function ext( Loco_fs_File $file ){
         $ext = rtrim( strtolower( $file->extension() ), '~' );
         if( 'po' === $ext || 'pot' === $ext || 'mo' === $ext ){
+            // We could validate file location here, but file type restriction should be sufficient
             return $ext;
         }
         // translators: Error thrown when attempting to parse a file that is not PO, POT or MO

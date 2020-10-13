@@ -10,6 +10,8 @@ echo $this->render('../common/inc-po-header');
 
 /* @var Loco_mvc_ViewParams $js */
 $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers');
+/* @var Loco_mvc_ViewParams $locale */
+$prof = apply_filters('loco_external','https://localise.biz/wordpress/translation?l='.$locale->code);
 
 // inline modal for auto-translate. Note that modal will be placed outside of #loco.wrap element
 if( $js->apis ):?> 
@@ -44,7 +46,10 @@ if( $js->apis ):?>
                 <a href="<?php self::e($help)?>" class="button button-link has-icon icon-help" target="_blank"><?php
                     esc_html_e('Help','loco-translate');
                 ?></a>
-            </p>
+                <a href="<?php self::e($prof)?>" class="button button-link has-icon icon-group" target="_blank"><?php
+                    esc_html_e('Need a human?','loco-translate');
+                ?></a>
+                </p>
         </fieldset>
     </form>
 </div><?php
@@ -58,11 +63,14 @@ else:?>
         <?php esc_html_e('Add automatic translation services in the plugin settings.','loco-translate')?>
     </p>
     <nav>
-        <a href="<?php $this->route('config-apis')->e('href')?>" class="has-icon icon-cog"><?php
+        <a href="<?php $this->route('config-apis')->e('href')?>" class="button button-link has-icon icon-cog"><?php
             esc_html_e('Settings','loco-translate');
         ?></a>
-        <a href="<?php self::e($help)?>" class="has-icon icon-help" target="_blank"><?php
+        <a href="<?php self::e($help)?>" class="button button-link has-icon icon-help" target="_blank"><?php
             esc_html_e('Help','loco-translate');
+        ?></a>
+        <a href="<?php self::e($prof)?>" class="button button-link has-icon icon-group" target="_blank"><?php
+            esc_html_e('Need a human?','loco-translate');
         ?></a>
     </nav>
 </div><?php

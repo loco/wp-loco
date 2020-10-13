@@ -32,7 +32,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function render(){
-        
+        /* @var Loco_fs_File $file */
         $file = $this->get('file');
         $name = $file->basename();
         $this->set('title', $name );
@@ -67,6 +67,15 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             $dinfo['existent'] = true;
             $dinfo['writable'] = $dir->writable();
         }
+
+        // secure download link
+        $args = new Loco_mvc_HiddenFields( array (
+            'route' => 'download',
+            'action' => 'loco_download',
+            'path' => $file->getRelativePath(loco_constant('WP_CONTENT_DIR')),
+        ) );
+        $args->setNonce('download');
+        $finfo['download'] = $args->getHref( admin_url('admin-ajax.php','relative') );
         
         // collect note worthy problems with file headers
         $debugging = loco_debugging();

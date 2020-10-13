@@ -27,7 +27,7 @@ abstract class Loco_compat_PosixExtension {
             }
             // else use temp file system to establish owner
             else {
-                self::$uid = self::getuidViaTempDir();
+                self::$uid = self::getuidViaTempDir(); // @codeCoverageIgnore
             }
         }
         return self::$uid;
@@ -45,7 +45,7 @@ abstract class Loco_compat_PosixExtension {
             }
             // else use temp file system to establish group owner
             else {
-                self::$gid = self::getgidViaTempDir();
+                self::$gid = self::getgidViaTempDir(); // @codeCoverageIgnore
             }
         }
         return self::$gid;

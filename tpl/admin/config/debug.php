@@ -5,6 +5,7 @@
 $this->extend('../layout');
 
 /* @var Loco_mvc_ViewParams $versions */
+/* @var Loco_mvc_ViewParams $encoding */
 ?> 
     
         <div class="panel" id="loco-versions">
@@ -35,7 +36,10 @@ $this->extend('../layout');
                 <dd><?php echo $encoding->OK?> <span id="loco-utf8-check"><?php echo $encoding->tick?></span></dd>
 
                 <dt>Multibyte support:</dt>
-                <dd><?php echo $encoding->mbstring?></dd>
+                <dd><?php $encoding->e('mbstring')?></dd>
+
+                <dt>Site character set</dt>
+                <dd><?php $encoding->e('charset')?></dd>
             </dl>
         </div>
     

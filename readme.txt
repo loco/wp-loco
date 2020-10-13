@@ -101,8 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.4 =
+* Added download button to file info page
 * Fix for extracting plurals also used as singulars
-* Bumped WordPress version to 5.5.1 
+* Bumped WordPress version to 5.5.1
 
 = 2.4.3 =
 * Improved fix for default syncing of msgstr fields

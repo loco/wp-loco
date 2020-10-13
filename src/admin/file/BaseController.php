@@ -36,8 +36,6 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         // security validations
         try {
             Loco_gettext_Data::ext( $file );
-            // TODO also need to block access to files outside content directory
-            // this is more difficult as can symlink into and out of the tree.
         }
         catch( Exception $e ){
             return $this->view( 'admin/errors/file-sec', array( 'reason' => $e->getMessage() ) );

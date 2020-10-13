@@ -5,10 +5,14 @@
 $this->extend('info');
 $this->start('header');
 /* @var Loco_mvc_FileParams $file */
+/* @var Loco_mvc_FileParams $locale */
 /* @var Loco_gettext_Metadata $meta */
 ?> 
 
     <div class="notice inline notice-info">
+        <nav>
+            <a class="icon only-icon icon-download" title="Download" href="<?php $file->e('download')?>"><span>download</span></a>
+        </nav>
         <h3>
             <a href="<?php $locale->e('href')?>" class="has-lang">
                 <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
