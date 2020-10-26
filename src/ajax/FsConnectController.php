@@ -47,6 +47,7 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
 
 
     /**
+     * @param Loco_fs_File file path to update (should exist)
      * @return bool
      */
     private function authorizeUpdate( Loco_fs_File $file ){
@@ -57,13 +58,28 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
         if( Loco_data_Settings::get()->num_backups && ! $this->api->authorizeCopy($file) ){
             return false;
         }
-        // updating file may also recompile binary, which may or may not exist
-        $files = new Loco_fs_Siblings( $file );
-        if( $file = $files->getBinary() ){
-            return $this->api->authorizeSave($file);
+        // updating file will also recompile binary, which may or may not exist
+        $files = new Loco_fs_Siblings($file);
+        $mofile = $files->getBinary();
+        if( $mofile && ! $this->api->authorizeSave($mofile) ){
+            return false;
         }
         // else no dependants to update
         return true;
+    }
+
+
+    /**
+     * @param Loco_fs_File path which may exist (update it) or may not (create it)
+     * @return bool
+     */
+    private function authorizeUpload( Loco_fs_File $file ){
+        if( $file->exists() ){
+            return $this->api->authorizeUpdate($file);
+        }
+        else {
+            return $this->api->authorizeCreate($file);
+        }
     }
 
 

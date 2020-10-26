@@ -192,8 +192,9 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-debug' => 'bundle_Debug',
             'lang-view' => 'bundle_Locale',
             // file initialization
-            '{type}-msginit'   => 'init_InitPo',
-            '{type}-xgettext'  => 'init_InitPot',
+            '{type}-msginit' => 'init_InitPo',
+            '{type}-xgettext' => 'init_InitPot',
+            '{type}-upload' => 'init_Upload',
             // file resource views
             '{type}-file-view' => 'file_View',
             '{type}-file-edit' => 'file_Edit',

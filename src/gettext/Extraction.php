@@ -88,18 +88,20 @@ class Loco_gettext_Extraction {
         if( function_exists('wp_raise_memory_limit') ){
             wp_raise_memory_limit('loco');
         }
-        /* @var $file Loco_fs_File */
+        /* @var Loco_fs_File $file */
         foreach( $project->findSourceFiles() as $file ){
             $type = $opts->ext2type( $file->extension() );
             $extr = loco_wp_extractor($type);
             if( 'js' !== $type ) {
                 // skip large files for PHP, because token_get_all is hungry
-                $size = $file->size();
-                $this->maxbytes = max( $this->maxbytes, $size );
-                if( $size > $max ){
-                    $list = $this->skipped or $list = ( $this->skipped = new Loco_fs_FileList() );
-                    $list->add( $file );
-                    continue;
+                if( 0 !== $max ){
+                    $size = $file->size();
+                    $this->maxbytes = max( $this->maxbytes, $size );
+                    if( $size > $max ){
+                        $list = $this->skipped or $list = ( $this->skipped = new Loco_fs_FileList() );
+                        $list->add( $file );
+                        continue;
+                    }
                 }
                 // extract headers from theme PHP files in
                 if( $project->getBundle()->isTheme() ){

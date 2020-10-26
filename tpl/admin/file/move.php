@@ -5,7 +5,7 @@
 $this->extend('../layout');
 ?> 
 
-<form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-move"><?php
+<form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-main"><?php
     /* @var Loco_mvc_HiddenFields $hidden */
     $hidden->_e();
     echo $source?> 

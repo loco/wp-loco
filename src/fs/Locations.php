@@ -111,6 +111,7 @@ class Loco_fs_Locations extends ArrayObject {
         if( ! self::$plugin ){
             self::$plugin = new Loco_fs_Locations( array(
                 loco_constant('WP_PLUGIN_DIR'),
+                loco_constant('WPMU_PLUGIN_DIR'),
             ) );
         }
         return self::$plugin;

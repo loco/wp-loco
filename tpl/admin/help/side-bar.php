@@ -9,5 +9,8 @@
     <a href="<?php echo esc_url( apply_filters('loco_external','https://wordpress.org/plugins/loco-translate/') )?>" target="_blank"><?php esc_html_e('Official plugin page','loco-translate')?></a>
 </p>
 <p>
-    <a href="<?php echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') )?>" target="_blank"><?php esc_html_e('Help and tutorials','loco-translate')?></a>
+    <a href="<?php echo esc_url( apply_filters('loco_external','https://wordpress.org/support/plugin/loco-translate/') )?>" target="_blank"><?php esc_html_e('Support forum','loco-translate')?></a>
+</p>
+<p>
+    <a href="<?php echo esc_url( apply_filters('loco_external','https://localise.biz/wordpress/plugin') )?>" target="_blank"><?php esc_html_e('Info and tutorials','loco-translate')?></a>
 </p>

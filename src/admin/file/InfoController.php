@@ -162,8 +162,8 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     }
                 }
                 if( $debugging ){
-                    // missing or invalid headers are tollerated but developers should be notified
-                    if( $debugging && ! count($head) ){
+                    // missing or invalid headers are tolerated but developers should be notified
+                    if( ! count($head) ){
                         $debug[] = __('File does not have a valid header','loco-translate');
                     }
                     // Language header sanity checks, raising developer (debug) warnings

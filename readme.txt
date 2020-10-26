@@ -101,8 +101,13 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.4 =
+* Added PO file upload feature
 * Added download button to file info page
 * Fix for extracting plurals also used as singulars
+* Updating API keys no longer require editor page reload
+* Catching fatal startup errors in loco.php
+* Supporting max_php_size=0 to mean no size restriction
+* Auto-update detection now checks new site options
 * Bumped WordPress version to 5.5.1
 
 = 2.4.3 =

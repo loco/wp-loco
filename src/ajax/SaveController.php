@@ -52,26 +52,16 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
             $data = Loco_gettext_Data::fromSource( $post->data );
         }
         
-        // WordPress-ize some headers that differ from JavaScript libs
-        if( $compile = (bool) $locale ){
+        // WordPress-ize some headers that differ from that sent from JavaScript
+        if( $locale ){
             $head = $data->getHeaders();
             $head['Language'] = strtr( $locale, '-', '_' );
         }
         
-        // backup existing file before overwriting, but still allow if backups fails
-        $num_backups = Loco_data_Settings::get()->num_backups;
-        if( $num_backups && $poexists ){
-            try {
-                $api->authorizeCopy( $pofile );
-                $backups = new Loco_fs_Revisions( $pofile );
-                $backups->create();
-                $backups->prune($num_backups);
-            }
-            catch( Exception $e ){
-                Loco_error_AdminNotices::debug( $e->getMessage() );
-                $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco-translate');
-                Loco_error_AdminNotices::warn( sprintf( $message, $pofile->getParent()->basename() ) );
-            }
+        // backup existing file before overwriting, but continue if backups fails
+        if( $poexists ){
+            $backups = new Loco_fs_Revisions($pofile);
+            $backups->rotate($api);
         }
 
         // commit file directly to disk
@@ -97,21 +87,20 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
         $this->set('datetime', Loco_mvc_ViewParams::date_i18n($mtime) );
 
         // Compile MO and JSON files unless saving template
-        if( $compile ){
+        if( $locale ){
             try {
                 $mofile = $pofile->cloneExtension('mo');
                 $api->authorizeSave( $mofile );
                 $bytes = $mofile->putContents( $data->msgfmt() );
                 $this->set( 'mobytes', $bytes );
                 Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco-translate') );
-                
             }
             catch( Exception $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );
                 Loco_error_AdminNotices::warn( __('PO file saved, but MO file compilation failed','loco-translate') );
                 $this->set( 'mobytes', 0 );
                 // prevent further compilation if MO failed
-                $compile = false;
+                // $compile = false;
             }
         }
         else {

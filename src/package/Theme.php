@@ -75,16 +75,18 @@ class Loco_package_Theme extends Loco_package_Bundle {
      * Create theme bundle definition from WordPress theme handle 
      * 
      * @param string short name of theme, e.g. "twentyfifteen"
-     * @return Loco_package_Plugin
+     * @param string theme root if known
+     * @return Loco_package_Theme
      */
-    public static function create( $slug, $root = null ){
+    public static function create( $slug, $root = '' ){
         return self::createFromTheme( wp_get_theme( $slug, $root ) );
     }
 
 
-
     /**
      * Create theme bundle definition from WordPress theme data 
+     * @param WP_Theme
+     * @return Loco_package_Theme
      */
     public static function createFromTheme( WP_Theme $theme ){
         $slug = $theme->get_stylesheet();
@@ -130,5 +132,22 @@ class Loco_package_Theme extends Loco_package_Bundle {
         // do_action( 'loco_bundle_configured', $bundle );
 
         return $bundle;
-    }    
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public static function fromFile( Loco_fs_File $file ){
+        $find = $file->getPath();
+        foreach( wp_get_themes( array('errors'=>null) ) as $theme ){
+            $base = $theme->get_stylesheet_directory();
+            $path = $base.substr( $find, strlen($base) );
+            if( $find === $path ){
+                return self::createFromTheme($theme);
+            }
+        }
+        return null;
+    }
+
 }

@@ -4,9 +4,9 @@
  */
 $this->extend('../layout');
 echo $header;
+/* @var Loco_mvc_FileParams $file */
 ?> 
 
-  
     <?php
     if( ! $file->existent ):?> 
     <div class="notice inline notice-error">

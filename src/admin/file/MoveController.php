@@ -26,12 +26,13 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             $this->set('hidden',$fields );
             // attempt move if valid nonce posted back
             while( $this->checkNonce($action) ){
+                $post = Loco_mvc_PostParams::get();
                 // Chosen location should be valid as a posted "dest" parameter
-                if( ! Loco_mvc_PostParams::get()->has('dest') ){
+                if( ! $post->has('dest') ){
                     Loco_error_AdminNotices::err('No destination posted');
                     break;
                 }
-                $target = new Loco_fs_LocaleFile( Loco_mvc_PostParams::get()->dest );
+                $target = new Loco_fs_LocaleFile( $post->dest );
                 $ext = $target->extension();
                 // primary file extension should only be permitted to change between po and pot
                 if( $ext !== $file->extension() && 'po' !== $ext && 'pot' !== $ext ){

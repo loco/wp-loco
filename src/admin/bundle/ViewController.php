@@ -96,6 +96,13 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'name' => __('New language','loco-translate'),
             'icon' => 'add',
         ) );
+        
+        // offer PO file upload
+        $p['nav'][] = new Loco_mvc_ViewParams( array(
+            'href' => $this->getProjectLink('upload', $project ),
+            'name' => __('Upload PO','loco-translate'),
+            'icon' => 'upload',
+        ) );
 
         $pot = $project->getPot();
         

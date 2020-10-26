@@ -21,7 +21,7 @@ $this->start('source');
                         <p class="description"><?php $location->e('label')?>:</p>
                     </td>
                     <td><?php
-                        /* @var Loco_mvc_FileParams $choice */
+                        /* @var Loco_mvc_ViewParams $choice */
                         foreach( $location['paths'] as $choice ):?> 
                         <p><?php
                             if( $choice->active ):?> 

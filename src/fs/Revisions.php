@@ -6,7 +6,7 @@
 class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     
     /**
-     * @var loco_fs_File
+     * @var Loco_fs_File
      */
     private $master;
     
@@ -140,7 +140,6 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
 
 
-
     /**
      * @return array
      */
@@ -163,7 +162,6 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
 
 
-    
     /**
      * Parse a file path into a timestamp
      * @param string
@@ -179,7 +177,6 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
 
 
-
     /**
      * Get number of backups plus master
      * @return int
@@ -190,7 +187,6 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
         }
         return $this->length;
     }
-
 
 
     /**
@@ -204,24 +200,29 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
 
 
-
     /**
-     * Test whether at least one backup file exists on disk.
-     * @return bool
-     *
-    public function sniff(){
-        $found = false;
-        if( $dir = opendir( $this->master->dirname() ) ){
-            $regex = $this->getRegExp();
-            while( $f = readdir($dir) ){
-                if( preg_match($regex,$f) ){
-                    $found = true;
-                    break;
-                }
+     * Execute backup of current file.
+     * @param Loco_api_WordPressFileSystem Authorized file system
+     * @return bool whether rotation 
+     */
+    public function rotate( Loco_api_WordPressFileSystem $api ){
+        $pofile = $this->master;
+        // backup existing file before overwriting, but still allow if backups fails
+        $num_backups = Loco_data_Settings::get()->num_backups;
+        if( $num_backups ){
+            try {
+                $api->authorizeCopy($this->master);
+                $this->create();
+                $this->prune($num_backups);
+                return true;
             }
-            closedir($dir);
+            catch( Exception $e ){
+                Loco_error_AdminNotices::debug( $e->getMessage() );
+                $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco-translate');
+                Loco_error_AdminNotices::warn( sprintf( $message, $pofile->getParent()->basename() ) );
+            }
         }
-        return $found;
-    }*/
+        return false;
+    }
 
 }

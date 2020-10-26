@@ -119,13 +119,14 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     }
 
 
-
     /**
      * {@inheritdoc}
      */
     public function copy( $dest ){
-        $copy = clone $this;
-        $copy->path = $dest;
+        $copy = new Loco_fs_DummyFile($dest);
+        foreach( get_object_vars($this) as $prop => $value ){
+            $copy->$prop = $value;
+        }
         return $copy;
     }
 
@@ -144,9 +145,8 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     public function gid(){
         return $this->gid;
     }
-    
-    
-    
+
+
     /**
      * {@inheritdoc}
      * @codeCoverageIgnore
@@ -167,6 +167,14 @@ class Loco_fs_DummyFile extends Loco_fs_File {
         }
         // else locked:
         return false;
-    }    
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function md5(){
+        return md5( $this->getContents() );
+    }
 
 }

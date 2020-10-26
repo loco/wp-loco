@@ -13,7 +13,35 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         // Fire an event so translation apis can register their hooks as lazily as possible
         do_action('loco_api_ajax');
         
-        // API client id should be posted
+        // Get request renders API modal contents:
+        if( 0 === $post->count() ){
+            $apis = Loco_api_Providers::configured();
+            $this->set('apis',$apis);
+            // modal views for batch-translate and suggest feature
+            $modal = new Loco_mvc_View;
+            $modal->set('apis',$apis);
+            // help buttons
+            $locale = $this->get('locale');
+            $modal->set( 'help', new Loco_mvc_ViewParams( array (
+                'text' => __('Help','loco-translate'),
+                'href' => apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers'),
+            ) ) );
+            $modal->set('prof', new Loco_mvc_ViewParams( array (
+                'text' => __('Need a human?','loco-translate'),
+                'href' => apply_filters('loco_external','https://localise.biz/wordpress/translation?l='.$locale),
+            ) ) );
+            // render auto-translate modal or prompt for configuration
+            if( $apis ){
+                $html = $modal->render('ajax/modal-apis-batch');
+            }
+            else {
+                $html = $modal->render('ajax/modal-apis-empty');
+            }
+            $this->set('html',$html);
+            return parent::render();
+        }
+        
+        // else API client id should be posted to perform operation
         $hook = (string) $post->hook;
         
         // API client must be hooked in using loco_api_providers filter

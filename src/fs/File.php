@@ -621,7 +621,8 @@ class Loco_fs_File {
     public function getUpdateType(){
         // global languages directory root, and canonical subdirectories
         $dirpath = (string) ( $this->isDirectory() ? $this : $this->getParent() );
-        if( $sub = Loco_fs_Locations::getGlobal()->rel($dirpath) ){
+        $sub = Loco_fs_Locations::getGlobal()->rel($dirpath);
+        if( is_string($sub) && '' !== $sub ){
             list($root) = explode('/', $sub, 2 );
             if( '.' === $root || 'themes' === $root || 'plugins' === $root ){
                 return 'translation';
@@ -641,5 +642,19 @@ class Loco_fs_File {
         // else not an update type
         return '';
     }
-    
+
+
+    /**
+     * Get MD5 hash of file contents
+     * @return string
+     */
+    public function md5(){
+        if( $this->exists() ) {
+            return md5_file( $this->path );
+        }
+        else {
+            return 'd41d8cd98f00b204e9800998ecf8427e';
+        }
+    } 
+
 }

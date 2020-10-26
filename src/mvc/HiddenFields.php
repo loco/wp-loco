@@ -29,6 +29,14 @@ class Loco_mvc_HiddenFields extends Loco_mvc_ViewParams {
 
 
     /**
+     * @return string
+     */
+    public function getNonce() {
+        return $this['loco-nonce'];
+    }
+    
+
+    /**
      * Load postdata fields
      * @param Loco_mvc_PostParams post data
      * @return Loco_mvc_HiddenFields

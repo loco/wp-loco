@@ -731,23 +731,19 @@ class Loco_package_Project {
         $suffix = sprintf( '%s.po', $locale );
         $prefix = $slug ? sprintf('%s-',$slug) : '';
         $choice = new Loco_fs_FileList;
-        /* @var $dir Loco_fs_Directory */
+        /* @var Loco_fs_Directory $dir */
         foreach( $this->getConfiguredTargets() as $dir ){
             // theme files under their own directory normally have no file prefix
             if( $default && $dir->underThemeDirectory() ){
                 $path = $dir->getPath().'/'.$suffix;
             }
-            // plugin files are prefixed even in their own directory, so empty prefix here implies incorrect bundle configuration
-            //else if( $default && ! $prefix && $dir->underPluginDirectory() ){
-            //    $path = $dir->getPath().'/'.$domain.'-'.$suffix;
-            //}
             // all other paths use configured prefix, which may be empty
             else {
                 $path = $dir->getPath().'/'.$prefix.$suffix;
             }
             $choice->add( new Loco_fs_LocaleFile($path) );
         }
-        /* @var $dir Loco_fs_Directory */
+        /* @var Loco_fs_Directory $dir */
         foreach( $this->getSystemTargets() as $dir ){
             $path = $dir->getPath();
             // themes and plugins under global locations will be loaded by domain, regardless of prefix
@@ -762,6 +758,26 @@ class Loco_package_Project {
         }
 
         return $choice;
+    }
+
+
+    /**
+     * Initialize a PO file path from required location
+     * @param Loco_fs_Directory
+     * @param Loco_Locale
+     * @return Loco_fs_LocaleFile
+     * @throws Loco_error_Exception
+     */
+    public function initLocaleFile( Loco_fs_Directory $dir, Loco_Locale $locale ){
+        $choice = $this->initLocaleFiles($locale);
+        $pattern = '!^'.preg_quote($dir->getPath(),'!').'/[^/.]+\\.po$!';
+        /* @var Loco_fs_LocaleFile $file */
+        foreach( $choice as $file ){
+            if( preg_match($pattern,$file->getPath()) ){
+                return $file;
+            }
+        }
+        throw new Loco_error_Exception('Unexpected file location: '.$dir );
     }
 
 

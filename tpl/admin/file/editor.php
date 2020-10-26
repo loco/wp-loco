@@ -9,12 +9,13 @@ echo $header;
 /* @var Loco_mvc_ViewParams $js */
 /* @var Loco_mvc_ViewParams $ui */
 /* @var Loco_mvc_ViewParams $params */
+/* @var Loco_mvc_ViewParams $locale */
 /* @var Loco_mvc_HiddenFields $dlFields */
 ?> 
     
     <div id="loco-editor">
-        
-        <nav id="loco-toolbar" class="wp-core-ui">
+
+        <nav class="wp-core-ui">
             <form action="#" id="loco-actions">
                 <fieldset>
                     <button class="button has-icon icon-save" data-loco="save" disabled>

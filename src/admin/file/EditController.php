@@ -43,40 +43,6 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
 
 
     /**
-     * @param bool whether po files is in read-only mode
-     * @return array[]|null
-     */
-    private function getApiProviders( $readonly ){
-        if( $readonly ){
-            return null;
-        }
-        $apis = array_filter( Loco_api_Providers::export(), array(__CLASS__,'filterApiProvider') );
-        usort($apis,array(__CLASS__,'sortApiProviders') );
-        return $apis;
-    }
-
-
-    /**
-     * @internal
-     * @param string[]
-     * @return bool
-     */
-    private static function filterApiProvider( array $api ){
-        return (bool) $api['key'];
-    }
-
-    /**
-     * @internal
-     * @param string[]
-     * @param string[]
-     * @return bool
-     */
-    private static function sortApiProviders( array $a, array $b ){
-        return strcasecmp($a['name'],$b['name']);
-    }
-
-
-    /**
      * {@inheritdoc}
      */
     public function render(){
@@ -113,7 +79,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         // Fine if not, this just means sync isn't possible.
         catch( Loco_error_Exception $e ){
             Loco_error_AdminNotices::add( $e );
-            Loco_error_AdminNotices::debug( sprintf("Sync is disabled because this file doesn't relate to a known set of translations", $bundle ) );
+            Loco_error_AdminNotices::debug("Sync is disabled because this file doesn't relate to a known set of translations");
             $project = null;
         }
             
@@ -214,7 +180,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 'domain' => (string) $project->getId(),
             ) : null,
             'nonces' => $this->getNonces($readonly),
-            'apis' => $locale ? $this->getApiProviders($readonly) : null,
+            'apis' => $locale && ! $readonly ? Loco_api_Providers::configured() : null,
         ) ) );
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
              // Translators: button for adding a new string when manually editing a POT file

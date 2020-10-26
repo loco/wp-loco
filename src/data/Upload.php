@@ -6,9 +6,15 @@
  class Loco_data_Upload {
 
      /**
+      * Actual file currently on system
       * @var Loco_fs_File
       */
      private $file;
+
+     /**
+      * @var array
+      */
+     private $data;
 
 
      /**
@@ -19,7 +25,7 @@
       */
      public static function src($key){
          $upload = new Loco_data_Upload($_FILES[$key]);
-         return $upload->file->getContents();
+         return $upload->getContents();
      }
      
 
@@ -28,6 +34,7 @@
       * @throws Loco_error_UploadException
       */
     public function __construct( array $data ){
+        $this->data = $data;
         // https://www.php.net/manual/en/features.file-upload.errors.php
         $code = (int) $data['error'];
         switch( $code ){
@@ -50,10 +57,6 @@
         default:
             throw new Loco_error_UploadException('Unknown file upload error',$code);
         }
-        // mime check is largely pointless but may as well check as we'll only send one type
-        if( 'application/x-gettext' !== $data['type'] ){
-            throw new Loco_error_UploadException('Unsupported file type, expected PO or POT file');
-        }
         // upload is OK according to PHP, but check it's really readable and not empty
         $path = $data['tmp_name'];
         $file = new Loco_fs_File($path);
@@ -66,6 +69,22 @@
         // file is really ok
         $this->file = $file;
     }
-     
+
+
+     /**
+      * @return string
+      */
+     public function getName(){
+         return $this->data['name'];
+     }
+
+
+     /**
+      * @return string
+      */
+     public function getContents(){
+         return $this->file->getContents();
+     }
+
  }
  
