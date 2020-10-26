@@ -69,7 +69,7 @@ class Loco_admin_init_UploadController extends Loco_admin_bundle_BaseController 
             }
             $locations[$typeId]['paths'][] = new Loco_mvc_ViewParams( array(
                 'parent' => Loco_mvc_FileParams::create($parent),
-                'holder' => str_replace('-zxx.po','-{locale}</span>.po', $pofile->basename() ),
+                'holder' => str_replace('zxx.po','{locale}</span>.po', $pofile->basename() ),
             ) );
         }
         // we don't know what the specifics will be until a location is chosen and a file is presented.

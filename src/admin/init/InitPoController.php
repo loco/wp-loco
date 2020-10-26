@@ -272,7 +272,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 $writable = false;
                 $disabled = true;
             }
-            $suffix = '-'.$pofile->getSuffix().'.po';
+            $suffix = $pofile->getSuffix().'.po';
             $choice = new Loco_mvc_ViewParams( array (
                 'checked' => '',
                 'writable' => $writable,
@@ -280,7 +280,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 'systype' => $systype,
                 'parent' => Loco_mvc_FileParams::create( $parent ),
                 'hidden' => $pofile->getRelativePath($content_dir),
-                'holder' => str_replace( $suffix, '-<span>{locale}</span>.po', $pofile->basename() ),
+                'holder' => str_replace( $suffix, '<span>{locale}</span>.po', $pofile->basename() ),
             ) );
             $sortable[] = $choice;
             $locations[$typeId]['paths'][] = $choice;
