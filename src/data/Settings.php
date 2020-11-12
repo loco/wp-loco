@@ -5,6 +5,7 @@
  * @property string $version Current plugin version installed
  * @property bool $gen_hash Whether to compile hash table into MO files
  * @property bool $use_fuzzy Whether to include Fuzzy strings in MO files
+ * @property int $fuzziness Fuzzy matching tolerance level, 0-100
  * @property int $num_backups Number of backups to keep of Gettext files
  * @property array $pot_alias Alternative names for POT files in priority order
  * @property array $php_alias Alternative file extensions for PHP files
@@ -42,6 +43,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'version' => '',
         'gen_hash' => false,
         'use_fuzzy' => true,
+        'fuzziness' => 20,
         'num_backups' => 1,
         'pot_alias' => array( 'default.po', 'en_US.po', 'en.po' ),
         'php_alias' => array( 'php', 'twig' ),

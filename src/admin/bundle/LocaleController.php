@@ -66,7 +66,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
             $files = $package->findTemplateFiles()->augment($files);
         }
         
-        /* @var Loco_fs_File */
+        /* @var Loco_fs_File $file */
         foreach( $files as $file ){
             $nfiles++;
             if( 'pot' !== $file->extension() ){

@@ -170,7 +170,7 @@ class Loco_fs_File {
                 if( $writer->isDirect() && ( $uid = Loco_compat_PosixExtension::getuid() ) ){
                     return $uid === $this->uid() || $uid === $parent->uid();
                 }
-                // else delete operation won't be done directly, so can't pre-empt sticky problems
+                // else delete operation won't be done directly, so can't preempt sticky problems
                 // TODO is it worth comparing FTP username etc.. for ownership?
             }
             // defaulting to "deletable" based on fact that parent is writable.
@@ -199,7 +199,7 @@ class Loco_fs_File {
 
 
     /**
-     * Check if file can't be overwitten when existent, nor created when non-existent
+     * Check if file can't be overwritten when existent, nor created when non-existent
      * This does not check permissions recursively as directory trees are not built implicitly
      * @return bool
      */

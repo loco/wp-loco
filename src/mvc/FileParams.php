@@ -5,6 +5,11 @@
  * @property-read string $name
  * @property-read string $path
  * @property-read string $relpath
+ * @property-read string $size
+ * @property-read int $imode
+ * @property-read string $smode
+ * @property-read string $group
+ * @property-read string $owner
  */
 class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     
@@ -129,7 +134,6 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     /**
      * Using slightly modified version of WordPress's Human time differencing
      * + Added "Just now" when in the last 30 seconds
-     * TODO possibly replace with custom function that includes "Yesterday" etc..
      * @internal
      * @return string
      */

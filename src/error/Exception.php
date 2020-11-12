@@ -103,7 +103,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
         $path = $file->getRelativePath( loco_plugin_root() );
         $text = sprintf('[Loco.%s] "%s" in %s:%u', $this->getType(), $this->getMessage(), $path, $this->getRealLine() );
         // separate error log in CWD for tests
-        if( 'cli' === PHP_SAPI && defined('LOCO_TEST') && LOCO_TEST ){
+        if( defined('LOCO_TEST') && LOCO_TEST ){
             error_log( '['.date('c').'] '.$text."\n", 3, 'debug.log' );
         }
         // Else write to default PHP log, but note that WordPress may have set this to wp-content/debug.log.
@@ -138,6 +138,15 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      */
     public function getLevel(){
         return self::LEVEL_ERROR;
+    }
+
+
+    /**
+     * Call wp cli logging function
+     * @return void
+     */
+    public function logCli(){
+        WP_CLI::error( $this->getMessage(), false );
     }
 
 

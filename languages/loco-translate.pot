@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-10-26 18:04+0000\n"
+"POT-Creation-Date: 2020-11-12 19:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.5-dev; wp-5.5.1"
+"X-Loco-Version: 2.4.5-dev; wp-5.5.3"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -436,7 +436,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:171 src/admin/file/EditController.php:162
+#: src/data/Settings.php:173 src/admin/file/EditController.php:162
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:177
 #: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -632,7 +632,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:98 src/error/Exception.php:149
+#: src/js/Strings.php:98 src/error/Exception.php:158
 msgid "Error"
 msgstr ""
 
@@ -951,7 +951,7 @@ msgid "Just copy English source strings"
 msgstr ""
 
 #. relative time when something happened in the last 30 seconds
-#: src/mvc/FileParams.php:145
+#: src/mvc/FileParams.php:149
 msgid "Just now"
 msgstr ""
 
@@ -1047,7 +1047,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/data/Settings.php:169
+#: src/data/Settings.php:171
 msgid ""
 "Loco Translate 2.4 supports third party translation providers. Set up your "
 "API keys in the plugin settings!"
@@ -1306,7 +1306,7 @@ msgstr ""
 msgid "Permission denied to update file"
 msgstr ""
 
-#: src/package/Plugin.php:208
+#: src/package/Plugin.php:225
 #, php-format
 msgid "Plugin not found: %s"
 msgstr ""
@@ -1529,7 +1529,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: src/data/Settings.php:170 tpl/ajax/modal-apis-empty.php:15
+#: src/data/Settings.php:172 tpl/ajax/modal-apis-empty.php:15
 #: src/admin/file/EditController.php:161 tpl/admin/common/inc-fsconn.php:18
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
 msgid "Settings"

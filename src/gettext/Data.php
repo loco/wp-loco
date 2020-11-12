@@ -41,7 +41,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         }
         catch( Loco_error_ParseException $e ){
             $path = $file->getRelativePath( loco_constant('WP_CONTENT_DIR') );
-            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file',$path,$type) );
+            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file; %s',$path,$type,$e->getMessage()) );
             throw new Loco_error_ParseException( sprintf('Invalid %s file: %s',$type,basename($path)) );
         }
     }

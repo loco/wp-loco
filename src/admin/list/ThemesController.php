@@ -13,9 +13,7 @@ class Loco_admin_list_ThemesController extends Loco_admin_list_BaseController {
         $this->set('type', 'theme' );
         $this->set('title', __( 'Translate themes', 'loco-translate' ) );
         
-        /* @var $theme WP_Theme */
-        foreach( wp_get_themes() as $theme ){
-            $bundle = Loco_package_Theme::create( $theme->get_stylesheet() );
+        foreach( Loco_package_Theme::getAll() as $bundle ){
             $this->addBundle( $bundle );
         }
 

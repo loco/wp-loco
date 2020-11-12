@@ -72,6 +72,23 @@ class Loco_package_Theme extends Loco_package_Bundle {
 
 
     /**
+     * @return Loco_package_Theme[]
+     */
+    public static function getAll(){
+        $themes = array();
+        foreach( wp_get_themes(array('errors'=>null)) as $theme ){
+            try {
+                $themes[] = self::createFromTheme($theme);
+            }
+            catch( Exception $e ){
+                // @codeCoverageIgnore
+            }
+        }
+        return $themes;
+    }
+
+
+    /**
      * Create theme bundle definition from WordPress theme handle 
      * 
      * @param string short name of theme, e.g. "twentyfifteen"

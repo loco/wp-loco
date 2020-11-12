@@ -201,6 +201,12 @@ try {
     if ( is_admin() ) {
         new Loco_hooks_AdminHooks;
     }
+    
+    // enable wp cli commands
+    if( class_exists('WP_CLI',false) ) {
+        WP_CLI::add_command('loco','Loco_cli_Commands');
+    }
+
 }
 catch( Exception $e ){ // PHP5+
     trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ),E_USER_NOTICE);

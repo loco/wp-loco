@@ -27,4 +27,12 @@ class Loco_error_Warning extends Loco_error_Exception {
         return Loco_error_Exception::LEVEL_WARNING;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    public function logCli(){
+        WP_CLI::warning( $this->getMessage() );
+    }
+
 }

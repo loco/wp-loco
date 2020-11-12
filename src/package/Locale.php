@@ -23,6 +23,7 @@ class Loco_package_Locale {
 
     /**
      * Construct with locale to filter on
+     * @param Loco_Locale|null
      */
     public function __construct( Loco_locale $locale = null ){
         $this->index =  new ArrayObject;
@@ -34,7 +35,8 @@ class Loco_package_Locale {
 
 
     /**
-     * Add another locale to serarch on
+     * Add another locale to search on
+     * @param Loco_Locale
      * @return Loco_package_Locale
      */
     public function addLocale( Loco_Locale $locale ){
@@ -47,48 +49,31 @@ class Loco_package_Locale {
 
 
     /**
-     * @return Loco_package_Project
+     * @param Loco_fs_File
+     * @return Loco_package_Project|null
      */
     public function getProject( Loco_fs_File $file ){
         $path = $file->getPath();
         if( isset($this->index[$path]) ){
             return $this->index[$path];
         }
+        return null;
     }
 
 
-
     /**
-     * @return array
+     * @return Loco_package_Bundle[]
      */
     public function getBundles(){
         $bundles = $this->bundles;
         if( ! $bundles ){
-            $bundles = array ( 
-                Loco_package_Core::create()
-            );
-            foreach( Loco_package_Plugin::get_plugins() as $handle => $data ){
-                try {
-                    $bundles[] = Loco_package_Plugin::create( $handle );
-                }
-                catch( Exception $e ){
-                    // @codeCoverageIgnore
-                }
-            }
-            /* @var $theme WP_Theme */
-            foreach( wp_get_themes() as $theme ){
-                try {
-                    $bundles[] = Loco_package_Theme::create( $theme->get_stylesheet() );
-                }
-                catch( Exception $e ){
-                    // @codeCoverageIgnore
-                }
-            }
+            $bundles = array( Loco_package_Core::create() );
+            $bundles = array_merge( $bundles, Loco_package_Plugin::getAll() );
+            $bundles = array_merge( $bundles, Loco_package_Theme::getAll() );
             $this->bundles = $bundles;
         }
         return $bundles;
     }
-
 
 
     /**
@@ -98,9 +83,8 @@ class Loco_package_Locale {
         $index = $this->index;
         $suffixes = $this->match;
         $list = new Loco_fs_FileList;
-        /* @var $bundle Loco_package_Bundle */
         foreach( $this->getBundles() as $bundle ){
-            /* @var $project Loco_package_Project */
+            /* @var Loco_package_Project $project */
             foreach( $bundle as $project ){
                 /* @var $file Loco_fs_File */
                 foreach( $project->findLocaleFiles('po') as $file ){
@@ -119,14 +103,12 @@ class Loco_package_Locale {
     }
 
 
-
     /**
      * @return loco_fs_FileList
      */
     public function findTemplateFiles(){
         $index = $this->index;
         $list = new Loco_fs_FileList;
-        /* @var $bundle Loco_package_Bundle */
         foreach( $this->getBundles() as $bundle ){
             /* @var $project Loco_package_Project */
             foreach( $bundle as $project ){
@@ -140,6 +122,5 @@ class Loco_package_Locale {
         }
         return $list;
     }
-    
-    
+
 }

@@ -28,4 +28,12 @@ class Loco_error_Notice extends Loco_error_Exception {
         return Loco_error_Exception::LEVEL_NOLOG;
     }
 
+
+    /**
+     * {@inheritDoc}
+     */
+    public function logCli(){
+        WP_CLI::log( $this->getMessage() );
+    }
+
 }

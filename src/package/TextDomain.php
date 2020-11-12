@@ -1,31 +1,32 @@
 <?php
 /**
  * Object represents a Text Domain within a bundle.
- * TODO implement a conflict watcher to warn when domains are shared by multiple bundles?
  */
 class Loco_package_TextDomain extends ArrayIterator {
-    
+
     /**
      * Actual Gettext-like name of Text Domain, e.g. "twentyfifteen"
      * @var string
      */
     private $name;
-    
+
     /**
      * Whether this is the officially declared domain for a theme or plugin
      * @var bool
      */
     private $canonical = false;
 
-    
+
     /**
      * Create new Text Domain from its name
+     * @param string
      */
     public function __construct( $name ){
+        parent::__construct();
         $this->name = $name;
     }
 
-    
+
     /**
      * @internal
      */
@@ -45,6 +46,8 @@ class Loco_package_TextDomain extends ArrayIterator {
 
     /**
      * Create a named project in a given bundle for this Text Domain
+     * @param Loco_package_Bundle bundle of which this is one set of translations
+     * @param string
      * @return Loco_package_Project
      */
     public function createProject( Loco_package_Bundle $bundle, $name ){
@@ -56,6 +59,7 @@ class Loco_package_TextDomain extends ArrayIterator {
 
 
     /**
+     * @param bool
      * @return Loco_package_TextDomain
      */
     public function setCanonical( $bool ){
@@ -70,5 +74,5 @@ class Loco_package_TextDomain extends ArrayIterator {
     public function isCanonical(){
         return $this->canonical;
     }
-      
+
 }

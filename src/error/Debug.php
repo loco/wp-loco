@@ -26,6 +26,14 @@ class Loco_error_Debug extends Loco_error_Exception {
     public function getLevel(){
         return Loco_error_Exception::LEVEL_DEBUG;
     }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function logCli(){
+        WP_CLI::debug( $this->getMessage(), 'loco' );
+    }
     
     
     /**

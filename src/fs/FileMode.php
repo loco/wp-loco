@@ -13,6 +13,7 @@ class Loco_fs_FileMode {
 
     /**
      * Instantiate from integer file mode
+     * @param int
      */
     public function __construct( $mode ){
         $this->i = (int) $mode;

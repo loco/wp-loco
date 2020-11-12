@@ -36,8 +36,8 @@ class Loco_data_Preferences extends Loco_data_Serializable {
     public static function get(){
         $id = get_current_user_id();
         if( ! $id ){
-            // allow null return only in tests, because all real users must be logged in
-            if( defined('LOCO_TEST') && LOCO_TEST ) {
+            // allow null return only on command line. All web users must be logged in
+            if( 'cli' === PHP_SAPI || defined('LOCO_TEST') ){
                 return null;
             }
             throw new Exception( 'No current user' ); // @codeCoverageIgnore
