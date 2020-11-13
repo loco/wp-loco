@@ -50,8 +50,9 @@ class Loco_gettext_Extraction {
         $this->extracted = new LocoExtracted;
         $this->extracted->setDomain('default');
         $this->extras = array();
-        if( $default = $bundle->getDefaultProject() ){
-            $domain = (string) $default->getDomain();
+        $default = $bundle->getDefaultProject();
+        if( $default instanceof Loco_package_Project ){
+            $domain = $default->getDomain()->getName();
             // wildcard stands in for empty text domain, meaning unspecified or dynamic domains will be included.
             // note that strings intended to be in "default" domain must specify explicitly, or be included here too.
             if( '*' === $domain ){

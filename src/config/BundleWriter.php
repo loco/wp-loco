@@ -135,7 +135,7 @@ class Loco_config_BundleWriter implements JsonSerializable {
                 if( $file = $proj->getPot() ){
                     $templateElement = $projElement->appendChild( $dom->createElement('template') );
                     $templateElement->appendChild( $model->createFileElement($file) );
-                    // template may be prortected from end-user tampering
+                    // template may be protected from end-user tampering
                     if( $proj->isPotLocked() ){
                         $templateElement->setAttribute('locked','true');
                     }

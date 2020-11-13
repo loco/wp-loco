@@ -77,14 +77,17 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             }
         }
         // else parse POT file if project defines one that exists
-        else if( ( $potfile = $project->getPot() ) && $potfile->exists() ){
-            $data = Loco_gettext_Data::load($potfile);
-        }
-        // else extract directly from source code, assuming domain passed though from front end
         else {
-            $extr = new Loco_gettext_Extraction( $bundle );
-            $data = $extr->addProject($project)->includeMeta()->getTemplate($domain);
-            $potfile = null;
+            $potfile = $project->getPot();
+            if( $potfile->exists() ){ 
+                $data = Loco_gettext_Data::load($potfile);
+            }
+            // else extract directly from source code, assuming domain passed though from front end
+            else {
+                $extr = new Loco_gettext_Extraction( $bundle );
+                $data = $extr->addProject($project)->includeMeta()->getTemplate($domain);
+                $potfile = null;
+            }
         }
 
         // Let template define Project-Id-Version, else set header to current project name

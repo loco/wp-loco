@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-12 19:18+0000\n"
+"POT-Creation-Date: 2020-11-13 17:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1136,11 +1136,11 @@ msgstr ""
 msgid "New template"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:116
+#: src/admin/init/InitPotController.php:105
 msgid "New template file"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:117
+#: src/admin/init/InitPotController.php:106
 #, php-format
 msgid "New translations template for \"%s\""
 msgstr ""
@@ -1623,7 +1623,7 @@ msgstr ""
 msgid "Template file"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:68
+#: src/admin/init/InitPotController.php:57
 msgid "Template file already exists"
 msgstr ""
 

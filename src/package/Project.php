@@ -356,6 +356,35 @@ class Loco_package_Project {
 
 
     /**
+     * Get first valid domain path
+     * @param bool whether directory should exist
+     * @return Loco_fs_Directory
+     */
+    private function getSafeDomainPath(){
+        // use first configured domain path that exists
+        foreach( $this->getConfiguredTargets() as $d ){
+            if( $d->exists() ){
+                return $d;
+            }
+        }
+        // fallback to unconfigured, but possibly existent folders
+        $base = $this->getBundle()->getDirectoryPath();
+        foreach( array('languages','language','lang','l10n','i18n') as $d ){
+            $d = new Loco_fs_Directory($d);
+            $d->normalize($base);
+            if( $this->isTargetExcluded($d) ){
+                continue;
+            }
+            if( $d->exists() ){
+                return $d;
+            }
+        }
+        // Give up and place in root
+        return new Loco_fs_Directory($base);
+    }
+
+
+    /**
      * Lazy create all searchable source paths
      * @return Loco_fs_FileFinder
      */
@@ -523,9 +552,10 @@ class Loco_package_Project {
      */
     public function getPot(){
         if( ! $this->pot ){
-            $name = $this->getSlug().'.pot';
+            $slug = $this->getSlug();
+            $name = ( $slug ? $slug : $this->getDomain()->getName() ).'.pot';
             if( '.pot' !== $name ){
-                // find under configured domain paths
+                // find actual file under configured domain paths
                 $targets = $this->getConfiguredTargets()->copy();
                 // always permit POT file in the bundle root (i.e. outside domain path)
                 if( $this->isDomainDefault() && $this->bundle->hasDirectoryPath() ){
@@ -551,11 +581,16 @@ class Loco_package_Project {
                     }
                 }
             }
+            // fall back to a directory that exists, but where the POT may not
+            if( ! $this->pot ){
+                $this->pot = new Loco_fs_File($name);
+                $this->pot->normalize( (string) $this->getSafeDomainPath() );
+            }
         }
         return $this->pot;
     }
 
-    
+
     /**
      * Force the use of a known POT file. This could be a PO file if necessary
      * @param Loco_fs_File template POT file
