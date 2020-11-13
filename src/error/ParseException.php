@@ -1,11 +1,11 @@
 <?php
 /**
- * 
+ * Exception thrown when parsing fails
  */
 class Loco_error_ParseException extends Loco_error_Exception {
 
     /**
-     * @var string
+     * @var string[]
      */
     private $context;
 
@@ -16,32 +16,36 @@ class Loco_error_ParseException extends Loco_error_Exception {
      * @return self
      */
     public function setContext( $line, $column, $source ){
-        $this->context = null;
-        // If line given as 0 then treat column as offset in an unknown number of lines
-        if( 0 === $line ){
-            $lines = preg_split( '/\\r?\\n/', substr($source,0,$column));
-            $line = count($lines);
-            $column = strlen( end($lines) );
+        $this->context = array();
+        $lines = preg_split( '/\\r?\\n/', $source, $line+1 );
+        $offset = $line - 1;
+        if( isset($lines[$offset]) ){
+            $this->context[] = $lines[$offset];
+            $this->context[] = str_repeat(' ', max(0,$column-1) ).'^';
         }
-        // get line of source code where error is and construct a ____^ thingy to show error on next line
-        // this requires that full source is passed in, so line number must be real
-        if( loco_debugging() ){
-            $lines = preg_split( '/\\r?\\n/', $source, $line+1 );
-            $offset = $line - 1;
-            if( isset($lines[$offset]) ){
-                $this->context = $lines[$offset] ."\n". str_repeat(' ', max(0,$column) ).'^';
-            }
-        }
-        // wrap initial message with context data
         $this->message = sprintf("Error at line %u, column %u: %s", $line, $column, $this->message );
         return $this;
     }
+
+
+    /**
+     * @param int zero-based offset to failure point
+     * @param string source in which to identify line and column
+     * @return self
+     */
+    public function setOffsetContext( $offset, $source ){
+        $lines = preg_split( '/\\r?\\n/', substr($source,0,$offset) );
+        $line = count($lines);
+        $column = 1 + strlen( end($lines) );
+        return $this->setContext( $line, $column, $source );
+    }
+
 
     /**
      * @return string
      */
     public function getContext(){
-        return $this->context;
+        return is_array($this->context) ? implode("\n",$this->context) : '';
     }
 
 }

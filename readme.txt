@@ -103,7 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.4.5 =
 * Added WP CLI sync command
 * Fixed {locale} placeholder bug introduced in 2.4.4
-* Fixes for extracting non-UTF8 PHP source
+* Improved handling of invalid character encodings
 * Bumped WordPress version to 5.5.3
 
 = 2.4.4 =

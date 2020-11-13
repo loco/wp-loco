@@ -24,6 +24,8 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
 
     /**
      * Render diff of two files, presumed to be PO or POT
+     * @param Loco_fs_File Left hand file
+     * @param Loco_fs_File Right hand file
      * @return string HTML table
      */
     public function renderFiles( Loco_fs_File $lhs, Loco_fs_File $rhs ){
@@ -34,10 +36,23 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
         }
         // like wp_text_diff but avoiding whitespace normalization
         // uses deprecated signature for 'auto' in case of old WordPress
-        return $this->render( new Text_Diff (
-            preg_split( '/(?:\\n|\\r\\n?)/', Loco_gettext_Data::ensureUtf8( $lhs->getContents() ) ),
-            preg_split( '/(?:\\n|\\r\\n?)/', Loco_gettext_Data::ensureUtf8( $rhs->getContents() ) )
-        ) );
+        return $this->render( new Text_Diff( self::splitFile($lhs), self::splitFile($rhs) ) );
+    }
+
+
+    /**
+     * @param Loco_fs_File
+     * @return string[]
+     */
+    private static function splitFile(  Loco_fs_File $file ){
+        $src = $file->getContents();
+        $src = Loco_gettext_Data::ensureUtf8($src);
+        $arr = preg_split( '/\\r?\\n/', $src );
+        if( ! is_array($arr) ){
+            $f = new Loco_mvc_FileParams( array(), $file );
+            throw new Loco_error_Exception('Failed to split '.$f->relpath.' ('.$f->size.')' );
+        }
+        return $arr;
     }
 
 
