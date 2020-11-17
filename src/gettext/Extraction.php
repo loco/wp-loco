@@ -25,7 +25,7 @@ class Loco_gettext_Extraction {
 
     /**
      * List of files skipped due to memory limit
-     * @var Loco_fs_FileList
+     * @var Loco_fs_FileList|null
      */
     private $skipped;
 

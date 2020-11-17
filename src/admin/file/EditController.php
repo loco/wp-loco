@@ -70,10 +70,12 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
 
         // default is to permit editing of any file
         $readonly = false;
+        
+        // All files must belong to a bundle.
+        $bundle = $this->getBundle();
 
         // Establish if file belongs to a configured project
         try {
-            $bundle = $this->getBundle();
             $project = $this->getProject();
         }
         // Fine if not, this just means sync isn't possible.

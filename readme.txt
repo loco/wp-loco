@@ -104,6 +104,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Added WP CLI sync command
 * Fixed {locale} placeholder bug introduced in 2.4.4
 * Improved handling of invalid character encodings
+* Sync (msgmerge) moved to back end 
+* Fuzzy matching uses Levenshtein distance
 * Bumped WordPress version to 5.5.3
 
 = 2.4.4 =

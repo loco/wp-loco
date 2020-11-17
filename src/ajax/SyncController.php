@@ -1,4 +1,5 @@
-<?php
+<?php /** @noinspection DuplicatedCode */
+
 /**
  * Ajax "sync" route.
  * Extracts strings from source (POT or code) and returns to the browser for in-editor merge.
@@ -17,21 +18,28 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         if( ! $project instanceof Loco_package_Project ){
             throw new Loco_error_Exception('No such project '.$post->domain);
         }
-        
+
+        // Merging on back end is only required if existing target file exists.
+        // Currently it always will and the editor is not permitted to contain unsaved changes when syncing.
+        if( ! $post->has('path') ){
+            throw new Loco_error_Exception('path argument required');
+        }
         $file = new Loco_fs_File( $post->path );
         $base = loco_constant('WP_CONTENT_DIR');
         $file->normalize($base);
-        
-        // POT file always synced with source code (even if a PO being used as POT)
-        if( 'pot' === $post->type ){
+        $target = Loco_gettext_Data::load($file);
+
+        // POT file always synced with source code
+        $type = $post->type;
+        if( 'pot' === $type ){
             $potfile = null;
         }
-        // allow post data to force a template file path
-        else if( $path = $post->sync ){
-            $potfile = new Loco_fs_File($path);
+        // allow front end to configure source file. (will have come from $target headers)
+        else if( $post->has('sync') ){
+            $potfile = new Loco_fs_File( $post->sync );
             $potfile->normalize($base);
         }
-        // else use project-configured template if one is defined
+        // else use project-configured template path
         else {
             $potfile = $project->getPot();
         }
@@ -43,22 +51,21 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             $potfile = null;
         }
         
-        // sync with POT if it exists
+        // Parse existing POT for source
         if( $potfile ){
             $this->set('pot', $potfile->basename() );
             try {
-                $data = Loco_gettext_Data::load($potfile);
+                $source = Loco_gettext_Data::load($potfile);
             }
             catch( Exception $e ){
                 // translators: Where %s is the name of the invalid POT file
                 throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
             }
-            // strip msgstr fields from PO files if template is user-defined and "copy translations" was not selected.
-            if( '1' === $post->strip ){
-                $data->strip();
-            }
+            // Only copy msgstr fields from source if it's a user-defined PO template and "copy translations" was selected.
+            $strip = (bool) $post->strip;
+            $translate = 'pot' !== $potfile->extension() && ! $strip;
         }
-        // else sync with source code
+        // else extract POT from source code
         else {
             $this->set('pot', '' );
             $domain = (string) $project->getDomain();
@@ -75,11 +82,79 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 // not failing, just warning. Nothing will be saved until user saves editor state
                 Loco_error_AdminNotices::warn( $text );
             }
-            // OK to return available strings
-            $data = $extr->includeMeta()->getTemplate($domain);
+            // Have source strings. These cannot contain any translations.
+            $source = $extr->includeMeta()->getTemplate($domain);
+            $translate = false;
+            $strip = false;
         }
-
-        $this->set( 'po', $data->jsonSerialize() );
+        
+        // establish on back end what strings will be added, removed, and which could be fuzzy-matches
+        $ntotal = 0;
+        $nmatched = 0;
+        $added = array();
+        $dropped = array();
+        $fuzzy = array();
+        // add latest valid sources to matching instance
+        $matcher = new LocoFuzzyMatcher;
+        /* @var LocoPoMessage $new */
+        foreach( $source as $new ){
+            $matcher->add($new);
+            $ntotal++;
+        }
+        // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
+        if( 'po' === $type ){
+            $fuzziness = Loco_data_Settings::get()->fuzziness;
+            $matcher->setFuzziness( (string) $fuzziness );
+        }
+        else {
+            $matcher->setFuzziness('0');
+        }
+        // update matches sources, deferring unmatched for deferred fuzzy match 
+        $merged = clone $target;
+        $merged->clear();
+        /* @var LocoPoMessage $old */
+        foreach( $target as $old ){
+            $new = $matcher->match($old);
+            // if existing source is still valid, merge any changes
+            if( $new instanceof LocoPoMessage ){
+                $p = clone $old;
+                $p->merge($new,$translate);
+                $merged->push($p);
+                $nmatched++;
+            }
+        }
+        // Attempt fuzzy matching after all exact matches have been processed
+        if( $nmatched !== $ntotal ){
+            foreach( $matcher->getFuzzyMatches() as $pair ){
+                list($old,$new) = $pair;
+                $p = clone $old;
+                $p->merge($new);
+                $merged->push($p);
+                $fuzzy[] = $p->getKey();
+            }
+            // Any unmatched strings remaining are NEW
+            /* @var LocoPoMessage $new */
+            foreach( $matcher->unmatched() as $new ){
+                $p = clone $new;
+                $strip and $p->strip();
+                $merged->push($p);
+                $added[] = $p->getKey();
+            }
+            // any deferred matches not resolved are dropped
+            /* @var LocoPoMessage $old */
+            foreach( $matcher->redundant() as $old ){
+                $dropped[] = $old->getKey();
+            }
+        }
+        // return to JavaScript with stats in the same form as old front end merge
+        $this->set( 'done', array (
+            'add' => $added,
+            'fuz' => $fuzzy,
+            'del' => $dropped,
+        ) );
+        
+        $merged->sort();
+        $this->set( 'po', $merged->jsonSerialize() );
         
         return parent::render();
     }
