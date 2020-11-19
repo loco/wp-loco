@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.5.3
-Stable tag: 2.4.4
+Stable tag: 2.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,7 +101,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.5 =
-* Added WP CLI sync command
+* Added WP-CLI sync and extract commands
 * Fixed {locale} placeholder bug introduced in 2.4.4
 * Improved handling of invalid character encodings
 * Sync (msgmerge) moved to back end 
