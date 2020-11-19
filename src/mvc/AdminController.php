@@ -40,9 +40,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         $this->auth();
         
         // check essential extensions on all pages so admin notices are shown
-        foreach( array('json','mbstring') as $ext ){
-            loco_check_extension($ext);
-        }
+        loco_check_extension('json');
+        loco_check_extension('mbstring');
 
         // add contextual help tabs to current screen if there are any
         if( $screen = get_current_screen() ){

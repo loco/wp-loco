@@ -132,17 +132,17 @@ function loco_require_lib( $path ){
  */
 function loco_check_extension( $name ) {
     static $cache = array();
-    if ( ! isset( $cache[$name] ) ) {
-        if ( extension_loaded($name) ) {
-            $cache[ $name ] = true;
+    if( ! array_key_exists($name,$cache) ) {
+        if( extension_loaded($name) ){
+            $cache[$name] = true;
         }
         else {
-            Loco_error_AdminNotices::warn( sprintf( __('Loco requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
+            Loco_error_AdminNotices::warn( sprintf( __('Loco Translate requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
             $class = 'Loco_compat_'.ucfirst($name).'Extension.php';
             $cache[$name] = class_exists($class);
         }
     }
-    return $cache[ $name ];
+    return $cache[$name];
 }
 
 

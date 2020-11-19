@@ -40,7 +40,7 @@ class Loco_ajax_DownloadController extends Loco_mvc_AjaxController {
             $has_bom = "\xEF\xBB\xBF" === substr($raw,0,3);
             $use_bom = (bool) Loco_data_Settings::get()->po_utf8_bom;
             // only alter file if valid UTF-8. Deferring detection overhead until required 
-            if( $has_bom !== $use_bom && 'UTF-8' === mb_detect_encoding( $raw, array('UTF-8','ISO-8859-1'), true ) ){
+            if( $has_bom !== $use_bom && preg_match('//u',$raw) ){
                 if( $use_bom ){
                     $raw = "\xEF\xBB\xBF".$raw; // prepend
                 }
@@ -52,6 +52,5 @@ class Loco_ajax_DownloadController extends Loco_mvc_AjaxController {
 
         return $raw;
     }
-    
-    
+
 }

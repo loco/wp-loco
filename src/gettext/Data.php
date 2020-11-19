@@ -98,7 +98,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return string
      */
     public static function ensureUtf8( $src ){
-        loco_check_extension('mbstring');
         $src = loco_remove_bom($src,$cs);
         if( ! $cs ){
             // read PO header, requiring partial parse

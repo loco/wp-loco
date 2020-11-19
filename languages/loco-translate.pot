@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 16:00+0000\n"
+"POT-Creation-Date: 2020-11-19 17:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -872,7 +872,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/mvc/AdminController.php:53
+#: src/mvc/AdminController.php:52
 msgid "Help & support"
 msgstr ""
 
@@ -1025,13 +1025,6 @@ msgstr ""
 msgid "Loco interrupted by output from %s:%u"
 msgstr ""
 
-#: loco.php:140
-#, php-format
-msgid ""
-"Loco requires the \"%s\" PHP extension. Ask your hosting provider to install "
-"it"
-msgstr ""
-
 #. change "en" in the URL to your language if it's available at http://php.net/docs.php
 #: tpl/admin/errors/no-tokenizer.php:17
 msgid ""
@@ -1057,8 +1050,18 @@ msgid ""
 "API keys in the plugin settings!"
 msgstr ""
 
-#: src/mvc/AdminController.php:116
+#: src/mvc/AdminController.php:115
 msgid "Loco Translate is powered by"
+msgstr ""
+
+#: loco.php:140
+#, php-format
+#| msgid ""
+#| "Loco requires the \"%s\" PHP extension. Ask your hosting provider "
+#| "to install it"
+msgid ""
+"Loco Translate requires the \"%s\" PHP extension. Ask your hosting provider "
+"to install it"
 msgstr ""
 
 #. Page title for plugin home screen
