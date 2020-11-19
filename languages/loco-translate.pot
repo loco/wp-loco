@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.5-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-11-17 14:41+0000\n"
+"POT-Creation-Date: 2020-11-17 16:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -131,7 +131,7 @@ msgid_plural "%s words"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/config/settings.php:148
+#: tpl/admin/config/settings.php:165
 msgid "About file system access"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "Allow (with warning)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:159
+#: tpl/admin/config/settings.php:176
 msgid "Allow full access to these roles"
 msgstr ""
 
@@ -437,7 +437,7 @@ msgid "Disallow"
 msgstr ""
 
 #: src/data/Settings.php:173 src/admin/file/EditController.php:164
-#: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:177
+#: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:194
 #: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
@@ -474,7 +474,7 @@ msgstr ""
 msgid "Editing %1$s in %2$s"
 msgstr ""
 
-#: tpl/admin/config/settings.php:138
+#: tpl/admin/config/settings.php:155
 msgid "Editing of POT (template) files"
 msgstr ""
 
@@ -793,7 +793,7 @@ msgstr ""
 msgid "File size"
 msgstr ""
 
-#: tpl/admin/config/settings.php:115 tpl/admin/config/settings.php:119
+#: tpl/admin/config/settings.php:132 tpl/admin/config/settings.php:136
 msgid "File system access"
 msgstr ""
 
@@ -844,6 +844,10 @@ msgstr ""
 msgid "Full documentation"
 msgstr ""
 
+#: tpl/admin/config/settings.php:110
+msgid "Fuzzy matching tolerance:"
+msgstr ""
+
 #: tpl/admin/config/settings.php:27
 msgid "Generate hash tables"
 msgstr ""
@@ -860,7 +864,7 @@ msgstr ""
 msgid "Go to WordPress Core"
 msgstr ""
 
-#: tpl/admin/config/settings.php:155
+#: tpl/admin/config/settings.php:172
 msgid "Grant access to roles"
 msgstr ""
 
@@ -1090,7 +1094,7 @@ msgid "MO file exists for this language already. Delete it first"
 msgstr ""
 
 #. @var Loco_mvc_ViewParams $verbose
-#: tpl/admin/config/settings.php:130
+#: tpl/admin/config/settings.php:147
 msgid "Modification of installed files"
 msgstr ""
 
@@ -1175,7 +1179,7 @@ msgstr ""
 msgid "no wildcards"
 msgstr ""
 
-#: tpl/admin/config/settings.php:89 tpl/admin/config/settings.php:125
+#: tpl/admin/config/settings.php:89 tpl/admin/config/settings.php:142
 msgid "Not recommended"
 msgstr ""
 
@@ -1400,7 +1404,7 @@ msgstr ""
 msgid "POT file saved"
 msgstr ""
 
-#: tpl/admin/config/settings.php:102
+#: tpl/admin/config/settings.php:119
 msgid "POT template files"
 msgstr ""
 
@@ -1468,11 +1472,11 @@ msgstr ""
 msgid "Save config"
 msgstr ""
 
-#: tpl/admin/config/settings.php:124
+#: tpl/admin/config/settings.php:141
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:176 tpl/admin/config/apis.php:121
+#: tpl/admin/config/settings.php:193 tpl/admin/config/apis.php:121
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1611,6 +1615,10 @@ msgstr ""
 
 #: tpl/admin/help/side-bar.php:12
 msgid "Support forum"
+msgstr ""
+
+#: tpl/admin/config/settings.php:102 tpl/admin/config/settings.php:106
+msgid "Syncing PO files"
 msgstr ""
 
 #: src/admin/config/DebugController.php:47

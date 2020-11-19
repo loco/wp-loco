@@ -98,6 +98,23 @@ $fs_help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/
                         </fieldset>
                     </td>
                 </tr>
+                <tr>
+                    <th scope="row"><?php esc_html_e('Syncing PO files','loco-translate')?></th>
+                    <td>
+                        <fieldset>
+                            <legend class="screen-reader-text">
+                                <span><?php esc_html_e('Syncing PO files','loco-translate')?></span>
+                            </legend>
+                            <p>
+                                <label for="loco--">
+                                    <?php esc_html_e('Fuzzy matching tolerance:','loco-translate')?>
+                                </label>
+                                <input type="text" size="5" maxlength="3" name="opts[fuzziness]" id="loco--fuzziness" value="<?php echo esc_attr( $opts->fuzziness)?>" placeholder="0-100" />
+                                <span>%</span>
+                            </p>
+                        </fieldset>
+                    </td>
+                </tr>
                 <!--tr>
                     <th scope="row"><?php esc_html_e('POT template files','loco-translate')?></th>
                     <td>
