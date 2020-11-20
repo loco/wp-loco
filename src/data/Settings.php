@@ -13,7 +13,7 @@
  * @property bool $fs_persist Whether to remember file system credentials in session
  * @property int $fs_protect Prevent modification of files in system folders (0:off, 1:warn, 2:block)
  * @property int $pot_protect Prevent modification of POT files (0:off, 1:warn, 2:block)
- * @property int $pot_expected Whether to block missing templates (0:off, 1:warn, 2:block) 
+ * @property int $pot_expected Whether to allow missing templates and sync to source (0:off, 1:warn, 2:block) 
  * @property string $max_php_size Skip PHP source files this size or larger
  * @property bool $po_utf8_bom Whether to prepend PO and POT files with UTF-8 byte order mark
  * @property string $po_width PO/POT file maximum line width (wrapping) zero to disable

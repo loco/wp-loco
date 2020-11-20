@@ -140,20 +140,20 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
     private function exitScript( $str, array $headers ){
 	    try {
             do_action('loco_admin_shutdown');
-	    	Loco_output_Buffer::clear();
-	    	$this->buffer = null;
-		    Loco_output_Buffer::check();
-		    $headers['Content-Length'] = strlen($str);
-		    foreach( $headers as $name => $value ){
-			    header( $name.': '.$value, true );
-		    }
+            Loco_output_Buffer::clear();
+            $this->buffer = null;
+            Loco_output_Buffer::check();
+            $headers['Content-Length'] = strlen($str);
+            foreach( $headers as $name => $value ){
+                header( $name.': '.$value, true );
+            }
 	    }
 	    catch( Exception $e ){
-		    Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
-		    $str = $e->getMessage();
+	        Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
+	        $str = $e->getMessage();
 	    }
-    	echo $str;
-    	exit(0);
+	    echo $str;
+	    exit(0);
     }
 
 

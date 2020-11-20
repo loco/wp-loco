@@ -76,7 +76,7 @@ document.addEventListener && document.addEventListener('DOMContentLoaded', funct
         function enumJs(s) {
             var i = s.length;
             while( 0 !== i-- ){
-                if( null == document.getElementById(s[i]) ){
+                if( null == document.getElementById(s[i]+'-js') ){
                     return false;
                 }
             }
