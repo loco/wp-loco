@@ -100,6 +100,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.4.6 =
+
 = 2.4.5 =
 * Added WP-CLI sync and extract commands
 * Fixed {locale} placeholder bug introduced in 2.4.4
@@ -385,7 +387,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.4.5 =
+= 2.4.6 =
 * Various improvements and bugfixes
 
 

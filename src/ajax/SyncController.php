@@ -35,7 +35,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             $potfile = null;
         }
         // allow front end to configure source file. (will have come from $target headers)
-        else if( $post->has('sync') ){
+        else if( $post->sync ){
             $potfile = new Loco_fs_File( $post->sync );
             $potfile->normalize($base);
         }

@@ -129,7 +129,9 @@ abstract class Loco_cli_Utils {
     
     /**
      * Parse boolean command line option. Absence is equal to false
-     * 
+     * @param string[]
+     * @param string
+     * @return bool
      */
     public static function bool( array $opts, $key ){
         $value = isset($opts[$key]) ? $opts[$key] : false;
