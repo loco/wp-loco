@@ -101,6 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.6 =
+* Fixed critical bug syncing PO directly to source code
+* Added plugin setting for allowing/disallowing missing POT
 
 = 2.4.5 =
 * Added WP-CLI sync and extract commands

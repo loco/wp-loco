@@ -8,6 +8,8 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
 $fs_help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/filesystem');
 /* @var Loco_data_Settings $opts */
 /* @var Loco_data_Settings $dflt */
+/* @var Loco_mvc_ViewParams $nonce */
+/* @var Loco_mvc_ViewParams $verbose */
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded">
@@ -106,11 +108,22 @@ $fs_help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/
                                 <span><?php esc_html_e('Syncing PO files','loco-translate')?></span>
                             </legend>
                             <p>
-                                <label for="loco--">
-                                    <?php esc_html_e('Fuzzy matching tolerance:','loco-translate')?>
+                                <label for="loco--fuzziness">
+                                    <?php esc_html_e('Fuzzy matching tolerance','loco-translate')?>:
                                 </label>
                                 <input type="text" size="5" maxlength="3" name="opts[fuzziness]" id="loco--fuzziness" value="<?php echo esc_attr( $opts->fuzziness)?>" placeholder="0-100" />
                                 <span>%</span>
+                            </p>
+                            <p>
+                                <label for="loco--pot-expected">
+                                    <?php // translators: Indicates that POT files are optional, which is not recommended
+                                    esc_html_e('Sync with source when template missing','loco-translate')?>:
+                                </label>
+                                <select name="opts[pot_expected]" id="loco--pot-expected">
+                                    <option value="0"><?php $verbose->e(0)?></option>
+                                    <option value="1"<?php echo 1 === $opts->pot_expected?' selected':''?>><?php $verbose->e(1)?></option>
+                                    <option value="2"<?php echo 2 === $opts->pot_expected?' selected':''?>><?php $verbose->e(2)?></option>
+                                </select>
                             </p>
                         </fieldset>
                     </td>
@@ -142,17 +155,20 @@ $fs_help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/
                                     (<?php esc_html_e('Not recommended','loco-translate')?>) 
                                 </label>
                             </p>
-                            <p><?php
-                                /* @var Loco_mvc_ViewParams $verbose */
-                                esc_html_e('Modification of installed files','loco-translate');?>:
+                            <p>
+                                <label for="loco--fs-protect">
+                                    <?php esc_html_e('Modification of installed files','loco-translate');?>:
+                                </label>
                                 <select name="opts[fs_protect]" id="loco--fs-protect">
                                     <option value="0"><?php $verbose->e(0)?></option>
                                     <option value="1"<?php echo 1 === $opts->fs_protect?' selected':''?>><?php $verbose->e(1)?></option>
                                     <option value="2"<?php echo 2 === $opts->fs_protect?' selected':''?>><?php $verbose->e(2)?></option>
                                 </select>
                             </p>
-                            <p><?php
-                                esc_html_e('Editing of POT (template) files','loco-translate');?>:
+                            <p>
+                                <label for="loco--pot-protect">
+                                    <?php esc_html_e('Editing of POT (template) files','loco-translate');?>:
+                                </label>
                                 <select name="opts[pot_protect]" id="loco--pot-protect">
                                     <option value="0"><?php $verbose->e(0)?></option>
                                     <option value="1"<?php echo 1 === $opts->pot_protect?' selected':''?>><?php $verbose->e(1)?></option>

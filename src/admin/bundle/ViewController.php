@@ -67,16 +67,17 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         ) );
 
         // POT template file
+        $pot = null;
         $file = $project->getPot();
         if( $file && $file->exists() ){
-            $meta = Loco_gettext_Metadata::load($file);
+            $pot = Loco_gettext_Metadata::load($file);
             $p['pot'] = new Loco_mvc_ViewParams( array(
                 // POT info
                 'name' => $file->basename(),
                 'time' => $file->modified(),
                 // POT links
-                'info' => $this->getResourceLink('file-info', $project, $meta ),
-                'edit' => $this->getResourceLink('file-edit', $project, $meta ),
+                'info' => $this->getResourceLink('file-info', $project, $pot ),
+                'edit' => $this->getResourceLink('file-edit', $project, $pot ),
             ) );
         }
         
@@ -90,42 +91,39 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
         $po = $project->findNotLocaleFiles('po')->augment( $project->findNotLocaleFiles('pot') );
         $p['_po'] = $this->createProjectPairs( $project, $po, $mo );
 
-        // always offer msginit even if we find out later we can't extract any strings
-        $p['nav'][] = new Loco_mvc_ViewParams( array( 
-            'href' => $this->getProjectLink('msginit', $project ),
-            'name' => __('New language','loco-translate'),
-            'icon' => 'add',
-        ) );
+        // offer msginit unless plugin settings disallows optional POT
+        if( $pot || 2 > Loco_data_Settings::get()->pot_expected ){
+            $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                'href' => $this->getProjectLink('msginit', $project ),
+                'name' => __('New language','loco-translate'),
+                'icon' => 'add',
+            ) );
+        }
         
-        // offer PO file upload
+        // Always offer PO file upload
         $p['nav'][] = new Loco_mvc_ViewParams( array(
             'href' => $this->getProjectLink('upload', $project ),
             'name' => __('Upload PO','loco-translate'),
             'icon' => 'upload',
         ) );
-
-        $pot = $project->getPot();
         
         // prevent editing of POT when config prohibits
-        if( $project->isPotLocked() || 1 < Loco_data_Settings::get()->pot_protect ) {
-            if( $pot && $pot->exists() ){
-                $meta = Loco_gettext_Metadata::load($pot);
+        if( $pot ){
+            if( $project->isPotLocked() || 1 < Loco_data_Settings::get()->pot_protect ) {
                 $p['nav'][] = new Loco_mvc_ViewParams( array(
-                    'href' => $this->getResourceLink('file-view', $project, $meta ),
+                    'href' => $this->getResourceLink('file-view', $project, $pot ),
                     'name' => __('View template','loco-translate'),
                     'icon' => 'file',
                 ) );
             }
-        }
-        // offer template editing if permitted
-        else if( $pot && $pot->exists() ){
-            $p['pot'] = $pot;
-            $meta = Loco_gettext_Metadata::load($pot);
-            $p['nav'][] = new Loco_mvc_ViewParams( array( 
-                'href' => $this->getResourceLink('file-edit', $project, $meta ),
-                'name' => __('Edit template','loco-translate'),
-                'icon' => 'pencil',
-            ) );
+            // offer template editing if permitted
+            else {
+                $p['nav'][] = new Loco_mvc_ViewParams( array( 
+                    'href' => $this->getResourceLink('file-edit', $project, $pot ),
+                    'name' => __('Edit template','loco-translate'),
+                    'icon' => 'pencil',
+                ) );
+            }
         }
         // else offer creation of new Template
         else {

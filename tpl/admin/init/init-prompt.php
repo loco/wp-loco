@@ -4,6 +4,12 @@
  */
 $this->extend('../layout');
 $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates');
+
+/* @var Loco_mvc_ViewParams[] $tabs */
+/* @var Loco_mvc_ViewParams $ext */
+/* @var Loco_mvc_ViewParams $conf */
+/* @var Loco_mvc_ViewParams $skip */
+/* @var Loco_mvc_ViewParams $params */
 ?> 
     <div class="notice inline notice-warning">
         <h3 class="has-icon">

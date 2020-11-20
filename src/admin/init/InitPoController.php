@@ -209,13 +209,13 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             // TODO this means another utility function in project for prefixing rules on individual location
         }
         // else no template exists, so we prompt to extract from source
-        else {
+        else if( 2 > Loco_data_Settings::get()->pot_expected ){
             $this->set( 'ext', new Loco_mvc_ViewParams( array(
                 'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-xgettext', $_GET ),
                 'text' => __('Create template','loco-translate'),
             ) ) );
-            // if forcing source extraction show brief description of source files
-            if( $this->get('extract') ){
+            // if allowing source extraction without warning show brief description of source files
+            if( $this->get('extract') || 0 === Loco_data_Settings::get()->pot_expected ){
                 // Tokenizer required for string extraction
                 if( ! loco_check_extension('tokenizer') ){
                     return $this->view('admin/errors/no-tokenizer');
@@ -242,6 +242,9 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 }
                 return $this->view('admin/init/init-prompt');
             }
+        }
+        else {
+            throw new Loco_error_Exception('Plugin settings disallow missing templates');
         }
         $this->set( 'summary', $summary );
         
