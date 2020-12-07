@@ -193,6 +193,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         if( $potfile && $potfile->exists() ){
             $meta = Loco_gettext_Metadata::load($potfile);
             $total = $meta->getTotal();
+            // translators: 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
             $summary = sprintf( _n('One string found in %2$s','%s strings found in %s',$total,'loco-translate'), number_format($total), $potfile->basename() );
             $this->set( 'pot', new Loco_mvc_ViewParams( array(
                 'name' => $potfile->basename(),

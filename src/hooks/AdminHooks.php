@@ -115,7 +115,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     private function purge_wp_cache(){
         global $wp_object_cache;
-        if( function_exists('wp_cache_delete') && method_exists($wp_object_cache,'delete') ){
+        if( function_exists('wp_cache_delete') && is_object($wp_object_cache) && method_exists($wp_object_cache,'delete') ){
             wp_cache_delete('plugins','loco');
         }
     }

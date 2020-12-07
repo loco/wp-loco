@@ -53,7 +53,7 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // xgettext: javascript-format
         _n("Translation job aborted with one string remaining","Translation job aborted with %s strings remaining",0,'loco-translate');
 
-        /* e.g. via Google Translate
+        /* 1: Number of strings; 2: Service provider; e.g. "50 strings translated via Google Translate"
          * xgettext: javascript-format */
         _n("%s string translated via %s","%s strings translated via %s",0,'loco-translate');
 

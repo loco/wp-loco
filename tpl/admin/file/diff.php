@@ -22,7 +22,7 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
                     <time><?php $master->date('mtime',$dfmt)?></time><br />
                     <button type="button" class="button disabled" disabled>Restore</button>
                 </div><?php
-                /* @var $file Loco_mvc_FileParams */
+                /* @var Loco_mvc_FileParams[] $files */
                 foreach( $files as $i => $file ):?> 
                 <div class="diff-meta jshide">
                     <span><?php $file->e('name')?></span><br />
@@ -32,7 +32,7 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
                 </div><?php
                 endforeach?> 
             </div><?php
-            /* @var $hidden Loco_mvc_HiddenFields */
+            /* @var Loco_mvc_HiddenFields $hidden */
             $hidden->_e();?> 
         </form>
         <div class="revisions-diff-frame jsonly">

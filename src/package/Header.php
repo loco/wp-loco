@@ -4,8 +4,11 @@
  * Because access to theme and plugin header data via WordPress is a total mess.
  * 
  * @property-read string $Name
+ * @property-read string $Version
  * @property-read string $Author
  * @property-read string $AuthorURI
+ * @property-read string $PluginURI
+ * @property-read string $ThemeURI
  * @property-read string $TextDomain
  * @property-read string $DomainPath
  */
@@ -24,13 +27,17 @@ class Loco_package_Header {
 
 
     /**
+     * @param string
      * @return string
      */
     public function __get( $prop ){
         $wp = $this->wp;
-        // prefer require "get" method to access raw properties (WP_Theme)
-        if( method_exists($wp, 'get') && ( $value = $wp->get($prop) ) ){
-            return $value;
+        // prefer "get" method to access raw properties (WP_Theme)
+        if( is_object($wp) && method_exists($wp,'get') ){
+            $value = $wp->get($prop);
+            if( is_string($value) && '' !== $value ){
+                return $value;
+            }
         }
         // may have key directly, e.g. TextDomain in plugin array
         if( isset($wp[$prop]) ){
@@ -42,10 +49,12 @@ class Loco_package_Header {
 
 
     /**
+     * @param string
+     * @param mixed
      * @codeCoverageIgnore
      */
     public function __set( $prop, $value ){
-        throw new RuntimeException('Read only');
+        throw new LogicException('Read only');
     }
 
 
