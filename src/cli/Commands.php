@@ -22,6 +22,9 @@ class Loco_cli_Commands {
      * [--noop]
      * : Specify dry run. Makes no changes on disk.
      * 
+     * [--force]
+     * : Update even when nothing has changed. Useful for recompiling MO/JSON.
+     * 
      * ## EXAMPLES
      * 
      * wp loco sync plugins
@@ -39,7 +42,8 @@ class Loco_cli_Commands {
             Loco_cli_SyncCommand::run (
                 Loco_cli_Utils::collectProjects( isset($args[0]) ? $args[0] : '' ),
                 Loco_cli_Utils::collectLocales( isset($opts['locale']) ? $opts['locale'] : '' ),
-                Loco_cli_Utils::bool($opts,'noop')
+                Loco_cli_Utils::bool($opts,'noop'),
+                Loco_cli_Utils::bool($opts,'force')
             );
         }
         catch( Loco_error_Exception $e ){
@@ -62,6 +66,9 @@ class Loco_cli_Commands {
      * [--noop]
      * : Specify dry run. Makes no changes on disk.
      * 
+     * [--force]
+     * : Update even when nothing has changed. Useful for updating meta properties.
+     * 
      * ## EXAMPLES
      *
      * wp loco extract core --maxsize=400K
@@ -77,7 +84,8 @@ class Loco_cli_Commands {
             }
             Loco_cli_ExtractCommand::run (
                 Loco_cli_Utils::collectProjects( isset($args[0]) ? $args[0] : '' ),
-                Loco_cli_Utils::bool($opts,'noop')
+                Loco_cli_Utils::bool($opts,'noop'),
+                Loco_cli_Utils::bool($opts,'force')
             );
         }
         catch( Loco_error_Exception $e ){

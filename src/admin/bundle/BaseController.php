@@ -61,7 +61,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     /**
      * @return Loco_package_Project
      */
-    public function getProject(){
+    protected function getProject(){
         if( ! $this->project ){
             $bundle = $this->getBundle();
             $domain = $this->get('domain');
@@ -75,6 +75,19 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         }
 
         return $this->project;
+    }
+
+
+    /**
+     * @return Loco_package_Project|null
+     */
+    protected function getOptionalProject(){
+        try {
+            return $this->getProject();
+        }
+        catch( Exception $e ){
+            return null;
+        }
     }
 
 

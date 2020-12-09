@@ -101,8 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.4.7 =
-* PHP 8.0.0 compatibility (in progress)
-* Bumped WordPress version to 5.6
+* PHP 8.0.0 compatibility
+* Bumped WordPress version to 5.6.0
+* Added JSON translation file generation
 * Disabled emoji image replacement on our admin screens
 
 = 2.4.6 =

@@ -25,7 +25,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     public static function get(){
         self::$singleton or self::$singleton = new Loco_error_AdminNotices;
         return self::$singleton;
-    } 
+    }
 
     
     /**
@@ -223,12 +223,23 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      */
     public function __destruct(){
         $this->inline = false;
+        $this->flush();
+    }
+
+
+    /**
+     * @internal
+     */
+    public function flush(){
         if( class_exists('WP_CLI',false) ){
             $this->flushCli();
         }
         else if( ! loco_doing_ajax() ){
             $this->flushHtml();
         }
+        else {
+            $this->errors = array();
+        }   
     }
 
 }

@@ -185,8 +185,8 @@ class Loco_api_WordPressFileSystem {
      */
     private function authorize( Loco_fs_File $file ){
         // may already have authorized successfully
-        if( $fs = $this->fs ){
-            $file->getWriteContext()->connect( $fs, false );
+        if( $this->fs instanceof WP_Filesystem_Base ){
+            $file->getWriteContext()->connect( $this->fs, false );
             return true;
         }
         

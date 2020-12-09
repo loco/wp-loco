@@ -201,28 +201,34 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
 
     /**
-     * Execute backup of current file.
+     * Execute backup of current file if enabled in settings.
      * @param Loco_api_WordPressFileSystem Authorized file system
-     * @return bool whether rotation 
+     * @return Loco_fs_File|null backup file if saved
      */
     public function rotate( Loco_api_WordPressFileSystem $api ){
+        $backup = null;
         $pofile = $this->master;
-        // backup existing file before overwriting, but still allow if backups fails
         $num_backups = Loco_data_Settings::get()->num_backups;
         if( $num_backups ){
+            // Attempt backup, but return null on failure
             try {
-                $api->authorizeCopy($this->master);
-                $this->create();
-                $this->prune($num_backups);
-                return true;
+                $api->authorizeCopy($pofile);
+                $backup = $this->create();
             }
             catch( Exception $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );
                 $message = __('Failed to create backup file in "%s". Check file permissions or disable backups','loco-translate');
                 Loco_error_AdminNotices::warn( sprintf( $message, $pofile->getParent()->basename() ) );
             }
+            // prune operation in separate catch block as error would be misleading
+            try {
+                $this->prune($num_backups);
+            }
+            catch( Exception $e ){
+                Loco_error_AdminNotices::debug('Failed to prune backup files: '.$e->getMessage() );
+            }
         }
-        return false;
+        return $backup;
     }
 
 }

@@ -7,8 +7,13 @@ abstract class Loco_cli_ExtractCommand {
     /**
      * @param Loco_package_Project[] project filter
      * @param bool whether dry run
+     * @param bool whether to always update
      */
-    public static function run( array $projects, $noop = true ){
+    public static function run( array $projects, $noop = true, $force = false ){
+
+        if( $force && $noop ){
+            throw new Loco_error_Exception('--force makes no sense with --noop');
+        }
 
         // track total number of POT files synced
         $updated = 0;
@@ -46,7 +51,7 @@ abstract class Loco_cli_ExtractCommand {
             }
             // if POT exists check if update is necessary.
             $data->sort();
-            if( $potfile->exists() ){
+            if( $potfile->exists() && ! $force ){
                 try {
                     Loco_cli_Utils::debug('Checking if sources have changed since '.date('c',$potfile->modified()) );
                     $prev = Loco_gettext_Data::fromSource( $potfile->getContents() );
@@ -72,7 +77,7 @@ abstract class Loco_cli_ExtractCommand {
             // write POT file to disk returning byte length
             Loco_cli_Utils::debug('Writing POT file...');
             $bytes = $potfile->putContents( $data->msgcat(false) );
-            Loco_cli_Utils::debug(' %u bytes written to %s',$bytes, $potfile->getRelativePath($content_dir) );
+            Loco_cli_Utils::debug('%u bytes written to %s',$bytes, $potfile->getRelativePath($content_dir) );
             WP_CLI::success( sprintf('Updated %s', $potfile->basename() ) );
             $updated++;
         }

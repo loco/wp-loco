@@ -18,6 +18,7 @@
  * @property bool $po_utf8_bom Whether to prepend PO and POT files with UTF-8 byte order mark
  * @property string $po_width PO/POT file maximum line width (wrapping) zero to disable
  * @property bool $jed_pretty Whether to pretty print JSON JED files
+ * @property bool $jed_clean Whether to clean up redundant JSON files during compilation
  * @property bool $ajax_files Whether to submit PO data as concrete files (requires Blob support in Ajax)
  *
  * @property string $deepl_api_key API key for DeepL Translator
@@ -45,7 +46,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'gen_hash' => false,
         'use_fuzzy' => true,
         'fuzziness' => 20,
-        'num_backups' => 1,
+        'num_backups' => 5,
         'pot_alias' => array( 'default.po', 'en_US.po', 'en.po' ),
         'php_alias' => array( 'php', 'twig' ),
         'jsx_alias' => array(),
@@ -56,7 +57,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'max_php_size' => '100K',
         'po_utf8_bom' => false,
         'po_width' => '79',
-        'jed_pretty' => false,
+        'jed_pretty' => true,
+        'jed_clean' => true,
         'ajax_files' => true,
         'deepl_api_key' => '',
         'google_api_key' => '',

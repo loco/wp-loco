@@ -19,11 +19,11 @@ abstract class Loco_test_TestCase extends PHPUnit_Framework_TestCase {
         $dom->normalizeDocument();
         $src = $dom->saveXML();
         
-        return trim( preg_replace( '/>\s+</', '><', $src ) );
+        return trim( preg_replace( '/>\\s+</', '><', $src ) );
     }
 
     
-    public function assertSameHtml( $expect, $actual, $message = null ){
+    public function assertSameHtml( $expect, $actual, $message = '' ){
         return $this->assertSame( $this->normalizeHtml($expect), $this->normalizeHtml($actual), $message );
     }
     

@@ -10,19 +10,26 @@ abstract class Loco_cli_SyncCommand {
      * @param Loco_package_Project[] project filter
      * @param Loco_Locale[] locale filter
      * @param bool whether dry run
+     * @param bool whether to always update
      */
-    public static function run( array $projects, array $locales, $noop = true ){
+    public static function run( array $projects, array $locales, $noop = true, $force = false ){
+        
+        if( $force && $noop ){
+            throw new Loco_error_Exception('--force makes no sense with --noop');
+        }
 
         // CLI runs all disk operations directly. No remote authorization here currently.
         $fs = new Loco_api_WordPressFileSystem;
         $content_dir = loco_constant('WP_CONTENT_DIR');
         
-        // track total number of PO files synced
+        // track total number of PO files synced, plus MO and JSON files compiled
         $updated = 0;
+        $compiled = 0;
 
         /* @var Loco_package_Project $project */
         foreach( $projects as $project ){
             $id = rtrim( $project->getId(), '.' );
+            $base_dir = $project->getBundle()->getDirectoryPath();
             WP_CLI::log( sprintf('Syncing "%s" (%s)',$project->getName(),$id) );
             // Check if project has POT, which will be used as default template unless PO overrides
             $pot = null;
@@ -68,7 +75,7 @@ abstract class Loco_cli_SyncCommand {
                 if( $head->has('X-Loco-Template') ){
                     $ref = null;
                     $potfile = new Loco_fs_File( $head['X-Loco-Template'] );
-                    $potfile->normalize( $project->getBundle()->getDirectoryPath() );
+                    $potfile->normalize( $base_dir );
                     if( $potfile->exists() ){
                         try {
                             Loco_cli_Utils::debug('> Parsing alternative template: %s',$potfile->getRelativePath($content_dir) );
@@ -97,7 +104,7 @@ abstract class Loco_cli_SyncCommand {
                 }
                 // File is synced, but may be identical
                 $po->sort();
-                if( $po->equal($def) ){
+                if( ! $force && $po->equal($def) ){
                     WP_CLI::log( sprintf('No update required for %s', $pofile->filename() ) );
                     continue;
                 }
@@ -106,20 +113,26 @@ abstract class Loco_cli_SyncCommand {
                     continue;
                 }
                 try {
-                    // file is different so make a backup before overwriting
-                    $backups = new Loco_fs_Revisions($pofile);
-                    if( $backups->rotate($fs) ){
-                        Loco_cli_Utils::debug('+ saved backup file of %s',$pofile->basename() );
-                    }
-                    // write new PO
                     $po->localize($locale);
-                    $bytes = $pofile->putContents( $po->msgcat() );
+                    $compiler = new Loco_gettext_Compiler($pofile);
+                    $bytes = $compiler->writePo($po);
                     Loco_cli_Utils::debug('+ %u bytes written to %s',$bytes, $pofile->basename());
                     $updated++;
                     // compile MO
-                    $bytes = $mofile->putContents( $po->msgfmt() );
-                    Loco_cli_Utils::debug('+ %u bytes written to %s',$bytes, $mofile->basename());
-                    // Done PO/MO pair
+                    $bytes = $compiler->writeMo($po);
+                    if( $bytes ){
+                        Loco_cli_Utils::debug('+ %u bytes written to %s',$bytes, $mofile->basename());
+                        $compiled++;
+                    }
+                    // Done PO/MO pair, now generate JSON fragments as applicable
+                    $jsons = $compiler->writeJson($project,$po);
+                    $n = $jsons->count();
+                    if( $n ) {
+                        Loco_cli_Utils::debug('+ %u JSON files written in %s',$n, $base_dir);
+                        $compiled += $n;
+                    }
+                    // Done compile of this PO set
+                    Loco_error_AdminNotices::get()->flush();
                     WP_CLI::success( sprintf('Updated %s', $pofile->filename() ) );
                 }
                 catch( Loco_error_WriteException $e ){
@@ -132,7 +145,7 @@ abstract class Loco_cli_SyncCommand {
             WP_CLI::log('Nothing updated');
         }
         else {
-            WP_CLI::success( sprintf('%u PO files synced',$updated) );
+            WP_CLI::success( sprintf('%u PO files synced, %u files compiled',$updated,$compiled) );
         }
     }
     

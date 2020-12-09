@@ -65,35 +65,17 @@ class Loco_ajax_UploadController extends Loco_ajax_common_BundleController {
         if( $pofile->filename() !== $dummy->filename() ){
             throw new Loco_error_Exception( sprintf('File must be named %s', $pofile->filename().'.'.$ext ) );
         }
-        $api = new Loco_api_WordPressFileSystem;
-        // PO may exist already. If not we need to auth create instead of update
-        if( $pofile->exists() ){
-            if( 'po' === $ext && $pofile->md5() === $dummy->md5() ){
-                throw new Loco_error_Exception( __('Your file is identical to the existing one','loco-translate') );
-            }
-            // backup existing PO file before overwriting, but proceed on failure
-            $backups = new Loco_fs_Revisions($pofile);
-            $backups->rotate($api);
-            $api->authorizeUpdate($pofile);
+        // Avoid processing if uploaded PO file is identical to existing one
+        if( $pofile->exists() && 'po' === $ext && $pofile->md5() === $dummy->md5() ){
+            throw new Loco_error_Exception( __('Your file is identical to the existing one','loco-translate') );
         }
-        else {
-            $api->authorizeCreate( $pofile );
-        }
-        // Putting file contents, because remote file system may not be able to read from tmp/upload location
-        if( 'mo' === $ext ){
-            $pofile->putContents( $pomo->msgcat() );
-            $bin = $dummy->getContents(); // <- use binary as-is.
-        }
-        else {
-            $pofile->putContents( $dummy->getContents() ); // <- use po source as is
-            $bin = $pomo->msgfmt(); // <- compile binary from PO
-        }
-        // should have binary data unless something went wrong
-        if( $bin ){
-            $mofile = $pofile->cloneExtension('mo');
-            $mofile->exists() ? $api->authorizeUpdate($mofile) : $api->authorizeCreate($mofile);
-            $mofile->putContents($bin);
-        }
+        // recompile all files including uploaded one
+        $compiler = new Loco_gettext_Compiler($pofile);
+        $compiler->writeAll($pomo,$project);
+
+        // push recent items on file creation
+        Loco_data_RecentItems::get()->pushBundle($bundle)->persist();
+
         // Redirect to edit this PO. Sync may be required and we're not doing automatically here.
         $type = strtolower( $this->get('type') );
         return Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type), array(

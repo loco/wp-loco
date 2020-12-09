@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.7-dev\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2020-12-07 17:02+0000\n"
+"POT-Creation-Date: 2020-12-09 14:01+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.7-dev; wp-5.6-RC4-49760"
+"X-Loco-Version: 2.4.7-dev; wp-5.6"
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -39,6 +39,12 @@ msgstr ""
 #: tpl/admin/file/info.php:24
 #, php-format
 msgid "%s file is writeable"
+msgstr ""
+
+#. Where %s is either PO or POT
+#: src/gettext/Compiler.php:184
+#, php-format
+msgid "%s file saved"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
@@ -174,7 +180,7 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:97 tpl/admin/file/move.php:26
+#: src/admin/bundle/BaseController.php:110 tpl/admin/file/move.php:26
 msgid "Advanced"
 msgstr ""
 
@@ -400,7 +406,7 @@ msgstr ""
 
 #: src/error/Debug.php:19 src/admin/config/BaseController.php:24
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:100
+#: src/admin/bundle/BaseController.php:113
 msgid "Debug"
 msgstr ""
 
@@ -436,7 +442,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:175 src/admin/file/EditController.php:164
+#: src/data/Settings.php:177 src/admin/file/EditController.php:164
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:210
 #: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -670,7 +676,7 @@ msgstr ""
 msgid "Failed to copy %s to %s"
 msgstr ""
 
-#: src/fs/Revisions.php:221
+#: src/fs/Revisions.php:220
 #, php-format
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
@@ -704,7 +710,7 @@ msgstr ""
 msgid "File backups are disabled in your plugin settings"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:57 src/admin/file/DiffController.php:61
+#: src/admin/file/DeleteController.php:57 src/admin/file/DiffController.php:45
 #, php-format
 msgid "File deleted"
 msgid_plural "%u files deleted"
@@ -769,7 +775,7 @@ msgstr ""
 msgid "File modified"
 msgstr ""
 
-#: src/admin/file/MoveController.php:80
+#: src/admin/file/MoveController.php:85
 #, php-format
 msgid "File moved"
 msgid_plural "%u files moved"
@@ -784,7 +790,7 @@ msgstr ""
 msgid "File prefix"
 msgstr ""
 
-#: src/admin/file/DiffController.php:50
+#: src/admin/file/DiffController.php:35
 msgid "File restored"
 msgstr ""
 
@@ -950,6 +956,11 @@ msgstr ""
 msgid "It needs configuring before you can do any translations"
 msgstr ""
 
+#: src/gettext/Compiler.php:141
+#, php-format
+msgid "JSON compilation failed for %s"
+msgstr ""
+
 #: tpl/admin/init/init-po.php:153
 msgid "Just copy English source strings"
 msgstr ""
@@ -1044,7 +1055,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/data/Settings.php:173
+#: src/data/Settings.php:175
 msgid ""
 "Loco Translate 2.4 supports third party translation providers. Set up your "
 "API keys in the plugin settings!"
@@ -1116,7 +1127,7 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: src/admin/file/MoveController.php:101 src/admin/file/MoveController.php:128
+#: src/admin/file/MoveController.php:106 src/admin/file/MoveController.php:133
 #, php-format
 msgid "Move %s"
 msgstr ""
@@ -1236,7 +1247,7 @@ msgid_plural "%s files can't be matched to a known set of strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/MoveController.php:84
+#: src/admin/file/MoveController.php:89
 #, php-format
 msgid "One file could not be moved"
 msgid_plural "%u files could not be moved"
@@ -1275,7 +1286,7 @@ msgstr[1] ""
 msgid "Out of sync with template"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:95
+#: src/admin/bundle/BaseController.php:108
 msgid "Overview"
 msgstr ""
 
@@ -1393,16 +1404,16 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/ajax/SaveController.php:96
+#: src/gettext/Compiler.php:180
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:100
-msgid "PO file saved, but MO file compilation failed"
+#: src/gettext/Compiler.php:177
+msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
-#: src/ajax/SaveController.php:107
-msgid "POT file saved"
+#: src/gettext/Compiler.php:88
+msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
 #: tpl/admin/config/settings.php:132
@@ -1450,7 +1461,7 @@ msgstr ""
 msgid "Restore"
 msgstr ""
 
-#: src/admin/file/DiffController.php:74 src/admin/file/DiffController.php:92
+#: src/admin/file/DiffController.php:58 src/admin/file/DiffController.php:76
 #, php-format
 msgid "Restore %s"
 msgstr ""
@@ -1534,7 +1545,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: src/data/Settings.php:174 tpl/ajax/modal-apis-empty.php:15
+#: src/data/Settings.php:176 tpl/ajax/modal-apis-empty.php:15
 #: src/admin/file/EditController.php:163 tpl/admin/common/inc-fsconn.php:18
 #: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
 msgid "Settings"
@@ -1546,7 +1557,7 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:96
+#: src/admin/bundle/BaseController.php:109
 msgid "Setup"
 msgstr ""
 
@@ -2098,6 +2109,6 @@ msgstr ""
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""
 
-#: src/ajax/UploadController.php:72
+#: src/ajax/UploadController.php:70
 msgid "Your file is identical to the existing one"
 msgstr ""

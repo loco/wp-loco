@@ -109,7 +109,7 @@ class Loco_fs_File {
 
     /**
      * Copy write context with our file reference
-     * @param Loco_fs_FileWriter 
+     * @param Loco_fs_FileWriter|null
      * @return Loco_fs_File
      */
     private function cloneWriteContext( Loco_fs_FileWriter $context = null ){
@@ -457,7 +457,7 @@ class Loco_fs_File {
         if( file_exists($this->path) ){
             return is_dir($this->path);
         }
-        return ! $this->extension();
+        return '' === $this->extension();
     }
 
 
@@ -575,14 +575,19 @@ class Loco_fs_File {
      * @return Loco_fs_File
      */
     public function cloneExtension( $ext ){
-        $snip = strlen( $this->extension() );
+        $name = $this->filename().'.'.$ext;
+        return $this->cloneBasename($name);
+    }
+
+
+    /**
+     * Copy this object with an alternative name under the same directory
+     * @param string new name
+     * @return Loco_fs_File
+     */
+    public function cloneBasename( $name ){
         $file = clone $this;
-        if( $snip ){
-            $file->path = substr_replace( $this->path, $ext, - $snip );
-        }
-        else {
-            $file->path .= '.'.$ext;
-        }
+        $file->path = rtrim($file->dirname(),'/').'/'.$name;
         $file->info = null;
         return $file;
     }

@@ -111,24 +111,19 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             }
         }
 
+        $locale->ensureName( new Loco_api_WordPressTranslations );
         $data->localize( $locale, $headers );
 
-        $posize = $pofile->putContents( $data->msgcat() );
-        $mosize = $mofile->putContents( $data->msgfmt() );
-        //$jssize = $jsfile && ( $sub = $data->splitJs() ) ? $jsfile->putContents($data->jedize($domain,$sub)) : 0;
+        $compiler = new Loco_gettext_Compiler($pofile);
+        $compiler->writeAll($data,$project);
         
-        // set debug response data
-        $this->set( 'debug', array (
+        $this->set('debug',new Loco_mvc_ViewParams( array(
             'poname' => $pofile->basename(),
-            'posize' => $posize,
-            'mosize' => $mosize,
-            //'jssize' => $jssize,
             'source' => $potfile ? $potfile->basename() : '',
-        ) );
-        
+        ) ) );
+
         // push recent items on file creation
-        // TODO push project and locale file
-        Loco_data_RecentItems::get()->pushBundle( $bundle )->persist();
+        Loco_data_RecentItems::get()->pushBundle($bundle)->persist();
         
         // front end will redirect to the editor
         $type = strtolower( $this->get('type') );
@@ -140,6 +135,5 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         
         return parent::render();
     }
-    
-    
+
 }

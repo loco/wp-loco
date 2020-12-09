@@ -447,7 +447,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      */
     public function assertRedirected( $status = 302, $message = 'Failed to redirect' ){
         $raw = $this->redirect;
-        $this->assertInternalType('array', $raw, $message );
+        $this->assertIsArray( $raw, $message );
         $this->assertSame( $status, $raw[1], $message );
         return $raw[0];
     } 
