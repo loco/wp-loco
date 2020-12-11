@@ -128,7 +128,7 @@ class Loco_gettext_Compiler {
                     }
                     // Hashable reference is always finally unminified, as per load_script_textdomain()
                     if( substr($relative,-7) === '.min.js' ) {
-                        $relative = substr($relative,-7).'.js';
+                        $relative = substr($relative,0,-7).'.js';
                     }
                     $name = $pofile->filename().'-'.md5($relative).'.json';
                     $jsonfile = $pofile->cloneBasename($name);
