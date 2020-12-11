@@ -104,6 +104,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * PHP 8.0.0 compatibility
 * Bumped WordPress version to 5.6.0
 * Added JSON translation file generation
+* Added custom JSON loading to LoadHelper
 * Disabled emoji image replacement on our admin screens
 
 = 2.4.6 =

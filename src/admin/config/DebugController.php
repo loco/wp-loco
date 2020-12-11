@@ -162,24 +162,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             }
         }
         
-        // Test WordPress i18n JavaScript API. Noting that Loco Translate does not currently use it elsewhere:
-        // this should force the dependency of wp-i18n in the handle we registered above.
-        /*if( function_exists('wp_set_script_translations') && class_exists('Loco_hooks_JsonHelper') ){
-            $domain = 'loco-translate';
-            $handle = $domain.'-debug';
-            $domainPath = loco_plugin_root().'/languages';
-            new Loco_hooks_JsonHelper;
-            wp_set_script_translations( $handle, $domain, $domainPath );
-            // references: pub/js/src/debug.js:94
-            __('Script translations loaded','loco-translate');
-        }*/
-        
-        
         return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug') );
     }
-    
-    
-    
-    
-    
+
 }
