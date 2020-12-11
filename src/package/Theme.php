@@ -38,6 +38,15 @@ class Loco_package_Theme extends Loco_package_Bundle {
 
 
     /**
+     * {@inheritDoc}
+     */
+    public function getDirectoryUrl() {
+        $slug = $this->getHandle();
+        return trailingslashit(get_theme_root_uri($slug)).$slug.'/';
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function getHeaderInfo(){

@@ -87,6 +87,9 @@ class Loco_config_ArrayModel extends Loco_config_Model {
 
 /**
  * Node
+ * @property-read string $textContent
+ * @property-read string $nodeName
+ * @property-read LocoConfigNodeList $childNodes
  */
 abstract class LocoConfigNode implements IteratorAggregate {
         

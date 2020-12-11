@@ -154,20 +154,23 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * Compile JED flavour JSON
      * @param string text domain for JED metadata
+     * @param string source file that uses included strings
      * @return string
      */
-    public function msgjed( $domain ){
+    public function msgjed( $domain = 'messages', $source = '' ){
         $head = $this->getHeaders();
         $head['domain'] = $domain;
         $data = $this->exportJed();
-        // pretty formatting for debugging
+        // Pretty formatting for debugging. Doing as per WordPress and always escaping Unicode.
         $json_options = 0;
         if( Loco_data_Settings::get()->jed_pretty ){
-            $json_options |= loco_constant('JSON_PRETTY_PRINT') | loco_constant('JSON_UNESCAPED_SLASHES') | loco_constant('JSON_UNESCAPED_UNICODE');
+            $json_options |= loco_constant('JSON_PRETTY_PRINT') | loco_constant('JSON_UNESCAPED_SLASHES'); // | loco_constant('JSON_UNESCAPED_UNICODE');
         }
+        // PO should have a date if localised properly
         return json_encode( array (
-            'translation-revision-date' => $head['po-revision-date'],
-            'generator' => $head['x-generator'],
+            'translation-revision-date' => $head['PO-Revision-Date'],
+            'generator' => $head['X-Generator'],
+            'source' => $source,
             'domain' => $domain,
             'locale_data' => array (
                 $domain => $data,
@@ -217,12 +220,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     
     /**
      * @param Loco_Locale
-     * @param array custom headers
+     * @param string[] custom headers
      * @return Loco_gettext_Data
      */
-    public function localize( Loco_Locale $locale, array $custom = null ){
+    public function localize( Loco_Locale $locale, array $custom = array() ){
         $date = gmdate('Y-m-d H:i').'+0000'; // <- forcing UCT
-        $headers = $this->getHeaders();
         // headers that must always be set if absent
         $defaults = array (
             'Project-Id-Version' => '',
@@ -256,19 +258,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
                 $required['Last-Translator'] = $credit;
             }
         }
-        // only set absent or empty headers from default list
-        foreach( $defaults as $key => $value ){
-            if( ! $headers[$key] ){
-                $headers[$key] = $value;
-            }
-        }
-        // add required headers with custom ones overriding
-        if( is_array($custom) ){
-            $required = array_merge( $required, $custom );
-        }
-        foreach( $required as $key => $value ){
-            $headers[$key] = $value;
-        }
+        $headers = $this->applyHeaders($required,$defaults,$custom);
         // avoid non-empty POT placeholders that won't have been set from $defaults
         if( 'PACKAGE VERSION' === $headers['Project-Id-Version'] ){
             $headers['Project-Id-Version'] = '';
@@ -279,14 +269,16 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
+     * @param string
      * @return Loco_gettext_Data
      */
-    public function templatize(){
+    public function templatize( $domain = '' ){
         $date = gmdate('Y-m-d H:i').'+0000'; // <- forcing UCT
-        $headers = $this->getHeaders();
-        $required = array (
+        $defaults = array (
             'Project-Id-Version' => 'PACKAGE VERSION',
             'Report-Msgid-Bugs-To' => '',
+        );
+        $required = array (
             'POT-Creation-Date' => $date,
             'PO-Revision-Date' => 'YEAR-MO-DA HO:MI+ZONE',
             'Last-Translator' => 'FULL NAME <EMAIL@ADDRESS>',
@@ -298,12 +290,36 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'Content-Transfer-Encoding' => '8bit',
             'X-Generator' => 'Loco https://localise.biz/',
             'X-Loco-Version' => sprintf('%s; wp-%s', loco_plugin_version(), $GLOBALS['wp_version'] ),
+            'X-Domain' => $domain,
         );
+        $this->applyHeaders($required,$defaults);
+        return $this->initPot();
+    }
+
+
+    /**
+     * @param string[] Required headers
+     * @param string[] Default headers
+     * @param string[] Custom headers
+     * @return LocoPoHeaders
+     */
+    private function applyHeaders( array $required = array(), array $defaults = array(), array $custom = array() ){
+        $headers = $this->getHeaders();
+        // only set absent or empty headers from default list
+        foreach( $defaults as $key => $value ){
+            if( ! $headers[$key] ){
+                $headers[$key] = $value;
+            }
+        }
+        // add required headers with custom ones overriding
+        if( $custom ){
+            $required = array_merge( $required, $custom );
+        }
+        // TODO fix ordering weirdness here. required headers seem to get appended wrongly
         foreach( $required as $key => $value ){
             $headers[$key] = $value;
         }
-
-        return $this->initPot();
+        return $headers;
     }
 
 
@@ -313,7 +329,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @param Loco_fs_File the file that was originally extracted to (POT)
      * @param Loco_fs_File the file that must now target references relative to itself
      * @param string vendor name used in header keys
-     * @return bool whether base header was alterered
+     * @return bool whether base header was altered
      */
     public function rebaseHeader( Loco_fs_File $origin, Loco_fs_File $target, $vendor ){
         $base = $target->getParent();
@@ -337,7 +353,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return int
      */
     public static function parseDate( $podate ){
-        if( method_exists('DateTime', 'createFromFormat') ){
+        if( method_exists('DateTime','createFromFormat') ){
             $objdate = DateTime::createFromFormat('Y-m-d H:iO', $podate);
             if( $objdate instanceof DateTime ){
                 return $objdate->getTimestamp();

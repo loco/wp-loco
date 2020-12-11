@@ -18,9 +18,8 @@ abstract class Loco_cli_SyncCommand {
             throw new Loco_error_Exception('--force makes no sense with --noop');
         }
 
-        // CLI runs all disk operations directly. No remote authorization here currently.
-        $fs = new Loco_api_WordPressFileSystem;
         $content_dir = loco_constant('WP_CONTENT_DIR');
+        $wp_locales = new Loco_api_WordPressTranslations;
         
         // track total number of PO files synced, plus MO and JSON files compiled
         $updated = 0;
@@ -113,6 +112,7 @@ abstract class Loco_cli_SyncCommand {
                     continue;
                 }
                 try {
+                    $locale->ensureName($wp_locales);
                     $po->localize($locale);
                     $compiler = new Loco_gettext_Compiler($pofile);
                     $bytes = $compiler->writePo($po);
@@ -126,12 +126,12 @@ abstract class Loco_cli_SyncCommand {
                     }
                     // Done PO/MO pair, now generate JSON fragments as applicable
                     $jsons = $compiler->writeJson($project,$po);
-                    $n = $jsons->count();
-                    if( $n ) {
-                        Loco_cli_Utils::debug('+ %u JSON files written in %s',$n, $base_dir);
-                        $compiled += $n;
+                    foreach( $jsons as $file ){
+                        $compiled++;
+                        $param = new Loco_mvc_FileParams(array(),$file);
+                        Loco_cli_Utils::debug('+ %u bytes written to %s',$param->size,$param->name);
                     }
-                    // Done compile of this PO set
+                    // Done compile of this set
                     Loco_error_AdminNotices::get()->flush();
                     WP_CLI::success( sprintf('Updated %s', $pofile->filename() ) );
                 }

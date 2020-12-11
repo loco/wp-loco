@@ -79,6 +79,12 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      */
     abstract public function getType();
 
+    /**
+     * Get absolute URL to bundle root, with trailing slash
+     * @return string
+     */
+    abstract public function getDirectoryUrl();
+
 
     /**
      * Construct bundle from unique ID containing type and handle

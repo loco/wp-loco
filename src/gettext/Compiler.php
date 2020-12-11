@@ -104,24 +104,34 @@ class Loco_gettext_Compiler {
         $domain = $project->getDomain()->getName();
         /* @var Loco_gettext_Data $fragment */
         foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
-            // reference could be source js, or minified version, but hash always comes from unminified
+            // Reference could be source js, or minified version.
+            // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
             if( substr($ref,-7) === '.min.js' ) {
                 $min = $ref;
-                $ref = substr($ref,-7).'.js';
+                $src = substr($ref,-7).'.js';
             }
             else {
+                $src = $ref;
                 $min = substr($ref,0,-3).'.min.js';
             }
-            // build JSON path to check whether deployed script exists
-            // TODO hook into load_script_textdomain_relative_path
+            // Try both script paths to check whether deployed script actually exists
             $jsonfile = null;
-            foreach( array($min,$ref) as $path ){
-                $file = new Loco_fs_File($path);
+            foreach( array($min,$src) as $relative ){
+                $file = new Loco_fs_File($relative);
                 $file->normalize($base_dir);
                 if( $file->exists() ){
-                    $name = $pofile->filename().'-'.md5($ref).'.json';
+                    // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
+                    $url = $project->getBundle()->getDirectoryUrl().$relative;
+                    $relative = apply_filters( 'load_script_textdomain_relative_path', $relative, $url );
+                    if( ! is_string($relative) || '' === $relative ){
+                        continue;
+                    }
+                    // Hashable reference is always finally unminified, as per load_script_textdomain()
+                    if( substr($relative,-7) === '.min.js' ) {
+                        $relative = substr($relative,-7).'.js';
+                    }
+                    $name = $pofile->filename().'-'.md5($relative).'.json';
                     $jsonfile = $pofile->cloneBasename($name);
-                    $jsonfile->normalize( $pofile->dirname() );
                     $jsons->add( $jsonfile );
                     break;
                 }
@@ -134,7 +144,7 @@ class Loco_gettext_Compiler {
             // ok to write JED fragment to hashed JSON file
             try {
                 $this->fs->authorizeSave($jsonfile);
-                $jsonfile->putContents( $fragment->msgjed($domain) );
+                $jsonfile->putContents( $fragment->msgjed($domain,$ref) );
             }
             catch( Loco_error_WriteException $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );

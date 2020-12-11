@@ -5,6 +5,8 @@ Plugin URI: https://wordpress.org/plugins/loco-translate/
 Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
 Version: 2.4.7-dev
+Requires at least: 4.1
+Requires PHP: 5.2.4
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/

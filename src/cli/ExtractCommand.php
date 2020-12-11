@@ -73,6 +73,7 @@ abstract class Loco_cli_ExtractCommand {
             // additional headers to set in new POT file
             $head = $data->getHeaders();
             $head['Project-Id-Version'] = $project->getName();
+            $head['X-Domain'] = $domain;
 
             // write POT file to disk returning byte length
             Loco_cli_Utils::debug('Writing POT file...');

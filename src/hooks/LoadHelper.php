@@ -7,20 +7,43 @@
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     
     /**
-     * @var array [ $subdir, $domain, $locale ]
+     * @var string[] [ $subdir, $domain, $locale ]
      */
     private $context;
 
     /**
-     * @var array
+     * @var bool[]
      */    
-    private $lock = array();
+    private $lock;
+
+    /**
+     * @var string
+     */
+    private $wp_lang_dir;
+
+    /**
+     * @var string
+     */
+    private $lc_lang_dir;
+
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct(){
+        parent::__construct();
+        $this->lock = array();
+        $this->wp_lang_dir = trailingslashit( loco_constant('WP_LANG_DIR') );
+        $this->lc_lang_dir = trailingslashit( loco_constant('LOCO_LANG_DIR') );
+    }
 
 
     /**
      * `theme_locale` filter callback.
      * Signals the beginning of a "load_theme_textdomain" process
-     */    
+     * @param string
+     * @param string
+     * @return string
+     */
     public function filter_theme_locale( $locale, $domain = '' ){
         $this->context = array( 'themes', $domain, $locale );
         unset( $this->lock[$domain] );
@@ -75,34 +98,22 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         if( isset($this->lock[$domain][$key]) ){
             return;
         }
-        // language roots
-        $wp_lang_dir = trailingslashit( loco_constant('WP_LANG_DIR') );
-        $lc_lang_dir = trailingslashit( loco_constant('LOCO_LANG_DIR') );
-
         // if context is set, then a theme or plugin initialized the loading process properly
         if( is_array($this->context) ){
             list( $subdir, $_domain, $locale ) = $this->context;
             $this->context = null;
-            // It shouldn't be possible to catch a different domain after setting context, but we'd better bail just in case
             if( $_domain !== $domain ){
                 return;
             }
-            $mopath = $lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo';
+            $mopath = $this->lc_lang_dir.$subdir.'/'.$domain.'-'.$locale.'.mo';
         }
-
         // else load_textdomain must have been called directly to bypass locale filters
         else {
-            $snip = strlen($wp_lang_dir);
-            // direct file loads must be under WP_LANG_DIR if we are to map them
-            if( substr( dirname($mopath).'/', 0, $snip ) === $wp_lang_dir ){
-                $mopath = substr_replace( $mopath, $lc_lang_dir, 0, $snip );
-            }
-            // else no way to map files from WP_LANG_DIR to LOCO_LANG_DIR
-            else {
+            $mopath = $this->map($mopath);
+            if( '' === $mopath ){
                 return;
             }
         }
-        
         // Load our custom translations avoiding recursion back into this hook
         $this->lock[$domain][$key] = true;
         load_textdomain( $domain, $mopath );
@@ -110,18 +121,34 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
-     * `load_textdomain_mofile` filter callback
+     * Map a file directly from a standard system location to LOCO_LANG_DIR
+     * @param string e.g. {WP_CONTENT_DIR}/languages/plugins/foo
+     * @return string e.g. {WP_CONTENT_DIR}/languages/loco/plugins/foo
+     */
+    private function map( $path ){
+        $snip = strlen($this->wp_lang_dir);
+        if( substr( dirname($path).'/', 0, $snip ) === $this->wp_lang_dir ){
+            return substr_replace( $path, $this->lc_lang_dir, 0, $snip );
+        }
+        // TODO check plugin/theme folders, accounting for legacy theme naming convention
+        return '';
+    }
+    
+    
+
+
+    /**
+     * `load_script_translation_file` filter callback
+     * @param string
      * @param string
      * @param string
      * @return string
-     */
-    public function filter_load_textdomain_mofile( $mopath, $domain ){
-        // 2.0.14 changed text domain from "loco" to "loco-translate"
-        // so if file doesn't exist, there's no harm in trying the legacy file name
-        if( 'loco-translate' === $domain && ! file_exists($mopath) ){
-            $mopath = str_replace('/loco-translate-','/loco-',$mopath);
+     *
+    public function filter_load_script_translation_file( $file = '', $handle = '', $domain = '' ){
+        if( is_string($file) && '' !== $file ){
+            
         }
-        return $mopath;
-    }
+        return $file;
+    }*/
 
 }

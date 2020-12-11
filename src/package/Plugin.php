@@ -33,6 +33,14 @@ class Loco_package_Plugin extends Loco_package_Bundle {
 
 
     /**
+     * {@inheritDoc}
+     */
+    public function getDirectoryUrl(){
+        return plugins_url('/',$this->getHandle());
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function getSlug(){

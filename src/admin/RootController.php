@@ -83,8 +83,13 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
         
         $this->set('title', __('Welcome to Loco Translate','loco-translate') );
         
+        // Deprecation warnings:
+        // At time of writing, WordPress below 5.2 accounts for about a quarter, whereas PHP below is 5.6 half of that. 
+        /* if( version_compare(PHP_VERSION,'5.6.20','<') || version_compare($GLOBALS['wp_version'],'5.2','<') ){
+            Loco_error_AdminNotices::warn('The next release of Loco Translate will require at least WordPress 5.2 and PHP 5.6.20'); // @codeCoverageIgnore
+        }*/
+        
         return $this->view('admin/root');
     }
-
 
 }

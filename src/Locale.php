@@ -179,21 +179,24 @@ class Loco_Locale implements JsonSerializable {
 
 
     /**
-     * Get stored name in current display language.
-     * Note that no dynamic translation of English name is performed, but can be altered with loco_parse_locale filter
+     * @param bool whether to get name in current display language
      * @return string | null
      */    
-    public function getName(){
+    public function getName( $translate = true ){
         $name = $this->name;
-        if( is_string($name) && '' !== $name ){
-            // use canonical native name only when current language matches
-            // deliberately not matching whole tag such that fr_CA would show native name of fr_FR
-            if( $_name = $this->getNativeName() ){
-                $locale = self::parse( function_exists('get_user_locale') ? get_user_locale() : get_locale() );
-                if( $this->lang === $locale->lang ){
-                    $name = $_name;
-                }
+        // use canonical native name only when current language matches
+        // deliberately not matching whole tag such that fr_CA would show native name of fr_FR
+        if( $translate ){
+            $locale = self::parse( function_exists('get_user_locale') ? get_user_locale() : get_locale() );
+            if( $this->lang === $locale->lang && $this->_name ){
+                $name = $this->_name;
             }
+            /*/ Note that no dynamic translation of English name is performed, but can be filtered with loco_parse_locale
+            else {
+                $name = __($name,'loco-translate-languages');
+            }*/
+        }
+        if( is_string($name) && '' !== $name ){
             return $name;
         }
         return null;
@@ -282,10 +285,11 @@ class Loco_Locale implements JsonSerializable {
     public function fetchName( Loco_api_WordPressTranslations $api ){
         $tag = (string) $this;
         // pull from WordPress translations API if network allowed
-        if( $locale = $api->getLocale($tag) ){
-            $this->setName( $locale->getName(), $locale->getNativeName() );
+        $locale = $api->getLocale($tag);
+        if( $locale ){
+            $this->setName( $locale->getName(false), $locale->getNativeName() );
         }
-        return $this->getName();
+        return $this->getName(false);
     }
 
 

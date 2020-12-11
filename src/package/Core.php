@@ -57,6 +57,14 @@ class Loco_package_Core extends Loco_package_Bundle {
 
 
     /**
+     * {@inheritDoc}
+     */
+    public function getDirectoryUrl(){
+        return get_site_url(null,'/');
+    }
+
+
+    /**
      * {@inheritdoc}
      * Core bundle is always configured
      */

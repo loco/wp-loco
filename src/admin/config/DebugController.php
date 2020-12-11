@@ -152,14 +152,34 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         // alert to known system setting problems:
         if( version_compare(PHP_VERSION,'7.4','<') ){
             if( get_magic_quotes_gpc() ){
-                Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_gpc" enabled. We recommend you disable this in PHP') );
+                Loco_error_AdminNotices::info('You have "magic_quotes_gpc" enabled. We recommend you disable this in PHP');
             }
             if( get_magic_quotes_runtime() ){
-                Loco_error_AdminNotices::add( new Loco_error_Debug('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP') );
+                Loco_error_AdminNotices::info('You have "magic_quotes_runtime" enabled. We recommend you disable this in PHP');
+            }
+            if( version_compare(PHP_VERSION,'5.6.20','<') ){
+                Loco_error_AdminNotices::info('Your PHP version is very old. We recommend you upgrade');
             }
         }
         
+        // Test WordPress i18n JavaScript API. Noting that Loco Translate does not currently use it elsewhere:
+        // this should force the dependency of wp-i18n in the handle we registered above.
+        /*if( function_exists('wp_set_script_translations') && class_exists('Loco_hooks_JsonHelper') ){
+            $domain = 'loco-translate';
+            $handle = $domain.'-debug';
+            $domainPath = loco_plugin_root().'/languages';
+            new Loco_hooks_JsonHelper;
+            wp_set_script_translations( $handle, $domain, $domainPath );
+            // references: pub/js/src/debug.js:94
+            __('Script translations loaded','loco-translate');
+        }*/
+        
+        
         return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug') );
     }
+    
+    
+    
+    
     
 }

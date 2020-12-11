@@ -147,7 +147,7 @@ class Loco_gettext_Extraction {
      */
     public function getTemplate( $domain ){
         $data = new Loco_gettext_Data( $this->extracted->filter($domain) );
-        return $data->templatize();
+        return $data->templatize( $domain );
     }
 
 
