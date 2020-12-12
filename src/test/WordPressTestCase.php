@@ -93,6 +93,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $this->enable_locale('en_US');
         $this->assertSame( 'en_US', get_locale(), 'Ensure test site is English to start');
         $this->assertSame( 'en_US', get_user_locale(),'Ensure test site is English to start');
+        // Any enqueued scripts should be destroyed
+        unset($GLOBALS['wp_scripts']);
         // ensure test themes are registered and WordPress's cache is valid
         register_theme_directory( LOCO_TEST_DATA_ROOT.'/themes' );
         $sniff = get_theme_roots();
@@ -125,7 +127,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $this->enable_network();
     }
 
-    
+
     /**
      * {@inheritdoc}
      */

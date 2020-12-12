@@ -1,30 +1,41 @@
-<?php
+<?php /** @noinspection PhpUnusedParameterInspection */
+
 /**
  * Text Domain loading helper.
  * Ensures custom translations can be loaded from `wp-content/languages/loco`.
- * This functionality is optional. You can disable the plugin if you're not loading MO files from languages/loco
+ * This functionality is optional. You can disable the plugin if you're not loading MO or JSON files from languages/loco
  */
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     
     /**
+     * theme/plugin text domain loading context in progress
      * @var string[] [ $subdir, $domain, $locale ]
      */
     private $context;
 
     /**
+     * Protects against recursive calls to load_textdomain()
      * @var bool[]
      */    
     private $lock;
 
     /**
+     * Custom/safe directory path with trailing slash
      * @var string
      */
     private $base;
 
     /**
+     * Locations that can be mapped to equivalent paths under custom directory
      * @var array[]
      */
     private $map;
+
+    /**
+     * Deferred JSON files under our custom directory, indexed by script handle
+     * @var string[]
+     */
+    private $json;
     
 
     /**
@@ -33,6 +44,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     public function __construct(){
         parent::__construct();
         $this->lock = array();
+        $this->json = array();
         $this->base = trailingslashit( loco_constant('LOCO_LANG_DIR') );
         // add system locations which have direct equivalent custom/safe locations under LOCO_LANG_DIR
         // not adding theme paths because as long as load_theme_textdomain is used they will be mapped by context.
@@ -161,79 +173,111 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     }
 
 
-    /**
-     * `pre_load_script_translations` filter callback.
-     * This allows us to merge custom JSON on top of installed version, but requires decode/encode.
-     * Alternative method would be to listen on `script_loader_tag` and splice raw json string.
-     * https://developer.wordpress.org/reference/hooks/pre_load_script_translations/
-     * @param null
-     * @param string|false
-     * @param string script handle
-     * @param string e.g "default"
-     * @return string|null
+    /*
+     * `load_script_translation_file` filter callback
+     * Alternative method to merging in `pre_load_script_translations`
+     * @param string|false candidate JSON file (false on final attempt)
+     * @param string
+     * @return string
      */
-    public function filter_pre_load_script_translations( $json = null, $path = '', $handle = '', $domain = '' ){
-        if( is_null($json) && is_string($path) && preg_match('/^-[a-f0-9]{32}\\.json$/',substr($path,-38) ) ){
+    public function filter_load_script_translation_file( $path = '', $handle = '' ){
+        // currently handle-based JSONs for author-provided translations will never map.
+        if( is_string($path) && preg_match('/^-[a-f0-9]{32}\\.json$/',substr($path,-38) ) ){
             $custom = $this->resolve($path);
             if( $custom && is_readable($custom) ){
-                $json = file_get_contents($custom);
-                if( is_readable($path) ){
-                    // merge in PHP, noting that our JED excludes empty keys
-                    $a = json_decode(file_get_contents($path),true);
-                    $b = json_decode($json,true);
-                    if( is_array($a) && is_array($b) ){
-                        // key is probably "messages" instead of domain, but could change in wp-cli/i18n-command
-                        $key = key($a['locale_data']);
-                        $a['locale_data'][$key] = $b['locale_data'][$domain] + $a['locale_data'][$key];
-                        $json = json_encode($a);
-                    }
-                }
+                // Defer until either JSON is resolved or final attempt passes an empty path.
+                $this->json[$handle] = $custom;
             }
+        }
+        // If we return an unreadable file, load_script_translations will not fire.
+        // However, we need to allow WordPress to try all files. Last attempt will have empty path
+        else if( false === $path && array_key_exists($handle,$this->json) ){
+            $path = $this->json[$handle];
+            unset( $this->json[$handle] );
+        }
+        return $path;
+    }
+
+
+    /**
+     * `load_script_translations` filter callback.
+     * Merges custom translations on top of installed ones, as late as possible.
+     * @param string contents of JSON file that WordPress has read 
+     * @param string path relating to given JSON (not used here)
+     * @param string script handle for registered merge
+     * @return string final JSON translations
+     */
+    public function filter_load_script_translations( $json = '', $path = '', $handle = '' ){
+        if( array_key_exists($handle,$this->json) ){
+            $path = $this->json[$handle];
+            unset( $this->json[$handle] );
+            $json = self::mergeJson( $json, file_get_contents($path) );
         }
         return $json;
     }
 
 
-    /*
-     * `load_script_translation_file` filter callback
-     * Alternative method to merging in `pre_load_script_translations`
-     * @param string candidate JSON file
-     * @param string
-     * @return string
-     *
-    public function filter_load_script_translation_file( $path = '', $handle = '' ){
-        // currently handle-based JSONs, for author-provided translations will never map
-        if( is_string($path) && preg_match('/^-[a-f0-9]{32}\\.json$/',substr($path,-38) ) ){
-            $custom = $this->resolve($path);
-            if( $custom && is_readable($custom) ){
-                // WordPress should continue to load original file if it exists. we will merge on top.
-                if( is_readable($path) ){
-                    $this->merge[$handle] = $custom;
-                    return $path;
-                }
-                // else return our own instead
-                return $custom;
-            }
+    /**
+     * Merge two JSON translation files such that custom strings override
+     * @param string Original/fallback JSON
+     * @param string Custom JSON (must exclude empty keys)
+     * @return string Merged JSON
+     */
+    private static function mergeJson( $json, $custom ){
+        $fallbackJed = json_decode($json,true);
+        $overrideJed = json_decode($custom,true);
+        if( self::jedValid($fallbackJed) && self::jedValid($overrideJed) ){
+            // Original key is probably "messages" instead of domain, but this could change at any time.
+            // Although custom file should have domain key, there's no guarantee JSON wasn't overwritten or key changed.
+            $overrideMessages = current($overrideJed['locale_data']);
+            $fallbackMessages = current($fallbackJed['locale_data']);
+            // We could merge headers, but custom file should be correct
+            // $overrideMessages[''] += $fallbackMessages[''];
+            // Continuing to use "messages" here as per WordPress. Good backward compatibility is likely.
+            // Note that our custom JED is sparse (exported with empty keys absent). This is essential for + operator.
+            $overrideJed['locale_data'] = array (
+                'messages' => $overrideMessages + $fallbackMessages,
+            );
+            // Note that envelope will be the custom one. No functional difference but demonstrates that merge worked.
+            $overrideJed['merged'] = true;
+            $json = json_encode($overrideJed);
         }
-        return $path;
-    }*/
+        // Handle situations where one or neither JSON strings are valid
+        else if( self::jedValid($overrideJed) ){
+            $json = $custom;
+        }
+        else if( ! self::jedValid($fallbackJed) ){
+            $json = '';
+        }
+        return $json;
+    }
+
+
+    /**
+     * Test if unserialized JSON is a valid JED structure
+     * @param array
+     * @return bool
+     */
+    private static function jedValid( $jed ){
+        return is_array($jed) &&  array_key_exists('locale_data',$jed) && is_array($jed['locale_data']) && $jed['locale_data'];
+    }
 
 
     /*
-     * `script_loader_tag` filter callback
+     * Alternative merging method using `script_loader_tag` filter callback.
+     * We could load two JSONs via two calls to wp.i18n.setLocaleData BUT WordPress closure makes it difficult/unreliable.
      * @param string candidate JSON file
      * @param string
      * @param string
      * @return string
      *
     public function filter_script_loader_tag( $tag = '', $handle = '', $src = '' ){
-        if( array_key_exists($handle,$this->merge) ){
-            $json = file_get_contents($this->merge[$handle] );
-            unset($this->merge[$handle]);
+        if( array_key_exists($handle,$this->json) ){
+            $json = file_get_contents($this->json[$handle] );
+            unset($this->json[$handle]);
             // splice custom translations between original ones and the script they're attached to.
-            // note that any other modifications to the script via other filters will break this. 
             list( $foo, $bar ) = explode('</script>',$tag,2);
-            $tag = $foo."\nconsole.log({$json});</script>".$bar;
+            $tag = $foo."\n console.log({$json});</script>".$bar;
         }
         return $tag;
     }*/
