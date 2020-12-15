@@ -3,7 +3,7 @@
  * Generic upload template for installing a file into a translation set.
  */
 $this->extend('../layout');
-/* @var Loco_mvc_ViewParams $params */
+/* @var Loco_Locale $locale */
 ?> 
 
 <form action="" method="post" enctype="multipart/form-data" id="loco-main"><?php
@@ -42,10 +42,14 @@ $this->extend('../layout');
     </div>
     <div class="notice inline notice-info">
         <h2>
-            Upload PO file
+            <?php  esc_html_e('Upload PO file','loco-translate')?> 
         </h2>
-        <p>
-            Your file must be named as shown above where <code>{locale}</code> is the language code, e.g. <code><?php $params->e('locale')?></code>.
+        <p><?php 
+            // translators: This is HTML formatted. (1) placeholder for language code, (2) Example language code
+            echo wp_kses (
+                sprintf( __('Your file must be named as shown above where %1$s is the language code, e.g. %2$s','loco-translate'), '<code>{locale}</code>', '<code>'.$locale.'</code>' ),
+                array('code'=>array())
+            )?> 
         </p>
         <p>
             <input type="file" name="f" />

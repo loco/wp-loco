@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.4.7-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2020-12-12 12:28+0000\n"
+"POT-Creation-Date: 2020-12-15 16:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1943,7 +1943,7 @@ msgstr ""
 msgid "Upgrade to %s"
 msgstr ""
 
-#: src/admin/init/UploadController.php:29 tpl/admin/init/upload.php:54
+#: src/admin/init/UploadController.php:29 tpl/admin/init/upload.php:58
 msgid "Upload"
 msgstr ""
 
@@ -1953,6 +1953,10 @@ msgstr ""
 
 #: src/admin/bundle/ViewController.php:106
 msgid "Upload PO"
+msgstr ""
+
+#: tpl/admin/init/upload.php:45
+msgid "Upload PO file"
 msgstr ""
 
 #: tpl/admin/init/init-po.php:163
@@ -2128,4 +2132,12 @@ msgstr ""
 
 #: src/ajax/UploadController.php:70
 msgid "Your file is identical to the existing one"
+msgstr ""
+
+#. This is HTML formatted. (1) placeholder for language code, (2) Example language code
+#: tpl/admin/init/upload.php:50
+#, php-format
+msgid ""
+"Your file must be named as shown above where %1$s is the language code, e.g. "
+"%2$s"
 msgstr ""
