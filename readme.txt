@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.6
-Stable tag: 2.4.6
+Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,7 +100,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
-= 2.4.7 =
+= 2.5.0 =
 * PHP 8.0.0 compatibility
 * Bumped WordPress version to 5.6.0
 * Added JSON translation file generation
@@ -397,7 +397,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.4.7 =
+= 2.5.0 =
 * Various improvements and bugfixes
 
 

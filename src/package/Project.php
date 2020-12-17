@@ -58,6 +58,12 @@ class Loco_package_Project {
      * @var Loco_fs_FileList
      */
     private $spaths;
+
+    /**
+     * Configured source file extensions, e.g. ["php","js"]
+     * @var string[]
+     */
+    private $sexts;
     
     /**
      * File and directory paths to exclude from source file extraction
@@ -391,11 +397,7 @@ class Loco_package_Project {
     private function getSourceFinder(){
         if( ! $this->source ){    
             $source = new Loco_fs_FileFinder;
-            // .php extensions configured in plugin options
-            $conf = Loco_data_Settings::get();
-            $exts = $conf->php_alias or $exts = array('php');
-            // Only add .js extensions if enabled
-            $exts = array_merge( $exts, (array) $conf->jsx_alias );
+            $exts = $this->getSourceExtensions();
             $source->setRecursive(true)->groupBy($exts);
             /* @var $file Loco_fs_File */
             foreach( $this->spaths as $file ){
@@ -408,6 +410,22 @@ class Loco_package_Project {
             $this->source = $source;
         }
         return $this->source;
+    }
+
+
+    /**
+     * @return string[]
+     */
+    public function getSourceExtensions(){
+        // TODO source extensions should be moved from plugin settings to project settings
+        $exts = $this->sexts;
+        if( is_null($exts) ){
+            $conf = Loco_data_Settings::get();
+            $exts = (array) $conf->php_alias;
+            $exts = array_merge( $exts, (array) $conf->jsx_alias );
+        }
+        // always ensure we have at least PHP files scanned
+        return array_merge( $exts, array('php') );
     }
 
 

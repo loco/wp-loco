@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.4.7-dev\n"
+"Project-Id-Version: Loco Translate 2.5.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2020-12-15 16:55+0000\n"
+"POT-Creation-Date: 2020-12-17 15:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.4.7-dev; wp-5.6\n"
+"X-Loco-Version: 2.5.0; wp-5.6\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -447,7 +447,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:177 src/admin/file/EditController.php:164
+#: src/data/Settings.php:176 src/admin/file/EditController.php:164
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
 #: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -1061,9 +1061,7 @@ msgid "Loco Translate %s"
 msgstr ""
 
 #: src/data/Settings.php:175
-msgid ""
-"Loco Translate 2.4 supports third party translation providers. Set up your "
-"API keys in the plugin settings!"
+msgid "Loco Translate 2.5 adds supports for JSON language pack generation."
 msgstr ""
 
 #: src/mvc/AdminController.php:115
@@ -1556,9 +1554,9 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: src/data/Settings.php:176 tpl/ajax/modal-apis-empty.php:15
-#: src/admin/file/EditController.php:163 tpl/admin/common/inc-fsconn.php:18
-#: tpl/admin/common/inc-fsconn.php:43 tpl/admin/errors/no-backups.php:24
+#: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:163
+#: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
+#: tpl/admin/errors/no-backups.php:24
 msgid "Settings"
 msgstr ""
 
