@@ -99,7 +99,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                             <input type="text" size="90" name="api[yandex][key]" id="loco--yandex_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
                         </p>
                         <p>
-                            <span class="description"><a href="https://tech.yandex.com/translate/" target="_blank" tabindex="-1">https://tech.yandex.com/translate/</a></span>
+                            <span class="description"><a href="https://cloud.yandex.com/services/translate" target="_blank" tabindex="-1">https://cloud.yandex.com/services/translate</a></span>
                         </p>
                     </fieldset>
                 </td>

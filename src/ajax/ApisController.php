@@ -47,7 +47,7 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         // API client must be hooked in using loco_api_providers filter
         // this normally filters on Loco_api_Providers::export() but should do the same with an empty array.
         $config = null;
-        foreach( apply_filters('loco_api_providers', array() ) as $candidate ){
+        foreach( apply_filters('loco_api_providers', Loco_api_Providers::builtin() ) as $candidate ){
             if( is_array($candidate) && array_key_exists('id',$candidate) && $candidate['id'] === $hook ){
                 $config = $candidate;
                 break;
@@ -64,7 +64,7 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         }
         
         // The front end sends translations detected as HTML separately. This is to support common external apis.
-        // $isHtml = 'html' === $post->type;
+        $config['type'] = $post->type;
         
         // We need a locale too, which should be valid as it's the same one loaded into the front end.
         $locale = Loco_Locale::parse( (string) $post->locale );
@@ -91,5 +91,20 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         return parent::render();
     }
 
+
+    /**
+     * Built-in Yandex API v2 support.
+     * https://cloud.yandex.com/docs/translate/api-ref/
+     * 
+     * @param string[] input strings
+     * @param Loco_Locale target locale for translations
+     * @param array our own api configuration
+     * @return string[] output strings
+     * @throws Loco_error_Exception
+     */
+    public function filter_loco_api_translate_yandex( array $sources, Loco_Locale $locale, array $config ){
+        $client = new Loco_api_YandexClient($config);
+        return $client->translate($sources,$locale);
+    }
 
 }

@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.5.1 =
+* Support for new Yandex translate API
+
 = 2.5.0 =
 * PHP 8.0.0 compatibility
 * Bumped WordPress version to 5.6.0
@@ -397,7 +400,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.5.0 =
+= 2.5.1 =
 * Various improvements and bugfixes
 
 
