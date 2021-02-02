@@ -44,7 +44,6 @@ class Loco_data_Permissions {
         // by default we'll initially allow full access to anyone that can manage_options
         else {
             $apply['translator'] = $roles->add_role( 'translator', 'Translator', array('read'=>true) );
-            /* @var $role WP_Role */
             foreach( $roles->role_objects as $id => $role ){
                 if( $role->has_cap('manage_options') ){
                     $apply[$id] = $role;
@@ -56,7 +55,6 @@ class Loco_data_Permissions {
         if( ! isset($apply['administrator']) && ! is_multisite() ){
             $apply['administrator'] = $roles->get_role('administrator');
         }
-        /* @var $role WP_Role */
         foreach( $apply as $role ){
             if( $role instanceof WP_Role ){
                 foreach( self::$caps as $cap ){

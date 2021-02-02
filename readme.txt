@@ -102,6 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.5.1 =
 * Support for new Yandex translate API
+* Support for DeepL formality parameter
 
 = 2.5.0 =
 * PHP 8.0.0 compatibility
