@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 5.6
+Tested up to: 5.6.1
 Stable tag: 2.5.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,6 +103,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.5.1 =
 * Support for new Yandex translate API
 * Support for DeepL formality parameter
+* Bumped WordPress version to 5.6.1
+* Removed literal "1" instances from singular strings
 
 = 2.5.0 =
 * PHP 8.0.0 compatibility

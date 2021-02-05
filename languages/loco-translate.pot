@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.5.0\n"
+"Project-Id-Version: Loco Translate 2.5.1-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2020-12-17 15:12+0000\n"
+"POT-Creation-Date: 2021-02-05 11:55+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.0; wp-5.6\n"
+"X-Loco-Version: 2.5.1-dev; wp-5.6.1\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -49,16 +49,57 @@ msgid "%s file saved"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: src/js/Strings.php:91 src/gettext/Metadata.php:205
+#: src/js/Strings.php:91 src/gettext/Metadata.php:206
 #, javascript-format
 msgid "%s fuzzy"
 msgstr ""
+
+#. Summary of new strings after running in-editor Sync
+#: src/js/Strings.php:25
+#, javascript-format
+msgid "%s new string added"
+msgid_plural "%s new strings added"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Summary of existing strings that no longer exist after running in-editor Sync
+#: src/js/Strings.php:29
+#, javascript-format
+msgid "%s obsolete string removed"
+msgid_plural "%s obsolete strings removed"
+msgstr[0] ""
+msgstr[1] ""
 
 #. Where %s is the size of a file
 #: tpl/admin/init/init-pot.php:16
 #, php-format
 msgid "%s on disk"
 msgstr ""
+
+#. Were %s is number of source files that will be scanned
+#: src/admin/init/InitPoController.php:227
+#, php-format
+msgid "%s source file will be scanned for translatable strings"
+msgid_plural "%s source files will be scanned for translatable strings"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Shows total string count at top of editor
+#. Where %s is any number of strings
+#: src/js/Strings.php:83 src/gettext/Metadata.php:194
+#, javascript-format
+msgid "%s string"
+msgid_plural "%s strings"
+msgstr[0] ""
+msgstr[1] ""
+
+#. Summary of existing translations where the source text has changed slightly
+#: src/js/Strings.php:33
+#, javascript-format
+msgid "%s string marked Fuzzy"
+msgid_plural "%s strings marked Fuzzy"
+msgstr[0] ""
+msgstr[1] ""
 
 #. 1: Number of strings; 2: Service provider; e.g. "50 strings translated via Google Translate"
 #: src/js/Strings.php:58
@@ -81,62 +122,23 @@ msgid "%s unique source strings."
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: src/js/Strings.php:95 src/gettext/Metadata.php:208
+#: src/js/Strings.php:95 src/gettext/Metadata.php:209
 #, javascript-format
 msgid "%s untranslated"
 msgstr ""
 
-#. Shows percentage translated at top of editor
-#: src/js/Strings.php:87 src/gettext/Metadata.php:203
-#, javascript-format
-msgid "%s%% translated"
-msgstr ""
-
-#. Summary of new strings after running in-editor Sync
-#: src/js/Strings.php:25
-#, javascript-format
-msgid "1 new string added"
-msgid_plural "%s new strings added"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Summary of existing strings that no longer exist after running in-editor Sync
-#: src/js/Strings.php:29
-#, javascript-format
-msgid "1 obsolete string removed"
-msgid_plural "%s obsolete strings removed"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/admin/init/InitPoController.php:225
+#: tpl/admin/file/info-pot.php:31
 #, php-format
-msgid "1 source file will be scanned for translatable strings"
-msgid_plural "%s source files will be scanned for translatable strings"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Shows total string count at top of editor
-#: src/js/Strings.php:83 src/gettext/Metadata.php:193
-#, javascript-format
-msgid "1 string"
-msgid_plural "%s strings"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Summary of existing translations where the source text has changed slightly
-#: src/js/Strings.php:33
-#, javascript-format
-msgid "1 string marked Fuzzy"
-msgid_plural "%s strings marked Fuzzy"
-msgstr[0] ""
-msgstr[1] ""
-
-#: tpl/admin/file/info-pot.php:29
-#, php-format
-msgid "1 word"
+msgid "%s word"
 msgid_plural "%s words"
 msgstr[0] ""
 msgstr[1] ""
+
+#. Shows percentage translated at top of editor
+#: src/js/Strings.php:87 src/gettext/Metadata.php:204
+#, javascript-format
+msgid "%s%% translated"
+msgstr ""
 
 #: tpl/admin/init/init-prompt.php:33 tpl/admin/init/init-pot.php:42
 msgid "About templates"
@@ -231,7 +233,7 @@ msgid ""
 "file?"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:241
+#: src/admin/init/InitPoController.php:243
 msgid "Assign template"
 msgstr ""
 
@@ -388,7 +390,7 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:216
+#: src/admin/init/InitPoController.php:217
 #: src/admin/bundle/ViewController.php:132 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
@@ -568,7 +570,7 @@ msgstr ""
 
 #. Label for the window pane holding the original English text
 #. List heading showing preview of English text for each item
-#: src/js/Strings.php:123 tpl/admin/file/info-pot.php:28
+#: src/js/Strings.php:123 tpl/admin/file/info-pot.php:30
 msgctxt "Editor"
 msgid "Source text"
 msgstr ""
@@ -775,7 +777,7 @@ msgstr ""
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:21 tpl/admin/file/info-pot.php:22
+#: tpl/admin/file/info-mo.php:21 tpl/admin/file/info-pot.php:24
 #: tpl/admin/file/info-po.php:26
 msgid "File modified"
 msgstr ""
@@ -799,7 +801,7 @@ msgstr ""
 msgid "File restored"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:18 tpl/admin/file/info-pot.php:19
+#: tpl/admin/file/info-mo.php:18 tpl/admin/file/info-pot.php:21
 #: tpl/admin/file/info-po.php:23
 msgid "File size"
 msgstr ""
@@ -939,12 +941,12 @@ msgstr ""
 msgid "Info and tutorials"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:107
+#: src/admin/init/InitPoController.php:108
 #, php-format
 msgid "Initializing new translations in \"%s\""
 msgstr ""
 
-#: src/admin/init/InitPoController.php:111
+#: src/admin/init/InitPoController.php:112
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
@@ -1003,7 +1005,7 @@ msgstr ""
 msgid "largest is %s"
 msgstr ""
 
-#: tpl/admin/file/info-pot.php:25
+#: tpl/admin/file/info-pot.php:27
 msgid "Last extracted"
 msgstr ""
 
@@ -1144,7 +1146,7 @@ msgid "Need a human?"
 msgstr ""
 
 #: src/admin/init/InitPoController.php:16
-#: src/admin/init/InitPoController.php:114
+#: src/admin/init/InitPoController.php:115
 #: src/admin/file/BaseController.php:127 src/admin/bundle/ViewController.php:98
 msgid "New language"
 msgstr ""
@@ -1278,7 +1280,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
-#: src/admin/init/InitPoController.php:197
+#: src/admin/init/InitPoController.php:198
 #, php-format
 msgid "One string found in %2$s"
 msgid_plural "%s strings found in %s"
@@ -1591,7 +1593,7 @@ msgstr ""
 msgid "Skip PHP files larger than:"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:231
+#: src/admin/init/InitPoController.php:233
 msgid "Skip template"
 msgstr ""
 
@@ -1652,7 +1654,7 @@ msgid "System diagnostics"
 msgstr ""
 
 #: tpl/admin/file/view-pot.php:9 tpl/admin/file/edit-pot.php:10
-#: tpl/admin/file/info-pot.php:16 tpl/admin/bundle/inc-po-table.php:42
+#: tpl/admin/file/info-pot.php:18 tpl/admin/bundle/inc-po-table.php:42
 #: tpl/admin/bundle/conf.php:65
 msgid "Template file"
 msgstr ""
@@ -1974,7 +1976,7 @@ msgstr ""
 msgid "User options apply to your WordPress login, across all sites"
 msgstr ""
 
-#: src/data/Permissions.php:157
+#: src/data/Permissions.php:155
 msgctxt "User role"
 msgid "Translator"
 msgstr ""
@@ -2030,7 +2032,7 @@ msgstr ""
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:319 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:321 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr ""
 

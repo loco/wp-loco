@@ -5,7 +5,9 @@
 $this->extend('info');
 $this->start('header');
 /* @var Loco_mvc_FileParams $file */
+/* @var Loco_mvc_ViewParams $params */
 /* @var Loco_gettext_Metadata $meta */
+/* @var int $words */
 ?> 
 
     <div class="notice inline notice-info">
@@ -26,7 +28,7 @@ $this->start('header');
             <dd><time><?php $params->date('potime')?></time></dd>
             
             <dt><?php echo esc_html_x('Source text','Editor','loco-translate')?>:</dt>
-            <dd><?php echo esc_html( $meta->getTotalSummary() )?> <span>(<?php echo sprintf( _n('1 word','%s words', $words, 'loco-translate'), number_format_i18n($words) )?>)</span></dd>
+            <dd><?php echo esc_html( $meta->getTotalSummary() )?> <span>(<?php echo sprintf( _n('%s word','%s words', $words, 'loco-translate'), number_format_i18n($words) )?>)</span></dd>
         </dl>
    </div>
     
@@ -41,4 +43,4 @@ $this->start('header');
             If this is intended to be a translation file it should end with a language code.
         </p>
     </div><?php
-    endif; 
+    endif;
