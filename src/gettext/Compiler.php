@@ -117,24 +117,25 @@ class Loco_gettext_Compiler {
             // Try both script paths to check whether deployed script actually exists
             $jsonfile = null;
             foreach( array($min,$src) as $relative ){
+                // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
+                $url = $project->getBundle()->getDirectoryUrl().$relative;
+                $relative = apply_filters( 'load_script_textdomain_relative_path', $relative, $url );
+                if( ! is_string($relative) || '' === $relative ){
+                    continue;
+                }
                 $file = new Loco_fs_File($relative);
                 $file->normalize($base_dir);
-                if( $file->exists() ){
-                    // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
-                    $url = $project->getBundle()->getDirectoryUrl().$relative;
-                    $relative = apply_filters( 'load_script_textdomain_relative_path', $relative, $url );
-                    if( ! is_string($relative) || '' === $relative ){
-                        continue;
-                    }
-                    // Hashable reference is always finally unminified, as per load_script_textdomain()
-                    if( substr($relative,-7) === '.min.js' ) {
-                        $relative = substr($relative,0,-7).'.js';
-                    }
-                    $name = $pofile->filename().'-'.md5($relative).'.json';
-                    $jsonfile = $pofile->cloneBasename($name);
-                    $jsons->add( $jsonfile );
-                    break;
+                if( ! $file->exists() ){
+                    continue;
                 }
+                // Hashable reference is always finally unminified, as per load_script_textdomain()
+                if( substr($relative,-7) === '.min.js' ) {
+                    $relative = substr($relative,0,-7).'.js';
+                }
+                $name = $pofile->filename().'-'.md5($relative).'.json';
+                $jsonfile = $pofile->cloneBasename($name);
+                $jsons->add( $jsonfile );
+                break;
             }
             // if neither exists in the bundle, this is a source path that will never be resolved at runtime
             if( is_null($jsonfile) ){
