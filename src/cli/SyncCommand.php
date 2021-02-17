@@ -133,7 +133,8 @@ abstract class Loco_cli_SyncCommand {
                     }
                     // Done compile of this set
                     Loco_error_AdminNotices::get()->flush();
-                    WP_CLI::success( sprintf('Updated %s', $pofile->filename() ) );
+                    $dir = new Loco_fs_LocaleDirectory( $pofile->dirname() );
+                    WP_CLI::success( sprintf('Updated %s', $pofile->filename() ).' ('.$dir->getTypeLabel( $dir->getTypeId() ).')' );
                 }
                 catch( Loco_error_WriteException $e ){
                     WP_CLI::error( $e->getMessage(), false );
@@ -157,17 +158,12 @@ abstract class Loco_cli_SyncCommand {
      * @return Loco_gettext_Data Merged file replacing $po
      */
     private static function msgmerge( Loco_gettext_Data $po, Loco_gettext_Data $pot, $translate = false ){
-        $ntotal = 0;
         $nmatched = 0;
         $nfuzzy = 0;
         $nadded = 0;
         // add latest valid sources to matching instance
-        $matcher = new LocoFuzzyMatcher;
-        /* @var LocoPoMessage $new */
-        foreach( $pot as $new ){
-            $ntotal++;
-            $matcher->add($new);
-        }
+        $matcher = new Loco_gettext_Matcher;
+        $ntotal = $matcher->loadRefs($pot);
         // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
         $fuzziness = Loco_data_Settings::get()->fuzziness;
         $matcher->setFuzziness( (string) $fuzziness );

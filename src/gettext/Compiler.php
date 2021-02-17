@@ -102,6 +102,7 @@ class Loco_gettext_Compiler {
         $pofile = $this->files->getSource();
         $base_dir = $project->getBundle()->getDirectoryPath();
         $domain = $project->getDomain()->getName();
+        $buffer = array();
         /* @var Loco_gettext_Data $fragment */
         foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
             // Reference could be source js, or minified version.
@@ -115,7 +116,7 @@ class Loco_gettext_Compiler {
                 $min = substr($ref,0,-3).'.min.js';
             }
             // Try both script paths to check whether deployed script actually exists
-            $jsonfile = null;
+            $found = false;
             foreach( array($min,$src) as $relative ){
                 // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
                 $url = $project->getBundle()->getDirectoryUrl().$relative;
@@ -132,26 +133,36 @@ class Loco_gettext_Compiler {
                 if( substr($relative,-7) === '.min.js' ) {
                     $relative = substr($relative,0,-7).'.js';
                 }
-                $name = $pofile->filename().'-'.md5($relative).'.json';
-                $jsonfile = $pofile->cloneBasename($name);
-                $jsons->add( $jsonfile );
+                // add .js strings to buffer for this json and merge if already present
+                if( array_key_exists($relative,$buffer) ){
+                    $buffer[$relative]->concat($fragment);
+                }
+                else {
+                    $buffer[$relative] = $fragment;
+                }
+                $found = true;
                 break;
             }
             // if neither exists in the bundle, this is a source path that will never be resolved at runtime
-            if( is_null($jsonfile) ){
+            if( ! $found ){
                 Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; script not found in bundle',$ref) );
-                continue;
             }
-            // ok to write JED fragment to hashed JSON file
+        }
+        // write all buffered fragments to their calculated JSON paths
+        foreach( $buffer as $ref => $fragment ) {
+            $name = $pofile->filename().'-'.md5($ref).'.json';
+            $jsonfile = $pofile->cloneBasename($name);
             try {
                 $this->fs->authorizeSave($jsonfile);
                 $jsonfile->putContents( $fragment->msgjed($domain,$ref) );
+                $jsons->add($jsonfile);
             }
             catch( Loco_error_WriteException $e ){
                 Loco_error_AdminNotices::debug( $e->getMessage() );
                 Loco_error_AdminNotices::warn( sprintf(__('JSON compilation failed for %s','loco-translate'),$ref));
             }
         }
+        $buffer = null;
         // clean up redundant JSONs including if no JSONs were compiled
         if( Loco_data_Settings::get()->jed_clean ){
             foreach( $this->files->getJsons() as $path ){

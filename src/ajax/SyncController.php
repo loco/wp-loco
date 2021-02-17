@@ -95,18 +95,13 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
-        $ntotal = 0;
         $nmatched = 0;
         $added = array();
         $dropped = array();
         $fuzzy = array();
         // add latest valid sources to matching instance
-        $matcher = new LocoFuzzyMatcher;
-        /* @var LocoPoMessage $new */
-        foreach( $source as $new ){
-            $matcher->add($new);
-            $ntotal++;
-        }
+        $matcher = new Loco_gettext_Matcher;
+        $ntotal = $matcher->loadRefs($source);
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
             $fuzziness = Loco_data_Settings::get()->fuzziness;
@@ -129,8 +124,11 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 $nmatched++;
             }
         }
-        // Attempt fuzzy matching after all exact matches have been processed
         if( $nmatched !== $ntotal ){
+            // TODO pull .js strings from associated .json files
+            //
+            
+            // Attempt fuzzy matching after all exact matches have been processed
             foreach( $matcher->getFuzzyMatches() as $pair ){
                 list($old,$new) = $pair;
                 $p = clone $old;
