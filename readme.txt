@@ -105,7 +105,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Support for DeepL formality parameter
 * Bumped WordPress version to 5.6.1
 * Removed literal "1" instances from singular strings
-* Buffering compiled JSON to support strings from multiple source files
+* Buffering compiled JSON to support strings from multiple sources
+* Added loco_compile_single_json filter
 
 = 2.5.0 =
 * PHP 8.0.0 compatibility
