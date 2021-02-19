@@ -92,14 +92,31 @@ abstract class Loco_cli_SyncCommand {
                         Loco_cli_Utils::debug('Template not found (%s)', $potfile->basename() );
                     }
                 }
-                // Perform merge if we have a reference file
-                if( $ref ){
-                    Loco_cli_Utils::debug('Merging %s <- %s', $pofile->basename(), $potfile->basename() );
-                    $po = self::msgmerge( $def, $ref, $translate );
-                }
-                else {
+                if( ! $ref ){
                     WP_CLI::warning( sprintf('Skipping %s; no valid translation template',$pofile->getRelativePath($content_dir) ) );
                     continue;
+                }
+                // Perform merge if we have a reference file
+                Loco_cli_Utils::debug('Merging %s <- %s', $pofile->basename(), $potfile->basename() );
+                $matcher = new Loco_gettext_Matcher;
+                $matcher->loadRefs($ref,$translate );
+                // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
+                $fuzziness = Loco_data_Settings::get()->fuzziness;
+                $matcher->setFuzziness( (string) $fuzziness );
+                // update matches sources, deferring unmatched for deferred fuzzy match 
+                $po = clone $def;
+                $po->clear();
+                $nvalid = count( $matcher->mergeValid($def,$po) );
+                $njsons = count( $matcher->mergePurged($pofile,$po) );
+                $nfuzzy = count( $matcher->mergeFuzzy($po) );
+                $nadded = count( $matcher->mergeAdded($po) );
+                $ndropped = count( $matcher->redundant() );
+                // TODO Support --previous to keep old strings, or at least comment them out as #| msgid.....
+                if( $nfuzzy || $nadded || $ndropped || $njsons ){
+                    Loco_cli_Utils::debug('> unchanged:%u added:%u fuzzy:%u dropped:%u', $nvalid, $nadded+$njsons, $nfuzzy, $ndropped );
+                }
+                else {
+                    Loco_cli_Utils::debug('> %u identical sources',$nvalid);
                 }
                 // File is synced, but may be identical
                 $po->sort();
@@ -152,62 +169,11 @@ abstract class Loco_cli_SyncCommand {
     
     
     /**
-     * @param Loco_gettext_Data Existing PO file to MODIFY (definitions)
-     * @param Loco_gettext_Data Latest POT file, being synced in (reference)
-     * @param bool whether to merge translations in addition to sources
+     * @param Loco_gettext_Data Existing PO file to MODIFY (definitions, def.po)
+     * @param Loco_gettext_Matcher merging instance populate with POT sources
      * @return Loco_gettext_Data Merged file replacing $po
      */
-    private static function msgmerge( Loco_gettext_Data $po, Loco_gettext_Data $pot, $translate = false ){
-        $nmatched = 0;
-        $nfuzzy = 0;
-        $nadded = 0;
-        // add latest valid sources to matching instance
-        $matcher = new Loco_gettext_Matcher;
-        $ntotal = $matcher->loadRefs($pot);
-        // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
-        $fuzziness = Loco_data_Settings::get()->fuzziness;
-        $matcher->setFuzziness( (string) $fuzziness );
-        // update matches sources, deferring unmatched for deferred fuzzy match 
-        $merged = clone $po;
-        $merged->clear();
-        /* @var LocoPoMessage $old */
-        foreach( $po as $old ){
-            $new = $matcher->match($old);
-            // if existing source is still valid, merge any changes
-            if( $new instanceof LocoPoMessage ){
-                $p = clone $old;
-                $p->merge($new,$translate);
-                $merged->push($p);
-                $nmatched += $p->countForms();
-            }
-        }
-        // We can quit early if all strings were matched
-        if( $nmatched === $ntotal ){
-            Loco_cli_Utils::debug('> %u identical sources',$ntotal);
-            return $merged;
-        }
-        // Attempt fuzzy matching after all exact matches have been processed
-        foreach( $matcher->getFuzzyMatches() as $pair ){
-            list($old,$new) = $pair;
-            $p = clone $old;
-            $p->merge($new);
-            $merged->push($p);
-            $nfuzzy += $p->countForms();
-            Loco_cli_Utils::debug('~ %s', $p['source'] );
-        }
-        // Any unmatched strings remaining are NEW
-        /* @var LocoPoMessage $new */
-        foreach( $matcher->unmatched() as $new ){
-            $p = clone $new;
-            $translate or $p->strip();
-            $merged->push($p);
-            $nadded += $p->countForms();
-            Loco_cli_Utils::debug('+ %s', $p['source'] );
-        }
-        // TODO Support --previous to keep old strings, or at least comment them out as #| msgid.....
-        // number of strings dropped is previous total minus those matched
-        $ndropped = $po->count() - ( $nmatched + $nfuzzy );
-        Loco_cli_Utils::debug('> unchanged:%u added:%u fuzzy:%u dropped:%u', $nmatched, $nadded, $nfuzzy, $ndropped );
+    private static function msgmerge( Loco_gettext_Data $po, Loco_gettext_Matcher $matcher ){
         return $merged;
     }
 

@@ -91,17 +91,11 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             // Have source strings. These cannot contain any translations.
             $source = $extr->includeMeta()->getTemplate($domain);
             $translate = false;
-            $strip = false;
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
-        $nmatched = 0;
-        $added = array();
-        $dropped = array();
-        $fuzzy = array();
-        // add latest valid sources to matching instance
         $matcher = new Loco_gettext_Matcher;
-        $ntotal = $matcher->loadRefs($source);
+        $matcher->loadRefs($source,$translate);
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
             $fuzziness = Loco_data_Settings::get()->fuzziness;
@@ -113,42 +107,14 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         // update matches sources, deferring unmatched for deferred fuzzy match 
         $merged = clone $target;
         $merged->clear();
+        $matcher->mergeValid($target,$merged);
+        $added = $matcher->mergePurged($file,$merged);
+        $fuzzy = $matcher->mergeFuzzy($merged);
+        $added = array_merge( $added, $matcher->mergeAdded($merged) );
         /* @var LocoPoMessage $old */
-        foreach( $target as $old ){
-            $new = $matcher->match($old);
-            // if existing source is still valid, merge any changes
-            if( $new instanceof LocoPoMessage ){
-                $p = clone $old;
-                $p->merge($new,$translate);
-                $merged->push($p);
-                $nmatched++;
-            }
-        }
-        if( $nmatched !== $ntotal ){
-            // TODO pull .js strings from associated .json files
-            //
-            
-            // Attempt fuzzy matching after all exact matches have been processed
-            foreach( $matcher->getFuzzyMatches() as $pair ){
-                list($old,$new) = $pair;
-                $p = clone $old;
-                $p->merge($new);
-                $merged->push($p);
-                $fuzzy[] = $p->getKey();
-            }
-            // Any unmatched strings remaining are NEW
-            /* @var LocoPoMessage $new */
-            foreach( $matcher->unmatched() as $new ){
-                $p = clone $new;
-                $strip and $p->strip();
-                $merged->push($p);
-                $added[] = $p->getKey();
-            }
-            // any deferred matches not resolved are dropped
-            /* @var LocoPoMessage $old */
-            foreach( $matcher->redundant() as $old ){
-                $dropped[] = $old->getKey();
-            }
+        $dropped = array();
+        foreach( $matcher->redundant() as $old ){
+            $dropped[] = $old->getKey();
         }
         // return to JavaScript with stats in the same form as old front end merge
         $this->set( 'done', array (
