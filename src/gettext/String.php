@@ -85,7 +85,7 @@ class Loco_gettext_String {
      * @param array|string
      * @return self
      */
-    public function adddExtractedComment( $notes ){
+    public function addExtractedComment( $notes ){
         $this->merge('notes',$notes,' ');
         return $this;
     }
