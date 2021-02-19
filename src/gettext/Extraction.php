@@ -132,6 +132,26 @@ class Loco_gettext_Extraction {
 
 
     /**
+     * Add a custom source string constructed from `new Loco_gettext_String(msgid,[msgctxt])`
+     * @param Loco_gettext_String
+     * @param string optional domain, if not current bundle's default
+     * @return Loco_gettext_Extraction
+     */
+    public function addString( Loco_gettext_String $string, $domain = '' ){
+        if( ! $domain ) {
+            $default = $this->bundle->getDefaultProject();
+            $domain = (string) ( $default ? $default->getDomain() :  $this->extracted->getDomain() );
+        }
+        $index = $this->extracted->pushEntry( $string->exportSingular(), $domain );
+        if( $string->hasPlural() ){
+            $this->extracted->pushPlural( $string->exportPlural(), $index );
+        }
+        
+        return $this;
+    }
+
+
+    /**
      * Get number of unique strings across all domains extracted (excluding additional metadata)
      * @return array { default: x, myDomain: y }
      */
@@ -146,6 +166,7 @@ class Loco_gettext_Extraction {
      * @return Loco_gettext_Data
      */
     public function getTemplate( $domain ){
+        do_action('loco_extracted_template', $this, $domain );
         $data = new Loco_gettext_Data( $this->extracted->filter($domain) );
         return $data->templatize( $domain );
     }
