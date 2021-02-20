@@ -98,7 +98,8 @@ abstract class Loco_cli_SyncCommand {
                 }
                 // Perform merge if we have a reference file
                 Loco_cli_Utils::debug('Merging %s <- %s', $pofile->basename(), $potfile->basename() );
-                $matcher = new Loco_gettext_Matcher;
+                $matcher = new Loco_gettext_Matcher($project);
+                $matcher->setPath($pofile);
                 $matcher->loadRefs($ref,$translate );
                 // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
                 $fuzziness = Loco_data_Settings::get()->fuzziness;
@@ -107,7 +108,7 @@ abstract class Loco_cli_SyncCommand {
                 $po = clone $def;
                 $po->clear();
                 $nvalid = count( $matcher->mergeValid($def,$po) );
-                $njsons = count( $matcher->mergePurged($pofile,$po) );
+                $njsons = count( $matcher->mergePurged($po) );
                 $nfuzzy = count( $matcher->mergeFuzzy($po) );
                 $nadded = count( $matcher->mergeAdded($po) );
                 $ndropped = count( $matcher->redundant() );

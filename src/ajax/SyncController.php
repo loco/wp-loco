@@ -94,7 +94,8 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
-        $matcher = new Loco_gettext_Matcher;
+        $matcher = new Loco_gettext_Matcher($project);
+        $matcher->setPath($file);
         $matcher->loadRefs($source,$translate);
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
@@ -108,7 +109,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         $merged = clone $target;
         $merged->clear();
         $matcher->mergeValid($target,$merged);
-        $added = $matcher->mergePurged($file,$merged);
+        $added = $matcher->mergePurged($merged);
         $fuzzy = $matcher->mergeFuzzy($merged);
         $added = array_merge( $added, $matcher->mergeAdded($merged) );
         /* @var LocoPoMessage $old */
