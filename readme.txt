@@ -107,8 +107,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Buffering compiled JSON to support strings from multiple sources
 * Added loco_compile_single_json filter for specifying custom JSON
 * Added loco_extracted_template hook for adding custom strings
-* Sync now pulls JSON translations when purged from PO but present in POT
-* Bumped WordPress version to 5.6.1
+* Sync now pulls JSON translations when purged from PO
+* Copying PO now copies existing JSON translations with it
+* Bumped WordPress version to 5.6.2
 
 = 2.5.0 =
 * PHP 8.0.0 compatibility

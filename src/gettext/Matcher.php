@@ -12,15 +12,15 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * JSON file paths that have been processed, indexed by their unminified relative PO file reference
-     * @var bool[]
+     * @var int[]
      */
     private $jsons;
 
     /**
-     * Base path for merged PO file siblings e.g. "/path/to/folder/my-domain-en_GB"
-     * @var string
+     * Base path[s] for merged PO file siblings e.g. "/path/to/folder/my-domain-en_GB"
+     * @var string[]
      */
-    private $basepath = '';
+    private $basepaths;
 
     /**
      * Text domain of current merge operation
@@ -46,13 +46,24 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
     /**
      * Set a base path for file siblings being operated on
      * @param Loco_fs_File
-     * @return void
+     * @return self
      */
     public function setPath( Loco_fs_File $po ){
-        $this->basepath = $po->dirname().'/'.$po->filename();
-        // reset cache of compiled translations
         $this->jsons = array();
         $this->compiled = array();
+        $this->basepaths = array();
+        return $this->addPath($po);
+    }
+
+
+    /**
+     * Add an additional base bath to try when looking for siblings
+     * @param Loco_fs_File
+     * @return self
+     */
+    public function addPath( Loco_fs_File $po ){
+        $this->basepaths[] = $po->dirname().'/'.$po->filename();
+        return $this;
     }
 
 
@@ -243,31 +254,33 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
             return $found; // already processed this
         }
         // base path is required for locating JSONs related to current PO.
-        $basepath = $this->basepath;
-        if( '' === $basepath ){
+        $basepaths = $this->basepaths;
+        if( is_null($basepaths) ){
             throw new RuntimeException('Cannot resolve JSON files without a base path');
         }
         // TODO allow load_script_textdomain_relative_path to modify the relative path
-        $file = new Loco_fs_File( $basepath.'-'.md5($ref).'.json' );
-        if( $file->exists() ){
-            foreach( $this->parseJed($file->getContents()) as $key => $translations ){
-                if( array_key_exists($key,$this->compiled) ){
-                    /*if( $this->compiled[$key] !== $translations ){
-                        trigger_error('Duplicate key has different translations in JSON',E_USER_WARNING);
-                    }*/
-                    continue;
-                }
-                if( is_array($translations) && array_key_exists(0,$translations) ) {
-                    $target = (string) $translations[0];
-                    if( '' !== $target ){
-                        $this->compiled[$key] = $translations;
-                        $found++;
+        foreach( array_unique($basepaths) as $basepath ){
+            $file = new Loco_fs_File( $basepath.'-'.md5($ref).'.json' );
+            if( $file->exists() ){
+                foreach( $this->parseJed($file->getContents()) as $key => $translations ){
+                    if( array_key_exists($key,$this->compiled) ){
+                        /*if( $this->compiled[$key] !== $translations ){
+                            trigger_error('Duplicate key has different translations in JSON',E_USER_WARNING);
+                        }*/
+                        continue;
+                    }
+                    if( is_array($translations) && array_key_exists(0,$translations) ) {
+                        $target = (string) $translations[0];
+                        if( '' !== $target ){
+                            $this->compiled[$key] = $translations;
+                            $found++;
+                        }
                     }
                 }
             }
-            // mark JSON as processed
-            $this->jsons[$ref] = true;
         }
+        // mark JSON as processed, whether exists or otherwise
+        $this->jsons[$ref] = $found;
         return $found;
     }
 

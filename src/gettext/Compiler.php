@@ -10,6 +10,7 @@ class Loco_gettext_Compiler {
     private $fs;
 
     /**
+     * Target file group, where we're compiling to
      * @var Loco_fs_Siblings
      */
     private $files;
@@ -18,6 +19,13 @@ class Loco_gettext_Compiler {
      * @var Loco_mvc_ViewParams
      */
     private $progress;
+
+    /**
+     * Whether to protect existing files during compilation (i.e. not overwrite them)
+     * @var bool
+     */
+    private $keep = false;
+    
 
     /**
      * Construct with primary file (PO) being saved
@@ -31,6 +39,17 @@ class Loco_gettext_Compiler {
             'mobytes' => 0,
             'numjson' => 0,
         ) );
+    }
+
+
+    /**
+     * Set overwrite mode
+     * @param bool whether to overwrite existing files during compilation
+     * @return self
+     */
+    public function overwrite( $overwrite ){
+        $this->keep = ! $overwrite;
+        return $this;
     }
 
 
@@ -93,6 +112,18 @@ class Loco_gettext_Compiler {
 
 
     /**
+     * @param Loco_fs_File Source MO file
+     * @return int
+     *
+    public function copyMo( Loco_fs_File $source ){
+        $target = $this->files->getBinary();
+        $bytes = $this->writeCopy($source,$target);
+        $this->progress['mobytes'] = $bytes;
+        return $bytes;
+    }*/
+
+
+    /**
      * @param Loco_package_Project Translation set, required to resolve script paths
      * @param Loco_gettext_Data PO data to export
      * @return Loco_fs_FileList All json files created
@@ -109,8 +140,7 @@ class Loco_gettext_Compiler {
             if( array_key_exists('js',$refs) && $refs['js'] instanceof Loco_gettext_Data ){
                 $jsonfile = new Loco_fs_File($path);
                 try {
-                    $this->fs->authorizeSave($jsonfile);
-                    $jsonfile->putContents( $refs['js']->msgjed($domain,'*.js') );
+                    $this->writeFile( $jsonfile, $refs['js']->msgjed($domain,'*.js') );
                     $jsons->add($jsonfile);
                 }
                 catch( Loco_error_WriteException $e ){
@@ -173,8 +203,7 @@ class Loco_gettext_Compiler {
                 $name = $pofile->filename().'-'.md5($ref).'.json';
                 $jsonfile = $pofile->cloneBasename($name);
                 try {
-                    $this->fs->authorizeSave($jsonfile);
-                    $jsonfile->putContents( $fragment->msgjed($domain,$ref) );
+                    $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
                     $jsons->add($jsonfile);
                 }
                 catch( Loco_error_WriteException $e ){
@@ -200,6 +229,23 @@ class Loco_gettext_Compiler {
         }
         $this->progress['numjson'] = $jsons->count();
         return $jsons;
+    }
+
+
+    /**
+     * Copy JSONs from another location
+     * @param Loco_fs_File Related PO file to which .js strings should be referenced
+     * @return void
+     */
+    public function copyJson( Loco_fs_File $source ){
+        $siblings = new Loco_fs_Siblings($source);
+        $target = $this->files->getSource();
+        foreach( $siblings->getJsons() as $source ){
+            $target = $target->cloneBasename( $source->basename() );
+            if( $this->writeCopy($source,$target) ){
+                $this->progress['numjson']++;
+            }
+        }
     }
 
 
@@ -242,6 +288,37 @@ class Loco_gettext_Compiler {
             }
         }
         return $map;
+    }
+
+
+    /**
+     * @param Loco_fs_File $file
+     * @param string Serialized JSON to write to given file
+     * @return int bytes written
+     */
+    private function writeFile( Loco_fs_File $file, $data ){
+        if( $this->keep && $file->exists() ){
+            return 0;
+        }
+        $this->fs->authorizeSave($file);
+        return $file->putContents($data);
+    }
+
+
+    /**
+     * Copy file using compiler's current filesystem auth
+     * @param Loco_fs_File source
+     * @param Loco_fs_File destination
+     * @return int bytes written
+     */
+    private function writeCopy( Loco_fs_File $source, Loco_fs_File $target ){
+        try {
+            return $this->writeFile( $target, $source->getContents() );
+        }
+        catch( Loco_error_WriteException $e ){
+            Loco_error_AdminNotices::warn( $e->getMessage() );
+        }
+        return 0;
     }
 
 }

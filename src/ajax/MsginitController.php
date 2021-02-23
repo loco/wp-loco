@@ -67,7 +67,8 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         }*/
         
         // Permit forcing of any parsable file as strings template
-        if( $source = $post->source ){
+        $source = (string) $post->source;
+        if( '' !== $source ){
             $potfile = new Loco_fs_LocaleFile( $source );
             $potfile->normalize( $base );
             $data = Loco_gettext_Data::load($potfile);
@@ -113,10 +114,19 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
 
         $locale->ensureName( new Loco_api_WordPressTranslations );
         $data->localize( $locale, $headers );
-
-        $compiler = new Loco_gettext_Compiler($pofile);
-        $compiler->writeAll($data,$project);
         
+        // compile translation files with overwrite mode off
+        $compiler = new Loco_gettext_Compiler($pofile);
+        // copy existing JSON files as is. This handles the problem of purged PO files when we sync.
+        // there is no way to know whether these are still valid, so we are not merging into the PO.
+        if( $potfile && 'po' === $potfile->extension() && $potfile->dirname() !== $pofile->dirname() ) {
+            $compiler->copyJson($potfile);
+        }
+        // compile new files from PO, excluding existing ones copied already
+        $compiler->overwrite(false);
+        $compiler->writeAll($data,$project);
+
+        // return debugging information, used in tests.
         $this->set('debug',new Loco_mvc_ViewParams( array(
             'poname' => $pofile->basename(),
             'source' => $potfile ? $potfile->basename() : '',
