@@ -572,7 +572,7 @@ class Loco_fs_File {
     /**
      * Copy this object with an alternative file extension
      * @param string new extension
-     * @return Loco_fs_File
+     * @return self
      */
     public function cloneExtension( $ext ){
         $name = $this->filename().'.'.$ext;
@@ -583,13 +583,36 @@ class Loco_fs_File {
     /**
      * Copy this object with an alternative name under the same directory
      * @param string new name
-     * @return Loco_fs_File
+     * @return self
      */
     public function cloneBasename( $name ){
         $file = clone $this;
         $file->path = rtrim($file->dirname(),'/').'/'.$name;
         $file->info = null;
         return $file;
+    }
+
+
+    /**
+     * Copy this object as a WordPress script translation file
+     * @param string relative path to .js file
+     * @param string optional base URL if you want to run relative path filters
+     * @return self
+     */
+    public function cloneJson( $ref, $url = '' ){
+        $name = $this->filename();
+        // Hook into load_script_textdomain_relative_path if script URL provided
+        if( is_string($url) && '' !== $url ){
+            $ref = apply_filters( 'load_script_textdomain_relative_path', $ref, trailingslashit($url).ltrim($ref,'/') );
+        }
+        if( is_string($ref) && '' !== $ref ){
+            // Hashable reference is always finally unminified, as per load_script_textdomain()
+            if( substr($ref,-7) === '.min.js' ) {
+                $ref = substr($ref,0,-7).'.js';
+            }
+            $name .= '-'.md5($ref);
+        }
+        return $this->cloneBasename( $name.'.json' );
     }
 
 

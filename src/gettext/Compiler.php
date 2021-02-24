@@ -167,28 +167,24 @@ class Loco_gettext_Compiler {
                 }
                 // Try both script paths to check whether deployed script actually exists
                 $found = false;
-                foreach( array($min,$src) as $relative ){
+                foreach( array($min,$src) as $ref ){
                     // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
-                    $url = $project->getBundle()->getDirectoryUrl().$relative;
-                    $relative = apply_filters( 'load_script_textdomain_relative_path', $relative, $url );
-                    if( ! is_string($relative) || '' === $relative ){
+                    $url = $project->getBundle()->getDirectoryUrl().$ref;
+                    $ref = apply_filters( 'load_script_textdomain_relative_path', $ref, $url );
+                    if( ! is_string($ref) || '' === $ref ){
                         continue;
                     }
-                    $file = new Loco_fs_File($relative);
+                    $file = new Loco_fs_File($ref);
                     $file->normalize($base_dir);
                     if( ! $file->exists() ){
                         continue;
                     }
-                    // Hashable reference is always finally unminified, as per load_script_textdomain()
-                    if( substr($relative,-7) === '.min.js' ) {
-                        $relative = substr($relative,0,-7).'.js';
-                    }
                     // add .js strings to buffer for this json and merge if already present
-                    if( array_key_exists($relative,$buffer) ){
-                        $buffer[$relative]->concat($fragment);
+                    if( array_key_exists($ref,$buffer) ){
+                        $buffer[$ref]->concat($fragment);
                     }
                     else {
-                        $buffer[$relative] = $fragment;
+                        $buffer[$ref] = $fragment;
                     }
                     $found = true;
                     break;
@@ -200,8 +196,7 @@ class Loco_gettext_Compiler {
             }
             // write all buffered fragments to their calculated JSON paths
             foreach( $buffer as $ref => $fragment ) {
-                $name = $pofile->filename().'-'.md5($ref).'.json';
-                $jsonfile = $pofile->cloneBasename($name);
+                $jsonfile = $pofile->cloneJson($ref);
                 try {
                     $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
                     $jsons->add($jsonfile);

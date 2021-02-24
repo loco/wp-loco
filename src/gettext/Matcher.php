@@ -23,6 +23,12 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
     private $basepaths;
 
     /**
+     * Base URL for bundle. Required for script path filters 
+     * @var string
+     */
+    private $basehref;
+
+    /**
      * Text domain of current merge operation
      * @var string
      */
@@ -40,6 +46,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      */
     public function __construct( Loco_package_Project $project ){
         $this->domain = (string) $project->getDomain();
+        $this->basehref = $project->getBundle()->getDirectoryUrl();
     }
 
 
@@ -218,12 +225,10 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         }
         return true;
     }
-    
 
 
     /**
      * Extract unique unminified script references from message.
-     * Note that this doesn't filter on load_script_textdomain_relative_path or loco_compile_single_json. Data not in scope.
      * @param LocoPoMessage
      * @return string[]
      */
@@ -247,9 +252,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      * @param string script reference
      * @return int number of new translations cached
      */
-    public function cacheJed( $ref ){
+    private function cacheJed( $ref ){
         $found = 0;
-        // TODO allow loco_compile_single_json filter to specify path
         if( array_key_exists($ref,$this->jsons) ){
             return $found; // already processed this
         }
@@ -258,9 +262,19 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         if( is_null($basepaths) ){
             throw new RuntimeException('Cannot resolve JSON files without a base path');
         }
-        // TODO allow load_script_textdomain_relative_path to modify the relative path
+        $files = array();
         foreach( array_unique($basepaths) as $basepath ){
-            $file = new Loco_fs_File( $basepath.'-'.md5($ref).'.json' );
+            $pofile = new Loco_fs_LocaleFile($basepath.'.po');
+            // allow loco_compile_single_json filter to specify single JSON path for bundle
+            $path = apply_filters('loco_compile_single_json', '', $pofile->getPath() );
+            if( is_string($path) && '' !== $path ){
+                $files[] = new Loco_fs_File($path);
+            }
+            // check hashed .json file name allowing relative path filters to run
+            $files[] = $pofile->cloneJson($ref,$this->basehref);
+        }
+        // cache all translations in any existing files found. First found, first used.
+        foreach( $files as $file ){
             if( $file->exists() ){
                 foreach( $this->parseJed($file->getContents()) as $key => $translations ){
                     if( array_key_exists($key,$this->compiled) ){
@@ -277,7 +291,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
                         }
                     }
                 }
-            }
+            }            
         }
         // mark JSON as processed, whether exists or otherwise
         $this->jsons[$ref] = $found;
