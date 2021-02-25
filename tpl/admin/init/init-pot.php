@@ -20,8 +20,8 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
         if( $n = $scan->skip ):?> 
         <p>
             <em><?php 
-            // Translators: Where %2$s is the size of a file
-            self::e( _n('Excludes one file over %2$s','Excludes %s files over %2$s',$n,'loco-translate'), $n, $scan->large )?>.
+            // Translators: (1) Number of files excluded (2) the maximum size of file that was included
+            self::e( _n('Excludes %1$s file over %2$s','Excludes %1$s files over %2$s',$n,'loco-translate'), $n, $scan->large )?>.
             <a class="icon icon-help" href="<?php echo esc_url(apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/skipped-files'))?>" target="_blank"><span class="screen-reader-text">Help</span></a>
             </em>
         </p><?php

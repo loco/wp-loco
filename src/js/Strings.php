@@ -51,11 +51,11 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         __("Translation progress %s%%",'loco-translate');
 
         // xgettext: javascript-format
-        _n("Translation job aborted with one string remaining","Translation job aborted with %s strings remaining",0,'loco-translate');
+        _n("Translation job aborted with %s string remaining","Translation job aborted with %s strings remaining",0,'loco-translate');
 
         /* 1: Number of strings; 2: Service provider; e.g. "50 strings translated via Google Translate"
          * xgettext: javascript-format */
-        _n("%s string translated via %s","%s strings translated via %s",0,'loco-translate');
+        _n("%1\$s string translated via %2\$s","%1\$s strings translated via %2\$s",0,'loco-translate');
 
         // xgettext: javascript-format
         _n("%s string updated","%s strings updated",0,'loco-translate');

@@ -68,6 +68,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         
         // Permit forcing of any parsable file as strings template
         $source = (string) $post->source;
+        $compile = false;
         if( '' !== $source ){
             $potfile = new Loco_fs_LocaleFile( $source );
             $potfile->normalize( $base );
@@ -75,6 +76,10 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             // Remove target strings when copying PO 
             if( $post->strip ){
                 $data->strip();
+            }
+            // else we're copying target translations from given file
+            else {
+                $compile = true;
             }
         }
         // else parse POT file if project defines one that exists
@@ -111,20 +116,22 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
                 $headers['X-Loco-Template-Mode'] = 'PO';
             }
         }
-
+        
+        // finalize PO data ready to write to new file
         $locale->ensureName( new Loco_api_WordPressTranslations );
         $data->localize( $locale, $headers );
         
-        // compile translation files with overwrite mode off
+        // compile all files in this set when copying target translation
         $compiler = new Loco_gettext_Compiler($pofile);
-        // copy existing JSON files as is. This handles the problem of purged PO files when we sync.
-        // there is no way to know whether these are still valid, so we are not merging into the PO.
-        if( $potfile && 'po' === $potfile->extension() && $potfile->dirname() !== $pofile->dirname() ) {
-            $compiler->copyJson($potfile);
+        if( $compile ){
+            $compiler->writeAll($data,$project);
         }
-        // compile new files from PO, excluding existing ones copied already
-        $compiler->overwrite(false);
-        $compiler->writeAll($data,$project);
+        // empty translations don't require compiled files, but adding MO for completeness.
+        else {
+            $compiler->writePo($data);
+            $data->clear();
+            $compiler->writeMo($data);
+        }
 
         // return debugging information, used in tests.
         $this->set('debug',new Loco_mvc_ViewParams( array(

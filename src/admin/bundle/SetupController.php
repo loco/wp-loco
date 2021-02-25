@@ -111,7 +111,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
                 $n += count($files);
             }
             if( $n ){
-                $notices[] = sprintf( _n("One file can't be matched to a known set of strings","%s files can't be matched to a known set of strings",$n,'loco-translate'), number_format($n) );
+                $notices[] = sprintf( _n("%s file can't be matched to a known set of strings","%s files can't be matched to a known set of strings",$n,'loco-translate'), number_format_i18n($n) );
             }
         }
         

@@ -82,8 +82,8 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 $n = count($list);
                 $maximum = Loco_mvc_FileParams::renderBytes( wp_convert_hr_to_bytes( Loco_data_Settings::get()->max_php_size ) );
                 $largest = Loco_mvc_FileParams::renderBytes( $extr->getMaxPhpSize() );
-                // Translators: Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
-                $text = _n('One file has been skipped because it\'s %3$s. (Max is %2$s). Check all strings are present before saving.','%s files over %2$s have been skipped. (Largest is %3$s). Check all strings are present before saving.',$n,'loco-translate');
+                // Translators: (1) Number of files (2) Maximum size of file that will be included (3) Size of the largest encountered
+                $text = _n('%1$s file has been skipped because it\'s %3$s. (Max is %2$s). Check all strings are present before saving.','%1$s files over %2$s have been skipped. (Largest is %3$s). Check all strings are present before saving.',$n,'loco-translate');
                 $text = sprintf( $text, number_format($n), $maximum, $largest );
                 // not failing, just warning. Nothing will be saved until user saves editor state
                 Loco_error_AdminNotices::warn( $text );
@@ -94,8 +94,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
-        $matcher = new Loco_gettext_Matcher($project);
-        $matcher->setPath($file);
+        $matcher = new Loco_gettext_Matcher;
         $matcher->loadRefs($source,$translate);
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
@@ -109,9 +108,8 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         $merged = clone $target;
         $merged->clear();
         $matcher->mergeValid($target,$merged);
-        $added = $matcher->mergePurged($merged);
         $fuzzy = $matcher->mergeFuzzy($merged);
-        $added = array_merge( $added, $matcher->mergeAdded($merged) );
+        $added = $matcher->mergeAdded($merged);
         /* @var LocoPoMessage $old */
         $dropped = array();
         foreach( $matcher->redundant() as $old ){

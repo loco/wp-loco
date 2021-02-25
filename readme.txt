@@ -103,12 +103,11 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.5.1 =
 * Support for new Yandex translate API
 * Support for DeepL formality parameter
-* Removed literal "1" instances from singular strings
+* Removed literal "1" and "one" instances from singular strings
 * Buffering compiled JSON to support strings from multiple sources
-* Added loco_compile_single_json filter for specifying custom JSON
-* Added loco_extracted_template hook for adding custom strings
-* Sync now pulls JSON translations when purged from PO
-* Copying PO now copies existing JSON translations with it
+* Added `loco_compile_single_json` filter for specifying custom JSON
+* Added `loco_extracted_template` hook for adding custom strings
+* Sync no longer removes the editor's current text filter
 * Bumped WordPress version to 5.6.2
 
 = 2.5.0 =

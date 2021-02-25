@@ -184,7 +184,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                     $count = $counts[$domain];
                     $realCount = $realCounts[$domain];
                     // translators: 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
-                    $str = _n( 'One string extracted from source code for "%2$s"', '%s strings extracted from source code for "%s"', $realCount, 'loco-translate' );
+                    $str = _n( '%1$s string extracted from source code for "%2$s"', '%1$s strings extracted from source code for "%2$s"', $realCount, 'loco-translate' );
                     $this->good( $str.' (%s including metadata)', number_format($realCount), $domain?$domain:'*', number_format($count) );
                 }
                 else {

@@ -54,7 +54,7 @@ abstract class Loco_cli_SyncCommand {
                 // Preempt write errors and print useful file mode info
                 $mofile = $pofile->cloneExtension('mo');
                 if( ! $pofile->writable() || $mofile->locked() ){
-                    WP_CLI::warning('Skipping unwritable: '.$pofile->filename() );
+                    WP_CLI::warning('Skipping unwritable: '.self::fname($pofile) );
                     Loco_cli_Utils::tabulateFiles( $pofile->getParent(), $pofile, $mofile );
                     continue;
                 }
@@ -98,8 +98,7 @@ abstract class Loco_cli_SyncCommand {
                 }
                 // Perform merge if we have a reference file
                 Loco_cli_Utils::debug('Merging %s <- %s', $pofile->basename(), $potfile->basename() );
-                $matcher = new Loco_gettext_Matcher($project);
-                $matcher->setPath($pofile);
+                $matcher = new Loco_gettext_Matcher;
                 $matcher->loadRefs($ref,$translate );
                 // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
                 $fuzziness = Loco_data_Settings::get()->fuzziness;
@@ -108,13 +107,12 @@ abstract class Loco_cli_SyncCommand {
                 $po = clone $def;
                 $po->clear();
                 $nvalid = count( $matcher->mergeValid($def,$po) );
-                $njsons = count( $matcher->mergePurged($po) );
                 $nfuzzy = count( $matcher->mergeFuzzy($po) );
                 $nadded = count( $matcher->mergeAdded($po) );
                 $ndropped = count( $matcher->redundant() );
                 // TODO Support --previous to keep old strings, or at least comment them out as #| msgid.....
-                if( $nfuzzy || $nadded || $ndropped || $njsons ){
-                    Loco_cli_Utils::debug('> unchanged:%u added:%u fuzzy:%u dropped:%u', $nvalid, $nadded+$njsons, $nfuzzy, $ndropped );
+                if( $nfuzzy || $nadded || $ndropped ){
+                    Loco_cli_Utils::debug('> unchanged:%u added:%u fuzzy:%u dropped:%u', $nvalid, $nadded, $nfuzzy, $ndropped );
                 }
                 else {
                     Loco_cli_Utils::debug('> %u identical sources',$nvalid);
@@ -122,11 +120,11 @@ abstract class Loco_cli_SyncCommand {
                 // File is synced, but may be identical
                 $po->sort();
                 if( ! $force && $po->equal($def) ){
-                    WP_CLI::log( sprintf('No update required for %s', $pofile->filename() ) );
+                    WP_CLI::log( sprintf('No update required for %s', self::fname($pofile) ) );
                     continue;
                 }
                 if( $noop ){
-                    WP_CLI::success( sprintf('**DRY RUN** would update %s', $pofile->filename() ) );
+                    WP_CLI::success( sprintf('**DRY RUN** would update %s', self::fname($pofile) ) );
                     continue;
                 }
                 try {
@@ -151,8 +149,7 @@ abstract class Loco_cli_SyncCommand {
                     }
                     // Done compile of this set
                     Loco_error_AdminNotices::get()->flush();
-                    $dir = new Loco_fs_LocaleDirectory( $pofile->dirname() );
-                    WP_CLI::success( sprintf('Updated %s', $pofile->filename() ).' ('.$dir->getTypeLabel( $dir->getTypeId() ).')' );
+                    WP_CLI::success( sprintf('Updated %s', self::fname($pofile) ) );
                 }
                 catch( Loco_error_WriteException $e ){
                     WP_CLI::error( $e->getMessage(), false );
@@ -167,15 +164,16 @@ abstract class Loco_cli_SyncCommand {
             WP_CLI::success( sprintf('%u PO files synced, %u files compiled',$updated,$compiled) );
         }
     }
-    
-    
+
+
     /**
-     * @param Loco_gettext_Data Existing PO file to MODIFY (definitions, def.po)
-     * @param Loco_gettext_Matcher merging instance populate with POT sources
-     * @return Loco_gettext_Data Merged file replacing $po
+     * Debug file name showing directory location 
+     * @param Loco_fs_File
+     * @return string
      */
-    private static function msgmerge( Loco_gettext_Data $po, Loco_gettext_Matcher $matcher ){
-        return $merged;
+    private static function fname( Loco_fs_File $file ){
+        $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
+        return $file->filename().' ('.$dir->getTypeLabel( $dir->getTypeId() ).')';
     }
 
 }

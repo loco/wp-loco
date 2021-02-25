@@ -82,11 +82,11 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                 // flash messages for display after redirect
                 try {
                     if( $count ) {
-                        Loco_data_Session::get()->flash( 'success', sprintf( _n( 'File moved', '%u files moved', $total, 'loco-translate' ), $total ) );
+                        Loco_data_Session::get()->flash( 'success', sprintf( _n( '%s file moved', '%s files moved', $total, 'loco-translate' ), $total ) );
                     }
                     if( $total > $count ){
                         $diff = $total - $count;
-                        Loco_data_Session::get()->flash( 'error', sprintf( _n( 'One file could not be moved', '%u files could not be moved', $diff, 'loco-translate' ), $diff ) );
+                        Loco_data_Session::get()->flash( 'error', sprintf( _n( '%s file could not be moved', '%s files could not be moved', $diff, 'loco-translate' ), $diff ) );
                     }
                     Loco_data_Session::close();
                 }

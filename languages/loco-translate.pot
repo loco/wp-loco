@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.5.1-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-02-20 12:56+0000\n"
+"POT-Creation-Date: 2021-02-25 14:42+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.1-dev; wp-5.6.1\n"
+"X-Loco-Version: 2.5.1-dev; wp-5.6.2\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -24,6 +24,42 @@ msgstr ""
 #: tpl/admin/bundle/alias.php:11
 msgid "\"Hello Dolly\" is part of the WordPress core"
 msgstr ""
+
+#. (1) Number of files (2) Maximum size of file that will be included (3) Size of the largest encountered
+#: src/ajax/SyncController.php:86
+#, php-format
+msgid ""
+"%1$s file has been skipped because it's %3$s. (Max is %2$s). Check all "
+"strings are present before saving."
+msgid_plural ""
+"%1$s files over %2$s have been skipped. (Largest is %3$s). Check all strings "
+"are present before saving."
+msgstr[0] ""
+msgstr[1] ""
+
+#. 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
+#: src/package/Debugger.php:187
+#, php-format
+msgid "%1$s string extracted from source code for \"%2$s\""
+msgid_plural "%1$s strings extracted from source code for \"%2$s\""
+msgstr[0] ""
+msgstr[1] ""
+
+#. 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
+#: src/admin/init/InitPoController.php:198
+#, php-format
+msgid "%1$s string found in %2$s"
+msgid_plural "%1$s strings found in %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#. 1: Number of strings; 2: Service provider; e.g. "50 strings translated via Google Translate"
+#: src/js/Strings.php:58
+#, javascript-format
+msgid "%1$s string translated via %2$s"
+msgid_plural "%1$s strings translated via %2$s"
+msgstr[0] ""
+msgstr[1] ""
 
 #: src/api/WordPressFileSystem.php:87
 #, php-format
@@ -36,14 +72,42 @@ msgstr ""
 msgid "%s characters will be sent for translation."
 msgstr ""
 
+#: src/admin/file/DeleteController.php:99
+#, php-format
+msgid "%s dependent file will also be deleted"
+msgid_plural "%s dependent files will also be deleted"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/bundle/SetupController.php:114
+#, php-format
+msgid "%s file can't be matched to a known set of strings"
+msgid_plural "%s files can't be matched to a known set of strings"
+msgstr[0] ""
+msgstr[1] ""
+
+#: src/admin/file/MoveController.php:89
+#, php-format
+msgid "%s file could not be moved"
+msgid_plural "%s files could not be moved"
+msgstr[0] ""
+msgstr[1] ""
+
 #. Where %s is the type of file, e.g. "po"
 #: tpl/admin/file/info.php:24
 #, php-format
 msgid "%s file is writeable"
 msgstr ""
 
+#: src/admin/file/MoveController.php:85
+#, php-format
+msgid "%s file moved"
+msgid_plural "%s files moved"
+msgstr[0] ""
+msgstr[1] ""
+
 #. Where %s is either PO or POT
-#: src/gettext/Compiler.php:227
+#: src/gettext/Compiler.php:251
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -98,14 +162,6 @@ msgstr[1] ""
 #, javascript-format
 msgid "%s string marked Fuzzy"
 msgid_plural "%s strings marked Fuzzy"
-msgstr[0] ""
-msgstr[1] ""
-
-#. 1: Number of strings; 2: Service provider; e.g. "50 strings translated via Google Translate"
-#: src/js/Strings.php:58
-#, javascript-format
-msgid "%s string translated via %s"
-msgid_plural "%s strings translated via %s"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -653,11 +709,11 @@ msgstr ""
 msgid "Exclude"
 msgstr ""
 
-#. Where %2$s is the size of a file
+#. (1) Number of files excluded (2) the maximum size of file that was included
 #: tpl/admin/init/init-pot.php:24
 #, php-format
-msgid "Excludes one file over %2$s"
-msgid_plural "Excludes %s files over %2$s"
+msgid "Excludes %1$s file over %2$s"
+msgid_plural "Excludes %1$s files over %2$s"
 msgstr[0] ""
 msgstr[1] ""
 
@@ -781,13 +837,6 @@ msgstr ""
 #: tpl/admin/file/info-po.php:26
 msgid "File modified"
 msgstr ""
-
-#: src/admin/file/MoveController.php:85
-#, php-format
-msgid "File moved"
-msgid_plural "%u files moved"
-msgstr[0] ""
-msgstr[1] ""
 
 #: tpl/admin/errors/file-missing.php:11
 msgid "File not found"
@@ -963,7 +1012,7 @@ msgstr ""
 msgid "It needs configuring before you can do any translations"
 msgstr ""
 
-#: src/gettext/Compiler.php:118 src/gettext/Compiler.php:182
+#: src/gettext/Compiler.php:148 src/gettext/Compiler.php:206
 #, php-format
 msgid "JSON compilation failed for %s"
 msgstr ""
@@ -1238,55 +1287,6 @@ msgstr ""
 msgid "OK, Load this config"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:99
-#, php-format
-msgid "One dependent file will also be deleted"
-msgid_plural "%u dependent files will also be deleted"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/admin/bundle/SetupController.php:114
-#, php-format
-msgid "One file can't be matched to a known set of strings"
-msgid_plural "%s files can't be matched to a known set of strings"
-msgstr[0] ""
-msgstr[1] ""
-
-#: src/admin/file/MoveController.php:89
-#, php-format
-msgid "One file could not be moved"
-msgid_plural "%u files could not be moved"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Where %2$s is the maximum size of a file that will be included and %3$s is the largest encountered
-#: src/ajax/SyncController.php:86
-#, php-format
-msgid ""
-"One file has been skipped because it's %3$s. (Max is %2$s). Check all "
-"strings are present before saving."
-msgid_plural ""
-"%s files over %2$s have been skipped. (Largest is %3$s). Check all strings "
-"are present before saving."
-msgstr[0] ""
-msgstr[1] ""
-
-#. 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
-#: src/package/Debugger.php:187
-#, php-format
-msgid "One string extracted from source code for \"%2$s\""
-msgid_plural "%s strings extracted from source code for \"%s\""
-msgstr[0] ""
-msgstr[1] ""
-
-#. 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
-#: src/admin/init/InitPoController.php:198
-#, php-format
-msgid "One string found in %2$s"
-msgid_plural "%s strings found in %s"
-msgstr[0] ""
-msgstr[1] ""
-
 #: tpl/admin/file/info-po.php:70
 msgid "Out of sync with template"
 msgstr ""
@@ -1415,15 +1415,15 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:223
+#: src/gettext/Compiler.php:247
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:220
+#: src/gettext/Compiler.php:244
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:88
+#: src/gettext/Compiler.php:107
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
@@ -1883,7 +1883,7 @@ msgstr ""
 
 #: src/js/Strings.php:54
 #, javascript-format
-msgid "Translation job aborted with one string remaining"
+msgid "Translation job aborted with %s string remaining"
 msgid_plural "Translation job aborted with %s strings remaining"
 msgstr[0] ""
 msgstr[1] ""

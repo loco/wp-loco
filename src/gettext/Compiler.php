@@ -228,23 +228,6 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * Copy JSONs from another location
-     * @param Loco_fs_File Related PO file to which .js strings should be referenced
-     * @return void
-     */
-    public function copyJson( Loco_fs_File $source ){
-        $siblings = new Loco_fs_Siblings($source);
-        $target = $this->files->getSource();
-        foreach( $siblings->getJsons() as $source ){
-            $target = $target->cloneBasename( $source->basename() );
-            if( $this->writeCopy($source,$target) ){
-                $this->progress['numjson']++;
-            }
-        }
-    }
-
-
-    /**
      * Fetch compilation summary and raise most relevant success message
      * @return Loco_mvc_ViewParams
      */
@@ -297,23 +280,6 @@ class Loco_gettext_Compiler {
         }
         $this->fs->authorizeSave($file);
         return $file->putContents($data);
-    }
-
-
-    /**
-     * Copy file using compiler's current filesystem auth
-     * @param Loco_fs_File source
-     * @param Loco_fs_File destination
-     * @return int bytes written
-     */
-    private function writeCopy( Loco_fs_File $source, Loco_fs_File $target ){
-        try {
-            return $this->writeFile( $target, $source->getContents() );
-        }
-        catch( Loco_error_WriteException $e ){
-            Loco_error_AdminNotices::warn( $e->getMessage() );
-        }
-        return 0;
     }
 
 }
