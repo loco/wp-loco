@@ -1,6 +1,6 @@
 <?php
 /**
- * 
+ * Wrapper for WordPress language availability
  */
 class Loco_api_WordPressTranslations {
 
@@ -31,7 +31,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Wrap wp_get_available_translations
-     * @return array
+     * @return array[]
      */
     private function wp_get_available_translations(){
         if( ! function_exists('wp_get_available_translations') ){
@@ -51,7 +51,8 @@ class Loco_api_WordPressTranslations {
         if( is_null($locales) ){
             $locales = array();
             // get official locales from API if we have network
-            if( $cached = $this->wp_get_available_translations() ){
+            $cached = $this->wp_get_available_translations();
+            if( is_array($cached) && $cached ){
                 $english_name = 'english_name';
                 $native_name = 'native_name';
             }
@@ -79,7 +80,6 @@ class Loco_api_WordPressTranslations {
         }
         return $locales;
     }
-
 
 
     /**
@@ -112,6 +112,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Check if a given locale is installed
+     * @param string|Loco_Locale
      * @return bool
      */
     public function isInstalled( $locale ){
@@ -121,6 +122,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Get WordPress locale data by strictly well-formed language tag
+     * @param string
      * @return Loco_Locale
      */
     public function getLocale( $tag ){

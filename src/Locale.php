@@ -127,10 +127,10 @@ class Loco_Locale implements JsonSerializable {
             throw new Loco_error_LocaleException('Locale must have a language');
         }
         // no UN codes in Wordpress
-        if( is_numeric($tag['region']) ){
+        if( preg_match('/^\\d+$/',$tag['region']) ){
             throw new Loco_error_LocaleException('Numeric regions not supported');
         }
-        // single, scalar variant. Only using for Formal german currently.
+        // non-standard variant code. e.g. formal/informal
         if( is_array($tag['variant']) ){
             $tag['variant'] = implode('_',$tag['variant']);
         }
@@ -490,6 +490,6 @@ class Loco_Locale implements JsonSerializable {
 
 // Depends on compiled library
 if( ! function_exists('loco_parse_wp_locale') ){
-    loco_include('lib/compiled/locales.php');
+    loco_require_lib('compiled/locales.php');
 }
 

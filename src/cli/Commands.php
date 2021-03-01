@@ -1,6 +1,7 @@
 <?php
 /**
  * Loco Translate commands
+ * @codeCoverageIgnore
  */
 class Loco_cli_Commands {
 
@@ -32,7 +33,6 @@ class Loco_cli_Commands {
      * 
      * @param string[]
      * @param string[]
-     * @codeCoverageIgnore
      */
     public function sync( $args, $opts ){
         if( array_key_exists('fuzziness',$opts) ){
@@ -75,7 +75,6 @@ class Loco_cli_Commands {
      *
      * @param string[]
      * @param string[]
-     * @codeCoverageIgnore
      */
     public function extract( $args, $opts ){
         try {
