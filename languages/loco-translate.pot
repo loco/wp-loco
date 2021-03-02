@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.5.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-03-01 11:41+0000\n"
+"POT-Creation-Date: 2021-03-02 14:34+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1356,43 +1356,43 @@ msgid "Plugins"
 msgstr ""
 
 #. Plural category for languages that have no plurals
-#: src/Locale.php:405
+#: src/Locale.php:406
 msgctxt "Plural category"
 msgid "All forms"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:419
+#: src/Locale.php:420
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:421
+#: src/Locale.php:422
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:415
+#: src/Locale.php:416
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:423
+#: src/Locale.php:424
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:417
+#: src/Locale.php:418
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:413
+#: src/Locale.php:414
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""

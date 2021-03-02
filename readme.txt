@@ -101,6 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.5.2 =
+* Added implied formality and loco_locale_formality filter
+* Added cli fetch command (experimental)
 
 = 2.5.1 =
 * Support for new Yandex translate API

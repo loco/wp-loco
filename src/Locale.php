@@ -361,7 +361,8 @@ class Loco_Locale implements JsonSerializable {
         $a['pluraleq'] = $p[0];
         $a['plurals'] = $p[1];
         $a['nplurals'] = count($p[1]);
-        
+        // tone setting may used by some external translation providers
+        $a['tone'] = $this->getFormality();
         return $a;
     }
 
@@ -482,6 +483,36 @@ class Loco_Locale implements JsonSerializable {
      */
     public function exportJson(){
         return json_encode( $this->jsonSerialize() );
+    }
+
+
+    /**
+     * Get formality setting, whether implied or explicit.
+     * @return string either "", "formal" or "informal"
+     */
+    public function getFormality(){
+        $value = '';
+        $tag = $this->__toString();
+        $variant = $this->variant;
+        if( '' === $variant ){
+            // if a formal variant exists, tone may be implied informal
+            $d = Loco_data_CompiledData::get('locales');
+            if( $d->offsetExists($tag.'_formal') ){
+                if( ! $d->offsetExists($tag.'_informal') ) {
+                    $value = 'informal';
+                }
+            }
+            // if an informal variant exists, tone may be implied formal
+            else if( $d->offsetExists($tag.'_informal') ){
+                if( ! $d->offsetExists($tag.'_formal') ) {
+                    $value = 'formal';
+                }
+            }
+        }
+        else if( 'formal' === $variant || 'informal' === $variant ){
+            $value = $variant;
+        }
+        return apply_filters('loco_locale_formality',$value,$tag);
     }
 
 }
