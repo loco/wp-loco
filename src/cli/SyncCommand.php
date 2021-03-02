@@ -1,5 +1,4 @@
-<?php /** @noinspection DuplicatedCode */
-
+<?php
 /**
  * Called from Loco_cli_Commands::sync
  */

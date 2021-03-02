@@ -107,21 +107,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         // update matches sources, deferring unmatched for deferred fuzzy match 
         $merged = clone $target;
         $merged->clear();
-        $matcher->mergeValid($target,$merged);
-        $fuzzy = $matcher->mergeFuzzy($merged);
-        $added = $matcher->mergeAdded($merged);
-        /* @var LocoPoMessage $old */
-        $dropped = array();
-        foreach( $matcher->redundant() as $old ){
-            $dropped[] = $old->getKey();
-        }
-        // return to JavaScript with stats in the same form as old front end merge
-        $this->set( 'done', array (
-            'add' => $added,
-            'fuz' => $fuzzy,
-            'del' => $dropped,
-        ) );
-        
+        $this->set( 'done', $matcher->merge($target,$merged) );
         $merged->sort();
         $this->set( 'po', $merged->jsonSerialize() );
         

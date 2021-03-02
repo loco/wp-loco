@@ -91,7 +91,37 @@ class Loco_cli_Commands {
             WP_CLI::error( $e->getMessage() );
         }
     }
-    
+
+
+    /**
+     * Attempts to install translation source files from an external repository.
+     *
+     * ## OPTIONS
+     *
+     * [<filter>]
+     * : Restrict to a type of bundle (plugins|themes|core) or a specific Text Domain
+     * 
+     * [--locale=<code>]
+     * : Restrict to one or more locales. Separate multiple codes with commas.
+     *
+     * ## EXAMPLES
+     *
+     * wp loco fetch loco-translate
+     *
+     * @param string[]
+     * @param string[]
+     */
+    public function fetch( $args, $opts ){
+        try {
+            Loco_cli_FetchCommand::run (
+                Loco_cli_Utils::collectProjects( isset($args[0]) ? $args[0] : '' ),
+                Loco_cli_Utils::collectLocales( isset($opts['locale']) ? $opts['locale'] : '' ),
+            );
+        }
+        catch( Loco_error_Exception $e ){
+            WP_CLI::error( $e->getMessage() );
+        }        
+    }
 
 }
     

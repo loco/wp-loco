@@ -142,5 +142,29 @@ class Loco_api_WordPressTranslations {
         return $this->enabled;
     }
     
+
+    /**
+     * Wrapper for translations_api
+     * @param string
+     * @param array
+     * @return array[]
+     */
+    public function apiGet( $type, array $args ){
+        if( ! function_exists('translations_api') ){
+            require_once ABSPATH.'wp-admin/includes/translation-install.php';
+        }
+        $response = translations_api($type,$args);
+        if( $response instanceof WP_Error ){
+            $message = 'Unknown error from translations_api';
+            foreach( $response->get_error_messages() as $message ){
+                Loco_error_AdminNotices::debug('translations_api error: '.$message);
+            }
+            throw new Loco_error_Exception($message);
+        }
+
+        return (array) $response;
+    }
+    
+    
 }
 

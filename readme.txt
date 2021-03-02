@@ -100,6 +100,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.5.2 =
+
 = 2.5.1 =
 * Support for new Yandex translate API
 * Support for DeepL formality parameter
@@ -407,7 +409,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.5.1 =
+= 2.5.2 =
 * Various improvements and bugfixes
 
 

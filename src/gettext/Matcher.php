@@ -92,4 +92,28 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         return $added;
     }
 
+
+    /**
+     * Perform full merge and return result suitable from front end.
+     * @param LocoPoIterator Existing definitions
+     * @param LocoPoIterator Resultant definitions
+     * @return array result
+     */
+    public function merge( LocoPoIterator $original, LocoPoIterator $merged ){
+        $this->mergeValid($original,$merged);
+        $fuzzy = $this->mergeFuzzy($merged);
+        $added = $this->mergeAdded($merged);
+        /* @var LocoPoMessage $old */
+        $dropped = array();
+        foreach( $this->redundant() as $old ){
+            $dropped[] = $old->getKey();
+        }
+        // return to JavaScript with stats in the same form as old front end merge
+        return array (
+            'add' => $added,
+            'fuz' => $fuzzy,
+            'del' => $dropped,
+        );
+    }
+
 }
