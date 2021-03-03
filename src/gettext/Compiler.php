@@ -112,18 +112,6 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * @param Loco_fs_File Source MO file
-     * @return int
-     *
-    public function copyMo( Loco_fs_File $source ){
-        $target = $this->files->getBinary();
-        $bytes = $this->writeCopy($source,$target);
-        $this->progress['mobytes'] = $bytes;
-        return $bytes;
-    }*/
-
-
-    /**
      * @param Loco_package_Project Translation set, required to resolve script paths
      * @param Loco_gettext_Data PO data to export
      * @return Loco_fs_FileList All json files created
@@ -274,7 +262,7 @@ class Loco_gettext_Compiler {
      * @param string Serialized JSON to write to given file
      * @return int bytes written
      */
-    private function writeFile( Loco_fs_File $file, $data ){
+    public function writeFile( Loco_fs_File $file, $data ){
         if( $this->keep && $file->exists() ){
             return 0;
         }

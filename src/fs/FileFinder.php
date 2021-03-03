@@ -11,7 +11,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     private $roots;
 
     /**
-     * All directories to search, including those recursed into
+     * Directories to search, including those descended into
      * @var Loco_fs_FileList
      */
     private $subdir;

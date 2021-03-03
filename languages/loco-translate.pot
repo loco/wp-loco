@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.5.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-03-02 14:34+0000\n"
+"POT-Creation-Date: 2021-03-03 12:35+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.2-dev; wp-5.6.2\n"
+"X-Loco-Version: 2.5.2-dev; wp-5.7-RC2-50482\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %s is either PO or POT
-#: src/gettext/Compiler.php:251
+#: src/gettext/Compiler.php:239
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -116,6 +116,12 @@ msgstr ""
 #: src/js/Strings.php:91 src/gettext/Metadata.php:206
 #, javascript-format
 msgid "%s fuzzy"
+msgstr ""
+
+#. Error thrown when attempting to parse a file that is not PO, POT or MO
+#: src/gettext/Data.php:23
+#, php-format
+msgid "%s is not a Gettext file"
 msgstr ""
 
 #. Summary of new strings after running in-editor Sync
@@ -339,6 +345,16 @@ msgstr ""
 msgid "Bundle setup"
 msgstr ""
 
+#: tpl/admin/file/diff.php:17
+msgctxt "Button label for a next revision"
+msgid "Next"
+msgstr ""
+
+#: tpl/admin/file/diff.php:14
+msgctxt "Button label for a previous revision"
+msgid "Previous"
+msgstr ""
+
 #: src/ajax/FsConnectController.php:130
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
@@ -469,7 +485,7 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:31
+#: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:32
 #: tpl/admin/bundle/inc-po-table.php:63 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
@@ -1012,7 +1028,7 @@ msgstr ""
 msgid "It needs configuring before you can do any translations"
 msgstr ""
 
-#: src/gettext/Compiler.php:148 src/gettext/Compiler.php:206
+#: src/gettext/Compiler.php:136 src/gettext/Compiler.php:194
 #, php-format
 msgid "JSON compilation failed for %s"
 msgstr ""
@@ -1415,11 +1431,11 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:247
+#: src/gettext/Compiler.php:235
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:244
+#: src/gettext/Compiler.php:232
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
@@ -1468,7 +1484,7 @@ msgstr ""
 msgid "Reset config"
 msgstr ""
 
-#: src/admin/file/BaseController.php:106 tpl/admin/file/diff.php:30
+#: src/admin/file/BaseController.php:106 tpl/admin/file/diff.php:31
 msgid "Restore"
 msgstr ""
 
@@ -2140,4 +2156,12 @@ msgstr ""
 msgid ""
 "Your file must be named as shown above where %1$s is the language code, e.g. "
 "%2$s"
+msgstr ""
+
+#. (1) Name of software, e.g. "WordPress" (2) Version number, e.g. "5.6"
+#: tpl/admin/config/version.php:53 tpl/admin/config/version.php:72
+#, php-format
+msgid ""
+"Your version of %1$s is very old. We recommend you upgrade to at least v%2$s,"
+" but preferably to the latest stable version."
 msgstr ""

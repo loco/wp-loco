@@ -7,8 +7,9 @@ abstract class Loco_cli_FetchCommand {
     /**
      * @param Loco_package_Project[] project filter
      * @param Loco_Locale[] locale filter
+     * @param bool[] switches
      */
-    public static function run( array $projects, array $locales ){
+    public static function run( array $projects, array $locales, array $opts ){
         
         $wp = new Loco_api_WordPressTranslations;
 
@@ -91,8 +92,13 @@ abstract class Loco_cli_FetchCommand {
                 }
                 if( 'core' === $type ){
                     // core projects are per-version. "dev" being upcoming. Then e.g. 5.6.x for stable
-                    list($major,$minor) = explode('.',$version,3);
-                    $slug = sprintf('%u.%u.x',$major,$minor);
+                    if( $opts['trunk'] || preg_match('/^\\d.\\d-(?:rc|dev|beta)/i',$version) ){
+                        $slug = 'dev';
+                    }
+                    else {
+                        list($major,$minor) = explode('.',$version,3);
+                        $slug = sprintf('%u.%u.x',$major,$minor);
+                    }
                     // Core projects are sub projects. plugins and themes don't have this
                     $map = array (
                         'default.' => '',
@@ -107,7 +113,7 @@ abstract class Loco_cli_FetchCommand {
                     $slug = $domain;
                     // plugins are either "stable" or "dev"; themes don't appear to have stability/version slug ??
                     if( 'plugins' === $type ) {
-                        $slug .= '/stable';
+                        $slug .= $opts['trunk'] ? '/dev' : '/stable';
                     }
                     $url = 'https://translate.wordpress.org/projects/wp-'.$type.'/'.$slug.'/'.$team.'/' . $variant . '/export-translations/?format=po';
                 }
@@ -128,11 +134,15 @@ abstract class Loco_cli_FetchCommand {
                 }*/
                 
                 // Parse PO data to check it's valid, and also because we're going to compile it.
-                $podata = Loco_gettext_Data::fromSource( wp_remote_retrieve_body($response) );
+                $pobody = wp_remote_retrieve_body($response);
+                $podata = Loco_gettext_Data::fromSource($pobody);
                 $response = null;    
                 
                 // keep translations if file already exists in this location.
                 $pofile = $project->initLocaleFile($dir,$locale);
+                $info = new Loco_mvc_FileParams( array(), $pofile );
+                Loco_cli_Utils::debug('Saving %s..', $info->relpath );
+                $compiler = new Loco_gettext_Compiler($pofile);
                 if( $pofile->exists() ){
                     $info = new Loco_mvc_FileParams( array(), $pofile );
                     Loco_cli_Utils::debug('PO already exists at %s (%s), merging..',$info->relpath,$info->size);
@@ -144,22 +154,25 @@ abstract class Loco_cli_FetchCommand {
                     $podata->clear();
                     $stats = $matcher->merge($original,$podata);
                     $original = null;
-                    // any change?
-                    if( $stats['add'] || $stats['del'] || $stats['fuz'] ){
-                        Loco_cli_Utils::debug('OK: %u added, %u dropped, %u fuzzy', count($stats['add']), count($stats['del']), count($stats['fuz']) );
-                        $podata->localize($locale); // <- ping modified headers
-                    }
-                    else {
+                    if( ! $stats['add'] && ! $stats['del'] && ! $stats['fuz'] ){
                         WP_CLI::success( sprintf('%s unchanged in %s. Skipping %s', $project,$locale,$info->relpath) );
                         continue;
                     }
+                    // Overwrite merged PO, which will backup first if configured
+                    Loco_cli_Utils::debug('OK: %u added, %u dropped, %u fuzzy', count($stats['add']), count($stats['del']), count($stats['fuz']) );
+                    $podata->localize($locale);
+                    $compiler->writePo($podata);
                 }
-                
-                // write new PO and compiled file set
-                $info = new Loco_mvc_FileParams( array(), $pofile );
-                Loco_cli_Utils::debug('Compiling %s..', $info->relpath );
-                $compiler = new Loco_gettext_Compiler($pofile);
-                $compiler->writeAll($podata, $project);
+                // Copy PO directly to disk as per remote source
+                else {
+                    $compiler->writeFile($pofile,$pobody);
+                    $podata->inheritHeader( Loco_gettext_Data::dummy()->localize($locale)->getHeaders() );
+                }
+
+                // Compile new MO and JSON files..
+                Loco_cli_Utils::debug('Compiling %s.{mo,json}',$pofile->filename() );
+                $compiler->writeMo($podata);
+                $compiler->writeJson($project,$podata);
 
                 $pofile->clearStat();
                 WP_CLI::success( sprintf('Fetched %s for %s: %s PO at %s', $project,$locale,$info->size,$info->relpath) );
@@ -167,6 +180,7 @@ abstract class Loco_cli_FetchCommand {
                 
                 // clean up memory and ready for next file
                 $podata = null;
+                $pobody = null;
             }
         }
 

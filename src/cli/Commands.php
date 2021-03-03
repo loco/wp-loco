@@ -103,6 +103,9 @@ class Loco_cli_Commands {
      * 
      * [--locale=<code>]
      * : Restrict to one or more locales. Separate multiple codes with commas.
+     * 
+     * [--trunk]
+     * : Install strings for upcoming dev version as opposed to latest stable
      *
      * ## EXAMPLES
      *
@@ -116,6 +119,9 @@ class Loco_cli_Commands {
             Loco_cli_FetchCommand::run (
                 Loco_cli_Utils::collectProjects( isset($args[0]) ? $args[0] : '' ),
                 Loco_cli_Utils::collectLocales( isset($opts['locale']) ? $opts['locale'] : '' ),
+                array (
+                    'trunk' => Loco_cli_Utils::bool($opts,'trunk')
+                )
             );
         }
         catch( Loco_error_Exception $e ){

@@ -8,19 +8,13 @@ abstract class Loco_admin_list_BaseController extends Loco_mvc_AdminController {
 
 
     /**
-     * build renderable bundle variables
+     * Build renderable bundle variables
+     * @param Loco_package_Bundle
      * @return Loco_mvc_ViewParams
      */
     protected function bundleParam( Loco_package_Bundle $bundle ){
         $handle = $bundle->getHandle();
-        // compatibility will be 'ok', 'warn' or 'error' depending on severity
-        if( $default = $bundle->getDefaultProject() ){
-            $compat = $default->getPot() instanceof Loco_fs_File;
-        }
-        else {
-            $compat = false;
-        }
-        //$info = $bundle->getHeaderInfo();
+        $default = $bundle->getDefaultProject();
         return new Loco_mvc_ViewParams( array (
             'id'   => $bundle->getId(),
             'name' => $bundle->getName(),
@@ -36,6 +30,7 @@ abstract class Loco_admin_list_BaseController extends Loco_mvc_AdminController {
 
     /**
      * Add bundle to enabled or disabled list, depending on whether it is configured
+     * @param Loco_package_Bundle
      */
     protected function addBundle( Loco_package_Bundle $bundle ){
         $this->bundles[] = $this->bundleParam($bundle);
