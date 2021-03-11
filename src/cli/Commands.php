@@ -94,7 +94,8 @@ class Loco_cli_Commands {
 
 
     /**
-     * Attempts to install translation source files from an external repository.
+     * EXPERIMENTAL. Attempts to install translation source files from an external repository.
+     * Use this to replace *installed* PO files if they are missing or have been purged of script translations.
      *
      * ## OPTIONS
      *
@@ -109,7 +110,7 @@ class Loco_cli_Commands {
      *
      * ## EXAMPLES
      *
-     * wp loco fetch loco-translate
+     * wp loco fetch loco-translate --locale=en_GB
      *
      * @param string[]
      * @param string[]

@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.5.2-dev\n"
+"Project-Id-Version: Loco Translate 2.5.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-03-10 09:07+0000\n"
+"POT-Creation-Date: 2021-03-11 09:51+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.2-dev; wp-5.7\n"
+"X-Loco-Version: 2.5.2; wp-5.7\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -200,6 +200,10 @@ msgstr[1] ""
 #: src/js/Strings.php:87 src/gettext/Metadata.php:204
 #, javascript-format
 msgid "%s%% translated"
+msgstr ""
+
+#: tpl/admin/config/version.php:14
+msgid "A newer version of Loco Translate is available for download"
 msgstr ""
 
 #: tpl/admin/init/init-prompt.php:33 tpl/admin/init/init-pot.php:42
@@ -1015,6 +1019,10 @@ msgstr ""
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
+#: tpl/admin/config/version.php:18
+msgid "Install manually"
+msgstr ""
+
 #: src/admin/bundle/LocaleController.php:116
 #: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:61
 msgid "Installed languages"
@@ -1135,7 +1143,7 @@ msgstr ""
 msgid "Loco Translate is powered by"
 msgstr ""
 
-#: loco.php:142
+#: loco.php:143
 #, php-format
 msgid ""
 "Loco Translate requires the \"%s\" PHP extension. Ask your hosting provider "

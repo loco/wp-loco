@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.7
-Stable tag: 2.5.1
+Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -103,7 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.5.2 =
 * Added implied formality and loco_locale_formality filter
 * Added cli fetch command (experimental)
-* Bumped WordPress version to 5.7.0
+* Bumped WordPress version to 5.7
 
 = 2.5.1 =
 * Support for new Yandex translate API

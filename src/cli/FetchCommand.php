@@ -12,6 +12,7 @@ abstract class Loco_cli_FetchCommand {
     public static function run( array $projects, array $locales, array $opts ){
         
         $wp = new Loco_api_WordPressTranslations;
+        $done = 0;
 
         // fetch for every "installed" locale if none specified
         if( ! $locales ){
@@ -23,6 +24,9 @@ abstract class Loco_cli_FetchCommand {
                 if( $locale->isValid() ){
                     $locales[] = $locale;
                 }
+            }
+            if( ! $locales ){
+                throw new Loco_error_Exception('No installed languages, try with --locale=<code>');
             }
         }
 
@@ -42,6 +46,7 @@ abstract class Loco_cli_FetchCommand {
                 }
                 $args['slug'] = $domain;
             }
+            WP_CLI::log( sprintf('Looking up %s v%s..',$project,$version) );
             Loco_cli_Utils::debug('Querying WordPress translations API for %s => %s..',$type,json_encode($args) );
             $result = $wp->apiGet($type,$args);
 
@@ -69,7 +74,6 @@ abstract class Loco_cli_FetchCommand {
             // Save path is under "system" location because we are installing from GlotPress
             $dir = new Loco_fs_Directory( 'core' === $type ? '.' : $type );
             $dir->normalize( loco_constant('WP_LANG_DIR') );
-
             foreach( $locales as $locale ){
                 $tag = (string) $locale;
                 if( 'en_US' == $tag ){
@@ -119,11 +123,11 @@ abstract class Loco_cli_FetchCommand {
                 }
                 // Note that this export URL is not a documented API and may change without notice
                 // TODO We could pass If-Modified-Since with current PO file header, BUT that could not know if existing file is purged or not. Make configurable?
-                WP_CLI::log( sprintf('Fetching PO from %s ...',$url));
+                WP_CLI::log( sprintf('Fetching PO from %s..',$url));
                 $response = wp_remote_get($url);
                 $status = wp_remote_retrieve_response_code($response);
                 if( 200 !== $status ){
-                    WP_CLI::warning( sprintf('Status %u from translate.wordpress.org, skipping %s for %s',$status,$project,$locale) );
+                    WP_CLI::warning( sprintf('Status %u from translate.wordpress.org; skipping "%s". Probably no translation team',$status,$tag) );
                     continue;
                 }
                 Loco_cli_Utils::debug('OK, last modified %s', wp_remote_retrieve_header($response,'last-modified') );
@@ -155,7 +159,7 @@ abstract class Loco_cli_FetchCommand {
                     $stats = $matcher->merge($original,$podata);
                     $original = null;
                     if( ! $stats['add'] && ! $stats['del'] && ! $stats['fuz'] ){
-                        WP_CLI::success( sprintf('%s unchanged in %s. Skipping %s', $project,$locale,$info->relpath) );
+                        WP_CLI::log( sprintf('%s unchanged in "%s". Skipping %s', $project,$locale,$info->relpath) );
                         continue;
                     }
                     // Overwrite merged PO, which will backup first if configured
@@ -175,15 +179,18 @@ abstract class Loco_cli_FetchCommand {
                 $compiler->writeJson($project,$podata);
 
                 $pofile->clearStat();
-                WP_CLI::success( sprintf('Fetched %s for %s: %s PO at %s', $project,$locale,$info->size,$info->relpath) );
+                WP_CLI::success( sprintf('Fetched %s for "%s": %s PO at %s', $project,$locale,$info->size,$info->relpath) );
                 Loco_error_AdminNotices::get()->flush();
                 
                 // clean up memory and ready for next file
                 $podata = null;
                 $pobody = null;
+                $done++;
             }
         }
-
+        if( 0 === $done ){
+            WP_CLI::success('Completed OK, but no files were installed');
+        }
     }
 
 }
