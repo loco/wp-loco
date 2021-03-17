@@ -332,7 +332,7 @@ var r = k || {
 _: function(a) {
 return a;
 }
-}, A = b.status || 0, d = b.responseText, s = l(d), f = b.getResponseHeader("Content-Type") || "Unknown type", z = b.getResponseHeader("Content-Length") || d.length;
+}, A = b.status || 0, d = b.responseText || "", s = l(d), f = b.getResponseHeader("Content-Type") || "Unknown type", z = b.getResponseHeader("Content-Length") || d.length;
 "success" === c && x ? n.error(x) : (n.error(g(s) + ".\n" + r._("Check console output for debugging information")), 
 n.log("Ajax failure for " + a, {
 status: A,
