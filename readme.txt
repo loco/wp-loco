@@ -100,6 +100,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.5.3 =
+
 = 2.5.2 =
 * Added implied formality and loco_locale_formality filter
 * Added cli fetch command (experimental)
@@ -412,7 +414,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.5.2 =
+= 2.5.3 =
 * Various improvements and bugfixes
 
 
