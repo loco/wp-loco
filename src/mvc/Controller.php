@@ -114,4 +114,13 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
     }
 
 
+    /**
+     * number_format_i18n filter callback because our admin screens assume number_format_i18n() returns unescaped text, not HTML.
+     * @param string
+     * @return string
+     */
+    public function filter_number_format_i18n( $formatted = '' ){
+        return html_entity_decode($formatted,ENT_NOQUOTES,'UTF-8');
+    }
+
 }

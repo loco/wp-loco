@@ -119,7 +119,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     /**
      * "update_footer" filter, prints Loco version number in admin footer
      */
-    public function filter_update_footer( $text ){
+    public function filter_update_footer( /*$text*/ ){
         $html = sprintf( '<span>v%s</span>', loco_plugin_version() );
         if( $this->bench && ( $info = $this->get('_debug') ) ){
             $html .= sprintf('<span>%ss</span>', number_format_i18n($info['time'],2) );
@@ -218,6 +218,11 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
                 // note that plural rules come from our data, because MO is not trusted.
                 $tag = apply_filters( 'plugin_locale', get_locale(), 'loco-translate' );
                 $jsConf->offsetSet('wplang', Loco_Locale::parse($tag) );
+            }
+            // localized formatting from core translations
+            global $wp_locale;
+            if( is_object($wp_locale) && property_exists($wp_locale,'number_format') ){
+                $jsConf->offsetSet('wpnum', array_map(array($this,'filter_number_format_i18n'),$wp_locale->number_format) );
             }
         }
         // take benchmark for debugger to be rendered in footer

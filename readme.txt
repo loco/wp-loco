@@ -101,6 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.5.3 =
+* Fix for missing responseText in failed Ajax responses
+* Fix for HTML entities returned from `number_format_i18n`
+* Localized number formatting in JavaScript
 
 = 2.5.2 =
 * Added implied formality and loco_locale_formality filter
