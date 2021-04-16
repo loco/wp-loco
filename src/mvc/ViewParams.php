@@ -17,27 +17,35 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     /**
      * format integer as string date, including time according to user settings
      * @param int unix timestamp
-     * @param string date format
+     * @param string|null date format
      * @return string
      */
      public static function date_i18n( $u, $f = null ){
         static $tf, $df, $tz;
         if( is_null($f) ){
-            if( ! $tf ){
+            if( is_null($tf) ){
                 $tf = get_option('time_format') or $tf = 'g:i A';
                 $df = get_option('date_format') or $df= 'M jS Y'; 
             }
             $f = $df.' '.$tf;
         }
-        // Fix Wordpress's broken timezone implementation
+        // date_i18n was replaced with wp_date in WP 5.3
+        if( function_exists('wp_date') ){
+             return wp_date($f,$u);
+        }
+        // date_i18n expects timestamp to include offset
         if( is_null($tz) ){
-            $tz = date_default_timezone_get() or $tz = 'UTC';
-            $wp = get_option('timezone_string') or $wp = $tz;
-            if( $tz !== $wp ){
-                date_default_timezone_set( $wp );
+            try {
+                $wp = get_option('timezone_string') or $wp = date_default_timezone_get();
+                $tz = new DateTimeZone($wp);
+            }
+            catch( Exception $e ){
+                $tz = new DateTimeZone('UTC');
             }
         }
-        return date_i18n( $f, $u );
+        $d = new DateTime(null,$tz);
+        $d->setTimestamp($u);
+        return date_i18n( $f, $u + $d->getOffset() );
     }
 
 
@@ -85,13 +93,10 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @return string empty string
      */ 
     public function date( $p, $f = null ){
-        if( $u = $this->__get($p) ){
-            $s = self::date_i18n( $u, $f );
+        $u = (int) $this->__get($p);
+        if( $u > 0 ){
+            echo $this->escape( self::date_i18n($u,$f) );
         }
-        else {
-            $s = '';
-        }
-        echo $this->escape($s);
         return '';
     }
 

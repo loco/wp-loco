@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 4.1
 Requires PHP: 5.2.4
-Tested up to: 5.7
+Tested up to: 5.7.1
 Stable tag: 2.5.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -104,6 +104,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Fix for missing responseText in failed Ajax responses
 * Fix for HTML entities returned from `number_format_i18n`
 * Localized number formatting in JavaScript
+* Replaced usage of date_i18n with wp_date
+* Bumped WordPress version to 5.7.1
 
 = 2.5.2 =
 * Added implied formality and loco_locale_formality filter
