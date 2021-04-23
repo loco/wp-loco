@@ -433,7 +433,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
 
     public static function filter_allows_fake_plugins_to_exist( array $data, $handle ){
         $file = LOCO_TEST_DATA_ROOT.'/plugins/'.$handle;
-        if( file_exists($file) ) {
+        if( file_exists($file) && is_file($file) ) {
             $data = get_plugin_data($file);
             $snip = -strlen($handle);
             $data['basedir'] = substr($file,0,--$snip);

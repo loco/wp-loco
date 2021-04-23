@@ -61,7 +61,7 @@ domain: n.domain,
 type: p ? "pot" : "po",
 path: g || "",
 sync: v || "",
-strip: "pot" === y ? "1" : ""
+mode: y || ""
 }, k(t).on("click", function(n) {
 return n.preventDefault(), o(), k(t).addClass("loco-loading"), F(a), !1;
 }), e();

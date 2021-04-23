@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.5.3-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-04-16 09:36+0000\n"
+"POT-Creation-Date: 2021-04-23 10:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -26,7 +26,7 @@ msgid "\"Hello Dolly\" is part of the WordPress core"
 msgstr ""
 
 #. (1) Number of files (2) Maximum size of file that will be included (3) Size of the largest encountered
-#: src/ajax/SyncController.php:86
+#: src/ajax/SyncController.php:88
 #, php-format
 msgid ""
 "%1$s file has been skipped because it's %3$s. (Max is %2$s). Check all "
@@ -289,8 +289,12 @@ msgstr ""
 msgid "API keys"
 msgstr ""
 
-#: src/admin/config/ApisController.php:66
+#: src/admin/config/ApisController.php:67
 msgid "API region"
+msgstr ""
+
+#: src/admin/config/ApisController.php:66
+msgid "API URL"
 msgstr ""
 
 #: tpl/admin/file/delete.php:16
@@ -525,9 +529,9 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:176 src/admin/file/EditController.php:164
+#: src/data/Settings.php:178 src/admin/file/EditController.php:164
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
-#: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:128 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -579,13 +583,13 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:189
+#: src/admin/file/EditController.php:190
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. Button that opens window for auto-translating
-#: src/admin/file/EditController.php:200
+#: src/admin/file/EditController.php:201
 msgctxt "Editor"
 msgid "Auto"
 msgstr ""
@@ -609,7 +613,7 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:202
+#: src/admin/file/EditController.php:203
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
@@ -621,19 +625,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:191
+#: src/admin/file/EditController.php:192
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:198
+#: src/admin/file/EditController.php:199
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:194
+#: src/admin/file/EditController.php:195
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -663,13 +667,13 @@ msgid "Suggest translation"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:196
+#: src/admin/file/EditController.php:197
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:208
+#: src/admin/file/EditController.php:209
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -680,7 +684,7 @@ msgid "Toggle Fuzzy"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:206
+#: src/admin/file/EditController.php:207
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -721,7 +725,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:98 src/error/Exception.php:158
+#: src/js/Strings.php:98 src/error/Exception.php:164
 msgid "Error"
 msgstr ""
 
@@ -895,7 +899,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:204
+#: src/admin/file/EditController.php:205
 msgid "Filter translations"
 msgstr ""
 
@@ -950,7 +954,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/ajax/ApisController.php:26 src/admin/file/EditController.php:192
+#: src/ajax/ApisController.php:26 src/admin/file/EditController.php:193
 msgid "Help"
 msgstr ""
 
@@ -986,7 +990,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:112
+#: tpl/admin/config/apis.php:118
 msgid "Important"
 msgstr ""
 
@@ -1135,7 +1139,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/data/Settings.php:175
+#: src/data/Settings.php:177
 msgid "Loco Translate 2.5 adds supports for JSON language pack generation."
 msgstr ""
 
@@ -1523,7 +1527,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:121
+#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:127
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1560,7 +1564,7 @@ msgstr ""
 msgid "See FAQ"
 msgstr ""
 
-#: tpl/admin/config/apis.php:115
+#: tpl/admin/config/apis.php:121
 msgid "See full disclaimer"
 msgstr ""
 
@@ -1762,7 +1766,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:114
+#: tpl/admin/config/apis.php:120
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"

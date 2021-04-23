@@ -80,7 +80,7 @@ class Loco_fs_Siblings {
      * @return Loco_fs_File[]
      */
     public function getJsons(){
-        $jsons = array();
+        $list = new Loco_fs_FileList;
         $name = $this->po->filename();
         $finder = new Loco_fs_FileFinder( $this->po->dirname() );
         // match .json files with same name as .po, plus hashed names
@@ -90,17 +90,17 @@ class Loco_fs_Siblings {
             foreach( $files as $file ){
                 $match = $file->filename();
                 if( $match === $name || preg_match($regex,$match) ) {
-                    $jsons[] = $file;
+                    $list->add($file);
                 }
             }
         }
         // append single json using our filter
         $path = apply_filters('loco_compile_single_json', '', $this->po->getPath() );
-        if( is_string($path) && '' !== $path && file_exists($path) && ! in_array($path,$jsons) ){
-            $jsons[] = $path;
+        if( is_string($path) && '' !== $path && file_exists($path) ){
+            $list->add( new Loco_fs_File($path) );
         }
 
-        return $jsons;
+        return $list->getArrayCopy();
     }
 
 }

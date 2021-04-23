@@ -161,7 +161,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             else if( 1 === $settings->pot_protect ){
                 Loco_error_AdminNotices::warn( __("This is NOT a translation file. Manual editing of source strings is not recommended.",'loco-translate') )
                  ->addLink( Loco_mvc_AdminRouter::generate('config').'#loco--pot-protect', __('Settings','loco-translate') )
-                 ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates'), __('Documentation','loco-translate') );
+                 ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates'), __('Documentation','loco-translate') )
+                 ->noLog();
             }
         }
         

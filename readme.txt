@@ -105,6 +105,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Fix for HTML entities returned from `number_format_i18n`
 * Localized number formatting in JavaScript
 * Replaced usage of date_i18n with wp_date
+* Added configurable API endpoint for DeepL
 * Bumped WordPress version to 5.7.1
 
 = 2.5.2 =

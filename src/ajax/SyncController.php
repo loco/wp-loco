@@ -68,7 +68,9 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
             }
             // Only copy msgstr fields from source if it's a user-defined PO template and "copy translations" was selected.
-            $strip = (bool) $post->strip;
+            // TODO po,json mode combination
+            $mode = preg_split('/[^a-z]+/', (string) $post->mode );
+            $strip = in_array( 'pot', $mode, true );
             $translate = 'pot' !== $potfile->extension() && ! $strip;
         }
         // else extract POT from source code

@@ -30,6 +30,12 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                             <input type="text" size="50" name="api[deepl][key]" id="loco--deepl_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
                         </p>
                         <p>
+                            <label for="loco--deepl_api_url">
+                                <?php $ui->e('api_url')?>:
+                            </label>
+                            <input type="text" size="50" name="api[deepl][url]" id="loco--deepl_api_url" value="<?php $api->e('url')?>" spellcheck="false" placeholder="https://api.deepl.com" />
+                        </p>
+                        <p>
                             <span class="description"><a href="https://www.deepl.com/translator" target="_blank" tabindex="-1">https://www.deepl.com/translator</a></span>
                         </p>
                     </fieldset>

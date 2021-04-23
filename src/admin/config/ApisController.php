@@ -63,6 +63,7 @@ class Loco_admin_config_ApisController extends Loco_admin_config_BaseController 
         // common ui elements / labels
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
             'api_key' => __('API key','loco-translate'),
+            'api_url' => __('API URL','loco-translate'),
             'api_region' => __('API region','loco-translate'),
         ) ) );
         

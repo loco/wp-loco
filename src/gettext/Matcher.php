@@ -30,6 +30,12 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
 
     /**
+     * Add further source strings from JSON/JED file
+     */
+    
+
+
+    /**
      * Update still-valid sources, deferring unmatched (new strings) for deferred fuzzy match
      * @param LocoPoIterator Existing definitions
      * @param LocoPoIterator Resultant definitions

@@ -73,6 +73,18 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             $potfile = new Loco_fs_LocaleFile( $source );
             $potfile->normalize( $base );
             $data = Loco_gettext_Data::load($potfile);
+            /*/ When copying a PO file we may need to augment with JSON strings
+            if( $post->json ){
+                $siblings = new Loco_fs_Siblings($potfile);
+                $jsons = $siblings->getJsons();
+                if( $jsons ){
+                    $merge = new Loco_gettext_Matcher();
+                    $merge->loadRefs($data,true);
+                    foreach( $jsons as $jsonfile ){
+                        
+                    }
+                }
+            }*/
             // Remove target strings when copying PO 
             if( $post->strip ){
                 $data->strip();

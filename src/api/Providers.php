@@ -24,6 +24,7 @@ abstract class Loco_api_Providers {
                 'id' => 'deepl',
                 'name' => 'DeepL Translator',
                 'key' => $settings->offsetGet('deepl_api_key'),
+                'url' => $settings->offsetGet('deepl_api_url'),
             ),
             array (
                 'id' => 'google',
