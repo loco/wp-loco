@@ -132,7 +132,7 @@ $this->extend('../layout');
                 if( $params->has('sourceLocale') ):?> 
                 <tbody>
                     <tr valign="top">
-                        <th scope="row" rowspan="3">
+                        <th scope="row" rowspan="4">
                             3. <?php esc_html_e('Template options','loco-translate')?>:
                         </th>
                         <td>
@@ -154,13 +154,23 @@ $this->extend('../layout');
                                 </label>
                             </p>
                         </td>
-                    </tr>                    
+                    </tr>
+                    <tr valign="top" class="compact">
+                        <td>
+                            <p>
+                                <label>
+                                    <input type="checkbox" name="json" value="1" />
+                                    <?php esc_html_e('Merge strings from related JSON files','loco-translate')?>
+                                </label>
+                            </p>
+                        </td>
+                    </tr>
                     <tr valign="top" class="compact">
                         <td>
                             <p>
                                 <label>
                                     <input type="checkbox" name="link" value="1" />
-                                    <?php esc_html_e('Use this file as template when running Sync','loco-translate')?> 
+                                    <?php esc_html_e('Use this file as template when running Sync','loco-translate')?>
                                 </label>
                             </p>
                         </td>

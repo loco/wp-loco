@@ -92,8 +92,9 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
             // $info['mtime'] = $backups->getTimestamp($path);
             // pull "real" update time, meaning when the revision was last updated as current version
             try {
-                $head = Loco_gettext_Data::head($tmp)->getHeaders();
-                if( $value = $head->trimmed($podate) ){
+                $head = Loco_gettext_Data::head($tmp);
+                $value = $head->trimmed($podate);
+                if( '' !== $value ){
                     $info['potime'] = Loco_gettext_Data::parseDate($value);
                 }
                 else {

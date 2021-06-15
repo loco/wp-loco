@@ -57,6 +57,10 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             $potfile = null;
         }
         
+        // defaults: no msgstr and no json
+        $translate = false;
+        $syncjsons = array();
+        
         // Parse existing POT for source
         if( $potfile ){
             $this->set('pot', $potfile->basename() );
@@ -68,10 +72,16 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
                 throw new Loco_error_ParseException( sprintf( __('Translation template is invalid (%s)','loco-translate'), $potfile->basename() ) );
             }
             // Only copy msgstr fields from source if it's a user-defined PO template and "copy translations" was selected.
-            // TODO po,json mode combination
-            $mode = preg_split('/[^a-z]+/', (string) $post->mode );
-            $strip = in_array( 'pot', $mode, true );
-            $translate = 'pot' !== $potfile->extension() && ! $strip;
+            $opts = new Loco_gettext_SyncOptions( new LocoPoHeaders );
+            $opts->setSyncMode( $post->mode );
+            if( 'pot' !== $potfile->extension() ){
+                $translate = $opts->mergeMsgstr();
+            }
+            // related JSONs will only wor if source is a localized PO.
+            if( $opts->mergeJson() ){
+                $siblings = new Loco_fs_Siblings($potfile);
+                $syncjsons = $siblings->getJsons();
+            }
         }
         // else extract POT from source code
         else {
@@ -92,12 +102,13 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             }
             // Have source strings. These cannot contain any translations.
             $source = $extr->includeMeta()->getTemplate($domain);
-            $translate = false;
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
         $matcher = new Loco_gettext_Matcher;
         $matcher->loadRefs($source,$translate);
+        // merging JSONs must be done before fuzzy matching as it may add source strings
+        $matcher->loadJsons($syncjsons);
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
             $fuzziness = Loco_data_Settings::get()->fuzziness;

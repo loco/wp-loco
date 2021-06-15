@@ -59,7 +59,7 @@ abstract class Loco_compat_PosixExtension {
     public static function getuidViaTempDir(){
         $dir = get_temp_dir();
         if( 04000 & fileperms($dir) ){
-            trigger_error( sprintf('%s directory has setuid bit, getuid may not be accurate'), E_USER_NOTICE );
+            trigger_error( sprintf('%s directory has setuid bit, getuid may not be accurate',basename($dir) ), E_USER_NOTICE );
         }
         $path = wp_tempnam( 'loco-sniff-'.time(), $dir );
         $uid = fileowner($path);
@@ -76,7 +76,7 @@ abstract class Loco_compat_PosixExtension {
     public static function getgidViaTempDir(){
         $dir = get_temp_dir();
         if( 02000 & fileperms($dir) ){
-            trigger_error( sprintf('%s directory has setgid bit, getgid may not be accurate'), E_USER_NOTICE );
+            trigger_error( sprintf('%s directory has setgid bit, getgid may not be accurate',basename($dir) ), E_USER_NOTICE );
         }
         $path = wp_tempnam( 'loco-sniff-'.time(), $dir );
         $gid = filegroup($path);
@@ -92,9 +92,11 @@ abstract class Loco_compat_PosixExtension {
      * @return string
      */
      public static function getHttpdUser(){
-        if( function_exists('posix_geteuid') ){
-            $info = posix_getpwuid( posix_geteuid() );
-            return $info['name'];
+        if( function_exists('posix_getpwuid') ){
+            $info = posix_getpwuid( self::getuid() );
+            if( isset($info['name']) ){
+                return $info['name'];
+            }
         }
         // @codeCoverageIgnoreStart
         foreach( array('apache','nginx') as $name ){

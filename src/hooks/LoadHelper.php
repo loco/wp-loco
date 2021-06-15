@@ -1,4 +1,4 @@
-<?php /** @noinspection PhpUnusedParameterInspection */
+<?php
 
 /**
  * Text Domain loading helper.
@@ -206,6 +206,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @param string path relating to given JSON (not used here)
      * @param string script handle for registered merge
      * @return string final JSON translations
+     * @noinspection PhpUnusedParameterInspection
      */
     public function filter_load_script_translations( $json = '', $path = '', $handle = '' ){
         if( array_key_exists($handle,$this->json) ){

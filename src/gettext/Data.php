@@ -50,15 +50,16 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * Like load but just pulls header, saving a full parse. PO only
      * @param Loco_fs_File
-     * @return Loco_gettext_Data
+     * @return LocoPoHeaders
      * @throws InvalidArgumentException
      */
     public static function head( Loco_fs_File $file ){
         if( 'mo' === self::ext($file) ){
             throw new InvalidArgumentException('PO only');
         }
-        $po = new LocoPoParser( $file->getContents() );
-        return new Loco_gettext_Data( $po->parse(1) );
+        $p = new LocoPoParser( $file->getContents() );
+        $d = new Loco_gettext_Data( $p->parse(1) );
+        return $d->getHeaders();
     }
 
 

@@ -101,12 +101,13 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.5.3 =
+* Added option to merge JSON translations when syncing
 * Fix for missing responseText in failed Ajax responses
 * Fix for HTML entities returned from `number_format_i18n`
 * Localized number formatting in JavaScript
 * Replaced usage of date_i18n with wp_date
 * Added configurable API endpoint for DeepL
-* Bumped WordPress version to 5.7.1
+* Bumped WordPress version to 5.7.2
 
 = 2.5.2 =
 * Added implied formality and loco_locale_formality filter

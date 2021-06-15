@@ -618,13 +618,12 @@ class Loco_fs_File {
 
     /**
      * Ensure full parent directory tree exists
-     * @return Loco_fs_Directory
+     * @return Loco_fs_Directory|null
      */
     public function createParent(){
-        if( $dir = $this->getParent() ){
-            if( ! $dir->exists() ){
-                $dir->mkdir();
-            }
+        $dir = $this->getParent();
+        if( $dir instanceof Loco_fs_Directory && ! $dir->exists() ){
+            $dir->mkdir();
         }
         return $dir;
     }

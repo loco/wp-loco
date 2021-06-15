@@ -71,7 +71,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      */
     public function getRealLine(){
         if( $this->_line ){
-            return $this->getLine();
+            return $this->_line;
         }
         return $this->getRootException()->getLine();
     }

@@ -35,7 +35,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     public static function add( Loco_error_Exception $error ){
         $notices = self::get();
         // if exception wasn't thrown we have to do some work to establish where it was invoked
-        if( __FILE__ === $error->getFile() ){
+        if( __FILE__ === $error->getRealFile() ){
             $error->setCallee(1);
         }
         // write error immediately under WP_CLI

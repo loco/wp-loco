@@ -45,9 +45,7 @@ class Loco_fs_Directory extends Loco_fs_File {
      * @return Loco_fs_Directory
      */
      public function mkdir(){
-         if( ! $this->exists() ){
-            $this->getWriteContext()->mkdir();
-         }
+         $this->getWriteContext()->mkdir();
          return $this;
      }
 

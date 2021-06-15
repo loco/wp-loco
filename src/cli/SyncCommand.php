@@ -68,20 +68,17 @@ abstract class Loco_cli_SyncCommand {
                 }
                 // Check if PO defines alternative template (reference)
                 $ref = $pot;
-                $translate = true;
                 $head = $def->getHeaders();
-                if( $head->has('X-Loco-Template') ){
+                $opts = new Loco_gettext_SyncOptions($head);
+                $translate = $opts->mergeMsgstr();
+                if( $opts->hasTemplate() ){
                     $ref = null;
-                    $potfile = new Loco_fs_File( $head['X-Loco-Template'] );
+                    $potfile = $opts->getTemplate();
                     $potfile->normalize( $base_dir );
                     if( $potfile->exists() ){
                         try {
                             Loco_cli_Utils::debug('> Parsing alternative template: %s',$potfile->getRelativePath($content_dir) );
                             $ref = Loco_gettext_Data::fromSource( $potfile->getContents() );
-                            // Default sync behaviour is to copy msgstr fields unless in POT mode
-                            if( $head->has('X-Loco-Template-Mode') && 'POT' === $head['X-Loco-Template-Mode'] ){
-                                $translate = false;
-                            }
                         }
                         catch( Loco_error_ParseException $e ){
                             WP_CLI::error( $e->getMessage().' in '.$potfile->getRelativePath($content_dir), false );
@@ -99,6 +96,14 @@ abstract class Loco_cli_SyncCommand {
                 Loco_cli_Utils::debug('Merging %s <- %s', $pofile->basename(), $potfile->basename() );
                 $matcher = new Loco_gettext_Matcher;
                 $matcher->loadRefs($ref,$translate );
+                // Merge jsons if configured and available
+                if( $opts->mergeJson() ){
+                    $siblings = new Loco_fs_Siblings($potfile);
+                    $njson = $matcher->loadJsons( $siblings->getJsons() );
+                    if( 0 !== $njson ){
+                        Loco_cli_Utils::debug('> merged json files:%u', $njson );
+                    }
+                }
                 // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
                 $fuzziness = Loco_data_Settings::get()->fuzziness;
                 $matcher->setFuzziness( (string) $fuzziness );

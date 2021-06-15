@@ -182,7 +182,7 @@ class Loco_gettext_Compiler {
                     Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; script not found in bundle',$ref) );
                 }
             }
-            // write all buffered fragments to their calculated JSON paths
+            // write all buffered fragments to their computed JSON paths
             foreach( $buffer as $ref => $fragment ) {
                 $jsonfile = $pofile->cloneJson($ref);
                 try {

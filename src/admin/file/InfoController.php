@@ -32,7 +32,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function render(){
-        /* @var Loco_fs_File $file */
+        /* @var Loco_fs_LocaleFile $file */
         $file = $this->get('file');
         $name = $file->basename();
         $this->set('title', $name );
@@ -110,7 +110,6 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             // don't attempt to pull locale of template file
             if( 'pot' !== $ext && ! $isTemplate ){
                 $locale = $file->getLocale();
-                $code = (string) $locale;
                 if( $locale->isValid() ){
                     // find PO/MO counter parts
                     if( 'po' === $ext ){
@@ -143,8 +142,9 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 $meta = Loco_gettext_Metadata::create($file,$data);
                 $this->set( 'meta', $meta );
                 // allow PO header to specify alternative template for sync
-                if( $head->has('X-Loco-Template') ){
-                    $altpot = new Loco_fs_File($head['X-Loco-Template']);
+                $opts = new Loco_gettext_SyncOptions($head);
+                if( $opts->hasTemplate() ){
+                    $altpot = $opts->getTemplate();
                     $altpot->normalize( $this->getBundle()->getDirectoryPath() );
                     if( $altpot->exists() && ( ! $template || ! $template->equal($altpot) ) ){
                         $template = $altpot;
@@ -168,13 +168,14 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                     }
                     // Language header sanity checks, raising developer (debug) warnings
                     if( $locale ){
-                        if( $value = $head['Language'] ){
-                            $check = (string) Loco_Locale::parse($value);
-                            if( $check !== $code ){
-                                $debug[]= sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $code );
+                        $value = $head->trimmed('Language');
+                        if( '' !== $value ){
+                            if( Loco_Locale::parse($value)->__toString() !== $locale->__toString() ){
+                                $debug[]= sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $locale );
                             }
                         }
-                        if( $value = $head['Plural-Forms'] ){
+                        $value = $head->trimmed('Plural-Forms');
+                        if( '' !== $value ){
                             try {
                                 $locale->setPluralFormsHeader($value);
                             }
