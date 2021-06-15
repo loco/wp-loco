@@ -207,13 +207,16 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      */
     private function getArrayRef( array $new ){
         $old = $this->getRef($new);
+        if( is_null($old) ){
+            return array();
+        }
         if( $old instanceof ArrayObject ){
             return $old->getArrayCopy();
         }
         if( is_array($old) ){
             return $old;
         }
-        throw new Exception('Unexpected type returned');
-
+        throw new Exception( (is_object($old)?get_class($old):gettype($old) ).' returned from '.get_class($this).'::getRef');
     }
+
 }
