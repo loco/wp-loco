@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.5.3-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-06-15 13:14+0000\n"
+"POT-Creation-Date: 2021-06-18 13:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Tosser\n"
+"X-Generator: Loco https://localise.biz/\n"
 "X-Loco-Version: 2.5.3-dev; wp-5.7.2\n"
 "X-Domain: loco-translate"
 
@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %s is either PO or POT
-#: src/gettext/Compiler.php:239
+#: src/gettext/Compiler.php:239 src/admin/file/HeadController.php:80
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -245,7 +245,8 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:110 tpl/admin/file/move.php:26
+#: src/admin/bundle/BaseController.php:110 tpl/admin/file/conf.php:58
+#: tpl/admin/file/move.php:26
 msgid "Advanced"
 msgstr ""
 
@@ -325,7 +326,7 @@ msgid ""
 "editor"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:46
+#: tpl/admin/file/info-po.php:47
 msgid "Binary file missing"
 msgstr ""
 
@@ -460,7 +461,7 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:147
+#: tpl/admin/init/init-po.php:147 tpl/admin/file/conf.php:32
 #, php-format
 msgid "Copy target translations from \"%s\""
 msgstr ""
@@ -804,7 +805,7 @@ msgid_plural "%u files deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/InfoController.php:167
+#: src/admin/file/InfoController.php:170
 msgid "File does not have a valid header"
 msgstr ""
 
@@ -858,7 +859,7 @@ msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
 #: tpl/admin/file/info-mo.php:21 tpl/admin/file/info-pot.php:24
-#: tpl/admin/file/info-po.php:26
+#: tpl/admin/file/info-po.php:27
 msgid "File modified"
 msgstr ""
 
@@ -875,7 +876,7 @@ msgid "File restored"
 msgstr ""
 
 #: tpl/admin/file/info-mo.php:18 tpl/admin/file/info-pot.php:21
-#: tpl/admin/file/info-po.php:23
+#: tpl/admin/file/info-po.php:24
 msgid "File size"
 msgstr ""
 
@@ -994,7 +995,7 @@ msgstr ""
 msgid "Important"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:59
+#: tpl/admin/file/info-po.php:60
 msgid "In sync with template"
 msgstr ""
 
@@ -1045,7 +1046,7 @@ msgstr ""
 msgid "JSON compilation failed for %s"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:153
+#: tpl/admin/init/init-po.php:153 tpl/admin/file/conf.php:38
 msgid "Just copy English source strings"
 msgstr ""
 
@@ -1062,7 +1063,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/admin/file/InfoController.php:174
+#: src/admin/file/InfoController.php:177
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -1091,7 +1092,7 @@ msgstr ""
 msgid "Last modified"
 msgstr ""
 
-#: tpl/admin/file/info-mo.php:24 tpl/admin/file/info-po.php:29
+#: tpl/admin/file/info-mo.php:24 tpl/admin/file/info-po.php:30
 msgid "Last translation"
 msgstr ""
 
@@ -1167,7 +1168,7 @@ msgstr ""
 msgid "Maximum line length (zero disables wrapping)"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:163
+#: tpl/admin/init/init-po.php:163 tpl/admin/file/conf.php:48
 msgid "Merge strings from related JSON files"
 msgstr ""
 
@@ -1182,7 +1183,7 @@ msgstr ""
 msgid "Merged from source code"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:83
+#: tpl/admin/file/info-po.php:84
 msgid "Missing template"
 msgstr ""
 
@@ -1319,7 +1320,7 @@ msgstr ""
 msgid "OK, Load this config"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:70
+#: tpl/admin/file/info-po.php:71
 msgid "Out of sync with template"
 msgstr ""
 
@@ -1331,7 +1332,7 @@ msgstr ""
 msgid "Overwrite existing translations"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:240
+#: src/mvc/AdminRouter.php:241
 msgid "Page not found"
 msgstr ""
 
@@ -1430,7 +1431,7 @@ msgid "Zero"
 msgstr ""
 
 #. Where %s is the name of a template file
-#: tpl/admin/file/info-po.php:74
+#: tpl/admin/file/info-po.php:75
 #, php-format
 msgid ""
 "PO file has different source strings to \"%s\". Try running Sync before "
@@ -1438,7 +1439,7 @@ msgid ""
 msgstr ""
 
 #. Where %s is the name of a template file
-#: tpl/admin/file/info-po.php:63
+#: tpl/admin/file/info-po.php:64
 #, php-format
 msgid "PO file has the same source strings as \"%s\""
 msgstr ""
@@ -1521,6 +1522,10 @@ msgstr ""
 
 #: tpl/admin/root.php:47
 msgid "Running plugins:"
+msgstr ""
+
+#: tpl/admin/file/conf.php:57 tpl/admin/file/head.php:34
+msgid "Save"
 msgstr ""
 
 #: tpl/admin/bundle/conf.php:141
@@ -1703,7 +1708,7 @@ msgstr ""
 msgid "Template missing"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:136
+#: tpl/admin/init/init-po.php:136 tpl/admin/file/conf.php:12
 msgid "Template options"
 msgstr ""
 
@@ -1764,7 +1769,7 @@ msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:87
+#: tpl/admin/file/info-po.php:88
 msgid ""
 "These translations are not linked to a POT file. Sync operations will "
 "extract strings directly from source code."
@@ -1920,7 +1925,7 @@ msgid_plural "Translation job aborted with %s strings remaining"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/file/info-po.php:32 tpl/admin/bundle/inc-po-table.php:16
+#: tpl/admin/file/info-po.php:33 tpl/admin/bundle/inc-po-table.php:16
 #: tpl/admin/bundle/locale.php:36
 msgid "Translation progress"
 msgstr ""
@@ -1962,7 +1967,7 @@ msgstr ""
 msgid "Unexpected file type"
 msgstr ""
 
-#: src/package/Header.php:86 src/admin/file/InfoController.php:135
+#: src/package/Header.php:86 src/admin/file/InfoController.php:138
 msgid "Unknown author"
 msgstr ""
 
@@ -2046,7 +2051,7 @@ msgstr ""
 msgid "Warning"
 msgstr ""
 
-#: tpl/admin/file/info-po.php:49
+#: tpl/admin/file/info-po.php:50
 msgid "We can't find the binary MO file that belongs with these translations"
 msgstr ""
 

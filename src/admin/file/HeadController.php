@@ -28,7 +28,7 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
                 // check some headers prior ro updating
                 $head = $data->getHeaders();
                 $plurals = $head['Plural-Forms'];
-                // in advanced mode we will set all headers from form as-is. 
+                // in advanced mode we will set all headers from form as-is.
                 $post = Loco_mvc_PostParams::get();
                 if( $post->has('headers') ){
                     $raw = (array) $post->headers;
@@ -57,6 +57,9 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
                     }
                     $conf->setSyncMode($mode);
                 }
+                // Validate and remove redundant headers
+                $conf = new Loco_gettext_SyncOptions($head);
+                $head = $conf->getHeaders();
                 // Render PO without modifying sort order
                 if( $file instanceof Loco_fs_LocaleFile && $file->getLocale()->isValid() ){
                     $compiler = new Loco_gettext_Compiler($file);
@@ -131,6 +134,20 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
         $conf = new Loco_gettext_SyncOptions($head);
         $this->set('conf', $conf );
         
+        // perform some basic validation of sync mode
+        if( $conf->hasTemplate() ){
+            $potfile = $conf->getTemplate();
+        }
+        else {
+            $potfile = new Loco_fs_LocaleFile( (string) $this->getProject()->getPot() );
+        }
+        if( $conf->mergeMsgstr() && 'po' !== $potfile->extension() ){
+            Loco_error_AdminNotices::warn('Copying translations requires template is a PO file');
+        }
+        if( $conf->mergeJson() && ! $potfile->getLocale()->isValid() ){
+            Loco_error_AdminNotices::warn('Merging JSON files requires template has a localized file path');
+        }
+
         // may or may not already have a custom template with a known locale
         $this->set('potName','--');
         if( $conf->hasTemplate() ){

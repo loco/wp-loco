@@ -44,7 +44,7 @@ class Loco_gettext_SyncOptions {
 
     /**
      * Test if translations (msgstr fields) are to be merged.
-     * Default sync behaviour is to copy msgstr fields unless *explicitly* in POT mode
+     * 
      * @return bool
      */
     public function mergeMsgstr(){
@@ -65,7 +65,13 @@ class Loco_gettext_SyncOptions {
      * @return string
      */
     public function getSyncMode(){
-        return strtolower( $this->head->trimmed('X-Loco-Template-Mode') );
+        $mode = strtolower( $this->head->trimmed('X-Loco-Template-Mode') );
+        // Default sync mode when undefined is to honour the type of source.
+        // i.e. for legacy compatibility, copy msgstr fields if source is a PO file.
+        if( '' === $mode ){
+            $mode = $this->hasTemplate() ? strtolower( $this->getTemplate()->extension() ) : 'pot';
+        }
+        return $mode;
     }
 
 
@@ -76,5 +82,19 @@ class Loco_gettext_SyncOptions {
         $this->head['X-Loco-Template-Mode'] = (string) $mode;
     }
     
+    
+    /**
+     * Remove redundant headers
+     * @return LocoPoHeaders
+     */
+    public function getHeaders(){
+        if( ! $this->hasTemplate() ){
+            $this->head->offsetUnset('X-Loco-Template');
+            if( 'pot' === $this->getSyncMode() ){
+                $this->head->offsetUnset('X-Loco-Template-Mode');
+            }
+        }
+        return $this->head;
+    }
 
 }

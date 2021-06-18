@@ -92,10 +92,10 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         if( $locale instanceof Loco_Locale ){
             // alternative POT file may be forced by sync options
             $sync = new Loco_gettext_SyncOptions($head);
+            $syncmode = $sync->getSyncMode();
             if( $sync->hasTemplate() ){
                 $potfile = $sync->getTemplate();
                 $potfile->normalize( $bundle->getDirectoryPath() );
-                $syncmode = $sync->getSyncMode();
             }
             // else use project-configured template, assuming there is one
             // no way to get configured POT if invalid project
