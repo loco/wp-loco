@@ -11,6 +11,7 @@ $this->start('header');
 
     <div class="notice inline notice-info">
         <nav>
+            <a class="icon only-icon icon-cog" title="Configure" href="<?php $file->e('configure')?>"><span>configure</span></a>
             <a class="icon only-icon icon-download" title="Download" href="<?php $file->e('download')?>"><span>download</span></a>
         </nav>
         <h3>

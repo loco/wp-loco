@@ -102,6 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.5.3 =
 * Added option to merge JSON translations when syncing
+* Added screen for editing file headers and sync options
 * Fix for missing responseText in failed Ajax responses
 * Fix for HTML entities returned from `number_format_i18n`
 * Localized number formatting in JavaScript

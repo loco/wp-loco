@@ -20,16 +20,16 @@ class Loco_gettext_SyncOptions {
      * @return bool
      */
     public function hasTemplate(){
-        return $this->head->has('X-Loco-Template');
+        return '' !== $this->head->trimmed('X-Loco-Template');
     }
 
 
     /**
      * Get *relative* path to alternative template path.
-     * @return Loco_fs_File
+     * @return Loco_fs_LocaleFile
      */
     public function getTemplate(){
-        return new Loco_fs_File( $this->head['X-Loco-Template'] );
+        return new Loco_fs_LocaleFile( $this->head['X-Loco-Template'] );
     }
 
 
@@ -53,7 +53,7 @@ class Loco_gettext_SyncOptions {
 
 
     /**
-     * Test if JSON files are merged.
+     * Test if JSON files are to be merged.
      * @return bool
      */
     public function mergeJson(){

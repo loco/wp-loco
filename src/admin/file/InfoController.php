@@ -76,7 +76,10 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         ) );
         $args->setNonce('download');
         $finfo['download'] = $args->getHref( admin_url('admin-ajax.php','relative') );
-        
+
+        // allow link to modify headers/settings
+        $finfo['configure'] = str_replace('file-info','file-head',$_SERVER['REQUEST_URI']);
+
         // collect note worthy problems with file headers
         $debugging = loco_debugging();
         $debug = array();

@@ -12,7 +12,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Loco https://localise.biz/\n"
+"X-Generator: Tosser\n"
 "X-Loco-Version: 2.5.3-dev; wp-5.7.2\n"
 "X-Domain: loco-translate"
 

@@ -58,8 +58,8 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             throw new InvalidArgumentException('PO only');
         }
         $p = new LocoPoParser( $file->getContents() );
-        $d = new Loco_gettext_Data( $p->parse(1) );
-        return $d->getHeaders();
+        $p->parse(0);
+        return $p->getHeader();
     }
 
 
