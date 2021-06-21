@@ -158,7 +158,7 @@ abstract class Loco_cli_FetchCommand {
                     $podata->clear();
                     $stats = $matcher->merge($original,$podata);
                     $original = null;
-                    if( ! $stats['add'] && ! $stats['del'] && ! $stats['fuz'] ){
+                    if( ! $stats['add'] && ! $stats['del'] && ! $stats['fuz'] && ! $stats['str'] ){
                         WP_CLI::log( sprintf('%s unchanged in "%s". Skipping %s', $project,$locale,$info->relpath) );
                         continue;
                     }

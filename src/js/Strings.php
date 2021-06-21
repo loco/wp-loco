@@ -32,6 +32,10 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
          * xgettext: javascript-format */
         _n("%s string marked Fuzzy","%s strings marked Fuzzy",0,'loco-translate');
 
+        /* Summary of translations copied from a PO file during Sync
+         * xgettext: javascript-format */
+        _n("%s translation copied","%s translations copied",0,'loco-translate');
+
         /* Message appears after sync operation, where %s refers to a POT file.
          * xgettext: javascript-format */
         __("Strings up to date with %s",'loco-translate');

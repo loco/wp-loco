@@ -1,21 +1,21 @@
 !function(k, S) {
-var C = k.loco, i = C && C.conf, c = document.getElementById("loco-editor-inner");
-if (C && i && c) {
-var D, r, n, z, h, a, u = !!i.WP_DEBUG, l = C.po.ref && C.po.ref.init(C, i), d = null, s = null, o = i.multipart, t = C.l10n, m = C.string.sprintf, e = i.wpnum && i.wpnum.thousands_sep || ",", T = i.locale, b = C.po.init(T).wrap(i.powrap), p = !T, f = document.getElementById("loco-actions"), g = i.popath, v = i.potpath, y = i.syncmode, w = document.getElementById("loco-fs"), x = w && C.fs.init(w), I = i.readonly, j = !I, M = {}, E = 0, L = {
+var C = k.loco, i = C && C.conf, u = document.getElementById("loco-editor-inner");
+if (C && i && u) {
+var D, r, n, z, h, a, d = !!i.WP_DEBUG, l = C.po.ref && C.po.ref.init(C, i), s = null, c = null, o = i.multipart, t = C.l10n, m = C.string.sprintf, e = i.wpnum && i.wpnum.thousands_sep || ",", T = i.locale, b = C.po.init(T).wrap(i.powrap), p = !T, f = document.getElementById("loco-actions"), g = i.popath, v = i.potpath, y = i.syncmode, w = document.getElementById("loco-fs"), x = w && C.fs.init(w), I = i.readonly, j = !I, M = {}, E = 0, L = {
 my: "top",
 at: "top",
 of: "#loco-content"
 };
 !o || k.FormData && k.Blob || (o = !1, C.notices.warn("Your browser doesn't support Ajax file uploads. Falling back to standard postdata")), 
 l || C.notices.warn("admin.js is out of date. Please empty your browser cache and reload the page.");
-var U, P, q = (P = parseInt(S(c).css("min-height") || 0), function() {
+var U, P, q = (P = parseInt(S(u).css("min-height") || 0), function() {
 var n = function(n, t) {
 for (var o = n.offsetTop || 0; (n = n.offsetParent) && n !== t; ) o += n.offsetTop || 0;
 return o;
-}(c, document.body), t = k.innerHeight, o = Math.max(P, t - n - 20);
-U !== o && (c.style.height = String(o) + "px", U = o);
+}(u, document.body), t = k.innerHeight, o = Math.max(P, t - n - 20);
+U !== o && (u.style.height = String(o) + "px", U = o);
 });
-q(), S(k).resize(q), c.innerHTML = "", D = C.po.ed.init(c).localise(t), C.po.kbd.init(D).add("save", j ? function() {
+q(), S(k).resize(q), u.innerHTML = "", D = C.po.ed.init(u).localise(t), C.po.kbd.init(D).add("save", j ? function() {
 D.dirty && G();
 } : Q).add("hint", T && j && H || Q).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
 var B = {
@@ -33,7 +33,7 @@ return t, D.on("poUnsaved", function() {
 n(), S(t).addClass("button-primary");
 }).on("poSave", function() {
 o(), S(t).removeClass("button-primary");
-}), s = S.extend({
+}), c = S.extend({
 path: g
 }, i.project || {}), S(t).on("click", function(n) {
 return n.preventDefault(), o(), S(t).addClass("loco-loading"), G(e), !1;
@@ -55,7 +55,7 @@ D.on("poUnsaved", function() {
 o();
 }).on("poSave", function() {
 e();
-}), d = {
+}), s = {
 bundle: n.bundle,
 domain: n.domain,
 type: p ? "pot" : "po",
@@ -140,7 +140,7 @@ V(), k.onbeforeunload = null;
 }).on("poHint", H).on("poUpdate", V).on("poMeta", function(n, t) {
 var o, e, a = (e = "CODE", (o = t).tagName === e ? o : o.getElementsByTagName(e)[0]);
 return !a || !l || (l.load(a.textContent), n.preventDefault(), !1);
-}), b.load(i.podata), D.load(b), (T = D.targetLocale) ? T.isRTL() && S(c).addClass("trg-rtl") : D.unlock(), 
+}), b.load(i.podata), D.load(b), (T = D.targetLocale) ? T.isRTL() && S(u).addClass("trg-rtl") : D.unlock(), 
 V(), delete C.conf, i = B = null;
 }
 function N(n) {
@@ -152,24 +152,25 @@ return C.l10n.n(n, t, o);
 function A(n) {
 return n.format(0, ".", e);
 }
-function F(s) {
-C.ajax.post("sync", d, function(n) {
+function F(c) {
+C.ajax.post("sync", s, function(n) {
 var t = [], o = n.pot, e = n.po, a = n.done || {
 add: [],
 del: [],
 fuz: []
-}, i = a.add.length, r = a.del.length, l = a.fuz.length;
-b.clear().load(e), D.load(b), i || r || l ? (o ? t.push(m(N("Merged from %s"), o)) : t.push(N("Merged from source code")), 
+}, i = a.add.length, r = a.del.length, l = a.fuz.length, s = a.trn || 0;
+b.clear().load(e), D.load(b), i || r || l || s ? (o ? t.push(m(N("Merged from %s"), o)) : t.push(N("Merged from source code")), 
 i && t.push(m(O("%s new string added", "%s new strings added", i), A(i))), r && t.push(m(O("%s obsolete string removed", "%s obsolete strings removed", r), A(r))), 
 l && t.push(m(O("%s string marked Fuzzy", "%s strings marked Fuzzy", l), A(l))), 
-S(c).trigger("poUnsaved", []), V(), u && k.console && function(n, t) {
+s && t.push(m(O("%s translation copied", "%s translations copied", s), A(s))), S(u).trigger("poUnsaved", []), 
+V(), d && k.console && function(n, t) {
 var o = -1, e = t.add.length;
 for (;++o < e; ) n.log(" + " + String(t.add[o]));
 for (e = t.del.length, o = 0; o < e; o++) n.log(" - " + String(t.del[o]));
 for (e = t.fuz.length, o = 0; o < e; o++) n.log(" ~ " + String(t.fuz[o]));
 }(console, a)) : o ? t.push(m(N("Strings up to date with %s"), o)) : t.push(N("Strings up to date with source code")), 
-C.notices.success(t.join(". ")), S(c).trigger("poMerge", [ n ]), s && s();
-}, s);
+C.notices.success(t.join(". ")), S(u).trigger("poMerge", [ n ]), c && c();
+}, c);
 }
 function $() {
 return n = n || function() {
@@ -320,7 +321,7 @@ a ? a.dialog("open") : C.notices.error("Logic error. Unconfigured API modal miss
 function G(t) {
 var n = S.extend({
 locale: String(b.locale() || "")
-}, s || {});
+}, c || {});
 x && x.applyCreds(n), o ? (n = function(n) {
 var t, o = new FormData();
 for (t in n) n.hasOwnProperty(t) && o.append(t, n[t]);
