@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 4.1
 Requires PHP: 5.2.4
 Tested up to: 5.7.1
-Stable tag: 2.5.2
+Stable tag: 2.5.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,8 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.5.3 =
-* Added option to merge JSON translations when syncing
-* Added screen for editing file headers and sync options
+* Adds option to merge JSON translations when syncing from PO
+* Adds screen for editing file headers and sync options
 * Fix for missing responseText in failed Ajax responses
 * Fix for HTML entities returned from `number_format_i18n`
 * Localized number formatting in JavaScript
