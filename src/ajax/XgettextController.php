@@ -28,8 +28,13 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
             throw new Loco_error_Exception('Front end did not post $name');
         }
 
-        // POT file shouldn't exist currently
+        // POT file should be .pot but we'll allow .po
         $potfile = new Loco_fs_File( $target.'/'.$name );
+        $ext = strtolower( $potfile->extension() );
+        if( 'pot' !== $ext && 'po' !== $ext ){
+            throw new Loco_error_Exception('Disallowed file extension');
+        }
+        // File shouldn't exist currently
         $api = new Loco_api_WordPressFileSystem;
         $api->authorizeCreate($potfile);
         // Do extraction and grab only given domain's strings

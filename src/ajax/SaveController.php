@@ -28,7 +28,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
 
         // ensure we only deal with PO/POT source files.
         // posting of MO file paths is permitted when PO is missing, but we're about to fix that
-        $ext = $pofile->extension();
+        $ext = strtolower( $pofile->extension() );
         if( 'mo' === $ext ){
             $pofile = $pofile->cloneExtension('po');
         }
@@ -36,7 +36,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
             $locale = '';
         }
         else if( 'po' !== $ext ){
-            throw new Loco_error_Exception('Invalid file path');
+            throw new Loco_error_Exception('Disallowed file extension');
         }
         
         // Prepare compiler for all save operations. PO/MO/JSON, or just POT

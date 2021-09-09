@@ -311,8 +311,13 @@ class Loco_fs_FileWriter {
         }
         // deny POT modification (pot_protect = 2)
         // this assumes that templates all have .pot extension, which isn't guaranteed. UI should prevent saving of wrongly files like "default.po"
-        if( 'pot' === $this->file->extension() &&  1 < $opts->pot_protect ){
+        $ext = strtolower( $this->file->extension() );
+        if( 'pot' === $ext &&  1 < $opts->pot_protect ){
             throw new Loco_error_WriteException( __('Modification of POT (template) files is disallowed by the plugin settings','loco-translate') );
+        }
+        // Deny list of sensitive file extensions, noting that specific actions may limit this further
+        else if( 'php' === $ext ){
+            throw new Loco_error_WriteException('Disallowed file extension in '.$this->file->basename() );
         }
         return $this;
     } 
