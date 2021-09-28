@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.5.3\n"
+"Project-Id-Version: Loco Translate 2.5.4-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-06-22 10:49+0000\n"
+"POT-Creation-Date: 2021-09-28 09:29+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.3; wp-5.7.2\n"
+"X-Loco-Version: 2.5.4-dev; wp-5.8.1\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -564,6 +564,10 @@ msgstr ""
 
 #: tpl/admin/bundle/setup/saved.php:19
 msgid "Edit config"
+msgstr ""
+
+#: tpl/admin/file/head.php:10
+msgid "Edit file headers"
 msgstr ""
 
 #: src/admin/bundle/ViewController.php:123
@@ -1207,7 +1211,7 @@ msgstr ""
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
-#: src/fs/FileWriter.php:315
+#: src/fs/FileWriter.php:316
 msgid ""
 "Modification of POT (template) files is disallowed by the plugin settings"
 msgstr ""
@@ -1501,6 +1505,10 @@ msgstr ""
 msgid "Relative path from bundle root to the official POT file"
 msgstr ""
 
+#: tpl/admin/file/conf.php:23
+msgid "Relative path to template file"
+msgstr ""
+
 #: src/admin/file/BaseController.php:107
 msgid "Relocate"
 msgstr ""
@@ -1708,7 +1716,7 @@ msgstr ""
 msgid "Template file already exists"
 msgstr ""
 
-#: src/ajax/XgettextController.php:62
+#: src/ajax/XgettextController.php:67
 msgid "Template file created"
 msgstr ""
 

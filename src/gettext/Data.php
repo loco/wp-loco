@@ -268,7 +268,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         if( 'PACKAGE VERSION' === $headers['Project-Id-Version'] ){
             $headers['Project-Id-Version'] = '';
         }
-        // header message must be un-fuzzied if it was formerly a POT file
+        // finally allow headers to be modified via filter
+        $replaced = apply_filters( 'loco_po_headers', $headers );
+        if( $replaced instanceof LocoPoHeaders && $replaced !== $headers ){
+            $this->setHeaders($replaced);
+        }
         return $this->initPo();
     }
 
@@ -297,7 +301,12 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'X-Loco-Version' => sprintf('%s; wp-%s', loco_plugin_version(), $GLOBALS['wp_version'] ),
             'X-Domain' => $domain,
         );
-        $this->applyHeaders($required,$defaults);
+        $headers = $this->applyHeaders($required,$defaults);
+        // finally allow headers to be modified via filter
+        $replaced = apply_filters( 'loco_pot_headers', $headers );
+        if( $replaced instanceof LocoPoHeaders && $replaced !== $headers ){
+            $this->setHeaders($replaced);
+        }
         return $this->initPot();
     }
 

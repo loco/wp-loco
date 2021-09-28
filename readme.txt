@@ -102,6 +102,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.5.4 =
 * Enforcing safe file extensions for new templates
+* Added filters loco_po_headers and loco_pot_headers
+* Bumped WordPress version to 5.8.1
 
 = 2.5.3 =
 * Adds option to merge JSON translations when syncing from PO

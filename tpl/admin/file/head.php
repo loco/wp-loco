@@ -7,7 +7,7 @@ $this->extend('../layout');
 
 <div class="panel">
     <h3>
-        Edit file headers:
+        <?php esc_html_e('Edit file headers','loco-translate');?> 
     </h3>
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-main"><?php

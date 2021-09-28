@@ -20,7 +20,7 @@ $this->extend('../layout');
             <tbody>
                 <tr valign="top" class="compact">
                     <td>
-                        <label for="loco-conf-template">Relative path to template file:</label><br />
+                        <label for="loco-conf-template"><?php esc_html_e('Relative path to template file','loco-translate');?>:</label><br />
                         <input type="text" name="conf[template]" value="<?php self::e( (string) $conf->getTemplate() )?>" size="100" id="loco-conf-template" />
                     </td>
                 </tr>
