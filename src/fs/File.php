@@ -255,8 +255,9 @@ class Loco_fs_File {
         return $info['filename'];
     }
 
-    
+
     /**
+     * Gets final file extension, e.g. "html" in "foo.php.html"
      * @return string
      */
     public function extension(){
@@ -264,7 +265,17 @@ class Loco_fs_File {
         return isset($info['extension']) ? $info['extension'] : '';
     }
 
-    
+
+    /**
+     * Gets full file extension after first dot ("."), e.g. "php.html" in "foo.php.html"
+     * @return string
+     */
+    public function fullExtension(){
+        $bits = explode('.',$this->basename(),2);
+        return array_key_exists(1,$bits) ? $bits[1] : '';
+    }
+
+
     /**
      * @return string
      */

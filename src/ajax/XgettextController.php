@@ -30,7 +30,7 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
 
         // POT file should be .pot but we'll allow .po
         $potfile = new Loco_fs_File( $target.'/'.$name );
-        $ext = strtolower( $potfile->extension() );
+        $ext = strtolower( $potfile->fullExtension() );
         if( 'pot' !== $ext && 'po' !== $ext ){
             throw new Loco_error_Exception('Disallowed file extension');
         }

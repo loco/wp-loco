@@ -38,7 +38,7 @@ class Loco_ajax_UploadController extends Loco_ajax_common_BundleController {
         }
         $upload = new Loco_data_Upload($_FILES['f']);
         $dummy = new Loco_fs_DummyFile( $upload->getName() );
-        $ext = strtolower( $dummy->extension() );
+        $ext = strtolower( $dummy->fullExtension() );
         // Loco_error_AdminNotices::debug('Have uploaded file: '.$dummy->basename() );
         switch($ext){
             case 'po':

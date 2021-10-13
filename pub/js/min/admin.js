@@ -4912,7 +4912,7 @@ k("#loco-admin.wrap table.wp-list-table").each(function(f, d) {
 n.require("$20", "tables.js").init(d);
 });
 D.validate = function(f) {
-return "2.5.4" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (D.notices.warn("admin.js is the wrong version (2.5.4). Please empty all relevant caches and reload this page."), 
+return "2.5.5" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (D.notices.warn("admin.js is the wrong version (2.5.5). Please empty all relevant caches and reload this page."), 
 !1) : !0;
 };
 })(window, document, window.jQuery);

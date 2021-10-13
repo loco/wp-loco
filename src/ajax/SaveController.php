@@ -28,7 +28,7 @@ class Loco_ajax_SaveController extends Loco_ajax_common_BundleController {
 
         // ensure we only deal with PO/POT source files.
         // posting of MO file paths is permitted when PO is missing, but we're about to fix that
-        $ext = strtolower( $pofile->extension() );
+        $ext = strtolower( $pofile->fullExtension() );
         if( 'mo' === $ext ){
             $pofile = $pofile->cloneExtension('po');
         }

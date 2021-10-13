@@ -42,6 +42,9 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         $_POST['path'] = $path;
 
         $pofile = new Loco_fs_LocaleFile( $path );
+        if( 'po' !== $pofile->fullExtension() ){
+            throw new Loco_error_Exception('Disallowed file extension');
+        }
         if( $suffix !== $pofile->getSuffix() ){
             $pofile = $pofile->cloneLocale( $locale );
             if( $suffix !== $pofile->getSuffix() ){
