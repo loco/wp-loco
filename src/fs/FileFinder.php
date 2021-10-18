@@ -347,7 +347,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
                     $ext = pathinfo($f,PATHINFO_EXTENSION);
                     // missing file extension only relevant for directories
                     if( '' === $ext ){
-                        if( is_file($path) ){
+                        if( ! $this->recursing || ! is_dir($path) ){
                             continue;
                         }
                     }
