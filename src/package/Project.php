@@ -398,7 +398,7 @@ class Loco_package_Project {
         if( ! $this->source ){    
             $source = new Loco_fs_FileFinder;
             $exts = $this->getSourceExtensions();
-            $source->setRecursive(true)->groupBy($exts);
+            $source->setRecursive(true)->filterExtensions($exts);
             /* @var $file Loco_fs_File */
             foreach( $this->spaths as $file ){
                 $path = realpath( (string) $file );    
@@ -835,7 +835,7 @@ class Loco_package_Project {
 
 
     /**
-     * Get newest timestamp of all translation files (includes template, but exclude source files)
+     * Get newest timestamp of all translation files (includes template, but excludes source files)
      * @return int
      */    
     public function getLastUpdated(){
@@ -844,7 +844,7 @@ class Loco_package_Project {
         if( $file && $file->exists() ){
             $t = $file->modified();
         }
-        /* @var $file Loco_fs_File */
+        /* @var Loco_fs_File $file */
         foreach( $this->findLocaleFiles('po') as $file ){
             $t = max( $t, $file->modified() );
         }

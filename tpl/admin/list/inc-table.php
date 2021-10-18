@@ -22,7 +22,7 @@
             </tr>
         </thead>
         <tbody><?php
-            /* @var $bundle Loco_pages_ViewParams */ 
+            /* @var Loco_mvc_ViewParams[] $bundles */ 
             foreach( $bundles as $bundle ):?> 
             <tr id="loco-<?php $bundle->e('id')?>">
                 <td data-sort-value="<?php $bundle->e('name')?>">

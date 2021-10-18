@@ -102,6 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.5.5 =
 * Fixed double file extension vulnerability reported by WordFence
+* Better performance when scanning directories for file types
 
 = 2.5.4 =
 * Fixed vulnerability reported by Tomi Ashari via wpscan
