@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.5.5\n"
+"Project-Id-Version: Loco Translate 2.5.6-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-10-18 12:11+0000\n"
+"POT-Creation-Date: 2021-10-20 11:37+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.5; wp-5.8.1\n"
+"X-Loco-Version: 2.5.6-dev; wp-5.8.1\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:178 src/admin/file/EditController.php:161
+#: src/data/Settings.php:178 src/admin/file/EditController.php:166
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
 #: tpl/admin/config/apis.php:128 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -596,13 +596,13 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:187
+#: src/admin/file/EditController.php:192
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. Button that opens window for auto-translating
-#: src/admin/file/EditController.php:198
+#: src/admin/file/EditController.php:203
 msgctxt "Editor"
 msgid "Auto"
 msgstr ""
@@ -626,7 +626,7 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:200
+#: src/admin/file/EditController.php:205
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
@@ -638,19 +638,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:189
+#: src/admin/file/EditController.php:194
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:196
+#: src/admin/file/EditController.php:201
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:192
+#: src/admin/file/EditController.php:197
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -680,13 +680,13 @@ msgid "Suggest translation"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:194
+#: src/admin/file/EditController.php:199
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:206
+#: src/admin/file/EditController.php:211
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -697,7 +697,7 @@ msgid "Toggle Fuzzy"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:204
+#: src/admin/file/EditController.php:209
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -912,7 +912,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:202
+#: src/admin/file/EditController.php:207
 msgid "Filter translations"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/ajax/ApisController.php:26 src/admin/file/EditController.php:190
+#: src/ajax/ApisController.php:26 src/admin/file/EditController.php:195
 msgid "Help"
 msgstr ""
 
@@ -1609,7 +1609,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:160
+#: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:165
 #: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
 #: tpl/admin/errors/no-backups.php:24
 msgid "Settings"
@@ -1874,7 +1874,7 @@ msgid "This information is for developers to find problems in the bundle setup"
 msgstr ""
 
 #. Warning when POT file is opened in the file editor. It can be disabled in settings.
-#: src/admin/file/EditController.php:159
+#: src/admin/file/EditController.php:164
 msgid ""
 "This is NOT a translation file. Manual editing of source strings is not "
 "recommended."
@@ -1953,12 +1953,12 @@ msgid "Translation progress %s%%"
 msgstr ""
 
 #. Where %s is the name of the invalid POT file
-#: src/ajax/SyncController.php:72 src/admin/file/EditController.php:121
+#: src/ajax/SyncController.php:72 src/admin/file/EditController.php:122
 #, php-format
 msgid "Translation template is invalid (%s)"
 msgstr ""
 
-#: src/admin/file/EditController.php:116
+#: src/admin/file/EditController.php:117
 #, php-format
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""

@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.5.6 =
+* Added loco_api_provider_source filter
+
 = 2.5.5 =
 * Fixed double file extension vulnerability reported by WordFence
 * Better performance when scanning directories for file types
@@ -431,7 +434,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.5.5 =
+= 2.5.6 =
 * Various improvements and bug fixes
 
 

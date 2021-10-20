@@ -48,6 +48,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
     public function render(){
         
         // file must exist for editing
+        /* @var Loco_fs_File $file */
         $file = $this->get('file');
         if( $fail = $this->getFileError($file) ){
             return $fail; 
@@ -146,6 +147,10 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             }
         }
         
+        // WordPress source locale is always en_US, but filter allows override for purpose of sending to translation APIs.
+        $tag = apply_filters('loco_api_provider_source', 'en', $file->getPath() );
+        $source = Loco_Locale::parse($tag);
+        
         $settings =  Loco_data_Settings::get();
         
         if( is_null($locale) ){
@@ -171,16 +176,16 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'powrap' => (int) $settings->po_width,
             'multipart' => (bool) $settings->ajax_files,
             'locale' => $locale ? $locale->jsonSerialize() : null,
+            'source' => $source->jsonSerialize(),
             'potpath' => $locale && $potfile ? $potfile->getRelativePath($wp_content) : null,
             'syncmode' => $syncmode,
             'popath' => $this->get('path'),
             'readonly' => $readonly,
             'project' => $project ? array (
                 'bundle' => $bundle->getId(),
-                'domain' => (string) $project->getId(),
+                'domain' => $project->getId(),
             ) : null,
             'nonces' => $this->getNonces($readonly),
-            'apis' => $locale && ! $readonly ? Loco_api_Providers::configured() : null,
         ) ) );
         $this->set( 'ui', new Loco_mvc_ViewParams( array(
              // Translators: button for adding a new string when manually editing a POT file
