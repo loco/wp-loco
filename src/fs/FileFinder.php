@@ -24,7 +24,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * File listing already matched
-     * @var Loco_fs_FileList
+     * @var Loco_fs_FileList|null
      */
     private $cache;
     
@@ -36,13 +36,13 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     
     /**
      * Internal pointer for directory being read
-     * @var int
+     * @var int|null
      */
     private $d;
     
     /**
      * Current directory being read
-     * @var resource
+     * @var resource|null
      */
     private $dir;
 
@@ -61,7 +61,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * Whether currently recursing into subdirectories
      * This is switched on and off as each directories is opened
-     * @var bool
+     * @var bool|null
      */
     private $recursing;
 
@@ -74,19 +74,19 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Registry of followed links by their original path
-     * @var Loco_fs_FileList
+     * @var Loco_fs_FileList|null
      */
     private $linked;
 
     /**
      * List of file extensions to filter on and group by
-     * @var Loco_fs_FileList[]
+     * @var null|Loco_fs_FileList[]
      */
     private $exts;
 
     /**
      * List of directory names to exclude from recursion
-     * @var Loco_fs_File[]
+     * @var null|Loco_fs_File[]
      */
     private $excluded;     
               
@@ -431,7 +431,6 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     }
 
 
-
     /**
      * @return Loco_fs_File|null
      */
@@ -442,7 +441,6 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
         }
         return null;
     }
-
 
 
     /**
@@ -521,11 +519,11 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
 
     /**
-     * test whether internal list has been fully cached in memory
+     * Test whether internal list has been fully cached in memory
+     * @return bool
      */
     public function isCached(){
         return $this->cached;
     }
 
-    
 }
