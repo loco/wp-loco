@@ -64,6 +64,10 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         if( function_exists('apache_get_modules') && ( $mods = preg_grep('/^mod_/',apache_get_modules() ) ) ){
             $versions['Server'] .= ' + '.implode(', ',$mods);
         }
+        // Add Xdebug version if installed
+        if( extension_loaded('xdebug') ){
+            $versions['PHP'] .= ' + Xdebug '. phpversion('xdebug');
+        }
 
         // byte code cache (currently only checking for Zend OPcache)
         if( function_exists('opcache_get_configuration') && ini_get('opcache.enable') ){

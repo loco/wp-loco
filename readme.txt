@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.5.6 =
 * Added loco_api_provider_source filter
 * Fixed bug loading user preferences saved in older version
+* Refactored file finder to avoid recursive function calls
 
 = 2.5.5 =
 * Fixed double file extension vulnerability reported by WordFence
