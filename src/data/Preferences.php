@@ -9,7 +9,7 @@ class Loco_data_Preferences extends Loco_data_Serializable {
 
     /**
      * User preference singletons
-     * @var array
+     * @var Loco_data_Preferences[]
      */
     private static $current = array();
 
