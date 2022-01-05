@@ -114,7 +114,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         // Third party API integrations:
         $apis = array();
         $jsapis = array();
-        foreach( Loco_api_Providers::export() as $api ){
+        foreach( Loco_api_Providers::sort( Loco_api_Providers::export() ) as $api ){
             $apis[] = new Loco_mvc_ViewParams($api);
             $jsapis[] = $api;
         }

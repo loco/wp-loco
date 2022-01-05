@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.5.6-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2021-10-21 14:10+0000\n"
+"POT-Creation-Date: 2022-01-05 14:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.6-dev; wp-5.8.1\n"
+"X-Loco-Version: 2.5.6-dev; wp-5.8.2\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -538,9 +538,9 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:178 src/admin/file/EditController.php:166
+#: src/data/Settings.php:180 src/admin/file/EditController.php:166
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
-#: tpl/admin/config/apis.php:128 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:149 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -1003,7 +1003,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:118
+#: tpl/admin/config/apis.php:139
 msgid "Important"
 msgstr ""
 
@@ -1152,7 +1152,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/data/Settings.php:177
+#: src/data/Settings.php:179
 msgid "Loco Translate 2.5 adds supports for JSON language pack generation."
 msgstr ""
 
@@ -1552,7 +1552,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:127
+#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:148
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1589,7 +1589,7 @@ msgstr ""
 msgid "See FAQ"
 msgstr ""
 
-#: tpl/admin/config/apis.php:121
+#: tpl/admin/config/apis.php:142
 msgid "See full disclaimer"
 msgstr ""
 
@@ -1791,7 +1791,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:120
+#: tpl/admin/config/apis.php:141
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"

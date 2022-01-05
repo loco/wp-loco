@@ -62,6 +62,27 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                     </fieldset>
                 </td>
             </tr><?php
+            // LECTO AI
+            $api = $apis['lecto']?> 
+            <tr>
+                <th scope="row"><?php $api->e('name')?></th>
+                <td>
+                    <fieldset>
+                        <legend class="screen-reader-text">
+                            <span><?php $ui->e('api_key')?></span>
+                        </legend>
+                        <p>
+                            <label for="loco--lecto_api_key">
+                                <?php $ui->e('api_key')?>:
+                            </label>
+                            <input type="text" size="50" name="api[lecto][key]" id="loco--lecto_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
+                        </p>
+                        <p>
+                            <span class="description"><a href="https://lecto.ai/?ref=loco" target="_blank" tabindex="-1">https://lecto.ai/?ref=loco</a></span>
+                        </p>
+                    </fieldset>
+                </td>
+            </tr><?php
             // MICROSOFT
             $api = $apis['microsoft']?> 
             <tr>
