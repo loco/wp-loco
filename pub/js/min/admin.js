@@ -3224,7 +3224,7 @@ g = !1;
 !this.sourceCell && r.setSrcMeta(b, a) && (g = !0);
 r.setTrgMeta(b, d, a) && (g = !0);
 r.setStatus(b, d);
-if (b.pluralized()) {
+if (1 !== e.nplurals && b.pluralized()) {
 var k = [], m = [], f = a.id + "-", z = b.targetForms() || e.plurals || [ "One", "Other" ], g = z.length, s = function(a) {
 var b = z[a];
 m.push(b ? c(b, !0) : "Form " + a);
