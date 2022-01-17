@@ -1,33 +1,33 @@
-(function(y, w, h, J) {
-var p = function() {
+(function(y, w, k, J) {
+var n = function() {
 function f(d) {
 throw Error("Failed to require " + d);
 }
 var d = {};
 return {
-register: function(f, n) {
-d[f] = n;
+register: function(f, m) {
+d[f] = m;
 },
-require: function(h, n) {
-return d[h] || f(n);
+require: function(k, m) {
+return d[k] || f(m);
 },
-include: function(h, n, k) {
-return d[h] || (k ? f(n) : null);
+include: function(k, m, g) {
+return d[k] || (g ? f(m) : null);
 }
 };
 }();
-p.register("$1", function(f, d, h) {
-function n(k) {
-var c = typeof k;
-if ("string" === c) if (/[^ <>!=()%^&|?:n0-9]/.test(k)) console.error("Invalid plural: " + k); else return new Function("n", "return " + k);
-"function" !== c && (k = function(b) {
+n.register("$1", function(f, d, k) {
+function m(g) {
+var c = typeof g;
+if ("string" === c) if (/[^ <>!=()%^&|?:n0-9]/.test(g)) console.error("Invalid plural: " + g); else return new Function("n", "return " + g);
+"function" !== c && (g = function(b) {
 return 1 != b;
 });
-return k;
+return g;
 }
-f.init = function(k) {
+f.init = function(g) {
 function c(a, b, e) {
-return (a = m[a]) && a[e] ? a[e] : b || "";
+return (a = h[a]) && a[e] ? a[e] : b || "";
 }
 function b(a) {
 return c(a, a, 0);
@@ -36,12 +36,12 @@ function a(a, b) {
 return c(b + "" + a, a, 0);
 }
 function e(a, b, e) {
-e = Number(k(e));
+e = Number(g(e));
 isNaN(e) && (e = 0);
 return c(a, e ? b : a, e);
 }
-k = n(k);
-var m = {};
+g = m(g);
+var h = {};
 return {
 __: b,
 _x: a,
@@ -50,22 +50,22 @@ _: b,
 x: a,
 n: e,
 load: function(a) {
-m = a || {};
+h = a || {};
 return this;
 },
 pluraleq: function(a) {
-k = n(a);
+g = m(a);
 return this;
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$2", function(f, d, h) {
+n.register("$2", function(f, d, k) {
 f.ie = function() {
-var f = !1, k = 0;
-d.attachEvent && d.navigator && /MSIE (\d+)\./.exec(String(navigator.appVersion)) && (k = Number(RegExp.$1), 
-f = 11 > k);
+var f = !1, g = 0;
+d.attachEvent && d.navigator && /MSIE (\d+)\./.exec(String(navigator.appVersion)) && (g = Number(RegExp.$1), 
+f = 11 > g);
 return function() {
 return f;
 };
@@ -75,8 +75,8 @@ return f;
 };
 return f;
 }({}, y, w));
-p.register("$3", function(f, d, h) {
-Number.prototype.format = function(d, k, c) {
+n.register("$3", function(f, d, k) {
+Number.prototype.format = function(d, g, c) {
 d = Math.pow(10, d || 0);
 var b = Math.round(d * this) / d;
 d = [];
@@ -87,142 +87,142 @@ d.unshift(b.substring(e - 3, e));
 b = d.join(c || ",");
 if (a) {
 c = a;
-var m;
-for (d = c.length; "0" === c.charAt(--d); ) m = d;
-m && (c = c.substring(0, m));
-(a = c) && (b += (k || ".") + a);
+var h;
+for (d = c.length; "0" === c.charAt(--d); ) h = d;
+h && (c = c.substring(0, h));
+(a = c) && (b += (g || ".") + a);
 }
 return b;
 };
 Number.prototype.percent = function(d) {
-var k = 0, c = this && d ? 100 * (this / d) : 0;
+var g = 0, c = this && d ? 100 * (this / d) : 0;
 if (0 === c) return "0";
 if (100 === c) return "100";
-if (99 < c) c = Math.min(c, 99.9), d = c.format(++k); else if (.5 > c) {
+if (99 < c) c = Math.min(c, 99.9), d = c.format(++g); else if (.5 > c) {
 c = Math.max(c, 1e-4);
 do {
-d = c.format(++k);
-} while ("0" === d && 4 > k);
+d = c.format(++g);
+} while ("0" === d && 4 > g);
 d = d.substr(1);
 } else d = c.format(0);
 return d;
 };
 return f;
 }({}, y, w));
-p.register("$4", function(f, d, h) {
+n.register("$4", function(f, d, k) {
 Array.prototype.indexOf || (Array.prototype.indexOf = function(d) {
 if (null == this) throw new TypeError();
-var k, c = Object(this), b = c.length >>> 0;
+var g, c = Object(this), b = c.length >>> 0;
 if (0 === b) return -1;
-k = 0;
-1 < arguments.length && (k = Number(arguments[1]), k != k ? k = 0 : 0 != k && Infinity != k && -Infinity != k && (k = (0 < k || -1) * Math.floor(Math.abs(k))));
-if (k >= b) return -1;
-for (k = 0 <= k ? k : Math.max(b - Math.abs(k), 0); k < b; k++) if (k in c && c[k] === d) return k;
+g = 0;
+1 < arguments.length && (g = Number(arguments[1]), g != g ? g = 0 : 0 != g && Infinity != g && -Infinity != g && (g = (0 < g || -1) * Math.floor(Math.abs(g))));
+if (g >= b) return -1;
+for (g = 0 <= g ? g : Math.max(b - Math.abs(g), 0); g < b; g++) if (g in c && c[g] === d) return g;
 return -1;
 });
 return f;
 }({}, y, w));
-p.register("$5", function(f, d, p) {
+n.register("$5", function(f, d, n) {
 d.JSON || (d.JSON = {
-parse: h.parseJSON,
+parse: k.parseJSON,
 stringify: null
 });
 return f = d.JSON;
 }({}, y, w));
-p.register("$6", function(f, d, h) {
-f.trim = function(d, k) {
-for (k || (k = " \n"); d && -1 !== k.indexOf(d.substr(0, 1)); ) d = d.substr(1);
-for (;d && -1 !== k.indexOf(d.substr(-1)); ) d = d.substr(0, d.length - 1);
+n.register("$6", function(f, d, k) {
+f.trim = function(d, g) {
+for (g || (g = " \n"); d && -1 !== g.indexOf(d.substr(0, 1)); ) d = d.substr(1);
+for (;d && -1 !== g.indexOf(d.substr(-1)); ) d = d.substr(0, d.length - 1);
 return d;
 };
 f.sprintf = function(d) {
-var k = 0, c = [].slice.call(arguments, 1);
+var g = 0, c = [].slice.call(arguments, 1);
 return d.replace(/%(?:([1-9][0-9]*)\$)?([sud%])/g, function(b, a, e) {
-return "%" === e ? "%" : (a ? c[Number(a) - 1] : c[k++]) || "";
+return "%" === e ? "%" : (a ? c[Number(a) - 1] : c[g++]) || "";
 });
 };
 return f;
 }({}, y, w));
-p.register("$21", function(f, d, h) {
-function n(k) {
+n.register("$21", function(f, d, k) {
+function m(g) {
 return function(c, b) {
-for (var a = c[k] || 0; (c = c.offsetParent) && c !== (b || h.body); ) a += c[k] || 0;
+for (var a = c[g] || 0; (c = c.offsetParent) && c !== (b || k.body); ) a += c[g] || 0;
 return a;
 };
 }
-f.top = n("offsetTop");
-f.left = n("offsetLeft");
-f.el = function(k, c) {
-var b = h.createElement(k || "div");
+f.top = m("offsetTop");
+f.left = m("offsetLeft");
+f.el = function(g, c) {
+var b = k.createElement(g || "div");
 c && (b.className = c);
 return b;
 };
-f.txt = function(k) {
-return h.createTextNode(k || "");
+f.txt = function(g) {
+return k.createTextNode(g || "");
 };
 return f;
 }({}, y, w));
-p.register("$7", function(f, d, D) {
-function n(a, b, e) {
+n.register("$7", function(f, d, D) {
+function m(a, b, e) {
 function c() {
-q();
+p();
 v = setTimeout(b, e);
 }
-function q() {
+function p() {
 v && clearTimeout(v);
 v = null;
 }
 var v;
 c();
-h(a).on("mouseenter", q).on("mouseleave", c);
+k(a).on("mouseenter", p).on("mouseleave", c);
 return {
 die: function() {
-q();
-h(a).off("mouseenter mouseleave");
+p();
+k(a).off("mouseenter mouseleave");
 }
 };
 }
-function k(a, b) {
+function g(a, b) {
 a.fadeTo(b, 0, function() {
 a.slideUp(b, function() {
 a.remove();
-h(d).triggerHandler("resize");
+k(d).triggerHandler("resize");
 });
 });
 return a;
 }
 function c(a, b) {
 function e(b) {
-l[v] = null;
-k(h(a), 250);
-q && q.die();
+q[v] = null;
+g(k(a), 250);
+p && p.die();
 var c;
 if (c = b) b.stopPropagation(), b.preventDefault(), c = !1;
 return c;
 }
 function c(b) {
-q && q.die();
-return q = n(a, e, b);
+p && p.die();
+return p = m(a, e, b);
 }
-var q, v, m, g = h(a), B = g.find("button");
-0 === B.length && (g.addClass("is-dismissible"), B = h('<button type="button" class="notice-dismiss"> </a>').appendTo(g));
+var p, v, h, l = k(a), B = l.find("button");
+0 === B.length && (l.addClass("is-dismissible"), B = k('<button type="button" class="notice-dismiss"> </a>').appendTo(l));
 B.off("click").on("click", e);
-h(d).triggerHandler("resize");
-z();
-v = l.length;
-l.push(e);
-b && (q = c(b));
+k(d).triggerHandler("resize");
+A();
+v = q.length;
+q.push(e);
+b && (p = c(b));
 return {
 link: function(b, v) {
-var e = v || b, c = h(a).find("nav"), e = h("<nav></nav>").append(h("<a></a>").attr("href", b).text(e));
-m ? (m.push(e.html()), c.html(m.join("<span> | </span>"))) : (m = [ e.html() ], 
-h(a).addClass("has-nav").append(e));
+var e = v || b, c = k(a).find("nav"), e = k("<nav></nav>").append(k("<a></a>").attr("href", b).text(e));
+h ? (h.push(e.html()), c.html(h.join("<span> | </span>"))) : (h = [ e.html() ], 
+k(a).addClass("has-nav").append(e));
 return this;
 },
 stick: function() {
-q && q.die();
-q = null;
-l[v] = null;
+p && p.die();
+p = null;
+q[v] = null;
 return this;
 },
 slow: function(a) {
@@ -232,55 +232,55 @@ return this;
 };
 }
 function b(a, b, e) {
-var c = p.require("$21", "dom.js").el;
-a = h('<div class="notice notice-' + a + ' loco-notice inline"></div>').prependTo(h("#loco-notices"));
-var q = h(c("p"));
-e = h(c("span")).text(e);
-b = h(c("strong", "has-icon")).text(b + ": ");
-q.append(b).append(e).appendTo(a);
+var c = n.require("$21", "dom.js").el;
+a = k('<div class="notice notice-' + a + ' loco-notice inline"></div>').prependTo(k("#loco-notices"));
+var p = k(c("p"));
+e = k(c("span")).text(e);
+b = k(c("strong", "has-icon")).text(b + ": ");
+p.append(b).append(e).appendTo(a);
 return a;
 }
-function a(a, e, q, m) {
-a = b(q, e, a).css("opacity", "0").fadeTo(500, 1);
-h(d).triggerHandler("resize");
-return c(a, m);
+function a(a, e, p, h) {
+a = b(p, e, a).css("opacity", "0").fadeTo(500, 1);
+k(d).triggerHandler("resize");
+return c(a, h);
 }
 function e(b) {
 return a(b, s, "warning");
 }
-function m() {
-h("#loco-notices").find("div.notice").each(function(a, b) {
+function h() {
+k("#loco-notices").find("div.notice").each(function(a, b) {
 if (-1 === b.className.indexOf("jshide")) {
 var e = -1 === b.className.indexOf("notice-success") ? null : 5e3;
 c(b, e);
 }
 });
 }
-var l = [], g = d.console || {
+var q = [], l = d.console || {
 log: function() {}
-}, z = Date.now || function() {
+}, A = Date.now || function() {
 return new Date().getTime();
-}, A, s, q, B;
+}, z, s, p, B;
 f.error = function(b) {
-return a(b, A, "error");
+return a(b, z, "error");
 };
 f.warn = e;
 f.info = function(b) {
-return a(b, q, "info");
+return a(b, p, "info");
 };
 f.success = function(b) {
 return a(b, B, "success", 5e3);
 };
 f.warning = e;
 f.log = function() {
-g.log.apply(g, arguments);
+l.log.apply(l, arguments);
 };
 f.debug = function() {
-(g.debug || g.log).apply(g, arguments);
+(l.debug || l.log).apply(l, arguments);
 };
 f.clear = function() {
-for (var a = -1, b, e = l, c = e.length; ++a < c; ) (b = e[a]) && b.call && b();
-l = [];
+for (var a = -1, b, e = q, c = e.length; ++a < c; ) (b = e[a]) && b.call && b();
+q = [];
 return f;
 };
 f.create = b;
@@ -289,23 +289,23 @@ f.raise = function(a) {
 };
 f.convert = c;
 f.init = function(a) {
-A = a._("Error");
+z = a._("Error");
 s = a._("Warning");
-q = a._("Notice");
+p = a._("Notice");
 B = a._("OK");
-setTimeout(m, 1e3);
+setTimeout(h, 1e3);
 return f;
 };
 return f;
 }({}, y, w));
-p.register("$8", function(f, d, D) {
-function n(a) {
-var b = h("<pre>" + a + "</pre>").text();
+n.register("$8", function(f, d, D) {
+function m(a) {
+var b = k("<pre>" + a + "</pre>").text();
 b && (b = b.replace(/[\r\n]+/g, "\n").replace(/(^|\n)\s+/g, "$1").replace(/\s+$/, ""));
 b || (b = a) || (b = "Blank response from server");
 return b;
 }
-function k(a) {
+function g(a) {
 return (a = a.split(/[\r\n]/)[0]) ? (a = a.replace(/ +in +\S+ on line \d+/, ""), 
 a = a.replace(/^[()! ]+Fatal error:\s*/, "")) : t._("Server returned invalid data");
 }
@@ -325,48 +325,48 @@ value: e
 function e(a, b, e) {
 a.append(b, e);
 }
-function m(a, b, e, c) {
-function m(b, c, v) {
+function h(a, b, e, c) {
+function h(b, c, v) {
 if ("abort" !== c) {
-var q = g || {
+var p = l || {
 _: function(a) {
 return a;
 }
-}, r = b.status || 0, d = b.responseText || "", x = n(d), A = b.getResponseHeader("Content-Type") || "Unknown type", f = b.getResponseHeader("Content-Length") || d.length;
-"success" === c && v ? l.error(v) : (l.error(k(x) + ".\n" + q._("Check console output for debugging information")), 
-l.log("Ajax failure for " + a, {
+}, r = b.status || 0, d = b.responseText || "", x = m(d), z = b.getResponseHeader("Content-Type") || "Unknown type", f = b.getResponseHeader("Content-Length") || d.length;
+"success" === c && v ? q.error(v) : (q.error(g(x) + ".\n" + p._("Check console output for debugging information")), 
+q.log("Ajax failure for " + a, {
 status: r,
 error: c,
 message: v,
 output: d
-}), "parsererror" === c && (v = "Response not JSON"), l.log([ q._("Provide the following text when reporting a problem") + ":", "----", "Status " + r + ' "' + (v || q._("Unknown error")) + '" (' + A + " " + f + " bytes)", x, "====" ].join("\n")));
+}), "parsererror" === c && (v = "Response not JSON"), q.log([ p._("Provide the following text when reporting a problem") + ":", "----", "Status " + r + ' "' + (v || p._("Unknown error")) + '" (' + z + " " + f + " bytes)", x, "====" ].join("\n")));
 e && e.call && e(b, c, v);
-z = b;
+A = b;
 }
 }
-c.url = A;
+c.url = z;
 c.dataType = "json";
-var l = p.require("$7", "notices.js").clear();
-z = null;
-return h.ajax(c).fail(m).done(function(a, e, v) {
-var c = a && a.data, g = a && a.notices, z = g && g.length, k = -1;
-for (!c || a.error ? m(v, e, a && a.error && a.error.message) : b && b(c, e, v); ++k < z; ) l.raise(g[k]);
+var q = n.require("$7", "notices.js").clear();
+A = null;
+return k.ajax(c).fail(h).done(function(a, e, v) {
+var c = a && a.data, l = a && a.notices, g = l && l.length, A = -1;
+for (!c || a.error ? h(v, e, a && a.error && a.error.message) : b && b(c, e, v); ++A < g; ) q.raise(l[A]);
 });
 }
-var l = {}, g, z, A = d.ajaxurl || "/wp-admin/admin-ajax.php";
+var q = {}, l, A, z = d.ajaxurl || "/wp-admin/admin-ajax.php";
 f.init = function(a) {
-l = a.nonces || l;
+q = a.nonces || q;
 return f;
 };
 f.localise = function(a) {
-g = a;
+l = a;
 return f;
 };
 f.xhr = function() {
-return z;
+return A;
 };
-f.strip = n;
-f.parse = k;
+f.strip = m;
+f.parse = g;
 f.submit = function(a, b, e) {
 function c(a, b) {
 b.disabled ? b.setAttribute("data-was-disabled", "true") : b.disabled = !0;
@@ -374,7 +374,7 @@ b.disabled ? b.setAttribute("data-was-disabled", "true") : b.disabled = !0;
 function r(a, b) {
 b.getAttribute("data-was-disabled") || (b.disabled = !1);
 }
-function l(a) {
+function q(a) {
 a.find(".button-primary").removeClass("loading");
 a.find("button").each(r);
 a.find("input").each(r);
@@ -382,7 +382,7 @@ a.find("select").each(r);
 a.find("textarea").each(r);
 a.removeClass("disabled loading");
 }
-var g = h(a), z = g.serialize();
+var l = k(a), A = l.serialize();
 (function(a) {
 a.find(".button-primary").addClass("loading");
 a.find("button").each(c);
@@ -390,49 +390,49 @@ a.find("input").each(c);
 a.find("select").each(c);
 a.find("textarea").each(c);
 a.addClass("disabled loading");
-})(g);
-return m(a.route.value, function(a, e, c) {
-l(g);
+})(l);
+return h(a.route.value, function(a, e, c) {
+q(l);
 b && b(a, e, c);
 }, function(a, b, c) {
-l(g);
+q(l);
 e && e(a, b, c);
 }, {
 type: a.method,
-data: z
+data: A
 });
 };
-f.post = function(g, q, z, k) {
-var r = !0, G = q || {}, A = l[g] || c(g);
-d.FormData && G instanceof FormData ? (r = !1, q = e) : q = Array.isArray(G) ? a : b;
-q(G, "action", "loco_json");
-q(G, "route", g);
-q(G, "loco-nonce", A);
-return m(g, z, k, {
+f.post = function(l, p, A, g) {
+var r = !0, G = p || {}, z = q[l] || c(l);
+d.FormData && G instanceof FormData ? (r = !1, p = e) : p = Array.isArray(G) ? a : b;
+p(G, "action", "loco_json");
+p(G, "route", l);
+p(G, "loco-nonce", z);
+return h(l, A, g, {
 type: "post",
 data: G,
 processData: r,
 contentType: r ? "application/x-www-form-urlencoded; charset=UTF-8" : !1
 });
 };
-f.get = function(a, b, e, g) {
+f.get = function(a, b, e, l) {
 b = b || {};
-var r = l[a] || c(a);
+var r = q[a] || c(a);
 b.action = "loco_json";
 b.route = a;
 b["loco-nonce"] = r;
-return m(a, e, g, {
+return h(a, e, l, {
 type: "get",
 data: b
 });
 };
 f.setNonce = function(a, b) {
-l[a] = b;
+q[a] = b;
 return f;
 };
 return f;
 }({}, y, w));
-p.register("$22", {
+n.register("$22", {
 arab: 1,
 aran: 1,
 hebr: 1,
@@ -470,29 +470,29 @@ ps: 1,
 ur: 1,
 yi: 1
 });
-p.register("$9", function(f, d, h) {
-function n() {}
-var k, c = p.require("$22", "rtl.json");
+n.register("$9", function(f, d, k) {
+function m() {}
+var g, c = n.require("$22", "rtl.json");
 f.init = function() {
-return new n();
+return new m();
 };
 f.cast = function(b) {
-return b instanceof n ? b : "string" === typeof b ? f.parse(b) : f.clone(b);
+return b instanceof m ? b : "string" === typeof b ? f.parse(b) : f.clone(b);
 };
 f.clone = function(b) {
-var a, e = new n();
+var a, e = new m();
 for (a in b) e[a] = b[a];
 return e;
 };
 f.parse = function(b) {
-if (!(k || (k = /^([a-z]{2,3})(?:[-_]([a-z]{2}))?(?:[-_]([a-z0-9]{3,8}))?$/i)).exec(b)) return null;
-var a = new n();
+if (!(g || (g = /^([a-z]{2,3})(?:[-_]([a-z]{2}))?(?:[-_]([a-z0-9]{3,8}))?$/i)).exec(b)) return null;
+var a = new m();
 a.lang = RegExp.$1.toLowerCase();
 if (b = RegExp.$2) a.region = b.toUpperCase();
 if (b = RegExp.$3) a.variant = b.toLowerCase();
 return a;
 };
-d = n.prototype;
+d = m.prototype;
 d.isValid = function() {
 return !!this.lang;
 };
@@ -508,9 +508,9 @@ if (a = this.variant) e += b + a;
 return e;
 };
 d.getIcon = function() {
-for (var b = 3, a, e, c = [ "variant", "region", "lang" ], l = []; 0 !== b--; ) if (a = c[b], 
-e = this[a]) l.push(a), l.push(a + "-" + e.toLowerCase());
-return l.join(" ");
+for (var b = 3, a, e, c = [ "variant", "region", "lang" ], q = []; 0 !== b--; ) if (a = c[b], 
+e = this[a]) q.push(a), q.push(a + "-" + e.toLowerCase());
+return q.join(" ");
 };
 d.isRTL = function() {
 return !!c[String(this.lang).toLowerCase()];
@@ -518,7 +518,7 @@ return !!c[String(this.lang).toLowerCase()];
 d = null;
 return f;
 }({}, y, w));
-p.register("$23", {
+n.register("$23", {
 "á": "a",
 "à": "a",
 "ă": "a",
@@ -930,37 +930,37 @@ p.register("$23", {
 "ӣ": "и",
 "ӯ": "у"
 });
-p.register("$10", function(f, d, h) {
+n.register("$10", function(f, d, k) {
 f.init = function() {
 function d(a) {
-return g[a] || a;
+return l[a] || a;
 }
-function k(a, b, e, c) {
+function g(a, b, e, c) {
 b = a.split(b);
-for (var m = b.length; 0 !== m--; ) (a = b[m]) && null == c[a] && (e.push(a), c[a] = !0);
+for (var h = b.length; 0 !== h--; ) (a = b[h]) && null == c[a] && (e.push(a), c[a] = !0);
 return e;
 }
 function c(a) {
-return k(String(a || "").toLowerCase().replace(m, d), l, [], {});
+return g(String(a || "").toLowerCase().replace(h, d), q, [], {});
 }
 function b(a, b) {
-for (var c = [], q = {}, g, x = b.length, r = l; 0 !== x--; ) (g = b[x]) && k(String(g || "").toLowerCase().replace(m, d), r, c, q);
+for (var c = [], p = {}, l, x = b.length, r = q; 0 !== x--; ) (l = b[x]) && g(String(l || "").toLowerCase().replace(h, d), r, c, p);
 e[a] = c;
 }
 function a(a, b) {
-var c = [], m = -1, g = e, l = g.length, r, k, d, u, v, F, f = a.length, h = b ? !0 : !1;
-a: for (;++m < l; ) if (d = g[m], null != d && (u = d.length)) {
+var c = [], h = -1, q = e, l = q.length, r, g, d, u, v, F, f = a.length, k = b ? !0 : !1;
+a: for (;++h < l; ) if (d = q[h], null != d && (u = d.length)) {
 v = 0;
 b: for (;v < f; v++) {
 F = a[v];
-for (r = 0; r < u; r++) if (k = d[r], 0 === k.indexOf(F)) continue b;
+for (r = 0; r < u; r++) if (g = d[r], 0 === g.indexOf(F)) continue b;
 continue a;
 }
-c.push(h ? b[m] : m);
+c.push(k ? b[h] : h);
 }
 return c;
 }
-var e = [], m = /[^a-z0-9]/g, l = /[\-_\s.?!;:,*^+=~`"(){}<>\[\]\/\\\u00a0\u1680\u180e\u2000-\u206f\u2e00-\u2e7f\u3000-\u303f]+/, g = p.require("$23", "flatten.json");
+var e = [], h = /[^a-z0-9]/g, q = /[\-_\s.?!;:,*^+=~`"(){}<>\[\]\/\\\u00a0\u1680\u180e\u2000-\u206f\u2e00-\u2e7f\u3000-\u303f]+/, l = n.require("$23", "flatten.json");
 return {
 split: c,
 pull: function(b, e) {
@@ -991,72 +991,72 @@ e[a] = null;
 };
 return f;
 }({}, y, w));
-p.register("$11", function(f, d, p) {
-f.listen = function(f, k) {
+n.register("$11", function(f, d, n) {
+f.listen = function(f, g) {
 function c() {
-q[m ? "show" : "hide"]();
+p[h ? "show" : "hide"]();
 }
 function b(a) {
-s && z.setAttribute("size", 2 + a.length);
-m = a;
+s && A.setAttribute("size", 2 + a.length);
+h = a;
 c();
 return a;
 }
 function a() {
-l = null;
-k(m);
+q = null;
+g(h);
 }
 function e(e) {
-var c = z.value;
-A && c === A && (c = "");
-c !== m ? (l && clearTimeout(l), b(c), e ? l = setTimeout(a, e) : a()) : l && null == e && (clearTimeout(l), 
+var c = A.value;
+z && c === z && (c = "");
+c !== h ? (q && clearTimeout(q), b(c), e ? q = setTimeout(a, e) : a()) : q && null == e && (clearTimeout(q), 
 a());
 }
-var m, l, g = 150, z = f instanceof jQuery ? f[0] : f, A = d.attachEvent && z.getAttribute("placeholder"), s = 1 === Number(z.size), q = h('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').on("click", function() {
-z.value = "";
+var h, q, l = 150, A = f instanceof jQuery ? f[0] : f, z = d.attachEvent && A.getAttribute("placeholder"), s = 1 === Number(A.size), p = k('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').on("click", function() {
+A.value = "";
 e();
 return !1;
 });
-b(z.value);
-h(z).on("input", function() {
-e(g);
+b(A.value);
+k(A).on("input", function() {
+e(l);
 return !0;
 }).on("blur focus change", function() {
 e(null);
 return !0;
-}).after(q);
+}).after(p);
 c();
 return {
 delay: function(a) {
-g = a;
+l = a;
 return this;
 },
 ping: function(c) {
-c ? (l && clearTimeout(l), c = z.value, A && c === A && (c = ""), b(c), a(), c = void 0) : c = e();
+c ? (q && clearTimeout(q), c = A.value, z && c === z && (c = ""), b(c), a(), c = void 0) : c = e();
 return c;
 },
 val: function(a) {
-if (null == a) return m;
-l && clearTimeout(l);
-z.value = b(a);
+if (null == a) return h;
+q && clearTimeout(q);
+A.value = b(a);
 c();
 },
 el: function() {
-return z;
+return A;
 },
 blur: function(a) {
-return h(z).on("blur", a);
+return k(A).on("blur", a);
 },
 destroy: function() {
-l && clearTimeout(l);
+q && clearTimeout(q);
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$12", function(f, d, p) {
-function n(b, a) {
-this.$element = h(b);
+n.register("$12", function(f, d, n) {
+function m(b, a) {
+this.$element = k(b);
 this.options = a;
 this.enabled = !0;
 this.fixTitle();
@@ -1065,31 +1065,31 @@ f.init = function(b, a) {
 var e = {
 fade: !0,
 offset: 5,
-delayIn: k,
+delayIn: g,
 delayOut: c,
 anchor: b.attr("data-anchor"),
 gravity: b.attr("data-gravity") || "s"
 };
-a && (e = h.extend({}, e, a));
+a && (e = k.extend({}, e, a));
 b.tipsy(e);
 };
 f.delays = function(b, a) {
-k = b || 150;
+g = b || 150;
 c = a || 100;
 };
 f.kill = function() {
-h("div.tipsy").remove();
+k("div.tipsy").remove();
 };
 f.text = function(b, a) {
 a.data("tipsy").setTitle(b);
 };
-var k, c;
+var g, c;
 f.delays();
-h(p.body).on("overlayOpened overlayClosing", function(b) {
+k(n.body).on("overlayOpened overlayClosing", function(b) {
 f.kill();
 return !0;
 });
-n.prototype = {
+m.prototype = {
 show: function() {
 var b = this.getTitle();
 if (b && this.enabled) {
@@ -1099,42 +1099,42 @@ a[0].className = "tipsy";
 a.remove().css({
 top: 0,
 left: 0
-}).prependTo(p.body);
-var b = (b = this.options.anchor) ? this.$element.find(b) : this.$element, b = h.extend({}, b.offset(), {
+}).prependTo(n.body);
+var b = (b = this.options.anchor) ? this.$element.find(b) : this.$element, b = k.extend({}, b.offset(), {
 width: b[0].offsetWidth,
 height: b[0].offsetHeight
-}), e = a[0].offsetWidth, c = a[0].offsetHeight, l = "function" == typeof this.options.gravity ? this.options.gravity.call(this.$element[0]) : this.options.gravity, g;
-switch (l.charAt(0)) {
+}), e = a[0].offsetWidth, c = a[0].offsetHeight, q = "function" == typeof this.options.gravity ? this.options.gravity.call(this.$element[0]) : this.options.gravity, l;
+switch (q.charAt(0)) {
 case "n":
-g = {
+l = {
 top: b.top + b.height + this.options.offset,
 left: b.left + b.width / 2 - e / 2
 };
 break;
 
 case "s":
-g = {
+l = {
 top: b.top - c - this.options.offset,
 left: b.left + b.width / 2 - e / 2
 };
 break;
 
 case "e":
-g = {
+l = {
 top: b.top + b.height / 2 - c / 2,
 left: b.left - e - this.options.offset
 };
 break;
 
 case "w":
-g = {
+l = {
 top: b.top + b.height / 2 - c / 2,
 left: b.left + b.width + this.options.offset
 };
 }
-2 == l.length && ("w" == l.charAt(1) ? g.left = b.left + b.width / 2 - 15 : g.left = b.left + b.width / 2 - e + 15);
-a.css(g).addClass("tipsy-" + l);
-a.find(".tipsy-arrow")[0].className = "tipsy-arrow tipsy-arrow-" + l.charAt(0);
+2 == q.length && ("w" == q.charAt(1) ? l.left = b.left + b.width / 2 - 15 : l.left = b.left + b.width / 2 - e + 15);
+a.css(l).addClass("tipsy-" + q);
+a.find(".tipsy-arrow")[0].className = "tipsy-arrow tipsy-arrow-" + q.charAt(0);
 this.options.className && a.addClass("function" == typeof this.options.className ? this.options.className.call(this.$element[0]) : this.options.className);
 a.addClass("in");
 }
@@ -1160,7 +1160,7 @@ a.attr("original-title", b);
 if (this.$tip) this.$tip.find(".tipsy-inner")[this.options.html ? "html" : "text"](b);
 },
 tip: function() {
-this.$tip || (this.$tip = h('<div class="tipsy"></div>').html('<div class="tipsy-arrow"></div><div class="tipsy-inner"></div>'), 
+this.$tip || (this.$tip = k('<div class="tipsy"></div>').html('<div class="tipsy-arrow"></div><div class="tipsy-inner"></div>'), 
 this.$tip.data("tipsy-pointee", this.$element[0]));
 return this.$tip;
 },
@@ -1178,10 +1178,10 @@ toggleEnabled: function() {
 this.enabled = !this.enabled;
 }
 };
-h.fn.tipsy = function(b) {
+k.fn.tipsy = function(b) {
 function a(a) {
-var e = h.data(a, "tipsy");
-e || (e = new n(a, h.fn.tipsy.elementOptions(a, b)), h.data(a, "tipsy", e));
+var e = k.data(a, "tipsy");
+e || (e = new m(a, k.fn.tipsy.elementOptions(a, b)), k.data(a, "tipsy", e));
 return e;
 }
 function e() {
@@ -1192,23 +1192,23 @@ e.hoverState = "in";
 }, c));
 }
 function c() {
-var e = a(this), m = b.delayOut;
+var e = a(this), h = b.delayOut;
 e.hoverState = "out";
-0 == m ? e.hide() : (e.tip().removeClass("in"), setTimeout(function() {
+0 == h ? e.hide() : (e.tip().removeClass("in"), setTimeout(function() {
 "out" == e.hoverState && e.hide();
-}, m));
+}, h));
 }
-b = h.extend({}, h.fn.tipsy.defaults, b);
+b = k.extend({}, k.fn.tipsy.defaults, b);
 b.live || this.each(function() {
 a(this);
 });
 if ("manual" != b.trigger) {
-var l = b.live ? "live" : "bind", g = "hover" == b.trigger ? "mouseleave" : "blur";
-this[l]("hover" == b.trigger ? "mouseenter" : "focus", e)[l](g, c);
+var q = b.live ? "live" : "bind", l = "hover" == b.trigger ? "mouseleave" : "blur";
+this[q]("hover" == b.trigger ? "mouseenter" : "focus", e)[q](l, c);
 }
 return this;
 };
-h.fn.tipsy.defaults = {
+k.fn.tipsy.defaults = {
 className: null,
 delayIn: 0,
 delayOut: 0,
@@ -1223,77 +1223,77 @@ title: "title",
 trigger: "hover",
 anchor: null
 };
-h.fn.tipsy.elementOptions = function(b, a) {
-return h.metadata ? h.extend({}, a, h(b).metadata()) : a;
+k.fn.tipsy.elementOptions = function(b, a) {
+return k.metadata ? k.extend({}, a, k(b).metadata()) : a;
 };
-h.fn.tipsy.autoNS = function() {
-return h(this).offset().top > h(p).scrollTop() + h(d).height() / 2 ? "s" : "n";
+k.fn.tipsy.autoNS = function() {
+return k(this).offset().top > k(n).scrollTop() + k(d).height() / 2 ? "s" : "n";
 };
-h.fn.tipsy.autoWE = function() {
-return h(this).offset().left > h(p).scrollLeft() + h(d).width() / 2 ? "e" : "w";
+k.fn.tipsy.autoWE = function() {
+return k(this).offset().left > k(n).scrollLeft() + k(d).width() / 2 ? "e" : "w";
 };
-h.fn.tipsy.autoBounds = function(b, a) {
+k.fn.tipsy.autoBounds = function(b, a) {
 return function() {
-var e = a[0], c = 1 < a.length ? a[1] : !1, l = h(p).scrollTop() + b, g = h(p).scrollLeft() + b, k = h(this);
-k.offset().top < l && (e = "n");
-k.offset().left < g && (c = "w");
-h(d).width() + h(p).scrollLeft() - k.offset().left < b && (c = "e");
-h(d).height() + h(p).scrollTop() - k.offset().top < b && (e = "s");
+var e = a[0], c = 1 < a.length ? a[1] : !1, q = k(n).scrollTop() + b, l = k(n).scrollLeft() + b, g = k(this);
+g.offset().top < q && (e = "n");
+g.offset().left < l && (c = "w");
+k(d).width() + k(n).scrollLeft() - g.offset().left < b && (c = "e");
+k(d).height() + k(n).scrollTop() - g.offset().top < b && (e = "s");
 return e + (c ? c : "");
 };
 };
 return f;
 }({}, y, w));
-p.register("$36", function(f, d, h) {
+n.register("$36", function(f, d, k) {
 "".localeCompare || (String.prototype.localeCompare = function() {
 return 0;
 });
 "".trim || (String.prototype.trim = function() {
-return p.require("$6", "string.js").trim(this, " \n\r\t");
+return n.require("$6", "string.js").trim(this, " \n\r\t");
 });
 f.html = function() {
 function d() {
 b = /[<>&]/g;
 a = /(\r\n|\n|\r)/g;
 e = /(?:https?):\/\/(\S+)/gi;
-m = location.hostname;
+h = location.hostname;
 d = null;
 }
-function k(a) {
+function g(a) {
 return "&#" + a.charCodeAt(0) + ";";
 }
 function c(a, b) {
-return '<a href="' + a + '" target="' + (b.indexOf(m) ? "_blank" : "_top") + '">' + b + "</a>";
+return '<a href="' + a + '" target="' + (b.indexOf(h) ? "_blank" : "_top") + '">' + b + "</a>";
 }
-var b, a, e, m;
-return function(m, g) {
+var b, a, e, h;
+return function(h, l) {
 d && d();
-var z = m.replace(b, k);
-g && (z = z.replace(e, c).replace(a, "<br />"));
-return z;
+var A = h.replace(b, g);
+l && (A = A.replace(e, c).replace(a, "<br />"));
+return A;
 };
 }();
 return f;
 }({}, y, w));
-p.register("$37", function(f, d, h) {
-function n() {}
-var k, c, b = p.require("$22", "rtl.json");
+n.register("$37", function(f, d, k) {
+function m() {}
+var g, c, b = n.require("$22", "rtl.json");
 f.init = function() {
-return new n();
+return new m();
 };
 f.cast = function(a) {
-return a instanceof n ? a : "string" === typeof a ? f.parse(a) : f.clone(a);
+return a instanceof m ? a : "string" === typeof a ? f.parse(a) : f.clone(a);
 };
 f.clone = function(a) {
-var b, c = new n();
+var b, c = new m();
 for (b in a) c[b] = a[b];
 return c;
 };
 f.parse = function(a) {
-k || (c = /[-_+]/, k = /^([a-z]{2,3})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?(?:-([0-9][a-z0-9]{3,8}|[a-z0-9]{5,8}))?(?:-([a-z]-[-a-z]+))?$/i);
+g || (c = /[-_+]/, g = /^([a-z]{2,3})(?:-([a-z]{4}))?(?:-([a-z]{2}|[0-9]{3}))?(?:-([0-9][a-z0-9]{3,8}|[a-z0-9]{5,8}))?(?:-([a-z]-[-a-z]+))?$/i);
 a = String(a).split(c).join("-");
-if (!k.exec(a)) return null;
-var b = new n();
+if (!g.exec(a)) return null;
+var b = new m();
 b.lang = RegExp.$1.toLowerCase();
 if (a = RegExp.$2) b.script = a.charAt(0).toUpperCase() + a.substr(1).toLowerCase();
 if (a = RegExp.$3) b.region = a.toUpperCase();
@@ -1301,7 +1301,7 @@ if (a = RegExp.$4) b.variant = a.toLowerCase();
 if (a = RegExp.$5) b.extension = a;
 return b;
 };
-d = n.prototype;
+d = m.prototype;
 d.isValid = function() {
 return !!this.lang;
 };
@@ -1319,9 +1319,9 @@ if (b = this.extension) c += a + b;
 return c;
 };
 d.getIcon = function() {
-for (var a = 4, b, c, l = [ "variant", "region", "script", "lang" ], g = []; 0 !== a--; ) if (b = l[a], 
-c = this[b]) c.join && (c = c.join("-")), 1 === a && 3 === c.length ? g.push("region-m49") : g = g.concat([ b, b + "-" + c.toLowerCase() ]);
-return g.join(" ");
+for (var a = 4, b, c, q = [ "variant", "region", "script", "lang" ], l = []; 0 !== a--; ) if (b = q[a], 
+c = this[b]) c.join && (c = c.join("-")), 1 === a && 3 === c.length ? l.push("region-m49") : l = l.concat([ b, b + "-" + c.toLowerCase() ]);
+return l.join(" ");
 };
 d.isRTL = function() {
 return !!b[String(this.script || this.lang).toLowerCase()];
@@ -1329,12 +1329,12 @@ return !!b[String(this.script || this.lang).toLowerCase()];
 d = null;
 return f;
 }({}, y, w));
-p.register("$38", function(f, d, h) {
-function n(a) {
+n.register("$38", function(f, d, k) {
+function m(a) {
 d.console && console.error && console.error(a);
 }
-function k() {
-n("Method not implemented");
+function g() {
+m("Method not implemented");
 }
 function c() {}
 function b(a) {}
@@ -1342,16 +1342,16 @@ c.prototype.toString = function() {
 return "[Undefined]";
 };
 b.prototype._validate = function(a) {
-var b, m, l = !0;
-for (b in this) m = this[b], m === k ? (n(a + "." + b + "() must be implemented"), 
-l = !1) : m instanceof c && (n(a + "." + b + " must be defined"), l = !1);
-return l;
+var b, h, q = !0;
+for (b in this) h = this[b], h === g ? (m(a + "." + b + "() must be implemented"), 
+q = !1) : h instanceof c && (m(a + "." + b + " must be defined"), q = !1);
+return q;
 };
 f.init = function(a, e) {
-var m, l = new b();
-if (a) for (m = a.length; 0 !== m--; ) l[a[m]] = k;
-if (e) for (m = e.length; 0 !== m--; ) l[e[m]] = new c();
-return l;
+var h, q = new b();
+if (a) for (h = a.length; 0 !== h--; ) q[a[h]] = g;
+if (e) for (h = e.length; 0 !== h--; ) q[e[h]] = new c();
+return q;
 };
 f.validate = function(a) {
 var b = /function (\w+)\(/.exec(a.toString()) ? RegExp.$1 : "";
@@ -1359,24 +1359,24 @@ a.prototype._validate(b || "Object");
 };
 return f;
 }({}, y, w));
-p.register("$50", function(f, d, h) {
-var n = d.requestAnimationFrame, k = d.cancelAnimationFrame, c = 0;
-if (!n || !k) for (var b in {
+n.register("$50", function(f, d, k) {
+var m = d.requestAnimationFrame, g = d.cancelAnimationFrame, c = 0;
+if (!m || !g) for (var b in {
 ms: 1,
 moz: 1,
 webkit: 1,
 o: 1
-}) if (n = d[b + "RequestAnimationFrame"]) if (k = d[b + "CancelAnimationFrame"] || d[b + "CancelRequestAnimationFrame"]) break;
-n && k || (n = function(b) {
-var m = a();
-timeToCall = Math.max(0, 16 - (m - c));
-nextTime = m + timeToCall;
+}) if (m = d[b + "RequestAnimationFrame"]) if (g = d[b + "CancelAnimationFrame"] || d[b + "CancelRequestAnimationFrame"]) break;
+m && g || (m = function(b) {
+var h = a();
+timeToCall = Math.max(0, 16 - (h - c));
+nextTime = h + timeToCall;
 timerId = d.setTimeout(function() {
 b(nextTime);
 }, timeToCall);
 c = nextTime;
 return timerId;
-}, k = function(a) {
+}, g = function(a) {
 clearTimeout(a);
 });
 var a = Date.now || function() {
@@ -1384,43 +1384,43 @@ return new Date().getTime();
 };
 f.loop = function(a, b) {
 function c() {
-d = n(c, b);
-a(g++);
+d = m(c, b);
+a(l++);
 }
-var g = 0, d;
+var l = 0, d;
 c();
 return {
 stop: function() {
-d && k(d);
+d && g(d);
 d = null;
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$47", function(f, d, h) {
-function n(a, c, e, q) {
+n.register("$47", function(f, d, k) {
+function m(a, c, e, p) {
 if (b) {
-var g = e;
+var l = e;
 e = function(a) {
-if ((a.MSPOINTER_TYPE_TOUCH || "touch") === a.pointerType) return g(a);
+if ((a.MSPOINTER_TYPE_TOUCH || "touch") === a.pointerType) return l(a);
 };
 }
-a.addEventListener(c, e, q);
+a.addEventListener(c, e, p);
 return {
 unbind: function() {
-a.removeEventListener(c, e, q);
+a.removeEventListener(c, e, p);
 }
 };
 }
-function k(a) {
+function g(a) {
 a.preventDefault();
 a.stopPropagation();
 return !1;
 }
-var c, b = !!d.navigator.msPointerEnabled, a = b ? "MSPointerDown" : "touchstart", e = b ? "MSPointerMove" : "touchmove", m = b ? "MSPointerUp" : "touchend";
+var c, b = !!d.navigator.msPointerEnabled, a = b ? "MSPointerDown" : "touchstart", e = b ? "MSPointerMove" : "touchmove", h = b ? "MSPointerUp" : "touchend";
 f.ok = function(a) {
-null == c && (c = "function" === typeof h.body.addEventListener);
+null == c && (c = "function" === typeof k.body.addEventListener);
 c && a && a(f);
 return c;
 };
@@ -1428,51 +1428,51 @@ f.ms = function() {
 return b;
 };
 f.dragger = function(b, c) {
-function g(a) {
+function l(a) {
 b.addEventListener(a, d[a], !1);
 }
-function q(a) {
+function p(a) {
 b.removeEventListener(a, d[a], !1);
 }
 var d = {};
 d[a] = function(b) {
-l(b, function(e, g) {
-g.type = a;
-c(b, g, f);
+q(b, function(e, p) {
+p.type = a;
+c(b, p, f);
 });
-g(e);
-g(m);
+l(e);
+l(h);
 return !0;
 };
-d[m] = function(a) {
-q(e);
-q(m);
-l(a, function(b, e) {
-e.type = m;
+d[h] = function(a) {
+p(e);
+p(h);
+q(a, function(b, e) {
+e.type = h;
 c(a, e, f);
 });
 return !0;
 };
 d[e] = function(a) {
-l(a, function(b, g) {
-g.type = e;
-c(a, g, f);
+q(a, function(b, p) {
+p.type = e;
+c(a, p, f);
 });
-return k(a);
+return g(a);
 };
-g(a);
+l(a);
 var f = {
 kill: function() {
-q(a);
-q(e);
-q(m);
+p(a);
+p(e);
+p(h);
 b = f = c = null;
 }
 };
 return f;
 };
 f.swiper = function(c, d, f) {
-function q(a) {
+function p(a) {
 c.addEventListener(a, u[a], !1);
 }
 function B(a) {
@@ -1482,22 +1482,22 @@ function x() {
 r && r.stop();
 r = null;
 }
-var r, G, E, u = {}, v = [], F = [], h = [];
+var r, G, E, u = {}, v = [], F = [], k = [];
 u[a] = function(a) {
 G = !1;
 x();
-var b = g();
-l(a, function(a, c) {
+var b = l();
+q(a, function(a, c) {
 v[a] = b;
 F[a] = c.clientX;
-h[a] = c.clientY;
+k[a] = c.clientY;
 });
 E = c.scrollLeft;
 return !0;
 };
-u[m] = function(a) {
-l(a, function(a, b) {
-var c = g() - v[a], e = F[a] - b.clientX, c = Math.abs(e) / c;
+u[h] = function(a) {
+q(a, function(a, b) {
+var c = l() - v[a], e = F[a] - b.clientX, c = Math.abs(e) / c;
 d(c, e ? 0 > e ? -1 : 1 : 0);
 });
 E = null;
@@ -1505,20 +1505,20 @@ return !0;
 };
 u[e] = function(a) {
 var b, e;
-null == E || l(a, function(a, c) {
+null == E || q(a, function(a, c) {
 b = F[a] - c.clientX;
-e = h[a] - c.clientY;
+e = k[a] - c.clientY;
 });
 if (e && Math.abs(e) > Math.abs(b)) return G = !0;
 b && (G = !0, c.scrollLeft = Math.max(0, E + b));
-return k(a);
+return g(a);
 };
-if (!b || f) q(a), q(e), q(m), b && (c.className += " mstouch");
+if (!b || f) p(a), p(e), p(h), b && (c.className += " mstouch");
 return {
 kill: function() {
 B(a);
 B(e);
-B(m);
+B(h);
 x();
 },
 swiped: function() {
@@ -1533,32 +1533,32 @@ c.style["-ms-scroll-snap-type"] = "mandatory", c.style["-ms-scroll-chaining"] = 
 },
 scroll: function(a, b, e) {
 x();
-var v = c.scrollLeft, g = a > v ? 1 : -1, q = Math[1 === g ? "min" : "max"], l = Math.round(16 * b * g);
-return r = p.require("$50", "fps.js").loop(function(b) {
-b && (v = Math.max(0, q(a, v + l)), c.scrollLeft = v, a === v && (x(), e && e(v)));
+var v = c.scrollLeft, p = a > v ? 1 : -1, l = Math[1 === p ? "min" : "max"], h = Math.round(16 * b * p);
+return r = n.require("$50", "fps.js").loop(function(b) {
+b && (v = Math.max(0, l(a, v + h)), c.scrollLeft = v, a === v && (x(), e && e(v)));
 }, c);
 }
 };
 };
 f.start = function(b, c) {
-return n(b, a, c, !1);
+return m(b, a, c, !1);
 };
 f.move = function(a, b) {
-return n(a, e, b, !1);
+return m(a, e, b, !1);
 };
 f.end = function(a, b) {
-return n(a, m, b, !1);
+return m(a, h, b, !1);
 };
-var l = f.each = function(a, c) {
-if (b) (a.MSPOINTER_TYPE_TOUCH || "touch") === a.pointerType && c(0, a); else for (var e = -1, g = (a.originalEvent || a).changedTouches || []; ++e < g.length; ) c(e, g[e]);
-}, g = Date.now || function() {
+var q = f.each = function(a, c) {
+if (b) (a.MSPOINTER_TYPE_TOUCH || "touch") === a.pointerType && c(0, a); else for (var e = -1, p = (a.originalEvent || a).changedTouches || []; ++e < p.length; ) c(e, p[e]);
+}, l = Date.now || function() {
 return new Date().getTime();
 };
 return f;
 }({}, y, w));
-p.register("$51", function(f, d, p) {
+n.register("$51", function(f, d, n) {
 f.init = function(d) {
-function k() {
+function g() {
 e.style.top = String(-d.scrollTop) + "px";
 return !0;
 }
@@ -1571,74 +1571,74 @@ return !0;
 function b(a) {
 return '<span class="x' + a.charCodeAt(0).toString(16) + '">' + a + "</span>";
 }
-var a = d.parentNode, e = a.insertBefore(p.createElement("div"), d);
-h(d).on("input", c).on("scroll", k);
-h(a).addClass("has-mirror");
+var a = d.parentNode, e = a.insertBefore(n.createElement("div"), d);
+k(d).on("input", c).on("scroll", g);
+k(a).addClass("has-mirror");
 e.className = "ta-mirror";
-var m = d.offsetWidth - d.clientWidth;
-2 < m && (e.style.marginRight = String(m - 2) + "px");
+var h = d.offsetWidth - d.clientWidth;
+2 < h && (e.style.marginRight = String(h - 2) + "px");
 c();
-k();
+g();
 return {
 kill: function() {
-h(d).off("input", c).off("scroll", k);
+k(d).off("input", c).off("scroll", g);
 a.removeChild(e);
 e = null;
-h(a).removeClass("has-mirror");
+k(a).removeClass("has-mirror");
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$29", function(f, d, h) {
-function n(b, a) {
-for (var c = 0, m = -1, l = a && d[a], g = k[b] || [], f = g.length; ++m < f; ) callback = g[m], 
-"function" === typeof callback && (callback(l), c++);
+n.register("$29", function(f, d, k) {
+function m(b, a) {
+for (var c = 0, h = -1, q = a && d[a], l = g[b] || [], f = l.length; ++h < f; ) callback = l[h], 
+"function" === typeof callback && (callback(q), c++);
 return c;
 }
-var k = {}, c;
+var g = {}, c;
 f.load = function(b, a, c) {
-function m() {
+function h() {
 f && (clearTimeout(f), f = null);
-A && (A.onreadystatechange = null, A = A = A.onload = null);
-b && (delete k[b], b = null);
+z && (z.onreadystatechange = null, z = z = z.onload = null);
+b && (delete g[b], b = null);
 }
-function l(a, g) {
-var d = A && A.readyState;
-if (g || !d || "loaded" === d || "complete" === d) g || n(b, c), m();
+function q(a, p) {
+var l = z && z.readyState;
+if (p || !l || "loaded" === l || "complete" === l) p || m(b, c), h();
 }
-function g() {
-if (0 === n(b)) throw Error('Failed to load "' + (c || b) + '"');
-m();
+function l() {
+if (0 === m(b)) throw Error('Failed to load "' + (c || b) + '"');
+h();
 }
-if (c && d[c]) "function" === typeof a && a(d[c]); else if (null != k[b]) k[b].push(a); else {
-k[b] = [ a ];
-var f = setTimeout(g, 4e3), A = h.createElement("script");
-A.setAttribute("src", b);
-A.setAttribute("async", "true");
-A.onreadystatechange = l;
-A.onload = l;
-A.onerror = g;
-A.onabort = m;
-h.getElementsByTagName("head")[0].appendChild(A);
+if (c && d[c]) "function" === typeof a && a(d[c]); else if (null != g[b]) g[b].push(a); else {
+g[b] = [ a ];
+var f = setTimeout(l, 4e3), z = k.createElement("script");
+z.setAttribute("src", b);
+z.setAttribute("async", "true");
+z.onreadystatechange = q;
+z.onload = q;
+z.onerror = l;
+z.onabort = h;
+k.getElementsByTagName("head")[0].appendChild(z);
 }
 };
 f.stat = function(b) {
 var a;
 if (!(a = c)) {
-for (var e, d, l = h.getElementsByTagName("script"), g = -1, k = l.length; ++g < k; ) if (a = l[g].getAttribute("src")) if (e = a.indexOf("/lib/vendor"), 
+for (var e, h, d = k.getElementsByTagName("script"), l = -1, g = d.length; ++l < g; ) if (a = d[l].getAttribute("src")) if (e = a.indexOf("/lib/vendor"), 
 -1 !== e) {
-d = a.substr(0, e);
+h = a.substr(0, e);
 break;
 }
-a = c = d || "/static";
+a = c = h || "/static";
 }
 return a + b;
 };
 return f;
 }({}, y, w));
-p.register("$16", function(f, d, D) {
-function n(a, b) {
+n.register("$16", function(f, d, D) {
+function m(a, b) {
 a.setReadOnly(!1);
 a.on("change", function(a, c) {
 return b.val(c.getValue());
@@ -1650,24 +1650,24 @@ a.on("blur", function() {
 return b.blur();
 });
 }
-function k(a) {
+function g(a) {
 a.off("change");
 a.off("focus");
 a.off("blur");
 }
 function c(a) {
-k(a);
+g(a);
 a.setReadOnly(!0);
 a.setHighlightGutterLine(!1);
 a.setHighlightActiveLine(!1);
 }
 function b(b, c) {
 function e() {
-this.HighlightRules = d;
+this.HighlightRules = h;
 }
-var d = a(c), q = b.require, m = q("ace/lib/oop");
-m.inherits(d, q("ace/mode/text_highlight_rules").TextHighlightRules);
-m.inherits(e, q("ace/mode/text").Mode);
+var h = a(c), p = b.require, d = p("ace/lib/oop");
+d.inherits(h, p("ace/mode/text_highlight_rules").TextHighlightRules);
+d.inherits(e, p("ace/mode/text").Mode);
 return new e();
 }
 function a(a) {
@@ -1757,38 +1757,38 @@ return /%(?:[1-9]\d*\$)?\+?(?:0|'[^$])?-?\d*(?:\.\d+)?[b-gijostTuvxX%]/;
 case "auto":
 return /%(?:\d+\$|\([_A-Za-z][_A-Za-z0-9]*\))?(?:[-+0]?\d*(\.\d+)?[duxoefgaDUXOEFGA]|[@scSC%])/;
 
-case l:
-return m || "%%";
+case q:
+return h || "%%";
 }
 }
-var m, l = "auto";
-f.init = function(a, e, m) {
-var f, q = !1, B = m || l, x = a.parentNode, r = x.appendChild(D.createElement("div"));
-h(x).addClass("has-proxy has-ace");
-p.require("$29", "remote.js").load("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js", function(d) {
+var h, q = "auto";
+f.init = function(a, e, h) {
+var f, p = !1, B = h || q, x = a.parentNode, r = x.appendChild(D.createElement("div"));
+k(x).addClass("has-proxy has-ace");
+n.require("$29", "remote.js").load("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js", function(h) {
 if (r) {
-if (!d) throw Error("Failed to load code editor");
-f = d.edit(r);
-var m = f.session, l = f.renderer;
+if (!h) throw Error("Failed to load code editor");
+f = h.edit(r);
+var d = f.session, q = f.renderer;
 f.$blockScrolling = Infinity;
-f.setShowInvisibles(q);
+f.setShowInvisibles(p);
 f.setWrapBehavioursEnabled(!1);
 f.setBehavioursEnabled(!1);
 f.setHighlightActiveLine(!1);
-m.setUseSoftTabs(!1);
-l.setShowGutter(!0);
-l.setPadding(10);
-l.setScrollMargin(8);
-m.setMode(b(d, B));
+d.setUseSoftTabs(!1);
+q.setShowGutter(!0);
+q.setPadding(10);
+q.setScrollMargin(8);
+d.setMode(b(h, B));
 f.setValue(a.value, -1);
-m.setUseWrapMode(!0);
-e ? n(f, e) : c(f);
+d.setUseWrapMode(!0);
+e ? m(f, e) : c(f);
 }
 }, "ace");
 return {
 kill: function() {
-f && (k(f), f.destroy(), f = null);
-r && (x.removeChild(r), h(x).removeClass("has-proxy has-ace"), r = null);
+f && (g(f), f.destroy(), f = null);
+r && (x.removeChild(r), k(x).removeClass("has-proxy has-ace"), r = null);
 return this;
 },
 disable: function() {
@@ -1798,7 +1798,7 @@ return this;
 },
 enable: function(a) {
 e = a;
-f && n(f, a);
+f && m(f, a);
 return this;
 },
 resize: function() {
@@ -1811,11 +1811,11 @@ return this;
 },
 invs: function(a) {
 a = a || !1;
-q !== a && (q = a, f && f.setShowInvisibles(a));
+p !== a && (p = a, f && f.setShowInvisibles(a));
 return this;
 },
 strf: function(a) {
-a = a || l;
+a = a || q;
 a !== B && (B = a, f && f.session.setMode(b(d.ace, a)));
 return this;
 },
@@ -1825,14 +1825,14 @@ return this;
 };
 };
 f.strf = function(a, b) {
-l = a;
-m = b;
+q = a;
+h = b;
 return f;
 };
 return f;
 }({}, y, w));
-p.register("$52", function(f, d, D) {
-function n(a, b) {
+n.register("$52", function(f, d, D) {
+function m(a, b) {
 function c() {
 return b.val(a.getContent());
 }
@@ -1846,51 +1846,51 @@ return b.blur();
 });
 a.setMode("design");
 }
-function k(a) {
+function g(a) {
 a.off("input");
 a.off("change");
 a.off("focus");
 a.off("blur");
 }
 function c(a) {
-k(a);
+g(a);
 a.setMode("readonly");
 }
 var b = 0;
 f.load = function(a) {
-var b = p.require("$29", "remote.js");
+var b = n.require("$29", "remote.js");
 b.load(b.stat("/lib/tinymce.min.js"), a, "tinymce");
 return f;
 };
 f.init = function(a, e) {
-function d(a) {
-A = a;
+function h(a) {
+z = a;
 s = "<p>" === a.substr(0, 3) && "</p>" === a.substr(-4);
 return a.replace(/(<\/?)script/gi, "$1loco:script");
 }
-function l(a) {
-g = a;
+function d(a) {
+l = a;
 a._getContent = a.getContent;
 a.getContent = function(a) {
 a = this._getContent(a);
 a = a.replace(/(<\/?)loco:script/gi, "$1script");
 if (!s && "<p>" === a.substr(0, 3) && "</p>" === a.substr(-4)) {
 var b = a.substr(3, a.length - 7);
-if (b === A || -1 === b.indexOf("</p>")) a = b;
+if (b === z || -1 === b.indexOf("</p>")) a = b;
 }
 return a;
 };
 a._setContent = a.setContent;
 a.setContent = function(a, b) {
-return this._setContent(d(a), b);
+return this._setContent(h(a), b);
 };
-e ? (n(a, e), e.reset()) : c(a);
-h(x).removeClass("loading");
+e ? (m(a, e), e.reset()) : c(a);
+k(x).removeClass("loading");
 }
-var g, z = !1, A = "", s = !1, q = a.parentNode, B = q.parentNode, x = q.appendChild(D.createElement("div")), r = B.insertBefore(D.createElement("nav"), q);
+var l, A = !1, z = "", s = !1, p = a.parentNode, B = p.parentNode, x = p.appendChild(D.createElement("div")), r = B.insertBefore(D.createElement("nav"), p);
 r.id = "_tb" + String(++b);
-h(q).addClass("has-proxy has-mce");
-h(x).addClass("mce-content-body loading").html(d(a.value));
+k(p).addClass("has-proxy has-mce");
+k(x).addClass("mce-content-body loading").html(h(a.value));
 f.load(function(a) {
 if (!a) throw Error("Failed to load HTML editor");
 x && a.init({
@@ -1932,109 +1932,109 @@ extended_valid_elements: "span,b,i,u,loco:script",
 entities: "38,amp,60,lt,62,gt,160,nbsp",
 entity_encoding: "named",
 keep_styles: !1,
-init_instance_callback: l
+init_instance_callback: d
 });
 });
 return {
 val: function(b) {
-b = d(b);
-null == g ? (a.value = b, h(x).html(b)) : g.getContent() !== b && g.setContent(b);
+b = h(b);
+null == l ? (a.value = b, k(x).html(b)) : l.getContent() !== b && l.setContent(b);
 e && e.val(b);
 return this;
 },
 kill: function() {
-g && (e && e.val(g.getContent()), k(g), g.destroy(), g = null);
-x && (q.removeChild(x), h(q).removeClass("has-proxy has-mce"), x = null);
+l && (e && e.val(l.getContent()), g(l), l.destroy(), l = null);
+x && (p.removeChild(x), k(p).removeClass("has-proxy has-mce"), x = null);
 r && (B.removeChild(r), r = null);
 return this;
 },
 enable: function(a) {
 e = a;
-g && n(g, a);
+l && m(l, a);
 return this;
 },
 disable: function() {
-g && c(g);
+l && c(l);
 e = null;
 return this;
 },
 focus: function() {
-g && e && g.focus();
+l && e && l.focus();
 return this;
 },
 invs: function(a) {
 a = a || !1;
-z !== a && (z = a, h(q)[a ? "addClass" : "removeClass"]("show-invs"));
+A !== a && (A = a, k(p)[a ? "addClass" : "removeClass"]("show-invs"));
 return this;
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$48", function(f, d, D) {
-function n(b) {
+n.register("$48", function(f, d, D) {
+function m(b) {
 function a() {
-k && (f.off("input", e), k = !1);
+g && (f.off("input", e), g = !1);
 }
 function e() {
 var a = b.value;
-a !== q && (f.trigger("changing", [ a, q ]), q = a);
+a !== p && (f.trigger("changing", [ a, p ]), p = a);
+}
+function h() {
+e();
+g && B !== p && f.trigger("changed", [ p ]);
 }
 function d() {
-e();
-k && B !== q && f.trigger("changed", [ q ]);
-}
-function l() {
 c = b;
-B = q;
-k || (f.on("input", e), k = !0);
+B = p;
+g || (f.on("input", e), g = !0);
 f.trigger("editFocus");
 s.addClass("has-focus");
 return !0;
 }
-function g() {
+function l() {
 c === b && (c = null);
 f.trigger("editBlur");
 s.removeClass("has-focus");
-k && (d(), a());
+g && (h(), a());
 return !0;
 }
-var k = !1, f = h(b), s = h(b.parentNode), q = b.value, B;
-f.on("blur", g).on("focus", l);
+var g = !1, f = k(b), s = k(b.parentNode), p = b.value, B;
+f.on("blur", l).on("focus", d);
 return {
 val: function(a) {
-q !== a && (b.value = a, f.triggerHandler("input"), q = a);
+p !== a && (b.value = a, f.triggerHandler("input"), p = a);
 return !0;
 },
 kill: function() {
 a();
-f.off("blur", g).off("focus", l);
+f.off("blur", l).off("focus", d);
 },
 fire: function() {
-q = null;
+p = null;
 e();
 },
-ping: d,
-blur: g,
-focus: l,
+ping: h,
+blur: l,
+focus: d,
 reset: function() {
-B = q = b.value;
+B = p = b.value;
 }
 };
 }
-function k(b) {
+function g(b) {
 this.e = b;
 }
 var c;
 f._new = function(b) {
-return new k(b);
+return new g(b);
 };
 f.init = function(b) {
-var a = new k(b);
+var a = new g(b);
 b.disabled ? (b.removeAttribute("disabled"), a.disable()) : b.readOnly ? a.disable() : a.enable();
 return a;
 };
-TextAreaPrototype = k.prototype;
+TextAreaPrototype = g.prototype;
 TextAreaPrototype.destroy = function() {
 this.unlisten();
 var b = this.p;
@@ -2054,7 +2054,7 @@ if (null == b) return a.value;
 var c = this.l, d = this.p;
 d && d.val(b);
 c && c.val(b);
-c || a.value === b || (a.value = b, h(a).triggerHandler("input"));
+c || a.value === b || (a.value = b, k(a).triggerHandler("input"));
 return this;
 };
 TextAreaPrototype.fire = function() {
@@ -2067,7 +2067,7 @@ return this;
 };
 TextAreaPrototype.focus = function() {
 var b = this.p;
-b ? b.focus() : h(this.e).focus();
+b ? b.focus() : k(this.e).focus();
 };
 TextAreaPrototype.focused = function() {
 return c && c === this.el;
@@ -2101,7 +2101,7 @@ return this;
 TextAreaPrototype.listen = function() {
 var b = this.l;
 b && b.kill();
-this.l = n(this.e);
+this.l = m(this.e);
 return this;
 };
 TextAreaPrototype.unlisten = function() {
@@ -2111,7 +2111,7 @@ return this;
 };
 TextAreaPrototype.setInvs = function(b, a) {
 var c = this.i || !1;
-if (a || c !== b) this._i && (this._i.kill(), delete this._i), (c = this.p) ? c.invs && c.invs(b) : b && (this._i = p.require("$51", "mirror.js").init(this.e)), 
+if (a || c !== b) this._i && (this._i.kill(), delete this._i), (c = this.p) ? c.invs && c.invs(b) : b && (this._i = n.require("$51", "mirror.js").init(this.e)), 
 this.i = b;
 return this;
 };
@@ -2120,7 +2120,7 @@ return this.i || !1;
 };
 TextAreaPrototype.setMode = function(b) {
 var a = this.p, e = this.i || !1;
-b !== (this.m || "") && (this.m = b, a && a.kill(), this.p = a = "code" === b ? p.require("$16", "ace.js").init(this.e, this.l, this["%"]) : "html" === b ? p.require("$52", "mce.js").init(this.e, this.l) : null, 
+b !== (this.m || "") && (this.m = b, a && a.kill(), this.p = a = "code" === b ? n.require("$16", "ace.js").init(this.e, this.l, this["%"]) : "html" === b ? n.require("$52", "mce.js").init(this.e, this.l) : null, 
 this.setInvs(e, !0), c && this.focus());
 return this;
 };
@@ -2144,13 +2144,13 @@ b && b.resize && b.resize();
 TextAreaPrototype = null;
 return f;
 }({}, y, w));
-p.register("$49", function(f, d, p) {
-function n(a) {
+n.register("$49", function(f, d, n) {
+function m(a) {
 var b = d.console;
 b && b.error && b.error(a);
 }
-function k(a) {
-var b = p.createElement("div");
+function g(a) {
+var b = n.createElement("div");
 a && b.setAttribute("class", a);
 return b;
 }
@@ -2185,9 +2185,9 @@ b.preventDefault();
 return !1;
 };
 }
-function m(a, b, c) {
+function h(a, b, c) {
 function e(a) {
-n("row[" + a + "] disappeared");
+m("row[" + a + "] disappeared");
 return {
 cellVal: function() {
 return "";
@@ -2195,64 +2195,64 @@ return "";
 };
 }
 return function(d) {
-var g = b || 0, l = c ? -1 : 1, v = a.rows || [];
+var h = b || 0, g = c ? -1 : 1, v = a.rows || [];
 d.sort(function(a, b) {
-return l * (v[a] || e(a)).cellVal(g).localeCompare((v[b] || e(b)).cellVal(g));
+return g * (v[a] || e(a)).cellVal(h).localeCompare((v[b] || e(b)).cellVal(h));
 });
 };
 }
-function l(a) {
+function q(a) {
 this.w = a;
 }
-function g(a) {
+function l(a) {
 this.t = a;
 this.length = 0;
 }
-function z(a, b, c) {
-var e = p.createElement("div");
+function A(a, b, c) {
+var e = n.createElement("div");
 e.className = c || "";
 this._ = e;
 this.d = b || [];
 this.i = a || 0;
 this.length = b.length;
 }
-function A(a) {
+function z(a) {
 this.live = a;
 this.rows = [];
 }
 f.create = function(a) {
-return new l(a);
+return new q(a);
 };
-var s = l.prototype;
+var s = q.prototype;
 s.init = function(d) {
-var g = this.w, l = g.id, m = g.splity(l + "-thead", l + "-tbody"), f = m[0], m = m[1], E = [], u = [], v = [], F = [];
+var h = this.w, l = h.id, q = h.splity(l + "-thead", l + "-tbody"), f = q[0], q = q[1], E = [], u = [], v = [], F = [];
 if (d) this.ds = d, this.idxs = u, this._idxs = null; else if (!(d = this.ds)) throw Error("No datasource");
 f.css.push("wg-thead");
-m.css.push("wg-tbody");
+q.css.push("wg-tbody");
 d.eachCol(function(a, b, c) {
 v[a] = l + "-col-" + b;
 F[a] = c || b;
 });
-for (var N = k(), s = -1, A = v.length, n = k("wg-cols"), p = f.splitx.apply(f, v); ++s < A; ) p[s].header(F[s]), 
-n.appendChild(N.cloneNode(!1)).setAttribute("for", v[s]);
+for (var N = g(), s = -1, z = v.length, m = g("wg-cols"), n = f.splitx.apply(f, v); ++s < z; ) n[s].header(F[s]), 
+m.appendChild(N.cloneNode(!1)).setAttribute("for", v[s]);
 d.eachRow(function(a, b, c) {
-E[a] = new z(a, b, c);
+E[a] = new A(a, b, c);
 u[a] = a;
 });
 this.rows = E;
-this.cols = n;
+this.cols = m;
 this.ww = null;
-this.root = N = m.body;
+this.root = N = q.body;
 this.head = f;
 f.redraw = c(this);
-f = m.fixed = p[0].bodyY() || 20;
-g.lock().resize(f, m);
-g.css.push("is-table");
-g.restyle();
-this.sc ? this._re_sort(A) : d.sort && d.sort(u);
+f = q.fixed = n[0].bodyY() || 20;
+h.lock().resize(f, q);
+h.css.push("is-table");
+h.restyle();
+this.sc ? this._re_sort(z) : d.sort && d.sort(u);
 this.redrawDirty();
 this.render();
-h(N).attr("tabindex", "-1").on("keydown", e(this)).on("mousedown", b(this)).on("scroll", a(this));
+k(N).attr("tabindex", "-1").on("keydown", e(this)).on("mousedown", b(this)).on("scroll", a(this));
 return this;
 };
 s.clear = function() {
@@ -2263,12 +2263,12 @@ void 0;
 return this;
 };
 s.render = function() {
-for (var a, b, c = [], e = this.rows || [], d = -1, g, l = this.idxs, v = l.length, m = this.idxr = {}, k = this.r, f = this._r, h = this.root, z = this.cols; ++d < v; ) {
-0 === d % 100 && (a = z.cloneNode(!0), b = new A(a), b.h = 2200, b.insert(h), c.push(b));
-g = l[d];
-m[g] = d;
-a = e[g];
-if (null == a) throw Error("Render error, no data at [" + g + "]");
+for (var a, b, c = [], e = this.rows || [], d = -1, h, g = this.idxs, v = g.length, q = this.idxr = {}, l = this.r, f = this._r, k = this.root, A = this.cols; ++d < v; ) {
+0 === d % 100 && (a = A.cloneNode(!0), b = new z(a), b.h = 2200, b.insert(k), c.push(b));
+h = g[d];
+q[h] = d;
+a = e[h];
+if (null == a) throw Error("Render error, no data at [" + h + "]");
 a.page = b;
 b.rows.push(a);
 }
@@ -2277,16 +2277,16 @@ this.pages = c;
 this.mx = this.mn = null;
 this.redrawDirty();
 this.redraw();
-null == k ? null != f && (a = e[f]) && a.page && (delete this._r, this.select(f, !0)) : (a = e[k]) && a.page ? this.select(k, !0) : (this.deselect(), 
-this._r = k);
+null == l ? null != f && (a = e[f]) && a.page && (delete this._r, this.select(f, !0)) : (a = e[l]) && a.page ? this.select(l, !0) : (this.deselect(), 
+this._r = l);
 return this;
 };
 s.resize = function() {
-var a = -1, b = this.ww || (this.ww = []), c = this.w, e = c.cells[0], d = e.body.childNodes, g = d.length, l = this.pages || [], v = l.length;
-for (c.redraw.call(e); ++a < g; ) b[a] = d[a].style.width;
+var a = -1, b = this.ww || (this.ww = []), c = this.w, e = c.cells[0], d = e.body.childNodes, h = d.length, g = this.pages || [], v = g.length;
+for (c.redraw.call(e); ++a < h; ) b[a] = d[a].style.width;
 if (v) {
 c = this.mx;
-for (a = this.mn; a <= c; a++) l[a].widths(b);
+for (a = this.mn; a <= c; a++) g[a].widths(b);
 this.redrawDirty() && this.redraw();
 }
 };
@@ -2297,18 +2297,18 @@ this.vh !== b && (a = !0, this.vh = b);
 return a;
 };
 s.redraw = function() {
-for (var a = 0, b = -1, c = null, e = null, d = this.ww, g = this.sy, l = this.vh, v = this.mn, m = this.mx, k = Math.max(0, g - 100), g = l + g + 100, f = this.pages || [], h = f.length; ++b < h && !(a > g); ) l = f[b], 
-a += l.height(), a < k || (null === c && (c = b), e = b, l.rendered || l.render(d));
+for (var a = 0, b = -1, c = null, e = null, d = this.ww, h = this.sy, g = this.vh, v = this.mn, l = this.mx, q = Math.max(0, h - 100), h = g + h + 100, f = this.pages || [], k = f.length; ++b < k && !(a > h); ) g = f[b], 
+a += g.height(), a < q || (null === c && (c = b), e = b, g.rendered || g.render(d));
 if (v !== c) {
 if (null !== v && c > v) for (b = v; b < c; b++) {
-l = f[b];
-if (!l) throw Error("Shit!");
-l.rendered && l.sleep();
+g = f[b];
+if (!g) throw Error("Shit!");
+g.rendered && g.sleep();
 }
 this.mn = c;
 }
-if (m !== e) {
-if (null !== m && e < m) for (b = m; b > e; b--) l = f[b], l.rendered && l.sleep();
+if (l !== e) {
+if (null !== l && e < l) for (b = l; b > e; b--) g = f[b], g.rendered && g.sleep();
 this.mx = e;
 }
 };
@@ -2332,11 +2332,11 @@ return this.tr(a)[b];
 };
 s.next = function(a, b, c) {
 null == c && (c = this.r || 0);
-var e = this.idxs, d = e.length, g = (this.idxr || {})[c];
-for (c = g; c !== (g += a) && !(0 <= g && d > g); ) if (b && d) g = 1 === a ? -1 : d, 
+var e = this.idxs, d = e.length, h = (this.idxr || {})[c];
+for (c = h; c !== (h += a) && !(0 <= h && d > h); ) if (b && d) h = 1 === a ? -1 : d, 
 b = !1; else return null;
-c = e[g];
-return null == c || null == this.rows[c] ? (n("Bad next: [" + g + "] does not map to data row"), 
+c = e[h];
+return null == c || null == this.rows[c] ? (m("Bad next: [" + h + "] does not map to data row"), 
 null) : c;
 };
 s.selectNext = function(a, b, c) {
@@ -2346,7 +2346,7 @@ return this;
 };
 s.deselect = function(a) {
 var b = this.r;
-null != b && (this.r = null, h(this.tr(b)).removeClass("selected"), this.w.fire("wgRowDeselect", [ b, a ]));
+null != b && (this.r = null, k(this.tr(b)).removeClass("selected"), this.w.fire("wgRowDeselect", [ b, a ]));
 return this;
 };
 s.selectRow = function(a, b) {
@@ -2354,17 +2354,17 @@ return this.select(this.idxs[a]);
 };
 s.select = function(a, b) {
 var c = this.rows[a], e = c && c.page;
-if (!e) return this.deselect(!1), n("Row is filtered out"), this;
+if (!e) return this.deselect(!1), m("Row is filtered out"), this;
 this.deselect(!0);
-var d, g = this.w.cells[1];
-e.rendered || (d = e.top(), g.scrollY(d), this.redrawDirty() && this.redraw());
-if (!c.rendered) return e.rendered || n("Failed to render page"), n("Row [" + c.i + "] not rendered"), 
+var d, h = this.w.cells[1];
+e.rendered || (d = e.top(), h.scrollY(d), this.redrawDirty() && this.redraw());
+if (!c.rendered) return e.rendered || m("Failed to render page"), m("Row [" + c.i + "] not rendered"), 
 this;
 e = c.cells();
-h(e).addClass("selected");
+k(e).addClass("selected");
 this.r = a;
-b || (d = g.scrollY(), h(this.root).focus(), d !== g.scrollY() && g.scrollY(d));
-g.scrollTo(e[0], !0);
+b || (d = h.scrollY(), k(this.root).focus(), d !== h.scrollY() && h.scrollY(d));
+h.scrollTo(e[0], !0);
 this.w.fire("wgRowSelect", [ a, c.data() ]);
 return this;
 };
@@ -2378,18 +2378,18 @@ this.idxs = this._sort(a);
 return this.clear().render();
 };
 s.each = function(a) {
-for (var b, c = -1, e = this.rows || [], d = this.idxs || [], g = d.length; ++c < g; ) b = d[c], 
+for (var b, c = -1, e = this.rows || [], d = this.idxs || [], h = d.length; ++c < h; ) b = d[c], 
 a(e[b], c, b);
 return this;
 };
 s.sortable = function(a) {
-var b = this.sc || (this.sc = new g(this));
+var b = this.sc || (this.sc = new l(this));
 b.has(a) || b.add(a);
 return this;
 };
 s._re_sort = function(a) {
 var b = -1, c = this.sc, e = c.active;
-for (this.sc = c = new g(this); ++b < a; ) c.add(b);
+for (this.sc = c = new l(this); ++b < a; ) c.add(b);
 e && (b = this.head.indexOf(e.id), -1 === b && (b = Math.min(e.idx, a - 1)), this.sort(b, e.desc));
 return this;
 };
@@ -2398,12 +2398,12 @@ b ? (this.s = b, b(a)) : (b = this.s) && b(a);
 return a;
 };
 s.sort = function(a, b) {
-this._sort(this.idxs, m(this, a, b));
+this._sort(this.idxs, h(this, a, b));
 this.sc.activate(a, b);
 return this;
 };
 s = null;
-s = g.prototype;
+s = l.prototype;
 s.has = function(a) {
 return null != this[a];
 };
@@ -2428,14 +2428,14 @@ return this;
 s.activate = function(a, b) {
 var c, e;
 c = this.active;
-var d = this[a], g = this.t.head.cells;
-c && (e = g[c.idx]) && (e.removeClass(c.css), c !== d && e.restyle());
-(e = g[a]) ? (d.desc = b, this.active = d, c = "wg-" + (b ? "desc" : "asc"), e.addClass(c).restyle(), 
+var d = this[a], h = this.t.head.cells;
+c && (e = h[c.idx]) && (e.removeClass(c.css), c !== d && e.restyle());
+(e = h[a]) ? (d.desc = b, this.active = d, c = "wg-" + (b ? "desc" : "asc"), e.addClass(c).restyle(), 
 d.css = c) : this.active = null;
 return this;
 };
 s = null;
-s = z.prototype;
+s = A.prototype;
 s.render = function(a) {
 var b, c = [], e = this._, d = this.length;
 if (e) {
@@ -2467,12 +2467,12 @@ a = this.d[a]() || "";
 return String(a.textContent || a);
 };
 s = null;
-s = A.prototype;
+s = z.prototype;
 s.size = function() {
 return this.rows.length;
 };
 s.insert = function(a) {
-var b = this.h, c = k("wg-dead");
+var b = this.h, c = g("wg-dead");
 c.style.height = String(b) + "px";
 a.appendChild(c);
 return this.dead = c;
@@ -2483,15 +2483,15 @@ return (this.rendered ? this.live : this.dead).offsetTop;
 s.height = function() {
 var a = this.h;
 null == a && (this.h = a = this.rendered ? this.live.firstChild.offsetHeight : this.dead.offsetHight);
-a || n("row has zero height");
+a || m("row has zero height");
 return a;
 };
 s.render = function(a) {
-for (var b, c = -1, e = this.rows, d = e.length, g = this.dead, l = this.live, v = l.childNodes; ++c < d; ) b = e[c], 
+for (var b, c = -1, e = this.rows, d = e.length, h = this.dead, g = this.live, v = g.childNodes; ++c < d; ) b = e[c], 
 b.rendered || b.render(v);
 d = a.length;
 for (c = 0; c < d; c++) v[c].style.width = a[c];
-g.parentNode.replaceChild(l, g);
+h.parentNode.replaceChild(g, h);
 this.rendered = !0;
 this.h = null;
 return this;
@@ -2522,27 +2522,27 @@ for (a.parentNode.removeChild(a); 0 !== c--; ) b[c].destroy();
 s = null;
 return f;
 }({}, y, w));
-p.register("$39", function(f, d, D) {
-function n(a, b) {
-var c = a.id, e = c && q[c], d = e && e.parent();
+n.register("$39", function(f, d, D) {
+function m(a, b) {
+var c = a.id, e = c && p[c], d = e && e.parent();
 if (!e || !d) return null;
-var g = d.dir === s, c = g ? "X" : "Y", l = "page" + c, g = g ? A : z, m = g(d.el), c = b["offset" + c], k = d.el, f = k.className;
-null == c && (c = b[l] - g(a));
-c && (m += c);
-k.className = f + " is-resizing";
+var h = d.dir === s, c = h ? "X" : "Y", g = "page" + c, h = h ? z : A, l = h(d.el), c = b["offset" + c], q = d.el, f = q.className;
+null == c && (c = b[g] - h(a));
+c && (l += c);
+q.className = f + " is-resizing";
 return {
 done: function() {
-k.className = f;
+q.className = f;
 },
 move: function(a) {
-d.resize(a[l] - m, e);
+d.resize(a[g] - l, e);
 return !0;
 }
 };
 }
-function k(a, c) {
+function g(a, c) {
 function e() {
-h(D).off("mousemove", d);
+k(D).off("mousemove", d);
 x && (x.done(), x = null);
 return !0;
 }
@@ -2551,14 +2551,14 @@ x ? x.move(a) : e();
 return !0;
 }
 if (x) return !0;
-x = n(a.target, a);
+x = m(a.target, a);
 if (!x) return !0;
-h(D).one("mouseup", e).on("mousemove", d);
+k(D).one("mouseup", e).on("mousemove", d);
 return b(a);
 }
 function c(a, b) {
 var c = b.type;
-"touchmove" === c ? x && x.move(b) : "touchstart" === c ? x = n(a.target, b) : "touchend" === c && x && (x.done(), 
+"touchmove" === c ? x && x.move(b) : "touchstart" === c ? x = m(a.target, b) : "touchend" === c && x && (x.done(), 
 x = null);
 }
 function b(a) {
@@ -2573,37 +2573,37 @@ a && a.redraw();
 return B = a;
 }
 function e(b, c) {
-var e = h(c).on("editFocus", function() {
+var e = k(c).on("editFocus", function() {
 e.trigger("wgFocus", [ a(b) ]);
 }).on("editBlur", function() {
 e.trigger("wgBlur", [ a(null) ]);
 });
 }
-function m(a) {
+function h(a) {
 var b = a.id, c = a.className;
 this.id = b;
 this.el = a;
 this.pos = this.index = 0;
 this.css = [ c || "wg-root", "wg-cell" ];
 this._cn = c;
-q[b] = this;
+p[b] = this;
 this.clear();
 }
-var l = p.include("$46", "html.js") || p.include("$2", "html.js", !0), g = p.require("$21", "dom.js"), z = g.top, A = g.left, s = 1, q = {}, B, x = !1;
+var q = n.include("$46", "html.js") || n.include("$2", "html.js", !0), l = n.require("$21", "dom.js"), A = l.top, z = l.left, s = 1, p = {}, B, x = !1;
 f.init = function(a) {
-var b = new m(a);
+var b = new h(a);
 b.redraw();
-p.require("$47", "touch.js").ok(function(b) {
+n.require("$47", "touch.js").ok(function(b) {
 b.dragger(a, c);
 });
-h(a).on("mousedown", k);
+k(a).on("mousedown", g);
 return b;
 };
-d = m.prototype;
+d = h.prototype;
 d.fire = function(a, b) {
-var c = h.Event(a);
+var c = k.Event(a);
 c.cell = this;
-h(this.el).trigger(c, b);
+k(this.el).trigger(c, b);
 return this;
 };
 d.each = function(a) {
@@ -2611,7 +2611,7 @@ for (var b = -1, c = this.cells, e = c.length; ++b < e; ) a(c[b], b);
 return this;
 };
 d.indexOf = function(a) {
-return (a = q[a.id || String(a)]) && a.pid === this.id ? a.index : -1;
+return (a = p[a.id || String(a)]) && a.pid === this.id ? a.index : -1;
 };
 d.on = function() {
 return this.$("on", arguments);
@@ -2620,10 +2620,10 @@ d.off = function() {
 return this.$("off", arguments);
 };
 d.find = function(a) {
-return h(this.el).find(a);
+return k(this.el).find(a);
 };
 d.$ = function(a, b) {
-h.fn[a].apply(h(this.el), b);
+k.fn[a].apply(k(this.el), b);
 return this;
 };
 d.addClass = function(a) {
@@ -2636,7 +2636,7 @@ a = this.css.indexOf(a);
 return this;
 };
 d.parent = function() {
-return this.pid && q[this.pid];
+return this.pid && p[this.pid];
 };
 d.splitx = function() {
 return this._split(s, arguments);
@@ -2646,17 +2646,17 @@ return this._split(2, arguments);
 };
 d._split = function(a, b) {
 (this.length || this.field) && this.clear();
-for (var c = -1, e, d = b.length, l = 1 / d, k = 0; ++c < d; ) {
-e = g.el();
+for (var c = -1, e, d = b.length, g = 1 / d, q = 0; ++c < d; ) {
+e = l.el();
 this.body.appendChild(e);
-for (var f = e, h = b[c], z = h, s = 1; q[h]; ) h = z + "-" + ++s;
-f.id = h;
-e = new m(e);
+for (var f = e, k = b[c], A = k, s = 1; p[k]; ) k = A + "-" + ++s;
+f.id = k;
+e = new h(e);
 e.index = c;
 e.pid = this.id;
 e._locale(this.lang, this.rtl);
-e.pos = k;
-k += l;
+e.pos = q;
+q += g;
 this.cells.push(e);
 this.length++;
 }
@@ -2666,40 +2666,40 @@ return this.cells;
 };
 d.destroy = function() {
 this.clear();
-delete q[this.id];
+delete p[this.id];
 var a = this.el;
 a.innerHTML = "";
 this.body = null;
 a.className = this._cn || "";
-h(a).off();
+k(a).off();
 return this;
 };
 d.exists = function() {
-return this === q[this.id];
+return this === p[this.id];
 };
 d.clear = function() {
-for (var a = this.el, b = this.cells, c = this.field, e = this.body, d = this.nav, m = this.length || 0; 0 !== m--; ) delete q[b[m].destroy().id];
+for (var a = this.el, b = this.cells, c = this.field, e = this.body, d = this.nav, h = this.length || 0; 0 !== h--; ) delete p[b[h].destroy().id];
 this.cells = [];
 this.length = 0;
 d && (a.removeChild(d), this.nav = null);
-e && (c && (l.ie() && h(e).triggerHandler("blur"), c.destroy(), this.field = null), 
+e && (c && (q.ie() && k(e).triggerHandler("blur"), c.destroy(), this.field = null), 
 this.table && (this.table = null), a === e.parentNode && a.removeChild(e));
-this.body = a.appendChild(g.el("", "wg-body"));
+this.body = a.appendChild(l.el("", "wg-body"));
 this._h = null;
 return this;
 };
 d.resize = function(a, b) {
 if (!b && (b = this.cells[1], !b)) return;
-var c = b.index, e = this.cells, d = h(this.el)[this.dir === s ? "width" : "height"](), g = e[c + 1], c = e[c - 1];
+var c = b.index, e = this.cells, d = k(this.el)[this.dir === s ? "width" : "height"](), h = e[c + 1], c = e[c - 1];
 pad = (b.body || b.el.firstChild).offsetTop || 0;
-max = (g ? g.pos * d : d) - pad;
+max = (h ? h.pos * d : d) - pad;
 min = c ? c.pos * d : 0;
 b.pos = Math.min(max, Math.max(min, a)) / d;
 this.redraw();
 return this;
 };
 d.distribute = function(a) {
-for (var b = -1, c = 0, e, d = this.cells, g = a.length; ++b < g && (e = d[++c]); ) e.pos = Math.max(0, Math.min(1, a[b]));
+for (var b = -1, c = 0, e, d = this.cells, h = a.length; ++b < h && (e = d[++c]); ) e.pos = Math.max(0, Math.min(1, a[b]));
 this.redraw();
 return this;
 };
@@ -2722,25 +2722,25 @@ d.redraw = function(a) {
 this.restyle();
 var b = this.el, c = this.body, e = this.field;
 if (c) {
-var d, g = b.clientWidth || 0, l = b.clientHeight || 0, m = c.offsetTop || 0, l = m > l ? 0 : l - m;
-this._h !== l && (this._h = l, c.style.height = String(l) + "px", d = e);
-this._w !== g && (this._w = g, d = e);
+var d, h = b.clientWidth || 0, g = b.clientHeight || 0, q = c.offsetTop || 0, g = q > g ? 0 : g - q;
+this._h !== g && (this._h = g, c.style.height = String(g) + "px", d = e);
+this._w !== h && (this._w = h, d = e);
 d && d.redraw();
 }
 c = this.length;
-g = 1;
-l = this.nav;
-for (m = 2 === this.dir ? "height" : "width"; 0 !== c--; ) e = this.cells[c], l ? d = 1 : (e.fixed && (e.pos = e.fixed / h(b)[m]()), 
-d = g - e.pos, g = e.pos), e.el.style[m] = String(100 * d) + "%", e.redraw(a);
+h = 1;
+g = this.nav;
+for (q = 2 === this.dir ? "height" : "width"; 0 !== c--; ) e = this.cells[c], g ? d = 1 : (e.fixed && (e.pos = e.fixed / k(b)[q]()), 
+d = h - e.pos, h = e.pos), e.el.style[q] = String(100 * d) + "%", e.redraw(a);
 return this;
 };
 d.contents = function(a, b) {
 var c = this.el, e = this.body;
 if (null == a) return e.innerHTML;
 this.length ? this.clear() : e && (c.removeChild(e), e = null);
-e || (this.body = e = c.appendChild(g.el("", b || "wg-content")), this._h = null, 
+e || (this.body = e = c.appendChild(l.el("", b || "wg-content")), this._h = null, 
 (c = this.lang) && this._locale(c, this.rtl, !0));
-"string" === typeof a ? h(e)._html(a) : a && this.append(a);
+"string" === typeof a ? k(e)._html(a) : a && this.append(a);
 this.redraw();
 return this;
 };
@@ -2750,14 +2750,14 @@ if (c) {
 var d = c.editable();
 c.reload(a, b);
 d !== b && this.restyle();
-} else this.length && this.clear(), d = g.el("textarea"), d.setAttribute("wrap", "virtual"), 
-d.value = a, this.contents(d), c = p.require("$48", "field.js")._new(d)[b ? "enable" : "disable"](), 
+} else this.length && this.clear(), d = l.el("textarea"), d.setAttribute("wrap", "virtual"), 
+d.value = a, this.contents(d), c = n.require("$48", "field.js")._new(d)[b ? "enable" : "disable"](), 
 e(this, d), this.field = c, this.restyle();
 this.lang || this.locale("en");
 return c;
 };
 d.locale = function(a) {
-a = p.require("$37", "locale.js").cast(a);
+a = n.require("$37", "locale.js").cast(a);
 return this._locale(String(a), a.isRTL());
 };
 d._locale = function(a, b, c) {
@@ -2784,26 +2784,26 @@ b.eachTextarea(a);
 return this;
 };
 d.append = function(a) {
-a && (a.nodeType ? l.init(this.body.appendChild(a)) : l.init(h(a).appendTo(this.body)));
+a && (a.nodeType ? q.init(this.body.appendChild(a)) : q.init(k(a).appendTo(this.body)));
 return this;
 };
 d.prepend = function(a) {
 var b = this.body;
 if (a.nodeType) {
 var c = b.firstChild;
-l.init(c ? b.insertBefore(a, c) : b.appendChild(a));
-} else l.init(h(a).prependTo(b));
+q.init(c ? b.insertBefore(a, c) : b.appendChild(a));
+} else q.init(k(a).prependTo(b));
 return this;
 };
 d.before = function(a) {
 var b = this.body;
-a.nodeType ? l.init(this.el.insertBefore(a, b)) : l.init(h(a).insertBefore(b));
+a.nodeType ? q.init(this.el.insertBefore(a, b)) : q.init(k(a).insertBefore(b));
 return this;
 };
 d.header = function(a, b) {
 if (null == a && null == b) return this.el.getElementsByTagName("header")[0];
-this.t = g.txt(a || "");
-this.el.insertBefore(g.el("header", b), this.body).appendChild(this.t);
+this.t = l.txt(a || "");
+this.el.insertBefore(l.el("header", b), this.body).appendChild(this.t);
 this.redraw();
 return this;
 };
@@ -2818,7 +2818,7 @@ var a = this.t;
 return a && a.nodeValue;
 };
 d.bodyY = function() {
-return z(this.body, this.el);
+return A(this.body, this.el);
 };
 d.scrollY = function(a) {
 if (J === a) return this.body.scrollTop;
@@ -2826,7 +2826,7 @@ this.body.scrollTop = a;
 };
 d.tabulate = function(a) {
 var b = this.table;
-b ? b.clear() : b = p.require("$49", "wgtable.js").create(this);
+b ? b.clear() : b = n.require("$49", "wgtable.js").create(this);
 b.init(a);
 return this.table = b;
 };
@@ -2837,67 +2837,67 @@ return this;
 d.scrollTo = function(a, b) {
 var c, e = this.body;
 c = e.scrollTop;
-var d = z(a, e);
+var d = A(a, e);
 if (c > d) c = d; else {
-var g = e.clientHeight, d = d + h(a).outerHeight();
-if (g + c < d) c = d - g; else return;
+var h = e.clientHeight, d = d + k(a).outerHeight();
+if (h + c < d) c = d - h; else return;
 }
-b ? e.scrollTop = c : h(e).stop(!0).animate({
+b ? e.scrollTop = c : k(e).stop(!0).animate({
 scrollTop: c
 }, 250);
 };
 d.navigize = function(a, c) {
 function e(a) {
-var b = l[a], c = f[a], d = h(b.el).show();
+var b = h[a], c = f[a], d = k(b.el).show();
 c.addClass("active");
-k = a;
-z.data("idx", a);
+q = a;
+p.data("idx", a);
 b.fire("wgTabSelect", [ a ]);
 return d;
 }
-var d = this, l = d.cells, m = d.nav, k, f = [];
-m && d.el.removeChild(m);
-var m = d.nav = d.el.insertBefore(g.el("nav", "wg-tabs"), d.body), z = h(m).on("click", function(a) {
-var c = h(a.target).data("idx");
+var d = this, h = d.cells, g = d.nav, q, f = [];
+g && d.el.removeChild(g);
+var g = d.nav = d.el.insertBefore(l.el("nav", "wg-tabs"), d.body), p = k(g).on("click", function(a) {
+var c = k(a.target).data("idx");
 if (null == c) return !0;
-if (null != k) {
-var g = f[k];
-h(l[k].el).hide();
+if (null != q) {
+var g = f[q];
+k(h[q].el).hide();
 g.removeClass("active");
 }
 e(c);
 d.redraw();
 return b(a);
 });
-null == c && (c = z.data("idx") || 0);
+null == c && (c = p.data("idx") || 0);
 d.each(function(b, c) {
-f[c] = h('<a href="#' + b.id + '"></a>').data("idx", c).text(a[c]).appendTo(z);
+f[c] = k('<a href="#' + b.id + '"></a>').data("idx", c).text(a[c]).appendTo(p);
 b.pos = 0;
-h(b.el).hide();
+k(b.el).hide();
 });
-e(l[c] ? c : 0);
+e(h[c] ? c : 0);
 d.lock();
 d.redraw();
 return d;
 };
 d.navigated = function() {
 var a = this.nav;
-if (a) return h(a).data("idx");
+if (a) return k(a).data("idx");
 };
 d = null;
 return f;
 }({}, y, w));
-p.register("$24", function(f, d, D) {
-function n(a) {
+n.register("$24", function(f, d, D) {
+function m(a) {
 var b = [];
 a && (a.saved() || b.push("po-unsaved"), a.fuzzy() ? b.push("po-fuzzy") : a.flagged() && b.push("po-flagged"), 
 a.translation() || b.push("po-empty"), a.comment() && b.push("po-comment"));
 return b.join(" ");
 }
-function k(a, b, c) {
-b = h(a.title(b).parentNode);
+function g(a, b, c) {
+b = k(a.title(b).parentNode);
 var e = b.find("span.lang");
-c ? (c = p.require("$37", "locale.js").cast(c), e.length || (e = h("<span></span>").prependTo(b)), 
+c ? (c = n.require("$37", "locale.js").cast(c), e.length || (e = k("<span></span>").prependTo(b)), 
 e.attr("lang", c.lang).attr("class", c.getIcon() || "lang region region-" + (c.region || "zz").toLowerCase())) : (e.remove(), 
 c = "en");
 a.locale(c);
@@ -2913,8 +2913,8 @@ return e;
 function b() {
 this.dirty = 0;
 }
-p.require("$3", "number.js");
-var a = "poUpdate", e = "changing", m = "changed", l = 0, g = 1, z = 2, A = 3, s = 4, q = 5, B, x, r = p.require("$36", "string.js").html, y = p.require("$6", "string.js").sprintf;
+n.require("$3", "number.js");
+var a = "poUpdate", e = "changing", h = "changed", q = 0, l = 1, A = 2, z = 3, s = 4, p = 5, B, x, r = n.require("$36", "string.js").html, y = n.require("$6", "string.js").sprintf;
 f.extend = function(a) {
 return a.prototype = new b();
 };
@@ -2928,7 +2928,7 @@ return function(b) {
 a.innerHTML = b.replace("src=", "x=");
 return a.textContent.trim() || b.trim();
 };
-}(), u = b.prototype = p.require("$38", "abstract.js").init([ "getListColumns", "getListHeadings", "getListEntry" ], [ "editable", "t" ]);
+}(), u = b.prototype = n.require("$38", "abstract.js").init([ "getListColumns", "getListHeadings", "getListEntry" ], [ "editable", "t" ]);
 u.init = function() {
 this.localise();
 this.editable = {
@@ -2940,14 +2940,14 @@ this.html = !1;
 return this;
 };
 u.localise = function(a) {
-a || (a = x || p.require("$1", "t.js").init());
+a || (a = x || n.require("$1", "t.js").init());
 var b = [];
-b[l] = a._x("Source text", "Editor") + ":";
-b[A] = a._x("%s translation", "Editor") + ":";
+b[q] = a._x("Source text", "Editor") + ":";
+b[z] = a._x("%s translation", "Editor") + ":";
 b[s] = a._x("Context", "Editor") + ":";
-b[q] = a._x("Comments", "Editor") + ":";
-b[g] = a._x("Single", "Editor") + ":";
-b[z] = a._x("Plural", "Editor") + ":";
+b[p] = a._x("Comments", "Editor") + ":";
+b[l] = a._x("Single", "Editor") + ":";
+b[A] = a._x("Plural", "Editor") + ":";
 b[6] = a._x("Untranslated", "Editor");
 b[7] = a._x("Translated", "Editor");
 b[8] = a._x("Toggle Fuzzy", "Editor");
@@ -2961,22 +2961,22 @@ function b(a) {
 c.redraw(!0, a);
 return !0;
 }
-var c = p.require("$39", "wingrid.js").init(a);
-h(d).on("resize", b);
+var c = n.require("$39", "wingrid.js").init(a);
+k(d).on("resize", b);
 this.redraw = b;
-h(a).on("wgFocus wgBlur", function(a, b) {
+k(a).on("wgFocus wgBlur", function(a, b) {
 a.stopPropagation();
 B = b;
 });
 this.destroy = function() {
 c.destroy();
-h(d).off("resize", b);
+k(d).off("resize", b);
 };
 this.rootDiv = a;
 return c;
 };
 u.$ = function() {
-return h(this.rootDiv);
+return k(this.rootDiv);
 };
 u.setListCell = function(a) {
 var b = this;
@@ -2996,12 +2996,12 @@ u.setTargetCell = function(a) {
 this.targetCell = a;
 };
 u.next = function(a, b, c) {
-for (var e = this.listTable, d = e.selected(), g = d, l, m = this.po; null != (d = e.next(a, c, d)); ) {
-if (g === d) {
+for (var e = this.listTable, d = e.selected(), h = d, g, q = this.po; null != (d = e.next(a, c, d)); ) {
+if (h === d) {
 d = null;
 break;
 }
-if (b && (l = m.row(d), l.translated(0))) continue;
+if (b && (g = q.row(d), g.translated(0))) continue;
 break;
 }
 null != d && e.select(d, !0);
@@ -3040,16 +3040,16 @@ u.filtered = function() {
 return this.lastSearch || "";
 };
 u.filter = function(a, b) {
-var c, e = this.listTable, d = this.lastFound, g = this.lastSearch;
+var c, e = this.listTable, d = this.lastFound, h = this.lastSearch;
 if (a) {
-if (g === a) return d || 0;
-if (g && !d && 0 === a.indexOf(g)) return 0;
+if (h === a) return d || 0;
+if (h && !d && 0 === a.indexOf(h)) return 0;
 c = this.dict.find(a);
 }
-this.lastSearch = g = a;
+this.lastSearch = h = a;
 this.lastFound = d = c ? c.length : this.po.length;
 c ? e.filter(c) : e.unfilter();
-b || this.fire("poFilter", [ g, d ]);
+b || this.fire("poFilter", [ h, d ]);
 return d;
 };
 u.countFiltered = function() {
@@ -3067,8 +3067,8 @@ u.markUnsaved = function(a) {
 var b = this.po.indexOf(a);
 if ((b = this.listTable.tr(b)) && b.length) {
 var c = b[0].className;
-a = c.replace(/(?:^| +)po-[a-z]+/g, "") + " " + n(a);
-a !== c && h(b).attr("class", a);
+a = c.replace(/(?:^| +)po-[a-z]+/g, "") + " " + m(a);
+a !== c && k(b).attr("class", a);
 }
 };
 u.save = function(a) {
@@ -3082,7 +3082,7 @@ return b;
 u.fire = function(a, b) {
 var c = this.handle;
 if (c && c[a] && (c = c[a].apply(this, b || []), !1 === c)) return !1;
-c = h.Event(a);
+c = k.Event(a);
 this.$().trigger(c, b);
 return !c.isDefaultPrevented();
 };
@@ -3094,30 +3094,30 @@ u.getSorter = function() {
 return null;
 };
 u.reload = function() {
-var a = this, b, c = a.listCell, e = a.listTable, d = a.po, g = d && d.locale(), l = g && g.isRTL(), m = d && d.length || 0;
+var a = this, b, c = a.listCell, e = a.listTable, d = a.po, h = d && d.locale(), g = h && h.isRTL(), q = d && d.length || 0;
 if (!d || !d.row) return c && c.clear().header("Error").contents("Invalid messages list"), 
 !1;
-a.targetLocale = g;
-a.lastSearch && (a.lastSearch = "", a.lastFound = m, a.fire("poFilter", [ "", m ]));
+a.targetLocale = h;
+a.lastSearch && (a.lastSearch = "", a.lastFound = q, a.fire("poFilter", [ "", q ]));
 e && (b = e.thead().distribution());
 a.listTable = e = c.tabulate({
 eachCol: function(b) {
-var c, e, d = a.getListColumns(), g = a.getListHeadings();
-for (e in d) c = d[e], b(c, e, g[c]);
+var c, e, d = a.getListColumns(), h = a.getListHeadings();
+for (e in d) c = d[e], b(c, e, h[c]);
 },
 eachRow: function(b) {
 d.each(function(c, e) {
-b(e.idx, a.getListEntry(e), n(e));
+b(e.idx, a.getListEntry(e), m(e));
 });
 },
 sort: a.getSorter()
 });
-var k, c = a.getListColumns();
-for (k in c) e.sortable(c[k]);
+var l, c = a.getListColumns();
+for (l in c) e.sortable(c[l]);
 b && e.thead().distribute(b);
-e.tbody().$(l ? "addClass" : "removeClass", [ "is-rtl" ]);
+e.tbody().$(g ? "addClass" : "removeClass", [ "is-rtl" ]);
 a.fire("poLoad");
-return !!m;
+return !!q;
 };
 u.load = function(a, b) {
 this.po = a;
@@ -3149,27 +3149,27 @@ u.setStatus = function() {
 return null;
 };
 u.setSrcMeta = function(a, b) {
-var e = [], d, g = !1, l = this.$smeta, m = this.labels, k = [], f = a.tags(), z = f && f.length;
-if (d = a.context()) k.push("<span>" + r(m[s]) + "</span>"), k.push("<mark>" + r(d) + "</mark>");
-if (z && this.getTag) for (k.push("<span>Tagged:</span>"); 0 <= --z; ) (d = this.getTag(f[z])) && k.push('<mark class="tag">' + r(d.mod_name) + "</mark>");
-k.length && e.push(k.join(" "));
-if (this.getMono() && (d = a.refs()) && (f = d.split(/\s/), z = f.length)) {
-for (k = []; 0 <= --z; ) d = f[z], k.push("<code>" + r(d) + "</code>");
-e.push('<p class="has-icon icon-file">' + k.join(" ") + "</p>");
+var e = [], d, h = !1, g = this.$smeta, q = this.labels, l = [], f = a.tags(), p = f && f.length;
+if (d = a.context()) l.push("<span>" + r(q[s]) + "</span>"), l.push("<mark>" + r(d) + "</mark>");
+if (p && this.getTag) for (l.push("<span>Tagged:</span>"); 0 <= --p; ) (d = this.getTag(f[p])) && l.push('<mark class="tag">' + r(d.mod_name) + "</mark>");
+l.length && e.push(l.join(" "));
+if (this.getMono() && (d = a.refs()) && (f = d.split(/\s/), p = f.length)) {
+for (l = []; 0 <= --p; ) d = f[p], l.push("<code>" + r(d) + "</code>");
+e.push('<p class="has-icon icon-file">' + l.join(" ") + "</p>");
 }
 (d = a.notes()) && e.push('<p class="has-icon icon-info">' + r(d, !0) + "</p>");
-e.length ? (l || (l = b.find("div.meta"), l.length || (l = h('<div class="meta"></div>').insertAfter(b.header())), 
-c(this, l, "poMeta"), this.$smeta = l), l.html(e.join("\n")).show(), g = !0) : l && l.text() && (l.text("").hide(), 
-g = !0);
-return g;
+e.length ? (g || (g = b.find("div.meta"), g.length || (g = k('<div class="meta"></div>').insertAfter(b.header())), 
+c(this, g, "poMeta"), this.$smeta = g), g.html(e.join("\n")).show(), h = !0) : g && g.text() && (g.text("").hide(), 
+h = !0);
+return h;
 };
 u.setTrgMeta = function(a, b, c) {
-var e = [], d = !1, g = this.$tmeta;
+var e = [], d = !1, h = this.$tmeta;
 b = (a = a.errors(b)) && a.length;
-var l;
-if (b) for (l = 0; l < b; l++) e.push('<p class="has-icon icon-warn">' + r(a[l], !0) + ".</p>");
-e.length ? (g || (g = c.find("div.meta"), g.length || (g = h('<div class="meta"></div>').insertAfter(c.header())), 
-this.$tmeta = g), g.html(e.join("\n")).show(), d = !0) : g && g.text() && (g.text("").hide(), 
+var g;
+if (b) for (g = 0; g < b; g++) e.push('<p class="has-icon icon-warn">' + r(a[g], !0) + ".</p>");
+e.length ? (h || (h = c.find("div.meta"), h.length || (h = k('<div class="meta"></div>').insertAfter(c.header())), 
+this.$tmeta = h), h.html(e.join("\n")).show(), d = !0) : h && h.text() && (h.text("").hide(), 
 d = !0);
 return d;
 };
@@ -3182,101 +3182,101 @@ e[0] = a.charAt(0).toUpperCase() + a.substr(1).toLowerCase();
 return e.join(" ");
 }
 function d(a, e) {
-var m = J, h = L[l];
+var h = J, k = L[q];
 a.off();
-a.titled() !== h && k(a, h, e || "en");
-h = !1;
-r.setSrcMeta(b, a) && (h = !0);
+a.titled() !== k && g(a, k, e || "en");
+k = !1;
+r.setSrcMeta(b, a) && (k = !0);
 if (b.plural()) {
-var h = -1, s = [], q = [], A = a.id + "-", n = b.sourceForms() || e && e.plurals || [ "One", "Other" ], p = n.length;
-if (2 !== p || "=" === n[0].charAt(0) && "=1" !== n[0]) for (;++h < p; ) s[h] = A + String(h), 
-q[h] = c(n[h]) + ":"; else s = [ A + "-0", A + "-1" ], q = [ L[g], L[z] ];
-a.splity.apply(a, s);
+var k = -1, p = [], s = [], z = a.id + "-", m = b.sourceForms() || e && e.plurals || [ "One", "Other" ], n = m.length;
+if (2 !== n || "=" === m[0].charAt(0) && "=1" !== m[0]) for (;++k < n; ) p[k] = z + String(k), 
+s[k] = c(m[k]) + ":"; else p = [ z + "-0", z + "-1" ], s = [ L[l], L[A] ];
+a.splity.apply(a, p);
 a.each(function(a, c) {
-a.header(q[c]).textarea(b.source(null, c), m).setStrf(C).setMode(x).setInvs(w);
+a.header(s[c]).textarea(b.source(null, c), h).setStrf(C).setMode(x).setInvs(w);
 });
 a.lock();
-m && a.each(function(a, b) {
+h && a.each(function(a, b) {
 f(a, b);
 });
-} else h && a.redraw(), a.textarea(b.source(), m).setStrf(C).setMode(x).setInvs(w), 
-m && f(a, 0);
+} else k && a.redraw(), a.textarea(b.source(), h).setStrf(C).setMode(x).setInvs(w), 
+h && f(a, 0);
 }
 function f(c, d) {
 c.on(e, function(a, c) {
 b.source(c, d);
 0 === d && r.updateListCell(b, "source");
 r.unsave(b, d);
-}).on(m, function() {
+}).on(h, function() {
 0 === d && r.po.reIndex(b);
 r.dict && r.rebuildSearch();
 r.fire(a, [ b ]);
 });
 }
-function h(a, e, d) {
+function k(a, e, d) {
 M && a.eachTextarea(function(a) {
 a.ping();
 });
 a.off();
-var g = e.isKnown() && e.label || "Target", g = y(L[A], g);
-a.titled() !== g && k(a, g, e);
-g = !1;
-!this.sourceCell && r.setSrcMeta(b, a) && (g = !0);
-r.setTrgMeta(b, d, a) && (g = !0);
+var h = e.isKnown() && e.label || "Target", h = y(L[z], h);
+a.titled() !== h && g(a, h, e);
+h = !1;
+!this.sourceCell && r.setSrcMeta(b, a) && (h = !0);
+r.setTrgMeta(b, d, a) && (h = !0);
 r.setStatus(b, d);
 if (1 !== e.nplurals && b.pluralized()) {
-var l = [], m = [], f = a.id + "-", z = b.targetForms() || e.plurals || [ "One", "Other" ], g = z.length, s = function(a) {
-var b = z[a];
-m.push(b ? c(b, !0) : "Form " + a);
-l.push(f + String(a));
+var q = [], l = [], f = a.id + "-", p = b.targetForms() || e.plurals || [ "One", "Other" ], h = p.length, A = function(a) {
+var b = p[a];
+l.push(b ? c(b, !0) : "Form " + a);
+q.push(f + String(a));
 };
-for (b.each(s); (e = l.length) < g; ) s(e);
-a.splitx.apply(a, l);
+for (b.each(A); (e = q.length) < h; ) A(e);
+a.splitx.apply(a, q);
 a.each(function(a, c) {
 var e = M && !b.disabled(c);
 a.textarea(b.translation(c), e).setStrf(C).setMode(x).setInvs(w);
-M && n(a, c);
+M && m(a, c);
 });
-a.navigize(m, d || null).on("wgTabSelect", function(c, e) {
+a.navigize(l, d || null).on("wgTabSelect", function(c, e) {
 var d = M && c.cell.editable();
 d && d.focus();
 r.setTrgMeta(b, e, a);
 r.setStatus(b, e);
 r.fire("poTab", [ e ]);
 });
-} else g && a.redraw(), a.textarea(b.translation(), M && !b.disabled(0)).setStrf(C).setMode(x).setInvs(w), 
-M && n(a, 0);
+} else h && a.redraw(), a.textarea(b.translation(), M && !b.disabled(0)).setStrf(C).setMode(x).setInvs(w), 
+M && m(a, 0);
 }
-function n(c, d) {
+function m(c, d) {
 c.on(e, function(a, c, e) {
 b.translate(c, d);
 0 === d && r.updateListCell(b, "target");
 b.fuzzy(d) ? r.fuzzy(!1, b, d) : r.unsave(b, d);
 "" === c ? (r.fire("poEmpty", [ !0, b, d ]), r.setStatus(b, d)) : "" === e && (r.fire("poEmpty", [ !1, b, d ]), 
 r.setStatus(b, d));
-}).on(m, function() {
+}).on(h, function() {
 r.dict && r.rebuildSearch();
 r.fire(a, [ b ]);
 });
 }
-function p(c) {
+function n(c) {
 c.off();
 var d = L[s];
-c.titled() !== d && (k(c, d), r.setStatus(null));
+c.titled() !== d && (g(c, d), r.setStatus(null));
 c.textarea(b.context(), !0).setMode(x).setInvs(w);
 X && c.on(e, function(a, c) {
 b.context(c);
 r.updateListCell(b, "source");
 r.unsave(b, O);
-}).on(m, function() {
+}).on(h, function() {
 r.po.reIndex(b);
 r.dict && r.rebuildSearch();
 r.fire(a, [ b ]);
 });
 }
 function u(a) {
-var c = L[q];
-a.titled() !== c && k(a, c);
+var c = L[p];
+a.titled() !== c && g(a, c);
 a.off().on(e, function(a, c) {
 b.comment(c);
 r.fire("poComment", [ b, c ]);
@@ -3287,8 +3287,8 @@ var r = this, x = r.mode, D = b.isHTML(), w = r.inv || !1, E = this.fmt || null,
 r.html !== D && (r.html = D, "code" !== r.mode && (x = D ? "html" : "", r.setMode(x)));
 r.active = b;
 T && d(T, Y);
-U && p(U);
-S && W && (O = S.navigated() || 0, h(S, W, O));
+U && n(U);
+S && W && (O = S.navigated() || 0, k(S, W, O));
 V && u(V);
 P && (P.exists() || (P = P.parent()), (D = P.editable()) && D.focus());
 E !== C && (this.fmt = C);
@@ -3406,8 +3406,8 @@ return this;
 u = null;
 return f;
 }({}, y, w));
-p.register("$13", function(f, d, D) {
-function n() {
+n.register("$13", function(f, d, D) {
+function m() {
 this.init()._validate();
 this.sourceLocale = {
 lang: "en",
@@ -3415,38 +3415,38 @@ label: "English",
 plurals: [ "One", "Other" ]
 };
 }
-function k(a) {
-a = h('<button type="button" class="button button-small icon icon-' + a + ' hastip"></button>');
-p.require("$12", "tooltip.js").init(a);
+function g(a) {
+a = k('<button type="button" class="button button-small icon icon-' + a + ' hastip"></button>');
+n.require("$12", "tooltip.js").init(a);
 return a;
 }
 function c(a) {
-return k("cloud").attr("title", a.labels[8] + " (Ctrl-U)").on("click", function(b) {
+return g("cloud").attr("title", a.labels[8] + " (Ctrl-U)").on("click", function(b) {
 b.preventDefault();
 a.focus().fuzzy(!a.fuzzy());
 });
 }
 function b(a) {
-return k("robot").attr("title", a.labels[9] + " (Ctrl-J)").on("click", function(b) {
+return g("robot").attr("title", a.labels[9] + " (Ctrl-J)").on("click", function(b) {
 b.preventDefault();
 a.fire("poHint");
 });
 }
-d = p.require("$24", "base.js");
+d = n.require("$24", "base.js");
 f.init = function(a) {
-var b = new n();
+var b = new m();
 a = b.setRootCell(a);
-var c = a.splity("po-list", "po-edit"), d = c[0], g = c[1], c = g.splitx("po-trans", "po-comment"), k = c[0], f = c[1].header("Loading.."), c = k.splity("po-source", "po-target"), k = c[0].header("Loading.."), c = c[1].header("Loading..");
+var c = a.splity("po-list", "po-edit"), d = c[0], g = c[1], c = g.splitx("po-trans", "po-comment"), f = c[0], k = c[1].header("Loading.."), c = f.splity("po-source", "po-target"), f = c[0].header("Loading.."), c = c[1].header("Loading..");
 a.distribute([ .34 ]);
 g.distribute([ .8 ]);
 b.setListCell(d);
-b.setSourceCell(k);
+b.setSourceCell(f);
 b.setTargetCell(c);
-b.commentCell = f;
+b.commentCell = k;
 b.editable.source = !1;
 return b;
 };
-d = n.prototype = d.extend(n);
+d = m.prototype = d.extend(m);
 d.getListHeadings = function() {
 var a = this.t || {
 _x: function(a) {
@@ -3465,8 +3465,8 @@ return a;
 };
 d.getListEntry = function(a) {
 var b = this.cellText, c = [ function() {
-var c, d = b(a.source() || ""), k = a.context();
-return k ? (c = D.createElement("p"), c.appendChild(D.createElement("mark")).innerText = k, 
+var c, d = b(a.source() || ""), h = a.context();
+return h ? (c = D.createElement("p"), c.appendChild(D.createElement("mark")).innerText = h, 
 c.appendChild(D.createTextNode(" " + d)), c) : d;
 } ];
 this.targetLocale && (c[1] = function() {
@@ -3512,7 +3512,7 @@ return !this._unlocked;
 d.setStatus = function(a) {
 var e = this.$tnav;
 if (null == a) e && (e.remove(), this.$tnav = null); else {
-e || (this.$tnav = e = h("<nav></nav>").append(c(this)).append(b(this)).appendTo(this.targetCell.header()));
+e || (this.$tnav = e = k("<nav></nav>").append(c(this)).append(b(this)).appendTo(this.targetCell.header()));
 var d = [];
 a.translated() ? a.fuzzy() && d.push("po-fuzzy") : d.push("po-empty");
 e.attr("class", d.join(" "));
@@ -3520,24 +3520,24 @@ e.attr("class", d.join(" "));
 };
 d.getSorter = function() {
 function a(a, c) {
-var d = a.weight(), k = c.weight();
-return d === k ? b(a, c) : d > k ? -1 : 1;
+var d = a.weight(), h = c.weight();
+return d === h ? b(a, c) : d > h ? -1 : 1;
 }
 function b(a, c) {
 return a.hash().localeCompare(c.hash());
 }
 var c = this;
 return function(d) {
-var g = c.po, k = c.locked() ? a : b;
+var g = c.po, f = c.locked() ? a : b;
 d.sort(function(a, b) {
-return k(g.row(a), g.row(b));
+return f(g.row(a), g.row(b));
 });
 };
 };
 return f;
 }({}, y, w));
-p.register("$14", function(f, d, p) {
-var n = {
+n.register("$14", function(f, d, n) {
+var m = {
 copy: 66,
 clear: 75,
 save: 83,
@@ -3547,7 +3547,7 @@ prev: 38,
 enter: 13,
 invis: 73,
 hint: 74
-}, k = {
+}, g = {
 38: !0,
 40: !0,
 73: !0
@@ -3583,42 +3583,42 @@ f.init = function(b, a) {
 function e(a) {
 if (a.isDefaultPrevented() || !a.metaKey && !a.ctrlKey) return !0;
 var e = a.which;
-if (!m[e]) return !0;
+if (!h[e]) return !0;
 var d = c[e];
 if (!d) throw Error("command undefined #" + e);
-if (a.altKey || a.shiftKey && !k[e] || !1 === d(a, b)) return !0;
+if (a.altKey || a.shiftKey && !g[e] || !1 === d(a, b)) return !0;
 a.stopPropagation();
 a.preventDefault();
 return !1;
 }
-var m = {};
-h(a || d).on("keydown", e);
+var h = {};
+k(a || d).on("keydown", e);
 return {
 add: function(a, b) {
-c[n[a]] = b;
+c[m[a]] = b;
 return this;
 },
 enable: function() {
 var a, b;
-for (b in arguments) a = n[arguments[b]], m[a] = !0;
+for (b in arguments) a = m[arguments[b]], h[a] = !0;
 return this;
 },
 disable: function() {
-h(a || d).off("keydown", e);
-b = a = m = null;
+k(a || d).off("keydown", e);
+b = a = h = null;
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$25", function(f, d, h) {
-function n() {
+n.register("$25", function(f, d, k) {
+function m() {
 this.reIndex([]);
 }
 f.init = function() {
-return new n();
+return new m();
 };
-d = n.prototype;
+d = m.prototype;
 d.reIndex = function(d) {
 for (var c = {}, b = -1, a = d.length; ++b < a; ) c[d[b]] = b;
 this.keys = d;
@@ -3667,11 +3667,11 @@ for (var c = -1, b = this.keys, a = this.length; ++c < a; ) d(b[c], this[c], c);
 return this;
 };
 d.sort = function(d) {
-for (var c = -1, b = this.length, a, e = this.keys, m = this.ords, l = []; ++c < b; ) l[c] = [ this[c], e[c] ];
-l.sort(function(a, b) {
+for (var c = -1, b = this.length, a, e = this.keys, h = this.ords, f = []; ++c < b; ) f[c] = [ this[c], e[c] ];
+f.sort(function(a, b) {
 return d(a[0], b[0]);
 });
-for (c = 0; c < b; c++) a = l[c], this[c] = a[0], a = a[1], e[c] = a, m[a] = c;
+for (c = 0; c < b; c++) a = f[c], this[c] = a[0], a = a[1], e[c] = a, h[a] = c;
 return this;
 };
 d.join = function(d) {
@@ -3680,28 +3680,28 @@ return [].join.call(this, d);
 d = null;
 return f;
 }({}, y, w));
-p.register("$26", function(f, d, h) {
-function n(d, c) {
+n.register("$26", function(f, d, k) {
+function m(d, c) {
 var b = RegExp("^.{0," + (d - 1) + "}[" + c + "]"), a = RegExp("^[^" + c + "]+");
-return function(c, m) {
-for (var l = c.length, g; l > d; ) {
-g = b.exec(c) || a.exec(c);
-if (null == g) break;
-g = g[0];
-m.push(g);
-g = g.length;
-l -= g;
-c = c.substr(g);
+return function(c, h) {
+for (var f = c.length, l; f > d; ) {
+l = b.exec(c) || a.exec(c);
+if (null == l) break;
+l = l[0];
+h.push(l);
+l = l.length;
+f -= l;
+c = c.substr(l);
 }
-0 !== l && m.push(c);
-return m;
+0 !== f && h.push(c);
+return h;
 };
 }
 f.create = function(d) {
 function c(a) {
-return g[a] || "\\" + a;
+return l[a] || "\\" + a;
 }
-var b, a, e = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g, m = /[ \r\n]+/g, l = /[\t\v\f\x07\x08\\\"]/g, g = {
+var b, a, e = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g, h = /[ \r\n]+/g, f = /[\t\v\f\x07\x08\\\"]/g, l = {
 "\t": "\\t",
 "\v": "\\v",
 "\f": "\\f",
@@ -3709,27 +3709,27 @@ var b, a, e = /(?:\r\n|[\r\n\v\f\u2028\u2029])/g, m = /[ \r\n]+/g, l = /[\t\v\f\
 "\b": "\\b"
 };
 if (null == d || isNaN(d = Number(d))) d = 79;
-0 < d && (b = n(d - 3, " "), a = n(d - 2, "-– \\.,:;\\?!\\)\\]\\}\\>"));
+0 < d && (b = m(d - 3, " "), a = m(d - 2, "-– \\.,:;\\?!\\)\\]\\}\\>"));
 return {
-pair: function(b, g) {
-if (!g) return b + ' ""';
-g = g.replace(l, c);
-var m = 0;
-g = g.replace(e, function() {
-m++;
+pair: function(b, h) {
+if (!h) return b + ' ""';
+h = h.replace(f, c);
+var l = 0;
+h = h.replace(e, function() {
+l++;
 return "\\n\n";
 });
-if (!(m || d && d < g.length + b.length + 3)) return b + ' "' + g + '"';
-var f = [ b + ' "' ], h = g.split("\n");
-if (a) for (var n = -1, p = h.length; ++n < p; ) a(h[n], f); else f = f.concat(h);
-return f.join('"\n"') + '"';
+if (!(l || d && d < h.length + b.length + 3)) return b + ' "' + h + '"';
+var k = [ b + ' "' ], m = h.split("\n");
+if (a) for (var n = -1, r = m.length; ++n < r; ) a(m[n], k); else k = k.concat(m);
+return k.join('"\n"') + '"';
 },
 prefix: function(a, b) {
 var c = a.split(e);
 return b + c.join("\n" + b);
 },
 refs: function(a) {
-a = a.replace(m, " ", a);
+a = a.replace(h, " ", a);
 b && (a = b(a, []).join("\n#: "));
 return "#: " + a;
 }
@@ -3737,14 +3737,14 @@ return "#: " + a;
 };
 return f;
 }({}, y, w));
-p.register("$40", function(f, d, h) {
-function n() {
+n.register("$40", function(f, d, k) {
+function m() {
 this.length = 0;
 }
 f.init = function() {
-return new n();
+return new m();
 };
-d = n.prototype;
+d = m.prototype;
 d.push = function(d) {
 this[this.length++] = d;
 return this;
@@ -3759,12 +3759,12 @@ return this;
 };
 return f;
 }({}, y, w));
-p.register("$27", function(f, d, h) {
-function n() {}
+n.register("$27", function(f, d, k) {
+function m() {}
 f.extend = function(d) {
-return d.prototype = new n();
+return d.prototype = new m();
 };
-d = n.prototype = p.require("$38", "abstract.js").init([ "add", "load" ]);
+d = m.prototype = n.require("$38", "abstract.js").init([ "add", "load" ]);
 d.row = function(d) {
 return this.rows[d];
 };
@@ -3782,7 +3782,7 @@ this.loc = null;
 return d;
 };
 d.locale = function(d) {
-null == d ? d = this.loc : this.loc = d = p.require("$37", "locale.js").cast(d);
+null == d ? d = this.loc : this.loc = d = n.require("$37", "locale.js").cast(d);
 return d;
 };
 d.each = function(d) {
@@ -3820,25 +3820,25 @@ this.rows.sort(d);
 return this;
 };
 d["export"] = function() {
-for (var d = -1, c = this.rows, b = c.length, a = p.require("$40", "list.js").init(); ++d < b; ) a.push(c[d]);
+for (var d = -1, c = this.rows, b = c.length, a = n.require("$40", "list.js").init(); ++d < b; ) a.push(c[d]);
 return a;
 };
 d = null;
 return f;
 }({}, y, w));
-p.register("$28", function(f, d, h) {
-function n(c, b, a) {
+n.register("$28", function(f, d, k) {
+function m(c, b, a) {
 if (null == a) return c[b] || "";
 c[b] = a || "";
 return c;
 }
-function k() {
+function g() {
 this._id = this.id = "";
 }
 f.extend = function(c) {
-return c.prototype = new k();
+return c.prototype = new g();
 };
-d = k.prototype;
+d = g.prototype;
 d.flag = function(c, b) {
 var a = this.flg || (this.flg = []);
 if (null != b) a[b] = c; else for (var d = Math.max(a.length, this.src.length, this.msg.length); 0 !== d--; ) a[d] = c;
@@ -3851,7 +3851,7 @@ for (c = b.length; 0 !== c--; ) if (b[c]) return !0;
 return !1;
 };
 d.flags = function() {
-for (var c, b = {}, a = [], d = this.flg || [], m = d.length; 0 !== m--; ) c = d[m], 
+for (var c, b = {}, a = [], d = this.flg || [], h = d.length; 0 !== h--; ) c = d[h], 
 b[c] || (b[c] = !0, a.push(c));
 return a;
 };
@@ -3883,7 +3883,7 @@ d.targetForms = function() {
 return this.msgF;
 };
 d.each = function(c) {
-for (var b = -1, a = this.src, d = this.msg, m = Math.max(a.length, d.length); ++b < m; ) c(b, a[b], d[b]);
+for (var b = -1, a = this.src, d = this.msg, h = Math.max(a.length, d.length); ++b < h; ) c(b, a[b], d[b]);
 return this;
 };
 d.count = function() {
@@ -3922,19 +3922,19 @@ for (c = 0; c < a; c++) if (b[c]) return !1;
 return !0;
 };
 d.comment = function(c) {
-return n(this, "cmt", c);
+return m(this, "cmt", c);
 };
 d.notes = function(c) {
-return n(this, "xcmt", c);
+return m(this, "xcmt", c);
 };
 d.refs = function(c) {
-return n(this, "rf", c);
+return m(this, "rf", c);
 };
 d.format = function(c) {
-return n(this, "fmt", c);
+return m(this, "fmt", c);
 };
 d.context = function(c) {
-return n(this, "ctx", c);
+return m(this, "ctx", c);
 };
 d.tags = function() {
 return this.tg;
@@ -3989,8 +3989,8 @@ this.htm = c;
 d = null;
 return f;
 }({}, y, w));
-p.register("$15", function(f, d, h) {
-function n(a) {
+n.register("$15", function(f, d, k) {
+function m(a) {
 return {
 "Project-Id-Version": "PACKAGE VERSION",
 "Report-Msgid-Bugs-To": "",
@@ -4005,7 +4005,7 @@ Language: "",
 "Content-Transfer-Encoding": "8bit"
 };
 }
-function k(a, b) {
+function g(a, b) {
 var c = a || "";
 b && (c += "\0" + b);
 return c;
@@ -4015,12 +4015,12 @@ var b = d.console;
 b && b.error && b.error(a.message || String(a));
 }
 function b(a) {
-return p.require("$26", "format.js").create(a);
+return n.require("$26", "format.js").create(a);
 }
 function a(a) {
 this.locale(a);
 this.clear();
-this.head = n(this.now());
+this.head = m(this.now());
 }
 function e(a, b) {
 this.src = [ a || "" ];
@@ -4029,13 +4029,13 @@ this.msg = [ b || "" ];
 f.create = function(b) {
 return new a(b);
 };
-h = p.require("$27", "messages.js").extend(a);
-h.clear = function() {
-this.rows = p.require("$25", "collection.js").init();
+k = n.require("$27", "messages.js").extend(a);
+k.clear = function() {
+this.rows = n.require("$25", "collection.js").init();
 this.length = 0;
 return this;
 };
-h.now = function() {
+k.now = function() {
 function a(b, c) {
 for (var d = String(b); d.length < c; ) d = "0" + d;
 return d;
@@ -4043,14 +4043,14 @@ return d;
 var b = new Date(), c = b.getUTCFullYear(), d = b.getUTCMonth() + 1, e = b.getUTCDate(), f = b.getUTCHours(), b = b.getUTCMinutes();
 return a(c, 4) + "-" + a(d, 2) + "-" + a(e, 2) + " " + a(f, 2) + ":" + a(b, 2) + "+0000";
 };
-h.header = function(a, b) {
+k.header = function(a, b) {
 var c = this.head || (this.head = {});
 if (null == b) return this.headers()[a] || "";
 c[a] = b || "";
 return this;
 };
-h.headers = function(a) {
-var b, c = this.now(), d = this.head || (this.head = n(c));
+k.headers = function(a) {
+var b, c = this.now(), d = this.head || (this.head = m(c));
 if (null != a) {
 for (b in a) d[b] = a[b];
 return this;
@@ -4066,11 +4066,11 @@ a[b] || (a[b] = c);
 a["X-Generator"] = "Loco https://localise.biz/";
 return a;
 };
-h.get = function(a, b) {
-var c = k(a, b);
+k.get = function(a, b) {
+var c = g(a, b);
 return this.rows.get(c);
 };
-h.add = function(a, b) {
+k.add = function(a, b) {
 a instanceof e || (a = new e(a));
 b && a.context(b);
 var d = a.hash();
@@ -4078,57 +4078,57 @@ this.rows.get(d) ? c("Duplicate message at index " + this.indexOf(a)) : (a.idx =
 this.length = this.rows.length);
 return a;
 };
-h.load = function(a) {
-for (var b = -1, d, f, k, h, q, n, p = (k = this.locale()) && k.nplurals || 2, r = []; ++b < a.length; ) d = a[b], 
-null == d.parent ? (f = d.source || d.id, k = d.target || "", h = d.context, f || h ? (q = new e(f, k), 
-q._id = d._id, h && q.context(h), d.flag && q.flag(d.flag, 0), d.comment && q.comment(d.comment), 
-d.notes && q.notes(d.notes), d.refs && q.refs(d.refs), q.format(d.format), d.message = q, 
-this.add(q), d.prev && d.prev[0] && (q.prev(d.prev[0].source, d.prev[0].context), 
-d.prev[1] && q._src.push(d.prev[1].source || ""))) : 0 === b && "object" === typeof k && (this.head = k, 
+k.load = function(a) {
+for (var b = -1, d, f, g, k, p, m, n = (g = this.locale()) && g.nplurals || 2, r = []; ++b < a.length; ) d = a[b], 
+null == d.parent ? (f = d.source || d.id, g = d.target || "", k = d.context, f || k ? (p = new e(f, g), 
+p._id = d._id, k && p.context(k), d.flag && p.flag(d.flag, 0), d.comment && p.comment(d.comment), 
+d.notes && p.notes(d.notes), d.refs && p.refs(d.refs), p.format(d.format), d.message = p, 
+this.add(p), d.prev && d.prev[0] && (p.prev(d.prev[0].source, d.prev[0].context), 
+d.prev[1] && p._src.push(d.prev[1].source || ""))) : 0 === b && "object" === typeof g && (this.head = g, 
 this.headcmt = d.comment)) : r.push(d);
 for (b = -1; ++b < r.length; ) try {
 d = r[b];
 f = d.source || d.id;
-q = a[d.parent] && a[d.parent].message;
-if (!q) throw Error("parent missing for plural " + f);
-n = d.plural;
-1 === n && q.plural(f);
-n >= p || (d.flag && q.flag(d.flag, n), q.translate(d.target || "", n), d.format && !q.format() && q.format(d.format));
+p = a[d.parent] && a[d.parent].message;
+if (!p) throw Error("parent missing for plural " + f);
+m = d.plural;
+1 === m && p.plural(f);
+m >= n || (d.flag && p.flag(d.flag, m), p.translate(d.target || "", m), d.format && !p.format() && p.format(d.format));
 } catch (w) {
 c(w);
 }
 return this;
 };
-h.wrap = function(a) {
+k.wrap = function(a) {
 this.fmtr = b(a);
 return this;
 };
-h.toString = function() {
-var a, c = this.locale(), d = [], f = [], k = this.headers(), h = !c, n = c && c.nplurals || 2, p = this.fmtr || b();
-k[c ? "PO-Revision-Date" : "POT-Creation-Date"] = this.now();
-for (a in k) f.push(a + ": " + k[a]);
+k.toString = function() {
+var a, c = this.locale(), d = [], f = [], g = this.headers(), k = !c, p = c && c.nplurals || 2, m = this.fmtr || b();
+g[c ? "PO-Revision-Date" : "POT-Creation-Date"] = this.now();
+for (a in g) f.push(a + ": " + g[a]);
 f = new e("", f.join("\n"));
 f.comment(this.headcmt || "");
-h && f.fuzzy(0, !0);
+k && f.fuzzy(0, !0);
 d.push(f.toString());
 d.push("");
 this.rows.each(function(a, b) {
-a && (d.push(b.cat(p, h, n)), d.push(""));
+a && (d.push(b.cat(m, k, p)), d.push(""));
 });
 return d.join("\n");
 };
-h = p.require("$28", "message.js").extend(e);
-h.prev = function(a, b) {
+k = n.require("$28", "message.js").extend(e);
+k.prev = function(a, b) {
 this._src = [ a || "" ];
 this._ctx = b;
 };
-h.hash = function() {
-return k(this.source(), this.context());
+k.hash = function() {
+return g(this.source(), this.context());
 };
-h.toString = function() {
+k.toString = function() {
 return this.cat(b());
 };
-h.cat = function(a, b, c) {
+k.cat = function(a, b, c) {
 var d, e = [], f;
 (f = this.cmt) && e.push(a.prefix(f, "# "));
 (f = this.xcmt) && e.push(a.prefix(f, "#. "));
@@ -4145,7 +4145,7 @@ if (null == this.src[1]) e.push(a.pair("msgstr", b ? "" : this.msg[0])); else fo
 e.push(a.pair("msgid_plural", this.src[1])), f = this.msg || [ "", "" ], c = c || f.length; ++d < c; ) e.push(a.pair("msgstr[" + d + "]", b ? "" : f[d] || ""));
 return e.join("\n");
 };
-h.compare = function(a, b) {
+k.compare = function(a, b) {
 var c = this.weight(), d = a.weight();
 if (c > d) return 1;
 if (c < d) return -1;
@@ -4157,19 +4157,19 @@ if (c > d) return -1;
 }
 return 0;
 };
-h.copy = function() {
+k.copy = function() {
 var a = new e(), b, c;
 for (b in this) this.hasOwnProperty(b) && ((c = this[b]) && c.concat && (c = c.concat()), 
 a[b] = c);
 return a;
 };
-h = h = null;
+k = k = null;
 return f;
 }({}, y, w));
-p.register("$17", function(f, d, p) {
+n.register("$17", function(f, d, n) {
 f.init = function(d, f) {
 function c() {
-return m || (m = h('<div id="loco-po-ref"></div>').dialog({
+return h || (h = k('<div id="loco-po-ref"></div>').dialog({
 dialogClass: "loco-modal loco-modal-wide",
 modal: !0,
 autoOpen: !1,
@@ -4179,45 +4179,45 @@ height: 500
 }));
 }
 function b(a, b, d) {
-a = h("<p></p>").text(d);
+a = k("<p></p>").text(d);
 c().dialog("close").html("").dialog("option", "title", "Error").append(a).dialog("open");
 }
 function a(a) {
 var b = a && a.code;
 if (b) {
-for (var d = -1, e = b.length, f = h("<ol></ol>").attr("class", a.type); ++d < e; ) h("<li></li>").html(b[d]).appendTo(f);
+for (var d = -1, e = b.length, f = k("<ol></ol>").attr("class", a.type); ++d < e; ) k("<li></li>").html(b[d]).appendTo(f);
 f.find("li").eq(a.line - 1).attr("class", "highlighted");
 c().dialog("close").html("").dialog("option", "title", a.path + ":" + a.line).append(f).dialog("open");
 }
 }
 function e(a) {
 a = a.target;
-var b = h(a).find("li.highlighted")[0], b = Math.max(0, (b && b.offsetTop || 0) - Math.floor(a.clientHeight / 2));
+var b = k(a).find("li.highlighted")[0], b = Math.max(0, (b && b.offsetTop || 0) - Math.floor(a.clientHeight / 2));
 a.scrollTop = b;
 }
-var m;
+var h;
 return {
-load: function(l) {
+load: function(h) {
 c().html('<div class="loco-loading"></div>').dialog("option", "title", "Loading..").off("dialogopen").dialog("open").on("dialogopen", e);
-l = h.extend({
-ref: l,
+h = k.extend({
+ref: h,
 path: f.popath
 }, f.project || {});
-d.ajax.post("fsReference", l, a, b);
+d.ajax.post("fsReference", h, a, b);
 }
 };
 };
 return f;
 }({}, y, w));
-p.register("$30", function(f, d, h) {
-function n(d) {
+n.register("$30", function(f, d, k) {
+function m(d) {
 this.api = d;
 this.chars = 0;
 }
 f.create = function(d) {
-return new n(d);
+return new m(d);
 };
-d = n.prototype;
+d = m.prototype;
 d.init = function(d, c) {
 function b(a) {
 var b = {
@@ -4229,24 +4229,24 @@ B.push(b);
 return x[a.html ? 1 : 0] = b;
 }
 function a(a, d) {
-var k = a.source(null, d);
-if (k && (a.untranslated(d) || c)) {
-var u = q[k];
+var g = a.source(null, d);
+if (g && (a.untranslated(d) || c)) {
+var u = p[g];
 if (u) u.push(a); else {
-var u = k.length, v = e.isHtml(k), v = x[v ? 1 : 0], B = v.sources;
-if (p && u > p) g++; else {
-if (v.length + u > n || B.length === h) v = b(v), B = v.sources;
-B.push(k);
-q[k] = [ a ];
+var u = g.length, v = e.isHtml(g), v = x[v ? 1 : 0], B = v.sources;
+if (s && u > s) l++; else {
+if (v.length + u > n || B.length === m) v = b(v), B = v.sources;
+B.push(g);
+p[g] = [ a ];
 v.length += u;
 f += u;
-l += 1;
+k += 1;
 }
 }
 }
 }
-var e = this.api, f = 0, l = 0, g = 0, h = 50, n = 1e4, p = e.maxChr(), q = {}, B = [], x = [];
-p && (n = Math.min(n, p));
+var e = this.api, f = 0, k = 0, l = 0, m = 50, n = 1e4, s = e.maxChr(), p = {}, B = [], x = [];
+s && (n = Math.min(n, s));
 b({
 html: !1
 });
@@ -4258,12 +4258,12 @@ a(c, 0);
 a(c, 1);
 });
 delete x;
-this.map = q;
+this.map = p;
 this.chars = f;
-this.length = l;
+this.length = k;
 this.batches = B;
 this.locale = d.locale();
-g && e.stderr("Strings over " + n + " characters long will be skipped");
+l && e.stderr("Strings over " + n + " characters long will be skipped");
 };
 d.abort = function() {
 this.state = "abort";
@@ -4271,46 +4271,46 @@ return this;
 };
 d.dispatch = function() {
 function d(a, b) {
-function e(c, d, g) {
-b !== g && (a === d || 1 < c && f.source(null, 1) === a) && (f.translate(b, c), 
-m++, r++);
-return m;
+function e(c, d, h) {
+b !== h && (a === d || 1 < c && f.source(null, 1) === a) && (f.translate(b, c), 
+p++, r++);
+return p;
 }
 if (!c()) return !1;
 if (!b) return !0;
-var f, g = n[a] || [], k = g.length, h = -1, m;
-for (B++; ++h < k; ) if (f = g[h]) m = 0, f.each(e), m && l("each", [ f ]);
+var f, h = n[a] || [], g = h.length, l = -1, p;
+for (B++; ++l < g; ) if (f = h[l]) p = 0, f.each(e), p && k("each", [ f ]);
 return !0;
 }
 function c() {
-return "abort" === g.state ? (h && (h.abort(), f()), !1) : !0;
+return "abort" === l.state ? (m && (m.abort(), f()), !1) : !0;
 }
 function b() {
-var b = p.shift(), c;
-b ? (c = b.sources) && c.length ? h.batch(c, q, b.html, d).fail(a).always(e) : e() : f();
+var b = s.shift(), c;
+b ? (c = b.sources) && c.length ? m.batch(c, p, b.html, d).fail(a).always(e) : e() : f();
 }
 function a() {
-g.abort();
+l.abort();
 f();
 }
 function e() {
 x++;
-l("prog", [ x, y ]);
+k("prog", [ x, y ]);
 c() && b();
 }
 function f() {
-h = p = null;
-l("done");
+m = s = null;
+k("done");
 }
-function l(a, b) {
+function k(a, b) {
 for (var c = u[a] || [], d = c.length; 0 <= --d; ) c[d].apply(null, b);
 }
-var g = this, h = g.api, n = g.map, p = g.batches || [], q = g.locale, B = 0, x = 0, r = 0, w = g.length, y = p.length, u = {
+var l = this, m = l.api, n = l.map, s = l.batches || [], p = l.locale, B = 0, x = 0, r = 0, w = l.length, y = s.length, u = {
 done: [],
 each: [],
 prog: []
 };
-g.state = "";
+l.state = "";
 b();
 return {
 done: function(a) {
@@ -4339,23 +4339,23 @@ return B;
 };
 return f;
 }({}, y, w));
-p.register("$41", {
+n.register("$41", {
 nn: [ "no" ]
 });
-p.register("$31", function(f, d, h) {
-function n() {}
-function k(c) {
+n.register("$31", function(f, d, k) {
+function m() {}
+function g(c) {
 c.parseError = function(b) {
 return b && b.code && 200 !== b.code && b.message ? "Error " + b.code + ": " + b.message : "";
 };
 c.batch = function(b, a, d, f) {
-function l(c) {
+function g(c) {
 for (var d = b.length, e = -1; ++e < d && !1 !== f(b[e], c[e] || "", a); ) ;
 }
 d = d ? "html" : "plain";
-var g = this.getSrc(), k = this.toLang(a);
+var k = this.getSrc(), m = this.toLang(a);
 return c._call({
-url: "https://translate.yandex.net/api/v1.5/tr.json/translate?format=" + d + "&lang=" + g + "-" + k,
+url: "https://translate.yandex.net/api/v1.5/tr.json/translate?format=" + d + "&lang=" + k + "-" + m,
 method: "POST",
 traditional: !0,
 data: {
@@ -4363,15 +4363,15 @@ key: c.key(),
 text: b
 }
 }).done(function(a, b, d) {
-a && 200 === a.code ? l(a.text || []) : (c.stderr(c.parseError(a) || c.httpError(d)), 
-l([]));
+a && 200 === a.code ? g(a.text || []) : (c.stderr(c.parseError(a) || c.httpError(d)), 
+g([]));
 }).fail(function() {
-l([]);
+g([]);
 });
 };
 }
 f.create = function(c) {
-var b = n.prototype = new c();
+var b = m.prototype = new c();
 b.toString = function() {
 return "Yandex.Translate";
 };
@@ -4383,70 +4383,70 @@ return "https://translate.yandex.com/";
 };
 b.init = function(a) {
 c.prototype.init.call(this, a);
-/^trnsl\./.test(this.key()) && k(this);
+/^trnsl\./.test(this.key()) && g(this);
 };
 b.toLang = function(a) {
-return this.mapLang(a, p.require("$41", "yandex.json"));
+return this.mapLang(a, n.require("$41", "yandex.json"));
 };
 b.maxChr = function() {
 return 1e4;
 };
-return new n();
+return new m();
 };
 return f;
 }({}, y, w));
-p.register("$42", {
+n.register("$42", {
 zh: [ "zh", "zh-CN", "zh-TW" ],
 he: [ "iw" ],
 jv: [ "jw" ]
 });
-p.register("$32", function(f, d, h) {
-function n() {}
+n.register("$32", function(f, d, k) {
+function m() {}
 f.create = function(d) {
-var c = n.prototype = new d();
-c.toString = function() {
+d = m.prototype = new d();
+d.toString = function() {
 return "Google Translate";
 };
-c.getId = function() {
+d.getId = function() {
 return "google";
 };
-c.getUrl = function() {
+d.getUrl = function() {
 return "https://translate.google.com/";
 };
-c.batch = function(b, a, d, f) {
-function l(d) {
-var e = b.length, g = -1, l;
-for (c.parseError = function(a) {
-if (a.error) {
-for (var b = [], c = a.error.errors || [], d = c.length, e = -1; ++e < d; ) b.push(c[e].message || "");
-return "Error " + a.error.code + ": " + b.join(";");
+d.parseError = function(c) {
+if (c.error) {
+for (var b = [], a = c.error.errors || [], d = a.length, f = -1; ++f < d; ) b.push(a[f].message || "");
+return "Error " + c.error.code + ": " + b.join(";");
 }
 return "";
-}; ++g < e && (l = d[g] || {}, !1 !== f(b[g], l.translatedText || "", a)); ) ;
+};
+d.batch = function(c, b, a, d) {
+function f(a) {
+for (var h = c.length, g = -1, k; ++g < h && (k = a[g] || {}, !1 !== d(c[g], k.translatedText || "", b)); ) ;
 }
-var g = this, h = this.getSrc();
-d = d ? "html" : "text";
-var k = g.mapLang(a, p.require("$42", "google.json"));
+var g = this, k = this.getSrc();
+a = a ? "html" : "text";
+var m = g.mapLang(b, n.require("$42", "google.json"));
 return g._call({
-url: "https://translation.googleapis.com/language/translate/v2?source=" + h + "&target=" + k + "&format=" + d,
+url: "https://translation.googleapis.com/language/translate/v2?source=" + k + "&target=" + m + "&format=" + a,
 method: "POST",
 traditional: !0,
 data: {
 key: g.key(),
-q: b
+q: c
 }
 }).done(function(a, b, c) {
-a.data ? l(a.data.translations || []) : (g.stderr(g.parseError(a) || g.httpError(c)), 
-l([]));
+a.data ? f(a.data.translations || []) : (g.stderr(g.parseError(a) || g.httpError(c)), 
+f([]));
 }).fail(function() {
-l([]);
+f([]);
 });
 };
-return new n();
+return new m();
 };
 return f;
 }({}, y, w));
-p.register("$43", {
+n.register("$43", {
 nn: [ "no" ],
 pt: [ "pt", "pt-pt" ],
 sr: [ "sr-Cyrl", "sr-Latn" ],
@@ -4458,10 +4458,10 @@ zh_HK: [ "zh-Hans" ],
 zh_SG: [ "zh-Hans" ],
 zh_TW: [ "zh-Hant" ]
 });
-p.register("$33", function(f, d, h) {
-function n() {}
+n.register("$33", function(f, d, k) {
+function m() {}
 f.create = function(d) {
-d = n.prototype = new d();
+d = m.prototype = new d();
 d.toString = function() {
 return "Microsoft Translator text API";
 };
@@ -4479,40 +4479,40 @@ return 1e4;
 };
 d.batch = function(c, b, a, d) {
 function f(a) {
-for (var g = -1, l; ++g < k && (l = a[g] || {}, l = l.translations || [], l = l[0] || {}, 
-!1 !== d(c[g], l.text || "", b)); ) ;
+for (var h = -1, g; ++h < z && (g = a[h] || {}, g = g.translations || [], g = g[0] || {}, 
+!1 !== d(c[h], g.text || "", b)); ) ;
 }
-var l = this, g = [], h = l.getSrc(), k = c.length, n = -1;
+var g = this, k = [], m = g.getSrc(), z = c.length, s = -1;
 a = a ? "html" : "plain";
-for (var q = l.mapLang(b, p.require("$43", "ms.json")); ++n < k; ) g.push({
-text: c[n]
+for (var p = g.mapLang(b, n.require("$43", "ms.json")); ++s < z; ) k.push({
+text: c[s]
 });
-return l._call({
-url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=" + h + "&to=" + q + "&textType=" + a,
+return g._call({
+url: "https://api.cognitive.microsofttranslator.com/translate?api-version=3.0&from=" + m + "&to=" + p + "&textType=" + a,
 method: "POST",
-data: JSON.stringify(g),
+data: JSON.stringify(k),
 headers: {
 "Content-Type": "application/json; charset=UTF-8",
 "Ocp-Apim-Subscription-Key": this.key(),
-"Ocp-Apim-Subscription-Region": l.param("region") || "global"
+"Ocp-Apim-Subscription-Region": g.param("region") || "global"
 }
 }).done(function(a, b, c) {
-a && a.length ? f(a) : (l.stderr(l.parseError(a) || l.httpError(c)), f([]));
+a && a.length ? f(a) : (g.stderr(g.parseError(a) || g.httpError(c)), f([]));
 }).fail(function() {
 f([]);
 });
 };
-return new n();
+return new m();
 };
 return f;
 }({}, y, w));
-p.register("$44", {
+n.register("$44", {
 pt: [ "pt-PT", "pt-BR" ]
 });
-p.register("$34", function(f, d, h) {
-function n() {}
+n.register("$34", function(f, d, k) {
+function m() {}
 f.create = function(d) {
-d = n.prototype = new d();
+d = m.prototype = new d();
 d.toString = function() {
 return "DeepL Translator";
 };
@@ -4527,44 +4527,44 @@ return c.message;
 };
 d.batch = function(c, b, a, d) {
 function f(a) {
-for (var g = c.length, l = -1, h; ++l < g && (h = a[l] || {}, !1 !== d(c[l], h.text || "", b)); ) ;
+for (var h = c.length, g = -1, k; ++g < h && (k = a[g] || {}, !1 !== d(c[g], k.text || "", b)); ) ;
 }
-var l = this;
+var g = this;
 a = this.getSrc();
-var g = l.param("url") || "https://api.deepl.com", h = l.mapLang(b, p.require("$44", "deepl.json")), k = b.tone, n = "default";
-null == k && (k = String(b.variant || "").toLowerCase());
-"formal" === k ? n = "more" : "informal" === k && (n = "less");
-return l._call({
-url: l.fixURL(g + "/v2/translate"),
+var k = g.param("url") || "https://api.deepl.com", m = g.mapLang(b, n.require("$44", "deepl.json")), z = b.tone, s = "default";
+null == z && (z = String(b.variant || "").toLowerCase());
+"formal" === z ? s = "more" : "informal" === z && (s = "less");
+return g._call({
+url: g.fixURL(k + "/v2/translate"),
 method: "POST",
 traditional: !0,
 data: {
 source_lang: a.toUpperCase(),
-target_lang: h.toUpperCase(),
-formality: n,
+target_lang: m.toUpperCase(),
+formality: s,
 preserve_formatting: "1",
-auth_key: l.key(),
+auth_key: g.key(),
 text: c
 }
 }).done(function(a, b, c) {
-a.translations ? f(a.translations) : (l.stderr(l.parseError(a) || l.httpError(c)), 
+a.translations ? f(a.translations) : (g.stderr(g.parseError(a) || g.httpError(c)), 
 f([]));
 }).fail(function() {
 f([]);
 });
 };
-return new n();
+return new m();
 };
 return f;
 }({}, y, w));
-p.register("$45", {
+n.register("$45", {
 zh: [ "zh", "zh-CN", "zh-TW" ],
 pt: [ "pt", "pt-PT", "pt-BR" ]
 });
-p.register("$35", function(f, d, h) {
-function n() {}
+n.register("$35", function(f, d, k) {
+function m() {}
 f.create = function(d) {
-d = n.prototype = new d();
+d = m.prototype = new d();
 d.getUrl = function() {
 return "https://lecto.ai/?ref=loco";
 };
@@ -4580,52 +4580,52 @@ return 1e3;
 };
 d.batch = function(c, b, a, d) {
 function f(a) {
-for (var g = c.length, l = -1, h = (a[0] || {
+for (var h = c.length, g = -1, k = (a[0] || {
 translated: []
-}).translated || []; ++l < g && (a = h[l] || "", !1 !== d(c[l], a, b)); ) ;
+}).translated || []; ++g < h && (a = k[g] || "", !1 !== d(c[g], a, b)); ) ;
 }
-var l = this;
+var g = this;
 a = this.getSrc();
-var g = l.param("url") || "https://api.lecto.ai", h = l.mapLang(b, p.require("$45", "lecto.json"));
-return l._call({
-url: l.fixURL(g + "/v1/translate/text"),
+var k = g.param("url") || "https://api.lecto.ai", m = g.mapLang(b, n.require("$45", "lecto.json"));
+return g._call({
+url: g.fixURL(k + "/v1/translate/text"),
 method: "POST",
 data: JSON.stringify({
-to: [ h ],
+to: [ m ],
 from: a,
 texts: c
 }),
 headers: {
 "Content-Type": "application/json; charset=UTF-8",
-"X-API-Key": l.key(),
+"X-API-Key": g.key(),
 Accept: "application/json"
 }
 }).done(function(a, b, c) {
-a ? f(a.translations || []) : (l.stderr(l.parseError(a) || l.httpError(c)), f([]));
+a ? f(a.translations || []) : (g.stderr(g.parseError(a) || g.httpError(c)), f([]));
 }).fail(function() {
 f([]);
 });
 };
-return new n();
+return new m();
 };
 return f;
 }({}, y, w));
-p.register("$18", function(f, d, w) {
-function n() {
+n.register("$18", function(f, d, w) {
+function m() {
 this.inf = {};
 }
-function k() {
+function g() {
 var a = w.createElement("p"), b = /&(#\d+|#x[0-9a-f]|[a-z]+);/i, c = /<[a-z]+\s/i, d, f;
 return {
-sniff: function(h) {
-if (h === d) return f;
-d = h;
-if (b.test(h) || c.test(h)) if (a.innerHTML = h, a.textContent !== h) return f = !0;
+sniff: function(g) {
+if (g === d) return f;
+d = g;
+if (b.test(g) || c.test(g)) if (a.innerHTML = g, a.textContent !== g) return f = !0;
 return f = !1;
 }
 };
 }
-var c = n.prototype;
+var c = m.prototype;
 c.init = function(a) {
 this.inf = a || {};
 };
@@ -4658,9 +4658,9 @@ c.parseError = function() {
 return "";
 };
 c.mapLang = function(a, b) {
-var c = String(a).replace("-", "_"), d = a.lang, f = b[c] || b[d] || [], h = f.length;
-if (0 === h) return d;
-if (1 < h) for (var c = c.toLowerCase(), d = -1, k; ++d < h; ) if (k = f[d], k.toLowerCase().replace("-", "_") === c) return k;
+var c = String(a).replace("-", "_"), d = a.lang, f = b[c] || b[d] || [], g = f.length;
+if (0 === g) return d;
+if (1 < g) for (var c = c.toLowerCase(), d = -1, k; ++d < g; ) if (k = f[d], k.toLowerCase().replace("-", "_") === c) return k;
 return f[0];
 };
 c.toLang = function(a) {
@@ -4684,12 +4684,12 @@ a.cache = !0;
 a.dataType = "json";
 a.error = function(a, c, d) {
 try {
-var f = a.responseText, h = f && p.require("$5", "json.js").parse(f);
-d = h && b.parseError(h) || d;
+var f = a.responseText, g = f && n.require("$5", "json.js").parse(f);
+d = g && b.parseError(g) || d;
 } catch (k) {}
 b.stderr(d || b.httpError(a));
 };
-return b.abortable(h.ajax(a));
+return b.abortable(k.ajax(a));
 };
 c.abortable = function(a) {
 var b = this;
@@ -4703,16 +4703,16 @@ var a = this.$r;
 a && a.abort();
 };
 c.isHtml = function(a) {
-return (b || (b = k())).sniff(a);
+return (b || (b = g())).sniff(a);
 };
 c.createJob = function() {
-return p.require("$30", "job.js").create(this);
+return n.require("$30", "job.js").create(this);
 };
 c.batch = function(a, b, c, f) {
 function g(c) {
-for (var d = a.length, g = -1; ++g < d && !1 !== f(a[g], c[g], b); ) ;
+for (var d = a.length, h = -1; ++h < d && !1 !== f(a[h], c[h], b); ) ;
 }
-var k = d.loco.ajax;
+var m = d.loco.ajax;
 c = {
 hook: this.getId(),
 type: c ? "html" : "text",
@@ -4720,8 +4720,8 @@ locale: this.toLang(b),
 source: this.getSrc(),
 sources: a
 };
-var n = h.Deferred();
-this.abortable(k.post("apis", c, function(a) {
+var n = k.Deferred();
+this.abortable(m.post("apis", c, function(a) {
 g(a && a.targets || []);
 n.resolve();
 }, function() {
@@ -4733,102 +4733,102 @@ return n.promise();
 f.create = function(a) {
 var b;
 b = a.id;
-b = "yandex" === b ? p.require("$31", "yandex.js").create(n) : "google" === b ? p.require("$32", "google.js").create(n) : "microsoft" === b ? p.require("$33", "ms.js").create(n) : "deepl" === b ? p.require("$34", "deepl.js").create(n) : "lecto" === b ? p.require("$35", "lecto.js").create(n) : new n();
+b = "yandex" === b ? n.require("$31", "yandex.js").create(m) : "google" === b ? n.require("$32", "google.js").create(m) : "microsoft" === b ? n.require("$33", "ms.js").create(m) : "deepl" === b ? n.require("$34", "deepl.js").create(m) : "lecto" === b ? n.require("$35", "lecto.js").create(m) : new m();
 b.init(a);
 return b;
 };
 f.suggest = function(a, b, c, d) {
-var f, h, k = a.length;
-for (f = 0; f < k; f++) h = a[f], h.translate(b, c, d);
+var f, g, k = a.length;
+for (f = 0; f < k; f++) g = a[f], g.translate(b, c, d);
 };
 var b;
 return f;
 }({}, y, w));
-p.register("$19", function(f, d, p) {
+n.register("$19", function(f, d, n) {
 f.init = function(f) {
-function k() {
-H || (I.on("click", g), H = h('<div id="loco-fs-creds"></div>').dialog({
+function g() {
+H || (I.on("click", l), H = k('<div id="loco-fs-creds"></div>').dialog({
 dialogClass: "request-filesystem-credentials-dialog loco-modal",
 minWidth: 580,
 modal: !0,
 autoOpen: !1,
 closeOnEscape: !0
 }).on("change", 'input[name="connection_type"]', function() {
-this.checked && h("#ssh-keys").toggleClass("hidden", "ssh" !== h(this).val());
+this.checked && k("#ssh-keys").toggleClass("hidden", "ssh" !== k(this).val());
 }));
 return H;
 }
 function c() {
-R && (b(h(x)), R = !1);
+R && (b(k(x)), R = !1);
 if (E && J) {
-var a = J, c = h(Q);
+var a = J, c = k(Q);
 c.find("span.loco-msg").text(a);
 K || (c.removeClass("jshide").hide().fadeIn(500), K = !0);
-} else K && (b(h(Q)), K = !1);
+} else K && (b(k(Q)), K = !1);
 }
 function b(a) {
 a.slideUp(250).fadeOut(250, function() {
-h(this).addClass("jshide");
+k(this).addClass("jshide");
 });
 }
 function a() {
-if (E) return H && H.dialog("close"), c(), h(f).find('button[type="submit"]').attr("disabled", !1), 
-h(d).triggerHandler("resize"), y && y(!0), !0;
-v && H ? (R || (h(x).removeClass("jshide").hide().fadeIn(500), R = !0), K && (b(h(Q)), 
+if (E) return H && H.dialog("close"), c(), k(f).find('button[type="submit"]').attr("disabled", !1), 
+k(d).triggerHandler("resize"), y && y(!0), !0;
+v && H ? (R || (k(x).removeClass("jshide").hide().fadeIn(500), R = !0), K && (b(k(Q)), 
 K = !1)) : c();
-h(f).find('input[type="submit"]').attr("disabled", !0);
+k(f).find('input[type="submit"]').attr("disabled", !0);
 y && y(!1);
 return !1;
 }
 function e(a) {
-var b, c, d = q || {};
-for (b in d) d.hasOwnProperty(b) && (c = d[b], a[b] ? a[b].value = c : h('<input type="hidden" />').attr("name", b).appendTo(a).val(c));
+var b, c, d = p || {};
+for (b in d) d.hasOwnProperty(b) && (c = d[b], a[b] ? a[b].value = c : k('<input type="hidden" />').attr("name", b).appendTo(a).val(c));
 }
-function m(a) {
+function h(a) {
 a.preventDefault();
-a = h(a.target).serializeArray();
+a = k(a.target).serializeArray();
 s(a);
 C = !0;
 return !1;
 }
-function l(a) {
+function q(a) {
 a.preventDefault();
 H.dialog("close");
 return !1;
 }
-function g(a) {
+function l(a) {
 a.preventDefault();
 H.dialog("open").find('input[name="connection_type"]').change();
 return !1;
 }
-function z(b) {
+function w(b) {
 E = b.authed;
 r = b.method;
-h(x).find("span.loco-msg").text(b.message || "Something went wrong.");
+k(x).find("span.loco-msg").text(b.message || "Something went wrong.");
 J = b.warning || "";
 b.notice && u.notices.info(b.notice);
-if (E) "direct" !== r && (q = b.creds, e(f), C && b.success && u.notices.success(b.success)), 
+if (E) "direct" !== r && (p = b.creds, e(f), C && b.success && u.notices.success(b.success)), 
 a(); else if (b.reason) u.notices.info(b.reason); else if (b = b.prompt) {
-var c = k();
-c.html(b).find("form").on("submit", m);
+var c = g();
+c.html(b).find("form").on("submit", h);
 c.dialog("option", "title", c.find("h2").remove().text());
-c.find("button.cancel-button").show().on("click", l);
+c.find("button.cancel-button").show().on("click", q);
 c.find('input[type="submit"]').addClass("button-primary");
 a();
-h(d).triggerHandler("resize");
+k(d).triggerHandler("resize");
 } else u.notices.error("Server didn't return credentials, nor a prompt for credentials");
 }
-function w() {
+function z() {
 a();
 }
 function s(a) {
 C = !1;
-u.ajax.setNonce("fsConnect", N).post("fsConnect", a, z, w);
+u.ajax.setNonce("fsConnect", N).post("fsConnect", a, w, z);
 return a;
 }
-var q, y, x = f, r = null, C = !1, E = !1, u = d.loco, v = f.path.value, F = f.auth.value, N = f["loco-nonce"].value, I = h(x).find("button.button-primary"), Q = p.getElementById(x.id + "-warn"), R = !1, K = !1, J = "", H;
+var p, y, x = f, r = null, C = !1, E = !1, u = d.loco, v = f.path.value, F = f.auth.value, N = f["loco-nonce"].value, I = k(x).find("button.button-primary"), Q = n.getElementById(x.id + "-warn"), R = !1, K = !1, J = "", H;
 u.notices.convert(Q).stick();
-f.connection_type ? (q = {}, q.connection_type = f.connection_type.value, E = !0) : v && F && s({
+f.connection_type ? (p = {}, p.connection_type = f.connection_type.value, E = !0) : v && F && s({
 path: v,
 auth: F
 });
@@ -4836,7 +4836,7 @@ a();
 return {
 applyCreds: function(a) {
 if (a.nodeType) e(a); else {
-var b, c = q || {};
+var b, c = p || {};
 for (b in c) c.hasOwnProperty(b) && (a[b] = c[b]);
 }
 return this;
@@ -4850,7 +4850,7 @@ return this;
 connect: function() {
 v = f.path.value;
 F = f.auth.value;
-s(h(f).serializeArray());
+s(k(f).serializeArray());
 return this;
 },
 listen: function(a) {
@@ -4865,13 +4865,13 @@ return E;
 };
 return f;
 }({}, y, w));
-p.register("$20", function(f, d, w) {
-function n(d, f, h, g) {
-f = "n" === h ? c(f) : b(f);
-g && (f = a(f));
-return k([].sort, [ f ])(d);
+n.register("$20", function(f, d, w) {
+function m(d, f, k, l) {
+f = "n" === k ? c(f) : b(f);
+l && (f = a(f));
+return g([].sort, [ f ])(d);
 }
-function k(a, b) {
+function g(a, b) {
 return function(c) {
 a.apply(c, b);
 return c;
@@ -4896,50 +4896,50 @@ return -1 * a(b, c);
 f.init = function(a) {
 function b(a) {
 var c = -1, d = a.length;
-for (h("tr", x).remove(); ++c < d; ) x.appendChild(a[c].$);
+for (k("tr", x).remove(); ++c < d; ) x.appendChild(a[c].$);
 }
 function c(a) {
 s = a ? y.find(a, d) : d.slice(0);
-w && (a = f[w], s = n(s, w, a.type, a.desc));
+w && (a = f[w], s = m(s, w, a.type, a.desc));
 b(s);
 }
-var d = [], f = [], k = 0, s, q, w, x = a.getElementsByTagName("tbody")[0], r = a.getElementsByTagName("thead")[0], y = p.require("$10", "fulltext.js").init();
-r && x && (h("th", r).each(function(a, c) {
+var d = [], f = [], g = 0, s, p, w, x = a.getElementsByTagName("tbody")[0], r = a.getElementsByTagName("thead")[0], y = n.require("$10", "fulltext.js").init();
+r && x && (k("th", r).each(function(a, c) {
 var e = c.getAttribute("data-sort-type");
-e && (a = k, h(c).addClass("loco-sort").on("click", function(c) {
+e && (a = g, k(c).addClass("loco-sort").on("click", function(c) {
 c.preventDefault();
 c = a;
-var e = f[c], l = e.type, k = !(e.desc = !e.desc);
-s = n(s || d.slice(0), c, l, k);
+var e = f[c], g = e.type, n = !(e.desc = !e.desc);
+s = m(s || d.slice(0), c, g, n);
 b(s);
-q && q.removeClass("loco-desc loco-asc");
-q = h(e.$).addClass(k ? "loco-desc" : "loco-asc").removeClass(k ? "loco-asc" : "loco-desc");
+p && p.removeClass("loco-desc loco-asc");
+p = k(e.$).addClass(n ? "loco-desc" : "loco-asc").removeClass(n ? "loco-asc" : "loco-desc");
 w = c;
 return !1;
-}), f[k] = {
+}), f[g] = {
 $: c,
 type: e
 });
-c.hasAttribute("colspan") ? k += Number(c.getAttribute("colspan")) : k++;
-}), h("tr", x).each(function(a, b) {
-var c, e, h, k = [], l = {
+c.hasAttribute("colspan") ? g += Number(c.getAttribute("colspan")) : g++;
+}), k("tr", x).each(function(a, b) {
+var c, e, g, h = [], k = {
 _: a,
 $: b
 }, m = b.getElementsByTagName("td");
 for (e in f) {
 c = m[e];
-(h = c.textContent.replace(/(^\s+|\s+$)/g, "")) && k.push(h);
-c.hasAttribute("data-sort-value") && (h = c.getAttribute("data-sort-value"));
+(g = c.textContent.replace(/(^\s+|\s+$)/g, "")) && h.push(g);
+c.hasAttribute("data-sort-value") && (g = c.getAttribute("data-sort-value"));
 switch (f[e].type) {
 case "n":
-h = Number(h);
+g = Number(g);
 }
-l[e] = h;
+k[e] = g;
 }
-d[a] = l;
-y.index(a, k);
-}), a = h('form.loco-filter input[type="text"]', a.parentNode), a.length && (a = a[0], 
-r = h(a.form), 1 < d.length ? p.require("$11", "LocoTextListener.js").listen(a, c) : r.hide(), 
+d[a] = k;
+y.index(a, h);
+}), a = k('form.loco-filter input[type="text"]', a.parentNode), a.length && (a = a[0], 
+r = k(a.form), 1 < d.length ? n.require("$11", "LocoTextListener.js").listen(a, c) : r.hide(), 
 r.on("submit", function(a) {
 a.preventDefault();
 return !1;
@@ -4950,36 +4950,36 @@ return f;
 var C = y.loco || {}, I = C.conf || {
 $v: [ 0, 0 ]
 };
-y = p.require("$1", "t.js").init();
+y = n.require("$1", "t.js").init();
 w = I.wplang;
 C.version = function(f) {
 return I.$v[f || 0];
 };
-p.require("$2", "html.js");
-p.require("$3", "number.js");
-p.require("$4", "array.js");
-p.require("$5", "json.js");
+n.require("$2", "html.js");
+n.require("$3", "number.js");
+n.require("$4", "array.js");
+n.require("$5", "json.js");
 C.l10n = y;
 y.load(I.wpl10n);
 w && y.pluraleq(w.pluraleq);
-C.string = p.require("$6", "string.js");
-C.notices = p.require("$7", "notices.js").init(y);
-C.ajax = p.require("$8", "ajax.js").init(I).localise(y);
-C.locale = p.require("$9", "wplocale.js");
-C.fulltext = p.require("$10", "fulltext.js");
-C.watchtext = p.require("$11", "LocoTextListener.js").listen;
-C.tooltip = p.require("$12", "tooltip.js");
+C.string = n.require("$6", "string.js");
+C.notices = n.require("$7", "notices.js").init(y);
+C.ajax = n.require("$8", "ajax.js").init(I).localise(y);
+C.locale = n.require("$9", "wplocale.js");
+C.fulltext = n.require("$10", "fulltext.js");
+C.watchtext = n.require("$11", "LocoTextListener.js").listen;
+C.tooltip = n.require("$12", "tooltip.js");
 C.po = {
-ed: p.require("$13", "poedit.js"),
-kbd: p.require("$14", "hotkeys.js"),
-init: p.require("$15", "po.js").create,
-ace: p.require("$16", "ace.js").strf("php"),
-ref: p.require("$17", "refs.js")
+ed: n.require("$13", "poedit.js"),
+kbd: n.require("$14", "hotkeys.js"),
+init: n.require("$15", "po.js").create,
+ace: n.require("$16", "ace.js").strf("php"),
+ref: n.require("$17", "refs.js")
 };
-C.apis = p.require("$18", "apis.js");
-C.fs = p.require("$19", "fsconn.js");
-h("#loco-admin.wrap table.wp-list-table").each(function(f, d) {
-p.require("$20", "tables.js").init(d);
+C.apis = n.require("$18", "apis.js");
+C.fs = n.require("$19", "fsconn.js");
+k("#loco-admin.wrap table.wp-list-table").each(function(f, d) {
+n.require("$20", "tables.js").init(d);
 });
 C.validate = function(f) {
 return "2.5.7" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (C.notices.warn("admin.js is the wrong version (2.5.7). Please empty all relevant caches and reload this page."), 

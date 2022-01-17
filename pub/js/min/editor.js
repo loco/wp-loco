@@ -299,8 +299,8 @@ var n = i.todo();
 n && C.notices.warn(m(A("Translation job aborted with %s string remaining", "Translation job aborted with %s strings remaining", n), F(n))).slow();
 var t = [], o = i.did();
 o && t.push(m(A("%1$s string translated via %2$s", "%1$s strings translated via %2$s", o), F(o), a)), 
-r ? t.push(m(A("%s string updated", "%s strings updated", r), F(r))) : t.push(O("Nothing needed updating")), 
-C.notices.success(t.join(". ")).slow(), i = e = null;
+r ? t.push(m(A("%s string updated", "%s strings updated", r), F(r))) : o && t.push(O("Nothing needed updating")), 
+t.length && C.notices.success(t.join(". ")).slow(), i = e = null;
 }
 r && (X(), D.rebuildSearch()), l && (l.off("dialogclose").dialog("close"), l = null), 
 D.fire("poAuto");
