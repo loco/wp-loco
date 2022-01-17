@@ -4234,7 +4234,7 @@ if (l && (a.untranslated(d) || c)) {
 var u = q[l];
 if (u) u.push(a); else {
 var u = l.length, v = e.isHtml(l), v = x[v ? 1 : 0], B = v.sources;
-if (u > p) g++; else {
+if (p && u > p) g++; else {
 if (v.length + u > n || B.length === h) v = b(v), B = v.sources;
 B.push(l);
 q[l] = [ a ];
@@ -4976,7 +4976,7 @@ h("#loco-admin.wrap table.wp-list-table").each(function(f, d) {
 p.require("$20", "tables.js").init(d);
 });
 C.validate = function(f) {
-return "2.5.6" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (C.notices.warn("admin.js is the wrong version (2.5.6). Please empty all relevant caches and reload this page."), 
+return "2.5.7" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (C.notices.warn("admin.js is the wrong version (2.5.7). Please empty all relevant caches and reload this page."), 
 !1) : !0;
 };
 })(window, document, window.jQuery);

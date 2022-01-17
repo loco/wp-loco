@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.5.7 = 
+* Fixed bug in 2.5.6 where remote APIs could not be used in batch mode.
+
 = 2.5.6 =
 * Added loco_api_provider_source filter
 * Fixed bug loading user preferences saved in older version
