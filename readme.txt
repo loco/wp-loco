@@ -102,6 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.5.7 = 
 * Fixed bug in 2.5.6 where remote APIs could not be used in batch mode.
+* Enforcing 10k character limit per request for Microsoft and Yandex Translators.
 
 = 2.5.6 =
 * Added loco_api_provider_source filter

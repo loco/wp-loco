@@ -82,15 +82,4 @@ class Loco_api_YandexClient {
         return $targets;
     }
 
-
-    /**
-     *  
-     */
-    private function parseError(){
-        
-    }
-    
-    
-    
-    
 }
