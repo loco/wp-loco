@@ -28,7 +28,7 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
 
     /**
      * Default authorization check
-     * @return Loco_mvc_Controller
+     * @return Loco_mvc_Controller|void
      */
     public function auth(){
         if( is_user_logged_in() ){

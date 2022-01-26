@@ -2,6 +2,7 @@
 
 /**
  * View renderer
+ * @property-read string $_content
  */
 class Loco_mvc_View implements IteratorAggregate {
 

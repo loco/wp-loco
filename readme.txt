@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.5.8 =
 * Compatible with PHP 8.1
 * Bumped WordPress version to 5.9
+* Added deprecation warning prior to v2.6
 
 = 2.5.7 = 
 * Fixed bug in 2.5.6 where remote APIs could not be used in batch mode

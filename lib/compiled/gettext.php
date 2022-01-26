@@ -23,8 +23,7 @@ public function offsetSet($key, $v ){ $k = strtolower($key); if( isset($this->ma
 #[ReturnTypeWillChange]
 public function offsetUnset($key ){ $k = strtolower($key); if( isset($this->map[$k]) ){ parent::offsetUnset( $this->map[$k] ); unset( $this->map[$k] ); } } 
 #[ReturnTypeWillChange]
-public function jsonSerialize(){ return $this->getArrayCopy(); } 
-public function keys(){ trigger_error('Is this required?', E_USER_NOTICE); return array_values( $this->map ); } }
+public function jsonSerialize(){ return $this->getArrayCopy(); } }
 function loco_normalize_charset(  $cs ) { if( preg_match('/^UTF-?8$/i',$cs) ){ return 'UTF-8'; } try { $aliases = @mb_encoding_aliases($cs); } catch( Throwable $e ){ $aliases = false; } if( false === $aliases ){ throw new InvalidArgumentException('Unsupported character encoding: '.$cs ); } if( preg_grep('/^ISO[-_]\\d+[-_]\\d+$/i',$aliases) ){ $cs = current($aliases); $cs = strtr( strtoupper($cs), '_', '-' ); } else if( in_array('US-ASCII',$aliases,true) ){ $cs = 'US-ASCII'; } return $cs; }
 class LocoPoHeaders extends LocoHeaders { 
 private  $cs = null; 
