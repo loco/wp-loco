@@ -216,7 +216,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
         $args['_route'] = $page;
         // tokenize path arguments
-        if( preg_match('/^(plugin|theme|core)-/', $page, $r ) ){
+        if( $page && preg_match('/^(plugin|theme|core)-/', $page, $r ) ){
             $args['type'] = $r[1];
             $page = substr_replace( $page, '{type}', 0, strlen($r[1]) );
         }
@@ -317,8 +317,8 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         else {
             unset( $args['action'] );
         }
-        // append all arguments to base URL        
-        if( $query = http_build_query($args,null,'&') ){
+        // append all arguments to base URL
+        if( $query = http_build_query($args) ){
             $sep = false === strpos($url, '?') ? '?' : '&';
             $url .= $sep.$query;
         }

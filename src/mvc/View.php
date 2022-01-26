@@ -136,6 +136,7 @@ class Loco_mvc_View implements IteratorAggregate {
     /**
      * {@inheritDoc}
      */
+    #[ReturnTypeWillChange]
     public function getIterator(){
         return $this->scope;
     }

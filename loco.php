@@ -4,9 +4,9 @@ Plugin Name: Loco Translate
 Plugin URI: https://wordpress.org/plugins/loco-translate/
 Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
-Version: 2.5.7
+Version: 2.5.8-dev
 Requires at least: 4.1
-Tested up to: 5.8.3
+Tested up to: 5.9
 Requires PHP: 5.2.4
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
@@ -33,7 +33,7 @@ function loco_plugin_file(){
  * @return string
  */
 function loco_plugin_version(){
-    return '2.5.7';
+    return '2.5.8-dev';
 }
 
 

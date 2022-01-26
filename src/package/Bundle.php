@@ -757,6 +757,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize(){
         $writer = new Loco_config_BundleWriter( $this );
         return $writer->toArray();

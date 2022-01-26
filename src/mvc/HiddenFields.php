@@ -55,7 +55,7 @@ class Loco_mvc_HiddenFields extends Loco_mvc_ViewParams {
      * @return string full URL with query string
      */
     public function getHref( $base = '' ){
-        $query = http_build_query($this->getArrayCopy(),null,'&');
+        $query = http_build_query($this->getArrayCopy());
         $sep = false === strpos($base,'?') ? '?' : '&';
         return $base.$sep.$query;
     }

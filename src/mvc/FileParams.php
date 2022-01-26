@@ -82,6 +82,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * {@inheritdoc}
      * Override to get live information from file object
      */
+    #[ReturnTypeWillChange]
     public function offsetGet( $prop ){
         $getter = array( $this, '_get_'.$prop );
         if( is_callable($getter) ){
@@ -95,6 +96,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
      * {@inheritdoc}
      * Override to ensure all properties populated
      */
+    #[ReturnTypeWillChange]
     public function getArrayCopy(){
         $a = array();
         foreach( $this as $prop => $dflt ){

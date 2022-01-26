@@ -72,6 +72,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
     /**
      * {@inheritDoc}
      */
+    #[ReturnTypeWillChange]
     public function offsetSet( $index, $value ){
         throw new Exception('Use Loco_fs_FileList::add');
     }

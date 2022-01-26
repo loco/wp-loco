@@ -187,6 +187,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize(){
         $po = $this->getArrayCopy();
         // exporting headers non-scalar so js doesn't have to parse them
@@ -201,15 +202,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         catch( Exception $e ){ }
         // @codeCoverageIgnoreEnd
         return $po;
-    }
-
-
-    /**
-     * Export to JSON for JavaScript editor
-     * @return string
-     */
-    public function exportJson(){
-        return json_encode( $this->jsonSerialize() );
     }
 
 

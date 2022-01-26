@@ -168,6 +168,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
     /**
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize(){
         return array (
             'code' => $this->getCode(),

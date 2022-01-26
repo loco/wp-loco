@@ -118,10 +118,7 @@ abstract class LocoConfigNode implements IteratorAggregate {
         return $this->data[0];
     }
     
-    /*protected function get_attributes(){
-        return $this->data[1];
-    }*/
-    
+
     protected function get_childNodes(){
         return $this->getIterator();
     }
@@ -152,9 +149,10 @@ abstract class LocoConfigNode implements IteratorAggregate {
     /**
      * @return LocoConfigNodeList
      */
+    #[ReturnTypeWillChange]
     public function getIterator(){
         if( ! $this->children ){
-            $raw = isset($this->data[2]) ? $this->data[2] : array();
+            //$raw = isset($this->data[2]) ? $this->data[2] : array();
             $this->children = new LocoConfigNodeList( $this->data[2] );
         }
         return $this->children;
@@ -187,38 +185,46 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
         $this->nodes = $nodes;
         $this->n = count( $nodes );
     }
-    
+
+    #[ReturnTypeWillChange]
     public function count(){
         return $this->n;
     }
-    
+
+    #[ReturnTypeWillChange]
     public function rewind(){
         $this->i = -1;
         $this->next();
     }
-    
+
+    #[ReturnTypeWillChange]
     public function key(){
         return $this->i;
     }
 
+    #[ReturnTypeWillChange]
     public function current(){
         return $this[ $this->i ];
     }
-    
+
+    #[ReturnTypeWillChange]
     public function valid(){
         return is_int($this->i);
     }
-    
+
+    #[ReturnTypeWillChange]
     public function next(){
         if( ++$this->i === $this->n ){
             $this->i = null;
         }
     }
- 
+
+    #[ReturnTypeWillChange]
     public function offsetExists( $i ){
         return $i >= 0 && $i < $this->n;
     }
-    
+
+    #[ReturnTypeWillChange]
     public function offsetGet( $i ){
         $node = $this->nodes[$i];
         if( ! $node instanceof LocoConfigNode ){
@@ -236,6 +242,7 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
     /**
      * @codeCoverageIgnore
      */
+    #[ReturnTypeWillChange]
     public function offsetSet( $i, $value ){
         throw new Exception('Use append');
     }
@@ -243,6 +250,7 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
     /**
      * @codeCoverageIgnore
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset( $i ){
         throw new Exception('Read only');
     }

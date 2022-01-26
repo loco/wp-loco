@@ -134,7 +134,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     public function filter_loco_external( $url ){
         $u = parse_url( $url );
         if( isset($u['host']) && 'localise.biz' === $u['host'] ){
-            $query = http_build_query( array( 'utm_medium' => 'plugin', 'utm_campaign' => 'wp', 'utm_source' => 'admin', 'utm_content' => $this->get('_route') ), null, '&' );
+            $query = http_build_query( array( 'utm_medium' => 'plugin', 'utm_campaign' => 'wp', 'utm_source' => 'admin', 'utm_content' => $this->get('_route') ) );
             $url = 'https://localise.biz'.$u['path'];
             if( isset($u['query']) ){
                 $url .= '?'. $u['query'].'&'.$query;

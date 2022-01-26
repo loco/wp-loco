@@ -426,6 +426,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return int
      */
+    #[ReturnTypeWillChange]
     public function count(){
         return count( $this->export() );
     }
@@ -434,6 +435,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return Loco_fs_File|null
      */
+    #[ReturnTypeWillChange]
     public function current(){
         $i = $this->i;
         if( is_int($i) && isset($this->cache[$i]) ){
@@ -446,6 +448,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return Loco_fs_File|null
      */
+    #[ReturnTypeWillChange]
     public function next(){
         if( $this->cached ){
             $i = $this->i + 1;
@@ -469,6 +472,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return int
      */
+    #[ReturnTypeWillChange]
     public function key(){
         return $this->i;
     }
@@ -477,6 +481,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return bool
      */
+    #[ReturnTypeWillChange]
     public function valid(){
         // may be in lazy state after rewind
         // must do initial read now in case list is empty
@@ -487,6 +492,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return void
      */
+    #[ReturnTypeWillChange]
     public function rewind(){
         if( $this->cached ){
             $this->cache->rewind();

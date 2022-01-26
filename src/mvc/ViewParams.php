@@ -10,7 +10,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @return string
      */
     public function escape( $text ){
-        return htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
+        return htmlspecialchars( (string) $text, ENT_COMPAT, 'UTF-8' );
     }
 
 
@@ -141,6 +141,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     /**
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize(){
         return $this->getArrayCopy();
     }
@@ -173,14 +174,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @codeCoverageIgnore
      */
     public function dump(){
-        echo '<pre>',$this->escape( json_encode( $this->__debugInfo(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE ) ),'</pre>';
-    }
-
-    /**
-     * @codeCoverageIgnore
-     */
-    public function __debugInfo() {
-        return $this->getArrayCopy();
+        echo '<pre>',$this->escape( json_encode( $this->getArrayCopy(),JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE ) ),'</pre>';
     }
 
 

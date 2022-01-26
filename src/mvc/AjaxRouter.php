@@ -31,7 +31,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             'action' => 'loco_ajax',
             'loco-nonce' => wp_create_nonce($route),
         );
-        return admin_url('admin-ajax.php','relative').'?'.http_build_query($args,null,'&');
+        return admin_url('admin-ajax.php','relative').'?'.http_build_query($args);
     }
 
 

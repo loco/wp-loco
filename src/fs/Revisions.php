@@ -180,7 +180,8 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     /**
      * Get number of backups plus master
      * @return int
-     */    
+     */
+    #[ReturnTypeWillChange]
     public function count(){
         if( ! $this->length ){
             $this->length = 1 + count( $this->getPaths() );

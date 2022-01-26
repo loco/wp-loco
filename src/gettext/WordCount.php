@@ -43,6 +43,7 @@ class Loco_gettext_WordCount implements Countable {
      * Default count function returns source words (msgid) in current file.
      * @return int
      */
+    #[ReturnTypeWillChange]
     public function count(){
         $n = $this->sw;
         if( is_null($n) ){

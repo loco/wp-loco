@@ -109,6 +109,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
      * {@inheritdoc}
      * override so we can set dirty flag
      */
+    #[ReturnTypeWillChange]
     public function offsetSet( $prop, $value ){
         if( ! isset($this[$prop]) || $value !== $this[$prop] ){
             parent::offsetSet( $prop, $value );
@@ -121,6 +122,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
      * {@inheritdoc}
      * override so we can set dirty flag
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset( $prop ){
         if( isset($this[$prop]) ){
             parent::offsetUnset($prop);

@@ -25,7 +25,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     private $fs_allow = true;
 
     /**
-     * @var array<Loco_data_Cookie>
+     * @var Loco_data_Cookie[]
      */
     private $cookies_set;
     
@@ -51,8 +51,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     /**
      * @internal
      */
-    public static function setUpBeforeClass(){
-        parent::setUpBeforeClass();
+    public static function set_up_before_class(){
+        parent::set_up_before_class();
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
@@ -67,8 +67,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     /**
      * @internal
      */
-    public static function tearDownAfterClass(){
-        parent::tearDownAfterClass();
+    public static function tear_down_after_class(){
+        parent::tear_down_after_class();
         Loco_data_Settings::clear();
         Loco_data_Session::destroy();
         Loco_data_RecentItems::destroy();
@@ -81,8 +81,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     /**
      * {@inheritdoc}
      */
-    public function setUp(){
-        parent::setUp();
+    public function set_up(){
+        parent::set_up();
         Loco_mvc_PostParams::destroy();
         Loco_error_AdminNotices::destroy();
         Loco_package_Listener::destroy();
@@ -522,6 +522,19 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
             'name' => basename($path),
         );
     }
-    
+
+
+    /*
+     * {@inheritDoc}
+     *
+    public static function assertContains( $needle, $haystack, $message = '' ):void {
+        if( is_string($haystack) ){
+            trigger_error('Use assertStringContainsString', E_USER_DEPRECATED );
+            parent::assertStringContainsString($needle,$haystack,$message);
+        }
+        else {
+            parent::assertContains( $needle, $haystack, $message );
+        }
+    }*/
 
 }

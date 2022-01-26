@@ -238,6 +238,7 @@ class Loco_package_Debugger implements IteratorAggregate {
      * Implements IteratorAggregate for looping over messages
      * @return ArrayIterator
      */
+    #[ReturnTypeWillChange]
     public function getIterator(){
         return new ArrayIterator( $this->messages );
     }

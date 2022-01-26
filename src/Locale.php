@@ -353,6 +353,7 @@ class Loco_Locale implements JsonSerializable {
     /**
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize(){
         $a = $this->tag;
         $a['label'] = $this->getName();
@@ -382,16 +383,6 @@ class Loco_Locale implements JsonSerializable {
         }
         return $cache;
     }
-
-
-    /**
-     * @return int
-     */
-    public function getPluralCount(){
-        $raw = $this->getPluralData();
-        return count( $raw[1] );
-    }
-
 
 
     /**
@@ -434,7 +425,6 @@ class Loco_Locale implements JsonSerializable {
     }
 
 
-
     /**
      * Get PO style Plural-Forms header value comprising number of forms and integer equation for n
      * @return string
@@ -443,7 +433,6 @@ class Loco_Locale implements JsonSerializable {
         list( $equation, $forms ) = $this->getPluralData();
         return sprintf('nplurals=%u; plural=%s;', count($forms), $equation );
     }
-
 
 
     /**
@@ -474,15 +463,6 @@ class Loco_Locale implements JsonSerializable {
             }
         }
         return $this;
-    }
-
-
-
-    /**
-     * @return string
-     */
-    public function exportJson(){
-        return json_encode( $this->jsonSerialize() );
     }
 
 

@@ -18,7 +18,6 @@ class Loco_config_BundleWriter implements JsonSerializable {
     }
 
 
-
     /**
      * @return string XML source
      */
@@ -29,7 +28,6 @@ class Loco_config_BundleWriter implements JsonSerializable {
     }
 
 
-
     /**
      * @return array
      */
@@ -38,7 +36,6 @@ class Loco_config_BundleWriter implements JsonSerializable {
         $dom = $this->compile($model);
         return $dom->export();
     }
-
 
 
     /**
@@ -55,6 +52,7 @@ class Loco_config_BundleWriter implements JsonSerializable {
      * Alias of toArray implementing JsonSerializable
      * @return array
      */
+    #[ReturnTypeWillChange]
     public function jsonSerialize(){
         return $this->toArray();
     }
@@ -62,7 +60,7 @@ class Loco_config_BundleWriter implements JsonSerializable {
 
     /**
      * Agnostic compilation of any config data type
-     * @return LocoConfigDocumentInterface
+     * @return LocoConfigDocument
      */
     private function compile( Loco_config_Model $model ){
         

@@ -97,9 +97,11 @@ class Loco_config_XMLModel extends Loco_config_Model {
  * @internal
  */
 class LocoConfig_DOMElement extends DOMElement implements IteratorAggregate, Countable {
+    #[ReturnTypeWillChange]
     public function getIterator(){
         return new LocoConfigNodeListIterator( $this->childNodes );
     }
+    #[ReturnTypeWillChange]
     public function count(){
         return $this->childNodes->length;
     }
@@ -133,28 +135,34 @@ class LocoConfigNodeListIterator implements Iterator, Countable, ArrayAccess {
         $this->nodes = $nodes;
         $this->n = $nodes->length;
     }
-    
+
+    #[ReturnTypeWillChange]
     public function count(){
         return $this->n;
     }
-    
+
+    #[ReturnTypeWillChange]
     public function rewind(){
         $this->i = -1;
         $this->next();
     }
-    
+
+    #[ReturnTypeWillChange]
     public function key(){
         return $this->i;
     }
-    
+
+    #[ReturnTypeWillChange]
     public function current(){
         return $this->nodes->item( $this->i );
     }
-    
+
+    #[ReturnTypeWillChange]
     public function valid(){
         return is_int($this->i);
     }
-    
+
+    #[ReturnTypeWillChange]
     public function next(){
         while( true ){
             $this->i++;
@@ -165,11 +173,13 @@ class LocoConfigNodeListIterator implements Iterator, Countable, ArrayAccess {
             break;
         }
     }
-    
+
+    #[ReturnTypeWillChange]
     public function offsetExists( $i ){
         return $i >= 0 && $i < $this->n;
     }
-    
+
+    #[ReturnTypeWillChange]
     public function offsetGet( $i ){
         return $this->nodes->item($i);
     }
@@ -177,6 +187,7 @@ class LocoConfigNodeListIterator implements Iterator, Countable, ArrayAccess {
     /**
      * @codeCoverageIgnore
      */
+    #[ReturnTypeWillChange]
     public function offsetSet( $i, $value ){
         throw new Exception('Read only');
     }
@@ -184,6 +195,7 @@ class LocoConfigNodeListIterator implements Iterator, Countable, ArrayAccess {
     /**
      * @codeCoverageIgnore
      */
+    #[ReturnTypeWillChange]
     public function offsetUnset( $i ){
         throw new Exception('Read only');
     }
