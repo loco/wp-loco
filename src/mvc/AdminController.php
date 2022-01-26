@@ -231,10 +231,6 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
                 'time' => microtime(true) - $this->bench,
             ) ) );
         }
-        // add urgent deprecation warning. Next version of Loco Translate will not run below these versions.
-        if( version_compare(PHP_VERSION,'5.6.20','<') || version_compare($GLOBALS['wp_version'],'5.2','<') ){
-            $this->set('_deprecation', true );
-        }
         
         return $view->render( $tpl );
     }

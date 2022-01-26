@@ -43,16 +43,16 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
         
         // check PHP version, noting that we want to move to minimum version 5.6 as per latest WordPress
         $phpversion = PHP_VERSION;
-        if( version_compare($phpversion,'5.6.20','<') ){
-            $this->setPhpUpdate('5.6.20');
+        if( version_compare($phpversion,'7.4.0','<') ){
+            $this->set('phpupdate','7.4');
         }
         
         
-        // check WordPress version, noting that v5.2 bumped PHP min version to 5.6.20, as above
+        // check WordPress version, No plans to increase this until WP bumps their min PHP requirement.
         $wpversion = $GLOBALS['wp_version'];
-        if( version_compare($wpversion,'5.2','<') ){
+        /*if( version_compare($wpversion,'5.2','<') ){
             $this->setWpUpdate('5.2');
-        }
+        }*/
         
         return $this->view('admin/config/version', compact('breadcrumb','version','phpversion','wpversion') ); 
     }
@@ -71,19 +71,11 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
 
     /**
      * @param string minimum recommended version
-     */
-    private function setPhpUpdate( $version ){
-        $this->set('phpupdate',$version);
-    }
-
-
-    /**
-     * @param string minimum recommended version
-     */
+     *
     private function setWpUpdate( $version ){
         $this->set('wpupdate',$version);
         $this->set('wpupdate_href', admin_url('update-core.php') );
-    }
+    }*/
 
     
 }

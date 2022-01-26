@@ -6,15 +6,6 @@
 /* @var Loco_mvc_ViewParams $params */
 ?><div class="wrap" id="loco-admin"><?php
 
-    // urgent warnings not dismissable
-    if( $this->has('_deprecation') ):?> 
-    <div class="update-nag">
-        <strong>Deprecation notice:</strong>
-        The next version of Loco Translate will require a minimum of WordPress 5.2 and PHP 5.6.20.
-        <a href="https://wordpress.org/about/requirements/">Update your system</a> or roll back to Loco Translate 2.5.7 to get rid of this message.
-    </div><?php
-    endif;
-
     if( $this->has('breadcrumb') ):?> 
     <h1>
         <ul><?php

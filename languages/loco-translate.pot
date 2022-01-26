@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.5.8-dev\n"
+"Project-Id-Version: Loco Translate 2.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-01-26 14:38+0000\n"
+"POT-Creation-Date: 2022-01-26 18:28+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.5.8-dev; wp-5.9\n"
+"X-Loco-Version: 2.6.0; wp-5.9\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/data/Settings.php:180 src/admin/file/EditController.php:166
+#: src/admin/file/EditController.php:166
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
 #: tpl/admin/config/apis.php:149 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -1150,10 +1150,6 @@ msgstr ""
 #: src/admin/RootController.php:23
 #, php-format
 msgid "Loco Translate %s"
-msgstr ""
-
-#: src/data/Settings.php:179
-msgid "Loco Translate 2.5 adds supports for JSON language pack generation."
 msgstr ""
 
 #: src/mvc/AdminController.php:115
@@ -2094,7 +2090,7 @@ msgid "WordPress"
 msgstr ""
 
 #. Where %s is the full version number of WordPress
-#: tpl/admin/config/version.php:69
+#: tpl/admin/config/version.php:68
 #, php-format
 msgid "WordPress %s"
 msgstr ""
@@ -2196,9 +2192,9 @@ msgid ""
 msgstr ""
 
 #. (1) Name of software, e.g. "WordPress" (2) Version number, e.g. "5.6"
-#: tpl/admin/config/version.php:53 tpl/admin/config/version.php:72
+#: tpl/admin/config/version.php:53 tpl/admin/config/version.php:71
 #, php-format
 msgid ""
-"Your version of %1$s is very old. We recommend you upgrade to at least v%2$s,"
-" but preferably to the latest stable version."
+"Your version of %1$s is out of date. We recommend you upgrade to at least "
+"v%2$s, but preferably to the latest stable version."
 msgstr ""

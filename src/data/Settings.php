@@ -174,11 +174,11 @@ class Loco_data_Settings extends Loco_data_Serializable {
         if( version_compare($old,$new,'<') ){
             $this->persist();
             $updated = true;
-            // feature alerts:
-            if( '2.5.' === substr($new,0,4) && '2.5.' !== substr($old,0,4) ){
-                Loco_error_AdminNotices::info( __('Loco Translate 2.5 adds supports for JSON language pack generation.','loco-translate') )
-                   ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/json'), __('Documentation','loco-translate') );
-            }
+            /*/ feature alerts:
+            if( '2.6.' === substr($new,0,4) && '2.6.' !== substr($old,0,4) ){
+                Loco_error_AdminNotices::info( __('Loco Translate 2.6 adds ......','loco-translate') )
+                   ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/changelog'), __('Documentation','loco-translate') );
+            }*/
         }
         return $updated;
     }
