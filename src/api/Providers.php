@@ -38,11 +38,6 @@ abstract class Loco_api_Providers {
                 'region' => $settings->offsetGet('microsoft_api_region'),
             ),
             array (
-                'id' => 'yandex',
-                'name' => 'Yandex.Translate',
-                'key' => $settings->offsetGet('yandex_api_key'),
-            ),
-            array (
                 'id' => 'lecto',
                 'name' => 'Lecto AI',
                 'key' => $settings->offsetGet('lecto_api_key'),

@@ -6,8 +6,8 @@ Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
 Version: 2.6.0
 Requires at least: 5.2
-Tested up to: 5.9
 Requires PHP: 5.6.20
+Tested up to: 5.9.1
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/
@@ -53,9 +53,7 @@ function loco_plugin_self(){
  * @return string __DIR__
  */
 function loco_plugin_root(){
-    static $root;
-    isset($root) or $root = dirname(__FILE__);
-    return $root;
+    return __DIR__;
 }
 
 

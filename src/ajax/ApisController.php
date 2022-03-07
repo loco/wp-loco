@@ -90,20 +90,4 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         return parent::render();
     }
 
-
-    /**
-     * Built-in Yandex API v2 support.
-     * https://cloud.yandex.com/docs/translate/api-ref/
-     * 
-     * @param string[] input strings
-     * @param Loco_Locale target locale for translations
-     * @param array our own api configuration
-     * @return string[] output strings
-     * @throws Loco_error_Exception
-     */
-    public function filter_loco_api_translate_yandex( array $sources, Loco_Locale $locale, array $config ){
-        $client = new Loco_api_YandexClient($config);
-        return $client->translate($sources,$locale);
-    }
-
 }

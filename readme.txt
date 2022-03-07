@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 5.9
+Tested up to: 5.9.1
 Stable tag: 2.5.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -102,6 +102,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.6.0 =
 * Dropped support for WordPress < 5.2
+* Code upgrades for >= PHP 5.6.20
+* Bumped WordPress version to 5.9.1
+* Removed Yandex API integration
 
 = 2.5.8 =
 * Compatible with PHP 8.1

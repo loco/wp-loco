@@ -109,27 +109,6 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                         </p>
                     </fieldset>
                 </td>
-            </tr><?php
-            // YANDEX
-            $api = $apis['yandex']?> 
-            <tr>
-                <th scope="row"><?php $api->e('name')?></th>
-                <td>
-                    <fieldset>
-                        <legend class="screen-reader-text">
-                            <span><?php $ui->e('api_key')?></span>
-                        </legend>
-                        <p>
-                            <label for="loco--yandex_api_key">
-                                <?php $ui->e('api_key')?>:
-                            </label>
-                            <input type="text" size="90" name="api[yandex][key]" id="loco--yandex_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
-                        </p>
-                        <p>
-                            <span class="description"><a href="https://cloud.yandex.com/services/translate" target="_blank" tabindex="-1">https://cloud.yandex.com/services/translate</a></span>
-                        </p>
-                    </fieldset>
-                </td>
             </tr>
         </tbody>
     </table>

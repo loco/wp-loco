@@ -438,7 +438,7 @@ class Loco_Locale implements JsonSerializable {
     /**
      * Apply PO style Plural-Forms header.
      * @param string e.g. "nplurals=2; plural=n != 1;"
-     * @return Loco_Locale
+     * @return self
      */
     public function setPluralFormsHeader( $str ){
         if( ! preg_match('/^nplurals=(\\d);\s*plural=([ +\\-\\/*%!=<>|&?:()n0-9]+);?$/', $str, $match ) ){
