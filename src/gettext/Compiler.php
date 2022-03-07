@@ -143,43 +143,39 @@ class Loco_gettext_Compiler {
             $buffer = [];
             /* @var Loco_gettext_Data $fragment */
             foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
-                // Initial filter allows authors to control hashable path references
-                $use = apply_filters('loco_compile_script_reference',null,$ref,$domain);
-                if( is_null($use) ){
-                    // Reference could be source js, or minified version.
-                    // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
-                    if( substr($ref,-7) === '.min.js' ) {
-                        $min = $ref;
-                        $src = substr($ref,-7).'.js';
-                    }
-                    else {
-                        $src = $ref;
-                        $min = substr($ref,0,-3).'.min.js';
-                    }
-                    // Try .js and .min.js paths to check whether deployed script actually exists
-                    foreach( [$min,$src] as $try ){
-                        // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
-                        $url = $project->getBundle()->getDirectoryUrl().$try;
-                        $try = apply_filters( 'load_script_textdomain_relative_path', $try, $url );
-                        if( ! is_string($try) || '' === $try ){
-                            continue;
-                        }
-                        // by default ignore js file that is not in deployed code
-                        $file = new Loco_fs_File($try);
-                        $file->normalize($base_dir);
-                        if( $file->exists() ){
-                            $use = $try;
-                            break;
-                        }
-                    }
-                    // if neither exists in the bundle, this is a source path that will never be resolved at runtime
-                    if( is_null($use) ){
-                        Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; script not found in bundle',$ref) );
+                $use = null;
+                // Reference could be source js, or minified version.
+                // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
+                if( substr($ref,-7) === '.min.js' ) {
+                    $min = $ref;
+                    $src = substr($ref,-7).'.js';
+                }
+                else {
+                    $src = $ref;
+                    $min = substr($ref,0,-3).'.min.js';
+                }
+                // Try .js and .min.js paths to check whether deployed script actually exists
+                foreach( [$min,$src] as $try ){
+                    // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
+                    $url = $project->getBundle()->getDirectoryUrl().$try;
+                    $try = apply_filters( 'load_script_textdomain_relative_path', $try, $url );
+                    if( ! is_string($try) || '' === $try ){
                         continue;
                     }
+                    // by default ignore js file that is not in deployed code
+                    $file = new Loco_fs_File($try);
+                    $file->normalize($base_dir);
+                    if( apply_filters('loco_compile_script_reference',$file->exists(),$try,$domain) ){
+                        $use = $try;
+                        break;
+                    }
+                }
+                // if neither exists in the bundle, this is a source path that will never be resolved at runtime
+                if( is_null($use) ){
+                    Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; script not found in bundle',$ref) );
                 }
                 // add .js strings to buffer for this json and merge if already present
-                if( array_key_exists($use,$buffer) ){
+                else if( array_key_exists($use,$buffer) ){
                     $buffer[$use]->concat($fragment);
                 }
                 else {
