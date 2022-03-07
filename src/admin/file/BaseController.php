@@ -27,18 +27,18 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
     protected function getFileError( Loco_fs_File $file = null ){
         // file must exist for editing
         if( is_null($file) || ! $file->exists() ){
-            return $this->view( 'admin/errors/file-missing', array() );
+            return $this->view( 'admin/errors/file-missing', [] );
         }
         if( $file->isDirectory() ){
             $this->set('info', Loco_mvc_FileParams::create($file) );
-            return $this->view( 'admin/errors/file-isdir', array() );
+            return $this->view( 'admin/errors/file-isdir', [] );
         }
         // security validations
         try {
             Loco_gettext_Data::ext( $file );
         }
         catch( Exception $e ){
-            return $this->view( 'admin/errors/file-sec', array( 'reason' => $e->getMessage() ) );
+            return $this->view( 'admin/errors/file-sec', [ 'reason' => $e->getMessage() ] );
         }
 
         return '';
@@ -75,13 +75,13 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         if( $localised ){
             $this->locale = $locale;
             $code = (string) $locale;
-            $this->set( 'locale', new Loco_mvc_ViewParams( array(
+            $this->set( 'locale', new Loco_mvc_ViewParams( [
                 'code' => $code,
                 'lang' => $locale->lang,
                 'icon' => $locale->getIcon(),
                 'name' => $locale->ensureName( new Loco_api_WordPressTranslations ),
-                'href' => Loco_mvc_AdminRouter::generate('lang-view', array('locale'=>$code) ),
-            ) ) );
+                'href' => Loco_mvc_AdminRouter::generate('lang-view', ['locale'=>$code] ),
+            ] ) );
         }
         else {
             $this->set( 'locale', null );
@@ -99,18 +99,18 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         // navigate between sub view siblings for this resource
         $tabs = new Loco_admin_Navigation;
         $this->set( 'tabs', $tabs );
-        $actions = array (
+        $actions =  [
             'file-edit' => __('Editor','loco-translate'),
             'file-view' => __('Source','loco-translate'),
             'file-info' => __('File info','loco-translate'),
             'file-diff' => __('Restore','loco-translate'),
             'file-move' => $localised ? __('Relocate','loco-translate') : null,
             'file-delete' => __('Delete','loco-translate'),
-        );
+        ];
  
         $suffix = $this->get('action');
         $prefix = $this->get('type');
-        $args = array_intersect_key($_GET,array('path'=>1,'bundle'=>1,'domain'=>1));
+        $args = array_intersect_key($_GET,['path'=>1,'bundle'=>1,'domain'=>1]);
         foreach( $actions as $action => $name ){
             if( is_string($name) ){
                 $href = Loco_mvc_AdminRouter::generate( $prefix.'-'.$action, $args );
@@ -121,11 +121,11 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
         // Provide common language creation link if project scope is valid
         $project = $this->getOptionalProject();
         if( $project ){
-            $args = array( 'bundle' => $bundle->getHandle(), 'domain' => $project->getId() );
-            $this->set( 'msginit', new Loco_mvc_ViewParams( array (
+            $args = [ 'bundle' => $bundle->getHandle(), 'domain' => $project->getId() ];
+            $this->set( 'msginit', new Loco_mvc_ViewParams(  [
                 'href' => Loco_mvc_AdminRouter::generate( $prefix.'-msginit', $args ),
                 'text' => __('New language','loco-translate'),
-            ) ) );
+            ] ) );
         }
     }
 
@@ -134,7 +134,7 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
     /**
      * {@inheritdoc}
      */
-    public function view( $tpl, array $args = array() ){
+    public function view( $tpl, array $args = [] ){
         
         if( $breadcrumb = $this->get('breadcrumb') ){
             

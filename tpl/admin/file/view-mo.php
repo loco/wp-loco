@@ -20,7 +20,7 @@ $this->start('source');
             $i = 0;
             $r = 0;
             $cols = 24;
-            $line = array();
+            $line = [];
             $bytes = strlen($bin);
             // establish formatting of row offset, nbased on largest row number
             $rowfmt = sprintf( '%%0%uX | ', strlen( sprintf( '%02X', $cols * floor( $bytes / $cols ) ) ) );
@@ -47,7 +47,7 @@ $this->start('source');
                 // wrap at cols, and print plain text
                 if( ++$i === $cols ){
                     echo '  ', implode('', $line ), "\n";
-                    $line = array();
+                    $line = [];
                     $i = 0;
                     $r++;
                 }

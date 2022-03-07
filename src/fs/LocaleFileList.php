@@ -8,7 +8,7 @@ class Loco_fs_LocaleFileList extends Loco_fs_FileList {
      * Look up locale entries by their tag
      * @var array
      */
-    private $index = array();
+    private $index = [];
     
     
     /**
@@ -49,7 +49,7 @@ class Loco_fs_LocaleFileList extends Loco_fs_FileList {
      * @return array<Loco_Locale>
      */
     public function getLocales(){
-        $list = array();
+        $list = [];
         foreach( array_keys($this->index) as $tag ){
             $locale = Loco_Locale::parse($tag);
             if( $locale->isValid() ){

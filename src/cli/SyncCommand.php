@@ -148,7 +148,7 @@ abstract class Loco_cli_SyncCommand {
                     $jsons = $compiler->writeJson($project,$po);
                     foreach( $jsons as $file ){
                         $compiled++;
-                        $param = new Loco_mvc_FileParams(array(),$file);
+                        $param = new Loco_mvc_FileParams([],$file);
                         Loco_cli_Utils::debug('+ %u bytes written to %s',$param->size,$param->name);
                     }
                     // Done compile of this set

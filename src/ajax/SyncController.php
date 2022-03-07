@@ -59,7 +59,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         
         // defaults: no msgstr and no json
         $translate = false;
-        $syncjsons = array();
+        $syncjsons = [];
         
         // Parse existing POT for source
         if( $potfile ){

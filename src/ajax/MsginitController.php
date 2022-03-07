@@ -109,7 +109,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         }
 
         // Let template define Project-Id-Version, else set header to current project name
-        $headers = array();
+        $headers = [];
         $vers = $data->getHeaders()->{'Project-Id-Version'};
         if( ! $vers || 'PACKAGE VERSION' === $vers ){
             $headers['Project-Id-Version'] = $project->getName();
@@ -152,21 +152,21 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         }
 
         // return debugging information, used in tests.
-        $this->set('debug',new Loco_mvc_ViewParams( array(
+        $this->set('debug',new Loco_mvc_ViewParams( [
             'poname' => $pofile->basename(),
             'source' => $potfile ? $potfile->basename() : '',
-        ) ) );
+        ] ) );
 
         // push recent items on file creation
         Loco_data_RecentItems::get()->pushBundle($bundle)->persist();
         
         // front end will redirect to the editor
         $type = strtolower( $this->get('type') );
-        $this->set( 'redirect', Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type), array (
+        $this->set( 'redirect', Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type),  [
             'path' => $pofile->getRelativePath($base),
             'bundle' => $bundle->getHandle(),
             'domain' => $project->getId(),
-        ) ) );
+        ] ) );
         
         return parent::render();
     }

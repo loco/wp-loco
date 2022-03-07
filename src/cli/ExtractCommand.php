@@ -45,7 +45,7 @@ abstract class Loco_cli_ExtractCommand {
                 $suggest = ceil( $ext->getMaxPhpSize() / 1024 );
                 WP_CLI::warning(sprintf('%u source files skipped over %s. Consider running with --maxsize=%uK',count($list),$current,$suggest) );
                 foreach( $list as $file ) {
-                    $f = new Loco_mvc_FileParams(array(),$file);
+                    $f = new Loco_mvc_FileParams([],$file);
                     Loco_cli_Utils::debug('%s (%s)', $f->relpath, $f->size );
                 }
             }

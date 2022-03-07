@@ -48,7 +48,7 @@ class Loco_gettext_Extraction {
         $this->bundle = $bundle;
         $this->extracted = new LocoExtracted;
         $this->extracted->setDomain('default');
-        $this->extras = array();
+        $this->extras = [];
         $default = $bundle->getDefaultProject();
         if( $default instanceof Loco_package_Project ){
             $domain = $default->getDomain()->getName();
@@ -59,12 +59,12 @@ class Loco_gettext_Extraction {
                 $this->extracted->setDomain('');
             }
             // pull bundle's default metadata. these are translations that may not be encountered in files
-            $extras = array();
+            $extras = [];
             $header = $bundle->getHeaderInfo();
             foreach( $bundle->getMetaTranslatable() as $prop => $notes ){
                 if( $source = $header->__get($prop) ){
                     if( is_string($source) ){
-                        $extras[] = array( $source, $notes );
+                        $extras[] = [ $source, $notes ];
                     }
                 }
             }
@@ -105,9 +105,9 @@ class Loco_gettext_Extraction {
                 }
                 // extract headers from theme PHP files in
                 if( $project->getBundle()->isTheme() ){
-                    $extr->headerize( array (
+                    $extr->headerize(  [
                         'Template Name' => 'Name of the template',
-                    ), (string) $project->getDomain() );
+                    ], (string) $project->getDomain() );
                 }
             }
             $this->extracted->extractSource( $extr, $file->getContents(), $file->getRelativePath( $base ) );
@@ -126,7 +126,7 @@ class Loco_gettext_Extraction {
                 $this->extracted->pushMeta( $args[0], $args[1], $domain );
             }
         }
-        $this->extras = array();
+        $this->extras = [];
         return $this;
     }
 

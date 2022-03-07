@@ -105,6 +105,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Code upgrades for >= PHP 5.6.20
 * Bumped WordPress version to 5.9.1
 * Removed Yandex API integration
+* Added loco_compile_script_reference filter
 
 = 2.5.8 =
 * Compatible with PHP 8.1

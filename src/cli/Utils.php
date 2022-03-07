@@ -11,7 +11,7 @@ abstract class Loco_cli_Utils {
      * @return Loco_package_Project[]
      */
     public static function collectProjects( $filter ){
-        $projects = array();
+        $projects = [];
         $filter = strtolower($filter);
         // bundle type filter
         if( 'plugins' === $filter ){
@@ -23,11 +23,11 @@ abstract class Loco_cli_Utils {
             $filter = null;
         }
         else if( 'core' === $filter ) {
-            $bundles = array( Loco_package_Core::create() );
+            $bundles = [ Loco_package_Core::create() ];
             $filter = null;
         }
         else {
-            $bundles = array( Loco_package_Core::create() );
+            $bundles = [ Loco_package_Core::create() ];
             $bundles = array_merge( $bundles, Loco_package_Plugin::getAll() );
             $bundles = array_merge( $bundles, Loco_package_Theme::getAll() );
         }
@@ -53,7 +53,7 @@ abstract class Loco_cli_Utils {
      * @return Loco_Locale[]
      */
     public static function collectLocales( $tags ){
-        $locales = array();
+        $locales = [];
         if( '' !== $tags ){
             $api = new Loco_api_WordPressTranslations;
             foreach( preg_split('/[\\s,;]+/i',$tags,-1,PREG_SPLIT_NO_EMPTY) as $tag ){
@@ -79,7 +79,7 @@ abstract class Loco_cli_Utils {
      * @param string[][] data rows to print
      */
     public static function tabulate( array $t ){
-        $w = array();
+        $w = [];
         foreach( $t as $y => $row ){
             foreach( $row as $x => $value ){
                 $width = mb_strlen($value,'UTF-8');
@@ -87,7 +87,7 @@ abstract class Loco_cli_Utils {
             }
         }
         foreach( $t as $y => $row ){
-            $line = array();
+            $line = [];
             foreach( $w as $x => $width ){
                 $value = isset($row[$x]) ? $row[$x] : '';
                 $value = str_pad($value,$width,' ',STR_PAD_RIGHT);
@@ -102,12 +102,12 @@ abstract class Loco_cli_Utils {
      * Prints file listing to stdout
      */
     public static function tabulateFiles(){
-        $t = array();
+        $t = [];
         /* @var Loco_fs_File $file */
         foreach( func_get_args() as $file ){
             if( $file instanceof Loco_fs_File && $file->exists() ){
-                $f = new Loco_mvc_FileParams(array(),$file);
-                $t[] = array( $f->owner, $f->group, $f->smode, $f->relpath );
+                $f = new Loco_mvc_FileParams([],$file);
+                $t[] = [ $f->owner, $f->group, $f->smode, $f->relpath ];
             }
         }
         self::tabulate($t);

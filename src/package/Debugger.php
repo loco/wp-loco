@@ -20,13 +20,13 @@ class Loco_package_Debugger implements IteratorAggregate {
      */
     public function __construct( Loco_package_Bundle $bundle ){
         
-        $this->messages = array();
-        $this->counts = array(
+        $this->messages = [];
+        $this->counts = [
             'success' => 0,
             'warning' => 0,
             'debug'   => 0,
             'info'    => 0,
-        );
+        ];
         
         // config storage type
         switch( $bundle->isConfigured() ){
@@ -58,7 +58,7 @@ class Loco_package_Debugger implements IteratorAggregate {
             $this->info('WordPress says primary text domain is "%s"', $value);
             // WordPress 4.6 changes mean this header could be a fallback and not actually declared by author
             if( $bundle->isPlugin() ){
-                $map = array ( 'TextDomain' => 'Text Domain' );
+                $map =  [ 'TextDomain' => 'Text Domain' ];
                 $raw = get_file_data( $bundle->getBootstrapPath(), $map, 'plugin' );
                 if( empty($raw['TextDomain']) ){
                     $this->warn('Author doesn\'t define the TextDomain header, WordPress guessed it');
@@ -89,8 +89,8 @@ class Loco_package_Debugger implements IteratorAggregate {
         }
         
         // collecting only configured domains to match against source code
-        $domains = array();
-        $templates = array();
+        $domains = [];
+        $templates = [];
         
         // show each known subset
         if( $count = count($bundle) ){
@@ -104,7 +104,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                 }
                 $domains[$domain] = true;
                 // Domain path[s] within bundle directory
-                $targets = array();
+                $targets = [];
                 /* @var $dir Loco_fs_Directory */
                 foreach( $project->getConfiguredTargets() as $dir ){
                     $targets[] = $dir->getRelativePath($base);
@@ -169,7 +169,7 @@ class Loco_package_Debugger implements IteratorAggregate {
         
         // source code extraction across entire bundle
         $tmp = clone $bundle;
-        $tmp->exchangeArray( array() );
+        $tmp->exchangeArray( [] );
         $project = $tmp->createDefault( (string) $default->getDomain() );
         $extr = new Loco_gettext_Extraction( $tmp );
         $extr->addProject( $project );

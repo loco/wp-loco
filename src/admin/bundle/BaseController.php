@@ -104,17 +104,17 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
         // navigate between bundle view siblings
         $tabs = new Loco_admin_Navigation;
         $this->set( 'tabs', $tabs );
-        $actions = array (
+        $actions =  [
             'view'  => __('Overview','loco-translate'),
             'setup' => __('Setup','loco-translate'),
             'conf'  => __('Advanced','loco-translate'),
-        );
+        ];
         if( loco_debugging() ){
             $actions['debug'] = __('Debug','loco-translate');
         }
         $suffix = $this->get('action');
         $prefix = strtolower( $this->get('type') );
-        $getarg = array_intersect_key( $_GET, array('bundle'=>'') );
+        $getarg = array_intersect_key( $_GET, ['bundle'=>''] );
         foreach( $actions as $action => $name ){
             $href = Loco_mvc_AdminRouter::generate( $prefix.'-'.$action, $getarg );
             $tabs->add( $name, $href, $action === $suffix );
@@ -133,12 +133,12 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
      */
     protected function prepareFsConnect( $type, $relpath ){
 
-        $fields = new Loco_mvc_HiddenFields( array(
+        $fields = new Loco_mvc_HiddenFields( [
             'auth' => $type,
             'path' => $relpath,
             'loco-nonce' => wp_create_nonce('fsConnect'),
             '_fs_nonce' => wp_create_nonce('filesystem-credentials'), // <- WP 4.7.5 added security fix
-        ) ) ;
+        ] ) ;
         $this->set('fsFields', $fields );
 
         // may have fs credentials saved in session

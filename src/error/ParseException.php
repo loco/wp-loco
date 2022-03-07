@@ -16,7 +16,7 @@ class Loco_error_ParseException extends Loco_error_Exception {
      * @return self
      */
     public function setContext( $line, $column, $source ){
-        $this->context = array();
+        $this->context = [];
         $lines = preg_split( '/\\r?\\n/', $source, $line+1 );
         $offset = $line - 1;
         if( isset($lines[$offset]) ){

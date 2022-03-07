@@ -39,9 +39,9 @@ class Loco_fs_Siblings {
      * @return Loco_fs_File[]
      */
     public function expand(){
-        $siblings = array();
+        $siblings = [];
         // Source and binary pair
-        foreach( array( $this->po, $this->mo ) as $file ){
+        foreach( [ $this->po, $this->mo ] as $file ){
             if( $file && $file->exists() ){
                 $siblings[] = $file;
             }

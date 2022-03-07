@@ -30,9 +30,9 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
      * {@inheritdoc}
      */
     public function getHelpTabs(){
-        return array (
+        return  [
             __('Overview','default') => $this->viewSnippet('tab-locale-view'),
-        );
+        ];
     }
 
 
@@ -56,7 +56,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
 
         // Get PO files for this locale
         $files = $package->findLocaleFiles();
-        $translations = array();
+        $translations = [];
         $modified = 0;
         $npofiles = 0;
         $nfiles = 0;
@@ -82,14 +82,14 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
             $domain = $project->getDomain()->getName();
             $bundle = $project->getBundle();
             $type = strtolower( $bundle->getType() );
-            $args = array(
+            $args = [
                 // 'locale' => $tag,
                 'bundle' => $bundle->getHandle(),
                 'domain' => $project->getId(),
                 'path' => $meta->getPath(false),
-            );
+            ];
             // append data required for PO table row, except use bundle data instead of locale data
-            $translations[$type][] = new Loco_mvc_ViewParams( array (
+            $translations[$type][] = new Loco_mvc_ViewParams(  [
                 // bundle info
                 'title' => $project->getName(),
                 'domain' => $domain,
@@ -110,7 +110,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
                 'move' =>   Loco_mvc_AdminRouter::generate( $type.'-file-move', $args ),
                 'delete' => Loco_mvc_AdminRouter::generate( $type.'-file-delete', $args ),
                 'copy' =>   Loco_mvc_AdminRouter::generate( $type.'-msginit', $args ),
-            ) );
+            ] );
         }
         
         $title = __( 'Installed languages', 'loco-translate' );
@@ -131,29 +131,29 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         }
 
         // Translated type labels and "See all <type>" links
-        $types = array(
-            'core' => new Loco_mvc_ViewParams( array(
+        $types = [
+            'core' => new Loco_mvc_ViewParams( [
                 'name' => __('WordPress Core','loco-translate'),
                 'text' => __('See all core translations','loco-translate'), 
                 'href' => Loco_mvc_AdminRouter::generate('core') 
-            ) ),
-            'theme' => new Loco_mvc_ViewParams( array(
+            ] ),
+            'theme' => new Loco_mvc_ViewParams( [
                 'name' => __('Themes','loco-translate'),
                 'text' => __('See all themes','loco-translate'), 
                 'href' => Loco_mvc_AdminRouter::generate('theme') 
-            ) ),
-            'plugin' => new Loco_mvc_ViewParams( array(
+            ] ),
+            'plugin' => new Loco_mvc_ViewParams( [
                 'name' => __('Plugins','loco-translate'),
                 'text' => __('See all plugins','loco-translate'), 
                 'href' => Loco_mvc_AdminRouter::generate('plugin') 
-            ) ),
-        );
+            ] ),
+        ];
         
-        $this->set( 'locale', new Loco_mvc_ViewParams( array(
+        $this->set( 'locale', new Loco_mvc_ViewParams( [
             'code' => $tag,
             'name' => $locale->getName(),
             'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
-        ) ) );
+        ] ) );
 
         return $this->view( 'admin/bundle/locale', compact('breadcrumb','translations','types','npofiles','modified') );
     }

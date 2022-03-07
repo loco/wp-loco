@@ -109,7 +109,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         // validate allowed source file types 
         $conf = Loco_data_Settings::get();
         $ext = strtolower( $srcfile->extension() );
-        $allow = array_merge( array('php','js'), $conf->php_alias, $conf->jsx_alias );
+        $allow = array_merge( ['php','js'], $conf->php_alias, $conf->jsx_alias );
         if( ! in_array($ext,$allow,true) ){
             throw new InvalidArgumentException('File extension disallowed, '.$ext );
         }
@@ -122,7 +122,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         $this->set('path', $srcfile->getRelativePath( loco_constant('WP_CONTENT_DIR') ) );
         
         // source code will be HTML-tokenized into multiple lines
-        $code = array();
+        $code = [];
         
         // observe the same size limits for source highlighting as for string extraction as tokenizing will use the same amount of juice
         $maxbytes = wp_convert_hr_to_bytes( $conf->max_php_size );
@@ -157,7 +157,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                 else {
                     // scalar symbol will always start on the line that the previous token ended on
                     $clss = 'T_NONE';
-                    $lines = array( $tok );
+                    $lines = [ $tok ];
                     $startline = $thisline;
                 }
                 // token can span multiple lines, so include only bytes on required line[s]

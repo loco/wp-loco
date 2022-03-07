@@ -17,7 +17,7 @@ abstract class Loco_package_Inverter {
         foreach( $bundle as $project ){
             if( $file = $project->getPot() ){
                 // excluding all extensions in case POT is actually a PO/MO pair
-                foreach( array('pot','po','mo') as $ext ){
+                foreach( ['pot','po','mo'] as $ext ){
                     $file = $file->cloneExtension($ext); 
                     if( $path = realpath( $file->getPath() ) ){
                         $finder->exclude( $path );
@@ -55,9 +55,9 @@ abstract class Loco_package_Inverter {
         
 
         // first iteration groups found files into common locations that should hopefully indicate translation sets
-        $groups = array();
-        $templates = array();
-        $localised = array();
+        $groups = [];
+        $templates = [];
+        $localised = [];
         $root = $bundle->getDirectoryPath();
 
         /* @var $list Loco_fs_FileList */
@@ -71,8 +71,8 @@ abstract class Loco_package_Inverter {
                 //
                 if( ! isset($groups[$key]) ){
                     $groups[$key] = $dir;
-                    $templates[$key] = array();
-                    $localised[$key] = array();
+                    $templates[$key] = [];
+                    $localised[$key] = [];
                 }
                 // template should define single set of translations unique by directory and file prefix
                 if( 'pot' === $ext ){
@@ -99,7 +99,7 @@ abstract class Loco_package_Inverter {
 
 
         // next iteration matches collected files together into likely project sets
-        $unique = array();
+        $unique = [];
         
         /* @var $list Loco_fs_Directory */
         foreach( $groups as $key => $dir ){

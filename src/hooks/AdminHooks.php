@@ -24,7 +24,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     public function __construct(){
         // renders failure notice if plugin failed to start up admin hooks.
-        add_action( 'admin_notices', array(__CLASS__,'print_hook_failure') );
+        add_action( 'admin_notices', [__CLASS__,'print_hook_failure'] );
         // initialize hooks
         parent::__construct();
         // Ajax router will be called directly in tests
@@ -64,7 +64,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 			    esc_html( __("This plugin doesn't collect any data from public website visitors.",'loco-translate') ).'<br />'. 
                 wp_kses( 
                     sprintf( __('Administrators and auditors may wish to review Loco\'s <a href="%s">plugin privacy notice</a>.','loco-translate'), esc_url($url) ),
-                    array('a'=>array('href'=>true)), array('https')
+                    ['a'=>['href'=>true]], ['https']
                 )
 		    );
 	    }
@@ -81,7 +81,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             load_plugin_textdomain( 'loco-translate', false, $domainPath );
         }
         // Unhook failure notice that would fire if this hook was not successful
-        remove_action( 'admin_notices', array(__CLASS__,'print_hook_failure') );
+        remove_action( 'admin_notices', [__CLASS__,'print_hook_failure'] );
     }
 
 
@@ -96,10 +96,10 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
              if( $plugin && current_user_can('loco_admin') && Loco_package_Plugin::get_plugin($plugin) ){
                 // coerce links to array
                 if( ! is_array($links) ){
-                    $links = $links && is_string($links) ? (array) $links : array();
+                    $links = $links && is_string($links) ? (array) $links : [];
                 }
                 // ok to add "translate" link into meta row
-                $href = Loco_mvc_AdminRouter::generate('plugin-view', array( 'bundle' => $plugin) );
+                $href = Loco_mvc_AdminRouter::generate('plugin-view', [ 'bundle' => $plugin] );
                 $links[] = '<a href="'.esc_attr($href).'">'.esc_html__('Translate','loco-translate').'</a>';
              }
          }

@@ -72,7 +72,7 @@ class WP_Filesystem_Debug extends WP_Filesystem_Base {
      */
     public function disconnect(){
         $this->authed = false;
-        $this->options = array();
+        $this->options = [];
         return $this;
     }
 
@@ -98,7 +98,7 @@ class WP_Filesystem_Debug extends WP_Filesystem_Base {
     private function _call( $method, array $args ){
         if( $this->authed ){
             $real = Loco_api_WordPressFileSystem::direct();
-            return call_user_func_array( array($real,$method), $args );
+            return call_user_func_array( [$real,$method], $args );
         }
         return false;
     }

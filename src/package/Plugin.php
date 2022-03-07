@@ -9,10 +9,10 @@ class Loco_package_Plugin extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getSystemTargets(){
-        return array ( 
+        return  [ 
             trailingslashit( loco_constant('LOCO_LANG_DIR') ).'plugins',
             trailingslashit( loco_constant('WP_LANG_DIR') ).'plugins',
-        );
+        ];
     }
 
 
@@ -55,7 +55,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
      * @return Loco_package_Plugin[]
      */
     public static function getAll(){
-        $plugins = array();
+        $plugins = [];
         foreach( self::get_plugins() as $handle => $data ){
             try {
                 $plugins[] = Loco_package_Plugin::create($handle);
@@ -75,12 +75,12 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     public static function get_plugins(){
         $cached = wp_cache_get('plugins','loco');
         if( ! is_array($cached) ){
-            $cached = array();
+            $cached = [];
             // regular plugins + mu plugins:
-            $search = array (
+            $search =  [
                 'WP_PLUGIN_DIR' => 'get_plugins',
                 'WPMU_PLUGIN_DIR' => 'get_mu_plugins',
-            );
+            ];
             foreach( $search as $const => $getter ){
                 if( $list = call_user_func($getter) ){
                     $base = loco_constant($const);
@@ -129,7 +129,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         }
         // else plugin is not known to WordPress
         else {
-            $data = apply_filters( 'loco_missing_plugin', array(), $handle );
+            $data = apply_filters( 'loco_missing_plugin', [], $handle );
         }
         // plugin not valid if name absent from raw data
         if( empty($data['Name']) ){
@@ -159,7 +159,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
                 $data = get_plugin_data( $path, false, false );
             }
             else {
-                $data = array();
+                $data = [];
             }
         }
         return new Loco_package_Header( $data );
@@ -170,14 +170,14 @@ class Loco_package_Plugin extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getMetaTranslatable(){
-        return array (
+        return  [
             'Name'        => 'Name of the plugin',
             'Description' => 'Description of the plugin',
             'PluginURI'   => 'URI of the plugin',
             'Author'      => 'Author of the plugin',
             'AuthorURI'   => 'Author URI of the plugin',
             // 'Tags'        => 'Tags of the plugin',
-        );
+        ];
     }
 
     

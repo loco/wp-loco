@@ -71,12 +71,12 @@ class Loco_data_Session extends Loco_data_Serializable {
     /**
      * @internal
      */
-    final public function __construct( array $raw = array() ){
+    final public function __construct( array $raw = [] ){
         $this->token = wp_get_session_token();
         if( ! $this->token ){
             throw new Loco_error_Exception('Failed to get session token');
         }
-        parent::__construct( array() );
+        parent::__construct( [] );
         $this->manager = WP_Session_Tokens::get_instance( get_current_user_id() );
         // populate object from stored session data
         $data = $this->getRaw();
@@ -91,7 +91,7 @@ class Loco_data_Session extends Loco_data_Serializable {
         self::$current = $this;
         // ensure against unclean shutdown
         if( loco_debugging() ){
-            register_shutdown_function( array($this,'_on_shutdown') );
+            register_shutdown_function( [$this,'_on_shutdown'] );
         }
     }
 
@@ -145,7 +145,7 @@ class Loco_data_Session extends Loco_data_Serializable {
             unset( $data['loco'] );
             $this->manager->update( $this->token, $data );
         }
-        $this->exchangeArray( array() );
+        $this->exchangeArray( [] );
         $this->dirty = false;
         return $this;
     }

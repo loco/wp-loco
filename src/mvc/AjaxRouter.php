@@ -21,16 +21,16 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
      * @param array
      * @return string
      */
-    public static function generate( $route, array $args = array() ){
+    public static function generate( $route, array $args = [] ){
         // validate route autoload if debugging
         if( loco_debugging() ){
             class_exists( self::routeToClass($route) );
         }
-        $args += array (
+        $args +=  [
             'route' => $route,
             'action' => 'loco_ajax',
             'loco-nonce' => wp_create_nonce($route),
-        );
+        ];
         return admin_url('admin-ajax.php','relative').'?'.http_build_query($args);
     }
 
@@ -85,9 +85,9 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
      */
     public function on_wp_ajax_loco_json(){
         $json = $this->renderAjax();
-	    $this->exitScript( $json, array (
+	    $this->exitScript( $json,  [
 	        'Content-Type' => 'application/json; charset=UTF-8',
-	    ) );
+	    ] );
     }
 
 
@@ -111,14 +111,14 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             $data = (string) $data;
             $ext = null;
         }
-        $mimes = array (
+        $mimes =  [
             'mo'   => 'application/x-gettext-translation',
             'po'   => 'application/x-gettext',
             'pot'  => 'application/x-gettext',
             'xml'  => 'text/xml',
             'json' => 'application/json',
-        );
-        $headers = array();
+        ];
+        $headers = [];
 	    if( $ext && isset($mimes[$ext]) ){
             $headers['Content-Type'] = $mimes[$ext].'; charset=UTF-8';
             $headers['Content-Disposition'] = 'attachment; filename='.$file->basename();
@@ -175,11 +175,11 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             }
         }
         catch( Loco_error_Exception $e ){
-            $json = json_encode( array( 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ) );
+            $json = json_encode( [ 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ] );
         }
         catch( Exception $e ){
             $e = Loco_error_Exception::convert($e);
-            $json = json_encode( array( 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ) );
+            $json = json_encode( [ 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ] );
         }
         $this->buffer->discard();
         return $json;

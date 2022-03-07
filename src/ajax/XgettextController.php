@@ -51,11 +51,11 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         
         // set response data for debugging
         if( loco_debugging() ){
-            $this->set( 'debug', array (
+            $this->set( 'debug',  [
                 'potname' => $potfile->basename(),
                 'potsize' => $potsize,
                 'total' => $ext->getTotal(),
-            ) );
+            ] );
         }
 
         // push recent items on file creation
@@ -73,9 +73,9 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         
         // redirect front end to bundle view. Discourages manual editing of template
         $type = strtolower( $bundle->getType() );   
-        $href = Loco_mvc_AdminRouter::generate( sprintf('%s-view',$type), array(
+        $href = Loco_mvc_AdminRouter::generate( sprintf('%s-view',$type), [
             'bundle' => $bundle->getHandle(),
-        ) );
+        ] );
         $hash = '#loco-'.$project->getId();
         $this->set( 'redirect', $href.$hash );
         

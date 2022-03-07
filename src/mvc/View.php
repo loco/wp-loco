@@ -40,7 +40,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * @internal
      * @param array
      */
-    public function __construct( array $args = array() ){
+    public function __construct( array $args = [] ){
         $this->scope = new Loco_mvc_ViewParams( $args );
         $this->cwd = loco_plugin_root().'/tpl';
     }
@@ -280,10 +280,10 @@ class Loco_mvc_View implements IteratorAggregate {
      * @param array optional page arguments
      * @return Loco_mvc_ViewParams
      */
-    public function route( $route, array $args = array() ){
-        return new Loco_mvc_ViewParams( array (
+    public function route( $route, array $args = [] ){
+        return new Loco_mvc_ViewParams(  [
             'href' => Loco_mvc_AdminRouter::generate( $route, $args ),
-        ) );
+        ] );
     }
 
 

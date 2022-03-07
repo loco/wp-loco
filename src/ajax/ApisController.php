@@ -22,14 +22,14 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
             $modal->set('apis',$apis);
             // help buttons
             $locale = $this->get('locale');
-            $modal->set( 'help', new Loco_mvc_ViewParams( array (
+            $modal->set( 'help', new Loco_mvc_ViewParams(  [
                 'text' => __('Help','loco-translate'),
                 'href' => apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/providers'),
-            ) ) );
-            $modal->set('prof', new Loco_mvc_ViewParams( array (
+            ] ) );
+            $modal->set('prof', new Loco_mvc_ViewParams(  [
                 'text' => __('Need a human?','loco-translate'),
                 'href' => apply_filters('loco_external','https://localise.biz/wordpress/translation?l='.$locale),
-            ) ) );
+            ] ) );
             // render auto-translate modal or prompt for configuration
             if( $apis ){
                 $html = $modal->render('ajax/modal-apis-batch');

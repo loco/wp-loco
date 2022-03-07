@@ -26,7 +26,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                 $post = Loco_mvc_PostParams::get();
                 if( $post->has('opts') ){
                     $opts->populate( $post->opts )->persist();
-                    $perms->populate( $post->has('caps') ? $post->caps : array() );
+                    $perms->populate( $post->has('caps') ? $post->caps : [] );
                     // done update
                     Loco_error_AdminNotices::success( __('Settings saved','loco-translate') );
                     // remove saved params from session if persistent options unset
@@ -47,26 +47,26 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         $this->set('caps', $caps = new Loco_mvc_ViewParams );
         // there is no distinct role for network admin, so we'll fake it for UI
         if( is_multisite() ){
-            $caps[''] = new Loco_mvc_ViewParams( array(
+            $caps[''] = new Loco_mvc_ViewParams( [
                 'label' => __('Super Admin','default'),
                 'name' => 'dummy-admin-cap',
                 'attrs' => 'checked disabled'
-            ) );
+            ] );
         }
         foreach( $perms->getRoles() as $id => $role ){
-            $caps[$id] = new Loco_mvc_ViewParams( array(
+            $caps[$id] = new Loco_mvc_ViewParams( [
                 'value' => '1',
                 'label' => $perms->getRoleName($id),
                 'name' => 'caps['.$id.'][loco_admin]',
                 'attrs' => $perms->isProtectedRole($role) ? 'checked disabled ' : ( $role->has_cap('loco_admin') ? 'checked ' : '' ),
-            ) );
+            ] );
         }
         // allow/deny warning levels
-        $this->set('verbose', new Loco_mvc_ViewParams( array(
+        $this->set('verbose', new Loco_mvc_ViewParams( [
             0 => __('Allow','loco-translate'),
             1 => __('Allow (with warning)','loco-translate'),
             2 => __('Disallow','loco-translate'),
-        ) ) );
+        ] ) );
     }
 
 

@@ -104,7 +104,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @throws Loco_error_Exception
      */
     public static function createType( $type, $handle ){
-        $func = array( 'Loco_package_'.ucfirst($type), 'create' );
+        $func = [ 'Loco_package_'.ucfirst($type), 'create' ];
         if( is_callable($func) ){
             $bundle = call_user_func( $func, $handle );
         }
@@ -142,7 +142,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @param string
      */
     public function __construct( $handle, $name ){
-        parent::__construct( array() );
+        parent::__construct( [] );
         $this->setHandle($handle)->setName($name);
         $this->xpaths = new Loco_fs_FileList;
     }
@@ -153,7 +153,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return Loco_package_Bundle
      */
     public function reload(){
-        return call_user_func( array( get_class($this), 'create' ), $this->getSlug() );
+        return call_user_func( [ get_class($this), 'create' ], $this->getSlug() );
     }
 
 
@@ -305,9 +305,9 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return string[]
      */
     public function getVendorRoots(){
-        $dirs = array();
+        $dirs = [];
         $base = (string) $this->getDirectoryPath();
-        foreach( array('node_modules','vendor') as $f ){
+        foreach( ['node_modules','vendor'] as $f ){
             $path = $base.'/'.$f;
             if( is_dir($path) ){
                 $dirs[] = $path;
@@ -433,7 +433,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return array indexed by Text Domain name
      */
     public function exportGrouped(){
-        $domains = array();
+        $domains = [];
         /* @var $proj Loco_package_Project */
         foreach( $this as $proj ){
             $domain = $proj->getDomain();
@@ -697,7 +697,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return array<Loco_package_TextDomain>
      */
     public function getDomains(){
-        $domains = array();
+        $domains = [];
         /* @var $project Loco_package_Project */
         foreach( $this as $project ){
             if( $domain = $project->getDomain() ){
@@ -747,7 +747,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return Loco_package_Bundle
      */
     public function clear(){
-        $this->exchangeArray( array() );
+        $this->exchangeArray( [] );
         $this->xpaths = new Loco_fs_FileList;
         $this->saved = false;
         return $this;

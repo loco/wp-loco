@@ -54,9 +54,9 @@ class Loco_fs_Locations extends ArrayObject {
      */
     public static function getRoot(){
         if( ! self::$roots ){
-            self::$roots = new Loco_fs_Locations( array(
+            self::$roots = new Loco_fs_Locations( [
                 loco_constant('ABSPATH'),
-            ) );
+            ] );
         }
         return self::$roots;
     }
@@ -67,10 +67,10 @@ class Loco_fs_Locations extends ArrayObject {
      */
     public static function getContent(){
         if( ! self::$conts ){
-            self::$conts = new Loco_fs_Locations( array(
+            self::$conts = new Loco_fs_Locations( [
                 loco_constant('WP_CONTENT_DIR'),  // <- defined WP_CONTENT_DIR
                 trailingslashit(ABSPATH).'wp-content', // <- default /wp-content
-            ) );
+            ] );
         }
         return self::$conts;
     }
@@ -81,9 +81,9 @@ class Loco_fs_Locations extends ArrayObject {
      */
     public static function getGlobal(){
         if( ! self::$langs ){
-            self::$langs = new Loco_fs_Locations( array(
+            self::$langs = new Loco_fs_Locations( [
                 loco_constant('WP_LANG_DIR'),
-            ) );
+            ] );
         }
         return self::$langs;
     }
@@ -94,7 +94,7 @@ class Loco_fs_Locations extends ArrayObject {
      */
     public static function getThemes(){
         if( ! self::$theme ){
-            $roots = isset($GLOBALS['wp_theme_directories']) ? $GLOBALS['wp_theme_directories'] : array();
+            $roots = isset($GLOBALS['wp_theme_directories']) ? $GLOBALS['wp_theme_directories'] : [];
             if( ! $roots ){
                 $roots[] = trailingslashit( loco_constant('WP_CONTENT_DIR') ).'themes';
             }
@@ -109,10 +109,10 @@ class Loco_fs_Locations extends ArrayObject {
      */
     public static function getPlugins(){
         if( ! self::$plugin ){
-            self::$plugin = new Loco_fs_Locations( array(
+            self::$plugin = new Loco_fs_Locations( [
                 loco_constant('WP_PLUGIN_DIR'),
                 loco_constant('WPMU_PLUGIN_DIR'),
-            ) );
+            ] );
         }
         return self::$plugin;
     }
@@ -122,7 +122,7 @@ class Loco_fs_Locations extends ArrayObject {
      * @param array
      */
     public function __construct( array $paths ){
-        parent::__construct( array() );
+        parent::__construct( [] );
         foreach( $paths as $path ){
             $this->add( $path );
         }
@@ -189,7 +189,7 @@ class Loco_fs_Locations extends ArrayObject {
         if( ! $path ){
             throw new InvalidArgumentException('Expected absolute path');
         }
-        $paths = array( trailingslashit($path) );
+        $paths = [ trailingslashit($path) ];
         // add real path if differs
         $real = realpath($path);
         if( $real && $real !== $path ){

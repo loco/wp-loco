@@ -27,13 +27,13 @@ class Loco_api_WordPressFileSystem {
      * Credentials posted into the API
      * @var array
      */
-    private $creds_in = array();
+    private $creds_in = [];
 
     /**
      * Credentials returned from the API
      * @var array
      */
-    private $creds_out = array();
+    private $creds_out = [];
 
 
     /**
@@ -203,7 +203,7 @@ class Loco_api_WordPressFileSystem {
         // else begin new auth
         $this->fs = null;
         $this->form = '';
-        $this->creds_out = array();
+        $this->creds_out = [];
         
         // observe settings held temporarily in session
         try {
@@ -211,7 +211,7 @@ class Loco_api_WordPressFileSystem {
             if( isset($session['loco-fs']) ){
                 $creds = $session['loco-fs'];
                 if( is_array($creds) && $this->tryCredentials($creds,$file) ){
-                    $this->creds_in = array();
+                    $this->creds_in = [];
                     return true;
                 }
             }
@@ -221,7 +221,7 @@ class Loco_api_WordPressFileSystem {
         }
 
         $post = Loco_mvc_PostParams::get();
-        $dflt = array( 'hostname' => '', 'username' => '', 'password' => '', 'public_key' => '', 'private_key' => '', 'connection_type' => '', '_fs_nonce' => '' );
+        $dflt = [ 'hostname' => '', 'username' => '', 'password' => '', 'public_key' => '', 'private_key' => '', 'connection_type' => '', '_fs_nonce' => '' ];
         $this->creds_in = array_intersect_key( $post->getArrayCopy(), $dflt );
         
         // deliberately circumventing call to `get_filesystem_method`
@@ -261,7 +261,7 @@ class Loco_api_WordPressFileSystem {
         $type = apply_filters( 'filesystem_method', $type, $post->getArrayCopy(), $context, true );
         
         // the only params we'll pass into form will be those used by the ajax fsConnect end point
-        $extra = array( 'loco-nonce', 'path', 'auth', 'dest' );
+        $extra = [ 'loco-nonce', 'path', 'auth', 'dest' ];
         
         // capture WordPress output during negotiation.
         $buffer = Loco_output_Buffer::start();
@@ -390,7 +390,7 @@ class Loco_api_WordPressFileSystem {
                     $bundle = Loco_package_Bundle::fromFile($file);
                     if( $bundle instanceof Loco_package_Bundle ){
                         $handle = $bundle->getHandle();
-                        $option = (array) get_site_option( "auto_update_{$type}s", array() );
+                        $option = (array) get_site_option( "auto_update_{$type}s", [] );
                         // var_dump( compact('handle','option') );
                         if( ! in_array($handle,$option,true) ){
                             $enabled = false;

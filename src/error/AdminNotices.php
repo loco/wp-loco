@@ -10,7 +10,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     /**
      * @var Loco_error_Exception[]
      */
-    private $errors = array();
+    private $errors = [];
 
     /**
      * Inline messages are handled by our own template views
@@ -125,11 +125,11 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         $notices = self::$singleton;
         if( $notices instanceof  Loco_error_AdminNotices ){
             $buffer = $notices->errors;
-            $notices->errors = array();
+            $notices->errors = [];
             self::$singleton = null;
             return $buffer;
         }
-        return array();
+        return [];
     }
 
 
@@ -139,7 +139,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * @return array
      */
     public static function destroyAjax(){
-        $data = array();
+        $data = [];
         foreach( self::destroy() as $notice ){
             $data[] = $notice->jsonSerialize();
         }
@@ -152,14 +152,14 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      */
     private function flushHtml(){
         if( $this->errors ){
-            $htmls = array();
+            $htmls = [];
             foreach( $this->errors as $error ){
                 $html = sprintf (
                     '<p><strong class="has-icon">%s:</strong> <span>%s</span></p>',
                     esc_html( $error->getTitle() ),
                     esc_html( $error->getMessage() )
                 );
-                $styles = array( 'notice', 'notice-'.$error->getType() );
+                $styles = [ 'notice', 'notice-'.$error->getType() ];
                 if( $this->inline ){
                     $styles[] = 'inline';
                 }
@@ -169,7 +169,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
                 }
                 $htmls[] = '<div class="'.implode(' ',$styles).'">'.$html.'</div>';
             }
-            $this->errors = array();
+            $this->errors = [];
             echo implode("\n", $htmls),"\n";
         }
     }
@@ -181,7 +181,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         foreach( $this->errors as $e ){
             $e->logCli();
         }
-        $this->errors = array();
+        $this->errors = [];
         
     }
 
@@ -236,7 +236,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
             $this->flushHtml();
         }
         else {
-            $this->errors = array();
+            $this->errors = [];
         }   
     }
 

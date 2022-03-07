@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-01-26 18:28+0000\n"
+"POT-Creation-Date: 2022-03-07 12:16+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.0; wp-5.9\n"
+"X-Loco-Version: 2.6.0; wp-5.9.1\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %s is either PO or POT
-#: src/gettext/Compiler.php:239 src/admin/file/HeadController.php:80
+#: src/gettext/Compiler.php:243 src/admin/file/HeadController.php:80
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -540,7 +540,7 @@ msgstr ""
 
 #: src/admin/file/EditController.php:166
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
-#: tpl/admin/config/apis.php:149 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:128 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -1003,7 +1003,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:139
+#: tpl/admin/config/apis.php:118
 msgid "Important"
 msgstr ""
 
@@ -1053,7 +1053,7 @@ msgstr ""
 msgid "It needs configuring before you can do any translations"
 msgstr ""
 
-#: src/gettext/Compiler.php:136 src/gettext/Compiler.php:194
+#: src/gettext/Compiler.php:136 src/gettext/Compiler.php:198
 #, php-format
 msgid "JSON compilation failed for %s"
 msgstr ""
@@ -1156,7 +1156,7 @@ msgstr ""
 msgid "Loco Translate is powered by"
 msgstr ""
 
-#: loco.php:143
+#: loco.php:141
 #, php-format
 msgid ""
 "Loco Translate requires the \"%s\" PHP extension. Ask your hosting provider "
@@ -1456,11 +1456,11 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:235
+#: src/gettext/Compiler.php:239
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:232
+#: src/gettext/Compiler.php:236
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
@@ -1548,7 +1548,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:148
+#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:127
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1585,7 +1585,7 @@ msgstr ""
 msgid "See FAQ"
 msgstr ""
 
-#: tpl/admin/config/apis.php:142
+#: tpl/admin/config/apis.php:121
 msgid "See full disclaimer"
 msgstr ""
 
@@ -1787,7 +1787,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:141
+#: tpl/admin/config/apis.php:120
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"

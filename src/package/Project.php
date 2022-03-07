@@ -141,7 +141,7 @@ class Loco_package_Project {
         $r = preg_split('/(?<!\\\\)\\./', $id, 2 );
         $domain = stripcslashes($r[0]);
         $slug = isset($r[1]) ? stripcslashes($r[1]) : $domain;
-        return array( $domain, $slug );
+        return [ $domain, $slug ];
     }
 
 
@@ -375,7 +375,7 @@ class Loco_package_Project {
         }
         // fallback to unconfigured, but possibly existent folders
         $base = $this->getBundle()->getDirectoryPath();
-        foreach( array('languages','language','lang','l10n','i18n') as $d ){
+        foreach( ['languages','language','lang','l10n','i18n'] as $d ){
             $d = new Loco_fs_Directory($d);
             $d->normalize($base);
             if( $this->isTargetExcluded($d) ){
@@ -425,7 +425,7 @@ class Loco_package_Project {
             $exts = array_merge( $exts, (array) $conf->jsx_alias );
         }
         // always ensure we have at least PHP files scanned
-        return array_merge( $exts, array('php') );
+        return array_merge( $exts, ['php'] );
     }
 
 
@@ -581,7 +581,7 @@ class Loco_package_Project {
                     $targets->add( new Loco_fs_Directory($root) );
                     // look in alternative language directories if only root is configured
                     if( 1 === count($targets) ){
-                        foreach( array('languages','language','lang','l10n','i18n') as $d ) {
+                        foreach( ['languages','language','lang','l10n','i18n'] as $d ) {
                             $alt = new Loco_fs_Directory($root.'/'.$d);
                             if( ! $this->isTargetExcluded($alt) ){
                                 $targets->add($alt);
@@ -639,7 +639,7 @@ class Loco_package_Project {
         }
         $this->excludeTargets($finder);
         $files = $finder->group('pot','po','mo')->exportGroups();
-        foreach( array('pot','po') as $ext ){
+        foreach( ['pot','po'] as $ext ){
             /* @var $pot Loco_fs_File */
             foreach( $files[$ext] as $pot ){
                 $name = $pot->filename();
@@ -648,7 +648,7 @@ class Loco_package_Project {
                     return $pot;
                 }
                 // support unconventional <slug>-en_US.<ext>
-                foreach( array('-en_US'=>6, '-en'=>3 ) as $tail => $len ){
+                foreach( ['-en_US'=>6, '-en'=>3 ] as $tail => $len ){
                     if( '-en_US' === substr($name,-$len) && $slug === substr($name,0,-$len) ){
                         return $pot;
                     }
@@ -665,7 +665,7 @@ class Loco_package_Project {
         if( $this->isDomainDefault() ){
             $options = Loco_data_Settings::get();
             if( $aliases = $options->pot_alias ){
-                $found = array();
+                $found = [];
                 /* @var $pot Loco_fs_File */
                 foreach( $finder as $pot ){
                     $priority = array_search( $pot->basename(), $aliases, true );

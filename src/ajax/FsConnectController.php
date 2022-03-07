@@ -91,7 +91,7 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
         $post = $this->validate();
         $type = $post->auth;
         $func = 'authorize'.ucfirst($type);
-        $auth = array( $this, $func );
+        $auth = [ $this, $func ];
         if( ! is_callable($auth) ){
             throw new Loco_error_Exception('Unexpected file operation');
         }
@@ -99,7 +99,7 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
         $file = new Loco_fs_File( $post->path );
         $base = loco_constant('WP_CONTENT_DIR');
         $file->normalize($base);
-        $args = array($file);
+        $args = [$file];
         // some auth methods also require a destination/target (move,copy,etc..)
         if( $dest = $post->dest ){
             $file = new Loco_fs_File($dest);

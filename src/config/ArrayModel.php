@@ -9,7 +9,7 @@ class Loco_config_ArrayModel extends Loco_config_Model {
      * {@inheritdoc}
      */
     public function createDom(){
-        return new LocoConfigDocument( array('#document', array(), array() ) );
+        return new LocoConfigDocument( ['#document', [], [] ] );
     }
     
     
@@ -32,7 +32,7 @@ class Loco_config_ArrayModel extends Loco_config_Model {
      */
     public function loadArray( array $root ){
         $dom = $this->getDom();
-        $dom->load( array('#document', array(), array($root) ) );
+        $dom->load( ['#document', [], [$root] ] );
     }
 
 
@@ -125,7 +125,7 @@ abstract class LocoConfigNode implements IteratorAggregate {
     
     
     public function __get( $prop ){
-        $method = array( $this, 'get_'.$prop );
+        $method = [ $this, 'get_'.$prop ];
         if( is_callable($method) ){
             return call_user_func( $method );
         }
@@ -181,7 +181,7 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
 
     private $n;
     
-    public function __construct( array $nodes = array() ){
+    public function __construct( array $nodes = [] ){
         $this->nodes = $nodes;
         $this->n = count( $nodes );
     }
@@ -300,7 +300,7 @@ class LocoConfigDocument extends LocoConfigNode {
      * @return LocoConfigElement
      */
     public function createElement( $name ){
-        return new LocoConfigElement( array( $name, array(), array() ) );
+        return new LocoConfigElement( [ $name, [], [] ] );
     }
 
 

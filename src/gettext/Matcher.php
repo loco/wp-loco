@@ -67,7 +67,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
                     // TODO handle empty msgid case that uses weird "msgctxt\4(msgctxt)" format?
                 }
                 // string may exist in original template, and also in multiple JSONs.
-                $new = array('source'=>$msgid,'context'=>$msgctxt,'refs'=>$ref );
+                $new = ['source'=>$msgid,'context'=>$msgctxt,'refs'=>$ref ];
                 $old = $this->getArrayRef($new);
                 if( $old ){
                     $refs = array_key_exists('refs',$old) ? (string) $old['refs'] : '';
@@ -91,7 +91,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
                 // handle plurals, noting that msgid_plural is not stored in JED structure
                 if( 1 < count($arr) ){
                     $index = 0;
-                    $plurals = $old && array_key_exists('plurals',$old) ? $old['plurals'] : array();
+                    $plurals = $old && array_key_exists('plurals',$old) ? $old['plurals'] : [];
                     while( array_key_exists(++$index,$arr) ){
                         if( array_key_exists($index,$plurals) ){
                             $raw = $plurals[$index];
@@ -100,7 +100,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
                             }
                         }
                         else {
-                            $raw = array('source'=>'','target'=>'');
+                            $raw = ['source'=>'','target'=>''];
                         }
                         if( $this->translate && ( ! array_key_exists('target',$raw) || '' === $raw['target'] ) ){
                             $raw['target'] = $arr[$index];
@@ -150,7 +150,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      * @return string[] keys matched exactly
      */
     public function mergeValid( LocoPoIterator $original, LocoPoIterator $merged ){
-        $valid = array();
+        $valid = [];
         $translate = $this->translate;
         /* @var LocoPoMessage $old */
         foreach( $original as $old ){
@@ -177,7 +177,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      * @return string[] strings fuzzy-matched
      */
     public function mergeFuzzy( LocoPoIterator $merged ){
-        $fuzzy = array();
+        $fuzzy = [];
         foreach( $this->getFuzzyMatches() as $pair ){
             list($old,$new) = $pair;
             $p = clone $old;
@@ -195,7 +195,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      * @return string[] strings added
      */
     public function mergeAdded( LocoPoIterator $merged ){
-        $added = array();
+        $added = [];
         $translate = $this->translate;
         /* @var LocoPoMessage $new */
         foreach( $this->unmatched() as $new ){
@@ -222,17 +222,17 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         $fuzzy = $this->mergeFuzzy($merged);
         $added = $this->mergeAdded($merged);
         /* @var LocoPoMessage $old */
-        $dropped = array();
+        $dropped = [];
         foreach( $this->redundant() as $old ){
             $dropped[] = $old->getKey();
         }
         // return to JavaScript with stats in the same form as old front end merge
-        return array (
+        return  [
             'add' => $added,
             'fuz' => $fuzzy,
             'del' => $dropped,
             'trn' => $this->translated,
-        );
+        ];
     }
 
 
@@ -243,7 +243,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
     private function getArrayRef( array $a ){
         $r = $this->getRef($a);
         if( is_null($r) ){
-            return array();
+            return [];
         }
         if( $r instanceof ArrayObject ){
             return $r->getArrayCopy();

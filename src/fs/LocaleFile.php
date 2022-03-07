@@ -48,7 +48,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
                 $this->locale = null;
             }
         }
-        return array( $this->prefix, $this->suffix, $this->hash );
+        return [ $this->prefix, $this->suffix, $this->hash ];
     }
     
     

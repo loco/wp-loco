@@ -36,7 +36,7 @@ abstract class Loco_config_Model {
      * 
      */    
     final public function __construct(){
-        $this->dirs = array();
+        $this->dirs = [];
         $this->dom = $this->createDom();
         $this->setDirectoryPath( loco_constant('ABSPATH') );
     }
@@ -94,7 +94,7 @@ abstract class Loco_config_Model {
             // Map to a configured base path if target is not under our root. This makes XML more portable
             // matching order is most specific first, resulting in shortest path
             if( $relpath && ( Loco_fs_File::abs($relpath) || '..' === substr($relpath,0,2) || $this->base === $this->getDirectoryPath('ABSPATH') ) ){
-                $bases = array( 'LOCO_LANG_DIR', 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' );
+                $bases = [ 'LOCO_LANG_DIR', 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' ];
                 foreach( $bases as $key ){
                     if( ( $base = $this->getDirectoryPath($key) ) && $base !== $this->base ){
                         $base .= '/';

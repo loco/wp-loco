@@ -49,7 +49,7 @@ class Loco_data_RecentItems extends Loco_data_Option {
      */
     private function push( $object, array $indexes ){
         foreach( $indexes as $key => $id ){
-            $stack = isset($this[$key]) ? $this[$key] : array();
+            $stack = isset($this[$key]) ? $this[$key] : [];
             // remove before add ensures latest item appended to hashmap
             unset($stack[$id]);
             $stack[$id] = time();
@@ -65,7 +65,7 @@ class Loco_data_RecentItems extends Loco_data_Option {
      * @return array
      */
     private function getItems( $key, $offset, $count ){
-        $stack = isset($this[$key]) ? $this[$key] : array();
+        $stack = isset($this[$key]) ? $this[$key] : [];
         // hash map should automatically be in "push" order, meaning most recent last 
         // sorting gives wrong order for same-second updates (only relevent in tests, but still..)
         // asort( $stack, SORT_NUMERIC );
@@ -93,7 +93,7 @@ class Loco_data_RecentItems extends Loco_data_Option {
      * @return Loco_data_RecentItems 
      */
     public function pushBundle( Loco_package_Bundle $bundle ){
-        return $this->push( $bundle, array( 'bundle' => $bundle->getId() ) );
+        return $this->push( $bundle, [ 'bundle' => $bundle->getId() ] );
     }
 
 

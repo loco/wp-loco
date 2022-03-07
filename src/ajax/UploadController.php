@@ -78,10 +78,10 @@ class Loco_ajax_UploadController extends Loco_ajax_common_BundleController {
 
         // Redirect to edit this PO. Sync may be required and we're not doing automatically here.
         $type = strtolower( $this->get('type') );
-        return Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type), array(
+        return Loco_mvc_AdminRouter::generate( sprintf('%s-file-edit',$type), [
             'path' => $pofile->getRelativePath($base),
             'bundle' => $bundle->getHandle(),
             'domain' => $project->getId(),
-        ) );
+        ] );
     }
 }

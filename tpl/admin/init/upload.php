@@ -48,7 +48,7 @@ $this->extend('../layout');
             // translators: This is HTML formatted. (1) placeholder for language code, (2) Example language code
             echo wp_kses (
                 sprintf( __('Your file must be named as shown above where %1$s is the language code, e.g. %2$s','loco-translate'), '<code>{locale}</code>', '<code>'.$locale.'</code>' ),
-                array('code'=>array())
+                ['code'=>[]]
             )?> 
         </p>
         <p>

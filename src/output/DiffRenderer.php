@@ -13,12 +13,12 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
     /**
      * {@inheritdoc}
      */
-    public function __construct( $params = array() ){
-        parent::__construct( $params + array (
+    public function __construct( $params = [] ){
+        parent::__construct( $params +  [
             'show_split_view' => true,
             'leading_context_lines' => 1,
             'trailing_context_lines' => 1,
-        ) );
+        ] );
     }
 
 
@@ -49,7 +49,7 @@ class Loco_output_DiffRenderer extends WP_Text_Diff_Renderer_Table {
         $src = Loco_gettext_Data::ensureUtf8($src);
         $arr = preg_split( '/\\r?\\n/', $src );
         if( ! is_array($arr) ){
-            $f = new Loco_mvc_FileParams( array(), $file );
+            $f = new Loco_mvc_FileParams( [], $file );
             throw new Loco_error_Exception('Failed to split '.$f->relpath.' ('.$f->size.')' );
         }
         return $arr;

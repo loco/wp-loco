@@ -34,11 +34,11 @@ class Loco_gettext_Compiler {
     public function __construct( Loco_fs_LocaleFile $pofile ){
         $this->fs = new Loco_api_WordPressFileSystem;
         $this->files = new Loco_fs_Siblings($pofile);
-        $this->progress = new Loco_mvc_ViewParams( array(
+        $this->progress = new Loco_mvc_ViewParams( [
             'pobytes' => 0,
             'mobytes' => 0,
             'numjson' => 0,
-        ) );
+        ] );
     }
 
 
@@ -140,46 +140,50 @@ class Loco_gettext_Compiler {
         // continue as per default, generating multiple per-script JSON
         else {
             $base_dir = $project->getBundle()->getDirectoryPath();
-            $buffer = array();
+            $buffer = [];
             /* @var Loco_gettext_Data $fragment */
             foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
-                // Reference could be source js, or minified version.
-                // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
-                if( substr($ref,-7) === '.min.js' ) {
-                    $min = $ref;
-                    $src = substr($ref,-7).'.js';
-                }
-                else {
-                    $src = $ref;
-                    $min = substr($ref,0,-3).'.min.js';
-                }
-                // Try both script paths to check whether deployed script actually exists
-                $found = false;
-                foreach( array($min,$src) as $ref ){
-                    // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
-                    $url = $project->getBundle()->getDirectoryUrl().$ref;
-                    $ref = apply_filters( 'load_script_textdomain_relative_path', $ref, $url );
-                    if( ! is_string($ref) || '' === $ref ){
-                        continue;
-                    }
-                    $file = new Loco_fs_File($ref);
-                    $file->normalize($base_dir);
-                    if( ! $file->exists() ){
-                        continue;
-                    }
-                    // add .js strings to buffer for this json and merge if already present
-                    if( array_key_exists($ref,$buffer) ){
-                        $buffer[$ref]->concat($fragment);
+                // Initial filter allows authors to control hashable path references
+                $use = apply_filters('loco_compile_script_reference',null,$ref,$domain);
+                if( is_null($use) ){
+                    // Reference could be source js, or minified version.
+                    // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
+                    if( substr($ref,-7) === '.min.js' ) {
+                        $min = $ref;
+                        $src = substr($ref,-7).'.js';
                     }
                     else {
-                        $buffer[$ref] = $fragment;
+                        $src = $ref;
+                        $min = substr($ref,0,-3).'.min.js';
                     }
-                    $found = true;
-                    break;
+                    // Try .js and .min.js paths to check whether deployed script actually exists
+                    foreach( [$min,$src] as $try ){
+                        // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
+                        $url = $project->getBundle()->getDirectoryUrl().$try;
+                        $try = apply_filters( 'load_script_textdomain_relative_path', $try, $url );
+                        if( ! is_string($try) || '' === $try ){
+                            continue;
+                        }
+                        // by default ignore js file that is not in deployed code
+                        $file = new Loco_fs_File($try);
+                        $file->normalize($base_dir);
+                        if( $file->exists() ){
+                            $use = $try;
+                            break;
+                        }
+                    }
+                    // if neither exists in the bundle, this is a source path that will never be resolved at runtime
+                    if( is_null($use) ){
+                        Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; script not found in bundle',$ref) );
+                        continue;
+                    }
                 }
-                // if neither exists in the bundle, this is a source path that will never be resolved at runtime
-                if( ! $found ){
-                    Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; script not found in bundle',$ref) );
+                // add .js strings to buffer for this json and merge if already present
+                if( array_key_exists($use,$buffer) ){
+                    $buffer[$use]->concat($fragment);
+                }
+                else {
+                    $buffer[$use] = $fragment;
                 }
             }
             // write all buffered fragments to their computed JSON paths
@@ -246,7 +250,7 @@ class Loco_gettext_Compiler {
      * @return string[]
      */
     private function getJsExtMap(){
-        $map = array('js'=>'js', 'jsx'=>'js');
+        $map = ['js'=>'js', 'jsx'=>'js'];
         $exts = Loco_data_Settings::get()->jsx_alias;
         if( is_array($exts) && $exts ){
             foreach( $exts as $ext ){

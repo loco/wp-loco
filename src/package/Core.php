@@ -8,10 +8,10 @@ class Loco_package_Core extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getSystemTargets(){
-        return array (
+        return  [
             untrailingslashit( loco_constant('LOCO_LANG_DIR') ),
 	        untrailingslashit( loco_constant('WP_LANG_DIR') )
-        );
+        ];
     }
 
 
@@ -19,7 +19,7 @@ class Loco_package_Core extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getHeaderInfo(){
-        return new Loco_package_Header( array (
+        return new Loco_package_Header(  [
             'TextDomain' => 'default',
             'DomainPath' => '/wp-content/languages/',
             // dummy author info for core components
@@ -27,7 +27,7 @@ class Loco_package_Core extends Loco_package_Bundle {
             'Version' => $GLOBALS['wp_version'],
             'Author' => __('The WordPress Team','default'),
             'AuthorURI' => __('https://wordpress.org/','default'),
-        ) );
+        ] );
     }
 
 
@@ -35,7 +35,7 @@ class Loco_package_Core extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getMetaTranslatable(){
-        return array();
+        return [];
     }
 
 

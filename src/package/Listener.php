@@ -97,16 +97,16 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      * @return Loco_package_Listener
      */
     public function clear(){
-        $this->buffer = array();
-        $this->themes = array();
-        $this->plugins = array();
-        $this->domains = array();
-        $this->domainPaths = array();
+        $this->buffer = [];
+        $this->themes = [];
+        $this->plugins = [];
+        $this->domains = [];
+        $this->domainPaths = [];
         $this->pluginHandles = null;
         $this->buffered = false;
-        $this->globalPaths = array();
+        $this->globalPaths = [];
 
-        foreach( array('WP_LANG_DIR') as $name ){
+        foreach( ['WP_LANG_DIR'] as $name ){
             if( $value = loco_constant($name) ){
                 $this->globalPaths[$value] = strlen($value);
             }
@@ -179,7 +179,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      */
     private function isPlugin( $check ){
         if( ! $this->pluginHandles ){
-            $this->pluginHandles = array();
+            $this->pluginHandles = [];
             foreach( Loco_package_Plugin::get_plugins() as $handle => $data ){
                 $this->pluginHandles[ dirname($handle) ] = $handle;
                 // set default text domain because additional domains could be discovered before the canonical one
@@ -269,14 +269,14 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
             }
 
             // check if MO file lives inside a plugin
-            foreach( array( 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR' ) as $const ){
+            foreach( [ 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR' ] as $const ){
                 $root = loco_constant( $const );
                 $relative = self::relative($path, $root);
                 if( is_null($relative) ){
                     continue;
                 }
                 // plugin *might* live directly under root
-                $stack = array();
+                $stack = [];
                 foreach( explode( '/', dirname($relative) ) as $next ){
                     $stack[] = $next;
                     $relbase = implode('/', $stack );
@@ -338,7 +338,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
                     }
                 }
             }
-            $this->buffer = array();
+            $this->buffer = [];
             $this->buffered = false;
         }
     }

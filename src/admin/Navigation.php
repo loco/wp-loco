@@ -34,9 +34,9 @@ class Loco_admin_Navigation extends ArrayIterator {
         // root link depends on bundle type
         $type = strtolower( $bundle->getType() );
         if( 'core' !== $type ){
-            $link = new Loco_mvc_ViewParams( array(
+            $link = new Loco_mvc_ViewParams( [
                 'href' => Loco_mvc_AdminRouter::generate($type),
-            ) );
+            ] );
             if( 'theme' === $type ){
                 $link['name'] = __('Themes','loco-translate');
             }
@@ -49,7 +49,7 @@ class Loco_admin_Navigation extends ArrayIterator {
         // Add actual bundle page, href may be unset to show as current page if needed
         $nav->add (
             $bundle->getName(),
-            Loco_mvc_AdminRouter::generate( $type.'-view', array( 'bundle' => $bundle->getHandle() ) )
+            Loco_mvc_AdminRouter::generate( $type.'-view', [ 'bundle' => $bundle->getHandle() ] )
         );
         
         // client code will add current page

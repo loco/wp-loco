@@ -11,7 +11,7 @@ class Loco_data_Preferences extends Loco_data_Serializable {
      * User preference singletons
      * @var Loco_data_Preferences[]
      */
-    private static $current = array();
+    private static $current = [];
 
     /**
      * ID of the currently operational user
@@ -23,10 +23,10 @@ class Loco_data_Preferences extends Loco_data_Serializable {
      * Available options and their defaults
      * @var array
      */
-    private static $defaults = array (
+    private static $defaults =  [
         'credit' => '',
-        'locales' => array(),
-    );
+        'locales' => [],
+    ];
 
 
     /**

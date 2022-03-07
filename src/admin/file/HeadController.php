@@ -17,7 +17,7 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
             $path = $file->getPath();
             $action = 'head:'.$path;
             // set up view now in case of late failure
-            $fields = new Loco_mvc_HiddenFields( array() );
+            $fields = new Loco_mvc_HiddenFields( [] );
             $fields->setNonce( $action );
             $fields['auth'] = 'update';
             $fields['path'] = $this->get('path');

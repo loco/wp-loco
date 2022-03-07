@@ -8,7 +8,7 @@
 abstract class Loco_compat_TokenizerExtension {
     
     public static function token_get_all( $value ){
-        return array();
+        return [];
     }
     
 }

@@ -22,10 +22,10 @@ class Loco_gettext_String {
      * @param string Optional context
      */
     public function __construct( $msgid, $msgctxt = '' ){
-        $this->raw = array (
+        $this->raw =  [
             'source' => (string) $msgid,
             'context' => (string) $msgctxt,
-        );
+        ];
     }
 
 
@@ -45,9 +45,9 @@ class Loco_gettext_String {
      * @return string[]
      */
     public function exportPlural(){
-        return array (
+        return  [
             'source' => $this->plural,
-        );
+        ];
     }
 
 
@@ -59,7 +59,7 @@ class Loco_gettext_String {
      */
     private function merge( $prop, $value, $glue ){
         if( is_string($value) ){
-            $value = array($value);
+            $value = [$value];
         }
         else if( ! is_array($value) ){
             throw new InvalidArgumentException('Expected Array or String');

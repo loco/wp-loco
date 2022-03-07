@@ -19,27 +19,27 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     public function render(){
         
         // debug package listener
-        $themes = array();
+        $themes = [];
         /* @var $bundle Loco_package_Bundle */
         foreach( Loco_package_Listener::singleton()->getThemes() as $bundle ){
-            $themes[] = array (
+            $themes[] =  [
                 'id' => $bundle->getId(),
                 'name' => $bundle->getName(),
                 'default' => $bundle->getDefaultProject()->getSlug(),
                 'count' => count($bundle),
-            );
+            ];
         }
         $this->set('themes', $themes );
 
-        $plugins = array();
+        $plugins = [];
         /* @var $bundle Loco_package_Bundle */
         foreach( Loco_package_Listener::singleton()->getPlugins() as $bundle ){
-            $plugins[] = array (
+            $plugins[] =  [
                 'id' => $bundle->getId(),
                 'name' => $bundle->getName(),
                 'default' => $bundle->getDefaultProject()->getSlug(),
                 'count' => count($bundle),
-            );
+            ];
         }
         
         

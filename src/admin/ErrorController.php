@@ -19,7 +19,7 @@ class Loco_admin_ErrorController extends Loco_mvc_AdminController {
             $file['line'] = $e->getRealLine();
             $this->set('file', $file );
             if( loco_debugging() ){
-                $trace = array();
+                $trace = [];
                 foreach( $e->getRealTrace() as $raw ) {
                     $frame  = new Loco_mvc_ViewParams($raw);
                     if( $frame->has('file') ){

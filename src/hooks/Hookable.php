@@ -19,7 +19,7 @@ abstract class Loco_hooks_Hookable {
     public function __construct(){
 
         $ref = new ReflectionClass( $this ); 
-        $reg = array();
+        $reg = [];
         foreach( $ref->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ){
             $func = $method->name;
             // support filter_{filter_hook} methods
@@ -43,9 +43,9 @@ abstract class Loco_hooks_Hookable {
             // call add_action or add_filter with required arguments and hook is registered
             // add_action actually calls add_filter, although unsure how long that's been the case.
             $num_args = $method->getNumberOfParameters();
-            add_filter( $hook, array( $this, $func ), $priority, $num_args );
+            add_filter( $hook, [ $this, $func ], $priority, $num_args );
             // register hook for destruction so object can be removed from memory
-            $reg[] = array( $hook, $func, $priority );
+            $reg[] = [ $hook, $func, $priority ];
         }
 
         $this->hooks = $reg;
@@ -59,7 +59,7 @@ abstract class Loco_hooks_Hookable {
     public function unhook(){
         if( is_array($this->hooks) ){
             foreach( $this->hooks as $r ){
-                remove_filter( $r[0], array($this,$r[1]), $r[2] );
+                remove_filter( $r[0], [$this,$r[1]], $r[2] );
             }
         }
         $this->hooks = null;

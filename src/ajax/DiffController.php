@@ -21,10 +21,10 @@ class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
         $rhs = new Loco_fs_File( $post->rhs ); $rhs->normalize($dir);
         
         // avoid diffing non Gettext source files
-        $exts = array_flip( array( 'pot', 'pot~', 'po', 'po~' ) );
+        $exts = array_flip( [ 'pot', 'pot~', 'po', 'po~' ] );
 
         /* @var $file Loco_fs_File */
-        foreach( array($lhs,$rhs) as $file ){
+        foreach( [$lhs,$rhs] as $file ){
             if( ! $file->exists() ){
                 throw new InvalidArgumentException('File paths must exist');
             }

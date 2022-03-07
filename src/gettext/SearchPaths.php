@@ -34,7 +34,7 @@ class Loco_gettext_SearchPaths extends Loco_fs_FileFinder {
             $head = LocoPoHeaders::fromSource( $pofile->getContents() );
         }
         $ninc = 0;
-        foreach( array('Poedit') as $vendor ){
+        foreach( ['Poedit'] as $vendor ){
             $key = 'X-'.$vendor.'-Basepath';
             if( ! $head->has($key) ){
                 continue;

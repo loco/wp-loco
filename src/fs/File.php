@@ -381,10 +381,10 @@ class Loco_fs_File {
             }
             else {
                 if( ! $this->rel || ! $base ){
-                    $b = array();
+                    $b = [];
                 }
                 else {
-                    $b = self::explode( $base, array() );
+                    $b = self::explode( $base, [] );
                 }
                 $b = self::explode( $path, $b );
                 $this->setPath( implode('/',$b) );
@@ -606,16 +606,11 @@ class Loco_fs_File {
 
     /**
      * Copy this object as a WordPress script translation file
-     * @param string relative path to .js file
-     * @param string optional base URL if you want to run relative path filters
+     * @param string relative path to .js file presumed to exist
      * @return self
      */
-    public function cloneJson( $ref, $url = '' ){
+    public function cloneJson( $ref ){
         $name = $this->filename();
-        // Hook into load_script_textdomain_relative_path if script URL provided
-        if( is_string($url) && '' !== $url ){
-            $ref = apply_filters( 'load_script_textdomain_relative_path', $ref, trailingslashit($url).ltrim($ref,'/') );
-        }
         if( is_string($ref) && '' !== $ref ){
             // Hashable reference is always finally unminified, as per load_script_textdomain()
             if( substr($ref,-7) === '.min.js' ) {

@@ -19,30 +19,30 @@ abstract class Loco_api_Providers {
      */
     public static function builtin(){
         $settings = Loco_data_Settings::get();
-        return array (
-            array (
+        return  [
+             [
                 'id' => 'deepl',
                 'name' => 'DeepL Translator',
                 'key' => $settings->offsetGet('deepl_api_key'),
                 'url' => $settings->offsetGet('deepl_api_url'),
-            ),
-            array (
+            ],
+             [
                 'id' => 'google',
                 'name' => 'Google Translate',
                 'key' => $settings->offsetGet('google_api_key'),
-            ),
-            array (
+            ],
+             [
                 'id' => 'microsoft',
                 'name' => 'Microsoft Translator',
                 'key' => $settings->offsetGet('microsoft_api_key'),
                 'region' => $settings->offsetGet('microsoft_api_region'),
-            ),
-            array (
+            ],
+             [
                 'id' => 'lecto',
                 'name' => 'Lecto AI',
                 'key' => $settings->offsetGet('lecto_api_key'),
-            ),
-        );
+            ],
+        ];
     }
     
     
@@ -51,7 +51,7 @@ abstract class Loco_api_Providers {
      * @return array[]
      */
     public static function configured(){
-        return self::sort( array_filter( self::export(), array(__CLASS__,'filterConfigured') ) );
+        return self::sort( array_filter( self::export(), [__CLASS__,'filterConfigured'] ) );
     }
 
 
@@ -82,7 +82,7 @@ abstract class Loco_api_Providers {
      * @return array
      */
     public static function sort( array $apis ){
-        usort( $apis, array(__CLASS__,'compareNames') );
+        usort( $apis, [__CLASS__,'compareNames'] );
         return $apis;
     }
 

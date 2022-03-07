@@ -43,8 +43,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */
     public function __construct(){
         parent::__construct();
-        $this->lock = array();
-        $this->json = array();
+        $this->lock = [];
+        $this->json = [];
         $this->base = trailingslashit( loco_constant('LOCO_LANG_DIR') );
         // add system locations which have direct equivalent custom/safe locations under LOCO_LANG_DIR
         // not adding theme paths because as long as load_theme_textdomain is used they will be mapped by context.
@@ -63,7 +63,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     private function add( $subdir, $path ){
         if( $path ){
             $path = trailingslashit($path);
-            $this->map[] = array( $subdir, $path, strlen($path) );
+            $this->map[] = [ $subdir, $path, strlen($path) ];
         }
         return $this;
     }
@@ -98,7 +98,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @return string
      */
     public function filter_theme_locale( $locale, $domain = '' ){
-        $this->context = array( 'themes/', $domain, $locale );
+        $this->context = [ 'themes/', $domain, $locale ];
         unset( $this->lock[$domain] );
         return $locale;
     }
@@ -112,7 +112,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @return string
      */
     public function filter_plugin_locale( $locale, $domain = '' ){
-        $this->context = array( 'plugins/', $domain, $locale );
+        $this->context = [ 'plugins/', $domain, $locale ];
         unset( $this->lock[$domain] );
         return $locale;
     }
@@ -236,9 +236,9 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
             // $overrideMessages[''] += $fallbackMessages[''];
             // Continuing to use "messages" here as per WordPress. Good backward compatibility is likely.
             // Note that our custom JED is sparse (exported with empty keys absent). This is essential for + operator.
-            $overrideJed['locale_data'] = array (
+            $overrideJed['locale_data'] =  [
                 'messages' => $overrideMessages + $fallbackMessages,
-            );
+            ];
             // Note that envelope will be the custom one. No functional difference but demonstrates that merge worked.
             $overrideJed['merged'] = true;
             $json = json_encode($overrideJed);

@@ -19,7 +19,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             $path = $file->getPath();
             $action = 'move:'.$path;
             // set up view now in case of late failure
-            $fields = new Loco_mvc_HiddenFields( array() );
+            $fields = new Loco_mvc_HiddenFields( [] );
             $fields->setNonce( $action );
             $fields['auth'] = 'move';
             $fields['path'] = $this->get('path');
@@ -52,7 +52,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                 $target_base = $target->filename();
                 $source_snip = strlen( $file->filename() );
                 // buffer all files to move to preempt write failures
-                $movable = array();
+                $movable = [];
                 $api = new Loco_api_WordPressFileSystem;
                 foreach( $files->expand() as $source ){
                     $suffix = substr( $source->basename(), $source_snip ); // <- e.g. "-backup.po~"
@@ -65,7 +65,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                         Loco_error_AdminNotices::err('Failed to authorize relocation of '.$source->basename() );
                         break 2;
                     }
-                    $movable[] = array($source,$target);
+                    $movable[] = [$source,$target];
                 }
                 // commit moves. If any fail we'll have separated the files, which is bad
                 $count = 0;
@@ -94,7 +94,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                     // tolerate session failure
                 }
                 // redirect to bundle overview
-                $href = Loco_mvc_AdminRouter::generate( $this->get('type').'-view', array( 'bundle' => $this->get('bundle') ) );
+                $href = Loco_mvc_AdminRouter::generate( $this->get('type').'-view', [ 'bundle' => $this->get('bundle') ] );
                 if( wp_redirect($href) ){
                     exit;
                 }
@@ -137,10 +137,10 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         $current = $file->getRelativePath($content_dir);
         $parent = new Loco_fs_LocaleDirectory( $file->dirname() );
         $typeId = $parent->getTypeId();
-        $this->set('current', new Loco_mvc_ViewParams(array(
+        $this->set('current', new Loco_mvc_ViewParams([
             'path' => $parent->getRelativePath($content_dir),
             'type' => $parent->getTypeLabel($typeId),
-        )) );
+        ]) );
         // moving files will require deletion permission on current file location
         // plus write permission on target location, but we don't know what that is yet.
         $fields = $this->prepareFsConnect('move',$current);
@@ -155,14 +155,14 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         // establish valid locations for translation set, which may include current:
         $filechoice = $project->initLocaleFiles($locale);
         // start with current location so always first in list
-        $locations = array();
-        $locations[$typeId] = new Loco_mvc_ViewParams( array(
+        $locations = [];
+        $locations[$typeId] = new Loco_mvc_ViewParams( [
             'label' => $parent->getTypeLabel($typeId),
-            'paths' => array( new Loco_mvc_ViewParams( array(
+            'paths' => [ new Loco_mvc_ViewParams( [
                 'path' => $current,
                 'active' => true,
-            ) ) )
-        ) );
+            ] ) ]
+        ] );
         /* @var Loco_fs_File $pofile */
         foreach( $filechoice as $pofile ){
             $relpath = $pofile->getRelativePath($content_dir);
@@ -173,14 +173,14 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
             $parent = new Loco_fs_LocaleDirectory( $pofile->dirname() );
             $typeId = $parent->getTypeId();
             if( ! isset($locations[$typeId]) ){
-                $locations[$typeId] = new Loco_mvc_ViewParams( array(
+                $locations[$typeId] = new Loco_mvc_ViewParams( [
                     'label' => $parent->getTypeLabel($typeId),
-                    'paths' => array(),
-                ) );
+                    'paths' => [],
+                ] );
             }
-            $choice = new Loco_mvc_ViewParams( array(
+            $choice = new Loco_mvc_ViewParams( [
                 'path' => $relpath,
-            ) );
+            ] );
             $locations[$typeId]['paths'][] = $choice;
         }
         $this->set('locations', $locations );

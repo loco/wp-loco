@@ -8,14 +8,14 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
      * Hash map for ensuring files only added once
      * @var array
      */
-    private $unique = array();
+    private $unique = [];
     
     /**
      * Construct with initial list if files
      * @param Loco_fs_File[]
      */
-    public function __construct( $a = array() ){
-        parent::__construct( array() );
+    public function __construct( $a = [] ){
+        parent::__construct( [] );
         foreach( $a as $file ){
             $this->add( $file );
         }
@@ -37,7 +37,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
      * @return array
      */
     public function export(){
-        $a = array();
+        $a = [];
         foreach( $this as $file ){
             $a[] = (string) $file;
         }

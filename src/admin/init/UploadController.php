@@ -37,13 +37,13 @@ class Loco_admin_init_UploadController extends Loco_admin_bundle_BaseController 
         // file upload requires a properly configured project
         $bundle = $this->getBundle();
         $project = $this->getProject();
-        $fields = new Loco_mvc_HiddenFields( array(
+        $fields = new Loco_mvc_HiddenFields( [
             'path' => '',
             'auth' => 'upload',
             'type' => $bundle->getType(),
             'domain' => $project->getId(),
             'bundle' => $bundle->getHandle(),
-        ) );
+        ] );
         $fields->setNonce('upload');
         $this->set('hidden',$fields);
         $this->prepareFsConnect('upload','');
@@ -55,32 +55,32 @@ class Loco_admin_init_UploadController extends Loco_admin_bundle_BaseController 
         $locale = new Loco_Locale('zxx');
         $filechoice = $this->getProject()->initLocaleFiles($locale);
         // 
-        $locations = array();
+        $locations = [];
         /* @var Loco_fs_LocaleFile $pofile */
         foreach( $filechoice as $pofile ){
             // initialize location type (system, etc..)
             $parent = new Loco_fs_LocaleDirectory( $pofile->dirname() );
             $typeId = $parent->getTypeId();
             if( ! isset($locations[$typeId]) ){
-                $locations[$typeId] = new Loco_mvc_ViewParams( array(
+                $locations[$typeId] = new Loco_mvc_ViewParams( [
                     'label' => $parent->getTypeLabel($typeId),
-                    'paths' => array(),
-                ) );
+                    'paths' => [],
+                ] );
             }
-            $locations[$typeId]['paths'][] = new Loco_mvc_ViewParams( array(
+            $locations[$typeId]['paths'][] = new Loco_mvc_ViewParams( [
                 'parent' => Loco_mvc_FileParams::create($parent),
                 'holder' => str_replace('zxx.po','{locale}</span>.po', $pofile->basename() ),
-            ) );
+            ] );
         }
         // we don't know what the specifics will be until a location is chosen and a file is presented.
         $this->set('locale',get_locale());
         $this->set('locations', $locations );
         // file upload will be done via ajax if possible
         $settings = Loco_data_Settings::get();
-        $this->set('js',new Loco_mvc_ViewParams( array (
+        $this->set('js',new Loco_mvc_ViewParams(  [
             'multipart' => (bool) $settings->ajax_files,
-            'nonces' => array( 'upload' => $fields->getNonce() ),
-        ) ) );
+            'nonces' => [ 'upload' => $fields->getNonce() ],
+        ] ) );
         $this->enqueueScript('upload');
         return $this->view('admin/init/upload');
     }

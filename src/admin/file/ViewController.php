@@ -22,9 +22,9 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function getHelpTabs(){
-        return array (
+        return  [
             __('Overview','default') => $this->viewSnippet('tab-file-view'),
-        );
+        ];
     }
 
 
@@ -77,16 +77,16 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
         $this->set( 'lines', $lines );
         
         // ajax parameters required for pulling reference sources
-        $this->set('js', new Loco_mvc_ViewParams( array (
+        $this->set('js', new Loco_mvc_ViewParams(  [
             'popath' => $this->get('path'),
-            'nonces' => array(
+            'nonces' => [
                 'fsReference' => wp_create_nonce('fsReference'),
-            ),
-            'project' => $bundle ? array (
+            ],
+            'project' => $bundle ?  [
                 'bundle' => $bundle->getId(),
                 'domain' => $project ? $project->getId() : '',
-            ) : null,
-        ) ) ); 
+            ] : null,
+        ] ) ); 
 
         
         // treat as PO if file name has locale

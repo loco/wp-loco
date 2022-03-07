@@ -98,7 +98,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     public function __construct( $root = '' ){
         $this->roots = new Loco_fs_FileList;
         $this->linked = new Loco_fs_FileList;
-        $this->excluded = array();
+        $this->excluded = [];
         if( $root ){
             $this->addRoot( $root );
         }
@@ -235,7 +235,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
      */
     public function filterExtensions( array $exts ){
         $this->invalidate();
-        $this->exts = array();
+        $this->exts = [];
         foreach( $exts as $ext ){
             $this->exts[ ltrim($ext,'*.') ] = new Loco_fs_FileList;
         }

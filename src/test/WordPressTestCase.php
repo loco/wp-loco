@@ -37,7 +37,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     protected static function dropOptions(){
         global $wpdb;
         
-        $args = array('loco_%','_%_loco_%','%_auto_update_%');
+        $args = ['loco_%','_%_loco_%','%_auto_update_%'];
         $query = $wpdb->prepare( "SELECT option_name FROM $wpdb->options WHERE option_name LIKE '%s' OR option_name LIKE '%s' OR option_name LIKE '%s';", $args );
         if( $results = $wpdb->get_results($query,ARRAY_N) ){
             foreach( $results as $row ){
@@ -89,7 +89,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         wp_cache_flush();
         // text domains should be unloaded at start of all tests, and locale reset
         unset( $GLOBALS['locale'] );
-        $GLOBALS['l10n'] = array();
+        $GLOBALS['l10n'] = [];
         $this->enable_locale('en_US');
         $this->assertSame( 'en_US', get_locale(), 'Ensure test site is English to start');
         $this->assertSame( 'en_US', get_user_locale(),'Ensure test site is English to start');
@@ -103,13 +103,13 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         }
         // test plugins require a filter as multiple roots not supported in wp
         remove_all_filters('loco_missing_plugin');
-        add_filter( 'loco_missing_plugin', array(__CLASS__,'filter_allows_fake_plugins_to_exist'), 10, 2 );
+        add_filter( 'loco_missing_plugin', [__CLASS__,'filter_allows_fake_plugins_to_exist'], 10, 2 );
         // avoid WordPress missing index notices
-        $GLOBALS['_SERVER'] += array (
+        $GLOBALS['_SERVER'] +=  [
             'HTTP_HOST' => 'localhost',
             'SERVER_PROTOCOL' => 'HTTP/1.0',
             'HTTP_USER_AGENT' => 'Loco/'.get_class($this),
-        );
+        ];
         // remove all filters before adding
         remove_all_filters('filesystem_method');
         remove_all_filters('loco_constant_DISALLOW_FILE_MODS');
@@ -117,13 +117,13 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         remove_all_filters('loco_file_mod_allowed_context');
         remove_all_filters('loco_setcookie');
         // tests should always dictate the file system method, which defaults to direct
-        add_filter('filesystem_method', array($this,'filter_fs_method') );
-        add_filter('loco_constant_DISALLOW_FILE_MODS', array($this,'filter_fs_disallow') );
-        add_filter('file_mod_allowed', array($this,'filter_fs_allow'), 10, 2 ); // <- wp 4.8
-        add_filter('loco_file_mod_allowed_context', array($this,'filter_fs_allow_context'),10,2); // <- used with file_mod_allowed
+        add_filter('filesystem_method', [$this,'filter_fs_method'] );
+        add_filter('loco_constant_DISALLOW_FILE_MODS', [$this,'filter_fs_disallow'] );
+        add_filter('file_mod_allowed', [$this,'filter_fs_allow'], 10, 2 ); // <- wp 4.8
+        add_filter('loco_file_mod_allowed_context', [$this,'filter_fs_allow_context'],10,2); // <- used with file_mod_allowed
         // capture cookies so we can test what is set 
-        add_filter('loco_setcookie', array($this,'captureCookie'), 10, 1 );
-        $this->cookies_set = array();
+        add_filter('loco_setcookie', [$this,'captureCookie'], 10, 1 );
+        $this->cookies_set = [];
         $this->enable_network();
     }
 
@@ -133,8 +133,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      */
     public function clean_up_global_scope(){
         parent::clean_up_global_scope();
-        $_COOKIE = array();
-        $_REQUEST = array();
+        $_COOKIE = [];
+        $_REQUEST = [];
     }
 
 
@@ -169,14 +169,14 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $screen = get_current_screen();
         $action = isset($_GET['action']) ? $_GET['action'] : null;
         $router->initPage( $screen, $action );
-        $html = get_echo( array($router,'renderPage') );
+        $html = get_echo( [$router,'renderPage'] );
         // ensure further hooks fired as WordPress continues to render admin footer
         do_action('in_admin_footer');
         do_action('admin_footer','');
-        get_echo( 'do_action', array('admin_print_footer_scripts') );
+        get_echo( 'do_action', ['admin_print_footer_scripts'] );
         // Capture late errors flushed on destruct
         // $data = Loco_error_AdminNotices::destroyAjax();
-        $html .= get_echo( array(Loco_error_AdminNotices::get(),'on_loco_admin_notices') );
+        $html .= get_echo( [Loco_error_AdminNotices::get(),'on_loco_admin_notices'] );
         return $html;
     }
 
@@ -261,7 +261,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $root = new Loco_fs_Directory( LOCO_TEST_DATA_ROOT.'/tmp' );
         $dir = new Loco_fs_FileFinder( $root );
         $dir->setRecursive( true );
-        $dirs = array();
+        $dirs = [];
         /* @var $file Loco_fs_File */
         foreach( $dir as $file ){
             $dirs[ $file->dirname() ] = true;
@@ -292,7 +292,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
             throw new Exception( $role.' role has no capabilities' );
         }
        
-        $user = self::factory()->user->create( array( 'role' => $role ) );
+        $user = self::factory()->user->create( [ 'role' => $role ] );
         if( $user instanceof WP_Error ){
             foreach( $user->get_error_messages() as $message ){
                 trigger_error( $message );
@@ -383,7 +383,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
          $locale = Loco_Locale::parse($tag);
          $this->locale = (string) $locale;
          remove_all_filters('locale');
-         add_filter('locale', array($this,'_filter_locale') );
+         add_filter('locale', [$this,'_filter_locale'] );
     }
 
 
@@ -401,7 +401,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      */
     public function enable_test_content_dir(){
         remove_all_filters('loco_constant_WP_CONTENT_DIR');
-        add_filter('loco_constant_WP_CONTENT_DIR', array($this,'_filter_wp_content_dir'), 10, 0 );
+        add_filter('loco_constant_WP_CONTENT_DIR', [$this,'_filter_wp_content_dir'], 10, 0 );
     }
 
 
@@ -418,7 +418,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      */
     public function capture_redirects(){
         remove_all_filters('wp_redirect');
-        add_filter('wp_redirect', array($this,'filter_wp_redirect'), 10, 2 ); 
+        add_filter('wp_redirect', [$this,'filter_wp_redirect'], 10, 2 ); 
     }
     
     
@@ -464,7 +464,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $_POST = $post;
         $_REQUEST = array_merge( $_GET, $_POST, $_COOKIE );
         $_SERVER['REQUEST_METHOD'] = 'POST';
-        $_FILES = array();
+        $_FILES = [];
         Loco_mvc_PostParams::destroy();
     }
 
@@ -488,7 +488,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $_GET = $get;
         $_REQUEST = array_merge( $_GET, $_POST, $_COOKIE );
         $_SERVER['REQUEST_METHOD'] = 'GET';
-        $_FILES = array();
+        $_FILES = [];
     }
 
 
@@ -516,11 +516,11 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         if( $len !== strlen($src) ){
             throw new Exception('Bad file params');
         }
-        $_FILES[$key] = array (
+        $_FILES[$key] =  [
             'error' => 0,
             'tmp_name' => $tmp,
             'name' => basename($path),
-        );
+        ];
     }
 
 

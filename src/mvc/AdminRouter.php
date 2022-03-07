@@ -29,7 +29,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
 
         // rendering hook for all menu items
-        $render = array( $this, 'renderPage' );
+        $render = [ $this, 'renderPage' ];
         
         // main loco pages, hooking only if has permission
         if( $user->has_cap($cap) ){
@@ -96,7 +96,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
      */
     public function initPage( WP_Screen $screen, $action = '' ){
         $class = null;
-        $args = array ();
+        $args =  [];
         // suppress error display when establishing Loco page
         $page = self::screenToPage($screen);
         if( is_string($page) ){
@@ -130,7 +130,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             $this->ctrl = new Loco_admin_ErrorController;
             // can't afford an error during an error
             try {
-                $this->ctrl->_init( array( 'error' => $e ) );
+                $this->ctrl->_init( [ 'error' => $e ] );
             }
             catch( Exception $_e ){
                 Loco_error_AdminNotices::debug( $_e->getMessage() );
@@ -173,7 +173,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
      * @return string|null
      */
     private static function pageToClass( $page, $action, array &$args ){
-        $routes = array (
+        $routes =  [
             '' => 'Root',
             'debug' => 'Debug',
             // site-wide plugin configurations
@@ -207,7 +207,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-file-delete' => 'file_Delete',
             // test routes that don't actually exist
             'test-no-class' => 'test_NonExistantClass',
-        );
+        ];
         if( ! $page ){
             $page = $action;
         }
@@ -246,7 +246,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             $ctrl = new Loco_admin_ErrorController;
             try {
-                $ctrl->_init( array() );
+                $ctrl->_init( [] );
             }
             catch( Exception $_e ){
                 // avoid errors during error rendering
@@ -266,7 +266,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
      * @param array
      * @return string
      */
-    public static function generate( $route, array $args = array() ){
+    public static function generate( $route, array $args = [] ){
         $url = null;
         $page = null;
         $action = null;
@@ -291,7 +291,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
         // sanitize extended route in debug mode only. useful in tests
         if( loco_debugging() ){
-            $tmp = array();
+            $tmp = [];
             $class = self::pageToClass( (string) substr($page,5), $action, $tmp );
             if( ! $class ){
                 throw new UnexpectedValueException( sprintf('Invalid admin route: %s', json_encode($route) ) );

@@ -17,8 +17,8 @@ foreach( $projects as $p ): ?>
         <h2><?php $p->e('name')?> <span>(<?php $p->e('short')?>)</span></h2><?php
         endif;
         
-        echo $this->render('inc-po-links', array( 'nav' => $p->nav ) );
-        echo $this->render('inc-po-table', array( 'pairs' => $p->po, 'domain' => $p->domain ) );
+        echo $this->render('inc-po-links', [ 'nav' => $p->nav ] );
+        echo $this->render('inc-po-table', [ 'pairs' => $p->po, 'domain' => $p->domain ] );
         ?> 
                 
     </div><?php
@@ -33,13 +33,13 @@ if( $unknown ):?>
                 // Translators: %s is a URL. Keep the <a> tag intact
                 echo wp_kses(
                     sprintf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href ),
-                    array('a'=>array('href'=>true)), array('http','https')
+                    ['a'=>['href'=>true]], ['http','https']
                 );?>.
             </p>
         </div>
         <?php 
         echo $this->render('../common/inc-table-filter');
-        echo $this->render('inc-po-table', array( 'pairs' => $unknown, 'domain' => null ) )?> 
+        echo $this->render('inc-po-table', [ 'pairs' => $unknown, 'domain' => null ] )?> 
     </div><?php
 endif;
    
@@ -55,14 +55,14 @@ else:?>
             esc_html_e("This bundle isn't automatically compatible and requires configuring before you can use all the functions of Loco Translate",'loco-translate')?>. <?php
             echo wp_kses(
                 sprintf( __('Click the <a href="%s">setup</a> tab to complete the bundle configuration','loco-translate'), $tabs[1]->href ),
-                array('a'=>array('href'=>true)), array('http','https')
+                ['a'=>['href'=>true]], ['http','https']
             );?>.
         </p>
     </div>
 </div><?php
 if( $unknown ):?> 
     <div class="loco-project">
-        <?php echo $this->render('inc-po-table', array( 'pairs' => $unknown, 'domain' => null ) )?> 
+        <?php echo $this->render('inc-po-table', [ 'pairs' => $unknown, 'domain' => null ] )?> 
     </div><?php
 endif;
 endif;

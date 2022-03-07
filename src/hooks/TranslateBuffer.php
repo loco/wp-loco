@@ -9,7 +9,7 @@ class Loco_hooks_TranslateBuffer extends Loco_hooks_Hookable {
      * Temporary buffer of raw translation lookupkeys
      * @var array
      */
-    private $buffer = array();
+    private $buffer = [];
     
     /**
      * `gettext` filter callback
@@ -54,7 +54,7 @@ class Loco_hooks_TranslateBuffer extends Loco_hooks_Hookable {
      * @return array
      */
     public function flush( $domain ){
-        $export = array();
+        $export = [];
         if( isset($this->buffer[$domain]) ){
             // what we captures was just a unique namespace
             $captured = $this->buffer[$domain];

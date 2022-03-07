@@ -274,7 +274,7 @@ class Loco_fs_FileWriter {
         // may have bypassed definition of FS_CHMOD_DIR
         $mode = defined('FS_CHMOD_DIR') ? FS_CHMOD_DIR : 0755;
         // find first ancestor that exists while building tree
-        $stack = array();
+        $stack = [];
         /* @var $parent Loco_fs_Directory */
         while( $parent = $here->getParent() ){
             array_unshift( $stack, $this->mapPath( $here->getPath() ) );

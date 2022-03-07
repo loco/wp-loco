@@ -16,32 +16,32 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
     public function getPost(){
         $dom = $this->getDom();
         $root = $dom->documentElement;
-        $post = new Loco_mvc_PostParams( array (
+        $post = new Loco_mvc_PostParams(  [
             'name' => $root->getAttribute('name'),
-            'exclude' => array (
+            'exclude' =>  [
                 'path' => '',
-            ),
-            'conf' => array(),
-        ) );
+            ],
+            'conf' => [],
+        ] );
         /* @var LocoConfigElement $domain */
         foreach( $this->query('domain',$root) as $domain ){
             $domainName = $domain->getAttribute('name');
             /* @var LocoConfigElement $project */
             foreach( $domain as $project ){
-                $tree = array (
+                $tree =  [
                     'name' => $project->getAttribute('name'),
                     'slug' => $project->getAttribute('slug'),
                     'domain' => $domainName,
-                    'source' => array (
+                    'source' =>  [
                         'path' => '',
-                        'exclude' => array( 'path' => '' ),
-                    ),
-                    'target' => array (
+                        'exclude' => [ 'path' => '' ],
+                    ],
+                    'target' =>  [
                         'path' => '',
-                        'exclude' => array( 'path' => '' ),
-                    ),
-                    'template' => array( 'path' => '', 'locked' => false ),
-                );
+                        'exclude' => [ 'path' => '' ],
+                    ],
+                    'template' => [ 'path' => '', 'locked' => false ],
+                ];
                 $post['conf'][] = $this->collectPaths( $project, $tree );
             }
         }
@@ -56,7 +56,7 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
 
 
     private function collectPaths( LocoConfigElement $parent, array $branch ){
-        $texts = array();
+        $texts = [];
         foreach( $parent as $child ){
             $name = $child->nodeName;
             // all file types as "path" in form model
@@ -132,12 +132,12 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
         $root->setAttribute( 'name', $name );
         
         // bundle level excluded paths
-        if( $nodes = array_intersect_key( $post->getArrayCopy(), array( 'exclude' => '' ) ) ) {
+        if( $nodes = array_intersect_key( $post->getArrayCopy(), [ 'exclude' => '' ] ) ) {
             $this->loadStruct( $root, $nodes );
         }
         
         // collect all projects grouped by domain
-        $domains = array();
+        $domains = [];
         foreach( $confs as $i => $conf ){
             if( ! empty($conf['removed']) ){
                 continue;
@@ -147,13 +147,13 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
             }
             $domains[ $conf['domain'] ][] = $project = $dom->createElement('project');
             // project attributes
-            foreach( array('name','slug') as $attr ){
+            foreach( ['name','slug'] as $attr ){
                 if( isset($conf[$attr]) ){
                     $project->setAttribute( $attr, $conf[$attr] );
                 }
             }
             // project children
-            if( $nodes = array_intersect_key( $conf, array( 'source' => '', 'target' => '', 'template' => '' ) ) ) {
+            if( $nodes = array_intersect_key( $conf, [ 'source' => '', 'target' => '', 'template' => '' ] ) ) {
                 $this->loadStruct( $project, $nodes );
             }
         }

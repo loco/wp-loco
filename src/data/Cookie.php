@@ -73,7 +73,7 @@ class Loco_data_Cookie extends ArrayObject {
      * @return Loco_data_Cookie
      */
     public function kill(){
-        $this->exchangeArray( array() );
+        $this->exchangeArray( [] );
         $this->expires = time() - 86400;
         return $this;
     }

@@ -28,18 +28,18 @@ class Loco_admin_bundle_DebugController extends Loco_admin_bundle_BaseController
         $this->set('notices', $notices = new Loco_mvc_ViewParams );
         /* @var $notice Loco_error_Exception */
         foreach( $debugger as $notice ){
-            $notices[] = new Loco_mvc_ViewParams( array(
+            $notices[] = new Loco_mvc_ViewParams( [
                 'style' => 'notice inline notice-'.$notice->getType(),
                 'title' => $notice->getTitle(),
                 'body' => $notice->getMessage(),
-            ) );
+            ] );
         }
         
         $meta = $bundle->getHeaderInfo();
-        $this->set('meta', new Loco_mvc_ViewParams( array(
+        $this->set('meta', new Loco_mvc_ViewParams( [
             'vendor' => $meta->getVendorHost(),
             'author' => $meta->getAuthorCredit(),
-        ) ) );
+        ] ) );
         
         if( count($bundle) ){
             $writer = new Loco_config_BundleWriter( $bundle );

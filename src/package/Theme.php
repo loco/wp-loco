@@ -14,10 +14,10 @@ class Loco_package_Theme extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getSystemTargets(){
-        return array ( 
+        return  [ 
             trailingslashit( loco_constant('LOCO_LANG_DIR') ).'themes',
             trailingslashit( loco_constant('WP_LANG_DIR') ).'themes',
-        );
+        ];
     }
 
 
@@ -60,14 +60,14 @@ class Loco_package_Theme extends Loco_package_Bundle {
      * {@inheritdoc}
      */
     public function getMetaTranslatable(){
-        return array (
+        return  [
             'Name'        => 'Name of the theme',
             'Description' => 'Description of the theme',
             'ThemeURI'    => 'URI of the theme',
             'Author'      => 'Author of the theme',
             'AuthorURI'   => 'Author URI of the theme',
             // 'Tags'        => 'Tags of the theme',
-        );
+        ];
     }
 
 
@@ -84,8 +84,8 @@ class Loco_package_Theme extends Loco_package_Bundle {
      * @return Loco_package_Theme[]
      */
     public static function getAll(){
-        $themes = array();
-        foreach( wp_get_themes(array('errors'=>null)) as $theme ){
+        $themes = [];
+        foreach( wp_get_themes(['errors'=>null]) as $theme ){
             try {
                 $themes[] = self::createFromTheme($theme);
             }
@@ -137,11 +137,11 @@ class Loco_package_Theme extends Loco_package_Bundle {
         // otherwise project will use theme root by default
 
         
-        $bundle->configure( $base, array (
+        $bundle->configure( $base,  [
             'Name' => $name,
             'TextDomain' => $domain,
             'DomainPath' => $target,
-        ) );
+        ] );
         
         // parent theme inheritance:
         if( $parent = $theme->parent() ){
@@ -166,7 +166,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
      */
     public static function fromFile( Loco_fs_File $file ){
         $find = $file->getPath();
-        foreach( wp_get_themes( array('errors'=>null) ) as $theme ){
+        foreach( wp_get_themes( ['errors'=>null] ) as $theme ){
             $base = $theme->get_stylesheet_directory();
             $path = $base.substr( $find, strlen($base) );
             if( $find === $path ){

@@ -99,7 +99,7 @@ abstract class Loco_compat_PosixExtension {
             }
         }
         // @codeCoverageIgnoreStart
-        foreach( array('apache','nginx') as $name ){
+        foreach( ['apache','nginx'] as $name ){
             if( false !== stripos(PHP_SAPI,$name) ){
                 return $name;
             }

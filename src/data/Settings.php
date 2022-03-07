@@ -42,15 +42,15 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * Available options and their defaults
      * @var array
      */
-    private static $defaults = array (
+    private static $defaults =  [
         'version' => '',
         'gen_hash' => false,
         'use_fuzzy' => true,
         'fuzziness' => 20,
         'num_backups' => 5,
-        'pot_alias' => array( 'default.po', 'en_US.po', 'en.po' ),
-        'php_alias' => array( 'php', 'twig' ),
-        'jsx_alias' => array(),
+        'pot_alias' => [ 'default.po', 'en_US.po', 'en.po' ],
+        'php_alias' => [ 'php', 'twig' ],
+        'jsx_alias' => [],
         'fs_persist' => false,
         'fs_protect' => 1,
         'pot_protect' => 1,
@@ -67,7 +67,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'microsoft_api_key' => '',
         'microsoft_api_region' => 'global',
         'lecto_api_key' => '',
-    );
+    ];
 
 
     /**
@@ -211,7 +211,7 @@ class Loco_data_Settings extends Loco_data_Serializable {
             }
         }
         // enforce missing values that must have a default, but were passed empty
-        foreach( array('php_alias','max_php_size','po_width') as $prop ){
+        foreach( ['php_alias','max_php_size','po_width'] as $prop ){
             if( isset($data[$prop]) && '' === $data[$prop] ){
                 parent::offsetSet( $prop, self::$defaults[$prop] );
             }

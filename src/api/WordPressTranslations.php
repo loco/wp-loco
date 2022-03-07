@@ -49,7 +49,7 @@ class Loco_api_WordPressTranslations {
     public function getAvailableCore(){
         $locales = $this->locales;
         if( is_null($locales) ){
-            $locales = array();
+            $locales = [];
             // get official locales from API if we have network
             $cached = $this->wp_get_available_translations();
             if( is_array($cached) && $cached ){
