@@ -221,7 +221,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * @return Loco_gettext_Data
      */
     public function localize( Loco_Locale $locale, array $custom = [] ){
-        $date = gmdate('Y-m-d H:i').'+0000'; // <- forcing UCT
+        $date = gmdate('Y-m-d H:i').'+0000';
         // headers that must always be set if absent
         $defaults =  [
             'Project-Id-Version' => '',
@@ -241,6 +241,18 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             'X-Generator' => 'Loco https://localise.biz/',
             'X-Loco-Version' => sprintf('%s; wp-%s', loco_plugin_version(), $GLOBALS['wp_version'] ),
         ];
+        // Allow some existing headers to remain if PO was previously localized to the same language
+        $headers = $this->getHeaders();
+        $previous = Loco_Locale::parse( $headers->trimmed('Language') );
+        if( $previous->lang === $locale->lang ){
+            $header = $headers->trimmed('Plural-Forms');
+            if( preg_match('/^\\s*nplurals\\s*=\\s*\\d+\\s*;\\s*plural\\s*=/', $header) ) {
+                $required['Plural-Forms'] = $header;
+            }
+            if( $previous->region === $locale->region && $previous->variant === $locale->variant ){
+                unset( $required['Language-Team'] );
+            }
+        }
         // set user's preferred Last-Translator credit if configured
         if( function_exists('get_current_user_id') && get_current_user_id() ){
             $prefs = Loco_data_Preferences::get();
