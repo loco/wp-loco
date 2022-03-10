@@ -72,7 +72,7 @@ class Loco_fs_File {
     /**
      * Internally set path value and flag whether relative or absolute
      * @param string
-     * @return string
+     * @return void
      */
     private function setPath( $path ){
         $path = (string) $path;
@@ -87,7 +87,6 @@ class Loco_fs_File {
             $this->path = $path;
             $this->info = null;
         }
-        return $path;
     }
 
 
@@ -110,14 +109,13 @@ class Loco_fs_File {
     /**
      * Copy write context with our file reference
      * @param Loco_fs_FileWriter|null
-     * @return Loco_fs_File
+     * @return void
      */
     private function cloneWriteContext( Loco_fs_FileWriter $context = null ){
         if( $context ){
             $context = clone $context;
             $this->w = $context->setFile($this);
         }
-        return $this;
     }
 
 
@@ -429,7 +427,7 @@ class Loco_fs_File {
      */
     public function getRelativePath( $base ){
         $path = $this->normalize();
-        if( $abspath = self::abs($path) ){
+        if( self::abs($path) ){
             // base may needs require normalizing
             $file = new Loco_fs_File($base);
             $base = $file->normalize();

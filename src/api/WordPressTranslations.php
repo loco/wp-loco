@@ -64,6 +64,7 @@ class Loco_api_WordPressTranslations {
                 // debug so we can see on front end that data was offline
                 // $locales['en-debug'] = ( new Loco_Locale('en','','debug') )->setName('OFFLINE DATA');
             }
+            /* @var string $tag */
             foreach( $cached as $tag => $raw ){
                 $locale = Loco_Locale::parse($tag);
                 if( $locale->isValid() ){

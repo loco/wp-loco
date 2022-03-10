@@ -2923,10 +2923,11 @@ y = a;
 return f;
 };
 var x = function() {
-var a = D.createElement("p");
-return function(b) {
-a.innerHTML = b.replace("src=", "x=");
-return a.textContent.trim() || b.trim();
+var a = D.createElement("p"), b = /(src|href|on[a-z]+)\s*=/gi;
+return function(c) {
+a.innerHTML = c.replace(b, "data-x-loco-$1=");
+var e = a.textContent.trim();
+return e ? e.replace("data-x-loco-", "") : c.trim();
 };
 }(), u = b.prototype = n.require("$37", "abstract.js").init([ "getListColumns", "getListHeadings", "getListEntry" ], [ "editable", "t" ]);
 u.init = function() {
@@ -4926,7 +4927,7 @@ k("#loco-admin.wrap table.wp-list-table").each(function(f, d) {
 n.require("$20", "tables.js").init(d);
 });
 C.validate = function(f) {
-return "2.6.0" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (C.notices.warn("admin.js is the wrong version (2.6.0). Please empty all relevant caches and reload this page."), 
+return "2.6.1" !== (/^\d+\.\d+\.\d+/.exec(f && f[0] || "") && RegExp.lastMatch) ? (C.notices.warn("admin.js is the wrong version (2.6.1). Please empty all relevant caches and reload this page."), 
 !1) : !0;
 };
 })(window, document, window.jQuery);

@@ -162,7 +162,7 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
         else if( '' === $conf->getSyncMode() ){
             $conf->setSyncMode('pot');
         }
-        
+
         return $this->view('admin/file/conf');
     }
     

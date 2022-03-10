@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 5.2
 Requires PHP: 5.6.20
 Tested up to: 5.9.1
-Stable tag: 2.5.8
+Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 
 == Changelog ==
+
+= 2.6.1 =
+* Improved HTML stripping in editor
 
 = 2.6.0 =
 * Dropped support for WordPress < 5.2
@@ -457,7 +460,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.0 =
+= 2.6.1 =
 * Various improvements and bug fixes
 
 
