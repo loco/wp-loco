@@ -7,7 +7,7 @@ Author: Tim Whitlock
 Version: 2.6.1-dev
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 5.9.1
+Tested up to: 5.9.2
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/

@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 5.9.1
+Tested up to: 5.9.2
 Stable tag: 2.6.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,7 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.1 =
-* Improved HTML stripping in editor
+* Bumped WordPress version to 5.9.2
+* Fix for CVE-2022-0765 reported by Taurus Omar via wpscan
 
 = 2.6.0 =
 * Dropped support for WordPress < 5.2
