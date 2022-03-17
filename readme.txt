@@ -20,7 +20,7 @@ It also provides Gettext/localization tools for developers, such as extracting s
 Features include:
 
 * Built-in translation editor within WordPress admin
-* Integration with translation APIs including DeepL, Google, Microsoft and Yandex
+* Integration with translation APIs including DeepL, Google, Microsoft and Lecto AI
 * Create and update language files directly in your theme or plugin
 * Extraction of translatable strings from your source code
 * Native MO file compilation without the need for Gettext on your system
@@ -99,6 +99,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 
 == Changelog ==
+
+= 2.6.2 =
+* 
 
 = 2.6.1 =
 * Bumped WordPress version to 5.9.2
@@ -461,7 +464,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.1 =
+= 2.6.2 =
 * Various improvements and bug fixes
 
 
