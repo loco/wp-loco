@@ -101,7 +101,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.2 =
-* 
+* Better labelling of reverse-engineered plural forms
 
 = 2.6.1 =
 * Bumped WordPress version to 5.9.2

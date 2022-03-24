@@ -39,11 +39,11 @@ class Loco_Locale implements JsonSerializable {
     private $_name;
 
     /**
-     * Cache of raw plural data 
-     * @var array
+     * Cache of plural data required by editor
+     * @var array|null [ string $equation, array $forms, array $samples, array $labels ]
      */
     private $plurals;
-
+    
     /**
      * Validity cache
      * @var bool
@@ -360,8 +360,8 @@ class Loco_Locale implements JsonSerializable {
         // plural data expected by editor
         $p = $this->getPluralData();
         $a['pluraleq'] = $p[0];
-        $a['plurals'] = $p[1];
         $a['nplurals'] = count($p[1]);
+        $a['plurals'] = $p[3];
         // tone setting may used by some external translation providers
         $a['tone'] = $this->getFormality();
         return $a;
@@ -371,36 +371,64 @@ class Loco_Locale implements JsonSerializable {
     /**
      * Get plural data with translated forms
      * @internal
-     * @return array [ (string) equation, (array) forms ]
+     * @return array [ (string) $equation, (array) $forms ]
      */
     public function getPluralData(){
+        $cache = $this->getRawPluralData();
+        // compile display labels if flag invalidated
+        if( null === $cache[3] ){
+            $cache[3] = $this->translatePluralForms($cache);
+        }
+        return $cache;
+    }
+    
+    
+    private function getRawPluralData(){
         $cache = $this->plurals;
         if( ! $cache ){
             $lc = $this->lang;
             $db = Loco_data_CompiledData::get('plurals');
             $id = $lc && isset($db[$lc]) ? $db[$lc] : 0;
-            $cache = $this->setPlurals( $db[''][$id] );
+            $this->setPlurals( $db[''][$id] );
+            $cache = $this->plurals;
         }
         return $cache;
     }
 
 
     /**
-     * @param array[]
-     * @return array
+     * Set plural form labels from raw plural form data
+     * @param array[] either from built-in rules or derived from given equation
+     * @return void
      */
     private function setPlurals( array $raw ){
         $raw = apply_filters( 'loco_locale_plurals', $raw, $this );
-        // handle languages with no plural forms, where n is always 0
-        if( ! isset($raw[1][1]) ){
-            // Translators: Plural category for languages that have no plurals
-            $raw[1] = [ _x('All forms','Plural category','loco-translate') ];
-            $raw[0] = '0';
+        $raw[3] = null;
+        $this->plurals = $raw;
+    }
+    
+    
+    private function translatePluralForms( array $cache ){
+        list( , $forms, $samples ) = $cache;
+        $nplurals = count($forms);
+        // Languages with no plural forms, where n always yields 0. The UI doesn't show a label for this.
+        if( 1 === $nplurals ){
+            return [ 'All' ];
         }
-        // else translate all implemented plural forms
+        // TODO translate plural forms into *this* language, not current admin language?
+        //
+        // Germanic plurals can show singular/plural as per source string text boxes
+        // Note that french style plurals include n=0 under the "Single", but this no worse than seeing "One (0,1)"
+        if( 2 === $nplurals ){
+            $l10n = [ 
+                'one' => _x('Single','Editor','loco-translate'), 
+                'other' => _x('Plural',"Editor",'loco-translate'),
+            ];
+        }
+        // else translate all implemented plural forms and show sample numbers if useful:
         // for meaning of categories, see http://cldr.unicode.org/index/cldr-spec/plural-rules
         else {
-            $forms = [
+            $l10n = [
                 // Translators: Plural category for zero quantity
                 'zero' => _x('Zero','Plural category','loco-translate'),
                 // Translators: Plural category for singular quantity
@@ -414,14 +442,63 @@ class Loco_Locale implements JsonSerializable {
                 // Translators: General plural category not covered by other forms
                 'other' => _x('Other','Plural category','loco-translate'),
             ];
-            foreach( $raw[1] as $k => $v ){
-                if( isset($forms[$v]) ){
-                    $raw[1][$k] = $forms[$v];
+        }
+        // process labels to be shown in editor tab, appending sample values of `n` if useful
+        $labels = [];
+        $max = $nplurals - 1;
+        foreach( $forms as $i => $tag ){
+            // append hellip if more samples are possible than displayed
+            $sample = $samples[$i];
+            if( array_key_exists(3,$sample) ){
+                $append = implode(',',array_slice($sample,0,3))."\xE2\x80\xA6";
+            }
+            else {
+                $append = implode(',',$sample);
+            }
+            // resolve CLDR mnemonic tags to a limited extent.
+            if( '' === $tag ){
+                // allow named tags for *exactly* zero, one, or two
+                $exact = ['zero','one','two'];
+                if( array_key_exists($append,$exact) ){
+                    $tag = $exact[$append];
                 }
+                // allow first form to be called "one" if pair is [one,other] and it satisfies n=1 (e.g. French)
+                else if( 0 === $i && 2 === $nplurals && in_array(1,$sample,true) ){
+                    $tag = 'one';
+                }
+                // allowing final form to be called "other" unless it has finite sample values (i.e. fewer than 4)
+                else if( $i === $max && ! in_array('other',$forms) && array_key_exists(3,$sample) ){
+                    $tag = 'other';
+                }
+                // use only sample numbers for unknown tags. this includes "few" and "many" which are too ambiguous.
+                else {
+                    $tag = $append;
+                }
+                // remember tags locally to avoid duplicates
+                $forms[$i] = $tag;
+            }
+            // take initial label from base translation of Unicode tag
+            if( array_key_exists($tag,$l10n) ){
+                $label = $l10n[$tag];
+            }
+            else {
+                $label = $tag;
+            }
+            // skip redundant sampling like "One (1)" or "1 (1)", and don't bother sampling other in [one,other]
+            if (
+                preg_match('/\\d/',$label) || 
+                ( 'one' === $tag && '1' === $append ) ||
+                ( 'two' === $tag && '2' === $append ) ||
+                ( 'zero' === $tag && '0' === $append ) ||
+                ( 'other' === $tag && 2 === $nplurals )
+            ){
+                $labels[] = $label;
+            }
+            else {
+                $labels[] = $label.' ('.$append.')';
             }
         }
-        $this->plurals = $raw;
-        return $raw;
+        return $labels;
     }
 
 
@@ -430,7 +507,7 @@ class Loco_Locale implements JsonSerializable {
      * @return string
      */
     public function getPluralFormsHeader(){
-        list( $equation, $forms ) = $this->getPluralData();
+        list( $equation, $forms ) = $this->getRawPluralData();
         return sprintf('nplurals=%u; plural=%s;', count($forms), $equation );
     }
 
@@ -441,28 +518,72 @@ class Loco_Locale implements JsonSerializable {
      * @return self
      */
     public function setPluralFormsHeader( $str ){
-        if( ! preg_match('/^nplurals=(\\d);\s*plural=([ +\\-\\/*%!=<>|&?:()n0-9]+);?$/', $str, $match ) ){
+        if( ! preg_match('#^nplurals=(\\d);\\s*plural=([-+/*%!=<>|&?:()n\\d ]+);?$#', $str, $match ) ){
             throw new InvalidArgumentException('Invalid Plural-Forms header, '.json_encode($str) );
         }
-        $cache = $this->getPluralData();
-        $exprn = $match[2];
-        // always alter if equation differs
-        if( $cache[0] !== $exprn ){
-            $this->plurals[0] = $exprn;
-            // alter number of forms if changed
-            $nplurals = max( 1, (int) $match[1] );
-            if( $nplurals !== count($cache[1]) ){
-                // named forms must also change, but Plural-Forms cannot contain this information
-                // as a cheat, we'll assume first form always "one" and last always "other"
-                for( $i = 1; $i < $nplurals; $i++ ){
-                    $name = 1 === $i ? 'one' : sprintf('Plural %u',$i);
-                    $forms[] = $name;
-                }
-                $forms[] = 'other';
-                $this->setPlurals( [$exprn,$forms] );
+        $nplurals = (int) $match[1];
+        $pluraleq = trim( $match[2],' ');
+        // fix nonsense plural count
+        if( 0 === $nplurals ){
+            $nplurals = 1;
+            $pluraleq = '0';
+        }
+        // Set new plural expression if it differs at all.
+        $cache = $this->getRawPluralData();
+        if( $pluraleq !== $cache[0] ){
+            $tags = $cache[1];
+            $samples = $cache[2];
+            // no point calculating for single form locales
+            if( 1 === $nplurals ){
+                $tags = ['other'];
+                $pluraleq = '0';
+                $samples = [];
             }
+            // recalculate tags and sample quantities if the expression has materially changed
+            else if( count($tags) !== $nplurals || self::hashPlural($pluraleq) !== self::hashPlural($cache[0]) ) {
+                $tags = array_fill(0,$nplurals,'');
+                $samples = array_fill(0,$nplurals,[]);
+                $formula = new Plural_Forms($pluraleq);
+                $quantities = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,20,21,22,100,101,102,200,201,202];
+                for( $i = 0; $i < $nplurals; $i++ ){
+                    $sample = [];
+                    foreach( $quantities as $j => $n ){
+                        if( is_null($n) || $formula->execute($n) !== $i ){
+                            continue;
+                        }
+                        $sample[] = $n;
+                        $quantities[$j] = null;
+                        if( array_key_exists(3,$sample) ){
+                            break;
+                        }
+                    }
+                    $samples[$i] = $sample;
+                }
+                // handle common [one,other] patterns here and allow them to be inverted.
+                // other mnemonic tags will be lazy resolved at point of translation if possible.
+                if( 2 === $nplurals ){
+                    if( in_array(1,$samples[0]) && array_key_exists(3,$samples[1]) ){
+                        $tags = ['one','other'];
+                    }
+                    else if( in_array(1,$samples[1]) && array_key_exists(3,$samples[0]) ){
+                        $tags = ['other','one'];
+                    }
+                }
+            }
+            // overwrite any changes in plural data
+            $this->setPlurals( [$pluraleq,$tags,$samples] );
         }
         return $this;
+    }
+
+
+    /**
+     * Crude normalizer for a plural equation such that similar formulae can be compared.
+     * @param string original plural equation
+     * @return string signature for comparison
+     */
+    private static function hashPlural( $str ){
+        return trim( str_replace([' ','<>'],['','!='],$str), '()' );
     }
 
 

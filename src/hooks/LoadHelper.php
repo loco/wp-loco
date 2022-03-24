@@ -77,7 +77,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @return string e.g. {WP_CONTENT_DIR}/languages/loco/plugins/foo
      */
     private function resolve( $path ){
-        foreach( $this->map as $key => $data ){
+        foreach( $this->map as $data ){
             list($subdir,$prefix,$len) = $data;
             if( substr($path,0,$len) === $prefix ){
                 if( '' === $subdir ){
