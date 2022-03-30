@@ -102,6 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.6.2 =
 * Better labelling of reverse-engineered plural forms
+* Removed undocumented loco_locale_plurals filter; use loco_po_headers
 
 = 2.6.1 =
 * Bumped WordPress version to 5.9.2
