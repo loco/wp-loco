@@ -36,9 +36,8 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
         // file must exist for editing
         /* @var Loco_fs_File $file */
         $file = $this->get('file');
-        $name = $file->basename();
+        $this->setFileTitle($file);
         $type = strtolower( $file->extension() );
-        $this->set('title', $name );
 
         if( $fail = $this->getFileError($file) ){
             return $fail; 
@@ -86,8 +85,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
                 'bundle' => $bundle->getId(),
                 'domain' => $project ? $project->getId() : '',
             ] : null,
-        ] ) ); 
-
+        ] ) );
         
         // treat as PO if file name has locale
         if( $this->getLocale() ){

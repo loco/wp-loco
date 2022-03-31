@@ -523,6 +523,8 @@ class Loco_Locale implements JsonSerializable {
             // blanking CLDR tags means only samples will be used as labels
             else {
                 $tags = array_fill(0,$nplurals,'');
+                // Translators: Shown when a PO file's Plural-Forms header has a different formula from the Unicode CLDR rules
+                Loco_error_AdminNotices::info( __('Plural forms differ from Loco Translate\'s built in rules for this language','loco-translate') );
             }
             // set new plural forms
             $this->plurals = array_combine($keys,$tags);

@@ -91,7 +91,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
         $files = $this->expandFiles( $file );
         $info = Loco_mvc_FileParams::create($file);
         $this->set( 'info', $info );
-        $this->set( 'title', sprintf( __('Delete %s','loco-translate'), $info->name ) );
+        $this->setFileTitle( $file, __('Delete %s','loco-translate') );
         
         // warn about additional files that will be deleted along with this
         if( $deps = array_slice($files,1) ){

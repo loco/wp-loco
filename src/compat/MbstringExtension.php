@@ -41,6 +41,11 @@ abstract class Loco_compat_MbstringExtension {
         }
         return $str;
     }
+    
+    public static function mb_strtolower( $str ){
+        return strtolower($str);
+    }
+
 }
 
 
@@ -73,5 +78,11 @@ if( ! function_exists('mb_convert_encoding') ){
 if( ! function_exists('mb_encoding_aliases') ){
     function mb_encoding_aliases(){
         return false;
+    }
+}
+
+if( ! function_exists('mb_strtolower') ){
+    function mb_strtolower( $str ){
+        return Loco_compat_MbstringExtension::mb_strtolower($str);
     }
 }

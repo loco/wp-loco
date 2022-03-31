@@ -73,7 +73,7 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
         $info = Loco_mvc_FileParams::create($file);
         $info['mtime'] = $file->modified();
         $this->set( 'master', $info );
-        $this->set( 'title', sprintf( __('Restore %s','loco-translate'), $info->name ) );        
+        $this->setFileTitle( $file, __('Restore %s','loco-translate') );
         
         $enabled = Loco_data_Settings::get()->num_backups;
         $this->set( 'enabled', $enabled );

@@ -50,6 +50,24 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
 
     /**
+     * Wrapper for sprintf so we can handle PHP 8 exceptions
+     * @param string
+     * @param array
+     * @return string
+     */
+    public static function format( $format, array $args ){
+        try {
+            return vsprintf($format,$args);
+        }
+        // Note that PHP8 will throw Error (not Exception), PHP 7 will trigger E_WARNING
+        catch( Error $e ){
+            Loco_error_AdminNotices::warn( $e->getMessage().' in vsprintf('.var_export($format,true).')' );
+            return '';
+        }
+    }
+
+
+    /**
      * @internal
      * @param string property name
      * @return mixed
@@ -71,21 +89,15 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     /**
      * Print escaped property value
      * @param string property key
-     * @param mixed optional arguments to substitute into value
      * @return string empty string
      */
     public function e( $p ){
         $text = $this->__get($p);
-        if( 1 < func_num_args() ){
-            $args = func_get_args();
-            $text = call_user_func_array( 'sprintf', $args );
-        }
         echo $this->escape( $text );
         return '';
     }
 
-    
-    
+
     /**
      * Print property as string date, including time
      * @param string property name
@@ -122,7 +134,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @return string empty string
      */
     public function f( $p, $f = '%s' ){
-        echo $this->escape( sprintf( $f, $this->__get($p) ) );
+        echo $this->escape( self::format( $f, [$this->__get($p)] ) );
         return '';
     }
 

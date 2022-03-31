@@ -130,7 +130,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         $custom = is_null($project) || $this->get('custom') || 'po' !== $file->extension() || ! $locale->isValid();
         // common page elements:
         $this->set('files',$files->expand() );
-        $this->set('title', sprintf( __('Move %s','loco-translate'), $file->filename() ) );
+        $this->setFileTitle($file,__('Move %s','loco-translate'));
         $this->enqueueScript('move');
         // set info for existing file location
         $content_dir = loco_constant('WP_CONTENT_DIR');

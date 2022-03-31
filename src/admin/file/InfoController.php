@@ -34,8 +34,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
     public function render(){
         /* @var Loco_fs_LocaleFile $file */
         $file = $this->get('file');
-        $name = $file->basename();
-        $this->set('title', $name );
+        $this->setFileTitle($file);
         
         if( $fail = $this->getFileError($file) ){
             return $fail;
@@ -188,8 +187,12 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                         }
                     }
                     // Other sanity checks
-                    if( $project && ( $value = $head['Project-Id-Version'] ) && $value !== $project->getName() ){
-                        $debug[] = sprintf('Project-Id-Version header is "%s" but project is "%s"', $value, $project );
+                    if( $project && $head->has('Project-Id-Version') ){
+                        $inProj = $project->getName();
+                        $inHead = $head->trimmed('Project-Id-Version');
+                        if( false === strpos($inProj,$inHead) && false === strpos($inHead,$inProj) ) {
+                            $debug[] = sprintf( 'Project-Id-Version header is "%s" but project is "%s"', $inHead, $inProj );
+                        }
                     }
                 }
                 // Count source text for templates only (assumed English)

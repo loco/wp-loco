@@ -114,7 +114,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                     try {
                         $potdata = Loco_gettext_Data::load( $potfile );
                         if( ! $potdata->equalSource($data) ){
-                            Loco_error_AdminNotices::debug( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) );
+                            Loco_error_AdminNotices::info( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) )
+                            ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/sync'), __('Documentation','loco-translate') );
                         }
                     }
                     catch( Exception $e ){
@@ -225,11 +226,9 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         // Remote file system required if file is not directly writable
         $this->prepareFsConnect( 'update', $this->get('path') );
         
-        // set simpler title for breadcrumb
-        $this->set('title', $file->basename() );
-        
         // ok to render editor as either po or pot
         $tpl = $locale ? 'po' : 'pot';
+        $this->setFileTitle($file);
         return $this->view( 'admin/file/edit-'.$tpl, [] );
     }
     

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-03-30 16:21+0000\n"
+"POT-Creation-Date: 2022-03-31 13:32+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -502,7 +502,7 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:108 tpl/admin/file/diff.php:32
+#: src/admin/file/BaseController.php:123 tpl/admin/file/diff.php:32
 #: tpl/admin/bundle/inc-po-table.php:63 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
@@ -538,7 +538,7 @@ msgstr ""
 msgid "Disallow"
 msgstr ""
 
-#: src/admin/file/EditController.php:166
+#: src/admin/file/EditController.php:118 src/admin/file/EditController.php:167
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
 #: tpl/admin/config/apis.php:128 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
@@ -584,7 +584,7 @@ msgstr ""
 msgid "Editing of POT (template) files"
 msgstr ""
 
-#: src/admin/file/BaseController.php:103
+#: src/admin/file/BaseController.php:118
 msgid "Editor"
 msgstr ""
 
@@ -596,13 +596,13 @@ msgid "%s translation"
 msgstr ""
 
 #. button for adding a new string when manually editing a POT file
-#: src/admin/file/EditController.php:193
+#: src/admin/file/EditController.php:194
 msgctxt "Editor"
 msgid "Add"
 msgstr ""
 
 #. Button that opens window for auto-translating
-#: src/admin/file/EditController.php:204
+#: src/admin/file/EditController.php:205
 msgctxt "Editor"
 msgid "Auto"
 msgstr ""
@@ -626,7 +626,7 @@ msgid "Context not loaded"
 msgstr ""
 
 #. Button for downloading a PO, MO or POT file
-#: src/admin/file/EditController.php:206
+#: src/admin/file/EditController.php:207
 msgctxt "Editor"
 msgid "Download"
 msgstr ""
@@ -638,19 +638,19 @@ msgid "Plural"
 msgstr ""
 
 #. button for removing a string when manually editing a POT file
-#: src/admin/file/EditController.php:195
+#: src/admin/file/EditController.php:196
 msgctxt "Editor"
 msgid "Remove"
 msgstr ""
 
 #. Button that reloads current screen
-#: src/admin/file/EditController.php:202
+#: src/admin/file/EditController.php:203
 msgctxt "Editor"
 msgid "Revert"
 msgstr ""
 
 #. Button that saves translations to disk
-#: src/admin/file/EditController.php:198
+#: src/admin/file/EditController.php:199
 msgctxt "Editor"
 msgid "Save"
 msgstr ""
@@ -680,13 +680,13 @@ msgid "Suggest translation"
 msgstr ""
 
 #. Button that runs in-editor sync/operation
-#: src/admin/file/EditController.php:200
+#: src/admin/file/EditController.php:201
 msgctxt "Editor"
 msgid "Sync"
 msgstr ""
 
 #. Button that toggles between "code" and regular text editing modes
-#: src/admin/file/EditController.php:212
+#: src/admin/file/EditController.php:213
 msgctxt "Editor"
 msgid "Toggle code view"
 msgstr ""
@@ -697,7 +697,7 @@ msgid "Toggle Fuzzy"
 msgstr ""
 
 #. Button that toggles invisible characters
-#: src/admin/file/EditController.php:210
+#: src/admin/file/EditController.php:211
 msgctxt "Editor"
 msgid "Toggle invisibles"
 msgstr ""
@@ -817,7 +817,7 @@ msgid_plural "%u files deleted"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/InfoController.php:170
+#: src/admin/file/InfoController.php:169
 msgid "File does not have a valid header"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr ""
 msgid "File doesn't exist"
 msgstr ""
 
-#: src/admin/file/BaseController.php:105 tpl/admin/bundle/inc-po-table.php:22
+#: src/admin/file/BaseController.php:120 tpl/admin/bundle/inc-po-table.php:22
 #: tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
@@ -912,7 +912,7 @@ msgid ""
 msgstr ""
 
 #. Placeholder text for text filter above editor
-#: src/admin/file/EditController.php:208
+#: src/admin/file/EditController.php:209
 msgid "Filter translations"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgstr ""
 msgid "Grant access to roles"
 msgstr ""
 
-#: src/ajax/ApisController.php:26 src/admin/file/EditController.php:196
+#: src/ajax/ApisController.php:26 src/admin/file/EditController.php:197
 msgid "Help"
 msgstr ""
 
@@ -1075,7 +1075,7 @@ msgstr ""
 msgid "Language"
 msgstr ""
 
-#: src/admin/file/InfoController.php:177
+#: src/admin/file/InfoController.php:176
 #, php-format
 msgid "Language header is \"%s\" but file name contains \"%s\""
 msgstr ""
@@ -1237,7 +1237,7 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:115
-#: src/admin/file/BaseController.php:127 src/admin/bundle/ViewController.php:98
+#: src/admin/file/BaseController.php:142 src/admin/bundle/ViewController.php:98
 msgid "New language"
 msgstr ""
 
@@ -1432,6 +1432,12 @@ msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
 
+#. Shown when a PO file's Plural-Forms header has a different formula from the Unicode CLDR rules
+#: src/Locale.php:527
+msgid ""
+"Plural forms differ from Loco Translate's built in rules for this language"
+msgstr ""
+
 #. Where %s is the name of a template file
 #: tpl/admin/file/info-po.php:75
 #, php-format
@@ -1499,7 +1505,7 @@ msgstr ""
 msgid "Relative path to template file"
 msgstr ""
 
-#: src/admin/file/BaseController.php:107
+#: src/admin/file/BaseController.php:122
 msgid "Relocate"
 msgstr ""
 
@@ -1507,7 +1513,7 @@ msgstr ""
 msgid "Reset config"
 msgstr ""
 
-#: src/admin/file/BaseController.php:106 tpl/admin/file/diff.php:31
+#: src/admin/file/BaseController.php:121 tpl/admin/file/diff.php:31
 msgid "Restore"
 msgstr ""
 
@@ -1599,7 +1605,7 @@ msgid "Sets"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
-#: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:165
+#: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:166
 #: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
 #: tpl/admin/errors/no-backups.php:24
 msgid "Settings"
@@ -1640,7 +1646,7 @@ msgstr ""
 msgid "Skip template"
 msgstr ""
 
-#: src/admin/file/BaseController.php:104
+#: src/admin/file/BaseController.php:119
 msgid "Source"
 msgstr ""
 
@@ -1864,7 +1870,7 @@ msgid "This information is for developers to find problems in the bundle setup"
 msgstr ""
 
 #. Warning when POT file is opened in the file editor. It can be disabled in settings.
-#: src/admin/file/EditController.php:164
+#: src/admin/file/EditController.php:165
 msgid ""
 "This is NOT a translation file. Manual editing of source strings is not "
 "recommended."
@@ -1943,7 +1949,7 @@ msgid "Translation progress %s%%"
 msgstr ""
 
 #. Where %s is the name of the invalid POT file
-#: src/ajax/SyncController.php:72 src/admin/file/EditController.php:122
+#: src/ajax/SyncController.php:72 src/admin/file/EditController.php:123
 #, php-format
 msgid "Translation template is invalid (%s)"
 msgstr ""
@@ -1973,7 +1979,7 @@ msgstr ""
 msgid "Unexpected file type"
 msgstr ""
 
-#: src/package/Header.php:86 src/admin/file/InfoController.php:138
+#: src/package/Header.php:86 src/admin/file/InfoController.php:137
 msgid "Unknown author"
 msgstr ""
 

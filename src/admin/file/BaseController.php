@@ -45,6 +45,21 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
     }
 
 
+    /**
+     * Set template title argument for a file
+     * @return void
+     */
+    protected function setFileTitle( Loco_fs_File $file, $format = '%s' ){
+        $name = Loco_mvc_ViewParams::format($format,[$file->basename()]);
+        // append folder location for translation files
+        if( in_array( $file->extension(), ['po','mo'] ) ){
+            $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
+            $type = $dir->getTypeLabel( $dir->getTypeId() );
+            $name .= ' ('.mb_strtolower($type,'UTF-8').')';
+        }
+        $this->set('title', $name );
+    }
+
 
     /**
      * {@inheritdoc}
@@ -150,13 +165,11 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
             }
             
             // Always add page title as final breadcrumb element
-            $title = $this->get('title') or $title = 'Untitled';
-            $breadcrumb->add( $title );
+            $breadcrumb->add( $this->get('title')?:'Untitled' );
         }
         
         return parent::view( $tpl, $args );
     }
-    
-    
-    
+
+
 }
