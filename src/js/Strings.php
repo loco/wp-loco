@@ -166,6 +166,12 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // List heading showing preview of translated text for each item
         _x("Translation","Editor",'loco-translate');
 
+        // xgettext: javascript-format
+        __("Too many placeholders; source text formatting suggests a maximum of %s",'loco-translate');
+
+        // xgettext: javascript-format
+        __("Missing placeholders; source text formatting suggests at least %s",'loco-translate');
+
 
         return $this->flush('loco-translate');
     }

@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-03-31 13:32+0000\n"
+"POT-Creation-Date: 2022-05-11 13:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.2-dev; wp-5.9.2\n"
+"X-Loco-Version: 2.6.2-dev; wp-6.0-RC2-53389\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -1191,6 +1191,11 @@ msgstr ""
 msgid "Merged from source code"
 msgstr ""
 
+#: src/js/Strings.php:173
+#, javascript-format
+msgid "Missing placeholders; source text formatting suggests at least %s"
+msgstr ""
+
 #: tpl/admin/file/info-po.php:84
 msgid "Missing template"
 msgstr ""
@@ -1912,6 +1917,11 @@ msgstr ""
 msgid ""
 "To make changes you'll have to connect to the remote file system, or make "
 "the file writeable by %s"
+msgstr ""
+
+#: src/js/Strings.php:170
+#, javascript-format
+msgid "Too many placeholders; source text formatting suggests a maximum of %s"
 msgstr ""
 
 #: src/hooks/AdminHooks.php:103 tpl/ajax/modal-apis-batch.php:37
