@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-05-11 13:31+0000\n"
+"POT-Creation-Date: 2022-05-20 13:00+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1191,6 +1191,10 @@ msgstr ""
 msgid "Merged from source code"
 msgstr ""
 
+#: src/js/Strings.php:179
+msgid "Mismatching placeholder type; check against source text formatting"
+msgstr ""
+
 #: src/js/Strings.php:173
 #, javascript-format
 msgid "Missing placeholders; source text formatting suggests at least %s"
@@ -1471,6 +1475,10 @@ msgstr ""
 
 #: src/gettext/Compiler.php:107
 msgid "PO file saved, but MO file compilation failed"
+msgstr ""
+
+#: src/js/Strings.php:176
+msgid "Possible syntax error in string formatting"
 msgstr ""
 
 #: tpl/admin/config/settings.php:156

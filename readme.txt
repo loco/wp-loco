@@ -105,7 +105,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Better labelling of reverse-engineered plural forms
 * Removed undocumented loco_locale_plurals filter; use loco_po_headers
 * Added PO folder location indicator in breadcrumb
-* Added simple argument count validation for formatted strings
+* Added syntax validation for formatted strings
 
 = 2.6.1 =
 * Bumped WordPress version to 5.9.2

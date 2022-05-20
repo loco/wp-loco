@@ -172,6 +172,12 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // xgettext: javascript-format
         __("Missing placeholders; source text formatting suggests at least %s",'loco-translate');
 
+        //
+        __("Possible syntax error in string formatting",'loco-translate');
+
+        //
+        __("Mismatching placeholder type; check against source text formatting",'loco-translate');
+
 
         return $this->flush('loco-translate');
     }

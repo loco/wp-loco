@@ -1,4 +1,4 @@
-(function(y, x, k, J) {
+(function(z, w, k, J) {
 var q = function() {
 function e(c) {
 throw Error("Failed to require " + c);
@@ -60,7 +60,7 @@ return this;
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$2", function(e, c, k) {
 e.ie = function() {
 var e = !1, h = 0;
@@ -74,7 +74,7 @@ e.init = function() {
 return e;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$3", function(e, c, k) {
 Number.prototype.format = function(c, h, l) {
 c = Math.pow(10, c || 0);
@@ -108,7 +108,7 @@ c = c.substr(1);
 return c;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$4", function(e, c, k) {
 Array.prototype.indexOf || (Array.prototype.indexOf = function(c) {
 if (null == this) throw new TypeError();
@@ -121,14 +121,14 @@ for (h = 0 <= h ? h : Math.max(a - Math.abs(h), 0); h < a; h++) if (h in l && l[
 return -1;
 });
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$5", function(e, c, q) {
 c.JSON || (c.JSON = {
 parse: k.parseJSON,
 stringify: null
 });
 return e = c.JSON;
-}({}, y, x));
+}({}, z, w));
 q.register("$6", function(e, c, k) {
 e.trim = function(c, h) {
 for (h || (h = " \n"); c && -1 !== h.indexOf(c.charAt(0)); ) c = c.substring(1);
@@ -145,7 +145,7 @@ return "%" === d ? "%" : (b ? h[Number(b) - 1] : h[l++]) || "";
 });
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$21", function(e, c, k) {
 function p(h) {
 return function(c, a) {
@@ -164,18 +164,18 @@ e.txt = function(c) {
 return k.createTextNode(c || "");
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$7", function(e, c, C) {
 function p(a, b, m) {
 function d() {
 f();
-w = setTimeout(b, m);
+v = setTimeout(b, m);
 }
 function f() {
-w && clearTimeout(w);
-w = null;
+v && clearTimeout(v);
+v = null;
 }
-var w;
+var v;
 d();
 k(a).on("mouseenter", f).on("mouseleave", d);
 return {
@@ -196,7 +196,7 @@ return a;
 }
 function l(a, b) {
 function m(b) {
-n[w] = null;
+n[v] = null;
 h(k(a), 250);
 f && f.die();
 var d;
@@ -207,25 +207,25 @@ function d(b) {
 f && f.die();
 return f = p(a, m, b);
 }
-var f, w, g, A = k(a), s = A.find("button");
+var f, v, g, A = k(a), s = A.find("button");
 0 === s.length && (A.addClass("is-dismissible"), s = k('<button type="button" class="notice-dismiss"> </a>').appendTo(A));
 s.off("click").on("click", m);
 k(c).triggerHandler("resize");
-z();
-w = n.length;
+y();
+v = n.length;
 n.push(m);
 b && (f = d(b));
 return {
-link: function(b, w) {
-var d = w || b, m = k(a).find("nav"), d = k("<nav></nav>").append(k("<a></a>").attr("href", b).text(d));
-g ? (g.push(d.html()), m.html(g.join("<span> | </span>"))) : (g = [ d.html() ], 
-k(a).addClass("has-nav").append(d));
+link: function(b, v) {
+var m = v || b, d = k(a).find("nav"), m = k("<nav></nav>").append(k("<a></a>").attr("href", b).text(m));
+g ? (g.push(m.html()), d.html(g.join("<span> | </span>"))) : (g = [ m.html() ], 
+k(a).addClass("has-nav").append(m));
 return this;
 },
 stick: function() {
 f && f.die();
 f = null;
-n[w] = null;
+n[v] = null;
 return this;
 },
 slow: function(a) {
@@ -234,17 +234,17 @@ return this;
 }
 };
 }
-function a(a, b, d) {
-var m = q.require("$21", "dom.js").el;
+function a(a, b, m) {
+var d = q.require("$21", "dom.js").el;
 a = k('<div class="notice notice-' + a + ' loco-notice inline"></div>').prependTo(k("#loco-notices"));
-var f = k(m("p"));
-d = k(m("span")).text(d);
-b = k(m("strong", "has-icon")).text(b + ": ");
-f.append(b).append(d).appendTo(a);
+var f = k(d("p"));
+m = k(d("span")).text(m);
+b = k(d("strong", "has-icon")).text(b + ": ");
+f.append(b).append(m).appendTo(a);
 return a;
 }
-function b(b, d, m, f) {
-b = a(m, d, b).css("opacity", "0").fadeTo(500, 1);
+function b(b, m, d, f) {
+b = a(d, m, b).css("opacity", "0").fadeTo(500, 1);
 k(c).triggerHandler("resize");
 return l(b, f);
 }
@@ -254,14 +254,14 @@ return b(a, s, "warning");
 function g() {
 k("#loco-notices").find("div.notice").each(function(a, b) {
 if (-1 === b.className.indexOf("jshide")) {
-var d = -1 === b.className.indexOf("notice-success") ? null : 5e3;
-l(b, d);
+var m = -1 === b.className.indexOf("notice-success") ? null : 5e3;
+l(b, m);
 }
 });
 }
 var n = [], f = c.console || {
 log: function() {}
-}, z = Date.now || function() {
+}, y = Date.now || function() {
 return new Date().getTime();
 }, B, s, m, A;
 e.error = function(a) {
@@ -282,7 +282,7 @@ e.debug = function() {
 (f.debug || f.log).apply(f, arguments);
 };
 e.clear = function() {
-for (var a = -1, b, d = n, m = d.length; ++a < m; ) (b = d[a]) && b.call && b();
+for (var a = -1, b, m = n, d = m.length; ++a < d; ) (b = m[a]) && b.call && b();
 n = [];
 return e;
 };
@@ -300,7 +300,7 @@ setTimeout(g, 1e3);
 return e;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$8", function(e, c, C) {
 function p(a) {
 var b = k("<pre>" + a + "</pre>").text();
@@ -329,34 +329,34 @@ function d(a, b, d) {
 a.append(b, d);
 }
 function g(a, b, d, g) {
-function v(b, m, w) {
+function r(b, m, v) {
 if ("abort" !== m) {
-var v = f || {
+var r = f || {
 _: function(a) {
 return a;
 }
-}, g = b.status || 0, c = b.responseText || "", r = p(c), B = b.getResponseHeader("Content-Type") || "Unknown type", l = b.getResponseHeader("Content-Length") || c.length;
-"success" === m && w ? n.error(w) : (n.error(h(r) + ".\n" + v._("Check console output for debugging information")), 
+}, g = b.status || 0, c = b.responseText || "", x = p(c), B = b.getResponseHeader("Content-Type") || "Unknown type", l = b.getResponseHeader("Content-Length") || c.length;
+"success" === m && v ? n.error(v) : (n.error(h(x) + ".\n" + r._("Check console output for debugging information")), 
 n.log("Ajax failure for " + a, {
 status: g,
 error: m,
-message: w,
+message: v,
 output: c
-}), "parsererror" === m && (w = "Response not JSON"), n.log([ v._("Provide the following text when reporting a problem") + ":", "----", "Status " + g + ' "' + (w || v._("Unknown error")) + '" (' + B + " " + l + " bytes)", r, "====" ].join("\n")));
-d && d.call && d(b, m, w);
-z = b;
+}), "parsererror" === m && (v = "Response not JSON"), n.log([ r._("Provide the following text when reporting a problem") + ":", "----", "Status " + g + ' "' + (v || r._("Unknown error")) + '" (' + B + " " + l + " bytes)", x, "====" ].join("\n")));
+d && d.call && d(b, m, v);
+y = b;
 }
 }
 g.url = B;
 g.dataType = "json";
 var n = q.require("$7", "notices.js").clear();
-z = null;
-return k.ajax(g).fail(v).done(function(a, d, w) {
-var f = a && a.data, g = a && a.notices, z = g && g.length, c = -1;
-for (!f || a.error ? v(w, d, a && a.error && a.error.message) : b && b(f, d, w); ++c < z; ) n.raise(g[c]);
+y = null;
+return k.ajax(g).fail(r).done(function(a, d, v) {
+var f = a && a.data, g = a && a.notices, y = g && g.length, c = -1;
+for (!f || a.error ? r(v, d, a && a.error && a.error.message) : b && b(f, d, v); ++c < y; ) n.raise(g[c]);
 });
 }
-var n = {}, f, z, B = c.ajaxurl || "/wp-admin/admin-ajax.php";
+var n = {}, f, y, B = c.ajaxurl || "/wp-admin/admin-ajax.php";
 e.init = function(a) {
 n = a.nonces || n;
 return e;
@@ -366,7 +366,7 @@ f = a;
 return e;
 };
 e.xhr = function() {
-return z;
+return y;
 };
 e.strip = p;
 e.parse = h;
@@ -374,15 +374,15 @@ e.submit = function(a, b, d) {
 function f(a, b) {
 b.disabled ? b.setAttribute("data-was-disabled", "true") : b.disabled = !0;
 }
-function v(a, b) {
+function r(a, b) {
 b.getAttribute("data-was-disabled") || (b.disabled = !1);
 }
-function z(a) {
+function y(a) {
 a.find(".button-primary").removeClass("loading");
-a.find("button").each(v);
-a.find("input").each(v);
-a.find("select").each(v);
-a.find("textarea").each(v);
+a.find("button").each(r);
+a.find("input").each(r);
+a.find("select").each(r);
+a.find("textarea").each(r);
 a.removeClass("disabled loading");
 }
 var n = k(a), c = n.serialize();
@@ -395,35 +395,35 @@ a.find("textarea").each(f);
 a.addClass("disabled loading");
 })(n);
 return g(a.route.value, function(a, d, f) {
-z(n);
+y(n);
 b && b(a, d, f);
 }, function(a, b, m) {
-z(n);
+y(n);
 d && d(a, b, m);
 }, {
 type: a.method,
 data: c
 });
 };
-e.post = function(f, m, z, h) {
-var v = !0, F = m || {}, B = n[f] || l(f);
-c.FormData && F instanceof FormData ? (v = !1, m = d) : m = Array.isArray(F) ? b : a;
+e.post = function(f, m, y, h) {
+var r = !0, F = m || {}, B = n[f] || l(f);
+c.FormData && F instanceof FormData ? (r = !1, m = d) : m = Array.isArray(F) ? b : a;
 m(F, "action", "loco_json");
 m(F, "route", f);
 m(F, "loco-nonce", B);
-return g(f, z, h, {
+return g(f, y, h, {
 type: "post",
 data: F,
-processData: v,
-contentType: v ? "application/x-www-form-urlencoded; charset=UTF-8" : !1
+processData: r,
+contentType: r ? "application/x-www-form-urlencoded; charset=UTF-8" : !1
 });
 };
 e.get = function(a, b, d, f) {
 b = b || {};
-var v = n[a] || l(a);
+var r = n[a] || l(a);
 b.action = "loco_json";
 b.route = a;
-b["loco-nonce"] = v;
+b["loco-nonce"] = r;
 return g(a, d, f, {
 type: "get",
 data: b
@@ -434,7 +434,7 @@ n[a] = b;
 return e;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$22", {
 arab: 1,
 aran: 1,
@@ -520,7 +520,7 @@ return !!l[String(this.lang).toLowerCase()];
 };
 c = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$23", {
 "á": "a",
 "à": "a",
@@ -938,28 +938,28 @@ e.init = function() {
 function c(a) {
 return f[a] || a;
 }
-function h(a, b, d, f) {
+function h(a, b, d, m) {
 b = a.split(b);
-for (var g = b.length; 0 !== g--; ) (a = b[g]) && null == f[a] && (d.push(a), f[a] = !0);
+for (var f = b.length; 0 !== f--; ) (a = b[f]) && null == m[a] && (d.push(a), m[a] = !0);
 return d;
 }
 function l(a) {
 return h(String(a || "").toLowerCase().replace(g, c), n, [], {});
 }
 function a(a, b) {
-for (var f = [], m = {}, A, r = b.length, v = n; 0 !== r--; ) (A = b[r]) && h(String(A || "").toLowerCase().replace(g, c), v, f, m);
+for (var f = [], m = {}, A, x = b.length, r = n; 0 !== x--; ) (A = b[x]) && h(String(A || "").toLowerCase().replace(g, c), r, f, m);
 d[a] = f;
 }
 function b(a, b) {
-var f = [], m = -1, g = d, n = g.length, v, c, h, l, w, E, e = a.length, k = b ? !0 : !1;
-a: for (;++m < n; ) if (h = g[m], null != h && (l = h.length)) {
-w = 0;
-b: for (;w < e; w++) {
-E = a[w];
-for (v = 0; v < l; v++) if (c = h[v], 0 === c.indexOf(E)) continue b;
+var f = [], m = -1, g = d, n = g.length, r, c, h, u, v, E, l = a.length, e = b ? !0 : !1;
+a: for (;++m < n; ) if (h = g[m], null != h && (u = h.length)) {
+v = 0;
+b: for (;v < l; v++) {
+E = a[v];
+for (r = 0; r < u; r++) if (c = h[r], 0 === c.indexOf(E)) continue b;
 continue a;
 }
-f.push(k ? b[m] : m);
+f.push(e ? b[m] : m);
 }
 return f;
 }
@@ -993,14 +993,14 @@ d[a] = null;
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$11", function(e, c, q) {
 e.listen = function(e, h) {
 function l() {
 m[g ? "show" : "hide"]();
 }
 function a(a) {
-s && z.setAttribute("size", 2 + a.length);
+s && y.setAttribute("size", 2 + a.length);
 g = a;
 l();
 return a;
@@ -1010,18 +1010,18 @@ n = null;
 h(g);
 }
 function d(d) {
-var f = z.value;
+var f = y.value;
 B && f === B && (f = "");
 f !== g ? (n && clearTimeout(n), a(f), d ? n = setTimeout(b, d) : b()) : n && null == d && (clearTimeout(n), 
 b());
 }
-var g, n, f = 150, z = e instanceof jQuery ? e[0] : e, B = c.attachEvent && z.getAttribute("placeholder"), s = 1 === Number(z.size), m = k('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').on("click", function() {
-z.value = "";
+var g, n, f = 150, y = e instanceof jQuery ? e[0] : e, B = c.attachEvent && y.getAttribute("placeholder"), s = 1 === Number(y.size), m = k('<a href="#clear" tabindex="-1" class="icon clear"><span>clear</span></a>').on("click", function() {
+y.value = "";
 d();
 return !1;
 });
-a(z.value);
-k(z).on("input", function() {
+a(y.value);
+k(y).on("input", function() {
 d(f);
 return !0;
 }).on("blur focus change", function() {
@@ -1035,20 +1035,20 @@ f = a;
 return this;
 },
 ping: function(f) {
-f ? (n && clearTimeout(n), f = z.value, B && f === B && (f = ""), a(f), b(), f = void 0) : f = d();
+f ? (n && clearTimeout(n), f = y.value, B && f === B && (f = ""), a(f), b(), f = void 0) : f = d();
 return f;
 },
 val: function(b) {
 if (null == b) return g;
 n && clearTimeout(n);
-z.value = a(b);
+y.value = a(b);
 l();
 },
 el: function() {
-return z;
+return y;
 },
 blur: function(a) {
-return k(z).on("blur", a);
+return k(y).on("blur", a);
 },
 destroy: function() {
 n && clearTimeout(n);
@@ -1056,7 +1056,7 @@ n && clearTimeout(n);
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$12", function(e, c, q) {
 function p(a, b) {
 this.$element = k(a);
@@ -1246,7 +1246,7 @@ return d + (g ? g : "");
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$35", function(e, c, k) {
 "".localeCompare || (String.prototype.localeCompare = function() {
 return 0;
@@ -1271,13 +1271,13 @@ return '<a href="' + a + '" target="' + (b.indexOf(g) ? "_blank" : "_top") + '">
 var a, b, d, g;
 return function(g, f) {
 c && c();
-var z = g.replace(a, h);
-f && (z = z.replace(d, l).replace(b, "<br />"));
-return z;
+var y = g.replace(a, h);
+f && (y = y.replace(d, l).replace(b, "<br />"));
+return y;
 };
 }();
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$36", function(e, c, k) {
 function p() {}
 var h, l, a = q.require("$22", "rtl.json");
@@ -1331,7 +1331,7 @@ return !!a[String(this.script || this.lang).toLowerCase()];
 };
 c = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$37", function(e, c, k) {
 function p(a) {
 c.console && console.error && console.error(a);
@@ -1361,7 +1361,7 @@ var d = /function (\w+)\(/.exec(a.toString()) ? RegExp.$1 : "";
 a.prototype._validate(d || "Object");
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$48", function(e, c, k) {
 var p = c.requestAnimationFrame, h = c.cancelAnimationFrame, l = 0;
 if (!p || !h) for (var a in {
@@ -1387,20 +1387,20 @@ return new Date().getTime();
 };
 e.loop = function(a, b) {
 function c() {
-z = p(c, b);
+y = p(c, b);
 a(f++);
 }
-var f = 0, z;
+var f = 0, y;
 c();
 return {
 stop: function() {
-z && h(z);
-z = null;
+y && h(y);
+y = null;
 }
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$45", function(e, c, k) {
 function p(b, d, f, m) {
 if (a) {
@@ -1441,7 +1441,7 @@ var A = {};
 A[b] = function(a) {
 n(a, function(d, m) {
 m.type = b;
-f(a, m, l);
+f(a, m, x);
 });
 c(d);
 c(g);
@@ -1452,27 +1452,27 @@ m(d);
 m(g);
 n(a, function(b, d) {
 d.type = g;
-f(a, d, l);
+f(a, d, x);
 });
 return !0;
 };
 A[d] = function(a) {
 n(a, function(b, m) {
 m.type = d;
-f(a, m, l);
+f(a, m, x);
 });
 return h(a);
 };
 c(b);
-var l = {
+var x = {
 kill: function() {
 m(b);
 m(d);
 m(g);
-a = l = f = null;
+a = x = f = null;
 }
 };
-return l;
+return x;
 };
 e.swiper = function(c, l, s) {
 function m(a) {
@@ -1481,17 +1481,17 @@ c.addEventListener(a, u[a], !1);
 function A(a) {
 c.removeEventListener(a, u[a], !1);
 }
-function r() {
-v && v.stop();
-v = null;
+function x() {
+r && r.stop();
+r = null;
 }
-var v, F, e, u = {}, w = [], E = [], k = [];
+var r, F, e, u = {}, v = [], E = [], k = [];
 u[b] = function(a) {
 F = !1;
-r();
+x();
 var b = f();
 n(a, function(a, d) {
-w[a] = b;
+v[a] = b;
 E[a] = d.clientX;
 k[a] = d.clientY;
 });
@@ -1500,7 +1500,7 @@ return !0;
 };
 u[g] = function(a) {
 n(a, function(a, b) {
-var d = f() - w[a], m = E[a] - b.clientX, d = Math.abs(m) / d;
+var d = f() - v[a], m = E[a] - b.clientX, d = Math.abs(m) / d;
 l(d, m ? 0 > m ? -1 : 1 : 0);
 });
 e = null;
@@ -1522,7 +1522,7 @@ kill: function() {
 A(b);
 A(d);
 A(g);
-r();
+x();
 },
 swiped: function() {
 return F;
@@ -1535,10 +1535,10 @@ a && !s && (c.style["-ms-scroll-snap-points-x"] = "snapInterval(0px," + b + "px)
 c.style["-ms-scroll-snap-type"] = "mandatory", c.style["-ms-scroll-chaining"] = "none");
 },
 scroll: function(a, b, d) {
-r();
-var f = c.scrollLeft, w = a > f ? 1 : -1, m = Math[1 === w ? "min" : "max"], g = Math.round(16 * b * w);
-return v = q.require("$48", "fps.js").loop(function(b) {
-b && (f = Math.max(0, m(a, f + g)), c.scrollLeft = f, a === f && (r(), d && d(f)));
+x();
+var f = c.scrollLeft, m = a > f ? 1 : -1, v = Math[1 === m ? "min" : "max"], g = Math.round(16 * b * m);
+return r = q.require("$48", "fps.js").loop(function(b) {
+b && (f = Math.max(0, v(a, f + g)), c.scrollLeft = f, a === f && (x(), d && d(f)));
 }, c);
 }
 };
@@ -1558,7 +1558,7 @@ if (a) (b.MSPOINTER_TYPE_TOUCH || "touch") === b.pointerType && d(0, b); else fo
 return new Date().getTime();
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$49", function(e, c, q) {
 e.init = function(c) {
 function h() {
@@ -1592,22 +1592,22 @@ k(b).removeClass("has-mirror");
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$29", function(e, c, k) {
 function p(a, b) {
-for (var d = 0, g = -1, n = b && c[b], f = h[a] || [], l = f.length; ++g < l; ) callback = f[g], 
+for (var d = 0, g = -1, n = b && c[b], f = h[a] || [], y = f.length; ++g < y; ) callback = f[g], 
 "function" === typeof callback && (callback(n), d++);
 return d;
 }
 var h = {}, l;
 e.load = function(a, b, d) {
 function g() {
-l && (clearTimeout(l), l = null);
-e && (e.onreadystatechange = null, e = e = e.onload = null);
+y && (clearTimeout(y), y = null);
+l && (l.onreadystatechange = null, l = l = l.onload = null);
 a && (delete h[a], a = null);
 }
 function n(b, f) {
-var c = e && e.readyState;
+var c = l && l.readyState;
 if (f || !c || "loaded" === c || "complete" === c) f || p(a, d), g();
 }
 function f() {
@@ -1616,20 +1616,20 @@ g();
 }
 if (d && c[d]) "function" === typeof b && b(c[d]); else if (null != h[a]) h[a].push(b); else {
 h[a] = [ b ];
-var l = setTimeout(f, 4e3), e = k.createElement("script");
-e.setAttribute("src", a);
-e.setAttribute("async", "true");
-e.onreadystatechange = n;
-e.onload = n;
-e.onerror = f;
-e.onabort = g;
-k.getElementsByTagName("head")[0].appendChild(e);
+var y = setTimeout(f, 4e3), l = k.createElement("script");
+l.setAttribute("src", a);
+l.setAttribute("async", "true");
+l.onreadystatechange = n;
+l.onload = n;
+l.onerror = f;
+l.onabort = g;
+k.getElementsByTagName("head")[0].appendChild(l);
 }
 };
 e.stat = function(a) {
 var b;
 if (!(b = l)) {
-for (var d, c, h = k.getElementsByTagName("script"), f = -1, e = h.length; ++f < e; ) if (b = h[f].getAttribute("src")) if (d = b.indexOf("/lib/vendor"), 
+for (var d, c, h = k.getElementsByTagName("script"), f = -1, y = h.length; ++f < y; ) if (b = h[f].getAttribute("src")) if (d = b.indexOf("/lib/vendor"), 
 -1 !== d) {
 c = b.substr(0, d);
 break;
@@ -1639,7 +1639,7 @@ b = l = c || "/static";
 return b + a;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$16", function(e, c, C) {
 function p(a, b) {
 a.setReadOnly(!1);
@@ -1766,12 +1766,12 @@ return g || "%%";
 }
 var g, n = "auto";
 e.init = function(b, d, g) {
-var e, m = !1, A = g || n, r = b.parentNode, v = r.appendChild(C.createElement("div"));
-k(r).addClass("has-proxy has-ace");
+var e, m = !1, A = g || n, x = b.parentNode, r = x.appendChild(C.createElement("div"));
+k(x).addClass("has-proxy has-ace");
 q.require("$29", "remote.js").load("https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js", function(c) {
-if (v) {
+if (r) {
 if (!c) throw Error("Failed to load code editor");
-e = c.edit(v);
+e = c.edit(r);
 var g = e.session, h = e.renderer;
 e.$blockScrolling = Infinity;
 e.setShowInvisibles(m);
@@ -1791,7 +1791,7 @@ d ? p(e, d) : l(e);
 return {
 kill: function() {
 e && (h(e), e.destroy(), e = null);
-v && (r.removeChild(v), k(r).removeClass("has-proxy has-ace"), v = null);
+r && (x.removeChild(r), k(x).removeClass("has-proxy has-ace"), r = null);
 return this;
 },
 disable: function() {
@@ -1833,7 +1833,7 @@ g = b;
 return e;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$50", function(e, c, C) {
 function p(a, d) {
 function c() {
@@ -1888,24 +1888,24 @@ a.setContent = function(a, b) {
 return this._setContent(c(a), b);
 };
 d ? (p(a, d), d.reset()) : l(a);
-k(r).removeClass("loading");
+k(x).removeClass("loading");
 }
-var f, z = !1, B = "", s = !1, m = b.parentNode, A = m.parentNode, r = m.appendChild(C.createElement("div")), v = A.insertBefore(C.createElement("nav"), m);
-v.id = "_tb" + String(++a);
+var f, y = !1, B = "", s = !1, m = b.parentNode, A = m.parentNode, x = m.appendChild(C.createElement("div")), r = A.insertBefore(C.createElement("nav"), m);
+r.id = "_tb" + String(++a);
 k(m).addClass("has-proxy has-mce");
-k(r).addClass("mce-content-body loading").html(c(b.value));
+k(x).addClass("mce-content-body loading").html(c(b.value));
 e.load(function(a) {
 if (!a) throw Error("Failed to load HTML editor");
-r && a.init({
+x && a.init({
 inline: !0,
-target: r,
+target: x,
 hidden_input: !1,
 theme: "modern",
 skin: !1,
 plugins: "link lists",
 browser_spellcheck: !0,
 menubar: !1,
-fixed_toolbar_container: "#" + v.id,
+fixed_toolbar_container: "#" + r.id,
 toolbar: "formatselect | bold italic link unlink | bullist numlist outdent indent",
 block_formats: "Paragraph=p;Heading 1=h1;Heading 2=h2;Heading 3=h4;Heading 4=h4;Heading 5=h5;Heading 6=h6;",
 forced_root_block: "p",
@@ -1941,14 +1941,14 @@ init_instance_callback: n
 return {
 val: function(a) {
 a = c(a);
-null == f ? (b.value = a, k(r).html(a)) : f.getContent() !== a && f.setContent(a);
+null == f ? (b.value = a, k(x).html(a)) : f.getContent() !== a && f.setContent(a);
 d && d.val(a);
 return this;
 },
 kill: function() {
 f && (d && d.val(f.getContent()), h(f), f.destroy(), f = null);
-r && (m.removeChild(r), k(m).removeClass("has-proxy has-mce"), r = null);
-v && (A.removeChild(v), v = null);
+x && (m.removeChild(x), k(m).removeClass("has-proxy has-mce"), x = null);
+r && (A.removeChild(r), r = null);
 return this;
 },
 enable: function(a) {
@@ -1967,13 +1967,13 @@ return this;
 },
 invs: function(a) {
 a = a || !1;
-z !== a && (z = a, k(m)[a ? "addClass" : "removeClass"]("show-invs"));
+y !== a && (y = a, k(m)[a ? "addClass" : "removeClass"]("show-invs"));
 return this;
 }
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$46", function(e, c, C) {
 function p(a) {
 function b() {
@@ -2146,7 +2146,7 @@ a && a.resize && a.resize();
 };
 TextAreaPrototype = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$47", function(e, c, q) {
 function p(a) {
 var b = c.console;
@@ -2198,9 +2198,9 @@ return "";
 };
 }
 return function(c) {
-var g = b || 0, h = d ? -1 : 1, w = a.rows || [];
+var g = b || 0, h = d ? -1 : 1, v = a.rows || [];
 c.sort(function(a, b) {
-return h * (w[a] || f(a)).cellVal(g).localeCompare((w[b] || f(b)).cellVal(g));
+return h * (v[a] || f(a)).cellVal(g).localeCompare((v[b] || f(b)).cellVal(g));
 });
 };
 }
@@ -2211,7 +2211,7 @@ function f(a) {
 this.t = a;
 this.length = 0;
 }
-function z(a, b, d) {
+function y(a, b, d) {
 var f = q.createElement("div");
 f.className = d || "";
 this._ = f;
@@ -2228,28 +2228,28 @@ return new n(a);
 };
 var s = n.prototype;
 s.init = function(f) {
-var c = this.w, g = c.id, v = c.splity(g + "-thead", g + "-tbody"), n = v[0], v = v[1], e = [], u = [], w = [], E = [];
+var c = this.w, g = c.id, r = c.splity(g + "-thead", g + "-tbody"), n = r[0], r = r[1], e = [], u = [], v = [], E = [];
 if (f) this.ds = f, this.idxs = u, this._idxs = null; else if (!(f = this.ds)) throw Error("No datasource");
 n.css.push("wg-thead");
-v.css.push("wg-tbody");
+r.css.push("wg-tbody");
 f.eachCol(function(a, b, d) {
-w[a] = g + "-col-" + b;
+v[a] = g + "-col-" + b;
 E[a] = d || b;
 });
-for (var s = h(), B = -1, p = w.length, q = h("wg-cols"), C = n.splitx.apply(n, w); ++B < p; ) C[B].header(E[B]), 
-q.appendChild(s.cloneNode(!1)).setAttribute("for", w[B]);
+for (var s = h(), B = -1, p = v.length, q = h("wg-cols"), C = n.splitx.apply(n, v); ++B < p; ) C[B].header(E[B]), 
+q.appendChild(s.cloneNode(!1)).setAttribute("for", v[B]);
 f.eachRow(function(a, b, d) {
-e[a] = new z(a, b, d);
+e[a] = new y(a, b, d);
 u[a] = a;
 });
 this.rows = e;
 this.cols = q;
 this.ww = null;
-this.root = s = v.body;
+this.root = s = r.body;
 this.head = n;
 n.redraw = l(this);
-n = v.fixed = C[0].bodyY() || 20;
-c.lock().resize(n, v);
+n = r.fixed = C[0].bodyY() || 20;
+c.lock().resize(n, r);
 c.css.push("is-table");
 c.restyle();
 this.sc ? this._re_sort(p) : f.sort && f.sort(u);
@@ -2266,8 +2266,8 @@ void 0;
 return this;
 };
 s.render = function() {
-for (var a, b, d = [], f = this.rows || [], c = -1, g, h = this.idxs, w = h.length, n = this.idxr = {}, e = this.r, l = this._r, z = this.root, s = this.cols; ++c < w; ) {
-0 === c % 100 && (a = s.cloneNode(!0), b = new B(a), b.h = 2200, b.insert(z), d.push(b));
+for (var a, b, d = [], f = this.rows || [], c = -1, g, h = this.idxs, v = h.length, n = this.idxr = {}, e = this.r, l = this._r, y = this.root, s = this.cols; ++c < v; ) {
+0 === c % 100 && (a = s.cloneNode(!0), b = new B(a), b.h = 2200, b.insert(y), d.push(b));
 g = h[c];
 n[g] = c;
 a = f[g];
@@ -2285,9 +2285,9 @@ this._r = e);
 return this;
 };
 s.resize = function() {
-var a = -1, b = this.ww || (this.ww = []), d = this.w, f = d.cells[0], c = f.body.childNodes, g = c.length, h = this.pages || [], w = h.length;
+var a = -1, b = this.ww || (this.ww = []), d = this.w, f = d.cells[0], c = f.body.childNodes, g = c.length, h = this.pages || [], v = h.length;
 for (d.redraw.call(f); ++a < g; ) b[a] = c[a].style.width;
-if (w) {
+if (v) {
 d = this.mx;
 for (a = this.mn; a <= d; a++) h[a].widths(b);
 this.redrawDirty() && this.redraw();
@@ -2300,10 +2300,10 @@ this.vh !== b && (a = !0, this.vh = b);
 return a;
 };
 s.redraw = function() {
-for (var a = 0, b = -1, d = null, f = null, c = this.ww, g = this.sy, h = this.vh, w = this.mn, n = this.mx, e = Math.max(0, g - 100), g = h + g + 100, l = this.pages || [], z = l.length; ++b < z && !(a > g); ) h = l[b], 
+for (var a = 0, b = -1, d = null, f = null, c = this.ww, g = this.sy, h = this.vh, v = this.mn, n = this.mx, e = Math.max(0, g - 100), g = h + g + 100, l = this.pages || [], y = l.length; ++b < y && !(a > g); ) h = l[b], 
 a += h.height(), a < e || (null === d && (d = b), f = b, h.rendered || h.render(c));
-if (w !== d) {
-if (null !== w && d > w) for (b = w; b < d; b++) {
+if (v !== d) {
+if (null !== v && d > v) for (b = v; b < d; b++) {
 h = l[b];
 if (!h) throw Error("Shit!");
 h.rendered && h.sleep();
@@ -2438,7 +2438,7 @@ c.css = d) : this.active = null;
 return this;
 };
 s = null;
-s = z.prototype;
+s = y.prototype;
 s.render = function(a) {
 var b, d = [], f = this._, c = this.length;
 if (f) {
@@ -2490,10 +2490,10 @@ a || p("row has zero height");
 return a;
 };
 s.render = function(a) {
-for (var b, d = -1, f = this.rows, c = f.length, g = this.dead, h = this.live, w = h.childNodes; ++d < c; ) b = f[d], 
-b.rendered || b.render(w);
+for (var b, d = -1, f = this.rows, c = f.length, g = this.dead, h = this.live, v = h.childNodes; ++d < c; ) b = f[d], 
+b.rendered || b.render(v);
 c = a.length;
-for (d = 0; d < c; d++) w[d].style.width = a[d];
+for (d = 0; d < c; d++) v[d].style.width = a[d];
 g.parentNode.replaceChild(h, g);
 this.rendered = !0;
 this.h = null;
@@ -2524,12 +2524,12 @@ for (a.parentNode.removeChild(a); 0 !== d--; ) b[d].destroy();
 };
 s = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$38", function(e, c, C) {
 function p(a, b) {
 var d = a.id, f = d && m[d], c = f && f.parent();
 if (!f || !c) return null;
-var g = c.dir === s, d = g ? "X" : "Y", h = "page" + d, g = g ? B : z, n = g(c.el), d = b["offset" + d], e = c.el, l = e.className;
+var g = c.dir === s, d = g ? "X" : "Y", h = "page" + d, g = g ? B : y, n = g(c.el), d = b["offset" + d], e = c.el, l = e.className;
 null == d && (d = b[h] - g(a));
 d && (n += d);
 e.className = l + " is-resizing";
@@ -2546,23 +2546,23 @@ return !0;
 function h(b, d) {
 function f() {
 k(C).off("mousemove", c);
-r && (r.done(), r = null);
+x && (x.done(), x = null);
 return !0;
 }
 function c(a) {
-r ? r.move(a) : f();
+x ? x.move(a) : f();
 return !0;
 }
-if (r) return !0;
-r = p(b.target, b);
-if (!r) return !0;
+if (x) return !0;
+x = p(b.target, b);
+if (!x) return !0;
 k(C).one("mouseup", f).on("mousemove", c);
 return a(b);
 }
 function l(a, b) {
 var d = b.type;
-"touchmove" === d ? r && r.move(b) : "touchstart" === d ? r = p(a.target, b) : "touchend" === d && r && (r.done(), 
-r = null);
+"touchmove" === d ? x && x.move(b) : "touchstart" === d ? x = p(a.target, b) : "touchend" === d && x && (x.done(), 
+x = null);
 }
 function a(a) {
 a.stopPropagation();
@@ -2592,7 +2592,7 @@ this._cn = d;
 m[b] = this;
 this.clear();
 }
-var n = q.include("$44", "html.js") || q.include("$2", "html.js", !0), f = q.require("$21", "dom.js"), z = f.top, B = f.left, s = 1, m = {}, A, r = !1;
+var n = q.include("$44", "html.js") || q.include("$2", "html.js", !0), f = q.require("$21", "dom.js"), y = f.top, B = f.left, s = 1, m = {}, A, x = !1;
 e.init = function(a) {
 var b = new g(a);
 b.redraw();
@@ -2649,10 +2649,10 @@ return this._split(2, arguments);
 };
 c._split = function(a, b) {
 (this.length || this.field) && this.clear();
-for (var d = -1, c, w = b.length, h = 1 / w, n = 0; ++d < w; ) {
+for (var d = -1, c, v = b.length, h = 1 / v, n = 0; ++d < v; ) {
 c = f.el();
 this.body.appendChild(c);
-for (var e = c, l = b[d], z = l, s = 1; m[l]; ) l = z + "-" + ++s;
+for (var e = c, l = b[d], y = l, s = 1; m[l]; ) l = y + "-" + ++s;
 e.id = l;
 c = new g(c);
 c.index = d;
@@ -2821,7 +2821,7 @@ var a = this.t;
 return a && a.nodeValue;
 };
 c.bodyY = function() {
-return z(this.body, this.el);
+return y(this.body, this.el);
 };
 c.scrollY = function(a) {
 if (J === a) return this.body.scrollTop;
@@ -2840,7 +2840,7 @@ return this;
 c.scrollTo = function(a, b) {
 var d, c = this.body;
 d = c.scrollTop;
-var f = z(a, c);
+var f = y(a, c);
 if (d > f) d = f; else {
 var g = c.clientHeight, f = f + k(a).outerHeight();
 if (g + d < f) d = f - g; else return;
@@ -2851,34 +2851,34 @@ scrollTop: d
 };
 c.navigize = function(b, d) {
 function c(a) {
-var b = h[a], d = l[a], f = k(b.el).show();
+var b = v[a], d = e[a], f = k(b.el).show();
 d.addClass("active");
-e = a;
-m.data("idx", a);
+n = a;
+l.data("idx", a);
 b.fire("wgTabSelect", [ a ]);
 return f;
 }
-var g = this, h = g.cells, n = g.nav, e, l = [];
-n && g.el.removeChild(n);
-var n = g.nav = g.el.insertBefore(f.el("nav", "wg-tabs"), g.body), m = k(n).on("click", function(b) {
+var g = this, v = g.cells, h = g.nav, n, e = [];
+h && g.el.removeChild(h);
+var h = g.nav = g.el.insertBefore(f.el("nav", "wg-tabs"), g.body), l = k(h).on("click", function(b) {
 var d = k(b.target).data("idx");
 if (null == d) return !0;
-if (null != e) {
-var f = l[e];
-k(h[e].el).hide();
+if (null != n) {
+var f = e[n];
+k(v[n].el).hide();
 f.removeClass("active");
 }
 c(d);
 g.redraw();
 return a(b);
 });
-null == d && (d = m.data("idx") || 0);
+null == d && (d = l.data("idx") || 0);
 g.each(function(a, d) {
-l[d] = k('<a href="#' + a.id + '"></a>').data("idx", d).text(b[d]).appendTo(m);
+e[d] = k('<a href="#' + a.id + '"></a>').data("idx", d).text(b[d]).appendTo(l);
 a.pos = 0;
 k(a.el).hide();
 });
-c(h[d] ? d : 0);
+c(v[d] ? d : 0);
 g.lock();
 g.redraw();
 return g;
@@ -2889,7 +2889,7 @@ if (a) return k(a).data("idx");
 };
 c = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$24", function(e, c, C) {
 function p(a) {
 var b = [];
@@ -2917,15 +2917,15 @@ function a() {
 this.dirty = 0;
 }
 q.require("$3", "number.js");
-var b = "poUpdate", d = "changing", g = "changed", n = 0, f = 1, z = 2, B = 3, s = 4, m = 5, A, r, v = q.require("$35", "string.js").html, y = q.require("$6", "string.js").sprintf;
+var b = "poUpdate", d = "changing", g = "changed", n = 0, f = 1, y = 2, B = 3, s = 4, m = 5, A, x, r = q.require("$35", "string.js").html, z = q.require("$6", "string.js").sprintf;
 e.extend = function(b) {
 return b.prototype = new a();
 };
 e.localise = function(a) {
-r = a;
+x = a;
 return e;
 };
-var x = function() {
+var w = function() {
 var a = C.createElement("p"), b = /(src|href|on[a-z]+)\s*=/gi;
 return function(d) {
 a.innerHTML = d.replace(b, "data-x-loco-$1=");
@@ -2945,7 +2945,7 @@ this.html = !1;
 return this;
 };
 u.t = function() {
-return this.$t || r || q.require("$1", "t.js").init();
+return this.$t || x || q.require("$1", "t.js").init();
 };
 u.localise = function(a) {
 a || (a = this.t());
@@ -2955,7 +2955,7 @@ b[B] = a._x("%s translation", "Editor") + ":";
 b[s] = a._x("Context", "Editor") + ":";
 b[m] = a._x("Comments", "Editor") + ":";
 b[f] = a._x("Single", "Editor") + ":";
-b[z] = a._x("Plural", "Editor") + ":";
+b[y] = a._x("Plural", "Editor") + ":";
 b[6] = a._x("Untranslated", "Editor");
 b[7] = a._x("Translated", "Editor");
 b[8] = a._x("Toggle Fuzzy", "Editor");
@@ -3135,6 +3135,7 @@ this.reload() && (-1 !== b ? this.listTable.selectRow(b || 0) : this.active && t
 };
 u.pasteMessage = function(a) {
 var b, d = 0;
+this.validate(a);
 this.active === a && ((b = this.sourceCell) && b.eachTextarea(function(b) {
 b.val(a.source(null, d++));
 }), (b = this.contextCell) && b.eachTextarea(function(b) {
@@ -3159,14 +3160,14 @@ return null;
 };
 u.setSrcMeta = function(a, b) {
 var d = [], c, f = !1, g = this.$smeta, h = this.labels, n = [], e = a.tags(), m = e && e.length;
-if (c = a.context()) n.push("<span>" + v(h[s]) + "</span>"), n.push("<mark>" + v(c) + "</mark>");
-if (m && this.getTag) for (n.push("<span>Tagged:</span>"); 0 <= --m; ) (c = this.getTag(e[m])) && n.push('<mark class="tag">' + v(c.mod_name) + "</mark>");
+if (c = a.context()) n.push("<span>" + r(h[s]) + "</span>"), n.push("<mark>" + r(c) + "</mark>");
+if (m && this.getTag) for (n.push("<span>Tagged:</span>"); 0 <= --m; ) (c = this.getTag(e[m])) && n.push('<mark class="tag">' + r(c.mod_name) + "</mark>");
 n.length && d.push(n.join(" "));
 if (this.getMono() && (c = a.refs()) && (e = c.split(/\s/), m = e.length)) {
-for (n = []; 0 <= --m; ) c = e[m], n.push("<code>" + v(c) + "</code>");
+for (n = []; 0 <= --m; ) c = e[m], n.push("<code>" + r(c) + "</code>");
 d.push('<p class="has-icon icon-file">' + n.join(" ") + "</p>");
 }
-(c = a.notes()) && d.push('<p class="has-icon icon-info">' + v(c, !0) + "</p>");
+(c = a.notes()) && d.push('<p class="has-icon icon-info">' + r(c, !0) + "</p>");
 d.length ? (g || (g = b.find("div.meta"), g.length || (g = k('<div class="meta"></div>').insertAfter(b.header())), 
 l(this, g, "poMeta"), this.$smeta = g), g.html(d.join("\n")).show(), f = !0) : g && g.text() && (g.text("").hide(), 
 f = !0);
@@ -3177,7 +3178,7 @@ var c, f = [];
 c = !1;
 var g = this.$tmeta;
 if (b = (a = a.errors(b)) && a.length) {
-for (c = 0; c < b; c++) f.push('<p class="has-icon icon-warn">' + v(a[c], !0) + ".</p>");
+for (c = 0; c < b; c++) f.push('<p class="has-icon icon-warn">' + r(a[c], !0) + ".</p>");
 g || (g = d.find("div.meta"), g.length || (g = k('<div class="meta"></div>').insertAfter(d.header())), 
 this.$tmeta = g);
 g.html(f.join("\n")).show();
@@ -3204,16 +3205,16 @@ r.setSrcMeta(a, b) && (m = !0);
 if (a.plural()) {
 var m = -1, s = [], k = [], B = b.id + "-", p = a.sourceForms() || d && d.plurals || [ "One", "Other" ], q = p.length;
 if (2 !== q || "=" === p[0].charAt(0) && "=1" !== p[0]) for (;++m < q; ) s[m] = B + String(m), 
-k[m] = c(p[m].split(" ", 1)[0]) + ":"; else s = [ B + "-0", B + "-1" ], k = [ L[f], L[z] ];
+k[m] = c(p[m].split(" ", 1)[0]) + ":"; else s = [ B + "-0", B + "-1" ], k = [ L[f], L[y] ];
 b.splity.apply(b, s);
 b.each(function(b, d) {
-b.header(k[d]).textarea(a.source(null, d), g).setStrf(D).setMode(u).setInvs(x);
+b.header(k[d]).textarea(a.source(null, d), g).setStrf(D).setMode(u).setInvs(w);
 });
 b.lock();
 g && b.each(function(a, b) {
 l(a, b);
 });
-} else m && b.redraw(), b.textarea(a.source(), g).setStrf(D).setMode(u).setInvs(x), 
+} else m && b.redraw(), b.textarea(a.source(), g).setStrf(D).setMode(u).setInvs(w), 
 g && l(b, 0);
 }
 function l(c, f) {
@@ -3232,22 +3233,22 @@ M && b.eachTextarea(function(a) {
 a.ping();
 });
 b.off();
-var g = d.isKnown() && d.label || "Target", g = y(L[B], g);
+var g = d.isKnown() && d.label || "Target", g = z(L[B], g);
 b.titled() !== g && h(b, g, d);
 g = !1;
 !this.sourceCell && r.setSrcMeta(a, b) && (g = !0);
 r.setTrgMeta(a, f, b) && (g = !0);
 r.setStatus(a, f);
 if (1 !== d.nplurals && a.pluralized()) {
-var n = [], e = [], l = b.id + "-", m = a.targetForms() || d.plurals || [ "One", "Other" ], g = m.length, z = function(a) {
+var n = [], e = [], l = b.id + "-", m = a.targetForms() || d.plurals || [ "One", "Other" ], g = m.length, y = function(a) {
 e.push(c(m[a] || "Form " + a));
 n.push(l + String(a));
 };
-for (a.eachMsg(z); (d = n.length) < g; ) z(d);
+for (a.eachMsg(y); (d = n.length) < g; ) y(d);
 b.splitx.apply(b, n);
 b.each(function(b, d) {
 var c = M && !a.disabled(d);
-b.textarea(a.translation(d), c).setStrf(D).setMode(u).setInvs(x);
+b.textarea(a.translation(d), c).setStrf(D).setMode(u).setInvs(w);
 M && p(b, d);
 });
 b.navigize(e, f || null).on("wgTabSelect", function(d, c) {
@@ -3257,7 +3258,7 @@ r.setTrgMeta(a, c, b);
 r.setStatus(a, c);
 r.fire("poTab", [ c ]);
 });
-} else g && b.redraw(), b.textarea(a.translation(), M && !a.disabled(0)).setStrf(D).setMode(u).setInvs(x), 
+} else g && b.redraw(), b.textarea(a.translation(), M && !a.disabled(0)).setStrf(D).setMode(u).setInvs(w), 
 M && p(b, 0);
 }
 function p(c, f) {
@@ -3278,7 +3279,7 @@ function q(c) {
 c.off();
 var f = L[s];
 c.titled() !== f && (h(c, f), r.setStatus(null));
-c.textarea(a.context(), !0).setMode(u).setInvs(x);
+c.textarea(a.context(), !0).setMode(u).setInvs(w);
 W && c.on(d, function(b, d) {
 a.context(d);
 r.updateListCell(a, "source");
@@ -3289,7 +3290,7 @@ r.dict && r.rebuildSearch();
 r.fire(b, [ a ]);
 });
 }
-function v(b) {
+function x(b) {
 var c = L[m];
 b.titled() !== c && h(b, c);
 b.off().on(d, function(b, d) {
@@ -3298,13 +3299,13 @@ r.fire("poComment", [ a, d ]);
 r.unsave(a, N);
 }).textarea(a.comment(), !0);
 }
-var r = this, u = r.mode, C = a.isHTML(), x = r.inv || !1, G = this.fmt || null, D = a.format() || null, I = a.is(r.active), N = 0, S = r.sourceCell, R = r.targetCell, T = r.contextCell, U = r.commentCell, M = r.editable.target, J = r.editable.source, W = r.editable.context, O = A, X = r.sourceLocale, V = r.targetLocale, L = r.labels;
+var r = this, u = r.mode, C = a.isHTML(), w = r.inv || !1, G = this.fmt || null, D = a.format() || null, I = a.is(r.active), N = 0, S = r.sourceCell, R = r.targetCell, T = r.contextCell, U = r.commentCell, M = r.editable.target, J = r.editable.source, W = r.editable.context, O = A, X = r.sourceLocale, V = r.targetLocale, L = r.labels;
 r.html !== C && (r.html = C, "code" !== r.mode && (u = C ? "html" : "", r.setMode(u)));
 r.active = a;
 S && e(S, X);
 T && q(T);
 R && V && (N = R.navigated() || 0, k(R, V, N));
-U && v(U);
+U && x(U);
 O && (O.exists() || (O = O.parent()), (C = O.editable()) && C.focus());
 G !== D && (this.fmt = D);
 I || r.fire("poSelected", [ a, N ]);
@@ -3340,7 +3341,7 @@ var d = this.getListColumns()[b], c = this.po.indexOf(a);
 (c = this.listTable.row(c)) && c.rendered && c.update(d);
 };
 u.cellText = function(a) {
-return (a = -1 !== a.indexOf("<") || -1 !== a.indexOf("&") ? x(a) : a.trim()) || " ";
+return (a = -1 !== a.indexOf("<") || -1 !== a.indexOf("&") ? w(a) : a.trim()) || " ";
 };
 u.fuzzy = function(a, b, d) {
 b = b || this.active;
@@ -3423,7 +3424,7 @@ return 0;
 };
 u = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$13", function(e, c, C) {
 function p() {
 this.init()._validate();
@@ -3451,10 +3452,16 @@ a.fire("poHint");
 });
 }
 function b() {
-var a = /%(\d+\$)?[sdu]/g;
+var a = /%([1-9]\d*\$)?(?:'.|[-+0 ])*\d*(?:\.\d+)?(.|$)/g;
 return function(b) {
-for (var d = 0, c = 0, g; null != (g = a.exec(b)); ) null == g[1] ? c++ : d = Math.max(d, parseInt(g[1]));
-return Math.max(d, c);
+for (var d = 0, c = 0, g, h, n = {}, e = 0; null != (g = a.exec(b)); ) h = g[2], 
+"%" !== h && ("" === h || -1 === "suxXbcdeEfFgGo".indexOf(h) ? e++ : (null == g[1] ? g = ++c : (g = parseInt(g[1]), 
+d = Math.max(d, g)), null == n[g] && (n[g] = {}), n[g][h] = !0));
+return {
+count: Math.max(d, c),
+valid: 0 === e,
+types: n
+};
 };
 }
 function d(a) {
@@ -3563,18 +3570,26 @@ return h(g.row(a), g.row(b));
 };
 };
 c.validate = function(a) {
-var b = this, c = [], h = 0, n = 0, e = 0, l = this.fmt || "";
-"" !== l && "no-" === l.substring(0, 3) || a.eachSrc(function(a, b) {
-var c = d(b);
-c && (e = Math.max(e, c), n = n ? Math.min(n, c) : c);
+var b = this, c = [], h = 0, n = 0, e = 0, l = [], k = this.fmt || "";
+"" !== k && "no-" === k.substring(0, 3) || a.eachSrc(function(a, b) {
+var c = d(b), f = c.count;
+c.valid && (l[a] = c, e = Math.max(e, f), n = n ? Math.min(n, f) : f);
 });
-a.eachMsg(function(k, p) {
-c[k] = [];
-if ("" !== p && (e || l)) {
-var q = d(p);
-q > e ? (c[k].push(g(b.t()._("Too many placeholders; source text formatting suggests a maximum of %s"), [ e ])), 
-h++) : q < n && 1 === a.count() && (c[k].push(g(b.t()._("Missing placeholders; source text formatting suggests at least %s"), [ n ])), 
-h++);
+a.eachMsg(function(p, q) {
+c[p] = [];
+if ("" !== q && (e || k)) {
+var u = d(q), v = u.count;
+if (v > e) c[p].push(g(b.t()._("Too many placeholders; source text formatting suggests a maximum of %s"), [ e ])), 
+h++; else if (v < n && 1 === a.count()) c[p].push(g(b.t()._("Missing placeholders; source text formatting suggests at least %s"), [ n ])), 
+h++; else if (!u.valid) c[p].push(b.t()._("Possible syntax error in string formatting")), 
+h++; else if (l[p]) {
+var C, v = l[p].types, w;
+for (C in u.types) for (w in u.types[C]) if (null == v[C] || null == v[C][w]) {
+c[p].push(b.t()._("Mismatching placeholder type; check against source text formatting"));
+h++;
+return;
+}
+}
 }
 });
 a.err = h ? c : null;
@@ -3583,7 +3598,7 @@ return h;
 c.handle = {};
 var n;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$14", function(e, c, q) {
 var p = {
 copy: 66,
@@ -3658,7 +3673,7 @@ a = b = g = null;
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$25", function(e, c, k) {
 function p() {
 this.reIndex([]);
@@ -3727,7 +3742,7 @@ return [].join.call(this, c);
 };
 c = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$26", function(e, c, k) {
 function p(c, e) {
 var a = RegExp("^.{0," + (c - 1) + "}[" + e + "]"), b = RegExp("^[^" + e + "]+");
@@ -3769,7 +3784,7 @@ return "\\n\n";
 });
 if (!(g || c && c < f.length + a.length + 3)) return a + ' "' + f + '"';
 var m = [ a + ' "' ], k = f.split("\n");
-if (b) for (var p = -1, q = k.length; ++p < q; ) b(k[p], m); else m = m.concat(k);
+if (b) for (var p = -1, r = k.length; ++p < r; ) b(k[p], m); else m = m.concat(k);
 return m.join('"\n"') + '"';
 },
 prefix: function(a, b) {
@@ -3784,7 +3799,7 @@ return "#: " + b;
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$39", function(e, c, k) {
 function p() {
 this.length = 0;
@@ -3806,7 +3821,7 @@ for (var e = -1, a = this.length; ++e < a; ) c(e, this[e]);
 return this;
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$27", function(e, c, k) {
 function p() {}
 e.extend = function(c) {
@@ -3873,7 +3888,7 @@ return b;
 };
 c = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$28", function(e, c, k) {
 function p(a, b, d) {
 if (null == d) return a[b] || "";
@@ -4050,7 +4065,7 @@ this.htm = a;
 };
 c = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$15", function(e, c, k) {
 function p(a) {
 return {
@@ -4141,23 +4156,23 @@ this.length = this.rows.length);
 return a;
 };
 k.load = function(a) {
-for (var b = -1, c, e, h, k, m, p, q = (h = this.locale()) && h.nplurals || 2, v = []; ++b < a.length; ) c = a[b], 
+for (var b = -1, c, e, h, k, m, p, q = (h = this.locale()) && h.nplurals || 2, r = []; ++b < a.length; ) c = a[b], 
 null == c.parent ? (e = c.source || c.id, h = c.target || "", k = c.context, e || k ? (m = new d(e, h), 
 m._id = c._id, k && m.context(k), c.flag && m.flag(c.flag, 0), c.comment && m.comment(c.comment), 
 c.notes && m.notes(c.notes), c.refs && m.refs(c.refs), m.format(c.format), c.message = m, 
 this.add(m), c.prev && c.prev[0] && (m.prev(c.prev[0].source, c.prev[0].context), 
 c.prev[1] && m._src.push(c.prev[1].source || ""))) : 0 === b && "object" === typeof h && (this.head = h, 
-this.headcmt = c.comment)) : v.push(c);
-for (b = -1; ++b < v.length; ) try {
-c = v[b];
+this.headcmt = c.comment)) : r.push(c);
+for (b = -1; ++b < r.length; ) try {
+c = r[b];
 e = c.source || c.id;
 m = a[c.parent] && a[c.parent].message;
 if (!m) throw Error("parent missing for plural " + e);
 p = c.plural;
 1 === p && m.plural(e);
 p >= q || (c.flag && m.flag(c.flag, p), m.translate(c.target || "", p), c.format && !m.format() && m.format(c.format));
-} catch (x) {
-l(x);
+} catch (w) {
+l(w);
 }
 return this;
 };
@@ -4227,7 +4242,7 @@ return a;
 };
 k = k = null;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$17", function(e, c, q) {
 e.init = function(c, e) {
 function l() {
@@ -4270,7 +4285,7 @@ c.ajax.post("fsReference", g, b, a);
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$30", function(e, c, k) {
 function p(c) {
 this.api = c;
@@ -4288,26 +4303,26 @@ html: a.html,
 sources: []
 };
 A.push(b);
-return r[a.html ? 1 : 0] = b;
+return x[a.html ? 1 : 0] = b;
 }
 function b(b, c) {
 var h = b.source(null, c);
 if (h && (b.untranslated(c) || e)) {
 var u = m[h];
 if (u) u.push(b); else {
-var u = h.length, w = d.isHtml(h), w = r[w ? 1 : 0], A = w.sources;
+var u = h.length, v = d.isHtml(h), v = x[v ? 1 : 0], A = v.sources;
 if (q && u > q) f++; else {
-if (w.length + u > p || A.length === k) w = a(w), A = w.sources;
+if (v.length + u > p || A.length === k) v = a(v), A = v.sources;
 A.push(h);
 m[h] = [ b ];
-w.length += u;
+v.length += u;
 g += u;
 n += 1;
 }
 }
 }
 }
-var d = this.api, g = 0, n = 0, f = 0, k = 50, p = 1e4, q = d.maxChr(), m = {}, A = [], r = [];
+var d = this.api, g = 0, n = 0, f = 0, k = 50, p = 1e4, q = d.maxChr(), m = {}, A = [], x = [];
 q && (p = Math.min(p, q));
 a({
 html: !1
@@ -4315,11 +4330,11 @@ html: !1
 a({
 html: !0
 });
-c.each(function(a, d) {
-b(d, 0);
-b(d, 1);
+c.each(function(a, c) {
+b(c, 0);
+b(c, 1);
 });
-delete r;
+delete x;
 this.map = m;
 this.chars = g;
 this.length = n;
@@ -4335,7 +4350,7 @@ c.dispatch = function() {
 function c(a, b) {
 function d(c, e, g) {
 b !== g && (a === e || 1 < c && f.source(null, 1) === a) && (f.translate(b, c), 
-m++, v++);
+m++, r++);
 return m;
 }
 if (!e()) return !1;
@@ -4356,8 +4371,8 @@ f.abort();
 g();
 }
 function d() {
-r++;
-n("prog", [ r, y ]);
+x++;
+n("prog", [ x, z ]);
 e() && a();
 }
 function g() {
@@ -4365,9 +4380,9 @@ k = q = null;
 n("done");
 }
 function n(a, b) {
-for (var d = u[a] || [], c = d.length; 0 <= --c; ) d[c].apply(null, b);
+for (var c = u[a] || [], d = c.length; 0 <= --d; ) c[d].apply(null, b);
 }
-var f = this, k = f.api, p = f.map, q = f.batches || [], m = f.locale, A = 0, r = 0, v = 0, x = f.length, y = q.length, u = {
+var f = this, k = f.api, p = f.map, q = f.batches || [], m = f.locale, A = 0, x = 0, r = 0, w = f.length, z = q.length, u = {
 done: [],
 each: [],
 prog: []
@@ -4390,7 +4405,7 @@ return this;
 stat: function() {
 return {
 todo: function() {
-return Math.max(x - A, 0);
+return Math.max(w - A, 0);
 },
 did: function() {
 return A;
@@ -4400,7 +4415,7 @@ return A;
 };
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$40", {
 zh: [ "zh", "zh-CN", "zh-TW" ],
 he: [ "iw" ],
@@ -4451,7 +4466,7 @@ e([]);
 return new p();
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$41", {
 nn: [ "no" ],
 pt: [ "pt", "pt-pt" ],
@@ -4511,7 +4526,7 @@ e([]);
 return new p();
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$42", {
 pt: [ "pt-PT", "pt-BR" ]
 });
@@ -4562,7 +4577,7 @@ e([]);
 return new p();
 };
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$43", {
 zh: [ "zh", "zh-CN", "zh-TW" ],
 pt: [ "pt", "pt-PT", "pt-BR" ]
@@ -4615,13 +4630,13 @@ e([]);
 return new p();
 };
 return e;
-}({}, y, x));
-q.register("$18", function(e, c, x) {
+}({}, z, w));
+q.register("$18", function(e, c, w) {
 function p() {
 this.inf = {};
 }
 function h() {
-var a = x.createElement("p"), c = /&(#\d+|#x[0-9a-f]|[a-z]+);/i, e = /<[a-z]+\s/i, h, f;
+var a = w.createElement("p"), c = /&(#\d+|#x[0-9a-f]|[a-z]+);/i, e = /<[a-z]+\s/i, h, f;
 return {
 sniff: function(k) {
 if (k === h) return f;
@@ -4688,12 +4703,12 @@ var c = this;
 c.state = null;
 a.cache = !0;
 a.dataType = "json";
-a.error = function(a, b, e) {
+a.error = function(a, b, f) {
 try {
-var h = a.responseText, k = h && q.require("$5", "json.js").parse(h);
-e = k && c.parseError(k) || e;
-} catch (l) {}
-c.stderr(e || c.httpError(a));
+var e = a.responseText, h = e && q.require("$5", "json.js").parse(e);
+f = h && c.parseError(h) || f;
+} catch (k) {}
+c.stderr(f || c.httpError(a));
 };
 return c.abortable(k.ajax(a));
 };
@@ -4716,7 +4731,7 @@ return q.require("$30", "job.js").create(this);
 };
 l.batch = function(a, d, e, h) {
 function f(c) {
-for (var e = a.length, f = -1; ++f < e && !1 !== h(a[f], c[f], d); ) ;
+for (var f = a.length, e = -1; ++e < f && !1 !== h(a[e], c[e], d); ) ;
 }
 var l = c.loco.ajax;
 e = {
@@ -4749,7 +4764,7 @@ for (f = 0; f < l; f++) k = a[f], k.translate(c, e, h);
 };
 var a;
 return e;
-}({}, y, x));
+}({}, z, w));
 q.register("$19", function(e, c, q) {
 e.init = function(e) {
 function h() {
@@ -4765,7 +4780,7 @@ this.checked && k("#ssh-keys").toggleClass("hidden", "ssh" !== k(this).val());
 return H;
 }
 function l() {
-Q && (a(k(r)), Q = !1);
+Q && (a(k(x)), Q = !1);
 if (G && J) {
 var b = J, c = k(P);
 c.find("span.loco-msg").text(b);
@@ -4780,7 +4795,7 @@ k(this).addClass("jshide");
 function b() {
 if (G) return H && H.dialog("close"), l(), k(e).find('button[type="submit"]').attr("disabled", !1), 
 k(c).triggerHandler("resize"), A && A(!0), !0;
-w && H ? (Q || (k(r).removeClass("jshide").hide().fadeIn(500), Q = !0), K && (a(k(P)), 
+v && H ? (Q || (k(x).removeClass("jshide").hide().fadeIn(500), Q = !0), K && (a(k(P)), 
 K = !1)) : l();
 k(e).find('input[type="submit"]').attr("disabled", !0);
 A && A(!1);
@@ -4794,7 +4809,7 @@ function g(a) {
 a.preventDefault();
 a = k(a.target).serializeArray();
 s(a);
-y = !0;
+z = !0;
 return !1;
 }
 function n(a) {
@@ -4807,13 +4822,13 @@ a.preventDefault();
 H.dialog("open").find('input[name="connection_type"]').change();
 return !1;
 }
-function z(a) {
+function y(a) {
 G = a.authed;
-v = a.method;
-k(r).find("span.loco-msg").text(a.message || "Something went wrong.");
+r = a.method;
+k(x).find("span.loco-msg").text(a.message || "Something went wrong.");
 J = a.warning || "";
 a.notice && u.notices.info(a.notice);
-if (G) "direct" !== v && (m = a.creds, d(e), y && a.success && u.notices.success(a.success)), 
+if (G) "direct" !== r && (m = a.creds, d(e), z && a.success && u.notices.success(a.success)), 
 b(); else if (a.reason) u.notices.info(a.reason); else if (a = a.prompt) {
 var f = h();
 f.html(a).find("form").on("submit", g);
@@ -4824,18 +4839,18 @@ b();
 k(c).triggerHandler("resize");
 } else u.notices.error("Server didn't return credentials, nor a prompt for credentials");
 }
-function x() {
+function w() {
 b();
 }
 function s(a) {
-y = !1;
-u.ajax.setNonce("fsConnect", D).post("fsConnect", a, z, x);
+z = !1;
+u.ajax.setNonce("fsConnect", D).post("fsConnect", a, y, w);
 return a;
 }
-var m, A, r = e, v = null, y = !1, G = !1, u = c.loco, w = e.path.value, E = e.auth.value, D = e["loco-nonce"].value, I = k(r).find("button.button-primary"), P = q.getElementById(r.id + "-warn"), Q = !1, K = !1, J = "", H;
+var m, A, x = e, r = null, z = !1, G = !1, u = c.loco, v = e.path.value, E = e.auth.value, D = e["loco-nonce"].value, I = k(x).find("button.button-primary"), P = q.getElementById(x.id + "-warn"), Q = !1, K = !1, J = "", H;
 u.notices.convert(P).stick();
-e.connection_type ? (m = {}, m.connection_type = e.connection_type.value, G = !0) : w && E && s({
-path: w,
+e.connection_type ? (m = {}, m.connection_type = e.connection_type.value, G = !0) : v && E && s({
+path: v,
 auth: E
 });
 b();
@@ -4854,7 +4869,7 @@ d(a);
 return this;
 },
 connect: function() {
-w = e.path.value;
+v = e.path.value;
 E = e.auth.value;
 s(k(e).serializeArray());
 return this;
@@ -4870,8 +4885,8 @@ return G;
 };
 };
 return e;
-}({}, y, x));
-q.register("$20", function(e, c, x) {
+}({}, z, w));
+q.register("$20", function(e, c, w) {
 function p(c, e, k, f) {
 e = "n" === k ? l(e) : a(e);
 f && (e = b(e));
@@ -4902,15 +4917,15 @@ return -1 * a(b, c);
 e.init = function(a) {
 function b(a) {
 var c = -1, d = a.length;
-for (k("tr", r).remove(); ++c < d; ) r.appendChild(a[c].$);
+for (k("tr", x).remove(); ++c < d; ) x.appendChild(a[c].$);
 }
 function c(a) {
-s = a ? y.find(a, e) : e.slice(0);
-x && (a = h[x], s = p(s, x, a.type, a.desc));
+s = a ? z.find(a, e) : e.slice(0);
+w && (a = h[w], s = p(s, w, a.type, a.desc));
 b(s);
 }
-var e = [], h = [], l = 0, s, m, x, r = a.getElementsByTagName("tbody")[0], v = a.getElementsByTagName("thead")[0], y = q.require("$10", "fulltext.js").init();
-v && r && (k("th", v).each(function(a, c) {
+var e = [], h = [], l = 0, s, m, w, x = a.getElementsByTagName("tbody")[0], r = a.getElementsByTagName("thead")[0], z = q.require("$10", "fulltext.js").init();
+r && x && (k("th", r).each(function(a, c) {
 var d = c.getAttribute("data-sort-type");
 d && (a = l, k(c).addClass("loco-sort").on("click", function(c) {
 c.preventDefault();
@@ -4920,14 +4935,14 @@ s = p(s || e.slice(0), c, l, n);
 b(s);
 m && m.removeClass("loco-desc loco-asc");
 m = k(d.$).addClass(n ? "loco-desc" : "loco-asc").removeClass(n ? "loco-asc" : "loco-desc");
-x = c;
+w = c;
 return !1;
 }), h[l] = {
 $: c,
 type: d
 });
 c.hasAttribute("colspan") ? l += Number(c.getAttribute("colspan")) : l++;
-}), k("tr", r).each(function(a, b) {
+}), k("tr", x).each(function(a, b) {
 var c, d, g, k = [], l = {
 _: a,
 $: b
@@ -4943,21 +4958,21 @@ g = Number(g);
 l[d] = g;
 }
 e[a] = l;
-y.index(a, k);
+z.index(a, k);
 }), a = k('form.loco-filter input[type="text"]', a.parentNode), a.length && (a = a[0], 
-v = k(a.form), 1 < e.length ? q.require("$11", "LocoTextListener.js").listen(a, c) : v.hide(), 
-v.on("submit", function(a) {
+r = k(a.form), 1 < e.length ? q.require("$11", "LocoTextListener.js").listen(a, c) : r.hide(), 
+r.on("submit", function(a) {
 a.preventDefault();
 return !1;
 })));
 };
 return e;
-}({}, y, x));
-var D = y.loco || {}, I = D.conf || {
+}({}, z, w));
+var D = z.loco || {}, I = D.conf || {
 $v: [ 0, 0 ]
 };
-y = q.require("$1", "t.js").init();
-x = I.wplang;
+z = q.require("$1", "t.js").init();
+w = I.wplang;
 D.version = function(e) {
 return I.$v[e || 0];
 };
@@ -4965,12 +4980,12 @@ q.require("$2", "html.js");
 q.require("$3", "number.js");
 q.require("$4", "array.js");
 q.require("$5", "json.js");
-D.l10n = y;
-y.load(I.wpl10n);
-x && y.pluraleq(x.pluraleq);
+D.l10n = z;
+z.load(I.wpl10n);
+w && z.pluraleq(w.pluraleq);
 D.string = q.require("$6", "string.js");
-D.notices = q.require("$7", "notices.js").init(y);
-D.ajax = q.require("$8", "ajax.js").init(I).localise(y);
+D.notices = q.require("$7", "notices.js").init(z);
+D.ajax = q.require("$8", "ajax.js").init(I).localise(z);
 D.locale = q.require("$9", "wplocale.js");
 D.fulltext = q.require("$10", "fulltext.js");
 D.watchtext = q.require("$11", "LocoTextListener.js").listen;
