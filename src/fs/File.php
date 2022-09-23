@@ -580,7 +580,7 @@ class Loco_fs_File {
 
     /**
      * Copy this object with an alternative file extension
-     * @param string new extension
+     * @param string $ext new extension
      * @return self
      */
     public function cloneExtension( $ext ){
@@ -591,7 +591,7 @@ class Loco_fs_File {
 
     /**
      * Copy this object with an alternative name under the same directory
-     * @param string new name
+     * @param string $name new name
      * @return self
      */
     public function cloneBasename( $name ){
@@ -604,7 +604,7 @@ class Loco_fs_File {
 
     /**
      * Copy this object as a WordPress script translation file
-     * @param string relative path to .js file presumed to exist
+     * @param string $ref relative path to .js file presumed to exist
      * @return self
      */
     public function cloneJson( $ref ){
@@ -634,7 +634,7 @@ class Loco_fs_File {
 
 
     /**
-     * @param string file contents
+     * @param string $data file contents
      * @return int number of bytes written to file
      */
     public function putContents( $data ){

@@ -101,6 +101,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.3 =
+* Fixed bug that author theme files have no domain prefix
 * Fixed errors in bundle debugger
 * Added validation for whitespace errors
 * Bumped WordPress version to 6.0.2

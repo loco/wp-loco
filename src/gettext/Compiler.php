@@ -112,8 +112,8 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * @param Loco_package_Project Translation set, required to resolve script paths
-     * @param Loco_gettext_Data PO data to export
+     * @param Loco_package_Project $project Translation set, required to resolve script paths
+     * @param Loco_gettext_Data $po PO data to export
      * @return Loco_fs_FileList All json files created
      */
     public function writeJson( Loco_package_Project $project, Loco_gettext_Data $po ){
@@ -182,19 +182,30 @@ class Loco_gettext_Compiler {
                     $buffer[$use] = $fragment;
                 }
             }
-            // write all buffered fragments to their computed JSON paths
-            foreach( $buffer as $ref => $fragment ) {
-                $jsonfile = $pofile->cloneJson($ref);
-                try {
-                    $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
-                    $jsons->add($jsonfile);
+            if( $buffer ){
+                // theme author po files have no text domain prefix, but JSON files must do.
+                if( $project->getBundle()->isTheme() && $project->getSlug() === $domain ){
+                    $prefix = $domain.'-';
+                    $snip = strlen($prefix);
+                    $name = $pofile->basename();
+                    if( $prefix !== substr($name,0,$snip) ){
+                        $pofile = $pofile->cloneBasename($prefix.$name);
+                    }
                 }
-                catch( Loco_error_WriteException $e ){
-                    Loco_error_AdminNotices::debug( $e->getMessage() );
-                    Loco_error_AdminNotices::warn( sprintf(__('JSON compilation failed for %s','loco-translate'),$ref));
+                // write all buffered fragments to their computed JSON paths
+                foreach( $buffer as $ref => $fragment ) {
+                    $jsonfile = $pofile->cloneJson($ref);
+                    try {
+                        $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
+                        $jsons->add($jsonfile);
+                    }
+                    catch( Loco_error_WriteException $e ){
+                        Loco_error_AdminNotices::debug( $e->getMessage() );
+                        Loco_error_AdminNotices::warn( sprintf(__('JSON compilation failed for %s','loco-translate'),$ref));
+                    }
                 }
+                $buffer = null;
             }
-            $buffer = null;
         }
         // clean up redundant JSONs including if no JSONs were compiled
         if( Loco_data_Settings::get()->jed_clean ){
