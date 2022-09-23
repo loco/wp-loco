@@ -12,7 +12,7 @@ $this->extend('../layout');
     </p>
     
     <?php
-    /* @var $notice Loco_mvc_ViewParams */
+    /* @var $notices Loco_mvc_ViewParams[] */
     foreach( $notices as $notice ):?> 
     <div class="<?php $notice->e('style')?>">
         <p>
@@ -21,7 +21,7 @@ $this->extend('../layout');
         </p>
     </div><?php
     endforeach;
-    
+
     if( $params->has('xml') ):?> 
     <div class="notice inline notice-generic">
         <h4>Current configuration as XML:</h4>

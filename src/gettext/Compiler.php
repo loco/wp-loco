@@ -259,7 +259,7 @@ class Loco_gettext_Compiler {
 
     /**
      * @param Loco_fs_File $file
-     * @param string Serialized JSON to write to given file
+     * @param string $data Serialized JSON to write to given file
      * @return int bytes written
      */
     public function writeFile( Loco_fs_File $file, $data ){

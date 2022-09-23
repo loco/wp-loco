@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.6.2\n"
+"Project-Id-Version: Loco Translate 2.6.3-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-05-24 10:44+0000\n"
+"POT-Creation-Date: 2022-09-23 15:52+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.2; wp-6.0-RC4-53443\n"
+"X-Loco-Version: 2.6.3-dev; wp-6.0.2\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -38,7 +38,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
-#: src/package/Debugger.php:187
+#: src/package/Debugger.php:177
 #, php-format
 msgid "%1$s string extracted from source code for \"%2$s\""
 msgid_plural "%1$s strings extracted from source code for \"%2$s\""
@@ -442,7 +442,7 @@ msgstr ""
 msgid "Configure %s"
 msgstr ""
 
-#: src/package/Debugger.php:205
+#: src/package/Debugger.php:195
 #, php-format
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
@@ -738,7 +738,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:102 src/error/Exception.php:164
+#: src/js/Strings.php:102 src/error/Exception.php:163
 msgid "Error"
 msgstr ""
 
@@ -1156,7 +1156,7 @@ msgstr ""
 msgid "Loco Translate is powered by"
 msgstr ""
 
-#: loco.php:141
+#: loco.php:137
 #, php-format
 msgid ""
 "Loco Translate requires the \"%s\" PHP extension. Ask your hosting provider "
@@ -1946,6 +1946,22 @@ msgstr ""
 
 #. Description of the plugin
 msgid "Translate themes and plugins directly in WordPress"
+msgstr ""
+
+#: src/js/Strings.php:182
+msgid "Translation has incorrect space at the beginning"
+msgstr ""
+
+#: src/js/Strings.php:188
+msgid "Translation has incorrect space at the end"
+msgstr ""
+
+#: src/js/Strings.php:185
+msgid "Translation has unwanted space at the beginning"
+msgstr ""
+
+#: src/js/Strings.php:191
+msgid "Translation has unwanted space at the end"
 msgstr ""
 
 #: src/js/Strings.php:58

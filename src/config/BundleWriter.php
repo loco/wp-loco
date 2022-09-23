@@ -69,7 +69,8 @@ class Loco_config_BundleWriter implements JsonSerializable {
         $systemTargets = $bundle->getSystemTargets();
         
         $dom = $model->getDom();
-        $root = $dom->appendChild( $dom->createElement('bundle') );
+        $root = $dom->createElement('bundle') ;
+        $dom->appendChild($root);
         $root->setAttribute( 'name', $bundle->getName() );
 
         /*/ additional headers for information only (not read back in)
@@ -78,11 +79,13 @@ class Loco_config_BundleWriter implements JsonSerializable {
         }*/
         
         foreach( $bundle->exportGrouped() as $domainName => $projects ){
-            $domainElement = $root->appendChild( $dom->createElement('domain') );
+            $domainElement = $dom->createElement('domain');
+            $root->appendChild( $domainElement );
             $domainElement->setAttribute( 'name', $domainName );
             /* @var $proj Loco_package_Project */
             foreach( $projects as $proj ){
-                $projElement = $domainElement->appendChild( $dom->createElement('project') );
+                $projElement = $dom->createElement('project');
+                $domainElement->appendChild($projElement);
                 // add project name even if it's the same as the bundle name
                 // when loading however, missing name will default to bundle name
                 $value = $proj->getName() or $value = $bundle->getName();
@@ -93,7 +96,7 @@ class Loco_config_BundleWriter implements JsonSerializable {
                 // <source>
                 // zero or more source file locations
                 $sourcesElement = $dom->createElement('source');
-                /* @var $file Loco_fs_Directory */
+                /* @var Loco_fs_File $file */
                 foreach( $proj->getConfiguredSources() as $file ){
                     $sourcesElement->appendChild( $model->createFileElement($file) );
                 }
@@ -131,7 +134,8 @@ class Loco_config_BundleWriter implements JsonSerializable {
                 // <template>
                 // add single POT template location
                 if( $file = $proj->getPot() ){
-                    $templateElement = $projElement->appendChild( $dom->createElement('template') );
+                    $templateElement = $dom->createElement('template');
+                    $projElement->appendChild($templateElement);
                     $templateElement->appendChild( $model->createFileElement($file) );
                     // template may be protected from end-user tampering
                     if( $proj->isPotLocked() ){

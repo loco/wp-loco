@@ -29,7 +29,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     
     /**
-     * @param Loco_error_Exception
+     * @param Loco_error_Exception $error
      * @return Loco_error_Exception
      */
     public static function add( Loco_error_Exception $error ){
@@ -62,7 +62,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a success message
-     * @param string
+     * @param string $message
      * @return Loco_error_Exception
      */
     public static function success( $message ){
@@ -73,7 +73,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a failure message
-     * @param string
+     * @param string $message
      * @return Loco_error_Exception
      */
     public static function err( $message ){
@@ -84,7 +84,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a warning message
-     * @param string
+     * @param string $message
      * @return Loco_error_Exception
      */
     public static function warn( $message ){
@@ -95,7 +95,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a generic info message
-     * @param string
+     * @param string $message
      * @return Loco_error_Exception
      */
     public static function info( $message ){
@@ -106,7 +106,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a debug notice, if debug is enabled
-     * @param string
+     * @param string $message
      * @return Loco_error_Debug
      */
     public static function debug( $message ){

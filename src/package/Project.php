@@ -421,8 +421,8 @@ class Loco_package_Project {
         $exts = $this->sexts;
         if( is_null($exts) ){
             $conf = Loco_data_Settings::get();
-            $exts = (array) $conf->php_alias;
-            $exts = array_merge( $exts, (array) $conf->jsx_alias );
+            $exts = $conf->php_alias;
+            $exts = array_merge( $exts, $conf->jsx_alias );
         }
         // always ensure we have at least PHP files scanned
         return array_merge( $exts, ['php'] );
@@ -430,9 +430,9 @@ class Loco_package_Project {
 
 
     /**
-     * Utility excludes current exclude paths from target finder
+     * Utility excludes current exclude paths from passed target finder
      * @param Loco_fs_FileFinder
-     * @return Loco_fs_FileFinder
+     * @return void
      */
     private function excludeSources( Loco_fs_FileFinder $finder ){
         foreach( $this->xspaths as $file ){
@@ -445,7 +445,6 @@ class Loco_package_Project {
                 $finder->exclude( $path );
             }
         }
-        return $finder;
     }
 
 
@@ -691,21 +690,20 @@ class Loco_package_Project {
     public function findSourceFiles(){
         $source = $this->getSourceFinder();
         // augment file list from directories unless already done so
-        if( ! $source->isCached() ){
-            $crawled = $source->exportGroups();
-            foreach( $crawled as $ext => $files ){
-                /* @var Loco_fs_File $file */
-                foreach( $files as $file ){
-                    $name = $file->filename();
-                    // skip "{name}.min.{ext}" but only if "{name}.{ext}" exists
-                    if( '.min' === substr($name,-4) && file_exists( $file->dirname().'/'.substr($name,0,-4).'.'.$ext ) ){
-                        continue;
-                    }
-                    $this->sfiles->add($file);
+        $list = $this->sfiles->copy();
+        $crawled = $source->exportGroups();
+        foreach( $crawled as $ext => $files ){
+            /* @var Loco_fs_File $file */
+            foreach( $files as $file ){
+                $name = $file->filename();
+                // skip "{name}.min.{ext}" but only if "{name}.{ext}" exists
+                if( '.min' === substr($name,-4) && file_exists( $file->dirname().'/'.substr($name,0,-4).'.'.$ext ) ){
+                    continue;
                 }
+                $list->add($file);
             }
         }
-        return $this->sfiles;
+        return $list;
     }
 
 

@@ -4,10 +4,10 @@ Plugin Name: Loco Translate
 Plugin URI: https://wordpress.org/plugins/loco-translate/
 Description: Translate themes and plugins directly in WordPress
 Author: Tim Whitlock
-Version: 2.6.2
+Version: 2.6.3-dev
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.0.0
+Tested up to: 6.0.1
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/
@@ -33,7 +33,7 @@ function loco_plugin_file(){
  * @return string
  */
 function loco_plugin_version(){
-    return '2.6.2';
+    return '2.6.3-dev';
 }
 
 
@@ -77,23 +77,19 @@ function loco_doing_ajax(){
 
 /**
  * Evaluate a constant by name
- * @param string
+ * @param string $name
  * @return mixed
  */
-function loco_constant( $name ){
-    $value = defined($name) ? constant($name) : null;
-    // constant values will only be modified in tests
-    if( defined('LOCO_TEST') && LOCO_TEST ){
-        $value = apply_filters('loco_constant', $value, $name );
-        $value = apply_filters('loco_constant_'.$name, $value );
+if( ! function_exists('loco_constant') ) {
+    function loco_constant( $name ) {
+        return defined($name) ? constant($name) : null;
     }
-    return $value;
 }
 
 
 /**
  * Runtime inclusion of any file under plugin root
- * @param string PHP file path relative to __DIR__
+ * @param string $relpath PHP file path relative to __DIR__
  * @return mixed return value from included file
  */
 function loco_include( $relpath ){
@@ -118,7 +114,7 @@ function loco_include( $relpath ){
 
 /**
  * Require dependant library once only
- * @param string PHP file path relative to ./lib
+ * @param string $path PHP file path relative to ./lib
  * @return void
  */
 function loco_require_lib( $path ){
@@ -128,7 +124,7 @@ function loco_require_lib( $path ){
 
 /**
  * Check PHP extension required by Loco and load polyfill if needed
- * @param string
+ * @param string $name
  * @return bool
  */
 function loco_check_extension( $name ) {
@@ -153,7 +149,7 @@ function loco_check_extension( $name ) {
  * Also does autoload for polyfills under "src/compat" if $name < 20 chars
  * 
  * @internal 
- * @param string
+ * @param $name string
  * @return void
  */
 function loco_autoload( $name ){
@@ -171,7 +167,7 @@ function loco_autoload( $name ){
 
 /**
  * class_exists wrapper that fails silently.
- * @param string class name
+ * @param string $class Class name
  * @return bool
  */
 function loco_class_exists( $class ){
@@ -210,8 +206,8 @@ try {
 
 }
 catch( Exception $e ){ // PHP5+
-    trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ),E_USER_NOTICE);
+    trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ) );
 }
 catch( Throwable $e ){ // PHP7+
-    trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ),E_USER_NOTICE);
+    trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ) );
 }

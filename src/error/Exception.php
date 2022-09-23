@@ -86,7 +86,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
 
     /**
-     * @param int number of levels up from callee
+     * @param int $depth number of levels up from callee
      * @return Loco_error_Exception
      */
     public function setCallee( $depth = 0 ){
@@ -101,15 +101,14 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
     /**
      * Write this error to file regardless of log level
-     * @param Loco_error_Exception
      * @return void
      */
     public function log(){
         $file = new Loco_fs_File( $this->getRealFile() );
         $path = $file->getRelativePath( loco_plugin_root() );
         $text = sprintf('[Loco.%s] "%s" in %s:%u', $this->getType(), $this->getMessage(), $path, $this->getRealLine() );
-        // separate error log in CWD for tests
-        if( defined('LOCO_TEST') && LOCO_TEST ){
+        // separate error log for cli tests
+        if( 'cli' === PHP_SAPI && defined('LOCO_TEST_DATA_ROOT') ){
             error_log( '['.date('c').'] '.$text."\n", 3, 'debug.log' );
         }
         // Else write to default PHP log, but note that WordPress may have set this to wp-content/debug.log.
@@ -184,8 +183,8 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
     /**
      * Push navigation links into error. Use for help pages etc..
-     * @param string
-     * @param string
+     * @param string $href
+     * @param string $text
      * @return Loco_error_Exception
      */
     public function addLink( $href, $text ){
@@ -204,7 +203,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
 
     /**
      * Convert generic exception to one of ours
-     * @param Exception original error
+     * @param Exception $e original error
      * @return Loco_error_Exception
      */
     public static function convert( Exception $e ){
