@@ -4,12 +4,25 @@
  */
 class Loco_config_ArrayModel extends Loco_config_Model {
 
+    /**
+     * @var LocoConfigDocument
+     */
+    private $dom;
+
 
     /**
      * {@inheritdoc}
      */
     public function createDom(){
-        return new LocoConfigDocument( ['#document', [], [] ] );
+        $this->dom = new LocoConfigDocument( ['#document', [], [] ] );
+    }
+
+
+    /**
+     * @return LocoConfigDocument
+     */
+    public function getDom(){
+        return $this->dom;
     }
     
     
@@ -45,7 +58,7 @@ class Loco_config_ArrayModel extends Loco_config_Model {
         $match = new LocoConfigNodeList;
         $query = explode('/', $query );
         // absolute path always starts in document
-        if( $absolute = empty($query[0]) ){
+        if( empty($query[0]) ){
             $match->append( $this->getDom() );
         }
         // else start with base for relative path
@@ -95,7 +108,7 @@ abstract class LocoConfigNode implements IteratorAggregate {
         
     /**
      * Raw data of internal format
-     * @var array 
+     * @var array|string
      */ 
     protected $data;
     
@@ -110,15 +123,24 @@ abstract class LocoConfigNode implements IteratorAggregate {
      */
     abstract public function export();
 
+    /**
+     * @param array|string $data
+     */
     final public function __construct( $data ){
         $this->data = $data;
     }
 
+    /**
+     * @internal
+     */
     protected function get_nodeName(){
         return $this->data[0];
     }
-    
 
+
+    /**
+     * @internal
+     */
     protected function get_childNodes(){
         return $this->getIterator();
     }
@@ -129,6 +151,7 @@ abstract class LocoConfigNode implements IteratorAggregate {
         if( is_callable($method) ){
             return call_user_func( $method );
         }
+        return null;
     }
 
     
@@ -220,13 +243,13 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
     }
 
     #[ReturnTypeWillChange]
-    public function offsetExists( $i ){
-        return $i >= 0 && $i < $this->n;
+    public function offsetExists( $offset ){
+        return $offset >= 0 && $offset < $this->n;
     }
 
     #[ReturnTypeWillChange]
-    public function offsetGet( $i ){
-        $node = $this->nodes[$i];
+    public function offsetGet( $offset ){
+        $node = $this->nodes[$offset];
         if( ! $node instanceof LocoConfigNode ){
             if( is_array($node) ){
                 $node = new LocoConfigElement( $node );
@@ -234,7 +257,7 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
             else {
                 $node = new LocoConfigText( $node );
             }
-            $this->nodes[$i] = $node;
+            $this->nodes[$offset] = $node;
         }
         return $node;
     }
@@ -243,16 +266,16 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
      * @codeCoverageIgnore
      */
     #[ReturnTypeWillChange]
-    public function offsetSet( $i, $value ){
-        throw new Exception('Use append');
+    public function offsetSet( $offset, $value ){
+        throw new LogicException('Use append');
     }
 
     /**
      * @codeCoverageIgnore
      */
     #[ReturnTypeWillChange]
-    public function offsetUnset( $i ){
-        throw new Exception('Read only');
+    public function offsetUnset( $offset ){
+        throw new LogicException('Read only');
     }
     
     
@@ -284,6 +307,7 @@ class LocoConfigNodeList implements Iterator, Countable, ArrayAccess {
 
 /**
  * Document
+ * @property-read LocoConfigElement $documentElement
  */
 class LocoConfigDocument extends LocoConfigNode {
 
@@ -294,7 +318,7 @@ class LocoConfigDocument extends LocoConfigNode {
         $this->data = $data;
         $this->children = null;
     }
-    
+
 
     /**
      * @return LocoConfigElement
@@ -329,9 +353,8 @@ class LocoConfigDocument extends LocoConfigNode {
      * Override to keep single element root 
      */
     public function export(){
-        if( $root = $this->get_documentElement() ){
-            return $root->export();
-        }
+        $root = $this->get_documentElement();
+        return $root ? $root->export() : null;
     }
     
 }
@@ -379,7 +402,9 @@ class LocoConfigElement extends LocoConfigNode {
 
 
 /**
- * Text
+ * Text node
+ * @property-read string $nodeValue
+ * @property-read string $textContent
  */
 class LocoConfigText extends LocoConfigNode {
 
@@ -399,10 +424,12 @@ class LocoConfigText extends LocoConfigNode {
         return (string) $this->data;
     }
     
+    /** @internal */
     public function get_nodeValue(){
         return (string) $this->data;
     }
-    
+
+    /** @internal */
     public function get_textContent(){
         return (string) $this->data;
     }

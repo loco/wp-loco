@@ -29,7 +29,7 @@ class Loco_gettext_Compiler {
 
     /**
      * Construct with primary file (PO) being saved
-     * @param Loco_fs_LocaleFile Localised PO file which may or may not exist yet
+     * @param Loco_fs_LocaleFile $pofile Localised PO file which may or may not exist yet
      */
     public function __construct( Loco_fs_LocaleFile $pofile ){
         $this->fs = new Loco_api_WordPressFileSystem;
@@ -44,7 +44,7 @@ class Loco_gettext_Compiler {
 
     /**
      * Set overwrite mode
-     * @param bool whether to overwrite existing files during compilation
+     * @param bool $overwrite whether to overwrite existing files during compilation
      * @return self
      */
     public function overwrite( $overwrite ){
@@ -54,8 +54,6 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * @param Loco_gettext_Data
-     * @param Loco_package_Project|null
      * @return self
      */
     public function writeAll( Loco_gettext_Data $po, Loco_package_Project $project = null ){
@@ -69,7 +67,6 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * @param Loco_gettext_Data PO data
      * @return int bytes written to PO file
      * @throws Loco_error_WriteException
      */
@@ -92,7 +89,6 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * @param Loco_gettext_Data PO data
      * @return int bytes written to MO file
      */
     public function writeMo( Loco_gettext_Data $po ){
@@ -183,18 +179,9 @@ class Loco_gettext_Compiler {
                 }
             }
             if( $buffer ){
-                // theme author po files have no text domain prefix, but JSON files must do.
-                if( $project->getBundle()->isTheme() && $project->getSlug() === $domain ){
-                    $prefix = $domain.'-';
-                    $snip = strlen($prefix);
-                    $name = $pofile->basename();
-                    if( $prefix !== substr($name,0,$snip) ){
-                        $pofile = $pofile->cloneBasename($prefix.$name);
-                    }
-                }
                 // write all buffered fragments to their computed JSON paths
                 foreach( $buffer as $ref => $fragment ) {
-                    $jsonfile = $pofile->cloneJson($ref);
+                    $jsonfile = $this->cloneJson($pofile,$ref,$domain);
                     try {
                         $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
                         $jsons->add($jsonfile);
@@ -209,7 +196,7 @@ class Loco_gettext_Compiler {
         }
         // clean up redundant JSONs including if no JSONs were compiled
         if( Loco_data_Settings::get()->jed_clean ){
-            foreach( $this->files->getJsons() as $path ){
+            foreach( $this->files->getJsons($domain) as $path ){
                 $jsonfile = new Loco_fs_File($path);
                 if( ! $jsons->has($jsonfile) ){
                     try {
@@ -224,6 +211,27 @@ class Loco_gettext_Compiler {
         $this->progress['numjson'] = $jsons->count();
         return $jsons;
     }
+
+
+    /**
+     * Clone localised file as a WordPress script translation file
+     * @return Loco_fs_File
+     */
+    private function cloneJson( Loco_fs_File $pofile, $ref, $domain ){
+        $name = $pofile->filename();
+        // Theme author PO files have no text domain, but JSON files must always be prefixed
+        if( $domain && 'default' !== $domain && preg_match('/^[a-z]{2,3}(?:_[a-z\\d_]+)?$/i',$name) ){
+            $name = $domain.'-'.$name;
+        }
+        // Hashable reference is always finally unminified, as per load_script_textdomain()
+        if( is_string($ref) && '' !== $ref ){
+            if( substr($ref,-7) === '.min.js' ) {
+                $ref = substr($ref,0,-7).'.js';
+            }
+            $name .= '-'.md5($ref);
+        }
+        return $pofile->cloneBasename( $name.'.json' );
+    } 
 
 
     /**

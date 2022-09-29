@@ -7,7 +7,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
 
     /**
      * Expand single path to all files that will be deleted
-     * @param Loco_fs_File primary file being deleted, probably the PO
+     * @param Loco_fs_File $file primary file being deleted, probably the PO
      * @return array
      */
     private function expandFiles( Loco_fs_File $file ){
@@ -18,6 +18,7 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
             $ext = $file->extension();
             throw new Loco_error_Exception( sprintf('Refusing to delete a %s file', strtoupper($ext) ) );
         }
+        $siblings->setDomain( $this->getDomain() );
         return $siblings->expand();
     }
 

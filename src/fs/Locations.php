@@ -119,7 +119,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param array
+     * Create instance from list of locations
      */
     public function __construct( array $paths ){
         parent::__construct( [] );
@@ -130,7 +130,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param string normalized absolute path
+     * @param string $path normalized absolute path
      * @return Loco_fs_Locations
      */ 
     public function add( $path ){
@@ -144,7 +144,7 @@ class Loco_fs_Locations extends ArrayObject {
 
     /**
      * Check if a given path begins with any of the registered ones
-     * @param string absolute path
+     * @param string $path absolute path
      * @return bool whether path matched
      */    
     public function check( $path ){
@@ -162,7 +162,7 @@ class Loco_fs_Locations extends ArrayObject {
     /**
      * Match location and return the relative subpath.
      * Note that exact match is returned as "." indicating self
-     * @param string
+     * @param string $path
      * @return string | null
      */
     public function rel( $path ){
@@ -181,7 +181,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param string
+     * @param string $path
      * @return string[]
      */
     private function expand( $path ){

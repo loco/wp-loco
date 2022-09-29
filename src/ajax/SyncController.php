@@ -77,10 +77,10 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
             if( 'pot' !== $potfile->extension() ){
                 $translate = $opts->mergeMsgstr();
             }
-            // related JSONs will only wor if source is a localized PO.
+            // related JSONs will only sync if source is a localized PO.
             if( $opts->mergeJson() ){
                 $siblings = new Loco_fs_Siblings($potfile);
-                $syncjsons = $siblings->getJsons();
+                $syncjsons = $siblings->getJsons( $project->getDomain()->getName() );
             }
         }
         // else extract POT from source code

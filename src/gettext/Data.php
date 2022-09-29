@@ -9,7 +9,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Normalize file extension to internal type
-     * @param Loco_fs_File
      * @return string Normalized file extension "po", "pot" or "mo"
      * @throws Loco_error_Exception
      */
@@ -25,7 +24,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * @param Loco_fs_File
      * @return Loco_gettext_Data
      */
     public static function load( Loco_fs_File $file ){
@@ -49,7 +47,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Like load but just pulls header, saving a full parse. PO only
-     * @param Loco_fs_File
      * @return LocoPoHeaders
      * @throws InvalidArgumentException
      */
@@ -64,7 +61,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * @param string assumed PO source
+     * @param string $src PO source
      * @return Loco_gettext_Data
      */
     public static function fromSource( $src ){
@@ -74,7 +71,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * @param string assumed MO bytes
+     * @param string $bin MO bytes
      * @return Loco_gettext_Data
      */
     public static function fromBinary( $bin ){
@@ -95,7 +92,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * Ensure PO source is UTF-8. 
      * Required if we want PO code when we're not parsing it. e.g. source view
-     * @param string
+     * @param string $src PO source
      * @return string
      */
     public static function ensureUtf8( $src ){
@@ -140,7 +137,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Get final UTF-8 string for writing to file
-     * @param bool whether to sort output, generally only for extracting strings
+     * @param bool $sort Whether to sort output, generally only for extracting strings
      * @return string
      */
     public function msgcat( $sort = false ){
@@ -158,8 +155,8 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Compile JED flavour JSON
-     * @param string text domain for JED metadata
-     * @param string source file that uses included strings
+     * @param string $domain text domain for JED metadata
+     * @param string $source reference to file that uses included strings
      * @return string
      */
     public function msgjed( $domain = 'messages', $source = '' ){
@@ -316,9 +313,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * @param string[] Required headers
-     * @param string[] Default headers
-     * @param string[] Custom headers
      * @return LocoPoHeaders
      */
     private function applyHeaders( array $required = [], array $defaults = [], array $custom = [] ){
@@ -344,9 +338,9 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * Remap proprietary base path when PO file is moving to another location.
      * 
-     * @param Loco_fs_File the file that was originally extracted to (POT)
-     * @param Loco_fs_File the file that must now target references relative to itself
-     * @param string vendor name used in header keys
+     * @param Loco_fs_File $origin the file that was originally extracted to (POT)
+     * @param Loco_fs_File $target the file that must now target references relative to itself
+     * @param string $vendor name used in header keys
      * @return bool whether base header was altered
      */
     public function rebaseHeader( Loco_fs_File $origin, Loco_fs_File $target, $vendor ){
@@ -368,7 +362,6 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Inherit meta values from header given, but leave standard headers intact.
-     * @param LocoPoHeaders source header
      */
     public function inheritHeader( LocoPoHeaders $source ){
         $target = $this->getHeaders();
@@ -381,7 +374,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * @param string date format as Gettext states "YEAR-MO-DA HO:MI+ZONE"
+     * @param string $podate Gettext data formatted "YEAR-MO-DA HO:MI+ZONE"
      * @return int
      */
     public static function parseDate( $podate ){

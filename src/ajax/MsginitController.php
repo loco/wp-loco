@@ -77,7 +77,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             if( $post->json ){
                 $mergejson = true;
                 $siblings = new Loco_fs_Siblings($potfile);
-                $jsons = $siblings->getJsons();
+                $jsons = $siblings->getJsons($domain);
                 if( $jsons ){
                     $refs = clone $data;
                     $merge = new Loco_gettext_Matcher();

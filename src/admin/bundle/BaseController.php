@@ -29,6 +29,19 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
 
     /**
+     * Get current project's text domain if available
+     * @return string
+     */
+    public function getDomain(){
+        $project = $this->getOptionalProject();
+        if( $project instanceof Loco_package_Project ){
+            return $project->getDomain()->getName();
+        }
+        return '';
+    }
+
+
+    /**
      * Commit bundle config to database
      * @return Loco_admin_bundle_BaseController 
      */

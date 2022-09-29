@@ -514,11 +514,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     }
 
 
-
     /**
      * Get XML configuration file used to define this bundle
-     * TODO will we also support JSON for when dom extension is loaded?
-     * TODO support custom location for user-saved XML?
      * @return Loco_fs_File
      */
     public function getConfigFile(){
@@ -529,7 +526,6 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         }
         return $file;
     }
-
 
 
     /**

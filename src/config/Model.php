@@ -3,11 +3,6 @@
  * Generic configuration model serializer for portable Loco configs
  */
 abstract class Loco_config_Model {
-
-    /**
-     * @var LocoConfigDocument
-     */
-    private $dom;    
     
     /**
      * Root directory for calculating relative file paths
@@ -16,7 +11,7 @@ abstract class Loco_config_Model {
     private $base;
     
     /**
-     * registry of location contants that may have been overridden
+     * registry of location constants that may have been overridden
      * @var array
      */
     private $dirs;
@@ -27,17 +22,22 @@ abstract class Loco_config_Model {
     abstract public function query( $query, $context = null );
 
     /**
-     * @return LocoConfigDocument
+     * @return void
      */
     abstract public function createDom();
 
+    /**
+     * @return DOMDocument|LocoConfigDocument
+     */
+    abstract public function getDom();
+
 
     /**
-     * 
+     * Super constructor for all model types
      */    
     final public function __construct(){
         $this->dirs = [];
-        $this->dom = $this->createDom();
+        $this->createDom();
         $this->setDirectoryPath( loco_constant('ABSPATH') );
     }
     
@@ -54,19 +54,11 @@ abstract class Loco_config_Model {
             $this->dirs[$key] = $path;
         }
     }
-    
-    
-    /**
-     * @return LocoConfigDocument
-     */
-    public function getDom(){
-        return $this->dom;
-    }
 
 
     /**
      * Evaluate a name constant pointing to a file location
-     * @param string one of 'LOCO_LANG_DIR', 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', or 'ABSPATH'
+     * @param string|null $key one of 'LOCO_LANG_DIR', 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', or 'ABSPATH'
      */
     public function getDirectoryPath( $key = null ){
         if( is_null($key) ){
@@ -87,7 +79,7 @@ abstract class Loco_config_Model {
      * @return LocoConfigElement
      */
     public function createFileElement( Loco_fs_File $file ){
-        $node = $this->dom->createElement( $file->isDirectory() ? 'directory' : 'file' );
+        $node = $this->getDom()->createElement( $file->isDirectory() ? 'directory' : 'file' );
         if( $path = $file->getPath() ) {
             // Calculate relative path to the config file itself
             $relpath = $file->getRelativePath( $this->base );
@@ -104,7 +96,7 @@ abstract class Loco_config_Model {
                             $relpath = substr( $path, $len );
                             break;
                         }
-                    } // @codeCoverageIgnore
+                    }
                 }
             }
             $path = $relpath;
@@ -114,20 +106,20 @@ abstract class Loco_config_Model {
     }
 
 
-
     /**
-     * @param LocoConfigElement
-     * @param string
+     * @param LocoConfigElement $node
+     * @param string $path
      * @return LocoConfigText
      */
     protected function setFileElementPath( $node, $path ){
-        return $node->appendChild( $this->dom->createTextNode($path) );
+        $text = $this->getDom()->createTextNode($path);
+        $node->appendChild($text);
+        return $text;
     }
 
 
-    
     /**
-     * @param LocoConfigElement
+     * @param LocoConfigElement $el
      * @return Loco_fs_File
      */
     public function evaluateFileElement( $el ){
@@ -163,9 +155,9 @@ abstract class Loco_config_Model {
     }
 
 
-
     /**
-     * @param LocoConfigElement
+     * @param LocoConfigElement $el
+     * @param string $attr
      * @return bool
      */
     public function evaulateBooleanAttribute( $el, $attr ){

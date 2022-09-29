@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.3-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2022-09-23 17:30+0000\n"
+"POT-Creation-Date: 2022-09-29 10:56+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -72,7 +72,7 @@ msgstr ""
 msgid "%s characters will be sent for translation."
 msgstr ""
 
-#: src/admin/file/DeleteController.php:99
+#: src/admin/file/DeleteController.php:100
 #, php-format
 msgid "%s dependent file will also be deleted"
 msgid_plural "%s dependent files will also be deleted"
@@ -86,7 +86,7 @@ msgid_plural "%s files can't be matched to a known set of strings"
 msgstr[0] ""
 msgstr[1] ""
 
-#: src/admin/file/MoveController.php:89
+#: src/admin/file/MoveController.php:90
 #, php-format
 msgid "%s file could not be moved"
 msgid_plural "%s files could not be moved"
@@ -99,7 +99,7 @@ msgstr[1] ""
 msgid "%s file is writeable"
 msgstr ""
 
-#: src/admin/file/MoveController.php:85
+#: src/admin/file/MoveController.php:86
 #, php-format
 msgid "%s file moved"
 msgid_plural "%s files moved"
@@ -107,7 +107,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %s is either PO or POT
-#: src/gettext/Compiler.php:250 src/admin/file/HeadController.php:80
+#: src/gettext/Compiler.php:258 src/admin/file/HeadController.php:80
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -119,7 +119,7 @@ msgid "%s fuzzy"
 msgstr ""
 
 #. Error thrown when attempting to parse a file that is not PO, POT or MO
-#: src/gettext/Data.php:23
+#: src/gettext/Data.php:22
 #, php-format
 msgid "%s is not a Gettext file"
 msgstr ""
@@ -253,7 +253,7 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:110 tpl/admin/file/conf.php:58
+#: src/admin/bundle/BaseController.php:123 tpl/admin/file/conf.php:58
 #: tpl/admin/file/move.php:26
 msgid "Advanced"
 msgstr ""
@@ -428,11 +428,11 @@ msgstr ""
 msgid "Compiling MO files"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:53
+#: src/admin/bundle/BaseController.php:66
 msgid "Configuration reset"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:38
+#: src/admin/bundle/BaseController.php:51
 msgid "Configuration saved"
 msgstr ""
 
@@ -498,7 +498,7 @@ msgstr ""
 
 #: src/error/Debug.php:19 src/admin/config/BaseController.php:24
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:113
+#: src/admin/bundle/BaseController.php:126
 msgid "Debug"
 msgstr ""
 
@@ -507,8 +507,8 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:76
-#: src/admin/file/DeleteController.php:94
+#: src/admin/file/DeleteController.php:77
+#: src/admin/file/DeleteController.php:95
 #, php-format
 msgid "Delete %s"
 msgstr ""
@@ -810,7 +810,7 @@ msgstr ""
 msgid "File backups are disabled in your plugin settings"
 msgstr ""
 
-#: src/admin/file/DeleteController.php:57 src/admin/file/DiffController.php:45
+#: src/admin/file/DeleteController.php:58 src/admin/file/DiffController.php:45
 #, php-format
 msgid "File deleted"
 msgid_plural "%u files deleted"
@@ -1053,7 +1053,7 @@ msgstr ""
 msgid "It needs configuring before you can do any translations"
 msgstr ""
 
-#: src/gettext/Compiler.php:136 src/gettext/Compiler.php:204
+#: src/gettext/Compiler.php:132 src/gettext/Compiler.php:191
 #, php-format
 msgid "JSON compilation failed for %s"
 msgstr ""
@@ -1231,7 +1231,7 @@ msgstr ""
 msgid "Move"
 msgstr ""
 
-#: src/admin/file/MoveController.php:106 src/admin/file/MoveController.php:133
+#: src/admin/file/MoveController.php:108 src/admin/file/MoveController.php:136
 #, php-format
 msgid "Move %s"
 msgstr ""
@@ -1341,7 +1341,7 @@ msgstr ""
 msgid "Out of sync with template"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:108
+#: src/admin/bundle/BaseController.php:121
 msgid "Overview"
 msgstr ""
 
@@ -1465,15 +1465,15 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:246
+#: src/gettext/Compiler.php:254
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:243
+#: src/gettext/Compiler.php:251
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:107
+#: src/gettext/Compiler.php:103
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
@@ -1630,7 +1630,7 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:109
+#: src/admin/bundle/BaseController.php:122
 msgid "Setup"
 msgstr ""
 
@@ -1741,7 +1741,7 @@ msgstr ""
 msgid "Text domain"
 msgstr ""
 
-#: src/config/FormModel.php:146
+#: src/config/FormModel.php:147
 msgid "Text Domain cannot be empty"
 msgstr ""
 
@@ -2163,7 +2163,7 @@ msgstr ""
 msgid "XML setup"
 msgstr ""
 
-#: src/config/XMLModel.php:42
+#: src/config/XMLModel.php:54
 msgid "XML supplied is empty"
 msgstr ""
 

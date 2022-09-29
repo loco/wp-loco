@@ -14,7 +14,15 @@ class Loco_fs_Siblings {
      */
     private $mo;
 
-    
+    /**
+     * @var string
+     */
+    private $td = '';
+
+
+    /**
+     * @param Loco_fs_File $file Master file, either PO/MO or POT
+     */
     public function __construct( Loco_fs_File $file ){
         $ext = $file->extension();
         if( 'pot' === $ext ){
@@ -31,6 +39,15 @@ class Loco_fs_Siblings {
         else {
             throw new InvalidArgumentException('Unexpected file extension: '.$ext);
         }
+    }
+
+
+    /**
+     * Set text domain explicitly, required if unknown from PO/POT file name
+     * @return void
+     */
+    public function setDomain( $domain ){
+        $this->td = $domain ?: 'default';
     }
 
 
@@ -53,7 +70,7 @@ class Loco_fs_Siblings {
         }
         // JSON exports, unless in POT mode:
         if( 'po' === $this->po->extension() ){
-            $siblings = array_merge($siblings,$this->getJsons());
+            $siblings = array_merge($siblings,$this->getJsons($this->td));
         }
 
         return $siblings;
@@ -77,12 +94,18 @@ class Loco_fs_Siblings {
 
     
     /**
+     * @param string $prefix Prefix required in case not present in PO file name
      * @return Loco_fs_File[]
      */
-    public function getJsons(){
+    public function getJsons( $prefix ){
         $list = new Loco_fs_FileList;
         $name = $this->po->filename();
         $finder = new Loco_fs_FileFinder( $this->po->dirname() );
+        // Handle problem that PO file has no text domain prefix
+        if( $prefix && 'default' !== $prefix && preg_match('/^[a-z]{2,3}(?:_[a-z\\d_]+)?$/i',$name) ){
+            $name = $prefix.'-'.$name;
+        }
+        // locale must also be known, which it should be if only localised po file is set 
         // match .json files with same name as .po, plus hashed names
         $regex = '/^'.preg_quote($name,'/').'-[0-9a-f]{32}$/';
         /* @var Loco_fs_File $file */

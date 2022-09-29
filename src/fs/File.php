@@ -603,24 +603,6 @@ class Loco_fs_File {
 
 
     /**
-     * Copy this object as a WordPress script translation file
-     * @param string $ref relative path to .js file presumed to exist
-     * @return self
-     */
-    public function cloneJson( $ref ){
-        $name = $this->filename();
-        if( is_string($ref) && '' !== $ref ){
-            // Hashable reference is always finally unminified, as per load_script_textdomain()
-            if( substr($ref,-7) === '.min.js' ) {
-                $ref = substr($ref,0,-7).'.js';
-            }
-            $name .= '-'.md5($ref);
-        }
-        return $this->cloneBasename( $name.'.json' );
-    }
-
-
-    /**
      * Ensure full parent directory tree exists
      * @return Loco_fs_Directory|null
      */

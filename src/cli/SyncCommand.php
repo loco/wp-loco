@@ -98,8 +98,8 @@ abstract class Loco_cli_SyncCommand {
                 $matcher->loadRefs($ref,$translate );
                 // Merge jsons if configured and available
                 if( $opts->mergeJson() ){
-                    $siblings = new Loco_fs_Siblings($potfile);
-                    $njson = $matcher->loadJsons( $siblings->getJsons() );
+                    $siblings = new Loco_fs_Siblings($pofile);
+                    $njson = $matcher->loadJsons( $siblings->getJsons( $project->getDomain()->getName() ) );
                     if( 0 !== $njson ){
                         Loco_cli_Utils::debug('> merged json files:%u', $njson );
                     }

@@ -41,7 +41,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
             $this->prefix = implode('-',$parts);
             // handle situations where unsuffixed name is wrongly taken as the prefix
             // e.g. "de.po" is valid but "hello.po" is not. 
-            // There are still some  ambiguous situations, e.g. "foo-bar.po" is valid, but nonsense
+            // There are still some ambiguous situations, e.g. "foo-bar.po" is valid, but nonsense
             if( ! $this->prefix && ! $this->getLocale()->isValid() ){
                 $this->prefix = $this->suffix;
                 $this->suffix = '';
@@ -69,7 +69,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
 
 
     /**
-     * @param Loco_locale
+     * @param $locale Loco_locale
      * @return Loco_fs_LocaleFile
      */
     public function cloneLocale( Loco_locale $locale ){
@@ -133,6 +133,5 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
         $info = $this->split();
         return $info[0] && ! $info[1];
     }
-    
-    
+
 }
