@@ -104,6 +104,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Fixed bug generating author theme jsons
 * Fixed errors in bundle debugger
 * Added validation for whitespace errors
+* Extended cli type argument to filter specific bundle
 * Bumped WordPress version to 6.0.2
 
 = 2.6.2 =

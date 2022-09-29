@@ -7,26 +7,40 @@ abstract class Loco_cli_Utils {
 
     /**
      * Collect translation sets according to type/domain filter
-     * @param string Type of bundle (plugins|themes|core) or a specific Text Domain
      * @return Loco_package_Project[]
      */
     public static function collectProjects( $filter ){
         $projects = [];
-        $filter = strtolower($filter);
-        // bundle type filter
-        if( 'plugins' === $filter ){
-            $bundles = Loco_package_Plugin::getAll();
-            $filter = null;
+        $domain = null;
+        $slug = null;
+        // bundle type filter, with optional argument
+        if( preg_match('/^(plugins|themes|core)(?::(.+))?/i',$filter,$matched) ){
+            $type = strtolower($matched[1]);
+            $handle = isset($matched[2]) ? $matched[2] : '';
+            if( 'plugins' === $type ){
+                if( $handle ){
+                    $bundles = [ Loco_package_Plugin::create($handle) ];
+                }
+                else {
+                    $bundles = Loco_package_Plugin::getAll();
+                }
+            }
+            else if( 'themes' === $type ){
+                if( $handle ){
+                    $bundles = [ Loco_package_Theme::create($handle) ];
+                }
+                else {
+                    $bundles = Loco_package_Theme::getAll();
+                }
+            }
+            else {
+                $bundles = [ Loco_package_Core::create() ];
+                $slug = $handle;
+            }
         }
-        else if( 'themes' === $filter ){
-            $bundles = Loco_package_Theme::getAll();
-            $filter = null;
-        }
-        else if( 'core' === $filter ) {
-            $bundles = [ Loco_package_Core::create() ];
-            $filter = null;
-        }
+        // else fall back to text domain filter
         else {
+            $domain = $filter;
             $bundles = [ Loco_package_Core::create() ];
             $bundles = array_merge( $bundles, Loco_package_Plugin::getAll() );
             $bundles = array_merge( $bundles, Loco_package_Theme::getAll() );
@@ -34,7 +48,10 @@ abstract class Loco_cli_Utils {
         /* @var Loco_package_Project $project */
         foreach( $bundles as $bundle ){
             foreach( $bundle as $project ){
-                if( $filter && strtolower( $project->getDomain() ) !== $filter ){
+                if( $domain && $project->getDomain()->getName() !== $domain ){
+                    continue;
+                }
+                if( $slug && $project->getSlug() !== $slug ){
                     continue;
                 }
                 $projects[] = $project;

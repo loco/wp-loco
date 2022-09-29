@@ -12,7 +12,7 @@ class Loco_cli_Commands {
      * ## OPTIONS
      * 
      * [<filter>]
-     * : Restrict to a type of bundle (plugins|themes|core) or a specific Text Domain
+     * : Restrict to a type of bundle (plugins|themes|core); a single bundle (e.g. plugins:<handle>); or a Text Domain
      * 
      * [--locale=<code>]
      * : Restrict to one or more locales. Separate multiple codes with commas.
@@ -30,9 +30,8 @@ class Loco_cli_Commands {
      * 
      * wp loco sync plugins
      * 
-     * 
-     * @param string[]
-     * @param string[]
+     * @param string[] $args
+     * @param string[] $opts
      */
     public function sync( $args, $opts ){
         if( array_key_exists('fuzziness',$opts) ){
@@ -58,7 +57,7 @@ class Loco_cli_Commands {
      * ## OPTIONS
      * 
      * [<filter>]
-     * : Restrict to a type of bundle (plugins|themes|core) or a specific Text Domain
+     * : Restrict to a type of bundle (plugins|themes|core); a single bundle (e.g. plugins:<handle>); or a Text Domain
      * 
      * [--maxsize=<size>]
      * : Override plugin settings for maximum PHP file size
@@ -73,8 +72,8 @@ class Loco_cli_Commands {
      *
      * wp loco extract core --maxsize=400K
      *
-     * @param string[]
-     * @param string[]
+     * @param string[] $args
+     * @param string[] $opts
      */
     public function extract( $args, $opts ){
         try {
@@ -100,7 +99,7 @@ class Loco_cli_Commands {
      * ## OPTIONS
      *
      * [<filter>]
-     * : Restrict to a type of bundle (plugins|themes|core) or a specific Text Domain
+     * : Restrict to a type of bundle (plugins|themes|core); a single bundle (e.g. plugins:<handle>); or a Text Domain
      * 
      * [--locale=<code>]
      * : Restrict to one or more locales. Separate multiple codes with commas.
@@ -112,8 +111,8 @@ class Loco_cli_Commands {
      *
      * wp loco fetch loco-translate --locale=en_GB
      *
-     * @param string[]
-     * @param string[]
+     * @param string[] $args
+     * @param string[] $opts
      */
     public function fetch( $args, $opts ){
         try {
