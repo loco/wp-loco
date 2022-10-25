@@ -57,7 +57,7 @@ class Loco_Locale implements JsonSerializable {
     private $valid;
 
     /**
-     * @param string
+     * @param string $tag
      * @return Loco_Locale
      */
     public static function parse( $tag ){
@@ -77,9 +77,9 @@ class Loco_Locale implements JsonSerializable {
     /**
      * Construct from subtags NOT from composite tag. See self::parse
      * Note that this skips normalization and validation steps
-     * @param string
-     * @param string
-     * @param string
+     * @param string $lang
+     * @param string $region
+     * @param string $variant
      */
     public function __construct( $lang = '', $region = '', $variant = '' ){
         if( 1 == func_num_args() && isset($lang[3]) ){
@@ -92,7 +92,7 @@ class Loco_Locale implements JsonSerializable {
     /**
      * Allow read access to subtags
      * @internal 
-     * @param string
+     * @param string $t subtag
      * @return string
      */
     public function __get( $t ){
@@ -103,8 +103,8 @@ class Loco_Locale implements JsonSerializable {
     /**
      * Allow write access to subtags
      * @internal
-     * @param string
-     * @param string
+     * @param string $t subtag, e.g. "lang"
+     * @param string $s subtag value, e.g. "en"
      * @return void
      */
     public function __set( $t, $s ){
@@ -117,7 +117,7 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * Set subtags as produced from loco_parse_wp_locale
-     * @param string[]
+     * @param string[] $tag
      * @return Loco_Locale
      */
     public function setSubtags( array $tag ){
@@ -185,7 +185,7 @@ class Loco_Locale implements JsonSerializable {
 
 
     /**
-     * @param bool whether to get name in current display language
+     * @param bool $translate whether to get name in current display language
      * @return string | null
      */    
     public function getName( $translate = true ){
@@ -245,7 +245,7 @@ class Loco_Locale implements JsonSerializable {
 
 
     /**
-     * @param string CSS icon name
+     * @param string $css CSS icon name
      * @return Loco_Locale
      */
     public function setIcon( $css ){
@@ -260,8 +260,8 @@ class Loco_Locale implements JsonSerializable {
 
 
     /**
-     * @param string
-     * @param string
+     * @param string $english_name
+     * @param string $native_name
      * @return Loco_Locale
      */
     public function setName( $english_name, $native_name = '' ){
@@ -285,7 +285,6 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * Resolve this locale's "official" name from WordPress's translation api
-     * @param Loco_api_WordPressTranslations 
      * @return string English name currently set
      */    
     public function fetchName( Loco_api_WordPressTranslations $api ){
@@ -335,7 +334,6 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * Ensure locale has a label, even if it has to fall back to language code or error
-     * @param Loco_api_WordPressTranslations
      * @return string
      */
     public function ensureName( Loco_api_WordPressTranslations $api ){
@@ -470,7 +468,7 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * Apply PO style Plural-Forms header.
-     * @param string e.g. "nplurals=2; plural=n != 1;"
+     * @param string $str header value e.g. "nplurals=2; plural=n != 1;"
      * @return void
      */
     public function setPluralFormsHeader( $str ){
@@ -514,8 +512,11 @@ class Loco_Locale implements JsonSerializable {
             }
             $keys[] = implode(',',$sample).$suffix;
         }
-        // use mnemonic tag only if it matches the default (CLDR) tag for the current language
-        if( array_keys($this->plurals) !== $keys ) {
+        // cast to string for comparison due to PHP forcing integer keys in this->plurals
+        $expect = implode('|',$keys);
+        $actual = implode('|',array_keys($this->plurals));
+        // use mnemonic tags only if they match the default (CLDR) tags for the current language
+        if( $expect !== $actual ){
             // exception when two forms only and the first accepts n=1 and second n=2
             if( 2 === $nplurals && 0 === $formula->execute(1) && 1 === $formula->execute(2) ){
                 $tags = ['one','other'];
@@ -534,7 +535,7 @@ class Loco_Locale implements JsonSerializable {
 
     /**
      * Crude normalizer for a plural equation such that similar formulae can be compared.
-     * @param string original plural equation
+     * @param string $str original plural equation
      * @return string signature for comparison
      */
     private static function hashPlural( $str ){
