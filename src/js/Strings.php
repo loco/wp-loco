@@ -178,18 +178,6 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         //
         __("Mismatching placeholder type; check against source text formatting",'loco-translate');
 
-        //
-        __("Translation has incorrect space at the beginning",'loco-translate');
-
-        //
-        __("Translation has unwanted space at the beginning",'loco-translate');
-
-        //
-        __("Translation has incorrect space at the end",'loco-translate');
-
-        //
-        __("Translation has unwanted space at the end",'loco-translate');
-
 
         return $this->flush('loco-translate');
     }
