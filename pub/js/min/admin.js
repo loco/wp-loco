@@ -103,7 +103,7 @@ l = Math.max(l, 1e-4);
 do {
 c = l.format(++h);
 } while ("0" === c && 4 > h);
-c = c.substr(1);
+c = c.substring(1);
 } else c = l.format(0);
 return c;
 };
@@ -1298,7 +1298,7 @@ a = String(a).split(l).join("-");
 if (!h.exec(a)) return null;
 var d = new p();
 d.lang = RegExp.$1.toLowerCase();
-if (a = RegExp.$2) d.script = a.charAt(0).toUpperCase() + a.substr(1).toLowerCase();
+if (a = RegExp.$2) d.script = a.charAt(0).toUpperCase() + a.substring(1).toLowerCase();
 if (a = RegExp.$3) d.region = a.toUpperCase();
 if (a = RegExp.$4) d.variant = a.toLowerCase();
 if (a = RegExp.$5) d.extension = a;
@@ -1631,7 +1631,7 @@ var b;
 if (!(b = l)) {
 for (var d, c, h = k.getElementsByTagName("script"), f = -1, y = h.length; ++f < y; ) if (b = h[f].getAttribute("src")) if (d = b.indexOf("/lib/vendor"), 
 -1 !== d) {
-c = b.substr(0, d);
+c = b.substring(0, d);
 break;
 }
 b = l = c || "/static";
@@ -1868,7 +1868,7 @@ return e;
 e.init = function(b, d) {
 function c(a) {
 B = a;
-s = "<p>" === a.substr(0, 3) && "</p>" === a.substr(-4);
+s = "<p>" === a.substring(0, 3) && "</p>" === a.substring(a.length - 4);
 return a.replace(/(<\/?)script/gi, "$1loco:script");
 }
 function n(a) {
@@ -1877,8 +1877,8 @@ a._getContent = a.getContent;
 a.getContent = function(a) {
 a = this._getContent(a);
 a = a.replace(/(<\/?)loco:script/gi, "$1script");
-if (!s && "<p>" === a.substr(0, 3) && "</p>" === a.substr(-4)) {
-var b = a.substr(3, a.length - 7);
+if (!s && "<p>" === a.substring(0, 3) && "</p>" === a.substring(a.length - 4)) {
+var b = a.substring(3, a.length - 4);
 if (b === B || -1 === b.indexOf("</p>")) a = b;
 }
 return a;
@@ -3761,7 +3761,7 @@ f = f[0];
 g.push(f);
 f = f.length;
 e -= f;
-d = d.substr(f);
+d = d.substring(f);
 }
 0 !== e && g.push(d);
 return g;
