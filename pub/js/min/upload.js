@@ -1,47 +1,54 @@
-!function(o, n, t) {
-var e, i, r, a = o.loco, u = (a && a.conf || {}).multipart && o.FormData && o.Blob, c = n.getElementById("loco-fs"), f = n.getElementById("loco-main");
-function l(e) {
-var n = t(f).find("button.button-primary");
-return n.each(function(n, t) {
-t.disabled = e;
-}), n;
+"use strict";
+
+!function(e, l, m) {
+function h(a) {
+var n = m(b).find("button.button-primary");
+n.each(function(A, t) {
+t.disabled = a;
+});
+return n;
 }
-function d() {
-l(!0).addClass("loco-loading");
+function p() {
+h(!0).addClass("loco-loading");
 }
-function s(n) {
-l(n).removeClass("loco-loading");
+function f(a) {
+h(a).removeClass("loco-loading");
 }
-function m() {
-f.path.value = i + "/" + r, d(), e.connect();
+function u(a) {
+f(!(a && c && d));
 }
-function v() {
-return i && r && e.authed();
+function q() {
+b.path.value = c + "/" + d;
+p();
+g.connect();
 }
-function p(n, t, e) {
-n.redirect ? (s(!0), o.location.assign(n.redirect)) : s(!1);
+function v(a) {
+d = String(b.f.value).split(/[\\\/]/).pop();
+a = a.target || {};
+if ("dir" === a.name && a.checked) {
+if ((a = a.value) && a !== c && (c = a, d)) {
+q();
+return;
 }
-function g() {
-s(!1);
+} else if ("f" === a.name && c) {
+q();
+return;
 }
-c && f && (e = o.loco.fs.init(c).setForm(f).listen(function(n) {
-s(!(n && i && r));
-}), t(f).change(function(n) {
-r = String(f.f.value).split(/[\\\/]/).pop();
-var t, e = n.target || {};
-if ("dir" === e.name && e.checked) {
-if ((t = e.value) && t !== i && (i = t, r)) return void m();
-} else if ("f" === e.name && i) return void m();
-l(!v());
-}).submit(function(n) {
-if (v()) {
-if (u) {
-n.preventDefault();
-var t = new FormData(f);
-return d(), a.ajax.post("upload", t, p, g), !1;
+h(!(c && d && g.authed()));
 }
-return !0;
+function w(a) {
+a.redirect ? (f(!0), e.location.assign(a.redirect)) : f(!1);
 }
-return n.preventDefault(), !1;
-}));
+function x() {
+f(!1);
+}
+function y(a) {
+if (c && d && g.authed()) return z ? (a.preventDefault(), a = new FormData(b), p(), 
+k.ajax.post("upload", a, w, x), !1) : !0;
+a.preventDefault();
+return !1;
+}
+let g, c, d;
+const k = e.loco, z = (k && k.conf || {}).multipart && e.FormData && e.Blob, r = l.getElementById("loco-fs"), b = l.getElementById("loco-main");
+r && b && (g = e.loco.fs.init(r).setForm(b).listen(u), m(b).change(v).submit(y));
 }(window, document, window.jQuery);

@@ -102,6 +102,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.6.4 =
 * Bumped WordPress version to 6.1.1
+* Dropped support for Internet Explorer
+* Updated JavaScript to ECMAScript 6
 
 = 2.6.3 =
 * Fixed bug in plural forms comparison

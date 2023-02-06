@@ -292,7 +292,7 @@ public function count(){ return count($this->tokens); } }
 class LocoPHPEscapeParser extends LocoEscapeParser { 
 public function __construct(){ parent::__construct( [ 'n' => "\n", 'r' => "\r", 't' => "\t", 'v' => "\x0B", 'f' => "\x0C", 'e' => "\x1B", '$' => '$', '\\' => '\\', '"' => '"', ] ); } 
 protected function stripSlashes(  $s ) { return preg_replace_callback('/\\\\(x[0-9A-Fa-f]{1,2}|[0-3]?[0-7]{1,2})/', [$this,'unescapeMatch'], $s, -1, $n ); } }
-function loco_unescape_php_string(  $s ){ static $l; if( is_null($l) ) { $l = new LocoPHPEscapeParser; } return $l->unescape($s); }
+function loco_unescape_php_string(  $s ) { static $l; if( is_null($l) ) { $l = new LocoPHPEscapeParser; } return $l->unescape($s); }
 function loco_decapse_php_string( $s ){ if( ! $s ){ return (string) $s; } $q = $s[0]; if( "'" === $q ){ return str_replace( ['\\'.$q, '\\\\'], [$q, '\\'], substr( $s, 1, -1 ) ); } if( '"' !== $q ){ return $s; } return loco_unescape_php_string( substr($s,1,-1) ); }
 function loco_parse_php_comment($comment){ $comment = trim( $comment,"/ \n\r\t" ); if( '' !== $comment && '*' === $comment[0] ){ $lines = []; $junk = "\r\t/ *"; foreach( explode("\n",$comment) as $line ){ $line = trim($line,$junk); if( '' !== $line ){ $lines[] = $line; } } $comment = implode("\n", $lines); } return $comment; }
 function loco_parse_wp_comment(  $block ) { $header = []; if( '/*' === substr($block,0,2) ){ $junk = "\r\t/ *"; foreach( explode("\n", $block) as $line ){ if( false !== ( $i = strpos($line,':') ) ){ $key = substr($line,0,$i); $val = substr($line,++$i); $header[ trim($key,$junk) ] = trim($val,$junk); } } } return $header; }

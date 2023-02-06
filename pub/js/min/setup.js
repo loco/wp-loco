@@ -1,51 +1,60 @@
-!function(e, o, a) {
-function n(e, o, n) {
-function r() {
-i("Failed to contact remote API"), c = null;
+"use strict";
+
+!function(r, t, b) {
+function u(a, f, k) {
+function e() {
+l("Failed to contact remote API");
+c = null;
 }
-function u() {
+function g() {
 c && (clearTimeout(c), c = null);
 }
-var c = setTimeout(r, 3e3);
-return i(""), a.ajax({
-url: s.apiUrl + "/" + e + "/" + o + ".jsonp?version=" + encodeURIComponent(n),
+var c = setTimeout(e, 3e3);
+l("");
+b.ajax({
+url: n.apiUrl + "/" + a + "/" + f + ".jsonp?version=" + encodeURIComponent(k),
 dataType: "jsonp",
-success: function(e, o, n) {
+success: function(h) {
 if (c) {
-u();
-var t = e && e.exact;
-o = e && e.status;
-t ? function(e) {
-d["json-content"].value = e, a("#loco-remote-empty").hide(), a("#loco-remote-found").show();
-}(t) : 404 === o ? i("Sorry, we don't know a bundle by this name") : (l.notices.error(e.error || "Unknown server error"), 
-r());
+g();
+const p = h && h.exact, v = h && h.status;
+p ? (d["json-content"].value = p, b("#loco-remote-empty").hide(), b("#loco-remote-found").show()) : 404 === v ? l("Sorry, we don't know a bundle by this name") : (q.notices.error(h.error || "Unknown server error"), 
+e());
 }
 },
 error: function() {
-c && (u(), r());
-},
-cache: !0
-}), {
-abort: u
-};
-}
-function i(e) {
-d["json-content"].value = "", a("#loco-remote-empty").show().find("span").text(e), 
-a("#loco-remote-found").hide().removeClass("jshide");
-}
-var t, l = e.loco, s = l.conf || {}, d = o.getElementById("loco-remote");
-a(d).find('button[type="button"]').on("click", function(e) {
-return e.preventDefault(), t && t.abort(), t = n(d.vendor.value, d.slug.value, d.version.value), 
-!1;
-}), a(d).find('input[type="reset"]').on("click", function(e) {
-return e.preventDefault(), i(""), !1;
-}), a.ajax({
-url: s.apiUrl + "/vendors.jsonp",
-dataType: "jsonp",
-success: function(e) {
-for (var o, n, t = -1, r = e.length, u = a(d.vendor).html(""); ++t < r; ) o = e[t][0], 
-n = e[t][1], u.append(a("<option></option>").attr("value", o).text(n));
+c && (g(), e());
 },
 cache: !0
 });
-}(window, document, jQuery);
+return {
+abort: g
+};
+}
+function l(a) {
+d["json-content"].value = "";
+b("#loco-remote-empty").show().find("span").text(a);
+b("#loco-remote-found").hide().removeClass("jshide");
+}
+var q = r.loco, n = q.conf || {}, m, d = t.getElementById("loco-remote");
+b(d).find('button[type="button"]').on("click", function(a) {
+a.preventDefault();
+m && m.abort();
+m = u(d.vendor.value, d.slug.value, d.version.value);
+return !1;
+});
+b(d).find('input[type="reset"]').on("click", function(a) {
+a.preventDefault();
+l("");
+return !1;
+});
+b.ajax({
+url: n.apiUrl + "/vendors.jsonp",
+dataType: "jsonp",
+success: function(a) {
+for (var f = -1, k, e, g = a.length, c = b(d.vendor).html(""); ++f < g; ) k = a[f][0], 
+e = a[f][1], c.append(b("<option></option>").attr("value", k).text(e));
+},
+cache: !0
+});
+}(window, document, window.jQuery);

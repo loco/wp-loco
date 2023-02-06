@@ -1,4 +1,9 @@
-!function(o, e) {
-var n = e.getElementById("loco-fs"), t = e.getElementById("loco-del");
-n && t && o.loco.fs.init(n).setForm(t);
-}(window, document, window.jQuery);
+"use strict";
+
+{
+var c = window;
+let a = document.getElementById("loco-fs"), b = document.getElementById("loco-del");
+a && b && c.loco.fs.init(a).setForm(b);
+}
+
+!0;

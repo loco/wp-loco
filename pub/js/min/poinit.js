@@ -1,85 +1,97 @@
-!function(n, t, c) {
-var i, e, a, l, o, r, u, s = n.loco, f = t.getElementById("loco-fs"), d = t.getElementById("loco-poinit"), v = f && s.fs.init(f), g = (a = (e = d)["select-locale"], 
-l = e["custom-locale"], o = e["use-selector"], r = c(a).on("focus", p).closest("fieldset").on("click", p)[0], 
-u = c(l).on("focus", x).closest("fieldset").on("click", x)[0], c(o).change(m), m(), 
-s.watchtext(l, function(n) {
-c(l.form).triggerHandler("change");
-}), {
+"use strict";
+
+!function(A, w, d) {
+function p(a) {
+d(h).find("button.button-primary").each(function(c, b) {
+b.disabled = a;
+});
+}
+function x() {
+var a = q && q.val(), c = a && a.isValid() && "zxx" !== a.lang, b = r && r.val();
+c = c && b;
+y(a);
+p(!0);
+c && (a = r.txt(), a !== t ? (t = a, u.path.value = t, z.listen(B).connect()) : p(!1));
+}
+function B(a) {
+p(!a);
+}
+function y(a) {
+var c = d(h), b = a && a.toString("_") || "", g = b ? "zxx" === b ? "{locale}" : b : "{invalid}";
+c.find("code.path span").each(function(n, e) {
+e.textContent = g;
+});
+c.find("span.lang").each(function(n, e) {
+a && "zxx" !== a.lang ? (e.setAttribute("lang", a.lang), e.setAttribute("class", a.getIcon())) : (e.setAttribute("lang", ""), 
+e.setAttribute("class", "lang nolang"));
+});
+}
+function C(a) {
+(a = a && a.redirect) && location.assign(a);
+}
+let t = "";
+const l = A.loco, u = w.getElementById("loco-fs"), h = w.getElementById("loco-poinit"), z = u && l.fs.init(u);
+var q = function(a) {
+function c() {
+m[0].checked = !0;
+e(!0);
+}
+function b() {
+k.value || (k.value = g());
+m[1].checked = !0;
+e(!1);
+}
+function g() {
+var f = d(m[0].checked ? v : k).serializeArray();
+return f[0] && f[0].value || "";
+}
+function n() {
+e(m[0].checked);
+return !0;
+}
+function e(f) {
+k.disabled = f;
+v.disabled = !f;
+D.className = f ? "disabled" : "active";
+E.className = f ? "active" : "disabled";
+x();
+}
+var v = a["select-locale"], k = a["custom-locale"], m = a["use-selector"], E = d(v).on("focus", c).closest("fieldset").on("click", c)[0], D = d(k).on("focus", b).closest("fieldset").on("click", b)[0];
+d(m).change(n);
+n();
+l.watchtext(k, function() {
+d(k.form).triggerHandler("change");
+});
+return {
 val: function() {
-var n = b();
-return n ? s.locale.parse(n) : s.locale.clone({
+var f = g();
+return f ? l.locale.parse(f) : l.locale.clone({
 lang: "zxx"
 });
 }
-});
-function h() {
-return o[0].checked;
+};
+}(h), r = function() {
+function a(b) {
+var g;
+return (g = (g = d(c).serializeArray()[0]) && g.value || null) && h[b + "[" + g + "]"];
 }
-function p() {
-y(o[0].checked = !0);
-}
-function x() {
-l.value || (l.value = b()), y(!(o[1].checked = !0));
-}
-function b() {
-var n = c(h() ? a : l).serializeArray();
-return n[0] && n[0].value || "";
-}
-function m() {
-return y(h()), !0;
-}
-function y(n) {
-l.disabled = n, a.disabled = !n, u.className = n ? "disabled" : "active", r.className = n ? "active" : "disabled", 
-I();
-}
-var z, A = (z = d["select-path"], {
+var c = h["select-path"];
+return {
 val: function() {
-var n = k("path");
-return n && n.value;
+var b = a("path");
+return b && b.value;
 },
 txt: function() {
-var n = k("path");
-return n && c(n.parentNode).find("code.path").text();
+var b = a("path");
+return b && d(b.parentNode).find("code.path").text();
 }
+};
+}(h);
+d(h).on("change", x).on("submit", function(a) {
+a.preventDefault();
+z.applyCreds(h);
+l.ajax.submit(a.target, C);
+return !1;
 });
-function k(n) {
-var t = function() {
-var n = c(z).serializeArray()[0];
-return n && n.value || null;
-}();
-return t && d[n + "[" + t + "]"];
-}
-function w(e) {
-c(d).find("button.button-primary").each(function(n, t) {
-t.disabled = e;
-});
-}
-function I() {
-var n = g && g.val(), t = n && n.isValid() && "zxx" !== n.lang, e = A && A.val(), a = t && e;
-if (j(n), w(!0), a) {
-var c = A.txt();
-c !== i ? (i = c, f.path.value = i, v.listen(N).connect()) : w(!1);
-}
-}
-function N(n) {
-w(!n);
-}
-function j(e) {
-var n = c(d), t = e && e.toString("_") || "", a = t ? "zxx" === t ? "{locale}" : t : "{invalid}";
-n.find("code.path span").each(function(n, t) {
-t.textContent = a;
-}), n.find("span.lang").each(function(n, t) {
-!function(n, t) {
-t && "zxx" !== t.lang ? (n.setAttribute("lang", t.lang), n.setAttribute("class", t.getIcon())) : (n.setAttribute("lang", ""), 
-n.setAttribute("class", "lang nolang"));
-}(t, e);
-});
-}
-function B(n) {
-var t = n && n.redirect;
-t && location.assign(t);
-}
-c(d).on("change", I).on("submit", function(n) {
-return n.preventDefault(), v.applyCreds(d), s.ajax.submit(n.target, B), !1;
-}), j(g.val());
-}(window, document, jQuery);
+y(q.val());
+}(window, document, window.jQuery);

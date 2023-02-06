@@ -1,17 +1,24 @@
-!function(t, e, o) {
-var c, i, u = e.getElementById("loco-fs"), a = e.getElementById("loco-main"), d = a.path.value;
-function l(n) {
-o(a).find("button.button-primary").each(function(t, e) {
-e.disabled = n;
+"use strict";
+
+!function(k, e, f) {
+function g(a) {
+f(b).find("button.button-primary").each(function(r, l) {
+l.disabled = a;
 });
 }
-u && a && (c = t.loco.fs.init(u).setForm(a).listen(function(t) {
-l(!(t && i));
-}), o(a).change(function(t) {
-var e, n = t.target || {};
-"dest" !== n.name || !n.checked && "text" !== n.type || (e = n.value) && e !== i && (i = e, 
-l(!0), d !== e && (u.dest.value = e, c.connect()));
-}).submit(function(t) {
-return !!i || (t.preventDefault(), !1);
-}));
+function m(a) {
+g(!(a && c));
+}
+function n(a) {
+a = a.target || {};
+"dest" !== a.name || !a.checked && "text" !== a.type || (a = a.value) && a !== c && (c = a, 
+g(!0), p !== a && (d.dest.value = a, h.connect()));
+}
+function q(a) {
+if (c) return !0;
+a.preventDefault();
+return !1;
+}
+let h, c, d = e.getElementById("loco-fs"), b = e.getElementById("loco-main"), p = b.path.value;
+d && b && (h = k.loco.fs.init(d).setForm(b).listen(m), f(b).change(n).submit(q));
 }(window, document, window.jQuery);

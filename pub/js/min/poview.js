@@ -1,37 +1,56 @@
-!function(e, o, f) {
-var a, c, i, l, r, p, n, s, u, d = e.loco, t = d.conf, h = d.po.ref.init(d, t), v = o.getElementById("loco-po");
-function g() {
-r.length && (p.push([ i, l ]), c.push(r), r = []), i = null;
+"use strict";
+
+!function(p, u, c) {
+const g = p.loco, C = g.po.ref.init(g, g.conf), h = u.getElementById("loco-po");
+!function(d, e) {
+function b() {
+l.length && (v.push([ m, w ]), e.push(l), l = []);
+m = null;
 }
-function m(t) {
-return f('<ol class="msgcat"></ol>').attr("start", t).appendTo(a);
+function k(a) {
+return c('<ol class="msgcat"></ol>').attr("start", a).appendTo(d);
 }
-function x(t) {
-n !== t && (f("#loco-content")[t ? "removeClass" : "addClass"]("loco-invalid"), 
-n = t);
+function q(a) {
+x !== a && (c("#loco-content")[a ? "removeClass" : "addClass"]("loco-invalid"), 
+x = a);
 }
-a = v, c = d.fulltext.init(), r = [], p = [], s = !(n = !0), (u = f(a).find("li")).each(function(t, n) {
-var e, o = f(n);
-o.find("span.po-none").length ? g() : (l = t, null == i && (i = t), (e = o.find(".po-text").text()) && (r = r.concat(e.replace(/\\[ntvfab\\"]/g, " ").split(" "))));
-}), g(), d.watchtext(f(a.parentNode).find("form.loco-filter")[0].q, function(t) {
-t ? function(t) {
-var n, e, o, i = c.find(t), l = -1, r = i.length;
-if (f("ol", a).remove(), r) {
-for (;++l < r; ) for (o = m((n = (e = p[i[l]])[0]) + 1); n <= e[1]; n++) o.append(u[n]);
-x(!0);
-} else x(!1), m(0).append(f("<li></li>").text(d.l10n._("Nothing matches the text filter")));
-s = !0, C();
-}(t) : s && (x(!0), s = !1, f("ol", a).remove(), m(1).append(u), C());
-}), f(v).removeClass("loco-loading");
-var w, y, C = (y = v.clientHeight - 2, function() {
-var t = function(t, n) {
-for (var e = t.offsetTop || 0; (t = t.offsetParent) && t !== n; ) e += t.offsetTop || 0;
-return e;
-}(v, o.body), n = e.innerHeight - t - 20;
-w !== n && (v.style.height = n < y ? String(n) + "px" : "", w = n);
+var m, w, l = [], v = [], x = !0, r = !1, t = c(d).find("li");
+t.each(function(a, f) {
+f = c(f);
+f.find("span.po-none").length ? b() : (w = a, null == m && (m = a), a = f.find(".po-text").text(), 
+"" !== a && (l = l.concat(a.replace(/\\[ntvfab\\"]/g, " ").split(" "))));
 });
-C(), f(e).resize(C), f(v).on("click", function(t) {
-var n = t.target;
-if (n.hasAttribute("href")) return t.preventDefault(), h.load(n.textContent), !1;
+b();
+g.watchtext(c(d.parentNode).find("form.loco-filter")[0].q, function(a) {
+if (a) {
+var f = e.find(a), y = -1, z = f.length, A;
+c("ol", d).remove();
+if (z) {
+for (;++y < z; ) {
+var B = v[f[y]];
+a = B[0];
+for (A = k(a + 1); a <= B[1]; a++) A.append(t[a]);
+}
+q(!0);
+} else q(!1), k(0).append(c("<li></li>").text(g.l10n._("Nothing matches the text filter")));
+r = !0;
+n();
+} else r && (q(!0), r = !1, c("ol", d).remove(), k(1).append(t), n());
+});
+}(h, g.fulltext.init());
+c(h).removeClass("loco-loading");
+var n = function() {
+var d, e = h.clientHeight - 2;
+return function() {
+for (var b = h, k = b.offsetTop || 0; (b = b.offsetParent) && b !== u.body; ) k += b.offsetTop || 0;
+b = p.innerHeight - k - 20;
+d !== b && (h.style.height = b < e ? String(b) + "px" : "", d = b);
+};
+}();
+n();
+c(p).resize(n);
+c(h).on("click", function(d) {
+var e = d.target;
+if (e.hasAttribute("href")) return d.preventDefault(), C.load(e.textContent), !1;
 });
 }(window, document, window.jQuery);

@@ -1,10 +1,16 @@
-!function(t, n, e) {
-var o = t.loco, i = n.getElementById("loco-fs"), r = n.getElementById("loco-potinit");
-function c(t) {
-var n = t && t.redirect;
-n && location.assign(n);
+"use strict";
+
+!function(c, b, e) {
+function f(a) {
+(a = a && a.redirect) && location.assign(a);
 }
-e(r).on("submit", function(t) {
-return t.preventDefault(), o.ajax.submit(t.target, c), !1;
-}), i && o.fs.init(i).setForm(r);
-}(window, document, jQuery);
+const d = c.loco;
+c = b.getElementById("loco-fs");
+b = b.getElementById("loco-potinit");
+e(b).on("submit", function(a) {
+a.preventDefault();
+d.ajax.submit(a.target, f);
+return !1;
+});
+c && d.fs.init(c).setForm(b);
+}(window, document, window.jQuery);
