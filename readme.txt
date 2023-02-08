@@ -104,6 +104,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Bumped WordPress version to 6.1.1
 * Dropped support for Internet Explorer
 * Updated JavaScript to ECMAScript 6
+* Fixed error icon not clearing after correction
 
 = 2.6.3 =
 * Fixed bug in plural forms comparison
