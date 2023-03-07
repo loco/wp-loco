@@ -93,7 +93,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Create initial list of directories to search
-     * @param string default root to start
+     * @param string $root default root to start
      */
     public function __construct( $root = '' ){
         $this->roots = new Loco_fs_FileList;
@@ -107,7 +107,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Set recursive state of all defined roots
-     * @param bool
+     * @param bool $bool
      * @return Loco_fs_FileFinder
      */
     public function setRecursive( $bool ){
@@ -122,7 +122,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
 
     /**
-     * @param bool
+     * @param bool $bool
      * @return Loco_fs_FileFinder
      */
     public function followLinks( $bool ){
@@ -133,7 +133,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
 
     /**
-     * @param string
+     * @param string $path
      * @return Loco_fs_Link
      */
     public function getFollowed( $path ){
@@ -195,8 +195,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Add a directory root to search.
-     * @param string
-     * @param bool|null
+     * @param string $root
+     * @param bool|null $recursive
      * @return Loco_fs_FileFinder 
      */
     public function addRoot( $root, $recursive = null ){
@@ -218,19 +218,18 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     }
 
 
-
     /**
      * Filter results by given file extensions
      * @return Loco_fs_FileFinder
      */
-    public function group(){
-        return $this->filterExtensions( func_get_args() );
+    public function group( ...$exts ){
+        return $this->filterExtensions($exts);
     }
 
 
     /**
      * Filter results by file extensions given in array
-     * @param string[] file extensions
+     * @param string[] $exts File extension strings
      * @return Loco_fs_FileFinder
      */
     public function filterExtensions( array $exts ){
@@ -245,12 +244,11 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Add one or more paths to exclude from listing
-     * @param string e.g "node_modules"
      * @return Loco_fs_FileFinder
      */
-    public function exclude(){
+    public function exclude( ...$paths ){
         $this->invalidate();
-        foreach( func_get_args() as $path ){
+        foreach( $paths as $path ){
             $file = new Loco_fs_File($path);
             // if path is absolute, add straight onto list
             if( $file->isAbsolute() ){
@@ -280,7 +278,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     
     /**
-     * @param Loco_fs_Directory
+     * @param Loco_fs_Directory $dir
      * @return void
      */    
     private function open( Loco_fs_Directory $dir ){
@@ -311,7 +309,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Test if given path is matched by one of our exclude rules
-     * @param string
+     * @param string $path
      * @return bool
      */
     public function isExcluded( $path ){
@@ -504,7 +502,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
             $this->cache = new Loco_fs_FileList;
             // add only root directories that exist
             $this->subdir = new Loco_fs_FileList;
-            /* @var Loco_fs_Directory */
+            /* @var Loco_fs_Directory $root */
             foreach( $this->roots as $root ){
                 if( $root instanceof Loco_fs_Directory && $root->exists() && ! $this->isExcluded( $root->getPath() ) ){
                     $this->subdir->add($root);

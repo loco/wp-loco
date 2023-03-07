@@ -155,14 +155,11 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
             $doconf = true;
         }
         
-        // display configurator if configurating
+        // display configurator if configuring
         if( $doconf ){
             return $this->view( 'admin/bundle/setup/conf' );
         }
-        // else set configurator links back to self with required option
-        // ...
-        
-        
+        // else set configurator links back to self with required option ...
         if( ! $configured || ! count($bundle) ){
             return $this->view( 'admin/bundle/setup/none' );
         }

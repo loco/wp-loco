@@ -5,7 +5,7 @@
 class Loco_package_Theme extends Loco_package_Bundle {
 
     /**
-     * @var Loco_package_Theme
+     * @var Loco_package_Theme|null
      */
     private $parent;
 
@@ -73,7 +73,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
 
     /**
      * Get parent bundle if theme is a child
-     * @return Loco_package_Theme
+     * @return Loco_package_Theme|null
      */
     public function getParent(){
         return $this->parent;
@@ -81,7 +81,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
 
 
     /**
-     * @return Loco_package_Theme[]
+     * @return static[]
      */
     public static function getAll(){
         $themes = [];
@@ -100,9 +100,9 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * Create theme bundle definition from WordPress theme handle 
      * 
-     * @param string short name of theme, e.g. "twentyfifteen"
-     * @param string theme root if known
-     * @return Loco_package_Theme
+     * @param string $slug Short name of theme, e.g. "twentyfifteen"
+     * @param string $root Theme root if known
+     * @return self
      */
     public static function create( $slug, $root = '' ){
         return self::createFromTheme( wp_get_theme( $slug, $root ) );
@@ -111,8 +111,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
 
     /**
      * Create theme bundle definition from WordPress theme data 
-     * @param WP_Theme
-     * @return Loco_package_Theme
+     * @return self
      */
     public static function createFromTheme( WP_Theme $theme ){
         $slug = $theme->get_stylesheet();
@@ -130,13 +129,11 @@ class Loco_package_Theme extends Loco_package_Bundle {
         $domain = Loco_package_Listener::singleton()->getDomain($slug);
         // otherwise we won't try to guess as it results in silent problems when guess is wrong
         
-        // ideally theme has declared its DomainPath
-        $target = $theme->get('DomainPath') or
-        // if not, we can see if the Domain listener has picked it up 
-        $target = Loco_package_Listener::singleton()->getDomainPath($domain);
+        // ideally theme has declared its DomainPath. if not, we can see if the listener has picked it up 
         // otherwise project will use theme root by default
+        $target = $theme->get('DomainPath')
+               ?: Loco_package_Listener::singleton()->getDomainPath($domain);
 
-        
         $bundle->configure( $base,  [
             'Name' => $name,
             'TextDomain' => $domain,
@@ -153,10 +150,6 @@ class Loco_package_Theme extends Loco_package_Bundle {
                 Loco_error_AdminNotices::add($e);
             }
         }
-        
-        // TODO provide hook to modify bundle?
-        // do_action( 'loco_bundle_configured', $bundle );
-
         return $bundle;
     }
 

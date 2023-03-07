@@ -88,8 +88,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Construct bundle from unique ID containing type and handle
-     * @param string
-     * @return Loco_package_Bundle
+     * @return self
      */
     public static function fromId( $id ){
         $r = explode( '.', $id, 2 );
@@ -98,9 +97,9 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     
     /**
-     * @param string
-     * @param string
-     * @return Loco_package_Bundle
+     * @param string $type
+     * @param string $handle
+     * @return self
      * @throws Loco_error_Exception
      */
     public static function createType( $type, $handle ){
@@ -117,8 +116,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Resolve a file path to a plugin, theme or the core 
-     * @param Loco_fs_File
-     * @return Loco_package_Bundle|null
+     * @return self|null
      */
     public static function fromFile( Loco_fs_File $file ){
         if( $file->underThemeDirectory() ){
@@ -138,11 +136,11 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Construct from WordPress handle and friendly name
-     * @param string
-     * @param string
+     * @param string $handle
+     * @param string $name
      */
     public function __construct( $handle, $name ){
-        parent::__construct( [] );
+        parent::__construct();
         $this->setHandle($handle)->setName($name);
         $this->xpaths = new Loco_fs_FileList;
     }
@@ -150,7 +148,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Re-fetch this bundle from its currently saved location
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function reload(){
         return call_user_func( [ get_class($this), 'create' ], $this->getSlug() );
@@ -172,7 +170,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * @return string
      */
     public function __toString(){
-        return (string) $this->name;
+        return $this->name;
     }
 
 
@@ -185,12 +183,12 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
 
     /**
-     * Get parent bundle if possible
+     * Get parent bundle if possible. This can only be a theme.
      * @codeCoverageIgnore
-     * @return Loco_package_Bundle|null
+     * @return Loco_package_Theme|null
      */
     public function getParent(){
-        trigger_error( $this->getType().' bundles cannot have parents. Check isTheme first', E_USER_NOTICE );
+        trigger_error( $this->getType().' bundles cannot have parents. Check isTheme first');
         return null;
     }
 
@@ -227,33 +225,30 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set friendly name of bundle
-     * @param string
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function setName( $name ){
-        $this->name = $name;
+        $this->name = (string) $name;
         return $this;
     }
 
 
     /**
      * Set short name of bundle which may or may not match unique handle
-     * @param string
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function setSlug( $slug ){
-        $this->slug = $slug;
+        $this->slug = (string) $slug;
         return $this;
     }
 
 
     /**
      * Set internal handle registered with WordPress for this bundle type
-     * @param string
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function setHandle( $handle ){
-        $this->handle = $handle;
+        $this->handle = (string) $handle;
         return $this;
     }
 
@@ -278,8 +273,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set root directory for bundle. e.g. theme or plugin directory
-     * @param string
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function setDirectoryPath( $path ){
         $this->root = new Loco_fs_Directory( $path );
@@ -306,7 +300,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      */
     public function getVendorRoots(){
         $dirs = [];
-        $base = (string) $this->getDirectoryPath();
+        $base = $this->getDirectoryPath();
         foreach( ['node_modules','vendor'] as $f ){
             $path = $base.'/'.$f;
             if( is_dir($path) ){
@@ -328,7 +322,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Add a path for excluding from all projects
-     * @param Loco_fs_File|string
+     * @param Loco_fs_File|string $path
      * @return Loco_package_Bundle
      */
     public function excludeLocation( $path ){
@@ -366,7 +360,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Set primary PHP source file containing bundle bootstrap code, if applicable.
-     * @param string path to PHP file
+     * @param string $path to PHP file
      * @return Loco_package_Bundle
      */
     public function setBootstrapPath( $path ){
@@ -388,14 +382,13 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * Test whether bundle consists of a single file
      */
     public function isSingleFile(){
-        return (bool) $this->solo;
+        return $this->solo;
     }
     
     
     /**
      * Add all projects defined in a TextDomain
-     * @param Loco_package_TextDomain
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function addDomain( Loco_package_TextDomain $domain ){
         /* @var Loco_package_Project $proj */
@@ -409,8 +402,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * Add a translation project to bundle.
      * Note that this always adds without checking uniqueness. Call hasProject first if it could be a duplicate
-     * @param Loco_package_Project
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function addProject( Loco_package_Project $project ){
         // add global targets
@@ -460,7 +452,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * Generate default configuration. 
      * Adds a simple one domain, one project config
-     * @param string optional Text Domain to use
+     * @param string|null $domainName optional Text Domain to use
      * @return Loco_package_Project
      */
     public function createDefault( $domainName = null ){
@@ -483,13 +475,13 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     }
 
 
-
     /**
      * Configure from custom saved option
-     * @return bool whether configured
+     * @return bool whether configured via database option
      */
     public function configureDb(){
-        if( $option = $this->getCustomConfig() ){
+        $option = $this->getCustomConfig();
+        if( $option instanceof  Loco_config_CustomSaved ){
             $option->configure();
             $this->saved = 'db';
             return true;
@@ -498,13 +490,13 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     }
 
 
-
     /**
      * Configure from XML config
-     * @return bool whether configured
+     * @return bool whether configured via static XML file
      */
     public function configureXml(){
-        if( $xmlfile = $this->getConfigFile() ){
+        $xmlfile = $this->getConfigFile();
+        if( $xmlfile instanceof Loco_fs_File ){
             $reader = new Loco_config_BundleReader($this);
             $reader->loadXml( $xmlfile );
             $this->saved = 'file';
@@ -530,7 +522,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Check whether bundle is manually configured, as opposed to guessed
-     * @return string (file|db|meta|internal)
+     * @return string|false (file|db|meta|internal)
      */    
     public function isConfigured(){
         return $this->saved;
@@ -539,8 +531,8 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Do basic configuration from bundle meta data (file headers)
-     * @param array header tags from theme or plugin bootstrap file
-     * @return bool whether configured
+     * @param array $header tags from theme or plugin bootstrap file
+     * @return bool whether configured via header tags
      */
     public function configureMeta( array $header ){
         if( isset($header['Name']) ){
@@ -598,13 +590,14 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
      * Configure bundle from canonical sources.
      * Source order is "db","file","meta" where meta is the auto-config fallback.
      * No deep scanning is performed at this point
-     * @param string
-     * @param string[] header tags from theme or plugin bootstrap file
-     * @return Loco_package_Bundle
+     * @param string $base
+     * @param string[] $header tags from theme or plugin bootstrap file
+     * @return self
      */
     public function configure( $base, array $header ){
         $this->setDirectoryPath( $base );
         $this->configureDb() || $this->configureXml() || $this->configureMeta($header);
+        do_action('loco_bundle_configured',$this);
         return $this;
     }
 
@@ -624,8 +617,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Inherit another bundle. Used for child themes to display parent translations
-     * @param Loco_package_Bundle
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function inherit( Loco_package_Bundle $parent ){
         foreach( $parent as $project ){
@@ -637,12 +629,11 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     }
 
 
-
     /**
      * Get unique translation project by text domain (and optionally slug)
      * TODO would prefer to avoid iteration, but slug can be changed at any time
-     * @param string
-     * @param string | null
+     * @param string $domain
+     * @param string|null $slug
      * @return Loco_package_Project
      */
     public function getProject( $domain, $slug = null ){
@@ -681,7 +672,6 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     
     /**
      * Test if project already exists in bundle
-     * @param Loco_package_Project
      * @return bool
      */
     public function hasProject( Loco_package_Project $project ){
@@ -690,7 +680,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
 
     /**
-     * @return array<Loco_package_TextDomain>
+     * @return Loco_package_TextDomain[]
      */
     public function getDomains(){
         $domains = [];
@@ -724,11 +714,11 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         }
         return $t;
     }
-     
+
 
     /**
      * Get project by ID
-     * @param string <domain>[.<slug>]
+     * @param string $id identifier of the form <domain>[.<slug>]
      * @return Loco_package_Project
      */
     public function getProjectById( $id ){
@@ -740,7 +730,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     /**
      * Reset bundle configuration, but keep metadata like name and slug.
      * Call this before applying a saved config, otherwise values will just be added on top.
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function clear(){
         $this->exchangeArray( [] );
@@ -762,11 +752,10 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
 
     /**
      * Create a copy of this bundle containing any files found that aren't currently configured
-     * @return Loco_package_Bundle
+     * @return self
      */
     public function invert(){
         return Loco_package_Inverter::compile( $this );
     }
-
 
 }

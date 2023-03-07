@@ -19,11 +19,10 @@ class Loco_package_TextDomain extends ArrayIterator {
 
     /**
      * Create new Text Domain from its name
-     * @param string
      */
     public function __construct( $name ){
         parent::__construct();
-        $this->name = $name;
+        $this->name = (string) $name;
     }
 
 
@@ -31,7 +30,7 @@ class Loco_package_TextDomain extends ArrayIterator {
      * @internal
      */
     public function __toString(){
-        return (string) $this->name;
+        return $this->name;
     }
 
 
@@ -46,8 +45,8 @@ class Loco_package_TextDomain extends ArrayIterator {
 
     /**
      * Create a named project in a given bundle for this Text Domain
-     * @param Loco_package_Bundle bundle of which this is one set of translations
-     * @param string
+     * @param Loco_package_Bundle $bundle of which this is one set of translations
+     * @param string $name
      * @return Loco_package_Project
      */
     public function createProject( Loco_package_Bundle $bundle, $name ){
@@ -59,7 +58,7 @@ class Loco_package_TextDomain extends ArrayIterator {
 
 
     /**
-     * @param bool
+     * @param bool $bool
      * @return Loco_package_TextDomain
      */
     public function setCanonical( $bool ){

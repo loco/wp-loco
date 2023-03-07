@@ -709,7 +709,7 @@ class Loco_package_Project {
 
     /**
      * Get all translation files matching project prefix across target directories
-     * @param string file extension, usually "po" or "mo"
+     * @param string $ext File extension, usually "po" or "mo"
      * @return Loco_fs_LocaleFileList
      */
     public function findLocaleFiles( $ext ){
@@ -752,7 +752,7 @@ class Loco_package_Project {
 
 
     /**
-     * @param string file extension
+     * @param string $ext File extension
      * @return Loco_fs_FileList
      */
     public function findNotLocaleFiles( $ext ){
@@ -772,7 +772,7 @@ class Loco_package_Project {
 
     /**
      * Initialize choice of PO file paths for a given locale
-     * @param Loco_Locale locale to initialize translation files for
+     * @param Loco_Locale $locale to initialize translation files for
      * @return Loco_fs_FileList
      */
     public function initLocaleFiles( Loco_Locale $locale ){
@@ -814,8 +814,6 @@ class Loco_package_Project {
 
     /**
      * Initialize a PO file path from required location
-     * @param Loco_fs_Directory
-     * @param Loco_Locale
      * @return Loco_fs_LocaleFile
      * @throws Loco_error_Exception
      */
