@@ -38,12 +38,13 @@ class Loco_error_Debug extends Loco_error_Exception {
     
     /**
      * Log debugging message to file without raising admin notice
-     * @param string
+     * @param array $args
      * @codeCoverageIgnore
      */
-    public static function trace( $message ){
-        if( 1 < func_get_args() ){
-            $message = call_user_func_array('sprintf',func_get_args());
+    public static function trace( ...$args ){
+        $message = array_shift($args);
+        if( $args ){
+            $message = vsprintf($message,$args);
         }
         $debug = new Loco_error_Debug($message);
         $debug->setCallee(1);

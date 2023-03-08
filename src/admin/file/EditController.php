@@ -24,13 +24,13 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-file-edit'),
+            __('Overview') => $this->viewSnippet('tab-file-edit'),
         ];
     }
 
 
     /**
-     * @param bool whether po files is in read-only mode
+     * @param bool $readonly whether po files is in read-only mode
      * @return array
      */
     private function getNonces( $readonly ){

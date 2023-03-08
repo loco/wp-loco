@@ -8,7 +8,7 @@ class Loco_data_CompiledData implements ArrayAccess, Countable, IteratorAggregat
     /**
      * @var array
      */
-    private static $reg;
+    private static $reg = [];
     
     /**
      * @var string
@@ -22,14 +22,23 @@ class Loco_data_CompiledData implements ArrayAccess, Countable, IteratorAggregat
 
     
     /**
-     * @param string
-     * @return Loco_data_CompiledData
+     * @param string $name
+     * @return self
      */
     public static function get( $name ){
         if( ! isset(self::$reg[$name]) ){
             self::$reg[$name] = new Loco_data_CompiledData($name);
         }
         return self::$reg[$name];
+    }
+
+
+    /**
+     * Remove all cached data from memory
+     * @return void
+     */
+    public static function flush(){
+        self::$reg = [];
     }
     
 

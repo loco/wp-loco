@@ -123,7 +123,7 @@ class Loco_api_WordPressTranslations {
 
     /**
      * Get WordPress locale data by strictly well-formed language tag
-     * @param string
+     * @param string $tag
      * @return Loco_Locale
      */
     public function getLocale( $tag ){
