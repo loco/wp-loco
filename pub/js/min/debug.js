@@ -1,36 +1,40 @@
 "use strict";
 
-!function(c, b) {
-function k(a, d, e) {
-"success" !== d && (e = c.ajax.parse(c.ajax.strip(a.responseText)));
-b("#loco-ajax-check").text("FAILED: " + e).addClass("loco-danger");
+!function(d, c) {
+function l(a, b, e) {
+"success" !== b && (e = d.ajax.parse(d.ajax.strip(a.responseText)));
+c("#loco-ajax-check").text("FAILED: " + e).addClass("loco-danger");
 }
-function g(a, d) {
-return b("#loco-api-" + a).text(d);
+function g(a, b) {
+return c("#loco-api-" + a).text(b);
 }
-function m(a) {
-var d = a.getId();
-a.key() ? a.translate("OK", n, function(e, p) {
-p ? g(d, "OK ✓") : g(d, "FAILED").addClass("loco-danger");
-}) : g(d, "No API key");
+function n(a) {
+var b = a.getId();
+a.key() ? a.translate("OK", p, function(e, h) {
+h ? g(b, "OK ✓") : g(b, "FAILED").addClass("loco-danger");
+}) : g(b, "No API key");
 }
-var f = b("#loco-utf8-check")[0].textContent, h = c.conf;
-1 === f.length && 10003 === f.charCodeAt(0) || c.notices.warn("This page has a problem rendering UTF-8").stick();
-window.ajaxurl && b("#loco-ajax-url").text(window.ajaxurl);
-b("#loco-vers-jquery").text([ b.fn && b.fn.jquery || "unknown", "ui/" + (b.ui && b.ui.version || "none"), "migrate/" + (b.migrateVersion || "none") ].join("; "));
-c.ajax.post("ping", {
+var f = c("#loco-utf8-check")[0].textContent, k = d.conf;
+1 === f.length && 10003 === f.charCodeAt(0) || d.notices.warn("This page has a problem rendering UTF-8").stick();
+window.ajaxurl && c("#loco-ajax-url").text(window.ajaxurl);
+c("#loco-vers-jquery").text([ c.fn && c.fn.jquery || "unknown", "ui/" + (c.ui && c.ui.version || "none"), "migrate/" + (c.migrateVersion || "none") ].join("; "));
+d.ajax.post("ping", {
 echo: "ΟΚ ✓"
-}, function(a, d, e) {
-a && a.ping ? b("#loco-ajax-check").text(a.ping) : k(e, d, a && a.error && a.error.message);
-}, k);
-h = h.apis;
-var q = h.length, l = -1, n = c.locale.parse("fr");
-if (c.apis) for (;++l < q; ) {
-f = h[l];
+}, function(a, b, e) {
+a && a.ping ? c("#loco-ajax-check").text(a.ping) : l(e, b, a && a.error && a.error.message);
+}, l);
+f = k.apis;
+k = f.length;
+const m = d.apis.providers(), p = d.locale.parse("fr");
+if (d.apis) {
+let a = -1;
+for (;++a < k; ) {
+const b = f[a], e = b.id;
 try {
-m(c.apis.create(f));
-} catch (a) {
-g(f.id, String(a));
+n(d.apis.create(b, m[e] || m._));
+} catch (h) {
+g(e, String(h));
 }
-} else c.notices.error("admin.js is out of date. Please empty your browser cache.");
+}
+} else d.notices.error("admin.js is out of date. Please empty your browser cache.");
 }(window.loco, window.jQuery);

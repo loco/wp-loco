@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.6.4-dev\n"
+"Project-Id-Version: Loco Translate 2.6.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2023-03-07 11:14+0000\n"
+"POT-Creation-Date: 2023-03-20 10:31+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.4-dev; wp-6.1.1\n"
+"X-Loco-Version: 2.6.5-dev; wp-6.1.1\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -46,7 +46,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
-#: src/admin/init/InitPoController.php:198
+#: src/admin/init/InitPoController.php:194
 #, php-format
 msgid "%1$s string found in %2$s"
 msgid_plural "%1$s strings found in %2$s"
@@ -147,7 +147,7 @@ msgid "%s on disk"
 msgstr ""
 
 #. Were %s is number of source files that will be scanned
-#: src/admin/init/InitPoController.php:227
+#: src/admin/init/InitPoController.php:224
 #, php-format
 msgid "%s source file will be scanned for translatable strings"
 msgid_plural "%s source files will be scanned for translatable strings"
@@ -267,11 +267,11 @@ msgstr ""
 msgid "Advanced tab"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:174
+#: src/mvc/AjaxRouter.php:172
 msgid "Ajax controller returned empty JSON"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:169
+#: src/mvc/AjaxRouter.php:167
 #, php-format
 msgid "Ajax route not found: \"%s\""
 msgstr ""
@@ -312,7 +312,7 @@ msgid ""
 "file?"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:243
+#: src/admin/init/InitPoController.php:240
 msgid "Assign template"
 msgstr ""
 
@@ -324,7 +324,7 @@ msgstr ""
 msgid "Auto-translate this file"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:67
+#: tpl/admin/init/init-po.php:68
 msgid "Available languages"
 msgstr ""
 
@@ -389,11 +389,11 @@ msgstr ""
 msgid "Child theme declares the same Text Domain as the parent theme"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:48
+#: tpl/admin/init/init-po.php:49
 msgid "Choose a language"
 msgstr ""
 
-#: tpl/admin/init/upload.php:15 tpl/admin/init/init-po.php:93
+#: tpl/admin/init/upload.php:15 tpl/admin/init/init-po.php:94
 msgid "Choose a location"
 msgstr ""
 
@@ -469,7 +469,7 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:147 tpl/admin/file/conf.php:32
+#: tpl/admin/init/init-po.php:148 tpl/admin/file/conf.php:32
 #, php-format
 msgid "Copy target translations from \"%s\""
 msgstr ""
@@ -479,12 +479,12 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:217
+#: src/admin/init/InitPoController.php:214
 #: src/admin/bundle/ViewController.php:132 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:13
+#: tpl/admin/init/init-po.php:14
 msgid "Create template instead"
 msgstr ""
 
@@ -492,7 +492,7 @@ msgstr ""
 msgid "Creating this file requires permission"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:79
+#: tpl/admin/init/init-po.php:80
 msgid "Custom language"
 msgstr ""
 
@@ -540,7 +540,7 @@ msgstr ""
 
 #: src/admin/file/EditController.php:118 src/admin/file/EditController.php:167
 #: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
-#: tpl/admin/config/apis.php:128 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -550,11 +550,11 @@ msgstr ""
 msgid "Domain path"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:197
+#: src/mvc/AjaxRouter.php:195
 msgid "Download action not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:202
+#: src/mvc/AjaxRouter.php:200
 msgid "Download controller returned empty output"
 msgstr ""
 
@@ -1003,7 +1003,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:118
+#: tpl/admin/config/apis.php:112
 msgid "Important"
 msgstr ""
 
@@ -1027,12 +1027,12 @@ msgstr ""
 msgid "Info and tutorials"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:108
+#: src/admin/init/InitPoController.php:105
 #, php-format
 msgid "Initializing new translations in \"%s\""
 msgstr ""
 
-#: src/admin/init/InitPoController.php:112
+#: src/admin/init/InitPoController.php:109
 msgid "Initializing new translations in unknown set"
 msgstr ""
 
@@ -1041,7 +1041,7 @@ msgid "Install manually"
 msgstr ""
 
 #: src/admin/bundle/LocaleController.php:116
-#: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:61
+#: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:62
 msgid "Installed languages"
 msgstr ""
 
@@ -1058,7 +1058,7 @@ msgstr ""
 msgid "JSON compilation failed for %s"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:153 tpl/admin/file/conf.php:38
+#: tpl/admin/init/init-po.php:154 tpl/admin/file/conf.php:38
 msgid "Just copy English source strings"
 msgstr ""
 
@@ -1176,7 +1176,7 @@ msgstr ""
 msgid "Maximum line length (zero disables wrapping)"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:163 tpl/admin/file/conf.php:48
+#: tpl/admin/init/init-po.php:164 tpl/admin/file/conf.php:48
 msgid "Merge strings from related JSON files"
 msgstr ""
 
@@ -1245,7 +1245,7 @@ msgid "Need a human?"
 msgstr ""
 
 #: src/admin/init/InitPoController.php:16
-#: src/admin/init/InitPoController.php:115
+#: src/admin/init/InitPoController.php:112
 #: src/admin/file/BaseController.php:142 src/admin/bundle/ViewController.php:98
 msgid "New language"
 msgstr ""
@@ -1254,11 +1254,11 @@ msgstr ""
 msgid "New template"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:105
+#: src/admin/init/InitPotController.php:104
 msgid "New template file"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:106
+#: src/admin/init/InitPotController.php:105
 #, php-format
 msgid "New translations template for \"%s\""
 msgstr ""
@@ -1271,7 +1271,7 @@ msgstr ""
 msgid "No files found for this language"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:60
+#: tpl/admin/init/init-po.php:61
 msgid "No language selected"
 msgstr ""
 
@@ -1561,7 +1561,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:127
+#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:121
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1598,7 +1598,7 @@ msgstr ""
 msgid "See FAQ"
 msgstr ""
 
-#: tpl/admin/config/apis.php:121
+#: tpl/admin/config/apis.php:115
 msgid "See full disclaimer"
 msgstr ""
 
@@ -1655,7 +1655,7 @@ msgstr ""
 msgid "Skip PHP files larger than:"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:233
+#: src/admin/init/InitPoController.php:230
 msgid "Skip template"
 msgstr ""
 
@@ -1671,7 +1671,7 @@ msgstr ""
 msgid "Source files to scan:"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:183
+#: tpl/admin/init/init-po.php:184
 msgid "Start translating"
 msgstr ""
 
@@ -1721,7 +1721,7 @@ msgstr ""
 msgid "Template file"
 msgstr ""
 
-#: src/admin/init/InitPotController.php:57
+#: src/admin/init/InitPotController.php:56
 msgid "Template file already exists"
 msgstr ""
 
@@ -1733,7 +1733,7 @@ msgstr ""
 msgid "Template missing"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:136 tpl/admin/file/conf.php:12
+#: tpl/admin/init/init-po.php:137 tpl/admin/file/conf.php:12
 msgid "Template options"
 msgstr ""
 
@@ -1800,7 +1800,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:120
+#: tpl/admin/config/apis.php:114
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"
@@ -2026,7 +2026,7 @@ msgstr ""
 msgid "Upload PO file"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:173
+#: tpl/admin/init/init-po.php:174
 msgid "Use this file as template when running Sync"
 msgstr ""
 
@@ -2099,7 +2099,7 @@ msgstr ""
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:321 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:318 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr ""
 
@@ -2121,7 +2121,7 @@ msgstr ""
 msgid "WordPress core"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:55
+#: tpl/admin/init/init-po.php:56
 msgid "WordPress language"
 msgstr ""
 
@@ -2175,7 +2175,7 @@ msgstr ""
 msgid "You can use existing translations as a template using the Copy feature."
 msgstr ""
 
-#: tpl/admin/init/init-po.php:12
+#: tpl/admin/init/init-po.php:13
 msgid "You're creating translations directly from source code"
 msgstr ""
 

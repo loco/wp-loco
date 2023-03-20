@@ -1,8 +1,9 @@
-<?php /** @noinspection PhpMultipleClassesDeclarationsInOneFile */
+<?php
 
 /**
  * View renderer
  * @property-read string $_content
+ * @property-read string|null $_trash
  */
 class Loco_mvc_View implements IteratorAggregate {
 
@@ -13,7 +14,7 @@ class Loco_mvc_View implements IteratorAggregate {
     
     /**
      * View that is decorating current view
-     * @var Loco_mvc_View
+     * @var self
      */
     private $parent;
     
@@ -38,7 +39,6 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * @internal
-     * @param array
      */
     public function __construct( array $args = [] ){
         $this->scope = new Loco_mvc_ViewParams( $args );
@@ -48,7 +48,7 @@ class Loco_mvc_View implements IteratorAggregate {
     
     /**
      * Change base path for template paths
-     * @param string path relative to current directory
+     * @param string $path relative to current directory
      * @return Loco_mvc_View 
      */
     public function cd( $path ){
@@ -75,7 +75,6 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Render error screen HTML
-     * @param Loco_error_Exception
      * @return string
      */
     public static function renderError( Loco_error_Exception $e ){
@@ -93,8 +92,8 @@ class Loco_mvc_View implements IteratorAggregate {
     /**
      * Make this view a child of another template. i.e. decorate this with that.
      * Parent will have access to original argument scope, but separate from now on
-     * @param string
-     * @return Loco_mvc_View the parent view
+     * @param string $tpl
+     * @return self the parent view
      */
     private function extend( $tpl ){
         $this->parent = new Loco_mvc_View;
@@ -106,7 +105,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * After start is called any captured output will be placed in the named variable
-     * @param string
+     * @param string $name
      * @return void
      */
     private function start( $name ){
@@ -128,7 +127,6 @@ class Loco_mvc_View implements IteratorAggregate {
                 $content = $this->scope[$b].$content;
             }
             $this->scope[$b] = new _LocoViewBuffer($content);
-            $this->block = null;
         }
         $this->block = '_trash';
     }
@@ -145,7 +143,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * @internal
-     * @param string
+     * @param string $prop
      * @return mixed
      */
     public function __get( $prop ){
@@ -154,7 +152,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
 
     /**
-     * @param string
+     * @param string $prop
      * @return bool
      */
     public function has( $prop ){
@@ -164,7 +162,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Get property after checking with self::has
-     * @param string
+     * @param string $prop
      * @return mixed
      */
     public function get( $prop ){
@@ -174,9 +172,9 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Set a view argument
-     * @param string
-     * @param mixed
-     * @return Loco_mvc_View
+     * @param string $prop
+     * @param mixed $value
+     * @return self
      */
     public function set( $prop, $value ){
         $this->scope[$prop] = $value;
@@ -187,9 +185,9 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Main entry to rendering complete template
-     * @param string template name excluding extension
-     * @param array extra arguments to set in view scope
-     * @param Loco_mvc_View parent view rendering this view
+     * @param string $tpl template name excluding extension
+     * @param array|null $args extra arguments to set in view scope
+     * @param self|null $parent parent view rendering this view
      * @return string
      */
     public function render( $tpl, array $args = null, Loco_mvc_View $parent = null ){
@@ -236,7 +234,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Set current template
-     * @param string path tro template, excluding file extension
+     * @param string $tpl Path to template, excluding file extension
      */
     public function setTemplate( $tpl ){
         $file = new Loco_fs_File( $tpl.'.php' );
@@ -264,7 +262,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Do actual runtime template include
-     * @param string
+     * @param string $template
      * @return void
      */
     private function execTemplate( $template ){
@@ -276,8 +274,8 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Link generator
-     * @param string page route, e.g. "config"
-     * @param array optional page arguments
+     * @param string $route page route, e.g. "config"
+     * @param array $args optional page arguments
      * @return Loco_mvc_ViewParams
      */
     public function route( $route, array $args = [] ){
@@ -289,7 +287,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Shorthand for `echo esc_html( sprintf( ...`
-     * @param string
+     * @param string $text
      * @return string
      */
     private static function e( $text ){

@@ -38,7 +38,6 @@ class Loco_error_Debug extends Loco_error_Exception {
     
     /**
      * Log debugging message to file without raising admin notice
-     * @param array $args
      * @codeCoverageIgnore
      */
     public static function trace( ...$args ){

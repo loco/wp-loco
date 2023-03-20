@@ -22,14 +22,14 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-init-po'),
+            __('Overview') => $this->viewSnippet('tab-init-po'),
         ];
     }
 
 
     /**
      * Sort to the left the best option for saving new translation files
-     * @param Loco_mvc_ViewParams[]
+     * @param Loco_mvc_ViewParams[] $choices
      * @return Loco_mvc_ViewParams|null
      */
     private function sortPreferred( array $choices ){
@@ -44,8 +44,6 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
 
     /**
      * @internal
-     * @param Loco_mvc_ViewParams
-     * @param Loco_mvc_ViewParams
      * @return int
      */
     public static function _onSortPreferred( Loco_mvc_ViewParams $a, Loco_mvc_ViewParams $b ){
@@ -57,7 +55,6 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
     
     /**
      * Score an individual file choice for sorting preferred
-     * @param Loco_mvc_ViewParams
      * @return int
      */
     private static function scoreFileChoice( Loco_mvc_ViewParams $p ){
@@ -77,8 +74,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
 
     /**
      * @internal
-     * @param int
-     * @param int
+     * @param int $a
+     * @param int $b
      * @return int
      */
     private static function compareLocationKeys( $a, $b ){
@@ -105,7 +102,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $project = $this->getProject();
             $slug = $project->getSlug();
             $domain = (string) $project->getDomain();
-            $subhead = sprintf( __('Initializing new translations in "%s"','loco-translate'), $slug?$slug:$domain );
+            $subhead = sprintf( __('Initializing new translations in "%s"','loco-translate'), $slug?:$domain );
         }
         catch( Loco_error_Exception $e ){
             $project = null;
@@ -147,31 +144,30 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $potfile = $project->getPot();
         }
 
-
         $locales = [];
         $installed = [];
         $api = new Loco_api_WordPressTranslations;
         $prefs = Loco_data_Preferences::get();
         // pull installed list first, this will include en_US and any non-standard languages installed
         foreach( $api->getInstalledCore() as $tag ){
-            $locale = Loco_Locale::parse($tag);
-            if( $locale->isValid() && $prefs->has_locale($locale) ){
-                $tag = (string) $tag;
+            $tmp = Loco_Locale::parse($tag);
+            if( $tmp->isValid() && $prefs->has_locale($tmp) ){
+                $tag = (string) $tmp;
                 // We may not have names for these, so just the language tag will show
                 $installed[$tag] = new Loco_mvc_ViewParams( [
                     'value' => $tag,
-                    'icon'  => $locale->getIcon(),
-                    'label' => $locale->ensureName($api),
+                    'icon'  => $tmp->getIcon(),
+                    'label' => $tmp->ensureName($api),
                 ] );
             }
         }
         // pull the same list of "available" languages as used in WordPress settings
-        foreach( $api->getAvailableCore() as $tag => $locale ){
-            if( ! array_key_exists($tag,$installed) && $prefs->has_locale($locale) ){
+        foreach( $api->getAvailableCore() as $tag => $tmp ){
+            if( ! array_key_exists($tag,$installed) && $prefs->has_locale($tmp) ){
                 $locales[$tag] = new Loco_mvc_ViewParams( [
                     'value' => $tag,
-                    'icon'  => $locale->getIcon(),
-                    'label' => $locale->ensureName($api),
+                    'icon'  => $tmp->getIcon(),
+                    'label' => $tmp->ensureName($api),
                 ] );
             }
         }
@@ -202,7 +198,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             ] ) );
             // if copying an existing PO file, we can fairly safely establish the correct prefixing
             if( $copying ){
-                $poname = ( $prefix = $potfile->getPrefix() ) ? sprintf('%s-%s.po',$prefix,$locale) : sprintf('%s.po',$locale);
+                $prefix = $potfile->getPrefix();
+                $poname = $prefix ? sprintf('%s-%s.po',$prefix,$locale) : sprintf('%s.po',$locale);
                 $pofile = new Loco_fs_LocaleFile( $poname );
                 $pofile->normalize( $potfile->dirname() );
                 $filechoice->add( $pofile );
@@ -325,7 +322,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $this->prepareFsConnect( 'create', '' );
         
         $this->enqueueScript('poinit');
-        return $this->view( 'admin/init/init-po', [] );
+        return $this->view('admin/init/init-po');
     }
 
 }

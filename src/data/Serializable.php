@@ -110,9 +110,9 @@ abstract class Loco_data_Serializable extends ArrayObject {
      * override so we can set dirty flag
      */
     #[ReturnTypeWillChange]
-    public function offsetSet( $prop, $value ){
-        if( ! isset($this[$prop]) || $value !== $this[$prop] ){
-            parent::offsetSet( $prop, $value );
+    public function offsetSet( $key, $value ){
+        if( ! isset($this[$key]) || $value !== $this[$key] ){
+            parent::offsetSet( $key, $value );
             $this->dirty = true;
         }
     }
@@ -123,16 +123,16 @@ abstract class Loco_data_Serializable extends ArrayObject {
      * override so we can set dirty flag
      */
     #[ReturnTypeWillChange]
-    public function offsetUnset( $prop ){
-        if( isset($this[$prop]) ){
-            parent::offsetUnset($prop);
+    public function offsetUnset( $key ){
+        if( isset($this[$key]) ){
+            parent::offsetUnset($key);
             $this->dirty = true;
         }
     }
 
 
     /**
-     * @param string|int|float
+     * @param string|int|float $version
      * @return self
      */
     public function setVersion( $version ){
@@ -176,7 +176,7 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
     /**
      * Restore object state from array as returned from getSerializable
-     * @param array
+     * @param array $data
      * @return self
      */    
     protected function setUnserialized( $data ){
@@ -206,9 +206,9 @@ abstract class Loco_data_Serializable extends ArrayObject {
 
 
     /**
-     * @param string
-     * @param mixed
-     * @param mixed[]
+     * @param string $prop
+     * @param mixed $value
+     * @param array $defaults
      * @return mixed
      */
     protected static function cast( $prop, $value, array $defaults ){

@@ -4,7 +4,7 @@ Tags: translation, translators, localization, localisation, l10n, i18n, Gettext,
 Requires at least: 5.2
 Requires PHP: 5.6.20
 Tested up to: 6.1.1
-Stable tag: 2.6.3
+Stable tag: 2.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -99,6 +99,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 
 == Changelog ==
+
+= 2.6.5 =
+* Removed deepl_api_url config. Free API detected from :fx key suffix.
 
 = 2.6.4 =
 * Bumped WordPress version to 6.1.1
@@ -482,7 +485,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.4 =
+= 2.6.5 =
 * Various improvements and bug fixes
 
 

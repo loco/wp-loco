@@ -58,12 +58,6 @@ class Loco_package_Project {
      * @var Loco_fs_FileList
      */
     private $spaths;
-
-    /**
-     * Configured source file extensions, e.g. ["php","js"]
-     * @var string[]
-     */
-    private $sexts;
     
     /**
      * File and directory paths to exclude from source file extraction
@@ -99,17 +93,17 @@ class Loco_package_Project {
      * Whether POT file is protected from end-user update and sync operations.
      * @var bool
      */
-    private $potlock;
+    private $potlock = false;
 
 
     /**
      * Construct project from its domain and a descriptive name
-     * @param Loco_package_Bundle
-     * @param Loco_package_TextDomain
-     * @param string
+     * @param Loco_package_Bundle $bundle
+     * @param Loco_package_TextDomain $domain
+     * @param string $name
      */
     public function __construct( Loco_package_Bundle $bundle, Loco_package_TextDomain $domain, $name ){
-        $this->name = $name;
+        $this->setName($name);
         $this->bundle = $bundle;
         $this->domain = $domain;
         // take default slug from domain, avoiding wildcard
@@ -163,14 +157,14 @@ class Loco_package_Project {
      * @return string
      */
     public function __toString(){
-        return (string) $this->name;
+        return $this->name;
     }
 
 
     /**
      * Set friendly name of project
-     * @param string
-     * @return Loco_package_Project
+     * @param string $name
+     * @return self
      */
     public function setName( $name ){
         $this->name = (string) $name;
@@ -238,8 +232,8 @@ class Loco_package_Project {
 
     /**
      * Add a root path where translation files may live
-     * @param string | Loco_fs_File
-     * @return Loco_package_Project
+     * @param string|Loco_fs_File $location
+     * @return self
      */
     public function addTargetDirectory( $location ){
         $this->target = null;
@@ -250,7 +244,7 @@ class Loco_package_Project {
 
     /**
      * Add a global search path where translation files may live
-     * @param string | Loco_fs_Directory
+     * @param string|Loco_fs_Directory $location
      * @return Loco_package_Project
      */
     public function addSystemTargetDirectory( $location ){
@@ -311,9 +305,8 @@ class Loco_package_Project {
 
     
     /**
-     * utility excludes current exclude paths from target finder
-     * @param Loco_fs_FileFinder
-     * @return Loco_fs_FileFinder
+     * Utility excludes current exclude paths from target finder
+     * @return void
      */
     private function excludeTargets( Loco_fs_FileFinder $finder ){
         foreach( $this->xdpaths as $file ){
@@ -326,13 +319,11 @@ class Loco_package_Project {
                 $finder->exclude( $path );
             }
         }
-        return $finder;
     }
 
 
     /**
      * Check if target file or directory is excluded
-     * @param Loco_fs_File PO or POT file
      * @return bool
      */
     private function isTargetExcluded( Loco_fs_File $file ){
@@ -342,8 +333,8 @@ class Loco_package_Project {
     
     /**
      * Add a path for excluding in a recursive target file search
-     * @param string | Loco_fs_File
-     * @return Loco_package_Project
+     * @param string|Loco_fs_File $path
+     * @return self
      */
     public function excludeTargetPath( $path ){
         $this->target = null;
@@ -418,12 +409,9 @@ class Loco_package_Project {
      */
     public function getSourceExtensions(){
         // TODO source extensions should be moved from plugin settings to project settings
-        $exts = $this->sexts;
-        if( is_null($exts) ){
-            $conf = Loco_data_Settings::get();
-            $exts = $conf->php_alias;
-            $exts = array_merge( $exts, $conf->jsx_alias );
-        }
+        $conf = Loco_data_Settings::get();
+        $exts = $conf->php_alias;
+        $exts = array_merge( $exts, $conf->jsx_alias );
         // always ensure we have at least PHP files scanned
         return array_merge( $exts, ['php'] );
     }
@@ -431,7 +419,6 @@ class Loco_package_Project {
 
     /**
      * Utility excludes current exclude paths from passed target finder
-     * @param Loco_fs_FileFinder
      * @return void
      */
     private function excludeSources( Loco_fs_FileFinder $finder ){
@@ -548,13 +535,13 @@ class Loco_package_Project {
      * @return bool
      */
     public function isPotLocked(){
-        return (bool) $this->potlock;
+        return $this->potlock;
     }
 
 
     /**
      * Lock POT file to prevent end-user updates0
-     * @param bool
+     * @param bool $locked
      * @return Loco_package_Project
      */
     public function setPotLock( $locked ){
@@ -570,7 +557,7 @@ class Loco_package_Project {
     public function getPot(){
         if( ! $this->pot ){
             $slug = $this->getSlug();
-            $name = ( $slug ? $slug : $this->getDomain()->getName() ).'.pot';
+            $name = ( $slug ?: $this->getDomain()->getName() ).'.pot';
             if( '.pot' !== $name ){
                 // find actual file under configured domain paths
                 $targets = $this->getConfiguredTargets()->copy();
@@ -646,9 +633,9 @@ class Loco_package_Project {
                 if( $slug === $name ){
                     return $pot;
                 }
-                // support unconventional <slug>-en_US.<ext>
+                // support unconventional "{slug}-en_US.{ext}"
                 foreach( ['-en_US'=>6, '-en'=>3 ] as $tail => $len ){
-                    if( '-en_US' === substr($name,-$len) && $slug === substr($name,0,-$len) ){
+                    if( $tail === substr($name,-$len) && $slug === substr($name,0,-$len) ){
                         return $pot;
                     }
                 }
@@ -794,14 +781,17 @@ class Loco_package_Project {
             }
             $choice->add( new Loco_fs_LocaleFile($path) );
         }
+        if( 'default' === $domain || '*' === $domain ){
+            $domain = '';
+        }
         /* @var Loco_fs_Directory $dir */
         foreach( $this->getSystemTargets() as $dir ){
             $path = $dir->getPath();
             // themes and plugins under global locations will be loaded by domain, regardless of prefix
-            if( '/themes' === substr($path,-7) || '/plugins' ===  substr($path,-8) ){
+            if( ( '/themes' === substr($path,-7) || '/plugins' ===  substr($path,-8) ) && '' !== $domain ){
                 $path .= '/'.$domain.'-'.$suffix;
             }
-            // all other paths (probably core) use configured prefix, which may be empty
+            // all other paths (probably core) use the configured prefix, which may be empty
             else {
                 $path .= '/'.$prefix.$suffix;
             }

@@ -23,7 +23,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-file-view'),
+            __('Overview') => $this->viewSnippet('tab-file-view'),
         ];
     }
 
@@ -44,12 +44,14 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
         }
 
         // Establish if file belongs to a configured project
+        $bundle = null;
+        $project = null;
         try {
             $bundle = $this->getBundle();
             $project = $this->getProject();
         }
         catch( Exception $e ){
-            $project = null;
+            Loco_error_AdminNotices::debug( $e->getMessage() );
         }    
             
         // Parse data before rendering, so we know it's a valid Gettext format
@@ -72,7 +74,7 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
         
         // else is a PO or POT file 
         $this->enqueueScript('poview');//->enqueueScript('min/highlight');
-        $lines = preg_split('/(?:\\n|\\r\\n?)/', Loco_gettext_Data::ensureUtf8( $file->getContents() ) );
+        $lines = preg_split('/\\n|\\r\\n?/', Loco_gettext_Data::ensureUtf8( $file->getContents() ) );
         $this->set( 'lines', $lines );
         
         // ajax parameters required for pulling reference sources

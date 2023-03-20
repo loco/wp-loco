@@ -133,7 +133,8 @@ class Loco_output_Buffer {
 
 	/**
 	 * Debug collection of junk output
-	 * @param string
+	 * @param string $junk
+     * @return void
 	 */
     private static function log_junk( $junk ){
     	$bytes = strlen($junk);

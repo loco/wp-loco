@@ -22,7 +22,6 @@
  * @property bool $ajax_files Whether to submit PO data as concrete files (requires Blob support in Ajax)
  *
  * @property string $deepl_api_key API key for DeepL Translator
- * @property string $deepl_api_url Base URL for DeepL Translator version
  * @property string $google_api_key API key for Google Translate
  * @property string $lecto_api_key API key for Lecto Translation API
  * @property string $microsoft_api_key API key for Microsoft Translator text API
@@ -62,7 +61,6 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'jed_clean' => false,
         'ajax_files' => true,
         'deepl_api_key' => '',
-        'deepl_api_url' => '',
         'google_api_key' => '',
         'microsoft_api_key' => '',
         'microsoft_api_region' => 'global',
@@ -184,8 +182,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
 
     /**
      * Populate ALL settings from raw postdata.
-     * @param array posted setting values
-     * @param array optional filter to restrict modifiable values
+     * @param array $data Posted setting values
+     * @param array|null $filter Optional filter to restrict modifiable values
      * @return Loco_data_Settings
      */
     public function populate( array $data, $filter = null ){
@@ -223,14 +221,14 @@ class Loco_data_Settings extends Loco_data_Serializable {
 
     /**
      * Map a file extension to registered types, defaults to "php"
-     * @param string
+     * @param string $ext File extension
      * @return string php, js or twig
      */
-    public function ext2type($x){
-        $x = strtolower($x);
+    public function ext2type($ext){
+        $ext = strtolower($ext);
         $types = array_fill_keys( $this->jsx_alias, 'js' );
         $types['twig'] = 'twig'; // <- temporary hack in lieu of dedicated twig extractor
-        return isset($types[$x]) ? $types[$x] : 'php';
+        return isset($types[$ext]) ? $types[$ext] : 'php';
     }
    
 }

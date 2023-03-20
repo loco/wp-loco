@@ -22,7 +22,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-init-pot'),
+            __('Overview') => $this->viewSnippet('tab-init-pot'),
         ];
     }
     
@@ -40,7 +40,6 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         $bundle = $this->getBundle();
         $project = $this->getProject();
 
-        $slug = $project->getSlug();
         $domain = (string) $project->getDomain();
         $this->set('domain', $domain );
         

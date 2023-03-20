@@ -5,6 +5,7 @@
 $this->extend('../layout');
 
     // warn if doing direct extraction
+    /* @var Loco_mvc_ViewParams $params */
     /* @var Loco_mvc_ViewParams $ext */
     if( $params->has('ext') ):?> 
     <div class="notice inline notice-info">

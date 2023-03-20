@@ -97,6 +97,8 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
      * @codeCoverageIgnore
      */
     public function on_wp_ajax_loco_download(){
+        $file = null;
+        $ext = null;
         $data = $this->renderDownload();
         if( is_string($data) ){
             $path = ( $this->ctrl ? $this->ctrl->get('path') : '' ) or $path = 'error.json';
@@ -105,11 +107,9 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         }
         else if( $data instanceof Exception ){
             $data = sprintf('%s in %s:%u', $data->getMessage(), basename($data->getFile()), $data->getLine() );
-            $ext = null;
         }
         else {
             $data = (string) $data;
-            $ext = null;
         }
         $mimes =  [
             'mo'   => 'application/x-gettext-translation',
@@ -119,7 +119,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             'json' => 'application/json',
         ];
         $headers = [];
-	    if( $ext && isset($mimes[$ext]) ){
+	    if( $file instanceof Loco_fs_File && isset($mimes[$ext]) ){
             $headers['Content-Type'] = $mimes[$ext].'; charset=UTF-8';
             $headers['Content-Disposition'] = 'attachment; filename='.$file->basename();
         }
@@ -134,8 +134,6 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 	 * Exit script before WordPress shutdown, avoids hijacking of exit via wp_die_ajax_handler.
 	 * Also gives us a final chance to check for output buffering problems.
 	 * @codeCoverageIgnore
-	 * @param string
-	 * @param array
 	 */
     private function exitScript( $str, array $headers ){
 	    try {
@@ -145,7 +143,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             Loco_output_Buffer::check();
             $headers['Content-Length'] = strlen($str);
             foreach( $headers as $name => $value ){
-                header( $name.': '.$value, true );
+                header( $name.': '.$value );
             }
 	    }
 	    catch( Exception $e ){

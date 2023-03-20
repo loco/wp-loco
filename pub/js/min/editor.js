@@ -1,7 +1,7 @@
 "use strict";
 
 !function(C, d) {
-function w(a) {
+function v(a) {
 return g.l10n._(a);
 }
 function H(a, b, c) {
@@ -12,46 +12,50 @@ return a.format(0, ".", va);
 }
 function wa(a) {
 g.ajax.post("sync", ea, function(b) {
-var c = [], f = b.pot, e = b.po, q = b.done || {
+var c = [], e = b.pot, f = b.po, q = b.done || {
 add: [],
 del: [],
 fuz: []
 }, l = q.add.length, m = q.del.length, z = q.fuz.length, r = q.trn || 0;
-D.clear().load(e);
+D.clear().load(f);
 h.load(D);
 if (l || m || z || r) {
-if (f ? c.push(x(w("Merged from %s"), f)) : c.push(w("Merged from source code")), 
-l && c.push(x(H("%s new string added", "%s new strings added", l), A(l))), m && c.push(x(H("%s obsolete string removed", "%s obsolete strings removed", m), A(m))), 
-z && c.push(x(H("%s string marked Fuzzy", "%s strings marked Fuzzy", z), A(z))), 
-r && c.push(x(H("%s translation copied", "%s translations copied", r), A(r))), d(F).trigger("poUnsaved", []), 
+if (e ? c.push(w(v("Merged from %s"), e)) : c.push(v("Merged from source code")), 
+l && c.push(w(H("%s new string added", "%s new strings added", l), A(l))), m && c.push(w(H("%s obsolete string removed", "%s obsolete strings removed", m), A(m))), 
+z && c.push(w(H("%s string marked Fuzzy", "%s strings marked Fuzzy", z), A(z))), 
+r && c.push(w(H("%s translation copied", "%s translations copied", r), A(r))), d(F).trigger("poUnsaved", []), 
 O(), xa && C.console) {
-f = console;
-e = -1;
-for (l = q.add.length; ++e < l; ) f.log(" + " + String(q.add[e]));
+e = console;
+f = -1;
+for (l = q.add.length; ++f < l; ) e.log(" + " + String(q.add[f]));
 l = q.del.length;
-for (e = 0; e < l; e++) f.log(" - " + String(q.del[e]));
+for (f = 0; f < l; f++) e.log(" - " + String(q.del[f]));
 l = q.fuz.length;
-for (e = 0; e < l; e++) f.log(" ~ " + String(q.fuz[e]));
+for (f = 0; f < l; f++) e.log(" ~ " + String(q.fuz[f]));
 }
-} else f ? c.push(x(w("Strings up to date with %s"), f)) : c.push(w("Strings up to date with source code"));
+} else e ? c.push(w(v("Strings up to date with %s"), e)) : c.push(v("Strings up to date with source code"));
 g.notices.success(c.join(". "));
 d(F).trigger("poMerge", [ b ]);
 a && a();
 }, a);
 }
+function ya(a) {
+const b = a.id, c = g.apis, e = c.providers();
+return c.create(a, e[b] || e._);
+}
 function fa() {
-for (var a = -1, b, c = [], f = I, e = f.length, q = String(ya); ++a < e; ) try {
-b = f[a], null == b.src && (b.src = q), c.push(g.apis.create(b));
+for (var a = -1, b, c = [], e = I, f = e.length, q = String(za); ++a < f; ) try {
+b = e[a], null == b.src && (b.src = q), c.push(ya(b));
 } catch (l) {
 g.notices.error(String(l));
 }
 return c;
 }
 function ha(a) {
-function b(f) {
+function b(e) {
 W = new Date().getTime();
-I = f && f.apis || [];
-0 === I.length ? N = X("loco-apis-empty", f.html) : P = X("loco-apis-batch", f.html);
+I = e && e.apis || [];
+0 === I.length ? N = X("loco-apis-empty", e.html) : P = X("loco-apis-batch", e.html);
 c.remove();
 a(I);
 }
@@ -97,20 +101,20 @@ return b;
 }
 function ka() {
 ha(function(a) {
-a.length ? za() : la();
+a.length ? Aa() : la();
 });
 }
-function Aa(a) {
+function Ba(a) {
 a.preventDefault();
 ha(function(b) {
-b.length ? Ba() : la();
+b.length ? Ca() : la();
 });
 return !1;
 }
 function la() {
 N ? N.dialog("open") : g.notices.error("Logic error. Unconfigured API modal missing");
 }
-function Ba() {
+function Ca() {
 function a(k) {
 a: {
 var p = d(k.api).val();
@@ -124,40 +128,40 @@ p = void 0;
 }
 k = k.existing.checked;
 L.text("Calculating....");
-e = p.createJob();
-e.init(D, k);
+f = g.apis.createJob(p);
+f.init(D, k);
 q = p.toString();
-L.text(x(w("%s unique source strings."), A(e.length)) + " " + x(w("%s characters will be sent for translation."), A(e.chars)));
-y[0].disabled = e.length ? !1 : !0;
+L.text(w(v("%s unique source strings."), A(f.length)) + " " + w(v("%s characters will be sent for translation."), A(f.chars)));
+x[0].disabled = f.length ? !1 : !0;
 l = null;
 }
 function b(k) {
-e && (z && k.fuzzy(0, !0), h.pasteMessage(k), k === h.active && h.setStatus(k), 
+f && (z && k.fuzzy(0, !0), h.pasteMessage(k), k === h.active && h.setStatus(k), 
 h.unsave(k, 0), m++);
 }
 function c(k, p) {
 k = p ? 100 * k / p : 0;
-L.text(x(w("Translation progress %s%%"), A(k)));
+L.text(w(v("Translation progress %s%%"), A(k)));
 }
-function f() {
-y.removeClass("loco-loading");
-if (e && l) {
+function e() {
+x.removeClass("loco-loading");
+if (f && l) {
 var k = l.todo();
-k && g.notices.warn(x(H("Translation job aborted with %s string remaining", "Translation job aborted with %s strings remaining", k), A(k))).slow();
+k && g.notices.warn(w(H("Translation job aborted with %s string remaining", "Translation job aborted with %s strings remaining", k), A(k))).slow();
 k = [];
 var p = l.did();
-p && k.push(x(H("%1$s string translated via %2$s", "%1$s strings translated via %2$s", p), A(p), q));
-m ? k.push(x(H("%s string updated", "%s strings updated", m), A(m))) : p && k.push(w("Nothing needed updating"));
+p && k.push(w(H("%1$s string translated via %2$s", "%1$s strings translated via %2$s", p), A(p), q));
+m ? k.push(w(H("%s string updated", "%s strings updated", m), A(m))) : p && k.push(v("Nothing needed updating"));
 k.length && g.notices.success(k.join(". ")).slow();
-l = e = null;
+l = f = null;
 }
 m && (O(), h.rebuildSearch());
 r && (r.off("dialogclose").dialog("close"), r = null);
 h.fire("poAuto");
 }
-var e, q, l, m = 0, z = !1, r = P.dialog("open"), M = r.find("form"), y = M.find("button.button-primary"), L = d("#loco-job-progress");
-y.removeClass("loco-loading");
-y[0].disabled = !0;
+var f, q, l, m = 0, z = !1, r = P.dialog("open"), M = r.find("form"), x = M.find("button.button-primary"), L = d("#loco-job-progress");
+x.removeClass("loco-loading");
+x[0].disabled = !0;
 g.notices.clear();
 M.off("submit change");
 a(M[0]);
@@ -168,58 +172,58 @@ var p = k.name;
 return !0;
 }).on("submit", function(k) {
 k.preventDefault();
-y.addClass("loco-loading");
-y[0].disabled = !0;
+x.addClass("loco-loading");
+x[0].disabled = !0;
 m = 0;
 c(0);
 z = k.target.fuzzy.checked;
-l = e.dispatch().done(f).each(b).prog(c).stat();
+l = f.dispatch().done(e).each(b).prog(c).stat();
 });
 r.off("dialogclose").on("dialogclose", function() {
-e.abort();
+f.abort();
 r = null;
-f();
+e();
 });
 }
-function za() {
+function Aa() {
 function a(n) {
 if (n.isDefaultPrevented()) return !1;
 var t = n.which;
 let u = -1;
 49 <= t && 57 >= t ? u = t - 49 : 97 <= t && 105 >= t && (u = t - 97);
-return 0 <= u && 9 > u && (t = y && y.find("button.button-primary").eq(u)) && 1 === t.length ? (t.click(), 
+return 0 <= u && 9 > u && (t = x && x.find("button.button-primary").eq(u)) && 1 === t.length ? (t.click(), 
 n.preventDefault(), n.stopPropagation(), !1) : !0;
 }
 function b(n, t) {
 return function(u) {
 u.preventDefault();
 u.stopPropagation();
-e();
+f();
 u = h.current();
 var E = h.getTargetOffset();
 u && u.source(null, E) === n ? (u.translate(t, E), h.focus().reloadMessage(u)) : g.notices.warn("Source changed since suggestion");
 };
 }
 function c(n, t, u, E) {
-var Y = E.getId(), Z = R[Y], ma = String(Z + 1), Ca = E.getUrl(), na = w("Use this translation");
+var Y = E.getId(), Z = R[Y], ma = String(Z + 1), Da = E.getUrl(), na = v("Use this translation");
 E = String(E);
 var oa = K && K[Y];
 n = d('<button class="button button-primary"></button>').attr("tabindex", String(1 + l + Z)).on("click", b(n, t));
 n.attr("accesskey", ma);
 1 < L.length && (na += " (" + ma + ")");
 n.text(na);
-oa && oa.replaceWith(d('<div class="loco-api loco-api-' + Y + '"></div>').append(d('<a class="loco-api-credit" target="_blank" tabindex="-1"></a>').attr("href", Ca).text(E)).append(d("<blockquote " + M + "></blockquote>").text(t || "FAILED")).append(n));
-++V === k && (y && y.dialog("option", "title", w("Suggested translations") + " — " + u.label), 
+oa && oa.replaceWith(d('<div class="loco-api loco-api-' + Y + '"></div>').append(d('<a class="loco-api-credit" target="_blank" tabindex="-1"></a>').attr("href", Da).text(E)).append(d("<blockquote " + M + "></blockquote>").text(t || "FAILED")).append(n));
+++V === k && (x && x.dialog("option", "title", v("Suggested translations") + " — " + u.label), 
 l += V);
 0 === Z && n.focus();
 }
-function f(n) {
+function e(n) {
 var t = d('<div class="loco-api loco-api-loading"></div>').text("Calling " + n + " ...");
 return K[n.getId()] = t;
 }
-function e(n) {
-y && null == n && y.dialog("close");
-K = y = null;
+function f(n) {
+x && null == n && x.dialog("close");
+K = x = null;
 d(C).off("keydown", a);
 }
 function q(n) {
@@ -232,17 +236,17 @@ let l = 99;
 var m = h.current(), z = h.getTargetOffset();
 const r = m && m.source(null, z), M = 'lang="' + String(B) + '" dir="' + (B.isRTL() ? "RTL" : "LTR") + '"';
 if (!r) return !1;
-var y = (Q || (Q = X("loco-apis-hint", "<div></div>"))).html("").append(d('<div class="loco-api"><p>Source text:</p></div>').append(d('<blockquote lang="en"></blockquote>').text(r))).dialog("option", "title", w("Loading suggestions") + "...").off("dialogclose").on("dialogclose", e).dialog("open");
-(m = m.translation(z)) && d('<div class="loco-api"><p>Current translation:</p></div>').append(d("<blockquote " + M + "></blockquote>").text(m)).append(d('<button class="button"></button>').attr("tabindex", String(++l)).text(w("Keep this translation")).on("click", function(n) {
+var x = (Q || (Q = X("loco-apis-hint", "<div></div>"))).html("").append(d('<div class="loco-api"><p>Source text:</p></div>').append(d('<blockquote lang="en"></blockquote>').text(r))).dialog("option", "title", v("Loading suggestions") + "...").off("dialogclose").on("dialogclose", f).dialog("open");
+(m = m.translation(z)) && d('<div class="loco-api"><p>Current translation:</p></div>').append(d("<blockquote " + M + "></blockquote>").text(m)).append(d('<button class="button"></button>').attr("tabindex", String(++l)).text(v("Keep this translation")).on("click", function(n) {
 n.preventDefault();
-e();
-})).appendTo(y);
+f();
+})).appendTo(x);
 for (var L = U || (U = fa()), k = L.length, p = -1, J = pa[r] || (pa[r] = {}), K = {}, V = 0, R = {}; ++p < k; ) m = L[p], 
-y.append(f(m)), z = m.getId(), R[z] = p, J[z] ? c(r, J[z], B, m) : m.translate(r, B, q(m));
+x.append(e(m)), z = m.getId(), R[z] = p, J[z] ? c(r, J[z], B, m) : m.translate(r, B, q(m));
 d(C).on("keydown", a);
 return !0;
 }
-function Da(a) {
+function Ea(a) {
 var b, c = new FormData();
 for (b in a) a.hasOwnProperty(b) && c.append(b, a[b]);
 return c;
@@ -252,7 +256,7 @@ var b = d.extend({
 locale: String(D.locale() || "")
 }, ra || {});
 sa && sa.applyCreds(b);
-aa ? (b = Da(b), b.append("po", new Blob([ String(D) ], {
+aa ? (b = Ea(b), b.append("po", new Blob([ String(D) ], {
 type: "application/x-gettext"
 }), String(b.path).split("/").pop() || "untitled.po")) : b.data = String(D);
 g.ajax.post("save", b, function(c) {
@@ -261,13 +265,13 @@ h.save(!0);
 d("#loco-po-modified").text(c.datetime || "[datetime error]");
 }, a);
 }
-function Ea() {
+function Fa() {
 h.dirty && qa();
 }
-function Fa() {
-return w("Your changes will be lost if you continue without saving");
+function Ga() {
+return v("Your changes will be lost if you continue without saving");
 }
-function Ga(a) {
+function Ha(a) {
 function b() {
 a.disabled = !1;
 d(a).removeClass("loco-loading");
@@ -281,7 +285,7 @@ d(a).removeClass("button-primary");
 });
 ra = d.extend({
 path: ba
-}, v.project || {});
+}, y.project || {});
 d(a).on("click", function(c) {
 c.preventDefault();
 a.disabled = !0;
@@ -291,8 +295,8 @@ return !1;
 });
 return !0;
 }
-function Ha(a) {
-var b = v.project;
+function Ia(a) {
+var b = y.project;
 if (b) {
 var c = function() {
 a.disabled = !1;
@@ -308,11 +312,11 @@ bundle: b.bundle,
 domain: b.domain,
 type: T ? "pot" : "po",
 path: ba || "",
-sync: Ia || "",
-mode: Ja || ""
+sync: Ja || "",
+mode: Ka || ""
 };
-d(a).on("click", function(f) {
-f.preventDefault();
+d(a).on("click", function(e) {
+e.preventDefault();
 a.disabled = !0;
 d(a).addClass("loco-loading");
 wa(c);
@@ -322,30 +326,30 @@ a.disabled = !1;
 }
 return !0;
 }
-function Ka(a) {
+function La(a) {
 h.on("poUnsaved", function() {
 a.disabled = !0;
 }).on("poSave poAuto", function() {
 a.disabled = !1;
 });
-d(a).on("click", Aa);
+d(a).on("click", Ba);
 a.disabled = !1;
 return !0;
 }
-function La(a) {
+function Ma(a) {
 a.disabled = !1;
 d(a).on("click", function(b) {
 b.preventDefault();
 b = 1;
-var c, f = /(\d+)$/;
-for (c = "New message"; D.get(c); ) b = f.exec(c) ? Math.max(b, Number(RegExp.$1)) : b, 
+var c, e = /(\d+)$/;
+for (c = "New message"; D.get(c); ) b = e.exec(c) ? Math.max(b, Number(RegExp.$1)) : b, 
 c = "New message " + ++b;
 h.add(c);
 return !1;
 });
 return !0;
 }
-function Ma(a) {
+function Na(a) {
 a.disabled = !1;
 d(a).on("click", function(b) {
 b.preventDefault();
@@ -357,9 +361,9 @@ return !0;
 function ta(a, b) {
 a.disabled = !1;
 d(a).on("click", function() {
-var c = a.form, f = ba;
-"binary" === b && (f = f.replace(/\.po$/, ".mo"));
-c.path.value = f;
+var c = a.form, e = ba;
+"binary" === b && (e = e.replace(/\.po$/, ".mo"));
+c.path.value = e;
 c.source.value = D.toString();
 return !0;
 });
@@ -370,18 +374,18 @@ a.preventDefault();
 return !1;
 }
 function O() {
-var a = h.stats(), b = a.t, c = a.f, f = a.u;
-b = x(H("%s string", "%s strings", b), A(b));
-var e = [];
-B && (b = x(w("%s%% translated"), a.p.replace("%", "")) + ", " + b, c && e.push(x(w("%s fuzzy"), A(c))), 
-f && e.push(x(w("%s untranslated"), A(f))), e.length && (b += " (" + e.join(", ") + ")"));
+var a = h.stats(), b = a.t, c = a.f, e = a.u;
+b = w(H("%s string", "%s strings", b), A(b));
+var f = [];
+B && (b = w(v("%s%% translated"), a.p.replace("%", "")) + ", " + b, c && f.push(w(v("%s fuzzy"), A(c))), 
+e && f.push(w(v("%s untranslated"), A(e))), f.length && (b += " (" + f.join(", ") + ")"));
 d("#loco-po-status").text(b);
 }
-var g = C.loco, v = g && g.conf, F = document.getElementById("loco-editor-inner");
-if (g && v && F) {
-var xa = !!v.WP_DEBUG, da = g.po.ref && g.po.ref.init(g, v), ea = null, ra = null, aa = v.multipart, Na = g.l10n, x = g.string.sprintf, va = v.wpnum && v.wpnum.thousands_sep || ",", B = v.locale, D = g.po.init(B).wrap(v.powrap), T = !B, ya = g.locale.clone(v.source || {
+const g = C.loco, y = g && g.conf, F = document.getElementById("loco-editor-inner");
+if (g && y && F) {
+var xa = !!y.WP_DEBUG, da = g.po.ref && g.po.ref.init(g, y), ea = null, ra = null, aa = y.multipart, Oa = g.l10n, w = g.string.sprintf, va = y.wpnum && y.wpnum.thousands_sep || ",", B = y.locale, D = g.po.init(B).wrap(y.powrap), T = !B, za = g.locale.clone(y.source || {
 lang: "en"
-}), Oa = document.getElementById("loco-actions"), ba = v.popath, Ia = v.potpath, Ja = v.syncmode, G = document.getElementById("loco-fs"), sa = G && g.fs.init(G), ia = v.readonly;
+}), Pa = document.getElementById("loco-actions"), ba = y.popath, Ja = y.potpath, Ka = y.syncmode, G = document.getElementById("loco-fs"), sa = G && g.fs.init(G), ia = y.readonly;
 G = !ia;
 var I, U, pa = {}, Q, P, N, W = 0, ja = {
 my: "top",
@@ -393,19 +397,19 @@ da || g.notices.warn("admin.js is out of date. Please empty your browser cache a
 var ua = function() {
 var a, b = parseInt(d(F).css("min-height") || 0);
 return function() {
-for (var c = F, f = c.offsetTop || 0; (c = c.offsetParent) && c !== document.body; ) f += c.offsetTop || 0;
-c = Math.max(b, C.innerHeight - f - 20);
+for (var c = F, e = c.offsetTop || 0; (c = c.offsetParent) && c !== document.body; ) e += c.offsetTop || 0;
+c = Math.max(b, C.innerHeight - e - 20);
 a !== c && (F.style.height = String(c) + "px", a = c);
 };
 }();
 ua();
 d(C).resize(ua);
 F.innerHTML = "";
-var h = g.po.ed.init(F).localise(Na);
-g.po.kbd.init(h).add("save", G ? Ea : ca).add("hint", B && G && ka || ca).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
+var h = g.po.ed.init(F).localise(Oa);
+g.po.kbd.init(h).add("save", G ? Fa : ca).add("hint", B && G && ka || ca).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
 var S = {
-save: G && Ga,
-sync: G && Ha,
+save: G && Ha,
+sync: G && Ia,
 revert: function(a) {
 h.on("poUnsaved", function() {
 a.disabled = !1;
@@ -422,8 +426,8 @@ return !0;
 invs: function(a) {
 var b = d(a);
 a.disabled = !1;
-h.on("poInvs", function(c, f) {
-b[f ? "addClass" : "removeClass"]("inverted");
+h.on("poInvs", function(c, e) {
+b[e ? "addClass" : "removeClass"]("inverted");
 });
 b.on("click", function(c) {
 c.preventDefault();
@@ -449,33 +453,33 @@ return !0;
 source: ta,
 binary: T ? null : ta
 };
-T ? (S.add = G && La, S.del = G && Ma) : S.auto = Ka;
+T ? (S.add = G && Ma, S.del = G && Na) : S.auto = La;
 d("#loco-editor > nav .button").each(function(a, b) {
 a = b.getAttribute("data-loco");
 var c = S[a];
 c && c(b, a) || d(b).addClass("loco-noop");
 });
-d(Oa).on("submit", ca);
+d(Pa).on("submit", ca);
 (function(a) {
-function b(e) {
-d(a.parentNode)[e || null == e ? "removeClass" : "addClass"]("invalid");
+function b(f) {
+d(a.parentNode)[f || null == f ? "removeClass" : "addClass"]("invalid");
 }
 h.searchable(g.fulltext.init());
 a.disabled = !1;
-var c = a.value = "", f = g.watchtext(a, function(e) {
-e = h.filter(e, !0);
-b(e);
+var c = a.value = "", e = g.watchtext(a, function(f) {
+f = h.filter(f, !0);
+b(f);
 });
-h.on("poFilter", function(e, q, l) {
-c = f.val();
-f.val(q || "");
+h.on("poFilter", function(f, q, l) {
+c = e.val();
+e.val(q || "");
 b(l);
 }).on("poMerge", function() {
 c && h.filter(c);
 });
 })(document.getElementById("loco-search"));
 h.on("poUnsaved", function() {
-C.onbeforeunload = Fa;
+C.onbeforeunload = Ga;
 }).on("poSave", function() {
 O();
 C.onbeforeunload = null;
@@ -483,11 +487,11 @@ C.onbeforeunload = null;
 b = "CODE" === b.tagName ? b : b.getElementsByTagName("CODE")[0];
 return b && da ? (da.load(b.textContent), a.preventDefault(), !1) : !0;
 });
-D.load(v.podata);
+D.load(y.podata);
 h.load(D);
 (B = h.targetLocale) ? B.isRTL() && d(F).addClass("trg-rtl") : h.unlock();
 O();
 delete g.conf;
-v = S = null;
+S = null;
 }
 }(window, window.jQuery);

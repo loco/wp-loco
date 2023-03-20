@@ -58,12 +58,14 @@ echo $header;
             </form>
             <form action="<?php $params->e('dlAction')?>" method="post" target="_blank" id="loco-download" class="aux">
                 <fieldset>
-                    <button class="button button-link has-icon icon-download" data-loco="source" disabled title="<?php $ui->e('download')?>">
+                    <button class="button button-link has-icon icon-download" data-loco="source" disabled title="<?php $ui->e('download')?> <?php $params->e('filetype')?>">
                         <span><?php $params->e('filetype')?></span>
-                    </button>
+                    </button><?php
+                    if( 'MO' !== $params->filetype ):?> 
                     <button class="button button-link has-icon icon-download" data-loco="binary" disabled title="<?php $ui->e('download')?> MO">
                         <span>MO</span>
-                    </button>
+                    </button><?php
+                    endif;?> 
                 </fieldset>
                 <?php
                 $dlFields->_e();?> 

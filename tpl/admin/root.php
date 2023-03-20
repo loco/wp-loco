@@ -3,9 +3,9 @@
  * Root admin screen
  */
 
+/* @var Loco_mvc_View $this */
 $this->extend('layout');
-?> 
-
+?>  
     <div class="notice inline notice-info">
         <p class="has-lang">
             <span <?php echo $siteLocale->attr?>><code><?php $siteLocale->e('code')?></code></span>

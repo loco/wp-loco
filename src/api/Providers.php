@@ -24,23 +24,23 @@ abstract class Loco_api_Providers {
                 'id' => 'deepl',
                 'name' => 'DeepL Translator',
                 'key' => $settings->offsetGet('deepl_api_key'),
-                'url' => $settings->offsetGet('deepl_api_url'),
-            ],
-             [
+                'url' => 'https://www.deepl.com/translator',
+            ],[
                 'id' => 'google',
                 'name' => 'Google Translate',
                 'key' => $settings->offsetGet('google_api_key'),
-            ],
-             [
+                'url' => 'https://translate.google.com/',
+            ],[
                 'id' => 'microsoft',
                 'name' => 'Microsoft Translator',
                 'key' => $settings->offsetGet('microsoft_api_key'),
                 'region' => $settings->offsetGet('microsoft_api_region'),
-            ],
-             [
+                'url' => 'https://aka.ms/MicrosoftTranslatorAttribution',
+            ],[
                 'id' => 'lecto',
                 'name' => 'Lecto AI',
                 'key' => $settings->offsetGet('lecto_api_key'),
+                'url' => 'https://lecto.ai/?ref=loco',
             ],
         ];
     }
@@ -57,7 +57,7 @@ abstract class Loco_api_Providers {
 
     /**
      * @internal
-     * @param string[]
+     * @param $api string[]
      * @return bool
      */
     private static function filterConfigured( array $api ){
@@ -67,8 +67,8 @@ abstract class Loco_api_Providers {
 
     /**
      * @internal
-     * @param string[]
-     * @param string[]
+     * @param string[] $a
+     * @param string[] $b
      * @return int
      */
     private static function compareNames( array $a, array $b ){
@@ -78,7 +78,7 @@ abstract class Loco_api_Providers {
     
     /**
      * Sort providers alphabetically
-     * @param array
+     * @param array[] $apis
      * @return array
      */
     public static function sort( array $apis ){
