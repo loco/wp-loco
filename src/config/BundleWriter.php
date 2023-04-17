@@ -43,7 +43,7 @@ class Loco_config_BundleWriter implements JsonSerializable {
      */
     public function toForm(){
         $model = new Loco_config_FormModel;
-        $dom = $this->compile($model);
+        $this->compile($model);
         return $model->getPost();
     }
 

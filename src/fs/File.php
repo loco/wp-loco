@@ -355,7 +355,7 @@ class Loco_fs_File {
 
     /**
      * Check if passed path is equal to ours
-     * @param string
+     * @param string $path
      * @return bool
      */
     public function equal( $path ){
@@ -365,7 +365,7 @@ class Loco_fs_File {
 
     /**
      * Normalize path for string comparison, resolves redundant dots and slashes.
-     * @param string path to prefix
+     * @param string $base path to prefix
      * @return string
      */
     public function normalize( $base = '' ){
@@ -394,8 +394,8 @@ class Loco_fs_File {
 
 
     /**
-     * @param string
-     * @param string[]
+     * @param string $path
+     * @param string[] $b
      * @return array
      */
     private static function explode( $path, array $b ){
@@ -422,19 +422,18 @@ class Loco_fs_File {
 
     /**
      * Get path relative to given location, unless path is already relative
-     * @param string base path
+     * @param string $base Base path
      * @return string path relative to given base
      */
     public function getRelativePath( $base ){
         $path = $this->normalize();
         if( self::abs($path) ){
-            // base may needs require normalizing
+            // base may require normalizing
             $file = new Loco_fs_File($base);
             $base = $file->normalize();
-            $length = strlen($base);
+            $length = strlen($base)+1;
             // if we are below given base path, return ./relative
-            if( substr($path,0,$length) === $base ){
-                ++$length;
+            if( substr($path,0,$length) === $base.'/' ){
                 if( strlen($path) > $length ){
                     return substr( $path, $length );
                 }

@@ -94,7 +94,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Check if given file is already in list
-     * @param Loco_fs_File
+     * @param Loco_fs_File $file
      * @return bool
      */
     public function has( Loco_fs_File $file ){
@@ -105,8 +105,8 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Get a copy of list with only files not contained in passed list
-     * @param Loco_fs_FileList
-     * @return Loco_fs_FileList
+     * @param self $not_in
+     * @return self
      */
     public function diff( Loco_fs_FileList $not_in ){
         $list = new Loco_fs_FileList;
@@ -120,8 +120,8 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Merge another list of the SAME TYPE uniquely on top of current one
-     * @param Loco_fs_FileList
-     * @return Loco_fs_FileList
+     * @param self $list
+     * @return self
      */
     public function augment( loco_fs_FileList $list ){
         foreach( $list as $file ){
@@ -129,5 +129,5 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
         }
         return $this;
     }
-    
+
 }

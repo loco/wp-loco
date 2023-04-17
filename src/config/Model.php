@@ -84,7 +84,7 @@ abstract class Loco_config_Model {
             // Calculate relative path to the config file itself
             $relpath = $file->getRelativePath( $this->base );
             // Map to a configured base path if target is not under our root. This makes XML more portable
-            // matching order is most specific first, resulting in shortest path
+            // matching order is the most specific first, resulting in the shortest path
             if( $relpath && ( Loco_fs_File::abs($relpath) || '..' === substr($relpath,0,2) || $this->base === $this->getDirectoryPath('ABSPATH') ) ){
                 $bases = [ 'LOCO_LANG_DIR', 'WP_LANG_DIR', 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR', 'WP_CONTENT_DIR', 'ABSPATH' ];
                 foreach( $bases as $key ){

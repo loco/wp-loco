@@ -437,7 +437,7 @@ class Loco_package_Project {
 
     /**
      * Add a root path where source files may live under for this project
-     * @param string | Loco_fs_File
+     * @param string|Loco_fs_File $location
      * @return Loco_package_Project
      */
     public function addSourceDirectory( $location ){
@@ -449,7 +449,7 @@ class Loco_package_Project {
 
     /**
      * Add Explicit source file to project config
-     * @param string | Loco_fs_File
+     * @param string|Loco_fs_File $path
      * @return Loco_package_Project
      */
     public function addSourceFile( $path ){
@@ -461,7 +461,7 @@ class Loco_package_Project {
 
     /**
      * Add a file or directory as a source location
-     * @param string | Loco_fs_File
+     * @param string|Loco_fs_File $path
      * @return Loco_package_Project
      */
     public function addSourceLocation( $path ){
@@ -498,7 +498,7 @@ class Loco_package_Project {
     
     /**
      * Add a path for excluding in source file search
-     * @param string | Loco_fs_File
+     * @param string|Loco_fs_File $path
      * @return Loco_package_Project
      */
     public function excludeSourcePath( $path ){

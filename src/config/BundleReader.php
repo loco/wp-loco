@@ -103,7 +103,7 @@ class Loco_config_BundleReader {
                     // sources may be <file>, <directory> or pass in special <path> if it could be either 
                     foreach( $model->query('file',$sourceElement) as $fileElement ){
                         $project->addSourceFile( $model->evaluateFileElement($fileElement) );
-                    }                
+                    }
                     foreach( $model->query('directory',$sourceElement) as $fileElement ){
                         $project->addSourceDirectory( $model->evaluateFileElement($fileElement) );
                     }
