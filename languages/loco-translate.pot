@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2023-04-17 11:38+0000\n"
+"POT-Creation-Date: 2023-06-29 11:21+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.5-dev; wp-6.2\n"
+"X-Loco-Version: 2.6.5-dev; wp-6.2.2\n"
 "X-Domain: loco-translate"
 
 #: src/fs/FileWriter.php:214
@@ -465,7 +465,7 @@ msgstr ""
 msgid "Connected to remote file system"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:57 tpl/admin/bundle/locale.php:72
+#: tpl/admin/bundle/inc-po-table.php:60 tpl/admin/bundle/locale.php:72
 msgid "Copy"
 msgstr ""
 
@@ -503,7 +503,7 @@ msgid "Debug"
 msgstr ""
 
 #: src/admin/file/BaseController.php:123 tpl/admin/file/diff.php:32
-#: tpl/admin/bundle/inc-po-table.php:63 tpl/admin/bundle/locale.php:75
+#: tpl/admin/bundle/inc-po-table.php:66 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
 
@@ -558,7 +558,7 @@ msgstr ""
 msgid "Download controller returned empty output"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:48 tpl/admin/bundle/locale.php:63
+#: tpl/admin/bundle/inc-po-table.php:51 tpl/admin/bundle/locale.php:63
 msgid "Edit"
 msgstr ""
 
@@ -825,7 +825,7 @@ msgstr ""
 msgid "File doesn't exist"
 msgstr ""
 
-#: src/admin/file/BaseController.php:120 tpl/admin/bundle/inc-po-table.php:22
+#: src/admin/file/BaseController.php:120 tpl/admin/bundle/inc-po-table.php:25
 #: tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
@@ -925,7 +925,7 @@ msgstr ""
 msgid "Find config"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:28 tpl/admin/bundle/locale.php:49
+#: tpl/admin/bundle/inc-po-table.php:31 tpl/admin/bundle/locale.php:49
 msgid "Folder"
 msgstr ""
 
@@ -1019,7 +1019,7 @@ msgstr ""
 msgid "Include Fuzzy strings"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:54 tpl/admin/bundle/locale.php:69
+#: tpl/admin/bundle/inc-po-table.php:57 tpl/admin/bundle/locale.php:69
 msgid "Info"
 msgstr ""
 
@@ -1099,7 +1099,7 @@ msgstr ""
 msgid "Last extracted"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:25 tpl/admin/bundle/locale.php:46
+#: tpl/admin/bundle/inc-po-table.php:28 tpl/admin/bundle/locale.php:46
 #: tpl/admin/list/locales.php:19 tpl/admin/list/inc-table.php:17
 msgid "Last modified"
 msgstr ""
@@ -1227,7 +1227,7 @@ msgctxt "Modified time"
 msgid "Updated"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:60
+#: tpl/admin/bundle/inc-po-table.php:63
 msgid "Move"
 msgstr ""
 
@@ -1283,7 +1283,7 @@ msgstr ""
 msgid "No translation APIs configured"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:108
+#: tpl/admin/bundle/inc-po-table.php:115
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -1365,7 +1365,7 @@ msgstr ""
 msgid "Partially configured bundle"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:19 tpl/admin/bundle/locale.php:39
+#: tpl/admin/bundle/inc-po-table.php:22 tpl/admin/bundle/locale.php:39
 msgid "Pending"
 msgstr ""
 
@@ -1675,6 +1675,10 @@ msgstr ""
 msgid "Start translating"
 msgstr ""
 
+#: tpl/admin/bundle/inc-po-table.php:19
+msgid "Strings"
+msgstr ""
+
 #. Message appears after sync operation, where %s refers to a POT file.
 #: src/js/Strings.php:41
 #, javascript-format
@@ -1716,7 +1720,7 @@ msgid "System diagnostics"
 msgstr ""
 
 #: tpl/admin/file/view-pot.php:9 tpl/admin/file/edit-pot.php:10
-#: tpl/admin/file/info-pot.php:18 tpl/admin/bundle/inc-po-table.php:42
+#: tpl/admin/file/info-pot.php:18 tpl/admin/bundle/inc-po-table.php:45
 #: tpl/admin/bundle/conf.php:65
 msgid "Template file"
 msgstr ""
@@ -1775,7 +1779,7 @@ msgid "The namespace into which WordPress will load translated strings"
 msgstr ""
 
 #. used when user name of web server process is unknown
-#: src/compat/PosixExtension.php:111
+#: src/compat/PosixExtension.php:115
 msgid "the web server"
 msgstr ""
 
@@ -2065,7 +2069,7 @@ msgstr ""
 msgid "Version %s"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:51 tpl/admin/bundle/locale.php:66
+#: tpl/admin/bundle/inc-po-table.php:54 tpl/admin/bundle/locale.php:66
 msgid "View"
 msgstr ""
 

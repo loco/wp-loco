@@ -17,8 +17,8 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 
     /**
      * Generate a GET request URL containing required routing parameters
-     * @param string
-     * @param array
+     * @param string $route
+     * @param array $args
      * @return string
      */
     public static function generate( $route, array $args = [] ){

@@ -84,7 +84,7 @@ class Loco_output_Buffer {
 
     /**
      * Collect output buffered to a given level
-     * @param int highest buffer to flush, 0 being the root
+     * @param int $min highest buffer to flush, 0 being the root
      * @return string
      */
     public static function collect( $min ){
@@ -126,7 +126,7 @@ class Loco_output_Buffer {
     public static function check(){
 	    if( headers_sent($file,$line) && 'cli' !== PHP_SAPI ){
 		    $file = str_replace( trailingslashit( loco_constant('ABSPATH') ), '', $file );
-		    throw new Loco_error_Exception( sprintf( __('Loco interrupted by output from %s:%u','loco-translate'), $file, $line ) );
+		    throw new Loco_error_Exception( sprintf( __('Loco interrupted by output from %s:%u','loco-translate'), $file?:'Unknown', $line ) );
 	    }
     }
 
@@ -139,7 +139,7 @@ class Loco_output_Buffer {
     private static function log_junk( $junk ){
     	$bytes = strlen($junk);
 		$message = sprintf("Cleared %s of buffered output", Loco_mvc_FileParams::renderBytes($bytes) );
-		Loco_error_AdminNotices::debug( $message );
+        Loco_error_AdminNotices::debug( $message );
 		do_action( 'loco_buffer_cleared', $junk );
 	}
 

@@ -36,7 +36,7 @@ class Loco_fs_File {
 
     /**
      * Check if a path is absolute and return fixed slashes for readability
-     * @param string
+     * @param string $path
      * @return string fixed path, or "" if not absolute
      */
     public static function abs( $path ){
@@ -62,7 +62,7 @@ class Loco_fs_File {
 
     /**
      * Create file with initial, unvalidated path
-     * @param string
+     * @param string $path
      */    
     public function __construct( $path ){
         $this->setPath( $path );
@@ -71,7 +71,7 @@ class Loco_fs_File {
 
     /**
      * Internally set path value and flag whether relative or absolute
-     * @param string
+     * @param string $path
      * @return void
      */
     private function setPath( $path ){
@@ -108,7 +108,7 @@ class Loco_fs_File {
 
     /**
      * Copy write context with our file reference
-     * @param Loco_fs_FileWriter|null
+     * @param Loco_fs_FileWriter|null $context
      * @return void
      */
     private function cloneWriteContext( Loco_fs_FileWriter $context = null ){
@@ -144,7 +144,18 @@ class Loco_fs_File {
      * @return bool
      */
     public function exists(){
-        return file_exists( $this->path );
+        return file_exists($this->path);
+    }
+
+
+    /**
+     * Check if current path is within open_basedir restrictions
+     * @codeCoverageIgnore
+     * @return bool
+     */
+    public function inBaseDir(){
+        $bases = new Loco_fs_Locations( explode(':',ini_get('open_basedir') ));
+        return $bases->check( $this->path );
     }
 
 
@@ -317,8 +328,8 @@ class Loco_fs_File {
 
     /**
      * Set file mode
-     * @param int file mode integer e.g 0664
-     * @param bool whether to set recursively (directories)
+     * @param int $mode file mode integer e.g 0664
+     * @param bool $recursive whether to set recursively (directories)
      * @return Loco_fs_File
      */
     public function chmod( $mode, $recursive = false ){
@@ -540,7 +551,7 @@ class Loco_fs_File {
 
     /**
      * Copy this file for real
-     * @param string new path
+     * @param string $dest new path
      * @throws Loco_error_WriteException
      * @return Loco_fs_File new file
      */
@@ -555,7 +566,7 @@ class Loco_fs_File {
 
     /**
      * Move/rename this file for real
-     * @param Loco_fs_File target file with new path
+     * @param Loco_fs_File $dest target file with new path
      * @throws Loco_error_WriteException
      * @return Loco_fs_File original file that should no longer exist
      */

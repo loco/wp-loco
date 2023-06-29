@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.2
+Tested up to: 6.2.2
 Stable tag: 2.6.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -103,7 +103,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.6.5 =
 * Removed deepl_api_url config. Free API detected from :fx key suffix.
 * Fixed bug in relative path calculations
-* Bumped WordPress compatibility to 6.2
+* Added total strings count to PO file tables
+* Bumped WordPress compatibility to 6.2.2
 
 = 2.6.4 =
 * Bumped WordPress version to 6.1.1

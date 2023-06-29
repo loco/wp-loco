@@ -56,8 +56,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * Add a mappable location
-     * @param string
-     * @param string
+     * @param string $subdir
+     * @param string $path
      * @return self
      */
     private function add( $subdir, $path ){
@@ -73,7 +73,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Map a file directly from a standard system location to LOCO_LANG_DIR.
      * - this does not check if file exists, only what the path should be.
      * - this does not handle filename differences (so won't work with themes)
-     * @param string e.g. {WP_CONTENT_DIR}/languages/plugins/foo or {WP_PLUGIN_DIR}/foo/anything/foo
+     * @param string $path e.g. {WP_CONTENT_DIR}/languages/plugins/foo or {WP_PLUGIN_DIR}/foo/anything/foo
      * @return string e.g. {WP_CONTENT_DIR}/languages/loco/plugins/foo
      */
     private function resolve( $path ){
@@ -93,8 +93,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `theme_locale` filter callback.
      * Signals the beginning of a "load_theme_textdomain" process
-     * @param string
-     * @param string
+     * @param string $locale
+     * @param string $domain
      * @return string
      */
     public function filter_theme_locale( $locale, $domain = '' ){
@@ -107,8 +107,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `plugin_locale` filter callback.
      * Signals the beginning of a "load_plugin_textdomain" process
-     * @param string 
-     * @param string
+     * @param string $locale
+     * @param string $domain
      * @return string
      */
     public function filter_plugin_locale( $locale, $domain = '' ){
@@ -121,7 +121,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `unload_textdomain` action callback.
      * Lets us release lock so that custom file may be loaded again (hopefully for another locale)
-     * @param string
+     * @param string $domain
      * @return void
      */
     public function on_unload_textdomain( $domain ){
@@ -131,10 +131,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * `load_textdomain` action callback.
-     * Lets us load our custom translations before WordPress loads what it was going to anyway.
+     * Lets us load our custom translations before WordPress loads what it had already decided to load.
      * We're deliberately not stopping WordPress loading $mopath, if it exists it will be merged on top of our custom strings.
-     * @param string
-     * @param string
+     * @param string $domain
+     * @param string $mopath
      * @return void
      */
     public function on_load_textdomain( $domain, $mopath ){
@@ -202,9 +202,9 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `load_script_translations` filter callback.
      * Merges custom translations on top of installed ones, as late as possible.
-     * @param string contents of JSON file that WordPress has read 
-     * @param string path relating to given JSON (not used here)
-     * @param string script handle for registered merge
+     * @param string $json contents of JSON file that WordPress has read 
+     * @param string $path path relating to given JSON (not used here)
+     * @param string $handle script handle for registered merge
      * @return string final JSON translations
      * @noinspection PhpUnusedParameterInspection
      */
@@ -220,8 +220,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * Merge two JSON translation files such that custom strings override
-     * @param string Original/fallback JSON
-     * @param string Custom JSON (must exclude empty keys)
+     * @param string $json Original/fallback JSON
+     * @param string $custom Custom JSON (must exclude empty keys)
      * @return string Merged JSON
      */
     private static function mergeJson( $json, $custom ){
@@ -256,7 +256,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * Test if unserialized JSON is a valid JED structure
-     * @param array
+     * @param array $jed
      * @return bool
      */
     private static function jedValid( $jed ){

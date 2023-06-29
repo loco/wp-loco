@@ -3,9 +3,22 @@
  * Test case that doesn't need any WordPress bootstrapping
  */
 abstract class Loco_test_TestCase extends PHPUnit_Adapter_TestCase {
+
+    /**
+     * Buffering output for tests that won't capture output
+     * @var Loco_output_Buffer
+     */
+    private $buffer;
     
     
+    public function set_up(){
+        parent::set_up();
+        $this->buffer = Loco_output_Buffer::start();
+    }
+
+
     public function tear_down(){
+        $this->buffer->close();
         parent::tear_down();
         Loco_error_AdminNotices::destroy();
     }

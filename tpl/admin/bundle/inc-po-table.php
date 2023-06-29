@@ -16,6 +16,9 @@
                         <?php esc_html_e('Translation progress','loco-translate')?> 
                     </th>
                     <th data-sort-type="n">
+                        <?php esc_html_e('Strings','loco-translate')?> 
+                    </th>
+                    <th data-sort-type="n">
                         <?php esc_html_e('Pending','loco-translate')?> 
                     </th>
                     <th data-sort-type="s">
@@ -70,22 +73,26 @@
                     <td data-sort-value="<?php echo $po->meta->getPercent()?>">
                         <?php $po->meta->printProgress()?> 
                     </td>
-                    <td title="of <?php $po->n('total')?>">
+                    <td>
                         <?php echo $po->meta->getPercent()?>%
+                    </td>
+                    <td data-sort-value="<?php $po->n('total')?> ">
+                        <?php $po->n('total')?> 
                     </td>
                     <td data-sort-value="<?php $po->f('todo','%u')?>">
                         <?php $po->n('todo')?> 
                     </td><?php
 
+                    // else is a template, so has no progress
                     else:?> 
                     <td data-sort-value="-1">
-                        -- <!-- no progress for template -->
-                    </td>
-                    <td>
-                        <!-- no percentage for template -->
+                        --
                     </td>
                     <td data-sort-value="-1">
-                        -- <!-- no pendingfor template -->
+                        --
+                    </td>
+                    <td data-sort-value="-1">
+                        --
                     </td><?php
                     endif?> 
 

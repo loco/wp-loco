@@ -1,1 +1,29 @@
-form.loco-filter{float:right}@media only screen and (max-width: 1024px){table.wp-list-table a.row-title{max-width:100px}}
+/**
+ * Bundle overview screen showing project listings
+ */
+/*table.wp-list-table {
+    td > a,
+    td > time {
+        display: inline-block;
+        max-width: 100%;
+        @include text-overflow();
+    }
+
+}*/
+form.loco-filter {
+  float: right;
+}
+
+@media only screen and (max-width: 1024px) {
+  table.wp-list-table {
+    /*/ collapse progress down to just text - no progress bar
+    div.progress .t {
+        display: none;
+    }*/
+  }
+  table.wp-list-table a.row-title {
+    max-width: 100px;
+  }
+}
+
+/*# sourceMappingURL=bundle.css.map */

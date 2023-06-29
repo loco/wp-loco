@@ -87,8 +87,8 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
     /**
      * plugin_action_links action callback
-     * @param string[]
-     * @param string
+     * @param string[] $links
+     * @param string $plugin
      * @return string[]
      */
     public function on_plugin_action_links( $links, $plugin = '' ){
@@ -123,7 +123,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
     /**
      * pre_update_option_{$option} filter callback for $option = "active_plugins"
-     * @param array active plugins
+     * @param array|null $value Active plugins
      * @return array
      */
     public function filter_pre_update_option_active_plugins( $value = null ){
@@ -134,7 +134,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
     /**
      * pre_update_site_option_{$option} filter callback for $option = "active_sitewide_plugins"
-     * @param array active sitewide plugins
+     * @param array|null $value Active sitewide plugins
      * @return array
      */
     public function filter_pre_update_site_option_active_sitewide_plugins( $value = null ){

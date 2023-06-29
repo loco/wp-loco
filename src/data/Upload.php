@@ -19,7 +19,7 @@
 
      /**
       * Pass through temporary file data
-      * @param string key in $_FILES known to exist
+      * @param string $key Key in $_FILES known to exist
       * @return string
       * @throws Loco_error_UploadException
       */
@@ -30,7 +30,7 @@
      
 
      /**
-      * @param array member of $_FILE
+      * @param array $data member of $_FILE
       * @throws Loco_error_UploadException
       */
     public function __construct( array $data ){
@@ -57,8 +57,12 @@
         default:
             throw new Loco_error_UploadException('Unknown file upload error',$code);
         }
-        // upload is OK according to PHP, but check it's really readable and not empty
+        // upload is OK according to PHP, but may need moving if upload_tmp_dir is not under open_basedir.
         $path = $data['tmp_name'];
+        if( defined('WP_TEMP_DIR') ){
+            
+        }
+        // check it's really readable and not empty
         $file = new Loco_fs_File($path);
         if( ! $file->exists() ){
             throw new Loco_error_UploadException('Uploaded file is not readable',UPLOAD_ERR_NO_FILE);

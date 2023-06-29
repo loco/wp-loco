@@ -169,17 +169,35 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      */
     #[ReturnTypeWillChange]
     public function jsonSerialize(){
-        return  [
+        $a = [
             'code' => $this->getCode(),
             'type' => $this->getType(),
-            'class' => get_class($this),
             'title' => $this->getTitle(),
             'message' => $this->getMessage(),
-            //'file' => str_replace( ABSPATH, '', $this->getRealFile() ),
-            //'line' => $this->getRealLine()
         ];
+        /*if( loco_debugging() ){
+            $a['file'] = str_replace( ABSPATH, '', $this->getRealFile() );
+            $a['line'] = $this->getRealLine();
+            $a = self::recurseJsonSerialize($a,$this);
+        }*/
+        return $a;
     }
 
+
+    /**
+     * @param string[] $a
+     * @return array modified from $a
+     * @codeCoverageIgnore
+     */
+    private static function recurseJsonSerialize( array $a, Exception $child ){
+        $a['class'] = get_class($child);
+        $a['trace'] = $child->getTraceAsString();
+        $parent = $child->getPrevious();
+        if( $parent instanceof Exception ){
+            $a['previous'] = self::recurseJsonSerialize([],$parent);
+        }
+        return $a;
+    }
 
     /**
      * Push navigation links into error. Use for help pages etc..

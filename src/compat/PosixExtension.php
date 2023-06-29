@@ -56,8 +56,10 @@ abstract class Loco_compat_PosixExtension {
      * Attempt to get effective user ID by reading a temporary file
      * @return int
      */
-    public static function getuidViaTempDir(){
-        $dir = get_temp_dir();
+    public static function getuidViaTempDir( $dir = '' ){
+        if( ! $dir ) {
+            $dir = get_temp_dir();
+        }
         if( 04000 & fileperms($dir) ){
             trigger_error( sprintf('%s directory has setuid bit, getuid may not be accurate',basename($dir) ), E_USER_NOTICE );
         }
@@ -73,10 +75,12 @@ abstract class Loco_compat_PosixExtension {
      * Attempt to get effective group ID by reading a temporary file
      * @return int
      */
-    public static function getgidViaTempDir(){
-        $dir = get_temp_dir();
+    public static function getgidViaTempDir( $dir = '' ){
+        if( ! $dir ) {
+            $dir = get_temp_dir();
+        }
         if( 02000 & fileperms($dir) ){
-            trigger_error( sprintf('%s directory has setgid bit, getgid may not be accurate',basename($dir) ), E_USER_NOTICE );
+            trigger_error( sprintf('%s directory has setgid bit, getgid may not be accurate',basename($dir) ) );
         }
         $path = wp_tempnam( 'loco-sniff-'.time(), $dir );
         $gid = filegroup($path);

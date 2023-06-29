@@ -15,7 +15,7 @@ class Loco_fs_FileWriter {
     private $fs;
 
     /**
-     * @param Loco_fs_File
+     * @param Loco_fs_File $file
      */
     public function __construct( Loco_fs_File $file ){
         $this->file = $file;
@@ -24,7 +24,7 @@ class Loco_fs_FileWriter {
     
     
     /**
-     * @param Loco_fs_File
+     * @param Loco_fs_File $file
      * @return Loco_fs_FileWriter
      */
     public function setFile( Loco_fs_File $file ){
@@ -77,7 +77,7 @@ class Loco_fs_FileWriter {
 
     /**
      * Map virtual path for remote file system
-     * @param string
+     * @param string $path
      * @return string
      */
     private function mapPath( $path ){
@@ -121,8 +121,8 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * @param int file mode integer e.g 0664
-     * @param bool whether to set recursively (directories)
+     * @param int $mode file mode integer e.g 0664
+     * @param bool $recursive whether to set recursively (directories)
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
@@ -136,7 +136,7 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * @param Loco_fs_File target for copy
+     * @param Loco_fs_File $copy target for copy
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
@@ -165,7 +165,7 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * @param Loco_fs_File target file with new path
+     * @param Loco_fs_File $dest target file with new path
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
@@ -261,7 +261,7 @@ class Loco_fs_FileWriter {
 
     /**
      * Create current directory context
-     * @param Loco_fs_File optional directory
+     * @param Loco_fs_File|null $here optional working directory
      * @return bool
      * @throws Loco_error_WriteException
      */
@@ -278,7 +278,7 @@ class Loco_fs_FileWriter {
         /* @var $parent Loco_fs_Directory */
         while( $parent = $here->getParent() ){
             array_unshift( $stack, $this->mapPath( $here->getPath() ) );
-            if( $parent->exists() ){
+            if( $parent->exists() || '/' === $parent->getPath() ){
                 // have existent directory, now build full path
                 foreach( $stack as $path ){
                     if( ! $fs->mkdir($path,$mode) ){

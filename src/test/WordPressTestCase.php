@@ -28,6 +28,11 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @var Loco_data_Cookie[]
      */
     private $cookies_set;
+
+    /**
+     * @var Loco_output_Buffer
+     */
+    private $buffer;
     
     
     /**
@@ -125,6 +130,23 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         add_filter('loco_setcookie', [$this,'captureCookie'], 10, 1 );
         $this->cookies_set = [];
         $this->enable_network();
+    }
+    
+    
+    public function tear_down(){
+        if( $this->buffer ){
+            $this->buffer->close();
+            $this->buffer = null;
+        }
+        parent::tear_down();
+    }
+
+
+    protected function enable_buffer(){
+        if( $this->buffer ){
+            $this->buffer->discard();
+        }
+        $this->buffer = Loco_output_Buffer::start();
     }
 
 
