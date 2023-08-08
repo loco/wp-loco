@@ -12,7 +12,7 @@ class Loco_admin_bundle_DebugController extends Loco_admin_bundle_BaseController
     public function init(){
         parent::init();
         $bundle = $this->getBundle();
-        $this->set('title', 'Debug: '.$bundle );
+        $this->set('title', sprintf(__('Debug: %s', 'loco-translate'),$bundle ));
     }
 
     

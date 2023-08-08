@@ -3,7 +3,7 @@
  * File revisions and rollback UI
  */
 $this->extend('../layout');
-$dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
+$dfmt = _x( 'j M @ H:i', 'revision date short format', 'loco-translate' );
 /* @var Loco_mvc_ViewParams $master */
 ?> 
 
@@ -78,7 +78,7 @@ $dfmt = _x( 'j M @ H:i', 'revision date short format', 'default' );
         </table>
 
         <p class="submit">
-            <button type="submit" class="button button-danger"><?php esc_html_e('Restore selected','default')?></button>
+            <button type="submit" class="button button-danger"><?php esc_html_e('Restore selected','loco-translate')?></button>
         </p>
         <?php
         $hidden->_e();?> 

@@ -46,7 +46,7 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
      */
     protected function exitForbidden(){
         do_action( 'admin_page_access_denied' );
-        wp_die( __( 'You do not have sufficient permissions to access this page.','default' ), 403 );
+        wp_die( __( 'You do not have sufficient permissions to access this page.','loco-translate' ), 403 );
     } // @codeCoverageIgnore
     
 

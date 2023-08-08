@@ -91,7 +91,7 @@ $this->extend('../layout');
                             </div>
                             <p class="description">
                                 <?php // Translators: Help tip for "Domain path" field in advanced bundle config
-                                esc_html_e('Folders within the bundle that contain author-supplied translations','loco-translate')?>. (<?php esc_html_e('no wildcards','loco-translate')?>)
+                                esc_html_e('Folders within the bundle that contain author-supplied translations. (no wildcards)','loco-translate')?>
                             </p>
                         </td>
                     </tr>
@@ -110,7 +110,7 @@ $this->extend('../layout');
                             </div>
                             <p class="description">
                                 <?php // Translators: Help tip for "Source file paths" field in advanced bundle config
-                                esc_html_e('Files and folders within the bundle that contain localized PHP code','loco-translate')?>. (<?php esc_html_e('no wildcards','loco-translate')?>)
+                                esc_html_e('Files and folders within the bundle that contain localized PHP code. (no wildcards)','loco-translate')?>
                             </p>
                         </td>
                     </tr>
@@ -131,7 +131,7 @@ $this->extend('../layout');
                             <textarea name="exclude[path]" id="all-excl" rows="3" cols="30" class="large-text"><?php echo $params->escape($excl['path'])?></textarea>
                             <p class="description">
                                 <?php // Translators: Help tip for "Blocked paths" field in advanced bundle config
-                                esc_html_e('Folders within the bundle that will never be searched for files','loco-translate')?>. (<?php esc_html_e('no wildcards','loco-translate')?>)
+                                esc_html_e('Folders within the bundle that will never be searched for files. (no wildcards)','loco-translate')?>
                             </p>
                         </td>
                     </tr>

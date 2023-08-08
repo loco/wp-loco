@@ -31,22 +31,22 @@ class Loco_package_Debugger implements IteratorAggregate {
         // config storage type
         switch ( $bundle->isConfigured() ) {
             case 'db':
-                $this->info( "Custom configuration saved in database" );
+                $this->info( __( 'Custom configuration saved in database', 'loco-translate' ) );
                 break;
             case 'meta':
-                $this->good( "Configuration auto-detected from file headers" );
+                $this->good( __( 'Configuration auto-detected from file headers', 'loco-translate' ) );
                 break;
             case 'file':
-                $this->good( "Official configuration provided by author" );
+                $this->good( __( 'Official configuration provided by author', 'loco-translate' ) );
                 break;
             case 'internal':
-                $this->info( "Configuration built-in to Loco" );
+                $this->info( __( 'Configuration built-in to Loco', 'loco-translate' ) );
                 break;
             case '':
-                $this->warn( "Cannot auto-detect configuration" );
+                $this->warn( __( 'Cannot auto-detect configuration', 'loco-translate' ) );
                 break;
             default:
-                throw new Exception( 'Unexpected isConfigured() return value' );
+                throw new Exception( __( 'Unexpected isConfigured() return value', 'loco-translate' ) );
         }
 
         $base = $bundle->getDirectoryPath();
@@ -55,34 +55,34 @@ class Loco_package_Debugger implements IteratorAggregate {
         // self-declarations provided by author in file headers
         $native = $bundle->getHeaderInfo();
         if ( $value = $native->TextDomain ) {
-            $this->info( 'WordPress says primary text domain is "%s"', $value );
+            $this->info( sprintf(__('WordPress says primary text domain is "%s"', 'loco-translate'), $value ));
             // WordPress 4.6 changes mean this header could be a fallback and not actually declared by author
             if ( $bundle->isPlugin() ) {
                 $map = [ 'TextDomain' => 'Text Domain' ];
                 $raw = get_file_data( $bundle->getBootstrapPath(), $map, 'plugin' );
                 if ( empty( $raw['TextDomain'] ) ) {
-                    $this->warn( 'Author doesn\'t define the TextDomain header, WordPress guessed it' );
+                    $this->warn( __('Author doesn\'t define the TextDomain header, WordPress guessed it', 'loco-translate' ));
                 }
             }
             // Warn if WordPress-assumed text domain is not configured. plugin/theme headers won't be translated
             $domains = $bundle->getDomains();
             if ( ! isset( $domains[ $value ] ) && ! isset( $domains['*'] ) ) {
-                $this->warn( 'Expected text domain "%s" is not configured', $value );
+                $this->warn( sprintf(__('Expected text domain "%s" is not configured', 'loco-translate'), $value ));
             }
         } else {
-            $this->warn( "Author doesn't define the TextDomain header" );
+            $this->warn( __('Author doesn\'t define the TextDomain header', 'loco-translate') );
         }
         if ( $value = $native->DomainPath ) {
-            $this->good( 'Primary domain path declared by author as "%s"', $value );
+            $this->good( sprintf(__('Primary domain path declared by author as "%s"', 'loco-translate'), $value ));
         } else if ( is_dir( $base . '/languages' ) ) {
-            $this->info( 'Standard "languages" folder found, although DomainPath not declared' );
+            $this->info( __('Standard "languages" folder found, although DomainPath not declared', 'loco-translate') );
         } else {
-            $this->warn( "Author doesn't define the DomainPath header" );
+            $this->warn( __('Author doesn\'t define the DomainPath header', 'loco-translate') );
         }
 
         // check validity of single-file plugins
         if ( $bundle->isSingleFile() && ! $bundle->getBootstrapPath() ) {
-            $this->warn( 'Plugin is a single file, but bootstrap file is unknown' );
+            $this->warn( __('Plugin is a single file, but bootstrap file is unknown', 'loco-translate'));
         }
 
         // collecting only configured domains to match against source code
@@ -96,7 +96,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                 $id     = $project->getId();
                 $domain = (string) $project->getDomain();
                 if ( '*' === $domain ) {
-                    $this->devel( 'Wildcard text domain configured for %s', $project );
+                    $this->devel( sprintf(__('Wildcard text domain configured for %s', 'loco-translate'), $project ));
                     $domain = '';
                 }
                 $domains[ $domain ] = true;
@@ -107,39 +107,39 @@ class Loco_package_Debugger implements IteratorAggregate {
                     $targets[] = $dir->getRelativePath( $base );
                 }
                 if ( $targets ) {
-                    $this->info( '%u domain path[s] configured for "%s" -> %s', count( $targets ), $id, json_encode( $targets, JSON_UNESCAPED_SLASHES ) );
+                    $this->info( sprintf(__('%1$s domain path[s] configured for "%2$s" -> %3$s', 'loco-translate'), count( $targets ), $id, json_encode( $targets, JSON_UNESCAPED_SLASHES ) ));
                 } else {
-                    $this->warn( 'No domain paths configured for "%s"', $id );
+                    $this->warn( sprintf(__('No domain paths configured for "%s"', 'loco-translate'), $id ));
                 }
                 // POT template file  
                 if ( $potfile = $project->getPot() ) {
                     if ( $potfile->exists() ) {
-                        $this->good( 'Template file for "%s" exists at "%s"', $id, $potfile->getRelativePath( $base ) );
+                        $this->good( sprintf(__('Template file for "%1$s" exists at "%2$s"', 'loco-translate'), $id, $potfile->getRelativePath( $base ) ));
                         try {
                             $data = Loco_gettext_Data::load( $potfile );
                             $templates[ $domain ][] = $data;
                         } catch ( Exception $e ) {
-                            $this->warn( 'Template file for "%s" is invalid format', $id );
+                            $this->warn( sprintf(__('Template file for "%s" is invalid format', 'loco-translate'), $id ));
                         }
                     } else {
-                        $this->warn( 'Template file for "%s" does not exist (%s)', $id, $potfile->getRelativePath( $base ) );
+                        $this->warn( sprintf(__('Template file for "%1$s" does not exist (%2$s)', 'loco-translate'), $id, $potfile->getRelativePath( $base ) ));
                     }
                 } else {
-                    $this->warn( 'No template file configured for "%s"', $domain );
+                    $this->warn( sprintf(__('No template file configured for "%s"', 'loco-translate'), $domain ));
                     if ( $potfile = $project->guessPot() ) {
-                        $this->devel( 'Possible non-standard name for "%s" template at "%s"', $id, $potfile->getRelativePath( $base ) );
+                        $this->devel( sprintf(__('Possible non-standard name for "%1$s" template at "%2$s"', 'loco-translate'), $id, $potfile->getRelativePath( $base ) ));
                         $project->setPot( $potfile ); // <- adding so that invert ignores it
                     }
                 }
             }
             $default = $bundle->getDefaultProject();
             if ( ! $default ) {
-                $this->warn( '%u subsets configured, but failed to establish the default/primary', $count );
+                $this->warn( sprintf(__('%u subsets configured, but failed to establish the default/primary', 'loco-translate'), $count ));
             }
         } else {
             $default = $bundle->createDefault();
             $domain  = (string) $default->getDomain();
-            $this->devel( 'Suggested text domain: "%s"', $domain );
+            $this->devel( sprintf(__('Suggested text domain: "%s"', 'loco-translate'), $domain ));
         }
 
         // files picked up with no context as to what they're for
@@ -153,7 +153,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                     /* @var $dir Loco_fs_Directory */
                     foreach ( $project->getConfiguredTargets() as $dir ) {
                         $reldir = $dir->getRelativePath( $base ) ?: '.';
-                        $this->warn( 'Unconfigured files found in "%s", possible domain name: "%s"', $reldir, $domain );
+                        $this->warn( sprintf(__('Unconfigured files found in "%1$s", possible domain name: "%2$s"', 'loco-translate'), $reldir, $domain ));
                     }
                 }
             }
@@ -175,17 +175,17 @@ class Loco_package_Debugger implements IteratorAggregate {
                 $realCount = $realCounts[$domain];
                 // translators: 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
                 $str = _n( '%1$s string extracted from source code for "%2$s"', '%1$s strings extracted from source code for "%2$s"', $realCount, 'loco-translate' );
-                $this->good( $str.' (%s including metadata)', number_format($realCount), $domain?:'*', number_format($count) );
+                $this->good( $str. __(' (%s including metadata)', 'loco-translate'), number_format($realCount), $domain?:'*', number_format($count) );
             }
             else {
-                $this->warn('No strings extracted from source code for "%s"', $domain?:'*' );
+                $this->warn(sprintf(__('No strings extracted from source code for "%s"', 'loco-translate'), $domain?:'*' ));
             }
             // check POT agrees with extracted count, but only if domain has single POT (i.e. not split across files on purpose)
             if( isset($templates[$domain]) && 1 === count($templates[$domain]) ){
                 $data = current( $templates[$domain] );
                 if( ! $extr->getTemplate($domain)->equalSource($data) ){
                     $meta = Loco_gettext_Metadata::create( new Loco_fs_DummyFile(''), $data );
-                    $this->devel('Template is not in sync with source code (%s in file)', $meta->getTotalSummary() );
+                    $this->devel(sprintf(__('Template is not in sync with source code (%s in file)', 'loco-translate'), $meta->getTotalSummary() ));
                 }
             }
         }
@@ -197,7 +197,7 @@ class Loco_package_Debugger implements IteratorAggregate {
         }
         if( $extra = array_diff_key($realCounts,$domains) ){
             
-            $this->info('%u unconfigured domain[s] found in source code: %s', count($extra), $this->implodeKeys($extra) );
+            $this->info(sprintf(__('%u unconfigured domain[s] found in source code: %s', 'loco-translate'), count($extra), $this->implodeKeys($extra) ));
             /*/ debug other domains extracted
             foreach( $extra as $name => $count ){
                 $this->devel(' > %s (%u)', $name, $count );
@@ -208,7 +208,7 @@ class Loco_package_Debugger implements IteratorAggregate {
                     $flat = preg_replace('/[^a-z\\d]/','', strtolower($name) );
                     foreach( array_keys($missing) as $decl ){
                         if( preg_replace('/[^a-z\\d]/','', strtolower($decl) ) === $flat ){
-                            $this->devel('"%s" might be a mistake. Should it be "%s"?', $decl, $name );
+                            $this->devel(sprintf(__('"%1$s" might be a mistake. Should it be "%2$s"?', 'loco-translate'), $decl, $name ));
                         }
                     }
                 }

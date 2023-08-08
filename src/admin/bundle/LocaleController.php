@@ -31,7 +31,7 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-locale-view'),
+            __('Overview','loco-translate') => $this->viewSnippet('tab-locale-view'),
         ];
     }
 

@@ -27,7 +27,7 @@ $this->extend('../layout');
             </p><?php
             endif?> 
             <p class="submit">
-                <button type="submit" class="button button-danger" disabled><?php esc_html_e('Delete Permanently','default')?></button>
+                <button type="submit" class="button button-danger" disabled><?php esc_html_e('Delete Permanently','loco-translate')?></button>
             </p>
         </div>
         <?php

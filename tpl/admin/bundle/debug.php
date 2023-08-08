@@ -24,7 +24,7 @@ $this->extend('../layout');
 
     if( $params->has('xml') ):?> 
     <div class="notice inline notice-generic">
-        <h4>Current configuration as XML:</h4>
+        <h4><?php esc_html_e( 'Current configuration as XML:', 'loco-translate' ); ?></h4>
         <pre><?php $params->e('xml')?></pre>
     </div><?php
     endif?> 

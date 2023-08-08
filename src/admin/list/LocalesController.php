@@ -21,7 +21,7 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-list-locales'),
+            __('Overview','loco-translate') => $this->viewSnippet('tab-list-locales'),
         ];
     }
 

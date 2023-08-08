@@ -144,13 +144,13 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
         $time_diff = time() - $time;
         // use same time format as posts listing when in future or more than a day ago
         if( $time_diff < 0 || $time_diff >= 86400 ){
-            return Loco_mvc_ViewParams::date_i18n( $time, __('Y/m/d','default') );
+            return Loco_mvc_ViewParams::date_i18n( $time, __('Y/m/d','loco-translate') );
         }
         if( $time_diff < 30 ){
             // translators: relative time when something happened in the last 30 seconds
             return __('Just now','loco-translate');
         }
-        return sprintf( __('%s ago','default'), human_time_diff($time) );
+        return sprintf( __('%s ago','loco-translate'), human_time_diff($time) );
     }
 
 

@@ -3,7 +3,7 @@
  * Help tab side bar, more information links
  */
 ?><p>
-    <strong><?php esc_html_e('For more information:','default')?></strong>
+    <strong><?php esc_html_e('For more information:','loco-translate')?></strong>
 </p>
 <p>
     <a href="<?php echo esc_url( apply_filters('loco_external','https://wordpress.org/plugins/loco-translate/') )?>" target="_blank"><?php esc_html_e('Official plugin page','loco-translate')?></a>
