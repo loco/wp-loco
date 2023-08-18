@@ -23,7 +23,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-file-info'),
+            __('Overview','loco-translate') => $this->viewSnippet('tab-file-info'),
         ];
     }
     

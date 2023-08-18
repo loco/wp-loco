@@ -18,7 +18,7 @@ class Loco_ajax_UploadController extends Loco_ajax_common_BundleController {
 
     /**
      * Upload processor shared with standard postback controller
-     * @param Loco_mvc_ViewParams script input
+     * @param Loco_mvc_ViewParams $post script input
      * @return string redirect to file edit
      */
     public function process( Loco_mvc_ViewParams $post ){
@@ -37,36 +37,36 @@ class Loco_ajax_UploadController extends Loco_ajax_common_BundleController {
             throw new Loco_error_Exception('No file posted');
         }
         $upload = new Loco_data_Upload($_FILES['f']);
-        $dummy = new Loco_fs_DummyFile( $upload->getName() );
-        $ext = strtolower( $dummy->fullExtension() );
-        // Loco_error_AdminNotices::debug('Have uploaded file: '.$dummy->basename() );
-        switch($ext){
+        // Uploaded file will have a temporary name, so real name extension come from _FILES metadata
+        $name = $upload->getOriginalName();
+        $ext = strtolower( pathinfo($name,PATHINFO_EXTENSION) );
+        // Loco_error_AdminNotices::debug('Have upload: '.$name.' @ '.$upload->getPath() );
+        switch( $ext ){
             case 'po':
             case 'mo':
-                $dummy->putContents($upload->getContents());
-                $pomo = Loco_gettext_Data::load($dummy);
+                $pomo = Loco_gettext_Data::load($upload,$ext);
                 break;
             default:
                 throw new Loco_error_Exception('Only PO/MO uploads supported');
         }
         // PO/MO data is valid.
         // get real file name and establish if a locale can be extracted, otherwise get from headers
-        $file = new Loco_fs_LocaleFile( $dummy->basename() );
-        $locale = $file->getLocale();
+        $dummy = new Loco_fs_LocaleFile($name);
+        $locale = $dummy->getLocale();
         if( ! $locale->isValid() ){
             $value = $pomo->getHeaders()->offsetGet('Language');
             $locale = Loco_Locale::parse($value);
             if( ! $locale->isValid() ){
-                throw new Loco_error_Exception('Unable to detect language from '.$file->basename() );
+                throw new Loco_error_Exception('Unable to detect language from '.$name );
             }
         }
-        // Fail if user presents å wrongly named file. This is to avoid mixing up text domains.
+        // Fail if user presents a wrongly named file. This is to avoid mixing up text domains.
         $pofile = $project->initLocaleFile($parent,$locale);
         if( $pofile->filename() !== $dummy->filename() ){
             throw new Loco_error_Exception( sprintf('File must be named %s', $pofile->filename().'.'.$ext ) );
         }
         // Avoid processing if uploaded PO file is identical to existing one
-        if( $pofile->exists() && 'po' === $ext && $pofile->md5() === $dummy->md5() ){
+        if( $pofile->exists() && $pofile->md5() === $upload->md5() ){
             throw new Loco_error_Exception( __('Your file is identical to the existing one','loco-translate') );
         }
         // recompile all files including uploaded one

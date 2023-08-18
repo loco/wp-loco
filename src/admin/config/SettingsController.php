@@ -48,7 +48,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         // there is no distinct role for network admin, so we'll fake it for UI
         if( is_multisite() ){
             $caps[''] = new Loco_mvc_ViewParams( [
-                'label' => __('Super Admin','default'),
+                'label' => __('Super Admin','loco-translate'),
                 'name' => 'dummy-admin-cap',
                 'attrs' => 'checked disabled'
             ] );

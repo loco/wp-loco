@@ -42,7 +42,7 @@ abstract class Loco_admin_list_BaseController extends Loco_mvc_AdminController {
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-list-bundles'),
+            __('Overview','loco-translate') => $this->viewSnippet('tab-list-bundles'),
         ];
     }
 

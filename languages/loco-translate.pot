@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2023-06-29 11:21+0000\n"
+"POT-Creation-Date: 2023-08-18 17:36+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,8 +13,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.5-dev; wp-6.2.2\n"
+"X-Loco-Version: 2.6.5-dev; wp-6.3\n"
 "X-Domain: loco-translate"
+
+#. Author credit: (1) Product name (2) version number, (3) author name.
+#: src/package/Header.php:89
+#, php-format
+msgid "\"%1$s\" %2$s by %3$s"
+msgstr ""
 
 #: src/fs/FileWriter.php:214
 #, php-format
@@ -328,6 +334,10 @@ msgstr ""
 msgid "Available languages"
 msgstr ""
 
+#: tpl/admin/init/init-prompt.php:45
+msgid "Back"
+msgstr ""
+
 #: tpl/admin/errors/no-backups.php:16
 msgid ""
 "Backup files will be written when you save translations from Loco Translate "
@@ -370,6 +380,11 @@ msgstr ""
 #: tpl/admin/file/diff.php:14
 msgctxt "Button label for a previous revision"
 msgid "Previous"
+msgstr ""
+
+#: tpl/admin/bundle/setup/conf.php:28 tpl/admin/bundle/setup/conf.php:35
+#: tpl/admin/bundle/setup/conf.php:56
+msgid "Cancel"
 msgstr ""
 
 #: src/ajax/FsConnectController.php:130
@@ -511,6 +526,10 @@ msgstr ""
 #: src/admin/file/DeleteController.php:95
 #, php-format
 msgid "Delete %s"
+msgstr ""
+
+#: tpl/admin/file/delete.php:30
+msgid "Delete Permanently"
 msgstr ""
 
 #: tpl/admin/config/settings.php:162
@@ -1063,7 +1082,7 @@ msgid "Just copy English source strings"
 msgstr ""
 
 #. relative time when something happened in the last 30 seconds
-#: src/mvc/FileParams.php:151
+#: src/mvc/FileParams.php:149
 msgid "Just now"
 msgstr ""
 
@@ -1341,7 +1360,12 @@ msgstr ""
 msgid "Out of sync with template"
 msgstr ""
 
+#: src/admin/RootController.php:12 src/admin/file/InfoController.php:26
+#: src/admin/config/BaseController.php:41
+#: src/admin/bundle/ViewController.php:25
+#: src/admin/bundle/LocaleController.php:34
 #: src/admin/bundle/BaseController.php:121
+#: src/admin/list/LocalesController.php:24 src/admin/list/BaseController.php:45
 msgid "Overview"
 msgstr ""
 
@@ -1702,6 +1726,10 @@ msgstr ""
 msgid "Suggestion"
 msgstr ""
 
+#: src/admin/config/SettingsController.php:51
+msgid "Super Admin"
+msgstr ""
+
 #: tpl/admin/help/side-bar.php:12
 msgid "Support forum"
 msgstr ""
@@ -1715,7 +1743,7 @@ msgstr ""
 msgid "Syncing PO files"
 msgstr ""
 
-#: src/admin/config/DebugController.php:47
+#: src/admin/config/DebugController.php:55
 msgid "System diagnostics"
 msgstr ""
 
@@ -2009,6 +2037,10 @@ msgstr ""
 msgid "Unknown error"
 msgstr ""
 
+#: tpl/admin/config/version.php:74
+msgid "Update Now"
+msgstr ""
+
 #: tpl/admin/config/version.php:17
 #, php-format
 msgid "Upgrade to %s"
@@ -2036,6 +2068,10 @@ msgstr ""
 
 #: src/js/Strings.php:71
 msgid "Use this translation"
+msgstr ""
+
+#: tpl/admin/help/side-bar.php:6
+msgid "Useful links:"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:71 src/admin/config/PrefsController.php:13

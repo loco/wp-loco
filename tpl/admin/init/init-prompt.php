@@ -42,7 +42,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
             <?php esc_html_e('You can use existing translations as a template using the Copy feature.','loco-translate')?> 
         </p>
         <p>
-            <a class="button button-link has-icon icon-back" href="<?php $tabs[0]->e('href')?>"><?php esc_html_e('Back','default')?></a>
+            <a class="button button-link has-icon icon-back" href="<?php $tabs[0]->e('href')?>"><?php esc_html_e('Back','loco-translate')?></a>
             <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('See FAQ','loco-translate')?></a>
         </p>
     </div>

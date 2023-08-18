@@ -26,11 +26,13 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     /**
      * @return Loco_gettext_Data
      */
-    public static function load( Loco_fs_File $file ){
-        $type = strtoupper( self::ext($file) );
-        // catch parse errors so we can inform user of which file is bad
+    public static function load( Loco_fs_File $file, $type = null ){
+        if( is_null($type) ) {
+            $type = self::ext($file);
+        }
+        // catch parse errors, so we can inform user of which file is bad
         try {
-            if( 'MO' === $type ){
+            if( 'mo' === $type || 'MO' === $type ){
                 return self::fromBinary( $file->getContents() );
             }
             else {
@@ -39,7 +41,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         }
         catch( Loco_error_ParseException $e ){
             $path = $file->getRelativePath( loco_constant('WP_CONTENT_DIR') );
-            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file; %s',$path,$type,$e->getMessage()) );
+            Loco_error_AdminNotices::debug( sprintf('Failed to parse %s as a %s file; %s',$path,strtoupper($type),$e->getMessage()) );
             throw new Loco_error_ParseException( sprintf('Invalid %s file: %s',$type,basename($path)) );
         }
     }

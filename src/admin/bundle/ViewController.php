@@ -22,7 +22,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      */
     public function getHelpTabs(){
         return  [
-            __('Overview','default') => $this->viewSnippet('tab-bundle-view'),
+            __('Overview','loco-translate') => $this->viewSnippet('tab-bundle-view'),
         ];
     }
 

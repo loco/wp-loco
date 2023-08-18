@@ -114,6 +114,8 @@ $this->extend('../layout');
                     endif?> 
                 </dd><?php
                 endforeach?> 
+                <dt>PHP open_basedir:</dt>
+                <dd><?php self::e(ini_get('open_basedir'))?></dd>
             </dl>
         </div>
 
