@@ -36,8 +36,8 @@ class Loco_fs_FileWriter {
     /**
      * Connect to alternative file system context
      * 
-     * @param WP_Filesystem_Base
-     * @param bool whether reconnect required
+     * @param WP_Filesystem_Base $fs
+     * @param bool $disconnected whether reconnect required
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */

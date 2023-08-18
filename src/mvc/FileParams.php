@@ -22,8 +22,8 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
     
     /**
      * Print property as a number of bytes in larger denominations
-     * @param int
-     * @return string
+     * @param int $n
+     * @return string 
      */
     public static function renderBytes( $n ){
         $i = 0;
@@ -48,7 +48,6 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
 
 
     /**
-     * @param Loco_fs_File
      * @return Loco_mvc_FileParams 
      */
     public static function create( Loco_fs_File $file ) {
@@ -58,8 +57,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
 
     /**
      * Override does lazy property initialization
-     * @param array initial extra properties
-     * @param Loco_fs_File
+     * @param array $props initial extra properties
      */
     public function __construct( array $props, Loco_fs_File $file ){
         parent::__construct(  [

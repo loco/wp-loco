@@ -215,10 +215,10 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
 
         // Download form params
         $hidden = new Loco_mvc_HiddenFields( [
-            'path'   => '',
-            'source' => '',
             'route'  => 'download',
             'action' => 'loco_download',
+            'path'   => '',
+            'source' => '',
         ] );
         $this->set( 'dlFields', $hidden->setNonce('download') );
         $this->set( 'dlAction', admin_url('admin-ajax.php','relative') );

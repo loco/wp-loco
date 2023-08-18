@@ -205,20 +205,20 @@ u && u.source(null, E) === n ? (u.translate(t, E), h.focus().reloadMessage(u)) :
 };
 }
 function c(n, t, u, E) {
-var Y = E.getId(), Z = R[Y], ma = String(Z + 1), Da = E.getUrl(), na = v("Use this translation");
+let Y = E.getId(), Z = R[Y], ma = String(Z + 1), Da = E.getUrl(), na = v("Use this translation");
 E = String(E);
-var oa = K && K[Y];
+let oa = K && K[Y];
 n = d('<button class="button button-primary"></button>').attr("tabindex", String(1 + l + Z)).on("click", b(n, t));
 n.attr("accesskey", ma);
 1 < L.length && (na += " (" + ma + ")");
 n.text(na);
-oa && oa.replaceWith(d('<div class="loco-api loco-api-' + Y + '"></div>').append(d('<a class="loco-api-credit" target="_blank" tabindex="-1"></a>').attr("href", Da).text(E)).append(d("<blockquote " + M + "></blockquote>").text(t || "FAILED")).append(n));
+oa && oa.replaceWith(d('<div class="loco-api loco-api-' + Y + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Da).text(E))).append(d("<blockquote " + M + "></blockquote>").text(t || "FAILED")).append(n));
 ++V === k && (x && x.dialog("option", "title", v("Suggested translations") + " — " + u.label), 
 l += V);
 0 === Z && n.focus();
 }
 function e(n) {
-var t = d('<div class="loco-api loco-api-loading"></div>').text("Calling " + n + " ...");
+const t = d('<div class="loco-api loco-api-loading"></div>').text("Calling " + n + " ...");
 return K[n.getId()] = t;
 }
 function f(n) {
@@ -236,7 +236,7 @@ let l = 99;
 var m = h.current(), z = h.getTargetOffset();
 const r = m && m.source(null, z), M = 'lang="' + String(B) + '" dir="' + (B.isRTL() ? "RTL" : "LTR") + '"';
 if (!r) return !1;
-var x = (Q || (Q = X("loco-apis-hint", "<div></div>"))).html("").append(d('<div class="loco-api"><p>Source text:</p></div>').append(d('<blockquote lang="en"></blockquote>').text(r))).dialog("option", "title", v("Loading suggestions") + "...").off("dialogclose").on("dialogclose", f).dialog("open");
+let x = (Q || (Q = X("loco-apis-hint", "<div></div>"))).html("").append(d('<div class="loco-api"><p>Source text:</p></div>').append(d('<blockquote lang="en"></blockquote>').text(r))).dialog("option", "title", v("Loading suggestions") + "...").off("dialogclose").on("dialogclose", f).dialog("open");
 (m = m.translation(z)) && d('<div class="loco-api"><p>Current translation:</p></div>').append(d("<blockquote " + M + "></blockquote>").text(m)).append(d('<button class="button"></button>').attr("tabindex", String(++l)).text(v("Keep this translation")).on("click", function(n) {
 n.preventDefault();
 f();

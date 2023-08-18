@@ -14,8 +14,8 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
 
 
     /**
-     * @param string
-     * @return int
+     * @param string $raw
+     * @return int 
      */
     private function memory_size( $raw ){
         $bytes = wp_convert_hr_to_bytes($raw);
@@ -24,7 +24,8 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
 
 
     /**
-     * @param string
+     * Get path relative to WordPress ABSPATH
+     * @param string $path
      * @return string
      */
     private function rel_path( $path ){
@@ -37,6 +38,13 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         }
         return $path;
     }
+    
+    
+    private function file_params( Loco_fs_File $file ){
+        $ctx = new Loco_fs_FileWriter($file);
+        return new Loco_mvc_ViewParams(['path'=>$this->rel_path($file->getPath()), 'writable'=>$ctx->writable()]);
+    }
+    
 
 
     /**
@@ -125,15 +133,24 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         }
         
         // File system access
-        $dir = new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ;
-        $ctx = new Loco_fs_FileWriter( $dir );
+        $ctx = new Loco_fs_FileWriter( new Loco_fs_Directory(WP_LANG_DIR) );
         $fsp = Loco_data_Settings::get()->fs_protect;
         $fs = new Loco_mvc_PostParams( [
-            'langdir' => $this->rel_path( $dir->getPath() ),
-            'writable' => $ctx->writable(),
             'disabled' => $ctx->disabled(),
             'fs_protect' => 1 === $fsp ? 'Warn' : ( $fsp ? 'Block' : 'Off' ),
+            #'PHP sys_temp_dir' => ini_get('sys_temp_dir'),
+            #'PHP upload_tmp_dir' => ini_get('upload_tmp_dir'),
         ] );
+        // important locations, starting with LOCO_LANG_DIR
+        $locations = [
+            'Custom languages directory' => $this->file_params( new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ),
+        ];
+        // WP_TEMP_DIR takes precedence over sys_get_temp_dir in WordPress get_temp_dir();
+        if( defined('WP_TEMP_DIR') ){
+            $locations['WP_TEMP_DIR'] = $this->file_params( new Loco_fs_Directory(WP_TEMP_DIR) );
+        }
+        $locations['PHP sys_get_temp_dir'] = $this->file_params( new Loco_fs_Directory( sys_get_temp_dir() ) );
+        $locations['PHP upload_tmp_dir'] = $this->file_params( new Loco_fs_Directory( ini_get('upload_tmp_dir') ) );
         
         // Debug and error log settings
         $debug = new Loco_mvc_ViewParams( [
@@ -166,7 +183,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             }
         }
         
-        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','debug') );
+        return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','locations','debug') );
     }
 
 }

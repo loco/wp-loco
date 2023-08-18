@@ -19,7 +19,8 @@ class Loco_ajax_DownloadController extends Loco_mvc_AjaxController {
         $ext = Loco_gettext_Data::ext($file);
 
         // posted source must be clean and must parse as whatever the file extension claims to be
-        if( $raw = $post->source ){
+        $raw = $post->source;
+        if( is_string($raw) && '' !== $raw ){
             // compile source if target is MO
             if( 'mo' === $ext ) {
                 $raw = Loco_gettext_Data::fromSource($raw)->msgfmt();

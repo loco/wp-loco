@@ -66,7 +66,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
 
     
     /**
-     * @param string
+     * @param string $route
      * @return string
      */
     private static function routeToClass( $route ){

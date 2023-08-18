@@ -80,6 +80,7 @@ $this->extend('../layout');
                 <a href="#loco-sizes" class="loco-anchor" aria-hidden="true"></a>
             </h3>
             <dl><?php
+            /* @var Loco_mvc_ViewParams $memory */    
             foreach( $memory as $key => $value ):?> 
                 <dt>
                     <?php echo $memory->escape($key)?>:
@@ -97,18 +98,22 @@ $this->extend('../layout');
                 <a href="#loco-files" class="loco-anchor" aria-hidden="true"></a>
             </h3>
             <dl>
-                <dt>Custom languages directory:</dt>
-                <dd><code class="path"><?php $fs->e('langdir')?></code></dd>
-    
-                <dt>Directory writable:</dt>
-                <dd><?php echo $fs->writable?'Yes':'No'?></dd>
-    
                 <dt>File mods disallowed:</dt>
                 <dd><?php echo $fs->disabled?'Yes':'No'?></dd>
                 
                 <dt>File mod safety level:</dt>
-                <dd><?php $fs->e('fs_protect')?></dd>
+                <dd><?php $fs->e('fs_protect')?></dd><?php
                 
+                /* @var Loco_mvc_ViewParams[] $locations */
+                foreach( $locations as $label => $f ):?> 
+                <dt><?php echo $f->escape($label)?>:</dt>
+                <dd><?php 
+                    $f->e('path');
+                    if( $f->writable ): echo ' ✓'; else:?> 
+                    <span class="icon icon-warn" title="Not writable directly by PHP"></span><?php
+                    endif?> 
+                </dd><?php
+                endforeach?> 
             </dl>
         </div>
 
