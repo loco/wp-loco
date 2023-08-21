@@ -21,7 +21,7 @@ class Loco_fs_Directory extends Loco_fs_File {
 
     /**
      * Set recursive flag for use when traversing directory trees
-     * @param bool
+     * @param bool $bool
      * @return Loco_fs_Directory
      */
     public function setRecursive( $bool ){

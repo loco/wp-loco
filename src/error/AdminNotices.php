@@ -123,7 +123,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      */
     public static function destroy(){
         $notices = self::$singleton;
-        if( $notices instanceof  Loco_error_AdminNotices ){
+        if( $notices instanceof Loco_error_AdminNotices ){
             $buffer = $notices->errors;
             $notices->errors = [];
             self::$singleton = null;
@@ -133,10 +133,9 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     }
 
 
-
     /**
-     * Destroy and return all serialized notices, suitable for ajax response 
-     * @return array
+     * @codeCoverageIgnore 
+     * @deprecated Since PHP 5.4 there is no need to cast array via calls to jsonSerialize
      */
     public static function destroyAjax(){
         $data = [];
@@ -182,7 +181,6 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
             $e->logCli();
         }
         $this->errors = [];
-        
     }
 
 
@@ -222,6 +220,25 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     public function __destruct(){
         $this->inline = false;
         $this->flush();
+        // handle situation where test case will have lost the buffer
+        if( $this->errors && 'cli' === PHP_SAPI ){
+            throw new RuntimeException('Notices not flushed before destruction');
+        }
+    }
+
+
+    /**
+     * @param int $level
+     * @return Loco_error_Exception[]
+     */
+    public function filter( $level ){
+        $e = [];
+        foreach( $this->errors as $error ){
+            if( $error->getLevel() <= $level ){
+                $e[] = $error;
+            }
+        }
+        return $e;
     }
 
 
@@ -232,12 +249,17 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         if( class_exists('WP_CLI',false) ){
             $this->flushCli();
         }
-        else if( ! loco_doing_ajax() ){
+        else if( loco_doing_ajax() ){
+            $this->errors = [];
+        }
+        else if( 'cli' !== PHP_SAPI ){
             $this->flushHtml();
         }
+        // else probably in unit test and not properly handled, leave significant errors in buffer
         else {
-            $this->errors = [];
-        }   
+            $this->errors = $this->filter( Loco_error_Exception::LEVEL_WARNING );
+        }
+        return $this;
     }
 
 }

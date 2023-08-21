@@ -69,8 +69,8 @@ abstract class Loco_mvc_AjaxController extends Loco_mvc_Controller {
             'data' => $this->output->getArrayCopy(),
         ];
         // non-fatal notices deliberately not in "error" key
-        $array = Loco_error_AdminNotices::destroyAjax();
-        if( $array && is_array($array) ){
+        $array = Loco_error_AdminNotices::destroy();
+        if( $array ){
             $data['notices'] = $array;
         }
         return json_encode( $data );

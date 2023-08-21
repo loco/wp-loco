@@ -173,11 +173,11 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             }
         }
         catch( Loco_error_Exception $e ){
-            $json = json_encode( [ 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ] );
+            $json = json_encode( [ 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroy() ] );
         }
         catch( Exception $e ){
             $e = Loco_error_Exception::convert($e);
-            $json = json_encode( [ 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroyAjax() ] );
+            $json = json_encode( [ 'error' => $e->jsonSerialize(), 'notices' => Loco_error_AdminNotices::destroy() ] );
         }
         $this->buffer->discard();
         return $json;

@@ -1,7 +1,6 @@
 <?php
 /**
  * Simple wrapper for transient file uploads carrying PO data.
- * Doesn't move or persist uploaded files, so doesn't call wp_handle_upload()
  */
 class Loco_data_Upload extends Loco_fs_File {
 
@@ -28,7 +27,6 @@ class Loco_data_Upload extends Loco_fs_File {
      * @throws Loco_error_UploadException
      */
     public function __construct( array $data ){
-        $this->data = $data;
         // https://www.php.net/manual/en/features.file-upload.errors.php
         $code = (int) $data['error'];
         switch( $code ){
@@ -51,26 +49,29 @@ class Loco_data_Upload extends Loco_fs_File {
             default:
                 throw new Loco_error_UploadException('Unknown file upload error',$code);
         }
-        // upload is OK according to PHP, but may need moving before we can read it
+        // Upload is OK according to PHP, but may need moving (if upload_tmp_dir is not in open_basedir)
         $path = $data['tmp_name'];
-        if( ! is_readable($path) ){
+        if( ! Loco_fs_File::is_readable($path) ){
             $safe = get_temp_dir().basename($path);
             if( $safe !== $path ){
                 Loco_error_AdminNotices::debug( sprintf('Moving uploaded file: %s -> %s',$path,$safe) );
                 if( move_uploaded_file( $path, $safe ) ){
+                    register_shutdown_function('unlink',$safe);
+                    $data['tmp_name'] = $safe;
                     $path = $safe;
                 }
             }
-            if( ! is_readable($path) ){
-                throw new Loco_error_UploadException('Uploaded file is not readable',UPLOAD_ERR_NO_FILE);
-            }
+        }
+        if( ! is_file($path) ){
+            throw new Loco_error_UploadException('Uploaded file is not readable',UPLOAD_ERR_NO_FILE);
         }
         // upload ok, but check it's not empty
-        parent::__construct($path);
-        if( 0 === $this->size() ){
+        if( 0 === filesize($path) ){
             throw new Loco_error_UploadException('Uploaded file contains no data',UPLOAD_ERR_NO_FILE);
         }
-   }
+        $this->data = $data;
+        parent::__construct($path);
+    }
 
 
     /**

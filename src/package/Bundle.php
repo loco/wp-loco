@@ -303,7 +303,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         $base = $this->getDirectoryPath();
         foreach( ['node_modules','vendor'] as $f ){
             $path = $base.'/'.$f;
-            if( is_dir($path) ){
+            if( Loco_fs_File::is_readable($path) && is_dir($path) ){
                 $dirs[] = $path;
             }
         }
@@ -367,7 +367,7 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
         $path = (string) $path;
         // sanity check this is a PHP file even if it doesn't exist
         if( '.php' !== substr($path,-4) ){
-            throw new Loco_error_Exception('Bootstrap file should end .php'.$path );
+            throw new Loco_error_Exception('Bootstrap file should end .php, got '.$path );
         }
         $this->boot = $path;
         // base directory can be inferred from bootstrap path

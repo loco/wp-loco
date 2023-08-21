@@ -55,10 +55,32 @@ class Loco_fs_File {
                 }
             }
         }
-        // else path is relative, so return falsey string
+        // else path is relative, so return falsy string
         return '';
     }
-    
+
+
+    /**
+     * Call PHP is_readable() but suppress E_WARNING when path is outside open_basedir.
+     * @param string $path
+     * @return bool
+     */
+    public static function is_readable( $path ){
+        if( '' === $path || '.' === $path[0] ){
+            throw new InvalidArgumentException('Relatve path disallowed');
+        }
+        // preemptive check of open_basedir. if it passes is_readable() will be allowed to error
+        $bases = new Loco_fs_Locations( explode(':',ini_get('open_basedir') ));
+        if( $bases->check($path) ){
+            return is_readable($path);
+        }
+        Loco_error_AdminNotices::debug( sprintf('%s is not within the open_basedir restriction',$path) );
+        $erep = error_reporting( error_reporting() & ~E_WARNING );
+        $bool = is_readable($path);
+        error_reporting($erep);
+        return $bool;
+    }
+
 
     /**
      * Create file with initial, unvalidated path
@@ -149,21 +171,18 @@ class Loco_fs_File {
 
 
     /**
-     * Check if current path is within open_basedir restrictions
-     * @codeCoverageIgnore
      * @return bool
      */
-    public function inBaseDir(){
-        $bases = new Loco_fs_Locations( explode(':',ini_get('open_basedir') ));
-        return $bases->check( $this->path );
+    public function writable(){
+        return $this->getWriteContext()->writable();
     }
 
 
     /**
      * @return bool
      */
-    public function writable(){
-        return $this->getWriteContext()->writable();
+    public function readable(){
+        return self::is_readable($this->path);
     }
 
 
@@ -405,6 +424,22 @@ class Loco_fs_File {
 
 
     /**
+     * Get real path if file is real, but without altering internal path property.
+     * Also skips call to realpath() when likely to raise E_WARNING due to open_basedir
+     * @return string
+     */
+    public function getRealPath(){
+        if( $this->readable() ){
+            $path = realpath( $this->getPath() );
+            if( is_string($path) ){
+                return $path;
+            }
+        }
+        return '';
+    } 
+
+
+    /**
      * @param string $path
      * @param string[] $b
      * @return array
@@ -473,7 +508,7 @@ class Loco_fs_File {
      * @return bool
      */
     public function isDirectory(){
-        if( file_exists($this->path) ){
+        if( $this->readable() ){
             return is_dir($this->path);
         }
         return '' === $this->extension();

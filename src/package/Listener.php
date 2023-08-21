@@ -270,7 +270,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
             // check if MO file lives inside a plugin
             foreach( [ 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR' ] as $const ){
-                $root = loco_constant( $const );
+                $root = loco_constant($const);
                 $relative = self::relative($path, $root);
                 if( is_null($relative) ){
                     continue;

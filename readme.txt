@@ -105,6 +105,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Fixed bug in relative path calculations
 * Added total strings count to PO file tables
 * Better flag icons, with @x2 pixel support
+* Handling upload_tmp_dir values outside of open_basedir
+* Suppressing E_WARNING when testing file is_readable
 * Bumped WordPress compatibility to 6.3
 
 = 2.6.4 =

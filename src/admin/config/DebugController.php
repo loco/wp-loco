@@ -138,20 +138,19 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         $fs = new Loco_mvc_PostParams( [
             'disabled' => $ctx->disabled(),
             'fs_protect' => 1 === $fsp ? 'Warn' : ( $fsp ? 'Block' : 'Off' ),
-            #'PHP sys_temp_dir' => ini_get('sys_temp_dir'),
-            #'PHP upload_tmp_dir' => ini_get('upload_tmp_dir'),
         ] );
         // important locations, starting with LOCO_LANG_DIR
         $locations = [
-            'Custom languages directory' => $this->file_params( new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ),
+            'LOCO_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ),
         ];
         // WP_TEMP_DIR takes precedence over sys_get_temp_dir in WordPress get_temp_dir();
         if( defined('WP_TEMP_DIR') ){
             $locations['WP_TEMP_DIR'] = $this->file_params( new Loco_fs_Directory(WP_TEMP_DIR) );
         }
-        $locations['PHP sys_get_temp_dir'] = $this->file_params( new Loco_fs_Directory( sys_get_temp_dir() ) );
+        $locations['PHP sys_temp_dir'] = $this->file_params( new Loco_fs_Directory( sys_get_temp_dir() ) );
         $locations['PHP upload_tmp_dir'] = $this->file_params( new Loco_fs_Directory( ini_get('upload_tmp_dir') ) );
-        
+        $locations['PHP error_log'] = $this->file_params( new Loco_fs_Directory( ini_get('error_log') ) );
+
         // Debug and error log settings
         $debug = new Loco_mvc_ViewParams( [
             'WP_DEBUG' => loco_constant('WP_DEBUG') ? 'On' : 'Off',
@@ -159,7 +158,6 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'WP_DEBUG_DISPLAY' => loco_constant('WP_DEBUG_DISPLAY') ? 'On' : 'Off',
             'PHP display_errors' => ini_get('display_errors')  ? 'On' : 'Off',
             'PHP log_errors' => ini_get('log_errors')  ? 'On' : 'Off',
-            'PHP error_log' => $this->rel_path( ini_get('error_log') ),
         ] );
 
         /* Output buffering settings

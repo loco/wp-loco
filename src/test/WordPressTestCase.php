@@ -130,6 +130,10 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         add_filter('loco_setcookie', [$this,'captureCookie'], 10, 1 );
         $this->cookies_set = [];
         $this->enable_network();
+        //
+        if( Loco_error_AdminNotices::destroy() ){
+            throw new Exception('Refusing to start test with errors in buffer');
+        }
     }
     
     
@@ -137,6 +141,13 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         if( $this->buffer ){
             $this->buffer->close();
             $this->buffer = null;
+        }
+        // ignore all but real error messages after test
+        $errors = Loco_error_AdminNotices::get()->filter( Loco_error_Exception::LEVEL_WARNING );
+        if( $errors ) {
+            Loco_error_AdminNotices::destroy();
+            fwrite( STDERR, json_encode($errors,JSON_PRETTY_PRINT|JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE) );
+            throw new Exception( 'Unflushed admin notices after test' );
         }
         parent::tear_down();
     }

@@ -278,7 +278,7 @@ class Loco_fs_FileWriter {
         /* @var $parent Loco_fs_Directory */
         while( $parent = $here->getParent() ){
             array_unshift( $stack, $this->mapPath( $here->getPath() ) );
-            if( $parent->exists() || '/' === $parent->getPath() ){
+            if( '/' === $parent->getPath() || $parent->readable() ){
                 // have existent directory, now build full path
                 foreach( $stack as $path ){
                     if( ! $fs->mkdir($path,$mode) ){

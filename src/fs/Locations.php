@@ -181,13 +181,17 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param string $path
+     * @param string $rel
      * @return string[]
      */
-    private function expand( $path ){
-        $path = Loco_fs_File::abs($path);
-        if( ! $path ){
-            throw new InvalidArgumentException('Expected absolute path');
+    private function expand( $rel ){
+        if( '' === $rel ){
+            //Loco_error_AdminNotices::debug('Expanding empty path to empty array');
+            return [];
+        }
+        $path = Loco_fs_File::abs($rel);
+        if( '' === $path ){
+            throw new InvalidArgumentException('Failed on abs('.var_export($rel,true).')');
         }
         $paths = [ trailingslashit($path) ];
         // add real path if differs
@@ -197,6 +201,5 @@ class Loco_fs_Locations extends ArrayObject {
         }
         return $paths;
     }
-    
-    
+
 }

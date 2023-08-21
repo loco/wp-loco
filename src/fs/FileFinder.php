@@ -504,7 +504,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
             $this->subdir = new Loco_fs_FileList;
             /* @var Loco_fs_Directory $root */
             foreach( $this->roots as $root ){
-                if( $root instanceof Loco_fs_Directory && $root->exists() && ! $this->isExcluded( $root->getPath() ) ){
+                if( $root instanceof Loco_fs_Directory && $root->readable() && ! $this->isExcluded( $root->getPath() ) ){
                     $this->subdir->add($root);
                 }
             }
