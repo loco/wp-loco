@@ -170,6 +170,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         
         // alert to known system setting problems:
         if( version_compare(PHP_VERSION,'7.4','<') ){
+            // phpcs:disable -- PHP version is checked prior to deprecated function call.
             if( get_magic_quotes_gpc() ){
                 Loco_error_AdminNotices::info('You have "magic_quotes_gpc" enabled. We recommend you disable this in PHP');
             }
@@ -179,6 +180,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             if( version_compare(PHP_VERSION,'5.6.20','<') ){
                 Loco_error_AdminNotices::info('Your PHP version is very old. We recommend you upgrade');
             }
+            // phpcs:enable
         }
         
         return $this->view('admin/config/debug', compact('breadcrumb','versions','encoding','memory','fs','locations','debug') );

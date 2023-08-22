@@ -36,6 +36,7 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
      * @return bool
      */
     private static function has_magic_quotes(){
+        // phpcs:ignore -- PHP version is checked prior to deprecated function call.
         return version_compare(PHP_VERSION,'7.4','<') && ( get_magic_quotes_gpc() || get_magic_quotes_runtime() );
     }
 
