@@ -101,6 +101,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.5 =
+* Added syntax checking function
 * Removed deepl_api_url config. Free API detected from :fx key suffix.
 * Fixed bug in relative path calculations
 * Added total strings count to PO file tables

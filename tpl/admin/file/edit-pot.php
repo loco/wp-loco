@@ -6,6 +6,16 @@ $this->extend('editor');
 $this->start('header');
 ?>
 
+    <form action="<?php $params->e('dlAction')?>" method="post" target="_blank" id="loco-download" class="aux">
+        <fieldset>
+            <button class="button button-link has-icon icon-download" data-loco="source" disabled title="<?php $ui->e('download')?>">
+                <span>POT</span>
+            </button>
+        </fieldset>
+        <?php
+        $dlFields->_e();?> 
+    </form>
+
     <h3 class="has-lang">
         <span><?php esc_html_e('Template file','loco-translate')?>:</span>
         <span class="loco-meta">

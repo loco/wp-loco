@@ -203,6 +203,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
              'revert'   => _x('Revert','Editor','loco-translate'),
              // Translators: Button that opens window for auto-translating
              'auto'     => _x('Auto','Editor','loco-translate'),
+             // Translators: Butt that validates current translation formatting
+             'lint'     => _x('Check','Editor','loco-translate'),
              // Translators: Button for downloading a PO, MO or POT file
              'download' => _x('Download','Editor','loco-translate'),
              // Translators: Placeholder text for text filter above editor

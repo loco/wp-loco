@@ -43,6 +43,16 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // Message appears after sync operation.
         __("Strings up to date with source code",'loco-translate');
 
+        // Result of validation when all strings pass validation
+        __("No formatting errors detected",'loco-translate');
+
+        /* %s refers to a non-zero amount of errors detected.
+         * xgettext: javascript-format */
+        _n("%s possible error detected","%s possible errors detected",0,'loco-translate');
+
+        //
+        __("Check the translations marked with a warning sign",'loco-translate');
+
         // xgettext: javascript-format
         __("%s unique source strings.",'loco-translate');
 
