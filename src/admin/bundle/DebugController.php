@@ -2,6 +2,7 @@
 /**
  * Bundle debugger.
  * Shows bundle diagnostics and highlights problems
+ * @codeCoverageIgnore
  */
 class Loco_admin_bundle_DebugController extends Loco_admin_bundle_BaseController {
     

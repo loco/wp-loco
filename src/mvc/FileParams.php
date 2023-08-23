@@ -148,6 +148,7 @@ class Loco_mvc_FileParams extends Loco_mvc_ViewParams {
             // translators: relative time when something happened in the last 30 seconds
             return __('Just now','loco-translate');
         }
+        // translators: %s: Human-readable time difference.
         return sprintf( __('%s ago','default'), human_time_diff($time) );
     }
 

@@ -6,7 +6,7 @@ $this->extend('editor');
 $this->start('header');
 ?>
 
-    <form action="<?php $params->e('dlAction')?>" method="post" target="_blank" id="loco-download" class="aux">
+    <form action="<?php $params->e('dlAction')?>" method="post" target="_blank" id="loco-download" class="aux wp-core-ui">
         <fieldset>
             <button class="button button-link has-icon icon-download" data-loco="source" disabled title="<?php $ui->e('download')?>">
                 <span>POT</span>

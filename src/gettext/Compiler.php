@@ -129,6 +129,7 @@ class Loco_gettext_Compiler {
                 }
                 catch( Loco_error_WriteException $e ){
                     Loco_error_AdminNotices::debug( $e->getMessage() );
+                    // translators: %s refers to a JSON file which could not be compiled due to an error
                     Loco_error_AdminNotices::warn( sprintf(__('JSON compilation failed for %s','loco-translate'),$jsonfile->basename()) );
                 }
             }
@@ -140,7 +141,7 @@ class Loco_gettext_Compiler {
             /* @var Loco_gettext_Data $fragment */
             foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
                 $use = null;
-                // Reference could be source js, or minified version.
+                // Reference could be a js source file, or a minified version.
                 // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
                 if( substr($ref,-7) === '.min.js' ) {
                     $min = $ref;
@@ -188,6 +189,7 @@ class Loco_gettext_Compiler {
                     }
                     catch( Loco_error_WriteException $e ){
                         Loco_error_AdminNotices::debug( $e->getMessage() );
+                        // phpcs:ignore -- comment already applied to this string elsewhere
                         Loco_error_AdminNotices::warn( sprintf(__('JSON compilation failed for %s','loco-translate'),$ref));
                     }
                 }

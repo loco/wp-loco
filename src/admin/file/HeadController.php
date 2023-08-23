@@ -77,6 +77,7 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
                 }
                 // flash message for display after redirect
                 try {
+                    // translators: Success notice where %s is a file extension, e.g. "PO"
                     Loco_data_Session::get()->flash('success',sprintf( __('%s file saved','loco-translate'), strtoupper($file->extension()) ));
                     Loco_data_Session::close();
                 }

@@ -102,6 +102,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             $project = $this->getProject();
             $slug = $project->getSlug();
             $domain = (string) $project->getDomain();
+            // translators: %s refers to the slug/handle of a theme or plugin
             $subhead = sprintf( __('Initializing new translations in "%s"','loco-translate'), $slug?:$domain );
         }
         catch( Loco_error_Exception $e ){

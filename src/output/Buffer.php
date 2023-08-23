@@ -126,7 +126,8 @@ class Loco_output_Buffer {
     public static function check(){
 	    if( headers_sent($file,$line) && 'cli' !== PHP_SAPI ){
 		    $file = str_replace( trailingslashit( loco_constant('ABSPATH') ), '', $file );
-		    throw new Loco_error_Exception( sprintf( __('Loco interrupted by output from %s:%u','loco-translate'), $file?:'Unknown', $line ) );
+            // translators: (1) is the name of a PHP script, (2) is a line number in the file
+		    throw new Loco_error_Exception( sprintf( __('Loco was interrupted by output from %1$s:%2$u','loco-translate'), $file?:'Unknown', $line ) );
 	    }
     }
 

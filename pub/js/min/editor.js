@@ -8,9 +8,9 @@ function F(a, b, c) {
 return g.l10n.n(a, b, c);
 }
 function A(a) {
-return a.format(0, ".", xa);
+return a.format(0, ".", ya);
 }
-function ya(a) {
+function za(a) {
 g.ajax.post("sync", fa, function(b) {
 var c = [], e = b.pot, f = b.po, q = b.done || {
 add: [],
@@ -24,7 +24,7 @@ if (e ? c.push(w(r("Merged from %s"), e)) : c.push(r("Merged from source code"))
 l && c.push(w(F("%s new string added", "%s new strings added", l), A(l))), m && c.push(w(F("%s obsolete string removed", "%s obsolete strings removed", m), A(m))), 
 z && c.push(w(F("%s string marked Fuzzy", "%s strings marked Fuzzy", z), A(z))), 
 t && c.push(w(F("%s translation copied", "%s translations copied", t), A(t))), d(G).trigger("poUnsaved", []), 
-P(), za && D.console) {
+P(), Aa && D.console) {
 e = console;
 f = -1;
 for (l = q.add.length; ++f < l; ) e.log(" + " + String(q.add[f]));
@@ -39,14 +39,14 @@ d(G).trigger("poMerge", [ b ]);
 a && a();
 }, a);
 }
-function Aa(a) {
+function Ba(a) {
 const b = a.currentTarget;
 a.stopImmediatePropagation();
 b.disabled = !0;
-Ba();
+Ca();
 b.disabled = !1;
 }
-function Ba() {
+function Ca() {
 const a = [];
 B.each(function(b, c, e) {
 h.validate(c) && a.push(c);
@@ -61,13 +61,13 @@ g.notices.warn(c.join(". ")).slow();
 }
 0 < b && h.current(a[0]);
 }
-function Ca(a) {
+function Da(a) {
 const b = a.id, c = g.apis, e = c.providers();
 return c.create(a, e[b] || e._);
 }
 function ia() {
-for (var a = -1, b, c = [], e = I, f = e.length, q = String(Da); ++a < f; ) try {
-b = e[a], null == b.src && (b.src = q), c.push(Ca(b));
+for (var a = -1, b, c = [], e = I, f = e.length, q = String(Ea); ++a < f; ) try {
+b = e[a], null == b.src && (b.src = q), c.push(Da(b));
 } catch (l) {
 g.notices.error(String(l));
 }
@@ -123,20 +123,20 @@ return b;
 }
 function ma() {
 ja(function(a) {
-a.length ? Ea() : na();
+a.length ? Fa() : na();
 });
 }
-function Fa(a) {
+function Ga(a) {
 a.preventDefault();
 ja(function(b) {
-b.length ? Ga() : na();
+b.length ? Ha() : na();
 });
 return !1;
 }
 function na() {
 N ? N.dialog("open") : g.notices.error("Logic error. Unconfigured API modal missing");
 }
-function Ga() {
+function Ha() {
 function a(k) {
 a: {
 var p = d(k.api).val();
@@ -207,7 +207,7 @@ t = null;
 e();
 });
 }
-function Ea() {
+function Fa() {
 function a(n) {
 if (n.isDefaultPrevented()) return !1;
 var u = n.which;
@@ -227,14 +227,14 @@ v && v.source(null, E) === n ? (v.translate(u, E), h.focus().reloadMessage(v)) :
 };
 }
 function c(n, u, v, E) {
-let Z = E.getId(), aa = S[Z], oa = String(aa + 1), Ha = E.getUrl(), pa = r("Use this translation");
+let Z = E.getId(), aa = S[Z], oa = String(aa + 1), Ia = E.getUrl(), pa = r("Use this translation");
 E = String(E);
 let qa = K && K[Z];
 n = d('<button class="button button-primary"></button>').attr("tabindex", String(1 + l + aa)).on("click", b(n, u));
 n.attr("accesskey", oa);
 1 < L.length && (pa += " (" + oa + ")");
 n.text(pa);
-qa && qa.replaceWith(d('<div class="loco-api loco-api-' + Z + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Ha).text(E))).append(d("<blockquote " + M + "></blockquote>").text(u || "FAILED")).append(n));
+qa && qa.replaceWith(d('<div class="loco-api loco-api-' + Z + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Ia).text(E))).append(d("<blockquote " + M + "></blockquote>").text(u || "FAILED")).append(n));
 ++V === k && (x && x.dialog("option", "title", r("Suggested translations") + " — " + v.label), 
 l += V);
 0 === aa && n.focus();
@@ -268,7 +268,7 @@ x.append(e(m)), z = m.getId(), S[z] = p, J[z] ? c(t, J[z], C, m) : m.translate(t
 d(D).on("keydown", a);
 return !0;
 }
-function Ia(a) {
+function Ja(a) {
 var b, c = new FormData();
 for (b in a) a.hasOwnProperty(b) && c.append(b, a[b]);
 return c;
@@ -278,7 +278,7 @@ var b = d.extend({
 locale: String(B.locale() || "")
 }, ta || {});
 ua && ua.applyCreds(b);
-ba ? (b = Ia(b), b.append("po", new Blob([ String(B) ], {
+ba ? (b = Ja(b), b.append("po", new Blob([ String(B) ], {
 type: "application/x-gettext"
 }), String(b.path).split("/").pop() || "untitled.po")) : b.data = String(B);
 g.ajax.post("save", b, function(c) {
@@ -287,13 +287,13 @@ h.save(!0);
 d("#loco-po-modified").text(c.datetime || "[datetime error]");
 }, a);
 }
-function Ja() {
+function Ka() {
 h.dirty && sa();
 }
-function Ka() {
+function La() {
 return r("Your changes will be lost if you continue without saving");
 }
-function La(a) {
+function Ma(a) {
 function b() {
 a.disabled = !1;
 d(a).removeClass("loco-loading");
@@ -317,7 +317,7 @@ return !1;
 });
 return !0;
 }
-function Ma(a) {
+function Na(a) {
 var b = y.project;
 if (b) {
 var c = function() {
@@ -334,35 +334,35 @@ bundle: b.bundle,
 domain: b.domain,
 type: T ? "pot" : "po",
 path: ca || "",
-sync: Na || "",
-mode: Oa || ""
+sync: Oa || "",
+mode: Pa || ""
 };
 d(a).on("click", function(e) {
 e.preventDefault();
 a.disabled = !0;
 d(a).addClass("loco-loading");
-ya(c);
+za(c);
 return !1;
 });
 a.disabled = !1;
 }
 return !0;
 }
-function Pa(a) {
+function Qa(a) {
 h.on("poUnsaved", function() {
 a.disabled = !0;
 }).on("poSave poAuto", function() {
 a.disabled = !1;
 });
-d(a).on("click", Fa);
+d(a).on("click", Ga);
 a.disabled = !1;
 return !0;
 }
-function Qa(a) {
-d(a).on("click", Aa);
+function Ra(a) {
+d(a).on("click", Ba);
 a.disabled = !1;
 }
-function Ra(a) {
+function Sa(a) {
 a.disabled = !1;
 d(a).on("click", function(b) {
 b.preventDefault();
@@ -375,7 +375,7 @@ return !1;
 });
 return !0;
 }
-function Sa(a) {
+function Ta(a) {
 a.disabled = !1;
 d(a).on("click", function(b) {
 b.preventDefault();
@@ -407,11 +407,16 @@ C && (b = w(r("%s%% translated"), a.p.replace("%", "")) + ", " + b, c && f.push(
 e && f.push(w(r("%s untranslated"), A(e))), f.length && (b += " (" + f.join(", ") + ")"));
 d("#loco-po-status").text(b);
 }
+function wa(a, b) {
+a = b.getAttribute("data-loco");
+const c = O[a];
+c && c(b, a) || d(b).addClass("loco-noop");
+}
 const g = D.loco, y = g && g.conf, G = document.getElementById("loco-editor-inner");
 if (g && y && G) {
-var za = !!y.WP_DEBUG, ea = g.po.ref && g.po.ref.init(g, y), fa = null, ta = null, ba = y.multipart, Ta = g.l10n, w = g.string.sprintf, xa = y.wpnum && y.wpnum.thousands_sep || ",", C = y.locale, B = g.po.init(C).wrap(y.powrap), T = !C, Da = g.locale.clone(y.source || {
+var Aa = !!y.WP_DEBUG, ea = g.po.ref && g.po.ref.init(g, y), fa = null, ta = null, ba = y.multipart, Ua = g.l10n, w = g.string.sprintf, ya = y.wpnum && y.wpnum.thousands_sep || ",", C = y.locale, B = g.po.init(C).wrap(y.powrap), T = !C, Ea = g.locale.clone(y.source || {
 lang: "en"
-}), Ua = document.getElementById("loco-actions"), ca = y.popath, Na = y.potpath, Oa = y.syncmode, H = document.getElementById("loco-fs"), ua = H && g.fs.init(H), ka = y.readonly;
+}), Va = document.getElementById("loco-actions"), ca = y.popath, Oa = y.potpath, Pa = y.syncmode, H = document.getElementById("loco-fs"), ua = H && g.fs.init(H), ka = y.readonly;
 H = !ka;
 var I, U, ra = {}, R, Q, N, X = 0, la = {
 my: "top",
@@ -420,7 +425,7 @@ of: "#loco-content"
 };
 !ba || D.FormData && D.Blob || (ba = !1, g.notices.warn("Your browser doesn't support Ajax file uploads. Falling back to standard postdata"));
 ea || g.notices.warn("admin.js is out of date. Please empty your browser cache and reload the page.");
-var wa = function() {
+var xa = function() {
 var a, b = parseInt(d(G).css("min-height") || 0);
 return function() {
 for (var c = G, e = c.offsetTop || 0; (c = c.offsetParent) && c !== document.body; ) e += c.offsetTop || 0;
@@ -428,14 +433,14 @@ c = Math.max(b, D.innerHeight - e - 20);
 a !== c && (G.style.height = String(c) + "px", a = c);
 };
 }();
-wa();
-d(D).resize(wa);
+xa();
+d(D).resize(xa);
 G.innerHTML = "";
-var h = g.po.ed.init(G).localise(Ta);
-g.po.kbd.init(h).add("save", H ? Ja : da).add("hint", C && H && ma || da).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
+var h = g.po.ed.init(G).localise(Ua);
+g.po.kbd.init(h).add("save", H ? Ka : da).add("hint", C && H && ma || da).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
 var O = {
-save: H && La,
-sync: H && Ma,
+save: H && Ma,
+sync: H && Na,
 revert: function(a) {
 h.on("poUnsaved", function() {
 a.disabled = !1;
@@ -479,13 +484,10 @@ return !0;
 source: va,
 binary: T ? null : va
 };
-T ? (O.add = H && Ra, O.del = H && Sa) : (O.auto = Pa, O.lint = Qa);
-d("#loco-editor > nav .button").each(function(a, b) {
-a = b.getAttribute("data-loco");
-var c = O[a];
-c && c(b, a) || d(b).addClass("loco-noop");
-});
-d(Ua).on("submit", da);
+T ? (O.add = H && Sa, O.del = H && Ta) : (O.auto = Qa, O.lint = Ra);
+d("#loco-editor > nav .button").each(wa);
+d("#loco-content > form .button").each(wa);
+d(Va).on("submit", da);
 (function(a) {
 function b(f) {
 d(a.parentNode)[f || null == f ? "removeClass" : "addClass"]("invalid");
@@ -505,7 +507,7 @@ c && h.filter(c);
 });
 })(document.getElementById("loco-search"));
 h.on("poUnsaved", function() {
-D.onbeforeunload = Ka;
+D.onbeforeunload = La;
 }).on("poSave", function() {
 P();
 D.onbeforeunload = null;

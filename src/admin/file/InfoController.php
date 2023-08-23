@@ -173,7 +173,8 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                         $value = $head->trimmed('Language');
                         if( '' !== $value ){
                             if( Loco_Locale::parse($value)->__toString() !== $locale->__toString() ){
-                                $debug[]= sprintf( __('Language header is "%s" but file name contains "%s"','loco-translate'), $value, $locale );
+                                // translators: Warning that the language in the file header (1) does not match the file name (2)
+                                $debug[]= sprintf( __('Language header is "%1$s" but file name contains "%2$s"','loco-translate'), $value, $locale );
                             }
                         }
                         $value = $head->trimmed('Plural-Forms');

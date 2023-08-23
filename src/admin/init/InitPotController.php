@@ -102,6 +102,7 @@ class Loco_admin_init_InitPotController extends Loco_admin_bundle_BaseController
         $this->set('dir', Loco_mvc_FileParams::create( $dir ) );
         
         $title = __('New template file','loco-translate');
+        // translators: %s refers to the name of a translation set (theme, plugin or core component)
         $subhead = sprintf( __('New translations template for "%s"','loco-translate'), $project );
         $this->set('subhead', $subhead );
         

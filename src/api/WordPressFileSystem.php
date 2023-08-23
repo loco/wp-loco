@@ -84,6 +84,7 @@ class Loco_api_WordPressFileSystem {
     public function authorizeCreate( Loco_fs_File $file ){
         $this->preAuthorize($file);
         if( $file->exists() ){
+            // translators: %s refers to the name of a new file to be created, but which already existed
             throw new Loco_error_WriteException( sprintf( __('%s already exists in this folder','loco-translate'), $file->basename() ) );
         }
         return $file->creatable() || $this->authorize($file);

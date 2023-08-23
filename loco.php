@@ -134,6 +134,7 @@ function loco_check_extension( $name ) {
             $cache[$name] = true;
         }
         else {
+            // translators: %s refers to the name of a missing PHP extension, for example "mbstring".
             Loco_error_AdminNotices::warn( sprintf( __('Loco Translate requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
             $class = 'Loco_compat_'.ucfirst($name).'Extension.php';
             $cache[$name] = class_exists($class);

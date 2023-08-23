@@ -228,6 +228,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         // plugin must be registered with at least a name and "basedir"
         $data = self::get_plugin($handle);
         if( ! $data ){
+            // translators: %s refers to the handle of a plugin, e.g. "loco-translate/loco.php"
             throw new Loco_error_Exception( sprintf( __('Plugin not found: %s','loco-translate'),$handle) );
         }
 

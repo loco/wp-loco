@@ -114,6 +114,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                     try {
                         $potdata = Loco_gettext_Data::load( $potfile );
                         if( ! $potdata->equalSource($data) ){
+                            // translators: %s refers to the name of a POT file
                             Loco_error_AdminNotices::info( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) )
                             ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/sync'), __('Documentation','loco-translate') );
                         }

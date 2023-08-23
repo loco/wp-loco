@@ -86,10 +86,11 @@ class Loco_package_Header {
             $author = __('Unknown author','loco-translate');
         }
         // translators: Author credit: (1) Product name (2) version number, (3) author name.
-        $html = esc_html( sprintf( __('"%1$s" %2$s by %3$s','loco-translate'), $this->Name, $this->Version, $author ) );
+        $html = wp_kses( sprintf( __('"%1$s" %2$s by %3$s','loco-translate'), $this->Name, $this->Version, $author ), ['a'=>['href'=>true,'target'=>true]], ['http','https'] );
         
-        if( ( $link = $this->PluginURI ) || ( $link = $this->ThemeURI ) ){
-            $html .= sprintf( ' &mdash; <a href="%s" target="_blank">%s</a>', esc_url($link), __('Visit official site','loco-translate') );
+        $link = $this->PluginURI ?: $this->ThemeURI;
+        if( $link ){
+            $html .= sprintf( ' &mdash; <a href="%s" target="_blank">%s</a>', esc_url($link), esc_html(__('Visit official site','loco-translate')) );
         }
         
         return $html;

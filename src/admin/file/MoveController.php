@@ -83,10 +83,12 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                 // flash messages for display after redirect
                 try {
                     if( $count ) {
+                        // translators: %s is the quantity of files which were successfully moved
                         Loco_data_Session::get()->flash( 'success', sprintf( _n( '%s file moved', '%s files moved', $total, 'loco-translate' ), $total ) );
                     }
                     if( $total > $count ){
                         $diff = $total - $count;
+                        // translators: %s is the quantity of files which failed to be moved
                         Loco_data_Session::get()->flash( 'error', sprintf( _n( '%s file could not be moved', '%s files could not be moved', $diff, 'loco-translate' ), $diff ) );
                     }
                     Loco_data_Session::close();
@@ -105,6 +107,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         }
         // set page title before render sets inline title
         $bundle = $this->getBundle();
+        // translators: Page title where %s is the name of a file to be moved
         $this->set('title', sprintf( __('Move %s','loco-translate'), $file->basename() ).' &lsaquo; '.$bundle->getName() );
     }
 
@@ -133,6 +136,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
         $custom = is_null($project) || $this->get('custom') || 'po' !== $file->extension() || ! $locale->isValid();
         // common page elements:
         $this->set('files',$files->expand() );
+        // phpcs:ignore -- duplicate string
         $this->setFileTitle($file,__('Move %s','loco-translate'));
         $this->enqueueScript('move');
         // set info for existing file location

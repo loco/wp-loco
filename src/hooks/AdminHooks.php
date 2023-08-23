@@ -62,7 +62,8 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 		    wp_add_privacy_policy_content(
 		    	__('Loco Translate','loco-translate'),
 			    esc_html( __("This plugin doesn't collect any data from public website visitors.",'loco-translate') ).'<br />'. 
-                wp_kses( 
+                wp_kses(
+                    // translators: %s will be replaced with a URL which may change without affecting the translation.
                     sprintf( __('Administrators and auditors may wish to review Loco\'s <a href="%s">plugin privacy notice</a>.','loco-translate'), esc_url($url) ),
                     ['a'=>['href'=>true]], ['https']
                 )

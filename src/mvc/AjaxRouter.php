@@ -164,6 +164,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             // respond with deferred failure from initAjax
             if( ! $this->ctrl ){
                 $route = isset($_REQUEST['route']) ? $_REQUEST['route'] : '';
+                // translators: Fatal error where %s represents an unexpected value
                 throw new Loco_error_Exception( sprintf( __('Ajax route not found: "%s"','loco-translate'), $route ) );
             }
             // else execute controller to get json output

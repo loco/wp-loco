@@ -55,6 +55,7 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
         }
         
         $bundle = $this->getBundle();
+        // translators: %s is a file name to be rolled back to a previous version.
         $this->set('title', sprintf( __('Restore %s','loco-translate'), $pofile->basename() ).' &lsaquo; '.$bundle->getName() );
     }
 
@@ -73,6 +74,7 @@ class Loco_admin_file_DiffController extends Loco_admin_file_BaseController {
         $info = Loco_mvc_FileParams::create($file);
         $info['mtime'] = $file->modified();
         $this->set( 'master', $info );
+        // translators: Page title where %s refers to a file name
         $this->setFileTitle( $file, __('Restore %s','loco-translate') );
         
         $enabled = Loco_data_Settings::get()->num_backups;

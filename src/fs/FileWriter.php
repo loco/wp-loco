@@ -129,6 +129,7 @@ class Loco_fs_FileWriter {
     public function chmod( $mode, $recursive = false ){
         $this->authorize();
         if( ! $this->fs->chmod( $this->getPath(), $mode, $recursive ) ){
+            // translators: %s refers to a file name, for which the chmod operation failed.
             throw new Loco_error_WriteException( sprintf( __('Failed to chmod %s','loco-translate'), $this->file->basename() ) );
         }
         return $this;
@@ -157,7 +158,8 @@ class Loco_fs_FileWriter {
         // perform WP file system copy method
         if( ! $this->fs->copy($source,$target,true) ){
             Loco_error_AdminNotices::debug(sprintf('Failed to copy %s to %s via "%s" method',$source,$target,$this->fs->method));
-            throw new Loco_error_WriteException( sprintf( __('Failed to copy %s to %s','loco-translate'), basename($source), basename($target) ) );
+            // translators: (1) Source file name (2) Target file name
+            throw new Loco_error_WriteException( sprintf( __('Failed to copy %1$s to %2$s','loco-translate'), basename($source), basename($target) ) );
         }
 
         return $this;
@@ -195,6 +197,7 @@ class Loco_fs_FileWriter {
     public function delete( $recursive = false ){
         $this->authorize();
         if( ! $this->fs->delete( $this->getPath(), $recursive ) ){
+            // translators: %s refers to a file name, for which a delete operation failed.
             throw new Loco_error_WriteException( sprintf( __('Failed to delete %s','loco-translate'), $this->file->basename() ) );
         }
 
@@ -211,6 +214,7 @@ class Loco_fs_FileWriter {
         $this->authorize();
         $file = $this->file;
         if( $file->isDirectory() ){
+            // translators: %s refers to a directory name which was expected to be an ordinary file
             throw new Loco_error_WriteException( sprintf( __('"%s" is a directory, not a file','loco-translate'), $file->basename() ) );
         }
         // file having no parent directory is likely an error, like a relative path.
