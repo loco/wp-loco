@@ -256,7 +256,7 @@ class Loco_gettext_Compiler {
             Loco_error_AdminNotices::success( __('PO file saved and MO file compiled','loco-translate') );
         }
         else {
-            // translators: Where %s is either PO or POT
+            // translators: Success notice where %s is a file extension, e.g. "PO"
             Loco_error_AdminNotices::success( sprintf(__('%s file saved','loco-translate'),strtoupper($pofile->extension())) );
         }
         return $this->progress;

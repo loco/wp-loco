@@ -9,10 +9,14 @@ $this->extend('layout');
     <div class="notice inline notice-info">
         <p class="has-lang">
             <span <?php echo $siteLocale->attr?>><code><?php $siteLocale->e('code')?></code></span>
-            <span><?php printf( esc_html( __('The language of this site is %s.','loco-translate') ), $siteLocale->link );?> 
-            <?php if( $params->has('adminLocale') ):
-            printf( esc_html( __('Your admin language is %s.','loco-translate') ), $adminLocale->link );
-            endif?></span>
+            <span><?php
+                // translators: %s will be replaced with the full name of the site language
+                printf( esc_html( __('The language of this site is %s.','loco-translate') ), $siteLocale->link );
+                if( $params->has('adminLocale') ): echo ' ';
+                // translators: %s will be replaced with the full name of the user profile's admin language        
+                printf( esc_html( __('Your admin language is %s.','loco-translate') ), $adminLocale->link );
+                endif?> 
+            </span>
         </p>
     </div><?php
 

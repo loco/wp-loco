@@ -179,6 +179,9 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // translators: List heading showing preview of translated text for each item
         _x("Translation","Editor",'loco-translate');
 
+        //
+        __("Possible syntax error in string formatting",'loco-translate');
+
         /* translators: %s is the maximum number of formatting arguments accepted by the source text of a translation
          * xgettext: javascript-format */
         __("Too many placeholders; source text formatting suggests a maximum of %s",'loco-translate');
@@ -186,9 +189,6 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         /* translators: %s is the minimum number of formatting arguments accepted by the source text of a translation
          * xgettext: javascript-format */
         __("Missing placeholders; source text formatting suggests at least %s",'loco-translate');
-
-        //
-        __("Possible syntax error in string formatting",'loco-translate');
 
         //
         __("Mismatching placeholder type; check against source text formatting",'loco-translate');

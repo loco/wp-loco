@@ -201,14 +201,14 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
      */
     public function getProgressSummary(){
         $extra = [];
-        // translators: %s will be replaced with a percentage number. %% must remain intact.
+        // translators: Shows percentage translated at top of editor
         $stext = sprintf( __('%s%% translated','loco-translate'), $this->getPercent() ).', '.$this->getTotalSummary();
         if( $num = $this->countFuzzy() ){
-            // translators: %s is a quantity - the number of strings in a file that are marked Fuzzy
+            // translators: Shows number of fuzzy strings at top of editor
             $extra[] = sprintf( __('%s fuzzy','loco-translate'), number_format($num) );
         }
         if( $num = $this->countUntranslated() ){
-            // translators: %s is a quantity - the number of strings in a file that are not translated
+            // translators: Shows number of untranslated strings at top of editor
             $extra[] = sprintf( __('%s untranslated','loco-translate'), number_format($num) );
         }
         if( $extra ){

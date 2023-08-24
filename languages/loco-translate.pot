@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2023-08-23 10:48+0000\n"
+"POT-Creation-Date: 2023-08-24 19:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -118,7 +118,6 @@ msgid_plural "%s files moved"
 msgstr[0] ""
 msgstr[1] ""
 
-#. Where %s is either PO or POT
 #. Success notice where %s is a file extension, e.g. "PO"
 #: src/gettext/Compiler.php:260 src/admin/file/HeadController.php:81
 #, php-format
@@ -126,7 +125,6 @@ msgid "%s file saved"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#. %s is a quantity - the number of strings in a file that are marked Fuzzy
 #: src/js/Strings.php:108 src/gettext/Metadata.php:208
 #, javascript-format
 msgid "%s fuzzy"
@@ -216,7 +214,6 @@ msgid "%s unique source strings."
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#. %s is a quantity - the number of strings in a file that are not translated
 #: src/js/Strings.php:112 src/gettext/Metadata.php:212
 #, javascript-format
 msgid "%s untranslated"
@@ -230,7 +227,6 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows percentage translated at top of editor
-#. %s will be replaced with a percentage number. %% must remain intact.
 #: src/js/Strings.php:104 src/gettext/Metadata.php:205
 #, javascript-format
 msgid "%s%% translated"
@@ -238,7 +234,6 @@ msgstr ""
 
 #. %u is a number of files which were successfully deleted
 #: src/admin/file/DeleteController.php:59
-#, php-format
 msgid "%u file deleted"
 msgid_plural "%u files deleted"
 msgstr[0] ""
@@ -260,7 +255,7 @@ msgstr ""
 msgid "Access to this file is blocked for security reasons"
 msgstr ""
 
-#: tpl/admin/root.php:35
+#: tpl/admin/root.php:39
 msgid "Active theme:"
 msgstr ""
 
@@ -492,7 +487,6 @@ msgid "Configure %s"
 msgstr ""
 
 #: src/package/Debugger.php:197
-#, php-format
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
@@ -547,7 +541,7 @@ msgstr ""
 
 #: src/error/Debug.php:19 src/admin/config/BaseController.php:24
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:126
+#: src/admin/bundle/BaseController.php:128
 msgid "Debug"
 msgstr ""
 
@@ -661,7 +655,7 @@ msgctxt "Editor"
 msgid "Auto"
 msgstr ""
 
-#. Butt that validates current translation formatting
+#. Button that validates current translation formatting
 #: src/admin/file/EditController.php:208
 msgctxt "Editor"
 msgid "Check"
@@ -1262,7 +1256,7 @@ msgid "Mismatching placeholder type; check against source text formatting"
 msgstr ""
 
 #. %s is the minimum number of formatting arguments accepted by the source text of a translation
-#: src/js/Strings.php:188
+#: src/js/Strings.php:191
 #, javascript-format
 msgid "Missing placeholders; source text formatting suggests at least %s"
 msgstr ""
@@ -1557,7 +1551,7 @@ msgstr ""
 msgid "PO file saved, but MO file compilation failed"
 msgstr ""
 
-#: src/js/Strings.php:191
+#: src/js/Strings.php:183
 msgid "Possible syntax error in string formatting"
 msgstr ""
 
@@ -1577,7 +1571,7 @@ msgstr ""
 msgid "Read only"
 msgstr ""
 
-#: tpl/admin/root.php:23
+#: tpl/admin/root.php:27
 msgid "Recently updated:"
 msgstr ""
 
@@ -1627,7 +1621,7 @@ msgstr ""
 msgid "Revisions are identical, you can delete %s"
 msgstr ""
 
-#: tpl/admin/root.php:47
+#: tpl/admin/root.php:51
 msgid "Running plugins:"
 msgstr ""
 
@@ -1668,11 +1662,11 @@ msgstr ""
 msgid "See all core translations"
 msgstr ""
 
-#: tpl/admin/root.php:54 src/admin/bundle/LocaleController.php:147
+#: tpl/admin/root.php:58 src/admin/bundle/LocaleController.php:147
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:39 src/admin/bundle/LocaleController.php:142
+#: tpl/admin/root.php:43 src/admin/bundle/LocaleController.php:142
 msgid "See all themes"
 msgstr ""
 
@@ -1854,7 +1848,8 @@ msgid_plural "The following files will be moved/renamed to the new location:"
 msgstr[0] ""
 msgstr[1] ""
 
-#: tpl/admin/root.php:12
+#. %s will be replaced with the full name of the site language
+#: tpl/admin/root.php:14
 #, php-format
 msgid "The language of this site is %s."
 msgstr ""
@@ -1879,7 +1874,7 @@ msgstr ""
 msgid "Themes"
 msgstr ""
 
-#: tpl/admin/root.php:50
+#: tpl/admin/root.php:54
 msgid ""
 "These plugins have recently loaded translation files into the admin area"
 msgstr ""
@@ -2018,7 +2013,7 @@ msgid ""
 msgstr ""
 
 #. %s is the maximum number of formatting arguments accepted by the source text of a translation
-#: src/js/Strings.php:184
+#: src/js/Strings.php:187
 #, javascript-format
 msgid "Too many placeholders; source text formatting suggests a maximum of %s"
 msgstr ""
@@ -2070,7 +2065,7 @@ msgstr ""
 msgid "Translations don't match template. Run sync to update from %s"
 msgstr ""
 
-#: tpl/admin/root.php:26
+#: tpl/admin/root.php:30
 msgid "Translations have been recently modified in the following bundles"
 msgstr ""
 
@@ -2288,7 +2283,8 @@ msgstr ""
 msgid "You're running the latest version of Loco Translate"
 msgstr ""
 
-#: tpl/admin/root.php:14
+#. %s will be replaced with the full name of the user profile's admin language
+#: tpl/admin/root.php:17
 #, php-format
 msgid "Your admin language is %s."
 msgstr ""

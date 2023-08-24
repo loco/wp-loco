@@ -19,8 +19,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Initialize matcher with current valid source strings (ref.pot)
-     * @param Loco_gettext_Data POT reference
-     * @param bool whether copying translations from reference data
+     * @param Loco_gettext_Data $pot POT reference
+     * @param bool $translate Whether copying translations from reference data
      * @return int
      */
     public function loadRefs( Loco_gettext_Data $pot, $translate = false ){
@@ -38,7 +38,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Add further source strings from JSON/JED file
-     * @param Loco_fs_File json file
+     * @param Loco_fs_File $file json file
      * @return int
      */
     public function loadJson( Loco_fs_File $file ){
@@ -54,7 +54,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         }
         $ref = $jed['source'];
         // not checking domain key. Should be valid if passed here and should only be one.
-        foreach( $jed['locale_data'] as $domain => $keys ){
+        foreach( $jed['locale_data'] as /*$domain =>*/ $keys ){
             foreach( $keys as $msgid => $arr ){
                 if( '' === $msgid || ! is_array($arr) || ! isset($arr[0]) ){
                     continue;
@@ -126,7 +126,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Shortcut for loading multiple jsons with error tolerance
-     * @param Loco_fs_File[]
+     * @param Loco_fs_File[] $jsons
      * @return int
      */
     public function loadJsons( array $jsons ){
@@ -145,8 +145,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Update still-valid sources, deferring unmatched (new strings) for deferred fuzzy match
-     * @param LocoPoIterator Existing definitions
-     * @param LocoPoIterator Resultant definitions
+     * @param LocoPoIterator $original Existing definitions
+     * @param LocoPoIterator $merged Resultant definitions
      * @return string[] keys matched exactly
      */
     public function mergeValid( LocoPoIterator $original, LocoPoIterator $merged ){
@@ -173,7 +173,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Perform fuzzy matching after all exact matches have been attempted
-     * @param LocoPoIterator Resultant definitions
+     * @param LocoPoIterator $merged Resultant definitions 
      * @return string[] strings fuzzy-matched
      */
     public function mergeFuzzy( LocoPoIterator $merged ){
@@ -191,7 +191,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Add unmatched strings remaining as NEW source strings
-     * @param LocoPoIterator Resultant definitions to accept new strings
+     * @param LocoPoIterator $merged Resultant definitions to accept new strings
      * @return string[] strings added
      */
     public function mergeAdded( LocoPoIterator $merged ){
@@ -213,8 +213,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Perform full merge and return result suitable from front end.
-     * @param LocoPoIterator Existing definitions
-     * @param LocoPoIterator Resultant definitions
+     * @param LocoPoIterator $original Existing definitions
+     * @param LocoPoIterator $merged Resultant definitions
      * @return array result
      */
     public function merge( LocoPoIterator $original, LocoPoIterator $merged ){
@@ -237,7 +237,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
 
     /**
-     * @param array
+     * @param array $a
      * @return array
      */
     private function getArrayRef( array $a ){
