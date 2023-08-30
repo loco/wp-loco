@@ -105,6 +105,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Removed deepl_api_url config. Free API detected from :fx key suffix.
 * Fixed bug in relative path calculations
 * Fixed API suggestions for plural forms
+* Fixed bug clearing unsaved state icons
 * Added total strings count to PO file tables
 * Better flag icons, with @x2 pixel support
 * Handling upload_tmp_dir values outside of open_basedir
