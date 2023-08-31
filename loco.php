@@ -146,7 +146,7 @@ function loco_check_extension( $name ) {
 
 /**
  * Class autoloader for Loco classes under src directory.
- * e.g. class "Loco_foo_Bar" wil be found in "src/foo/Bar.php"
+ * e.g. class "Loco_foo_Bar" will be found in "src/foo/Bar.php"
  * Also does autoload for polyfills under "src/compat" if $name < 20 chars
  * 
  * @internal 

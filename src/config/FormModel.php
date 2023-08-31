@@ -88,7 +88,7 @@ class Loco_config_FormModel extends Loco_config_ArrayModel {
         foreach( $branch as $name => $default ){
             if( $parent->hasAttribute($name) ){
                 if( is_bool($default) ){
-                    $branch[$name] = $this->evaulateBooleanAttribute($parent, $name);
+                    $branch[$name] = $this->evaluateBooleanAttribute($parent, $name);
                 }
                 else {
                     $branch[$name] = $parent->getAttribute($name);

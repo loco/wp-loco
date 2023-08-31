@@ -205,7 +205,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-file-move' => 'file_Move',
             '{type}-file-delete' => 'file_Delete',
             // test routes that don't actually exist
-            'test-no-class' => 'test_NonExistantClass',
+            'test-no-class' => 'test_NonExistentClass',
         ];
         if( ! $page ){
             $page = $action;
