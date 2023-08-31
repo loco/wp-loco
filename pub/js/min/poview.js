@@ -14,7 +14,7 @@ function q(a) {
 x !== a && (c("#loco-content")[a ? "removeClass" : "addClass"]("loco-invalid"), 
 x = a);
 }
-var m, w, l = [], v = [], x = !0, r = !1, t = c(d).find("li");
+let m, w, l = [], v = [], x = !0, r = !1, t = c(d).find("li");
 t.each(function(a, f) {
 f = c(f);
 f.find("span.po-none").length ? b() : (w = a, null == m && (m = a), a = f.find(".po-text").text(), 
@@ -40,7 +40,7 @@ n();
 }(h, g.fulltext.init());
 c(h).removeClass("loco-loading");
 var n = function() {
-var d, e = h.clientHeight - 2;
+let d, e = h.clientHeight - 2;
 return function() {
 for (var b = h, k = b.offsetTop || 0; (b = b.offsetParent) && b !== u.body; ) k += b.offsetTop || 0;
 b = p.innerHeight - k - 20;
@@ -50,7 +50,7 @@ d !== b && (h.style.height = b < e ? String(b) + "px" : "", d = b);
 n();
 c(p).resize(n);
 c(h).on("click", function(d) {
-var e = d.target;
+const e = d.target;
 if (e.hasAttribute("href")) return d.preventDefault(), C.load(e.textContent), !1;
 });
 }(window, document, window.jQuery);

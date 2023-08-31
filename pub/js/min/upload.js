@@ -2,7 +2,7 @@
 
 !function(e, l, m) {
 function h(a) {
-var n = m(b).find("button.button-primary");
+const n = m(b).find("button.button-primary");
 n.each(function(A, t) {
 t.disabled = a;
 });
