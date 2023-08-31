@@ -19,10 +19,8 @@ abstract class Loco_admin_config_BaseController extends Loco_mvc_AdminController
                 'user' => __('User options','loco-translate'),
                 'apis' => __('API keys','loco-translate'),
                 'version' => __('Version','loco-translate'),
+                'debug' => __('Debug','loco-translate'),
             ];
-            if( loco_debugging() ){
-                $actions['debug'] = __('Debug','loco-translate');
-            }
             $suffix = (string) $this->get('action');
             foreach( $actions as $action => $name ){
                 $href = Loco_mvc_AdminRouter::generate( 'config-'.$action, $_GET );

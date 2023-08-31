@@ -167,9 +167,8 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
     /**
      * Get unvalidated controller class for given route parameters
      * Abstracted from initPage so we can validate routes in self::generate
-     * @param string
-     * @param string
-     * @param array reference
+     * @param string $page
+     * @param string $action
      * @return string|null
      */
     private static function pageToClass( $page, $action, array &$args ){

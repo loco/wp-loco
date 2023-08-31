@@ -1,8 +1,7 @@
 <?php
 /**
- * Bundle debugger.
- * Shows bundle diagnostics and highlights problems
  * @codeCoverageIgnore
+ * @deprecated Useful info moved into bundle "Setup" tab
  */
 class Loco_admin_bundle_DebugController extends Loco_admin_bundle_BaseController {
     

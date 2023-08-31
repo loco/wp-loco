@@ -85,15 +85,10 @@
 
                     // else is a template, so has no progress
                     else:?> 
-                    <td data-sort-value="-1">
-                        --
-                    </td>
-                    <td data-sort-value="-1">
-                        --
-                    </td>
-                    <td data-sort-value="-1">
-                        --
-                    </td><?php
+                    <td data-sort-value="-1"> -- </td>
+                    <td data-sort-value="-1"> -- </td>
+                    <td data-sort-value="-1"> -- </td>
+                    <td data-sort-value="-1"> -- </td><?php
                     endif?> 
 
                     <td data-sort-value="<?php $po->e('name')?>">

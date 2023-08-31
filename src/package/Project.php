@@ -354,7 +354,6 @@ class Loco_package_Project {
 
     /**
      * Get first valid domain path
-     * @param bool whether directory should exist
      * @return Loco_fs_Directory
      */
     private function getSafeDomainPath(){

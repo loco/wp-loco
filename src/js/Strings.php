@@ -86,6 +86,12 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         //
         __("Suggested translations",'loco-translate');
 
+        // translators: Label for the plural form of the original English text
+        _x("Plural","Editor",'loco-translate');
+
+        // translators: Label for the singular form of the original English text
+        _x("Single","Editor",'loco-translate');
+
         //
         __("Loading suggestions",'loco-translate');
 
@@ -149,12 +155,6 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // translators: Label for the window pane for entering translator comments
         _x("Comments","Editor",'loco-translate');
 
-        // translators: Label for the singular form of the original English text
-        _x("Single","Editor",'loco-translate');
-
-        // translators: Label for the plural form of the original English text
-        _x("Plural","Editor",'loco-translate');
-
         //
         _x("Untranslated","Editor",'loco-translate');
 
@@ -182,11 +182,11 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         //
         __("Possible syntax error in string formatting",'loco-translate');
 
-        /* translators: %s is the maximum number of formatting arguments accepted by the source text of a translation
+        /* translators: %s is the number of formatting arguments accepted by the source text of a translation
          * xgettext: javascript-format */
         __("Too many placeholders; source text formatting suggests a maximum of %s",'loco-translate');
 
-        /* translators: %s is the minimum number of formatting arguments accepted by the source text of a translation
+        /* translators: %s is the number of formatting arguments accepted by the source text of a translation
          * xgettext: javascript-format */
         __("Missing placeholders; source text formatting suggests at least %s",'loco-translate');
 

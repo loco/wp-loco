@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2023-08-24 19:53+0000\n"
+"POT-Creation-Date: 2023-08-31 16:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.5-dev; wp-6.3\n"
+"X-Loco-Version: 2.6.5-dev; wp-6.3.1\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -45,7 +45,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
-#: src/package/Debugger.php:179
+#: src/package/Debugger.php:180
 #, php-format
 msgid "%1$s string extracted from source code for \"%2$s\""
 msgid_plural "%1$s strings extracted from source code for \"%2$s\""
@@ -125,7 +125,7 @@ msgid "%s file saved"
 msgstr ""
 
 #. Shows number of fuzzy strings at top of editor
-#: src/js/Strings.php:108 src/gettext/Metadata.php:208
+#: src/js/Strings.php:114 src/gettext/Metadata.php:208
 #, javascript-format
 msgid "%s fuzzy"
 msgstr ""
@@ -176,7 +176,7 @@ msgstr[1] ""
 
 #. Shows total string count at top of editor
 #. Where %s is any number of strings
-#: src/js/Strings.php:100 src/gettext/Metadata.php:194
+#: src/js/Strings.php:106 src/gettext/Metadata.php:194
 #, javascript-format
 msgid "%s string"
 msgid_plural "%s strings"
@@ -214,7 +214,7 @@ msgid "%s unique source strings."
 msgstr ""
 
 #. Shows number of untranslated strings at top of editor
-#: src/js/Strings.php:112 src/gettext/Metadata.php:212
+#: src/js/Strings.php:118 src/gettext/Metadata.php:212
 #, javascript-format
 msgid "%s untranslated"
 msgstr ""
@@ -227,7 +227,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Shows percentage translated at top of editor
-#: src/js/Strings.php:104 src/gettext/Metadata.php:205
+#: src/js/Strings.php:110 src/gettext/Metadata.php:205
 #, javascript-format
 msgid "%s%% translated"
 msgstr ""
@@ -325,7 +325,7 @@ msgstr ""
 
 #: src/admin/config/ApisController.php:12
 #: src/admin/config/BaseController.php:20
-#: src/admin/config/BaseController.php:42 tpl/admin/help/tab-config-apis.php:2
+#: src/admin/config/BaseController.php:40 tpl/admin/help/tab-config-apis.php:2
 msgid "API keys"
 msgstr ""
 
@@ -347,7 +347,7 @@ msgstr ""
 msgid "Assign template"
 msgstr ""
 
-#: tpl/admin/bundle/setup.php:12
+#: tpl/admin/bundle/setup.php:36
 msgid "Author details"
 msgstr ""
 
@@ -385,7 +385,7 @@ msgstr ""
 msgid "Bundle configuration saved"
 msgstr ""
 
-#: src/admin/bundle/DebugController.php:25
+#: src/admin/bundle/DebugController.php:24
 msgid "Bundle diagnostics"
 msgstr ""
 
@@ -407,7 +407,6 @@ msgctxt "Button label for a previous revision"
 msgid "Previous"
 msgstr ""
 
-#: tpl/admin/bundle/setup/conf.php:28 tpl/admin/bundle/setup/conf.php:35
 #: tpl/admin/bundle/setup/conf.php:56
 msgid "Cancel"
 msgstr ""
@@ -417,11 +416,7 @@ msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
-#: tpl/admin/bundle/setup/conf.php:12
-msgid "Check config repository"
-msgstr ""
-
-#: src/js/Strings.php:130
+#: src/js/Strings.php:136
 msgid "Check console output for debugging information"
 msgstr ""
 
@@ -486,7 +481,7 @@ msgstr ""
 msgid "Configure %s"
 msgstr ""
 
-#: src/package/Debugger.php:197
+#: src/package/Debugger.php:198
 msgid "Configured domain has no extractable strings"
 msgid_plural "%u configured domains have no extractable strings"
 msgstr[0] ""
@@ -535,11 +530,15 @@ msgstr ""
 msgid "Creating this file requires permission"
 msgstr ""
 
+#: tpl/admin/bundle/setup.php:27
+msgid "Current configuration as XML"
+msgstr ""
+
 #: tpl/admin/init/init-po.php:80
 msgid "Custom language"
 msgstr ""
 
-#: src/error/Debug.php:19 src/admin/config/BaseController.php:24
+#: src/error/Debug.php:19 src/admin/config/BaseController.php:22
 #: src/admin/config/DebugController.php:12
 #: src/admin/bundle/BaseController.php:128
 msgid "Debug"
@@ -637,7 +636,7 @@ msgid "Editor"
 msgstr ""
 
 #. Where %s is the name of the language, e.g. "French translation"
-#: src/js/Strings.php:144
+#: src/js/Strings.php:150
 #, javascript-format
 msgctxt "Editor"
 msgid "%s translation"
@@ -662,13 +661,13 @@ msgid "Check"
 msgstr ""
 
 #. Label for the window pane for entering translator comments
-#: src/js/Strings.php:150
+#: src/js/Strings.php:156
 msgctxt "Editor"
 msgid "Comments"
 msgstr ""
 
 #. Label for the window pane holding message context
-#: src/js/Strings.php:147
+#: src/js/Strings.php:153
 msgctxt "Editor"
 msgid "Context"
 msgstr ""
@@ -686,7 +685,7 @@ msgid "Download"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/Locale.php:402 src/js/Strings.php:156
+#: src/Locale.php:402 src/js/Strings.php:90
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
@@ -710,14 +709,14 @@ msgid "Save"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/Locale.php:401 src/js/Strings.php:153
+#: src/Locale.php:401 src/js/Strings.php:93
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
 
 #. Label for the window pane holding the original English text
 #. List heading showing preview of English text for each item
-#: src/js/Strings.php:140 tpl/admin/file/info-pot.php:30
+#: src/js/Strings.php:146 tpl/admin/file/info-pot.php:30
 msgctxt "Editor"
 msgid "Source text"
 msgstr ""
@@ -792,7 +791,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:115 src/error/Exception.php:163
+#: src/js/Strings.php:121 src/error/Exception.php:163
 msgid "Error"
 msgstr ""
 
@@ -976,10 +975,6 @@ msgstr ""
 msgid "Filter..."
 msgstr ""
 
-#: tpl/admin/bundle/setup/conf.php:27
-msgid "Find config"
-msgstr ""
-
 #: tpl/admin/bundle/inc-po-table.php:31 tpl/admin/bundle/locale.php:49
 msgid "Folder"
 msgstr ""
@@ -1042,7 +1037,7 @@ msgstr ""
 msgid "https://wordpress.org/plugins/loco-translate/"
 msgstr ""
 
-#: tpl/admin/bundle/setup.php:15
+#: tpl/admin/bundle/setup.php:39
 msgid ""
 "If you have trouble translating this bundle, consider asking the author for "
 "help"
@@ -1124,7 +1119,7 @@ msgstr ""
 msgid "Just now"
 msgstr ""
 
-#: src/js/Strings.php:93
+#: src/js/Strings.php:99
 msgid "Keep this translation"
 msgstr ""
 
@@ -1170,7 +1165,7 @@ msgstr ""
 msgid "Load config"
 msgstr ""
 
-#: src/js/Strings.php:90
+#: src/js/Strings.php:96
 msgid "Loading suggestions"
 msgstr ""
 
@@ -1255,7 +1250,7 @@ msgstr ""
 msgid "Mismatching placeholder type; check against source text formatting"
 msgstr ""
 
-#. %s is the minimum number of formatting arguments accepted by the source text of a translation
+#. %s is the number of formatting arguments accepted by the source text of a translation
 #: src/js/Strings.php:191
 #, javascript-format
 msgid "Missing placeholders; source text formatting suggests at least %s"
@@ -1351,7 +1346,7 @@ msgstr ""
 msgid "No translation APIs configured"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:115
+#: tpl/admin/bundle/inc-po-table.php:110
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -1380,7 +1375,7 @@ msgstr ""
 msgid "Nothing needed updating"
 msgstr ""
 
-#: src/js/Strings.php:121 src/error/Notice.php:20
+#: src/js/Strings.php:127 src/error/Notice.php:20
 #: tpl/admin/common/inc-fsconn.php:37
 msgid "Notice"
 msgstr ""
@@ -1397,12 +1392,8 @@ msgstr ""
 msgid "Official plugin page"
 msgstr ""
 
-#: src/js/Strings.php:124 src/error/Success.php:19
+#: src/js/Strings.php:130 src/error/Success.php:19
 msgid "OK"
-msgstr ""
-
-#: tpl/admin/bundle/setup/conf.php:34
-msgid "OK, Load this config"
 msgstr ""
 
 #: tpl/admin/file/info-po.php:71
@@ -1410,7 +1401,7 @@ msgid "Out of sync with template"
 msgstr ""
 
 #: src/admin/RootController.php:12 src/admin/file/InfoController.php:26
-#: src/admin/config/BaseController.php:41
+#: src/admin/config/BaseController.php:39
 #: src/admin/bundle/ViewController.php:25
 #: src/admin/bundle/LocaleController.php:34
 #: src/admin/bundle/BaseController.php:121
@@ -1422,7 +1413,7 @@ msgstr ""
 msgid "Overwrite existing translations"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:241
+#: src/mvc/AdminRouter.php:240
 msgid "Page not found"
 msgstr ""
 
@@ -1563,7 +1554,7 @@ msgstr ""
 msgid "Project name"
 msgstr ""
 
-#: src/js/Strings.php:133
+#: src/js/Strings.php:139
 msgid "Provide the following text when reporting a problem"
 msgstr ""
 
@@ -1679,7 +1670,7 @@ msgid "See full disclaimer"
 msgstr ""
 
 #. Generic error when external process broke an Ajax request
-#: src/js/Strings.php:127
+#: src/js/Strings.php:133
 msgid "Server returned invalid data"
 msgstr ""
 
@@ -1842,6 +1833,16 @@ msgid ""
 "same location"
 msgstr ""
 
+#: src/admin/bundle/SetupController.php:250
+msgid "The default \"languages\" domain path has been detected"
+msgstr ""
+
+#. %s will be replaced with a relative path like "/languages"
+#: src/admin/bundle/SetupController.php:245
+#, php-format
+msgid "The domain path is declared by the author as \"%s\""
+msgstr ""
+
 #: tpl/admin/file/move.php:17
 msgid "The following file will be moved/renamed to the new location:"
 msgid_plural "The following files will be moved/renamed to the new location:"
@@ -1891,6 +1892,18 @@ msgid ""
 "costs from the provider"
 msgstr ""
 
+#: src/admin/bundle/SetupController.php:239
+msgid ""
+"This bundle does't declare a text domain; try configuring it in the Advanced "
+"tab"
+msgstr ""
+
+#: src/admin/bundle/SetupController.php:253
+msgid ""
+"This bundle doesn't declare a domain path. Add one via the Advanced tab if "
+"needed"
+msgstr ""
+
 #: tpl/admin/init/init-prompt.php:24
 msgid "This bundle doesn't define a translations template file"
 msgstr ""
@@ -1924,7 +1937,7 @@ msgid ""
 msgstr ""
 
 #: tpl/admin/bundle/setup/core.php:13
-msgid "This bundle's configuration is built into Loco"
+msgid "This bundle's configuration is built into Loco Translate"
 msgstr ""
 
 #: tpl/admin/bundle/setup/author.php:14
@@ -1986,10 +1999,21 @@ msgstr ""
 msgid "This plugin doesn't collect any data from public website visitors."
 msgstr ""
 
+#. This warning is shown when a text domain has defaulted to same as the folder name (or slug)
+#: src/admin/bundle/SetupController.php:229
+msgid ""
+"This plugin doesn't declare a text domain. It's assumed to be the same as "
+"the slug, but this could be wrong"
+msgstr ""
+
 #: tpl/admin/bundle/alias.php:14
 msgid ""
 "This plugin doesn't have its own translation files, but can be translated in "
 "the default text domain"
+msgstr ""
+
+#: src/admin/bundle/SetupController.php:235
+msgid "This text domain is not in Loco Translate's bundle configuration"
 msgstr ""
 
 #. Author of the plugin
@@ -2012,7 +2036,7 @@ msgid ""
 "the file writeable by %s"
 msgstr ""
 
-#. %s is the maximum number of formatting arguments accepted by the source text of a translation
+#. %s is the number of formatting arguments accepted by the source text of a translation
 #: src/js/Strings.php:187
 #, javascript-format
 msgid "Too many placeholders; source text formatting suggests a maximum of %s"
@@ -2089,7 +2113,7 @@ msgstr ""
 msgid "Unknown author"
 msgstr ""
 
-#: src/js/Strings.php:136
+#: src/js/Strings.php:142
 msgid "Unknown error"
 msgstr ""
 
@@ -2173,7 +2197,7 @@ msgstr ""
 msgid "Visit official site"
 msgstr ""
 
-#: src/js/Strings.php:118 src/error/Warning.php:19
+#: src/js/Strings.php:124 src/error/Warning.php:19
 msgid "Warning"
 msgstr ""
 
@@ -2183,12 +2207,6 @@ msgstr ""
 
 #: tpl/admin/file/info-mo.php:41
 msgid "We can't find the original PO file from which this was compiled"
-msgstr ""
-
-#: tpl/admin/bundle/setup/conf.php:16
-msgid ""
-"We have a database of non-standard bundle configurations.\n"
-"If we know your bundle, we'll configure it for you automatically"
 msgstr ""
 
 #: src/admin/RootController.php:84
@@ -2219,6 +2237,12 @@ msgstr ""
 
 #: tpl/admin/init/init-po.php:56
 msgid "WordPress language"
+msgstr ""
+
+#. %s will be replaced with a text domain, e.g. "loco-translate"
+#: src/admin/bundle/SetupController.php:222
+#, php-format
+msgid "WordPress says the primary text domain is \"%s\""
 msgstr ""
 
 #: tpl/admin/file/info.php:107
@@ -2290,7 +2314,7 @@ msgid "Your admin language is %s."
 msgstr ""
 
 #. Warning appears when user tries to refresh or navigate away when editor work is unsaved
-#: src/js/Strings.php:96
+#: src/js/Strings.php:102
 msgid "Your changes will be lost if you continue without saving"
 msgstr ""
 

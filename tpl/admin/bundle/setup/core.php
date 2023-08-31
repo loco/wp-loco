@@ -10,7 +10,7 @@ $this->extend('../../layout');
             <?php esc_html_e('Bundle auto-configured','loco-translate')?> 
         </h3>
         <p>
-            <?php esc_html_e("This bundle's configuration is built into Loco",'loco-translate')?>.
+            <?php esc_html_e("This bundle's configuration is built into Loco Translate",'loco-translate')?>.
             <?php esc_html_e("You can make changes in the Advanced tab if you need to override the current settings",'loco-translate')?>.
         </p>
         <p class="submit">

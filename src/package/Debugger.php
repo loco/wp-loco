@@ -2,6 +2,7 @@
 /**
  * Bundle diagnostics.
  * @codeCoverageIgnore
+ * @deprecated
  * phpcs:disable WordPress.WP.I18n
  */
 class Loco_package_Debugger implements IteratorAggregate {

@@ -135,7 +135,7 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
             $doconf = true;
         }
         
-        // enable form to paste JSON config (via remote lookup)
+        /*/ JSON config via remote lookup has been scrapped
         if( $this->get('json') ){
             $fields = new Loco_mvc_HiddenFields( [
                 'json-content' => '',
@@ -154,13 +154,21 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
                 'apiUrl' => $apiBase.'/wp/'.strtolower( $bundle->getType() ),
             ] ) );
             $doconf = true;
-        }
+        }*/
+        
         
         // display configurator if configuring
         if( $doconf ){
             return $this->view( 'admin/bundle/setup/conf' );
         }
-        // else set configurator links back to self with required option ...
+
+        // Add some debugging information on all screens except config
+        // this used to be accessed via the Debug tab, which is removed
+        if( loco_debugging() && count($bundle) ){
+            $this->set('debug', $this->getDebug($bundle) );
+        }
+
+        // set configurator links back to self with required option ...
         if( ! $configured || ! count($bundle) ){
             return $this->view( 'admin/bundle/setup/none' );
         }
@@ -186,6 +194,69 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
         }
         
         return $this->view('admin/bundle/setup/meta');
+    }
+
+
+
+    /**
+     * @return Loco_mvc_ViewParams
+     */
+    private function getDebug( Loco_package_Bundle $bundle ){
+        $debug = new Loco_mvc_ViewParams;
+
+        // XML config
+        $writer = new Loco_config_BundleWriter($bundle);
+        $debug['xml'] = $writer->toXml();
+        
+        // general notes, followed by related warnings
+        $notes = [];
+        $warns = [];
+        
+        // show auto-detected settings, either assumed (by wp) or declared (by author)
+        if( 'meta' === $bundle->isConfigured() ){
+            // Text Domain:
+            $native = $bundle->getHeaderInfo();
+            $domain = $native->TextDomain;
+            if( $domain ){
+                // Translators: %s will be replaced with a text domain, e.g. "loco-translate"
+                $notes[] = sprintf( __('WordPress says the primary text domain is "%s"','loco-translate'), $domain );
+                // WordPress 4.6 changes mean this header could be a fallback and not actually declared by the author
+                if( $bundle->isPlugin() ) {
+                    $map = [ 'TextDomain' => 'Text Domain' ];
+                    $raw = get_file_data( $bundle->getBootstrapPath(), $map, 'plugin' );
+                    if( ! isset($raw['TextDomain']) || '' === $raw['TextDomain'] ) {
+                        // Translators: This warning is shown when a text domain has defaulted to same as the folder name (or slug)
+                        $warns[] = __("This plugin doesn't declare a text domain. It's assumed to be the same as the slug, but this could be wrong",'loco-translate');
+                    }
+                }
+                // Warn if WordPress-assumed text domain is not configured. plugin/theme headers won't be translated
+                $domains = $bundle->getDomains();
+                if ( ! isset($domains[$domain ]) && ! isset($domains['*']) ) {
+                    $warns[] = __("This text domain is not in Loco Translate's bundle configuration",'loco-translate');
+                }
+            }
+            else {
+                $warns[] = __("This bundle does't declare a text domain; try configuring it in the Advanced tab",'loco-translate');
+            }
+            // Domain Path:
+            $path = $native->DomainPath;
+            if( $path ){
+                // Translators: %s will be replaced with a relative path like "/languages"
+                $notes[] = sprintf( __('The domain path is declared by the author as "%s"','loco-translate'), $path );
+            }
+            else {
+                $guess = new Loco_fs_Directory( $bundle->getDirectoryPath().'/languages' );
+                if( $guess->readable() ){
+                    $notes[] = __('The default "languages" domain path has been detected','loco-translate');
+                }
+                else {
+                    $warns[] = __("This bundle doesn't declare a domain path. Add one via the Advanced tab if needed",'loco-translate');
+                }
+            }
+        }
+
+        $debug['notices'] = [ 'info' => $notes, 'warning' => $warns ];
+        return $debug;
     }
     
 }

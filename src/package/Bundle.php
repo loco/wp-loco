@@ -697,7 +697,6 @@ abstract class Loco_package_Bundle extends ArrayObject implements JsonSerializab
     }
 
 
-
     /**
      * Get newest timestamp of all translation files (includes template, but exclude source files)
      * @return int

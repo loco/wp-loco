@@ -110,7 +110,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Sharper flags and spinners (@x2 pixel support)
 * Handling upload_tmp_dir values outside of open_basedir
 * Suppressing E_WARNING when testing file is_readable
-* Bundle debug screen is deprecated
+* Bundle debug screen is deprecated (moving into Setup)
+* Showing System Diagnostics when debug is off
 * Bumped WordPress compatibility to 6.3.1
 
 = 2.6.4 =
