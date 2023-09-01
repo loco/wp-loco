@@ -67,14 +67,9 @@ class Loco_fs_File {
      */
     public static function is_readable( $path ){
         if( '' === $path || '.' === $path[0] ){
-            throw new InvalidArgumentException('Relatve path disallowed');
+            throw new InvalidArgumentException('Relative paths disallowed');
         }
-        // preemptive check of open_basedir. if it passes is_readable() will be allowed to error
-        $bases = new Loco_fs_Locations( explode(':',ini_get('open_basedir') ));
-        if( $bases->check($path) ){
-            return is_readable($path);
-        }
-        Loco_error_AdminNotices::debug( sprintf('%s is not within the open_basedir restriction',$path) );
+        // suppress E_WARNING from is_readable()
         $erep = error_reporting( error_reporting() & ~E_WARNING );
         $bool = is_readable($path);
         error_reporting($erep);
