@@ -257,4 +257,14 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
     }
     
     
+    /**
+     * Check if passed exception is effectively the same as this one
+     * @return bool
+     */
+    public function isIdentical( Exception $other ){
+        return $this->getCode() === $other->getCode()
+            && $this->getMessage() === $other->getMessage()
+            && $this->getType() === ( $other instanceof Loco_error_Exception ? $other->getType() : 0 );
+    }
+
 }

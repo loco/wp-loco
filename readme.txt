@@ -101,7 +101,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.6 =
-* Scrapped open_basedir check for is_readable
+* Replaced open_basedir check with error capturing
 
 = 2.6.5 =
 * Added syntax checking function

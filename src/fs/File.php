@@ -69,10 +69,10 @@ class Loco_fs_File {
         if( '' === $path || '.' === $path[0] ){
             throw new InvalidArgumentException('Relative paths disallowed');
         }
-        // suppress E_WARNING from is_readable()
-        $erep = error_reporting( error_reporting() & ~E_WARNING );
+        // Reduce PHP errors from is_readable to debug messages
+        Loco_error_AdminNotices::capture(E_NOTICE|E_WARNING);
         $bool = is_readable($path);
-        error_reporting($erep);
+        restore_error_handler();
         return $bool;
     }
 
@@ -158,6 +158,8 @@ class Loco_fs_File {
 
 
     /**
+     * @deprecated Preferable to call is_readable.
+     * This can return true if a file is under open_basedir, but is unreadable due to permissions.
      * @return bool
      */
     public function exists(){

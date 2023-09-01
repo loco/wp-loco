@@ -27,13 +27,45 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
         return self::$singleton;
     }
 
-    
+
+    /**
+     * Enable temporary buffering of PHP errors, reducing error reporting to debug level.
+     * Call restore_error_handler to stop capturing.
+     * @param int $level PHP error level bit mask, e.g. E_WARNING
+     * @return void
+     */
+    public static function capture( $level ){
+        set_error_handler( [__CLASS__,'handle_error'], $level );
+    }
+
+
+    /**
+     * @internal
+     * @param int $errno
+     * @param string $errstr
+     */
+    public static function handle_error( $errno, $errstr /*$errfile, $errline*/ ){
+        if( $errno & (E_ERROR|E_USER_ERROR) ){
+            return false;
+        }
+        $label = $errno & (E_WARNING|E_USER_WARNING) ? 'Warning' : 'Notice';
+        self::debug( '[PHP '.$label.'] '.$errstr );
+        return true;
+    }
+
+
     /**
      * @param Loco_error_Exception $error
      * @return Loco_error_Exception
      */
     public static function add( Loco_error_Exception $error ){
         $notices = self::get();
+        // Skip repeated error messages in same stack
+        foreach( $notices->errors as $previous ){
+            if( $error->isIdentical($previous) ){
+                return $previous;
+            }
+        }
         // if exception wasn't thrown we have to do some work to establish where it was invoked
         if( __FILE__ === $error->getRealFile() ){
             $error->setCallee(1);
