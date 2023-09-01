@@ -145,7 +145,7 @@ class Loco_config_BundleReader {
                 // <template>
                 // configure POT file, should only be one
                 foreach( $model->query('template',$projectElement) as $templateElement ){
-                    if( $model->evaulateBooleanAttribute( $templateElement, 'locked') ){
+                    if( $model->evaluateBooleanAttribute( $templateElement, 'locked') ){
                         $project->setPotLock( true );
                     }
                     foreach( $model->query('file',$templateElement) as $fileElement ){

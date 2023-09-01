@@ -1,6 +1,6 @@
 <?php
 /**
- * File information for ony type of file. Extended by specific views for supported types
+ * File information for any type of file. Extended by specific views for supported types
  */
 $this->extend('../layout');
 echo $header;

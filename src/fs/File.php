@@ -158,8 +158,8 @@ class Loco_fs_File {
 
 
     /**
-     * @deprecated Preferable to call is_readable.
-     * This can return true if a file is under open_basedir, but is unreadable due to permissions.
+     * Checks if a file exists, and is within open_basedir restrictions.
+     * This does NOT check if file permissions allow PHP to read it. Call is_readable.
      * @return bool
      */
     public function exists(){
@@ -176,6 +176,7 @@ class Loco_fs_File {
 
 
     /**
+     * Check if the file exists and is readable by the current PHP process.
      * @return bool
      */
     public function readable(){

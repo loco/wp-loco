@@ -205,7 +205,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-file-move' => 'file_Move',
             '{type}-file-delete' => 'file_Delete',
             // test routes that don't actually exist
-            'test-no-class' => 'test_NonExistantClass',
+            'test-no-class' => 'test_NonExistentClass',
         ];
         if( ! $page ){
             $page = $action;
@@ -261,8 +261,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
     /**
      * Generate a routable link to Loco admin page
-     * @param string
-     * @param array
+     * @param string $route
      * @return string
      */
     public static function generate( $route, array $args = [] ){
@@ -296,7 +295,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
                 throw new UnexpectedValueException( sprintf('Invalid admin route: %s', json_encode($route) ) );
             }
             else {
-                class_exists( $class, true ); // <- autoloader will throw if not class found
+                class_exists($class,true); // <- autoloader will throw if not class found
             }
         }
         // if url found, it should contain the page

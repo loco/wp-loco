@@ -1,6 +1,6 @@
 <?php
 /**
- * Help tab side bar, more information links
+ * Help tab sidebar, more information links
  */
 ?><p>
     <strong><?php esc_html_e('Useful links:','loco-translate')?></strong>

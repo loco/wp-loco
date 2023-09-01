@@ -67,7 +67,7 @@ class Loco_data_RecentItems extends Loco_data_Option {
     private function getItems( $key, $offset, $count ){
         $stack = isset($this[$key]) ? $this[$key] : [];
         // hash map should automatically be in "push" order, meaning most recent last 
-        // sorting gives wrong order for same-second updates (only relevent in tests, but still..)
+        // sorting gives wrong order for same-second updates (only relevant in tests, but still..)
         // asort( $stack, SORT_NUMERIC );
         $stack = array_reverse( array_keys( $stack ) );
         if( is_null($count) && 0 === $offset ){

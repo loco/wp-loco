@@ -96,7 +96,7 @@ $this->extend('../layout');
                         <!-- no percentage for template -->
                     </td>
                     <td data-sort-value="-1">
-                        -- <!-- no pending for template -->
+                        -- <!-- no pending translations in templates -->
                     </td><?php
                     endif;
                     endif?> 

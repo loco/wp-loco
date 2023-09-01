@@ -108,7 +108,7 @@ abstract class Loco_package_Inverter {
                 if( isset($localised[$key][$slug]) ){
                     //printf("Perfect match on domain '%s' in %s <br />\n", $slug, $key );
                     $unique[$key][$slug] = $dir;
-                    // done with this prefectly matched set
+                    // done with this perfectly matched set
                     $templates[$key][$slug] = null;
                     $localised[$key][$slug] = null;
                 }

@@ -165,7 +165,7 @@ abstract class Loco_config_Model {
      * @param string $attr
      * @return bool
      */
-    public function evaulateBooleanAttribute( $el, $attr ){
+    public function evaluateBooleanAttribute( $el, $attr ){
         if( ! $el->hasAttribute($attr) ){
             return false;
         }
