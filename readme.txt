@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.7 =
+* Fixed a bug where unused plural forms were counted as untranslated
+
 = 2.6.6 =
 * Replaced open_basedir check with error capturing
 
@@ -499,7 +502,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.6 =
+= 2.6.7 =
 * Various improvements and bug fixes
 
 

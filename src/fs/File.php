@@ -159,7 +159,7 @@ class Loco_fs_File {
 
     /**
      * Checks if a file exists, and is within open_basedir restrictions.
-     * This does NOT check if file permissions allow PHP to read it. Call is_readable.
+     * This does NOT check if file permissions allow PHP to read it. Call $this->readable() or self::is_readable($path).
      * @return bool
      */
     public function exists(){
