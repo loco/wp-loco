@@ -190,7 +190,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-view' => 'bundle_View',
             '{type}-conf' => 'bundle_Conf',
             '{type}-setup' => 'bundle_Setup',
-            '{type}-debug' => 'bundle_Debug',
+            '{type}-debug' => 'bundle_Debug', // <- removed in 2.6.7
             'lang-view' => 'bundle_Locale',
             // file initialization
             '{type}-msginit' => 'init_InitPo',
