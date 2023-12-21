@@ -10,7 +10,7 @@ private  $map = [];
 public function __construct(array $raw = [] ){ if( $raw ){ $keys = array_keys( $raw ); $this->map = array_combine( array_map( 'strtolower', $keys ), $keys ); parent::__construct($raw); } } 
 public function normalize(  $k ) { $k = strtolower($k); return array_key_exists($k,$this->map) ? $this->map[$k] : null; } 
 public function add($key, $val ) { $this->offsetSet( $key, $val ); return $this; } 
-public function __toString(){ $pairs = []; foreach( $this as $key => $val ){ $pairs[] = $key.': '.$val; } return implode("\n", $pairs ); } 
+public function __toString() { $pairs = []; foreach( $this as $key => $val ){ $pairs[] = $key.': '.$val; } return implode("\n", $pairs ); } 
 public function trimmed(  $prop ) { return trim( $this->__get($prop) ); } 
 public function has(  $key) { return array_key_exists( strtolower($key), $this->map ); } 
 public function __get(  $key ){ return $this->offsetGet( $key ); } 
@@ -24,7 +24,7 @@ public function offsetSet(  $key,  $value ) { $k = strtolower($key); if( isset($
 #[ReturnTypeWillChange]
 public function offsetUnset(  $key ) { $k = strtolower($key); if( isset($this->map[$k]) ){ parent::offsetUnset( $this->map[$k] ); unset( $this->map[$k] ); } } 
 #[ReturnTypeWillChange]
-public function jsonSerialize(){ return $this->getArrayCopy(); } }
+public function jsonSerialize() { return $this->getArrayCopy(); } }
 function loco_normalize_charset(  $cs ) { if( preg_match('/^UTF-?8$/i',$cs) ){ return 'UTF-8'; } try { $aliases = @mb_encoding_aliases($cs); } catch( ValueError $e ){ $aliases = false; } if( false === $aliases ){ throw new InvalidArgumentException('Unsupported character encoding: '.$cs ); } if( preg_grep('/^ISO[-_]\\d+[-_]\\d+$/i',$aliases) ){ $cs = current($aliases); $cs = strtr( strtoupper($cs), '_', '-' ); } else if( in_array('US-ASCII',$aliases,true) ){ $cs = 'US-ASCII'; } return $cs; }
 class LocoPoHeaders extends LocoHeaders { 
 private  $cs = null; 
@@ -44,7 +44,7 @@ protected function setCharset(  $cs ){ $this->cs = $cs; }
 protected function getCharset(){ return $this->cs; } 
 protected function str(  $str ){ if( '' !== $str ){ $str = loco_convert_utf8($str,$this->cs,false); } return $str; } }
 function loco_remove_bom(  $s, &$c ){ $bom = substr($s,0,2); if( "\xFF\xFE" === $bom ){ $c = 'UTF-16LE'; return substr($s,2); } if( "\xFE\xFF" === $bom ){ $c = 'UTF-16BE'; return substr($s,2); } if( "\xEF\xBB" === $bom && "\xBF" === $s[2] ){ $c = 'UTF-8'; return substr($s,3); } $c = ''; return $s; }
-function loco_parse_reference_id( $refs, &$_id ){ if( false === ( $n = strpos($refs,'loco:') ) ){ $_id = ''; return $refs; } $_id = substr($refs, $n+5, 24 ); $refs = substr_replace( $refs, '', $n, 29 ); return trim( $refs ); }
+function loco_parse_reference_id(  $refs, &$_id ) { if( false === ( $n = strpos($refs,'loco:') ) ){ $_id = ''; return $refs; } $_id = substr($refs, $n+5, 24 ); $refs = substr_replace( $refs, '', $n, 29 ); return trim( $refs ); }
 class LocoPoParser extends LocoGettextParser implements Iterator { 
 private  $lines = []; 
 private  $i; 
@@ -52,16 +52,16 @@ private  $k;
 private  $m; 
 public function __construct(  $src ){ if( '' !== $src ){ $src = loco_remove_bom($src,$cs); if( $cs && 'UTF-8' !== $cs ){ $src = mb_convert_encoding( $src, 'UTF-8', $cs ); $cs = 'UTF-8'; } if( 'UTF-8' === $cs ){ $this->setCharset('UTF-8'); } $this->lines = preg_split('/(\\r\\n?|\\n)/', $src ); } } 
 #[ReturnTypeWillChange]
-public function rewind(){ $this->i = -1; $this->k = -1; $this->next(); } 
+public function rewind() { $this->i = -1; $this->k = -1; $this->next(); } 
 #[ReturnTypeWillChange]
-public function valid(){ return is_int($this->i); } 
+public function valid() { return is_int($this->i); } 
 #[ReturnTypeWillChange]
-public function key(){ return $this->k; } 
+public function key() { return $this->k; } 
 #[ReturnTypeWillChange]
-public function current(){ return $this->m; } 
+public function current() { return $this->m; } 
 #[ReturnTypeWillChange]
-public function next(){ $valid = false; $entry = [ '#' => [], 'id' => [null], 'str' => [null] ]; $i = $this->i; while( array_key_exists(++$i,$this->lines) ){ $line = $this->lines[$i]; try { if( '' === $line ){ if( $valid ){ break; } continue; } $c = $line[0]; if( '#' === $c ){ if( $valid ){ $i--; break; } if( '#' === $line ){ continue; } $f = $line[1]; $entry['#'][$f][] = trim( substr( $line, 1+strlen($f) ), "/ \n\r\t" ); } else if( preg_match('/^msg(id(?:_plural)?|ctxt|str(?:\\[(\\d+)])?)[ \\t]*/', $line, $r ) ){ if( isset($r[2]) ){ $key = 'str'; $idx = (int) $r[2]; } else { $key = $r[1]; $idx = 0; } if( $valid && 'str' !== $key && null !== $entry['str'][0] ){ $i--; break; } $snip = strlen($r[0]); if( '"' !== substr($line,$snip,1) ){ throw new Exception('Expected " to follow msg'.$key); } $val = ''; $line = substr($line,$snip); while( true ){ if( '"' === $line || '"' !== substr($line,-1) ){ throw new Exception('Unterminated msg'.$key ); } $val .= substr( $line, 1, -1 ); $j = $i + 1; if( array_key_exists($j,$this->lines) && ( $line = $this->lines[$j] ) && '"' === $line[0] ){ $i = $j; } else { break; } } if( ! $valid ){ $valid = true; } if( 'id_plural' === $key ){ $key = 'id'; $idx = 1; } $entry[$key][$idx] = stripcslashes($val); } else if( preg_match('/^[ \\t]+$/',$line) ){ if( $valid ) { break; } } else if( '"' === $c ){ throw new Exception('String encountered without keyword'); } else { throw new Exception('Junk'); } } catch( Exception $e ){ } } if( $valid ){ ++$this->k; $this->i = $i; $this->m = $entry; } else { $this->i = null; $this->k = null; $this->m = null; } } 
-public function parse(  $limit = -1 ){ $this->rewind(); if( ! $this->valid() ){ throw new Loco_error_ParseException('Invalid PO file'); } $entry = $this->current(); if( '' !== $entry['id'][0] || isset($entry['ctxt']) || is_null($entry['str'][0]) ){ $head = $this->setHeader( new LocoPoHeaders ); } else { $head = $this->setHeader( LocoPoHeaders::fromMsgstr($entry['str'][0]) ); } if( 0 === $limit ){ return []; } $i = -1; $assets = []; $lk = $head['X-Loco-Lookup']; while( $this->valid() ){ $entry = $this->current(); $msgid = $entry['id'][0]; if( is_null($msgid) ){ $this->next(); continue; } if( ++$i === $limit ){ return $assets; } $asset = [ 'source' => $this->str( $msgid ), 'target' => $this->str( (string) $entry['str'][0] ), 'context' => null, ]; $prev_entry = null; if( isset($entry['ctxt']) ){ $asset['context'] = $this->str( $entry['ctxt'][0] ); } $cmt = $entry['#']; if( isset($cmt[' ']) ){ $asset['comment'] = $this->str( implode("\n", $cmt[' '] ) ); } if( isset($cmt['.']) ){ $asset['notes'] = $this->str( implode("\n", $cmt['.'] ) ); } if( isset($cmt[':']) ){ if( $refs = implode( ' ', $cmt[':'] ) ) { $refs = $this->str($refs); if( $refs = loco_parse_reference_id( $refs, $_id ) ){ $asset['refs'] = $refs; } if( $_id ){ $asset['_id'] = $_id; } } } if( isset($cmt[',']) ){ foreach( $cmt[','] as $flags ){ foreach( explode(',',$flags) as $flag ){ if( $flag = trim($flag," \t") ){ if( preg_match('/^((?:no-)?\w+)-format/', $flag, $r ) ){ $asset['format'] = $r[1]; } else if( 'fuzzy' === $flag ){ $asset['flag'] = 4; } } } } } if( isset($cmt['|']) ){ $p = new LocoPoParser(''); $p->lines = $cmt['|']; $p->setCharset( $this->getCharset() ); try { $prev_entry = $p->parse(); } catch( Loco_error_ParseException $e ){ } if( $prev_entry ){ $msgid = $prev_entry[0]['source']; if( $lk && 'text' !== $lk ){ $asset[$lk] = $asset['source']; $asset['source'] = $msgid; } else if( 'loco:' === substr($msgid,0,5) ){ $asset['_id'] = substr($msgid,5); } else { $asset['prev'] = $prev_entry; $prev_entry = null; } } } $assets[] = $asset; if( isset($entry['id'][1]) ){ $idx = 0; $pidx = count($assets) - 1; $num = max( 2, count($entry['str']) ); while( ++$idx < $num ){ $plural = [ 'source' => '', 'target' => isset($entry['str'][$idx]) ? $this->str($entry['str'][$idx]) : '', 'plural' => $idx, 'parent' => $pidx, ]; if( 1 === $idx ){ $plural['source'] = $this->str($entry['id'][1]); if( is_array($prev_entry) && isset($prev_entry[1]) ){ if( $lk && 'text' !== $lk ){ $plural[$lk] = $plural['source']; $plural['source'] = $prev_entry[1]['source']; } } } if( isset($asset['flag']) ){ $plural['flag'] = $asset['flag']; } $assets[] = $plural; } } $this->next(); } if( -1 === $i ){ throw new Loco_error_ParseException('Invalid PO file'); } else if( 0 === $i && '' === $assets[0]['source'] && '' === $assets[0]['target'] ){ throw new Loco_error_ParseException('Invalid PO file' ); } return $assets; } }
+public function next() { $valid = false; $entry = [ '#' => [], 'id' => [null], 'str' => [null] ]; $i = $this->i; while( array_key_exists(++$i,$this->lines) ){ $line = $this->lines[$i]; try { if( '' === $line ){ if( $valid ){ break; } continue; } $c = $line[0]; if( '#' === $c ){ if( $valid ){ $i--; break; } if( '#' === $line ){ continue; } $f = $line[1]; $entry['#'][$f][] = trim( substr( $line, 1+strlen($f) ), "/ \n\r\t" ); } else if( preg_match('/^msg(id(?:_plural)?|ctxt|str(?:\\[(\\d+)])?)[ \\t]*/', $line, $r ) ){ if( isset($r[2]) ){ $key = 'str'; $idx = (int) $r[2]; } else { $key = $r[1]; $idx = 0; } if( $valid && 'str' !== $key && null !== $entry['str'][0] ){ $i--; break; } $snip = strlen($r[0]); if( '"' !== substr($line,$snip,1) ){ throw new Exception('Expected " to follow msg'.$key); } $val = ''; $line = substr($line,$snip); while( true ){ if( '"' === $line || ! substr($line,-1) == '"' ){ throw new Exception('Unterminated msg'.$key ); } $val .= substr( $line, 1, -1 ); $j = $i + 1; if( array_key_exists($j,$this->lines) && ( $line = $this->lines[$j] ) && '"' === $line[0] ){ $i = $j; } else { break; } } if( ! $valid ){ $valid = true; } if( 'id_plural' === $key ){ $key = 'id'; $idx = 1; } $entry[$key][$idx] = stripcslashes($val); } else if( preg_match('/^[ \\t]+$/',$line) ){ if( $valid ) { break; } } else if( '"' === $c ){ throw new Exception('String encountered without keyword'); } else { throw new Exception('Junk'); } } catch( Exception $e ){ } } if( $valid ){ ++$this->k; $this->i = $i; $this->m = $entry; } else { $this->i = null; $this->k = null; $this->m = null; } } 
+public function parse(  $limit = -1 ) { $this->rewind(); if( ! $this->valid() ){ throw new Loco_error_ParseException('Invalid PO file'); } $entry = $this->current(); if( '' !== $entry['id'][0] || isset($entry['ctxt']) || is_null($entry['str'][0]) ){ $head = $this->setHeader( new LocoPoHeaders ); } else { $head = $this->setHeader( LocoPoHeaders::fromMsgstr($entry['str'][0]) ); } if( 0 === $limit ){ return []; } $i = -1; $assets = []; $lk = $head['X-Loco-Lookup']; while( $this->valid() ){ $entry = $this->current(); $msgid = $entry['id'][0]; if( is_null($msgid) ){ $this->next(); continue; } if( ++$i === $limit ){ return $assets; } $asset = [ 'source' => $this->str( $msgid ), 'target' => $this->str( (string) $entry['str'][0] ), 'context' => null, ]; $prev_entry = null; if( isset($entry['ctxt']) ){ $asset['context'] = $this->str( $entry['ctxt'][0] ); } $cmt = $entry['#']; if( isset($cmt[' ']) ){ $asset['comment'] = $this->str( implode("\n", $cmt[' '] ) ); } if( isset($cmt['.']) ){ $asset['notes'] = $this->str( implode("\n", $cmt['.'] ) ); } if( isset($cmt[':']) ){ if( $refs = implode( ' ', $cmt[':'] ) ) { $refs = $this->str($refs); if( $refs = loco_parse_reference_id( $refs, $_id ) ){ $asset['refs'] = $refs; } if( $_id ){ $asset['_id'] = $_id; } } } if( isset($cmt[',']) ){ foreach( $cmt[','] as $flags ){ foreach( explode(',',$flags) as $flag ){ if( $flag = trim($flag," \t") ){ if( preg_match('/^((?:no-)?\w+)-format/', $flag, $r ) ){ $asset['format'] = $r[1]; } else if( 'fuzzy' === $flag ){ $asset['flag'] = 4; } } } } } if( isset($cmt['|']) ){ $p = new LocoPoParser(''); $p->lines = $cmt['|']; $p->setCharset( $this->getCharset() ); try { $prev_entry = $p->parse(); } catch( Loco_error_ParseException $e ){ } if( $prev_entry ){ $msgid = $prev_entry[0]['source']; if( $lk && 'text' !== $lk ){ $asset[$lk] = $asset['source']; $asset['source'] = $msgid; } else if( substr($msgid,0,1) == 'loco:' ){ $asset['_id'] = substr($msgid,5); } else { $asset['prev'] = $prev_entry; $prev_entry = null; } } } $assets[] = $asset; if( isset($entry['id'][1]) ){ $idx = 0; $pidx = count($assets) - 1; $num = max( 2, count($entry['str']) ); while( ++$idx < $num ){ $plural = [ 'source' => '', 'target' => isset($entry['str'][$idx]) ? $this->str($entry['str'][$idx]) : '', 'plural' => $idx, 'parent' => $pidx, ]; if( 1 === $idx ){ $plural['source'] = $this->str($entry['id'][1]); if( is_array($prev_entry) && isset($prev_entry[1]) ){ if( $lk && 'text' !== $lk ){ $plural[$lk] = $plural['source']; $plural['source'] = $prev_entry[1]['source']; } } } if( isset($asset['flag']) ){ $plural['flag'] = $asset['flag']; } $assets[] = $plural; } } $this->next(); } if( -1 === $i ){ throw new Loco_error_ParseException('Invalid PO file'); } else if( 0 === $i && '' === $assets[0]['source'] && '' === $assets[0]['target'] ){ throw new Loco_error_ParseException('Invalid PO file' ); } return $assets; } }
 class LocoMoParser extends LocoGettextParser { 
 private $bin; 
 private $be; 
@@ -116,103 +116,103 @@ private  $t;
 private  $j; 
 private  $z = 0; 
 private  $w = 79; 
-public function __construct(  $po ){ if( is_array($po) ){ $this->po = $po; } else if( $po instanceof Traversable ){ $this->po = iterator_to_array($po,false); } else { throw new InvalidArgumentException('PO data must be array or iterator'); } $this->t = count($po); if( 0 === $this->t ){ throw new InvalidArgumentException('Empty PO data'); } $h = $po[0]; if( '' !== $h['source'] || ( isset($h['context']) && '' !== $h['context'] ) || ( isset($po[1]['parent']) && 0 === $po[1]['parent'] ) ){ $this->z = -1; } } 
-public function push( LocoPoMessage $p ){ $raw = $p->export(); $plurals = $p->plurals; unset($raw['plurals']); $i = count($this->po); $this->po[$i] = $raw; $this->t++; if( is_array($plurals) ) { $j = 0; foreach( $plurals as $p ) { $raw = $p->export(); $raw['parent'] = $i; $raw['plural'] = ++$j; $this->po[] = $raw; $this->t++; } } } 
-public function concat( LocoPoIterator $more ){ foreach( $more as $message ){ $this->push($message); } return $this; } 
-public function __clone(){ if( $this->headers ){ $this->headers = new LocoPoHeaders( $this->headers->getArrayCopy() ); } } 
+public function __construct(  $po ){ if( is_array($po) ){ $this->po = $po; } else if( $po instanceof Traversable ){ $this->po = iterator_to_array($po,false); } else { throw new InvalidArgumentException('PO data must be array or iterator'); } $this->t = count( $this->po ); if( 0 === $this->t ){ throw new InvalidArgumentException('Empty PO data'); } $h = $po[0]; if( '' !== $h['source'] || ( isset($h['context']) && '' !== $h['context'] ) || ( isset($po[1]['parent']) && 0 === $po[1]['parent'] ) ){ $this->z = -1; } } 
+public function push( LocoPoMessage $p ) { $raw = $p->export(); $plurals = $p->plurals; unset($raw['plurals']); $i = count($this->po); $this->po[$i] = $raw; $this->t++; if( is_array($plurals) ) { $j = 0; foreach( $plurals as $p ) { $raw = $p->export(); $raw['parent'] = $i; $raw['plural'] = ++$j; $this->po[] = $raw; $this->t++; } } } 
+public function concat( LocoPoIterator $more ) { foreach( $more as $message ){ $this->push($message); } return $this; } 
+public function __clone() { if( $this->headers ){ $this->headers = new LocoPoHeaders( $this->headers->getArrayCopy() ); } } 
 #[ReturnTypeWillChange]
-public function count(){ return $this->t - ( $this->z + 1 ); } 
-public function wrap( $width ){ $width = (int) $width; if( $width > 0 ){ $this->w = max( 15, $width ); } else { $this->w = 0; } return $this; } 
+public function count() { return $this->t - ( $this->z + 1 ); } 
+public function wrap(  $width ) { if( $width > 0 ){ $this->w = max( 15, $width ); } else { $this->w = 0; } return $this; } 
 #[ReturnTypeWillChange]
-public function rewind(){ $this->i = $this->z; $this->j = -1; $this->next(); } 
+public function rewind() { $this->i = $this->z; $this->j = -1; $this->next(); } 
 #[ReturnTypeWillChange]
-public function key(){ return $this->j; } 
+public function key() { return $this->j; } 
 #[ReturnTypeWillChange]
-public function valid(){ return is_int($this->i); } 
+public function valid() { return is_int($this->i); } 
 #[ReturnTypeWillChange]
-public function next(){ $i = $this->i; while( ++$i < $this->t ){ if( array_key_exists('parent',$this->po[$i]) ){ continue; } $this->j++; $this->i = $i; return; } $this->i = null; $this->j = null; } 
+public function next() { $i = $this->i; while( ++$i < $this->t ){ if( array_key_exists('parent',$this->po[$i]) ){ continue; } $this->j++; $this->i = $i; return; } $this->i = null; $this->j = null; } 
 #[ReturnTypeWillChange]
-public function current(){ $i = $this->i; $po = $this->po; $parent = new LocoPoMessage( $po[$i] ); $plurals = []; $nonseq = $parent->offsetExists('child'); $j = $nonseq ? $parent['child'] : $i+1; while( isset($po[$j]['parent']) && $i === $po[$j]['parent'] ){ $plurals[] = new LocoPoMessage($po[$j++]); } if( $plurals ){ $parent['plurals'] = $plurals; } return $parent; } 
-public function getArrayCopy(){ $po = $this->po; if( 0 === $this->z ){ $po[0]['target'] = (string) $this->getHeaders(); } return $po; } 
-public function clear(){ if( 0 === $this->z ){ $this->po = [ $this->po[0] ]; $this->t = 1; } else { $this->po = []; $this->t = 0; } } 
-public function getHeaders(){ if( is_null($this->headers) ){ $header = $this->po[0]; if( 0 === $this->z ){ $this->headers = LocoPoHeaders::fromMsgstr( $header['target'] ); } else { $this->headers = new LocoPoHeaders; } } return $this->headers; } 
-public function setHeaders( LocoPoHeaders $head ){ $this->headers = $head; if( 0 === $this->z ){ $this->po[0]['target'] = null; } return $this; } 
-public function initPo(){ if( 0 === $this->z ){ unset( $this->po[0]['flag'] ); } return $this; } 
-public function initPot(){ if( 0 === $this->z ){ $this->po[0]['flag'] = 4; } return $this; } 
-public function strip(){ $po = $this->po; $i = count($po); $z = $this->z; while( --$i > $z ){ $po[$i]['target'] = ''; } $this->po = $po; return $this; } 
-public function __toString(){ try { return $this->render(); } catch( Exception $e ){ trigger_error( $e->getMessage(), E_USER_WARNING ); return ''; } } 
-public function render( $sorter = null ){ $width = $this->w; $ref_width = max( 0, $width - 3 ); $h = $this->exportHeader(); $msg = new LocoPoMessage( $h ); $s = $msg->render( $width, $ref_width ); if( $sorter ){ if( ! is_callable($sorter) ){ throw new InvalidArgumentException('Bad callback'); } $msgs = []; foreach( $this as $msg ){ $msgs[] = $msg; } usort( $msgs, $sorter ); } else { $msgs = $this; } $h = $this->getHeaders()->offsetGet('Plural-Forms'); if( is_string($h) && preg_match('/nplurals\\s*=\\s*(\\d)/',$h,$r) ){ $max_pl = (int) $r[1]; } else { $max_pl = 0; } foreach( $msgs as $msg ){ $s .= "\n".$msg->render( $width, $ref_width, $max_pl ); } return $s; } 
-public function exportJed(){ $head = $this->getHeaders(); $a = [ '' => [ 'domain' => $head['domain'], 'lang' => $head['language'], 'plural-forms' => $head['plural-forms'], ] ]; foreach( $this as $message ){ if( $message->translated() ){ $a[ $message->getKey() ] = $message->exportSerial(); } } return $a; } 
-private function exportHeader(){ if( 0 === $this->z ){ $h = $this->po[0]; } else { $h = [ 'source' => '', 'target' => '' ]; } if( $this->headers ){ $h['target'] = (string) $this->headers; } return $h; } 
-public function exportRefs(  $grep = '' ){ $a = []; if( '' === $grep ) { $grep = '/(\\S+):\\d+/'; } else { $grep = '/(\\S*'.$grep.'):\\d+/'; } $self = get_class($this); $base = [ $this->exportHeader() ]; foreach( $this as $message ){ if( preg_match_all( $grep, (string) $message->refs, $r ) ){ foreach( $r[1] as $ref ) { if( array_key_exists($ref,$a) ){ $po = $a[$ref]; } else { $po = new $self($base); $a[$ref] = $po; } $po->push($message); } } } return $a; } 
-public function splitRefs( array $map = null ){ $a = []; $self = get_class($this); $base = [ $this->exportHeader() ]; if( is_array($map) ){ $grep = implode('|',array_keys($map)); } else { $grep = '[a-z]+'; } foreach( $this as $message ){ $refs = ltrim( (string) $message->refs ); if( '' !== $refs ){ if( preg_match_all('/\\S+\\.('.$grep.'):\\d+/', $refs, $r, PREG_SET_ORDER ) ){ $tmp = []; foreach( $r as $rr ) { list( $ref, $ext ) = $rr; $tmp[$ext][$ref] = true; } foreach( $tmp as $ext => $refs ){ if( is_array($map) ){ $ext = $map[$ext]; } if( array_key_exists($ext,$a) ){ $po = $a[$ext]; } else { $po = new $self($base); $a[$ext] = $po; } $message = clone $message; $message['refs'] = implode(' ',array_keys($refs) ); $po->push($message); } } } } return $a; } 
-public function getHashes(){ $a = []; foreach( $this as $msg ){ $a[] = $msg->getHash(); } sort( $a, SORT_STRING ); return $a; } 
-public function equalSource( LocoPoIterator $that ){ $a = $this->getHashes(); $b = $that->getHashes(); if( count($a) !== count($b) ){ return false; } foreach( $a as $i => $hash ){ if( $hash !== $b[$i] ){ return false; } } return true; } 
-public function equal( LocoPoIterator $that ){ if( $this->t !== $that->t ){ return false; } $i = $this->z; $fields = [ 'source', 'context', 'notes', 'refs', 'target', 'comment', 'flag', 'parent', 'plural' ]; while( ++$i < $this->t ){ $a = $this->po[$i]; $b = $that->po[$i]; foreach( $fields as $f ){ $af = isset($a[$f]) ? $a[$f] : ''; $bf = isset($b[$f]) ? $b[$f] : ''; if( $af !== $bf ){ return false; } } } return true; } 
-public function sort( $func = null ){ $order = []; foreach( $this as $msg ){ $order[] = $msg; } if( is_null($func) ){ $func = [ __CLASS__, 'compare' ]; } else if( ! is_callable($func) ){ throw new InvalidArgumentException('Bad callback'); } usort( $order, $func ); $this->clear(); foreach( $order as $p ){ $this->push($p); } return $this; } 
-public static function compare( LocoPoMessage $a, LocoPoMessage $b ){ $h = $a->getHash(); $j = $b->getHash(); $n = strcasecmp( $h, $j ); if( 0 === $n ){ $n = strcmp( $h, $j ); if( 0 === $n ){ return 0; } } return $n > 0 ? 1 : -1; } 
-public function createSorter(){ $index = []; foreach( $this as $i => $msg ){ $index[ $msg->getHash() ] = $i; } $obj = new LocoPoIndex( $index ); return [ $obj, 'compare' ]; } }
+public function current() { $i = $this->i; $po = $this->po; $parent = new LocoPoMessage( $po[$i] ); $plurals = []; $nonseq = $parent->offsetExists('child'); $j = $nonseq ? $parent['child'] : $i+1; while( isset($po[$j]['parent']) && $i === $po[$j]['parent'] ){ $plurals[] = new LocoPoMessage($po[$j++]); } if( $plurals ){ $parent['plurals'] = $plurals; } return $parent; } 
+public function getArrayCopy() { $po = $this->po; if( 0 === $this->z ){ $po[0]['target'] = (string) $this->getHeaders(); } return $po; } 
+public function clear() { if( 0 === $this->z ){ $this->po = [ $this->po[0] ]; $this->t = 1; } else { $this->po = []; $this->t = 0; } } 
+public function getHeaders() { if( is_null($this->headers) ){ $header = $this->po[0]; if( 0 === $this->z ){ $this->headers = LocoPoHeaders::fromMsgstr( $header['target'] ); } else { $this->headers = new LocoPoHeaders; } } return $this->headers; } 
+public function setHeaders( LocoPoHeaders $head ) { $this->headers = $head; if( 0 === $this->z ){ $this->po[0]['target'] = null; } return $this; } 
+public function initPo() { if( 0 === $this->z ){ unset( $this->po[0]['flag'] ); } return $this; } 
+public function initPot() { if( 0 === $this->z ){ $this->po[0]['flag'] = 4; } return $this; } 
+public function strip() { $po = $this->po; $i = count($po); $z = $this->z; while( --$i > $z ){ $po[$i]['target'] = ''; } $this->po = $po; return $this; } 
+public function __toString() { try { return $this->render(); } catch( Exception $e ){ trigger_error( $e->getMessage(), E_USER_WARNING ); return ''; } } 
+public function render( callable $sorter = null ) { $width = $this->w; $ref_width = max( 0, $width - 3 ); $h = $this->exportHeader(); $msg = new LocoPoMessage( $h ); $s = $msg->render( $width, $ref_width ); if( $sorter ){ $msgs = []; foreach( $this as $msg ){ $msgs[] = $msg; } usort( $msgs, $sorter ); } else { $msgs = $this; } $h = $this->getHeaders()->offsetGet('Plural-Forms'); if( is_string($h) && preg_match('/nplurals\\s*=\\s*(\\d)/',$h,$r) ){ $max_pl = (int) $r[1]; } else { $max_pl = 0; } foreach( $msgs as $msg ){ $s .= "\n".$msg->render( $width, $ref_width, $max_pl ); } return $s; } 
+public function exportJed() { $head = $this->getHeaders(); $a = [ '' => [ 'domain' => $head['domain'], 'lang' => $head['language'], 'plural-forms' => $head['plural-forms'], ] ]; foreach( $this as $message ){ if( $message->translated() ){ $a[ $message->getKey() ] = $message->exportSerial(); } } return $a; } 
+private function exportHeader() { if( 0 === $this->z ){ $h = $this->po[0]; } else { $h = [ 'source' => '', 'target' => '' ]; } if( $this->headers ){ $h['target'] = (string) $this->headers; } return $h; } 
+public function exportRefs(  $grep = '' ) { $a = []; if( '' === $grep ) { $grep = '/(\\S+):\\d+/'; } else { $grep = '/(\\S*'.$grep.'):\\d+/'; } $self = get_class($this); $base = [ $this->exportHeader() ]; foreach( $this as $message ){ if( preg_match_all( $grep, (string) $message->refs, $r ) ){ foreach( $r[1] as $ref ) { if( array_key_exists($ref,$a) ){ $po = $a[$ref]; } else { $po = new $self($base); $a[$ref] = $po; } $po->push($message); } } } return $a; } 
+public function splitRefs( array $map = null ) { $a = []; $self = get_class($this); $base = [ $this->exportHeader() ]; if( is_array($map) ){ $grep = implode('|',array_keys($map)); } else { $grep = '[a-z]+'; } foreach( $this as $message ){ $refs = ltrim( (string) $message->refs ); if( '' !== $refs ){ if( preg_match_all('/\\S+\\.('.$grep.'):\\d+/', $refs, $r, PREG_SET_ORDER ) ){ $tmp = []; foreach( $r as $rr ) { list( $ref, $ext ) = $rr; $tmp[$ext][$ref] = true; } foreach( $tmp as $ext => $refs ){ if( is_array($map) ){ $ext = $map[$ext]; } if( array_key_exists($ext,$a) ){ $po = $a[$ext]; } else { $po = new $self($base); $a[$ext] = $po; } $message = clone $message; $message['refs'] = implode(' ',array_keys($refs) ); $po->push($message); } } } } return $a; } 
+public function getHashes() { $a = []; foreach( $this as $msg ){ $a[] = $msg->getHash(); } sort( $a, SORT_STRING ); return $a; } 
+public function equalSource( LocoPoIterator $that ) { $a = $this->getHashes(); $b = $that->getHashes(); if( count($a) !== count($b) ){ return false; } foreach( $a as $i => $hash ){ if( $hash !== $b[$i] ){ return false; } } return true; } 
+public function equal( LocoPoIterator $that ) { if( $this->t !== $that->t ){ return false; } $i = $this->z; $fields = [ 'source', 'context', 'notes', 'refs', 'target', 'comment', 'flag', 'parent', 'plural' ]; while( ++$i < $this->t ){ $a = $this->po[$i]; $b = $that->po[$i]; foreach( $fields as $f ){ $af = isset($a[$f]) ? $a[$f] : ''; $bf = isset($b[$f]) ? $b[$f] : ''; if( $af !== $bf ){ return false; } } } return true; } 
+public function sort( callable $func = null ) { $order = []; foreach( $this as $msg ){ $order[] = $msg; } usort( $order, $func ?: [__CLASS__,'compare'] ); $this->clear(); foreach( $order as $p ){ $this->push($p); } return $this; } 
+public static function compare( LocoPoMessage $a, LocoPoMessage $b ) { $h = $a->getHash(); $j = $b->getHash(); $n = strcasecmp( $h, $j ); if( 0 === $n ){ $n = strcmp( $h, $j ); if( 0 === $n ){ return 0; } } return $n > 0 ? 1 : -1; } 
+public function createSorter() { $index = []; foreach( $this as $i => $msg ){ $index[ $msg->getHash() ] = $i; } $obj = new LocoPoIndex( $index ); return [ $obj, 'compare' ]; } }
 class LocoMoTable { 
-private $size = 0; 
-private $bin = ''; 
-private $map; 
-public function __construct( $data = null ){ if( is_array($data) ){ $this->compile( $data ); } else if( $data ){ $this->parse( $data ); } } 
+private  $size = 0; 
+private  $bin = ''; 
+private  $map = null; 
+public function __construct(  $data = '' ){ if( is_array($data) ){ $this->compile( $data ); } else if( '' !== $data ){ $this->parse( $data ); } } 
 #[ReturnTypeWillChange]
-public function count(){ if( ! isset($this->size) ){ if( $this->bin ){ $this->size = (int) ( strlen( $this->bin ) / 4 ); } else if( is_array($this->map) ){ $this->size = count($this->map); } else { return 0; } if( ! self::is_prime($this->size) || $this->size < 3 ){ throw new Exception('Size expected to be prime number above 2, got '.$this->size); } } return $this->size; } 
-public function bytes(){ return $this->count() * 4; } 
-public function __toString(){ return $this->bin; } 
-public function export(){ if( ! is_array($this->map) ){ $this->parse( $this->bin ); } return $this->map; } 
-private function reset( $length ){ $this->size = max( 3, self::next_prime ( $length * 4 / 3 ) ); $this->bin = null; $this->map = array(); return $this->size; } 
-public function compile( array $msgids ){ $hash_tab_size = $this->reset( count($msgids) ); $packed = array_fill( 0, $hash_tab_size, "\0\0\0\0" ); $j = 0; foreach( $msgids as $msgid ){ $hash_val = self::hashpjw( $msgid ); $idx = $hash_val % $hash_tab_size; if( array_key_exists($idx, $this->map) ){ $incr = 1 + ( $hash_val % ( $hash_tab_size - 2 ) ); do { $idx += $incr; if( $hash_val === $idx ){ throw new Exception('Unable to find empty slot in hash table'); } $idx %= $hash_tab_size; } while( array_key_exists($idx, $this->map ) ); } $this->map[$idx] = $j; $packed[$idx] = pack('V', ++$j ); } return $this->bin = implode('',$packed); } 
-public function lookup( $msgid, array $msgids ){ $hash_val = self::hashpjw( $msgid ); $idx = $hash_val % $this->size; $incr = 1 + ( $hash_val % ( $this->size - 2 ) ); while( true ){ if( ! array_key_exists($idx, $this->map) ){ break; } $j = $this->map[$idx]; if( isset($msgids[$j]) && $msgid === $msgids[$j] ){ return $j; } $idx += $incr; if( $idx === $hash_val ){ break; } $idx %= $this->size; } return -1; } 
-public function parse( $bin ){ $this->bin = (string) $bin; $this->size = null; $hash_tab_size = $this->count(); $this->map = array(); $idx = -1; $byte = 0; while( ++$idx < $hash_tab_size ){ $word = substr( $this->bin, $byte, 4 ); if( "\0\0\0\0" !== $word ){ list(,$j) = unpack('V', $word ); $this->map[$idx] = $j - 1; } $byte += 4; } return $this->map; } 
-public static function hashpjw( $str ){ $i = -1; $hval = 0; $len = strlen($str); while( ++$i < $len ){ $ord = ord( substr($str,$i,1) ); $hval = ( $hval << 4 ) + $ord; $g = $hval & 0xf0000000; if( $g !== 0 ){ $hval ^= $g >> 24; $hval ^= $g; } } return $hval; } 
-private static function next_prime( $seed ){ $seed |= 1; while ( ! self::is_prime($seed) ){ $seed += 2; } return $seed; } 
-private static function is_prime( $num ) { if ($num === 1 ){ return false; } if( $num === 2 ){ return true; } if( $num % 2 == 0 ) { return false; } for( $i = 3; $i <= ceil(sqrt($num)); $i = $i + 2) { if($num % $i == 0 ){ return false; } } return true; } }
+public function count() { if( is_null($this->size) ){ if( $this->bin ){ $this->size = (int) ( strlen( $this->bin ) / 4 ); } else if( is_array($this->map) ){ $this->size = count($this->map); } else { return 0; } if( ! self::is_prime($this->size) || $this->size < 3 ){ throw new Exception('Size expected to be prime number above 2, got '.$this->size); } } return $this->size; } 
+public function bytes() { return $this->count() * 4; } 
+public function __toString() { return $this->bin; } 
+public function export() { if( is_null($this->map) ){ $this->parse($this->bin); } return $this->map; } 
+private function reset(  $length ) { $this->size = max( 3, self::next_prime( $length * 4 / 3 ) ); $this->bin = ''; $this->map = []; return $this->size; } 
+public function compile( array $msgids ) { $hash_tab_size = $this->reset( count($msgids) ); $packed = array_fill( 0, $hash_tab_size, "\0\0\0\0" ); $j = 0; foreach( $msgids as $msgid ){ $hash_val = self::hashpjw( $msgid ); $idx = $hash_val % $hash_tab_size; if( array_key_exists($idx, $this->map) ){ $incr = 1 + ( $hash_val % ( $hash_tab_size - 2 ) ); do { $idx += $incr; if( $hash_val === $idx ){ throw new Exception('Unable to find empty slot in hash table'); } $idx %= $hash_tab_size; } while( array_key_exists($idx, $this->map ) ); } $this->map[$idx] = $j; $packed[$idx] = pack('V', ++$j ); } $this->bin = implode('',$packed); } 
+public function lookup(  $msgid, array $msgids ) { $hash_val = self::hashpjw( $msgid ); $idx = $hash_val % $this->size; $incr = 1 + ( $hash_val % ( $this->size - 2 ) ); while( true ){ if( ! array_key_exists($idx, $this->map) ){ break; } $j = $this->map[$idx]; if( isset($msgids[$j]) && $msgid === $msgids[$j] ){ return $j; } $idx += $incr; if( $idx === $hash_val ){ break; } $idx %= $this->size; } return -1; } 
+private function parse(  $bin ) { $this->bin = $bin; $this->size = null; $hash_tab_size = $this->count(); $this->map = []; $idx = -1; $byte = 0; while( ++$idx < $hash_tab_size ){ $word = substr( $this->bin, $byte, 4 ); if( "\0\0\0\0" !== $word ){ list(,$j) = unpack('V', $word ); $this->map[$idx] = $j - 1; } $byte += 4; } } 
+public static function hashpjw(  $str ) { $i = -1; $hval = 0; $len = strlen($str); while( ++$i < $len ){ $ord = ord( substr($str,$i,1) ); $hval = ( $hval << 4 ) + $ord; $g = $hval & 0xf0000000; if( $g !== 0 ){ $hval ^= $g >> 24; $hval ^= $g; } } return $hval; } 
+private static function next_prime(  $seed ) { $seed = (int) floor($seed); $seed |= 1; while ( ! self::is_prime($seed) ){ $seed += 2; } return $seed; } 
+private static function is_prime(  $num ) { if( 1 === $num ){ return false; } if( 2 === $num ){ return true; } if( $num % 2 == 0 ) { return false; } for( $i = 3; $i <= ceil(sqrt($num)); $i = $i + 2) { if($num % $i == 0 ){ return false; } } return true; } }
 class LocoMo { 
-private $bin; 
-private $msgs; 
-private $head; 
-private $hash; 
-private $use_fuzzy = false; 
-private $cs; 
+private  $bin; 
+private  $msgs; 
+private  $head; 
+private  $hash = null; 
+private  $use_fuzzy = false; 
+private  $cs = null; 
 public function __construct( Iterator $export, LocoPoHeaders $head = null ){ if( $head ){ $this->head = $head; } else { $this->head = new LocoPoHeaders; $this->setHeader('Project-Id-Version','Loco'); } $this->msgs = $export; $this->bin = ''; } 
-public function setCharset(  $cs ){ $cs = $this->head->setCharset($cs); $this->cs = 'UTF-8' === $cs ? null : $cs; } 
+public function setCharset(  $cs ) { $cs = $this->head->setCharset($cs); $this->cs = 'UTF-8' === $cs ? null : $cs; } 
 public function enableHash() { $this->hash = new LocoMoTable; } 
 public function useFuzzy() { $this->use_fuzzy = true; } 
 public function setHeader(  $key,  $val ) { $this->head->add($key,$val); return $this; } 
 private function str(  $s ) { if( $cs = $this->cs ){ $s = mb_convert_encoding($s,$cs,['UTF-8']); } return $s; } 
-public function compile() { $table = ['']; $sources = ['']; $targets = [ (string) $this->head ]; $fuzzy_flag = 4; $skip_fuzzy = ! $this->use_fuzzy; if( $this->head->has('Plural-Forms') && preg_match('/^nplurals=(\\d)/',$this->head->trimmed('Plural-Forms'), $r) ){ $nplurals = (int) $r[1]; $maxplural = max( 0, $nplurals-1 ); } else { $maxplural = 1; } foreach( $this->msgs as $r ){ if( $skip_fuzzy && isset($r['flag']) && $fuzzy_flag === $r['flag'] ){ continue; } $msgid = $this->str( $r['key'] ); if( isset($r['context']) ){ $msgctxt = $this->str( $r['context'] ); if( '' !== $msgctxt ){ if( '' === $msgid ){ $msgid = '('.$msgctxt.')'; } $msgid = $msgctxt."\x04".$msgid; } } if( '' === $msgid ){ continue; } $msgstr = $this->str( $r['target'] ); if( '' === $msgstr ){ continue; } $table[] = $msgid; if( isset($r['plurals']) ){ if( $r['plurals'] ){ $i = 0; foreach( $r['plurals'] as $i => $p ){ if( $i === 0 ){ $msgid .= "\0".$this->str($p['key']); } $msgstr .= "\0".$this->str($p['target']); } while( $maxplural > ++$i ){ $msgstr .= "\0"; } } else if( isset($r['plural_key']) ){ $msgid .= "\0".$this->str($r['plural_key']); } } $sources[] = $msgid; $targets[] = $msgstr; } asort( $sources, SORT_STRING ); $this->bin = "\xDE\x12\x04\x95\x00\x00\x00\x00"; $n = count($sources); $this->writeInteger( $n ); $offset = 28; $this->writeInteger( $offset ); $offset += $n * 8; $this->writeInteger( $offset ); if( $this->hash ){ sort( $table, SORT_STRING ); $this->hash->compile( $table ); $s = $this->hash->count(); } else { $s = 0; } $this->writeInteger( $s ); $offset += $n * 8; $this->writeInteger( $offset ); if( $s ){ $offset += $s * 4; } $source = ''; foreach( $sources as $i => $str ){ $source .= $str."\0"; $this->writeInteger( $strlen = strlen($str) ); $this->writeInteger( $offset ); $offset += $strlen + 1; } $target = ''; foreach( array_keys($sources) as $i ){ $str = $targets[$i]; $target .= $str."\0"; $this->writeInteger( $strlen = strlen($str) ); $this->writeInteger( $offset ); $offset += $strlen + 1; } if( $this->hash ){ $this->bin .= $this->hash->__toString(); } $this->bin .= $source; $this->bin .= $target; return $this->bin; } 
-private function writeInteger( $num ){ $this->bin .= pack( 'V', $num ); return $this; } }
+public function compile() { $table = ['']; $sources = ['']; $targets = [ (string) $this->head ]; $fuzzy_flag = 4; $skip_fuzzy = ! $this->use_fuzzy; if( $this->head->has('Plural-Forms') && preg_match('/^nplurals=(\\d)/',$this->head->trimmed('Plural-Forms'), $r) ){ $nplurals = (int) $r[1]; $maxplural = max( 0, $nplurals-1 ); } else { $maxplural = 1; } foreach( $this->msgs as $r ){ if( $skip_fuzzy && isset($r['flag']) && $fuzzy_flag === $r['flag'] ){ continue; } $msgid = $this->str( $r['key'] ); if( isset($r['context']) ){ $msgctxt = $this->str( $r['context'] ); if( '' !== $msgctxt ){ if( '' === $msgid ){ $msgid = '('.$msgctxt.')'; } $msgid = $msgctxt."\x04".$msgid; } } if( '' === $msgid ){ continue; } $msgstr = $this->str( $r['target'] ); if( '' === $msgstr ){ continue; } $table[] = $msgid; if( isset($r['plurals']) ){ if( $r['plurals'] ){ $i = 0; foreach( $r['plurals'] as $i => $p ){ if( $i === 0 ){ $msgid .= "\0".$this->str($p['key']); } $msgstr .= "\0".$this->str($p['target']); } while( $maxplural > ++$i ){ $msgstr .= "\0"; } } else if( isset($r['plural_key']) ){ $msgid .= "\0".$this->str($r['plural_key']); } } $sources[] = $msgid; $targets[] = $msgstr; } asort( $sources, SORT_STRING ); $this->bin = "\xDE\x12\x04\x95\x00\x00\x00\x00"; $n = count($sources); $this->writeInteger( $n ); $offset = 28; $this->writeInteger( $offset ); $offset += $n * 8; $this->writeInteger( $offset ); if( $this->hash ){ sort( $table, SORT_STRING ); $this->hash->compile( $table ); $s = $this->hash->count(); } else { $s = 0; } $this->writeInteger( $s ); $offset += $n * 8; $this->writeInteger( $offset ); if( $s ){ $offset += $s * 4; } $source = ''; foreach( $sources as $str ){ $source .= $str."\0"; $this->writeInteger( $strlen = strlen($str) ); $this->writeInteger( $offset ); $offset += $strlen + 1; } $target = ''; foreach( array_keys($sources) as $i ){ $str = $targets[$i]; $target .= $str."\0"; $this->writeInteger( $strlen = strlen($str) ); $this->writeInteger( $offset ); $offset += $strlen + 1; } if( $this->hash ){ $this->bin .= $this->hash->__toString(); } $this->bin .= $source; $this->bin .= $target; return $this->bin; } 
+private function writeInteger(  $num ) { $this->bin .= pack( 'V', $num ); } }
 interface LocoTokensInterface extends Iterator { 
 public function advance(); 
 public function ignore( array $a ); }
 class LocoTokenizer implements LocoTokensInterface { const T_LITERAL = 0; const T_UNKNOWN = -1; 
-private $src; 
-private $pos; 
-private $line; 
-private $col; 
-private $max; 
-private $rules = []; 
-private $skip = []; 
-private $tok; 
-private $len; 
+private  $src; 
+private  $pos; 
+private  $line; 
+private  $col; 
+private  $max; 
+private  $rules = []; 
+private  $skip = []; 
+private  $tok; 
+private  $len; 
 public function __construct(  $src = '' ){ $this->init($src); } 
-public function parse(  $src ){ $tokens = []; $this->init($src); while( $tok = $this->advance() ){ $tokens[] = $tok; } return $tokens; } 
-public function init(  $src ){ $this->src = $src; $this->rewind(); return $this; } 
-public function define(  $grep, $t = 0 ){ if('^' !== $grep[1] ){ throw new InvalidArgumentException('Expression '.$grep.' isn\'t anchored'); } if( ! is_int($t) && ! is_callable($t) ){ throw new InvalidArgumentException('Non-integer token must be valid callback'); } $sniff = $grep[2]; if( $sniff === preg_quote($sniff,$grep[0]) ){ $this->rules[$sniff][] = [ $grep, $t ]; } else { $this->rules[''][] = [ $grep, $t ]; } return $this; } 
-public function ignore( array $a ){ foreach( $a as $t ){ $this->skip[$t] = true; } return $this; } 
+public function parse(  $src ) { $tokens = []; $this->init($src); while( $tok = $this->advance() ){ $tokens[] = $tok; } return $tokens; } 
+public function init(  $src ) { $this->src = $src; $this->rewind(); return $this; } 
+public function define(  $grep,  $t = 0 ) { if('^' !== $grep[1] ){ throw new InvalidArgumentException('Expression '.$grep.' isn\'t anchored'); } if( ! is_int($t) && ! is_callable($t) ){ throw new InvalidArgumentException('Non-integer token must be valid callback'); } $sniff = $grep[2]; if( $sniff === preg_quote($sniff,$grep[0]) ){ $this->rules[$sniff][] = [ $grep, $t ]; } else { $this->rules[''][] = [ $grep, $t ]; } return $this; } 
+public function ignore( array $a ) { foreach( $a as $t ){ $this->skip[$t] = true; } return $this; } 
 #[ReturnTypeWillChange]
-public function current(){ return $this->tok; } 
-public function advance(){ $tok = $this->current(); $this->next(); return $tok; } 
+public function current() { return $this->tok; } 
+public function advance() { $tok = $this->current(); $this->next(); return $tok; } 
 #[ReturnTypeWillChange]
-public function next(){ $tok = null; $offset = $this->pos; $column = $this->col; $line = $this->line; while( $offset <= $this->max ){ $t = null; $s = ''; $text = substr($this->src,$offset); foreach( [$text[0],''] as $k ){ if( isset($this->rules[$k]) ) { foreach( $this->rules[$k] as $rule) { if( preg_match($rule[0], $text, $match ) ) { $s = $match[0]; $t = $rule[1]; if( ! is_int($t) ) { $t = call_user_func( $t, $s, $match ); } break 2; } } } } if( is_null($t) ){ $n = preg_match('/^./u',$text,$match); if( false === $n ){ $s = $text[0]; $match = [ mb_convert_encoding($s,'UTF-8','cp1252') ]; } $s = (string) $match[0]; $t = self::T_UNKNOWN; } $length = strlen($s); if( 0 === $length ){ throw new Loco_error_ParseException('Failed to match anything'); } $offset += $length; $lines = preg_split('/\\r?\\n/',$s); $nlines = count($lines); if( $nlines > 1 ){ $next_line = $line + ( $nlines - 1 ); $next_column = strlen( end($lines) ); } else { $next_line = $line; $next_column = $column + $length; } if( array_key_exists($t,$this->skip) ){ $line = $next_line; $column = $next_column; continue; } $tok = self::T_LITERAL === $t ? $s : [ $t, $s, $line, $column ]; $line = $next_line; $column = $next_column; $this->len++; break; } $this->tok = $tok; $this->pos = $offset; $this->col = $column; $this->line = $line; } 
+public function next() { $tok = null; $offset = $this->pos; $column = $this->col; $line = $this->line; while( $offset <= $this->max ){ $t = null; $s = ''; $text = substr($this->src,$offset); foreach( [$text[0],''] as $k ){ if( isset($this->rules[$k]) ) { foreach( $this->rules[$k] as $rule) { if( preg_match($rule[0], $text, $match ) ) { $s = $match[0]; $t = $rule[1]; if( ! is_int($t) ) { $t = call_user_func( $t, $s, $match ); } break 2; } } } } if( is_null($t) ){ $n = preg_match('/^./u',$text,$match); if( false === $n ){ $s = $text[0]; $match = [ mb_convert_encoding($s,'UTF-8','cp1252') ]; } $s = (string) $match[0]; $t = self::T_UNKNOWN; } $length = strlen($s); if( 0 === $length ){ throw new Loco_error_ParseException('Failed to match anything'); } $offset += $length; $lines = preg_split('/\\r?\\n/',$s); $nlines = count($lines); if( $nlines > 1 ){ $next_line = $line + ( $nlines - 1 ); $next_column = strlen( end($lines) ); } else { $next_line = $line; $next_column = $column + $length; } if( array_key_exists($t,$this->skip) ){ $line = $next_line; $column = $next_column; continue; } $tok = self::T_LITERAL === $t ? $s : [ $t, $s, $line, $column ]; $line = $next_line; $column = $next_column; $this->len++; break; } $this->tok = $tok; $this->pos = $offset; $this->col = $column; $this->line = $line; } 
 #[ReturnTypeWillChange]
-public function key(){ return $this->len ? $this->len-1 : null; } 
+public function key() { return $this->len ? $this->len-1 : null; } 
 #[ReturnTypeWillChange]
-public function valid(){ return null !== $this->tok; } 
+public function valid() { return null !== $this->tok; } 
 #[ReturnTypeWillChange]
-public function rewind(){ $this->len = 0; $this->pos = 0; $this->col = 0; $this->line = 1; $this->max = strlen($this->src) - 1; $this->next(); } }
+public function rewind() { $this->len = 0; $this->pos = 0; $this->col = 0; $this->line = 1; $this->max = strlen($this->src) - 1; $this->next(); } }
 function loco_utf8_chr(  $u ){ if( $u < 0x80 ){ if( $u < 0 ){ throw new RangeException( sprintf('%d is out of Unicode range', $u ) ); } return chr($u); } if( $u < 0x800 ) { return chr( ($u>>6) & 0x1F | 0xC0 ).chr( $u & 0x3F | 0x80 ); } if( $u < 0x10000 ) { return chr( $u>>12 & 15 | 0xE0 ).chr( $u>>6 & 0x3F | 0x80 ).chr( $u & 0x3F | 0x80 ); } if( $u < 0x110000 ) { return chr( $u>>18 & 7 | 0xF0 ).chr( $u>>12 & 0x3F | 0x80 ).chr( $u>>6 & 0x3F | 0x80 ).chr( $u & 0x3F | 0x80 ); } throw new RangeException( sprintf('\\x%X is out of Unicode range', $u ) ); }
 function loco_resolve_surrogates(  $s ){ return preg_replace_callback('/\\xED([\\xA0-\\xAF])([\\x80-\\xBF])\\xED([\\xB0-\\xBF])([\\x80-\\xBF])/', '_loco_resolve_surrogates', $s ); }
 function _loco_resolve_surrogates( array $r ){ return loco_utf8_chr ( ( ( ( ( 832 | ( ord($r[1]) & 0x3F ) ) << 6 ) | ( ord($r[2]) & 0x3F ) ) - 0xD800 ) * 0x400 + ( ( ( ( 832 | ( ord($r[3]) & 0x3F ) ) << 6 ) | ( ord($r[4]) & 0x3F ) ) - 0xDC00 ) + 0x10000 ); }
@@ -235,19 +235,19 @@ private  $exp = [];
 private  $reg = []; 
 private  $dom = []; 
 private  $dflt = ''; 
-public function extractSource( LocoExtractor $ext,  $src,  $fileref = '' ){ $ext->extract( $this, $ext->tokenize($src), $fileref ); return $this; } 
-public function export(){ return $this->exp; } 
+public function extractSource( LocoExtractor $ext,  $src,  $fileref = '' ) { $ext->extract( $this, $ext->tokenize($src), $fileref ); return $this; } 
+public function export() { return $this->exp; } 
 #[ReturnTypeWillChange]
-public function count(){ return count( $this->exp ); } 
-public function getDomainCounts(){ return $this->dom; } 
-public function setDomain( $default ){ $this->dflt = (string) $default; return $this; } 
-public function getDomain(){ return $this->dflt; } 
-private function key( array $entry ){ $key = (string) $entry['source']; foreach( ['context','domain'] as $i => $prop ){ if( array_key_exists($prop,$entry) ) { $add = (string) $entry[$prop]; if( '' !== $add ){ $key .= ord($i).$add; } } } return $key; } 
-public function pushMeta(  $source,  $notes,  $domain = '' ){ if( '' === $domain || '*' === $domain ){ $domain = $this->dflt; } return $this->pushEntry( [ 'source' => $source, 'notes' => $notes, ], $domain ); } 
+public function count() { return count( $this->exp ); } 
+public function getDomainCounts() { return $this->dom; } 
+public function setDomain(  $default ) { $this->dflt = $default; return $this; } 
+public function getDomain() { return $this->dflt; } 
+private function key( array $entry ) { $key = (string) $entry['source']; foreach( ['context','domain'] as $i => $prop ){ if( array_key_exists($prop,$entry) ) { $add = (string) $entry[$prop]; if( '' !== $add ){ $key .= ord($i).$add; } } } return $key; } 
+public function pushMeta(  $source,  $notes,  $domain = '' ) { if( '' === $domain || '*' === $domain ){ $domain = $this->dflt; } return $this->pushEntry( [ 'source' => $source, 'notes' => $notes, ], $domain ); } 
 public function pushEntry( array $entry,  $domain = '' ) { $entry['id'] = ''; $entry['target'] = ''; $entry['domain'] = $domain; $key = $this->key($entry); if( isset($this->reg[$key]) ){ $index = $this->reg[$key]; $clash = $this->exp[$index]; if( $value = $this->mergeField( $clash, $entry, 'refs', ' ') ){ $this->exp[$index]['refs'] = $value; } if( $value = $this->mergeField( $clash, $entry, 'notes', "\n") ){ $this->exp[$index]['notes'] = $value; } } else { $index = count($this->exp); $this->reg[$key] = $index; $this->exp[$index] = $entry; if( isset($this->dom[$domain]) ){ $this->dom[$domain]++; } else { $this->dom[$domain] = 1; } } return $index; } 
-public function pushPlural( array $entry,  $sindex ){ $parent = $this->exp[$sindex]; $domain = $parent['domain']; $pkey = $this->key($parent)."\2"; if( ! array_key_exists($pkey,$this->reg) ){ $pindex = count($this->exp); $this->reg[$pkey] = $pindex; $entry += [ 'id' => '', 'target' => '', 'plural' => 1, 'parent' => $sindex, 'domain' => $domain, ]; $this->exp[$pindex] = $entry; if( isset($entry['format']) && ! isset( $parent['format']) ) { $this->exp[$sindex]['format'] = $entry['format']; } if( $pindex !== $sindex + $entry['plural']) { $this->exp[$sindex]['child'] = $pindex; } } } 
+public function pushPlural( array $entry,  $sindex ) { $parent = $this->exp[$sindex]; $domain = $parent['domain']; $pkey = $this->key($parent)."\2"; if( ! array_key_exists($pkey,$this->reg) ){ $pindex = count($this->exp); $this->reg[$pkey] = $pindex; $entry += [ 'id' => '', 'target' => '', 'plural' => 1, 'parent' => $sindex, 'domain' => $domain, ]; $this->exp[$pindex] = $entry; if( isset($entry['format']) && ! isset( $parent['format']) ) { $this->exp[$sindex]['format'] = $entry['format']; } if( $pindex !== $sindex + $entry['plural']) { $this->exp[$sindex]['child'] = $pindex; } } } 
 public function mergeField( array $old, array $new,  $field,  $glue ) { $prev = isset($old[$field]) ? $old[$field] : ''; if( isset($new[$field]) ){ $text = $new[$field]; if( '' !== $prev && $prev !== $text ){ if( 'notes' === $field && preg_match( '/^'.preg_quote( rtrim($text,'. '),'/').'[. ]*$/mu', $prev ) ) { $text = $prev; } else { $text = $prev.$glue.$text; } } return $text; } return $prev; } 
-public function filter( $domain ){ $map = []; $newOffset = 1; $matchAll = '*' === $domain; $raw = [ [ 'id' => '', 'source' => '', 'target' => '', 'domain' => $matchAll ? '' : $domain, ] ]; foreach( $this->exp as $oldOffset => $r ){ if( isset($r['parent']) ){ if( isset($map[$r['parent']]) ){ $r['parent'] = $map[ $r['parent'] ]; $raw[ $newOffset++ ] = $r; } } else { if( $matchAll ){ $match = true; } else if( isset($r['domain']) ){ $match = $domain === $r['domain']; } else { $match = $domain === ''; } if( $match ){ $map[ $oldOffset ] = $newOffset; $raw[ $newOffset++ ] = $r; } } } return $raw; } }
+public function filter(  $domain ) { $map = []; $newOffset = 1; $matchAll = '*' === $domain; $raw = [ [ 'id' => '', 'source' => '', 'target' => '', 'domain' => $matchAll ? '' : $domain, ] ]; foreach( $this->exp as $oldOffset => $r ){ if( isset($r['parent']) ){ if( isset($map[$r['parent']]) ){ $r['parent'] = $map[ $r['parent'] ]; $raw[ $newOffset++ ] = $r; } } else { if( $matchAll ){ $match = true; } else if( isset($r['domain']) ){ $match = $domain === $r['domain']; } else { $match = $domain === ''; } if( $match ){ $map[ $oldOffset ] = $newOffset; $raw[ $newOffset++ ] = $r; } } } return $raw; } }
 abstract class LocoExtractor { 
 private  $rules; 
 private  $wp = []; 
@@ -266,28 +266,28 @@ public function rule(  $keyword ) { return isset($this->rules[$keyword]) ? $this
 protected function push( LocoExtracted $strings,  $rule, array $args,  $comment = '',  $ref = '' ) { $s = strpos( $rule, 's'); $p = strpos( $rule, 'p'); $c = strpos( $rule, 'c'); $d = strpos( $rule, 'd'); if( false === $s || ! isset($args[$s]) ){ return null; } $msgid = $args[$s]; if( ! is_string($msgid) ){ return null; } $entry = [ 'source' => $msgid, ]; if( is_int($c) && isset($args[$c]) ){ $entry['context'] = $args[$c]; } else if( '' === $msgid ){ return null; } if( $ref ){ $entry['refs'] = $ref; } if( is_int($d) && array_key_exists($d,$args) ){ $domain = $args[$d]; if( is_null($domain) ){ $domain = ''; } } else if( '' === $this->domain ) { $domain = $strings->getDomain(); } else { $domain = $this->domain; } $format = ''; $comment = $this->comment($comment); if( '' !== $comment ){ if( preg_match('/^xgettext:\\s*([-a-z]+)-format\\s*/mi', $comment, $r, PREG_OFFSET_CAPTURE ) ){ $format = $r[1][0]; $entry['format'] = $format; $comment = trim( substr_replace( $comment,'', $r[0][1], strlen($r[0][0]) ) ); } if( preg_match('/^references?:( *.+:\\d+)*\\s*/mi', $comment, $r, PREG_OFFSET_CAPTURE ) ){ $entry['refs'] = trim($r[1][0],' '); $comment = trim( substr_replace( $comment, '', $r[0][1], strlen($r[0][0]) ) ); } $entry['notes'] = $comment; } $msgid_plural = is_int($p) && isset($args[$p]) ? $args[$p] : ''; if( '' === $format ){ $format = $this->fsniff($msgid); if( '' !== $format ){ $entry['format'] = $format; } else if( '' !== $msgid_plural ){ $format = $this->fsniff($msgid_plural); if( '' !== $format ){ $entry['format'] = $format; } } } $index = $strings->pushEntry($entry,$domain); if( '' !== $msgid_plural ){ $entry = [ 'source' => $msgid_plural, ]; if( '' !== $format ) { $entry['format'] = $format; } $strings->pushPlural($entry,$index); } return $index; } 
 protected function utf8(  $str ) { if( false === preg_match('//u',$str) ){ $str = mb_convert_encoding( $str, 'UTF-8', 'cp1252' ); } return $str; } }
 class LocoPHPTokens implements LocoTokensInterface, Countable { 
-private $i; 
-private $tokens; 
-private $skip_tokens = []; 
-private $literal_tokens = []; 
+private  $i = null; 
+private  $tokens; 
+private  $skip_tokens = []; 
+private  $literal_tokens = []; 
 public function __construct( array $tokens ){ $this->tokens = $tokens; $this->rewind(); } 
-public function literal( array $a ){ foreach( $a as $t ){ $this->literal_tokens[ $t ] = 1; } return $this; } 
-public function ignore( array $a ){ foreach( $a as $t ){ $this->skip_tokens[$t] = true; } return $this; } 
-public function export(){ $arr = []; $this->rewind(); while( $tok = $this->advance() ){ $arr[] = $tok; } return $arr; } 
-public function advance(){ $tok = $this->current(); $this->next(); return $tok; } 
+public function literal( array $a ) { foreach( $a as $t ){ $this->literal_tokens[ $t ] = 1; } return $this; } 
+public function ignore( array $a ) { foreach( $a as $t ){ $this->skip_tokens[$t] = true; } return $this; } 
+public function export() { $arr = []; $this->rewind(); while( $tok = $this->advance() ){ $arr[] = $tok; } return $arr; } 
+public function advance() { $tok = $this->current(); $this->next(); return $tok; } 
 #[ReturnTypeWillChange]
-public function rewind(){ $this->i = ( false === reset($this->tokens) ? null : key($this->tokens) ); } 
+public function rewind() { $this->i = ( false === reset($this->tokens) ? null : key($this->tokens) ); } 
 #[ReturnTypeWillChange]
-public function valid(){ while( isset($this->i) ){ $tok = $this->tokens[$this->i]; if( array_key_exists( is_array($tok) ? $tok[0] : $tok, $this->skip_tokens ) ){ $this->next(); } else { return true; } } return false; } 
+public function valid() { while( isset($this->i) ){ $tok = $this->tokens[$this->i]; if( array_key_exists( is_array($tok) ? $tok[0] : $tok, $this->skip_tokens ) ){ $this->next(); } else { return true; } } return false; } 
 #[ReturnTypeWillChange]
-public function key(){ return $this->i; } 
+public function key() { return $this->i; } 
 #[ReturnTypeWillChange]
-public function next(){ $this->i = ( false === next($this->tokens) ? null : key($this->tokens) ); } 
+public function next() { $this->i = ( false === next($this->tokens) ? null : key($this->tokens) ); } 
 #[ReturnTypeWillChange]
-public function current(){ if( ! $this->valid() ){ return false; } $tok = $this->tokens[$this->i]; if( is_array($tok) && isset($this->literal_tokens[$tok[0]]) ){ return $tok[1]; } return $tok; } 
-public function __toString(){ $s = []; foreach( $this as $token ){ $s[] = is_array($token) ? $token[1] : $token; } return implode('',$s); } 
+public function current() { if( ! $this->valid() ){ return false; } $tok = $this->tokens[$this->i]; if( is_array($tok) && isset($this->literal_tokens[$tok[0]]) ){ return $tok[1]; } return $tok; } 
+public function __toString() { $s = []; foreach( $this as $token ){ $s[] = is_array($token) ? $token[1] : $token; } return implode('',$s); } 
 #[ReturnTypeWillChange]
-public function count(){ return count($this->tokens); } }
+public function count() { return count($this->tokens); } }
 class LocoPHPEscapeParser extends LocoEscapeParser { 
 public function __construct(){ parent::__construct( [ 'n' => "\n", 'r' => "\r", 't' => "\t", 'v' => "\x0B", 'f' => "\x0C", 'e' => "\x1B", '$' => '$', '\\' => '\\', '"' => '"', ] ); } 
 protected function stripSlashes(  $s ) { return preg_replace_callback('/\\\\(x[0-9A-Fa-f]{1,2}|[0-3]?[0-7]{1,2})/', [$this,'unescapeMatch'], $s, -1, $n ); } }
