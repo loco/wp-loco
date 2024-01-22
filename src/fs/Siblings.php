@@ -72,6 +72,13 @@ class Loco_fs_Siblings {
         if( 'po' === $this->po->extension() ){
             $siblings = array_merge($siblings,$this->getJsons($this->td));
         }
+        // Append PHP cache, assuming performant-translations plugin created them
+        if( $this->mo ){
+            $file = $this->mo->cloneExtension('mo.php');
+            if( $file->exists() ){
+                $siblings[] = $file;
+            }
+        }
 
         return $siblings;
     }
@@ -125,5 +132,6 @@ class Loco_fs_Siblings {
 
         return $list->getArrayCopy();
     }
+    
 
 }

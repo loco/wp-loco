@@ -322,7 +322,11 @@ class Loco_fs_FileWriter {
         // Note that this ignores the base file name, so "php.pot" would be permitted, but "foo.php.pot" would not.
         $exts = array_slice( explode('.', $this->file->basename() ), 1 );
         if( preg_grep('/^php\\d*/i', $exts ) ){
-            throw new Loco_error_WriteException('Executable file extension disallowed .'.implode('.',$exts) );
+            $ext = implode('.',$exts);
+            // Temporarily allowing .mo.php while performant-translations plugin is in development
+            if( 'mo.php' !== $ext ){
+                throw new Loco_error_WriteException('Executable file extension disallowed .'.$ext );
+            }
         }
         return $this;
     }

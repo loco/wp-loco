@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Text Domain loading helper.
  * Ensures custom translations can be loaded from `wp-content/languages/loco`.

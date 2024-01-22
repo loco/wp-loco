@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.6.7 =
 * Fixed a bug where unused plural forms were counted as untranslated
 * Removed bundle debug screen (deprecated since 2.6.5)
+* Experimental support for performant-translations plugin
 * Bumped WordPress compatibility to 6.4.2
 
 = 2.6.6 =
