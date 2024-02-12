@@ -9,7 +9,7 @@ echo $header;
 
     <?php
     if( ! $file->existent ):?> 
-    <div class="notice inline notice-error">
+    <div class="panel panel-error">
         <h3 class="has-icon">
             <?php esc_html_e("File doesn't exist",'loco-translate')?> 
         </h3>
@@ -18,7 +18,7 @@ echo $header;
         </p>
     </div><?php    
     elseif( $file->writable ):?> 
-    <div class="notice inline notice-success">
+    <div class="panel panel-success">
         <h3 class="has-icon">
             <?php // Translators: Where %s is the type of file, e.g. "po"
             self::e( __('%s file is writeable','loco-translate'), $file->type )?> 
@@ -31,7 +31,7 @@ echo $header;
         </p>
     </div><?php
     else:?> 
-    <div class="notice inline notice-locked">
+    <div class="panel panel-locked">
         <h3 class="has-icon">
             <?php esc_html_e('Write protected','loco-translate')?> 
         </h3>
@@ -50,7 +50,7 @@ echo $header;
 
 
     if( ! $dir->existent ):?> 
-    <div class="notice inline notice-error">
+    <div class="panel panel-error">
         <h3 class="has-icon">
             <?php esc_html_e("Directory doesn't exist",'loco-translate')?> 
         </h3>
@@ -64,7 +64,7 @@ echo $header;
     </div><?php
 
     elseif( $dir->writable ):?> 
-    <div class="notice inline notice-success">
+    <div class="panel panel-success">
         <h3 class="has-icon">
             <?php esc_html_e('Directory is writeable','loco-translate')?> 
         </h3>
@@ -84,7 +84,7 @@ echo $header;
     </div><?php
 
     else:?> 
-    <div class="notice inline notice-locked">
+    <div class="panel panel-locked">
         <h3 class="has-icon">
             <?php esc_html_e('Write protected','loco-translate')?> 
         </h3>
@@ -102,7 +102,7 @@ echo $header;
     endif;
     
     if( $file->autoupdate ):?> 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h3 class="has-icon"><?php 
             esc_html_e('WordPress updates','loco-translate')?> 
         </h3>
@@ -117,7 +117,7 @@ echo $header;
     endif;
 
     if( $params->has('debug') ):?> 
-    <div class="notice inline notice-debug">
+    <div class="panel panel-debug">
         <h3 class="has-icon">Developer notes</h3>
         <div><?php
         foreach( $debug as $prop => $raw ):?> 

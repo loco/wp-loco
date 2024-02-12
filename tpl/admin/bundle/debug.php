@@ -25,7 +25,7 @@ $this->extend('../layout');
 
     /* @var Loco_mvc_ViewParams $params */
     if( $params->has('xml') ):?> 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h4>Current configuration as XML:</h4>
         <pre><?php $params->e('xml')?></pre>
     </div><?php

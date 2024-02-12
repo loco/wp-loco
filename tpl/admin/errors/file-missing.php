@@ -6,7 +6,7 @@ $this->extend('../layout');
 
 ?>
 
-    <div class="notice inline notice-error">
+    <div class="panel panel-error">
         <h3 class="has-icon">
             <?php esc_html_e('File not found','loco-translate')?> 
         </h3>

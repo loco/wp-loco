@@ -6,7 +6,7 @@ $this->extend('../setup');
 $this->start('header');
 ?> 
 
-    <div class="notice inline notice-warning">
+    <div class="panel panel-warning">
         <h3 class="has-icon icon-info">
             <?php esc_html_e('Partially configured bundle','loco-translate')?> 
         </h3>

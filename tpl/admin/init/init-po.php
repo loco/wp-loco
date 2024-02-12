@@ -8,32 +8,16 @@ $this->extend('../layout');
     /* @var Loco_mvc_ViewParams $params */
     /* @var Loco_mvc_ViewParams $ext */
     if( $params->has('ext') ):?> 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <p>
             <?php esc_html_e("You're creating translations directly from source code",'loco-translate')?>.
             <a href="<?php $ext->e('link')?>"><?php esc_html_e('Create template instead','loco-translate')?></a>.
         </p>
     </div><?php
-    endif;
+    endif;?> 
 
 
-    /*/ warning to show/hide when locations are marked unsafe
-    if( $params->has('fsNotice') ):?> 
-    <div id="loco-fs-info" class="has-nav notice inline notice-info jshide">
-        <p>
-            <strong class="has-icon"><?php esc_html_e('Warning','loco-translate')?>:</strong>
-            <span><?php $params->e('fsNotice')?>.</span>
-        </p>
-        <nav>
-            <a href="<?php echo $help?>#locations" target="_blank"><?php esc_html_e('Documentation','loco-translate')?></a>
-            <span>|</span>
-            <a href="<?php $this->route('config')->e('href')?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
-        </nav>
-    </div><?php
-    endif*/?> 
-
-
-    <div class="notice inline notice-generic">
+    <div class="panel">
 
         <h2><?php $params->e('subhead')?></h2>
         <p><?php $params->e('summary')?></p>

@@ -10,7 +10,7 @@ $this->extend('../layout');
     /* @var Loco_mvc_HiddenFields $hidden */
     $hidden->_e();?> 
 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h2>
             <?php self::e( __('Choose a location','loco-translate') );?> 
         </h2>
@@ -40,7 +40,7 @@ $this->extend('../layout');
             </tbody>
         </table>
     </div>
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h2>
             <?php  esc_html_e('Upload PO file','loco-translate')?> 
         </h2>

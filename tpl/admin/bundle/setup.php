@@ -13,7 +13,7 @@ $this->extend('../layout');
     if( $params->has('debug') && $debug ):
 
     foreach( $debug['notices'] as $type => $notes ): if($notes):?> 
-    <div class="notice inline notice-<?php echo $params->escape($type)?>"><?php
+    <div class="panel panel-<?php echo $params->escape($type)?>"><?php
         foreach( $notes as $text ):?> 
         <p>
             <strong class="has-icon"> </strong>
@@ -23,7 +23,7 @@ $this->extend('../layout');
     </div><?php
     endif; endforeach?> 
 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h4><?php esc_html_e('Current configuration as XML','loco-translate')?>:</h4>
         <pre><?php $debug->e('xml')?></pre>
     </div><?php
@@ -31,7 +31,7 @@ $this->extend('../layout');
 
     /* @var string $credit */
     if( $params->has('credit') ):?> 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h3 class="has-icon">
             <?php esc_html_e('Author details','loco-translate')?> 
         </h3>

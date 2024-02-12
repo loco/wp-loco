@@ -107,7 +107,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
         </tbody>
     </table>
 
-    <div class="notice inline">
+    <div class="panel">
         <p>
             <strong class="has-icon"><?php esc_html_e('Important','loco-translate')?>:</strong>
             <span>

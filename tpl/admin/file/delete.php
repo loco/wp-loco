@@ -6,7 +6,7 @@ $this->extend('../layout');
 ?> 
 
     <form action="" method="post" enctype="application/x-www-form-urlencoded" id="loco-del">
-        <div class="notice inline notice-danger">
+        <div class="panel panel-danger">
             <h3>
                 <span class="has-icon icon-trash"> </span>
                 <span><?php esc_html_e('Confirm delete','loco-translate')?></span>

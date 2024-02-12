@@ -9,7 +9,7 @@ $this->start('source');
 /* @var Loco_mvc_ViewParams[] $locations */
 ?> 
 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h2>
             <?php self::e( __('Choose a new location for these translations','loco-translate') );?> 
         </h2>

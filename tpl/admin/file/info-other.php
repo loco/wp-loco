@@ -6,7 +6,7 @@ $this->extend('info');
 $this->start('header');
 ?> 
 
-    <div class="notice inline notice-error">
+    <div class="panel panel-error">
         <h3 class="has-icon">
             <?php esc_html_e('Unexpected file type','loco-translate')?>  
         </h3>

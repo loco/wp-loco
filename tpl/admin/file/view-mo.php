@@ -6,7 +6,7 @@ $this->extend('view');
 $this->start('source');
 ?> 
 
-     <div class="notice inline notice-info">
+     <div class="panel panel-info">
          <p>
              <?php esc_html_e('File is in binary MO format','loco-translate')?>.
          </p>

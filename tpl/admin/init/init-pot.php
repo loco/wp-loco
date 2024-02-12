@@ -6,7 +6,7 @@ $this->extend('../layout');
 $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates');
 ?> 
 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h2><?php $params->e('subhead')?></h2>
         <p>
             <?php esc_html_e('Source files to scan:','loco-translate')?> 

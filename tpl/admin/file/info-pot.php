@@ -10,7 +10,7 @@ $this->start('header');
 /* @var int $words */
 ?> 
 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <nav>
             <a class="icon only-icon icon-download" title="Download" href="<?php $file->e('download')?>"><span>download</span></a>
         </nav>
@@ -34,7 +34,7 @@ $this->start('header');
     
     <?php 
     if( 'POT' !== $file->type && ! $params->isTemplate ):?> 
-    <div class="notice inline notice-debug">
+    <div class="panel panel-debug">
         <h3 class="has-icon">
             Unconventional file name
         </h3>

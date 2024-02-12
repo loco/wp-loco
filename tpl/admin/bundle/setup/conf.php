@@ -8,7 +8,7 @@ $this->start('header');
 
    /*if( $params->has('jsonFields') ):
     Remote JSON config is scrapped
-    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic jsonly" id="loco-remote">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="panel jsonly" id="loco-remote">
         <h3>
             <?php esc_html_e('Check config repository','loco-translate')?>  
         </h3>
@@ -41,7 +41,7 @@ $this->start('header');
     endif;*/
 
     if( $params->has('xmlFields') ):?> 
-    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="panel">
         <h3>
             <?php esc_html_e('XML setup','loco-translate')?> 
         </h3>
@@ -60,7 +60,7 @@ $this->start('header');
     endif;
 
     if( $params->has('autoFields') ):?> 
-    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="notice inline notice-generic">
+    <form action="" method="post" enctype="application/x-www-form-urlencoded" class="panel">
         <h3>
             Auto setup
         </h3>

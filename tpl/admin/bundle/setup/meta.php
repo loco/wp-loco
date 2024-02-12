@@ -6,7 +6,7 @@ $this->extend('../setup');
 $this->start('header');
 ?> 
 
-    <div class="notice inline notice-success">
+    <div class="panel panel-success">
         <h3 class="has-icon">
             <?php esc_html_e('Bundle auto-configured','loco-translate')?> 
         </h3>

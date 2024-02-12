@@ -9,7 +9,7 @@ $this->extend('../layout');
     /* @var Loco_mvc_HiddenFields $hidden */
     $hidden->_e();
     echo $source?> 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h2>
             <?php self::e( __('Confirm relocation','loco-translate') );?> 
         </h2>

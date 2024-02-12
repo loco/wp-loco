@@ -7,7 +7,7 @@ $help = esc_url( apply_filters('loco_external','https://localise.biz/wordpress/p
 
 ?> 
 
-    <div class="notice inline notice-warning">
+    <div class="panel panel-warning">
         <h3><?php 
             esc_html_e('No previous file revisions','loco-translate')?> 
         </h3>

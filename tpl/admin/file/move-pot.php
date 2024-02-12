@@ -9,7 +9,7 @@ $this->start('source');
 /* @var Loco_mvc_FileParams $file */
 /* @var Loco_mvc_ViewParams $current */
 ?> 
-    <div class="notice inline notice-generic">
+    <div class="panel">
         <h2>
             <?php self::e( __('Enter a new location for this file','loco-translate') );?> 
         </h2>

@@ -6,7 +6,7 @@
 $this->extend('../layout');
 ?> 
     
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h3 class="has-icon">
             <?php esc_attr_e('"Hello Dolly" is part of the WordPress core','loco-translate')?> 
         </h3>

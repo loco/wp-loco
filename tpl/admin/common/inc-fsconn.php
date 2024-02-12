@@ -7,7 +7,7 @@
 
     // Total file lock prevents any kind of update, regardless of connection
     if( $params->has('fsLocked') ):?> 
-    <div class="has-nav notice inline notice-locked">
+    <div class="has-nav panel panel-locked">
         <p>
             <strong class="has-icon"><?php esc_html_e('Locked','loco-translate')?>:</strong>
             <span><?php $params->e('fsLocked')?>.</span>
@@ -22,7 +22,7 @@
 
     // else specific file may be protected from updates by the bundle config
     elseif( $params->has('fsDenied') ):?>
-    <div class="has-nav notice inline notice-locked">
+    <div class="has-nav panel panel-locked">
     <p>
         <strong class="has-icon"><?php esc_html_e('Read only','loco-translate')?>:</strong>
         <span><?php esc_html_e('File is protected by the bundle configuration','loco-translate')?>.</span>
@@ -32,7 +32,7 @@
 
     // else render remote connection form
     else:?> 
-    <div id="loco-fs-warn" class="has-nav notice inline notice-info jshide">
+    <div id="loco-fs-warn" class="has-nav panel panel-info jshide">
         <p>
             <strong class="has-icon"><?php esc_html_e('Notice','loco-translate')?>:</strong>
             <span class="loco-msg"><!-- warning to be loaded by ajax --></span>
@@ -43,7 +43,7 @@
             <a href="<?php $this->route('config')->e('href')?>#loco--fs-protect"><?php esc_html_e('Settings','loco-translate')?></a>
         </nav>
     </div>
-    <form id="loco-fs" class="has-nav notice inline notice-locked jshide jsonly">
+    <form id="loco-fs" class="has-nav panel panel-locked jshide jsonly">
         <p>
             <strong class="has-icon"><?php
                 // Translators: When a file or folder cannot be modified due to filesystem permissions

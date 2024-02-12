@@ -9,7 +9,7 @@ $this->start('header');
 /* @var Loco_gettext_Metadata $meta */
 ?> 
 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <nav>
             <a class="icon only-icon icon-cog" title="Configure" href="<?php $file->e('configure')?>"><span>configure</span></a>
             <a class="icon only-icon icon-download" title="Download" href="<?php $file->e('download')?>"><span>download</span></a>
@@ -42,7 +42,7 @@ $this->start('header');
  
     <?php
     if( ! $sibling->existent ):?> 
-    <div class="notice inline notice-warning">
+    <div class="panel panel-warning">
         <h3 class="has-icon">
             <?php self::e( __('Binary file missing','loco-translate') )?> 
         </h3>
@@ -55,7 +55,7 @@ $this->start('header');
 
     if( $params->has('potfile') ):
     if( $potfile->synced ):?> 
-    <div class="notice inline notice-success">
+    <div class="panel panel-success">
         <h3 class="has-icon">
             <?php self::e( __('In sync with template','loco-translate') )?> 
         </h3>
@@ -66,7 +66,7 @@ $this->start('header');
     </div><?php
 
     else:?> 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h3 class="has-icon">
             <?php self::e( __('Out of sync with template','loco-translate') )?> 
         </h3>
@@ -79,7 +79,7 @@ $this->start('header');
     
     // only showing missing template warning when project was matched. Avoids confusion if something went wrong
     elseif( $params->has('project') ):?> 
-    <div class="notice inline notice-debug">
+    <div class="panel panel-debug">
         <h3 class="has-icon">
             <?php self::e( __('Missing template','loco-translate') )?> 
         </h3>

@@ -11,7 +11,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
 /* @var Loco_mvc_ViewParams $skip */
 /* @var Loco_mvc_ViewParams $params */
 ?> 
-    <div class="notice inline notice-warning">
+    <div class="panel panel-warning">
         <h3 class="has-icon">
             <?php esc_html_e('Template missing','loco-translate')?> 
         </h3><?php
@@ -36,7 +36,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
 
     $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/template-missing');
     ?> 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h3 class="has-icon"><?php esc_html_e('Suggestion','loco-translate')?></h3>
         <p>
             <?php esc_html_e('You can use existing translations as a template using the Copy feature.','loco-translate')?> 

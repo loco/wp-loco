@@ -25,7 +25,7 @@ foreach( $projects as $p ): ?>
 endforeach;
 if( $unknown ):?> 
     <div class="loco-project">
-        <div class="notice inline notice-info">
+        <div class="panel panel-info">
             <h2><?php esc_html_e('Additional files found','loco-translate')?></h2>
             <p>
                 <?php
@@ -48,7 +48,7 @@ endif;
 // showing incompatibility message if no configured projects available 
 else:?> 
 <div class="loco-project">
-    <div class="notice inline notice-error">
+    <div class="panel panel-error">
         <h2><?php $params->e('name')?> <span>(<?php esc_html_e('unconfigured','loco-translate')?>)</span></h2>
         <p>
             <?php

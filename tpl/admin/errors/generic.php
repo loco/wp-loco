@@ -11,7 +11,7 @@ $this->extend('../layout');
 
     <h1><?php echo esc_html( $error->getTitle() )?></h1>
 
-    <div class="notice inline notice-error">
+    <div class="panel panel-error">
         <h3 class="has-icon">
             <?php self::e( $error->getMessage() )?> 
         </h3><?php

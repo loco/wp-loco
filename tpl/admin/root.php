@@ -6,7 +6,7 @@
 /* @var Loco_mvc_View $this */
 $this->extend('layout');
 ?>  
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <p class="has-lang">
             <span <?php echo $siteLocale->attr?>><code><?php $siteLocale->e('code')?></code></span>
             <span><?php

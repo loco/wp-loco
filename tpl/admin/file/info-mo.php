@@ -6,7 +6,7 @@ $this->extend('info');
 $this->start('header');
 ?> 
 
-    <div class="notice inline notice-info">
+    <div class="panel panel-info">
         <h3>
             <a href="<?php $locale->e('href')?>">
                 <span class="<?php $locale->e('icon')?>" lang="<?php $locale->e('lang')?>"><code><?php $locale->e('code')?></code></span>
@@ -33,7 +33,7 @@ $this->start('header');
    
     <?php
     if( ! $sibling->existent ):?> 
-    <div class="notice inline notice-warning">
+    <div class="panel panel-warning">
         <h3 class="has-icon">
             <?php esc_html_e('PO file missing','loco-translate')?> 
         </h3>
