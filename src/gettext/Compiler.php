@@ -116,6 +116,7 @@ class Loco_gettext_Compiler {
         $domain = $project->getDomain()->getName();
         $pofile = $this->files->getSource();
         $jsons = new Loco_fs_FileList;
+        $hashes = null;
         // Allow plugins to dictate a single JSON file to hold all script translations for a text domain
         // authors will additionally have to filter at runtime on load_script_translation_file
         $path = apply_filters('loco_compile_single_json', '', $pofile->getPath(), $domain );
@@ -141,29 +142,38 @@ class Loco_gettext_Compiler {
             /* @var Loco_gettext_Data $fragment */
             foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
                 $use = null;
-                // Reference could be a js source file, or a minified version.
-                // Some build systems may differ, but WordPress only supports this. See WP-CLI MakeJsonCommand.
+                // Reference could be an unknown script from a json missing its source field.
+                // we'll search for a matching script path against the pre-computed hash
+                if( preg_match('!^\\.unknown/([0-9a-f]{32})!', $ref, $r) ){
+                    if( is_null($hashes) ){
+                        $hashes = self::getJsHashes( $project->getBundle() );
+                    }
+                    $hash = $r[1];
+                    if( array_key_exists($hash,$hashes) ){
+                        $ref = $hashes[$hash];
+                    }
+                }
+                // Reference could be a js source file, or a minified version. We'll try .min.js first, then .js
+                // Build systems may differ, but WordPress only supports these suffixes. See WP-CLI MakeJsonCommand.
                 if( substr($ref,-7) === '.min.js' ) {
-                    $min = $ref;
-                    $src = substr($ref,-7).'.js';
+                    $paths = [ $ref, substr($ref,-7).'.js' ];
                 }
                 else {
-                    $src = $ref;
-                    $min = substr($ref,0,-3).'.min.js';
+                    $paths = [ substr($ref,0,-3).'.min.js', $ref ];
                 }
                 // Try .js and .min.js paths to check whether deployed script actually exists
-                foreach( [$min,$src] as $try ){
+                foreach( $paths as $path ){
                     // Hook into load_script_textdomain_relative_path like load_script_textdomain() does.
-                    $url = $project->getBundle()->getDirectoryUrl().$try;
-                    $try = apply_filters( 'load_script_textdomain_relative_path', $try, $url );
-                    if( ! is_string($try) || '' === $try ){
+                    $url = $project->getBundle()->getDirectoryUrl().$path;
+                    $path = apply_filters( 'load_script_textdomain_relative_path', $path, $url );
+                    if( ! is_string($path) || '' === $path ){
                         continue;
                     }
                     // by default ignore js file that is not in deployed code
-                    $file = new Loco_fs_File($try);
+                    $file = new Loco_fs_File($path);
                     $file->normalize($base_dir);
-                    if( apply_filters('loco_compile_script_reference',$file->exists(),$try,$domain) ){
-                        $use = $try;
+                    if( apply_filters('loco_compile_script_reference',$file->exists(),$path,$domain) ){
+                        $use = $path;
                         break;
                     }
                 }
@@ -182,7 +192,7 @@ class Loco_gettext_Compiler {
             if( $buffer ){
                 // write all buffered fragments to their computed JSON paths
                 foreach( $buffer as $ref => $fragment ) {
-                    $jsonfile = $this->cloneJson($pofile,$ref,$domain);
+                    $jsonfile = self::cloneJson($pofile,$ref,$domain);
                     try {
                         $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
                         $jsons->add($jsonfile);
@@ -219,7 +229,7 @@ class Loco_gettext_Compiler {
      * Clone localised file as a WordPress script translation file
      * @return Loco_fs_File
      */
-    private function cloneJson( Loco_fs_File $pofile, $ref, $domain ){
+    private static function cloneJson( Loco_fs_File $pofile, $ref, $domain ){
         $name = $pofile->filename();
         // Theme author PO files have no text domain, but JSON files must always be prefixed
         if( $domain && 'default' !== $domain && preg_match('/^[a-z]{2,3}(?:_[a-z\\d_]+)?$/i',$name) ){
@@ -227,13 +237,39 @@ class Loco_gettext_Compiler {
         }
         // Hashable reference is always finally unminified, as per load_script_textdomain()
         if( is_string($ref) && '' !== $ref ){
-            if( substr($ref,-7) === '.min.js' ) {
-                $ref = substr($ref,0,-7).'.js';
-            }
-            $name .= '-'.md5($ref);
+            $name .= '-'.self::hashRef($ref);
         }
         return $pofile->cloneBasename( $name.'.json' );
-    } 
+    }
+
+
+    /**
+     * Hashable reference is always finally unminified, as per load_script_textdomain()
+     * @param string $ref script path relative to plugin base
+     * @return string
+     */
+    private static function hashRef( $ref ){
+        if( substr($ref,-7) === '.min.js' ) {
+            $ref = substr($ref,0,-7).'.js';
+        }
+        return md5($ref);
+    }
+
+
+    /**
+     * Build a map of existing script files indexed by their hash
+     */
+    private static function getJsHashes( Loco_package_Bundle $bundle ){
+        $scripts = $bundle->getFileFinder();
+        $scripts->setRecursive(true)->filterExtensions(['js']);
+        $map = [];
+        /* @var Loco_fs_File $jsfile */
+        foreach( $scripts->export() as $jsfile ){
+            $path = $jsfile->getRelativePath( $bundle->getDirectoryPath() );
+            $map[self::hashRef($path)] = $path;
+        }
+        return $map;
+    }
 
 
     /**

@@ -157,7 +157,6 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
         }
         return null;
     }
-    
 
 
     /**
@@ -181,7 +180,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
             }
         }
         return $this->cache;
-    }    
+    }
 
 
     /**

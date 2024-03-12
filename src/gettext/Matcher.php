@@ -47,12 +47,20 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         if( ! is_array($jed) || ! array_key_exists('locale_data',$jed) || ! is_array($jed['locale_data']) ){
             throw new Loco_error_Debug( $file->basename().' is not JED formatted');
         }
-        // Without a file reference strings will never be compiled back to the correct JSON.
-        // JSON files will not contain full line references, but we may know the file at least
-        if( ! array_key_exists('source',$jed) || ! $jed['source'] ){
-            throw new Loco_error_Debug( $file->basename().' has no "source" key');
+        // Without a file reference, strings will never be compiled back to the correct JSON.
+        $ref = array_key_exists('source',$jed) ? $jed['source'] : '';
+        if( '' === $ref || ! is_string($ref) ){
+            $name = $file->basename();
+            $error = $name.' has no "source" key';
+            if( preg_match('/-([0-9a-f]{32})\\.json$/', $name, $r ) ){
+                $hash = $r[1];
+                $ref = '.unknown/'.$hash.'.js:0';
+                //Loco_error_AdminNotices::debug( $error.'; defaulting to '.$ref);
+            }
+            else {
+                throw new Loco_error_Debug($error.'; script is unknown');
+            }
         }
-        $ref = $jed['source'];
         // not checking domain key. Should be valid if passed here and should only be one.
         foreach( $jed['locale_data'] as /*$domain =>*/ $keys ){
             foreach( $keys as $msgid => $arr ){

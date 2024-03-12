@@ -98,11 +98,10 @@ abstract class Loco_cli_SyncCommand {
                 $matcher->loadRefs($ref,$translate );
                 // Merge jsons if configured and available
                 if( $opts->mergeJson() ){
-                    $siblings = new Loco_fs_Siblings($pofile);
-                    $njson = $matcher->loadJsons( $siblings->getJsons( $project->getDomain()->getName() ) );
-                    if( 0 !== $njson ){
-                        Loco_cli_Utils::debug('> merged json files:%u', $njson );
-                    }
+                    $siblings = new Loco_fs_Siblings( $potfile->cloneBasename( $pofile->basename() ) );
+                    $jsons = $siblings->getJsons( $project->getDomain()->getName() );
+                    $njson = $matcher->loadJsons($jsons);
+                    Loco_cli_Utils::debug('> merged %u json files', $njson );
                 }
                 // Get fuzzy matching tolerance from plugin settings, can be set temporarily in command line
                 $fuzziness = Loco_data_Settings::get()->fuzziness;

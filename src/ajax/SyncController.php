@@ -108,7 +108,9 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         $matcher = new Loco_gettext_Matcher;
         $matcher->loadRefs($source,$translate);
         // merging JSONs must be done before fuzzy matching as it may add source strings
-        $matcher->loadJsons($syncjsons);
+        if( $syncjsons ) {
+            $matcher->loadJsons($syncjsons);
+        }
         // Fuzzy matching only applies to syncing PO files. POT files will always do hard sync (add/remove)
         if( 'po' === $type ){
             $fuzziness = Loco_data_Settings::get()->fuzziness;

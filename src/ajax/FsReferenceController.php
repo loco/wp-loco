@@ -7,7 +7,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
 
 
     /**
-     * @param string
+     * @param string $refpath
      * @return Loco_fs_File
      */
     private function findSourceFile( $refpath ){
@@ -19,6 +19,11 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                 return $srcfile;
             }
         }*/
+        
+        // special case for JED extraction where no source was given
+        if( preg_match('!^\\.unknown/([0-9a-f]{32})\\.js$!', $refpath ) ){
+            throw new InvalidArgumentException('Original script was not referenced in JSON translations');
+        }
 
         // reference may be resolvable via referencing PO file's location
         $pofile = new Loco_fs_File( $this->get('path') );
@@ -109,7 +114,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         // validate allowed source file types 
         $conf = Loco_data_Settings::get();
         $ext = strtolower( $srcfile->extension() );
-        $allow = array_merge( ['php','js'], $conf->php_alias, $conf->jsx_alias );
+        $allow = array_merge( ['php','js','json'], $conf->php_alias, $conf->jsx_alias );
         if( ! in_array($ext,$allow,true) ){
             throw new InvalidArgumentException('File extension disallowed, '.$ext );
         }
