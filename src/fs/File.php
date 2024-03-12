@@ -383,11 +383,11 @@ class Loco_fs_File {
 
     /**
      * Check if passed path is equal to ours
-     * @param string $path
+     * @param string|self $ref
      * @return bool
      */
-    public function equal( $path ){
-        return $this->path === (string) $path;
+    public function equal( $ref ){
+        return $this->path === (string) $ref;
     }
 
 

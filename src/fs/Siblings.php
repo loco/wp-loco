@@ -112,8 +112,8 @@ class Loco_fs_Siblings {
         if( $prefix && 'default' !== $prefix && preg_match('/^[a-z]{2,3}(?:_[a-z\\d_]+)?$/i',$name) ){
             $name = $prefix.'-'.$name;
         }
-        // locale must also be known, which it should be if only localised po file is set 
-        // match .json files with same name as .po, plus hashed names
+        // match .json files with same name as .po, suffixed with md5 hash.
+        // note that JSON files are localised, so won't be found if PO has no locale suffix.
         $regex = '/^'.preg_quote($name,'/').'-[0-9a-f]{32}$/';
         /* @var Loco_fs_File $file */
         foreach( $finder->group('json')->exportGroups() as $files ) {
