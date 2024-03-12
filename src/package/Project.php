@@ -384,7 +384,7 @@ class Loco_package_Project {
      * Lazy create all searchable source paths
      * @return Loco_fs_FileFinder
      */
-    private function getSourceFinder(){
+    public function getSourceFinder(){
         if( ! $this->source ){    
             $source = new Loco_fs_FileFinder;
             $exts = $this->getSourceExtensions();

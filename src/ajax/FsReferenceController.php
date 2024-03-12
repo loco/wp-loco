@@ -11,19 +11,6 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
      * @return Loco_fs_File
      */
     private function findSourceFile( $refpath ){
-        
-        /*/ absolute file path means no search paths required
-        if( Loco_fs_File::abs($refpath) ){
-            $srcfile = new Loco_fs_File( $refpath );
-            if( $srcfile->exists() ){
-                return $srcfile;
-            }
-        }*/
-        
-        // special case for JED extraction where no source was given
-        if( preg_match('!^\\.unknown/([0-9a-f]{32})\\.js$!', $refpath ) ){
-            throw new InvalidArgumentException('Original script was not referenced in JSON translations');
-        }
 
         // reference may be resolvable via referencing PO file's location
         $pofile = new Loco_fs_File( $this->get('path') );
@@ -97,13 +84,16 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         }
         
         // reference must parse as <path>:<line>
-        $ref = $post->ref;
-        if( ! preg_match('/^(.+):(\\d+)$/', $ref, $r ) ){
-            throw new InvalidArgumentException('Invalid file reference, '.$ref );
+        $refpath = $post->ref;
+        if( preg_match('/^(.+):(\\d+)$/', $refpath, $r ) ){
+            $refpath = $r[1];
+            $refline = (int) $r[2];
+        }
+        else {
+            $refline = 1;
         }
         
         // find file or fail
-        list( , $refpath, $refline ) = $r;
         $srcfile = $this->findSourceFile($refpath);
         
         // deny access to sensitive files
@@ -123,7 +113,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         $type = $conf->ext2type( $ext );
 
         $this->set('type', $type );
-        $this->set('line', (int) $refline );
+        $this->set('line', $refline );
         $this->set('path', $srcfile->getRelativePath( loco_constant('WP_CONTENT_DIR') ) );
         
         // source code will be HTML-tokenized into multiple lines

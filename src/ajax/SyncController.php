@@ -105,7 +105,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         }
         
         // establish on back end what strings will be added, removed, and which could be fuzzy-matches
-        $matcher = new Loco_gettext_Matcher;
+        $matcher = new Loco_gettext_Matcher($project);
         $matcher->loadRefs($source,$translate);
         // merging JSONs must be done before fuzzy matching as it may add source strings
         if( $syncjsons ) {

@@ -94,7 +94,7 @@ abstract class Loco_cli_SyncCommand {
                 }
                 // Perform merge if we have a reference file
                 Loco_cli_Utils::debug('Merging %s <- %s', $pofile->basename(), $potfile->basename() );
-                $matcher = new Loco_gettext_Matcher;
+                $matcher = new Loco_gettext_Matcher($project);
                 $matcher->loadRefs($ref,$translate );
                 // Merge jsons if configured and available
                 if( $opts->mergeJson() ){

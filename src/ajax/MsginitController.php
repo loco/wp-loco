@@ -80,7 +80,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
                 $jsons = $siblings->getJsons($domain);
                 if( $jsons ){
                     $refs = clone $data;
-                    $merge = new Loco_gettext_Matcher();
+                    $merge = new Loco_gettext_Matcher($project);
                     $merge->loadRefs($refs,$translate);
                     $merge->loadJsons($jsons);
                     // resolve faux merge into empty instance

@@ -151,7 +151,7 @@ abstract class Loco_cli_FetchCommand {
                     $info = new Loco_mvc_FileParams( [], $pofile );
                     Loco_cli_Utils::debug('PO already exists at %s (%s), merging..',$info->relpath,$info->size);
                     $original = Loco_gettext_Data::load($pofile);
-                    $matcher = new Loco_gettext_Matcher;
+                    $matcher = new Loco_gettext_Matcher($project);
                     $matcher->loadRefs($podata,true);
                     // downloaded file is in memory can be replaced with merged version
                     $podata = clone $original;

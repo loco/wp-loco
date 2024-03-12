@@ -116,7 +116,6 @@ class Loco_gettext_Compiler {
         $domain = $project->getDomain()->getName();
         $pofile = $this->files->getSource();
         $jsons = new Loco_fs_FileList;
-        $hashes = null;
         // Allow plugins to dictate a single JSON file to hold all script translations for a text domain
         // authors will additionally have to filter at runtime on load_script_translation_file
         $path = apply_filters('loco_compile_single_json', '', $pofile->getPath(), $domain );
@@ -142,17 +141,6 @@ class Loco_gettext_Compiler {
             /* @var Loco_gettext_Data $fragment */
             foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
                 $use = null;
-                // Reference could be an unknown script from a json missing its source field.
-                // we'll search for a matching script path against the pre-computed hash
-                if( preg_match('!^\\.unknown/([0-9a-f]{32})!', $ref, $r) ){
-                    if( is_null($hashes) ){
-                        $hashes = self::getJsHashes( $project->getBundle() );
-                    }
-                    $hash = $r[1];
-                    if( array_key_exists($hash,$hashes) ){
-                        $ref = $hashes[$hash];
-                    }
-                }
                 // Reference could be a js source file, or a minified version. We'll try .min.js first, then .js
                 // Build systems may differ, but WordPress only supports these suffixes. See WP-CLI MakeJsonCommand.
                 if( substr($ref,-7) === '.min.js' ) {
@@ -253,22 +241,6 @@ class Loco_gettext_Compiler {
             $ref = substr($ref,0,-7).'.js';
         }
         return md5($ref);
-    }
-
-
-    /**
-     * Build a map of existing script files indexed by their hash
-     */
-    private static function getJsHashes( Loco_package_Bundle $bundle ){
-        $scripts = $bundle->getFileFinder();
-        $scripts->setRecursive(true)->filterExtensions(['js']);
-        $map = [];
-        /* @var Loco_fs_File $jsfile */
-        foreach( $scripts->export() as $jsfile ){
-            $path = $jsfile->getRelativePath( $bundle->getDirectoryPath() );
-            $map[self::hashRef($path)] = $path;
-        }
-        return $map;
     }
 
 

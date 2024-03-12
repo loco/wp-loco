@@ -16,6 +16,22 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      */
     private $translated;
 
+    /**
+     * @var Loco_package_Project
+     */
+    private $project;
+
+    /**
+     * @var array[]|null
+     */
+    private $hashes;
+    
+    
+
+    public function __construct( Loco_package_Project $project ){
+        $this->project = $project;
+    }
+
 
     /**
      * Initialize matcher with current valid source strings (ref.pot)
@@ -37,30 +53,57 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
 
     /**
+     * Perform a reverse lookup for a file reference from its pre-computed hash
+     */
+    private function findScript( $hash ){
+        $map = $this->hashes;
+        // build full index of all script hashes under configured source locations.
+        if( is_null($map) ){
+            $map = [];
+            $scripts = clone $this->project->getSourceFinder();
+            $scripts->filterExtensions(['js']);
+            $basepath = $this->project->getBundle()->getDirectoryPath();
+            /* @var Loco_fs_File $jsfile */
+            foreach( $scripts->export() as $jsfile ){
+                $ref = $jsfile->getRelativePath($basepath);
+                if( substr($ref,-7) === '.min.js' ) {
+                    $ref = substr($ref,0,-7).'.js';
+                }
+                $map[ md5($ref) ] = $ref;
+            }
+            $this->hashes = $map;
+        }
+        return array_key_exists($hash,$map) ? $map[$hash] : '';
+    }
+
+
+    /**
      * Add further source strings from JSON/JED file
      * @param Loco_fs_File $file json file
      * @return int
      */
-    public function loadJson( Loco_fs_File $file ){
+    private function loadJson( Loco_fs_File $file ){
         $unique = 0;
         $jed = json_decode( $file->getContents(), true );
         if( ! is_array($jed) || ! array_key_exists('locale_data',$jed) || ! is_array($jed['locale_data']) ){
             throw new Loco_error_Debug( $file->basename().' is not JED formatted');
         }
-        // Without a file reference, strings will never be compiled back to the correct JSON.
+        // without a file reference, strings will never be compiled back to the correct JSON.
+        // if missing from JED, we'll attempt reverse match from scripts found on disk. 
         $ref = array_key_exists('source',$jed) ? $jed['source'] : '';
         if( '' === $ref || ! is_string($ref) ){
             $name = $file->basename();
-            $error = $name.' has no "source" key';
-            if( preg_match('/-([0-9a-f]{32})\\.json$/', $name, $r ) ){
-                $hash = $r[1];
-                $ref = '.unknown/'.$hash.'.js:0';
-                //Loco_error_AdminNotices::debug( $error.'; defaulting to '.$ref);
+            $ref = preg_match('/-([0-9a-f]{32})\\.json$/',$name,$r) ? $this->findScript($r[1]) : '';
+            if( '' === $ref ){
+                throw new Loco_error_Debug($name.' has no "source" key; script is unknown');
             }
-            else {
-                throw new Loco_error_Debug($error.'; script is unknown');
-            }
+            // The hash is pre-computed and .js file is known to exist, so we'll skip filters here.
+            // The compiler will still filter this reference, so it could potentially yield a different hash. 
+            Loco_error_AdminNotices::debug($name.' has no "source" key; reverse matched '.$ref);
         }
+        // file reference most likely won't have a line number, as it applies to all strings in the JSON
+        // As most deployed JavaScript will be minified, we probably only have one line anyway.
+        // $ref .= ':1';
         // not checking domain key. Should be valid if passed here and should only be one.
         foreach( $jed['locale_data'] as /*$domain =>*/ $keys ){
             foreach( $keys as $msgid => $arr ){

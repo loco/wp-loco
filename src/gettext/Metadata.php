@@ -9,7 +9,7 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
 
     /**
      * Generate abbreviated stats from parsed array data  
-     * @param array in form returned from parser, including header message
+     * @param array $po in form returned from parser, including header message
      * @return array in form ['t' => total, 'p' => progress, 'f' => fuzzy ];
      */
     public static function stats( array $po ){
