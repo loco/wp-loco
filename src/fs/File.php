@@ -627,8 +627,7 @@ class Loco_fs_File {
      * @return self
      */
     public function cloneExtension( $ext ){
-        $name = $this->filename().'.'.$ext;
-        return $this->cloneBasename($name);
+        return $this->cloneBasename( $this->filename().'.'.ltrim($ext,'.') );
     }
 
 

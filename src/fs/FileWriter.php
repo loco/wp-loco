@@ -190,8 +190,8 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * @param bool
-     * @return Loco_fs_FileWriter
+     * @param bool $recursive
+     * @return self
      * @throws Loco_error_WriteException
      */
     public function delete( $recursive = false ){
@@ -206,7 +206,7 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * @param string
+     * @param string $data
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
@@ -302,7 +302,7 @@ class Loco_fs_FileWriter {
     /**
      * Check whether write operations are permitted, or throw
      * @throws Loco_error_WriteException
-     * @return Loco_fs_FileWriter
+     * @return self
      */
     public function authorize(){
         if( $this->disabled() ){
@@ -313,22 +313,30 @@ class Loco_fs_FileWriter {
         if( 1 < $opts->fs_protect && $this->file->getUpdateType() ){
             throw new Loco_error_WriteException( __('Modification of installed files is disallowed by the plugin settings','loco-translate') );
         }
+        // we may need to examine multiple extensions, or there may be none for directories
+        $exts = array_slice( explode('.',strtolower($this->file->basename())), 1 );
+        if( ! $exts ){
+            return $this;
+        }
+        $ext = array_pop($exts);
         // deny POT modification (pot_protect = 2)
         // this assumes that templates all have .pot extension, which isn't guaranteed. UI should prevent saving of wrongly files like "default.po"
-        if( 'pot' === strtolower($this->file->extension()) &&  1 < $opts->pot_protect ){
-            throw new Loco_error_WriteException( __('Modification of POT (template) files is disallowed by the plugin settings','loco-translate') );
+        if( 'pot' === $ext && 1 < $opts->pot_protect ){
+            throw new Loco_error_WriteException( __( 'Modification of POT (template) files is disallowed by the plugin settings', 'loco-translate' ) );
         }
-        // Deny list of executable file extensions, noting that specific actions may limit this further.
-        // Note that this ignores the base file name, so "php.pot" would be permitted, but "foo.php.pot" would not.
-        $exts = array_slice( explode('.', $this->file->basename() ), 1 );
-        if( preg_grep('/^php\\d*/i', $exts ) ){
-            $ext = implode('.',$exts);
-            // Temporarily allowing .mo.php while performant-translations plugin is in development
-            if( 'mo.php' !== $ext ){
-                throw new Loco_error_WriteException('Executable file extension disallowed .'.$ext );
+        // Full list of file extensions this plugin can modify; note that specific actions may limit this further.
+        $allow = [ 'po'=>1, 'pot'=>1, 'mo'=>1, 'json'=>1, 'po~'=>1, 'pot~'=>1, 'txt'=>1, 'xml'=>1 ];
+        if( array_key_exists($ext,$allow) ){
+            return $this;
+        }
+        // Writing to PHP files is disallowed, but we may need to delete *.l10n.php caches.
+        if( preg_match('/php\\d*/i',$ext) ){
+            $prev = array_pop($exts);
+            if( 'mo' === $prev || 'l10n' === $prev ){
+                return $this;
             }
         }
-        return $this;
+        throw new Loco_error_WriteException('File extension disallowed .'.$ext );
     }
 
 

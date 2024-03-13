@@ -282,7 +282,8 @@ var z = u.pluralized();
 const B = z ? Math.min(h.getTargetOffset(), 1) : 0, I = 'lang="' + String(D) + '" dir="' + (D.isRTL() ? "RTL" : "LTR") + '"';
 let x, E = u.source(null, B);
 z ? (x = d('<select lang="en" name="s" disabled></select>'), u.eachSrc(function(l, p) {
-var m = l ? h.t()._x("Plural", "Editor") : h.t()._x("Single", "Editor");
+var m = h.t();
+m = l ? m._x("Plural", "Editor") : m._x("Single", "Editor");
 m = d("<optgroup></optgroup>").attr("label", m);
 x.append(m.append(d("<option></option>").attr("value", String(l)).text(p)));
 }), x.val(String(B)), x.on("change", function(l) {

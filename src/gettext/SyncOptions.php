@@ -44,8 +44,7 @@ class Loco_gettext_SyncOptions {
 
     /**
      * Test if translations (msgstr fields) are to be merged.
-     * 
-     * @return bool
+     * @return bool true if NOT in pot mode
      */
     public function mergeMsgstr(){
         return 0 === preg_match( '/\\bpot\\b/', $this->getSyncMode() );

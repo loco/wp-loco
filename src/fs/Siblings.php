@@ -72,11 +72,14 @@ class Loco_fs_Siblings {
         if( 'po' === $this->po->extension() ){
             $siblings = array_merge($siblings,$this->getJsons($this->td));
         }
-        // Append PHP cache, assuming performant-translations plugin created them
+        // Append PHP cache file with .l10n.php extension.
+        // Note that the precursor "performant-translations" plugin originally used .mo.php
         if( $this->mo ){
-            $file = $this->mo->cloneExtension('mo.php');
-            if( $file->exists() ){
-                $siblings[] = $file;
+            foreach( ['l10n.php','mo.php'] as $ext ){
+                $file = $this->mo->cloneExtension($ext);
+                if( $file->exists() ){
+                    $siblings[] = $file;
+                }
             }
         }
 

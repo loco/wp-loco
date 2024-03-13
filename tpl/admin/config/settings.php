@@ -12,7 +12,7 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
 /* @var Loco_mvc_ViewParams $verbose */
 ?> 
 
-    <form action="" method="post" enctype="application/x-www-form-urlencoded">
+    <form action="#" method="post" enctype="application/x-www-form-urlencoded">
         <input type="hidden" name="<?php $nonce->e('name')?>" value="<?php $nonce->e('value')?>" />
         <table class="form-table">
             <tbody>

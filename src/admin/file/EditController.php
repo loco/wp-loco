@@ -60,7 +60,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
         // Parse file data into JavaScript for editor
         try {
             $this->set('modified', $file->modified() );
-            $data = Loco_gettext_Data::load( $file );
+            $data = Loco_gettext_Data::load($file);
         }
         catch( Exception $e ){
             Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
@@ -112,7 +112,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 // Validate template file as long as it exists
                 if( $potfile->exists() ){
                     try {
-                        $potdata = Loco_gettext_Data::load( $potfile );
+                        $potdata = Loco_gettext_Data::load($potfile);
+                        // TODO merge jsons into $potdata if template dictates!
                         if( ! $potdata->equalSource($data) ){
                             // translators: %s refers to the name of a POT file
                             Loco_error_AdminNotices::info( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) )
