@@ -50,7 +50,7 @@ class Loco_hooks_TranslateBuffer extends Loco_hooks_Hookable {
 
     /**
      * Export all captured translations in a raw form and reset buffer
-     * @param string the specific domain listened for
+     * @param string $domain the specific domain listened for
      * @return array
      */
     public function flush( $domain ){
@@ -62,7 +62,18 @@ class Loco_hooks_TranslateBuffer extends Loco_hooks_Hookable {
             // process raw data for all that actually exist
             // this survives on WordPress internals not changing :-/
             $loaded = get_translations_for_domain($domain);
-            if( $loaded instanceof Translations && is_array($loaded->entries) ){
+            // since WordPress 6.5, this class doesn't pre-index the values
+            if( $loaded instanceof WP_Translations ){
+                /* @var Translation_Entry $entry */
+                foreach( $loaded->entries as $entry ){
+                    $key = $entry->key();
+                    if( array_key_exists($key,$captured) ){
+                        $export[$key] = $entry->translations;
+                    }
+                }
+            }
+            // legacy, entries are indexed already by the key:
+            else if( $loaded instanceof Translations ){
                 $entries = array_intersect_key( $loaded->entries, $captured );
                 /* @var $entry Translation_Entry */
                 foreach( $entries as $key => $entry ){

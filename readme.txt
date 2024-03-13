@@ -104,8 +104,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Fixed a bug where unused plural forms were counted as untranslated
 * Replaced CSS .notice with .panel to mitigate nag-blocker problems
 * Removed bundle debug screen (deprecated since 2.6.5)
-* Experimental support for performant-translations plugin
-* Workaround for absent "source" references in JED files 
+* Support for performant translation files in PHP format
+* Workaround for absent "source" references in JED files
 * Bumped WordPress compatibility to 6.4.3
 
 = 2.6.6 =

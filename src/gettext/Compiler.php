@@ -93,16 +93,22 @@ class Loco_gettext_Compiler {
      */
     public function writeMo( Loco_gettext_Data $po ){
         try {
-            $file = $this->files->getBinary();
-            $this->fs->authorizeSave($file);
-            $bytes = $file->putContents( $po->msgfmt() );
+            $mofile = $this->files->getBinary();
+            $this->fs->authorizeSave($mofile);
+            $bytes = $mofile->putContents( $po->msgfmt() );
             $this->progress['mobytes'] = $bytes;
+            // write PHP cache, if WordPress >= 6.5
+            $phfile = $this->files->getCache();
+            if( $phfile && class_exists('WP_Translation_File_PHP') ){
+                $this->progress['phbytes'] = $phfile->putContents( Loco_gettext_PhpCache::convert($po) );
+            }
         }
         catch( Exception $e ){
             Loco_error_AdminNotices::debug( $e->getMessage() );
             Loco_error_AdminNotices::warn( __('PO file saved, but MO file compilation failed','loco-translate') );
             $bytes = 0;
         }
+
         return $bytes;
     }
 

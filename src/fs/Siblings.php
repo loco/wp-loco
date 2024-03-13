@@ -10,9 +10,14 @@ class Loco_fs_Siblings {
     private $po;
 
     /**
-     * @var Loco_fs_File
+     * @var Loco_fs_File|null
      */
     private $mo;
+
+    /**
+     * @var Loco_fs_File|null
+     */
+    private $php;
 
     /**
      * @var string
@@ -39,6 +44,9 @@ class Loco_fs_Siblings {
         else {
             throw new InvalidArgumentException('Unexpected file extension: '.$ext);
         }
+        if( $this->mo && class_exists('WP_Translation_Controller') ){
+            $this->php = $this->mo->cloneExtension('l10n.php');
+        }
     }
 
 
@@ -58,31 +66,27 @@ class Loco_fs_Siblings {
     public function expand(){
         $siblings = [];
         // Source and binary pair
-        foreach( [ $this->po, $this->mo ] as $file ){
+        foreach( [ $this->po, $this->mo, $this->php ] as $file ){
             if( $file && $file->exists() ){
                 $siblings[] = $file;
             }
         }
-        // Revisions / backup files:
+        // PO revisions / backup files:
         $revs = new Loco_fs_Revisions( $this->po );
         foreach( $revs->getPaths() as $path ){
             $siblings[] = new Loco_fs_File( $path );
         }
         // JSON exports, unless in POT mode:
-        if( 'po' === $this->po->extension() ){
+        if( $this->mo ){
             $siblings = array_merge($siblings,$this->getJsons($this->td));
         }
-        // Append PHP cache file with .l10n.php extension.
-        // Note that the precursor "performant-translations" plugin originally used .mo.php
-        if( $this->mo ){
-            foreach( ['l10n.php','mo.php'] as $ext ){
-                $file = $this->mo->cloneExtension($ext);
-                if( $file->exists() ){
-                    $siblings[] = $file;
-                }
+        /*/ Note that the beta "performant-translations" plugin originally used .mo.php instead of .l10n.php
+        if( $this->mo && class_exists('Performant_Translations') ){
+            $file = $this->mo->cloneExtension('mo.php');
+            if( $file->exists() ){
+                $siblings[] = $file;
             }
-        }
-
+        }*/
         return $siblings;
     }
 
@@ -96,10 +100,18 @@ class Loco_fs_Siblings {
 
 
     /**
-     * @return Loco_fs_File
+     * @return Loco_fs_File|null
      */
     public function getBinary(){
         return $this->mo;
+    }
+
+
+    /**
+     * @return Loco_fs_File|null
+     */
+    public function getCache(){
+        return $this->php;
     }
 
     
@@ -135,6 +147,5 @@ class Loco_fs_Siblings {
 
         return $list->getArrayCopy();
     }
-    
 
 }

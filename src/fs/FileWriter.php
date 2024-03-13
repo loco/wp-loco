@@ -329,7 +329,7 @@ class Loco_fs_FileWriter {
         if( array_key_exists($ext,$allow) ){
             return $this;
         }
-        // Writing to PHP files is disallowed, but we may need to delete *.l10n.php caches.
+        // Writing to PHP files is generally disallowed, but we need to write l10n.php cache files
         if( preg_match('/php\\d*/i',$ext) ){
             $prev = array_pop($exts);
             if( 'mo' === $prev || 'l10n' === $prev ){

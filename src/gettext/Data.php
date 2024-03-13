@@ -202,6 +202,8 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         // @codeCoverageIgnoreEnd
         return $po;
     }
+    
+    
 
 
     /**
