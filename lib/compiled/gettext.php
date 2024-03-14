@@ -132,7 +132,9 @@ public function valid() { return is_int($this->i); }
 #[ReturnTypeWillChange]
 public function next() { $i = $this->i; while( ++$i < $this->t ){ if( array_key_exists('parent',$this->po[$i]) ){ continue; } $this->j++; $this->i = $i; return; } $this->i = null; $this->j = null; } 
 #[ReturnTypeWillChange]
-public function current() { $i = $this->i; $po = $this->po; $parent = new LocoPoMessage( $po[$i] ); $plurals = []; $nonseq = $parent->offsetExists('child'); $j = $nonseq ? $parent['child'] : $i+1; while( isset($po[$j]['parent']) && $i === $po[$j]['parent'] ){ $plurals[] = new LocoPoMessage($po[$j++]); } if( $plurals ){ $parent['plurals'] = $plurals; } return $parent; } 
+public function current() { return $this->item( $this->i ); } 
+private function item(  $i ) { $po = $this->po; $parent = new LocoPoMessage( $po[$i] ); $plurals = []; $nonseq = $parent->offsetExists('child'); $j = $nonseq ? $parent['child'] : $i+1; while( isset($po[$j]['parent']) && $i === $po[$j]['parent'] ){ $plurals[] = new LocoPoMessage($po[$j++]); } if( $plurals ){ $parent['plurals'] = $plurals; } return $parent; } 
+public function exportEntry(  $i ) { return $this->item( $i + ( 1-$this->z) ); } 
 public function getArrayCopy() { $po = $this->po; if( 0 === $this->z ){ $po[0]['target'] = (string) $this->getHeaders(); } return $po; } 
 public function clear() { if( 0 === $this->z ){ $this->po = [ $this->po[0] ]; $this->t = 1; } else { $this->po = []; $this->t = 0; } } 
 public function getHeaders() { if( is_null($this->headers) ){ $header = $this->po[0]; if( 0 === $this->z ){ $this->headers = LocoPoHeaders::fromMsgstr( $header['target'] ); } else { $this->headers = new LocoPoHeaders; } } return $this->headers; } 

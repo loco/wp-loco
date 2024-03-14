@@ -100,7 +100,7 @@ class Loco_gettext_Compiler {
             // write PHP cache, if WordPress >= 6.5
             $phfile = $this->files->getCache();
             if( $phfile && class_exists('WP_Translation_File_PHP') ){
-                $this->progress['phbytes'] = $phfile->putContents( Loco_gettext_PhpCache::convert($po) );
+                $this->progress['phbytes'] = $phfile->putContents( Loco_gettext_PhpCache::render($po) );
             }
         }
         catch( Exception $e ){

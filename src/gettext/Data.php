@@ -217,8 +217,8 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     
     /**
-     * @param Loco_Locale
-     * @param string[] custom headers
+     * @param Loco_Locale $locale
+     * @param string[] $custom custom headers
      * @return Loco_gettext_Data
      */
     public function localize( Loco_Locale $locale, array $custom = [] ){
@@ -283,7 +283,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * @param string
+     * @param string $domain
      * @return Loco_gettext_Data
      */
     public function templatize( $domain = '' ){

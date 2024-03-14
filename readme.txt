@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.4.3
+Tested up to: 6.5.0
 Stable tag: 2.6.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,12 +101,12 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.7 =
+* Support for performant translation files in PHP format
 * Fixed a bug where unused plural forms were counted as untranslated
 * Replaced CSS .notice with .panel to mitigate nag-blocker problems
 * Removed bundle debug screen (deprecated since 2.6.5)
-* Support for performant translation files in PHP format
 * Workaround for absent "source" references in JED files
-* Bumped WordPress compatibility to 6.4.3
+* Bumped WordPress compatibility to 6.5.0
 
 = 2.6.6 =
 * Replaced open_basedir check with error capturing
