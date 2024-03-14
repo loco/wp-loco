@@ -227,7 +227,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
     public function ext2type($ext){
         $ext = strtolower($ext);
         $types = array_fill_keys( $this->jsx_alias, 'js' );
-        $types['twig'] = 'twig'; // <- temporary hack in lieu of dedicated twig extractor
+        $types['json'] = 'json'; // <- only block.json currently considered a source file.
+        $types['twig'] = 'twig'; // <- temporary hack in lieu of dedicated twig extractor.
         return isset($types[$ext]) ? $types[$ext] : 'php';
     }
    

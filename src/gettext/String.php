@@ -18,8 +18,8 @@ class Loco_gettext_String {
     /**
      * Loco_gettext_String constructor.
      *
-     * @param string Mandatory source
-     * @param string Optional context
+     * @param string $msgid Mandatory source
+     * @param string $msgctxt Optional context
      */
     public function __construct( $msgid, $msgctxt = '' ){
         $this->raw =  [
@@ -52,9 +52,9 @@ class Loco_gettext_String {
 
 
     /**
-     * @param string
-     * @param string|array
-     * @param string
+     * @param string $prop
+     * @param string|array $value
+     * @param string $glue
      * @return void
      */
     private function merge( $prop, $value, $glue ){
@@ -72,7 +72,7 @@ class Loco_gettext_String {
 
 
     /**
-     * @param array|string
+     * @param array|string $refs
      * @return self
      */
     public function addFileReferences( $refs ){
@@ -82,7 +82,7 @@ class Loco_gettext_String {
 
 
     /**
-     * @param array|string
+     * @param array|string $notes
      * @return self
      */
     public function addExtractedComment( $notes ){
@@ -91,7 +91,7 @@ class Loco_gettext_String {
     }
 
     /**
-     * @param string
+     * @param string $msgid_plural
      * @return self
      */
     public function pluralize( $msgid_plural ){
@@ -106,5 +106,11 @@ class Loco_gettext_String {
     public function hasPlural(){
         return is_string($this->plural) && '' !== $this->plural;
     }
+    
+    
+    /*public function __toString(){
+        return json_encode( $this->raw );
+    }*/
+    
 
 }

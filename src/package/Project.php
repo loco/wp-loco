@@ -411,8 +411,8 @@ class Loco_package_Project {
         $conf = Loco_data_Settings::get();
         $exts = $conf->php_alias;
         $exts = array_merge( $exts, $conf->jsx_alias );
-        // always ensure we have at least PHP files scanned
-        return array_merge( $exts, ['php'] );
+        // ensure we always scan *.php and block.json files
+        return array_merge( $exts, ['php','json'] );
     }
 
 
@@ -684,6 +684,10 @@ class Loco_package_Project {
                 $name = $file->filename();
                 // skip "{name}.min.{ext}" but only if "{name}.{ext}" exists
                 if( '.min' === substr($name,-4) && file_exists( $file->dirname().'/'.substr($name,0,-4).'.'.$ext ) ){
+                    continue;
+                }
+                // .json source files can only be called block.json
+                if( 'json' === $ext && 'block' !== $name ){
                     continue;
                 }
                 $list->add($file);

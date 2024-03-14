@@ -78,6 +78,7 @@ class Loco_gettext_Extraction {
      */
     public function addProject( Loco_package_Project $project ){
         $base = $this->bundle->getDirectoryPath();
+        $domain = (string) $project->getDomain();
         // skip files larger than configured maximum
         $opts = Loco_data_Settings::get();
         $max = wp_convert_hr_to_bytes( $opts->max_php_size );
@@ -88,8 +89,14 @@ class Loco_gettext_Extraction {
         /* @var Loco_fs_File $file */
         foreach( $project->findSourceFiles() as $file ){
             $type = $opts->ext2type( $file->extension() );
+            // handle block.json separately, as schema is known:
+            if( 'json' === $type ){
+                $this->includeBlock($file,$domain);
+                continue;
+            }
+            // else string extractor required
             $extr = loco_wp_extractor($type);
-            if( 'js' !== $type ) {
+            if( 'php' === $type || 'twig' === $type) {
                 // skip large files for PHP, because token_get_all is hungry
                 if( 0 !== $max ){
                     $size = $file->size();
@@ -100,16 +107,39 @@ class Loco_gettext_Extraction {
                         continue;
                     }
                 }
-                // extract headers from theme PHP files in
+                // extract headers from theme PHP files
                 if( $project->getBundle()->isTheme() ){
                     $extr->headerize(  [
                         'Template Name' => 'Name of the template',
-                    ], (string) $project->getDomain() );
+                    ], $domain );
                 }
             }
             $this->extracted->extractSource( $extr, $file->getContents(), $file->getRelativePath( $base ) );
         }
         return $this;
+    }
+    
+    
+    private function includeBlock( Loco_fs_File $file, $domain ) {
+        $def = json_decode( $file->getContents(), true );
+        if( ! is_array($def) || ! array_key_exists('$schema',$def) ){
+            return;
+        }
+        // adding dummy line number for well-formed file reference, not currently pulling line number.
+        $ref = $file->getRelativePath( $this->bundle->getDirectoryPath() ).':1';
+        foreach(['title','description','keywords'] as $key ){
+            if( ! array_key_exists($key,$def) ) {
+                continue;
+            }
+            $msgctxt = 'block '.rtrim($key,'s');
+            foreach( (array) $def[$key] as $msgid ){
+                if( is_string($msgid) && '' !== $msgid ){
+                    $str = new Loco_gettext_String($msgid,$msgctxt);
+                    $str->addFileReferences($ref);
+                    $this->addString($str,$domain);
+                }
+            }
+        }
     }
 
 
@@ -132,7 +162,7 @@ class Loco_gettext_Extraction {
      * Add a custom source string constructed from `new Loco_gettext_String(msgid,[msgctxt])`
      * @param Loco_gettext_String $string
      * @param string $domain Optional text domain, if not current bundle's default
-     * @return self
+     * @return void
      */
     public function addString( Loco_gettext_String $string, $domain = '' ){
         if( ! $domain ) {
@@ -143,8 +173,6 @@ class Loco_gettext_Extraction {
         if( $string->hasPlural() ){
             $this->extracted->pushPlural( $string->exportPlural(), $index );
         }
-        
-        return $this;
     }
 
 
