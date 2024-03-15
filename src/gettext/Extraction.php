@@ -89,12 +89,6 @@ class Loco_gettext_Extraction {
         /* @var Loco_fs_File $file */
         foreach( $project->findSourceFiles() as $file ){
             $type = $opts->ext2type( $file->extension() );
-            // handle block.json separately, as schema is known:
-            if( 'json' === $type ){
-                $this->includeBlock($file,$domain);
-                continue;
-            }
-            // else string extractor required
             $extr = loco_wp_extractor($type);
             if( 'php' === $type || 'twig' === $type) {
                 // skip large files for PHP, because token_get_all is hungry
@@ -114,7 +108,7 @@ class Loco_gettext_Extraction {
                     ], $domain );
                 }
             }
-            $this->extracted->extractSource( $extr, $file->getContents(), $file->getRelativePath( $base ) );
+            $this->extracted->extractSource( $extr, $file->getContents(), $file->getRelativePath($base) );
         }
         return $this;
     }
