@@ -1,6 +1,6 @@
 === Loco Translate ===
 Contributors: timwhitlock
-Tags: translation, translators, localization, localisation, l10n, i18n, Gettext, PO, MO, productivity, multilingual, internationalization
+Tags: translation, l10n, i18n, Gettext, multi-language
 Requires at least: 5.2
 Requires PHP: 5.6.20
 Tested up to: 6.5.0
