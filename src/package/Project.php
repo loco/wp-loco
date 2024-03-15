@@ -385,7 +385,7 @@ class Loco_package_Project {
      * @return Loco_fs_FileFinder
      */
     public function getSourceFinder(){
-        if( ! $this->source ){    
+        if( ! $this->source ){
             $source = new Loco_fs_FileFinder;
             $exts = $this->getSourceExtensions();
             $source->setRecursive(true)->filterExtensions($exts);
@@ -421,14 +421,12 @@ class Loco_package_Project {
      * @return void
      */
     private function excludeSources( Loco_fs_FileFinder $finder ){
-        foreach( $this->xspaths as $file ){
-            if( $path = realpath( (string) $file ) ){ 
-                $finder->exclude( $path );
-            }
-        }
-        foreach( $this->xgpaths as $file ){
-            if( $path = realpath( (string) $file ) ){
-                $finder->exclude( $path );
+        foreach( [$this->xspaths,$this->xgpaths] as $list ){
+            foreach( $list as $file ){
+                $real = realpath( (string) $file );
+                if( is_string($real) && '' !== $real ){
+                    $finder->exclude($real);
+                }
             }
         }
     }
@@ -518,7 +516,7 @@ class Loco_package_Project {
 
     /**
      * Add a globally excluded location affecting sources and targets
-     * @param string | Loco_fs_File
+     * @param string|Loco_fs_File $path
      * @return Loco_package_Project
      */
     public function excludeLocation( $path ){
@@ -686,9 +684,17 @@ class Loco_package_Project {
                 if( '.min' === substr($name,-4) && file_exists( $file->dirname().'/'.substr($name,0,-4).'.'.$ext ) ){
                     continue;
                 }
-                // .json source files can only be called block.json
-                if( 'json' === $ext && 'block' !== $name ){
-                    continue;
+                // .json source files like block.json theme.json etc..
+                if( 'json' === $ext && 'block' !== $name && 'theme' !== $name ){
+                    // arbitrarily named theme jsons, like onyx.json (twentytwentyfour)
+                    if( ! $this->getBundle()->isTheme() ){
+                        continue;
+                    }
+                    // Skip JED. We will merge these in separately as needed
+                    if( preg_match('/-[0-9a-f]{32}]$/',$name ) ){
+                        continue;
+                    }
+                    // Ok, treat as json schema file. May fail later...
                 }
                 $list->add($file);
             }

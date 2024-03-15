@@ -222,14 +222,16 @@ class Loco_data_Settings extends Loco_data_Serializable {
     /**
      * Map a file extension to registered types, defaults to "php"
      * @param string $ext File extension
-     * @return string php, js or twig
+     * @param string $default Optional default
+     * @return string php, js, json, twig or $default
      */
-    public function ext2type($ext){
+    public function ext2type( $ext, $default = 'php' ){
+        $types = ['php'=>'php', 'js'=>'js', 'json'=>'json', 'twig'=>'twig'] // <- canonical
+               + array_fill_keys( $this->php_alias, 'php')
+               + array_fill_keys( $this->jsx_alias, 'js')
+        ;
         $ext = strtolower($ext);
-        $types = array_fill_keys( $this->jsx_alias, 'js' );
-        $types['json'] = 'json'; // <- only block.json currently considered a source file.
-        $types['twig'] = 'twig'; // <- temporary hack in lieu of dedicated twig extractor.
-        return isset($types[$ext]) ? $types[$ext] : 'php';
+        return isset($types[$ext]) ? $types[$ext] : $default;
     }
    
 }

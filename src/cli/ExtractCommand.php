@@ -38,7 +38,7 @@ abstract class Loco_cli_ExtractCommand {
             $ext = new Loco_gettext_Extraction( $project->getBundle() );
             $domain = $project->getDomain()->getName();
             $data = $ext->addProject($project)->includeMeta()->getTemplate( $domain );
-            Loco_cli_Utils::debug('Extraction OK, %u strings', count($data) );
+            Loco_cli_Utils::debug('Extracted %u strings', count($data) );
             $list = $ext->getSkipped();
             if( $list ){
                 $current = Loco_data_Settings::get()->max_php_size;

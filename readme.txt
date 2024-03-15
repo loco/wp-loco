@@ -102,7 +102,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.6.7 =
 * Support for performant translation files in PHP format
-* Added block.json extraction when generating strings
+* Added block.json and theme.json extraction
+* Added theme pattern files to string extraction
 * Fixed a bug where unused plural forms were counted as untranslated
 * Replaced CSS .notice with .panel to mitigate nag-blocker problems
 * Removed bundle debug screen (deprecated since 2.6.5)
