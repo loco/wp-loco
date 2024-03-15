@@ -20,6 +20,20 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
 
     /**
+     * Autoloader for polyfills and warnings when important classes are requested, but missing.
+     * This must be loaded after `loco_autoload` which is responsible for loading Loco_* classes.
+     */
+    public static function autoload_compat( $name ){
+        if( strlen($name) < 20 && 'Loco_' !== substr($name,0,5) ){
+            $path = loco_plugin_root().'/src/compat/'.$name.'.php';
+            if( file_exists($path) ){
+                require $path;
+            }
+        }
+    }
+
+
+    /**
      * {@inheritdoc}
      */
     public function __construct(){
@@ -33,6 +47,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
             $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : '';
             // initialize Ajax router before hook fired so we can handle output buffering
             if( 'loco_' === substr($action,0,5)  && isset($_REQUEST['route']) ){
+                spl_autoload_register( [__CLASS__,'autoload_compat'] );
                 $this->router = new Loco_mvc_AjaxRouter;
                 Loco_package_Listener::create();
             }
@@ -41,14 +56,24 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
         // page router required on all pages as it hooks in the menu
         else {
             $this->router = new Loco_mvc_AdminRouter;
-            // we don't know we will render a page yet, but we need to listen for text domain hooks as early as possible
+            // we don't know we will render a page yet, but we know it'll be ours if it exists.
             if( isset($_GET['page']) && 'loco' === substr($_GET['page'],0,4) ){
+                spl_autoload_register( [__CLASS__,'autoload_compat'] );
                 Loco_package_Listener::create();
                 // trigger post-upgrade process if required
                 Loco_data_Settings::get()->migrate();
             }
         }
     }
+
+
+    /**
+     * @inheritdoc
+     */
+    public function unhook(){
+        spl_autoload_unregister( [__CLASS__,'autoload_compat'] );
+        parent::unhook();
+    }    
 
 
 	/**

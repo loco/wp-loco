@@ -18,7 +18,7 @@ class Loco_admin_RootController extends Loco_admin_list_BaseController {
      * Render main entry home screen
      */
     public function render(){
-        
+
         // translators: home screen title where %s is the version number
         $this->set('title', sprintf( __('Loco Translate %s','loco-translate'), loco_plugin_version() ) );
 

@@ -334,7 +334,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         }
         // setting user required to have proper user object
         $user = wp_set_current_user( $user );
-        // simulate default permissions used in admin menu hookage
+        // simulate default permissions used in admin menu hook
         if( $user->has_cap('manage_options') ){
             $user->add_cap('loco_admin');
         }

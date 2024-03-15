@@ -136,8 +136,8 @@ function loco_check_extension( $name ) {
         else {
             // translators: %s refers to the name of a missing PHP extension, for example "mbstring".
             Loco_error_AdminNotices::warn( sprintf( __('Loco Translate requires the "%s" PHP extension. Ask your hosting provider to install it','loco-translate'), $name ) );
-            $class = 'Loco_compat_'.ucfirst($name).'Extension.php';
-            $cache[$name] = class_exists($class);
+            class_exists( ucfirst($name).'Extension' ); // <- pings Loco_hooks_AdminHooks::autoload_compat
+            $cache[$name] = false;
         }
     }
     return $cache[$name];
@@ -147,7 +147,6 @@ function loco_check_extension( $name ) {
 /**
  * Class autoloader for Loco classes under src directory.
  * e.g. class "Loco_foo_Bar" will be found in "src/foo/Bar.php"
- * Also does autoload for polyfills under "src/compat" if $name < 20 chars
  * 
  * @internal 
  * @param $name string
@@ -156,12 +155,6 @@ function loco_check_extension( $name ) {
 function loco_autoload( $name ){
     if( 'Loco_' === substr($name,0,5) ){
         loco_include( 'src/'.strtr( substr($name,5), '_', '/' ).'.php' );
-    }
-    else if( strlen($name) < 20 ){
-        $path = loco_plugin_root().'/src/compat/'.$name.'.php';
-        if( file_exists($path) ){
-            require $path;
-        }
     }
 }
 
