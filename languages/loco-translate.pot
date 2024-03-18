@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.7-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-03-13 18:52+0000\n"
+"POT-Creation-Date: 2024-03-18 10:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -276,7 +276,7 @@ msgid "Additional files found"
 msgstr ""
 
 #. %s will be replaced with a URL which may change without affecting the translation.
-#: src/hooks/AdminHooks.php:67
+#: src/hooks/AdminHooks.php:92
 #, php-format
 msgid ""
 "Administrators and auditors may wish to review Loco's <a href=\"%s\">plugin "
@@ -544,7 +544,7 @@ msgstr ""
 msgid "Debug"
 msgstr ""
 
-#: src/admin/file/BaseController.php:123 tpl/admin/file/diff.php:32
+#: src/admin/file/BaseController.php:122 tpl/admin/file/diff.php:32
 #: tpl/admin/bundle/inc-po-table.php:66 tpl/admin/bundle/locale.php:75
 msgid "Delete"
 msgstr ""
@@ -631,7 +631,7 @@ msgstr ""
 msgid "Editing of POT (template) files"
 msgstr ""
 
-#: src/admin/file/BaseController.php:118
+#: src/admin/file/BaseController.php:117
 msgid "Editor"
 msgstr ""
 
@@ -879,7 +879,7 @@ msgstr ""
 msgid "File doesn't exist"
 msgstr ""
 
-#: src/admin/file/BaseController.php:120 tpl/admin/bundle/inc-po-table.php:25
+#: src/admin/file/BaseController.php:119 tpl/admin/bundle/inc-po-table.php:25
 #: tpl/admin/bundle/locale.php:43
 msgid "File info"
 msgstr ""
@@ -1190,7 +1190,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:63
+#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:88
 msgid "Loco Translate"
 msgstr ""
 
@@ -1303,7 +1303,7 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:113
-#: src/admin/file/BaseController.php:142 src/admin/bundle/ViewController.php:98
+#: src/admin/file/BaseController.php:141 src/admin/bundle/ViewController.php:98
 msgid "New language"
 msgstr ""
 
@@ -1583,7 +1583,7 @@ msgstr ""
 msgid "Relative path to template file"
 msgstr ""
 
-#: src/admin/file/BaseController.php:122
+#: src/admin/file/BaseController.php:121
 msgid "Relocate"
 msgstr ""
 
@@ -1591,7 +1591,7 @@ msgstr ""
 msgid "Reset config"
 msgstr ""
 
-#: src/admin/file/BaseController.php:121 tpl/admin/file/diff.php:31
+#: src/admin/file/BaseController.php:120 tpl/admin/file/diff.php:31
 msgid "Restore"
 msgstr ""
 
@@ -1726,7 +1726,7 @@ msgstr ""
 msgid "Skip template"
 msgstr ""
 
-#: src/admin/file/BaseController.php:119
+#: src/admin/file/BaseController.php:118
 msgid "Source"
 msgstr ""
 
@@ -1860,7 +1860,7 @@ msgstr ""
 msgid "The namespace into which WordPress will load translated strings"
 msgstr ""
 
-#. used when user name of web server process is unknown
+#. used when username of web server process is unknown
 #: src/compat/PosixExtension.php:115
 msgid "the web server"
 msgstr ""
@@ -1995,7 +1995,7 @@ msgstr ""
 msgid "This page was expecting a file, but the path is actually a directory"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:64
+#: src/hooks/AdminHooks.php:89
 msgid "This plugin doesn't collect any data from public website visitors."
 msgstr ""
 
@@ -2042,7 +2042,7 @@ msgstr ""
 msgid "Too many placeholders; source text formatting suggests a maximum of %s"
 msgstr ""
 
-#: src/hooks/AdminHooks.php:104 tpl/ajax/modal-apis-batch.php:37
+#: src/hooks/AdminHooks.php:129 tpl/ajax/modal-apis-batch.php:37
 msgid "Translate"
 msgstr ""
 
