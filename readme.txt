@@ -1,10 +1,10 @@
 === Loco Translate ===
 Contributors: timwhitlock
-Tags: translation, l10n, i18n, Gettext, multi-language
+Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
 Requires PHP: 5.6.20
 Tested up to: 6.5.0
-Stable tag: 2.6.6
+Stable tag: 2.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,15 +101,15 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.7 =
+* WordPress 6.5.0 compatible
 * Support for performant translation files in PHP format
 * Added block.json and theme.json extraction
-* Added theme pattern files to string extraction
+* Added theme pattern files to php string extractor
 * Fixed a bug where unused plural forms were counted as untranslated
 * Replaced CSS .notice with .panel to mitigate nag-blocker problems
 * Removed bundle debug screen (deprecated since 2.6.5)
 * Workaround for absent "source" references in JED files
 * Extension polyfills now restricted to Loco admin screens.
-* Bumped WordPress compatibility to 6.5.0
 
 = 2.6.6 =
 * Replaced open_basedir check with error capturing
