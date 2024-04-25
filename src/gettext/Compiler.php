@@ -128,10 +128,13 @@ class Loco_gettext_Compiler {
         if( is_string($path) && '' !== $path ){
             $refs = $po->splitRefs( $this->getJsExtMap() );
             if( array_key_exists('js',$refs) && $refs['js'] instanceof Loco_gettext_Data ){
-                $jsonfile = new Loco_fs_File($path);
+                $json = $refs['js']->msgjed($domain,'*.js');
                 try {
-                    $this->writeFile( $jsonfile, $refs['js']->msgjed($domain,'*.js') );
-                    $jsons->add($jsonfile);
+                    if( '' !== $json ){
+                        $jsonfile = new Loco_fs_File($path);
+                        $this->writeFile($jsonfile,$json);
+                        $jsons->add($jsonfile);
+                    }
                 }
                 catch( Loco_error_WriteException $e ){
                     Loco_error_AdminNotices::debug( $e->getMessage() );
@@ -186,9 +189,14 @@ class Loco_gettext_Compiler {
             if( $buffer ){
                 // write all buffered fragments to their computed JSON paths
                 foreach( $buffer as $ref => $fragment ) {
-                    $jsonfile = self::cloneJson($pofile,$ref,$domain);
+                    $json = $fragment->msgjed($domain,$ref);
+                    if( '' === $json ){
+                        Loco_error_AdminNotices::debug( sprintf('Skipping JSON for %s; no translations',$ref) );
+                        continue;
+                    }
                     try {
-                        $this->writeFile( $jsonfile, $fragment->msgjed($domain,$ref) );
+                        $jsonfile = self::cloneJson($pofile,$ref,$domain);
+                        $this->writeFile( $jsonfile, $json );
                         $jsons->add($jsonfile);
                     }
                     catch( Loco_error_WriteException $e ){

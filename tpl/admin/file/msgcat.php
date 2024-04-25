@@ -1,5 +1,8 @@
 <?php
-    
+
+    /* @var Loco_mvc_ViewParams $params */
+    /* @var string[] $lines */
+
     echo $this->render('../common/inc-table-filter');?> 
     
     <div class="panel loco-loading" id="loco-po">

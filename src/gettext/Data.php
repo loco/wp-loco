@@ -8,13 +8,13 @@ loco_require_lib('compiled/gettext.php');
 class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
-     * Normalize file extension to internal type
-     * @return string Normalized file extension "po", "pot" or "mo"
+     * Normalize file extension to internal type.
+     * @return string Normalized file extension "po", "pot", "mo" or "json"
      * @throws Loco_error_Exception
      */
     public static function ext( Loco_fs_File $file ){
         $ext = rtrim( strtolower( $file->extension() ), '~' );
-        if( 'po' === $ext || 'pot' === $ext || 'mo' === $ext ){
+        if( 'po' === $ext || 'pot' === $ext || 'mo' === $ext || 'json' === $ext ){
             // We could validate file location here, but file type restriction should be sufficient
             return $ext;
         }
@@ -30,14 +30,19 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
         if( is_null($type) ) {
             $type = self::ext($file);
         }
+        $type = strtolower($type);
         // catch parse errors, so we can inform user of which file is bad
         try {
-            if( 'mo' === $type || 'MO' === $type ){
-                return self::fromBinary( $file->getContents() );
-            }
-            else {
+            if( 'po' === $type || 'pot' === $type ){
                 return self::fromSource( $file->getContents() );
             }
+            if( 'mo' === $type ){
+                return self::fromBinary( $file->getContents() );
+            }
+            if( 'json' === $type ){
+                return self::fromJson( $file->getContents() );
+            }
+            throw new InvalidArgumentException('No parser for '.$type.' files');
         }
         catch( Loco_error_ParseException $e ){
             $path = $file->getRelativePath( loco_constant('WP_CONTENT_DIR') );
@@ -48,14 +53,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
 
     /**
-     * Like load but just pulls header, saving a full parse. PO only
+     * Like load but just pulls header, saving a full parse
      * @return LocoPoHeaders
      * @throws InvalidArgumentException
      */
     public static function head( Loco_fs_File $file ){
-        if( 'mo' === self::ext($file) ){
-            throw new InvalidArgumentException('PO only');
-        }
         $p = new LocoPoParser( $file->getContents() );
         $p->parse(0);
         return $p->getHeader();
@@ -78,6 +80,17 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      */
     public static function fromBinary( $bin ){
         $p = new LocoMoParser($bin);
+        return new Loco_gettext_Data( $p->parse() );
+    }
+
+
+    /**
+     * @param string $json Jed source
+     * @return Loco_gettext_Data
+     */
+    public static function fromJson( $json ){
+        $blob = json_decode( $json, true );
+        $p = new LocoJedParser( $blob['locale_data'] );
         return new Loco_gettext_Data( $p->parse() );
     }
 
@@ -159,12 +172,16 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      * Compile JED flavour JSON
      * @param string $domain text domain for JED metadata
      * @param string $source reference to file that uses included strings
-     * @return string
+     * @return string JSON source, or empty if JED file has no entries
      */
     public function msgjed( $domain = 'messages', $source = '' ){
+        // note that JED is sparse, like MO. We won't write empty files.
+        $data = $this->exportJed();
+        if( 1 >= count($data) ){
+            return '';
+        }
         $head = $this->getHeaders();
         $head['domain'] = $domain;
-        $data = $this->exportJed();
         // Pretty formatting for debugging. Doing as per WordPress and always escaping Unicode.
         $json_options = 0;
         if( Loco_data_Settings::get()->jed_pretty ){
@@ -261,7 +278,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             if( '' === $credit ){
                 $credit = $prefs->default_credit();
             }
-            // filter credit with current user name and email
+            // filter credit with current username and email
             $user = wp_get_current_user();
             $credit = apply_filters( 'loco_current_translator', $credit, $user->get('display_name'), $user->get('email') );
             if( '' !== $credit ){

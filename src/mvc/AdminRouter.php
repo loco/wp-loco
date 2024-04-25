@@ -71,13 +71,15 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
                 $title = __('User options','loco-translate');
                 add_submenu_page( 'loco', $title, __('Settings','loco-translate'), $cap, 'loco-config-user', $render );
             }
+            
+            // string translation simulator, currently in development
+            add_submenu_page( 'loco', 'Debugger', 'Debugger', $cap, 'loco-debug', $render );
         }
     }
 
 
     /**
      * Early hook as soon as we know what screen will be rendered
-     * @param WP_Screen
      * @return void
      */
     public function on_current_screen( WP_Screen $screen ){
@@ -90,8 +92,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
      * Instantiate admin page controller from current screen.
      * This is called early (before renderPage) so controller can listen on other hooks.
      * 
-     * @param WP_Screen
-     * @param string 
+     * @param string $action
      * @return Loco_mvc_AdminController|null
      */
     public function initPage( WP_Screen $screen, $action = '' ){
@@ -146,7 +147,6 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
     /**
      * Convert WordPress internal WPScreen $id into route prefix for an admin page controller
-     * @param WP_Screen
      * @return string|null
      */
     private static function screenToPage( WP_Screen $screen ){

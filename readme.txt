@@ -101,6 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.8 =
+* Compiler avoids writing empty JSON translation files
+* Added experimental string debugger
 * Bumped WordPress compatibility to 6.5.2
 
 = 2.6.7 =

@@ -548,7 +548,7 @@ class Loco_package_Project {
 
 
     /**
-     * Get full path to template POT (file)
+     * Get full path to template POT (file) whether it exists or nor
      * @return Loco_fs_File
      */
     public function getPot(){
@@ -594,7 +594,7 @@ class Loco_package_Project {
 
     /**
      * Force the use of a known POT file. This could be a PO file if necessary
-     * @param Loco_fs_File template POT file
+     * @param Loco_fs_File $pot template POT file
      * @return Loco_package_Project
      */
     public function setPot( Loco_fs_File $pot ){
@@ -605,7 +605,7 @@ class Loco_package_Project {
 
     /**
      * Take a guess at most likely POT file under target locations
-     * @return Loco_fs_File|null
+     * @return Loco_fs_File|null Existent file, or null 
      */
     public function guessPot(){
         $slug = $this->getSlug();

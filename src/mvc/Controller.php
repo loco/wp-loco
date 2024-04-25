@@ -12,15 +12,15 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
 
     /**
      * Get view parameter
-     * @param string
+     * @param string $prop
      * @return mixed
      */
     abstract public function get( $prop );
 
     /**
      * Set view parameter
-     * @param string
-     * @param mixed
+     * @param string $prop
+     * @param mixed $value
      * @return Loco_mvc_Controller
      */
     abstract public function set( $prop, $value );

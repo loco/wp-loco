@@ -128,7 +128,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     /**
      * Print property with passed formatting string
      * e.g. $params->f('name', 'My name is %s' );
-     * @param string $p roperty name
+     * @param string $p property name
      * @param string $f formatting string
      * @return string empty string
      */

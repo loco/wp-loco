@@ -149,7 +149,7 @@ function loco_check_extension( $name ) {
  * e.g. class "Loco_foo_Bar" will be found in "src/foo/Bar.php"
  * 
  * @internal 
- * @param $name string
+ * @param string $name
  * @return void
  */
 function loco_autoload( $name ){

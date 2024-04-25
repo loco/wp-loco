@@ -29,7 +29,6 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Pre-init call invoked by router
-     * @param array
      * @return static
      */    
     final public function _init( array $args ){
@@ -50,7 +49,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
                 $tabs = $this->getHelpTabs();
                 // always append common help tabs
                 $tabs[ __('Help & support','loco-translate') ] = $this->view->render('tab-support');
-                // set all tabs and common side bar
+                // set all tabs and common sidebar
                 $i = 0;
                 foreach( $tabs as $title => $content ){
                     $id = sprintf('loco-help-%u', $i++ );
@@ -179,8 +178,8 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Render template for echoing into admin screen
-     * @param string template name
-     * @param array template arguments
+     * @param string $tpl template name
+     * @param array $args template arguments
      * @return string
      */
     public function view( $tpl, array $args = [] ){

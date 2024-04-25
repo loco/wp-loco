@@ -18,8 +18,8 @@ abstract class Loco_hooks_Hookable {
      */
     public function __construct(){
 
-        $ref = new ReflectionClass( $this ); 
-        $reg = [];
+        $ref = new ReflectionClass( $this );
+        $this->hooks = [];
         foreach( $ref->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ){
             $func = $method->name;
             // support filter_{filter_hook} methods
@@ -40,15 +40,35 @@ abstract class Loco_hooks_Hookable {
                 preg_match( '/^\d+/', substr($docblock,$offset+10), $r ) and
                 $priority = (int) $r[0];
             }*/
-            // call add_action or add_filter with required arguments and hook is registered
-            // add_action actually calls add_filter, although unsure how long that's been the case.
             $num_args = $method->getNumberOfParameters();
-            add_filter( $hook, [ $this, $func ], $priority, $num_args );
-            // register hook for destruction so object can be removed from memory
-            $reg[] = [ $hook, $func, $priority ];
+            $this->addHook( $hook, $func, $num_args, $priority );
         }
+    }
 
-        $this->hooks = $reg;
+
+
+    /**
+     * Manually append a hook, regardless of whether it's added already
+     */
+    protected function addHook( $hook, $func, $num_args = 0, $priority = 11  ){
+        // call add_action or add_filter with required arguments and hook is registered
+        add_filter( $hook, [ $this, $func ], $priority, $num_args );
+        $this->hooks[] = [ $hook, $func, $priority, $num_args ];
+    }
+
+
+    /**
+     * Ensure all hooks in memory are re-attached if they've been removed
+     */
+    protected function reHook(){
+        if( is_array($this->hooks) ){
+            foreach( $this->hooks as $r ){
+                list( $hook, $func, $priority, $num_args ) = $r;
+                if( ! has_filter($hook,[$this,$func]) ){
+                    add_filter( $hook, [$this,$func], $priority, $num_args );
+                }
+            }
+        }
     }
 
 
