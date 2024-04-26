@@ -25,13 +25,13 @@ if( $params->has('header') ) {
 if( $params->has('log') ):?> 
     <div class="panel" id="loco-log">
         <h3>
-            Trace:
+            Trace log:
         </h3>
         <p>
             If you're asking for help on the WordPress forum, please post the full text below.
         </p>
         <form action="#">
-            <textarea class="code" name="l" rows="8 "><?php echo $params->escape( implode("\n",iterator_to_array($log) ) );?></textarea>
+            <textarea spellcheck="false" class="code" name="l" rows="<?=$log->count()?>"><?php echo $params->escape( implode("\n",iterator_to_array($log) ) );?></textarea>
         </form>
     </div><?php
 endif;

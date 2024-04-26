@@ -14,27 +14,36 @@ $this->start('form');
             <tbody>
                 <tr>
                     <th scope="row">
-                        <label for="debug-msgid">Source string *</label><br />
+                        <label for="debug-msgid">Source string</label><br />
                     </th>
                     <td>
-                        <textarea class="regular-text" name="msgid" rows="4" id="debug-msgid" placeholder="msgid"><?php $form->e('msgid')?></textarea>
-                        <br />
-                        <input type="text" class="regular-text" name="msgctxt" id="debug-msgctxt" value="<?php $form->e('msgctxt')?>" placeholder="msgctxt" />
+                        <textarea required class="regular-text" name="msgid" rows="4" id="debug-msgid" placeholder="e.g. %s comment"><?php $form->e('msgid')?></textarea>
                         <p class="description">
-                            Enter the original (source) string <em>exactly</em> and unescaped. Context is optional.
+                            Enter the original string <strong>exactly</strong>. This field is mandatory.
                         </p>
                     </td>
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label for="debug-plural">Plural</label>
+                        <label for="debug-msgctxt">Context</label>
                     </th>
                     <td>
-                        <input type="text" class="regular-text" name="msgid_plural" id="debug-plural" value="<?php $form->e('msgid_plural')?>" placeholder="msgid_plural" />
+                        <input type="text" class="regular-text" name="msgctxt" id="debug-msgctxt" value="<?php $form->e('msgctxt')?>" placeholder="e.g. Comments title" />
+                        <p class="description">
+                            Context is optional. It's used to disambiguate duplicate strings. If in doubt, leave blank.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
+                        <label for="debug-plural">Plural form</label>
+                    </th>
+                    <td>
+                        <input type="text" class="regular-text" name="msgid_plural" id="debug-plural" value="<?php $form->e('msgid_plural')?>" placeholder="e.g. %s comments" />
                         <label for="debug-n">n=</label>
                         <input type="number" min="0" name="n" id="debug-n" value="<?php $form->e('n')?>" placeholder="<?php $default->e('n')?>" />
                         <p class="description">
-                            Plural source is optional. Enter only if code uses <code>_n</code> or <code>_nx</code> etc..
+                            Plural form is optional, and will only work if the string has been pluralized.
                         </p>
                     </td>
                 </tr>
@@ -44,7 +53,7 @@ $this->start('form');
                     </th>
                     <td>
                         <input type="text" class="regular-text" name="domain" id="debug-domain" value="<?php $form->e('domain')?>" placeholder="<?php $default->e('domain')?>"/>
-                        <p class="description">Leaving empty will use WordPress core "default" text domain.</p>
+                        <p class="description">Leaving empty will use the WordPress core (default) text domain.</p>
                     </td>
                 </tr>
                 <tr>
@@ -53,7 +62,7 @@ $this->start('form');
                     </th>
                     <td>
                         <input type="text" class="regular-text" name="locale" id="debug-locale" value="<?php $form->e('locale')?>" placeholder="<?php $default->e('locale')?>" />
-                        <p class="description">TODO this needs to unhook all existsing locale filters</p>
+                        <p class="description">Enter a valid locale code. Your translation files must be suffixed exactly with this value.</p>
                     </td>
                 </tr>
                 <tr>
@@ -81,7 +90,11 @@ $this->start('form');
                         <label for="debug-loadpath">path: </label>
                         <input type="text" class="regular-text code" name="loadpath" id="debug-loadpath" value="<?php $form->e('loadpath')?>" placeholder="" />
                         <p class="description">
-                            See the WordPress documentation for the expected format of the path argument.
+                            The path argument is required by 
+                            <a href="https://developer.wordpress.org/reference/functions/load_textdomain/" tabindex="-1">load_textdomain</a>, and optional for 
+                            <a href="https://developer.wordpress.org/reference/functions/load_plugin_textdomain/" tabindex="-1">load_plugin_textdomain</a> and 
+                            <a href="https://developer.wordpress.org/reference/functions/load_theme_textdomain/" tabindex="-1">load_theme_textdomain</a>.<br />
+                            See the WordPress documentation for correct usage.
                         </p>
                     </td>
                 </tr>
@@ -92,7 +105,7 @@ $this->start('form');
                     <td>
                         <label>
                             <input type="checkbox" name="unhook" value="1"<?php $form->unhook and print(' checked')?> />
-                            Unhook all l10n filters before test
+                            Unhook filters before test. This may help isolate translation from other plugins.
                         </label>
                     </td>
                 </tr>
@@ -100,7 +113,7 @@ $this->start('form');
         </table>
         <p class="submit">
             <input type="submit" class="button-primary" value="Submit" />
-            <!--a class="button button-link" href="?page=loco-debug&surprise=me">Randomize</a-->
+            <a class="button button-link" href="?page=loco-debug&surprise=me">Lucky dip</a>
         </p>
     </form>
 

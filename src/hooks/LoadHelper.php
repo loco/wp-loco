@@ -35,6 +35,11 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @var string[]
      */
     private $json;
+
+    /**
+     * Registry of text domains we've seen, whether loaded or not. This will catch early JIT problem.
+     */
+    private $seen = [];
     
 
     /**
@@ -49,7 +54,21 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // not adding theme paths because as long as load_theme_textdomain is used they will be mapped by context.
         $this->add('', loco_constant('WP_LANG_DIR') )
              ->add('plugins/', loco_constant('WP_PLUGIN_DIR') )
-             ->add('plugins/', loco_constant('WPMU_PLUGIN_DIR') );
+             ->add('plugins/', loco_constant('WPMU_PLUGIN_DIR') )
+        ;
+        // Any text domains loaded prematurely won't be customizable, but we could force them to reload.
+        global $l10n;
+        if( $l10n && is_array($l10n) ){
+            foreach( $l10n as $domain => $value ){
+                if( ! $value instanceof NOOP_Translations && apply_filters('loco_unload_premature_domain',true,$domain) ){
+                    unload_textdomain($domain);
+                    unset($GLOBALS['l10n_unloaded'][$domain]);
+                    if( WP_DEBUG ){
+                        Loco_error_Debug::trace('Text domain loaded prematurely, unloaded "%s"',$domain);
+                    }
+                }
+            }
+        }
     }
 
 
@@ -138,6 +157,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */
     public function on_load_textdomain( $domain, $mopath ){
         $key = '';
+        $this->seen[$domain] = true;
         // domains may be split into multiple files
         $name = pathinfo( $mopath, PATHINFO_FILENAME );
         if( $lpos = strrpos( $name, '-') ){
@@ -169,6 +189,50 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // Load our custom translations avoiding recursion back into this hook
         $this->lock[$domain][$key] = true;
         load_textdomain( $domain, $mopath );
+    }
+
+
+    /**
+     * Handle the early JIT loading issue.
+     */
+    private function handle_unloaded_domain( $domain ){
+        if( ! array_key_exists($domain,$this->seen) ){
+            $this->seen[$domain] = true;
+            $locale = determine_locale();
+            if( 'en_US' !== $locale ){
+                if( is_textdomain_loaded($domain) ){
+                    $message = sprintf('The "%s" text domain was loaded before Loco Translate could start',$domain);
+                }
+                else {
+                    $message = sprintf('The "%s" text domain isn\'t loaded. "%s" translations may fail',$domain,$locale);
+                }
+                // visible notice on our admin screens only, else just log.
+                $screen = get_current_screen();
+                if( $screen && 'loco-translate' === substr($screen->id,0,14) ){
+                    Loco_error_AdminNotices::debug($message);
+                }
+                else {
+                    Loco_error_Debug::trace($message);
+                }
+            }
+        }
+    }
+
+
+    /**
+     * `gettext` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_gettext( $translation, $text, $domain = 'default' ){
+        $this->handle_unloaded_domain($domain);
+        return $translation;
+    }
+
+
+    /**
+     * `gettext_with_context` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_gettext_with_context( $translation, $text, $context, $domain = 'default' ){
+        return $translation;
     }
 
 

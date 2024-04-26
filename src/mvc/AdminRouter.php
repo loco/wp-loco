@@ -152,7 +152,6 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
     private static function screenToPage( WP_Screen $screen ){
         // Hooked menu slug is either "toplevel_page_loco" or "{title}_page_loco-{page}"
         // Sanitized {title} prefix is not reliable as it may be localized. instead just checking for "_page_loco"
-        // TODO is there a safer WordPress way to resolve this? 
         $id = $screen->id;
         $start = strpos($id,'_page_loco');
         // not one of our pages if token not found

@@ -23,12 +23,16 @@ abstract class Loco_hooks_Hookable {
         foreach( $ref->getMethods( ReflectionMethod::IS_PUBLIC ) as $method ){
             $func = $method->name;
             // support filter_{filter_hook} methods
-            if( 0 === strpos($func,'filter_' ) ) {
+            if( 'filter_' === substr($func,0,7) ) {
                 $hook = substr( $func, 7 );
             }
             // support on_{action_hook} methods
-            else if( 0 === strpos($func,'on_' ) ){
+            else if( 'on_' === substr($func,0,3) ) {
                 $hook = substr( $func, 3 );
+            }
+            // support debug_{filter|action_hook} methods only in debug mode
+            else if( WP_DEBUG && 'debug_' === substr($func,0,6) ) {
+                $hook = substr( $func, 6 );
             }
             else {
                 continue;

@@ -5,19 +5,26 @@ $this->extend('debug-form');
 $this->start('header');
 
 /* @var Loco_mvc_ViewParams $result */
-
-// Translation may be equal to source, even if source string is found in PO
-if( $result->msgstr === $result->msgid ):?> 
-    <div class="panel panel-warning">
-        <h3 class="has-icon">String found, but not translated</h3>
-        <p>See below for source string matches.</p>
+if( $result->translated ):?> 
+    <div class="panel panel-success">
+        <h3 class="has-icon">Translation result:</h3>
+        <p><code class="po"><?php $result->e('msgstr')?></code></p>
+        <p>
+            This is the translation value obtained from the 
+            <a href="<?php $result->e('calleeDoc')?>"><code><?php $result->e('callee')?></code></a> function.
+        </p>
     </div><?php
 
-// This is the result of the runtime translation request
 else:?> 
-    <div class="panel panel-success">
-        <h3>Translation result:</h3>
-        <p><code class="po"><?php $result->e('msgstr')?></code></p>
+    <div class="panel panel-warning">
+        <h3 class="has-icon">String found, but no translation returned</h3>
+        <p>
+            The <a href="<?php $result->e('calleeDoc')?>"><code><?php $result->e('callee')?></code></a> function
+            returned the same value as the source string. Either the string isn't translated, or the required translation file wasn't loaded. 
+        </p>
+        <p>
+            See below for the exact string matches we found in your translation files.
+        </p>
     </div><?php
 endif;
 
@@ -35,6 +42,12 @@ foreach( $result->matches as $g => $matched ):
             <span class="icon icon-file"> </span>
             <code class="path"><?php $file->e('relpath') ?></code> &rarr; <code class="po"><?php $file->e('msgstr');?></code>
         </p><?php
-        endforeach?> 
+        endforeach;
+        if( $group->has('href') ):?> 
+        <p>
+            <span class="icon icon-pencil"> </span>
+            <a href="<?php $group->e('href')?>">Edit PO</a>
+        </p><?php
+        endif;?> 
     </div><?php
 endforeach;
