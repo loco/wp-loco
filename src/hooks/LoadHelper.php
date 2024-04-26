@@ -206,9 +206,9 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
                 else {
                     $message = sprintf('The "%s" text domain isn\'t loaded. "%s" translations may fail',$domain,$locale);
                 }
-                // visible notice on our admin screens only, else just log.
-                $screen = get_current_screen();
-                if( $screen && 'loco-translate' === substr($screen->id,0,14) ){
+                // visible notice on our admin screens only, else just log to file.
+                $screen = function_exists('get_current_screen') ? get_current_screen() : null;
+                if( $screen instanceof WP_Screen && 'loco-translate' === substr($screen->id,0,14) ){
                     Loco_error_AdminNotices::debug($message);
                 }
                 else {
