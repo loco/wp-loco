@@ -9,16 +9,19 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
 
     /**
      * Normalize file extension to internal type.
-     * @return string Normalized file extension "po", "pot", "mo" or "json"
+     * @return string Normalized file extension "po", "pot", "mo", "json" or "php"
      * @throws Loco_error_Exception
      */
     public static function ext( Loco_fs_File $file ){
         $ext = rtrim( strtolower( $file->extension() ), '~' );
         if( 'po' === $ext || 'pot' === $ext || 'mo' === $ext || 'json' === $ext ){
-            // We could validate file location here, but file type restriction should be sufficient
             return $ext;
         }
-        // translators: Error thrown when attempting to parse a file that is not PO, POT or MO
+        // only observing the full `.l10n.php` extension as a translation format.
+        if( 'php' === $ext && '.l10n.php' === substr($file->getPath(),-9) ){
+            return 'php';
+        }
+        // translators: Error thrown when attempting to parse a file that is not a supported translation file format
         throw new Loco_error_Exception( sprintf( __('%s is not a Gettext file','loco-translate'), $file->basename() ) );
     }
 
@@ -41,6 +44,9 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
             }
             if( 'json' === $type ){
                 return self::fromJson( $file->getContents() );
+            }
+            if( 'php' === $type ){
+                return self::fromPhp( $file->getPath() );
             }
             throw new InvalidArgumentException('No parser for '.$type.' files');
         }
@@ -91,6 +97,22 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     public static function fromJson( $json ){
         $blob = json_decode( $json, true );
         $p = new LocoJedParser( $blob['locale_data'] );
+        // note that headers outside of locale_data are won't be parsed out. we don't currently need them.
+        return new Loco_gettext_Data( $p->parse() );
+    }
+
+
+    /**
+     * @param string $path PHP file path
+     * @return Loco_gettext_Data
+     */
+    public static function fromPhp( $path ){
+        $blob = include $path;
+        if( ! is_array($blob) || ! array_key_exists('messages',$blob) ){
+            throw new Loco_error_ParseException('Invalid PHP translation file');
+        }
+        // refactor PHP structure into JED format
+        $p = new LocoMoPhpParser($blob);
         return new Loco_gettext_Data( $p->parse() );
     }
 

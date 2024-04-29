@@ -353,12 +353,16 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         // Establish retrospectively if a non-zero plural index was used.
         $pluralIndex = 0;
         if( '' !== $msgid_plural ){
-            $this->log('TODO: access select_plural_form without knowing what file was obtained?');
             $tmp = get_translations_for_domain($domain);
-            /*$pluralIndex = get_translations_for_domain($domain)->select_plural_form($quantity);
-            if( 0 !== $pluralIndex ){
-                $this->log('Plural form [%d] was queried', $pluralIndex );
-            }*/
+            if( $tmp && method_exists($tmp,'select_plural_form') ){
+                $pluralIndex = $tmp->select_plural_form($quantity);
+                if( 0 !== $pluralIndex ){
+                    $this->log('Plural form [%d] was queried', $pluralIndex );
+                }
+            }
+            else {
+                $this->log('FIXME: can\'t select_plural_form from %s', is_object($tmp)?get_class($tmp):var_export($tmp,true));
+            }
         }
         // Establish translation success, assuming that source bring returned is equivalent to an absent translation
         $translated = '' !== $msgstr && $msgstr !== ($pluralIndex?$msgid_plural:$msgid);
@@ -415,8 +419,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $siblings->setDomain($domain);
             foreach( $siblings->expand() as $file ){
                 try {
-                    // TODO also parse .l10n.php translation files
-                    if( ! preg_match('!^(?:pot?|mo|json)$!', $file->fullExtension() ) || ! $file->exists() ){
+                    if( ! preg_match('!^(?:pot?|mo|json|l10n\\.php)$!', $file->fullExtension() ) || ! $file->exists() ){
                         continue;
                     }
                     $searched++;

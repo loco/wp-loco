@@ -1,10 +1,9 @@
 <?php
 /**
  * This saves the overhead of parsing a MO file when we already have it in memory,
- * but lets us use WordPress's compact var_export utility so its files are identical.
+ * but lets us use WordPress's compact var_export utility so its files are identical to ours.
  */
 class Loco_gettext_PhpCache extends WP_Translation_File_PHP {
-
 
     /**
      * @return string
