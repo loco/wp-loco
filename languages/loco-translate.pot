@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.8-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-04-19 15:01+0000\n"
+"POT-Creation-Date: 2024-04-29 08:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -119,7 +119,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Success notice where %s is a file extension, e.g. "PO"
-#: src/gettext/Compiler.php:274 src/admin/file/HeadController.php:81
+#: src/gettext/Compiler.php:282 src/admin/file/HeadController.php:81
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -538,8 +538,7 @@ msgstr ""
 msgid "Custom language"
 msgstr ""
 
-#: src/error/Debug.php:19 src/admin/config/BaseController.php:22
-#: src/admin/config/DebugController.php:12
+#: src/error/Debug.php:19 src/admin/config/DebugController.php:12
 #: src/admin/bundle/BaseController.php:128
 msgid "Debug"
 msgstr ""
@@ -1021,7 +1020,7 @@ msgstr ""
 msgid "Help"
 msgstr ""
 
-#: src/mvc/AdminController.php:52
+#: src/mvc/AdminController.php:51
 msgid "Help & support"
 msgstr ""
 
@@ -1105,7 +1104,7 @@ msgid "It needs configuring before you can do any translations"
 msgstr ""
 
 #. %s refers to a JSON file which could not be compiled due to an error
-#: src/gettext/Compiler.php:139 src/gettext/Compiler.php:197
+#: src/gettext/Compiler.php:142 src/gettext/Compiler.php:205
 #, php-format
 msgid "JSON compilation failed for %s"
 msgstr ""
@@ -1200,7 +1199,7 @@ msgstr ""
 msgid "Loco Translate %s"
 msgstr ""
 
-#: src/mvc/AdminController.php:115
+#: src/mvc/AdminController.php:114
 msgid "Loco Translate is powered by"
 msgstr ""
 
@@ -1413,7 +1412,7 @@ msgstr ""
 msgid "Overwrite existing translations"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:240
+#: src/mvc/AdminRouter.php:239
 msgid "Page not found"
 msgstr ""
 
@@ -1530,11 +1529,11 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:270
+#: src/gettext/Compiler.php:278
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:267
+#: src/gettext/Compiler.php:275
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
@@ -1784,6 +1783,10 @@ msgstr ""
 
 #: tpl/admin/config/settings.php:89 tpl/admin/config/settings.php:95
 msgid "Syncing PO files"
+msgstr ""
+
+#: src/admin/config/BaseController.php:22
+msgid "System"
 msgstr ""
 
 #: src/admin/config/DebugController.php:55

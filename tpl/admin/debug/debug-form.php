@@ -91,8 +91,8 @@ $this->start('form');
                         <input type="text" class="regular-text code" name="loadpath" id="debug-loadpath" value="<?php $form->e('loadpath')?>" placeholder="" />
                         <p class="description">
                             The path argument is required by 
-                            <a href="https://developer.wordpress.org/reference/functions/load_textdomain/" tabindex="-1">load_textdomain</a>, and optional for 
-                            <a href="https://developer.wordpress.org/reference/functions/load_plugin_textdomain/" tabindex="-1">load_plugin_textdomain</a> and 
+                            <a href="https://developer.wordpress.org/reference/functions/load_textdomain/" tabindex="-1">load_textdomain</a>, but optional for
+                            <a href="https://developer.wordpress.org/reference/functions/load_plugin_textdomain/" tabindex="-1">load_plugin_textdomain</a> and
                             <a href="https://developer.wordpress.org/reference/functions/load_theme_textdomain/" tabindex="-1">load_theme_textdomain</a>.<br />
                             See the WordPress documentation for correct usage.
                         </p>

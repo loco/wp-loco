@@ -89,8 +89,10 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
      * @param int $depth number of levels up from callee
      * @return Loco_error_Exception
      */
-    public function setCallee( $depth = 0 ){
-        $stack = debug_backtrace(0);
+    public function setCallee( $depth = 0, array $stack = null ){
+        if( is_null($stack) ) {
+            $stack = debug_backtrace(0);
+        }
         $callee = $stack[$depth];
         $this->_file = $callee['file'];
         $this->_line = $callee['line'];

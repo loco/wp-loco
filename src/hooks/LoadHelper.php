@@ -206,13 +206,25 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
                 else {
                     $message = sprintf('The "%s" text domain isn\'t loaded. "%s" translations may fail',$domain,$locale);
                 }
-                // visible notice on our admin screens only, else just log to file.
+                Loco_error_Debug::trace($message);
+                // establish who called the translation function
+                $stack = debug_backtrace(0);
+                $breakable = false;
+                foreach( $stack as $i => $callee ){
+                    if( '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
+                        $breakable = true;
+                    }
+                    else if( $breakable ){
+                        $args = trim( json_encode($callee['args'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES), '[]' );
+                        $debug = new Loco_error_Debug( sprintf('> %s(%s) called', $callee['function'], $args ) );
+                        $debug->setCallee($i, $stack )->log();
+                        break;
+                    }
+                }
+                // visible notice on our admin screens only
                 $screen = function_exists('get_current_screen') ? get_current_screen() : null;
                 if( $screen instanceof WP_Screen && 'loco-translate' === substr($screen->id,0,14) ){
-                    Loco_error_AdminNotices::debug($message);
-                }
-                else {
-                    Loco_error_Debug::trace($message);
+                    Loco_error_AdminNotices::debug($message.'. Check error log for [Loco.debug]');
                 }
             }
         }
@@ -229,9 +241,28 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
+     * `ngettext` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_ngettext( $translation, $single, $plural, $number, $domain = 'default' ){
+        $this->handle_unloaded_domain($domain);
+        return $translation;
+    }
+
+
+    /**
      * `gettext_with_context` filter callback. Enabled only in Debug mode.
      */
     public function debug_gettext_with_context( $translation, $text, $context, $domain = 'default' ){
+        $this->handle_unloaded_domain($domain);
+        return $translation;
+    }
+
+
+    /**
+     * `ngettext_with_context` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_ngettext_with_context( $translation, $single, $plural, $number, $context, $domain = 'default' ){
+        $this->handle_unloaded_domain($domain);
         return $translation;
     }
 
