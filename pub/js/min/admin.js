@@ -4669,7 +4669,7 @@ function b(h) {
 const n = h && h.code;
 if (n) {
 for (var q = n.length, u = A("<ol></ol>").attr("class", h.type), c = -1; ++c < q; ) A("<li></li>").html(n[c]).appendTo(u);
-u.find("li").eq(h.line - 1).attr("class", "highlighted");
+0 !== h.line && u.find("li").eq(h.line - 1).attr("class", "highlighted");
 t().dialog("close").html("").dialog("option", "title", h.path + ":" + h.line).append(u).dialog("open");
 }
 }

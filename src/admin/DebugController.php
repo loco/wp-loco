@@ -28,7 +28,6 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
      */
     public function init(){
         parent::init();
-        $this->set('title','String Debugger');
         // get a better default locale than en_US
         $locale = get_locale();
         if( 'en_US' === $locale ){
@@ -48,6 +47,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             'unhook' => '',
             'loader' => '',
             'loadpath' => '',
+            'jspath' => '',
         ];
         $defaults = [
             'n' => '1',
@@ -138,28 +138,81 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     }
 
 
-   /*public function filter_pre_get_language_files_from_path( $files, $path ){
-        Loco_error_AdminNotices::debug('EH? '.$path) ;
-        $this->log( '%s: %s', $path, json_encode($files) );
-        return $files;
-    }*/
+
+    /**
+     * `load_script_textdomain_relative_path` filter callback
+     */
+    public function filter_load_script_textdomain_relative_path( $relative/*, $src*/ ){
+        if( preg_match('!pub/js/(?:min|src)/dummy.js!', $relative )){
+            $form = $this->get('form');
+            $path = $form['jspath'];
+            error_log( json_encode(func_get_args(),JSON_UNESCAPED_SLASHES).' -> '.$path );
+            $this->log( '~ filter:load_script_textdomain_relative_path: %s => %s', $relative, $path );
+            return $path;
+        }
+        return $relative;
+    }
 
 
     /**
-     * `filter_gettext` filter callback
+     * `pre_load_script_translations` filter callback
      */
-    public function temp_filter_gettext( $translation, $text, $domain ){
-        if( $domain === $this->domain ){
-            $this->log('~ filter:gettext:%s =>%s', LocoPo::pair('',$text,0), LocoPo::pair('',$translation,0) );
+    public function filter_pre_load_script_translations( $translations, $file, $handle /*, $domain*/ ){
+        if( 'loco-translate-dummy' === $handle && ! is_null($translations) ){
+            $this->log('~ filter:pre_load_script_translations: Short-circuited with %s value', gettype($translations) );
+        }
+        return $translations;
+    }
+
+
+    /**
+     * `load_script_translation_file` filter callback.
+     */
+    public function filter_load_script_translation_file( $file, $handle/* ,$domain*/ ){
+        if( 'loco-translate-dummy' === $handle ){
+            error_log( json_encode(func_get_args(),JSON_UNESCAPED_SLASHES) );
+            // if file is not found, this will fire again with file=false
+            $this->log('~ filter:load_script_translation_file: %s', var_export($file,true) );
+        }
+        return $file;
+    }
+
+
+    /**
+     * `load_script_translations` filter callback
+     */
+    public function filter_load_script_translations( $translations, $file, $handle, $domain ){
+        if( 'loco-translate-dummy' === $handle ){
+            // just log it if the value isn't JSON.
+            if( ! is_string($translations) || '' === $translations || '{' !== $translations[0] ) {
+                $this->log( '~ filter:load_script_translations: %s', var_export($translations,true) );
+            }
+        }
+        return $translations;
+    }
+
+
+    /**
+     * `[n]gettext[_with_context]` filter callback
+     */
+    public function temp_filter_gettext(){
+        $i = func_num_args() - 1;
+        $args = func_get_args();
+        $translation = $args[0];
+        if( $args[$i] === $this->domain ){
+            $args = array_slice($args,1,--$i);
+            $opts = JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE;
+            $this->log('~ filter:gettext: %s =>%s', json_encode($args,$opts), json_encode($translation,$opts) );
         }
         return $translation;
     }
 
 
+
     /**
      * @return null|Loco_package_Bundle
      */
-    private static function getBundleByDomain( $domain, $type ){
+    private function getBundleByDomain( $domain, $type ){
         if( 'default' === $domain ){
             return Loco_package_Core::create();
         }
@@ -179,15 +232,19 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             /* @var Loco_package_Project $project */
             foreach( $bundle as $project ){
                 if( $project->getDomain()->getName() === $domain ){
+                    $this->log('Have %s bundle => %s', $bundle->getType(), $bundle->getName() );
                     return $bundle;
                 }
             }
         }
-        Loco_error_AdminNotices::warn('No '.$type.' known with text domain '.$domain );
+        $message = 'No '.$type.' known with text domain '.$domain;
+        Loco_error_AdminNotices::warn($message);
+        $this->log('! '.$message);
         return null;
     }
-
-
+    
+    
+    
 
     /**
      * @return string
@@ -220,13 +277,15 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 'theme_locale','plugin_locale','unload_textdomain','load_textdomain','load_script_translation_file','load_script_translations',
                 // these filters also affect text domain loading / file reading
                 'pre_load_textdomain','override_load_textdomain','load_textdomain_mofile','translation_file_format','load_translation_file', 'override_unload_textdomain',
-                // these filters affect translation fetching
-                'gettext',
+                // script translation hooks:
+                'load_script_textdomain_relative_path','pre_load_script_translations','load_script_translation_file','load_script_translations',
+                // these filters affect translation fetching:
+                'gettext','ngettext','gettext_with_context','ngettext_with_context'
             ] );
            new Loco_hooks_LoadHelper;
         }
         // Ensuring our forced locale requires no other filters allowed to run
-        // doing this whether "unhook" is set or not, otherwise determine_locale won't work.
+        // We're doing this whether "unhook" is set or not, otherwise determine_locale won't work.
         remove_all_filters('pre_determine_locale');
         $this->reHook();
         //
@@ -241,7 +300,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         // Perform preloading according to user choice, and optional path argument
         $type = $form['loader'];
         $path = $form['loadpath'];
-        $bundle = self::getBundleByDomain($domain,$type);
+        $bundle = $this->getBundleByDomain($domain,$type);
         // plugin and theme loaders allow missing path argument, custom loader does not
         if( '' === $path ){
             $file = null;
@@ -306,6 +365,59 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             }
             $this->log('> %s returned %s', $callee, var_export($returned,true) );
         }
+        
+        // Simulate JavaScript translation
+        $path = $form['jspath'];
+        if( '' !== $path ){
+            $this->log('Have script argument => %s', $path );
+            try {
+                if( preg_match('/^[0-9a-f]{32}$/',$path) ){
+                    throw new Loco_error_Exception('Enter the script path, not the hash');
+                }
+                // normalize file reference
+                $jsfile = new Loco_fs_File($path);
+                $basepath = $bundle->getDirectoryPath();
+                if( $jsfile->isAbsolute() ) {
+                    $path = $jsfile->getRelativePath($basepath);
+                }
+                else {
+                    $jsfile->normalize($basepath);
+                }
+                // simulator will allow non-existent js. We can still find translations even if it's absent.
+                if( ! $jsfile->exists() ){
+                    $this->log('! %s not under %s',$path,$basepath);
+                }
+                $form['jspath'] = $path;
+                // debug hashable path:
+                if( '.min.js' === substr($path,-7) ) {
+                    $path = substr($path,0,-7).'.js';
+                }
+                else if('.js' !== substr($path,-3) ){
+                    Loco_error_AdminNotices::debug("Script path didn't end with .js");
+                }
+                $hash = md5($path);
+                $this->log('> md5(%s) => %s', var_export($path,true), $hash );
+                // filters will point our debug script to the actual script we're simulating
+                $handle = $this->enqueueScript('dummy');
+                if( ! wp_set_script_translations($handle,$domain) ){
+                    throw new Loco_error_Exception('wp_set_script_translations returned false');
+                }
+                // load_script_textdomain won't fire until footer, so grab JSON directly
+                $json = load_script_textdomain($handle,$domain);
+                $this->dequeueScript('dummy');
+                if( is_string($json) && '' !== $json && '{' === $json[0] ){
+                    $this->log('> load_script_textdomain returned %u bytes of JSON', strlen($json) );
+                }
+                else {
+                    $this->log('! load_script_textdomain returned %s', var_export($json,true) );
+                    $json = null;
+                }
+            }
+            catch( Loco_error_Exception $e ){
+                Loco_error_AdminNotices::add($e);
+                $this->log('! %s', $e->getMessage() );
+            }
+        }
     
         // Create source message for string query
         $message = new LocoPoMessage(['source'=>$msgid,'context'=>$msgctxt,'target'=>'']);
@@ -314,31 +426,36 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $this->log('     | %s (n=%u)', LocoPo::pair('msgid_plural',$msgid_plural), $quantity );
             $message->offsetSet('plurals', [new LocoPoMessage(['source'=>$msgid_plural,'target'=>''])] );
         }
-        // temporary hooks during translation request only
-        $this->addHook('gettext', 'temp_filter_gettext', 3, 99 ); //gettext_with_context
+
         // Perform runtime translation request from MO file
+        // TODO look up in JSON instead, if load_script_textdomain is simulated
+        
         if( '' === $msgctxt ){
             if( '' === $msgid_plural ) {
                 $callee = '__';
                 $params = [ $msgid, $domain ];
+                $this->addHook('gettext', 'temp_filter_gettext', 3, 99 );
             }
             else {
                 $callee = '_n';
                 $params = [ $msgid, $msgid_plural, $quantity, $domain ];
+                $this->addHook('ngettext', 'temp_filter_gettext', 5, 99 );
             }
         }
         else {
-            $this->addHook('gettext_with_context', 'temp_filter_gettext', 3, 99 );
             $this->log('     | %s', LocoPo::pair('msgctxt',$msgctxt) );
             if( '' === $msgid_plural ){
                 $callee = '_x';
                 $params = [ $msgid, $msgctxt, $domain ];
+                $this->addHook('gettext_with_context', 'temp_filter_gettext', 4, 99 );
             }
             else {
                 $callee = '_nx';
                 $params = [ $msgid, $msgid_plural, $quantity, $msgctxt, $domain ];
+                $this->addHook('ngettext_with_context', 'temp_filter_gettext', 6, 99 );
             }
         }
+        //
         $this->log('Calling %s( %s )', $callee, trim( json_encode($params,JSON_UNESCAPED_SLASHES|JSON_UNESCAPED_UNICODE), '[]') );
         $msgstr = call_user_func_array($callee,$params);
         $this->log("====>| %s", LocoPo::pair('msgstr',$msgstr,0) );
@@ -368,7 +485,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $translated = '' !== $msgstr && $msgstr !== ($pluralIndex?$msgid_plural:$msgid);
         $this->log('Translated result state => %s', $translated?'true':'false');
 
-        // We're done with our temporary hooks now
+        // We're done with our temporary hooks now.
         $this->domain = null;
         $this->locale = null;
 

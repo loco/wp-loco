@@ -60,7 +60,12 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             // translators: Page title for installed languages page
             $title = __('Languages &lsaquo; Loco', 'loco-translate');
             add_submenu_page( 'loco', $title, $label, $cap, 'loco-lang', $render );
-            
+
+            // string translation simulator, currently in development
+            $label = __('Debugger', 'loco-translate');
+            $title = __('String debugger &lsaquo; Loco', 'loco-translate');
+            add_submenu_page( 'loco', $title, $label, $cap, 'loco-debug', $render );
+
             // settings page only for users with manage_options permission in addition to Loco access:
             if( $user->has_cap('manage_options') ){
                 $title = __('Plugin settings','loco-translate');
@@ -71,9 +76,6 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
                 $title = __('User options','loco-translate');
                 add_submenu_page( 'loco', $title, __('Settings','loco-translate'), $cap, 'loco-config-user', $render );
             }
-            
-            // string translation simulator, currently in development
-            add_submenu_page( 'loco', 'Debugger', 'Debugger', $cap, 'loco-debug', $render );
         }
     }
 

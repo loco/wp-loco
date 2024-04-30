@@ -90,7 +90,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             $refline = (int) $r[2];
         }
         else {
-            $refline = 1;
+            $refline = 0;
         }
         
         // find file or fail
@@ -173,8 +173,9 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                 $code[] = '<code>'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
             }
         }
-
-        if( ! isset($code[$refline-1]) ){
+        
+        // allow 0 line reference when line is unknown (e.g. block.json) else it must exist
+        if( $refline && ! isset($code[$refline-1]) ){
             throw new Loco_error_Exception( sprintf('Line %u not in source file', $refline) );
         }
  

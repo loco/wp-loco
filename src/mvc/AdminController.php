@@ -237,7 +237,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Shortcut to render template without full page arguments as per view
-     * @param string
+     * @param string $tpl
      * @return string
      */
     public function viewSnippet( $tpl ){
@@ -247,9 +247,9 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Add CSS to head
-     * @param string stem name of file, e.g "editor"
-     * @param string[] dependencies of this stylesheet
-     * @return Loco_mvc_Controller
+     * @param string $name stem name of file, e.g "editor"
+     * @param string[] $deps dependencies of this stylesheet
+     * @return self
      */
     public function enqueueStyle( $name, array $deps = [] ){
         $base = $this->baseurl;
@@ -267,9 +267,9 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
 
     /**
      * Add JavaScript to footer
-     * @param string stem name of file, e.g "editor"
-     * @param string[] dependencies of this script
-     * @return Loco_mvc_Controller
+     * @param string $name stem name of file, e.g "editor"
+     * @param string[] $deps dependencies of this script
+     * @return string
      */
     public function enqueueScript( $name, array $deps = [] ){
         $base = $this->baseurl;
@@ -282,14 +282,27 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
         $id = 'loco-translate-'.strtr($name,'/','-');
         wp_enqueue_script( $id, $href, $deps, $vers, true );
         $this->scripts[$id] = $href;
-        return $this;
+        return $id;
+    }
+
+
+    /**
+     * @param string $name
+     * @return void
+     */
+    public function dequeueScript( $name ){
+        $id = 'loco-translate-'.strtr($name,'/','-');
+        if( array_key_exists($id,$this->scripts) ){
+            wp_dequeue_script($id);
+            unset($this->scripts[$id]);
+        }
     }
 
 
     /**
      * @internal
-     * @param string
-     * @param string
+     * @param string $tag
+     * @param string $id
      * @return string
      */
     public function filter_script_loader_tag( $tag, $id ) {

@@ -10,7 +10,7 @@ if( $result->translated ):?>
         <h3 class="has-icon">Translation result:</h3>
         <p><code class="po"><?php $result->e('msgstr')?></code></p>
         <p>
-            This is the translation value obtained from the 
+            This is the translation value returned from the 
             <a href="<?php $result->e('calleeDoc')?>"><code><?php $result->e('callee')?></code></a> function.
         </p>
     </div><?php

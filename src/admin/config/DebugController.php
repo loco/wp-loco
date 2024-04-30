@@ -114,7 +114,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         }
         
         // Ajaxing:
-        $this->enqueueScript('debug');
+        $this->enqueueScript('system');
         $this->set( 'js', new Loco_mvc_ViewParams(  [
             'nonces' => [ 'ping' => wp_create_nonce('ping'), 'apis' => wp_create_nonce('apis') ],
         ] ) );

@@ -128,10 +128,10 @@ class Loco_gettext_Compiler {
         if( is_string($path) && '' !== $path ){
             $refs = $po->splitRefs( $this->getJsExtMap() );
             if( array_key_exists('js',$refs) && $refs['js'] instanceof Loco_gettext_Data ){
+                $jsonfile = new Loco_fs_File($path);
                 $json = $refs['js']->msgjed($domain,'*.js');
                 try {
                     if( '' !== $json ){
-                        $jsonfile = new Loco_fs_File($path);
                         $this->writeFile($jsonfile,$json);
                         $jsons->add($jsonfile);
                     }

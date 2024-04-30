@@ -100,6 +100,18 @@ $this->start('form');
                 </tr>
                 <tr>
                     <th scope="row">
+                        <label>Script</label>
+                    </th>
+                    <td>
+                        <input type="text" class="regular-text code" name="jspath" id="debug-jspath" value="<?php $form->e('jspath')?>" placeholder="" />
+                        <p class="description">
+                            Simulate <a href="https://developer.wordpress.org/reference/functions/wp_set_script_translations/" tabindex="-1">wp_set_script_translations</a>
+                            with a script reference, e.g. <code>blocks/example.js</code>.
+                        </p>
+                    </td>
+                </tr>
+                <tr>
+                    <th scope="row">
                         Options
                     </th>
                     <td>
