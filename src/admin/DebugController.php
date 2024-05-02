@@ -274,6 +274,40 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
 
     /**
+     * @return Plural_Forms|null
+     */
+    private function parsePluralForms( $raw ){
+        try {
+            $this->log('Parsing header: %s', $raw );
+            if( ! preg_match( '#^nplurals=\\d+;\\s*plural=([-+/*%!=<>|&?:()n\\d ]+);?$#', $raw, $match ) ) {
+                throw new InvalidArgumentException( 'Invalid Plural-Forms header, ' . json_encode($raw) );
+            }
+            return new Plural_Forms( trim( $match[1],'() ') );
+        }
+        catch( Exception $e ){
+            $this->log('! %s', $e->getMessage() );
+            return null;
+        }
+    }
+    
+    
+    
+    private function selectPluralForm( $quantity, $pluralIndex, Plural_Forms $eq = null ){
+        try {
+            if( $eq instanceof Plural_Forms ) {
+                $pluralIndex = $eq->execute( $quantity );
+                $this->log( '> Selected plural form [%u]', $pluralIndex );
+            }
+        }
+        catch ( Exception $e ){
+            $this->log('! Keeping plural form [%u]; %s', $pluralIndex, $e->getMessage() );
+        }
+        return $pluralIndex;
+    }
+
+
+
+    /**
      * Prepare text domain for MO file lookup
      * @return void
      */
@@ -284,21 +318,42 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $path = false;
         }
         // Just-in-time loader takes no path argument
-        else if( 'jit' === $type || '' === $type ){
+        else if( 'none' === $type || '' === $type ){
             $file = null;
-            Loco_error_AdminNotices::debug('Path argument ignored');
+            Loco_error_AdminNotices::debug('Path argument ignore. Not required for this loader');
         }
         else {
             $this->log('Have path argument => %s', $path );
             $file = new Loco_fs_File($path);
         }
 
-        // unload text domain for any forced loading method. Else default loaders will run
-        if( '' === $type ){
-            $this->log('No loader, is_textdomain_loaded() => %s', var_export(is_textdomain_loaded($domain),true) );
+        // Without a loader the current state of the text domain will be used for our translation.
+        // If the text domain was loaded before we set our locale, it may be in the wrong language.
+        if( 'none' === $type ){
+            $loaded = is_textdomain_loaded($domain);
+            $this->log('No loader, is_textdomain_loaded() => %s', var_export($loaded,true) );
+            // Note that is_textdomain_loaded() returns false even if NOOP_Translations is set,
+            // and NOOP_Translations being set prevents JIT loading, so will never translate our locale!
+            if( isset($GLOBALS['l10n'][$domain]) ){
+                // WordPress >= 6.5
+                if( class_exists('WP_Translation_Controller',false) ) {
+                    $locale = WP_Translation_Controller::get_instance()->get_locale();
+                }
+                /*/ could get locale from actual file header, but not very reliable!
+                else if( $GLOBALS['l10n'][$domain] instanceof Translations ){
+                    $locale = $GLOBALS['l10n'][$domain]->get_header('Language');
+                }*/
+                else {
+                    $locale = '';
+                }
+                if( $locale && $locale !== $this->locale ){
+                    Loco_error_AdminNotices::warn( sprintf('Translations already loaded for another locale (%s). Selecting a loader is recommended',$locale) );
+                }
+            }
             return;
         }
-            
+
+        // Unload text domain for any forced loading method.
         $this->log('Unloading text domain for %s loader', $type );
         $returned = unload_textdomain( $domain );
         $callee = 'unload_textdomain';
@@ -328,19 +383,20 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $returned = load_theme_textdomain( $domain, $path );
             $callee = 'load_theme_textdomain';
         }
-        // When we called unload_textdomain we passed $reloadable=false on purpose to force memory removal
-        // So if we want to allow _load_textdomain_just_in_time, we'll have to hack the reloadable lock.
-        else if( 'jit' === $type ){
-            $this->log('Removing JIT lock');
-            unset( $GLOBALS['l10n_unloaded'][$this->domain] );
-        }
-        else {
+        else if( 'custom' === $type ){
             if( is_null($file) || ! $file->isAbsolute() || ! $file->exists() || $file->isDirectory() ){
                 throw new InvalidArgumentException('Path argument must reference an existent file');
             }
             $this->log('Calling load_theme_textdomain with $mofile=%s',$path);
             $returned = load_textdomain($domain,$path);
             $callee = 'load_textdomain';
+        }
+        // Defaulting to JIT:
+        // When we called unload_textdomain we passed $reloadable=false on purpose to force memory removal
+        // So if we want to allow _load_textdomain_just_in_time, we'll have to hack the reloadable lock.
+        else {
+            $this->log('Removing JIT lock');
+            unset( $GLOBALS['l10n_unloaded'][$this->domain] );
         }
         $this->log('> %s returned %s', $callee, var_export($returned,true) );
     }
@@ -503,18 +559,21 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $this->log('! Text domain not loaded after %s() call completed', $callee );
             $this->log('? get_translations_for_domain => %s', is_object($loaded)?get_class($loaded):var_export($loaded,true));
         }
+
         // Establish retrospectively if a non-zero plural index was used.
         if( '' !== $msgid_plural ){
-            $tmp = get_translations_for_domain($domain);
-            if( $tmp && method_exists($tmp,'select_plural_form') ){
-                $pluralIndex = $tmp->select_plural_form($quantity);
-                if( 0 !== $pluralIndex ){
-                    $this->log('Plural form [%d] was queried', $pluralIndex );
+            $header = null;
+            if( class_exists('WP_Translation_Controller',false) ){
+                $h = WP_Translation_Controller::get_instance()->get_headers($domain);
+                if( array_key_exists('Plural-Forms',$h) ) {
+                    $header = $h['Plural-Forms'];
                 }
             }
-            else {
-                $this->log('FIXME: can\'t select_plural_form from %s', is_object($tmp)?get_class($tmp):var_export($tmp,true));
+            if( is_null($header) ){
+                $header = $locale->getPluralFormsHeader();
+                $this->log('! Can\'t get Plural-Forms; Using built-in rules');
             }
+            $pluralIndex = $this->selectPluralForm( $quantity, $pluralIndex, $this->parsePluralForms($header) );
         }
 
         // Simulate JavaScript translation if script path is set. This will be used as a secondary result.
@@ -522,10 +581,12 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         if( is_string($path) && '' !== $path ) {
             try {
                 $data = $this->preloadScript( $path, $domain, $bundle );
-                // TODO
-                if( '' !== $msgid_plural && 0 === $pluralIndex ){
-                    $header = $data->getHeaders()->offsetGet('pluralForms');
-                    $this->log('TODO plural form from JED header => %s', $header );
+                // Let JED-defined plural forms override plural index
+                if( '' !== $msgid_plural ){
+                    $header = $data->getHeaders()->offsetGet('Plural-Forms');
+                    if( $header ){
+                        $pluralIndex = $this->selectPluralForm( $quantity, $pluralIndex, $this->parsePluralForms($header) );
+                    }
                 }
                 $msgstr = $this->findKey( $findKey, $pluralIndex, $data );
                 if( is_null($msgstr) ){

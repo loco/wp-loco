@@ -89,7 +89,7 @@ private  $ld;
 public function __construct( array $struct ){ $this->ld = $struct; } 
 public function parse(  $limit = -1 ) { $values = []; foreach( $this->ld as $messages ){ $msgid = key($messages); if( '' === $msgid ){ $this->setHeader( new LocoJedHeaders($messages['']) ); unset($messages['']); } else { $this->setHeader( new LocoJedHeaders ); } $values[] = [ 'source' => '', 'target' => $this->getHeader(), ]; $i = -1; foreach( $messages as $key => $list ){ if( ++$i === $limit ){ break; } $value = $this->initMsgKey($key); $index = count($values); foreach( $list as $i => $msgstr ){ if( ! is_string($msgstr) ){ throw new Loco_error_ParseException('msgstr must be scalar'); } $value['target'] = $msgstr; if( 0 < $i ){ $value['plural'] = $i; $value['parent'] = $index; $value['source'] = ''; } $values[] = $value; } } } return $values; } }
 class LocoJedHeaders extends LocoPoHeaders { 
-public function __construct( array $raw = [] ) { parent::__construct($raw); $this->offsetSet('Language',$this->offsetGet('lang') ); $this->offsetSet('Plural-Forms',$this->offsetGet('plural_forms') ); } }
+public function __construct( array $raw = [] ) { foreach( ['Language'=>'lang','plural_forms'=>'Plural-Forms'] as $canonical => $alias ){ if( array_key_exists($alias,$raw) && ! array_key_exists($canonical,$raw) ){ $raw[$canonical] = $raw[$alias]; } } parent::__construct($raw); } }
 class LocoMoPhpParser extends LocoGettextParser { 
 private  $msgs; 
 public function __construct( array $struct ){ $this->msgs = $struct['messages']; unset($struct['messages']); $this->setHeader( new LocoPoHeaders($struct) ); } 

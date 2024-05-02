@@ -72,10 +72,7 @@ $this->start('form');
                     <td>
                         <select name="loader" id="debug-loader"><?php $value = $form['loader'];?> 
                             <option value="">
-                                None
-                            </option>
-                            <option value="jit"<?php $value==='jit' and print(' selected')?>>
-                                Auto (Just-in-time)
+                                Auto (recommended)
                             </option>
                             <option value="plugin"<?php $value==='plugin' and print(' selected')?>>
                                 load_plugin_textdomain
@@ -86,15 +83,14 @@ $this->start('form');
                             <option value="custom"<?php $value==='custom' and print(' selected')?>>
                                 load_textdomain
                             </option>
+                            <option value="none"<?php $value==='none' and print(' selected')?>>
+                                None
+                            </option>
                         </select>
                         <label for="debug-loadpath">path: </label>
                         <input type="text" class="regular-text code" name="loadpath" id="debug-loadpath" value="<?php $form->e('loadpath')?>" placeholder="" />
                         <p class="description">
-                            A path argument is required by 
-                            <a href="https://developer.wordpress.org/reference/functions/load_textdomain/" tabindex="-1">load_textdomain</a>, but optional for
-                            <a href="https://developer.wordpress.org/reference/functions/load_plugin_textdomain/" tabindex="-1">load_plugin_textdomain</a> and
-                            <a href="https://developer.wordpress.org/reference/functions/load_theme_textdomain/" tabindex="-1">load_theme_textdomain</a>.<br />
-                            See the WordPress documentation for correct usage.
+                            See the WordPress documentation for correct usage of the path argument.
                         </p>
                     </td>
                 </tr>
