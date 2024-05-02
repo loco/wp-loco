@@ -147,6 +147,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 if ( 2 !== strlen( "\xC2\xA3" ) ) {
                     Loco_error_AdminNotices::warn('Your mbstring configuration will result in corrupt MO files. Please ensure mbstring.func_overload is disabled');
                 }
+                
             }
         }
         
@@ -190,6 +191,7 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 'domain' => $project->getId(),
             ] : null,
             'nonces' => $this->getNonces($readonly),
+            'adminUrl' => Loco_mvc_AdminRouter::generate('loco'),
         ] ) );
         $this->set( 'ui', new Loco_mvc_ViewParams( [
              // Translators: button for adding a new string when manually editing a POT file

@@ -56,7 +56,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
              ->add('plugins/', loco_constant('WP_PLUGIN_DIR') )
              ->add('plugins/', loco_constant('WPMU_PLUGIN_DIR') )
         ;
-        // Any text domains loaded prematurely won't be customizable, but we could force them to reload.
+        // Any text domains loaded prematurely won't be customizable, but we can force them to reload.
         global $l10n;
         if( $l10n && is_array($l10n) ){
             foreach( $l10n as $domain => $value ){
@@ -193,7 +193,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
-     * Handle the early JIT loading issue.
+     * Handle the early JIT loading issue. This is only done when WP_DEBUG is on.
      */
     private function handle_unloaded_domain( $domain ){
         if( ! array_key_exists($domain,$this->seen) ){
@@ -221,11 +221,11 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
                         break;
                     }
                 }
-                // visible notice on our admin screens only
+                /*/ visible notice on our admin screens only
                 $screen = function_exists('get_current_screen') ? get_current_screen() : null;
                 if( $screen instanceof WP_Screen && 'loco-translate' === substr($screen->id,0,14) ){
                     Loco_error_AdminNotices::debug($message.'. Check error log for [Loco.debug]');
-                }
+                }*/
             }
         }
     }

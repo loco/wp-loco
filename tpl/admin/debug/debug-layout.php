@@ -15,10 +15,8 @@ $this->extend('../layout');
 <?php
 
 /* @var Loco_mvc_View $params */
-/* @var string|null $header */
-if( $params->has('header') ) {
-    echo $header;
-}
+/* @var string $header */
+$params->has('header') and print $header;
 
 
 /* @var ArrayIterator|null $log */
@@ -38,6 +36,4 @@ endif;
 
 
 /* @var string $form */
-if( $params->has('form') ) {
-    echo $form;
-}
+echo $form;

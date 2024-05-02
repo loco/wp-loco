@@ -90,7 +90,7 @@ $this->start('form');
                         <label for="debug-loadpath">path: </label>
                         <input type="text" class="regular-text code" name="loadpath" id="debug-loadpath" value="<?php $form->e('loadpath')?>" placeholder="" />
                         <p class="description">
-                            The path argument is required by 
+                            A path argument is required by 
                             <a href="https://developer.wordpress.org/reference/functions/load_textdomain/" tabindex="-1">load_textdomain</a>, but optional for
                             <a href="https://developer.wordpress.org/reference/functions/load_plugin_textdomain/" tabindex="-1">load_plugin_textdomain</a> and
                             <a href="https://developer.wordpress.org/reference/functions/load_theme_textdomain/" tabindex="-1">load_theme_textdomain</a>.<br />
@@ -100,13 +100,13 @@ $this->start('form');
                 </tr>
                 <tr>
                     <th scope="row">
-                        <label>Script</label>
+                        <label for="debug-jspath">Script path</label>
                     </th>
                     <td>
                         <input type="text" class="regular-text code" name="jspath" id="debug-jspath" value="<?php $form->e('jspath')?>" placeholder="" />
                         <p class="description">
                             Simulate <a href="https://developer.wordpress.org/reference/functions/wp_set_script_translations/" tabindex="-1">wp_set_script_translations</a>
-                            with a script reference, e.g. <code>blocks/example.js</code>.
+                            with a relative script path, e.g. <code>blocks/example.js</code>.
                         </p>
                     </td>
                 </tr>
@@ -124,8 +124,8 @@ $this->start('form');
             </tbody>
         </table>
         <p class="submit">
-            <input type="submit" class="button-primary" value="Submit" />
-            <a class="button button-link" href="?page=loco-debug&surprise=me">Lucky dip</a>
+            <input type="submit" class="button-primary" value="Translate" />
+            <a class="button button-link" href="?page=loco-debug&randomize">Lucky dip</a>
         </p>
     </form>
 

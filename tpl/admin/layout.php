@@ -70,13 +70,14 @@
 
 
 <?php 
+/* @var null|Loco_mvc_ViewParams $js */
 if( $this->has('js') && $js instanceof Loco_mvc_ViewParams ):?><script>
 /*<![CDATA[*/
 window.loco = { conf: <?php echo $js->exportJson()?> };
 document.addEventListener && document.addEventListener('DOMContentLoaded', function(loco,v,s){
     return function() {
         function enumJs(s) {
-            var i = s.length;
+            let i = s.length;
             while( 0 !== i-- ){
                 if( null == document.getElementById(s[i]+'-js') ){
                     return false;

@@ -175,7 +175,6 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     }
 
 
-
     /**
      * Render template for echoing into admin screen
      * @param string $tpl template name

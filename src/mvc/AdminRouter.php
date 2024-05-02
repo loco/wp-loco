@@ -63,8 +63,8 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
             // string translation simulator, currently in development
             $label = __('Debugger', 'loco-translate');
-            $title = __('String debugger &lsaquo; Loco', 'loco-translate');
-            add_submenu_page( 'loco', $title, $label, $cap, 'loco-debug', $render );
+            //$title = __('String debugger &lsaquo; Loco', 'loco-translate');
+            add_submenu_page( 'loco', $label, $label, $cap, 'loco-debug', $render );
 
             // settings page only for users with manage_options permission in addition to Loco access:
             if( $user->has_cap('manage_options') ){
@@ -124,11 +124,13 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             Loco_error_AdminNotices::debug( $e->getMessage() );
         }
-        // catch errors during controller setup
+        // Initialise controller with query string + route arguments
+        // note that $_GET is not being stripped of slashes added by WordPress.
         try {
-            $this->ctrl->_init( $_GET + $args );
+            $this->ctrl->_init($_GET+$args);
             do_action('loco_admin_init', $this->ctrl );
         }
+        // catch errors during controller setup
         catch( Loco_error_Exception $e ){
             $this->ctrl = new Loco_admin_ErrorController;
             // can't afford an error during an error

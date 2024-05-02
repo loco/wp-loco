@@ -11,7 +11,7 @@ if( $result->translated ):?>
         <p><code class="po"><?php $result->e('msgstr')?></code></p>
         <p>
             This is the translation value returned from the 
-            <a href="<?php $result->e('calleeDoc')?>"><code><?php $result->e('callee')?></code></a> function.
+            <a href="<?php $result->e('calleeDoc')?>" target="_blank"><code><?php $result->e('callee')?></code></a> function.
         </p>
     </div><?php
 
@@ -19,7 +19,7 @@ else:?>
     <div class="panel panel-warning">
         <h3 class="has-icon">String found, but no translation returned</h3>
         <p>
-            The <a href="<?php $result->e('calleeDoc')?>"><code><?php $result->e('callee')?></code></a> function
+            The <a href="<?php $result->e('calleeDoc')?>" target="_blank"><code><?php $result->e('callee')?></code></a> function
             returned the same value as the source string. Either the string isn't translated, or the required translation file wasn't loaded. 
         </p>
         <p>

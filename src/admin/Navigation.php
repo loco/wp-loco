@@ -26,7 +26,7 @@ class Loco_admin_Navigation extends ArrayIterator {
 
     /**
      * Create a breadcrumb trail for a given view below a bundle
-     * @return Loco_admin_Navigation
+     * @return self
      */
     public static function createBreadcrumb( Loco_package_Bundle $bundle ){
         $nav = new Loco_admin_Navigation;
@@ -53,6 +53,17 @@ class Loco_admin_Navigation extends ArrayIterator {
         );
         
         // client code will add current page
+        return $nav;
+    }
+
+
+    /**
+     * Create a basic breadcrumb comprising title only
+     * @return self
+     */
+    public static function createSimple( $name ){
+        $nav = new Loco_admin_Navigation;
+        $nav->add($name);
         return $nav;
     }
 
