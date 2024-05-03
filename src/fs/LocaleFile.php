@@ -31,10 +31,12 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
      */
     public function split(){
         if( is_null($this->suffix) ){
-            $parts = explode('-',$this->filename() );
-            $this->suffix = array_pop($parts);
+            // note that `filename` isn't used here because of double extensions (.l10n.php)
+            $parts = explode('-',$this->basename() );
+            $tail = array_pop($parts);
+            $this->suffix = explode('.',$tail,2)[0];
             // handle script hashes for JSONs only
-            if( 'json' === $this->extension() && preg_match('/^[0-9a-f]{32}$/',$this->suffix) ){
+            if( '.json' === substr($tail,-5) && preg_match('/^[0-9a-f]{32}$/',$this->suffix) ){
                 $this->hash = $this->suffix;
                 $this->suffix = array_pop($parts);
             }

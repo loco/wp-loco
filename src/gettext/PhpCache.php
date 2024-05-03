@@ -12,6 +12,7 @@ class Loco_gettext_PhpCache extends WP_Translation_File_PHP {
         $me = new Loco_gettext_PhpCache('');
         $me->headers = self::exportHeaders($po);
         $me->entries = self::exportEntries($po);
+        // TODO support Loco_data_Settings::get()->php_pretty
         return $me->export();
     }
 

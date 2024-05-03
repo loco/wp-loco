@@ -226,6 +226,11 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'path'   => '',
             'source' => '',
         ] );
+        // zip archive will on;y be available if bundle is configured
+        if( $bundle && $project ){
+            $hidden['bundle'] = $bundle->getId();
+            $hidden['domain'] = $project->getId();
+        }
         $this->set( 'dlFields', $hidden->setNonce('download') );
         $this->set( 'dlAction', admin_url('admin-ajax.php','relative') );
 

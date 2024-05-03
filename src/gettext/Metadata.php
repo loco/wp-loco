@@ -4,6 +4,7 @@ loco_require_lib('compiled/gettext.php');
 
 /**
  * Holds metadata about a PO file, cached as Transient
+ * TODO Non-PO files (MO/PHP) are sparse. We need to obtain the 100% mark from the PO sibling, and adjust completion.
  */
 class Loco_gettext_Metadata extends Loco_data_Transient {
 
@@ -49,14 +50,12 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
     /**
      * Load metadata from file, using cache if enabled.
      * Note that this does not throw exception, check "valid" key
-     * @param Loco_fs_File
-     * @param bool
      * @return Loco_gettext_Metadata
      */
     public static function load( Loco_fs_File $po, $nocache = false ){
         $bytes = $po->size();
         $mtime = $po->modified();
-        // quick construct of new meta object. enough to query and validate cache
+        // quick construct of a new metadata object. enough to query and validate cache
         $meta = new Loco_gettext_Metadata( [
             'rpath' => $po->getRelativePath( loco_constant('WP_CONTENT_DIR') ),
         ] );
@@ -90,8 +89,6 @@ class Loco_gettext_Metadata extends Loco_data_Transient {
 
     /**
      * Construct metadata from previously parsed PO data
-     * @param Loco_fs_File
-     * @param Loco_gettext_Data
      * @return Loco_gettext_Metadata 
      */
     public static function create( Loco_fs_File $file, Loco_gettext_Data $data ){

@@ -112,11 +112,13 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             $data = (string) $data;
         }
         $mimes =  [
-            'mo'   => 'application/x-gettext-translation',
             'po'   => 'application/x-gettext',
             'pot'  => 'application/x-gettext',
-            'xml'  => 'text/xml',
+            'mo'   => 'application/x-gettext-translation',
+            'php'  => 'application/x-httpd-php-source',
             'json' => 'application/json',
+            'zip'  => 'application/zip',
+            'xml'  => 'text/xml',
         ];
         $headers = [];
 	    if( $file instanceof Loco_fs_File && isset($mimes[$ext]) ){

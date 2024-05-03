@@ -4,6 +4,9 @@
  */
 $this->extend('view');
 $this->start('source');
+
+/* @var Loco_mvc_ViewParams $params */
+/* @var string $bin */
 ?> 
 
      <div class="panel panel-info">
@@ -22,7 +25,7 @@ $this->start('source');
             $cols = 24;
             $line = [];
             $bytes = strlen($bin);
-            // establish formatting of row offset, nbased on largest row number
+            // establish formatting of row offset, based on largest row number
             $rowfmt = sprintf( '%%0%uX | ', strlen( sprintf( '%02X', $cols * floor( $bytes / $cols ) ) ) );
             
             for( $b = 0; $b < $bytes; $b++ ){

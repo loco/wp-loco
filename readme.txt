@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.6.8 =
 * Compiler avoids writing empty JSON translation files
 * Added experimental string debugger
+* Added Zip download button instead of MO
 * Warning about premature text domain loading
 * Bumped WordPress compatibility to 6.5.2
 

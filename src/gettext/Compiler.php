@@ -5,7 +5,7 @@
 class Loco_gettext_Compiler {
 
     /**
-     * @var Loco_api_WordPressFileSystem
+     * @var Loco_api_WordPressFileSystem|null
      */
     private $fs;
 
@@ -16,45 +16,39 @@ class Loco_gettext_Compiler {
     private $files;
 
     /**
+     * Result when files written
+     * @var Loco_fs_FileList
+     */
+    private $done;
+    
+    /**
      * @var Loco_mvc_ViewParams
      */
     private $progress;
-
-    /**
-     * Whether to protect existing files during compilation (i.e. not overwrite them)
-     * @var bool
-     */
-    private $keep = false;
     
 
     /**
      * Construct with primary file (PO) being saved
-     * @param Loco_fs_LocaleFile $pofile Localised PO file which may or may not exist yet
+     * @param Loco_fs_File $pofile Localised PO file which may or may not exist yet
      */
-    public function __construct( Loco_fs_LocaleFile $pofile ){
-        $this->fs = new Loco_api_WordPressFileSystem;
+    public function __construct( Loco_fs_File $pofile ){
         $this->files = new Loco_fs_Siblings($pofile);
         $this->progress = new Loco_mvc_ViewParams( [
             'pobytes' => 0,
             'mobytes' => 0,
             'numjson' => 0,
+            'phbytes' => 0,
         ] );
+        // Connect compiler to the file system, if writing to disk for real
+        if( ! $pofile instanceof Loco_fs_DummyFile ) {
+            $this->fs = new Loco_api_WordPressFileSystem;
+        }
+        $this->done = new Loco_fs_FileList;
     }
 
 
     /**
-     * Set overwrite mode
-     * @param bool $overwrite whether to overwrite existing files during compilation
-     * @return self
-     */
-    public function overwrite( $overwrite ){
-        $this->keep = ! $overwrite;
-        return $this;
-    }
-
-
-    /**
-     * @return self
+     * @return Loco_fs_FileList
      */
     public function writeAll( Loco_gettext_Data $po, Loco_package_Project $project = null ){
         $this->writePo($po);
@@ -62,7 +56,7 @@ class Loco_gettext_Compiler {
         if( $project ){
             $this->writeJson($project,$po);
         }
-        return $this;
+        return $this->done;
     }
 
 
@@ -73,7 +67,7 @@ class Loco_gettext_Compiler {
     public function writePo( Loco_gettext_Data $po ){
         $file = $this->files->getSource();
         // Perform PO file backup before overwriting an existing PO
-        if( $file->exists() ){
+        if( $file->exists() && $this->fs ){
             $backups = new Loco_fs_Revisions($file);
             $backup = $backups->rotate($this->fs);
             // debug backup creation only under cli or ajax. too noisy printing on screen
@@ -81,8 +75,7 @@ class Loco_gettext_Compiler {
                 Loco_error_AdminNotices::debug( sprintf('Wrote backup: %s -> %s',$file->basename(),$backup->basename() ) );
             }
         }
-        $this->fs->authorizeSave($file);
-        $bytes = $file->putContents( $po->msgcat() );
+        $bytes = $this->writeFile( $file, $po->msgcat() );
         $this->progress['pobytes'] = $bytes;
         return $bytes;
     }
@@ -94,22 +87,36 @@ class Loco_gettext_Compiler {
     public function writeMo( Loco_gettext_Data $po ){
         try {
             $mofile = $this->files->getBinary();
-            $this->fs->authorizeSave($mofile);
-            $bytes = $mofile->putContents( $po->msgfmt() );
-            $this->progress['mobytes'] = $bytes;
-            // write PHP cache, if WordPress >= 6.5
-            $phfile = $this->files->getCache();
-            if( $phfile && class_exists('WP_Translation_File_PHP') ){
-                $this->progress['phbytes'] = $phfile->putContents( Loco_gettext_PhpCache::render($po) );
-            }
+            $bytes = $this->writeFile( $mofile, $po->msgfmt() );
         }
         catch( Exception $e ){
             Loco_error_AdminNotices::debug( $e->getMessage() );
             Loco_error_AdminNotices::warn( __('PO file saved, but MO file compilation failed','loco-translate') );
             $bytes = 0;
         }
-
+        $this->progress['mobytes'] = $bytes;
+        // write PHP cache, if WordPress >= 6.5
+        if( 0 !== $bytes ){
+            try {
+                $this->progress['phbytes'] = $this->writePhp($po);
+            }
+            catch( Exception $e ){
+                Loco_error_AdminNotices::debug( $e->getMessage() );
+            }
+        }
         return $bytes;
+    }
+
+
+    /**
+     * @return int bytes written to .l10n.php file
+     */
+    private function writePhp( Loco_gettext_Data $po ){
+        $phfile = $this->files->getCache();
+        if( $phfile && class_exists('WP_Translation_File_PHP',false) ){
+            return $this->writeFile( $phfile, Loco_gettext_PhpCache::render($po) );
+        }
+        return 0;
     }
 
 
@@ -265,7 +272,7 @@ class Loco_gettext_Compiler {
     public function getSummary(){
         $pofile = $this->files->getSource();
         // Avoid calling this unless the initial PO save was successful
-        if( ! $this->progress['pobytes'] || ! $pofile->exists() ){
+        if( ! $this->progress['pobytes'] ){
             throw new LogicException('PO not saved');
         }
         // Summary for localised file includes MO+JSONs
@@ -286,6 +293,15 @@ class Loco_gettext_Compiler {
 
 
     /**
+     * Get all files written, not including backups.
+     * @return Loco_fs_File[]
+     */
+    public function getFilesWritten(){
+        return $this->done->getArrayCopy();
+    }
+
+
+    /**
      * @return string[]
      */
     private function getJsExtMap(){
@@ -302,15 +318,18 @@ class Loco_gettext_Compiler {
 
     /**
      * @param Loco_fs_File $file
-     * @param string $data Serialized JSON to write to given file
+     * @param string $data to write to given file
      * @return int bytes written
      */
     public function writeFile( Loco_fs_File $file, $data ){
-        if( $this->keep && $file->exists() ){
-            return 0;
+        if( $this->fs ) {
+            $this->fs->authorizeSave( $file );
         }
-        $this->fs->authorizeSave($file);
-        return $file->putContents($data);
+        $bytes = $file->putContents($data);
+        if( 0 !== $bytes ){
+            $this->done->add($file );
+        }
+        return $bytes;
     }
 
 }

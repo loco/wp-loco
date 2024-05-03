@@ -18,7 +18,7 @@ class Loco_fs_FileWriter {
      * @param Loco_fs_File $file
      */
     public function __construct( Loco_fs_File $file ){
-        $this->file = $file;
+        $this->setFile($file);
         $this->disconnect();
     }
     
@@ -58,7 +58,7 @@ class Loco_fs_FileWriter {
     
     /**
      * Revert to direct file system connection
-     * @return Loco_fs_FileWriter
+     * @return self
      */
     public function disconnect(){
         $this->fs = Loco_api_WordPressFileSystem::direct();
@@ -325,7 +325,7 @@ class Loco_fs_FileWriter {
             throw new Loco_error_WriteException( __( 'Modification of POT (template) files is disallowed by the plugin settings', 'loco-translate' ) );
         }
         // Full list of file extensions this plugin can modify; note that specific actions may limit this further.
-        $allow = [ 'po'=>1, 'pot'=>1, 'mo'=>1, 'json'=>1, 'po~'=>1, 'pot~'=>1, 'txt'=>1, 'xml'=>1 ];
+        $allow = [ 'po'=>1, 'pot'=>1, 'mo'=>1, 'json'=>1, 'po~'=>1, 'pot~'=>1, 'txt'=>1, 'xml'=>1, 'zip'=>1 ];
         if( array_key_exists($ext,$allow) ){
             return $this;
         }

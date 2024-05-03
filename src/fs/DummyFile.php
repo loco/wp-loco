@@ -64,8 +64,8 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritdoc}
      */
-    public function putContents( $contents ){
-        $this->contents = (string) $contents;
+    public function putContents( $data ){
+        $this->contents = (string) $data;
         return $this;
     }
 
@@ -147,11 +147,10 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     }
 
 
-    /**
+    /*
      * {@inheritdoc}
-     * @codeCoverageIgnore
-     */
     public function writable(){
+        throw new Exception('Who did this?');
         $mode = $this->mode();
         // world writable
         if( $mode & 02 ){
@@ -167,6 +166,14 @@ class Loco_fs_DummyFile extends Loco_fs_File {
         }
         // else locked:
         return false;
+    }*/
+
+
+    /**
+     * {@inheritdoc}
+     */
+    public function creatable(){
+        return false;
     }
 
 
@@ -175,6 +182,37 @@ class Loco_fs_DummyFile extends Loco_fs_File {
      */
     public function md5(){
         return md5( $this->getContents() );
+    }
+
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getWriteContext() {
+        return new _LocoDummyFileWriter($this);
+    }
+
+
+}
+
+
+/**
+ * @internal
+ */
+class _LocoDummyFileWriter extends Loco_fs_FileWriter {
+
+    /**
+     * @inheritdoc
+     */
+    public function writable(){
+        return true;
+    }
+
+    /**
+     * @inheritdoc
+     */
+    public function authorize(){
+        return $this;
     }
 
 }

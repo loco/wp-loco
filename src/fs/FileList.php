@@ -1,6 +1,8 @@
 <?php
 /**
- * Simple list of file paths
+ * Collection of unique file references
+ *
+ * @method Loco_fs_File[] getArrayCopy
  */
 class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterface {
 
@@ -12,10 +14,10 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
     
     /**
      * Construct with initial list if files
-     * @param Loco_fs_File[]
+     * @param Loco_fs_File[] $a
      */
     public function __construct( $a = [] ){
-        parent::__construct( [] );
+        parent::__construct();
         foreach( $a as $file ){
             $this->add( $file );
         }
@@ -68,7 +70,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
      * {@inheritDoc}
      */
     #[ReturnTypeWillChange]
-    public function offsetSet( $index, $value ){
+    public function offsetSet( $key, $value ){
         throw new Exception('Use Loco_fs_FileList::add');
     }
 

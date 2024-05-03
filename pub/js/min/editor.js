@@ -11,7 +11,7 @@ function y(a) {
 return a.format(0, ".", Ba);
 }
 function Ca(a) {
-k.ajax.post("sync", ia, function(b) {
+k.ajax.post("sync", ja, function(b) {
 const c = [];
 var f = b.pot, g = b.po;
 const r = b.done || {
@@ -48,21 +48,21 @@ function Ea(a) {
 const b = a.currentTarget;
 a.stopImmediatePropagation();
 b.disabled = !0;
-ja();
+ka();
 b.disabled = !1;
 }
-function ja() {
+function ka() {
 const a = [];
 C.each(function(b, c) {
 h.validate(c) && a.push(c);
 });
 k.notices.clear();
-ka(a);
+la(a);
 }
 function Y(a) {
-a.invalid && (ka(a.invalid), a.invalid = null);
+a.invalid && (la(a.invalid), a.invalid = null);
 }
-function ka(a) {
+function la(a) {
 const b = a.length;
 if (0 === b) k.notices.success(t("No formatting errors detected")); else {
 const c = [ v(G("%s possible error detected", "%s possible errors detected", b), b), t("Check the translations marked with a warning sign") ];
@@ -74,7 +74,7 @@ function Fa(a) {
 const b = a.id, c = k.apis, f = c.providers();
 return c.create(a, f[b] || f._);
 }
-function la() {
+function ma() {
 for (var a = -1, b, c = [], f = K, g = f.length, r = String(Ga); ++a < g; ) try {
 b = f[a], null == b.src && (b.src = r), c.push(Fa(b));
 } catch (n) {
@@ -82,7 +82,7 @@ k.notices.error(String(n));
 }
 return c;
 }
-function ma(a) {
+function na(a) {
 function b(f) {
 Z = new Date().getTime();
 K = f && f.apis || [];
@@ -90,13 +90,13 @@ K = f && f.apis || [];
 c.remove();
 a(K);
 }
-if (W || na) k.notices.error("APIs not available in current mode"); else if (null == K || 0 === K.length || 10 < Math.round((new Date().getTime() - Z) / 1e3)) {
+if (T || oa) k.notices.error("APIs not available in current mode"); else if (null == K || 0 === K.length || 10 < Math.round((new Date().getTime() - Z) / 1e3)) {
 N && N.remove();
 N = null;
 S && S.remove();
 S = null;
-T && T.remove();
-K = T = null;
+U && U.remove();
+K = U = null;
 var c = d('<div><div class="loco-loading"></div></div>').dialog({
 dialogClass: "loco-modal loco-modal-no-close",
 appendTo: "#loco-admin.wrap",
@@ -106,7 +106,7 @@ autoOpen: !0,
 closeOnEscape: !1,
 resizable: !1,
 draggable: !1,
-position: oa,
+position: pa,
 height: 200
 });
 k.ajax.get("apis", {
@@ -126,30 +126,30 @@ autoOpen: !1,
 closeOnEscape: !0,
 resizable: !1,
 draggable: !1,
-position: oa
+position: pa
 });
 return b;
 }
-function pa() {
-ma(function(a) {
-a.length ? Ha() : qa();
+function qa() {
+na(function(a) {
+a.length ? Ha() : ra();
 });
 }
 function Ia(a) {
 a.preventDefault();
-ma(function(b) {
-b.length ? Ja() : qa();
+na(function(b) {
+b.length ? Ja() : ra();
 });
 return !1;
 }
-function qa() {
+function ra() {
 N ? N.dialog("open") : k.notices.error("Logic error. Unconfigured API modal missing");
 }
 function Ja() {
 function a(e) {
 a: {
 var q = d(e.api).val();
-for (var O, L = X || (X = la()), P = L.length, Q = -1; ++Q < P; ) if (O = L[Q], 
+for (var O, L = X || (X = ma()), P = L.length, Q = -1; ++Q < P; ) if (O = L[Q], 
 O.getId() === q) {
 q = O;
 break a;
@@ -189,7 +189,7 @@ n = g = null;
 u && (R(), h.rebuildSearch());
 I && (I.off("dialogclose").dialog("close"), I = null);
 h.fire("poAuto");
-z || ja();
+z || ka();
 }
 let g, r, n, u = 0, z = !0, B = !1, I = S.dialog("open");
 const x = I.find("form"), E = x.find("button.button-primary"), M = d("#loco-job-progress");
@@ -239,25 +239,25 @@ h.focus().reloadMessage(m);
 };
 }
 function c(l, p, m, A) {
-let ba = A.getId(), ca = P[ba], ra = String(ca + 1), Ka = A.getUrl(), sa = t("Use this translation");
+let ba = A.getId(), ca = P[ba], sa = String(ca + 1), Ka = A.getUrl(), ta = t("Use this translation");
 A = String(A);
-let ta = U && U[ba];
+let ua = V && V[ba];
 l = d('<button class="button button-primary"></button>').attr("tabindex", String(1 + M + ca)).on("click", b(l, p));
-l.attr("accesskey", ra);
-1 < q.length && (sa += " (" + ra + ")");
-l.text(sa);
-ta && ta.replaceWith(d('<div class="loco-api loco-api-result loco-api-' + ba + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Ka).text(A))).append(d("<blockquote " + I + "></blockquote>").text(p || "FAILED")).append(l));
+l.attr("accesskey", sa);
+1 < q.length && (ta += " (" + sa + ")");
+l.text(ta);
+ua && ua.replaceWith(d('<div class="loco-api loco-api-result loco-api-' + ba + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Ka).text(A))).append(d("<blockquote " + I + "></blockquote>").text(p || "FAILED")).append(l));
 ++Q === O && (e && e.dialog("option", "title", t("Suggested translations") + " — " + m.label), 
 M += Q, x.attr("disabled") && x.attr("disabled", !1));
 0 === ca && l.focus();
 }
 function f(l) {
 const p = d('<div class="loco-api loco-api-loading"></div>').text("Calling " + l + " ...");
-return U[l.getId()] = p;
+return V[l.getId()] = p;
 }
 function g(l) {
 e && null == l && e.dialog("close");
-U = P = e = null;
+V = P = e = null;
 d(F).off("keydown", a);
 }
 function r(l) {
@@ -267,7 +267,7 @@ c(p, m, A, l);
 };
 }
 function n(l) {
-L = ua[l] || (ua[l] = {});
+L = va[l] || (va[l] = {});
 let p = -1;
 for (;++p < O; ) {
 const m = q[p], A = m.getId();
@@ -288,20 +288,20 @@ m = d("<optgroup></optgroup>").attr("label", m);
 x.append(m.append(d("<option></option>").attr("value", String(l)).text(p)));
 }), x.val(String(B)), x.on("change", function(l) {
 e.find("div.loco-api-result").remove();
-U = {};
+V = {};
 P = {};
 Q = 0;
 E = u.source(null, l.target.selectedIndex);
 x.attr("disabled", "true");
 n(E);
 })) : x = d('<blockquote lang="en"></blockquote>').text(E);
-let M = 99, e = (T || (T = aa("loco-apis-hint", "<div></div>"))).html("").append(d('<div class="loco-api"><p>Source text:</p></div>').append(x)).dialog("option", "title", t("Loading suggestions") + "...").off("dialogclose").on("dialogclose", g).dialog("open");
+let M = 99, e = (U || (U = aa("loco-apis-hint", "<div></div>"))).html("").append(d('<div class="loco-api"><p>Source text:</p></div>').append(x)).dialog("option", "title", t("Loading suggestions") + "...").off("dialogclose").on("dialogclose", g).dialog("open");
 (z = u.translation(B)) && d('<div class="loco-api"><p>Current translation:</p></div>').append(d("<blockquote " + I + "></blockquote>").text(z)).append(d('<button class="button"></button>').attr("tabindex", String(++M)).text(t("Keep this translation")).on("click", function(l) {
 l.preventDefault();
 g();
 })).appendTo(e);
-const q = X || (X = la()), O = q.length;
-let L, P = {}, Q = 0, U = {};
+const q = X || (X = ma()), O = q.length;
+let L, P = {}, Q = 0, V = {};
 n(E);
 d(F).on("keydown", a);
 return !0;
@@ -311,11 +311,11 @@ const b = new FormData();
 for (const c in a) a.hasOwnProperty(c) && b.append(c, a[c]);
 return b;
 }
-function va(a) {
+function wa(a) {
 let b = d.extend({
 locale: String(C.locale() || "")
-}, wa || {});
-xa && xa.applyCreds(b);
+}, xa || {});
+ya && ya.applyCreds(b);
 da ? (b = La(b), b.append("po", new Blob([ String(C) ], {
 type: "application/x-gettext"
 }), String(b.path).split("/").pop() || "untitled.po")) : b.data = String(C);
@@ -327,7 +327,7 @@ Y(h);
 }, a);
 }
 function Ma() {
-h.dirty && va();
+h.dirty && wa();
 }
 function Na() {
 return t("Your changes will be lost if you continue without saving");
@@ -344,20 +344,20 @@ d(a).addClass("button-primary");
 a.disabled = !0;
 d(a).removeClass("button-primary");
 });
-wa = d.extend({
+xa = d.extend({
 path: ea
 }, w.project || {});
 d(a).on("click", function(c) {
 c.preventDefault();
 a.disabled = !0;
 d(a).addClass("loco-loading");
-va(b);
+wa(b);
 return !1;
 });
 return !0;
 }
 function Pa(a) {
-var b = w.project;
+const b = w.project;
 if (b) {
 var c = function() {
 a.disabled = !1;
@@ -368,10 +368,10 @@ a.disabled = !0;
 }).on("poSave", function() {
 a.disabled = !1;
 });
-ia = {
+ja = {
 bundle: b.bundle,
 domain: b.domain,
-type: W ? "pot" : "po",
+type: T ? "pot" : "po",
 path: ea || "",
 sync: Qa || "",
 mode: Ra || ""
@@ -423,18 +423,19 @@ return !1;
 });
 return !0;
 }
-function ya(a, b) {
+function fa(a, b) {
 a.disabled = !1;
 d(a).on("click", function() {
-var c = a.form, f = ea;
-"binary" === b && (f = f.replace(/\.po$/, ".mo"));
-c.path.value = f;
-c.source.value = C.toString();
+let c = ea;
+"archive" === b ? c = c.replace(/\.po$/, ".zip") : "binary" === b && (c = c.replace(/\.po$/, ".mo"));
+const f = a.form;
+f.path.value = c;
+f.source.value = C.toString();
 return !0;
 });
 return !0;
 }
-function fa(a) {
+function ha(a) {
 a.preventDefault();
 return !1;
 }
@@ -448,22 +449,22 @@ d("#loco-po-status").text(b);
 }
 function za(a, b) {
 a = b.getAttribute("data-loco");
-const c = V[a];
+const c = W[a];
 c && c(b, a) || d(b).addClass("loco-noop");
 }
 const k = F.loco, w = k && k.conf, H = document.getElementById("loco-editor-inner");
 if (k && w && H) {
-var Da = !!w.WP_DEBUG, ha = k.po.ref && k.po.ref.init(k, w), ia = null, wa = null, da = w.multipart, Wa = k.l10n, v = k.string.sprintf, Ba = w.wpnum && w.wpnum.thousands_sep || ",", D = w.locale, C = k.po.init(D).wrap(w.powrap), W = !D, Ga = k.locale.clone(w.source || {
+var Da = !!w.WP_DEBUG, ia = k.po.ref && k.po.ref.init(k, w), ja = null, xa = null, da = w.multipart, Wa = k.l10n, v = k.string.sprintf, Ba = w.wpnum && w.wpnum.thousands_sep || ",", D = w.locale, C = k.po.init(D).wrap(w.powrap), T = !D, Ga = k.locale.clone(w.source || {
 lang: "en"
-}), Xa = document.getElementById("loco-actions"), ea = w.popath, Qa = w.potpath, Ra = w.syncmode, J = document.getElementById("loco-fs"), xa = J && k.fs.init(J), na = w.readonly;
-J = !na;
-var K, X, ua = {}, T, S, N, Z = 0, oa = {
+}), Xa = document.getElementById("loco-actions"), ea = w.popath, Qa = w.potpath, Ra = w.syncmode, J = document.getElementById("loco-fs"), ya = J && k.fs.init(J), oa = w.readonly;
+J = !oa;
+var K, X, va = {}, U, S, N, Z = 0, pa = {
 my: "top",
 at: "top",
 of: "#loco-content"
 };
 !da || F.FormData && F.Blob || (da = !1, k.notices.warn("Your browser doesn't support Ajax file uploads. Falling back to standard postdata"));
-ha || k.notices.warn("admin.js is out of date. Please empty your browser cache and reload the page.");
+ia || k.notices.warn("admin.js is out of date. Please empty your browser cache and reload the page.");
 var Aa = function() {
 var a, b = parseInt(d(H).css("min-height") || 0);
 return function() {
@@ -476,8 +477,8 @@ Aa();
 d(F).resize(Aa);
 H.innerHTML = "";
 var h = k.po.ed.init(H).localise(Wa);
-k.po.kbd.init(h).add("save", J ? Ma : fa).add("hint", D && J && pa || fa).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
-var V = {
+k.po.kbd.init(h).add("save", J ? Ma : ha).add("hint", D && J && qa || ha).enable("copy", "clear", "enter", "next", "prev", "fuzzy", "save", "invis", "hint");
+var W = {
 save: J && Oa,
 sync: J && Pa,
 revert: function(a) {
@@ -520,13 +521,14 @@ return !1;
 k.tooltip.init(b);
 return !0;
 },
-source: ya,
-binary: W ? null : ya
+source: fa,
+binary: T ? null : fa,
+archive: T ? null : fa
 };
-W ? (V.add = J && Ua, V.del = J && Va) : (V.auto = Sa, V.lint = Ta);
+T ? (W.add = J && Ua, W.del = J && Va) : (W.auto = Sa, W.lint = Ta);
 d("#loco-editor > nav .button").each(za);
 d("#loco-content > form .button").each(za);
-d(Xa).on("submit", fa);
+d(Xa).on("submit", ha);
 (function(a) {
 function b(g) {
 d(a.parentNode)[g || null == g ? "removeClass" : "addClass"]("invalid");
@@ -550,9 +552,9 @@ F.onbeforeunload = Na;
 }).on("poSave", function() {
 R();
 F.onbeforeunload = null;
-}).on("poHint", pa).on("poUpdate", R).on("poMeta", function(a, b) {
+}).on("poHint", qa).on("poUpdate", R).on("poMeta", function(a, b) {
 b = "CODE" === b.tagName ? b : b.getElementsByTagName("CODE")[0];
-return b && ha ? (ha.load(b.textContent), a.preventDefault(), !1) : !0;
+return b && ia ? (ia.load(b.textContent), a.preventDefault(), !1) : !0;
 });
 C.load(w.podata);
 h.load(C);

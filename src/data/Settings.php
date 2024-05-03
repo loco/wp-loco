@@ -20,13 +20,14 @@
  * @property bool $jed_pretty Whether to pretty print JSON JED files
  * @property bool $jed_clean Whether to clean up redundant JSON files during compilation
  * @property bool $ajax_files Whether to submit PO data as concrete files (requires Blob support in Ajax)
- *
+ * 
  * @property string $deepl_api_key API key for DeepL Translator
  * @property string $google_api_key API key for Google Translate
  * @property string $lecto_api_key API key for Lecto Translation API
  * @property string $microsoft_api_key API key for Microsoft Translator text API
  * @property string $microsoft_api_region API region for Microsoft Translator text API
- *
+ * 
+ * TODO @property bool $php_pretty Whether to pretty print .l10n.php files
  */
 class Loco_data_Settings extends Loco_data_Serializable {
 

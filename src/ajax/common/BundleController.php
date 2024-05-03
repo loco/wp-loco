@@ -25,7 +25,7 @@ abstract class Loco_ajax_common_BundleController extends Loco_mvc_AjaxController
 
 
     /**
-     * @param Loco_package_Bundle
+     * @param Loco_package_Bundle $bundle
      * @return Loco_package_Project
      */
     protected function getProject( Loco_package_Bundle $bundle ){
