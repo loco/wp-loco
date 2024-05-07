@@ -106,7 +106,9 @@ public function compare( LocoPoMessage $a, LocoPoMessage $b ){ $h = $a->getHash(
 class LocoPoMessage extends ArrayObject { 
 public function __construct( array $r ){ $r['key'] = $r['source']; parent::__construct($r); } 
 public function __get(  $prop ) { return $this->offsetExists($prop) ? $this->offsetGet($prop) : null; } 
-private function getPoFlags() { $flags = []; $plurals = $this->__get('plurals'); if( 4 === $this->__get('flag') ){ $flags[] = 'fuzzy'; } else if( $plurals ){ foreach( $plurals as $child ){ if( 4 === $child->__get('flag') ){ $flags[] = 'fuzzy'; break; } } } if( $f = $this->__get('format') ){ $flags[] = $f.'-format'; } else if( isset($plurals[0]) && ( $f = $plurals[0]->format ) ){ $flags[] = $f.'-format'; } return $flags; } 
+public function isFuzzy() { return 4 === $this->__get('flag'); } 
+public function getFormat() { $f = $this->__get('format'); if( is_string($f) && '' !== $f ){ return $f; } return ''; } 
+private function getPoFlags() { $flags = []; foreach( array_merge( [$this], $this->__get('plurals')?:[] ) as $form ){ if( $form->isFuzzy() ){ $flags[0] = 'fuzzy'; } $f = $form->getFormat(); if( '' !== $f ){ $flags[1] = $f.'-format'; } } return array_values($flags); } 
 public function getHash() { $hash = $this->getKey(); if( $this->offsetExists('plurals') ){ foreach( $this->offsetGet('plurals') as $p ){ $hash .= "\0".$p->getHash(); break; } } return $hash; } 
 public function getKey() { $msgid = (string) $this['source']; $msgctxt = (string) $this->__get('context'); if( '' !== $msgctxt ){ if( '' === $msgid ){ $msgid = '('.$msgctxt.')'; } $msgid = $msgctxt."\4".$msgid; } return $msgid; } 
 public function exportSerial(  $f = 'target' ) { $a = [ $this[$f] ]; if( $this->offsetExists('plurals') ){ $plurals = $this->offsetGet('plurals'); if( is_array($plurals) ){ foreach( $plurals as $p ){ $a[] = $p[$f]; } } } return $a; } 

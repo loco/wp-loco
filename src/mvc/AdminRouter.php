@@ -61,11 +61,6 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             $title = __('Languages &lsaquo; Loco', 'loco-translate');
             add_submenu_page( 'loco', $title, $label, $cap, 'loco-lang', $render );
 
-            // string translation simulator, currently in development
-            $label = __('Debugger', 'loco-translate');
-            //$title = __('String debugger &lsaquo; Loco', 'loco-translate');
-            add_submenu_page( 'loco', $label, $label, $cap, 'loco-debug', $render );
-
             // settings page only for users with manage_options permission in addition to Loco access:
             if( $user->has_cap('manage_options') ){
                 $title = __('Plugin settings','loco-translate');
@@ -75,6 +70,12 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             else {
                 $title = __('User options','loco-translate');
                 add_submenu_page( 'loco', $title, __('Settings','loco-translate'), $cap, 'loco-config-user', $render );
+            }
+
+            // string translation simulator
+            if( loco_debugging() ){
+                $label = __('Debug', 'loco-translate');
+                add_submenu_page( 'loco', $label, $label, $cap, 'loco-debug', $render );
             }
         }
     }
@@ -193,7 +194,6 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             '{type}-view' => 'bundle_View',
             '{type}-conf' => 'bundle_Conf',
             '{type}-setup' => 'bundle_Setup',
-            '{type}-debug' => 'bundle_Debug', // <- removed
             'lang-view' => 'bundle_Locale',
             // file initialization
             '{type}-msginit' => 'init_InitPo',

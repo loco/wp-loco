@@ -31,9 +31,10 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      * Generate a link for a specific file resource within a project
      * @return string
      */
-    private function getResourceLink( $page, Loco_package_Project $project, Loco_gettext_Metadata $meta, array $args = [] ){
-        $args['path'] = $meta->getPath(false);
-        return $this->getProjectLink( $page, $project, $args );
+    private function getResourceLink( $page, Loco_package_Project $project, Loco_gettext_Metadata $meta ){
+        return $this->getProjectLink( $page, $project, [
+            'path' => $meta->getPath(false),
+        ] );
     }
 
 
@@ -51,7 +52,6 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
 
     /**
      * Initialize view parameters for a project
-     * @param Loco_package_Project
      * @return Loco_mvc_ViewParams
      */
     private function createProjectParams( Loco_package_Project $project ){
@@ -64,6 +64,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'slug' => $slug,
             'domain' => $domain,
             'short' => ! $slug || $project->isDomainDefault() ? $domain : $domain.'→'.$slug,
+            'warnings' => [],
         ] );
 
         // POT template file
@@ -134,15 +135,27 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             ] );
         }
         
+        // foreach locale, establish if text domain is installed in system location, flag if not.
+        $installed = [];
+        foreach( $p['po'] as $pair ){
+            $lc = $pair['lcode'];
+            if( $pair['installed'] ){
+                $installed[$lc] = true;
+            }
+            else if( ! array_key_exists($lc,$installed) ){
+                $installed[$lc] = false;
+            }
+        }
+        $p['installed'] = $installed;
+        if( in_array(false,$installed,true) ){
+            $p['warnings'][] = __('Custom translations may not work without System translations installed','loco-translate');
+        }
         return $p;
     }
 
 
     /**
      * Collect PO/MO pairings, ignoring any PO that is in use as a template
-     * @param Loco_fs_FileList PO files
-     * @param Loco_fs_FileList MO files
-     * @param Loco_fs_File POT file
      * @return array[]
      */
     private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, Loco_fs_File $pot = null ){     
@@ -175,17 +188,13 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     
     /**
      * Initialize view parameters for each row representing a localized resource pair
-     * @param Loco_package_Project
-     * @param Loco_fs_LocaleFileList localized PO files
-     * @param Loco_fs_LocaleFileList localized MO files
      * @return array collection of entries corresponding to available PO/MO pair.
      */
     private function createProjectPairs( Loco_package_Project $project, Loco_fs_LocaleFileList $po, Loco_fs_LocaleFileList $mo ){
         // populate official locale names for all found, or default to our own
         if( $locales = $po->getLocales() + $mo->getLocales() ){
             $api = new Loco_api_WordPressTranslations;
-            /* @var $locale Loco_Locale */
-            foreach( $locales as $tag => $locale ){
+            foreach( $locales as $locale ){
                 $locale->ensureName($api);
             }
         }
@@ -213,15 +222,13 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
 
 
     /**
-     * @param Loco_package_Project
-     * @param Loco_fs_File
-     * @param Loco_Locale
      * @return Loco_mvc_ViewParams
      */
     private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
         // Pull Gettext meta data from cache if possible
         $meta = Loco_gettext_Metadata::load($file);
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
+        $dType = $dir->getTypeId();
         // routing arguments
         $args =  [
             'path' => $meta->getPath(false), 
@@ -240,7 +247,8 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             'todo' => $meta->countIncomplete(),
             'total' => $meta->getTotal(),
             // author / system / custom / other
-            'store' => $dir->getTypeLabel( $dir->getTypeId() ),
+            'installed' => 'wplang' === $dType,
+            'store' => $dir->getTypeLabel($dType),
             // links
             'view' => $this->getProjectLink('file-view', $project, $args ),
             'info' => $this->getProjectLink('file-info', $project, $args ),
@@ -254,8 +262,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     
     /**
      * Prepare view parameters for all projects in a bundle
-     * @param Loco_package_Bundle
-     * @return array<Loco_mvc_ViewParams>
+     * @return Loco_mvc_ViewParams[]
      */
     private function createBundleListing( Loco_package_Bundle $bundle ){
         $projects = [];

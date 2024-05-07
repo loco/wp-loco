@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.8-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-05-03 17:12+0000\n"
+"POT-Creation-Date: 2024-05-07 10:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -41,14 +41,6 @@ msgid ""
 msgid_plural ""
 "%1$s files over %2$s have been skipped. (Largest is %3$s). Check all strings "
 "are present before saving."
-msgstr[0] ""
-msgstr[1] ""
-
-#. 1: Number of strings; 2: Text Domain; e.g. 100 strings extracted from source code for "loco-translate"
-#: src/package/Debugger.php:180
-#, php-format
-msgid "%1$s string extracted from source code for \"%2$s\""
-msgid_plural "%1$s strings extracted from source code for \"%2$s\""
 msgstr[0] ""
 msgstr[1] ""
 
@@ -385,10 +377,6 @@ msgstr ""
 msgid "Bundle configuration saved"
 msgstr ""
 
-#: src/admin/bundle/DebugController.php:24
-msgid "Bundle diagnostics"
-msgstr ""
-
 #: tpl/admin/bundle/locale.php:32 tpl/admin/list/inc-table.php:11
 msgid "Bundle name"
 msgstr ""
@@ -481,12 +469,6 @@ msgstr ""
 msgid "Configure %s"
 msgstr ""
 
-#: src/package/Debugger.php:198
-msgid "Configured domain has no extractable strings"
-msgid_plural "%u configured domains have no extractable strings"
-msgstr[0] ""
-msgstr[1] ""
-
 #: tpl/admin/file/delete.php:12
 msgid "Confirm delete"
 msgstr ""
@@ -518,7 +500,7 @@ msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
 #: src/admin/init/InitPoController.php:215
-#: src/admin/bundle/ViewController.php:132 tpl/admin/init/init-pot.php:40
+#: src/admin/bundle/ViewController.php:133 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
 
@@ -538,13 +520,14 @@ msgstr ""
 msgid "Custom language"
 msgstr ""
 
-#: src/error/Debug.php:19 src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:128
-msgid "Debug"
+#: src/admin/bundle/ViewController.php:151
+msgid "Custom translations may not work without System translations installed"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:65
-msgid "Debugger"
+#: src/mvc/AdminRouter.php:77 src/error/Debug.php:19
+#: src/admin/config/DebugController.php:12
+#: src/admin/bundle/BaseController.php:128
+msgid "Debug"
 msgstr ""
 
 #: src/admin/file/BaseController.php:122 tpl/admin/file/diff.php:32
@@ -620,7 +603,7 @@ msgstr ""
 msgid "Edit file headers"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:123
+#: src/admin/bundle/ViewController.php:124
 msgid "Edit template"
 msgstr ""
 
@@ -1306,7 +1289,7 @@ msgstr ""
 
 #: src/admin/init/InitPoController.php:16
 #: src/admin/init/InitPoController.php:113
-#: src/admin/file/BaseController.php:141 src/admin/bundle/ViewController.php:98
+#: src/admin/file/BaseController.php:141 src/admin/bundle/ViewController.php:99
 msgid "New language"
 msgstr ""
 
@@ -1349,7 +1332,7 @@ msgstr ""
 msgid "No translation APIs configured"
 msgstr ""
 
-#: tpl/admin/bundle/inc-po-table.php:110
+#: tpl/admin/bundle/inc-po-table.php:124
 #, php-format
 msgid "No translations found for \"%s\""
 msgstr ""
@@ -1456,7 +1439,7 @@ msgstr ""
 msgid "Plugin not found: %s"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:71 src/admin/config/ApisController.php:59
+#: src/mvc/AdminRouter.php:66 src/admin/config/ApisController.php:59
 #: src/admin/config/PrefsController.php:42
 #: src/admin/config/VersionController.php:22
 #: src/admin/config/SettingsController.php:79 tpl/admin/help/tab-config.php:2
@@ -1687,7 +1670,7 @@ msgstr ""
 msgid "Sets"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:72 src/mvc/AdminRouter.php:77
+#: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
 #: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:169
 #: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
 #: tpl/admin/errors/no-backups.php:24
@@ -1745,7 +1728,7 @@ msgstr ""
 msgid "Start translating"
 msgstr ""
 
-#: src/admin/DebugController.php:759
+#: src/admin/DebugController.php:782
 msgid "String debugger"
 msgstr ""
 
@@ -1987,10 +1970,6 @@ msgstr ""
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
-#: tpl/admin/bundle/debug.php:10
-msgid "This information is for developers to find problems in the bundle setup"
-msgstr ""
-
 #. Warning when POT file is opened in the file editor. It can be disabled in settings.
 #: src/admin/file/EditController.php:168
 msgid ""
@@ -2145,7 +2124,7 @@ msgstr ""
 msgid "Upload a translation file"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:106
+#: src/admin/bundle/ViewController.php:107
 msgid "Upload PO"
 msgstr ""
 
@@ -2165,7 +2144,7 @@ msgstr ""
 msgid "Useful links:"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:76 src/admin/config/PrefsController.php:13
+#: src/mvc/AdminRouter.php:71 src/admin/config/PrefsController.php:13
 #: src/admin/config/BaseController.php:19
 msgid "User options"
 msgstr ""
@@ -2200,7 +2179,7 @@ msgstr ""
 msgid "View"
 msgstr ""
 
-#: src/admin/bundle/ViewController.php:115
+#: src/admin/bundle/ViewController.php:116
 msgid "View template"
 msgstr ""
 

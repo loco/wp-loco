@@ -248,28 +248,45 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
 
     /**
-     * Look up a source key in given messages, returning source if untranslated, and null if not found.
-     * @return string|null 
+     * @return LocoPoMessage|null
      */
-    private function findKey( $findKey, $pluralIndex, Loco_gettext_Data $messages ){
+    private function findMessage( $findKey, Loco_gettext_Data $messages ){
         /* @var LocoPoMessage $m */
         foreach( $messages as $m ){
             if( $m->getKey() === $findKey ){
-                $values = $m->exportSerial();
-                if( array_key_exists($pluralIndex,$values) && '' !== $values[$pluralIndex] ){
-                    return $values[$pluralIndex];
-                }
-                $values = $m->exportSerial('source');
-                if( $pluralIndex ){
-                    if( array_key_exists(1,$values) && '' !== $values[1] ){
-                        return $values[1];
-                    }
-                    $this->log('! message is singular, defaulting to msgid');
-                }
-                return $values[0];
+                return $m;
             }
         }
         return null;
+    }
+
+
+    /**
+     * Get translation from a message falling back to source, as per __, _n etc..
+     */
+    private function getMsgstr( LocoPoMessage $m, $pluralIndex = 0 ){
+        $values = $m->exportSerial();
+        if( array_key_exists($pluralIndex,$values) && '' !== $values[$pluralIndex] ){
+            return $values[$pluralIndex];
+        }
+        $values = $m->exportSerial('source');
+        if( $pluralIndex ){
+            if( array_key_exists(1,$values) && '' !== $values[1] ){
+                return $values[1];
+            }
+            $this->log('! message is singular, defaulting to msgid');
+        }
+        return $values[0];
+    }
+
+
+    /**
+     * Look up a source key in given messages, returning source if untranslated, and null if not found.
+     * @return string|null 
+     */
+    private function findMsgstr( $findKey, $pluralIndex, Loco_gettext_Data $messages ){
+        $m = $this->findMessage( $findKey, $messages );
+        return $m ? $this->getMsgstr( $m, $pluralIndex ) : null;
     }
 
 
@@ -588,7 +605,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                         $pluralIndex = $this->selectPluralForm( $quantity, $pluralIndex, $this->parsePluralForms($header) );
                     }
                 }
-                $msgstr = $this->findKey( $findKey, $pluralIndex, $data );
+                $msgstr = $this->findMsgstr( $findKey, $pluralIndex, $data );
                 if( is_null($msgstr) ){
                     $this->log('! No match in JSON');
                 }
@@ -657,23 +674,30 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             // even if PO file is missing, we can search the MO, JSON etc..
             $siblings = new Loco_fs_Siblings($pofile);
             $siblings->setDomain($domain);
+            $exts = [];
             foreach( $siblings->expand() as $file ){
                 try {
-                    if( ! preg_match('!^(?:pot?|mo|json|l10n\\.php)$!', $file->fullExtension() ) || ! $file->exists() ){
+                    $ext = strtolower( $file->fullExtension() );
+                    if( ! preg_match('!^(?:pot?|mo|json|l10n\\.php)$!',$ext) || ! $file->exists() ){
                         continue;
                     }
                     $searched++;
-                    $value = $this->findKey( $findKey, $pluralIndex, Loco_gettext_Data::load($file) );
+                    $value = $this->findMsgstr( $findKey, $pluralIndex, Loco_gettext_Data::load($file) );
                     if( is_string($value) ){
                         $matched++;
                         $args = [ 'msgstr' => $value ];
                         $matches[$groupIdx][] = new Loco_mvc_FileParams($args,$file);
                         $this->log('> found in %s => %s', $file, var_export($value,true) );
+                        $exts[$ext] = true;
                     }
                 }
                 catch( Exception $e ){
                     Loco_error_Debug::trace( '%s in %s', $e->getMessage(), $file );
                 }
+            }
+            // warn if found in PO, but not MO.
+            if( isset($exts['po']) && ! isset($exts['mo']) ){
+                Loco_error_AdminNotices::debug('Found in PO, but not MO. Is it fuzzy? Does it need recompiling?');
             }
         }
 
@@ -723,7 +747,6 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $message = new LocoPoMessage(['source'=>'']);
         $extractor = loco_wp_extractor();
         $extractor->setDomain($domain);
-        /* @var Loco_fs_File[] $files */
         $files = $project->getSourceFinder()->group('php')->export()->getArrayCopy();
         while( $files ){
             $key = array_rand($files);

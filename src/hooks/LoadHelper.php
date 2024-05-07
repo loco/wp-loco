@@ -16,7 +16,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Protects against recursive calls to load_textdomain()
      * @var bool[]
      */    
-    private $lock;
+    private $lock = [];
 
     /**
      * Custom/safe directory path with trailing slash
@@ -28,13 +28,13 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Locations that can be mapped to equivalent paths under custom directory
      * @var array[]
      */
-    private $map;
+    private $map = [];
 
     /**
      * Deferred JSON files under our custom directory, indexed by script handle
      * @var string[]
      */
-    private $json;
+    private $json = [];
 
     /**
      * Registry of text domains we've seen, whether loaded or not. This will catch early JIT problem.
@@ -47,8 +47,6 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */
     public function __construct(){
         parent::__construct();
-        $this->lock = [];
-        $this->json = [];
         $this->base = trailingslashit( loco_constant('LOCO_LANG_DIR') );
         // add system locations which have direct equivalent custom/safe locations under LOCO_LANG_DIR
         // not adding theme paths because as long as load_theme_textdomain is used they will be mapped by context.
@@ -208,8 +206,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
                 }
                 Loco_error_Debug::trace($message);
                 // establish who called the translation function
-                $stack = debug_backtrace(0);
                 $breakable = false;
+                $stack = debug_backtrace(0);
                 foreach( $stack as $i => $callee ){
                     if( '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
                         $breakable = true;
@@ -234,8 +232,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `gettext` filter callback. Enabled only in Debug mode.
      */
-    public function debug_gettext( $translation, $text, $domain = 'default' ){
-        $this->handle_unloaded_domain($domain);
+    public function debug_gettext( $translation = '', $text = '', $domain = '' ){
+        $this->handle_unloaded_domain($domain?:'default');
         return $translation;
     }
 
@@ -243,8 +241,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `ngettext` filter callback. Enabled only in Debug mode.
      */
-    public function debug_ngettext( $translation, $single, $plural, $number, $domain = 'default' ){
-        $this->handle_unloaded_domain($domain);
+    public function debug_ngettext( $translation = '', $single = '', $plural = '', $number = 0, $domain = '' ){
+        $this->handle_unloaded_domain($domain?:'default');
         return $translation;
     }
 
@@ -252,8 +250,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `gettext_with_context` filter callback. Enabled only in Debug mode.
      */
-    public function debug_gettext_with_context( $translation, $text, $context, $domain = 'default' ){
-        $this->handle_unloaded_domain($domain);
+    public function debug_gettext_with_context( $translation = '', $text = '', $context = '', $domain = '' ){
+        $this->handle_unloaded_domain($domain?:'default');
         return $translation;
     }
 
@@ -261,8 +259,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `ngettext_with_context` filter callback. Enabled only in Debug mode.
      */
-    public function debug_ngettext_with_context( $translation, $single, $plural, $number, $context, $domain = 'default' ){
-        $this->handle_unloaded_domain($domain);
+    public function debug_ngettext_with_context( $translation = '', $single = '', $plural = '', $number = 0, $context = '', $domain = '' ){
+        $this->handle_unloaded_domain($domain?:'default');
         return $translation;
     }
 

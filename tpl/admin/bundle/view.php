@@ -16,9 +16,9 @@ foreach( $projects as $p ): ?>
         else:?> 
         <h2><?php $p->e('name')?> <span>(<?php $p->e('short')?>)</span></h2><?php
         endif;
-        
+
         echo $this->render('inc-po-links', [ 'nav' => $p->nav ] );
-        echo $this->render('inc-po-table', [ 'pairs' => $p->po, 'domain' => $p->domain ] );
+        echo $this->render('inc-po-table', [ 'pairs' => $p->po, 'domain' => $p->domain, 'installed'=>$p->installed, 'warnings'=>$p->warnings ] );
         ?> 
                 
     </div><?php
