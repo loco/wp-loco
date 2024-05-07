@@ -120,6 +120,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         // default locale is a placeholder
         $locale = new Loco_Locale('zxx');
         $content_dir = untrailingslashit( loco_constant('WP_CONTENT_DIR') );
+        $extracting = (bool) $this->get('extract');
         $copying = false;
         
         // Permit using any provided file a template instead of POT
@@ -185,6 +186,40 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         else {
             $filechoice = new Loco_fs_FileList;
         }
+        
+        
+        // Define suitable prompts for extracting from source, creating a template, or (preferred) copy an existing PO.
+        $prompts = [];
+        if( ! $copying ){
+            $args = array_intersect_key( $_GET,['bundle'=>'','domain'=>'']);
+            // link to extract a new template if none exists
+            $prompts['xgettext'] = new Loco_mvc_ViewParams( [ 
+                'link' => Loco_mvc_AdminRouter::generate( $this->get('type' ).'-xgettext', $args ),
+                'text' => __('Create template','loco-translate'),
+            ] );
+            // link to direct extraction here, if not already doing
+            $prompts['skip'] = new Loco_mvc_ViewParams( [
+                'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $args + ['extract'=>'1'] ),
+                'text' => __('Skip template','loco-translate'),
+            ] );
+            // link to copy an existing PO file, if there's an installed one
+            /* @var Loco_fs_LocaleFile $pofile */
+            foreach( $project->findLocaleFiles('po') as $pofile ){
+                $dir = new Loco_fs_LocaleDirectory( $pofile->dirname() );
+                if( 'wplang' !== $dir->getTypeId() ){
+                    continue;
+                }
+                // if we start pre-populating locale, we may want to use the same one here
+                // $pofile->getLocale() == $locale 
+                $args = array_intersect_key( $_GET,['bundle'=>'','domain'=>'']);
+                $args['path'] = $pofile->getRelativePath($content_dir);
+                $prompts['copy'] = new Loco_mvc_FileParams( [
+                    'link' => Loco_mvc_AdminRouter::generate( $this->get('type' ).'-msginit', $args ),
+                    'text' => __('Copy PO file','loco-translate'),
+                ], $pofile );
+                break;
+            }
+        }
 
 
         // show information about POT file if we are initializing from template
@@ -205,17 +240,18 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 $pofile->normalize( $potfile->dirname() );
                 $filechoice->add( $pofile );
             }
-            /// else if POT is in a folder we don't know about, we may as well add to the choices
-            // TODO this means another utility function in project for prefixing rules on individual location
         }
-        // else no template exists, so we prompt to extract from source
+        // else not initializing from template- prompt to copy existing PO file
+        else if( array_key_exists('copy',$prompts) && ! $extracting ){
+            $this->set('copy', $prompts['copy'] );
+            $this->set('skip', $prompts['skip'] );
+            $this->set('ext', $prompts['xgettext'] );
+            return $this->view('admin/init/init-copy');
+        }
+        // else prompt to extract from source (advanced).
         else if( 2 > Loco_data_Settings::get()->pot_expected ){
-            $this->set( 'ext', new Loco_mvc_ViewParams( [
-                'link' => Loco_mvc_AdminRouter::generate( $this->get('type').'-xgettext', $_GET ),
-                'text' => __('Create template','loco-translate'),
-            ] ) );
             // if allowing source extraction without warning show brief description of source files
-            if( $this->get('extract') || 0 === Loco_data_Settings::get()->pot_expected ){
+            if( $extracting || 0 === Loco_data_Settings::get()->pot_expected ){
                 // Tokenizer required for string extraction
                 if( ! loco_check_extension('tokenizer') ){
                     return $this->view('admin/errors/no-tokenizer');
@@ -223,13 +259,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 $nfiles = count( $project->findSourceFiles() );
                 // translators: Were %s is number of source files that will be scanned
                 $summary = sprintf( _n('%s source file will be scanned for translatable strings','%s source files will be scanned for translatable strings',$nfiles,'loco-translate'), number_format_i18n($nfiles) );
+                $extracting = true;
             }
             // else prompt for template creation before continuing
             else {
-                $this->set( 'skip', new Loco_mvc_ViewParams( [
-                    'link' => Loco_mvc_AdminRouter::generate( $this->get('_route'), $_GET + [ 'extract' => '1' ] ),
-                    'text' => __('Skip template','loco-translate'),
-                ] ) );
                 // POT could still be defined, it might just not exist yet
                 if( $potfile ){
                     $this->set('pot', Loco_mvc_FileParams::create($potfile) );
@@ -241,6 +274,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                         'text' => __('Assign template','loco-translate'),
                     ] ) );
                 }
+                $this->set('ext', $prompts['xgettext'] );
+                $this->set('skip', $prompts['skip'] );
                 return $this->view('admin/init/init-prompt');
             }
         }
@@ -318,6 +353,25 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             'href' => apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/msginit'),
             'text' => __("What's this?",'loco-translate'),
         ] ) );
+        
+        // add a prompt if there's a better option for creating a new PO
+        if( ! $copying ){
+            if( array_key_exists('copy',$prompts) ){
+                $prompt = $prompts['copy'];
+                $prompt['text'] = __( sprintf('Copy %s instead',$prompt->__get('name') ),'loco-translate');
+            }
+            else {
+                $prompt = $prompts['xgettext'];
+                $prompt['text'] = __('Create template instead','loco-translate');
+            }
+            if( $extracting ){
+                $prompt['title'] = __("You're creating translations directly from source code",'loco-translate');
+            }
+            else {
+                $prompt['title'] = __("You're creating translations from a POT file",'loco-translate');
+            }
+            $this->set('prompt',$prompt);
+        }
 
         // file system prompts will be handled when paths are selected (i.e. we don't have one yet)
         $this->prepareFsConnect( 'create', '' );

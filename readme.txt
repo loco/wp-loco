@@ -1,4 +1,4 @@
-=== Loco Translate ===
+	=== Loco Translate ===
 Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
@@ -106,6 +106,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Added debug messages about premature domain loading
 * Added waning when system translations not installed
 * Compiler avoids writing empty JSON translation files
+* UI promotes PO copy over msginit/xgettext routes
 * Bumped WordPress compatibility to 6.5.2
 
 = 2.6.7 =

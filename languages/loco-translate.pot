@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.8-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-05-07 10:46+0000\n"
+"POT-Creation-Date: 2024-05-07 13:44+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -45,7 +45,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. 1: Number of strings; 2: Name of POT file; e.g. "100 strings found in file.pot"
-#: src/admin/init/InitPoController.php:195
+#: src/admin/init/InitPoController.php:230
 #, php-format
 msgid "%1$s string found in %2$s"
 msgid_plural "%1$s strings found in %2$s"
@@ -159,7 +159,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Were %s is number of source files that will be scanned
-#: src/admin/init/InitPoController.php:225
+#: src/admin/init/InitPoController.php:261
 #, php-format
 msgid "%s source file will be scanned for translatable strings"
 msgid_plural "%s source files will be scanned for translatable strings"
@@ -235,7 +235,7 @@ msgstr[1] ""
 msgid "A newer version of Loco Translate is available for download"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:33 tpl/admin/init/init-pot.php:42
+#: tpl/admin/init/init-prompt.php:31 tpl/admin/init/init-pot.php:42
 msgid "About templates"
 msgstr ""
 
@@ -335,7 +335,7 @@ msgid ""
 "file?"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:241
+#: src/admin/init/InitPoController.php:274
 msgid "Assign template"
 msgstr ""
 
@@ -349,10 +349,6 @@ msgstr ""
 
 #: tpl/admin/init/init-po.php:52
 msgid "Available languages"
-msgstr ""
-
-#: tpl/admin/init/init-prompt.php:45
-msgid "Back"
 msgstr ""
 
 #: tpl/admin/errors/no-backups.php:16
@@ -489,6 +485,10 @@ msgstr ""
 msgid "Copy"
 msgstr ""
 
+#: src/admin/init/InitPoController.php:218
+msgid "Copy PO file"
+msgstr ""
+
 #: tpl/admin/init/init-po.php:132 tpl/admin/file/conf.php:32
 #, php-format
 msgid "Copy target translations from \"%s\""
@@ -499,12 +499,12 @@ msgstr ""
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:215
+#: src/admin/init/InitPoController.php:198
 #: src/admin/bundle/ViewController.php:133 tpl/admin/init/init-pot.php:40
 msgid "Create template"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:14
+#: src/admin/init/InitPoController.php:365
 msgid "Create template instead"
 msgstr ""
 
@@ -1647,10 +1647,6 @@ msgstr ""
 msgid "See all themes"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:46
-msgid "See FAQ"
-msgstr ""
-
 #: tpl/admin/config/apis.php:115
 msgid "See full disclaimer"
 msgstr ""
@@ -1708,7 +1704,7 @@ msgstr ""
 msgid "Skip PHP files larger than:"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:231
+#: src/admin/init/InitPoController.php:203
 msgid "Skip template"
 msgstr ""
 
@@ -1755,10 +1751,6 @@ msgstr ""
 msgid "Suggested translations"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:40
-msgid "Suggestion"
-msgstr ""
-
 #: src/admin/config/SettingsController.php:51
 msgid "Super Admin"
 msgstr ""
@@ -1798,7 +1790,7 @@ msgstr ""
 msgid "Template file created"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:16
+#: tpl/admin/init/init-copy.php:15 tpl/admin/init/init-prompt.php:15
 msgid "Template missing"
 msgstr ""
 
@@ -1898,7 +1890,7 @@ msgid ""
 "needed"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:24
+#: tpl/admin/init/init-prompt.php:23
 msgid "This bundle doesn't define a translations template file"
 msgstr ""
 
@@ -1942,7 +1934,7 @@ msgstr ""
 msgid "This bundle's configuration is saved in the WordPress database"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:20
+#: tpl/admin/init/init-prompt.php:19
 msgid ""
 "This bundle's template file doesn't exist yet. We recommend you create it "
 "before adding languages"
@@ -2203,7 +2195,7 @@ msgstr ""
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:319 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:354 tpl/admin/file/info.php:113
 msgid "What's this?"
 msgstr ""
 
@@ -2261,6 +2253,12 @@ msgstr ""
 msgid "XML supplied is empty"
 msgstr ""
 
+#: tpl/admin/init/init-copy.php:18
+msgid ""
+"You can copy an existing PO file (recommended), or extract directly from "
+"source (advanced)"
+msgstr ""
+
 #: tpl/admin/bundle/setup/meta.php:15 tpl/admin/bundle/setup/author.php:15
 #: tpl/admin/bundle/setup/core.php:14
 msgid ""
@@ -2281,12 +2279,12 @@ msgid ""
 "You can update these translations directly from the editor to the file system"
 msgstr ""
 
-#: tpl/admin/init/init-prompt.php:42
-msgid "You can use existing translations as a template using the Copy feature."
+#: src/admin/init/InitPoController.php:368
+msgid "You're creating translations directly from source code"
 msgstr ""
 
-#: tpl/admin/init/init-po.php:13
-msgid "You're creating translations directly from source code"
+#: src/admin/init/InitPoController.php:371
+msgid "You're creating translations from a POT file"
 msgstr ""
 
 #: tpl/admin/config/version.php:28

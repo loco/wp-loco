@@ -1,15 +1,14 @@
 <?php
 /**
- * Notice before creating a PO that there is no POT
+ * Notice before creating a PO that there is no POT.
  */
 $this->extend('../layout');
 $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/templates');
 
-/* @var Loco_mvc_ViewParams[] $tabs */
-/* @var Loco_mvc_ViewParams $ext */
-/* @var Loco_mvc_ViewParams $conf */
-/* @var Loco_mvc_ViewParams $skip */
 /* @var Loco_mvc_ViewParams $params */
+/* @var Loco_mvc_ViewParams $ext */
+/* @var Loco_mvc_ViewParams $skip */
+/* @var Loco_mvc_ViewParams $conf */
 ?> 
     <div class="panel panel-warning">
         <h3 class="has-icon">
@@ -28,21 +27,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
             <a href="<?php $ext->e('link')?>" class="button button-link has-icon icon-add"><?php $ext->e('text')?></a>
             <a href="<?php $skip->e('link')?>" class="button button-link has-icon icon-next"><?php $skip->e('text')?></a><?php
             if( $this->has('conf') ):?> 
-            <a href="<?php $conf->e('link')?>" class="button button-link has-icon icon-wrench"><?php $conf->e('text')?></a><?php
-            endif?> 
+            <a href="<?php $conf->e('link')?>" class="button button-link has-icon icon-wrench"><?php $conf->e('text')?></a><?php endif?> 
             <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('About templates','loco-translate')?></a>
-        </p>
-    </div><?php
-
-    $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/faqs/template-missing');
-    ?> 
-    <div class="panel panel-info">
-        <h3 class="has-icon"><?php esc_html_e('Suggestion','loco-translate')?></h3>
-        <p>
-            <?php esc_html_e('You can use existing translations as a template using the Copy feature.','loco-translate')?> 
-        </p>
-        <p>
-            <a class="button button-link has-icon icon-back" href="<?php $tabs[0]->e('href')?>"><?php esc_html_e('Back','loco-translate')?></a>
-            <a class="button button-link has-icon icon-help" href="<?php echo esc_url($help)?>" target="_blank"><?php esc_html_e('See FAQ','loco-translate')?></a>
         </p>
     </div>

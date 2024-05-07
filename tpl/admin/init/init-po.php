@@ -6,12 +6,12 @@ $this->extend('../layout');
 
     // warn if doing direct extraction
     /* @var Loco_mvc_ViewParams $params */
-    /* @var Loco_mvc_ViewParams $ext */
-    if( $params->has('ext') ):?> 
+    /* @var Loco_mvc_ViewParams $prompt */
+    if( $params->has('prompt') ):?> 
     <div class="panel panel-info">
-        <p>
-            <?php esc_html_e("You're creating translations directly from source code",'loco-translate')?>.
-            <a href="<?php $ext->e('link')?>"><?php esc_html_e('Create template instead','loco-translate')?></a>.
+        <p><?php 
+            $prompt->e('title')?>.
+            <a href="<?php $prompt->e('link')?>"><?php $prompt->e('text')?></a>.
         </p>
     </div><?php
     endif;?> 
@@ -144,7 +144,7 @@ $this->extend('../layout');
                         <td>
                             <p>
                                 <label>
-                                    <input type="checkbox" name="json" value="1" />
+                                    <input type="checkbox" name="json" value="1" checked />
                                     <?php esc_html_e('Merge strings from related JSON files','loco-translate')?>
                                 </label>
                             </p>
@@ -154,7 +154,7 @@ $this->extend('../layout');
                         <td>
                             <p>
                                 <label>
-                                    <input type="checkbox" name="link" value="1" />
+                                    <input type="checkbox" name="link" value="1" checked />
                                     <?php esc_html_e('Use this file as template when running Sync','loco-translate')?>
                                 </label>
                             </p>
