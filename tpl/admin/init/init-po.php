@@ -13,11 +13,7 @@ $this->extend('../layout');
             <a href="<?php $prompt->e('link')?>"><?php $prompt->e('text')?></a>.
         </p>
     </div><?php
-    endif;
-
-/* @var null|Loco_Locale $sourceLocale */
-$localeTag = (string) $params->__get('sourceLocale');
-?> 
+    endif?> 
 
 
     <div class="panel">

@@ -28,15 +28,24 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
 
 
     /**
-     * Sort to the left the best option for saving new translation files
+     * Sort to the left the best option for saving new translation files.
+     * This favours custom locations, with system secondary. No other locations will be pre-selected. 
      * @param Loco_mvc_ViewParams[] $choices
      * @return Loco_mvc_ViewParams|null
      */
     private function sortPreferred( array $choices ){
         usort( $choices, [__CLASS__,'_onSortPreferred'] );
-        $best = current( $choices );
-        if( $best && ! $best['disabled'] ){
-            return $best;
+        foreach( $choices as $choice ){
+            if( $choice['disabled'] || $choice['copying'] || $choice['exists']){
+                continue;
+            }
+            // avoid promoting the Author location
+            $t = $choice['dirtype'];
+            if( 'theme' === $t || 'plugin' === $t){
+                continue;
+            }
+            // pre-select this. It should be a writable custom or system file.
+            return $choice;
         }
         return null;
     }
@@ -123,15 +132,17 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $content_dir = untrailingslashit( loco_constant('WP_CONTENT_DIR') );
         $extracting = (bool) $this->get('extract');
         $copying = false;
+        $sourcedir = '';
         
         // Permit using any provided file a template instead of POT
         if( $potpath = $this->get('path') ){
             $potfile = new Loco_fs_LocaleFile($potpath);
-            $potfile->normalize( $content_dir );
+            $potfile->normalize($content_dir);
             if( ! $potfile->exists() ){
                 throw new Loco_error_Exception('Forced template argument must exist');
             }
             $copying = true;
+            $sourcedir = $potfile->dirname();
             // forced source could be a POT (although UI would normally prevent it)
             if( $potfile->getSuffix() ){
                 $locale = $potfile->getLocale();
@@ -218,8 +229,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 if( 'wplang' !== $dir->getTypeId() ){
                     continue;
                 }
-                // if we start pre-populating locale, we may want to use the same one here
-                // $pofile->getLocale() == $locale 
+                // we don't know yet what locale the user will select, so pick first PO.
                 $args = array_intersect_key( $_GET,['bundle'=>'','domain'=>'']);
                 $args['path'] = $pofile->getRelativePath($content_dir);
                 $prompts['copy'] = new Loco_mvc_FileParams( [
@@ -326,9 +336,12 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                 'writable' => $writable,
                 'disabled' => $disabled,
                 'systype' => $systype,
-                'parent' => Loco_mvc_FileParams::create( $parent ),
+                'dirtype' => $typeId,
+                'parent' => Loco_mvc_FileParams::create($parent),
                 'hidden' => $pofile->getRelativePath($content_dir),
                 'holder' => str_replace( $suffix, '<span>{locale}</span>.po', $pofile->basename() ),
+                'copying' => $sourcedir === $parent->getPath(),
+                'exists' => $copying && $pofile->exists(),
             ] );
             $sortable[] = $choice;
             $locations[$typeId]['paths'][] = $choice;
@@ -338,8 +351,9 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         uksort( $locations, [__CLASS__,'compareLocationKeys'] );
         $this->set( 'locations', $locations );
 
-        // pre-select best (safest/writable) option
-        if( $preferred = $this->sortPreferred( $sortable ) ){
+        // pre-select best option, excluding the current source if copying
+        $preferred = $this->sortPreferred( $sortable );
+        if( $preferred instanceof ArrayAccess ){
             $preferred['checked'] = 'checked';
         }
         // else show total lock message. probably file mods disallowed
