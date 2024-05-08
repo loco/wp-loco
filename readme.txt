@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
 Requires PHP: 5.6.20
 Tested up to: 6.5.3
-Stable tag: 2.6.7
+Stable tag: 2.6.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,10 +101,10 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.8 =
-* Added experimental string debugger
+* Added string debugger
 * Added Zip download button instead of MO
 * Added debug messages about premature domain loading
-* Added waning when system translations not installed
+* Added warning when system translations not installed
 * Compiler avoids writing empty JSON translation files
 * UI promotes PO copy over msginit/xgettext routes
 * Populating msginit fields when copying a PO
