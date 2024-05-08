@@ -118,6 +118,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         $this->set( 'breadcrumb', $breadcrumb );
         
         // default locale is a placeholder
+        $localeTag = '';
         $locale = new Loco_Locale('zxx');
         $content_dir = untrailingslashit( loco_constant('WP_CONTENT_DIR') );
         $extracting = (bool) $this->get('extract');
@@ -134,7 +135,10 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             // forced source could be a POT (although UI would normally prevent it)
             if( $potfile->getSuffix() ){
                 $locale = $potfile->getLocale();
-                $this->set('sourceLocale', $locale );
+                if( $locale->isValid() ){
+                    $this->set('sourceLocale', $locale );
+                    $localeTag = (string) $locale;
+                }
             }
         }
         // else project not configured. UI should prevent this by not offering msginit
@@ -160,6 +164,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     'value' => $tag,
                     'icon'  => $tmp->getIcon(),
                     'label' => $tmp->ensureName($api),
+                    'selected' => $tag === $localeTag ? ' selected' : ''
                 ] );
             }
         }
@@ -170,13 +175,17 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
                     'value' => $tag,
                     'icon'  => $tmp->getIcon(),
                     'label' => $tmp->ensureName($api),
+                    'selected' => $tag === $localeTag ? ' selected' : ''
                 ] );
             }
         }
 
-        // two locale lists built for "installed" and "available" dropdowns
-        $this->set( 'locales', $locales );
-        $this->set( 'installed', $installed );
+        // two locale lists built for "installed" and "available" dropdowns. Else populate custom field.
+        $this->set('locales', $locales );
+        $this->set('installed', $installed );
+        if( $localeTag && ! array_key_exists($localeTag,$installed) && ! array_key_exists($localeTag,$locales) ){
+            $this->set('custom', $localeTag );
+        }
 
         // Critical that user selects the correct save location:
         if( $project ){
@@ -358,6 +367,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         if( ! $copying ){
             if( array_key_exists('copy',$prompts) ){
                 $prompt = $prompts['copy'];
+                // translators: %s will be replaced with a PO file name
                 $prompt['text'] = __( sprintf('Copy %s instead',$prompt->__get('name') ),'loco-translate');
             }
             else {

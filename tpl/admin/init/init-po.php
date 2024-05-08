@@ -4,7 +4,6 @@
  */
 $this->extend('../layout');
 
-    // warn if doing direct extraction
     /* @var Loco_mvc_ViewParams $params */
     /* @var Loco_mvc_ViewParams $prompt */
     if( $params->has('prompt') ):?> 
@@ -14,7 +13,11 @@ $this->extend('../layout');
             <a href="<?php $prompt->e('link')?>"><?php $prompt->e('text')?></a>.
         </p>
     </div><?php
-    endif;?> 
+    endif;
+
+/* @var null|Loco_Locale $sourceLocale */
+$localeTag = (string) $params->__get('sourceLocale');
+?> 
 
 
     <div class="panel">
@@ -27,7 +30,7 @@ $this->extend('../layout');
             $hidden->_e();?> 
             <table class="form-table">
                 <tbody class="loco-locales">
-                    <tr valign="top">
+                    <tr>
                         <th scope="row">
                             <label for="loco-select-locale">
                                 1. <?php esc_html_e('Choose a language','loco-translate')?>:
@@ -46,26 +49,26 @@ $this->extend('../layout');
                                         <optgroup label="<?php esc_attr_e( 'Installed languages', 'loco-translate' )?>"><?php
                                             /* @var Loco_mvc_ViewParams[] $installed */
                                             foreach( $installed as $option ):?> 
-                                            <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
+                                            <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"<?php $option->e('selected')?>><?php $option->e('label')?></option><?php
                                             endforeach;?> 
                                         </optgroup>
                                         <optgroup label="<?php esc_attr_e( 'Available languages', 'loco-translate' )?>"><?php
                                             /* @var Loco_mvc_ViewParams[] $locales */
                                             foreach( $locales as $option ):?> 
-                                            <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"><?php $option->e('label')?></option><?php
+                                            <option value="<?php $option->e('value')?>" data-icon="<?php $option->e('icon')?>"<?php $option->e('selected')?>><?php $option->e('label')?></option><?php
                                             endforeach;?> 
                                         </optgroup>
                                     </select>
                                 </div>
                             </fieldset>
                             <fieldset class="disabled">
-                                <label for="loco-user-selector-0">
-                                    <span><input type="radio" name="use-selector" value="0" /></span>
+                                <label for="loco-use-selector-0">
+                                    <span><input type="radio" name="use-selector" value="0" id="loco-use-selector-0" <?php $params->has('custom') && print 'checked '?>/></span>
                                     <?php esc_attr_e('Custom language','loco-translate')?>:
                                 </label>
                                 <div>
                                     <span class="lang nolang"></span>
-                                    <span class="loco-clearable"><input type="text" maxlength="14" name="custom-locale" value="" /></span>
+                                    <span class="loco-clearable"><input type="text" maxlength="14" name="custom-locale" value="<?php $params->e('custom')?>" /></span>
                                 </div>
                             </fieldset>
                         </td>
@@ -79,7 +82,9 @@ $this->extend('../layout');
                             </label>
                         </th>
                         <td>
-                            <a href="<?php $help->e('href')?>#locations" class="has-icon icon-help" target="_blank" tabindex="-1"><?php $help->e('text')?></a>
+                            <a href="<?php
+                            /* @var Loco_mvc_ViewParams $help */
+                            $help->e('href')?>#locations" class="has-icon icon-help" target="_blank" tabindex="-1"><?php $help->e('text')?></a>
                         </td>
                     </tr><?php
                     $choiceId = 0;
@@ -115,8 +120,8 @@ $this->extend('../layout');
                 </tbody><?php
     
                 if( $params->has('sourceLocale') ):?> 
-                <tbody>
-                    <tr valign="top">
+                <tbody id="loco-copy" data-locale="<?php $params->e('sourceLocale')?>">
+                    <tr>
                         <th scope="row" rowspan="4">
                             3. <?php esc_html_e('Template options','loco-translate')?>:
                         </th>
@@ -124,7 +129,7 @@ $this->extend('../layout');
                             <a href="<?php $help->e('href')?>#copy" class="has-icon icon-help" target="_blank" tabindex="-1"><?php $help->e('text')?></a>
                         </td>
                     </tr>
-                    <tr valign="top" class="compact">
+                    <tr class="compact">
                         <td>
                             <p>
                                 <label>
@@ -140,7 +145,7 @@ $this->extend('../layout');
                             </p>
                         </td>
                     </tr>
-                    <tr valign="top" class="compact">
+                    <tr class="compact">
                         <td>
                             <p>
                                 <label>
@@ -150,7 +155,7 @@ $this->extend('../layout');
                             </p>
                         </td>
                     </tr>
-                    <tr valign="top" class="compact">
+                    <tr class="compact">
                         <td>
                             <p>
                                 <label>

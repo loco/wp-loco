@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.5.2
+Tested up to: 6.5.3
 Stable tag: 2.6.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -107,7 +107,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Added waning when system translations not installed
 * Compiler avoids writing empty JSON translation files
 * UI promotes PO copy over msginit/xgettext routes
-* Bumped WordPress compatibility to 6.5.2
+* Populating msginit fields when copying a PO
+* Bumped WordPress compatibility to 6.5.3
 
 = 2.6.7 =
 * WordPress 6.5.0 compatible
