@@ -5502,8 +5502,8 @@ B.require("$26", "tables.js").init(v);
 });
 U.validate = function(w) {
 w = /^\d+\.\d+\.\d+/.exec(w && w[0] || "");
-if ("2.6.8" === (w && w[0])) return !0;
-U.notices.warn("admin.js is the wrong version (2.6.8). Please empty all relevant caches and reload this page.");
+if ("2.6.9" === (w && w[0])) return !0;
+U.notices.warn("admin.js is the wrong version (2.6.9). Please empty all relevant caches and reload this page.");
 return !1;
 };
 })(window, document, window.jQuery);

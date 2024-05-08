@@ -84,6 +84,51 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
 
     /**
+     * `loco_unloaded_textdomain` action callback from the loading helper
+     */
+    public function on_loco_unloaded_textdomain( $domain ){
+        if( $domain === $this->domain ){
+            $this->log('! Text domain loaded prematurely, unloaded "%s"',$domain);
+        }
+    }
+
+
+    /**
+     * `loco_unseen_textdomain` action callback from the loading helper
+     */
+    public function on_loco_unseen_textdomain( $domain ){
+        if( $domain !== $this->domain ){
+            return;
+        }
+        $locale = determine_locale();
+        if( 'en_US' === $locale ){
+            return;
+        }
+        if( is_textdomain_loaded($domain) ){
+            $this->log('! The text domain was loaded before Loco Translate could start');
+        }
+        else {
+            $this->log('! The text domain isn\'t loaded for "%s"',$locale);
+        }
+        // establish who called the translation function
+        $breakable = false;
+        $stack = debug_backtrace(0);
+        foreach( $stack as $i => $callee ){
+            if( '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
+                $breakable = true;
+            }
+            else if( $breakable ){
+                $args = trim( json_encode($callee['args'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES), '[]' );
+                $debug = new Loco_error_Debug( sprintf('> %s(%s) called', $callee['function'], $args ) );
+                $debug->setCallee($i, $stack )->log();
+                break;
+            }
+        }
+    }
+    
+
+
+    /**
      * `pre_determine_locale` filter callback
      */
     public function filter_pre_determine_locale( $locale = null ){
@@ -371,7 +416,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         }
 
         // Unload text domain for any forced loading method.
-        $this->log('Unloading text domain for %s loader', $type );
+        $this->log('Unloading text domain for %s loader', $type?:'JIT' );
         $returned = unload_textdomain( $domain );
         $callee = 'unload_textdomain';
         // Bootstrap text domain if a loading function was selected
@@ -394,7 +439,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         else if( 'theme' === $type || 'child' === $type ){
             // Note that absent path argument will use current theme, and not necessarily whatever $domain is
             if( $file && ( ! $file->isAbsolute() || ! $file->isDirectory() ) ){
-                throw new InvalidArgumentException('Path argment must reference the theme directory');
+                throw new InvalidArgumentException('Path argument must reference the theme directory');
             }
             $this->log('Calling load_theme_textdomain with $path=%s',$path);
             $returned = load_theme_textdomain( $domain, $path );
@@ -682,13 +727,14 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                         continue;
                     }
                     $searched++;
-                    $value = $this->findMsgstr( $findKey, $pluralIndex, Loco_gettext_Data::load($file) );
-                    if( is_string($value) ){
+                    $message = $this->findMessage($findKey,Loco_gettext_Data::load($file));
+                    if( $message ){
                         $matched++;
+                        $value = $this->getMsgstr($message,$pluralIndex);
                         $args = [ 'msgstr' => $value ];
                         $matches[$groupIdx][] = new Loco_mvc_FileParams($args,$file);
                         $this->log('> found in %s => %s', $file, var_export($value,true) );
-                        $exts[$ext] = true;
+                        $exts[$ext] = $message->translated();
                     }
                 }
                 catch( Exception $e ){
@@ -696,7 +742,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 }
             }
             // warn if found in PO, but not MO.
-            if( isset($exts['po']) && ! isset($exts['mo']) ){
+            if( isset($exts['po']) && $exts['po'] && ! isset($exts['mo']) ){
                 Loco_error_AdminNotices::debug('Found in PO, but not MO. Is it fuzzy? Does it need recompiling?');
             }
         }

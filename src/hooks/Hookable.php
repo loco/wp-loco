@@ -31,7 +31,7 @@ abstract class Loco_hooks_Hookable {
                 $hook = substr( $func, 3 );
             }
             // support debug_{filter|action_hook} methods only in debug mode
-            else if( WP_DEBUG && 'debug_' === substr($func,0,6) ) {
+            else if( 'debug_' === substr($func,0,6) && loco_debugging() ) {
                 $hook = substr( $func, 6 );
             }
             else {

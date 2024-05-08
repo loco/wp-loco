@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.9 =
+Moved loading debug messages to action hooks
+
 = 2.6.8 =
 * Added string debugger
 * Added Zip download button instead of MO
@@ -520,7 +523,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.8 =
+= 2.6.9 =
 * Various improvements and bug fixes
 
 

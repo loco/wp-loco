@@ -61,9 +61,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
                 if( ! $value instanceof NOOP_Translations && apply_filters('loco_unload_premature_domain',true,$domain) ){
                     unload_textdomain($domain);
                     unset($GLOBALS['l10n_unloaded'][$domain]);
-                    if( WP_DEBUG ){
-                        Loco_error_Debug::trace('Text domain loaded prematurely, unloaded "%s"',$domain);
-                    }
+                    do_action('loco_unloaded_textdomain',$domain);
                 }
             }
         }
@@ -191,40 +189,12 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
-     * Handle the early JIT loading issue. This is only done when WP_DEBUG is on.
+     * Alert to the early JIT loading issue. This is only done when WP_DEBUG is on.
      */
     private function handle_unloaded_domain( $domain ){
         if( ! array_key_exists($domain,$this->seen) ){
             $this->seen[$domain] = true;
-            $locale = determine_locale();
-            if( 'en_US' !== $locale ){
-                if( is_textdomain_loaded($domain) ){
-                    $message = sprintf('The "%s" text domain was loaded before Loco Translate could start',$domain);
-                }
-                else {
-                    $message = sprintf('The "%s" text domain isn\'t loaded. "%s" translations may fail',$domain,$locale);
-                }
-                Loco_error_Debug::trace($message);
-                // establish who called the translation function
-                $breakable = false;
-                $stack = debug_backtrace(0);
-                foreach( $stack as $i => $callee ){
-                    if( '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
-                        $breakable = true;
-                    }
-                    else if( $breakable ){
-                        $args = trim( json_encode($callee['args'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES), '[]' );
-                        $debug = new Loco_error_Debug( sprintf('> %s(%s) called', $callee['function'], $args ) );
-                        $debug->setCallee($i, $stack )->log();
-                        break;
-                    }
-                }
-                /*/ visible notice on our admin screens only
-                $screen = function_exists('get_current_screen') ? get_current_screen() : null;
-                if( $screen instanceof WP_Screen && 'loco-translate' === substr($screen->id,0,14) ){
-                    Loco_error_AdminNotices::debug($message.'. Check error log for [Loco.debug]');
-                }*/
-            }
+            do_action('loco_unseen_textdomain',$domain);
         }
     }
 
