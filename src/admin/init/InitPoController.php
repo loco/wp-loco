@@ -390,11 +390,12 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             }
             if( $extracting ){
                 $prompt['title'] = __("You're creating translations directly from source code",'loco-translate');
+                $this->set('prompt',$prompt);
             }
-            else {
+            else if( array_key_exists('copy',$prompts) ){
                 $prompt['title'] = __("You're creating translations from a POT file",'loco-translate');
+                $this->set('prompt',$prompt);
             }
-            $this->set('prompt',$prompt);
         }
 
         // file system prompts will be handled when paths are selected (i.e. we don't have one yet)
