@@ -81,6 +81,18 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $message = str_replace( [LOCO_LANG_DIR,WP_LANG_DIR,WP_CONTENT_DIR,ABSPATH], ['{loco_lang_dir}','{wp_lang_dir}','{wp_content_dir}','{abspath}'], $message );
         $this->output[] = $message;
     }
+    
+    
+    /**
+     * `loco_unload_early_textdomain` filter callback.
+     */
+    public function filter_loco_unload_early_textdomain( $bool, $domain, $value ){
+        if( $this->domain === $domain ){
+            $type = is_object($value) ? get_class($value) : gettype($value);
+            $this->log('~ filter:loco_unload_early_textdomain: $l10n[%s] => %s; returning %s', $domain, $type, json_encode($bool) );
+        }
+        return $bool;
+    }
 
 
     /**
@@ -88,7 +100,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
      */
     public function on_loco_unloaded_textdomain( $domain ){
         if( $domain === $this->domain ){
-            $this->log('! Text domain loaded prematurely, unloaded "%s"',$domain);
+            $this->log('~ action:loco_unloaded_textdomain: Text domain loaded prematurely, unloaded "%s"',$domain);
         }
     }
 
@@ -105,27 +117,26 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             return;
         }
         if( is_textdomain_loaded($domain) ){
-            $this->log('! The text domain was loaded before Loco Translate could start');
+            $this->log('~ action:loco_unseen_textdomain: "%s" was loaded before helper started',$domain);
         }
         else {
-            $this->log('! The text domain isn\'t loaded for "%s"',$locale);
+            $this->log('~ action:loco_unseen_textdomain: "%s" isn\'t loaded for "%s"',$domain,$locale);
         }
-        // establish who called the translation function
+        // establish who called the translation function before we saw the text domain load
         $breakable = false;
         $stack = debug_backtrace(0);
-        foreach( $stack as $i => $callee ){
+        foreach( $stack as $callee ){
             if( '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
                 $breakable = true;
             }
             else if( $breakable ){
                 $args = trim( json_encode($callee['args'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES), '[]' );
-                $debug = new Loco_error_Debug( sprintf('> %s(%s) called', $callee['function'], $args ) );
-                $debug->setCallee($i, $stack )->log();
+                $this->log('> %s(%s) called in %s:%s', $callee['function'], $args, $callee['file'], $callee['line'] );
                 break;
             }
         }
     }
-    
+
 
 
     /**
@@ -262,6 +273,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
      */
     private function getBundleByDomain( $domain, $type ){
         if( 'default' === $domain ){
+            $this->log('Have WordPress core bundle');
             return Loco_package_Core::create();
         }
         if( 'plugin' === $type ){
@@ -280,7 +292,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             /* @var Loco_package_Project $project */
             foreach( $bundle as $project ){
                 if( $project->getDomain()->getName() === $domain ){
-                    $this->log('Have %s bundle => %s', $bundle->getType(), $bundle->getName() );
+                    $this->log('Have %s bundle => %s', strtolower($bundle->getType()), $bundle->getName() );
                     return $bundle;
                 }
             }
@@ -366,7 +378,21 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         }
         return $pluralIndex;
     }
-
+    
+    
+    /*private function logTextDomainsLoaded(){
+        foreach(['l10n','l10n_unloaded'] as $k ){
+            foreach( $GLOBALS[$k] as $d => $t ){
+                $type = is_object($t) ? get_class($t) : gettype($t);
+                $this->log('? $%s[%s] => %s', $k, var_export($d,true), $type );
+            }
+        }
+    }*/
+    
+    
+    /*public function on_unload_textdomain( $domain, $reloadable ){
+        $this->log('~ action:unload_textdomain: %s, reloadable = %b', $domain, $reloadable);
+    }*/
 
 
     /**
@@ -382,7 +408,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         // Just-in-time loader takes no path argument
         else if( 'none' === $type || '' === $type ){
             $file = null;
-            Loco_error_AdminNotices::debug('Path argument ignore. Not required for this loader');
+            Loco_error_AdminNotices::debug('Path argument ignored. Not required for this loading option.');
         }
         else {
             $this->log('Have path argument => %s', $path );
@@ -395,7 +421,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $loaded = is_textdomain_loaded($domain);
             $this->log('No loader, is_textdomain_loaded() => %s', var_export($loaded,true) );
             // Note that is_textdomain_loaded() returns false even if NOOP_Translations is set,
-            // and NOOP_Translations being set prevents JIT loading, so will never translate our locale!
+            // and NOOP_Translations being set prevents JIT loading, so will never translate our forced locale!
             if( isset($GLOBALS['l10n'][$domain]) ){
                 // WordPress >= 6.5
                 if( class_exists('WP_Translation_Controller',false) ) {
@@ -409,15 +435,15 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                     $locale = '';
                 }
                 if( $locale && $locale !== $this->locale ){
-                    Loco_error_AdminNotices::warn( sprintf('Translations already loaded for another locale (%s). Selecting a loader is recommended',$locale) );
+                    Loco_error_AdminNotices::warn( sprintf('Translations already loaded for "%s". Selecting a loader is recommended!',$locale) );
                 }
             }
             return;
         }
-
-        // Unload text domain for any forced loading method.
-        $this->log('Unloading text domain for %s loader', $type?:'JIT' );
-        $returned = unload_textdomain( $domain );
+        
+        // Unload text domain for any forced loading method
+        $this->log('Unloading text domain for %s loader', $type?:'auto' );
+        $returned = unload_textdomain($domain);
         $callee = 'unload_textdomain';
         // Bootstrap text domain if a loading function was selected
         if( 'plugin' === $type ){
@@ -446,12 +472,27 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $callee = 'load_theme_textdomain';
         }
         else if( 'custom' === $type ){
-            if( is_null($file) || ! $file->isAbsolute() || ! $file->exists() || $file->isDirectory() ){
+            if( $file && ! $file->isAbsolute() ){
+                $path = $file->normalize(WP_CONTENT_DIR);
+                $this->log('Resolving relative path argument to %s',$path);
+            }
+            if( is_null($file) || ! $file->exists() || $file->isDirectory() ){
                 throw new InvalidArgumentException('Path argument must reference an existent file');
             }
-            $this->log('Calling load_theme_textdomain with $mofile=%s',$path);
-            $returned = load_textdomain($domain,$path);
+            $expected = [ $this->locale.'.mo', $this->locale.'.l10n.php' ];
+            $bits = explode('-',$file->basename() );
+            if( ! in_array( end($bits), $expected) ){
+                throw new InvalidArgumentException('Path argument must end in '.$this->locale.'.mo');
+            }
+            $this->log('Calling load_textdomain with $mofile=%s',$path);
+            $returned = load_textdomain($domain,$path,$this->locale);
             $callee = 'load_textdomain';
+        }
+        // JIT doesn't work for WordPress core
+        else if( 'default' === $domain ){
+            $this->log('Reloading default text domain');
+            $callee = 'load_default_textdomain';
+            $returned = load_default_textdomain($this->locale);
         }
         // Defaulting to JIT:
         // When we called unload_textdomain we passed $reloadable=false on purpose to force memory removal
@@ -528,15 +569,9 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $msgid_plural = $form['msgid_plural'];
         $quantity = ctype_digit($form['n']) ? (int) $form['n'] : 1;
         $pluralIndex = 0;
-        // default domain should be explicit, not empty.
-        $domain = $form['domain'];
-        if( '' === $domain ){
-            $domain = 'default';
-        }
-        $this->domain = $domain;
-        class_exists('Loco_gettext_Data');
+        //
+        $domain = $form['domain']?:'default';
         $this->log('Running test for domain => %s', $domain );
-        // Look up MO translation via WordPress function
         $default = $this->get('default');
         $tag = $form['locale'] ?: $default['locale'];
         $locale = Loco_Locale::parse($tag);
@@ -556,7 +591,8 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 // these filters affect translation fetching via __, _n, _x and _nx:
                 'gettext','ngettext','gettext_with_context','ngettext_with_context'
             ] );
-           new Loco_hooks_LoadHelper;
+            // helper isn't a singleton, and will be garbage-collected now. Restart it.
+            new Loco_hooks_LoadHelper;
         }
         // Ensuring our forced locale requires no other filters be allowed to run.
         // We're doing this whether "unhook" is set or not, otherwise determine_locale won't work.
@@ -569,6 +605,8 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $this->log('determine_locale() => %s', $actual );
             Loco_error_AdminNotices::warn( sprintf('Locale %s is overriding %s', $actual, $this->locale) );
         }
+        // Deferred setting of text domain to avoid hooks firing before we're ready
+        $this->domain = $domain;
 
         // Perform preloading according to user choice, and optional path argument.
         $type = $form['loader'];
@@ -576,6 +614,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $this->preloadDomain( $domain, $type, $form['loadpath'] );
 
         // Create source message for string query
+        class_exists('Loco_gettext_Data');
         $message = new LocoPoMessage(['source'=>$msgid,'context'=>$msgctxt,'target'=>'']);
         $this->log('Query: %s', LocoPo::pair('msgid',$msgid) );
         if( '' !== $msgid_plural ){
@@ -684,12 +723,14 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 }
             }
         }
-        // without a configured bundle, we'll have to search all likely locations, but this will exclude author location
-        // we may as well add them anyway, in case bundle is misconfigured. Small risk of plugin/theme domain conflicts.
-        /* @var Loco_package_Bundle $tmp */
-        foreach( [ new Loco_package_Plugin('',''), new Loco_package_Theme('','') ] as $tmp ) {
-            foreach( $tmp->getSystemTargets() as $root ){
-                $pofiles->add( new Loco_fs_LocaleFile( sprintf('%s/%s-%s.po',$root,$domain,$locale) ) );
+        // Without a configured bundle, we'll have to search all possible locations, but this won't include Author files.
+        // We may as well add these anyway, in case bundle is misconfigured. Small risk of plugin/theme domain conflicts.
+        if( 'default' !== $domain ){
+            /* @var Loco_package_Bundle $tmp */
+            foreach( [ new Loco_package_Plugin('',''), new Loco_package_Theme('','') ] as $tmp ) {
+                foreach( $tmp->getSystemTargets() as $root ){
+                    $pofiles->add( new Loco_fs_LocaleFile( sprintf('%s/%s-%s.po',$root,$domain,$locale) ) );
+                }
             }
         }
         $grouped = [];
@@ -697,7 +738,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $searched = 0;
         $matched  = 0;
         $this->log('Searching %u possible locations for string versions', $pofiles->count() );
-        /* @var Loco_fs_File $pofile */
+        /* @var Loco_fs_LocaleFile $pofile */
         foreach( $pofiles as $pofile ){
             // initialize translation set for this PO and its siblings
             $dir = new Loco_fs_LocaleDirectory( $pofile->dirname() );
@@ -705,12 +746,22 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
             $args = [ 'type' => $dir->getTypeLabel($type) ];
             // as long as we know the bundle and the PO file exists, we can link to the editor.
             // bear in mind that domain may not be unique to one set of translations (core) so ...
-            // TODO how can we easily identify the exact project, file name?
             if( $bundle && $pofile->exists() ){
                 $route = strtolower($bundle->getType()).'-file-edit';
+                // find exact project in bundle. Required for core, or any multi-domain bundle
+                $project = $bundle->getDefaultProject();
+                if( is_null($project) || 1 < $bundle->count() ){
+                    $slug = $pofile->getPrefix();
+                    foreach( $bundle as $candidate ){
+                        if( $candidate->getSlug() === $slug ){
+                            $project = $candidate;
+                            break;
+                        }
+                    }
+                }
                 $args['href'] = Loco_mvc_AdminRouter::generate( $route, [
                     'bundle' => $bundle->getHandle(),
-                    'domain' => $domain, // <- needs slug!
+                    'domain' => $project ? $project->getId() : $domain,
                     'path' => $pofile->getRelativePath(WP_CONTENT_DIR),
                 ] );
             }

@@ -101,7 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.9 =
-Moved loading debug messages to action hooks
+* Rolled back load helper changes
+* Moved debug messages to action hooks
+* String debugger improvements
 
 = 2.6.8 =
 * Added string debugger

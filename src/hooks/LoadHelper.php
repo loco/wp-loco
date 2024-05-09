@@ -54,11 +54,12 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
              ->add('plugins/', loco_constant('WP_PLUGIN_DIR') )
              ->add('plugins/', loco_constant('WPMU_PLUGIN_DIR') )
         ;
-        // Any text domains loaded prematurely won't be customizable, but we can force them to reload.
+        // Any text domains loaded prematurely won't be customizable.
+        // Use the loco_unload_early_textdomain filter to force unloading. Not doing so may fire loco_unseen_textdomain later.
         global $l10n;
         if( $l10n && is_array($l10n) ){
             foreach( $l10n as $domain => $value ){
-                if( ! $value instanceof NOOP_Translations && apply_filters('loco_unload_premature_domain',true,$domain) ){
+                if( apply_filters('loco_unload_early_textdomain',false,$domain,$value) ){
                     unload_textdomain($domain);
                     unset($GLOBALS['l10n_unloaded'][$domain]);
                     do_action('loco_unloaded_textdomain',$domain);
@@ -189,7 +190,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
-     * Alert to the early JIT loading issue. This is only done when WP_DEBUG is on.
+     * Alert to the early JIT loading issue for any text domain queried before we've seen it be loaded. 
      */
     private function handle_unloaded_domain( $domain ){
         if( ! array_key_exists($domain,$this->seen) ){
