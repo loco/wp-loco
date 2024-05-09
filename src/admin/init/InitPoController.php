@@ -382,7 +382,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             if( array_key_exists('copy',$prompts) ){
                 $prompt = $prompts['copy'];
                 // translators: %s will be replaced with a PO file name
-                $prompt['text'] = __( sprintf('Copy %s instead',$prompt->__get('name') ),'loco-translate');
+                $prompt['text'] = sprintf( __('Copy %s instead','loco-translate'), $prompt->__get('name') );
             }
             else {
                 $prompt = $prompts['xgettext'];

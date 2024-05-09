@@ -705,7 +705,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 $callee = 'load_script_textdomain';
             }
             catch( Exception $e ){
-                $this->log('! %s', $e->getMessage() );
+                $this->log('! %s (falling back to PHP)', $e->getMessage() );
                 Loco_error_AdminNotices::warn('Script translation failed. Falling back to PHP translation');
             }
         }
