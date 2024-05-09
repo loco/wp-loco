@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.9-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-05-08 19:53+0000\n"
+"POT-Creation-Date: 2024-05-09 09:20+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -1724,7 +1724,7 @@ msgstr ""
 msgid "Start translating"
 msgstr ""
 
-#: src/admin/DebugController.php:782
+#: src/admin/DebugController.php:884
 msgid "String debugger"
 msgstr ""
 

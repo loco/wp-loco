@@ -122,21 +122,26 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         else {
             $this->log('~ action:loco_unseen_textdomain: "%s" isn\'t loaded for "%s"',$domain,$locale);
         }
-        // establish who called the translation function before we saw the text domain load
+        /*/ establishing who called the translation function early can't be known here.
+        // all we can detect from this backtrace is a (probably) legitimate translation that triggered the hook.
         $breakable = false;
-        $stack = debug_backtrace(0);
-        foreach( $stack as $callee ){
-            if( '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
+        foreach( debug_backtrace(0) as $callee ){
+            if( array_key_exists('file',$callee) && '/wp-includes/l10n.php' === substr($callee['file'],-21) ){
                 $breakable = true;
             }
             else if( $breakable ){
                 $args = trim( json_encode($callee['args'],JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES), '[]' );
-                $this->log('> %s(%s) called in %s:%s', $callee['function'], $args, $callee['file'], $callee['line'] );
+                if( array_key_exists('file',$callee) && array_key_exists('line',$callee) ){
+                    $ref = $callee['file'].':'.$callee['line'];
+                }
+                else {
+                    $ref = 'unknown';
+                }
+                $this->log('> %s(%s) called in %s', $callee['function'], $args, $ref );
                 break;
             }
-        }
+        }*/
     }
-
 
 
     /**
