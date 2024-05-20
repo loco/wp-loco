@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.10 =
+* Added loco_api_provider_{id} filter
+
 = 2.6.9 =
 * Rolled back load helper changes
 * Moved debug messages to action hooks
@@ -525,7 +528,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.9 =
+= 2.6.10 =
 * Various improvements and bug fixes
 
 

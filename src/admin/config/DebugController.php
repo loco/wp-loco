@@ -141,6 +141,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
         ] );
         // important locations, starting with LOCO_LANG_DIR
         $locations = [
+            'WP_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('WP_LANG_DIR') ) ),
             'LOCO_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ),
         ];
         // WP_TEMP_DIR takes precedence over sys_get_temp_dir in WordPress get_temp_dir();

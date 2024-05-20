@@ -10,7 +10,12 @@ abstract class Loco_api_Providers {
      * @return array[]
      */
     public static function export(){
-        return apply_filters( 'loco_api_providers', self::builtin() );
+        $apis = [];
+        foreach( self::builtin() as $a ){
+            $hook = 'loco_api_provider_'.$a['id'];
+            $apis[] = apply_filters($hook, $a );
+        }
+        return apply_filters( 'loco_api_providers', $apis );
     }
     
     

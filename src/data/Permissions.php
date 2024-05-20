@@ -51,7 +51,7 @@ class Loco_data_Permissions {
             }
         }
         // fix broken permissions whereby super admin cannot access Loco at all.
-        // this could happen if another plugin added the translator role before hand.
+        // this could happen if another plugin added the translator role beforehand.
         if( ! isset($apply['administrator']) && ! is_multisite() ){
             $apply['administrator'] = $roles->get_role('administrator');
         }
