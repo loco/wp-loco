@@ -540,8 +540,11 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         if( '.min.js' === substr($path,-7) ) {
             $path = substr($path,0,-7).'.js';
         }
-        else if('.js' !== substr($path,-3) ){
-            Loco_error_AdminNotices::debug("Script path didn't end with .js");
+        else {
+            $valid = array_flip( Loco_data_Settings::get()->jsx_alias ?: ['js'] );
+            if( ! array_key_exists($jsfile->extension(),$valid) ) {
+                Loco_error_AdminNotices::debug("Script path didn't end with .".implode('|',array_keys($valid) ) );
+            }
         }
         $hash = md5($path);
         $this->log('> md5(%s) => %s', var_export($path,true), $hash );
