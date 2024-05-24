@@ -6,10 +6,10 @@ abstract class Loco_cli_SyncCommand {
    
 
     /**
-     * @param Loco_package_Project[] project filter
-     * @param Loco_Locale[] locale filter
-     * @param bool whether dry run
-     * @param bool whether to always update
+     * @param Loco_package_Project[] $projects project filter
+     * @param Loco_Locale[] $locales locale filter
+     * @param bool $noop whether dry run
+     * @param bool $force whether to always update
      */
     public static function run( array $projects, array $locales, $noop = true, $force = false ){
         
@@ -24,7 +24,6 @@ abstract class Loco_cli_SyncCommand {
         $updated = 0;
         $compiled = 0;
 
-        /* @var Loco_package_Project $project */
         foreach( $projects as $project ){
             $id = rtrim( $project->getId(), '.' );
             $base_dir = $project->getBundle()->getDirectoryPath();

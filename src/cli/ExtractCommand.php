@@ -5,9 +5,9 @@
 abstract class Loco_cli_ExtractCommand {
 
     /**
-     * @param Loco_package_Project[] project filter
-     * @param bool whether dry run
-     * @param bool whether to always update
+     * @param Loco_package_Project[] $projects project filter
+     * @param bool $noop whether dry run
+     * @param bool $force whether to always update
      */
     public static function run( array $projects, $noop = true, $force = false ){
 
@@ -19,7 +19,6 @@ abstract class Loco_cli_ExtractCommand {
         $updated = 0;
         $content_dir = loco_constant('WP_CONTENT_DIR');
 
-        /* @var Loco_package_Project $project */
         foreach( $projects as $project ){
             $id = rtrim( $project->getId(), '.' );
             WP_CLI::log( sprintf('Extracting "%s" (%s)',$project->getName(),$id) );
@@ -77,7 +76,7 @@ abstract class Loco_cli_ExtractCommand {
 
             // write POT file to disk returning byte length
             Loco_cli_Utils::debug('Writing POT file...');
-            $bytes = $potfile->putContents( $data->msgcat(false) );
+            $bytes = $potfile->putContents( $data->msgcat() );
             Loco_cli_Utils::debug('%u bytes written to %s',$bytes, $potfile->getRelativePath($content_dir) );
             WP_CLI::success( sprintf('Updated %s', $potfile->basename() ) );
             $updated++;

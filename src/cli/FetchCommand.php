@@ -5,9 +5,9 @@
 abstract class Loco_cli_FetchCommand {
 
     /**
-     * @param Loco_package_Project[] project filter
-     * @param Loco_Locale[] locale filter
-     * @param bool[] switches
+     * @param Loco_package_Project[] $projects project filter
+     * @param Loco_Locale[] $locales locale filter
+     * @param bool[] $opts switches
      */
     public static function run( array $projects, array $locales, array $opts ){
         
@@ -30,7 +30,6 @@ abstract class Loco_cli_FetchCommand {
             }
         }
 
-        /* @var Loco_package_Project $project */
         foreach( $projects as $project ){
             $type = strtolower( $project->getBundle()->getType() );
             $domain = $project->getDomain()->getName();
@@ -162,7 +161,7 @@ abstract class Loco_cli_FetchCommand {
                         WP_CLI::log( sprintf('%s unchanged in "%s". Skipping %s', $project,$locale,$info->relpath) );
                         continue;
                     }
-                    // Overwrite merged PO, which will backup first if configured
+                    // Overwrite merged PO, which will back up first if configured
                     Loco_cli_Utils::debug('OK: %u added, %u dropped, %u fuzzy', count($stats['add']), count($stats['del']), count($stats['fuz']) );
                     $podata->localize($locale);
                     $compiler->writePo($podata);
@@ -183,8 +182,7 @@ abstract class Loco_cli_FetchCommand {
                 Loco_error_AdminNotices::get()->flush();
                 
                 // clean up memory and ready for next file
-                $podata = null;
-                $pobody = null;
+                unset($podata,$pobody);
                 $done++;
             }
         }

@@ -152,10 +152,12 @@ class Loco_gettext_Compiler {
         }
         // continue as per default, generating multiple per-script JSON
         else {
-            $base_dir = $project->getBundle()->getDirectoryPath();
             $buffer = [];
+            $base_dir = $project->getBundle()->getDirectoryPath();
+            $extensions = array_keys( $this->getJsExtMap() );
+            $refsGrep = '\\.(?:'.implode('|',$extensions).')';
             /* @var Loco_gettext_Data $fragment */
-            foreach( $po->exportRefs('\\.js') as $ref => $fragment ){
+            foreach( $po->exportRefs($refsGrep) as $ref => $fragment ){
                 $use = null;
                 // Reference could be a js source file, or a minified version. We'll try .min.js first, then .js
                 // Build systems may differ, but WordPress only supports these suffixes. See WP-CLI MakeJsonCommand.
@@ -302,17 +304,25 @@ class Loco_gettext_Compiler {
 
 
     /**
-     * @return string[]
+     * Obtain non-standard JavaScript file extensions.
+     * @return string[] where keys are PCRE safe extensions, all mapped to "js"
      */
     private function getJsExtMap(){
-        $map = ['js'=>'js', 'jsx'=>'js'];
+        $map = ['js'=>'js','jsx'=>'js'];
         $exts = Loco_data_Settings::get()->jsx_alias;
         if( is_array($exts) && $exts ){
-            foreach( $exts as $ext ){
-                $map[$ext] = 'js';
-            }
+            $exts = array_map( [__CLASS__,'pregQuote'], $exts);
+            $map = array_fill_keys($exts,'js') + $map;
         }
         return $map;
+    }
+
+
+    /**
+     * @internal
+     */
+    private static function pregQuote( $value ){
+        return preg_quote($value,'/');
     }
 
 
