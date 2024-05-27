@@ -20,12 +20,11 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
         $nonce = $this->setNonce( $this->get('_route').'-'.$this->get('bundle') );
         $this->set('nonce', $nonce );
         try {
-            // Save configuration if posted
-            if( $post->has('conf') ){
+            // Save configuration if posted, and security check passes
+            if( $post->has('conf') && $this->checkNonce($nonce->action) ){
                 if( ! $post->name ){
                     $post->name = $bundle->getName();
                 }
-                $this->checkNonce( $nonce->action );
                 $model = new Loco_config_FormModel;
                 $model->loadForm( $post );
                 // configure bundle from model in full
@@ -35,17 +34,15 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
                 $this->saveBundle();
             }
             // Delete configuration if posted
-            else if( $post->has('unconf') ){
+            else if( $post->has('unconf') && $this->checkNonce($nonce->action) ){
                 $this->resetBundle();
             }
         }
         catch( Exception $e ){
             Loco_error_AdminNotices::warn( $e->getMessage() );
         }
-
     }
 
-    
 
     /**
      * {@inheritdoc}

@@ -69,7 +69,7 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
      * Check if a valid nonce has been sent in current request.
      * Fails if nonce is invalid, but returns false if not sent so scripts can exit accordingly.
      * @throws Loco_error_Exception
-     * @param string action for passing to wp_verify_nonce
+     * @param string $action action for passing to wp_verify_nonce
      * @return bool true if data has been posted and nonce is valid
      */
     public function checkNonce( $action ){

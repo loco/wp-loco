@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.6.10-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-05-24 08:30+0000\n"
+"POT-Creation-Date: 2024-05-27 09:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -280,12 +280,12 @@ msgstr ""
 msgid "Advanced"
 msgstr ""
 
-#: src/admin/bundle/ConfController.php:140
+#: src/admin/bundle/ConfController.php:137
 #: tpl/admin/bundle/setup/inc-nav.php:19 tpl/admin/bundle/setup/core.php:17
 msgid "Advanced configuration"
 msgstr ""
 
-#: src/admin/bundle/ConfController.php:55
+#: src/admin/bundle/ConfController.php:52
 msgid "Advanced tab"
 msgstr ""
 
@@ -408,7 +408,7 @@ msgstr ""
 msgid "Check the translations marked with a warning sign"
 msgstr ""
 
-#: src/admin/bundle/ConfController.php:95
+#: src/admin/bundle/ConfController.php:92
 msgid "Child theme declares the same Text Domain as the parent theme"
 msgstr ""
 
@@ -1730,7 +1730,7 @@ msgstr ""
 msgid "Start translating"
 msgstr ""
 
-#: src/admin/DebugController.php:884
+#: src/admin/DebugController.php:887
 msgid "String debugger"
 msgstr ""
 

@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.6.10 =
 * Added loco_api_provider_{id} filter
 * JSON compiler observes configured .js aliases
+* Fixed a missing security check - thanks Nosa Shandy
 
 = 2.6.9 =
 * Rolled back load helper changes
