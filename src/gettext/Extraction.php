@@ -90,7 +90,7 @@ class Loco_gettext_Extraction {
             $type = $opts->ext2type( $file->extension() );
             $fileref = $file->getRelativePath($base);
             try {
-                $extr = loco_wp_extractor($type);
+                $extr = loco_wp_extractor( $type, $file->fullExtension() );
                 if( 'php' === $type || 'twig' === $type) {
                     // skip large files for PHP, because token_get_all is hungry
                     if( 0 !== $max ){

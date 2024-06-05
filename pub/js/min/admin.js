@@ -2906,6 +2906,9 @@ this.dir = g;
 this.redraw();
 return this.cells;
 };
+v.count = function() {
+return this.cells && this.cells.length || 0;
+};
 v.destroy = function() {
 this.clear();
 delete c[this.id];
@@ -3255,11 +3258,9 @@ u.setListCell = function(c) {
 const a = this;
 a.listCell = c;
 c.on("wgRowSelect", function(e, m) {
-a.loadMessage(a.po.row(m));
-return !0;
+(e = a.po.row(m)) && e !== a.active && a.loadMessage(e);
 }).on("wgRowDeselect", function(e, m, g) {
 g || a.loadNothing();
-return !0;
 });
 };
 u.setSourceCell = function(c) {

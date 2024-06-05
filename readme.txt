@@ -104,6 +104,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Added loco_api_provider_{id} filter
 * JSON compiler observes configured .js aliases
 * Fixed a missing security check - thanks Nosa Shandy
+* Added .blade.php tokenizer hack
 
 = 2.6.9 =
 * Rolled back load helper changes
