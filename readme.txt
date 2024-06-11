@@ -3,8 +3,8 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.5.3
-Stable tag: 2.6.9
+Tested up to: 6.5.4
+Stable tag: 2.6.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -105,6 +105,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * JSON compiler observes configured .js aliases
 * Fixed a missing security check - thanks Nosa Shandy
 * Added .blade.php tokenizer hack
+* Bumped WordPress compatibility to 6.5.4
 
 = 2.6.9 =
 * Rolled back load helper changes
