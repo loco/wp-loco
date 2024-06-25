@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.11 =
+* Removed accidental console trace
+
 = 2.6.10 =
 * Added loco_api_provider_{id} filter
 * JSON compiler observes configured .js aliases
@@ -532,7 +535,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.10 =
+= 2.6.11 =
 * Various improvements and bug fixes
 
 
