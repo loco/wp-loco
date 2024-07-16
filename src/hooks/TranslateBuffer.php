@@ -1,12 +1,11 @@
 <?php
 /**
  * Buffers translations requested via __, _x, _n and _nx for exporting in a raw form.
- * This is used for JavaScript localization because wp_localize_script is weak.
  */
 class Loco_hooks_TranslateBuffer extends Loco_hooks_Hookable {
     
     /**
-     * Temporary buffer of raw translation lookupkeys
+     * Temporary buffer of raw translation lookup keys
      * @var array
      */
     private $buffer = [];
