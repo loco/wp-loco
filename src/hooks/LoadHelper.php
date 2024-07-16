@@ -189,6 +189,28 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     }
 
 
+
+    /**
+     * `lang_dir_for_domain` filter callback, requires WP>=6.6
+     */
+    public function filter_lang_dir_for_domain( $path, $domain, $locale ){
+        // Empty path likely means JIT invocation with no system file installed.
+        // This fix allows our custom files to be picked up, but not author provided files.
+        if( ! $path ){
+            foreach( ['plugins','themes'] as $type ){
+                $dir = LOCO_LANG_DIR.'/'.$type.'/';
+                if( is_dir($dir) ){
+                    $base = $dir.$domain.'-'.$locale;
+                    if( file_exists($base.'.mo') || file_exists($base.'.l10n.php') ){
+                        return $dir;
+                    }
+                }
+            }
+        }
+        return $path;
+    }
+
+
     /**
      * Alert to the early JIT loading issue for any text domain queried before we've seen it be loaded. 
      */

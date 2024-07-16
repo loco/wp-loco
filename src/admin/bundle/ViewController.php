@@ -147,7 +147,8 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             }
         }
         $p['installed'] = $installed;
-        if( in_array(false,$installed,true) ){
+        // warning only necessary for WP<6.6 due to `lang_dir_for_domain` fix
+        if( ! function_exists('wp_get_l10n_php_file_data') && in_array(false,$installed,true) ){
             $p['warnings'][] = __('Custom translations may not work without System translations installed','loco-translate');
         }
         return $p;

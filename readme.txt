@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.5.4
+Tested up to: 6.6.0
 Stable tag: 2.6.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -102,6 +102,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.6.11 =
 * Removed accidental console trace
+* Bumped WordPress compatibility to 6.6.0
+* Added lang_dir_for_domain fix to handle system file absence
 
 = 2.6.10 =
 * Added loco_api_provider_{id} filter

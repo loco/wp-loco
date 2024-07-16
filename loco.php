@@ -7,7 +7,7 @@ Author: Tim Whitlock
 Version: 2.6.11-dev
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.5.4
+Tested up to: 6.6.0
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/
@@ -199,9 +199,10 @@ try {
     }
 
 }
-catch( Exception $e ){ // PHP5+
+catch( Exception $e ){
     trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ) );
 }
-catch( Throwable $e ){ // PHP7+
+/** @noinspection PhpElementIsNotAvailableInCurrentPhpVersionInspection */
+catch( Throwable $e ){
     trigger_error(sprintf('[Loco.fatal] %s in %s:%u',$e->getMessage(), $e->getFile(), $e->getLine() ) );
 }

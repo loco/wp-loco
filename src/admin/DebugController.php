@@ -180,9 +180,9 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     /**
      * `load_translation_file` filter callback
      */
-    public function filter_load_translation_file( $file, $domain ){
+    public function filter_load_translation_file( $file, $domain, $locale = '' ){
         if( $domain === $this->domain ){
-            $this->log('~ filter:load_translation_file: %s', $file );
+            $this->log('~ filter:load_translation_file: %s (%s)', $file, $locale );
         }
         return $file;
     }
@@ -202,13 +202,29 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
 
     /**
+     * `lang_dir_for_domain` filter callback, requires WP>=6.6
+     */
+    public function filter_lang_dir_for_domain( $path, $domain, $locale ){
+        if( $domain === $this->domain && $locale === $this->locale ){
+            if( $path ) {
+                $this->log( '~ filter:lang_dir_for_domain %s', $path );
+            }
+            else {
+                $this->log( '! filter:lang_dir_for_domain has no path. JIT likely to fail');
+            }
+        }
+        return $path;
+    }
+
+
+    /**
      * `load_script_textdomain_relative_path` filter callback
      */
     public function filter_load_script_textdomain_relative_path( $relative/*, $src*/ ){
         if( preg_match('!pub/js/(?:min|src)/dummy.js!', $relative )){
             $form = $this->get('form');
             $path = $form['jspath'];
-            error_log( json_encode(func_get_args(),JSON_UNESCAPED_SLASHES).' -> '.$path );
+            //error_log( json_encode(func_get_args(),JSON_UNESCAPED_SLASHES).' -> '.$path );
             $this->log( '~ filter:load_script_textdomain_relative_path: %s => %s', $relative, $path );
             return $path;
         }
@@ -440,7 +456,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                     $locale = '';
                 }
                 if( $locale && $locale !== $this->locale ){
-                    Loco_error_AdminNotices::warn( sprintf('Translations already loaded for "%s". Selecting a loader is recommended!',$locale) );
+                    Loco_error_AdminNotices::warn( sprintf('Translations already loaded for "%s". A loader is recommended to select "%s"',$locale,$this->locale) );
                 }
             }
             return;
@@ -593,7 +609,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
                 // these filters are all used by Loco_hooks_LoadHelper, and will need re-hooking afterwards:
                 'theme_locale','plugin_locale','unload_textdomain','load_textdomain','load_script_translation_file','load_script_translations',
                 // these filters also affect text domain loading / file reading:
-                'pre_load_textdomain','override_load_textdomain','load_textdomain_mofile','translation_file_format','load_translation_file', 'override_unload_textdomain',
+                'pre_load_textdomain','override_load_textdomain','load_textdomain_mofile','translation_file_format','load_translation_file','override_unload_textdomain','lang_dir_for_domain',
                 // script translation hooks:
                 'load_script_textdomain_relative_path','pre_load_script_translations','load_script_translation_file','load_script_translations',
                 // these filters affect translation fetching via __, _n, _x and _nx:
