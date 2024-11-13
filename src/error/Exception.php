@@ -112,6 +112,7 @@ class Loco_error_Exception extends Exception implements JsonSerializable {
         // separate error log for cli tests
         if( 'cli' === PHP_SAPI && defined('LOCO_TEST_DATA_ROOT') ){
             error_log( '['.date('c').'] '.$text."\n", 3, 'debug.log' );
+            //fwrite( STDERR, $this->getType().': '.$this->getMessage()."\n" );
         }
         // Else write to default PHP log, but note that WordPress may have set this to wp-content/debug.log.
         // If no `error_log` is set this will send message to the SAPI, so check your httpd/fast-cgi errors too.

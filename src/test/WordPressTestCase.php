@@ -95,9 +95,12 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         // text domains should be unloaded at start of all tests, and locale reset
         unset( $GLOBALS['locale'] );
         $GLOBALS['l10n'] = [];
+        $GLOBALS['l10n_unloaded'] = [];
         $this->enable_locale('en_US');
         $this->assertSame( 'en_US', get_locale(), 'Ensure test site is English to start');
         $this->assertSame( 'en_US', get_user_locale(),'Ensure test site is English to start');
+        // We can't clear the registry, so we have to hack it
+        $GLOBALS['wp_textdomain_registry'] = new WP_Textdomain_Registry;
         // Any enqueued scripts should be destroyed
         unset($GLOBALS['wp_scripts']);
         // ensure test themes are registered and WordPress's cache is valid

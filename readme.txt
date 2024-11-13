@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.12 =
+* Bumped WordPress compatibility to 6.6.1
+
 = 2.6.11 =
 * Removed accidental console trace
 * Bumped WordPress compatibility to 6.6.0
@@ -537,7 +540,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.11 =
+= 2.6.12 =
 * Various improvements and bug fixes
 
 

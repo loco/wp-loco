@@ -129,7 +129,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Get primary Text Domain that's uniquely assigned to a bundle
-     * @param string theme or plugin relative path
+     * @param string $handle theme or plugin relative path
      */
     public function getDomain( $handle ){
         $this->flush();
@@ -140,7 +140,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Get the default directory path where captured files of a given domain are held 
-     * @param string TextDomain
+     * @param string $domain TextDomain
      * @return string relative path
      */
     public function getDomainPath( $domain ){
@@ -174,7 +174,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Check if given relative directory path the root of a known plugin
-     * @param string relative plugin directory name, e.g. "foo/bar"
+     * @param string $check relative plugin directory name, e.g. "foo/bar"
      * @return string relative plugin file handle, e.g. "foo/bar/baz.php"
      */
     private function isPlugin( $check ){
@@ -198,18 +198,18 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Convert a file path to a theme or plugin bundle
-     * @return Loco_package_Bundle
+     * @return Loco_package_Bundle|null
      */
     private function resolve( $path, $domain ){
         $file = new Loco_fs_LocaleFile( $path );
         // ignore suffix-only files when locale is invalid as locale code would be taken wrongly as slug, e.g. if you tried to load "english.po"
         if( $file->hasPrefixOnly() ){
-            return;
+            return null;
         }
         // no point looking at files in global directory as they tell us only the domain which we already know
         foreach( $this->globalPaths as $prefix => $length ){
             if( substr($path,0,$length) === $prefix ){
-                return;
+                return null;
             }
         }
         // avoid infinite loops during bundle resolution
@@ -329,7 +329,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
             foreach( $this->buffer as $domain => $paths ){
                 foreach( $paths as $path ){
                     try {
-                        if( $bundle = $this->resolve($path,$domain) ){
+                        if( $this->resolve($path,$domain) ){
                             continue 2;
                         }
                     }

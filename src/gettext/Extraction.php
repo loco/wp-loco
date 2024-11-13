@@ -127,29 +127,6 @@ class Loco_gettext_Extraction {
         }
         return $this;
     }
-    
-    
-    private function includeBlock( Loco_fs_File $file, $domain ) {
-        $def = json_decode( $file->getContents(), true );
-        if( ! is_array($def) || ! array_key_exists('$schema',$def) ){
-            return;
-        }
-        // adding dummy line number for well-formed file reference, not currently pulling line number.
-        $ref = $file->getRelativePath( $this->bundle->getDirectoryPath() ).':1';
-        foreach(['title','description','keywords'] as $key ){
-            if( ! array_key_exists($key,$def) ) {
-                continue;
-            }
-            $msgctxt = 'block '.rtrim($key,'s');
-            foreach( (array) $def[$key] as $msgid ){
-                if( is_string($msgid) && '' !== $msgid ){
-                    $str = new Loco_gettext_String($msgid,$msgctxt);
-                    $str->addFileReferences($ref);
-                    $this->addString($str,$domain);
-                }
-            }
-        }
-    }
 
 
     /**
