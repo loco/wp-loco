@@ -3,6 +3,10 @@
  * Text Domain loading helper.
  * Ensures custom translations can be loaded from `wp-content/languages/loco`.
  * This functionality is optional. You can disable the plugin if you're not loading MO or JSON files from languages/loco
+ * 
+ * @noinspection PhpUnusedParameterInspection
+ * @noinspection DuplicatedCode
+ * @noinspection PhpUnused
  */
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 

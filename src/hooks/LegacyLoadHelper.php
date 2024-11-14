@@ -1,7 +1,12 @@
 <?php
 /**
- * @deprecated
  * Loading helper used for WordPress < 6.6
+ * 
+ * @deprecated
+ * @noinspection PhpDeprecationInspection
+ * @noinspection PhpUnusedParameterInspection
+ * @noinspection DuplicatedCode
+ * @noinspection PhpUnused
  */
 class Loco_hooks_LegacyLoadHelper extends Loco_hooks_Hookable {
     
@@ -258,13 +263,6 @@ class Loco_hooks_LegacyLoadHelper extends Loco_hooks_Hookable {
     }
 
 
-    /*
-     * `load_script_translation_file` filter callback
-     * Alternative method to merging in `pre_load_script_translations`
-     * @param string|false candidate JSON file (false on final attempt)
-     * @param string
-     * @return string
-     */
     public function filter_load_script_translation_file( $path = '', $handle = '' ){
         // currently handle-based JSONs for author-provided translations will never map.
         if( is_string($path) && preg_match('/^-[a-f0-9]{32}\\.json$/',substr($path,-38) ) ){
@@ -284,15 +282,6 @@ class Loco_hooks_LegacyLoadHelper extends Loco_hooks_Hookable {
     }
 
 
-    /**
-     * `load_script_translations` filter callback.
-     * Merges custom translations on top of installed ones, as late as possible.
-     * @param string $json contents of JSON file that WordPress has read 
-     * @param string $path path relating to given JSON (not used here)
-     * @param string $handle script handle for registered merge
-     * @return string final JSON translations
-     * @noinspection PhpUnusedParameterInspection
-     */
     public function filter_load_script_translations( $json = '', $path = '', $handle = '' ){
         if( array_key_exists($handle,$this->json) ){
             $path = $this->json[$handle];
@@ -303,12 +292,6 @@ class Loco_hooks_LegacyLoadHelper extends Loco_hooks_Hookable {
     }
 
 
-    /**
-     * Merge two JSON translation files such that custom strings override
-     * @param string $json Original/fallback JSON
-     * @param string $custom Custom JSON (must exclude empty keys)
-     * @return string Merged JSON
-     */
     private static function mergeJson( $json, $custom ){
         $fallbackJed = json_decode($json,true);
         $overrideJed = json_decode($custom,true);
@@ -339,11 +322,6 @@ class Loco_hooks_LegacyLoadHelper extends Loco_hooks_Hookable {
     }
 
 
-    /**
-     * Test if unserialized JSON is a valid JED structure
-     * @param array $jed
-     * @return bool
-     */
     private static function jedValid( $jed ){
         return is_array($jed) &&  array_key_exists('locale_data',$jed) && is_array($jed['locale_data']) && $jed['locale_data'];
     }

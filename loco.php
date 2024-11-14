@@ -7,7 +7,7 @@ Author: Tim Whitlock
 Version: 2.6.12-dev
 Requires at least: 5.2
 Requires PHP: 5.6.20
-Tested up to: 6.6.0
+Tested up to: 6.7
 Author URI: https://localise.biz/wordpress/plugin
 Text Domain: loco-translate
 Domain Path: /languages/
@@ -185,11 +185,11 @@ try {
 
     // text domain loading helper for custom file locations. Set constant empty to disable
     if ( LOCO_LANG_DIR ) {
-        if( function_exists('wp_get_l10n_php_file_data') ){
-            new Loco_hooks_LoadHelper;
+        if( version_compare($GLOBALS['wp_version'],'6.6','<') ){
+            new Loco_hooks_LegacyLoadHelper;
         }
         else {
-            new Loco_hooks_LegacyLoadHelper;
+            new Loco_hooks_LoadHelper;
         }
     }
 
