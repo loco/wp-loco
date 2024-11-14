@@ -185,7 +185,12 @@ try {
 
     // text domain loading helper for custom file locations. Set constant empty to disable
     if ( LOCO_LANG_DIR ) {
-        new Loco_hooks_LoadHelper;
+        if( function_exists('wp_get_l10n_php_file_data') ){
+            new Loco_hooks_LoadHelper;
+        }
+        else {
+            new Loco_hooks_LegacyLoadHelper;
+        }
     }
 
     // initialize hooks for admin screens

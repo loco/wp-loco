@@ -28,14 +28,15 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         $len = strlen( loco_constant('WP_LANG_DIR') );
         $rel = substr($path,$len);
         if( '/' !== $rel && '/plugins/' !== $rel && '/themes/' !== $rel ){
-            // custom location could be inside a theme or plugin, but could be anywhere
+            // custom location is likely to be inside a theme or plugin, but could be anywhere
             if( Loco_fs_Locations::getPlugins()->check($path) ){
                 $this->custom[$path] = 'plugins';
             }
             else if( Loco_fs_Locations::getThemes()->check($path) ){
                 $this->custom[$path] = 'themes';
             }
-            // folder could be plugin-specific, e.g. languages/woocommerce, but this won't be merged with custom because it IS custom.
+            // folder could be plugin-specific, e.g. languages/woocommerce,
+            // but this won't be merged with custom because it IS custom.
         }
         return $files;
     }
@@ -46,12 +47,12 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Called from {@see WP_Textdomain_Registry::get} after path is obtained from {@see WP_Textdomain_Registry::get_path_from_lang_dir}
      */
     public function filter_lang_dir_for_domain( $path, $domain, $locale ){
-        // If path is false it means no system or custom translation files were found. This will stop WordPress trying to load anything.
-        // Usually this occurs during true JIT loading when an author path was not set by load_plugin_textdomain.
+        // If path is false it means no system or author files were found. This will stop WordPress trying to load anything.
+        // Usually this occurs during true JIT loading, where an author path would not be set by e.g. load_plugin_textdomain.
         if( false === $path ){
             $base = loco_constant('LOCO_LANG_DIR');
             foreach( ['/plugins/','/themes/'] as $type ){
-                if( file_exists($base.$type.$domain.'-'.$locale.'.mo') ){
+                if( self::try_readable($base.$type.$domain.'-'.$locale.'.mo') ){
                     $path = $base.$type;
                     break;
                 }
@@ -63,6 +64,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * Filter callback for `load_translation_file`
+     * Called from {@see load_textdomain}
      */
     public function filter_load_translation_file( $file, $domain, $locale ){
         // loading a custom file directly is fine
@@ -98,7 +100,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         if( is_readable($path) ){
             return $path;
         }
-        // fall back to .mo if l10n.php doesn't exist. and vise versa.
+        // fall back to .mo if .l10n.php doesn't exist, and vise versa.
         $ext = substr($path,-3);
         if( '.mo' === $ext ){
             $path = substr($path,0,-2).'l10n.php';
@@ -204,11 +206,11 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * Test if unserialized JSON is a valid JED structure
-     * @param array $jed
+     * @param array[] $jed
      * @return bool
      */
     private static function jedValid( $jed ){
-        return is_array($jed) &&  array_key_exists('locale_data',$jed) && is_array($jed['locale_data']) && $jed['locale_data'];
+        return is_array($jed) && array_key_exists('locale_data',$jed) && is_array($jed['locale_data']) && $jed['locale_data'];
     }
     
 

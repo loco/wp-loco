@@ -163,7 +163,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     /**
      * `load_translation_file` filter callback
      */
-    public function filter_load_translation_file( $file, $domain, $locale = '' ){
+    public function filter_load_translation_file( $file, $domain/*, $locale = ''*/ ){
         if( $domain === $this->domain ){
             $this->log('~ filter:load_translation_file: %s (exists=%b)', $file, file_exists($file) );
         }
