@@ -101,7 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.12 =
-* WordPress 6.7 compatibility
+* Major bugfix to custom load_textdomain paths. Now works when original file is absent
+* CSS fixes including reinstating of unsaved "star" icon
+* Bumped WordPress compatibility to 6.7
 
 = 2.6.11 =
 * Removed accidental console trace
