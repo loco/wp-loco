@@ -99,7 +99,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
             }
             // The hash is pre-computed and .js file is known to exist, so we'll skip filters here.
             // The compiler will still filter this reference, so it could potentially yield a different hash. 
-            Loco_error_AdminNotices::debug($name.' has no "source" key; reverse matched '.$ref);
+            // Loco_error_AdminNotices::debug($name.' has no "source" key; reverse matched '.$ref);
         }
         // file reference most likely won't have a line number, as it applies to all strings in the JSON
         // As most deployed JavaScript will be minified, we probably only have one line anyway.

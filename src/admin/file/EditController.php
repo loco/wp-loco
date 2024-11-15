@@ -113,12 +113,25 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
                 if( $potfile->exists() ){
                     try {
                         $potdata = Loco_gettext_Data::load($potfile);
-                        // TODO merge jsons into $potdata if template dictates!
+                        // If template is pulling JSON files, we must merge them in before msgid comparison
+                        if( $project && $sync->mergeJson() ){
+                            $siblings = new Loco_fs_Siblings($potfile);
+                            $jsons = $siblings->getJsons( $project->getDomain()->getName() );
+                            if( $jsons ){
+                                // using matcher because regular iterator isn't indexed, and additions must be unique
+                                $merged = new Loco_gettext_Matcher($project);
+                                $merged->loadRefs($potdata);
+                                $merged->loadJsons($jsons);
+                                $potdata = $merged->exportPo();
+                                unset($matcher);
+                            }
+                        }
                         if( ! $potdata->equalSource($data) ){
                             // translators: %s refers to the name of a POT file
                             Loco_error_AdminNotices::info( sprintf( __("Translations don't match template. Run sync to update from %s",'loco-translate'), $potfile->basename() ) )
                             ->addLink( apply_filters('loco_external','https://localise.biz/wordpress/plugin/manual/sync'), __('Documentation','loco-translate') );
                         }
+                        unset($potdata);
                     }
                     catch( Exception $e ){
                         // translators: Where %s is the name of the invalid POT file

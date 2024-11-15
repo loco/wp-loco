@@ -22,6 +22,22 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */
     private $json = [];
 
+    /**
+     * Recursion lock, contains the current mofile being processed indexed by the domain
+     * @var string[]
+     */
+    private $lock = [];
+
+    /**
+     * The current MO file being loaded during recursive calls to load_textdomain
+     */
+    private $mofile = '';
+
+    /**
+     * The current domain being loaded during recursive calls to load_textdomain
+     */
+    private $domain = '';
+
 
     /**
      * Filter callback for `pre_get_language_files_from_path`
@@ -67,11 +83,40 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
 
     /**
+     * Triggers a new round of load_translation_file attempts.
+     */
+    public function on_load_textdomain( $domain, $mofile ){
+        if( isset($this->lock[$domain]) ){
+            // may be recursion for our custom file
+            if( $this->lock[$domain] === $mofile ){
+                return;
+            }
+            // else a new file, so release the lock
+            unset($this->lock[$domain]);
+        }
+        // flag whether the original MO file (or a valid sibling) exists for this load.
+        // we could check this during filter_load_translation_file but this saves doing it multiple times
+        $this->mofile = self::try_readable($mofile);
+        // Setting the domain just in case someone is applying filters manually in a strange order
+        $this->domain = $domain;
+    }
+    
+
+
+    /**
      * Filter callback for `load_translation_file`
-     * Called from {@see load_textdomain}
+     * Called from {@see load_textdomain} multiple times for each file format in preference order.
      */
     public function filter_load_translation_file( $file, $domain, $locale ){
-        // loading a custom file directly is fine
+        // domain mismatch would be unexpected during normal execution, but anyone could apply filters.
+        if( $domain !== $this->domain ){
+            return $file;
+        }
+        // skip recursion for our own custom file:
+        if( isset($this->lock[$domain]) ){
+            return $file;
+        }
+        // loading a custom file directly is fine, although above lock will prevent in normal situations
         $path = dirname($file).'/';
         $custom = loco_constant('LOCO_LANG_DIR').'/';
         if( $path === $custom || str_starts_with($file,$custom) ){
@@ -85,35 +130,58 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         }
         // custom path may be author location, meaning it's under plugin or theme directories
         else if( array_key_exists($path,$this->custom) ){
-            $ext = explode('.', basename($file), 2 )[1];
+            $ext = explode( '.', basename($file), 2 )[1];
             $mapped = $custom.$this->custom[$path].'/'.$domain.'-'.$locale.'.'.$ext;
         }
+        // otherwise we'll assume the custom path is not intended to be further customized.
         else {
             return $file;
         }
-        // recursion is fine due to first clause in this function
-        $mapped = self::try_readable($mapped);
-        if( $mapped ){
-            load_textdomain( $domain, $mapped, $locale );
+        // When the original file isn't found, calls to load_textdomain will return false and overwrite our custom file.
+        // Here we'll simply return our mapped version, whether it exists or not. WordPress will treat is as the original.
+        if( '' === $this->mofile ){
+            return $mapped;
         }
+        /*/ Sanity check:
+        $mofile = self::to_mopath($file);
+        if( $mofile !== $this->mofile ){
+            Loco_error_Debug::trace('UNEXPECTED CONDITION: %s != %s', $mofile, $this->mofile );
+        }*/
+        // We know that the original file will eventually be found (even if via a second file attempt)
+        // This requires a recursive call to load_textdomain for our custom file, WordPress will handle if it exists.
+        $mapped = self::to_mopath($mapped);
+        $this->lock[$domain] = $mapped;
+        Loco_error_Debug::trace('Recursion - '.$domain);
+        load_textdomain( $domain, $mapped, $locale );
+ 
+        /*/ Return original file, which we've established does exist, or if it doesn't another extension might
+        if( '' === self::try_readable($file) ){
+            Loco_error_Debug::trace('UNEXPECTEDLY UNREADABLE: %s', $file );
+        }*/
         return $file;
     }
 
 
+    /**
+     * Fix any file extension to use .mo
+     */
+    private static function to_mopath( $path ){
+        if( str_ends_with($path,'.mo') ){
+            return $path;
+        }
+        // path should only be a .l10n.php file, but could be something custom
+        return dirname($path).'/'.explode('.', basename($path),2)[0].'.mo';
+    }
+
+
+    /**
+     * Check .mo or .php file is readable, and return the .mo file if so.
+     * Note that load_textdomain expects a .mo file, even if it ends up using .l10n.php
+     */
     private static function try_readable( $path ){
-        if( is_readable($path) ){
-            return $path;
-        }
-        // fall back to .mo if .l10n.php doesn't exist, and vise versa.
-        $ext = substr($path,-3);
-        if( '.mo' === $ext ){
-            $path = substr($path,0,-2).'l10n.php';
-        }
-        else {
-            $path = substr($path,0,-8).'mo';
-        }
-        if( is_readable($path) ){
-            return $path;
+        $mofile = self::to_mopath($path);
+        if( is_readable($mofile) || is_readable(substr($path,0,-2).'l10n.php') ){
+            return $mofile;
         }
         return '';
     }
