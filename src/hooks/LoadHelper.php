@@ -4,7 +4,6 @@
  * Ensures custom translations can be loaded from `wp-content/languages/loco`.
  * This functionality is optional. You can disable the plugin if you're not loading MO or JSON files from languages/loco
  * 
- * @noinspection PhpUnusedParameterInspection
  * @noinspection DuplicatedCode
  * @noinspection PhpUnused
  */

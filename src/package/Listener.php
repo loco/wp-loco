@@ -1,37 +1,25 @@
 <?php
 /**
  * Captures text domains being loaded at runtime and establishes what bundles they belong to.
- * 
+ * Note that since WordPress 6.7 all text domains are loaded JIT, so we won't see them unless they're used.
  */
 class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Global availability of a single listener
-     * @var Loco_package_Listener
+     * @var self
      */
     private static $singleton;
 
     /**
      * Buffer of captured text domain loads before they're resolved
-     * @var array
+     * @var array[]
      */
     private $buffer; 
 
     /**
-     * Whether buffer can be flushed. i.e. whether there is anything new to resolve
-     * @var bool
-     */
-    private $buffered;
-
-    /**
-     * Resolved theme bundles, indexed by slug (stylesheet dir)
-     * @var array
-     */
-    private $themes;
-
-    /**
      * Resolved plugin bundles, indexed by slug (relative file path)
-     * @var array
+     * @var Loco_package_Plugin[]
      */
     private $plugins;
 
@@ -43,21 +31,15 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Map of all text domains and their official directory location
-     * @var array { slug: domain }
+     * @var array { domain: path }
      */
     private $domainPaths;
 
     /**
      * Map of all known plugin handles indexed by their relative containing directory
-     * @var array { slug: domain }
+     * @var array { dirname: handle }
      */
     private $pluginHandles;
-
-    /**
-     * List of common directories that don't indicate ownership to a bundle, e.g. WP_LANG_DIR
-     * @var array
-     */    
-    private $globalPaths;
 
 
     /**
@@ -98,19 +80,10 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      */
     public function clear(){
         $this->buffer = [];
-        $this->themes = [];
         $this->plugins = [];
         $this->domains = [];
         $this->domainPaths = [];
         $this->pluginHandles = null;
-        $this->buffered = false;
-        $this->globalPaths = [];
-
-        foreach( ['WP_LANG_DIR'] as $name ){
-            if( $value = loco_constant($name) ){
-                $this->globalPaths[$value] = strlen($value);
-            }
-        }
         return $this;
     }
 
@@ -118,17 +91,19 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
 
     /**
      * Early hook listening for active bundles loading their own text domains.
+     * @noinspection PhpUnused
      */
     public function on_load_textdomain( $domain, $mofile ){
-        // echo '<pre>Debug:',esc_html( json_encode(compact('domain','mofile'),JSON_UNESCAPED_SLASHES)),'</pre>';
-        $this->buffered = true;
+        if( '' === $domain || 'default' === $domain ){
+            return;
+        }
         $this->buffer[$domain][] = $mofile;
     }
 
 
 
     /**
-     * Get primary Text Domain that's uniquely assigned to a bundle
+     * Get primary Text Domain that's uniquely assigned to a bundle.
      * @param string $handle theme or plugin relative path
      */
     public function getDomain( $handle ){
@@ -148,176 +123,167 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
         return isset($this->domainPaths[$domain]) ? $this->domainPaths[$domain] : '';
     }
 
-    
-    
+
     /**
-     * Utility: checks if a file path is under a given root
-     * @return string subpath relative to given root
+     * Trim containing directory from a path, so "languages/foo/bar" -> "foo/bar", or "languages" -> ""
      */
-    private static function relative( $path, $root ){
-        $root = trailingslashit($root);
-        $snip = strlen($root);
-        // attempt unaltered path
-        if( substr($path,0,$snip) === $root ){
-            return substr( $path, $snip );
-        }
-        // attempt resolved in case symlinks along path
-        $real = realpath($path);
-        if( $real && $real !== $path && substr($real,0,$snip) === $root ){
-            return substr( $real, $snip );
-        }
-        // path not under root
-        return null;
+    private static function subdir( $path ){
+        $bits = explode('/',$path,2);
+        return isset($bits[1]) ? $bits[1] : '';
     }
 
 
+    /**
+     * Trim subdirectories from a path so "languages/foo/bar" -> "languages"
+     */
+    private static function topdir( $path ){
+        return explode('/',$path,2)[0];
+    }
+    
+
 
     /**
-     * Check if given relative directory path the root of a known plugin
-     * @param string $check relative plugin directory name, e.g. "foo/bar"
-     * @return string relative plugin file handle, e.g. "foo/bar/baz.php"
+     * Resolve any path under a plugin directory to a plugin bundle.
+     * @param string $path relative plugin path, e.g. "loco-translate/languages/foo.po"
+     * @return void
      */
-    private function isPlugin( $check ){
+    private function resolvePluginFromPath( $path, $domain, $slug ){
+        // cache all root directory names
         if( ! $this->pluginHandles ){
             $this->pluginHandles = [];
             foreach( Loco_package_Plugin::get_plugins() as $handle => $data ){
                 $this->pluginHandles[ dirname($handle) ] = $handle;
                 // set default text domain because additional domains could be discovered before the canonical one
-                if( isset($data['TextDomain']) && ( $domain = $data['TextDomain'] ) ){
-                    $this->domains[$handle] = $domain;
+                if( isset($data['TextDomain']) && '' !== $data['TextDomain'] ){
+                    $this->domains[$handle] = $data['TextDomain'];
                 }
             }
         }
-        if( ! array_key_exists($check, $this->pluginHandles) ){
-            return null;
+        // check root directory name exists in indexed plugin roots
+        $name = self::topdir($path);
+        if( array_key_exists($name, $this->pluginHandles) ) {
+            $handle = $this->pluginHandles[ $name ];
         }
-        
-        return $this->pluginHandles[$check];
+        else {
+            return;
+        }
+        // set this as default domain if not already cached
+        if( ! isset($this->domains[$handle]) ){
+            $this->domains[$handle] = $domain;
+        }
+        if( $slug !== $domain ){
+            $this->domains[$slug] = $domain;
+        }
+        // plugin bundle may already exist
+        if( isset($this->plugins[$handle]) ){
+            $bundle = $this->plugins[$handle];
+        }
+        // create default project for plugin bundle (not necessarily the current text domain)
+        else {
+            $bundle = Loco_package_Plugin::create($handle);
+            $this->plugins[$handle] = $bundle;
+        }
+        // add current domain as translation project if not already set
+        // this avoids extra domains getting set before the default one
+        if( ! $bundle->getProject($slug) ){
+            $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
+            $bundle->addProject( $project );
+        }
     }
 
 
     /**
-     * Convert a file path to a theme or plugin bundle
-     * @return Loco_package_Bundle|null
+     * @return void
+     */
+    private function resolvePluginFromSlug( $slug, $domain ){
+        // if we're lucky the plugin's directory will match. But we don't know the file name
+        foreach( Loco_fs_Locations::getPlugins()->apply($slug) as $path ){
+            if( is_dir($path) ){
+                $this->resolvePluginFromPath( basename($path).'/dummy.ext', $domain, $slug );
+                break;
+            }
+        }
+    }
+
+
+    /**
+     * @return bool
+     */
+    private function resolveThemeFromPath( $path, $root, $domain ){
+        $handle = self::topdir($path);
+        $theme = new WP_Theme( $handle, $root );
+        if( ! $theme->exists() ){
+            return false;
+        }
+        // theme may have officially declared text domain
+        if( $default = $theme->get('TextDomain') ){
+            $this->domains[$handle] = $default;
+        }
+        // else set current domain as default if not already set
+        else if ( ! isset($this->domains[$handle]) ){
+            $this->domains[$handle] = $domain;
+        }
+        if( ! isset($this->domainPaths[$domain]) ){
+            $this->domainPaths[$domain] = self::subdir($path);
+        }
+        // theme configuration may use domains and domain paths set above
+        // return Loco_package_Theme::createFromTheme($theme);
+        return true;
+    }
+
+
+    /**
+     * @return void
+     */
+    private function resolveThemeFromSlug( $slug, $domain ){
+        // if we're lucky the theme's directory will match the domain. But we don't know the file name
+        foreach( Loco_fs_Locations::getThemes()->apply($slug) as $path ){
+            if( is_dir($path) ){
+                $this->resolveThemeFromPath( $slug, dirname($path), $domain );
+                break;
+            }
+        }
+    }
+
+
+    /**
+     * @return void
      */
     private function resolve( $path, $domain ){
         $file = new Loco_fs_LocaleFile( $path );
         // ignore suffix-only files when locale is invalid as locale code would be taken wrongly as slug, e.g. if you tried to load "english.po"
         if( $file->hasPrefixOnly() ){
-            return null;
+            return;
         }
-        // no point looking at files in global directory as they tell us only the domain which we already know
-        foreach( $this->globalPaths as $prefix => $length ){
-            if( substr($path,0,$length) === $prefix ){
-                return null;
+        $dir = dirname($path);
+        // theme author: (no file prefix)
+        $split = Loco_fs_Locations::getThemes()->split($dir);
+        if( $split ){
+            [$root,$rel] = $split;
+            if( $this->resolveThemeFromPath($rel,$root,$domain) ){
+                return;
+            }
+            // try plugins, as they may be held in themes
+        }
+        // file prefix is probably the Text Domain, but we can't guarantee it
+        $slug = $file->getPrefix()?:$domain;
+        // plugin author:
+        if( $rel = Loco_fs_Locations::getPlugins()->rel($path) ){
+            $this->domainPaths[$domain] = self::subdir( dirname($rel) );
+            $this->resolvePluginFromPath($rel,$domain,$slug);
+        }
+        // Language domain locations
+        else if( Loco_fs_Locations::getLangs()->check($path) ){
+            // immediate parent will be either plugins or themes, else the root (default domain)
+            $type = basename( dirname($path) );
+            if( 'plugins' === $type ){
+                $this->resolvePluginFromSlug($slug,$domain);
+            }
+            else if( 'themes' === $type ){
+                $this->resolveThemeFromSlug($slug,$domain);
             }
         }
-        // avoid infinite loops during bundle resolution
-        $wasBuffered = $this->buffered;
-        $this->buffered = false;
-        // file prefix is *probably* the Text Domain, but can differ if load_textdomain called directly from bundle code
-        $slug = $file->getPrefix() or $slug = $domain;
-        $path = dirname($path);
-        $bundle = null;
-        while( true ){
-            // check if MO file lives inside a theme 
-            foreach( $GLOBALS['wp_theme_directories'] as $root ){
-                $relative = self::relative($path, $root);
-                if( is_null($relative) ){
-                    continue;
-                }
-                // theme's "stylesheet directory" must be immediately under this root
-                // passed path could root of theme, or any directory below it, but we only need the top level
-                $chunks = explode( '/', $relative, 2 );
-                $handle = current( $chunks );
-                if( ! $handle ){
-                    continue;
-                }
-                $theme = new WP_Theme( $handle, $root );
-                if( ! $theme->exists() ){
-                    continue;
-                }
-                $abspath = $root.'/'.$handle;
-                // theme may have officially declared text domain
-                if( $default = $theme->get('TextDomain') ){
-                    $this->domains[$handle] = $default;
-                }
-                // else set current domain as default if not already set
-                else if ( ! isset($this->domains[$handle]) ){
-                    $this->domains[$handle] = $domain;
-                }
-                if( ! isset($this->domainPaths[$domain]) ){
-                    $this->domainPaths[$domain] = self::relative( $path, $abspath );
-                }
-                // theme bundle may already exist
-                if( isset($this->themes[$handle]) ){
-                    $bundle = $this->themes[$handle];
-                }
-                // create default project for theme bundle
-                else {
-                    $bundle = Loco_package_Theme::createFromTheme($theme);
-                    $this->themes[$handle] = $bundle;
-                }
-                // possibility that additional text domains are being added
-                $project = $bundle->getProject($slug);
-                if( ! $project ){
-                    $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
-                    $bundle->addProject( $project );
-                }
-                // bundle was a theme, even if we couldn't configure it, so no point checking plugins
-                break 2;
-            }
-
-            // check if MO file lives inside a plugin
-            foreach( [ 'WP_PLUGIN_DIR', 'WPMU_PLUGIN_DIR' ] as $const ){
-                $root = loco_constant($const);
-                $relative = self::relative($path, $root);
-                if( is_null($relative) ){
-                    continue;
-                }
-                // plugin *might* live directly under root
-                $stack = [];
-                foreach( explode( '/', dirname($relative) ) as $next ){
-                    $stack[] = $next;
-                    $relbase = implode('/', $stack );
-                    if( $handle = $this->isPlugin($relbase) ){
-                        $abspath = $root.'/'.$handle;
-                        // set this as default domain if not already cached
-                        if( ! isset($this->domains[$handle]) ){
-                            $this->domains[$handle] = $domain;
-                        }
-                        if( ! isset($this->domainPaths[$domain]) ){
-                            $target = self::relative( $path, dirname($abspath) );
-                            $this->domainPaths[$domain] = $target;
-                        }
-                        // plugin bundle may already exist
-                        if( isset($this->plugins[$handle]) ){
-                            $bundle = $this->plugins[$handle];
-                        }
-                        // create default project for plugin bundle (not necessarily the current text domain)
-                        else {
-                            $bundle = Loco_package_Plugin::create($handle);
-                            $this->plugins[$handle] = $bundle;
-                        }
-                        // add current domain as translation project if not already set
-                        // this avoids extra domains getting set before the default one
-                        if( ! $bundle->getProject($slug) ){
-                            $project = new Loco_package_Project( $bundle, new Loco_package_TextDomain($domain), $slug );
-                            $bundle->addProject( $project );
-                        }
-                        break;
-                    }
-                }
-            }
-
-            // failed to establish a bundle
-            break;
-        }
-
-        $this->buffered = $wasBuffered;
-        return $bundle;
     }
-    
 
 
     /**
@@ -325,8 +291,10 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      * Resolve all currently buffered text domain paths
      */    
     private function flush(){
-        if( $this->buffered ){
-            foreach( $this->buffer as $domain => $paths ){
+        if( $this->buffer ){
+            $buffer = $this->buffer;
+            $this->buffer = [];
+            foreach( $buffer as $domain => $paths ){
                 foreach( $paths as $path ){
                     try {
                         if( $this->resolve($path,$domain) ){
@@ -338,21 +306,8 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
                     }
                 }
             }
-            $this->buffer = [];
-            $this->buffered = false;
         }
     }
-
-
-
-    /**
-     * @return array 
-     */
-    public function getThemes(){
-        $this->flush();
-        return $this->themes;
-    }
-
 
 
     /**

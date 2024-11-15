@@ -241,7 +241,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
         $bundle = new Loco_package_Plugin( $handle, $data['Name'] );
 
         // check if listener heard the real text domain, but only use when none declared
-        // This will not longer happen since WP 4.6 header fallback, but we could warn about it
+        // This will no longer happen since WP 4.6 header fallback, but we could warn about it
         $listener = Loco_package_Listener::singleton();
         if( $domain = $listener->getDomain($handle) ){
             if( empty($data['TextDomain']) ){

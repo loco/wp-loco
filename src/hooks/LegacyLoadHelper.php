@@ -51,7 +51,6 @@ class Loco_hooks_LegacyLoadHelper extends Loco_hooks_Hookable {
      */
     public function __construct(){
         parent::__construct();
-        Loco_error_AdminNotices::debug('Legacy mode');
         $this->base = trailingslashit( loco_constant('LOCO_LANG_DIR') );
         // add system locations which have direct equivalent custom/safe locations under LOCO_LANG_DIR
         // not adding theme paths because as long as load_theme_textdomain is used they will be mapped by context.

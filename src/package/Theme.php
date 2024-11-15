@@ -124,15 +124,13 @@ class Loco_package_Theme extends Loco_package_Bundle {
         $bundle = new Loco_package_Theme( $slug, $name );
         
         // ideally theme has declared its TextDomain
-        $domain = $theme->get('TextDomain') or
         // if not, we can see if the Domain listener has picked it up 
-        $domain = Loco_package_Listener::singleton()->getDomain($slug);
+        $domain = $theme->get('TextDomain') ?: Loco_package_Listener::singleton()->getDomain($slug);
         // otherwise we won't try to guess as it results in silent problems when guess is wrong
         
         // ideally theme has declared its DomainPath. if not, we can see if the listener has picked it up 
         // otherwise project will use theme root by default
-        $target = $theme->get('DomainPath')
-               ?: Loco_package_Listener::singleton()->getDomainPath($domain);
+        $target = $theme->get('DomainPath') ?: Loco_package_Listener::singleton()->getDomainPath($domain);
 
         $bundle->configure( $base,  [
             'Name' => $name,

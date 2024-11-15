@@ -101,8 +101,10 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.6.12 =
-* Major bugfix to custom load_textdomain paths. Now works when original file is absent
+* Major fix to custom load_textdomain loader. Works when original file is absent
+* Fixed bug in template comparison when JSON files need to be merged
 * CSS fixes including reinstating of unsaved "star" icon
+* Domain listener fixed for JIT loading
 * Bumped WordPress compatibility to 6.7
 
 = 2.6.11 =
