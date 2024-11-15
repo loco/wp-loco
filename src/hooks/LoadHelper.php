@@ -29,12 +29,12 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     private $lock = [];
 
     /**
-     * The current MO file being loaded during recursive calls to load_textdomain
+     * The current MO file being loaded during the initial call to load_textdomain
      */
     private $mofile = '';
 
     /**
-     * The current domain being loaded during recursive calls to load_textdomain
+     * The current domain being loaded during the initial call to load_textdomain
      */
     private $domain = '';
 
@@ -100,7 +100,6 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // Setting the domain just in case someone is applying filters manually in a strange order
         $this->domain = $domain;
     }
-    
 
 
     /**
@@ -142,22 +141,16 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         if( '' === $this->mofile ){
             return $mapped;
         }
-        /*/ Sanity check:
-        $mofile = self::to_mopath($file);
-        if( $mofile !== $this->mofile ){
-            Loco_error_Debug::trace('UNEXPECTED CONDITION: %s != %s', $mofile, $this->mofile );
-        }*/
         // We know that the original file will eventually be found (even if via a second file attempt)
         // This requires a recursive call to load_textdomain for our custom file, WordPress will handle if it exists.
         $mapped = self::to_mopath($mapped);
         $this->lock[$domain] = $mapped;
-        Loco_error_Debug::trace('Recursion - '.$domain);
         load_textdomain( $domain, $mapped, $locale );
- 
-        /*/ Return original file, which we've established does exist, or if it doesn't another extension might
-        if( '' === self::try_readable($file) ){
-            Loco_error_Debug::trace('UNEXPECTEDLY UNREADABLE: %s', $file );
+        /*/ Sanity check that original file does exist, and it's the one we're expecting:
+        if( '' === self::try_readable($file) || self::to_mopath($file) !== $this->mofile ){
+            throw new LogicException;
         }*/
+        // Return original file, which we've established does exist, or if it doesn't another extension might
         return $file;
     }
 
