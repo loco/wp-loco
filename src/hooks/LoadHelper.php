@@ -41,21 +41,17 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * Filter callback for `pre_get_language_files_from_path`
      * Called from {@see WP_Textdomain_Registry::get_language_files_from_path}
-     * Path will be either WP_LANG_DIR/plugins', WP_LANG_DIR/themes or a user-defined location
+     *
+     * @param null|array $files we're not going to modify this.
+     * @param string $path either WP_LANG_DIR/plugins/', WP_LANG_DIR/themes/ or a user-defined location
      */
     public function filter_pre_get_language_files_from_path( $files, $path ){
-        $len = strlen( loco_constant('WP_LANG_DIR') );
-        $rel = substr($path,$len);
-        if( '/' !== $rel && '/plugins/' !== $rel && '/themes/' !== $rel ){
-            // custom location is likely to be inside a theme or plugin, but could be anywhere
-            if( Loco_fs_Locations::getPlugins()->check($path) ){
-                $this->custom[$path] = 'plugins';
+        if( ! array_key_exists($path,$this->custom) ){
+            $len = strlen( loco_constant('WP_LANG_DIR') );
+            $rel = substr($path,$len);
+            if( '/' !== $rel && '/plugins/' !== $rel && '/themes/' !== $rel ){
+                $this->resolveType($path);
             }
-            else if( Loco_fs_Locations::getThemes()->check($path) ){
-                $this->custom[$path] = 'themes';
-            }
-            // folder could be plugin-specific, e.g. languages/woocommerce,
-            // but this won't be merged with custom because it IS custom.
         }
         return $files;
     }
@@ -98,6 +94,13 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         $this->mofile = self::try_readable($mofile);
         // Setting the domain just in case someone is applying filters manually in a strange order
         $this->domain = $domain;
+        // If load_textdomain was called directly with a custom file we'll have missed it
+        if( 'default' !== $domain ){
+            $path = dirname($mofile).'/';
+            if( ! array_key_exists($path,$this->custom) ){
+                $this->resolveType($path);
+            }
+        }
     }
 
 
@@ -151,6 +154,24 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         }*/
         // Return original file, which we've established does exist, or if it doesn't another extension might
         return $file;
+    }
+
+
+    /**
+     * Resolve a custom directory path to either a theme or a plugin
+     * @param string $path directory path with trailing slash
+     * @return void
+     */
+    private function resolveType( $path ) {
+        // custom location is likely to be inside a theme or plugin, but could be anywhere
+        if( Loco_fs_Locations::getPlugins()->check($path) ){
+            $this->custom[$path] = 'plugins';
+        }
+        else if( Loco_fs_Locations::getThemes()->check($path) ){
+            $this->custom[$path] = 'themes';
+        }
+        // folder could be plugin-specific, e.g. languages/woocommerce,
+        // but this won't be merged with custom because it IS custom.
     }
 
 

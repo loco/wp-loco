@@ -91,6 +91,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         Loco_mvc_PostParams::destroy();
         Loco_error_AdminNotices::destroy();
         Loco_package_Listener::destroy();
+        Loco_fs_Locations::clear();
         wp_cache_flush();
         // text domains should be unloaded at start of all tests, and locale reset
         unset( $GLOBALS['locale'] );
@@ -120,6 +121,9 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         ];
         // remove all filters before adding
         remove_all_filters('filesystem_method');
+        remove_all_filters('loco_constant');
+        remove_all_filters('loco_constant_WP_PLUGIN_DIR');
+        remove_all_filters('loco_constant_WPMU_PLUGIN_DIR');
         remove_all_filters('loco_constant_DISALLOW_FILE_MODS');
         remove_all_filters('file_mod_allowed');
         remove_all_filters('loco_file_mod_allowed_context');
@@ -482,6 +486,18 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         }
         return $data;
     }
+    
+    
+    public static function filter_enforce_test_plugins_only( $path ){
+        return LOCO_TEST_DATA_ROOT.'/'.basename($path);
+    }
+    
+    
+    public function enable_test_plugins(){
+        add_filter('loco_constant_WP_PLUGIN_DIR',[__CLASS__,'filter_enforce_test_plugins_only']);
+        add_filter('loco_constant_WPMU_PLUGIN_DIR',[__CLASS__,'filter_enforce_test_plugins_only']);
+    }
+    
 
 
     /**

@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.13 =
+* Fix for direct calls to load_textdomain with custom paths
+
 = 2.6.12 =
 * Major fix to custom load_textdomain loader. Works when original file is absent
 * Fixed bug in template comparison when JSON files need to be merged
@@ -544,7 +547,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.12 =
+= 2.6.13 =
 * Various improvements and bug fixes
 
 
