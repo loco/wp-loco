@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.6.14 =
+* Emergency fix for exception in fs locations
+
 = 2.6.13 =
 * Fix for direct calls to load_textdomain with custom paths
 * This resolves a regression in 2.6.12
@@ -548,7 +551,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.6.13 =
+= 2.6.14 =
 * Various improvements and bug fixes
 
 

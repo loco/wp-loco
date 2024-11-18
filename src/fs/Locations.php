@@ -233,7 +233,8 @@ class Loco_fs_Locations extends ArrayObject {
         }
         $path = Loco_fs_File::abs($rel);
         if( '' === $path ){
-            throw new InvalidArgumentException('Failed on abs('.var_export($rel,true).')');
+            //throw new InvalidArgumentException('Failed on abs('.var_export($rel,true).')');
+            return [];
         }
         $paths = [ trailingslashit($path) ];
         // add real path if differs
