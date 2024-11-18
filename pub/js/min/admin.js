@@ -2701,7 +2701,7 @@ return (this.rendered ? this.live : this.dead).offsetTop;
 };
 c.height = function() {
 let a = this.h;
-null == a && (this.h = a = this.rendered ? this.live.firstChild.offsetHeight : this.dead.offsetHight);
+null == a && (this.h = a = this.rendered ? this.live.firstChild.offsetHeight : this.dead.offsetHeight);
 a || y("row has zero height");
 return a;
 };
