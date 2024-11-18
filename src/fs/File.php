@@ -61,6 +61,14 @@ class Loco_fs_File {
 
 
     /**
+     * Test if a path looks absolute
+     */
+    public static function is_abs( $path ){
+        return '' !== $path && ( '/' === $path[0] || preg_match('!^\\\\\\\\|.:\\\\!',$path) );
+    }
+
+
+    /**
      * Call PHP is_readable() but suppress E_WARNING when path is outside open_basedir.
      * @param string $path
      * @return bool

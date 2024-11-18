@@ -163,6 +163,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @return void
      */
     private function resolveType( $path ) {
+        // no point trying to resolve a relative path, this likely stems from bad call to load_textdomain
+        if( ! Loco_fs_File::is_abs($path) ){
+            return;
+        }
         // custom location is likely to be inside a theme or plugin, but could be anywhere
         if( Loco_fs_Locations::getPlugins()->check($path) ){
             $this->custom[$path] = 'plugins';
