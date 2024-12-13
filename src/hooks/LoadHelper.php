@@ -4,8 +4,8 @@
  * Ensures custom translations can be loaded from `wp-content/languages/loco`.
  * This functionality is optional. You can disable the plugin if you're not loading MO or JSON files from languages/loco
  * 
- * @noinspection DuplicatedCode
  * @noinspection PhpUnused
+ * @noinspection PhpUnusedParameterInspection
  */
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
@@ -36,6 +36,11 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * The current domain being loaded during the initial call to load_textdomain
      */
     private $domain = '';
+
+    /**
+     * Registry of text domains we've seen, whether loaded or not. This will catch early JIT problem.
+     */
+    private $seen = [];
 
 
     /**
@@ -300,6 +305,57 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */
     private static function jedValid( $jed ){
         return is_array($jed) && array_key_exists('locale_data',$jed) && is_array($jed['locale_data']) && $jed['locale_data'];
+    }
+    
+    
+    // Debug //
+
+
+
+    /**
+     * Alert to the early JIT loading issue for any text domain queried before we've seen it be loaded.
+     */
+    private function handle_unseen_textdomain( $domain ){
+        if( ! array_key_exists($domain,$this->seen) ){
+            $this->seen[$domain] = true;
+            do_action('loco_unseen_textdomain',$domain);
+        }
+    }
+
+
+    /**
+     * `gettext` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_gettext( $translation = '', $text = '', $domain = '' ){
+        $this->handle_unseen_textdomain($domain?:'default');
+        return $translation;
+    }
+
+
+    /**
+     * `ngettext` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_ngettext( $translation = '', $single = '', $plural = '', $number = 0, $domain = '' ){
+        $this->handle_unseen_textdomain($domain?:'default');
+        return $translation;
+    }
+
+
+    /**
+     * `gettext_with_context` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_gettext_with_context( $translation = '', $text = '', $context = '', $domain = '' ){
+        $this->handle_unseen_textdomain($domain?:'default');
+        return $translation;
+    }
+
+
+    /**
+     * `ngettext_with_context` filter callback. Enabled only in Debug mode.
+     */
+    public function debug_ngettext_with_context( $translation = '', $single = '', $plural = '', $number = 0, $context = '', $domain = '' ){
+        $this->handle_unseen_textdomain($domain?:'default');
+        return $translation;
     }
     
 

@@ -53,6 +53,14 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
         
         $tag = (string) $locale;
         $package = new Loco_package_Locale( $locale );
+        
+        // search for base language, unless it's a separate, installed language
+        if( $locale->lang !== (string) $locale ){
+            $fallback = new Loco_Locale($locale->lang);
+            if( ! $api->isInstalled($fallback) ){
+                $package->addLocale($fallback);
+            }
+        }
 
         // Get PO files for this locale
         $files = $package->findLocaleFiles();
