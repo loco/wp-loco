@@ -78,8 +78,7 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
         }
 
         // This is effectively a filter whereby the returned array should be a translation of the input array
-        // TODO might be useful for translation hooks to know the PO file this comes from 
-        $targets = apply_filters( $action, $sources, $locale, $config );
+        $targets = apply_filters( $action, [], $sources, $locale, $config );
         if( count($targets) !== count($sources) ){
             Loco_error_AdminNotices::warn('Number of translations does not match number of source strings');
         }
