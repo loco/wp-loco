@@ -42,6 +42,24 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      */
     private $seen = [];
 
+    /**
+     * {@inheritDoc}
+     */
+    public function __construct(){
+        parent::__construct();
+        // Text domains loaded prematurely won't be customizable, even if NOOP_Translations
+        global $l10n, $l10n_unloaded;
+        if( $l10n && is_array($l10n) ){
+            foreach( $l10n as $domain => $value ){
+                if( 'default' !== $domain && apply_filters('loco_unload_early_textdomain',true,$domain,$value) ){
+                    unload_textdomain($domain);
+                    unset($l10n_unloaded[$domain]);
+                    loco_debugging() && Loco_error_Debug::trace('Unloaded premature text domain ('.$domain.')');
+                }
+            }
+        }
+    }
+
 
     /**
      * Filter callback for `pre_get_language_files_from_path`
@@ -70,7 +88,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // If path is false it means no system or author files were found. This will stop WordPress trying to load anything.
         // Usually this occurs during true JIT loading, where an author path would not be set by e.g. load_plugin_textdomain.
         if( false === $path ){
-            $base = loco_constant('LOCO_LANG_DIR');
+            $base = rtrim( loco_constant('LOCO_LANG_DIR'), '/' );
             foreach( ['/plugins/','/themes/'] as $type ){
                 if( self::try_readable($base.$type.$domain.'-'.$locale.'.mo') ){
                     $path = $base.$type;
@@ -124,13 +142,13 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         }
         // loading a custom file directly is fine, although above lock will prevent in normal situations
         $path = dirname($file).'/';
-        $custom = loco_constant('LOCO_LANG_DIR').'/';
+        $custom = trailingslashit( loco_constant('LOCO_LANG_DIR') );
         if( $path === $custom || str_starts_with($file,$custom) ){
             return $file;
         }
         // map system file to custom location if possible. e.g. languages/foo => languages/loco/foo
         // this will account for most installed translations which have been customized.
-        $system = loco_constant('WP_LANG_DIR').'/';
+        $system = trailingslashit( loco_constant('WP_LANG_DIR') );
         if( str_starts_with($file,$system) ){
             $mapped = substr_replace($file,$custom,0,strlen($system) );
         }

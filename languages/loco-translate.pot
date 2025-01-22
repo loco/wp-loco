@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.6.14\n"
+"Project-Id-Version: Loco Translate 2.7.0-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2024-11-18 10:07+0000\n"
+"POT-Creation-Date: 2025-01-21 15:05+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.6.14; wp-6.7\n"
+"X-Loco-Version: 2.7.0-dev; wp-6.7.1\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -578,7 +578,7 @@ msgid "Disallow"
 msgstr ""
 
 #: src/admin/file/EditController.php:132 src/admin/file/EditController.php:183
-#: src/admin/bundle/LocaleController.php:130 tpl/admin/config/settings.php:234
+#: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:234
 #: tpl/admin/config/apis.php:122 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
@@ -1083,7 +1083,7 @@ msgstr ""
 msgid "Install manually"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:116
+#: src/admin/bundle/LocaleController.php:124
 #: src/admin/list/LocalesController.php:35 tpl/admin/init/init-po.php:45
 msgid "Installed languages"
 msgstr ""
@@ -1197,7 +1197,7 @@ msgid "Loco Translate is powered by"
 msgstr ""
 
 #. %s refers to the name of a missing PHP extension, for example "mbstring".
-#: loco.php:138
+#: loco.php:131
 #, php-format
 msgid ""
 "Loco Translate requires the \"%s\" PHP extension. Ask your hosting provider "
@@ -1313,7 +1313,7 @@ msgstr ""
 msgid "New translations template for \"%s\""
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:129
+#: src/admin/bundle/LocaleController.php:137
 msgid "No core translation files are installed for this language"
 msgstr ""
 
@@ -1458,7 +1458,7 @@ msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
-#: src/admin/bundle/LocaleController.php:146
+#: src/admin/bundle/LocaleController.php:154
 msgid "Plugins"
 msgstr ""
 
@@ -1641,15 +1641,15 @@ msgstr ""
 msgid "Scan PHP files with extensions:"
 msgstr ""
 
-#: src/admin/bundle/LocaleController.php:137
+#: src/admin/bundle/LocaleController.php:145
 msgid "See all core translations"
 msgstr ""
 
-#: tpl/admin/root.php:58 src/admin/bundle/LocaleController.php:147
+#: tpl/admin/root.php:58 src/admin/bundle/LocaleController.php:155
 msgid "See all plugins"
 msgstr ""
 
-#: tpl/admin/root.php:43 src/admin/bundle/LocaleController.php:142
+#: tpl/admin/root.php:43 src/admin/bundle/LocaleController.php:150
 msgid "See all themes"
 msgstr ""
 
@@ -1863,7 +1863,7 @@ msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
 #: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
-#: src/admin/bundle/LocaleController.php:141
+#: src/admin/bundle/LocaleController.php:149
 msgid "Themes"
 msgstr ""
 
@@ -2215,7 +2215,7 @@ msgstr ""
 msgid "WordPress %s"
 msgstr ""
 
-#: src/package/Core.php:87 src/admin/bundle/LocaleController.php:136
+#: src/package/Core.php:87 src/admin/bundle/LocaleController.php:144
 msgid "WordPress Core"
 msgstr ""
 
