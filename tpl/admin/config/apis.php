@@ -103,7 +103,19 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                         </p>
                     </fieldset>
                 </td>
-            </tr>
+            </tr><?php
+            /* @var Loco_mvc_ViewParams[] $hooked */
+            foreach( $hooked as $api ):?> 
+            <tr>
+                <th scope="row"><?php $api->e('name')?></th>
+                <td>
+                    <p><?php
+                        $api->key ? esc_html_e('Configured externally','loco-translate') : esc_html_e('No API key','loco-translate') ?><br />
+                        <span class="description"><a href="<?php $api->e('url')?>" target="_blank" tabindex="-1"><?php $api->e('url')?></a></span>
+                    </p>
+                </td>
+            </tr><?php
+            endforeach?> 
         </tbody>
     </table>
 

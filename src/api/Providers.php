@@ -9,7 +9,7 @@ abstract class Loco_api_Providers {
      * Export API credentials for all supported APIs
      * @return array[]
      */
-    public static function export(){
+    public static function export():array {
         $apis = [];
         foreach( self::builtin() as $a ){
             $hook = 'loco_api_provider_'.$a['id'];
@@ -22,7 +22,7 @@ abstract class Loco_api_Providers {
     /**
      * @return array[]
      */
-    public static function builtin(){
+    public static function builtin():array {
         $settings = Loco_data_Settings::get();
         return  [
              [
@@ -55,7 +55,7 @@ abstract class Loco_api_Providers {
      * Get only configured APIs, and sort them fairly
      * @return array[]
      */
-    public static function configured(){
+    public static function configured():array {
         return self::sort( array_filter( self::export(), [__CLASS__,'filterConfigured'] ) );
     }
 
@@ -63,9 +63,8 @@ abstract class Loco_api_Providers {
     /**
      * @internal
      * @param $api string[]
-     * @return bool
      */
-    private static function filterConfigured( array $api ){
+    private static function filterConfigured( array $api ):bool {
         return array_key_exists('key',$api) && is_string($api['key']) && '' !== $api['key'];
     }
 
@@ -76,7 +75,7 @@ abstract class Loco_api_Providers {
      * @param string[] $b
      * @return int
      */
-    private static function compareNames( array $a, array $b ){
+    private static function compareNames( array $a, array $b ):int {
         return strcasecmp($a['name'],$b['name']);
     }
     
@@ -84,9 +83,8 @@ abstract class Loco_api_Providers {
     /**
      * Sort providers alphabetically
      * @param array[] $apis
-     * @return array
      */
-    public static function sort( array $apis ){
+    public static function sort( array $apis ):array {
         usort( $apis, [__CLASS__,'compareNames'] );
         return $apis;
     }

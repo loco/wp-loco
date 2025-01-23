@@ -13,6 +13,9 @@ class Loco_js_Strings extends Loco_hooks_TranslateBuffer {
         // translators: When text filtering reduces to an empty view
         __("Nothing matches the text filter",'loco-translate');
 
+        //
+        __("No API key",'loco-translate');
+
         /* translators: Where %s is the name of the POT template file. Message appears after sync
          * xgettext: javascript-format */
         __("Merged from %s",'loco-translate');

@@ -11,12 +11,22 @@ class Loco_admin_config_ApisController extends Loco_admin_config_BaseController 
         parent::init();
         $this->set( 'title', __('API keys','loco-translate') );
 
-        // collect support API keys
+        // Collect configurable API keys bundled with plugin
         $apis = [];
         foreach( Loco_api_Providers::builtin() as $api ){
             $apis[ $api['id'] ] = new Loco_mvc_ViewParams($api);
         }
+        // Add any additional API hooks for information only
+        $hooked = [];
+        foreach( Loco_api_Providers::export() as $api ){
+            $id = $api['id'];
+            if( ! array_key_exists($id,$apis) ){
+                $hooked[ $id ] = new Loco_mvc_ViewParams($api);
+            }
+        }
+
         $this->set('apis',$apis);
+        $this->set('hooked',$hooked);
 
         // handle save action
         $nonce = $this->setNonce('save-apis');
