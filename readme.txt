@@ -106,6 +106,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 * Locale-filtered bundle list now searches for base language
 * Loading helper forcefully removes prematurely loaded text domains
 * Machine translation hooks now have access to message context
+* Persistent UI state for code view and invisible character modes
 
 = 2.6.14 =
 * Critical fix: A relative path passed to `load_textdomain` no longer throws exception.

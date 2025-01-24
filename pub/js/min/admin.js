@@ -3717,6 +3717,7 @@ e.setMode(a);
 });
 const d = this.active, f = this.sourceCell;
 d && d.refs() && f && this.setSrcMeta(d, f) && f.redraw();
+this.fire("poMode", [ a ]);
 }
 return this;
 };

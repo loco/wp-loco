@@ -12,7 +12,7 @@ function m(a) {
 var b = a.getId();
 a.key() ? a.verify(function(e) {
 e ? g(b, "OK ✓") : g(b, "FAILED").addClass("loco-danger");
-}) : g(b, "No API key");
+}) : g(b, d.l10n._("No API key"));
 }
 var f = c("#loco-utf8-check")[0].textContent, h = d.conf;
 1 === f.length && 10003 === f.charCodeAt(0) || d.notices.warn("This page has a problem rendering UTF-8").stick();
