@@ -76,7 +76,7 @@
                 <td>
                     <?php echo $po->meta->getPercent()?>%
                 </td>
-                <td data-sort-value="<?php $po->n('total')?> ">
+                <td data-sort-value="<?php $po->f('total','%u')?> ">
                     <?php $po->n('total')?> 
                 </td>
                 <td data-sort-value="<?php $po->f('todo','%u')?>">

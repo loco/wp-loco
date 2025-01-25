@@ -159,7 +159,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      * Collect PO/MO pairings, ignoring any PO that is in use as a template
      * @return array[]
      */
-    private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, Loco_fs_File $pot = null ){     
+    private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, Loco_fs_File $pot = null ):array {
         $pairs = [];
         /* @var $pofile Loco_fs_LocaleFile */
         foreach( $po as $pofile ){
@@ -191,7 +191,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      * Initialize view parameters for each row representing a localized resource pair
      * @return array collection of entries corresponding to available PO/MO pair.
      */
-    private function createProjectPairs( Loco_package_Project $project, Loco_fs_LocaleFileList $po, Loco_fs_LocaleFileList $mo ){
+    private function createProjectPairs( Loco_package_Project $project, Loco_fs_LocaleFileList $po, Loco_fs_LocaleFileList $mo ):array {
         // populate official locale names for all found, or default to our own
         if( $locales = $po->getLocales() + $mo->getLocales() ){
             $api = new Loco_api_WordPressTranslations;
@@ -217,15 +217,15 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             }
             $rows[] = $this->createFileParams( $project, $file, $locale );
         }
-
+        // Sort PO pairs in alphabetical order, with custom before system, before author
+        usort( $rows, function( ArrayAccess $a, ArrayAccess $b ):int {
+            return strcasecmp( $a['lname'], $b['lname'] );
+        } );
         return $rows;
     }
 
 
-    /**
-     * @return Loco_mvc_ViewParams
-     */
-    private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ){
+    private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ):Loco_mvc_ViewParams {
         // Pull Gettext meta data from cache if possible
         $meta = Loco_gettext_Metadata::load($file);
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );
