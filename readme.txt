@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.2.24
 Tested up to: 6.7.1
-Stable tag: 2.6.14
+Stable tag: 2.7.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,7 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.7.0
 * Raised minimum requirements to WordPress 6.6
-* Minimum PHP version becomes 7.2.24 as per WordPress
+* Minimum PHP version becomes 7.2.24 as per WordPress 6.6
 * Locale-filtered bundle list now searches for base language
 * Loading helper forcefully removes prematurely loaded text domains
 * Machine translation hooks now have access to message context

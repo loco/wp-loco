@@ -78,7 +78,6 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
                 ] );
             }
         }
-        $this->set('locales', $locales );
         
         // Count up unique PO files  
         foreach( $finder->findLocaleFiles() as $file ){
@@ -100,6 +99,12 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
                 $locales[$tag]['time'] = max( $locales[$tag]['time'], $file->modified() );
             }
         }
+        
+        // sort alphabetically by locale label
+        usort( $locales, function( ArrayAccess $a, ArrayAccess $b ):int {
+            return strcasecmp( $a['lname'], $b['lname'] );
+        } );
+        $this->set('locales', $locales );
         
        return $this->view( 'admin/list/locales' );
     }

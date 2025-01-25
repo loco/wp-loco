@@ -162,6 +162,13 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
             'name' => $locale->getName(),
             'attr' => 'class="'.$locale->getIcon().'" lang="'.$locale->lang.'"',
         ] ) );
+        
+        // Sort each translation set alphabetically by bundle name...
+        foreach( array_keys($translations) as $type ){
+            usort( $translations[$type], function( ArrayAccess $a, ArrayAccess $b ):int { 
+                return strcasecmp($a['title'],$b['title']);
+            } );
+        }
 
         return $this->view( 'admin/bundle/locale', compact('breadcrumb','translations','types','npofiles','modified') );
     }

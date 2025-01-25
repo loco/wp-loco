@@ -538,7 +538,7 @@ class Loco_Locale implements JsonSerializable {
      * @param string $str original plural equation
      * @return string signature for comparison
      */
-    private static function hashPlural( $str ){
+    private static function hashPlural( string $str ):string {
         return trim( str_replace([' ','<>'],['','!='],$str), '()' );
     }
 
@@ -547,7 +547,7 @@ class Loco_Locale implements JsonSerializable {
      * Get formality setting, whether implied or explicit.
      * @return string either "", "formal" or "informal"
      */
-    public function getFormality(){
+    public function getFormality():string {
         $value = '';
         $tag = $this->__toString();
         $variant = $this->variant;
