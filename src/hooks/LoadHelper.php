@@ -50,12 +50,17 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // Text domains loaded prematurely won't be customizable, even if NOOP_Translations
         global $l10n, $l10n_unloaded;
         if( $l10n && is_array($l10n) ){
-            foreach( $l10n as $domain => $value ){
-                if( 'default' !== $domain && apply_filters('loco_unload_early_textdomain',true,$domain,$value) ){
-                    unload_textdomain($domain);
+            $unloaded = [];
+            foreach( array_keys($l10n) as $domain ){
+                if( $domain && is_string($domain) && 'default' !== $domain && apply_filters('loco_unload_early_textdomain',true,$domain) ){
+                    unload_textdomain($domain) and $unloaded[] = $domain;
                     unset($l10n_unloaded[$domain]);
-                    loco_debugging() && Loco_error_Debug::trace('Unloaded premature text domain ('.$domain.')');
                 }
+            }
+            // debug all text domains unloaded, excluding NOOP_Translations for less noise.
+            if( $unloaded && loco_debugging() ){
+                $n = count($unloaded);
+                Loco_error_Debug::trace('Unloaded %u premature text domain%s (%s)', $n, 1===$n?'':'s', implode(',',$unloaded) );
             }
         }
     }

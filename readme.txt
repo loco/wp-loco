@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.7.1
+* WIP
+
 = 2.7.0
 * Raised minimum requirements to WordPress 6.6
 * Minimum PHP version becomes 7.2.24 as per WordPress 6.6
@@ -559,7 +562,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.7.0 =
+= 2.7.1 =
 * Various improvements and bug fixes
 
 
