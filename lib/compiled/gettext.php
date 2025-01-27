@@ -218,6 +218,7 @@ public function generate(  $src ) { $this->init($src); while( $this->valid() ){ 
 public function init(  $src ) { $this->src = $src; $this->rewind(); return $this; } 
 public function define(  $grep,  $t = 0 ) { if('^' !== $grep[1] ){ throw new InvalidArgumentException('Expression '.$grep.' isn\'t anchored'); } if( ! is_int($t) && ! is_callable($t) ){ throw new InvalidArgumentException('Non-integer token must be valid callback'); } $sniff = $grep[2]; if( $sniff === preg_quote($sniff,$grep[0]) ){ $this->rules[$sniff][] = [ $grep, $t ]; } else { $this->rules[''][] = [ $grep, $t ]; } return $this; } 
 public function ignore( ...$symbols ) { $this->skip += array_fill_keys( $symbols, true ); return $this; } 
+public function allow( ...$symbols ) { $this->skip = array_diff_key( $this->skip, array_fill_keys($symbols,true) ); return $this; } 
 #[ReturnTypeWillChange]
 public function current() { return $this->tok; } 
 public function advance() { $tok = $this->current(); $this->next(); return $tok; } 

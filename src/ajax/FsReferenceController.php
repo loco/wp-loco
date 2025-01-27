@@ -130,6 +130,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         }
         else if( 'js' === $type ){
             $tokens = new LocoJsTokens( $srcfile->getContents() );
+            $tokens->allow(T_WHITESPACE);
         }
         else {
             $tokens = null;
@@ -140,7 +141,6 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             $thisline = 1;
             while( $tok = $tokens->advance() ){
                 if( is_array($tok) ){
-                    // line numbers added in PHP 5.2.2 - WordPress minimum is 5.2.4
                     list( $t, $str, $startline ) = $tok;
                     $clss = token_name($t);
                     // tokens can span multiple lines (whitespace/html/comments)
@@ -154,10 +154,14 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                 }
                 // token can span multiple lines, so include only bytes on required line[s]
                 foreach( $lines as $i => $line ){
+                    // pad missing lines. $code must be contiguous
                     $thisline = $startline + $i;
-                    $html = '<code class="'.$clss.'">'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
-                    // append highlighted token to current line
                     $j = $thisline - 1;
+                    while( count($code) < $j ){
+                        $code[] = '<code class="T_NONE"> </code>';
+                    }
+                    // append highlighted token to current line
+                    $html = '<code class="'.$clss.'">'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
                     if( isset($code[$j]) ){
                         $code[$j] .= $html;
                     }

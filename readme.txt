@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.7.2
+* WIP
+
 = 2.7.1
 * Debug logging of unloaded domains reduced to a summary
 
@@ -562,7 +565,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.7.1 =
+= 2.7.2 =
 * Various improvements and bug fixes
 
 
