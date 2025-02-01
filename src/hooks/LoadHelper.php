@@ -6,6 +6,8 @@
  * 
  * @noinspection PhpUnused
  * @noinspection PhpUnusedParameterInspection
+ * @noinspection PhpMissingParamTypeInspection
+ * @noinspection PhpMissingReturnTypeInspection
  */
 class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
@@ -73,8 +75,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @param null|array $files we're not going to modify this.
      * @param string $path either WP_LANG_DIR/plugins/', WP_LANG_DIR/themes/ or a user-defined location
      */
-    public function filter_pre_get_language_files_from_path( $files, $path ){
-        if( ! array_key_exists($path,$this->custom) ){
+    public function filter_pre_get_language_files_from_path( $files, $path = '' ) {
+        if( is_string($path) && ! array_key_exists($path,$this->custom) ){
             $len = strlen( loco_constant('WP_LANG_DIR') );
             $rel = substr($path,$len);
             if( '/' !== $rel && '/plugins/' !== $rel && '/themes/' !== $rel ){
@@ -88,6 +90,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * Filter callback for `lang_dir_for_domain`
      * Called from {@see WP_Textdomain_Registry::get} after path is obtained from {@see WP_Textdomain_Registry::get_path_from_lang_dir}
+     * @param false|string $path
+     * @param string $domain
+     * @param string $locale
+     * @return false|string
      */
     public function filter_lang_dir_for_domain( $path, $domain, $locale ){
         // If path is false it means no system or author files were found. This will stop WordPress trying to load anything.
@@ -188,9 +194,8 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * Resolve a custom directory path to either a theme or a plugin
      * @param string $path directory path with trailing slash
-     * @return void
      */
-    private function resolveType( $path ) {
+    private function resolveType( string $path ):void {
         // no point trying to resolve a relative path, this likely stems from bad call to load_textdomain
         if( ! Loco_fs_File::is_abs($path) ){
             return;
@@ -210,7 +215,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * Fix any file extension to use .mo
      */
-    private static function to_mopath( $path ){
+    private static function to_mopath( string $path ):string {
         if( str_ends_with($path,'.mo') ){
             return $path;
         }
@@ -223,7 +228,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * Check .mo or .php file is readable, and return the .mo file if so.
      * Note that load_textdomain expects a .mo file, even if it ends up using .l10n.php
      */
-    private static function try_readable( $path ){
+    private static function try_readable( string $path ):string {
         $mofile = self::to_mopath($path);
         if( is_readable($mofile) || is_readable(substr($path,0,-2).'l10n.php') ){
             return $mofile;
@@ -239,11 +244,10 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `load_script_translation_file` filter callback
      * Alternative method to merging in `pre_load_script_translations`
-     * @param string|false $path candidate JSON file (false on final attempt)
+     * @param string $path candidate JSON file (false on final attempt)
      * @param string $handle
-     * @return string
      */
-    public function filter_load_script_translation_file( $path = '', $handle = '' ){
+    public function filter_load_script_translation_file( $path = '', $handle = '' ) {
         // currently handle-based JSONs for author-provided translations will never map.
         if( is_string($path) && preg_match('/^-[a-f0-9]{32}\\.json$/',substr($path,-38) ) ){
             $system = loco_constant('WP_LANG_DIR').'/';
@@ -269,17 +273,22 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
     /**
      * `load_script_translations` filter callback.
      * Merges custom translations on top of installed ones, as late as possible.
+     *
      * @param string $json contents of JSON file that WordPress has read
      * @param string $path path relating to given JSON (not used here)
      * @param string $handle script handle for registered merge
      * @return string final JSON translations
-     * @noinspection PhpUnusedParameterInspection
      */
-    public function filter_load_script_translations( $json = '', $path = '', $handle = '' ){
+    public function filter_load_script_translations( $json = '', $path = '', $handle = '' ) {
         if( array_key_exists($handle,$this->json) ){
             $path = $this->json[$handle];
             unset( $this->json[$handle] );
-            $json = self::mergeJson( $json, file_get_contents($path) );
+            if( is_string($json) && '' !== $json ){
+                $json = self::mergeJson( $json, file_get_contents($path) );
+            }
+            else {
+                $json = file_get_contents($path);
+            }
         }
         return $json;
     }
@@ -291,7 +300,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
      * @param string $custom Custom JSON (must exclude empty keys)
      * @return string Merged JSON
      */
-    private static function mergeJson( $json, $custom ){
+    private static function mergeJson( string $json, string $custom ):string {
         $fallbackJed = json_decode($json,true);
         $overrideJed = json_decode($custom,true);
         if( self::jedValid($fallbackJed) && self::jedValid($overrideJed) ){
@@ -323,10 +332,9 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
 
     /**
      * Test if unserialized JSON is a valid JED structure
-     * @param array[] $jed
-     * @return bool
+     * @param mixed $jed
      */
-    private static function jedValid( $jed ){
+    private static function jedValid( $jed ):bool {
         return is_array($jed) && array_key_exists('locale_data',$jed) && is_array($jed['locale_data']) && $jed['locale_data'];
     }
     

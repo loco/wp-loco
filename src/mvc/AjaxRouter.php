@@ -85,9 +85,9 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
      */
     public function on_wp_ajax_loco_json(){
         $json = $this->renderAjax();
-	    $this->exitScript( $json,  [
-	        'Content-Type' => 'application/json; charset=UTF-8',
-	    ] );
+        $this->exitScript( $json,  [
+            'Content-Type' => 'application/json; charset=UTF-8',
+        ] );
     }
 
 
@@ -121,24 +121,24 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             'xml'  => 'text/xml',
         ];
         $headers = [];
-	    if( $file instanceof Loco_fs_File && isset($mimes[$ext]) ){
+        if( $file instanceof Loco_fs_File && isset($mimes[$ext]) ){
             $headers['Content-Type'] = $mimes[$ext].'; charset=UTF-8';
             $headers['Content-Disposition'] = 'attachment; filename='.$file->basename();
         }
         else {
-	        $headers['Content-Type'] = 'text/plain; charset=UTF-8';
+            $headers['Content-Type'] = 'text/plain; charset=UTF-8';
         }
         $this->exitScript( $data, $headers );
     }
 
 
-	/**
-	 * Exit script before WordPress shutdown, avoids hijacking of exit via wp_die_ajax_handler.
-	 * Also gives us a final chance to check for output buffering problems.
-	 * @codeCoverageIgnore
-	 */
+    /**
+     * Exit script before WordPress shutdown, avoids hijacking of exit via wp_die_ajax_handler.
+     * Also gives us a final chance to check for output buffering problems.
+     * @codeCoverageIgnore
+     */
     private function exitScript( $str, array $headers ){
-	    try {
+        try {
             do_action('loco_admin_shutdown');
             Loco_output_Buffer::clear();
             $this->buffer = null;
@@ -147,13 +147,13 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
             foreach( $headers as $name => $value ){
                 header( $name.': '.$value );
             }
-	    }
-	    catch( Exception $e ){
-	        Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
-	        $str = $e->getMessage();
-	    }
-	    echo $str;
-	    exit(0);
+        }
+        catch( Exception $e ){
+            Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
+            $str = $e->getMessage();
+        }
+        echo $str;
+        exit(0);
     }
 
 
@@ -206,7 +206,7 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             $data = $e;
         }
-	    $this->buffer->discard();
+        $this->buffer->discard();
         return $data;
     }
 

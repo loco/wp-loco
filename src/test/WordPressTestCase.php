@@ -110,6 +110,8 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         if( ! isset($sniff['empty-theme']) ){
             delete_site_transient( 'theme_roots' );
         }
+        remove_all_filters('template');
+        remove_all_filters('stylesheet');
         // test plugins require a filter as multiple roots not supported in wp
         remove_all_filters('loco_missing_plugin');
         add_filter( 'loco_missing_plugin', [__CLASS__,'filter_allows_fake_plugins_to_exist'], 10, 2 );
@@ -371,6 +373,17 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
 
 
     /**
+     * Fully unload a text domain
+     */
+    protected function unload_textdomain( string $domain ):void {
+        global $l10n, $l10n_unloaded;
+        unload_textdomain( $domain );
+        unset($l10n[$domain],$l10n_unloaded[$domain]);
+    }
+
+
+
+    /**
      * Disallow network access
      * @return void
      */
@@ -433,7 +446,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     /**
      * @internal
      */
-    public function _filter_locale(){
+    public function _filter_locale():string {
         return $this->locale;
     }
 
@@ -472,15 +485,38 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $this->redirect = func_get_args();
         return false;
     }
+    
+    
+    
+    
+    protected function activate_test_theme( string $slug ):void {
+        $closure = function () use( $slug ){
+            return $slug;
+        };
+        add_filter('stylesheet', $closure,10,0);
+        add_filter('template', $closure, 10,0);
+       /* add_filter('theme_root',function ($theme_root){
+            Loco_error_Debug::trace('? %s',$theme_root);
+            return $theme_root;
+        },10,1);*/
+        /*add_filter('stylesheet_directory', function( $stylesheet_dir, $stylesheet, $theme_root) {
+            Loco_error_Debug::trace('%s',$stylesheet_dir);
+            Loco_error_Debug::trace('%s',$stylesheet);
+            Loco_error_Debug::trace('%s',$theme_root);
+            return $stylesheet_dir;
+        }, 10, 3 );*/
+    }
+    
+    
 
 
     /**
      * @internal 
      */
-    public static function filter_allows_fake_plugins_to_exist( array $data, $handle ){
+    public static function filter_allows_fake_plugins_to_exist( array $data, $handle ):array {
         $file = LOCO_TEST_DATA_ROOT.'/plugins/'.$handle;
         if( file_exists($file) && is_file($file) ) {
-            $data = get_plugin_data($file);
+            $data = get_plugin_data($file,false,false);
             $snip = -strlen($handle);
             $data['basedir'] = substr($file,0,--$snip);
         }
@@ -488,12 +524,13 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
     }
     
     
-    public static function filter_enforce_test_plugins_only( $path ){
+    public static function filter_enforce_test_plugins_only( string $path ):string {
         return LOCO_TEST_DATA_ROOT.'/'.basename($path);
     }
     
     
     public function enable_test_plugins(){
+        wp_cache_delete('plugins','loco');
         add_filter('loco_constant_WP_PLUGIN_DIR',[__CLASS__,'filter_enforce_test_plugins_only']);
         add_filter('loco_constant_WPMU_PLUGIN_DIR',[__CLASS__,'filter_enforce_test_plugins_only']);
     }
