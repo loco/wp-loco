@@ -296,7 +296,7 @@ class Loco_fs_File {
      */
     public function extension(){
         $info = $this->pathinfo();
-        return isset($info['extension']) ? $info['extension'] : '';
+        return $info['extension'] ?? '';
     }
 
 

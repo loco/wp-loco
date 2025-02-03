@@ -20,7 +20,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
      * Whether directories all read into memory
      * @var bool
      */
-    private $cached;
+    private $cached = false;
 
     /**
      * File listing already matched
@@ -60,7 +60,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Whether currently recursing into subdirectories
-     * This is switched on and off as each directories is opened
+     * This is switched on and off as each directory is opened
      * @var bool|null
      */
     private $recursing;
@@ -74,7 +74,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Registry of followed links by their original path
-     * @var Loco_fs_FileList|null
+     * @var Loco_fs_FileList
      */
     private $linked;
 
@@ -82,23 +82,22 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
      * List of file extensions to filter on and group by
      * @var null|Loco_fs_FileList[]
      */
-    private $exts;
+    private $exts = null;
 
     /**
      * List of directory names to exclude from recursion
-     * @var null|Loco_fs_File[]
+     * @var array
      */
-    private $excluded;     
-              
+    private $excluded = [];
+
 
     /**
      * Create initial list of directories to search
      * @param string $root default root to start
      */
-    public function __construct( $root = '' ){
+    public function __construct( string $root = '' ){
         $this->roots = new Loco_fs_FileList;
         $this->linked = new Loco_fs_FileList;
-        $this->excluded = [];
         if( $root ){
             $this->addRoot( $root );
         }
@@ -107,10 +106,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Set recursive state of all defined roots
-     * @param bool $bool
-     * @return Loco_fs_FileFinder
      */
-    public function setRecursive( $bool ){
+    public function setRecursive( bool $bool ):self {
         $this->invalidate();
         $this->recursive = $bool;
         /* @var $dir Loco_fs_Directory */
@@ -122,22 +119,19 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
 
     /**
-     * @param bool $bool
-     * @return Loco_fs_FileFinder
+     * Whether to follow symlinks
      */
-    public function followLinks( $bool ){
+    public function followLinks( bool $bool ):self {
         $this->invalidate();
-        $this->symlinks = (bool) $bool;
+        $this->symlinks = $bool;
         return $this;
     }
 
 
     /**
-     * @param string $path
-     * @return Loco_fs_Link
+     * Get the original symlink that was followed for a given file
      */
-    public function getFollowed( $path ){
-        $path = (string) $path;
+    public function getFollowed( string $path ):?Loco_fs_Link {
         /* @var Loco_fs_Link $link */
         foreach( $this->linked as $link ){
             $file = $link->resolve();
@@ -159,10 +153,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     }
 
 
-    /**
-     * @return void
-     */
-    private function invalidate(){
+    private function invalidate():void {
         $this->cached = false;
         $this->cache = null;
         $this->subdir = null;
@@ -170,9 +161,10 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     
     
     /**
-     * @return Loco_fs_FileList
+     * Get all files found as a list object
+     * @return Loco_fs_FileList <int,Loco_fs_File> 
      */    
-    public function export(){
+    public function export():Loco_fs_FileList{
         if( ! $this->cached ){
             $this->rewind();
             while( $this->valid() ){
@@ -186,7 +178,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * @return Loco_fs_FileList[]
      */
-    public function exportGroups(){
+    public function exportGroups():array {
         $this->cached || $this->export();
         return $this->exts;
     }
@@ -194,11 +186,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Add a directory root to search.
-     * @param string $root
-     * @param bool|null $recursive
-     * @return Loco_fs_FileFinder 
      */
-    public function addRoot( $root, $recursive = null ){
+    public function addRoot( string $root, bool $recursive = null ):self {
         $this->invalidate();
         $dir = new Loco_fs_Directory($root);
         $this->roots->add( $dir );
@@ -210,18 +199,16 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Get all root directories to be searched
-     * @return Loco_fs_FileList
      */
-    public function getRootDirectories(){
+    public function getRootDirectories():Loco_fs_FileList {
         return $this->roots;
     }
 
 
     /**
      * Filter results by given file extensions
-     * @return Loco_fs_FileFinder
      */
-    public function group( ...$exts ){
+    public function group( ...$exts ):self {
         return $this->filterExtensions($exts);
     }
 
@@ -229,9 +216,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * Filter results by file extensions given in array
      * @param string[] $exts File extension strings
-     * @return Loco_fs_FileFinder
      */
-    public function filterExtensions( array $exts ){
+    public function filterExtensions( array $exts ):self {
         $this->invalidate();
         $this->exts = [];
         foreach( $exts as $ext ){
@@ -243,9 +229,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Add one or more paths to exclude from listing
-     * @return Loco_fs_FileFinder
      */
-    public function exclude( ...$paths ){
+    public function exclude( ...$paths ):self {
         $this->invalidate();
         foreach( $paths as $path ){
             $file = new Loco_fs_File($path);
@@ -271,7 +256,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
      * Export excluded paths as file objects
      * @return Loco_fs_File[]
      */
-    public function getExcluded(){
+    public function getExcluded():array {
         return $this->excluded;
     }
 
@@ -308,10 +293,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Test if given path is matched by one of our exclude rules
-     * @param string $path
-     * @return bool
      */
-    public function isExcluded( $path ){
+    public function isExcluded( string $path ):bool {
         /* @var Loco_fs_File $excl */
         foreach( $this->excluded as $excl ){
             if( $excl->equal($path) ){
@@ -324,9 +307,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Read next valid file path from root directories
-     * @return Loco_fs_File|null
      */
-    private function read(){
+    private function read():?Loco_fs_File {
         while( is_resource($this->dir) ){
             while( $f = readdir($this->dir) ){
                 // dot-files always excluded
@@ -404,13 +386,20 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * {@inheritDoc}
      */
-    public function add( Loco_fs_File $file ){
+    public function add( Loco_fs_File $file ):bool {
         if( is_array($this->exts) ){
             $ext = $file->extension();
-            /*if( '' === $ext || ! array_key_exists($ext,$this->exts) ){
-                throw new LogicException('Should have filtered out '.$file->basename().' when grouping by *.{'.implode(',',array_keys($this->exts)).'}' );
-            }*/
-            $this->exts[$ext]->add($file);
+            if( array_key_exists($ext,$this->exts) ){
+                $this->exts[$ext]->add($file);
+            }
+            // edge case where symlink has correct extension, but resolved path does not.
+            else if( $this->symlinks && $this->linked->has($file) ){
+                Loco_error_Debug::trace('Symbolic link resolves to a file excluded by filter (%s)',$file->basename());
+            }
+            else {
+                $glob = implode(',',array_keys($this->exts));
+                Loco_error_Debug::trace('Should have filtered out %s when grouping by *.{%s}', $file->basename(), $glob );
+            }
         }
         if( $this->cache->add($file) ){
             $this->i++;
@@ -424,7 +413,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
      * @return int
      */
     #[ReturnTypeWillChange]
-    public function count(){
+    public function count():int {
         return count( $this->export() );
     }
 
@@ -523,9 +512,8 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
 
     /**
      * Test whether internal list has been fully cached in memory
-     * @return bool
      */
-    public function isCached(){
+    public function isCached():bool {
         return $this->cached;
     }
 
