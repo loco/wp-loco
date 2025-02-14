@@ -669,7 +669,7 @@ class Loco_fs_File {
      * @param string $data file contents
      * @return int number of bytes written to file
      */
-    public function putContents( $data ){
+    public function putContents( string $data ):int {
         $this->getWriteContext()->putContents($data);
         $this->clearStat();
         return $this->size();

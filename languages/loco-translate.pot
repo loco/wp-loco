@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.7.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2025-02-14 09:57+0000\n"
+"POT-Creation-Date: 2025-02-14 10:18+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -111,7 +111,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Success notice where %s is a file extension, e.g. "PO"
-#: src/gettext/Compiler.php:290 src/admin/file/HeadController.php:81
+#: src/gettext/Compiler.php:287 src/admin/file/HeadController.php:81
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -1530,11 +1530,11 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:286
+#: src/gettext/Compiler.php:283
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:283
+#: src/gettext/Compiler.php:280
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 
