@@ -111,7 +111,7 @@ class Loco_gettext_Compiler {
     /**
      * @return int bytes written to .l10n.php file
      */
-    private function writePhp( Loco_gettext_Data $po ){
+    private function writePhp( Loco_gettext_Data $po ):int {
         $phfile = $this->files->getCache();
         if( $phfile && class_exists('WP_Translation_File_PHP',false) ){
             return $this->writeFile( $phfile, Loco_gettext_PhpCache::render($po) );
@@ -123,9 +123,8 @@ class Loco_gettext_Compiler {
     /**
      * @param Loco_package_Project $project Translation set, required to resolve script paths
      * @param Loco_gettext_Data $po PO data to export
-     * @return Loco_fs_FileList All json files created
      */
-    public function writeJson( Loco_package_Project $project, Loco_gettext_Data $po ){
+    public function writeJson( Loco_package_Project $project, Loco_gettext_Data $po ):Loco_fs_FileList {
         $domain = $project->getDomain()->getName();
         $pofile = $this->files->getSource();
         $jsons = new Loco_fs_FileList;

@@ -79,10 +79,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
 
     /**
      * Add further source strings from JSON/JED file
-     * @param Loco_fs_File $file json file
-     * @return int
      */
-    private function loadJson( Loco_fs_File $file ){
+    private function loadJson( Loco_fs_File $file ):int {
         $unique = 0;
         $jed = json_decode( $file->getContents(), true );
         if( ! is_array($jed) || ! array_key_exists('locale_data',$jed) || ! is_array($jed['locale_data']) ){
@@ -101,9 +99,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
             // The compiler will still filter this reference, so it could potentially yield a different hash. 
             // Loco_error_AdminNotices::debug($name.' has no "source" key; reverse matched '.$ref);
         }
-        // file reference most likely won't have a line number, as it applies to all strings in the JSON
-        // As most deployed JavaScript will be minified, we probably only have one line anyway.
-        // $ref .= ':1';
+        // We can't search the original script to know the line number, but this must be a valid reference
+        $ref .= ':1';
         // not checking domain key. Should be valid if passed here and should only be one.
         foreach( $jed['locale_data'] as /*$domain =>*/ $keys ){
             foreach( $keys as $msgid => $arr ){

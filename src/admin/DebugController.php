@@ -121,8 +121,9 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     /**
      * `loco_unload_early_textdomain` filter callback.
      */
-    public function filter_loco_unload_early_textdomain( $bool, $domain, $value ){
+    public function filter_loco_unload_early_textdomain( $bool, $domain ){
         if( $this->domain === $domain ){
+            $value = $GLOBALS['l10n'][$domain]??null;
             $type = is_object($value) ? get_class($value) : gettype($value);
             $this->log('~ filter:loco_unload_early_textdomain: $l10n[%s] => %s; returning %s', $domain, $type, json_encode($bool) );
         }
@@ -267,7 +268,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
      */
     public function filter_load_script_translation_file( $file, $handle/* ,$domain*/ ){
         if( 'loco-translate-dummy' === $handle ){
-            error_log( json_encode(func_get_args(),JSON_UNESCAPED_SLASHES) );
+            // error_log( json_encode(func_get_args(),JSON_UNESCAPED_SLASHES) );
             // if file is not found, this will fire again with file=false
             $this->log('~ filter:load_script_translation_file: %s', var_export($file,true) );
         }
@@ -554,9 +555,8 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
     /**
      * Preload domain for a script, then forcing retrieval of JSON.
-     * @return Loco_gettext_Data
      */
-    private function preloadScript( $path, $domain, Loco_package_Bundle $bundle = null ){
+    private function preloadScript( $path, string $domain, Loco_package_Bundle $bundle = null ):Loco_gettext_Data {
         $this->log('Have script argument => %s', $path );
         if( preg_match('/^[0-9a-f]{32}$/',$path) ){
             throw new Loco_error_Exception('Enter the script path, not the hash');

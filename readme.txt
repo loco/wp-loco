@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.2.24
-Tested up to: 6.7.1
+Tested up to: 6.7.2
 Stable tag: 2.7.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,7 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.7.2
-* WIP
+* Fix for JSON file references with no line number
+* Bumped WordPress compatibility to 6.7.2
 
 = 2.7.1
 * Debug logging of unloaded domains reduced to a summary

@@ -99,10 +99,12 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
         // If path is false it means no system or author files were found. This will stop WordPress trying to load anything.
         // Usually this occurs during true JIT loading, where an author path would not be set by e.g. load_plugin_textdomain.
         if( false === $path ){
+            // Avoid WordPress bailing on domain load by letting it know about our custom path now
             $base = rtrim( loco_constant('LOCO_LANG_DIR'), '/' );
             foreach( ['/plugins/','/themes/'] as $type ){
                 if( self::try_readable($base.$type.$domain.'-'.$locale.'.mo') ){
                     $path = $base.$type;
+                    // Caveat: if load_%_textdomain is called later on with a custom (author) path, it will be ignored.
                     break;
                 }
             }
@@ -135,6 +137,7 @@ class Loco_hooks_LoadHelper extends Loco_hooks_Hookable {
                 $this->resolveType($path);
             }
         }
+        $this->seen[$domain] = true;
     }
 
 

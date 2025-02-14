@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.7.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2025-02-03 12:19+0000\n"
+"POT-Creation-Date: 2025-02-14 09:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.2-dev; wp-6.7.1\n"
+"X-Loco-Version: 2.7.2-dev; wp-6.7.2\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -111,7 +111,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Success notice where %s is a file extension, e.g. "PO"
-#: src/gettext/Compiler.php:291 src/admin/file/HeadController.php:81
+#: src/gettext/Compiler.php:290 src/admin/file/HeadController.php:81
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -1101,7 +1101,7 @@ msgid "It needs configuring before you can do any translations"
 msgstr ""
 
 #. %s refers to a JSON file which could not be compiled due to an error
-#: src/gettext/Compiler.php:149 src/gettext/Compiler.php:214
+#: src/gettext/Compiler.php:148 src/gettext/Compiler.php:213
 #, php-format
 msgid "JSON compilation failed for %s"
 msgstr ""
@@ -1530,11 +1530,11 @@ msgstr ""
 msgid "PO file missing"
 msgstr ""
 
-#: src/gettext/Compiler.php:287
+#: src/gettext/Compiler.php:286
 msgid "PO file saved and MO file compiled"
 msgstr ""
 
-#: src/gettext/Compiler.php:284
+#: src/gettext/Compiler.php:283
 msgid "PO file saved and MO/JSON files compiled"
 msgstr ""
 

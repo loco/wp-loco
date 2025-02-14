@@ -173,7 +173,7 @@ try {
     }
 
     // text domain loading helper for custom file locations. Set constant empty to disable
-    if( LOCO_LANG_DIR ) {
+    if( LOCO_LANG_DIR ){
         new Loco_hooks_LoadHelper;
     }
 
