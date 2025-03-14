@@ -15,8 +15,9 @@ abstract class Loco_api_ChatGpt {
         $targets =  [];
 
         // Switch GPT model: See https://platform.openai.com/docs/models/model-endpoint-compatibility
-        if( ! array_key_exists('model',$config) ){
-            $config['model'] = 'gpt-4o-mini';
+        $model = $config['model']??'';
+        if( '' === $model ){
+            $model = 'gpt-4o-mini';
         }
 
         // GPT wants a wordy language name. We'll handle this with our own data.
@@ -53,7 +54,7 @@ abstract class Loco_api_ChatGpt {
 
         // https://platform.openai.com/docs/api-reference/chat/create
         $result = wp_remote_request( 'https://api.openai.com/v1/chat/completions', self::init_request_arguments( $config, [
-            'model' => $config['model'],
+            'model' => $model,
             'temperature' => 0,
             // Start with our base prompt, adding user instruction at [1] and data at [2]
             'messages' => [

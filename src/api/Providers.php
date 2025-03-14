@@ -50,6 +50,7 @@ abstract class Loco_api_Providers {
                 'id' => 'openai',
                 'name' => 'ChatGPT',
                 'key' => $settings->offsetGet('openai_api_key'),
+                'model' => $settings->offsetGet('openai_api_model'),
                 'prompt' => $settings->offsetGet('openai_api_prompt'),
                 'url' => 'https://openai.com/policies/usage-policies/',
             ]
