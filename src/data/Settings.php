@@ -26,6 +26,8 @@
  * @property string $lecto_api_key API key for Lecto Translation API
  * @property string $microsoft_api_key API key for Microsoft Translator text API
  * @property string $microsoft_api_region API region for Microsoft Translator text API
+ * @property string $openai_api_key API key for OpenAI / ChatGPT translator
+ * @property string $openai_prompt Custom prompt for OpenAI / ChatGPT translator
  * 
  * TODO @property bool $php_pretty Whether to pretty print .l10n.php files
  */
@@ -66,6 +68,8 @@ class Loco_data_Settings extends Loco_data_Serializable {
         'microsoft_api_key' => '',
         'microsoft_api_region' => 'global',
         'lecto_api_key' => '',
+        'openai_api_key' => '',
+        'openai_prompt' => '',
     ];
 
 

@@ -71,14 +71,20 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
             throw new Loco_error_Exception('Invalid locale');
         }
 
-        // Check if hook is registered, else sources will be returned as-is
+        // Check if hook is registered
+        // This is effectively a filter whereby the returned array should be a translation of the input array
         $action = 'loco_api_translate_'.$hook;
-        if( ! has_filter($action) ){
+        if( has_filter($action) ){
+            $targets = apply_filters( $action, [], $sources, $locale, $config );
+        }
+        // Use built-in translators if hook hasn't registered one.
+        else if( 'openai' === $hook && class_exists('Loco_api_ChatGpt') ){
+            $targets = Loco_api_ChatGpt::process( $sources, $locale, $config );
+        }
+        else {
             throw new Loco_error_Exception('API not hooked. Use `add_filter('.var_export($action,1).',...)`');
         }
 
-        // This is effectively a filter whereby the returned array should be a translation of the input array
-        $targets = apply_filters( $action, [], $sources, $locale, $config );
         if( count($targets) !== count($sources) ){
             Loco_error_AdminNotices::warn('Number of translations does not match number of source strings');
         }

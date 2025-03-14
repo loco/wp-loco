@@ -104,6 +104,27 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                     </fieldset>
                 </td>
             </tr><?php
+            // OPENAI (CHATGPT) 
+            $api = $apis['openai']?> 
+            <tr>
+                <th scope="row"><?php $api->e('name')?></th>
+                <td>
+                    <fieldset>
+                        <legend class="screen-reader-text">
+                            <span><?php $ui->e('api_key')?></span>
+                        </legend>
+                        <p>
+                            <label for="loco--openai_api_key">
+                                <?php $ui->e('api_key')?>:
+                            </label>
+                            <input type="text" size="50" name="api[openai][key]" id="loco--openai_api_key" value="<?php $api->e('key')?>" spellcheck="false" />
+                        </p>
+                        <p>
+                            <span class="description"><a href="https://platform.openai.com/" target="_blank" tabindex="-1">https://platform.openai.com/</a></span>
+                        </p>
+                    </fieldset>
+                </td>
+            </tr><?php
             /* @var Loco_mvc_ViewParams[] $hooked */
             foreach( $hooked as $api ):?> 
             <tr>

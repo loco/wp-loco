@@ -101,7 +101,8 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.7.2
-* Fix for JSON file references with no line number
+* Rolled in support for OpenAI / ChatGPT translation
+* Workaround for JSON file references with no line number
 * Bumped WordPress compatibility to 6.7.2
 
 = 2.7.1

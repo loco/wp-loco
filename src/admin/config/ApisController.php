@@ -38,7 +38,7 @@ class Loco_admin_config_ApisController extends Loco_admin_config_BaseController 
                     $data = [];
                     $filter = [];
                     foreach( $apis as $id => $api ){
-                        $fields = $post->api[$id];
+                        $fields = $post->api[$id]??null;
                         if( is_array($fields) ){
                             foreach( $fields as $prop => $value ){
                                 $apis[$id][$prop] = $value;

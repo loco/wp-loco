@@ -99,7 +99,8 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
             // The compiler will still filter this reference, so it could potentially yield a different hash. 
             // Loco_error_AdminNotices::debug($name.' has no "source" key; reverse matched '.$ref);
         }
-        // We can't search the original script to know the line number, but this must be a valid reference
+        // We won't search the original script to know the line number, but this must be a valid reference
+        // TODO We could extract the JS here, and search for each string in the JSON, but may not be 100% reliable.
         $ref .= ':1';
         // not checking domain key. Should be valid if passed here and should only be one.
         foreach( $jed['locale_data'] as /*$domain =>*/ $keys ){
