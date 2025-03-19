@@ -103,6 +103,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 = 2.7.2
 * Rolled in support for OpenAI / ChatGPT translation
 * Workaround for JSON file references with no line number
+* CORS workaround for DeepL key verification 
 * Bumped WordPress compatibility to 6.7.2
 
 = 2.7.1
