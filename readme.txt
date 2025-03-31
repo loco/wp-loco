@@ -1,4 +1,4 @@
-	=== Loco Translate ===
+=== Loco Translate ===
 Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
@@ -30,7 +30,6 @@ Features include:
 * Configurable PO file backups with diff and restore capability
 * Built-in WordPress locale codes
 
-
 Official [Loco](https://localise.biz/) WordPress plugin by Tim Whitlock. 
 For more information please visit our [plugin page](https://localise.biz/wordpress/plugin).
 
@@ -46,7 +45,6 @@ Translators: To translate a theme into your language, follow these steps:
 3. Find your theme in the list at *Loco Translate > Themes*
 4. Click `+ New language` and follow the on-screen prompts.
 
-
 Developers: To translate your own theme or plugin for distribution, follow these steps:
 
 1. Create a `languages` subdirectory in your bundle’s root directory
@@ -61,7 +59,6 @@ Developers: To translate your own theme or plugin for distribution, follow these
 1. Unzip all files to the `wp-content/plugins/loco-translate` directory
 2. Log into WordPress admin and activate the 'Loco Translate' plugin through the 'Plugins' menu
 3. Go to *Loco Translate > Home* in the left-hand menu to start translating
-
 
 More information on using the plugin is [available here](https://localise.biz/wordpress/plugin).
 
@@ -100,16 +97,16 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
-= 2.7.2
+= 2.7.2 =
 * Rolled in support for OpenAI / ChatGPT translation
 * Workaround for JSON file references with no line number
 * CORS workaround for DeepL key verification 
 * Bumped WordPress compatibility to 6.7.2
 
-= 2.7.1
+= 2.7.1 =
 * Debug logging of unloaded domains reduced to a summary
 
-= 2.7.0
+= 2.7.0 =
 * Raised minimum requirements to WordPress 6.6
 * Minimum PHP version becomes 7.2.24 as per WordPress 6.6
 * Locale-filtered bundle list now searches for base language
@@ -570,7 +567,6 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.7.2 =
 * Various improvements and bug fixes
-
 
 
 == Keyboard shortcuts ==
