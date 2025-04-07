@@ -12,6 +12,11 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
      */
     public static function process( array $items, Loco_Locale $locale, array $config ): array {
         
+        $api_key = $config['key'];
+        if( ! is_string($api_key) || '' === $api_key ){
+            throw new Loco_error_Exception('API key required');
+        }
+        
         // target language requires mapping to DeepL supported value
         // https://developers.deepl.com/docs/getting-started/supported-languages#target-languages
         $targetLang = strtoupper($locale->lang);
@@ -60,24 +65,17 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
         // context can only be set per request, for all text values posted,
         if( 1 === count($items) ){
             $context = trim( implode(' ', [ $items[0]['context']??'', $items[0]['notes']??'' ] ) );
-            /*/ TODO Detect key verification call here and perform a zero cost /v2/usage request
+            // Detect key verification call here and perform a zero cost /v2/usage request
             if( '' === $context && 'OK' === $sources[0] && 'FR' === $targetLang ){
-                return ['OK'];
-            }*/
+                return self::fetch_usage($api_key) ? ['OK'] : [];
+            }
         }
         else {
             $context = '';
         }
 
-        // host subdomain is either api or api-free
-        $url = 'https://api';
-        if( str_ends_with($config['key'],':fx') ){
-            $url .= '-free';
-        }
-        $url .= '.deepl.com/v2/translate';
-
         // make request and parse JSON result 
-        $result = wp_remote_request( $url, self::init_request_arguments( $config, [
+        $result = wp_remote_request( self::baseUrl($api_key).'/v2/translate', self::init_request_arguments( $config, [
             'source_lang' => apply_filters('loco_deepl_source_lang',$sourceLang),
             'target_lang' => apply_filters('loco_deepl_target_lang',$targetLang, $locale),
             'formality' => apply_filters('loco_deepl_formality',$formality, $locale),
@@ -135,6 +133,32 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
             }
         }
         return implode('&',$pairs);
+    }
+
+
+    private static function fetch_usage( string $key ):array {
+        $data = parent::decodeResponse( wp_remote_request( self::baseUrl($key).'/v2/usage', [
+            'redirection' => 0,
+            'user-agent' => parent::getUserAgent(),
+            'reject_unsafe_urls' => false,
+            'headers' => [
+                'Authorization' => 'DeepL-Auth-Key '.$key,
+            ],
+        ] ) );
+        if( array_key_exists('character_limit',$data) ){
+            return $data;
+        }
+        $message = $data['message'] ?? 'Failed to get usage';
+        throw new Loco_error_Exception( 'DeepL: '.$message);
+    }
+
+
+    private static function baseUrl( string $key ):string {
+        $url = 'https://api';
+        if( str_ends_with($key,':fx') ){
+            $url .= '-free';
+        }
+        return $url . '.deepl.com';
     }
 
 }
