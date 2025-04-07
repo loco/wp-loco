@@ -48,7 +48,7 @@ abstract class Loco_api_Providers {
                 'url' => 'https://lecto.ai/?ref=loco',
             ],[
                 'id' => 'openai',
-                'name' => 'ChatGPT',
+                'name' => 'OpenAI',
                 'key' => $settings->offsetGet('openai_api_key'),
                 'model' => $settings->offsetGet('openai_api_model'),
                 'prompt' => $settings->offsetGet('openai_api_prompt'),

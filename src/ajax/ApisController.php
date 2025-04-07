@@ -78,6 +78,9 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
             $targets = apply_filters( $action, [], $sources, $locale, $config );
         }
         // Use built-in translators if hook hasn't registered one.
+        else if( 'deepl' === $hook && class_exists('Loco_api_DeepL') ){
+            $targets = Loco_api_DeepL::process( $sources, $locale, $config );
+        }
         else if( 'openai' === $hook && class_exists('Loco_api_ChatGpt') ){
             $targets = Loco_api_ChatGpt::process( $sources, $locale, $config );
         }

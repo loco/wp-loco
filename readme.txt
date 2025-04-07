@@ -101,9 +101,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.7.2
+* DeepL client moved to back end due, because CORS 
 * Rolled in support for OpenAI / ChatGPT translation
 * Workaround for JSON file references with no line number
-* CORS workaround for DeepL key verification 
 * Bumped WordPress compatibility to 6.7.2
 
 = 2.7.1

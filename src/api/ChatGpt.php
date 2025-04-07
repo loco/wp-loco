@@ -3,7 +3,7 @@
  * Bundled from external repo:
  * @see https://github.com/loco/wp-gpt-translator/
  */
-abstract class Loco_api_ChatGpt {
+abstract class Loco_api_ChatGpt extends Loco_api_Client{
 
 
     /**
@@ -156,7 +156,7 @@ abstract class Loco_api_ChatGpt {
         return [
             'method' => 'POST',
             'redirection' => 0,
-            'user-agent' => sprintf('Loco Translate/%s; wp-%s', loco_plugin_version(), $GLOBALS['wp_version'] ),
+            'user-agent' => parent::getUserAgent(),
             'reject_unsafe_urls' => false,
             'headers' => [
                 'Content-Type' => 'application/json',
@@ -170,29 +170,16 @@ abstract class Loco_api_ChatGpt {
 
 
     private static function decode_response( $result ):array {
-        if( $result instanceof WP_Error ){
-            foreach( $result->get_error_messages() as $message ){
-                throw new Loco_error_Exception($message);
-            }
-        }
-        // always decode response if server says it's JSON
-        if( 'application/json' === substr($result['headers']['Content-Type'],0,16) ){
-            $data = json_decode( $result['body'], true );
-        }
-        else {
-            $data = [];
-        }
-        // TODO handle well formed error messages
+        $data = parent::decodeResponse($result);
         $status = $result['response']['code'];
         if( 200 !== $status ){
             $message = $data['error']['message'] ?? 'Unknown error';
             throw new Loco_error_Exception( sprintf('OpenAI API returned status %u: %s',$status,$message) );
         }
         // all responses have form {choices:[...]}
-        if( ! is_array($data) || ! array_key_exists('choices',$data) || ! is_array($data['choices']) ){
+        if( ! array_key_exists('choices',$data) || ! is_array($data['choices']) ){
             throw new Loco_error_Exception('OpenAI API returned unexpected data');
         }
-        // 
         return $data;
     }
 
