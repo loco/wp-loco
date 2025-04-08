@@ -6,15 +6,13 @@ abstract class Loco_config_Model {
     
     /**
      * Root directory for calculating relative file paths
-     * @var string
      */
-    private $base;
+    private string $base;
     
     /**
      * registry of location constants that may have been overridden
-     * @var array
      */
-    private $dirs;
+    private array $dirs;
 
     /**
      * @return Iterator

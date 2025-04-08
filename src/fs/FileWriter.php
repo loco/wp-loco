@@ -266,10 +266,9 @@ class Loco_fs_FileWriter {
     /**
      * Create current directory context
      * @param Loco_fs_File|null $here optional working directory
-     * @return bool
      * @throws Loco_error_WriteException
      */
-     public function mkdir( Loco_fs_File $here = null ) {
+     public function mkdir( ?Loco_fs_File $here = null ):bool {
         if( is_null($here) ){
             $here = $this->file;
         }

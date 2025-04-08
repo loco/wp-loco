@@ -166,7 +166,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     /**
      * `pre_determine_locale` filter callback
      */
-    public function filter_pre_determine_locale( $locale = null ){
+    public function filter_pre_determine_locale( ?string $locale = null ):?string {
         if( is_string($this->locale) ) {
             $this->log( '~ filter:pre_determine_locale: %s => %s', $locale ?: 'none', $this->locale );
             $locale = $this->locale;
@@ -406,7 +406,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     
     
     
-    private function selectPluralForm( $quantity, $pluralIndex, Plural_Forms $eq = null ){
+    private function selectPluralForm( $quantity, $pluralIndex, ?Plural_Forms $eq = null ){
         try {
             if( $eq instanceof Plural_Forms ) {
                 $pluralIndex = $eq->execute( $quantity );
@@ -556,7 +556,7 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
     /**
      * Preload domain for a script, then forcing retrieval of JSON.
      */
-    private function preloadScript( $path, string $domain, Loco_package_Bundle $bundle = null ):Loco_gettext_Data {
+    private function preloadScript( $path, string $domain, ?Loco_package_Bundle $bundle = null ):Loco_gettext_Data {
         $this->log('Have script argument => %s', $path );
         if( preg_match('/^[0-9a-f]{32}$/',$path) ){
             throw new Loco_error_Exception('Enter the script path, not the hash');

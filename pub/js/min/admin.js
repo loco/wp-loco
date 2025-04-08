@@ -5468,7 +5468,7 @@ C.require("$25", "tables.js").init(t);
 });
 T.validate = function(v) {
 v = (v = /^\d+\.\d+\.\d+/.exec(v && v[0] || "")) && v[0];
-if ("2.7.2" === v) return !0;
+if ("2.7.3" === v) return !0;
 T.notices.warn("admin.js is the wrong version (" + v + "). Please empty all relevant caches and reload this page.");
 return !1;
 };

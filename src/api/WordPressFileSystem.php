@@ -133,9 +133,8 @@ class Loco_api_WordPressFileSystem {
      * Authorize for move (to another path if given).
      * @param Loco_fs_File $source file being moved (must exist)
      * @param Loco_fs_File|null $target target path (should not exist)
-     * @return bool
      */
-    public function authorizeMove( Loco_fs_File $source, Loco_fs_File $target = null ){
+    public function authorizeMove( Loco_fs_File $source, ?Loco_fs_File $target = null ):bool {
         // source is in charge of its own deletion
         $result = $this->authorizeDelete($source);
         // target is in charge of copying original which it must also be able to read.

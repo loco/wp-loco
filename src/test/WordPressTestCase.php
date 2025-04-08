@@ -293,7 +293,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
      * @internal
      * @noinspection PhpUnusedParameterInspection
      */
-    public function filter_fs_allow_context( $context, Loco_fs_File $file = null ){
+    public function filter_fs_allow_context( $context, ?Loco_fs_File $file = null ){
         return 'loco_test';
     }
 

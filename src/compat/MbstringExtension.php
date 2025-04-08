@@ -7,18 +7,18 @@
  */
 abstract class Loco_compat_MbstringExtension {
     
-    public static function mb_detect_encoding( $str, array $encoding_list = null, $strict = null ){
+    public static function mb_detect_encoding( $str, ?array $encoding_list = null, bool $strict = false ):string {
         return ! $str || preg_match('//u',$str)
          ? 'UTF-8' 
          : 'ISO-8859-1'
          ;
     }
 
-    public static function mb_list_encodings(){
+    public static function mb_list_encodings():array {
         return ['UTF-8','ISO-8859-1'];
     }
 
-    public static function mb_strlen( $str, $encoding = null ){
+    public static function mb_strlen( $str, ?string $encoding = null ):int {
         static $warned = false;
         if( ! $warned && preg_match('/[\\x80-\\xFF]/',$str) ){
             trigger_error('Character counts will be wrong without mbstring extension',E_USER_WARNING);
@@ -27,7 +27,7 @@ abstract class Loco_compat_MbstringExtension {
         return strlen($str);
     }
 
-    public static function mb_convert_encoding( $str, $to_encoding, $from_encoding ){
+    public static function mb_convert_encoding( string $str, string $to_encoding, string $from_encoding ){
         if( $to_encoding !== $from_encoding && '' !== $str ){
             // loco_convert_utf8 no longer uses mb_convert_encoding for UTF8->latin1
             if( '' === $from_encoding || 'ISO-8859-1' === $from_encoding || 'cp1252' === $from_encoding ){
@@ -42,7 +42,7 @@ abstract class Loco_compat_MbstringExtension {
         return $str;
     }
     
-    public static function mb_strtolower( $str ){
+    public static function mb_strtolower( string $str ):string {
         return strtolower($str);
     }
 
@@ -52,26 +52,26 @@ abstract class Loco_compat_MbstringExtension {
 // @codeCoverageIgnoreStart
 
 if( ! function_exists('mb_detect_encoding') ){
-    function mb_detect_encoding( $str = '', array $encoding_list = [], $strict = false ){
+    function mb_detect_encoding( string $str = '', array $encoding_list = [], bool $strict = false ):string {
         return Loco_compat_MbstringExtension::mb_detect_encoding( $str, $encoding_list, $strict );
     }
 }
 
 if( ! function_exists('mb_list_encodings') ){
-    function mb_list_encodings(){
+    function mb_list_encodings():array {
         return Loco_compat_MbstringExtension::mb_list_encodings();
     }
 }
 
 if( ! function_exists('mb_strlen') ){
-    function mb_strlen( $str, $encoding = null ){
+    function mb_strlen( string $str, ?string $encoding = null ):int {
         return Loco_compat_MbstringExtension::mb_strlen( $str, $encoding );
     }
 }
 
 if( ! function_exists('mb_convert_encoding') ){
-    function mb_convert_encoding( $str, $to_encoding, $from_encoding = null ){
-        return Loco_compat_MbstringExtension::mb_convert_encoding( $str, $to_encoding, $from_encoding );
+    function mb_convert_encoding( string $str, string $to_encoding, ?string $from_encoding = null ){
+        return Loco_compat_MbstringExtension::mb_convert_encoding( $str, $to_encoding, (string) $from_encoding );
     }
 }
 

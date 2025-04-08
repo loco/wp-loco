@@ -45,7 +45,7 @@ abstract class Loco_test_TestCase extends PHPUnit_Adapter_TestCase {
     /**
      * @deprecated 
      */
-    public function setExpectedException( $exception, $message = '', $code = null ) {
+    public function setExpectedException( string $exception, string $message = '', ?int $code = null ) {
         //trigger_error('Use expectException('.var_export($exception,true).')', E_USER_DEPRECATED );
         $this->expectException( $exception );
 

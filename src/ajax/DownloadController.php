@@ -25,6 +25,7 @@ class Loco_ajax_DownloadController extends Loco_ajax_common_BundleController {
         register_shutdown_function('unlink',$path);
         
         // initialize zip
+        // TODO PHP 8.4 Using empty file as ZipArchive is deprecated
         loco_check_extension('zip');
         $z = new ZipArchive;
         $z->open( $path, ZipArchive::CREATE);

@@ -187,7 +187,7 @@ class Loco_fs_FileFinder implements Iterator, Countable, Loco_fs_FileListInterfa
     /**
      * Add a directory root to search.
      */
-    public function addRoot( string $root, bool $recursive = null ):self {
+    public function addRoot( string $root, ?bool $recursive = null ):self {
         $this->invalidate();
         $dir = new Loco_fs_Directory($root);
         $this->roots->add( $dir );

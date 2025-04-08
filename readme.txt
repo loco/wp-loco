@@ -100,6 +100,9 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Changelog ==
 
+= 2.7.3 =
+* Compatible with PHP 8.4
+
 = 2.7.2 =
 * DeepL client moved to back end due, because CORS 
 * Rolled in support for OpenAI / ChatGPT translation
@@ -568,7 +571,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 == Upgrade Notice ==
 
-= 2.7.2 =
+= 2.7.3 =
 * Various improvements and bug fixes
 
 

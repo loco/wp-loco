@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.7.2-dev\n"
+"Project-Id-Version: Loco Translate 2.7.3-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2025-02-14 10:18+0000\n"
+"POT-Creation-Date: 2025-04-08 15:04+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.2-dev; wp-6.7.2\n"
+"X-Loco-Version: 2.7.3-dev; wp-6.7.2; php-8.3.14\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -465,7 +465,7 @@ msgstr ""
 msgid "Configure %s"
 msgstr ""
 
-#: tpl/admin/config/apis.php:113
+#: tpl/admin/config/apis.php:146
 msgid "Configured externally"
 msgstr ""
 
@@ -583,7 +583,7 @@ msgstr ""
 
 #: src/admin/file/EditController.php:132 src/admin/file/EditController.php:183
 #: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:234
-#: tpl/admin/config/apis.php:134 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:167 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -787,7 +787,7 @@ msgstr ""
 msgid "Enter a new location for this file"
 msgstr ""
 
-#: src/js/Strings.php:124 src/error/Exception.php:166
+#: src/js/Strings.php:124 src/error/Exception.php:163
 msgid "Error"
 msgstr ""
 
@@ -807,7 +807,7 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:298
+#: src/fs/FileWriter.php:297
 msgid "Failed to build directory path"
 msgstr ""
 
@@ -835,7 +835,7 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:290
+#: src/fs/FileWriter.php:289
 msgid "Failed to create directory"
 msgstr ""
 
@@ -916,7 +916,7 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:309
+#: src/fs/FileWriter.php:308
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -1049,7 +1049,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:124
+#: tpl/admin/config/apis.php:157
 msgid "Important"
 msgstr ""
 
@@ -1264,11 +1264,11 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:314
+#: src/fs/FileWriter.php:313
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
-#: src/fs/FileWriter.php:325
+#: src/fs/FileWriter.php:324
 msgid ""
 "Modification of POT (template) files is disallowed by the plugin settings"
 msgstr ""
@@ -1317,7 +1317,7 @@ msgstr ""
 msgid "New translations template for \"%s\""
 msgstr ""
 
-#: src/js/Strings.php:17 tpl/admin/config/apis.php:113
+#: src/js/Strings.php:17 tpl/admin/config/apis.php:146
 msgid "No API key"
 msgstr ""
 
@@ -1465,7 +1465,7 @@ msgstr ""
 msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:44
+#: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:30
 #: src/admin/bundle/LocaleController.php:154
 msgid "Plugins"
 msgstr ""
@@ -1628,7 +1628,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:133
+#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:166
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1661,7 +1661,7 @@ msgstr ""
 msgid "See all themes"
 msgstr ""
 
-#: tpl/admin/config/apis.php:127
+#: tpl/admin/config/apis.php:160
 msgid "See full disclaimer"
 msgstr ""
 
@@ -1870,7 +1870,7 @@ msgstr ""
 msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:41
+#: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:27
 #: src/admin/bundle/LocaleController.php:149
 msgid "Themes"
 msgstr ""
@@ -1886,7 +1886,7 @@ msgid ""
 "extract strings directly from source code."
 msgstr ""
 
-#: tpl/admin/config/apis.php:126
+#: tpl/admin/config/apis.php:159
 msgid ""
 "Third party services are subject to their own terms of use and may incur "
 "costs from the provider"

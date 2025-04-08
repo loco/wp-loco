@@ -29,7 +29,7 @@ class Loco_gettext_SearchPaths extends Loco_fs_FileFinder {
      * Build search paths from a given PO/POT file that references other files
      * @return Loco_gettext_SearchPaths
      */
-    public function init( Loco_fs_File $pofile, LocoHeaders $head = null ){
+    public function init( Loco_fs_File $pofile, ?LocoHeaders $head = null ){
         if( is_null($head) ){
             loco_require_lib('compiled/gettext.php');
             $head = LocoPoHeaders::fromSource( $pofile->getContents() );

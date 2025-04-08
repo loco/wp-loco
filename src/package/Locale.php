@@ -24,7 +24,7 @@ class Loco_package_Locale {
     /**
      * Construct with locale to filter on
      */
-    public function __construct( Loco_locale $locale = null ){
+    public function __construct( ?Loco_locale $locale = null ){
         $this->index =  new ArrayObject;
         $this->match = [];
         if( $locale ){

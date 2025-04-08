@@ -50,7 +50,7 @@ class Loco_gettext_Compiler {
     /**
      * Write PO, MO and JSON siblings
      */
-    public function writeAll( Loco_gettext_Data $po, Loco_package_Project $project = null ):Loco_fs_FileList {
+    public function writeAll( Loco_gettext_Data $po, ?Loco_package_Project $project = null ):Loco_fs_FileList {
         $this->writePo($po);
         $this->writeMo($po);
         if( $project ){

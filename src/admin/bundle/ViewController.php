@@ -159,7 +159,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
      * Collect PO/MO pairings, ignoring any PO that is in use as a template
      * @return array[]
      */
-    private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, Loco_fs_File $pot = null ):array {
+    private function createPairs( Loco_fs_FileList $po, Loco_fs_FileList $mo, ?Loco_fs_File $pot = null ):array {
         $pairs = [];
         /* @var $pofile Loco_fs_LocaleFile */
         foreach( $po as $pofile ){
@@ -225,7 +225,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
     }
 
 
-    private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, Loco_Locale $locale = null ):Loco_mvc_ViewParams {
+    private function createFileParams( Loco_package_Project $project, Loco_fs_File $file, ?Loco_Locale $locale = null ):Loco_mvc_ViewParams {
         // Pull Gettext meta data from cache if possible
         $meta = Loco_gettext_Metadata::load($file);
         $dir = new Loco_fs_LocaleDirectory( $file->dirname() );

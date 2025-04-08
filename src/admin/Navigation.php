@@ -5,30 +5,16 @@
 class Loco_admin_Navigation extends ArrayIterator {
 
     
-    /**
-     * @return Loco_admin_Navigation
-     */
-    public function add( $name, $href = null, $active = false ){
+    public function add( string $name, ?string $href = null, ?bool $active = false ):self {
         $this[] = new Loco_mvc_ViewParams( compact('name','href','active') );
         return $this;
     }
 
 
-    /* not currently used
-     * @return Loco_admin_Navigation
-     *
-    public function addRoute( $name, $action ){
-        $href = Loco_mvc_AdminRouter::generate( $action );
-        return $this->add( $name, $href );
-    }*/
-    
-    
-
     /**
      * Create a breadcrumb trail for a given view below a bundle
-     * @return self
      */
-    public static function createBreadcrumb( Loco_package_Bundle $bundle ){
+    public static function createBreadcrumb( Loco_package_Bundle $bundle ):self {
         $nav = new Loco_admin_Navigation;
 
         // root link depends on bundle type
@@ -59,25 +45,12 @@ class Loco_admin_Navigation extends ArrayIterator {
 
     /**
      * Create a basic breadcrumb comprising title only
-     * @return self
      */
-    public static function createSimple( $name ){
+    public static function createSimple( string $name ):self {
         $nav = new Loco_admin_Navigation;
         $nav->add($name);
         return $nav;
     }
-
-
-
-    /**
-     * @return Loco_mvc_ViewParams
-     *
-    public function getSecondLast(){
-        $i = count($this);
-        if( $i > 1 ){
-            return $this[ $i-2 ];
-        }
-    }*/
 
 
 }

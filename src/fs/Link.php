@@ -7,7 +7,7 @@ class Loco_fs_Link extends Loco_fs_File {
     /**
      * @var Loco_fs_File
      */
-    private $real;
+    private ?Loco_fs_File $real = null;
 
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class Loco_fs_Link extends Loco_fs_File {
     /**
      * @return Loco_fs_File|null
      */
-    public function resolve(){
+    public function resolve():?Loco_fs_File {
         return $this->real;
     }
 
@@ -37,7 +37,7 @@ class Loco_fs_Link extends Loco_fs_File {
     /**
      * {@inheritdoc}
      */
-    public function isDirectory(){
+    public function isDirectory():bool {
         return $this->real instanceof Loco_fs_Directory;
     }
     

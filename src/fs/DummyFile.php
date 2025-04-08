@@ -40,7 +40,7 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritdoc}
      */
-    public function exists(){
+    public function exists():bool {
         return false;
     }
 
@@ -48,7 +48,7 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritdoc}
      */
-    public function getContents(){
+    public function getContents():string {
         return $this->contents;
     }
 
@@ -172,7 +172,7 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritdoc}
      */
-    public function creatable(){
+    public function creatable():bool {
         return false;
     }
 
@@ -180,7 +180,7 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritDoc}
      */
-    public function md5(){
+    public function md5():string {
         return md5( $this->getContents() );
     }
 
@@ -188,7 +188,7 @@ class Loco_fs_DummyFile extends Loco_fs_File {
     /**
      * {@inheritDoc}
      */
-    public function getWriteContext() {
+    public function getWriteContext():Loco_fs_FileWriter {
         return new _LocoDummyFileWriter($this);
     }
 
