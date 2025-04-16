@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.2.24
-Tested up to: 6.7.2
+Tested up to: 6.8
 Stable tag: 2.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -101,10 +101,11 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 == Changelog ==
 
 = 2.7.3 =
-* Compatible with PHP 8.4
+* PHP 8.4 compatibility
+* Bumped WordPress compatibility to 6.8
 
 = 2.7.2 =
-* DeepL client moved to back end due, because CORS 
+* DeepL client moved to back end, because CORS 
 * Rolled in support for OpenAI / ChatGPT translation
 * Workaround for JSON file references with no line number
 * Bumped WordPress compatibility to 6.7.2
