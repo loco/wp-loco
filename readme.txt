@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.2.24
-Tested up to: 6.8
+Tested up to: 6.8.1
 Stable tag: 2.7.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -102,7 +102,7 @@ We don't collect your data or snoop on you. See the [plugin privacy notice](http
 
 = 2.7.3 =
 * PHP 8.4 compatibility
-* Bumped WordPress compatibility to 6.8
+* Bumped WordPress compatibility to 6.8.1
 
 = 2.7.2 =
 * DeepL client moved to back end, because CORS 

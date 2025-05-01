@@ -15,10 +15,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     private $project;
 
 
-    /**
-     * @return Loco_package_Bundle
-     */
-    public function getBundle(){
+    public function getBundle():Loco_package_Bundle {
         if( ! $this->bundle ){
             $type = $this->get('type');
             $handle = $this->get('bundle');
@@ -30,9 +27,8 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
     /**
      * Get current project's text domain if available
-     * @return string
      */
-    public function getDomain(){
+    public function getDomain():string {
         $project = $this->getOptionalProject();
         if( $project instanceof Loco_package_Project ){
             return $project->getDomain()->getName();
@@ -43,9 +39,8 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
     /**
      * Commit bundle config to database
-     * @return Loco_admin_bundle_BaseController 
      */
-    protected function saveBundle(){
+    protected function saveBundle():self {
         $custom = new Loco_config_CustomSaved;
         if( $custom->setBundle($this->bundle)->persist() ){
             Loco_error_AdminNotices::success( __('Configuration saved','loco-translate') );
@@ -58,9 +53,8 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
 
     /**
      * Remove bundle config from database
-     * @return Loco_admin_bundle_BaseController 
      */
-    protected function resetBundle(){
+    protected function resetBundle():self {
         $option = $this->bundle->getCustomConfig();
         if( $option && $option->remove() ){
             Loco_error_AdminNotices::success( __('Configuration reset','loco-translate') );
@@ -71,10 +65,7 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     }
 
 
-    /**
-     * @return Loco_package_Project
-     */
-    protected function getProject(){
+    protected function getProject():Loco_package_Project{
         if( ! $this->project ){
             $bundle = $this->getBundle();
             $domain = $this->get('domain');
@@ -91,23 +82,17 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     }
 
 
-    /**
-     * @return Loco_package_Project|null
-     */
-    protected function getOptionalProject(){
+    protected function getOptionalProject():?Loco_package_Project {
         try {
             return $this->getProject();
         }
-        catch( Exception $e ){
+        catch( Throwable $e ){
             return null;
         }
     }
 
 
-    /**
-     * @return Loco_admin_Navigation
-     */
-    protected function prepareNavigation(){
+    protected function prepareNavigation():Loco_admin_Navigation {
         $bundle = $this->getBundle();
 
         // navigate up to bundle listing page 
@@ -144,9 +129,8 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
      * Prepare file system connect
      * @param string $type "create", "update", "delete"
      * @param string $relpath Path relative to wp-content
-     * @return Loco_mvc_HiddenFields
      */
-    protected function prepareFsConnect( $type, $relpath ){
+    protected function prepareFsConnect( string $type, string $relpath ):Loco_mvc_HiddenFields {
 
         $fields = new Loco_mvc_HiddenFields( [
             'auth' => $type,

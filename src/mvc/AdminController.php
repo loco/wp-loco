@@ -153,7 +153,7 @@ abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
      * All admin screens must define help tabs, even if they return empty
      * @return array
      */
-    public function getHelpTabs(){
+    public function getHelpTabs() {
         return [];
     }
 
