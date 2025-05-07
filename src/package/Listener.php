@@ -106,9 +106,9 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      * Get primary Text Domain that's uniquely assigned to a bundle.
      * @param string $handle theme or plugin relative path
      */
-    public function getDomain( $handle ){
+    public function getDomain( string $handle ){
         $this->flush();
-        return isset($this->domains[$handle]) ? $this->domains[$handle] : '';
+        return $this->domains[$handle]??'';
     }
 
 
@@ -118,18 +118,18 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      * @param string $domain TextDomain
      * @return string relative path
      */
-    public function getDomainPath( $domain ){
+    public function getDomainPath( string $domain ):string {
         $this->flush();
-        return isset($this->domainPaths[$domain]) ? $this->domainPaths[$domain] : '';
+        return $this->domainPaths[$domain]??'';
     }
 
 
     /**
      * Trim containing directory from a path, so "languages/foo/bar" -> "foo/bar", or "languages" -> ""
      */
-    private static function subdir( $path ){
+    private static function subdir( string $path ):string {
         $bits = explode('/',$path,2);
-        return isset($bits[1]) ? $bits[1] : '';
+        return $bits[1] ?? '';
     }
 
 
@@ -147,7 +147,7 @@ class Loco_package_Listener extends Loco_hooks_Hookable {
      * @param string $path relative plugin path, e.g. "loco-translate/languages/foo.po"
      * @return void
      */
-    private function resolvePluginFromPath( $path, $domain, $slug ){
+    private function resolvePluginFromPath( string $path, $domain, $slug ){
         // cache all root directory names
         if( ! $this->pluginHandles ){
             $this->pluginHandles = [];

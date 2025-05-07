@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.7.3-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2025-04-08 15:04+0000\n"
+"POT-Creation-Date: 2025-05-07 08:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.7.3-dev; wp-6.7.2; php-8.3.14\n"
+"X-Loco-Version: 2.7.3-dev; wp-6.8.1; php-8.3.14\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -275,7 +275,7 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:123 tpl/admin/file/conf.php:58
+#: src/admin/bundle/BaseController.php:102 tpl/admin/file/conf.php:58
 #: tpl/admin/file/move.php:26
 msgid "Advanced"
 msgstr ""
@@ -451,11 +451,11 @@ msgstr ""
 msgid "Compiling MO files"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:66
+#: src/admin/bundle/BaseController.php:54
 msgid "Configuration reset"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:51
+#: src/admin/bundle/BaseController.php:40
 msgid "Configuration saved"
 msgstr ""
 
@@ -536,7 +536,7 @@ msgstr ""
 
 #: src/mvc/AdminRouter.php:77 src/error/Debug.php:19
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:128
+#: src/admin/bundle/BaseController.php:107
 msgid "Debug"
 msgstr ""
 
@@ -681,7 +681,7 @@ msgid "Download"
 msgstr ""
 
 #. Label for the plural form of the original English text
-#: src/Locale.php:402 src/js/Strings.php:93
+#: src/Locale.php:375 src/js/Strings.php:93
 msgctxt "Editor"
 msgid "Plural"
 msgstr ""
@@ -705,7 +705,7 @@ msgid "Save"
 msgstr ""
 
 #. Label for the singular form of the original English text
-#: src/Locale.php:401 src/js/Strings.php:96
+#: src/Locale.php:374 src/js/Strings.php:96
 msgctxt "Editor"
 msgid "Single"
 msgstr ""
@@ -1092,7 +1092,7 @@ msgstr ""
 msgid "Installed languages"
 msgstr ""
 
-#: src/Locale.php:329
+#: src/Locale.php:306
 msgid "Invalid locale"
 msgstr ""
 
@@ -1404,7 +1404,7 @@ msgstr ""
 #: src/admin/config/BaseController.php:39
 #: src/admin/bundle/ViewController.php:25
 #: src/admin/bundle/LocaleController.php:34
-#: src/admin/bundle/BaseController.php:121
+#: src/admin/bundle/BaseController.php:100
 #: src/admin/list/LocalesController.php:24 src/admin/list/BaseController.php:45
 msgid "Overview"
 msgstr ""
@@ -1448,7 +1448,7 @@ msgid "PHP %s"
 msgstr ""
 
 #. %s refers to the handle of a plugin, e.g. "loco-translate/loco.php"
-#: src/package/Plugin.php:232
+#: src/package/Plugin.php:225
 #, php-format
 msgid "Plugin not found: %s"
 msgstr ""
@@ -1471,43 +1471,43 @@ msgid "Plugins"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:416
+#: src/Locale.php:389
 msgctxt "Plural category"
 msgid "Few"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:418
+#: src/Locale.php:391
 msgctxt "Plural category"
 msgid "Many"
 msgstr ""
 
 #. Plural category for singular quantity
-#: src/Locale.php:412
+#: src/Locale.php:385
 msgctxt "Plural category"
 msgid "One"
 msgstr ""
 
 #. General plural category not covered by other forms
-#: src/Locale.php:420
+#: src/Locale.php:393
 msgctxt "Plural category"
 msgid "Other"
 msgstr ""
 
 #. Plural category used in some multi-plural languages
-#: src/Locale.php:414
+#: src/Locale.php:387
 msgctxt "Plural category"
 msgid "Two"
 msgstr ""
 
 #. Plural category for zero quantity
-#: src/Locale.php:410
+#: src/Locale.php:383
 msgctxt "Plural category"
 msgid "Zero"
 msgstr ""
 
 #. Shown when a PO file's Plural-Forms header has a different formula from the Unicode CLDR rules
-#: src/Locale.php:528
+#: src/Locale.php:500
 msgid ""
 "Plural forms differ from Loco Translate's built in rules for this language"
 msgstr ""
@@ -1693,7 +1693,7 @@ msgstr ""
 msgid "Settings saved"
 msgstr ""
 
-#: src/admin/bundle/BaseController.php:122
+#: src/admin/bundle/BaseController.php:101
 msgid "Setup"
 msgstr ""
 
@@ -2223,7 +2223,7 @@ msgstr ""
 msgid "WordPress %s"
 msgstr ""
 
-#: src/package/Core.php:87 src/admin/bundle/LocaleController.php:144
+#: src/package/Core.php:85 src/admin/bundle/LocaleController.php:144
 msgid "WordPress Core"
 msgstr ""
 

@@ -7,7 +7,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getSystemTargets(){
+    public function getSystemTargets(): array {
         return  [
             untrailingslashit( loco_constant('LOCO_LANG_DIR') ),
 	        untrailingslashit( loco_constant('WP_LANG_DIR') )
@@ -18,7 +18,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getHeaderInfo(){
+    public function getHeaderInfo(): Loco_package_Header {
         return new Loco_package_Header(  [
             'TextDomain' => 'default',
             'DomainPath' => '/wp-content/languages/',
@@ -34,7 +34,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getMetaTranslatable(){
+    public function getMetaTranslatable(): array {
         return [];
     }
 
@@ -42,7 +42,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getType(){
+    public function getType(): string {
         return 'Core';
     }
 
@@ -51,7 +51,7 @@ class Loco_package_Core extends Loco_package_Bundle {
      * {@inheritdoc}
      * Core bundle doesn't need a handle, there is only one.
      */
-    public function getId(){
+    public function getId(): string {
         return 'core';
     }
 
@@ -59,7 +59,7 @@ class Loco_package_Core extends Loco_package_Bundle {
     /**
      * {@inheritDoc}
      */
-    public function getDirectoryUrl(){
+    public function getDirectoryUrl(): string {
         return get_site_url(null,'/');
     }
 
@@ -68,18 +68,16 @@ class Loco_package_Core extends Loco_package_Bundle {
      * {@inheritdoc}
      * Core bundle is always configured
      */
-    public function isConfigured(){
-        $saved = parent::isConfigured() or $saved = 'internal';
-        return $saved;
+    public function isConfigured(): string {
+        return parent::isConfigured() ?: 'internal';
     }
 
 
     /**
      * Manually define the core WordPress translations as a single bundle
      * Projects are those included in standard WordPress downloads: [default], "admin", "admin-network" and "continents-cities"
-     * @return self
      */
-    public static function create(){
+    public static function create():self {
         
         $rootDir = loco_constant('ABSPATH');
         $langDir = loco_constant('WP_LANG_DIR');
@@ -139,7 +137,7 @@ class Loco_package_Core extends Loco_package_Bundle {
         $bundle->addDomain( $domain );
 
 
-        // Continents & Cities is its own text domain)
+        // Continents & Cities is its own text domain
         $domain = new Loco_package_TextDomain('continents-cities');
         $project = $domain->createProject( $bundle, 'Continents & Cities');
         $project->setPot( new Loco_fs_File( $langDir.'/continents-cities.pot') )

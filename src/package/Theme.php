@@ -13,7 +13,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getSystemTargets(){
+    public function getSystemTargets():array {
         return  [ 
             trailingslashit( loco_constant('LOCO_LANG_DIR') ).'themes',
             trailingslashit( loco_constant('WP_LANG_DIR') ).'themes',
@@ -24,7 +24,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function isTheme(){
+    public function isTheme():bool {
         return true;
     }
 
@@ -32,7 +32,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getType(){
+    public function getType():string {
         return 'Theme';
     }
 
@@ -40,7 +40,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritDoc}
      */
-    public function getDirectoryUrl() {
+    public function getDirectoryUrl(): string {
         $slug = $this->getHandle();
         return trailingslashit(get_theme_root_uri($slug)).$slug.'/';
     }
@@ -49,7 +49,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getHeaderInfo(){
+    public function getHeaderInfo(): Loco_package_Header {
         $root = dirname( $this->getDirectoryPath() );
         $theme = new WP_Theme( $this->getSlug(), $root );
         return new Loco_package_Header( $theme );
@@ -59,7 +59,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getMetaTranslatable(){
+    public function getMetaTranslatable(): array {
         return  [
             'Name'        => 'Name of the theme',
             'Description' => 'Description of the theme',
@@ -72,10 +72,9 @@ class Loco_package_Theme extends Loco_package_Bundle {
 
 
     /**
-     * Get parent bundle if theme is a child
-     * @return Loco_package_Theme|null
+     * @inheritDoc
      */
-    public function getParent(){
+    public function getParent(): ?Loco_package_Theme {
         return $this->parent;
     }
 
@@ -83,7 +82,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * @return static[]
      */
-    public static function getAll(){
+    public static function getAll(): array {
         $themes = [];
         foreach( wp_get_themes(['errors'=>null]) as $theme ){
             try {
@@ -104,16 +103,15 @@ class Loco_package_Theme extends Loco_package_Bundle {
      * @param string $root Theme root if known
      * @return self
      */
-    public static function create( $slug, $root = '' ){
+    public static function create( string $slug, string $root = '' ):self {
         return self::createFromTheme( wp_get_theme( $slug, $root ) );
     }
 
 
     /**
      * Create theme bundle definition from WordPress theme data 
-     * @return self
      */
-    public static function createFromTheme( WP_Theme $theme ){
+    public static function createFromTheme( WP_Theme $theme ):self {
         $slug = $theme->get_stylesheet();
         $base = $theme->get_stylesheet_directory();
         $name = $theme->get('Name') or $name = $slug;
@@ -155,7 +153,7 @@ class Loco_package_Theme extends Loco_package_Bundle {
     /**
      * {@inheritDoc}
      */
-    public static function fromFile( Loco_fs_File $file ){
+    public static function fromFile( Loco_fs_File $file ):?Loco_package_Bundle {
         $find = $file->getPath();
         foreach( wp_get_themes( ['errors'=>null] ) as $theme ){
             $base = $theme->get_stylesheet_directory();

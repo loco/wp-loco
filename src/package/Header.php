@@ -27,7 +27,7 @@ class Loco_package_Header {
 
 
     /**
-     * @param string
+     * @param string $prop
      * @return string
      */
     public function __get( $prop ){
@@ -49,8 +49,8 @@ class Loco_package_Header {
 
 
     /**
-     * @param string
-     * @param mixed
+     * @param string $prop  
+     * @param mixed $value
      * @codeCoverageIgnore
      */
     public function __set( $prop, $value ){
@@ -62,7 +62,7 @@ class Loco_package_Header {
      * Get bundle author as linked text, just like the WordPress plugin list does
      * @return string escaped HTML
      */
-    public function getAuthorLink(){
+    public function getAuthorLink():string {
         if( ( $link = $this->AuthorURI ) || ( $link = $this->PluginURI ) || ( $link = $this->ThemeURI ) ){
             $author = $this->Author or $author = $link;
             return '<a href="'.esc_url($link).'" target="_blank">'.esc_html($author).'</a>';
@@ -75,7 +75,7 @@ class Loco_package_Header {
      * Get "name" by <author> credit
      * @return string escaped HTML
      */
-    public function getAuthorCredit(){
+    public function getAuthorCredit(): string {
         if( $author = $this->Author ){
             $author = esc_html( strip_tags($author) );
             if( $link = $this->AuthorURI ){
@@ -101,7 +101,7 @@ class Loco_package_Header {
      * Get hostname of vendor that hosts theme/plugin
      * @return string e.g. "wordpress.org"
      */
-    public function getVendorHost(){
+    public function getVendorHost(): string {
         $host = '';
         if( ( $url = $this->PluginURI ) || ( $url = $this->ThemeURI ) ){
             if( $host = parse_url($url,PHP_URL_HOST) ){

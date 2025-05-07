@@ -9,7 +9,7 @@ abstract class Loco_cli_Utils {
      * Collect translation sets according to type/domain filter
      * @return Loco_package_Project[]
      */
-    public static function collectProjects( $filter ){
+    public static function collectProjects( $filter ):array {
         $projects = [];
         $domain = null;
         $slug = null;

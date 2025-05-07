@@ -8,7 +8,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getSystemTargets(){
+    public function getSystemTargets(): array {
         return  [ 
             trailingslashit( loco_constant('LOCO_LANG_DIR') ).'plugins',
             trailingslashit( loco_constant('WP_LANG_DIR') ).'plugins',
@@ -19,7 +19,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function isPlugin(){
+    public function isPlugin(): bool {
         return true;
     }
 
@@ -27,7 +27,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getType(){
+    public function getType(): string {
         return 'Plugin';
     }
 
@@ -35,7 +35,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritDoc}
      */
-    public function getDirectoryUrl(){
+    public function getDirectoryUrl(): string {
         return plugins_url('/',$this->getHandle());
     }
 
@@ -43,18 +43,16 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getSlug(){
-        // TODO establish "official" slug somehow
+    public function getSlug(): string {
         // Fallback to first handle component
-        $slug = explode( '/', parent::getSlug(), 2 );
-        return current( $slug );
+        return explode( '/', parent::getSlug(), 2 )[0];
     }
 
 
     /**
      * @return Loco_package_Plugin[]
      */
-    public static function getAll(){
+    public static function getAll(): array {
         $plugins = [];
         foreach( self::get_plugins() as $handle => $data ){
             try {
@@ -72,7 +70,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
      * Maintaining our own cache of full paths to available plugins, because get_mu_plugins doesn't get cached by WP
      * @return array[]
      */    
-    public static function get_plugins(){
+    public static function get_plugins(): array {
         $cached = wp_cache_get('plugins','loco');
         if( ! is_array($cached) ){
             $cached = [];
@@ -115,20 +113,16 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     }
 
 
-
     /**
      * Get raw plugin data from WordPress registry, plus additional "basedir" field for resolving handle to actual file.
      * @param string $handle Relative file path used as handle e.g. loco-translate/loco.php
-     * @return array
      */
-    public static function get_plugin( $handle ){
-        $search = self::get_plugins();
+    public static function get_plugin( string $handle ): ?array {
         // plugin must be registered with WordPress
-        if( isset($search[$handle]) ){
-            $data = $search[$handle];
-        }
+        $search = self::get_plugins();
+        $data = $search[$handle] ?? null;
         // else plugin is not known to WordPress
-        else {
+        if( is_null($data) ){
             $data = apply_filters( 'loco_missing_plugin', [], $handle );
         }
         // plugin not valid if name absent from raw data
@@ -145,11 +139,10 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     }
 
 
-
     /**
      * {@inheritdoc}
      */
-    public function getHeaderInfo(){
+    public function getHeaderInfo(): Loco_package_Header {
         $handle = $this->getHandle();
         $data = self::get_plugin($handle);
         if( ! is_array($data) ){
@@ -169,7 +162,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function getMetaTranslatable(){
+    public function getMetaTranslatable(): array {
         return  [
             'Name'        => 'Name of the plugin',
             'Description' => 'Description of the plugin',
@@ -184,7 +177,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function setHandle( $handle ){
+    public function setHandle( string $handle ): Loco_package_Bundle {
         // plugin handles are relative paths from plugin directory to bootstrap file
         // so plugin is single file if its handle has no directory prefix
         if( basename($handle) === $handle ){
@@ -201,7 +194,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritdoc}
      */
-    public function setDirectoryPath( $path ){
+    public function setDirectoryPath( string $path ): Loco_package_Bundle {
         parent::setDirectoryPath($path);
         // plugin bootstrap file can be inferred from base directory + handle
         // e.g. if base is "/path/to/foo" and handle is "foo/bar.php" we can derive "/path/to/foo/bar.php"
@@ -223,7 +216,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
      * @param string $handle plugin handle relative to plugin directory
      * @return Loco_package_Plugin
      */
-    public static function create( $handle ){
+    public static function create( string $handle ): Loco_package_Plugin {
 
         // plugin must be registered with at least a name and "basedir"
         $data = self::get_plugin($handle);
@@ -267,7 +260,7 @@ class Loco_package_Plugin extends Loco_package_Bundle {
     /**
      * {@inheritDoc}
      */
-    public static function fromFile( Loco_fs_File $file ){
+    public static function fromFile( Loco_fs_File $file ): ?Loco_package_Bundle {
         $find = $file->getPath();
         foreach( self::get_plugins() as $handle => $data ){
             $boot = new Loco_fs_File( $handle );

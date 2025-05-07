@@ -85,8 +85,13 @@ class Loco_admin_list_LocalesController extends Loco_mvc_AdminController {
                 $locale = Loco_Locale::parse($r[1]);
                 if( $locale->isValid() ){
                     $tag = (string) $locale;
-                    $locales[$tag]['nfiles']++;
-                    $locales[$tag]['time'] = max( $locales[$tag]['time'], $file->modified() );
+                    if( array_key_exists($tag,$locales) ){
+                        $locales[$tag]['nfiles']++;
+                        $locales[$tag]['time'] = max( $locales[$tag]['time'], $file->modified() );
+                    }
+                    else {
+                        Loco_error_Debug::trace('%s found on disk, but not an installed language',$tag);
+                    }
                 }
             }
         }

@@ -4,21 +4,15 @@
  */
 abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController {
 
-    /**
-     * @var Loco_package_Bundle
-     */
-    private $bundle;
+    private ?Loco_package_Bundle $bundle = null;
 
-    /**
-     * @var Loco_package_Project
-     */
-    private $project;
+    private ?Loco_package_Project $project = null;
 
 
     public function getBundle():Loco_package_Bundle {
         if( ! $this->bundle ){
             $type = $this->get('type');
-            $handle = $this->get('bundle');
+            $handle = $this->get('bundle')??'';
             $this->bundle = Loco_package_Bundle::createType( $type, $handle );
         }
         return $this->bundle; 

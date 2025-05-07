@@ -35,11 +35,10 @@ class Loco_package_Locale {
 
     /**
      * Add another locale to search on
-     * @return Loco_package_Locale
      */
-    public function addLocale( Loco_Locale $locale ){
+    public function addLocale( Loco_Locale $locale ):self {
         if( $locale->isValid() ){
-            $sufx = (string) $locale.'.po';
+            $sufx = $locale.'.po';
             $this->match[$sufx] = - strlen($sufx);
         }
         return $this;
