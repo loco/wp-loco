@@ -1883,6 +1883,9 @@ return /%(?:\d+\$)?[-+,(0# ]*\d*(?:\.\d+)?(?:[bBhHsScCdoxXeEfgGaA%n]|[tT][HIklMS
 case "php":
 return /%(?:\d+\$)?(?:'.|[-+0 ])*\d*(?:\.\d+)?[suxXbcdeEfFgGo%]/;
 
+case "i18next":
+return /\{\{.+}}/;
+
 case "python":
 return /%(?:\([_A-Za-z][_A-Za-z0-9]*\))?[-+0# ]*(?:\d+|\*)?(?:\.\d+|\.\*)?(?:[hlL])?[sdiouxXeEfFgGcra%]/;
 
@@ -5468,7 +5471,7 @@ C.require("$25", "tables.js").init(t);
 });
 T.validate = function(v) {
 v = (v = /^\d+\.\d+\.\d+/.exec(v && v[0] || "")) && v[0];
-if ("2.7.3" === v) return !0;
+if ("2.7.4" === v) return !0;
 T.notices.warn("admin.js is the wrong version (" + v + "). Please empty all relevant caches and reload this page.");
 return !1;
 };

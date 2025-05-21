@@ -1,7 +1,7 @@
 <?php
 /**
  * Downgraded for PHP 7.2 compatibility. Do not edit.
- * #noinspection ALL
+ * @noinspection ALL
  */
 class LocoDomQueryFilter { 
 private /*string*/ $tag = ''; 

@@ -2,7 +2,7 @@
 Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
-Requires PHP: 7.2.24
+Requires PHP: 7.4
 Tested up to: 6.8.1
 Stable tag: 2.7.3
 License: GPLv2 or later
@@ -100,6 +100,10 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 
 == Changelog ==
+
+= 2.7.4 =
+* Bugfix for PHP 8.0 compatibility
+* Dropped support for PHP < 7.4
 
 = 2.7.3 =
 * PHP 8.4 compatibility
@@ -573,7 +577,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.7.3 =
+= 2.7.4 =
 * Various improvements and bug fixes
 
 

@@ -1,10 +1,9 @@
 <?php
 /**
  * Downgraded for PHP 7.2 compatibility. Do not edit.
- * #noinspection ALL
+ * @noinspection ALL
  */
-interface LocoArrayInterface extends ArrayAccess, Iterator, Countable, JsonSerializable { 
-public function getArrayCopy():array; }
+interface LocoArrayInterface extends ArrayAccess, Iterator, Countable, JsonSerializable { }
 class LocoHeaders extends ArrayIterator implements LocoArrayInterface { 
 private /*array*/ $map = []; 
 public function __construct(array $raw = [] ){ if( $raw ){ $keys = array_keys( $raw ); $this->map = array_combine( array_map( 'strtolower', $keys ), $keys ); parent::__construct($raw); } } 
@@ -240,7 +239,7 @@ public function __construct( array $map = [] ){ $this->map = $map; $rules = ['\\
 final public function unescape( string $s ):string { if( '' !== $s ) { return $this->stripSlashes( preg_replace_callback($this->grep, [$this, 'unescapeMatch'], $s) ); } return ''; } 
 final public function unescapeMatch( array $r ):string { $s = $r[0]; $c = $s[1]; if( isset($this->map[$c]) ){ return $this->map[$c]; } if( 'u' === $c ){ $str = ''; $surrogates = false; foreach( explode('\\u',$s) as $i => $h ){ if( '' !== $h ){ $h = ltrim( trim($h,'{}'),'0'); $u = intval($h,16); $str.= loco_utf8_chr($u); if( ! $surrogates ){ $surrogates = $u >= 0xD800 && $u <= 0xDBFF; } } } if( $surrogates ){ $str = loco_resolve_surrogates($str); } return $str; } if( 'U' === $c ){ return loco_utf8_chr( intval(substr($s,2),16) ); } if( 'x' === $c ){ return chr( intval(substr($s,2),16) ); } if( ctype_digit($c) ){ return chr( intval(substr($s,1),8) ); } return $s; } 
 protected function stripSlashes( string $s ):string { return stripcslashes($s); } }
-class LocoJsTokens extends LocoTokenizer { const T_KWORD = 1; const T_REGEX = 2; 
+class LocoJsTokens extends LocoTokenizer { 
 private static /*LocoEscapeParser*/ $lex = null; 
 protected static /*array*/ $words = [ 'true' => 1, 'false' => 1, 'null' => 1, 'break' => T_BREAK, 'else' => T_ELSE, 'new' => T_NEW, 'var' => 1, 'case' => T_CASE, 'finally' => T_FINALLY, 'return' => T_RETURN, 'void' => 1, 'catch' => T_CATCH, 'for' => T_FOR, 'switch' => T_SWITCH, 'while' => T_WHILE, 'continue' => T_CONTINUE, 'function' => T_FUNCTION, 'this' => T_STRING, 'with' => 1, 'default' => T_DEFAULT, 'if' => T_IF, 'throw' => T_THROW, 'delete' => 1, 'in' => 1, 'try' => T_TRY, 'do' => T_DO, 'instanceof' => 1, 'typeof' => 1, ]; 
 public static function decapse( string $encapsed ):string { $s = substr($encapsed,1,-1); $l = self::$lex; if( is_null($l) ){ $l = new LocoEscapeParser( [ 'U' => 'U', 'a' => 'a', ] ); self::$lex = $l; } return $l->unescape($s); } 
