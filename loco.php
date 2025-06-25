@@ -31,7 +31,7 @@ function loco_plugin_file(): string {
  * Get version of this plugin
  */
 function loco_plugin_version(): string {
-    return '2.8.0';
+    return '2.8.1-dev';
 }
 
 

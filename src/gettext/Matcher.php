@@ -103,7 +103,7 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
         // TODO We could extract the JS here, and search for each string in the JSON, but may not be 100% reliable.
         $ref .= ':1';
         // not checking domain key. Should be valid if passed here and should only be one.
-        foreach( $jed['locale_data'] as /*$domain =>*/ $keys ){
+        foreach( $jed['locale_data'] as $keys ){
             foreach( $keys as $msgid => $arr ){
                 if( '' === $msgid || ! is_array($arr) || ! isset($arr[0]) ){
                     continue;
