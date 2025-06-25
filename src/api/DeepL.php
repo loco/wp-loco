@@ -79,6 +79,7 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
             'source_lang' => apply_filters('loco_deepl_source_lang',$sourceLang),
             'target_lang' => apply_filters('loco_deepl_target_lang',$targetLang, $locale),
             'formality' => apply_filters('loco_deepl_formality',$formality, $locale),
+            'model' => apply_filters('loco_deepl_model','prefer_quality_optimized'),
             'preserve_formatting' => '1',
             'context' => $context,
             'text' => $sources,
