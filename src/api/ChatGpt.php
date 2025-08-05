@@ -50,7 +50,9 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client{
         }
 
         // Longer cURL timeout. This API can be slow with many items. 20 seconds and up is not uncommon
-        add_filter('http_request_timeout',function(){ return 20; });
+        add_filter('http_request_timeout', function( $timeout = 20 ){
+            return max( $timeout, 20 );
+        } );
 
         // https://platform.openai.com/docs/api-reference/chat/create
         $result = wp_remote_request( 'https://api.openai.com/v1/chat/completions', self::init_request_arguments( $config, [
