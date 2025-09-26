@@ -4,6 +4,20 @@
  */
 abstract class Loco_api_Providers {
 
+    const VENDOR_OPENAI = 'openai';
+    const VENDOR_GOOGLE = 'gemini';
+    const VENDOR_OROUTE = 'openrouter';
+    
+    /*private static array $vendors = [
+        self::VENDOR_OPENAI => 'OpenAI',
+        self::VENDOR_GOOGLE => 'Gemini',
+        self::VENDOR_OROUTE => 'OpenRouter',
+    ];*/
+    
+    /*public static function vendorName( string $id ): string{
+        return self::$vendors[$id] ?? 'Unknown Vendor';
+    }*/
+
 
     /**
      * Export API credentials for all supported APIs

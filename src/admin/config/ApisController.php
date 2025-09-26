@@ -75,6 +75,8 @@ class Loco_admin_config_ApisController extends Loco_admin_config_BaseController 
             'api_key' => __('API key','loco-translate'),
             'api_url' => __('API URL','loco-translate'),
             'api_region' => __('API region','loco-translate'),
+            'api_vendor' => __('Provider','loco-translate'),
+            'openai_compat' => __('Chat Completions','loco-translate'),
         ] ) );
         
         return $this->view('admin/config/apis', compact('breadcrumb') );

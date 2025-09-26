@@ -101,11 +101,6 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
             'setup' => __('Setup','loco-translate'),
             'conf'  => __('Advanced','loco-translate'),
         ];
-        // Debugger is deprecated. It remains accessible but will be removed or replaced in future versions
-        // If you want to see the Debug button, hook in the following filter with "__return_true"
-        if( apply_filters('loco_deprecated',false) ){
-            $actions['debug'] = __('Debug','loco-translate');
-        }
         $suffix = $this->get('action');
         $prefix = strtolower( $this->get('type') );
         $getarg = array_intersect_key( $_GET, ['bundle'=>''] );

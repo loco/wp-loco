@@ -239,7 +239,7 @@ f.focus().reloadMessage(m);
 };
 }
 function c(l, p, m, w) {
-let J = w.getId(), O = R[J], va = String(O + 1), Na = w.getUrl(), wa = u("Use this translation");
+let J = w.getId(), O = R[J], va = String(O + 1), Na = w.getUrl() || "#", wa = u("Use this translation");
 w = String(w);
 let xa = X && X[J];
 l = d('<button class="button button-primary"></button>').attr("tabindex", String(1 + N + O)).on("click", b(l, p));

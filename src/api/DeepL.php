@@ -73,13 +73,16 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
         else {
             $context = '';
         }
+        
+        // Switch on next-gen (quality_optimized) / classic (latency_optimized) models:
+        $model = $config['model'] ?? 'prefer_quality_optimized';
 
         // make request and parse JSON result 
         $result = wp_remote_request( self::baseUrl($api_key).'/v2/translate', self::init_request_arguments( $config, [
             'source_lang' => apply_filters('loco_deepl_source_lang',$sourceLang),
             'target_lang' => apply_filters('loco_deepl_target_lang',$targetLang, $locale),
             'formality' => apply_filters('loco_deepl_formality',$formality, $locale),
-            'model' => apply_filters('loco_deepl_model','prefer_quality_optimized'),
+            'model' => apply_filters('loco_deepl_model',$model),
             'preserve_formatting' => '1',
             'context' => $context,
             'text' => $sources,

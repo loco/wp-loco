@@ -103,7 +103,9 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 = 2.8.1 =
 * DeepL uses `quality_optimized` with `loco_deepl_model` filter
-* `http_request_timeout` filter returns maximum value. 
+* `http_request_timeout` filter returns maximum value
+* Splitting Chat Completion jobs into maximum 5KB batches
+* Added support for Gemini and OpenRouter (Chat Completions)
 * Bumped WordPress compatibility to 6.8.2
 
 = 2.8.0 =
