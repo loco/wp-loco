@@ -38,7 +38,7 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         
         // Establish temperature; preferring 0.0, but recent GPT models have minimum 1.0
         // Range is probably 0.0 -> 2.0, but letting vendor validate valid range as it may vary.
-        $temperature = $config['temerature'] ?? 0.0;
+        $temperature = $config['temperature'] ?? 0.0;
         if( $temperature < 1.0 && str_starts_with($model,'gpt-5') ){
             $temperature = 1.0;
         }
