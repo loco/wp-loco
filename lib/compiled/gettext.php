@@ -233,11 +233,11 @@ function loco_utf8_chr( int $u ){ if( $u < 0x80 ){ if( $u < 0 ){ throw new Range
 function loco_resolve_surrogates( string $s ){ return preg_replace_callback('/\\xED([\\xA0-\\xAF])([\\x80-\\xBF])\\xED([\\xB0-\\xBF])([\\x80-\\xBF])/', '_loco_resolve_surrogates', $s ); }
 function _loco_resolve_surrogates( array $r ){ return loco_utf8_chr ( ( ( ( ( 832 | ( ord($r[1]) & 0x3F ) ) << 6 ) | ( ord($r[2]) & 0x3F ) ) - 0xD800 ) * 0x400 + ( ( ( ( 832 | ( ord($r[3]) & 0x3F ) ) << 6 ) | ( ord($r[4]) & 0x3F ) ) - 0xDC00 ) + 0x10000 ); }
 class LocoEscapeParser { 
-private /*array*/ $map; 
 private /*string*/ $grep; 
-public function __construct( array $map = [] ){ $this->map = $map; $rules = ['\\\\']; if( $map ){ $rules[] = '['.implode(array_keys($map)).']'; } if( ! isset($map['U']) ) { $rules[] = 'U[0-9A-Fa-f]{5,8}'; } if( ! isset($map['u']) ) { $rules[] = 'u(?:\\{[0-9A-Fa-f]+\\}|[0-9A-Fa-f]{1,4})(?:\\\\u(?:\\{[0-9A-Fa-f]+\\}|[0-9A-Fa-f]{1,4}))*'; } $this->grep = '/\\\\('.implode('|',$rules).')/'; } 
+private /*array*/ $map; 
+public function __construct( array $map = [] ){ $rules = ['\\\\']; if( $map ){ $rules[] = '['.implode(array_keys($map)).']'; } if( ! isset($map['U']) ) { $rules[] = 'U[0-9A-Fa-f]{5,8}'; } if( ! isset($map['u']) ) { $rules[] = 'u(?:\\{[0-9A-Fa-f]+\\}|[0-9A-Fa-f]{1,4})(?:\\\\u(?:\\{[0-9A-Fa-f]+\\}|[0-9A-Fa-f]{1,4}))*'; } $this->grep = '/\\\\('.implode('|',$rules).')/'; $this->map = $map; } 
 final public function unescape( string $s ):string { if( '' !== $s ) { return $this->stripSlashes( preg_replace_callback($this->grep, [$this, 'unescapeMatch'], $s) ); } return ''; } 
-final public function unescapeMatch( array $r ):string { $s = $r[0]; $c = $s[1]; if( isset($this->map[$c]) ){ return $this->map[$c]; } if( 'u' === $c ){ $str = ''; $surrogates = false; foreach( explode('\\u',$s) as $i => $h ){ if( '' !== $h ){ $h = ltrim( trim($h,'{}'),'0'); $u = intval($h,16); $str.= loco_utf8_chr($u); if( ! $surrogates ){ $surrogates = $u >= 0xD800 && $u <= 0xDBFF; } } } if( $surrogates ){ $str = loco_resolve_surrogates($str); } return $str; } if( 'U' === $c ){ return loco_utf8_chr( intval(substr($s,2),16) ); } if( 'x' === $c ){ return chr( intval(substr($s,2),16) ); } if( ctype_digit($c) ){ return chr( intval(substr($s,1),8) ); } return $s; } 
+protected function unescapeMatch( array $r ):string { $s = $r[0]; $c = $s[1]; if( isset($this->map[$c]) ){ return $this->map[$c]; } if( 'u' === $c ){ $str = ''; $surrogates = false; foreach( explode('\\u',$s) as $h ){ if( '' !== $h ){ $h = ltrim( trim($h,'{}'),'0'); $u = intval($h,16); $str.= loco_utf8_chr($u); if( ! $surrogates ){ $surrogates = $u >= 0xD800 && $u <= 0xDBFF; } } } if( $surrogates ){ $str = loco_resolve_surrogates($str); } return $str; } if( 'U' === $c ){ return loco_utf8_chr( intval(substr($s,2),16) ); } if( 'x' === $c ){ return chr( intval(substr($s,2),16) ); } if( ctype_digit($c) ){ return chr( intval(substr($s,1),8) ); } return $s; } 
 protected function stripSlashes( string $s ):string { return stripcslashes($s); } }
 class LocoJsTokens extends LocoTokenizer { 
 private static /*LocoEscapeParser*/ $lex = null; 
@@ -309,7 +309,7 @@ public function __toString():string { $s = []; foreach( $this as $token ){ $s[] 
 public function count():int { return count($this->tokens); } }
 class LocoPHPEscapeParser extends LocoEscapeParser { 
 public function __construct(){ parent::__construct( [ 'n' => "\n", 'r' => "\r", 't' => "\t", 'v' => "\x0B", 'f' => "\x0C", 'e' => "\x1B", '$' => '$', '\\' => '\\', '"' => '"', ] ); } 
-protected function stripSlashes( string $s ):string { return preg_replace_callback('/\\\\(x[0-9A-Fa-f]{1,2}|[0-3]?[0-7]{1,2})/', [$this,'unescapeMatch'], $s, -1, $n ); } }
+protected function stripSlashes( string $s ):string { return preg_replace_callback('/\\\\(x[0-9A-Fa-f]{1,2}|[0-3]?[0-7]{1,2})/', [$this,'unescapeMatch'], $s ); } }
 function loco_unescape_php_string( string $s ):string { static $l; if( is_null($l) ) { $l = new LocoPHPEscapeParser; } return $l->unescape($s); }
 function loco_decapse_php_string( string $s ):string { if( '' === $s ){ return ''; } $q = $s[0]; if( "'" === $q ){ return str_replace( ['\\'.$q, '\\\\'], [$q, '\\'], substr( $s, 1, -1 ) ); } if( '"' !== $q ){ return $s; } return loco_unescape_php_string( substr($s,1,-1) ); }
 function loco_parse_php_comment( string $comment ):string { $comment = trim( $comment,"/ \n\r\t" ); if( '' !== $comment && '*' === $comment[0] ){ $lines = []; $junk = "\r\t/ *"; foreach( explode("\n",$comment) as $line ){ $line = trim($line,$junk); if( '' !== $line ){ $lines[] = $line; } } $comment = implode("\n", $lines); } return $comment; }

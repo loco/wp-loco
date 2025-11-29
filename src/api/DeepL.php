@@ -30,6 +30,8 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
                 'ZH-SG' => 'ZH-HANS',
                 'ZH-TW' => 'ZH-HANT',
                 'ZH-HK' => 'ZH-HANT',
+                'ZH-MO' => 'ZH-HANT',
+                // TODO ES-419 - Spanish (Latin American)
             ];
             $tag = $targetLang.'-'.strtoupper($locale->region);
             if( array_key_exists($tag,$variants) ){

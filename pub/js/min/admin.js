@@ -5054,6 +5054,7 @@ return new y();
 return w;
 }({}, K, M));
 D.register("24", {
+bel: [ "be" ],
 zh: [ "zh", "zh-cn", "zh-tw" ],
 he: [ "iw" ],
 jv: [ "jw" ]
@@ -5163,6 +5164,7 @@ return new y();
 return w;
 }({}, K, M));
 D.register("26", {
+bel: [ "be" ],
 nn: [ "no" ],
 pt: [ "pt", "pt-pt" ],
 sr: [ "sr", "sr-cyrl", "sr-latn" ],
