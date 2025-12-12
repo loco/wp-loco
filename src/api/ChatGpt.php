@@ -31,7 +31,7 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         if( '' === $model ){
             $model = [
                 Loco_api_Providers::VENDOR_OPENAI => 'gpt-4.1-nano',
-                Loco_api_Providers::VENDOR_GOOGLE => 'gemini-2.5-flash-lite-preview-06-17',
+                Loco_api_Providers::VENDOR_GOOGLE => 'gemini-2.5-flash-lite',
                 Loco_api_Providers::VENDOR_OROUTE => 'openai/gpt-4.1-nano',
             ][$vendor];
         }
@@ -60,7 +60,7 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         }
 
         // We're finished with locale data. free up some memory.
-        Loco_data_CompiledData:flush();
+        Loco_data_CompiledData::flush();
         
         // Start prompt with assistant identity and immutable translation instructions
         $instructions = [

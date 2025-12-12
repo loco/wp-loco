@@ -106,6 +106,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 * `http_request_timeout` filter returns maximum value
 * Splitting Chat Completion jobs into maximum 5KB batches
 * Added support for Gemini and OpenRouter (Chat Completions)
+* Fixed single colon usage bug during chat completions 
 * Bumped WordPress compatibility to 6.9
 
 = 2.8.0 =
