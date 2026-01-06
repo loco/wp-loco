@@ -81,7 +81,7 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
                 $posted = true;
             }
             else {
-                throw new Loco_error_Exception('Failed security check for '.$name);
+                throw new Loco_error_Exception('Failed security check. Please refresh the page');
             }
         }
         return $posted;
@@ -116,7 +116,7 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
 
     /**
      * number_format_i18n filter callback because our admin screens assume number_format_i18n() returns unescaped text, not HTML.
-     * @param string
+     * @param string $formatted
      * @return string
      */
     public function filter_number_format_i18n( $formatted = '' ){

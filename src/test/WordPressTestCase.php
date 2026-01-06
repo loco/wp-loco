@@ -211,7 +211,7 @@ abstract class Loco_test_WordPressTestCase extends WP_UnitTestCase {
         $router = new Loco_mvc_AdminRouter;
         $router->on_admin_menu();
         $screen = get_current_screen();
-        $action = isset($_GET['action']) ? $_GET['action'] : null;
+        $action = $_GET['action'] ?? '';
         $router->initPage( $screen, $action );
         $html = get_echo( [$router,'renderPage'] );
         // ensure further hooks fired as WordPress continues to render admin footer

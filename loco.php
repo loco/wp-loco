@@ -87,23 +87,23 @@ if( ! function_exists('loco_constant') ) {
  * @param string $relpath PHP file path relative to __DIR__
  * @return mixed return value from included file
  */
-function loco_include( string $relpath ){
+function loco_include( string $relpath, bool $strict = false ){
     $path = loco_plugin_root().'/'.$relpath;
-    if( ! file_exists($path) ){
-        $message = 'File not found: '.$path;
-        // debug specifics to error log in case full call stack not visible
-        if( 'cli' !== PHP_SAPI ) {
-            error_log( sprintf( '[Loco.debug] Failed on loco_include(%s). !file_exists(%s)', var_export($relpath,true), var_export($path,true) ) );
-        }
-        // handle circular file inclusion error if error class not found
-        if( loco_class_exists('Loco_error_Exception') ){
-            throw new Loco_error_Exception($message);
+    if( file_exists($path) ){
+        return include $path;
+    }
+    if( loco_debugging() && 'cli' !== PHP_SAPI ) {
+        error_log( sprintf( '[Loco.debug] Failed on loco_include(%s). !file_exists(%s)', var_export($relpath,true), var_export($path,true) ) );
+    }
+    if( $strict ){
+        if( class_exists('Loco_error_Exception') ){
+            throw new Loco_error_Exception('File not found: '.$relpath);
         }
         else {
-            throw new Exception($message.'; additionally src/error/Exception.php not loadable');
+            throw new Exception('File not found: '.$relpath.'; additionally src/error/Exception.php not loadable');
         }
     }
-    return include $path;
+    return null;
 }
 
 
@@ -151,16 +151,10 @@ function loco_autoload( string $name ):void {
 
 
 /**
- * class_exists wrapper that fails silently.
- * TODO Scrap this and let the normal autoloader fail silently. 
+ * @deprecated Just call class_exists
  */
 function loco_class_exists( string $class ): bool {
-    try {
-        return class_exists($class);
-    }
-    catch( Throwable $e ){
-        return false;
-    }
+    return class_exists($class);
 }
 
 

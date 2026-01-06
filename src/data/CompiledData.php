@@ -44,7 +44,7 @@ class Loco_data_CompiledData implements ArrayAccess, Countable, IteratorAggregat
 
     private function __construct( $name ){
         $path = 'lib/data/'.$name.'.php';
-        $this->data = loco_include( $path );
+        $this->data = loco_include( $path, true );
         $this->name = $name;
     }
 

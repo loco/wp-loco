@@ -108,6 +108,8 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 * Splitting chat completion jobs into maximum 5KB batches
 * Added support for other chat completion APIs via `vendor` config field
 * Fixed single colon usage bug during chat completions 
+* Autoloader no longer throws when Loco_ class not found
+* Refreshing Ajax nonces on WordPress heartbeat 
 * Bumped WordPress compatibility to 6.9
 
 = 2.8.0 =

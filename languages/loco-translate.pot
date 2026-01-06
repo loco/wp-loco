@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.1-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2025-06-25 08:58+0000\n"
+"POT-Creation-Date: 2026-01-06 14:53+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.1-dev; wp-6.8.1; php-8.3.14\n"
+"X-Loco-Version: 2.8.1-dev; wp-6.9; php-8.3.27\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -289,12 +289,12 @@ msgstr ""
 msgid "Advanced tab"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:175
+#: src/mvc/AjaxRouter.php:166
 msgid "Ajax controller returned empty JSON"
 msgstr ""
 
 #. Fatal error where %s represents an unexpected value
-#: src/mvc/AjaxRouter.php:170
+#: src/mvc/AjaxRouter.php:161
 #, php-format
 msgid "Ajax route not found: \"%s\""
 msgstr ""
@@ -398,6 +398,10 @@ msgstr ""
 #: src/ajax/FsConnectController.php:130
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
+msgstr ""
+
+#: src/admin/config/ApisController.php:79
+msgid "Chat Completions"
 msgstr ""
 
 #: src/js/Strings.php:139
@@ -505,7 +509,7 @@ msgid "Copy target translations from \"%s\""
 msgstr ""
 
 #. Page title for core WordPress translations
-#: src/mvc/AdminRouter.php:56
+#: src/mvc/AdminRouter.php:55
 msgid "Core translations &lsaquo; Loco"
 msgstr ""
 
@@ -534,9 +538,8 @@ msgstr ""
 msgid "Custom translations may not work without System translations installed"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:77 src/error/Debug.php:19
+#: src/mvc/AdminRouter.php:76 src/error/Debug.php:19
 #: src/admin/config/DebugController.php:12
-#: src/admin/bundle/BaseController.php:107
 msgid "Debug"
 msgstr ""
 
@@ -593,11 +596,11 @@ msgstr ""
 msgid "Domain path"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:198
+#: src/mvc/AjaxRouter.php:189
 msgid "Download action not found"
 msgstr ""
 
-#: src/mvc/AjaxRouter.php:203
+#: src/mvc/AjaxRouter.php:194
 msgid "Download controller returned empty output"
 msgstr ""
 
@@ -1021,7 +1024,7 @@ msgstr ""
 msgid "Help & support"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:42
+#: src/mvc/AdminRouter.php:41
 msgid "Home"
 msgstr ""
 
@@ -1129,12 +1132,12 @@ msgstr ""
 msgid "Language header is \"%1$s\" but file name contains \"%2$s\""
 msgstr ""
 
-#: src/mvc/AdminRouter.php:59
+#: src/mvc/AdminRouter.php:58
 msgid "Languages"
 msgstr ""
 
 #. Page title for installed languages page
-#: src/mvc/AdminRouter.php:61
+#: src/mvc/AdminRouter.php:60
 msgid "Languages &lsaquo; Loco"
 msgstr ""
 
@@ -1186,7 +1189,7 @@ msgid ""
 msgstr ""
 
 #. Name of the plugin
-#: src/mvc/AdminRouter.php:37 src/hooks/AdminHooks.php:88
+#: src/mvc/AdminRouter.php:36 src/hooks/AdminHooks.php:88
 msgid "Loco Translate"
 msgstr ""
 
@@ -1215,7 +1218,7 @@ msgid "Loco was interrupted by output from %1$s:%2$u"
 msgstr ""
 
 #. Page title for plugin home screen
-#: src/mvc/AdminRouter.php:39
+#: src/mvc/AdminRouter.php:38
 msgid "Loco, Translation Management"
 msgstr ""
 
@@ -1413,7 +1416,7 @@ msgstr ""
 msgid "Overwrite existing translations"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:243
+#: src/mvc/AdminRouter.php:240
 msgid "Page not found"
 msgstr ""
 
@@ -1453,7 +1456,7 @@ msgstr ""
 msgid "Plugin not found: %s"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:66 src/admin/config/ApisController.php:69
+#: src/mvc/AdminRouter.php:65 src/admin/config/ApisController.php:69
 #: src/admin/config/PrefsController.php:42
 #: src/admin/config/VersionController.php:22
 #: src/admin/config/SettingsController.php:79 tpl/admin/help/tab-config.php:2
@@ -1461,11 +1464,11 @@ msgid "Plugin settings"
 msgstr ""
 
 #. Page title for plugin translations
-#: src/mvc/AdminRouter.php:51
+#: src/mvc/AdminRouter.php:50
 msgid "Plugin translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:49 src/admin/Navigation.php:30
+#: src/mvc/AdminRouter.php:48 src/admin/Navigation.php:30
 #: src/admin/bundle/LocaleController.php:154
 msgid "Plugins"
 msgstr ""
@@ -1556,6 +1559,10 @@ msgstr ""
 
 #: src/js/Strings.php:142
 msgid "Provide the following text when reporting a problem"
+msgstr ""
+
+#: src/admin/config/ApisController.php:78
+msgid "Provider"
 msgstr ""
 
 #: tpl/admin/common/inc-fsconn.php:27
@@ -1680,7 +1687,7 @@ msgstr ""
 msgid "Sets"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:67 src/mvc/AdminRouter.php:72
+#: src/mvc/AdminRouter.php:66 src/mvc/AdminRouter.php:71
 #: tpl/ajax/modal-apis-empty.php:15 src/admin/file/EditController.php:182
 #: tpl/admin/common/inc-fsconn.php:18 tpl/admin/common/inc-fsconn.php:43
 #: tpl/admin/errors/no-backups.php:24
@@ -1866,11 +1873,11 @@ msgid "the web server"
 msgstr ""
 
 #. Page title for theme translations
-#: src/mvc/AdminRouter.php:46
+#: src/mvc/AdminRouter.php:45
 msgid "Theme translations &lsaquo; Loco"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:44 src/admin/Navigation.php:27
+#: src/mvc/AdminRouter.php:43 src/admin/Navigation.php:27
 #: src/admin/bundle/LocaleController.php:149
 msgid "Themes"
 msgstr ""
@@ -2150,7 +2157,7 @@ msgstr ""
 msgid "Useful links:"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:71 src/admin/config/PrefsController.php:13
+#: src/mvc/AdminRouter.php:70 src/admin/config/PrefsController.php:13
 #: src/admin/config/BaseController.php:19
 msgid "User options"
 msgstr ""
@@ -2213,7 +2220,7 @@ msgstr ""
 msgid "What's this?"
 msgstr ""
 
-#: src/mvc/AdminRouter.php:54
+#: src/mvc/AdminRouter.php:53
 msgid "WordPress"
 msgstr ""
 
