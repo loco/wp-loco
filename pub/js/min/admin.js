@@ -1913,7 +1913,7 @@ case "php":
 return /%(?:\d+\$)?(?:'.|[-+0 ])*\d*(?:\.\d+)?[suxXbcdeEfFgGo%]/;
 
 case "i18next":
-return /\{\{.+}}/;
+return /\{\{.+?}}/;
 
 case "python":
 return /%(?:\([_A-Za-z][_A-Za-z0-9]*\))?[-+0# ]*(?:\d+|\*)?(?:\.\d+|\.\*)?(?:[hlL])?[sdiouxXeEfFgGcra%]/;
@@ -4828,7 +4828,9 @@ return [ b.context || "", b.notes || "" ].join("\n").trim();
 };
 u.verify = function(b) {
 return this.translate({
-source: "OK"
+source: "OK",
+context: "",
+notes: ""
 }, {
 lang: "fr",
 toString: function() {

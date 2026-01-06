@@ -70,7 +70,7 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         if( '' !== $tone ){
             $instructions[] = 'Use only the '.$tone.' tone of '.$targetLang;
         }
-        $prompt = "#Identity\n\nYou are a translator that translates from ".$sourceLang.' ('.$sourceTag.') to '.$targetLang.' ('.$targetTag.").\n\n"
+        $prompt = "# Identity\n\nYou are a translator that translates from ".$sourceLang.' ('.$sourceTag.') to '.$targetLang.' ('.$targetTag.").\n\n"
                 . "# Instructions\n\n* ".implode(".\n* ",$instructions ).'.';
         
         // Allow user-defined extended instructions via filter

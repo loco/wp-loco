@@ -103,9 +103,10 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 = 2.8.1 =
 * DeepL uses `quality_optimized` with `loco_deepl_model` filter
+* DeepL beta languages enabled when next-gen model is used
 * `http_request_timeout` filter returns maximum value
-* Splitting Chat Completion jobs into maximum 5KB batches
-* Added support for Gemini and OpenRouter (Chat Completions)
+* Splitting chat completion jobs into maximum 5KB batches
+* Added support for other chat completion APIs via `vendor` config field
 * Fixed single colon usage bug during chat completions 
 * Bumped WordPress compatibility to 6.9
 

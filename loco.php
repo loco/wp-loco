@@ -152,6 +152,7 @@ function loco_autoload( string $name ):void {
 
 /**
  * class_exists wrapper that fails silently.
+ * TODO Scrap this and let the normal autoloader fail silently. 
  */
 function loco_class_exists( string $class ): bool {
     try {

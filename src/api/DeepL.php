@@ -77,6 +77,7 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
         }
         
         // Switch on next-gen (quality_optimized) / classic (latency_optimized) models:
+        // Note that beta languages don't work with the classic model
         $model = $config['model'] ?? 'prefer_quality_optimized';
 
         // make request and parse JSON result 
@@ -84,6 +85,7 @@ abstract class Loco_api_DeepL extends Loco_api_Client {
             'source_lang' => apply_filters('loco_deepl_source_lang',$sourceLang),
             'target_lang' => apply_filters('loco_deepl_target_lang',$targetLang, $locale),
             'formality' => apply_filters('loco_deepl_formality',$formality, $locale),
+            'enable_beta_languages' => apply_filters('loco_deepl_beta', 'latency_optimized' !== $model ),
             'model' => apply_filters('loco_deepl_model',$model),
             'preserve_formatting' => '1',
             'context' => $context,

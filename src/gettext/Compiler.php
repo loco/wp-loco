@@ -70,8 +70,8 @@ class Loco_gettext_Compiler {
         if( $file->exists() && $this->fs ){
             $backups = new Loco_fs_Revisions($file);
             $backup = $backups->rotate($this->fs);
-            // debug backup creation only under cli or ajax. too noisy printing on screen
-            if( $backup && ( loco_doing_ajax() || 'cli' === PHP_SAPI ) && $backup->exists() ){
+            // debug backup creation only under cli. too noisy otherwise
+            if( $backup && 'cli' === PHP_SAPI && $backup->exists() ){
                 Loco_error_AdminNotices::debug( sprintf('Wrote backup: %s -> %s',$file->basename(),$backup->basename() ) );
             }
         }
