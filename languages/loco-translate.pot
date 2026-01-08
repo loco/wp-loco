@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.8.1-dev\n"
+"Project-Id-Version: Loco Translate 2.8.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-01-06 14:53+0000\n"
+"POT-Creation-Date: 2026-01-08 10:23+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.1-dev; wp-6.9; php-8.3.27\n"
+"X-Loco-Version: 2.8.1; wp-6.9; php-8.3.27\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -398,10 +398,6 @@ msgstr ""
 #: src/ajax/FsConnectController.php:130
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
-msgstr ""
-
-#: src/admin/config/ApisController.php:79
-msgid "Chat Completions"
 msgstr ""
 
 #: src/js/Strings.php:139
@@ -1559,10 +1555,6 @@ msgstr ""
 
 #: src/js/Strings.php:142
 msgid "Provide the following text when reporting a problem"
-msgstr ""
-
-#: src/admin/config/ApisController.php:78
-msgid "Provider"
 msgstr ""
 
 #: tpl/admin/common/inc-fsconn.php:27
