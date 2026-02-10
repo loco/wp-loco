@@ -115,7 +115,7 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
                 'messages' => [
                     [ 'role' => 'developer', 'content' => $prompt ],
                     [ 'role' => 'user', 'content' => 'Translate the `text` properties of the following JSON objects, using the `context` property to identify the meaning' ],
-                    [ 'role' => 'user', 'content' => json_encode($batch,JSON_UNESCAPED_UNICODE) ],
+                    [ 'role' => 'user', 'content' => json_encode($batch,JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES) ],
                 ],
                 // Define schema for reliable returning of correct data
                 // https://openai.com/index/introducing-structured-outputs-in-the-api/

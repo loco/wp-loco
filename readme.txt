@@ -3,8 +3,8 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
-Tested up to: 6.9
-Stable tag: 2.8.0
+Tested up to: 6.9.1
+Stable tag: 2.8.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -100,6 +100,9 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 
 == Changelog ==
+
+= 2.8.2 =
+* Bumped WordPress compatibility to 6.9.1
 
 = 2.8.1 =
 * DeepL uses `quality_optimized` with `loco_deepl_model` filter
@@ -588,7 +591,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.1 =
+= 2.8.2 =
 * Various improvements and bug fixes
 
 

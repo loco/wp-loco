@@ -5506,7 +5506,7 @@ D.require("19").init(r);
 });
 T.validate = function(w) {
 w = (w = /^\d+\.\d+\.\d+/.exec(w && w[0] || "")) && w[0];
-if ("2.8.1" === w) return !0;
+if ("2.8.2" === w) return !0;
 T.notices.warn("admin.js is the wrong version (" + w + "). Please empty all relevant caches and reload this page.");
 return !1;
 };
