@@ -77,7 +77,17 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
      */
     public function render(){
         $post = $this->validate();
-        
+
+        // enforce code_view access setting before doing anything else
+        $conf = Loco_data_Settings::get();
+        $code_view = (int) $conf->code_view;
+        if( 0 === $code_view ){
+            throw new Loco_error_Exception('Source code viewer is disabled');
+        }
+        if( 1 === $code_view && ! current_user_can('manage_options') ){
+            throw new Loco_error_Exception('Source code viewer requires administrator privileges');
+        }
+
         // at the very least we need a reference to examine
         if( ! $post->has('ref') ){
             throw new InvalidArgumentException('ref parameter required');
@@ -102,7 +112,6 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         }
         
         // validate allowed source file types, including custom aliases
-        $conf = Loco_data_Settings::get();
         $ext = strtolower( $srcfile->extension() );
         $type = $conf->ext2type($ext,'none');
         if( 'none' === $type ){

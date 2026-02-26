@@ -102,6 +102,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 == Changelog ==
 
 = 2.8.2 =
+* Fix for LLMs retaining escaped forward slashes
 * Bumped WordPress compatibility to 6.9.1
 
 = 2.8.1 =

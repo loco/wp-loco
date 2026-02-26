@@ -202,6 +202,16 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                                     <option value="2"<?php echo 2 === $opts->pot_protect?' selected':''?>><?php $verbose->e(2)?></option>
                                 </select>
                             </p>
+                            <p>
+                                <label for="loco--code-view">
+                                    <?php esc_html_e('Source code viewer access','loco-translate');?>:
+                                </label>
+                                <select name="opts[code_view]" id="loco--code-view">
+                                    <option value="0"><?php esc_html_e('Disallow','loco-translate')?></option>
+                                    <option value="1"<?php echo 1 === $opts->code_view?' selected':''?>><?php esc_html_e('Admins only','loco-translate')?></option>
+                                    <option value="2"<?php echo 2 === $opts->code_view?' selected':''?>><?php esc_html_e('Allow','loco-translate')?></option>
+                                </select>
+                            </p>
                         </fieldset>
                     </td>
                 </tr>

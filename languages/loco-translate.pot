@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.2-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-02-10 10:05+0000\n"
+"POT-Creation-Date: 2026-02-26 21:11+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -275,6 +275,10 @@ msgid ""
 "privacy notice</a>."
 msgstr ""
 
+#: tpl/admin/config/settings.php:211
+msgid "Admins only"
+msgstr ""
+
 #: src/admin/bundle/BaseController.php:102 tpl/admin/file/conf.php:58
 #: tpl/admin/file/move.php:26
 msgid "Advanced"
@@ -299,7 +303,7 @@ msgstr ""
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
-#: src/admin/config/SettingsController.php:66
+#: src/admin/config/SettingsController.php:66 tpl/admin/config/settings.php:212
 msgid "Allow"
 msgstr ""
 
@@ -307,7 +311,7 @@ msgstr ""
 msgid "Allow (with warning)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:216
+#: tpl/admin/config/settings.php:226
 msgid "Allow full access to these roles"
 msgstr ""
 
@@ -576,12 +580,12 @@ msgstr ""
 msgid "Directory is writeable"
 msgstr ""
 
-#: src/admin/config/SettingsController.php:68
+#: src/admin/config/SettingsController.php:68 tpl/admin/config/settings.php:210
 msgid "Disallow"
 msgstr ""
 
 #: src/admin/file/EditController.php:132 src/admin/file/EditController.php:183
-#: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:234
+#: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:244
 #: tpl/admin/config/apis.php:167 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
@@ -1008,7 +1012,7 @@ msgstr ""
 msgid "Go to WordPress Core"
 msgstr ""
 
-#: tpl/admin/config/settings.php:210
+#: tpl/admin/config/settings.php:220
 msgid "Grant access to roles"
 msgstr ""
 
@@ -1627,7 +1631,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:233 tpl/admin/config/apis.php:166
+#: tpl/admin/config/settings.php:243 tpl/admin/config/apis.php:166
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""
@@ -1723,6 +1727,10 @@ msgstr ""
 
 #: src/admin/file/BaseController.php:118
 msgid "Source"
+msgstr ""
+
+#: tpl/admin/config/settings.php:207
+msgid "Source code viewer access"
 msgstr ""
 
 #: tpl/admin/bundle/conf.php:100
