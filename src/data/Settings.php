@@ -232,13 +232,13 @@ class Loco_data_Settings extends Loco_data_Serializable {
      * @param string $default Optional default
      * @return string php, js, json, twig or $default
      */
-    public function ext2type( $ext, $default = 'php' ){
+    public function ext2type( string $ext, string $default = 'php' ):string {
         $types = ['php'=>'php', 'js'=>'js', 'json'=>'json', 'twig'=>'twig'] // <- canonical
                + array_fill_keys( $this->php_alias, 'php')
                + array_fill_keys( $this->jsx_alias, 'js')
         ;
         $ext = strtolower($ext);
-        return isset($types[$ext]) ? $types[$ext] : $default;
+        return $types[ $ext ] ?? $default;
     }
    
 }

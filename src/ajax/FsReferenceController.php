@@ -6,11 +6,7 @@
 class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController {
 
 
-    /**
-     * @param string $refpath
-     * @return Loco_fs_File
-     */
-    private function findSourceFile( $refpath ){
+    private function findSourceFile( string $refpath ):Loco_fs_File {
 
         // reference may be resolvable via referencing PO file's location
         $pofile = new Loco_fs_File( $this->get('path') );
@@ -80,12 +76,12 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
 
         // enforce code_view access setting before doing anything else
         $conf = Loco_data_Settings::get();
-        $code_view = (int) $conf->code_view;
+        $code_view = $conf->code_view;
         if( 0 === $code_view ){
-            throw new Loco_error_Exception('Source code viewer is disabled');
+            throw new InvalidArgumentException('Source code viewer is disabled');
         }
         if( 1 === $code_view && ! current_user_can('manage_options') ){
-            throw new Loco_error_Exception('Source code viewer requires administrator privileges');
+            throw new InvalidArgumentException('Source code viewer requires administrator privileges');
         }
 
         // at the very least we need a reference to examine
@@ -129,20 +125,26 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         $maxbytes = wp_convert_hr_to_bytes( $conf->max_php_size );
         
         // tokenizers require gettext utilities, easiest just to ping the extraction library
-        if( ! class_exists('Loco_gettext_Extraction',true) ){
+        if( ! class_exists('Loco_gettext_Extraction') ){
             throw new RuntimeException('Failed to load tokenizers'); // @codeCoverageIgnore
         }
         
-        // PHP is the most likely format. 
+        // PHP is the most likely format, and the JS token stream mimics PHP tokens.
         if( 'php' === $type && ( $srcfile->size() <= $maxbytes ) && loco_check_extension('tokenizer') ) {
-            $tokens = new LocoPHPTokens( token_get_all( $srcfile->getContents() ) );
+            $tokens = new LocoPHPTokens( token_get_all($srcfile->getContents()) );
         }
         else if( 'js' === $type ){
-            $tokens = new LocoJsTokens( $srcfile->getContents() );
+            $tokens = new LocoJsTokens($srcfile->getContents());
             $tokens->allow(T_WHITESPACE);
         }
         else {
-            $tokens = null;
+            $source = $srcfile->getContents();
+            if( 'json' === $type ){
+                // This effectively blocks arbitrary JSON such as composer.json etc. 
+                ( new LocoWpJsonExtractor )->tokenize($source);
+            }
+            $tokens = preg_split( '/\\R/u', $source );
+            unset($source);
         }
 
         // highlighting on back end because tokenizer provides more control than highlight.js
@@ -150,7 +152,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             $thisline = 1;
             while( $tok = $tokens->advance() ){
                 if( is_array($tok) ){
-                    list( $t, $str, $startline ) = $tok;
+                    [ $t, $str, $startline ] = $tok;
                     $clss = token_name($t);
                     // tokens can span multiple lines (whitespace/html/comments)
                     $lines = preg_split('/\\R/', $str );
@@ -179,10 +181,12 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                     }
                 }
             }
+            // TODO block viewer here if no translatable strings are found
+            //      LocoPHPExtractor::extract would need a refactor to sniff only the first valid string.
         }
-        // permit limited other file types, but without back end highlighting
+        // permit limited other file types, but without back end highlighting (twig)
         else {
-            foreach( preg_split( '/\\R/u', $srcfile->getContents() ) as $line ){
+            foreach( $tokens as $line ){
                 $code[] = '<code>'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
             }
         }
