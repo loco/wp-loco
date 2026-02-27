@@ -4,16 +4,26 @@
  * Currently this is only PHP, but could theoretically be any file type.
  */
 class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController {
+    
+    
+    private function getReferringFile():Loco_fs_File {
+        $popath = $this->get('path');
+        if( is_string($popath) && '' !== $popath ){
+            $pofile = new Loco_fs_File($popath);
+            $pofile->normalize( loco_constant('WP_CONTENT_DIR') );
+            if( $pofile->exists() ){
+                return $pofile;
+            }
+        }
+        throw new InvalidArgumentException('Existent referring file required to resolve reference');
+    }
 
 
     private function findSourceFile( string $refpath ):Loco_fs_File {
 
-        // reference may be resolvable via referencing PO file's location
-        $pofile = new Loco_fs_File( $this->get('path') );
-        $pofile->normalize( loco_constant('WP_CONTENT_DIR') );
-        if( ! $pofile->exists() ){
-            throw new InvalidArgumentException('PO/POT file required to resolve reference');
-        }
+        // Reference may be resolvable via referencing PO file's location
+        // This also results in validation of referring file, so "path" must be real.
+        $pofile = $this->getReferringFile();
         $search = new Loco_gettext_SearchPaths;
         $search->init($pofile);
         if( $srcfile = $search->match($refpath) ){
@@ -114,37 +124,34 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             throw new InvalidArgumentException('File extension disallowed, '.$ext );
         }
 
-        $this->set('type', $type );
-        $this->set('line', $refline );
-        $this->set('path', $srcfile->getRelativePath( loco_constant('WP_CONTENT_DIR') ) );
-        
         // source code will be HTML-tokenized into multiple lines
         $code = [];
-        
-        // observe the same size limits for source highlighting as for string extraction as tokenizing will use the same amount of juice
-        $maxbytes = wp_convert_hr_to_bytes( $conf->max_php_size );
-        
+
         // tokenizers require gettext utilities, easiest just to ping the extraction library
         if( ! class_exists('Loco_gettext_Extraction') ){
             throw new RuntimeException('Failed to load tokenizers'); // @codeCoverageIgnore
         }
         
-        // PHP is the most likely format, and the JS token stream mimics PHP tokens.
-        if( 'php' === $type && ( $srcfile->size() <= $maxbytes ) && loco_check_extension('tokenizer') ) {
-            $tokens = new LocoPHPTokens( token_get_all($srcfile->getContents()) );
-        }
-        else if( 'js' === $type ){
-            $tokens = new LocoJsTokens($srcfile->getContents());
-            $tokens->allow(T_WHITESPACE);
-        }
-        else {
+        
+        $extractor = loco_wp_extractor($type,$ext);
+
+        // JSON is supported, but only if it parses as a valid i18n schema (e.g. blocks.json)
+        // No point highlighting this as blocks|theme.json usually have no line number. 
+        if( $extractor instanceof LocoWpJsonExtractor ){
             $source = $srcfile->getContents();
-            if( 'json' === $type ){
-                // This effectively blocks arbitrary JSON such as composer.json etc. 
-                ( new LocoWpJsonExtractor )->tokenize($source);
-            }
-            $tokens = preg_split( '/\\R/u', $source );
-            unset($source);
+            $extractor->tokenize($source);
+            $tokens = preg_split( '/\\R/u',$source);
+        }
+        // Else the file will be tokenized as JavaScript or PHP (including Twig and Blade) 
+        else if( $srcfile->size() > wp_convert_hr_to_bytes($conf->max_php_size) ){
+            throw new Loco_error_Exception('File exceeds maximum setting of '.$conf->max_php_size);
+        }
+        else if( ! loco_check_extension('tokenizer') ){
+            throw new Loco_error_Exception('Cannot validate '.$type.' file without tokenizer extension');
+        }
+        // Else always validate that PHP/JS have translatable strings. Other code will be disallowed.
+        else {
+            $tokens = $extractor->tokenize( $srcfile->getContents() );
         }
 
         // highlighting on back end because tokenizer provides more control than highlight.js
@@ -181,25 +188,38 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                     }
                 }
             }
-            // TODO block viewer here if no translatable strings are found
-            //      LocoPHPExtractor::extract would need a refactor to sniff only the first valid string.
+            // Tokens have been rendered including whitespace, but we will block files with no translatable strings
+            // TODO Implement a limit to the strings extracted so we don't have to pull the whole file.
+            $strings = new LocoExtracted;
+            $extractor->extract( $strings, $tokens );
+            if( 0 === $strings->count() ){
+                throw new Loco_error_Exception('File access disallowed: No translatable strings found');
+            }
         }
-        // permit limited other file types, but without back end highlighting (twig)
-        else {
+        // permit limited other file types, but without back end highlighting
+        else if( is_iterable($tokens) ){
             foreach( $tokens as $line ){
                 $code[] = '<code>'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
             }
         }
         
+        // empty source line is either an empty file, or a parsing error
+        if( [] === $code ){
+            throw new Loco_error_Exception( sprintf('Failed to produce any lines from %d bytes of %s source', $srcfile->size(), $type) );
+        }
         // allow 0 line reference when line is unknown (e.g. block.json) else it must exist
         if( $refline && ! isset($code[$refline-1]) ){
-            throw new Loco_error_Exception( sprintf('Line %u not in source file', $refline) );
+            Loco_error_AdminNotices::debug( sprintf('Line %u not in source file', $refline) );
+            $refline = 1;
         }
- 
-        $this->set( 'code', $code );
+
+        $this->set('type', $type );
+        $this->set('line', $refline );
+        $this->set('path', $srcfile->getRelativePath( loco_constant('WP_CONTENT_DIR') ) );
+        $this->set('code', $code );
 
         return parent::render();
     }
-    
+
     
 }

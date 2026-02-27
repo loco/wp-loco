@@ -104,6 +104,10 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 = 2.8.2 =
 * Fix for LLMs retaining escaped forward slashes
 * Bumped WordPress compatibility to 6.9.1
+* Bolstered security for viewing source code references:
+* 1) Added file reference access control via `code_view` setting
+* 2) Validating i18n JSON schemas (blocks|theme.json)
+* 3) Validating PHP/JS sources contain extractable strings
 
 = 2.8.1 =
 * DeepL uses `quality_optimized` with `loco_deepl_model` filter
