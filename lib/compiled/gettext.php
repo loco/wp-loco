@@ -1,6 +1,6 @@
 <?php
 /**
- * Downgraded for PHP 7.2 compatibility. Do not edit.
+ * Downgraded for PHP 7.4 compatibility. Do not edit.
  * @noinspection ALL
  */
 interface LocoArrayInterface extends ArrayAccess, Iterator, Countable, JsonSerializable { }
@@ -200,7 +200,8 @@ public function compile():string { $table = ['']; $sources = ['']; $targets = [ 
 private function writeInteger( int $num ):void { $this->bin .= pack( 'V', $num ); } }
 interface LocoTokensInterface extends Iterator { 
 public function advance(); 
-public function ignore( ...$symbols ):self; }
+public function ignore( ...$symbols ):self; 
+public function allow( ...$symbols ):self; }
 class LocoTokenizer implements LocoTokensInterface { const /*int*/T_LITERAL = 0; const /*int*/T_UNKNOWN = -1; 
 private /*string*/ $src; 
 private /*int*/ $pos; 
@@ -216,7 +217,7 @@ public function parse( string $src ):array { return iterator_to_array( $this->ge
 public function generate( string $src ):Generator { $this->init($src); while( $this->valid() ){ yield $this->current(); $this->next(); } } 
 public function init( string $src ):self { $this->src = $src; $this->rewind(); return $this; } 
 public function define( string $grep, /*mixed*/ $t = 0 ):self { if('^' !== $grep[1] ){ throw new InvalidArgumentException('Expression '.$grep.' isn\'t anchored'); } if( ! is_int($t) && ! is_callable($t) ){ throw new InvalidArgumentException('Non-integer token must be valid callback'); } $sniff = $grep[2]; if( $sniff === preg_quote($sniff,$grep[0]) ){ $this->rules[$sniff][] = [ $grep, $t ]; } else { $this->rules[''][] = [ $grep, $t ]; } return $this; } 
-public function ignore( ...$symbols ):LocoTokensInterface { $this->skip += array_fill_keys( $symbols, true ); return $this; } 
+public function ignore( ...$symbols ):self { $this->skip += array_fill_keys( $symbols, true ); return $this; } 
 public function allow( ...$symbols ):self { $this->skip = array_diff_key( $this->skip, array_fill_keys($symbols,true) ); return $this; } 
 #[ReturnTypeWillChange]
 public function current() { return $this->tok; } 
@@ -256,6 +257,7 @@ private /*array*/ $exp = [];
 private /*array*/ $reg = []; 
 private /*array*/ $dom = []; 
 private /*string*/ $dflt = ''; 
+private /*int*/ $cap = 0; 
 public function extractSource( LocoExtractorInterface $ext, string $src, string $fileref = '' ):self { $ext->extract( $this, $ext->tokenize($src), $fileref ); return $this; } 
 public function export():array { return $this->exp; } 
 #[ReturnTypeWillChange]
@@ -263,10 +265,12 @@ public function count():int { return count( $this->exp ); }
 public function getDomainCounts():array { return $this->dom; } 
 public function setDomain( string $default ):self { $this->dflt = $default; return $this; } 
 public function getDomain():string { return $this->dflt; } 
+public function isFull():bool { return $this->cap && count($this->exp) >= $this->cap; } 
+public function limit( int $cap ):void { $this->cap = $cap; } 
 private function key( array $entry ):string { $key = (string) $entry['source']; foreach( ['context','domain'] as $i => $prop ){ if( array_key_exists($prop,$entry) ) { $add = (string) $entry[$prop]; if( '' !== $add ){ $key .= ord($i).$add; } } } return $key; } 
-public function pushEntry( array $entry, string $domain ):int { if( '' === $domain || '*' === $domain ){ $domain = $this->dflt; } $entry['id'] = ''; $entry['target'] = ''; $entry['domain'] = $domain; $key = $this->key($entry); if( isset($this->reg[$key]) ){ $index = $this->reg[$key]; $clash = $this->exp[$index]; if( $value = $this->mergeField( $clash, $entry, 'refs', ' ') ){ $this->exp[$index]['refs'] = $value; } if( $value = $this->mergeField( $clash, $entry, 'notes', "\n") ){ $this->exp[$index]['notes'] = $value; } } else { $index = count($this->exp); $this->reg[$key] = $index; $this->exp[$index] = $entry; if( isset($this->dom[$domain]) ){ $this->dom[$domain]++; } else { $this->dom[$domain] = 1; } } return $index; } 
+public function pushEntry( array $entry, string $domain ):int { if( '' === $domain || '*' === $domain ){ $domain = $this->dflt; } $entry['id'] = ''; $entry['target'] = ''; $entry['domain'] = $domain; $key = $this->key($entry); if( isset($this->reg[$key]) ){ $index = $this->reg[$key]; $clash = $this->exp[$index]; if( $value = $this->mergeField( $clash, $entry, 'refs', ' ') ){ $this->exp[$index]['refs'] = $value; } if( $value = $this->mergeField( $clash, $entry, 'notes', "\n") ){ $this->exp[$index]['notes'] = $value; } } else { $index = count($this->exp); if( $this->cap && $index === $this->cap ){ throw new OverflowException('Extraction limit reached'); } $this->reg[$key] = $index; $this->exp[$index] = $entry; if( isset($this->dom[$domain]) ){ $this->dom[$domain]++; } else { $this->dom[$domain] = 1; } } return $index; } 
 public function pushPlural( array $entry, int $sindex ):void { $parent = $this->exp[$sindex]; $domain = $parent['domain']; $pkey = $this->key($parent)."\2"; if( ! array_key_exists($pkey,$this->reg) ){ $pindex = count($this->exp); $this->reg[$pkey] = $pindex; $entry += [ 'id' => '', 'target' => '', 'plural' => 1, 'parent' => $sindex, 'domain' => $domain, ]; $this->exp[$pindex] = $entry; if( isset($entry['format']) && ! isset( $parent['format']) ) { $this->exp[$sindex]['format'] = $entry['format']; } if( $pindex !== $sindex + $entry['plural']) { $this->exp[$sindex]['child'] = $pindex; } } } 
-public function mergeField( array $old, array $new, string $field, string $glue ):string { $prev = isset($old[$field]) ? $old[$field] : ''; if( isset($new[$field]) ){ $text = $new[$field]; if( '' !== $prev && $prev !== $text ){ if( 'notes' === $field && preg_match( '/^'.preg_quote( rtrim($text,'. '),'/').'[. ]*$/mu', $prev ) ) { $text = $prev; } else { $text = $prev.$glue.$text; } } return $text; } return $prev; } 
+public function mergeField( array $old, array $new, string $field, string $glue ):string { $prev = $old[$field] ?? ''; if( isset($new[$field]) ){ $text = $new[$field]; if( '' !== $prev && $prev !== $text ){ if( 'notes' === $field && preg_match( '/^'.preg_quote( rtrim($text,'. '),'/').'[. ]*$/mu', $prev ) ) { $text = $prev; } else { $text = $prev.$glue.$text; } } return $text; } return $prev; } 
 public function filter( string $domain ):array { if( '' === $domain ){ $domain = $this->dflt; } $map = []; $newOffset = 1; $matchAll = '*' === $domain; $raw = [ [ 'id' => '', 'source' => '', 'target' => '', 'domain' => $matchAll ? '' : $domain, ] ]; foreach( $this->exp as $oldOffset => $r ){ if( isset($r['parent']) ){ if( isset($map[$r['parent']]) ){ $r['parent'] = $map[ $r['parent'] ]; $raw[ $newOffset++ ] = $r; } } else { if( $matchAll ){ $match = true; } else if( isset($r['domain']) ){ $match = $domain === $r['domain']; } else { $match = $domain === ''; } if( $match ){ $map[ $oldOffset ] = $newOffset; $raw[ $newOffset++ ] = $r; } } } return $raw; } }
 abstract class LocoExtractor implements LocoExtractorInterface { 
 private /*array*/ $rules; 
@@ -291,7 +295,8 @@ private /*array*/ $literal_tokens;
 public function __construct( array $tokens ){ $this->tokens = $tokens; $this->reset(); } 
 public function reset():void { $this->rewind(); $this->literal_tokens = []; $this->skip_tokens = []; } 
 public function literal( ...$symbols ):self { $this->literal_tokens += array_fill_keys($symbols,true); return $this; } 
-public function ignore( ...$symbols ):LocoTokensInterface { $this->skip_tokens += array_fill_keys($symbols,true); return $this; } 
+public function ignore( ...$symbols ):self { $this->skip_tokens += array_fill_keys($symbols,true); return $this; } 
+public function allow( ...$symbols ):self { $this->skip_tokens = array_diff_key( $this->skip_tokens, array_fill_keys($symbols,true) ); return $this; } 
 public function export():array { return array_values( iterator_to_array($this) ); } 
 public function advance() { if( $this->valid() ){ $tok = $this->current(); $this->next(); return $tok; } return null; } 
 #[ReturnTypeWillChange]
@@ -321,7 +326,7 @@ public function decapse( string $raw ):string { return loco_decapse_php_string( 
 public function fsniff( string $str ):string { $format = ''; $offset = 0; while( preg_match('/%(?:[1-9]\\d*\\$)?(?:\'.|[-+0 ])*\\d*(?:\\.\\d+)?(.|$)/',$str,$r,PREG_OFFSET_CAPTURE,$offset) ){ $type = $r[1][0]; list($match,$offset) = $r[0]; if( '%' === $type && '%%' !== $match ){ return ''; } if( '' === $type || ! preg_match('/^[bcdeEfFgGosuxX%]/',$type) ){ return ''; } $offset += strlen($match); if( preg_match('/^% +[a-z]/i',$match) || preg_match('/^%[b-ou-x]/i',$match) ){ continue; } $format = 'php'; } return $format; } 
 protected function comment( string $comment ):string { return preg_replace('/^translators:\\s+/mi', '', loco_parse_php_comment($comment) ); } 
 public function define( string $name, string $value ):self { $this->defs[$name] = $value; return $this; } 
-public function extract( LocoExtracted $strings, LocoTokensInterface $tokens, string $fileref = '' ):void { $tokens->ignore(T_WHITESPACE); $n = 0; $depth = 0; $comment = ''; $narg = 0; $args = []; $ref = ''; $rule = ''; $wp = $this->getHeaders(); $tokens->rewind(); while( $tok = $tokens->advance() ){ if( is_string($tok) ){ $s = $tok; $t = null; } else { $t = $tok[0]; $s = $tok[1]; if( T_NAME_FULLY_QUALIFIED === $t ){ $s = ltrim($s,'\\'); $t = T_STRING; } } if( $depth ){ if( ')' === $s || ']' === $s ){ if( 0 === --$depth ){ if( $this->push( $strings, $rule, $args, $comment, $ref ) ){ $n++; } $comment = ''; } } else if( '(' === $s || '[' === $s ){ $depth++; $args[$narg] = null; } else if( 1 === $depth ){ if( ',' === $s ){ $narg++; } else if( T_CONSTANT_ENCAPSED_STRING === $t ){ $s = self::utf8($s); $args[$narg] = $this->decapse($s); } else if( T_STRING === $t && array_key_exists($s,$this->defs) ){ $args[$narg] = $this->defs[$s]; } else { $args[$narg] = null; } } } else if( T_COMMENT === $t || T_DOC_COMMENT === $t ){ $was_header = false; $s = self::utf8($s); if( 0 === $n ){ if( false !== strpos($s,'* @package') ){ $was_header = true; } if( $wp && ( $header = loco_parse_wp_comment($s) ) ){ foreach( $wp as $domain => $tags ){ foreach( array_intersect_key($header,$tags) as $tag => $text ){ $ref = $fileref ? $fileref.':'.$tok[2]: ''; $meta = $tags[$tag]; if( is_string($meta) ){ $meta = ['notes'=>$meta]; trigger_error( $tag.' header defaulted to "notes"',E_USER_DEPRECATED); } $strings->pushEntry( ['source'=>$text,'refs'=>$ref] + $meta, (string) $domain ); $was_header = true; } } } } if( ! $was_header ) { $comment = $s; } } else if( T_STRING === $t && '(' === $tokens->advance() && ( $rule = $this->rule($s) ) ){ $ref = $fileref ? $fileref.':'.$tok[2]: ''; $depth = 1; $args = []; $narg = 0; } else if( '' !== $comment && ! preg_match('!^[/* ]+(translators|xgettext):!im',$comment) ){ $comment = ''; } } } }
+public function extract( LocoExtracted $strings, LocoTokensInterface $tokens, string $fileref = '' ):void { $tokens->ignore(T_WHITESPACE); $n = 0; $depth = 0; $comment = ''; $narg = 0; $args = []; $ref = ''; $rule = ''; $wp = $this->getHeaders(); $tokens->rewind(); while( $tok = $tokens->advance() ){ if( is_string($tok) ){ $s = $tok; $t = null; } else { $t = $tok[0]; $s = $tok[1]; if( T_NAME_FULLY_QUALIFIED === $t ){ $s = ltrim($s,'\\'); $t = T_STRING; } } if( $depth ){ if( ')' === $s || ']' === $s ){ if( 0 === --$depth ){ if( $this->push( $strings, $rule, $args, $comment, $ref ) ){ $n++; } if( $strings->isFull() ){ return; } $comment = ''; } } else if( '(' === $s || '[' === $s ){ $depth++; $args[$narg] = null; } else if( 1 === $depth ){ if( ',' === $s ){ $narg++; } else if( T_CONSTANT_ENCAPSED_STRING === $t ){ $s = self::utf8($s); $args[$narg] = $this->decapse($s); } else if( T_STRING === $t && array_key_exists($s,$this->defs) ){ $args[$narg] = $this->defs[$s]; } else { $args[$narg] = null; } } } else if( T_COMMENT === $t || T_DOC_COMMENT === $t ){ $was_header = false; $s = self::utf8($s); if( 0 === $n ){ if( false !== strpos($s,'* @package') ){ $was_header = true; } if( $wp && ( $header = loco_parse_wp_comment($s) ) ){ foreach( $wp as $domain => $tags ){ foreach( array_intersect_key($header,$tags) as $tag => $text ){ $ref = $fileref ? $fileref.':'.$tok[2]: ''; $meta = $tags[$tag]; if( is_string($meta) ){ $meta = ['notes'=>$meta]; trigger_error( $tag.' header defaulted to "notes"',E_USER_DEPRECATED); } $strings->pushEntry( ['source'=>$text,'refs'=>$ref] + $meta, (string) $domain ); if( $strings->isFull() ){ return; } $was_header = true; } } } } if( ! $was_header ) { $comment = $s; } } else if( T_STRING === $t && '(' === $tokens->advance() && ( $rule = $this->rule($s) ) ){ $ref = $fileref ? $fileref.':'.$tok[2]: ''; $depth = 1; $args = []; $narg = 0; } else if( '' !== $comment && ! preg_match('!^[/* ]+(translators|xgettext):!im',$comment) ){ $comment = ''; } } } }
 class LocoJsExtractor extends LocoPHPExtractor { 
 public function tokenize( string $src ):LocoTokensInterface { return new LocoJsTokens($src); } 
 public function fsniff( string $str ):string { return parent::fsniff($str) ? 'javascript' : ''; } 
@@ -344,7 +349,8 @@ final public function extractSource( string $src, string $fileref ):LocoExtracte
 class LocoWpJsonStrings extends ArrayIterator implements LocoTokensInterface { 
 public function __construct( array $raw, stdClass $tpl ){ parent::__construct(); $this->walk( $tpl, $raw ); } 
 public function advance() { $tok = $this->current(); $this->next(); return $tok; } 
-public function ignore( ...$symbols ):LocoTokensInterface { return $this; } 
+public function ignore( ...$symbols ):self { throw new BadMethodCallException(); } 
+public function allow( ...$symbols ):self { throw new BadMethodCallException(); } 
 private function walk( /*mixed*/ $tpl, /*mixed*/ $raw ):void { if( is_string($tpl) && is_string($raw) ) { $this->offsetSet( null, [ 'context' => $tpl, 'source' => $raw, ] ); return; } if( is_array($tpl) && is_array($raw) ) { foreach ( $raw as $value ) { $this->walk( $tpl[0], $value ); } } else if( is_object($tpl) && is_array($raw) ) { $group_key = '*'; foreach ( $raw as $key => $value ) { if ( isset($tpl->$key) ) { $this->walk( $tpl->$key, $value ); } else if ( isset($tpl->$group_key) ) { $this->walk( $tpl->$group_key, $value ); } } } } }
 function loco_wp_extractor( string $type = 'php', string $ext = '' ):LocoExtractorInterface { if( 'json' === $type ){ return new LocoWpJsonExtractor; } static $rules = [ '__' => 'sd', '_e' => 'sd', '_c' => 'sd', '_n' => 'sp_d', '_n_noop' => 'spd', '_nc' => 'sp_d', '__ngettext' => 'spd', '__ngettext_noop' => 'spd', '_x' => 'scd', '_ex' => 'scd', '_nx' => 'sp_cd', '_nx_noop' => 'spcd', 'esc_attr__' => 'sd', 'esc_html__' => 'sd', 'esc_attr_e' => 'sd', 'esc_html_e' => 'sd', 'esc_attr_x' => 'scd', 'esc_html_x' => 'scd', ]; if( 'php' === $type ){ return substr($ext,-9) === 'blade.php' ? new LocoBladeExtractor($rules) : new LocoPHPExtractor($rules); } if( 'js' === $type ){ return new LocoJsExtractor($rules); } if( 'twig' === $type ){ return new LocoTwigExtractor($rules); } throw new InvalidArgumentException('No extractor for '.$type); }
 function loco_string_percent( int $n, int $t ):string { if( ! $t || ! $n ){ return '0'; } if( $t === $n ){ return '100'; } $dp = 0; $n = 100 * $n / $t; if( $n > 99 ){ return rtrim( number_format( min( $n, 99.9 ), ++$dp ), '.0' ); } if( $n < 0.5 ){ $n = max( $n, 0.0001 ); do { $s = number_format( $n, ++$dp ); } while( preg_match('/^0\\.0+$/',$s) && $dp < 4 ); return substr($s,1); } return number_format( $n, $dp ); }

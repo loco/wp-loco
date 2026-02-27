@@ -1,6 +1,6 @@
 <?php
 /**
- * Downgraded for PHP 7.2 compatibility. Do not edit.
+ * Downgraded for PHP 7.4 compatibility. Do not edit.
  * @noinspection ALL
  */
 class LocoDomQueryFilter { 

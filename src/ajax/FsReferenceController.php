@@ -136,11 +136,13 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         $extractor = loco_wp_extractor($type,$ext);
 
         // JSON is supported, but only if it parses as a valid i18n schema (e.g. blocks.json)
-        // No point highlighting this as blocks|theme.json usually have no line number. 
         if( $extractor instanceof LocoWpJsonExtractor ){
             $source = $srcfile->getContents();
             $extractor->tokenize($source);
-            $tokens = preg_split( '/\\R/u',$source);
+            // No point highlighting this as blocks|theme.json usually have no line number. 
+            foreach( preg_split( '/\\R/u',$source) as $line ){
+                $code[] = '<code>'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
+            }
         }
         // Else the file will be tokenized as JavaScript or PHP (including Twig and Blade) 
         else if( $srcfile->size() > wp_convert_hr_to_bytes($conf->max_php_size) ){
@@ -152,11 +154,15 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         // Else always validate that PHP/JS have translatable strings. Other code will be disallowed.
         else {
             $tokens = $extractor->tokenize( $srcfile->getContents() );
-        }
-
-        // highlighting on back end because tokenizer provides more control than highlight.js
-        if( $tokens instanceof LocoTokensInterface ){
+            $strings = new LocoExtracted;
+            $strings->limit(1);
+            $extractor->extract( $strings, $tokens );
+            if( 0 === $strings->count() ){
+                throw new Loco_error_Exception('File access disallowed: No translatable strings found');
+            }
             $thisline = 1;
+            $tokens->rewind();
+            $tokens->allow(T_WHITESPACE);
             while( $tok = $tokens->advance() ){
                 if( is_array($tok) ){
                     [ $t, $str, $startline ] = $tok;
@@ -187,19 +193,6 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
                         $code[$j] = $html;
                     }
                 }
-            }
-            // Tokens have been rendered including whitespace, but we will block files with no translatable strings
-            // TODO Implement a limit to the strings extracted so we don't have to pull the whole file.
-            $strings = new LocoExtracted;
-            $extractor->extract( $strings, $tokens );
-            if( 0 === $strings->count() ){
-                throw new Loco_error_Exception('File access disallowed: No translatable strings found');
-            }
-        }
-        // permit limited other file types, but without back end highlighting
-        else if( is_iterable($tokens) ){
-            foreach( $tokens as $line ){
-                $code[] = '<code>'.htmlentities($line,ENT_COMPAT,'UTF-8').'</code>';
             }
         }
         
