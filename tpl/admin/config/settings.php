@@ -28,19 +28,19 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                             </legend>
                             <p>
                                 <label for="loco--max_php_size">
-                                    <?php esc_html_e('Skip PHP files larger than:','loco-translate')?> 
+                                    <?php esc_html_e('Skip source files larger than:','loco-translate')?> 
                                 </label>
                                 <input type="text" size="5" name="opts[max_php_size]" id="loco--max_php_size" value="<?php echo esc_attr( $opts->max_php_size)?>" placeholder="<?php echo esc_attr($dflt->max_php_size)?>" />
                             </p>
                             <p>
                                 <label for="loco--php_alias">
-                                    <?php esc_html_e('Scan PHP files with extensions:','loco-translate')?>
+                                    <?php esc_html_e('Scan PHP files with extensions:','loco-translate')?> 
                                 </label>
                                 <input type="text" size="15" name="opts[php_alias]" id="loco--php_alias" value="<?php echo esc_attr( implode(' ',$opts->php_alias) )?>" placeholder="<?php echo esc_attr(implode(' ',$dflt->php_alias))?>" />
                             </p>
                             <p>
                                 <label for="loco--jsx_alias">
-                                    <?php esc_html_e('Scan JavaScript files with extensions:','loco-translate')?>
+                                    <?php esc_html_e('Scan JavaScript files with extensions:','loco-translate')?> 
                                 </label>
                                 <input type="text" size="15" name="opts[jsx_alias]" id="loco--jsx_alias" value="<?php echo esc_attr( implode(' ',$opts->jsx_alias) )?>" placeholder="<?php echo esc_attr(implode(' ',$dflt->jsx_alias))?>" />
                             </p>
@@ -204,7 +204,7 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                             </p>
                             <p>
                                 <label for="loco--code-view">
-                                    <?php esc_html_e('Source code viewer access','loco-translate');?>:
+                                    <?php esc_html_e('Viewing of referenced source code','loco-translate');?>:
                                 </label>
                                 <select name="opts[code_view]" id="loco--code-view">
                                     <option value="0"><?php esc_html_e('Disallow','loco-translate')?></option>

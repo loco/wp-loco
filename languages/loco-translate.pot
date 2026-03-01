@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.8.2-dev\n"
+"Project-Id-Version: Loco Translate 2.8.2\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-02-27 11:36+0000\n"
+"POT-Creation-Date: 2026-03-01 07:58+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.2-dev; wp-6.9.1; php-8.3.27\n"
+"X-Loco-Version: 2.8.2; wp-6.9.1; php-8.3.27\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -1718,7 +1718,7 @@ msgid ""
 msgstr ""
 
 #: tpl/admin/config/settings.php:31
-msgid "Skip PHP files larger than:"
+msgid "Skip source files larger than:"
 msgstr ""
 
 #: src/admin/init/InitPoController.php:223
@@ -1727,10 +1727,6 @@ msgstr ""
 
 #: src/admin/file/BaseController.php:118
 msgid "Source"
-msgstr ""
-
-#: tpl/admin/config/settings.php:207
-msgid "Source code viewer access"
 msgstr ""
 
 #: tpl/admin/bundle/conf.php:100
@@ -2194,6 +2190,10 @@ msgstr ""
 
 #: src/admin/bundle/ViewController.php:116
 msgid "View template"
+msgstr ""
+
+#: tpl/admin/config/settings.php:207
+msgid "Viewing of referenced source code"
 msgstr ""
 
 #: src/package/Header.php:93

@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 6.9.1
-Stable tag: 2.8.1
+Stable tag: 2.8.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,10 +104,10 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 = 2.8.2 =
 * Fix for LLMs retaining escaped forward slashes
 * Bumped WordPress compatibility to 6.9.1
-* Bolstered security for viewing source code references:
-* 1) Added file reference access control via `code_view` setting
-* 2) Validating i18n JSON schemas (blocks|theme.json)
-* 3) Validating PHP/JS sources contain extractable strings
+* New security features for viewing source code refs:
+* - Access permission via `code_view` setting
+* - JSON schemas must validate as blocks|theme.json
+* - PHP/JS sources must contain extractable strings
 
 = 2.8.1 =
 * DeepL uses `quality_optimized` with `loco_deepl_model` filter
