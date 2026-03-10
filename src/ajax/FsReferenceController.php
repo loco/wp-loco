@@ -112,9 +112,9 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         // find file or fail
         $srcfile = $this->findSourceFile($refpath);
         
-        // deny access to sensitive files
-        if( 'wp-config.php' === $srcfile->basename() ){
-            throw new InvalidArgumentException('File access disallowed');
+        // Search utility only checks that reference exists, not whether it's actually a file
+        if( $srcfile->isDirectory() ){
+            throw new InvalidArgumentException('File is a directory');
         }
         
         // validate allowed source file types, including custom aliases
@@ -122,6 +122,11 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         $type = $conf->ext2type($ext,'none');
         if( 'none' === $type ){
             throw new InvalidArgumentException('File extension disallowed, '.$ext );
+        }
+
+        // Deny access to files outside wp-content and WordPress root, plus sensitive files in the root
+        if( 'wp-config.php' === $srcfile->basename() || ! ( $srcfile->underContentDirectory() || $srcfile->underWordPressDirectory() ) ){
+            throw new InvalidArgumentException('File access disallowed');
         }
 
         // source code will be HTML-tokenized into multiple lines

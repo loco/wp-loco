@@ -144,6 +144,7 @@ $this->extend('../layout');
                 <a class="button button-link has-icon icon-cog" href="<?php $parent->e('href')?>"><?php esc_html_e('Parent theme','loco-translate')?></a><?php
                 endif?> 
                 <a class="button button-link has-icon icon-download" href="<?php $params->e('xmlUrl')?>"><?php esc_html_e('XML','loco-translate')?></a>
+                <a class="button button-link has-icon icon-help" href="<?php $params->e('manUrl')?>" target="_blank"><?php esc_html_e('Help','loco-translate')?></a>
             </p>
         </footer>
 

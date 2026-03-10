@@ -103,7 +103,7 @@ class Loco_fs_Locations extends ArrayObject {
      */
     public static function getThemes(){
         if( ! self::$theme ){
-            $roots = isset($GLOBALS['wp_theme_directories']) ? $GLOBALS['wp_theme_directories'] : [];
+            $roots = $GLOBALS['wp_theme_directories'] ?? [];
             if( ! $roots ){
                 $roots[] = trailingslashit( loco_constant('WP_CONTENT_DIR') ).'themes';
             }
