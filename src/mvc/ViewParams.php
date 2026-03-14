@@ -65,21 +65,26 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
 
     /**
      * @internal
-     * @param string $p property name
      * @return mixed
      */
-    public function __get( $p ){
+    public function __get( string $p ){
         return $this->offsetExists($p) ? $this->offsetGet($p) : null;
     }
 
 
     /**
      * Test if a property exists, even if null
-     * @param string $p property name
-     * @return bool
      */
-    public function has( $p ){
+    public function has( string  $p ):bool {
         return $this->offsetExists($p);
+    }
+
+
+    /**
+     * Test if a property exists and is truthy
+     */
+    public function truthy( string $p ):bool {
+        return $this->offsetExists($p) && $this->offsetGet($p);
     }
 
 
@@ -88,7 +93,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @param string $p property key
      * @return string empty string
      */
-    public function e( $p ){
+    public function e( string $p ):string {
         $text = $this->__get($p);
         echo $this->escape( $text );
         return '';

@@ -146,8 +146,7 @@ class Loco_mvc_View implements IteratorAggregate {
 
 
     /**
-     * @param string $prop
-     * @return bool
+     * Test if a view argument exists
      */
     public function has( string $prop ):bool {
         return $this->scope->offsetExists($prop);
@@ -156,7 +155,6 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Get property after checking with self::has
-     * @param string $prop
      * @return mixed
      */
     public function get( string $prop ){
@@ -166,10 +164,6 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * Set a view argument
-     * @param string $prop
-     * @param mixed $value
-     *
-     * @return Loco_mvc_View
      */
     public function set( string $prop, $value ):self {
         $this->scope[$prop] = $value;
@@ -177,6 +171,13 @@ class Loco_mvc_View implements IteratorAggregate {
     }
 
 
+    /**
+     * Remove a view argument
+     */
+    public function unset( string $prop ):void {
+        $this->scope->offsetUnset($prop);
+    }
+    
 
     /**
      * Main entry to rendering complete template

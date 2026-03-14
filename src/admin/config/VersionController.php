@@ -22,6 +22,7 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
         $title = __('Plugin settings','loco-translate');
         $breadcrumb = new Loco_admin_Navigation;
         $breadcrumb->add( $title );
+        $this->setLocoUpdate('0');
         
         // current plugin version
         $version = loco_plugin_version();
@@ -40,42 +41,31 @@ class Loco_admin_config_VersionController extends Loco_admin_config_BaseControll
             $this->set( 'devel', true );
         }
         
-        
-        // check PHP version, noting that we want to move to minimum version 5.6 as per latest WordPress
+        // check PHP version is at least 7.4
         $phpversion = PHP_VERSION;
         if( version_compare($phpversion,'7.4.0','<') ){
             $this->set('phpupdate','7.4');
         }
         
-        
         // check WordPress version, No plans to increase this until WP bumps their min PHP requirement.
         $wpversion = $GLOBALS['wp_version'];
-        /*if( version_compare($wpversion,'5.2','<') ){
-            $this->setWpUpdate('5.2');
-        }*/
-        
         return $this->view('admin/config/version', compact('breadcrumb','version','phpversion','wpversion') ); 
     }
 
 
-    /**
-     * @param string version
-     */
-    private function setLocoUpdate( $version ){
-        $action = 'upgrade-plugin_'.loco_plugin_self();
-        $link = admin_url( 'update.php?action=upgrade-plugin&plugin='.rawurlencode(loco_plugin_self()) );
-        $this->set('update', $version );
-        $this->set('update_href', wp_nonce_url( $link, $action ) );
+
+    private function setLocoUpdate( string $version ){
+        if( $version ){
+            $action = 'upgrade-plugin_'.loco_plugin_self();
+            $link = admin_url( 'update.php?action=upgrade-plugin&plugin='.rawurlencode(loco_plugin_self()) );
+            $this->set('update', $version );
+            $this->set('update_href', wp_nonce_url( $link, $action ) );
+        }
+        else {
+            $this->set('update','');
+            $this->set('update_href','');
+        }
     }
-
-
-    /**
-     * @param string minimum recommended version
-     *
-    private function setWpUpdate( $version ){
-        $this->set('wpupdate',$version);
-        $this->set('wpupdate_href', admin_url('update-core.php') );
-    }*/
 
     
 }

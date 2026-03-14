@@ -3,9 +3,9 @@
  * Plugin version information
  */
 $this->extend('../layout');
-
+    /* @var Loco_mvc_ViewParams $params */
     // Loco Translate version:
-    if( $params->has('update') ):?> 
+    if( $params->truthy('update') && $params->truthy('update_href') ):?> 
     <div class="panel panel-warning">
         <h3 class="has-icon">
             <?php self::e( __('Version %s','loco-translate'), $version )?> 
@@ -14,7 +14,7 @@ $this->extend('../layout');
             <?php esc_html_e('A newer version of Loco Translate is available for download','loco-translate')?>.
         </p>
         <p class="submit">
-            <a class="button button-primary" href="<?php echo $update_href?>" target="_blank"><?php self::e(__('Upgrade to %s','loco-translate'), 'v'.$update )?></a>
+            <a class="button button-primary" href="<?php echo esc_url($update_href)?>" target="_blank"><?php self::e(__('Upgrade to %s','loco-translate'), 'v'.$update )?></a>
             <a class="button button-link has-icon icon-ext" href="https://wordpress.org/plugins/loco-translate/installation/" target="_blank"><?php esc_html_e('Install manually','loco-translate')?></a>
         </p>
     </div><?php
