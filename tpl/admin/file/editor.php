@@ -3,8 +3,9 @@
  * Editor layout for PO and POT files
  */
 
+/* @var Loco_mvc_View $this */
 $this->extend('../layout');
-echo $header;
+$this->block('header');
 
 /* @var Loco_mvc_ViewParams $js */
 /* @var Loco_mvc_ViewParams $ui */

@@ -4,8 +4,7 @@
  * See setup/*.php for header definitions
  */
 $this->extend('../layout');
-
-    echo $header;
+$this->block('header');
     /* @var Loco_mvc_ViewParams $params */
 
 

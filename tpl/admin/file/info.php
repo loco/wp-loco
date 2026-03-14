@@ -3,7 +3,7 @@
  * File information for any type of file. Extended by specific views for supported types
  */
 $this->extend('../layout');
-echo $header;
+$this->block('header');
 /* @var Loco_mvc_FileParams $file */
 ?> 
 

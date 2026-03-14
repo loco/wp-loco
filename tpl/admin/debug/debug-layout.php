@@ -14,11 +14,9 @@ $this->extend('../layout');
     </style>
 <?php
 
+$this->block('header');
+
 /* @var Loco_mvc_View $params */
-/* @var string $header */
-$params->has('header') and print $header;
-
-
 /* @var ArrayIterator|null $log */
 if( $params->has('log') ):?> 
     <div class="panel" id="loco-log">
