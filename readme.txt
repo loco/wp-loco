@@ -3,8 +3,8 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
-Tested up to: 6.9.1
-Stable tag: 2.8.2
+Tested up to: 6.9.4
+Stable tag: 2.8.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
