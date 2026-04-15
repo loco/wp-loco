@@ -52,10 +52,10 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         // source language may be overridden by `loco_api_provider_source` hook
         $tag = Loco_mvc_PostParams::get()['source'];
         if( is_string($tag) && '' !== $tag ){
-            $locale = Loco_Locale::parse($tag);
-            if( $locale->isValid() ){
+            $source = Loco_Locale::parse($tag);
+            if( $source->isValid() ){
                 $sourceTag = $tag;
-                $sourceLang  = self::wordy_language($locale);
+                $sourceLang  = self::wordy_language($source);
             }
         }
 
@@ -72,7 +72,6 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         }
         $prompt = "# Identity\n\nYou are a translator that translates from ".$sourceLang.' ('.$sourceTag.') to '.$targetLang.' ('.$targetTag.").\n\n"
                 . "# Instructions\n\n* ".implode(".\n* ",$instructions ).'.';
-        
         // Allow user-defined extended instructions via filter
         $custom = apply_filters( 'loco_gpt_prompt', $config['prompt']??'', $locale );
         if( is_string($custom) ){
