@@ -101,6 +101,9 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Changelog ==
 
+= 2.8.4 =
+* Fixed error in LLM prompt where formality was ignored
+
 = 2.8.3 =
 * Bumped WordPress compatibility to 6.9.4
 * Additional restrictions on viewing source code refs
