@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.4-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-04-15 09:29+0000\n"
+"POT-Creation-Date: 2026-04-15 11:46+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -303,6 +303,12 @@ msgstr ""
 msgid "Ajax route not found: \"%s\""
 msgstr ""
 
+#: tpl/admin/config/apis.php:165
+msgid ""
+"All users granted access to this plugin can use your keys, and some APIs are "
+"called directly from the browser"
+msgstr ""
+
 #: src/admin/config/SettingsController.php:66 tpl/admin/config/settings.php:212
 msgid "Allow"
 msgstr ""
@@ -586,7 +592,7 @@ msgstr ""
 
 #: src/admin/file/EditController.php:132 src/admin/file/EditController.php:183
 #: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:244
-#: tpl/admin/config/apis.php:167 tpl/admin/config/prefs.php:45
+#: tpl/admin/config/apis.php:171 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
 msgid "Documentation"
@@ -1053,7 +1059,7 @@ msgstr ""
 msgid "Import config from XML"
 msgstr ""
 
-#: tpl/admin/config/apis.php:157
+#: tpl/admin/config/apis.php:157 tpl/admin/config/apis.php:164
 msgid "Important"
 msgstr ""
 
@@ -1632,7 +1638,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:243 tpl/admin/config/apis.php:166
+#: tpl/admin/config/settings.php:243 tpl/admin/config/apis.php:170
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""

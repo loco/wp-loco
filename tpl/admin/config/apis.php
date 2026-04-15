@@ -160,6 +160,10 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                 <a href="<?php self::e($help)?>#legal" target="_blank" tabindex="-1"><?php esc_html_e('See full disclaimer','loco-translate')?></a>.
             </span>
         </p>
+        <p>
+            <strong class="has-icon"><?php esc_html_e('Important','loco-translate')?>:</strong>
+            <?php esc_html_e('All users granted access to this plugin can use your keys, and some APIs are called directly from the browser','loco-translate')?>.
+        </p>
     </div>  
 
     <p class="submit">

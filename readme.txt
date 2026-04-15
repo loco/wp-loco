@@ -103,6 +103,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 = 2.8.4 =
 * Fixed error in LLM prompt where formality was ignored
+* Redacting API keys that aren't needed by client-side code
 
 = 2.8.3 =
 * Bumped WordPress compatibility to 6.9.4
