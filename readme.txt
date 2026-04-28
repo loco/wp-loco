@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 6.9.4
-Stable tag: 2.8.3
+Stable tag: 2.8.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -104,7 +104,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 = 2.8.4 =
 * Fixed error in LLM prompt where formality was ignored
 * Redacting API keys that aren't needed by client-side code
-* Fixed redundant display of filter field for empty tables
+* Fixed the redundant display of the filter field for empty tables
 
 = 2.8.3 =
 * Bumped WordPress compatibility to 6.9.4
