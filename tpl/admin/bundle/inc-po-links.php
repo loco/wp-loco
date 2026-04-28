@@ -4,7 +4,7 @@
  */
 ?> 
 <nav class="above-list-table"><?php
-    /* @var $link Loco_mvc_ViewParams */
+    /* @var Loco_mvc_ViewParams[] $nav */
     foreach( $nav as $link ):?> 
     <a class="has-icon icon-<?php $link->e('icon')?>" href="<?php $link->e('href')?>"><?php $link->e('name')?></a><?php
     endforeach;
