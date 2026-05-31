@@ -22,13 +22,15 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
             throw new Loco_error_Exception('Target is not a directory');
         }
         
-        // basename should be posted from front end
+        // basename should be posted from front end. Validate and prevent tampering.
         $name = $this->get('name');
-        if( ! $name ){
+        if( ! is_string($name) || '' === $name ){
             throw new Loco_error_Exception('Front end did not post $name');
         }
-
-        // POT file should be .pot but we'll allow .po
+        if( basename($name) !== $name ){
+            throw new Loco_error_Exception('Illegal file name');
+        }
+        // POT file should normally be .pot, but we'll allow .po
         $potfile = new Loco_fs_File( $target.'/'.$name );
         $ext = strtolower( $potfile->fullExtension() );
         if( 'pot' !== $ext && 'po' !== $ext ){
@@ -59,7 +61,6 @@ class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
         }
 
         // push recent items on file creation
-        // TODO push project and locale file
         Loco_data_RecentItems::get()->pushBundle( $bundle )->persist();
         
         // put flash message into session to be displayed on redirected page

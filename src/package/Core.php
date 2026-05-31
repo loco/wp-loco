@@ -94,7 +94,7 @@ class Loco_package_Core extends Loco_package_Bundle {
         $domain = new Loco_package_TextDomain('default');
         $domain->setCanonical( true );
         // front end subset, has empty name in WP
-        // full title is like "4.9.x - Development" but we don't know what version at this point
+        // full title is like "7.0.x - Development" but we don't know what version at this point
         list($x,$y) = explode('.',$GLOBALS['wp_version'],3); 
         $project = $domain->createProject( $bundle, sprintf('%u.%u.x - Development',$x,$y) );
         $project->setSlug('')
