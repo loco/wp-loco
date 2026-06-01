@@ -116,6 +116,8 @@ $this->extend('../layout');
                 endforeach?> 
                 <dt>PHP open_basedir:</dt>
                 <dd><?php self::e(ini_get('open_basedir'))?></dd>
+                <dt>Loco basedir restriction:</dt>
+                <dd><?php self::e( Loco_fs_Locations::getBaseDirs() )?></dd>
             </dl>
         </div>
 
@@ -125,6 +127,7 @@ $this->extend('../layout');
                 <a href="#loco-debug" class="loco-anchor" aria-hidden="true"></a>
             </h3>
             <dl><?php
+            /* @var Loco_mvc_ViewParams $debug */    
             foreach( $debug as $key => $value ):?> 
                 <dt>
                     <?php echo $debug->escape($key)?>:

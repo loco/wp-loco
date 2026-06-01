@@ -6,13 +6,15 @@ abstract class Loco_test_TestCase extends PHPUnit_Adapter_TestCase {
 
     /**
      * Buffering output for tests that won't capture output
-     * @var Loco_output_Buffer
      */
-    private $buffer;
+    private Loco_output_Buffer $buffer;
     
     
     public function set_up(){
         parent::set_up();
+        Loco_data_Settings::get()->populate([
+            'fs_basedir' => sys_get_temp_dir(),
+        ]);
         $this->buffer = Loco_output_Buffer::start();
     }
 
@@ -24,8 +26,7 @@ abstract class Loco_test_TestCase extends PHPUnit_Adapter_TestCase {
     }
     
     
-    protected function normalizeHtml( $src ){
-            
+    protected function normalizeHtml( string $src ):string {
         $dom = new DOMDocument('1.0','UTF-8');
         $dom->preserveWhiteSpace = false;
         $dom->formatOutput = false;

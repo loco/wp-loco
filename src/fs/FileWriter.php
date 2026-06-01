@@ -4,20 +4,14 @@
  */
 class Loco_fs_FileWriter {
 
-   /**
-    * @var Loco_fs_File
-    */
-    private $file;
+    private Loco_fs_File $file;
 
-    /**
-     * @var WP_Filesystem_Base
-     */
-    private $fs;
+    private WP_Filesystem_Base $fs;
 
     /**
      * @param Loco_fs_File $file
      */
-    public function __construct( Loco_fs_File $file ){
+    public function __construct( Loco_fs_File $file ) {
         $this->setFile($file);
         $this->disconnect();
     }
@@ -27,7 +21,7 @@ class Loco_fs_FileWriter {
      * @param Loco_fs_File $file
      * @return Loco_fs_FileWriter
      */
-    public function setFile( Loco_fs_File $file ){
+    public function setFile( Loco_fs_File $file ): self {
         $this->file = $file;
         return $this;
     }
@@ -41,7 +35,7 @@ class Loco_fs_FileWriter {
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
-    public function connect( WP_Filesystem_Base $fs, $disconnected = true ){
+    public function connect( WP_Filesystem_Base $fs, bool $disconnected = true ): self {
         if( $disconnected && ! $fs->connect() ){
             $errors = $fs->errors;
             if( is_wp_error($errors) ){
@@ -58,9 +52,8 @@ class Loco_fs_FileWriter {
     
     /**
      * Revert to direct file system connection
-     * @return self
      */
-    public function disconnect(){
+    public function disconnect(): self {
         $this->fs = Loco_api_WordPressFileSystem::direct();
         return $this;
     }
@@ -68,9 +61,8 @@ class Loco_fs_FileWriter {
 
     /**
      * Get mapped path for use in indirect file system manipulation
-     * @return string
      */
-    public function getPath(){
+    public function getPath(): string {
         return $this->mapPath( $this->file->getPath() );
     }
 
@@ -80,7 +72,7 @@ class Loco_fs_FileWriter {
      * @param string $path
      * @return string
      */
-    private function mapPath( $path ){
+    private function mapPath( string $path ): string {
         if( ! $this->isDirect() ){
             $base = untrailingslashit( Loco_fs_File::abs(loco_constant('WP_CONTENT_DIR')) );
             $snip = strlen($base);
@@ -105,17 +97,16 @@ class Loco_fs_FileWriter {
 
     /**
      * Test if a direct (not remote) file system
-     * @return bool
      */
-    public function isDirect(){
+    public function isDirect(): bool {
         return $this->fs instanceof WP_Filesystem_Direct;
     }
 
 
     /**
-     * @return bool
+     * Test if currently configured path is writable via the current file system connector
      */
-    public function writable(){
+    public function writable(): bool {
         return ! $this->disabled() && $this->fs->is_writable( $this->getPath() );
     }
 
@@ -126,7 +117,7 @@ class Loco_fs_FileWriter {
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
-    public function chmod( $mode, $recursive = false ){
+    public function chmod( int $mode, bool $recursive = false ): self {
         $this->authorize();
         if( ! $this->fs->chmod( $this->getPath(), $mode, $recursive ) ){
             // translators: %s refers to a file name, for which the chmod operation failed.
@@ -141,7 +132,7 @@ class Loco_fs_FileWriter {
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
-    public function copy( Loco_fs_File $copy ){
+    public function copy( Loco_fs_File $copy ): self {
         $this->authorize();
         $source = $this->getPath();
         $target = $this->mapPath( $copy->getPath() );
@@ -171,7 +162,7 @@ class Loco_fs_FileWriter {
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
-    public function move( Loco_fs_File $dest ){
+    public function move( Loco_fs_File $dest ): self {
         $orig = $this->file;
         try {
             // target should have been authorized to create the new file
@@ -179,7 +170,7 @@ class Loco_fs_FileWriter {
             $context->setFile($orig);
             $context->copy($dest);
             // source should have been authorized to delete the original file
-            $this->delete(false);
+            $this->delete();
             return $this;
         }
         catch( Loco_error_WriteException $e ){
@@ -194,7 +185,7 @@ class Loco_fs_FileWriter {
      * @return self
      * @throws Loco_error_WriteException
      */
-    public function delete( $recursive = false ){
+    public function delete( bool $recursive = false ): self {
         $this->authorize();
         if( ! $this->fs->delete( $this->getPath(), $recursive ) ){
             // translators: %s refers to a file name, for which a delete operation failed.
@@ -210,7 +201,7 @@ class Loco_fs_FileWriter {
      * @return Loco_fs_FileWriter
      * @throws Loco_error_WriteException
      */
-    public function putContents( $data ){
+    public function putContents( string $data ): self {
         $this->authorize();
         $file = $this->file;
         if( $file->isDirectory() ){
@@ -301,25 +292,31 @@ class Loco_fs_FileWriter {
     /**
      * Check whether write operations are permitted, or throw
      * @throws Loco_error_WriteException
-     * @return self
      */
-    public function authorize(){
+    public function authorize(): self {
         if( $this->disabled() ){
             throw new Loco_error_WriteException( __('File modification is disallowed by your WordPress config','loco-translate') );
         }
         $opts = Loco_data_Settings::get();
-        // deny system file changes (fs_protect = 2)
+        // Deny system file changes (fs_protect = 2)
         if( 1 < $opts->fs_protect && $this->file->getUpdateType() ){
             throw new Loco_error_WriteException( __('Modification of installed files is disallowed by the plugin settings','loco-translate') );
         }
-        // we may need to examine multiple extensions, or there may be none for directories
+        // Deny writes outside our custom base directories. The current path must be resolvable beneath at least one.
+        $roots = Loco_fs_Locations::getBaseDirs();
+        $path = $this->file->getPath();
+        if( $roots->count() && ! $roots->check($path) ){
+            Loco_error_AdminNotices::debug( sprintf('%s not in %s',$path,$roots) );
+            throw new Loco_error_WriteException( __('File modification disallowed by the plugin settings','loco-translate') );
+        }
+        // We may need to examine multiple extensions, or there may be none for directories
         $exts = array_slice( explode('.',strtolower($this->file->basename())), 1 );
         if( ! $exts ){
             return $this;
         }
         $ext = array_pop($exts);
-        // deny POT modification (pot_protect = 2)
-        // this assumes that templates all have .pot extension, which isn't guaranteed. UI should prevent saving of wrongly files like "default.po"
+        // Deny POT modification (pot_protect = 2)
+        // This assumes that templates all have .pot extension, which isn't guaranteed. UI should prevent saving of wrongly files like "default.po"
         if( 'pot' === $ext && 1 < $opts->pot_protect ){
             throw new Loco_error_WriteException( __( 'Modification of POT (template) files is disallowed by the plugin settings', 'loco-translate' ) );
         }
@@ -343,7 +340,7 @@ class Loco_fs_FileWriter {
      * Check if file system modification is banned at WordPress level
      * @return bool
      */
-    public function disabled(){
+    public function disabled(): bool {
         // WordPress >= 4.8
         if( function_exists('wp_is_file_mod_allowed') ){
             $context = apply_filters( 'loco_file_mod_allowed_context', 'download_language_pack', $this->file );

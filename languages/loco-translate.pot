@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-05-31 09:51+0000\n"
+"POT-Creation-Date: 2026-05-31 11:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -317,7 +317,7 @@ msgstr ""
 msgid "Allow (with warning)"
 msgstr ""
 
-#: tpl/admin/config/settings.php:226
+#: tpl/admin/config/settings.php:232
 msgid "Allow full access to these roles"
 msgstr ""
 
@@ -591,7 +591,7 @@ msgid "Disallow"
 msgstr ""
 
 #: src/admin/file/EditController.php:132 src/admin/file/EditController.php:183
-#: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:244
+#: src/admin/bundle/LocaleController.php:138 tpl/admin/config/settings.php:250
 #: tpl/admin/config/apis.php:171 tpl/admin/config/prefs.php:45
 #: tpl/admin/common/inc-fsconn.php:16 tpl/admin/common/inc-fsconn.php:41
 #: tpl/admin/errors/no-backups.php:22
@@ -1018,7 +1018,7 @@ msgstr ""
 msgid "Go to WordPress Core"
 msgstr ""
 
-#: tpl/admin/config/settings.php:220
+#: tpl/admin/config/settings.php:226
 msgid "Grant access to roles"
 msgstr ""
 
@@ -1612,6 +1612,10 @@ msgstr ""
 msgid "Restore %s"
 msgstr ""
 
+#: tpl/admin/config/settings.php:217
+msgid "Restrict base directories"
+msgstr ""
+
 #: tpl/admin/config/prefs.php:29 tpl/admin/config/prefs.php:33
 msgid "Restrict locales"
 msgstr ""
@@ -1638,7 +1642,7 @@ msgstr ""
 msgid "Save credentials in session"
 msgstr ""
 
-#: tpl/admin/config/settings.php:243 tpl/admin/config/apis.php:170
+#: tpl/admin/config/settings.php:249 tpl/admin/config/apis.php:170
 #: tpl/admin/config/prefs.php:44
 msgid "Save settings"
 msgstr ""

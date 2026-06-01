@@ -6,66 +6,68 @@ class Loco_fs_Locations extends ArrayObject {
 
     /**
      * Singleton of WordPress root directory
-     * @var Loco_fs_Locations
      */    
-    private static $roots;
+    private static ?self $wproot = null;
 
     /**
      * Singleton of wp-content directory
-     * @var Loco_fs_Locations
      */    
-    private static $conts;
+    private static ?self $conts = null;
 
     /**
      * Singleton of global languages directories
-     * @var Loco_fs_Locations
      */    
-    private static $langs;
+    private static ?self $langs = null;
 
 
     /**
      * Singleton of registered theme paths
-     * @var Loco_fs_Locations
      */    
-    private static $theme;
+    private static ?self $theme = null;
 
 
     /**
      * Singleton of registered plugin locations
-     * @var Loco_fs_Locations
-     */    
-    private static $plugin;
+     */
+    private static ?self $plugin = null;
+
+
+    /**
+     * Singleton of configured base directories from settings
+     */
+    private static ?self $jails = null;
 
 
     /**
      * Clear static caches
      */
-    public static function clear(){
-        self::$roots = null;
+    public static function clear(): void {
+        self::$wproot = null;
         self::$conts = null;
         self::$langs = null;
         self::$theme = null;
         self::$plugin = null;
+        self::$jails = null;
     }
 
 
     /**
-     * @return Loco_fs_Locations 
+     * Get a locations collection containing only the WordPress installation directory 
      */
-    public static function getRoot(){
-        if( ! self::$roots ){
-            self::$roots = new Loco_fs_Locations( [
+    public static function getRoot():self {
+        if( ! self::$wproot ){
+            self::$wproot = new Loco_fs_Locations( [
                 loco_constant('ABSPATH'),
             ] );
         }
-        return self::$roots;
+        return self::$wproot;
     }
 
 
     /**
-     * @return Loco_fs_Locations 
+     * Get a locations collection containing the most likely WordPress content directory
      */
-    public static function getContent(){
+    public static function getContent():self{
         if( ! self::$conts ){
             self::$conts = new Loco_fs_Locations( [
                 loco_constant('WP_CONTENT_DIR'),  // <- defined WP_CONTENT_DIR
@@ -78,17 +80,16 @@ class Loco_fs_Locations extends ArrayObject {
 
     /**
      * @deprecated Use getLang
-     * @return Loco_fs_Locations
      */
-    public static function getGlobal(){
+    public static function getGlobal():self {
         return self::getLangs();
     }
 
 
     /**
-     * @return Loco_fs_Locations
+     * Get a locations collection containing the WordPress global languages directory
      */
-    public static function getLangs(){
+    public static function getLangs():self{
         if( ! self::$langs ){
             self::$langs = new Loco_fs_Locations( [
                 loco_constant('WP_LANG_DIR'),
@@ -99,9 +100,9 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @return Loco_fs_Locations 
+     * Get a locations collection containing all directories that may contain themes 
      */
-    public static function getThemes(){
+    public static function getThemes():self{
         if( ! self::$theme ){
             $roots = $GLOBALS['wp_theme_directories'] ?? [];
             if( ! $roots ){
@@ -114,9 +115,9 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @return Loco_fs_Locations 
+     * Get a locations collection containing all directories that may contain plugins
      */
-    public static function getPlugins(){
+    public static function getPlugins():self{
         if( ! self::$plugin ){
             self::$plugin = new Loco_fs_Locations( [
                 loco_constant('WPMU_PLUGIN_DIR'),
@@ -128,10 +129,30 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
+     * Get a locations collection from the fs_basedir plugin setting.s
+     * Absolute paths are used as-is; relative paths are resolved against ABSPATH.
+     */
+    public static function getBaseDirs():self{
+        if( ! self::$jails ){
+            $abspath = loco_constant('ABSPATH');
+            $paths = [];
+            foreach( explode("\n", Loco_data_Settings::get()->fs_basedir) as $line ){
+                $line = trim($line);
+                if( '' !== $line ){
+                    $paths[] = (new Loco_fs_File($line))->normalize($abspath);
+                }
+            }
+            self::$jails = new Loco_fs_Locations( $paths );
+        }
+        return self::$jails;
+    }
+
+
+    /**
      * Create instance from list of locations
      */
     public function __construct( array $paths ){
-        parent::__construct( [] );
+        parent::__construct();
         foreach( $paths as $path ){
             $this->add( $path );
         }
@@ -142,7 +163,7 @@ class Loco_fs_Locations extends ArrayObject {
      * @param string $path normalized absolute path
      * @return Loco_fs_Locations
      */ 
-    public function add( $path ){
+    public function add( string $path ): self {
         foreach( $this->expand($path) as $path ){
             // path must have trailing slash, otherwise "/plugins/foobar" would match "/plugins/foo/"
             $this->offsetSet( $path, strlen($path) );
@@ -156,7 +177,7 @@ class Loco_fs_Locations extends ArrayObject {
      * @param string $path absolute path
      * @return bool whether path matched
      */    
-    public function check( $path ){
+    public function check( string $path ): bool {
         foreach( $this->expand($path) as $path ){
             foreach( $this as $prefix => $length ){
                 if( $prefix === $path || substr($path,0,$length) === $prefix ){
@@ -172,9 +193,9 @@ class Loco_fs_Locations extends ArrayObject {
      * Match location and return the relative subpath.
      * Note that exact match is returned as "." indicating self
      * @param string $path
-     * @return string | null
+     * @return string|null
      */
-    public function rel( $path ){
+    public function rel( string $path ): ?string {
         foreach( $this->expand($path) as $path ){
             foreach( $this as $prefix => $length ){
                 if( $prefix === $path ){
@@ -193,7 +214,7 @@ class Loco_fs_Locations extends ArrayObject {
      * Like rel() but returns base directory also
      * @return string[]
      */
-    public function split( $path ){
+    public function split( string $path ): ?array {
         foreach( $this->expand($path) as $path ){
             foreach( $this as $prefix => $length ){
                 if( $prefix === $path ){
@@ -223,10 +244,10 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param string $rel
+     * @param string $rel Relative 
      * @return string[]
      */
-    public function expand( $rel ){
+    public function expand( string $rel ):array {
         if( '' === $rel ){
             //Loco_error_AdminNotices::debug('Expanding empty path to empty array');
             return [];
@@ -249,7 +270,7 @@ class Loco_fs_Locations extends ArrayObject {
     /**
      * @return string[]
      */
-    public function apply( $suffix = '' ){
+    public function apply( string $suffix = '' ): array {
         $paths = [];
         foreach( $this->getArrayCopy() as $prefix => $length ){
             $paths[] = $prefix.$suffix;
@@ -257,6 +278,14 @@ class Loco_fs_Locations extends ArrayObject {
         return $paths;
     }
 
+    
+    public function __toString(): string {
+        $paths = [];
+        foreach( $this->getArrayCopy() as $prefix => $length ){
+            $paths[] = rtrim($prefix,'/');
+        }
+        return implode(':',$paths);
+    }
     
 
 }

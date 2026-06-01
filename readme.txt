@@ -102,7 +102,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 == Changelog ==
 
 = 2.8.5 =
-* Current dev branch
+* Added `fs_basedir` setting to restrict writeable locations
 * POT creation disallows file name tampering. Thanks Stranger825.
 * Bumped WordPress compatibility to 7.0
 
