@@ -104,7 +104,8 @@ class Loco_fs_FileWriter {
 
 
     /**
-     * Test if currently configured path is writable via the current file system connector
+     * Test if the currently configured path is writable via the current file system connector.
+     * Note that this doesn't check the additional security settings handled by authorize()
      */
     public function writable(): bool {
         return ! $this->disabled() && $this->fs->is_writable( $this->getPath() );
@@ -304,9 +305,7 @@ class Loco_fs_FileWriter {
         }
         // Deny writes outside our custom base directories. The current path must be resolvable beneath at least one.
         $roots = Loco_fs_Locations::getBaseDirs();
-        $path = $this->file->getPath();
-        if( $roots->count() && ! $roots->check($path) ){
-            Loco_error_AdminNotices::debug( sprintf('%s not in %s',$path,$roots) );
+        if( $roots->count() && ! $roots->check( $this->file->getPath() ) ){
             throw new Loco_error_WriteException( __('File modification disallowed by the plugin settings','loco-translate') );
         }
         // We may need to examine multiple extensions, or there may be none for directories
@@ -338,7 +337,6 @@ class Loco_fs_FileWriter {
 
     /**
      * Check if file system modification is banned at WordPress level
-     * @return bool
      */
     public function disabled(): bool {
         // WordPress >= 4.8

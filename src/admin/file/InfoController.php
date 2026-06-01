@@ -47,10 +47,16 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $finfo['type'] = strtoupper($ext);
         if( $file->exists() ){
             $finfo['existent'] = true;
-            $finfo['writable'] = $file->writable();
-            $finfo['deletable'] = $file->deletable();
             $finfo['mtime'] = $file->modified();
-            // Notify if file is managed by WordPress
+            try {
+                $file->getWriteContext()->authorize();
+                $finfo['writable'] = $file->writable();
+                $finfo['deletable'] = $file->deletable();
+            }
+            catch( Loco_error_WriteException $e ){
+                $finfo['denied'] = $e->getMessage();
+            }
+            // Notify if the file is managed by WordPress
             $api = new Loco_api_WordPressFileSystem;
             if( $api->isAutoUpdatable($file) ){
                 $finfo['autoupdate'] = true;
@@ -64,7 +70,13 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         $dinfo['type'] = $dir->getTypeId();
         if( $dir->exists() && $dir->isDirectory() ){
             $dinfo['existent'] = true;
-            $dinfo['writable'] = $dir->writable();
+            try {
+                $dir->getWriteContext()->authorize();
+                $dinfo['writable'] = $dir->writable();
+            }
+            catch( Loco_error_WriteException $e ){
+                $dinfo['denied'] = $e->getMessage();
+            }
         }
 
         // secure download link

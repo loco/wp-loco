@@ -16,7 +16,17 @@ $this->block('header');
         <p>
             <code><?php $file->e('relpath')?></code>
         </p>
-    </div><?php    
+    </div><?php
+    // let security settings override actual writeable state
+    elseif( $file->denied ):?> 
+    <div class="panel panel-locked">
+        <h3 class="has-icon">
+            <?php esc_html_e('Write access denied','loco-translate')?> 
+        </h3>
+        <p>
+            <?php $file->e('denied')?>.
+        </p>
+    </div><?php
     elseif( $file->writable ):?> 
     <div class="panel panel-success">
         <h3 class="has-icon">
@@ -30,6 +40,7 @@ $this->block('header');
             <code><?php $file->ls()?></code>
         </p>
     </div><?php
+    // else file is unwriteable via PHP, but not denied by security settings.
     else:?> 
     <div class="panel panel-locked">
         <h3 class="has-icon">
@@ -48,7 +59,6 @@ $this->block('header');
     </div><?php
     endif;
 
-
     if( ! $dir->existent ):?> 
     <div class="panel panel-error">
         <h3 class="has-icon">
@@ -62,7 +72,6 @@ $this->block('header');
             <code><?php $dir->e('relpath')?></code>
         </p>
     </div><?php
-
     elseif( $dir->writable ):?> 
     <div class="panel panel-success">
         <h3 class="has-icon">
@@ -82,11 +91,11 @@ $this->block('header');
         </p><?php
         endif;?> 
     </div><?php
-
-    else:?> 
+    // indicate that directory is unwriteable via file system, unless file is blocked
+    elseif( ! $file->denied ):?> 
     <div class="panel panel-locked">
         <h3 class="has-icon">
-            <?php esc_html_e('Write protected','loco-translate')?> 
+            <?php esc_html_e('Write protected directory','loco-translate')?> 
         </h3>
         <p>
             <?php esc_html_e("This directory can't be written to directly by the web server",'loco-translate')?>.
