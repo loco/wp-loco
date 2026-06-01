@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.5-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-05-31 11:02+0000\n"
+"POT-Creation-Date: 2026-06-01 11:59+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -23,7 +23,7 @@ msgid "\"%1$s\" %2$s by %3$s"
 msgstr ""
 
 #. %s refers to a directory name which was expected to be an ordinary file
-#: src/fs/FileWriter.php:218
+#: src/fs/FileWriter.php:210
 #, php-format
 msgid "\"%s\" is a directory, not a file"
 msgstr ""
@@ -97,7 +97,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Where %s is the type of file, e.g. "po"
-#: tpl/admin/file/info.php:24
+#: tpl/admin/file/info.php:34
 #, php-format
 msgid "%s file is writeable"
 msgstr ""
@@ -578,11 +578,11 @@ msgstr ""
 msgid "Descriptive name for this set of translatable strings"
 msgstr ""
 
-#: tpl/admin/file/info.php:55
+#: tpl/admin/file/info.php:65
 msgid "Directory doesn't exist"
 msgstr ""
 
-#: tpl/admin/file/info.php:69
+#: tpl/admin/file/info.php:78
 msgid "Directory is writeable"
 msgstr ""
 
@@ -816,22 +816,22 @@ msgstr[1] ""
 msgid "Extracting strings"
 msgstr ""
 
-#: src/fs/FileWriter.php:297
+#: src/fs/FileWriter.php:289
 msgid "Failed to build directory path"
 msgstr ""
 
 #. %s refers to a file name, for which the chmod operation failed.
-#: src/fs/FileWriter.php:133
+#: src/fs/FileWriter.php:125
 #, php-format
 msgid "Failed to chmod %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:52
+#: src/fs/FileWriter.php:46
 msgid "Failed to connect to remote server"
 msgstr ""
 
 #. (1) Source file name (2) Target file name
-#: src/fs/FileWriter.php:162
+#: src/fs/FileWriter.php:154
 #, php-format
 msgid "Failed to copy %1$s to %2$s"
 msgstr ""
@@ -844,17 +844,17 @@ msgid ""
 "backups"
 msgstr ""
 
-#: src/fs/FileWriter.php:289
+#: src/fs/FileWriter.php:281
 msgid "Failed to create directory"
 msgstr ""
 
 #. %s refers to a file name, for which a delete operation failed.
-#: src/fs/FileWriter.php:201
+#: src/fs/FileWriter.php:193
 #, php-format
 msgid "Failed to delete %s"
 msgstr ""
 
-#: src/fs/FileWriter.php:253
+#: src/fs/FileWriter.php:245
 msgid "Failed to save file"
 msgstr ""
 
@@ -876,7 +876,7 @@ msgstr ""
 msgid "File deleted"
 msgstr ""
 
-#: src/admin/file/InfoController.php:169
+#: src/admin/file/InfoController.php:181
 msgid "File does not have a valid header"
 msgstr ""
 
@@ -925,7 +925,11 @@ msgctxt "File location"
 msgid "System"
 msgstr ""
 
-#: src/fs/FileWriter.php:308
+#: src/fs/FileWriter.php:309
+msgid "File modification disallowed by the plugin settings"
+msgstr ""
+
+#: src/fs/FileWriter.php:299
 msgid "File modification is disallowed by your WordPress config"
 msgstr ""
 
@@ -964,7 +968,7 @@ msgstr ""
 msgid "Files found"
 msgstr ""
 
-#: tpl/admin/file/info.php:110
+#: tpl/admin/file/info.php:119
 msgid ""
 "Files in this location can be modified or deleted by WordPress automatic "
 "updates"
@@ -1134,7 +1138,7 @@ msgid "Language"
 msgstr ""
 
 #. Warning that the language in the file header (1) does not match the file name (2)
-#: src/admin/file/InfoController.php:177
+#: src/admin/file/InfoController.php:189
 #, php-format
 msgid "Language header is \"%1$s\" but file name contains \"%2$s\""
 msgstr ""
@@ -1274,11 +1278,11 @@ msgstr ""
 msgid "Modification of installed files"
 msgstr ""
 
-#: src/fs/FileWriter.php:313
+#: src/fs/FileWriter.php:304
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
-#: src/fs/FileWriter.php:324
+#: src/fs/FileWriter.php:320
 msgid ""
 "Modification of POT (template) files is disallowed by the plugin settings"
 msgstr ""
@@ -1370,7 +1374,7 @@ msgstr ""
 msgid "Not recommended"
 msgstr ""
 
-#: tpl/admin/file/info.php:81
+#: tpl/admin/file/info.php:90
 msgid ""
 "Note that the file may not be deletable due to additional ownership "
 "permissions"
@@ -1427,7 +1431,7 @@ msgstr ""
 msgid "Page not found"
 msgstr ""
 
-#: src/fs/FileWriter.php:249
+#: src/fs/FileWriter.php:241
 msgid "Parent directory isn't writable"
 msgstr ""
 
@@ -1447,7 +1451,7 @@ msgstr ""
 msgid "Permission denied"
 msgstr ""
 
-#: src/fs/FileWriter.php:243
+#: src/fs/FileWriter.php:235
 msgid "Permission denied to update file"
 msgstr ""
 
@@ -1580,7 +1584,7 @@ msgstr ""
 msgid "Recommended"
 msgstr ""
 
-#: src/fs/FileWriter.php:151
+#: src/fs/FileWriter.php:143
 msgid "Refusing to copy over an existing file"
 msgstr ""
 
@@ -1612,12 +1616,12 @@ msgstr ""
 msgid "Restore %s"
 msgstr ""
 
-#: tpl/admin/config/settings.php:217
-msgid "Restrict base directories"
-msgstr ""
-
 #: tpl/admin/config/prefs.php:29 tpl/admin/config/prefs.php:33
 msgid "Restrict locales"
+msgstr ""
+
+#: tpl/admin/config/settings.php:217
+msgid "Restricted writeable directories"
 msgstr ""
 
 #. Where %s is a file name
@@ -1835,12 +1839,12 @@ msgid "Text Domain cannot be empty"
 msgstr ""
 
 #. "either" meaning that the file itself can't exist without a containing directory
-#: tpl/admin/file/info.php:59
+#: tpl/admin/file/info.php:69
 msgid "The containing directory for this file doesn't exist either"
 msgstr ""
 
 #. Where %s is the name (or number) of an operating system user
-#: tpl/admin/file/info.php:73
+#: tpl/admin/file/info.php:82
 #, php-format
 msgid ""
 "The containing directory is writeable by %s, so you can add new files in the "
@@ -1968,7 +1972,7 @@ msgid ""
 "before adding languages"
 msgstr ""
 
-#: tpl/admin/file/info.php:92
+#: tpl/admin/file/info.php:101
 msgid "This directory can't be written to directly by the web server"
 msgstr ""
 
@@ -1982,7 +1986,7 @@ msgid ""
 "updates"
 msgstr ""
 
-#: tpl/admin/file/info.php:39
+#: tpl/admin/file/info.php:50
 msgid "This file can't be updated directly by the web server"
 msgstr ""
 
@@ -2031,7 +2035,7 @@ msgid "Tim Whitlock"
 msgstr ""
 
 #. Where %s is the name (or number) of an operating system user
-#: tpl/admin/file/info.php:96
+#: tpl/admin/file/info.php:105
 #, php-format
 msgid ""
 "To create new files here you'll have to connect to the remote file system, "
@@ -2039,7 +2043,7 @@ msgid ""
 msgstr ""
 
 #. Where %s is the name (or number) of an operating system user
-#: tpl/admin/file/info.php:43
+#: tpl/admin/file/info.php:54
 #, php-format
 msgid ""
 "To make changes you'll have to connect to the remote file system, or make "
@@ -2119,7 +2123,7 @@ msgstr ""
 msgid "Unexpected file type"
 msgstr ""
 
-#: src/package/Header.php:86 src/admin/file/InfoController.php:137
+#: src/package/Header.php:86 src/admin/file/InfoController.php:149
 msgid "Unknown author"
 msgstr ""
 
@@ -2227,7 +2231,7 @@ msgstr ""
 msgid "Welcome to Loco Translate"
 msgstr ""
 
-#: src/admin/init/InitPoController.php:377 tpl/admin/file/info.php:113
+#: src/admin/init/InitPoController.php:377 tpl/admin/file/info.php:122
 msgid "What's this?"
 msgstr ""
 
@@ -2259,14 +2263,21 @@ msgstr ""
 msgid "WordPress says the primary text domain is \"%s\""
 msgstr ""
 
-#: tpl/admin/file/info.php:107
+#: tpl/admin/file/info.php:116
 msgid "WordPress updates"
 msgstr ""
 
+#: tpl/admin/file/info.php:24
+msgid "Write access denied"
+msgstr ""
+
 #. When a file or folder cannot be modified due to filesystem permissions
-#: tpl/admin/file/info.php:36 tpl/admin/file/info.php:89
-#: tpl/admin/common/inc-fsconn.php:50
+#: tpl/admin/file/info.php:47 tpl/admin/common/inc-fsconn.php:50
 msgid "Write protected"
+msgstr ""
+
+#: tpl/admin/file/info.php:98
+msgid "Write protected directory"
 msgstr ""
 
 #: tpl/admin/bundle/conf.php:146
@@ -2306,7 +2317,7 @@ msgid ""
 "target=\"_blank\">template</a>"
 msgstr ""
 
-#: tpl/admin/file/info.php:27
+#: tpl/admin/file/info.php:37
 msgid ""
 "You can update these translations directly from the editor to the file system"
 msgstr ""
