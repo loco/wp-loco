@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 7.0
-Stable tag: 2.8.4
+Stable tag: 2.8.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -611,7 +611,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.3 =
+= 2.8.5 =
 * Various improvements and bug fixes
 
 
