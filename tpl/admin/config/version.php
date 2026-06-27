@@ -72,7 +72,7 @@ $this->extend('../layout');
         </p>
         <p class="submit">
             <a class="button button-primary" href="<?php echo esc_url($wpupdate_href)?>"><?php esc_html_e('Update Now','loco-translate')?></a>
-            <a class="button-link has-icon icon-ext" target="_blank" href="https://wordpress.org/download/releases/"><?php esc_html_e( __('Install manually','loco-translate') )?></a>
+            <a class="button-link has-icon icon-ext" target="_blank" href="https://wordpress.org/download/releases/"><?php esc_html_e('Install manually','loco-translate')?></a>
         </p>
         </div><?php
     endif;
