@@ -7,10 +7,10 @@ class Loco_test_RecursiveException extends Loco_error_Exception {
     
     
     /**
-     * @override
+     * @inheritdoc 
      */
     public function getTemplate(){
-        return LOCO_TEST_DATA_ROOT.'/views/fatal';
+        return 'tests/fatal';
     }    
 
 }

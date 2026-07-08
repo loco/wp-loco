@@ -42,10 +42,19 @@ class Loco_fs_File {
                 return $path;
             }
             // Windows drive path if "X:" or network path if "\\"
-            $chr2 = (string) substr($path,1,1);
+            $chr2 = substr($path,1,1) ?: '';
             if( '' !== $chr2 ){
                 if( ':' === $chr2 ||  ( '\\' === $chr1 && '\\' === $chr2 ) ){
                     return strtoupper($chr1).$chr2.strtr( substr($path,2), '\\', '/' );
+                }
+                // Check that relative isn't some other file wrapper uri.
+                if( preg_match('!^([^/:]+)://!',$path,$r) ){
+                    // allow file:// - pointless but harmless, as long as we pass back through again
+                    if( 'file' === $r[1] ){
+                        return self::abs( substr($path,strlen($r[0])) );
+                    }
+                    // This should never be thrown except in tests, as any illegal input will be rejected earlier.
+                    throw new InvalidArgumentException('Stream wrappers disallowed');
                 }
             }
         }

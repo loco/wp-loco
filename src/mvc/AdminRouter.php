@@ -96,14 +96,14 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
      * @return Loco_mvc_AdminController|null
      */
     public function initPage( WP_Screen $screen, string $action = '' ){
-        $class = null;
         $args =  [];
+        $class = '';
         // suppress error display when establishing Loco page
         $page = self::screenToPage($screen);
         if( is_string($page) ){
             $class = self::pageToClass( $page, $action, $args );
         }
-        if( is_null($class) ){
+        if( '' === $class ){
             $this->ctrl = null;
             return null;
         }
@@ -122,10 +122,13 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         catch( Exception $e ){
             Loco_error_AdminNotices::debug( $e->getMessage() );
         }
-        // Initialise controller with query string + route arguments
+        // Initialise controller with query string + route arguments.
+        // External $_GET is filtered through the controller's allowedParams; trusted routing args
+        // (_route, type, action) are passed separately so they can't be spoofed or stripped.
         // note that $_GET is not being stripped of slashes added by WordPress.
+        $args['action'] = $action;
         try {
-            $this->ctrl->_init($_GET+$args);
+            $this->ctrl->_init( $_GET, $args );
             do_action('loco_admin_init', $this->ctrl );
         }
         // catch errors during controller setup
@@ -133,9 +136,9 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             $this->ctrl = new Loco_admin_ErrorController;
             // can't afford an error during an error
             try {
-                $this->ctrl->_init( [ 'error' => $e ] );
+                $this->ctrl->_init( [], [ 'error' => $e ] );
             }
-            catch( Exception $_e ){
+            catch( Throwable $_e ){
                 Loco_error_AdminNotices::debug( $_e->getMessage() );
                 Loco_error_AdminNotices::add($e);
             }
@@ -149,18 +152,16 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
     /**
      * Convert WordPress internal WPScreen $id into route prefix for an admin page controller
-     * @return string|null
      */
-    private static function screenToPage( WP_Screen $screen ){
+    private static function screenToPage( WP_Screen $screen ):?string {
         // Hooked menu slug is either "toplevel_page_loco" or "{title}_page_loco-{page}"
         // Sanitized {title} prefix is not reliable as it may be localized. instead just checking for "_page_loco"
         $id = $screen->id;
         $start = strpos($id,'_page_loco');
-        // not one of our pages if token not found
         if( is_int($start) ){
-            $page = substr( $id, $start+11 ) or $page = '';
-            return $page;
+            return substr( $id, $start+11 )?:'';
         }
+        // null indicates not one of our pages if token not found (empty string means root page)
         return null;
     }
 
@@ -168,11 +169,8 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
     /**
      * Get unvalidated controller class for given route parameters
      * Abstracted from initPage so we can validate routes in self::generate
-     * @param string $page
-     * @param string $action
-     * @return string|null
      */
-    private static function pageToClass( $page, $action, array &$args ){
+    private static function pageToClass( string $page, string $action, array &$args ):string {
         $routes =  [
             '' => 'Root',
             'debug' => 'Debug',
@@ -224,7 +222,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         }
         // debug routing failures:
         // throw new Exception( sprintf('Failed to get page class from $page=%s',$page) );
-        return null;
+        return '';
     }
 
 
@@ -261,12 +259,10 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
 
     /**
      * Generate a routable link to Loco admin page
-     * @param string $route
-     * @return string
      */
-    public static function generate( string $route, array $args = [] ){
+    public static function generate( string $route, array $args = [] ):string {
         $url = null;
-        $action = null;
+        $action = '';
         // empty action targets plugin root
         if( ! $route || 'loco' === $route ){
             $page = 'loco';
@@ -286,16 +282,11 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
                 }
             }
         }
-        // sanitize extended route in debug mode only. useful in tests
+        // sanitize extended route in debug mode only
         if( loco_debugging() ){
-            $tmp = [];
-            $class = self::pageToClass( (string) substr($page,5), $action, $tmp );
-            if( ! $class ){
-                throw new UnexpectedValueException( sprintf('Invalid admin route: %s', json_encode($route) ) );
-            }
-            else if( ! class_exists($class) ){
-                throw new Loco_error_Exception('File not found for '.$class);
-            }
+            $defaults = [];
+            $class = self::pageToClass( substr($page,5)?:'', $action, $defaults );
+            Loco_mvc_AdminController::validateClass( $class, array_diff_key($args,$defaults) );
         }
         // if url found, it should contain the page
         if( $url ){
@@ -307,7 +298,7 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
             $args['page'] = $page;
         }
         // add action if found
-        if( $action ){
+        if( '' !== $action ){
             $args['action'] = $action;
         }
         // else ensure not set in args, as it's reserved

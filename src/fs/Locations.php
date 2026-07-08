@@ -87,7 +87,7 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * Get a locations collection containing the WordPress global languages directory
+     * Get a Loco_fs_Locations collection containing the WordPress global languages directory
      */
     public static function getLangs():self{
         if( ! self::$langs ){

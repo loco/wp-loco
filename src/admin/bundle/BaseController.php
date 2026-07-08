@@ -9,6 +9,18 @@ abstract class Loco_admin_bundle_BaseController extends Loco_mvc_AdminController
     private ?Loco_package_Project $project = null;
 
 
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        // "type", "action" and "_route" are trusted routing args supplied by the router, not $_GET
+        return [
+            'bundle' => '',
+            'domain' => '',
+        ];
+    }
+
+
     public function getBundle():Loco_package_Bundle {
         if( ! $this->bundle ){
             $type = $this->get('type');

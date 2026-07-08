@@ -4,6 +4,16 @@
  */
 class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
 
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'advanced' => '',
+        ];
+    }
+
+
 
     /**
      * {@inheritdoc}

@@ -4,6 +4,17 @@
  */
 class Loco_ajax_XgettextController extends Loco_ajax_common_BundleController {
 
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'name' => '',
+            'path' => '',
+        ];
+    }
+
+
 
     /**
      * {@inheritdoc}

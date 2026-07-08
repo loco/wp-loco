@@ -4,38 +4,33 @@
  */
 abstract class Loco_mvc_AdminController extends Loco_mvc_Controller {
     
-    /**
-     * @var Loco_mvc_View
-     */
-    private $view;
+    private Loco_mvc_View $view;
     
     /**
      * Debugging timestamp (microseconds)
-     * @var float
      */
-    private $bench;
+    private ?float $bench = null;
 
     /**
      * Base url to plugin folder for web access
-     * @var string
      */
-    private $baseurl;
+    private string $baseurl = '';
 
     /**
      * @var string[]
      */
-    private $scripts = [];
+    private array $scripts = [];
     
 
     /**
      * Pre-init call invoked by router
-     * @return static
      */    
-    final public function _init( array $args ){
+    final public function _init( array $external, array $internal = [] ):self {
         if( loco_debugging() ){
             $this->bench = microtime( true );
         }
-        $this->view = new Loco_mvc_View( $args );
+        $args = $internal + $this->filterParams($external);
+        $this->view = new Loco_mvc_View($args);
         $this->auth();
         
         // check essential extensions on all pages so admin notices are shown

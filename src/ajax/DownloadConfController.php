@@ -3,6 +3,16 @@
  * Downloads a bundle configuration as XML or Json
  */
 class Loco_ajax_DownloadConfController extends Loco_ajax_common_BundleController {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'path' => '',
+        ];
+    }
+
     
     
     /**

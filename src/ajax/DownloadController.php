@@ -4,6 +4,16 @@
  */
 class Loco_ajax_DownloadController extends Loco_ajax_common_BundleController {
 
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'path' => '',
+        ];
+    }
+
+
 
     /**
      * @return string

@@ -3,6 +3,16 @@
  * Pseudo-bundle view, lists all files available in a single locale
  */
 class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return [
+            'locale' => '',
+        ];
+    }
+
     
     /**
      * @var Loco_Locale

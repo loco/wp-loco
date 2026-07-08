@@ -6,27 +6,23 @@ abstract class Loco_mvc_AjaxController extends Loco_mvc_Controller {
     
     /**
      * Request arguments injected from Router
-     * @var ArrayObject
      */
-    private $input;
+    private ArrayObject $input;
     
     /**
      * Data to respond with as JSON
-     * @var ArrayObject
      */
-    private $output;
+    private ArrayObject $output;
 
 
     /**
      * Pre-init call invoked by router
-     * @param mixed[]
-     * @return void
      */    
-    final public function _init( array $args ){
+    final public function _init( array $external, array $internal = [] ):void {
         $this->auth();
         $this->output = new ArrayObject;
-        $this->input = new ArrayObject( $args );
-        // avoid fatal error if json extension is missing
+        $this->input = new ArrayObject( $internal + $this->filterParams($external) );
+        // avoid fatal error if JSON extension is missing
         loco_check_extension('json');
     }
 

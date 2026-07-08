@@ -69,7 +69,7 @@ class Loco_admin_bundle_ConfController extends Loco_admin_bundle_BaseController 
         if( $bundle->isTheme() && ( $parent = $bundle->getParent() ) ){
             $this->set( 'parent', new Loco_mvc_ViewParams( [
                 'name' => $parent->getName(),
-                'href' => Loco_mvc_AdminRouter::generate('theme-conf', [ 'bundle' => $parent->getSlug() ] + $_GET ),
+                'href' => Loco_mvc_AdminRouter::generate('theme-conf', ['bundle'=>$parent->getSlug()] ),
             ] ) );
         }
 

@@ -5,6 +5,17 @@
  */
 class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
 
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'custom' => '',
+            'hidden' => '',
+        ];
+    }
+
+
     
     /**
      * {@inheritdoc}

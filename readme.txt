@@ -101,6 +101,11 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Changelog ==
 
+= 2.8.6 =
+* Fixed missing Ace editor
+* Fix for CVE-2026-15005: Thanks mikemyers.
+* Current development version
+
 = 2.8.5 =
 * Added `fs_basedir` setting to restrict writeable locations
 * POT creation disallows file name tampering. Thanks Stranger825.
@@ -611,7 +616,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.5 =
+= 2.8.6 =
 * Various improvements and bug fixes
 
 

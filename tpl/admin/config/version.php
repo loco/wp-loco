@@ -58,21 +58,3 @@ $this->extend('../layout');
         </p>
     </div><?php
     endif;
-
-
-    // WordPress version (warnings only)
-    if( $params->has('wpupdate') ):?>
-        <div class="panel panel-warning">
-        <h3 class="has-icon"><?php
-            // translators: Where %s is the full version number of WordPress
-            self::e( __('WordPress %s','loco-translate'), $wpversion )?> 
-        </h3>
-        <p><?php
-            self::e( __('Your version of %1$s is out of date. We recommend you upgrade to at least v%2$s, but preferably to the latest stable version.','loco-translate'),'WordPress',$wpupdate)?> 
-        </p>
-        <p class="submit">
-            <a class="button button-primary" href="<?php echo esc_url($wpupdate_href)?>"><?php esc_html_e('Update Now','loco-translate')?></a>
-            <a class="button-link has-icon icon-ext" target="_blank" href="https://wordpress.org/download/releases/"><?php esc_html_e( __('Install manually','loco-translate') )?></a>
-        </p>
-        </div><?php
-    endif;

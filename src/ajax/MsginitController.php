@@ -5,6 +5,18 @@
 class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
 
     /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'use-selector'  => '',
+            'select-locale' => '',
+            'custom-locale' => '',
+        ];
+    }
+
+
+    /**
      * @return Loco_Locale
      */
     private function getLocale(){

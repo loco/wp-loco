@@ -4,6 +4,16 @@
  * Currently this is only PHP, but could theoretically be any file type.
  */
 class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'path' => '',
+        ];
+    }
+
     
     
     private function getReferringFile():Loco_fs_File {

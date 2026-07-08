@@ -12,24 +12,23 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
     /**
      * Buffer for collecting unintentional output
      */
-    private ?Loco_output_Buffer $buffer = null;
+    private ?Loco_output_Buffer $buffer;
 
     /**
-     * Generate a GET request URL containing required routing parameters
-     * @param string $route
-     * @param array $args
-     * @return string
+     * Generate a Loco admin Ajax route containing required parameters
      */
-    public static function generate( string $route, array $args = [] ){
-        // validate route autoload if debugging
-        if( loco_debugging() && ! class_exists( self::routeToClass($route) ) ){
-            throw new Exception('Loco class not found for '.$route);
-        }
-        $args +=  [
+    public static function generate( string $route, array $args = [] ):string {
+        $defaults = [
             'route' => $route,
             'action' => 'loco_ajax',
             'loco-nonce' => wp_create_nonce($route),
         ];
+        // validate route autoload if debugging
+        if( loco_debugging() ){
+            $class = self::routeToClass($route);
+            Loco_mvc_AjaxController::validateClass( $class, array_diff_key($args,$defaults) );
+        }
+        $args += $defaults;
         return admin_url('admin-ajax.php','relative').'?'.http_build_query($args);
     }
 
@@ -49,10 +48,12 @@ class Loco_mvc_AjaxRouter extends Loco_hooks_Hookable {
      */
     public function on_init(){
         $this->ctrl = null;
-        $class = self::routeToClass( $_REQUEST['route'] );
+        $route = $_REQUEST['route'];
+        $class = self::routeToClass( $route );
         if( class_exists($class) ){
             $this->ctrl = new $class;
-            $this->ctrl->_init( $_REQUEST );
+            // external $_REQUEST is filtered through allowedParams; the trusted route is passed separately
+            $this->ctrl->_init( $_REQUEST, [ 'route' => $route ] );
             // hook name compatible with AdminRouter, plus additional action for ajax hooks to set up
             do_action('loco_admin_init', $this->ctrl );
             do_action('loco_ajax_init', $this->ctrl );

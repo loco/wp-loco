@@ -205,6 +205,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             ] : null,
             'nonces' => $this->getNonces($readonly),
             'adminUrl' => Loco_mvc_AdminRouter::generate('loco'),
+            'aceUrl' => 'https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.1/ace.js',
+            
         ] ) );
         $this->set( 'ui', new Loco_mvc_ViewParams( [
              // Translators: button for adding a new string when manually editing a POT file

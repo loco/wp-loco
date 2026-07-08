@@ -7,34 +7,27 @@
  */
 class Loco_mvc_View implements IteratorAggregate {
 
-    /**
-     * @var Loco_mvc_ViewParams
-     */
-    private $scope;
+    private Loco_mvc_ViewParams $scope;
     
     /**
      * View that is decorating current view
-     * @var self
      */
-    private $parent;
+    private ?self $parent = null;
     
     /**
      * Current template as full path to PHP file
-     * @var string
      */
-    private $template;
+    private string $template = '';
     
     /**
      * Current working directory for finding templates by relative path
-     * @var string
      */
-    private $cwd;
+    private string $cwd;
 
     /**
      * Name of current output buffer
-     * @var string
      */
-    private $name;
+    private string $name = '';
 
 
     /**
@@ -66,7 +59,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * Clean up if something abruptly stopped rendering before graceful end
      */
     public function __destruct(){
-        if( $this->name ){
+        if( '' !== $this->name ){
             ob_end_clean();
         }
     }
@@ -81,7 +74,7 @@ class Loco_mvc_View implements IteratorAggregate {
             $view->set( 'error', $e );
             return $view->render( $e->getTemplate() );
         }
-        catch( Exception $e ){
+        catch( Throwable $e ){
             return '<h1>'.esc_html( $e->getMessage() ).'</h1>';
         }
     }
@@ -112,12 +105,12 @@ class Loco_mvc_View implements IteratorAggregate {
 
     /**
      * When stop is called, buffered output is saved into current variable for output by parent template, or at end of script.
-     * @return void
      */
-    private function stop(){
+    private function stop():void {
         $content = ob_get_contents();
         ob_clean();
-        if( $b = $this->name ){
+        $b = $this->name;
+        if( '' !== $b ){
             if( isset($this->scope[$b]) ){
                 $content = $this->scope[$b].$content;
             }
@@ -199,7 +192,7 @@ class Loco_mvc_View implements IteratorAggregate {
      * @param self|null $parent parent view rendering this view
      */
     public function render( string $tpl, ?array $args = null, ?Loco_mvc_View $parent = null ):string {
-        if( $this->name ){
+        if( '' !== $this->name ){
             return $this->fork()->render( $tpl, $args, $this );
         }
         $this->setTemplate($tpl);
@@ -227,7 +220,7 @@ class Loco_mvc_View implements IteratorAggregate {
         $this->start('_trash');
         $this->execTemplate( $this->template );
         $this->stop();
-        $this->name = null;
+        $this->name = '';
         // decorate via parent view if there is one
         if( $this->parent ){
             $this->parent->scope = clone $this->scope;
@@ -241,15 +234,19 @@ class Loco_mvc_View implements IteratorAggregate {
 
 
     /**
-     * Set current template
+     * Single entry point for setting current template
      * @param string $tpl Path to template, excluding file extension
      */
     public function setTemplate( string $tpl ):void {
         $file = new Loco_fs_File( $tpl.'.php' );
-        $file->normalize( $this->cwd );
-        if( ! $file->exists() ){
-            $debug = str_replace( loco_plugin_root().'/', '', $file->getPath() );
-            throw new Loco_error_Exception( 'Template not found: '.$debug );
+        $path = $file->normalize( $this->cwd );
+        $root = loco_plugin_root().'/tpl/';
+        // User input should be blocked from here, so the following is to catch developer errors.
+        if( ! str_starts_with($path,$root) ){
+            throw new Loco_error_Exception('Bad template path: '.$tpl.' => '.$path );
+        }
+        else if( ! $file->exists() ){
+            throw new Loco_error_Exception('Template not found: '.str_replace($root,'',$path) );
         }
         $this->cwd = $file->dirname();
         $this->template = $file->getPath();
@@ -270,7 +267,11 @@ class Loco_mvc_View implements IteratorAggregate {
      */
     private function execTemplate( string $template ):void {
         $params = $this->scope;
-        extract( $params->getArrayCopy() );
+        // Parameter input should be sanitized, but here we log developer error
+        if( $params->has('template') || $params->has('params')){
+            Loco_error_Debug::trace('Template arguments attempted to override local variables');
+        }
+        extract( $params->getArrayCopy(), EXTR_SKIP  );
         include $template;
     }
 

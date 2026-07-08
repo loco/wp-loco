@@ -7,6 +7,16 @@ class Loco_ajax_ApisController extends Loco_mvc_AjaxController {
     /**
      * {@inheritdoc}
      */
+    public function allowedParams():array {
+        return [
+            'locale' => '',
+        ];
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function render(){
         $post = $this->validate();
         

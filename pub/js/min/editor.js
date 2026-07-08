@@ -233,20 +233,20 @@ m.preventDefault();
 m.stopPropagation();
 h();
 m = f.current();
-const w = f.getTargetOffset();
-m.translate(p, w);
+const x = f.getTargetOffset();
+m.translate(p, x);
 f.focus().reloadMessage(m);
 };
 }
-function c(l, p, m, w) {
-let J = w.getId(), O = R[J], va = String(O + 1), Na = w.getUrl() || "#", wa = u("Use this translation");
-w = String(w);
+function c(l, p, m, x) {
+let J = x.getId(), O = R[J], va = String(O + 1), Na = x.getUrl() || "#", wa = u("Use this translation");
+x = String(x);
 let xa = X && X[J];
 l = d('<button class="button button-primary"></button>').attr("tabindex", String(1 + N + O)).on("click", b(l, p));
 l.attr("accesskey", va);
 1 < q.length && (wa += " (" + va + ")");
 l.text(wa);
-xa && xa.replaceWith(d('<div class="loco-api loco-api-result loco-api-' + J + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Na).text(w))).append(d("<blockquote " + I + "></blockquote>").text(p || "FAILED")).append(l));
+xa && xa.replaceWith(d('<div class="loco-api loco-api-result loco-api-' + J + '"></div>').append(d('<div class="loco-api-credit">Translated by </div>').append(d('<a target="_blank" tabindex="-1"></a>').attr("href", Na).text(x))).append(d("<blockquote " + I + "></blockquote>").text(p || "FAILED")).append(l));
 ++S === Q && (g && g.dialog("option", "title", u("Suggested translations") + " — " + m.label), 
 N += S, y.attr("disabled") && y.attr("disabled", !1));
 0 === O && l.focus();
@@ -261,19 +261,19 @@ X = R = g = null;
 d(C).off("keydown", a);
 }
 function t(l) {
-return function(p, m, w) {
+return function(p, m, x) {
 M[l.getId()] = m;
-c(p, m, w, l);
+c(p, m, x, l);
 };
 }
 function n(l) {
 const p = r.notes(), m = r.context();
-var w = m + "" + l;
-M = ya[w] || (ya[w] = {});
-for (w = -1; ++w < Q; ) {
-const J = q[w], O = J.getId();
+var x = m + "" + l;
+M = ya[x] || (ya[x] = {});
+for (x = -1; ++x < Q; ) {
+const J = q[x], O = J.getId();
 g.append(e(J));
-R[O] = w;
+R[O] = x;
 M[O] ? c(l, M[O], E, J) : J.translate({
 source: l,
 context: m,
@@ -351,7 +351,7 @@ d(a).removeClass("button-primary");
 });
 Aa = d.extend({
 path: ia
-}, x.project || {});
+}, w.project || {});
 d(a).on("click", function(c) {
 c.preventDefault();
 a.disabled = !0;
@@ -362,7 +362,7 @@ return !1;
 return !0;
 }
 function Sa(a) {
-const b = x.project;
+const b = w.project;
 if (b) {
 var c = function() {
 a.disabled = !1;
@@ -457,11 +457,11 @@ a = b.getAttribute("data-loco");
 const c = Y[a];
 c && c(b, a) || d(b).addClass("loco-noop");
 }
-const k = C.loco, x = k && k.conf, H = document.getElementById("loco-editor-inner");
-if (k && x && H) {
-var Ga = !!x.WP_DEBUG, la = k.po.ref && k.po.ref.init(k, x), ma = null, Aa = null, ha = x.multipart, Za = k.l10n, v = k.string.sprintf, Ea = x.wpnum && x.wpnum.thousands_sep || ",", E = x.locale, B = k.po.init(E).wrap(x.powrap), V = !E, Ja = k.locale.clone(x.source || {
+const k = C.loco, w = k && k.conf, H = document.getElementById("loco-editor-inner");
+if (k && w && H) {
+var Ga = !!w.WP_DEBUG, la = k.po.ref && k.po.ref.init(k, w), ma = null, Aa = null, ha = w.multipart, Za = k.l10n, v = k.string.sprintf, Ea = w.wpnum && w.wpnum.thousands_sep || ",", E = w.locale, B = k.po.init(E).wrap(w.powrap), V = !E, Ja = k.locale.clone(w.source || {
 lang: "en"
-}), $a = document.getElementById("loco-actions"), ia = x.popath, Ta = x.potpath, Ua = x.syncmode, K = document.getElementById("loco-fs"), Ba = K && k.fs.init(K), ra = x.readonly;
+}), $a = document.getElementById("loco-actions"), ia = w.popath, Ta = w.potpath, Ua = w.syncmode, K = document.getElementById("loco-fs"), Ba = K && k.fs.init(K), ra = w.readonly;
 K = !ra;
 var aa = C.sessionStorage || {
 setItem: function() {},
@@ -473,6 +473,7 @@ my: "top",
 at: "top",
 of: "#loco-content"
 };
+k.aceUrl = w.aceUrl;
 !ha || C.FormData && C.Blob || (ha = !1, k.notices.warn("Your browser doesn't support Ajax file uploads. Falling back to standard postdata"));
 la || k.notices.warn("admin.js is out of date. Please empty your browser cache and reload the page.");
 var Da = function() {
@@ -572,7 +573,7 @@ C.onbeforeunload = null;
 b = "CODE" === b.tagName ? b : b.getElementsByTagName("CODE")[0];
 return b && la ? (la.load(b.textContent), a.preventDefault(), !1) : !0;
 });
-B.load(x.podata);
+B.load(w.podata);
 f.load(B);
 (E = f.targetLocale) ? E.isRTL() && d(H).addClass("trg-rtl") : f.unlock();
 T();

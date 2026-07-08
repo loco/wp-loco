@@ -6,7 +6,7 @@
 class LocoDomQueryFilter { 
 private /*string*/ $tag = ''; 
 private /*array*/ $attr = []; 
-public function __construct( string $value ){ $id = '[-_a-z][-_a-z0-9]*'; if( ! preg_match('/^([a-z1-6]*)(#'.$id.')?(\\.'.$id.')?(\\[(\\w+)="(.+)"])?$/i', $value, $r ) ){ throw new InvalidArgumentException('Bad filter, '.$value ); } if( $r[1] ){ $this->tag = $r[1]; } if( ! empty($r[2]) ){ $this->attr['id'] = substr($r[2],1); } if( ! empty($r[3]) ){ $this->attr['class'] = substr($r[3],1); } if( ! empty($r[4]) ){ $this->attr[ $r[5] ] = $r[6]; } } 
+public function __construct( string $value ){ $id = '[-_a-z][-_a-z0-9]*'; if( ! preg_match('/^([a-z1-6]*)(#'.$id.')?(\\.'.$id.')?(\\[('.$id.')="(.+)"])?$/i', $value, $r ) ){ throw new InvalidArgumentException('Bad filter, '.$value ); } if( $r[1] ){ $this->tag = $r[1]; } if( ! empty($r[2]) ){ $this->attr['id'] = substr($r[2],1); } if( ! empty($r[3]) ){ $this->attr['class'] = substr($r[3],1); } if( ! empty($r[4]) ){ $this->attr[ $r[5] ] = $r[6]; } } 
 public function filter( DOMElement $el ):iterable { if( '' !== $this->tag ){ $list = $el->getElementsByTagName($this->tag); $recursive = false; } else { $list = $el->childNodes; $recursive = true; } if( $this->attr ){ $list = $this->reduce( $list, new ArrayIterator, $recursive )->getArrayCopy(); } return $list; } 
 public function reduce( DOMNodeList $list, ArrayIterator $reduced, bool $recursive ):ArrayIterator { foreach( $list as $node ){ if( $node instanceof DOMElement ){ $matched = false; foreach( $this->attr as $name => $value ){ if( ! $node->hasAttribute($name) ){ $matched = false; break; } $values = array_flip( explode(' ', $node->getAttribute($name) ) ); if( ! isset($values[$value]) ){ $matched = false; break; } $matched = true; } if( $matched ){ $reduced[] = $node; } if( $recursive && $node->hasChildNodes() ){ $this->reduce( $node->childNodes, $reduced, true ); } } } return $reduced; } }
 class LocoDomQuery extends ArrayIterator { 
@@ -16,6 +16,7 @@ public function eq( int $index ):self { if( $index < 0 ){ $index = $this->count(
 public function last():self { return $this->eq(-1); } 
 public function find( $value ):self { $q = new LocoDomQuery( [] ); $f = new LocoDomQueryFilter($value); foreach( $this as $el ){ foreach( $f->filter($el) as $match ){ $q[] = $match; } } return $q; } 
 public function children():self { $q = new LocoDomQuery([]); foreach( $this as $el ){ if( $el instanceof DOMNode ){ foreach( $el->childNodes as $child ) { $q[] = $child; } } } return $q; } 
+public function parent():self { $q = new LocoDomQuery([]); foreach( $this as $el ){ if( $el instanceof DOMNode ){ $q[] = $el->parentNode; break; } } return $q; } 
 public function text():string{ $s = ''; foreach( $this as $el ){ $s .= $el->textContent; } return $s; } 
 public function html():string { $s = ''; foreach( $this as $outer ){ foreach( $outer->childNodes as $inner ){ $s .= $inner->ownerDocument->saveXML($inner); } break; } return $s; } 
 public function attr( string $name ):?string { foreach( $this as $el ){ return $el->getAttribute($name); } return null; } 

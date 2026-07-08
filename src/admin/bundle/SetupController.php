@@ -7,6 +7,19 @@ class Loco_admin_bundle_SetupController extends Loco_admin_bundle_BaseController
     /**
      * {@inheritdoc}
      */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'auto'  => '',
+            'force' => '',
+            'json'  => '',
+            'xml'   => '',
+        ];
+    }
+
+
+    /**
+     * {@inheritdoc}
+     */
     public function init(){
         parent::init();
         $bundle = $this->getBundle();

@@ -5,16 +5,20 @@
  */
 abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseController {
     
-    /**
-     * @var Loco_Locale
-     */
-    private $locale;
+    private ?Loco_Locale $locale = null;
 
 
     /**
-     * @return Loco_Locale
+     * {@inheritdoc}
      */
-    protected function getLocale(){
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'path' => '',
+        ];
+    }
+
+
+    protected function getLocale():?Loco_Locale {
         return $this->locale;
     }
 

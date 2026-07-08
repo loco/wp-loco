@@ -3,6 +3,17 @@
  * pre-msginit function. Prepares arguments for creating a new PO language file
  */
 class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController {
+
+    /**
+     * {@inheritdoc}
+     */
+    public function allowedParams():array {
+        return parent::allowedParams() + [
+            'path'    => '',
+            'extract' => '',
+        ];
+    }
+
     
     
     /**

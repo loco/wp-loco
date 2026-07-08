@@ -12,18 +12,55 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
 
     /**
      * Get view parameter
-     * @param string $prop
      * @return mixed
      */
-    abstract public function get( $prop );
+    abstract public function get( string $prop );
 
     /**
      * Set view parameter
-     * @param string $prop
      * @param mixed $value
      * @return Loco_mvc_Controller
      */
-    abstract public function set( $prop, $value );
+    abstract public function set( string $prop, $value );
+
+    /**
+     * Get keyed input parameters that may be passed dynamically to the controller, e.g. via query string.
+     */
+    public function allowedParams():array {
+        return [];
+    }
+    
+    
+    final public function filterParams( array $params ):array {
+        return array_intersect_key( $params, $this->allowedParams() );
+    }
+
+
+    /**
+     * Debugging function validates a controller class and its permitted input parameters
+     * Example: Loco_mvc_AdminController::validateClass('Loco_admin_RootController', ['foo'=>'bar'])
+     */
+    final public static function validateClass( string $class, array $params ):void {
+        $base = static::class;
+        if( '' === $class ){
+            $type = preg_match('/^Loco_mvc_(\\w+)Controller/',$base,$r) ? $r[1] : 'controller';
+            throw new Loco_error_Exception('Invalid '.strtolower($type).' route');
+        }
+        if( ! class_exists($class) ){
+            throw new Loco_error_Exception('File not found for '.$class);
+        }
+        if( ! is_subclass_of($class,$base) ){
+            throw new Loco_error_Exception( $class.' must extend '.$base);
+        }
+        if( $params ){
+            $mock = ( new ReflectionClass($class) )->newInstanceWithoutConstructor();
+            $diff = array_diff_key( $params, $mock->allowedParams() );
+            if( $diff ){
+                throw new Loco_error_Exception('Illegal arguments for '.$class.': ['.implode(',',array_keys($diff)).']' );
+            }
+        }
+    }
+    
 
 
     /**

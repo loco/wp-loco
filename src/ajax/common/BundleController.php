@@ -3,7 +3,20 @@
  * Common functions for all Ajax actions that operate on a bundle 
  */
 abstract class Loco_ajax_common_BundleController extends Loco_mvc_AjaxController {
-    
+
+
+    /**
+     * {@inheritdoc}
+     * Note: "route" is a trusted routing arg supplied by the router, not filtered here.
+     */
+    public function allowedParams():array {
+        return [
+            'type'   => '',
+            'bundle' => '',
+            'domain' => '',
+        ];
+    }
+
 
     /**
      * @return Loco_package_Bundle
