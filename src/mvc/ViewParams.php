@@ -6,11 +6,9 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     
     /**
      * Default escape function for view type is HTML
-     * @param string $text
-     * @return string
      */
-    public function escape( $text ){
-        return htmlspecialchars( (string) $text, ENT_COMPAT, 'UTF-8' );
+    public function escape( ?string $text ):string {
+        return htmlspecialchars( $text??'', ENT_COMPAT, 'UTF-8' );
     }
 
 
@@ -75,7 +73,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     /**
      * Test if a property exists, even if null
      */
-    public function has( string  $p ):bool {
+    public function has( string $p ):bool {
         return $this->offsetExists($p);
     }
 
@@ -86,6 +84,20 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
     public function truthy( string $p ):bool {
         return $this->offsetExists($p) && $this->offsetGet($p);
     }
+    
+    
+    
+    public function getArrayProp( string $p ):array {
+        $value = $this->__get($p);
+        if( is_array($value) ){
+            return $value;
+        }
+        if( ! is_null($value) && loco_debugging() ){
+            Loco_error_Debug::trace( sprintf('Property %s is not an array', $p) );
+        }
+        return [];
+    }
+    
 
 
     /**
@@ -95,7 +107,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      */
     public function e( string $p ):string {
         $text = $this->__get($p);
-        echo $this->escape( $text );
+        echo $this->escape($text);
         return '';
     }
 

@@ -4,17 +4,13 @@
  */
 class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
     
-    /**
-     * @var Loco_mvc_PostParams
-     */
-    private static $singleton;
+    private static ?self $singleton = null;
 
 
     /**
      * Get actual postdata, not hacked postdata WordPress ruined with wp_magic_quotes
-     * @return Loco_mvc_PostParams
      */
-    public static function get(){
+    public static function get():self {
         if( ! self::$singleton ){
             self::$singleton = self::create();
         }
@@ -33,9 +29,8 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
     /**
      * Check if either magic_quotes_gpc or magic_quotes_runtime are enabled.
      * Note that get_magic_quotes_gpc and get_magic_quotes_runtime are deprecated as of PHP 7.4 and always return false
-     * @return bool
      */
-    private static function has_magic_quotes(){
+    private static function has_magic_quotes():bool {
         // phpcs:ignore -- PHP version is checked prior to deprecated function call.
         return version_compare(PHP_VERSION,'7.4','<') && ( get_magic_quotes_gpc() || get_magic_quotes_runtime() );
     }
@@ -43,9 +38,8 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
 
     /**
      * Construct clean postdata from current HTTP request
-     * @return self
      */
-     public static function create(){
+     public static function create():self {
         $post = [];
         if( 'POST' === $_SERVER['REQUEST_METHOD'] ){
             // attempt to use clean input if available (without added slashes)
@@ -65,10 +59,8 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
     /**
      * Construct postdata from a series of value pairs.
      * This is used in tests to simulate how a form is serialized and posted
-     * 
-     * @return self
      */
-    public static function fromSerial( array $serial ){
+    public static function fromSerial( array $serial ):self {
         $pairs = [];
         foreach( $serial as $pair ){
             $pairs[] = rawurlencode($pair[0]).'='.rawurlencode($pair[1]);
@@ -82,7 +74,7 @@ class Loco_mvc_PostParams extends Loco_mvc_ViewParams {
      * Collapse nested array down to series of scalar forms
      * @return string[]
      */
-    public function getSerial(){
+    public function getSerial():array {
         $serial = [];
         $query = http_build_query( $this->getArrayCopy(), false, '&' );
         foreach( explode('&',$query) as $str ){

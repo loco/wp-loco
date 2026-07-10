@@ -104,7 +104,8 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 = 2.8.6 =
 * Fixed missing Ace editor
 * Fix for CVE-2026-15005: Thanks mikemyers.
-* Current development version
+* Translator role is not granted `loco_admin` automatically when created.
+* Users with `manage_options no longer inherit `loco_admin` unless super user.
 
 = 2.8.5 =
 * Added `fs_basedir` setting to restrict writeable locations

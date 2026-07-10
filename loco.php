@@ -66,7 +66,7 @@ function loco_debugging(): bool {
  * Whether currently processing an Ajax request
  */
 function loco_doing_ajax(): bool {
-    return defined('DOING_AJAX') && DOING_AJAX;
+    return (bool) loco_constant('DOING_AJAX');
 }
 
 

@@ -1,187 +1,90 @@
 <?php
 /**
  * Abstraction of WordPress roles and capabilities and how they apply to Loco.
- * 
- * - Currently only one capability exists, proving full access "loco_admin"
- * - Any user with super admin privileges automatically inherits this permission
- * - A single custom role is added called "translator"
+ * TODO There is no reasin for this to not be a completely abstract class with static access.
  */
-class Loco_data_Permissions {
-    
+class Loco_data_Permissions implements IteratorAggregate {
+
     /**
-     * Loco capabilities applicable to roles
-     * @var array
+     * Loco capabilities applicable to roles able to access our Loco admin screens
      */
-    private static $caps = ['loco_admin'];
-    
-    
+    private static array $caps = ['loco_admin'];
+
+
     /**
-     * Polyfill for wp_roles which requires WP >= 4.3
-     * @return WP_Roles
+     * Lazy create the "translator" role, but grants nothing.
      */
-    private static function wp_roles(){
-        global $wp_roles;
-        if( ! isset($wp_roles) ){
-            get_role('ping');
+    public static function ensureTranslator():WP_Role {
+        $role = get_role('translator');
+        if( ! $role instanceof WP_Role ){
+            $role = add_role('translator', _x( 'Translator', 'User role', 'loco-translate' ), ['read']);
         }
-        return $wp_roles;
+        return $role;
     }
 
 
     /**
-     * Set up default roles and capabilities
-     * @return WP_Roles
+     * Test if a given user has implied (irrevocable) `loco_admin` capability.
      */
-    public static function init(){
-        $roles = self::wp_roles();
-        $apply = [];
-        // ensure translator role exists and is not locked out
-        $role = $roles->get_role('translator');
-        if( $role instanceof WP_Role ){
-            $role->has_cap('read') || $role->add_cap('read');
-        }
-        // else absence of translator role indicates first run
-        // by default we'll initially allow full access to anyone that can manage_options
-        else {
-            $apply['translator'] = $roles->add_role( 'translator', 'Translator', ['read'=>true] );
-            foreach( $roles->role_objects as $id => $role ){
-                if( $role->has_cap('manage_options') ){
-                    $apply[$id] = $role;
-                }
-            }
-        }
-        // fix broken permissions whereby super admin cannot access Loco at all.
-        // this could happen if another plugin added the translator role beforehand.
-        if( ! isset($apply['administrator']) && ! is_multisite() ){
-            $apply['administrator'] = $roles->get_role('administrator');
-        }
-        foreach( $apply as $role ){
-            if( $role instanceof WP_Role ){
-                foreach( self::$caps as $cap ){
-                    $role->has_cap($cap) || $role->add_cap($cap);
-                }
-            }
-        }
-        return $roles;
+    public static function isSuperAdmin( WP_User $user ):bool {
+        // is_super_admin() checks for "delete_users" capability, but that could include custom roles that a *real* admin must control.
+        // Here we check the user is also assigned the built-in "administrator" role, and that this role is what makes them super.
+        return is_super_admin($user->ID) && ( is_multisite() || ( in_array('administrator',$user->roles,true) && get_role('administrator')->has_cap('delete_users') ) );
+    }
+    
+    
+    /**
+     * @inheritdoc 
+     * @return ArrayIterator<int,string>
+     */
+    public function getIterator():Traversable{
+        return new ArrayIterator(self::$caps);
     }
 
 
     /**
-     * Construct instance, ensuring default roles and capabilities exist
+     * Get all WordPress roles indexed by short name
+     * @return array<string,WP_Role>
      */
-    public function __construct(){
-        self::init();
-    }
-
-
-    /**
-     * @return WP_Role[]
-     */
-    public function getRoles(){
-        $roles = self::wp_roles();
+    public function getRoles():array {
+        self::ensureTranslator();
+        $roles = wp_roles();
         return $roles->role_objects;
     }
 
 
     /**
-     * Check if role is protected such that user cannot lock themselves out when modifying settings
-     * @param WP_Role $role WordPress Role object to check
-     * @return bool
-     */
-    public function isProtectedRole( WP_Role $role ){
-        // if current user has this role and is not the super user, prevent lock-out
-        $user = wp_get_current_user();
-        if( $user instanceof WP_User && ! is_super_admin($user->ID) && $user->has_cap('manage_options') ){
-            return in_array( $role->name, $user->roles, true );
-        }
-        // admin users of single site installations must never be denied access.
-        // note that there is no such thing as a network admin role, but network admins have all permissions
-        return is_multisite() ? false : $role->has_cap('delete_users');
-    }
-
-
-    /**
      * Completely remove all Loco permissions, as if uninstalling
-     * @return Loco_data_Permissions
+     * TODO Move this into the test suite, as it's not currently use anywhere else
      */
-    public function remove(){
-        /* @var $role WP_Role */
+    public function remove():void {
         foreach( $this->getRoles() as $role ){
             foreach( self::$caps as $cap ){
                 $role->has_cap($cap) && $role->remove_cap($cap);
             }
         }
-        // we'll only remove our custom role if it has no capabilities other than admin access
-        // this avoids breaking other plugins that use it, or added it before Loco was installed.
+        // we'll only remove our custom role if it has no capabilities other than "read".
+        // this avoids breaking other plugins that may use it / had added it before Loco was installed.
         if( $role = get_role('translator') ){
             if( ! $role->capabilities || ['read'] === array_keys($role->capabilities) ){
                 remove_role('translator');
             }
         }
-        return $this;
-    }
-
-
-    /**
-     * Reset to default: roles include no Loco capabilities unless they have super admin privileges
-     * @return WP_Role[]
-     */
-    public function reset(){
-        $roles = $this->getRoles();
-        /* @var $role WP_Role */
-        foreach( $roles as $role ){
-            // always provide access to site admins on first run
-            $grant = $this->isProtectedRole($role);
-            foreach( self::$caps as $cap ){
-                if( $grant ){
-                    $role->has_cap($cap) || $role->add_cap($cap);
-                }
-                else {
-                    $role->has_cap($cap) && $role->remove_cap($cap);
-                }
-            }
-        }
-        return $roles;
     }
 
 
     /**
      * Get translated WordPress role name
-     * @param string
-     * @return string
      */
-    public function getRoleName( $id ){
+    public function getRoleName( string $id ):string {
         if( 'translator' === $id ){
             $label = _x( 'Translator', 'User role', 'loco-translate' );
         }
         else {
-            $names = self::wp_roles()->role_names;
+            $names = wp_roles()->role_names;
             $label = isset($names[$id]) ? translate_user_role( $names[$id] ) : $id;
         }
         return $label;
-    }
-
-
-    /**
-     * Populate permission settings from posted checkboxes
-     * @param string[]
-     * @return self
-     */
-    public function populate( array $caps ){
-        // drop all permissions before adding (cos checkboxes)
-        $roles = $this->reset();
-        foreach( $caps as $id => $checked ){
-            if( isset($roles[$id]) ){
-                $role = $roles[$id];
-                /* @var $role WP_Role */
-                foreach( self::$caps as $cap ){
-                    if( ! empty($checked[$cap]) ){
-                        $role->has_cap($cap) || $role->add_cap($cap);
-                    }
-                }
-            }
-        }
-        return $this;
     }
 
 }

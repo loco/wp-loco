@@ -235,7 +235,7 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                             foreach( $caps as $cap ):?> 
                             <p>
                                 <label>
-                                    <input type="checkbox" name="<?php $cap->e('name')?>" value="<?php $cap->e('label')?>" <?php echo $cap->attrs?> />
+                                    <input type="checkbox" name="<?php $cap->e('name')?>" value="<?php $cap->e('value')?>" <?php echo $cap->attrs?> />
                                     <?php $cap->e('label')?> 
                                 </label>
                             </p><?php

@@ -32,19 +32,16 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
      * Enable temporary buffering of PHP errors, reducing error reporting to debug level.
      * Call restore_error_handler to stop capturing.
      * @param int $level PHP error level bit mask, e.g. E_WARNING
-     * @return void
      */
-    public static function capture( $level ){
+    public static function capture( int $level ):void {
         set_error_handler( [__CLASS__,'handle_error'], $level );
     }
 
 
     /**
      * @internal
-     * @param int $errno
-     * @param string $errstr
      */
-    public static function handle_error( $errno, $errstr /*$errfile, $errline*/ ){
+    public static function handle_error( int $errno, string $errstr /*$errfile, $errline*/ ):bool {
         if( $errno & (E_ERROR|E_USER_ERROR) ){
             return false;
         }
@@ -54,11 +51,7 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
     }
 
 
-    /**
-     * @param Loco_error_Exception $error
-     * @return Loco_error_Exception
-     */
-    public static function add( Loco_error_Exception $error ){
+    public static function add( Loco_error_Exception $error ):Loco_error_Exception {
         $notices = self::get();
         // Skip repeated error messages in same stack
         foreach( $notices->errors as $previous ){
@@ -127,10 +120,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a generic info message
-     * @param string $message
-     * @return Loco_error_Exception
      */
-    public static function info( $message ){
+    public static function info( string $message ):Loco_error_Exception{
         $notice = new Loco_error_Notice($message);
         return self::add( $notice->setCallee(1) );
     }
@@ -138,10 +129,8 @@ class Loco_error_AdminNotices extends Loco_hooks_Hookable {
 
     /**
      * Raise a debug notice, if debug is enabled
-     * @param string $message
-     * @return Loco_error_Debug
      */
-    public static function debug( $message ){
+    public static function debug( string $message ):Loco_error_Debug{
         $notice = new Loco_error_Debug($message);
         $notice->setCallee(1);
         loco_debugging() and self::add( $notice );

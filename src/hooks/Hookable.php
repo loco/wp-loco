@@ -8,9 +8,8 @@ abstract class Loco_hooks_Hookable {
 
     /**
      * Registry of tags to be deregistered when object removed from memory
-     * @var array
      */
-    private $hooks;
+    private ?array $hooks;
 
 
     /**

@@ -19,18 +19,11 @@ class Loco_mvc_AdminRouter extends Loco_hooks_Hookable {
         // currently also the highest (and only) capability
         $cap = 'loco_admin';
         $user = wp_get_current_user();
-        $super = is_super_admin( $user->ID );
-        
-        // Ensure Loco permissions are set up for the first time, or nobody will have access at all
-        if( ! get_role('translator') || ( $super && ! is_multisite() && ! $user->has_cap($cap) ) ){
-            Loco_data_Permissions::init();
-            $user->get_role_caps(); // <- rebuild
-        }
 
         // rendering hook for all menu items
         $render = [ $this, 'renderPage' ];
         
-        // main loco pages, hooking only if user has permission
+        // main loco pages, hooking only if user has permission (filtered via AdminHooks)
         if( $user->has_cap($cap) ){
 
             $label = __('Loco Translate','loco-translate');

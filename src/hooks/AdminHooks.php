@@ -4,10 +4,7 @@
  */
 class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
-    /**
-     * @var Loco_mvc_AdminRouter
-     */
-    private $router;
+    private ?Loco_hooks_Hookable $router = null;
 
 
     /**
@@ -72,8 +69,18 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     public function unhook(){
         spl_autoload_unregister( [__CLASS__,'autoload_compat'] );
+        $this->router instanceof Loco_hooks_Hookable and $this->router->unhook();
         parent::unhook();
-    }    
+    }
+
+
+    /**
+     * Expose the router constructed for the current request context (admin page or ajax) No route if null.
+     * @return Loco_mvc_AdminRouter|Loco_mvc_AjaxRouter|null
+     */
+    public function getRouter():?Loco_hooks_Hookable {
+        return $this->router;
+    }
 
 
 	/**
@@ -112,10 +119,26 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
 
 
     /**
+     * "user_has_cap" filter callback.
+     * Grants in-memory `loco_admin` to site administrators, so their access never depends on concrete capabilities.
+     * All other users must inherit loco_admin from a role assigned in plugin settings, explicitly granted by an admin.
+     */
+    public function filter_user_has_cap( $allcaps = null, $caps = null , $args = null, $user = null ):array {
+        if( ! is_array($allcaps) ){
+            $allcaps = [];
+        }
+        if( $user instanceof WP_User && is_array($caps) && in_array('loco_admin',$caps,true) ){
+            $granted = $allcaps['loco_admin']??false;
+            if( ! $granted && Loco_data_Permissions::isSuperAdmin($user) ){
+                $allcaps['loco_admin'] = true;
+            }
+        }
+        return $allcaps;
+    }
+
+
+    /**
      * plugin_action_links action callback
-     * @param string[] $links
-     * @param string $plugin
-     * @return string[]
      */
     public function on_plugin_action_links( $links, $plugin = '' ){
          try {
@@ -129,7 +152,7 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
                 $links[] = '<a href="'.esc_attr($href).'">'.esc_html__('Translate','loco-translate').'</a>';
              }
          }
-         catch( Exception $e ){
+         catch( Throwable $e ){
              // $links[] = esc_html( 'Debug: '.$e->getMessage() );
          }
          return $links;
