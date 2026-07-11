@@ -40,8 +40,8 @@ class Loco_fs_File {
             // absolute path if starts "/"
             if( '/' === $chr1 ){
                 // collapse "." and ".." segments, rejecting any attempt to traverse above the root.
-                // paths without parent references are returned unmodified (redundant separators tolerated).
-                if( preg_match('~(?:^|/)\\.\\.?(?:/|$)~',$path) ){
+                // also collapse redundant "/" separators. paths with neither are returned unmodified.
+                if( preg_match('~(?:^|/)\\.\\.?(?:/|$)~',$path) || false !== strpos($path,'//') ){
                     $path = implode('/', self::explode($path,[]) );
                     // a path that collapses down to the root implodes to "", so restore the slash
                     return '' === $path ? '/' : $path;
@@ -61,7 +61,7 @@ class Loco_fs_File {
                         return self::abs( substr($path,strlen($r[0])) );
                     }
                     // This should never be thrown except in tests, as any illegal input will be rejected earlier.
-                    throw new InvalidArgumentException('Stream wrappers disallowed');
+                    throw new Loco_error_Exception('Stream wrappers disallowed');
                 }
             }
         }
@@ -452,7 +452,7 @@ class Loco_fs_File {
                 }
                 // popping the leading "" marker means traversing above the root of an absolute path
                 if( '' === $popped ){
-                    throw new InvalidArgumentException('Invalid path');
+                    throw new Loco_error_Exception('Invalid path: '.$path);
                 }
                 // else nothing to absorb in a relative path; retain ".." for deferred resolution
             }

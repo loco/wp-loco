@@ -1,9 +1,9 @@
 #, fuzzy
 msgid ""
 msgstr ""
-"Project-Id-Version: Loco Translate 2.8.6-dev\n"
+"Project-Id-Version: Loco Translate 2.8.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-07-11 10:14+0000\n"
+"POT-Creation-Date: 2026-07-11 12:02+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -13,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Loco https://localise.biz/\n"
-"X-Loco-Version: 2.8.6-dev; wp-7.0.1; php-8.3.27\n"
+"X-Loco-Version: 2.8.6; wp-7.0.1; php-8.3.27\n"
 "X-Domain: loco-translate"
 
 #. Author credit: (1) Product name (2) version number, (3) author name.
@@ -315,12 +315,12 @@ msgid ""
 "translation files in any writeable location."
 msgstr ""
 
-#: src/admin/config/SettingsController.php:152
+#: src/admin/config/SettingsController.php:157
 #: tpl/admin/config/settings.php:212
 msgid "Allow"
 msgstr ""
 
-#: src/admin/config/SettingsController.php:153
+#: src/admin/config/SettingsController.php:158
 msgid "Allow (with warning)"
 msgstr ""
 
@@ -593,7 +593,7 @@ msgstr ""
 msgid "Directory is writeable"
 msgstr ""
 
-#: src/admin/config/SettingsController.php:154
+#: src/admin/config/SettingsController.php:159
 #: tpl/admin/config/settings.php:210
 msgid "Disallow"
 msgstr ""
@@ -1479,7 +1479,7 @@ msgstr ""
 #: src/mvc/AdminRouter.php:58 src/admin/config/ApisController.php:69
 #: src/admin/config/PrefsController.php:42
 #: src/admin/config/VersionController.php:22
-#: src/admin/config/SettingsController.php:163 tpl/admin/help/tab-config.php:2
+#: src/admin/config/SettingsController.php:168 tpl/admin/help/tab-config.php:2
 msgid "Plugin settings"
 msgstr ""
 
@@ -1722,7 +1722,7 @@ msgstr ""
 
 #: src/admin/config/ApisController.php:53
 #: src/admin/config/PrefsController.php:26
-#: src/admin/config/SettingsController.php:98
+#: src/admin/config/SettingsController.php:103
 msgid "Settings saved"
 msgstr ""
 
@@ -1798,7 +1798,7 @@ msgstr ""
 msgid "Suggested translations"
 msgstr ""
 
-#: src/admin/config/SettingsController.php:118
+#: src/admin/config/SettingsController.php:123
 msgid "Super Admin"
 msgstr ""
 

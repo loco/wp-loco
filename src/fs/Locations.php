@@ -19,18 +19,15 @@ class Loco_fs_Locations extends ArrayObject {
      */    
     private static ?self $langs = null;
 
-
     /**
      * Singleton of registered theme paths
      */    
     private static ?self $theme = null;
 
-
     /**
      * Singleton of registered plugin locations
      */
     private static ?self $plugin = null;
-
 
     /**
      * Singleton of configured base directories from settings
@@ -229,20 +226,6 @@ class Loco_fs_Locations extends ArrayObject {
     }
 
 
-    /*
-     * Opposite of rel, takes a relative path and constructs the first full path that exists
-     *
-    public function abs( $rel ){
-        foreach( $this as $prefix => $length ){
-            $path = realpath( $prefix.$rel );
-            if( $path ){
-                return $path;
-            }
-        }
-        return null;
-    }*/
-
-
     /**
      * @param string $rel Relative 
      * @return string[]
@@ -258,7 +241,7 @@ class Loco_fs_Locations extends ArrayObject {
             return [];
         }
         $paths = [ trailingslashit($path) ];
-        // add real path if differs
+        // add the real path if differs. Note that under some PHP versions this may trigger E_WARNING
         $real = realpath($path);
         if( $real && $real !== $path ){
             $paths[] = trailingslashit($real);

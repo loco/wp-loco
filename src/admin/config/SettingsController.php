@@ -92,7 +92,12 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
             if( $this->checkNonce($nonce->action) ){
                 $post = Loco_mvc_PostParams::get();
                 if( $post->has('opts') ){
-                    $opts->populate( $post->opts )->persist();
+                    $opts->populate( $post->opts );
+                    // validate fs_basedir before persisting
+                    Loco_fs_Locations::clear();
+                    Loco_fs_Locations::getBaseDirs();
+                    // 
+                    $opts->persist();
                     self::grant( $post->getArrayProp('caps') );
                     // updates complete
                     Loco_error_AdminNotices::success( __('Settings saved','loco-translate') );
