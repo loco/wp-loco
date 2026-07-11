@@ -236,11 +236,22 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                             <p>
                                 <label>
                                     <input type="checkbox" name="<?php $cap->e('name')?>" value="<?php $cap->e('value')?>" <?php echo $cap->attrs?> />
-                                    <?php $cap->e('label')?> 
-                                </label>
+                                    <?php $cap->e('label')?>
+                                </label><?php
+                                if( $cap->lowpriv ):?> <span class="loco-dagger">&dagger;</span><?php endif?> 
                             </p><?php
                             endforeach;?> 
                         </fieldset>
+                        <div class="panel">
+                            <p>
+                                <strong class="has-icon"><?php esc_html_e('Important','loco-translate')?>:</strong>
+                                <span><?php esc_html_e('All users with the selected roles will be able to create and update translation files in any writeable location.','loco-translate')?></span>
+                            </p>
+                            <p>
+                                <strong class="has-icon"> </strong>
+                                <span><?php esc_html_e('Roles marked † have low privileges, and may be assigned to untrusted site users.','loco-translate')?></span>
+                            </p>
+                        </div>
                     </td>
                 </tr>
             </tbody>

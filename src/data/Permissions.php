@@ -1,7 +1,6 @@
 <?php
 /**
  * Abstraction of WordPress roles and capabilities and how they apply to Loco.
- * TODO There is no reasin for this to not be a completely abstract class with static access.
  */
 class Loco_data_Permissions implements IteratorAggregate {
 
@@ -43,11 +42,10 @@ class Loco_data_Permissions implements IteratorAggregate {
 
 
     /**
-     * Get all WordPress roles indexed by short name
+     * Get all WordPress roles indexed by short name.
      * @return array<string,WP_Role>
      */
     public function getRoles():array {
-        self::ensureTranslator();
         $roles = wp_roles();
         return $roles->role_objects;
     }
@@ -55,17 +53,18 @@ class Loco_data_Permissions implements IteratorAggregate {
 
     /**
      * Completely remove all Loco permissions, as if uninstalling
-     * TODO Move this into the test suite, as it's not currently use anywhere else
      */
     public function remove():void {
-        foreach( $this->getRoles() as $role ){
-            foreach( self::$caps as $cap ){
+        $roles = $this->getRoles();
+        foreach( $roles as $role ){
+            foreach( $this as $cap ){
                 $role->has_cap($cap) && $role->remove_cap($cap);
             }
         }
         // we'll only remove our custom role if it has no capabilities other than "read".
         // this avoids breaking other plugins that may use it / had added it before Loco was installed.
-        if( $role = get_role('translator') ){
+        $role = $roles['translator']??null;
+        if( $role instanceof WP_Role ){
             if( ! $role->capabilities || ['read'] === array_keys($role->capabilities) ){
                 remove_role('translator');
             }

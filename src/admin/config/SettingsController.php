@@ -14,6 +14,10 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
             throw new Loco_error_Exception('Current user must have manage_options capability');
         }
         $perms = new Loco_data_Permissions;
+        // Lazily create the translator role only when it's actually being granted access
+        if( array_key_exists('translator',$checked) ){
+            Loco_data_Permissions::ensureTranslator();
+        }
         $roles = $perms->getRoles();
         // reshape role/capability map, accounting for unchecked checkboxes
         $grant = [];
@@ -32,7 +36,7 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         if( $revoke ){
             // Before we revoke, protect against locking out the current user, already known to have access.
             // here we see if the user will still have at least one role providing loco_admin after revocation.
-            // TODO it would be preferable just to do $user->has_cap() after revocation, but that would require a rebuild and a rollback.
+            // Doing $user->has_cap() after revocation would require a rebuild, and potentially a rollback.
             if( ! Loco_data_Permissions::isSuperAdmin($user) ){
                 $cap = 'loco_admin';
                 $old = array_filter( $user->roles, [__CLASS__,'role_has_loco_admin'] );
@@ -106,17 +110,24 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
         catch( Loco_error_Exception $e ){
             Loco_error_AdminNotices::add($e);
         }
-
-        $this->set('caps', $caps = new Loco_mvc_ViewParams );
+    
+        $caps = [];
         // faux protected role for multi-site super admin
         if( is_multisite() ){
             $caps[''] = new Loco_mvc_ViewParams( [
                 'label' => __('Super Admin','loco-translate'),
                 'name' => 'dummy-admin-cap',
-                'attrs' => 'checked disabled'
+                'attrs' => 'checked disabled',
+                'lowpriv' => false,
             ] );
         }
-        foreach( $perms->getRoles() as $name => $role ){
+        // insert placeholder for "translator" role, which will be created lazily if needed
+        $roles = $perms->getRoles();
+        if( ! array_key_exists('translator',$roles) ){
+            $roles['translator'] = new WP_Role('translator',[]);
+        }
+        // ensure order such that translator appears below administrator
+        foreach( $roles as $name => $role ){
             $attrs = [];
             // revocation from the "administrator" role is not possible, assuming it provides super admin status.
             // Loco_hooks_AdminHooks::filter_user_has_cap => Loco_data_Permissions::isSuperAdmin
@@ -131,19 +142,11 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                 'label' => $perms->getRoleName($name),
                 'name' => 'caps['.$name.'][loco_admin]',
                 'attrs' => implode(' ',$attrs),
+                'lowpriv' => ! $role->has_cap('manage_options'),
             ] );
         }
-        // We *could* avoid lazy creating the "translator" role until ticked. We can show an unticked dummy here.
-        /*foreach( ['translator'] as $name ){
-            if( ! $caps->has('translator') ){
-                $caps[$name] = new Loco_mvc_ViewParams( [
-                    'value' => '1',
-                    'label' => $perms->getRoleName($name),
-                    'name' => 'caps['.$name.'][loco_admin]',
-                    'attrs' => '',
-                ] );
-            }
-        }*/
+        $this->set('caps', new Loco_mvc_ViewParams($caps) );
+
         // allow/deny warning levels
         $this->set('verbose', new Loco_mvc_ViewParams( [
             0 => __('Allow','loco-translate'),
@@ -151,8 +154,6 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
             2 => __('Disallow','loco-translate'),
         ] ) );
     }
-
-
 
     /**
      * {@inheritdoc}

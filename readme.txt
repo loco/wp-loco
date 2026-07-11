@@ -102,10 +102,10 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 == Changelog ==
 
 = 2.8.6 =
-* Fixed missing Ace editor
-* Fix for CVE-2026-15005: Thanks mikemyers.
-* Translator role is not granted `loco_admin` automatically when created.
+* Fixed incorrect Ace editor script reference.
+* Translator role is only created when explicitly granted `loco_admin`.
 * Users with `manage_options no longer inherit `loco_admin` unless super user.
+* Fix for CVE-2026-15005: Thanks mikemyers.
 
 = 2.8.5 =
 * Added `fs_basedir` setting to restrict writeable locations
