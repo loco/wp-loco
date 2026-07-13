@@ -101,6 +101,9 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Changelog ==
 
+= 2.8.7 =
+* Ctitical fix for Windows file paths
+
 = 2.8.6 =
 * Fixed incorrect Ace editor script reference.
 * Translator role is only created when explicitly granted `loco_admin`.
@@ -617,7 +620,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.6 =
+= 2.8.7 =
 * Various improvements and bug fixes
 
 

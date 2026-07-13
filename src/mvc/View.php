@@ -240,7 +240,7 @@ class Loco_mvc_View implements IteratorAggregate {
     public function setTemplate( string $tpl ):void {
         $file = new Loco_fs_File( $tpl.'.php' );
         $path = $file->normalize( $this->cwd );
-        $root = loco_plugin_root().'/tpl/';
+        $root = Loco_fs_File::abs( loco_plugin_root().'/tpl/' );
         // User input should be blocked from here, so the following is to catch developer errors.
         if( ! str_starts_with($path,$root) ){
             throw new Loco_error_Exception('Bad template path: '.$tpl.' => '.$path );
