@@ -3,7 +3,12 @@
  * 
  */
 class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
-    
+
+    /**
+     * Encoding flags for JSON. JSON_UNESCAPED_SLASHES deliberately absent to ensure, e.g. "<\/script>"
+     */
+    private const JSON_FLAGS = JSON_HEX_TAG|JSON_HEX_AMP|JSON_HEX_APOS|JSON_HEX_QUOT;
+
     /**
      * Default escape function for view type is HTML
      */
@@ -159,7 +164,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * @return string empty string
      */
     public function j( string $p ):string {
-        echo json_encode($this->__get($p) );
+        echo json_encode( $this->__get($p), self::JSON_FLAGS );
         return '';
     }
 
@@ -177,7 +182,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * Fetch whole object as JSON
      */
     public function exportJson():string {
-        return json_encode( $this->jsonSerialize() );
+        return json_encode( $this->jsonSerialize(), self::JSON_FLAGS );
     }
     
     

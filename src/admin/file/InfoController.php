@@ -91,7 +91,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         // allow link to modify headers/settings
         $finfo['configure'] = str_replace('file-info','file-head',$_SERVER['REQUEST_URI']);
 
-        // collect note worthy problems with file headers
+        // collect noteworthy problems with file headers
         $debugging = loco_debugging();
         $debug = [];
         
@@ -107,7 +107,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
         try {
             $project = $this->getProject();
             $template = $project->getPot();
-            $isTemplate = $template && $file->equal($template);
+            $isTemplate = $file->equal($template);
             $this->set('isTemplate', $isTemplate );
             $this->set('project', $project );
         }
@@ -117,7 +117,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             $template = null;
         }
 
-        // file will be Gettext most likely            
+        // file expected to Gettext source, with an exception for orphaned .mo
         if( 'pot' === $ext || 'po' === $ext || 'mo' === $ext ){
             // treat as template until locale verified
             $tpl = 'admin/file/info-pot';
@@ -125,7 +125,7 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
             if( 'pot' !== $ext && ! $isTemplate ){
                 $locale = $file->getLocale();
                 if( $locale->isValid() ){
-                    // find PO/MO counter parts
+                    // find PO/MO siblings
                     if( 'po' === $ext ){
                         $tpl = 'admin/file/info-po';
                         $sibling = $file->cloneExtension('mo');

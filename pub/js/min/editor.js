@@ -432,8 +432,9 @@ function ja(a, b) {
 a.disabled = !1;
 d(a).on("click", function() {
 let c = ia;
-"archive" === b ? c = c.replace(/\.po$/, ".zip") : "binary" === b && (c = c.replace(/\.po$/, ".mo"));
-const e = a.form;
+var e = /\.(?:pot?|mo|l10n\.php)$/;
+"archive" === b ? c = c.replace(e, ".zip") : "binary" === b && (c = c.replace(e, ".mo"));
+e = a.form;
 e.path.value = c;
 e.source.value = B.toString();
 return !0;

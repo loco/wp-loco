@@ -241,8 +241,8 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             'path'   => '',
             'source' => '',
         ] );
-        // zip archive will on;y be available if bundle is configured
-        if( $bundle && $project ){
+        // zip archive will only be available if bundle is configured
+        if( $project ){
             $hidden['bundle'] = $bundle->getId();
             $hidden['domain'] = $project->getId();
         }

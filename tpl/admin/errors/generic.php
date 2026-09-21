@@ -28,7 +28,7 @@ $this->extend('../layout');
     if( $this->has('trace') ):
     echo "<!-- DEBUG:\n";
     foreach( $trace as $f ):
-    echo '      ',($f->has('class')?$f['class'].'::':''), $f->e('function'),'  ', $f->e('file'),':',$f->e('line'), "\n";
+    echo '      ',($f->has('class')?$f->escape($f['class']).'::':''), $f->e('function'),'  ', $f->e('file'),':',$f->e('line'), "\n";
     endforeach;
     echo "    -->\n";
     endif;

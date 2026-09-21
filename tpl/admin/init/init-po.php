@@ -106,7 +106,7 @@ $this->extend('../layout');
                                     <input type="radio" name="select-path" value="<?php echo $offset?>" <?php echo $choice->checked?> />
                                     <input type="hidden" name="path[<?php echo $offset?>]" value="<?php $choice->e('hidden')?>" /><?php
                                 endif?> 
-                                    <code class="path"><?php $parent->e('relpath')?>/<?php echo $choice->holder?></code>
+                                    <code class="path"><?php $parent->e('relpath')?>/<?php echo wp_kses($choice->holder,['span'=>[]])?></code>
                                 </label>
                             </p><?php
                         endforeach?> 

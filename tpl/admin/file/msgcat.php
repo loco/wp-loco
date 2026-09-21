@@ -29,7 +29,7 @@
                     }
                     // else treat as normal comment even if empty
                     else {
-                        echo '<span class="po-comment">#',$symbol,'<span class="po-text">',$params->escape($line),'</span></span>';
+                        echo '<span class="po-comment">#',$params->escape($symbol),'<span class="po-text">',$params->escape($line),'</span></span>';
                     }
                 }
                 // else probably an empty comment

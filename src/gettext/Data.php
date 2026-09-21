@@ -89,8 +89,11 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
      */
     public static function fromJson( string $json ):self {
         $blob = json_decode( $json, true );
+        if( ! is_array($blob) || ! array_key_exists('locale_data',$blob) || ! is_array($blob['locale_data']) ){
+            throw new Loco_error_ParseException('Invalid Jed format');
+        }
         $p = new LocoJedParser( $blob['locale_data'] );
-        // note that headers outside of locale_data are won't be parsed out. we don't currently need them.
+        // note that headers outside "locale_data" won't be parsed out. we don't currently need them.
         return new Loco_gettext_Data( $p->parse() );
     }
 

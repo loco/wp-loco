@@ -30,7 +30,7 @@ $this->extend('../layout');
                         <p>
                             <label>
                                 <input type="radio" name="dir" value="<?php $parent->e('relpath')?>" />
-                                <code class="path"><?php $parent->e('relpath')?>/<?php echo $choice->holder?></code>
+                                <code class="path"><?php $parent->e('relpath')?>/<?php $choice->e('holder')?></code>
                             </label>
                         </p><?php
                     endforeach?> 

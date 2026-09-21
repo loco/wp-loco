@@ -3,7 +3,7 @@ Contributors: timwhitlock
 Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
-Tested up to: 7.0.2
+Tested up to: 7.1.1
 Stable tag: 2.8.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -100,6 +100,11 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 
 == Changelog ==
+
+= 2.8.9 =
+* Download endpoint allows only po/mo/pot files as per info tab
+* Fixed unescaped HTML loophole in file path placeholder UI
+* Bumped WordPress compatibility to 7.1.1
 
 = 2.8.8 =
 * Disabled links in all editor notes and error fields; fixes CVE-2026-15066
@@ -625,7 +630,7 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 
 == Upgrade Notice ==
 
-= 2.8.8 =
+= 2.8.9 =
 * Various improvements and bug fixes
 
 
