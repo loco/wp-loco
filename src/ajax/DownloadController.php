@@ -74,7 +74,7 @@ class Loco_ajax_DownloadController extends Loco_ajax_common_BundleController {
         }
 
         // Non-zip downloads are for direct .po/pot downloads (source), plus .mo (binary) - edge case when no source.
-        $file = new Loco_fs_File($path);
+        $file = new Loco_fs_LocaleFile($path);
         $file->normalize( loco_constant('WP_CONTENT_DIR') );
         $ext = Loco_gettext_Data::ext($file);
         
@@ -100,7 +100,11 @@ class Loco_ajax_DownloadController extends Loco_ajax_common_BundleController {
         else if( ! in_array($ext,['po','mo','pot']) ){
             throw new Loco_error_Exception('Unsupported file type');
         }
+        /*else if( ! $this->getProject()->isValidTarget($file) ){
+            throw new Loco_error_Exception(''); // Requires a bundle identifier for all downloads
+        }*/
         else {
+            Loco_gettext_Data::check($file);
             $raw = $file->getContents();
         }
 

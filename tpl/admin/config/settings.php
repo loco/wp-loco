@@ -214,7 +214,7 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                             </p>
                             <p>
                                 <label for="loco--fs-basedir" style="vertical-align: top">
-                                    <?php esc_html_e('Restricted writeable directories','loco-translate');?>:
+                                    <?php esc_html_e('Restricted translation directories','loco-translate');?>:
                                 </label>
                                 <textarea name="opts[fs_basedir]" id="loco--fs-basedir" rows="2" class="regular-text"><?php echo esc_html($opts->fs_basedir)?></textarea>
                             </p>

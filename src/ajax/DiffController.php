@@ -35,6 +35,7 @@ class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
             if( ! isset($exts[$ext]) ){
                 throw new InvalidArgumentException('Disallowed file extension');
             }
+            Loco_gettext_Data::check($file);
         }
         
         // OK to diff files as HTML table

@@ -451,6 +451,20 @@ class Loco_package_Project {
 
     
     /**
+     * Test if a file is under this project's configured source locations, and not excluded from them
+     */
+    public function isSourceLocation( Loco_fs_File $file ):bool {
+        $path = $file->getPath();
+        $excluded = new Loco_fs_Locations( array_merge( $this->xspaths->export(), $this->xgpaths->export() ) );
+        if( $excluded->check($path) ){
+            return false;
+        }
+        $included = new Loco_fs_Locations( $this->getConfiguredSources()->export() );
+        return $included->check($path);
+    }
+
+
+    /**
      * Add a path for excluding in source file search
      * @param string|Loco_fs_File $path
      */

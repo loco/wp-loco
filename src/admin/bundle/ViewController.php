@@ -69,9 +69,11 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
 
         // POT template file
         $pot = null;
+        $potLocked = false;
         $file = $project->getPot();
         if( $file && $file->exists() ){
             $pot = Loco_gettext_Metadata::load($file);
+            $potLocked = ! Loco_fs_Locations::permitted( $file->getPath() );
             $p['pot'] = new Loco_mvc_ViewParams( [
                 // POT info
                 'name' => $file->basename(),
@@ -114,7 +116,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
                 $p['nav'][] = new Loco_mvc_ViewParams( [
                     'href' => $this->getResourceLink('file-view', $project, $pot ),
                     'name' => __('View template','loco-translate'),
-                    'icon' => 'file',
+                    'icon' => $potLocked ? 'lock' : 'file',
                 ] );
             }
             // offer template editing if permitted
@@ -122,7 +124,7 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
                 $p['nav'][] = new Loco_mvc_ViewParams( [ 
                     'href' => $this->getResourceLink('file-edit', $project, $pot ),
                     'name' => __('Edit template','loco-translate'),
-                    'icon' => 'pencil',
+                    'icon' => $potLocked ? 'lock' : 'pencil',
                 ] );
             }
         }
@@ -250,6 +252,8 @@ class Loco_admin_bundle_ViewController extends Loco_admin_bundle_BaseController 
             // author / system / custom / other
             'installed' => 'wplang' === $dType,
             'store' => $dir->getTypeLabel($dType),
+            // file contents inaccessible due to fs_basedir setting
+            'locked' => ! Loco_fs_Locations::permitted( $file->getPath() ),
             // links
             'view' => $this->getProjectLink('file-view', $project, $args ),
             'info' => $this->getProjectLink('file-info', $project, $args ),

@@ -146,6 +146,16 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
+     * Check whether a path is permitted by the fs_basedir plugin setting.
+     * An empty setting imposes no restriction.
+     */
+    public static function permitted( string $path ):bool {
+        $roots = self::getBaseDirs();
+        return 0 === $roots->count() || $roots->check($path);
+    }
+
+
+    /**
      * Create instance from list of locations
      */
     public function __construct( array $paths ){

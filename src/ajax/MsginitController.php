@@ -16,10 +16,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
     }
 
 
-    /**
-     * @return Loco_Locale
-     */
-    private function getLocale(){
+    private function getLocale():Loco_Locale {
         if( $this->get('use-selector') ){
             $tag = $this->get('select-locale');
         }
@@ -68,7 +65,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         $pofile->normalize( $base );
         $api = new Loco_api_WordPressFileSystem;
         $api->authorizeCreate( $pofile );
-        
+
         // Target MO probably doesn't exist, but we don't want to overwrite it without asking
         $mofile = $pofile->cloneExtension('mo');
         if( $mofile->exists() ){
@@ -84,6 +81,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
             $compile = $translate;
             $potfile = new Loco_fs_LocaleFile( $source );
             $potfile->normalize( $base );
+            Loco_gettext_Data::check($potfile);
             $data = Loco_gettext_Data::load($potfile);
             // When copying a PO file we may need to augment with JSON strings
             if( $post->json ){
@@ -110,6 +108,7 @@ class Loco_ajax_MsginitController extends Loco_ajax_common_BundleController {
         else {
             $potfile = $project->getPot();
             if( $potfile->exists() ){ 
+                Loco_gettext_Data::check($potfile);
                 $data = Loco_gettext_Data::load($potfile);
             }
             // else extract directly from source code, assuming domain passed though from front end

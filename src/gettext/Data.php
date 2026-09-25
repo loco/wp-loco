@@ -26,6 +26,20 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     }
 
 
+    /**
+     * Validate a Gettext file for access: supported extension AND permitted by fs_basedir setting
+     * @return string normalized extension, as per ext()
+     * @throws Loco_error_Exception
+     */
+    public static function check( Loco_fs_File $file ):string {
+        $ext = self::ext($file);
+        if( ! Loco_fs_Locations::permitted( $file->getPath() ) ){
+            throw new Loco_error_Exception( __('File access disallowed by the plugin settings','loco-translate') );
+        }
+        return $ext;
+    }
+
+
     public static function load( Loco_fs_File $file, ?string $type = null ):self {
         if( is_null($type) ) {
             $type = self::ext($file);

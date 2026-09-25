@@ -53,7 +53,7 @@ $this->extend('../layout');
             <tbody><?php
                 /* @var Loco_mvc_ViewParams $po */
                 foreach( $group as $po ): ?> 
-                <tr>
+                <tr<?php if( $po->locked ):?> class="loco-locked"<?php endif?>>
                     <td class="has-row-actions" data-sort-value="<?php $po->e('lname')?>">
                         <a href="<?php $po->e('edit')?>" class="row-title">
                             <?php $po->e('title')?> 
@@ -101,8 +101,13 @@ $this->extend('../layout');
                     endif;
                     endif?> 
 
-                    <td data-sort-value="<?php $po->e('name')?>">
-                         <a href="<?php $po->e('info')?>"><?php $po->e('name')?></a>
+                    <td data-sort-value="<?php $po->e('name')?>"><?php
+                        // file contents are inaccessible due to plugin settings, but link must fail visibly
+                        if( $po->locked ):?> 
+                        <a href="<?php $po->e('info')?>" title="<?php $po->e('name')?>"><span class="has-icon icon-lock"><?php esc_html_e('Access denied','loco-translate')?></span></a><?php
+                        else:?> 
+                        <a href="<?php $po->e('info')?>"><?php $po->e('name')?></a><?php
+                        endif?> 
                     </td>
                     <td data-sort-value="<?php $po->f('time','%u')?>">
                         <time datetime="<?php $po->date('time','Y-m-d H:i:s')?>"><?php $po->date('time')?></time>

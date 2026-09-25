@@ -167,12 +167,13 @@ class Loco_admin_file_InfoController extends Loco_admin_file_BaseController {
                 // establish whether PO is in sync with POT
                 if( $template && ! $isTemplate && 'po' === $ext && $template->exists() ){
                     try {
+                        Loco_gettext_Data::check($template);
                         $this->set('potfile', new Loco_mvc_FileParams( [
                             'synced' => Loco_gettext_Data::load($template)->equalSource($data),
                         ], $template ) );
                     }
                     catch( Exception $e ){
-                        // ignore invalid template in this context
+                        // ignore invalid or disallowed template in this context
                     }
                 }
                 if( $debugging ){

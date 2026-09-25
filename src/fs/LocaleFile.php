@@ -4,32 +4,20 @@
  */
 class Loco_fs_LocaleFile extends Loco_fs_File {
     
-    /**
-     * @var Loco_Locale|null
-     */
-    private $locale;
+    private ?Loco_Locale $locale = null;
     
-    /**
-     * @var string
-     */
-    private $suffix;
+    private ?string $suffix = null;
     
-    /**
-     * @var string
-     */
-    private $prefix;
+    private string $prefix = '';
 
-    /**
-     * @var string
-     */
-    private $hash = '';
+    private string $hash = '';
 
 
     /**
      * Lazy handling of localized path info
      * @return array [ prefix, suffix, hash ]
      */
-    public function split(){
+    public function split():array {
         if( is_null($this->suffix) ){
             // note that `filename` isn't used here because of double extensions (.l10n.php)
             $parts = explode('-',$this->basename() );
@@ -54,10 +42,7 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
     }
     
     
-    /**
-     * @return Loco_Locale
-     */
-    public function getLocale(){
+    public function getLocale():Loco_Locale {
         if( ! $this->locale ){
             if( $tag = $this->getSuffix() ){
                 $this->locale = Loco_Locale::parse($tag);
@@ -71,10 +56,9 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
 
 
     /**
-     * @param $locale Loco_locale
-     * @return Loco_fs_LocaleFile
+     * Create a clone of this file reference for another locale
      */
-    public function cloneLocale( Loco_locale $locale ){
+    public function cloneLocale( Loco_locale $locale ):Loco_fs_LocaleFile {
         $this->split();
         $path = (string) $locale;
         if( $str = $this->prefix ){
@@ -92,9 +76,8 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
 
     /**
      * Get prefix (or stem) from name that comes before locale suffix.
-     * @return string
      */
-    public function getPrefix(){
+    public function getPrefix():string {
         $info = $this->split();
         return $info[0];
     }
@@ -102,26 +85,24 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
 
     /**
      * Get suffix (or locale code) from name that comes after "-" separator
-     * @return string
      */
-    public function getSuffix(){
+    public function getSuffix():string {
         $info = $this->split();
         return $info[1];
     }
 
     /**
-     * @return string
+     * Get .json hash that follows locale suffix, if any
      */
-    public function getHash(){
+    public function getHash():string {
         $info = $this->split();
         return $info[2];
     }
 
     /**
      * Test if file is suffix only, e.g. "en_US.po"
-     * @return bool
      */
-    public function hasSuffixOnly(){
+    public function hasSuffixOnly():bool {
         $info = $this->split();
         return $info[1] && ! $info[0];
     }
@@ -129,9 +110,8 @@ class Loco_fs_LocaleFile extends Loco_fs_File {
 
     /**
      * Test if file is prefix only, e.g. "incorrect.po"
-     * @return bool
      */
-    public function hasPrefixOnly(){
+    public function hasPrefixOnly():bool {
         $info = $this->split();
         return $info[0] && ! $info[1];
     }

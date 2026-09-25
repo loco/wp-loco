@@ -65,6 +65,8 @@ class Loco_ajax_UploadController extends Loco_ajax_common_BundleController {
         if( $pofile->filename() !== $dummy->filename() ){
             throw new Loco_error_Exception( sprintf('File must be named %s', $pofile->filename().'.'.$ext ) );
         }
+        // Target location must be permitted before existing file is compared
+        Loco_gettext_Data::check($pofile);
         // Avoid processing if uploaded PO file is identical to existing one
         if( $pofile->exists() && $pofile->md5() === $upload->md5() ){
             throw new Loco_error_Exception( __('Your file is identical to the existing one','loco-translate') );

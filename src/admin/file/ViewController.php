@@ -77,10 +77,12 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
         try {
             $this->set('modified', $file->modified() );
             $data = Loco_gettext_Data::load( $file );
+            $valid = true;
         }
         catch( Loco_error_ParseException $e ){
             Loco_error_AdminNotices::add( Loco_error_Exception::convert($e) );
             $data = Loco_gettext_Data::dummy();
+            $valid = false;
         }
 
         $this->set( 'meta', Loco_gettext_Metadata::create($file, $data) );
@@ -91,13 +93,18 @@ class Loco_admin_file_ViewController extends Loco_admin_file_BaseController {
             return $this->view('admin/file/view-mo' );
         }
         
-        // l10n.php files are unlikely to be encountered without a po or mo, but still..
+        // l10n.php files are unlikely to be encountered without a po or mo, but allowing if valid
         if( 'php'=== $type ){
-            return $this->view('admin/file/view-php', ['phps'=>$file->getContents()] );
+            return $this->view('admin/file/view-php', ['phps'=> $valid?$file->getContents():' '] );
         }
         
-        // else is a PO or POT file 
-        $this->enqueueScript('poview');//->enqueueScript('min/highlight');
+        // JSON files don't need a source view, but harmless if valid Jed. Already validated permitted location.
+        if( 'json' === $type ){
+            return $this->view('admin/file/view-json', ['json'=>$valid?$file->getContents():' '] );
+        }
+        
+        // else is a PO or POT file, display whether valid or not 
+        $this->enqueueScript('poview');
         $lines = preg_split('/\\n|\\r\\n?/', $this->getUtf8Source( $file, $data->getHeaders() ) );
         $this->set( 'lines', $lines );
         

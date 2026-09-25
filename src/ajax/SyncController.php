@@ -27,6 +27,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         $file = new Loco_fs_File( $post->path );
         $base = loco_constant('WP_CONTENT_DIR');
         $file->normalize($base);
+        Loco_gettext_Data::check($file);
         $target = Loco_gettext_Data::load($file);
 
         // POT file always synced with source code
@@ -64,6 +65,7 @@ class Loco_ajax_SyncController extends Loco_mvc_AjaxController {
         // Parse existing POT for source
         if( $potfile ){
             $this->set('pot', $potfile->basename() );
+            Loco_gettext_Data::check($potfile);
             try {
                 $source = Loco_gettext_Data::load($potfile);
             }

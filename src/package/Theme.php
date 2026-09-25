@@ -4,10 +4,7 @@
  */
 class Loco_package_Theme extends Loco_package_Bundle {
 
-    /**
-     * @var Loco_package_Theme|null
-     */
-    private $parent;
+    private ?Loco_package_Theme $parent = null;
 
 
     /**

@@ -18,10 +18,7 @@ abstract class Loco_ajax_common_BundleController extends Loco_mvc_AjaxController
     }
 
 
-    /**
-     * @return Loco_package_Bundle
-     */
-    protected function getBundle(){
+    protected function getBundle():Loco_package_Bundle {
         if( $id = $this->get('bundle') ){
             // type may be passed as separate argument    
             if( $type = $this->get('type') ){
@@ -36,12 +33,8 @@ abstract class Loco_ajax_common_BundleController extends Loco_mvc_AjaxController
     }
 
 
-
-    /**
-     * @param Loco_package_Bundle $bundle
-     * @return Loco_package_Project
-     */
-    protected function getProject( Loco_package_Bundle $bundle ){
+    protected function getProject( ?Loco_package_Bundle $bundle = null ):Loco_package_Project {
+        $bundle ??= $this->getBundle();
         $project = $bundle->getProjectById( $this->get('domain') );
         if( ! $project ){
             throw new Loco_error_Exception('Failed to find translation project');

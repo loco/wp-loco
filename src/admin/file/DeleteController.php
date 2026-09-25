@@ -4,13 +4,15 @@
  */
 class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
     
+    
+    private string $error;
 
     /**
      * Expand single path to all files that will be deleted
      * @param Loco_fs_File $file primary file being deleted, probably the PO
      * @return array
      */
-    private function expandFiles( Loco_fs_File $file ){
+    private function expandFiles( Loco_fs_File $file ):array {
         try {
             $siblings = new Loco_fs_Siblings( $file );
         }
@@ -30,22 +32,25 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
     public function init(){
         parent::init();
         $file = $this->get('file');
+        $this->error = $this->getFileError($file);
         
-        // set up form for delete confirmation
-        if( $file->exists() && ! $file->isDirectory() ){
+        if( '' === $this->error ){
             // nonce action will be specific to file for extra security
-            // TODO could also add file MD5 to avoid deletion after changes made.
             $path = $file->getPath();
             $action = 'delete:'.$path;
             // set up view now in case of late failure
             $fields = new Loco_mvc_HiddenFields( [] );
             $fields->setNonce( $action );
             $this->set( 'hidden', $fields );
-            // attempt delete if valid nonce posted back
+            // attempt deletion if valid nonce posted back, and file is valid
             if( $this->checkNonce($action) ){
-                $api = new Loco_api_WordPressFileSystem;
-                // delete dependant files first, so master still exists if others fail
+                // If file was valid when form presented, it should be valid now unless postdata was hacked
+                if( $this->getFileError($file) ){
+                    throw new Loco_error_Exception('Illegal file path');
+                }
+                // delete dependent files first, so master still exists if others fail
                 $files = array_reverse( $this->expandFiles($file) );
+                $api = new Loco_api_WordPressFileSystem;
                 try {
                     /* @var $trash Loco_fs_File */
                     foreach( $files as $trash ){
@@ -67,6 +72,8 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
                     if( wp_redirect($href) ){
                         exit;
                     }
+                    // correct behaviour on a failed redirect would that file no longer exists
+                    $this->error = $this->getFileError($file);
                 }
                 catch( Loco_error_Exception $e ){
                     Loco_error_AdminNotices::add( $e );
@@ -85,13 +92,11 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function render(){
-        
-        $file = $this->get('file');
-        if( $fail = $this->getFileError($file) ){
-            return $fail;
+        if( '' !== $this->error ){
+            return $this->error;
         }
-        
-        $files = $this->expandFiles( $file );
+        $file = $this->get('file');
+        $files = $this->expandFiles($file);
         $info = Loco_mvc_FileParams::create($file);
         $this->set( 'info', $info );
         // phpcs:ignore -- duplicate string

@@ -27,8 +27,12 @@ class Loco_ajax_DownloadConfController extends Loco_ajax_common_BundleController
 
         // Download actual loco.xml file if bundle is configured from it
         if( 'file' === $bundle->isConfigured() && 'xml' === $file->extension() ){
-            $file->normalize( $bundle->getDirectoryPath() );
-            if( $file->readable() ){
+            $base = $bundle->getDirectoryPath();
+            $file->normalize($base);
+            if( $file->getPath() !== $base.'/loco.xml' ){
+                throw new Loco_error_Exception('Invalid loco.xml path');
+            }
+            if( $file->readable() && Loco_fs_Locations::permitted( $file->getPath() ) ){
                 return $file->getContents(); 
             }
         }

@@ -22,6 +22,7 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             $pofile = new Loco_fs_File($popath);
             $pofile->normalize( loco_constant('WP_CONTENT_DIR') );
             if( $pofile->exists() ){
+                Loco_gettext_Data::check($pofile);
                 return $pofile;
             }
         }
@@ -29,60 +30,70 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
     }
 
 
+    /**
+     * Test if a source file is within a bundle's configured source locations, including a parent theme's.
+     */
+    private function isBundleSource( Loco_package_Bundle $bundle, Loco_fs_File $file ):bool {
+        $bundles = [ $bundle ];
+        // child theme may share a text domain with its parent, in which case parent projects aren't inherited
+        if( $bundle->isTheme() && ( $parent = $bundle->getParent() ) ){
+            $bundles[] = $parent;
+        }
+        foreach( $bundles as $b ){
+            /* @var Loco_package_Project $project */
+            foreach( $b as $project ){
+                if( $project->isSourceLocation($file) ){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+
+    /**
+     * Resolve reference to an existing source file permitted by the posted bundle.
+     * Candidates outside the bundle's source locations are indistinguishable from non-existent ones.
+     */
     private function findSourceFile( string $refpath ):Loco_fs_File {
+
+        // Bundle is required to establish where source files may be read from
+        $bundle = $this->getBundle();
 
         // Reference may be resolvable via referencing PO file's location
         // This also results in validation of referring file, so "path" must be real.
         $pofile = $this->getReferringFile();
         $search = new Loco_gettext_SearchPaths;
         $search->init($pofile);
+        $candidates = [];
         if( $srcfile = $search->match($refpath) ){
-            return $srcfile;
+            $candidates[] = $srcfile;
         }
 
         // check against PO file location when no search paths or search paths failed
-        $srcfile = new Loco_fs_File($refpath);
-        $srcfile->normalize( $pofile->dirname() );
-        if( $srcfile->exists() ){
-        	return $srcfile;
+        $bases = [ $pofile->dirname() ];
+
+        // Loco extractions will always be relative to bundle root
+        $bases[] = $bundle->getDirectoryPath();
+
+        // check relative to parent theme root
+        if( $bundle->isTheme() && ( $parent = $bundle->getParent() ) ){
+            $bases[] = $parent->getDirectoryPath();
         }
 
-        // reference may be resolvable via known project roots
-        try {
-            $bundle = $this->getBundle();
-            // Loco extractions will always be relative to bundle root
-            $srcfile = new Loco_fs_File( $refpath );
-            $srcfile->normalize( $bundle->getDirectoryPath() );
-            if( $srcfile->exists() ){
+        foreach( $bases as $base ){
+            $srcfile = new Loco_fs_File($refpath);
+            $srcfile->normalize($base);
+            $candidates[] = $srcfile;
+        }
+
+        /* @var Loco_fs_File $srcfile */
+        foreach( $candidates as $srcfile ){
+            if( $srcfile->exists() && $this->isBundleSource($bundle,$srcfile) ){
                 return $srcfile;
             }
-            
-            // check relative to parent theme root
-            if( $bundle->isTheme() && ( $parent = $bundle->getParent() ) ){
-                $srcfile = new Loco_fs_File( $refpath );
-                $srcfile->normalize( $parent->getDirectoryPath() );
-                if( $srcfile->exists() ){
-                    return $srcfile;
-                }
-            }
-    
-            // final attempt - search all project source roots
-            // TODO is there too large a risk of false positives? especially with files like index.php
-            /* @var $root Loco_fs_Directory */
-            /*foreach( $this->getProject($bundle)->getConfiguredSources() as $root ){
-                if( $root->isDirectory() ){
-                    $srcfile = new Loco_fs_File( $refpath );
-                    $srcfile->normalize( $root->getPath() );
-                    if( $srcfile->exists() ){
-                        return $srcfile;
-                    }
-                }
-            }*/
         }
-        catch( Loco_error_Exception $e ){
-            // permitted for there to be no bundle or project when viewing orphaned file
-        }
-        
+
         throw new Loco_error_Exception( sprintf('Failed to find source file matching "%s"',$refpath) );
     }
 
@@ -160,7 +171,8 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             }
         }
         // Else the file will be tokenized as JavaScript or PHP (including Twig and Blade) 
-        else if( $srcfile->size() > wp_convert_hr_to_bytes($conf->max_php_size) ){
+        // Explicit zero means no limit, as per Loco_gettext_Extraction
+        else if( 0 !== ( $max = wp_convert_hr_to_bytes($conf->max_php_size) ) && $srcfile->size() > $max ){
             throw new Loco_error_Exception('File exceeds maximum setting of '.$conf->max_php_size);
         }
         else if( ! loco_check_extension('tokenizer') ){

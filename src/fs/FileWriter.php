@@ -304,8 +304,7 @@ class Loco_fs_FileWriter {
             throw new Loco_error_WriteException( __('Modification of installed files is disallowed by the plugin settings','loco-translate') );
         }
         // Deny writes outside our custom base directories. The current path must be resolvable beneath at least one.
-        $roots = Loco_fs_Locations::getBaseDirs();
-        if( $roots->count() && ! $roots->check( $this->file->getPath() ) ){
+        if( ! Loco_fs_Locations::permitted( $this->file->getPath() ) ){
             throw new Loco_error_WriteException( __('File modification disallowed by the plugin settings','loco-translate') );
         }
         // We may need to examine multiple extensions, or there may be none for directories

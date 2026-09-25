@@ -27,18 +27,18 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
      * Check file is valid or return error
      * @return string rendered error
      */
-    protected function getFileError( ?Loco_fs_File $file = null ){
+    protected function getFileError( ?Loco_fs_File $file ):string {
         // file must exist for editing
         if( is_null($file) || ! $file->exists() ){
-            return $this->view( 'admin/errors/file-missing', [] );
+            return $this->view( 'admin/errors/file-missing');
         }
         if( $file->isDirectory() ){
             $this->set('info', Loco_mvc_FileParams::create($file) );
-            return $this->view( 'admin/errors/file-isdir', [] );
+            return $this->view( 'admin/errors/file-isdir');
         }
         // security validations
         try {
-            Loco_gettext_Data::ext( $file );
+            Loco_gettext_Data::check( $file );
         }
         catch( Exception $e ){
             return $this->view( 'admin/errors/file-sec', [ 'reason' => $e->getMessage() ] );
@@ -50,9 +50,8 @@ abstract class Loco_admin_file_BaseController extends Loco_admin_bundle_BaseCont
 
     /**
      * Set template title argument for a file
-     * @return void
      */
-    protected function setFileTitle( Loco_fs_File $file, $format = '%s' ){
+    protected function setFileTitle( Loco_fs_File $file, $format = '%s' ):void {
         $name = Loco_mvc_ViewParams::format($format,[$file->basename()]);
         // append folder location for translation files
         if( in_array( $file->extension(), ['po','mo'] ) ){

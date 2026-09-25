@@ -152,6 +152,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
             if( ! $potfile->exists() ){
                 throw new Loco_error_Exception('Forced template argument must exist');
             }
+            Loco_gettext_Data::check($potfile);
             $copying = true;
             $sourcedir = $potfile->dirname();
             // forced source could be a POT (although UI would normally prevent it)
