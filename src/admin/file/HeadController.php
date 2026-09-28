@@ -4,6 +4,8 @@
  */
 class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
 
+    private string $error;
+
     /**
      * {@inheritdoc}
      */
@@ -21,8 +23,9 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
     public function init(){
         parent::init();
         $file = $this->get('file');
-        /* @var Loco_fs_File $file */
-        if( $file->exists() && ! $file->isDirectory() ){
+        $this->error = $this->getFileError($file);
+
+        if( '' === $this->error ){
             // nonce action will be specific to file for extra security
             $path = $file->getPath();
             $action = 'head:'.$path;
@@ -61,7 +64,7 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
                     $conf = new Loco_gettext_SyncOptions($head);
                     $raw = (array) $post->conf;
                     $conf->setTemplate( $raw['template'] );
-                    $mode = isset($raw['mode']) ? $raw['mode'] : 'pot';
+                    $mode = $raw['mode'] ?? 'pot';
                     if( isset($raw['json']) ){
                         $mode .= ',json';
                     }
@@ -113,14 +116,11 @@ class Loco_admin_file_HeadController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function render(){
-
-        $file = $this->get('file');
-        $fail = $this->getFileError($file);
-        if( is_string($fail) && '' !== $fail ){
-            return $fail;
+        if( '' !== $this->error ){
+            return $this->error;
         }
-        
         // parse PO header
+        $file = $this->get('file');
         $head = Loco_gettext_Data::head($file);
         $this->set('head',$head);
 

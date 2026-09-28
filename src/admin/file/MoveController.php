@@ -5,6 +5,8 @@
  */
 class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
 
+    private string $error;
+
     /**
      * {@inheritdoc}
      */
@@ -23,8 +25,9 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
     public function init(){
         parent::init();
         $file = $this->get('file');
-        /* @var Loco_fs_File $file */
-        if( $file->exists() && ! $file->isDirectory() ){
+        $this->error = $this->getFileError($file);
+        
+        if( '' === $this->error ){
             $files = new Loco_fs_Siblings($file);
             $files->setDomain( $this->getDomain() );
             // nonce action will be specific to file for extra security
@@ -45,15 +48,23 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                     break;
                 }
                 $target = new Loco_fs_LocaleFile( $post->dest );
-                $ext = $target->extension();
                 // could be a directory when we wanted the full path to the file
                 if( $target->isDirectory() ){
                     Loco_error_AdminNotices::err('Enter the full path to the .'.$file->extension().' file, not the directory');
                     break;
                 }
                 // primary file extension should only be permitted to change between po and pot
+                $ext = $target->extension();
                 if( $ext !== $file->extension() && 'po' !== $ext && 'pot' !== $ext ){
                     Loco_error_AdminNotices::err('Invalid file extension, .po or .pot only');
+                    break;
+                }
+                // extension is already valid, because original/moving file is validated, but the target location isn't.
+                try {
+                    Loco_gettext_Data::check($target);
+                }
+                catch ( Loco_error_Exception $e ){
+                    Loco_error_AdminNotices::add($e);
                     break;
                 }
                 $target->normalize( loco_constant('WP_CONTENT_DIR') );
@@ -127,11 +138,11 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
      * {@inheritdoc}
      */
     public function render(){
-        $file = $this->get('file');
-        if( $fail = $this->getFileError($file) ){
-            return $fail;
+        if( '' !== $this->error ){
+            return $this->error;
         }
         // relocation requires knowing text domain and locale
+        $file = $this->get('file');
         $files = new Loco_fs_Siblings($file);
         try {
             $project = $this->getProject();

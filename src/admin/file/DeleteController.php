@@ -44,10 +44,6 @@ class Loco_admin_file_DeleteController extends Loco_admin_file_BaseController {
             $this->set( 'hidden', $fields );
             // attempt deletion if valid nonce posted back, and file is valid
             if( $this->checkNonce($action) ){
-                // If file was valid when form presented, it should be valid now unless postdata was hacked
-                if( $this->getFileError($file) ){
-                    throw new Loco_error_Exception('Illegal file path');
-                }
                 // delete dependent files first, so master still exists if others fail
                 $files = array_reverse( $this->expandFiles($file) );
                 $api = new Loco_api_WordPressFileSystem;

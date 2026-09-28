@@ -145,8 +145,9 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             throw new InvalidArgumentException('File extension disallowed, '.$ext );
         }
 
-        // Deny access to files outside wp-content and WordPress root, plus sensitive files in the root
-        if( 'wp-config.php' === $srcfile->basename() || ! ( $srcfile->underContentDirectory() || $srcfile->underWordPressDirectory() ) ){
+        // Deny access to wp-config and its variants, plus files outside wp-content and WordPress root
+        // Other non-source PHP is caught below by the "no translatable strings" check.
+        if( preg_match('/^wp-config[-.]/', strtolower( $srcfile->basename() ) ) || ! ( $srcfile->underContentDirectory() || $srcfile->underWordPressDirectory() ) ){
             throw new InvalidArgumentException('File access disallowed');
         }
 
@@ -157,7 +158,6 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
         if( ! class_exists('Loco_gettext_Extraction') ){
             throw new RuntimeException('Failed to load tokenizers'); // @codeCoverageIgnore
         }
-        
         
         $extractor = loco_wp_extractor($type,$ext);
 

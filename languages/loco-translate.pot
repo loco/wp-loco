@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.9-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-09-25 16:57+0000\n"
+"POT-Creation-Date: 2026-09-28 10:12+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -61,7 +61,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s refers to the name of a new file to be created, but which already existed
-#: src/api/WordPressFileSystem.php:87
+#: src/api/WordPressFileSystem.php:78
 #, php-format
 msgid "%s already exists in this folder"
 msgstr ""
@@ -73,7 +73,7 @@ msgid "%s characters will be sent for translation."
 msgstr ""
 
 #. Warning that deleting a file will also delete others. %s indicates that quantity.
-#: src/admin/file/DeleteController.php:109
+#: src/admin/file/DeleteController.php:105
 #, php-format
 msgid "%s dependent file will also be deleted"
 msgid_plural "%s dependent files will also be deleted"
@@ -89,7 +89,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. %s is the quantity of files which failed to be moved
-#: src/admin/file/MoveController.php:103
+#: src/admin/file/MoveController.php:114
 #, php-format
 msgid "%s file could not be moved"
 msgid_plural "%s files could not be moved"
@@ -103,7 +103,7 @@ msgid "%s file is writeable"
 msgstr ""
 
 #. %s is the quantity of files which were successfully moved
-#: src/admin/file/MoveController.php:98
+#: src/admin/file/MoveController.php:109
 #, php-format
 msgid "%s file moved"
 msgid_plural "%s files moved"
@@ -111,7 +111,7 @@ msgstr[0] ""
 msgstr[1] ""
 
 #. Success notice where %s is a file extension, e.g. "PO"
-#: src/gettext/Compiler.php:287 src/admin/file/HeadController.php:91
+#: src/gettext/Compiler.php:287 src/admin/file/HeadController.php:94
 #, php-format
 msgid "%s file saved"
 msgstr ""
@@ -225,7 +225,7 @@ msgid "%s%% translated"
 msgstr ""
 
 #. %u is a number of files which were successfully deleted
-#: src/admin/file/DeleteController.php:64
+#: src/admin/file/DeleteController.php:60
 msgid "%u file deleted"
 msgid_plural "%u files deleted"
 msgstr[0] ""
@@ -416,7 +416,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:130
+#: src/ajax/FsConnectController.php:122
 msgid ""
 "Changes to this file may be overwritten or deleted when you update WordPress"
 msgstr ""
@@ -502,7 +502,7 @@ msgstr ""
 msgid "Connect"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:117
+#: src/ajax/FsConnectController.php:109
 msgid "Connected to remote file system"
 msgstr ""
 
@@ -539,7 +539,7 @@ msgstr ""
 msgid "Create template instead"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:154
+#: src/ajax/FsConnectController.php:146
 msgid "Creating this file requires permission"
 msgstr ""
 
@@ -566,8 +566,8 @@ msgid "Delete"
 msgstr ""
 
 #. Page title where %s is the name of a file to be deleted
-#: src/admin/file/DeleteController.php:86
-#: src/admin/file/DeleteController.php:103
+#: src/admin/file/DeleteController.php:82
+#: src/admin/file/DeleteController.php:99
 #, php-format
 msgid "Delete %s"
 msgstr ""
@@ -580,7 +580,7 @@ msgstr ""
 msgid "Delete redundant files"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:157
+#: src/ajax/FsConnectController.php:149
 msgid "Deleting this file requires permission"
 msgstr ""
 
@@ -849,7 +849,7 @@ msgid "Failed to copy %1$s to %2$s"
 msgstr ""
 
 #. %s refers to a directory where a backup file could not be created due to file permissions
-#: src/fs/Revisions.php:222
+#: src/fs/Revisions.php:201
 #, php-format
 msgid ""
 "Failed to create backup file in \"%s\". Check file permissions or disable "
@@ -888,7 +888,7 @@ msgstr ""
 msgid "File backups are disabled in your plugin settings"
 msgstr ""
 
-#: src/admin/file/DiffController.php:45
+#: src/admin/file/DiffController.php:63
 msgid "File deleted"
 msgstr ""
 
@@ -962,7 +962,7 @@ msgstr ""
 msgid "File prefix"
 msgstr ""
 
-#: src/admin/file/DiffController.php:35
+#: src/admin/file/DiffController.php:56
 msgid "File restored"
 msgstr ""
 
@@ -1315,7 +1315,7 @@ msgid "Move"
 msgstr ""
 
 #. Page title where %s is the name of a file to be moved
-#: src/admin/file/MoveController.php:122 src/admin/file/MoveController.php:151
+#: src/admin/file/MoveController.php:133 src/admin/file/MoveController.php:162
 #, php-format
 msgid "Move %s"
 msgstr ""
@@ -1629,7 +1629,7 @@ msgstr ""
 
 #. %s is a file name to be rolled back to a previous version.
 #. Page title where %s refers to a file name
-#: src/admin/file/DiffController.php:59 src/admin/file/DiffController.php:78
+#: src/admin/file/DiffController.php:74 src/admin/file/DiffController.php:91
 #, php-format
 msgid "Restore %s"
 msgstr ""
@@ -1679,7 +1679,7 @@ msgstr ""
 msgid "Saving PO/POT files"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:163
+#: src/ajax/FsConnectController.php:155
 msgid "Saving this file requires permission"
 msgstr ""
 
@@ -2000,11 +2000,11 @@ msgstr ""
 msgid "This directory can't be written to directly by the web server"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:124
+#: src/ajax/FsConnectController.php:116
 msgid "This directory is managed by WordPress, be careful what you delete"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:127
+#: src/ajax/FsConnectController.php:119
 msgid ""
 "This directory is managed by WordPress. Removed files may be restored during "
 "updates"
@@ -2014,7 +2014,7 @@ msgstr ""
 msgid "This file can't be updated directly by the web server"
 msgstr ""
 
-#: src/ajax/FsConnectController.php:121
+#: src/ajax/FsConnectController.php:113
 msgid "This file may be overwritten or deleted when you update WordPress"
 msgstr ""
 
@@ -2025,7 +2025,7 @@ msgid ""
 "recommended."
 msgstr ""
 
-#: src/ajax/FsConnectController.php:160
+#: src/ajax/FsConnectController.php:152
 msgid "This move operation requires permission"
 msgstr ""
 

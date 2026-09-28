@@ -5,39 +5,31 @@
  */
 class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     
-    /**
-     * @var Loco_fs_File
-     */
-    private $master;
+    private Loco_fs_File $master;
     
     /**
-     * Sortable list of backed up file paths (not including master)
-     * @var array
+     * Sortable list of backed-up file paths (not including master)
      */
-    private $paths;
+    private ?array $paths = null;
     
     /**
      * Cached regular expression for matching backup file paths
-     * @var string
      */
-    private $regex;
+    private ?string $regex = null;
 
     /**
      * Cached count of backups + 1
-     * @var int
      */
-    private $length;
+    private ?int $length = null;
 
     /**
      * Paths to delete when object removed from memory
-     * @var array
      */
-    private $trash = [];
+    private array $trash = [];
     
 
     /**
-     * Construct from master file (current version)
-     * @param Loco_fs_File $file
+     * Construct from the master file (current version)
      */
     public function __construct( Loco_fs_File $file ){
         $this->master = $file;
@@ -70,9 +62,8 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
     /**
      * Check that file permissions allow a new backup to be created
-     * @return bool
      */
-    public function writable(){
+    public function writable():bool {
         return $this->master->exists() && $this->master->getParent()->writable();
     }
 
@@ -80,9 +71,8 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
     /**
      * Create a new backup of current version
-     * @return Loco_fs_File
      */
-    public function create(){
+    public function create():Loco_fs_File {
         $vers = 0;
         $date = date('YmdHis');
         $ext = $this->master->extension();
@@ -106,10 +96,8 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
     /**
      * Delete the oldest backups until we have maximum of $num_backups remaining
-     * @param int $num_backups
-     * @return Loco_fs_Revisions
      */
-    public function prune( $num_backups ){
+    public function prune( int $num_backups ):self {
         $paths = $this->getPaths();
         if( isset($paths[$num_backups]) ){
             foreach( array_slice( $paths, $num_backups ) as $path ){
@@ -123,10 +111,9 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
 
     /**
-     * build regex for matching backed up revisions of master
-     * @return string
+     * build regex for matching backed-up revisions of master
      */
-    private function getRegExp(){
+    private function getRegExp():string {
         $regex = $this->regex;
         if( is_null($regex) ){
             $regex = preg_quote( $this->master->filename(), '/' ).'-backup-(\\d{14,})';
@@ -140,10 +127,7 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     }
 
 
-    /**
-     * @return array
-     */
-    public function getPaths(){
+    public function getPaths():array {
         if( is_null($this->paths) ){
             $this->paths = [];
             $regex = $this->getRegExp();
@@ -163,11 +147,9 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
 
     /**
-     * Parse a file path into a timestamp
-     * @param string $path
-     * @return int
+     * Parse a file path into a timestamp.
      */
-    public function getTimestamp( $path ){
+    public function getTimestamp( string $path ):int {
         $name = basename($path);
         if( preg_match( $this->getRegExp(), $name, $r ) ){
             $ymdhis = substr( $r[1], 0, 14 );
@@ -179,7 +161,6 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
 
     /**
      * Get number of backups plus master
-     * @return int
      */
     #[ReturnTypeWillChange]
     public function count(){
@@ -193,20 +174,18 @@ class Loco_fs_Revisions implements Countable/*, IteratorAggregate*/ {
     /**
      * Delete file when object removed from memory.
      * Previously unlinked on shutdown, but doesn't work with WordPress file system abstraction
-     * @param string $path
-     * @return void
      */
-    public function unlinkLater($path){
+    public function unlinkLater( string $path):void {
         $this->trash[] = new Loco_fs_File($path);
     }
 
 
     /**
-     * Execute backup of current file if enabled in settings.
+     * Execute backup of the current file if enabled in settings.
      * @param Loco_api_WordPressFileSystem $api Authorized file system
      * @return Loco_fs_File|null backup file if saved
      */
-    public function rotate( Loco_api_WordPressFileSystem $api ){
+    public function rotate( Loco_api_WordPressFileSystem $api ):?Loco_fs_File {
         $backup = null;
         $pofile = $this->master;
         $num_backups = Loco_data_Settings::get()->num_backups;

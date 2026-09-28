@@ -4,17 +4,13 @@
  */
 class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
     
-    /**
-     * @var Loco_api_WordPressFileSystem 
-     */
-    private $api;
+    private Loco_api_WordPressFileSystem $api;
     
     
     /**
-     * @param Loco_fs_File existing file path (must exist)
-     * @return bool
+     * @param Loco_fs_File $file existing file path (must exist)
      */
-    private function authorizeDelete( Loco_fs_File $file ){
+    private function authorizeDelete( Loco_fs_File $file ):bool {
         $files = new Loco_fs_Siblings($file);
         // require remote authentication if at least one dependant file is not deletable directly
         foreach( $files->expand() as $file ){
@@ -28,29 +24,26 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
     
     
     /**
-     * @param Loco_fs_File file being moved (must exist)
-     * @param Loco_fs_File target path (should not exist)
-     * @return bool
+     * @param Loco_fs_File $source file being moved (must exist)
+     * @param Loco_fs_File|null $target target path (should not exist)
      */
-    private function authorizeMove( Loco_fs_File $source, ?Loco_fs_File $target = null ){
+    private function authorizeMove( Loco_fs_File $source, ?Loco_fs_File $target = null ):bool {
         return $this->api->authorizeMove($source,$target);
     }
 
 
     /**
      * @param Loco_fs_File $file new file path (should not exist)
-     * @return bool
      */
-    private function authorizeCreate( Loco_fs_File $file ){
+    private function authorizeCreate( Loco_fs_File $file ):bool {
         return $this->api->authorizeCreate($file);
     }
 
 
     /**
      * @param Loco_fs_File $file path to update (should exist)
-     * @return bool
      */
-    private function authorizeUpdate( Loco_fs_File $file ){
+    private function authorizeUpdate( Loco_fs_File $file ):bool {
         if( ! $this->api->authorizeUpdate($file) ){
             return false;
         }
@@ -71,9 +64,8 @@ class Loco_ajax_FsConnectController extends Loco_mvc_AjaxController {
 
     /**
      * @param Loco_fs_File $file path which may exist (update it) or may not (create it)
-     * @return bool
      */
-    private function authorizeUpload( Loco_fs_File $file ){
+    private function authorizeUpload( Loco_fs_File $file ):bool {
         if( $file->exists() ){
             return $this->api->authorizeUpdate($file);
         }
