@@ -32,7 +32,7 @@ class Loco_ajax_DownloadConfController extends Loco_ajax_common_BundleController
             if( $file->getPath() !== $base.'/loco.xml' ){
                 throw new Loco_error_Exception('Invalid loco.xml path');
             }
-            if( $file->readable() && Loco_fs_Locations::permitted( $file->getPath() ) ){
+            if( $file->readable() && Loco_fs_Locations::permittedRead( $file->getPath() ) ){
                 return $file->getContents(); 
             }
         }

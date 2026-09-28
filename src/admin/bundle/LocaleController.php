@@ -121,8 +121,9 @@ class Loco_admin_bundle_LocaleController extends Loco_mvc_AdminController {
                 'total' => $meta->getTotal(),
                 // author / system / custom / other
                 'store' => $dir->getTypeLabel( $dir->getTypeId() ),
-                // file contents inaccessible due to fs_basedir setting
-                'locked' => ! Loco_fs_Locations::permitted( $file->getPath() ),
+                // locked = not writable; readable distinguishes "read only" from "access denied"
+                'locked' => ! Loco_fs_Locations::permittedWrite( $file->getPath() ),
+                'readable' => Loco_fs_Locations::permittedRead( $file->getPath() ),
                 // links
                 'view' =>   Loco_mvc_AdminRouter::generate( $type.'-file-view', $args ),
                 'info' =>   Loco_mvc_AdminRouter::generate( $type.'-file-info', $args ),

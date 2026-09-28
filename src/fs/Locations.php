@@ -146,12 +146,21 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * Check whether a path is permitted by the fs_basedir plugin setting.
-     * An empty setting imposes no restriction.
+     * Check whether a path may be WRITTEN, as permitted by the fs_basedir plugin setting.
+     * An empty setting imposes no restriction. See permittedRead for the (wider) read boundary.
      */
-    public static function permitted( string $path ):bool {
+    public static function permittedWrite( string $path ):bool {
         $roots = self::getBaseDirs();
         return 0 === $roots->count() || $roots->check($path);
+    }
+
+
+    /**
+     * Check whether a path is under the web root, or the content directory, 
+     * or whether the fs_basedir value has been widened to custom locations, such as mount points, symlinks, etc...
+     */
+    public static function permittedRead( string $path ):bool {
+        return self::permittedWrite($path) || self::getRoot()->check($path) || self::getContent()->check($path);
     }
 
 

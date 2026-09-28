@@ -19,23 +19,17 @@ class Loco_ajax_DiffController extends Loco_mvc_AjaxController {
         $dir = loco_constant('WP_CONTENT_DIR');
         $lhs = new Loco_fs_File( $post->lhs ); $lhs->normalize($dir);
         $rhs = new Loco_fs_File( $post->rhs ); $rhs->normalize($dir);
-        
-        // avoid diffing non Gettext source files
-        $exts = array_flip( [ 'pot', 'pot~', 'po', 'po~' ] );
 
         /* @var $file Loco_fs_File */
         foreach( [$lhs,$rhs] as $file ){
             if( ! $file->exists() ){
                 throw new InvalidArgumentException('File paths must exist');
             }
-            if( ! $file->underContentDirectory() ){
-                throw new InvalidArgumentException('Files must be under '.basename($dir) );
-            }
-            $ext = $file->extension();
-            if( ! isset($exts[$ext]) ){
+            // Validate readable, with extra sanity check that we're diffing PO source.
+            $ext = Loco_gettext_Data::check($file);
+            if( 'po' !== $ext && 'pot' !== $ext ){
                 throw new InvalidArgumentException('Disallowed file extension');
             }
-            Loco_gettext_Data::check($file);
         }
         
         // OK to diff files as HTML table

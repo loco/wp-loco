@@ -59,14 +59,6 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                     Loco_error_AdminNotices::err('Invalid file extension, .po or .pot only');
                     break;
                 }
-                // extension is already valid, because original/moving file is validated, but the target location isn't.
-                try {
-                    Loco_gettext_Data::check($target);
-                }
-                catch ( Loco_error_Exception $e ){
-                    Loco_error_AdminNotices::add($e);
-                    break;
-                }
                 $target->normalize( loco_constant('WP_CONTENT_DIR') );
                 $target_dir = $target->getParent()->getPath();
                 // Primary file gives template remapping, so all files are renamed with same stub.
@@ -93,6 +85,7 @@ class Loco_admin_file_MoveController extends Loco_admin_file_BaseController {
                 // commit moves. If any fail we'll have separated the files, which is bad
                 $count = 0;
                 $total = count($movable);
+                /* @var Loco_fs_File[][] $movable */
                 foreach( $movable as $pair ){
                     try {
                         $pair[0]->move( $pair[1] );
