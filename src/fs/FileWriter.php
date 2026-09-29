@@ -306,7 +306,8 @@ class Loco_fs_FileWriter {
         }
         // Deny writes outside our custom base directories. The current path must be resolvable beneath at least one.
         if( ! Loco_fs_Locations::permittedWrite( $this->file->getPath() ) ){
-            throw new Loco_error_WriteException( __('File modification disallowed by the plugin settings','loco-translate') );
+            $reldir = ( $this->file->isDirectory() ? $this->file : $this->file->getParent() )->getRelativePath( loco_constant('ABSPATH') );
+            throw new Loco_error_WriteException( sprintf( __('Write access to %s is disallowed by the plugin settings','loco-translate'), $reldir ) );
         }
         // We may need to examine multiple extensions, or there may be none for directories
         $exts = array_slice( explode('.',strtolower($this->file->basename())), 1 );

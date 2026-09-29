@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.9-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-09-29 17:31+0000\n"
+"POT-Creation-Date: 2026-09-29 18:17+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -241,6 +241,11 @@ msgstr ""
 
 #: tpl/admin/errors/no-tokenizer.php:11
 msgid "About the Tokenizer"
+msgstr ""
+
+#: src/gettext/Data.php:37
+#, php-format
+msgid "Access to %s is disallowed by the plugin settings"
 msgstr ""
 
 #: tpl/admin/errors/file-sec.php:14
@@ -876,10 +881,6 @@ msgstr ""
 msgid "File access disallowed"
 msgstr ""
 
-#: src/gettext/Data.php:38
-msgid "File access disallowed by the plugin settings"
-msgstr ""
-
 #: tpl/admin/errors/no-backups.php:18
 msgid "File backups are disabled in your plugin settings"
 msgstr ""
@@ -935,10 +936,6 @@ msgstr ""
 #: src/fs/LocaleDirectory.php:66
 msgctxt "File location"
 msgid "System"
-msgstr ""
-
-#: src/fs/FileWriter.php:309
-msgid "File modification disallowed by the plugin settings"
 msgstr ""
 
 #: src/fs/FileWriter.php:300
@@ -1295,7 +1292,7 @@ msgstr ""
 msgid "Modification of installed files is disallowed by the plugin settings"
 msgstr ""
 
-#: src/fs/FileWriter.php:320
+#: src/fs/FileWriter.php:321
 msgid ""
 "Modification of POT (template) files is disallowed by the plugin settings"
 msgstr ""
@@ -2283,6 +2280,11 @@ msgstr ""
 
 #: tpl/admin/file/info.php:24
 msgid "Write access denied"
+msgstr ""
+
+#: src/fs/FileWriter.php:310
+#, php-format
+msgid "Write access to %s is disallowed by the plugin settings"
 msgstr ""
 
 #. When a file or folder cannot be modified due to filesystem permissions
