@@ -381,7 +381,7 @@ class Loco_fs_File {
 
 
     /**
-     * Check if passed path is equal to ours
+     * Check if the passed path is equal to that of this file
      * @param string|self $ref
      */
     public function equal( $ref ):bool {
@@ -390,8 +390,8 @@ class Loco_fs_File {
 
 
     /**
-     * Normalize path for string comparison, resolves redundant dots and slashes.
-     * @param string $base path to prefix
+     * Normalize a path for string comparison, resolves redundant dots and slashes.
+     * @param string $base path to directory prefix
      */
     public function normalize( string $base = '' ):string {
         if( $path = self::abs($base) ){

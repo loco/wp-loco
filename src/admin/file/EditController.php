@@ -103,15 +103,16 @@ class Loco_admin_file_EditController extends Loco_admin_file_BaseController {
             else if( $project ){
                 $potfile = $project->getPot();
                 // Handle situation where project defines a localised file as the official template
-                if( $potfile && $potfile->equal($file) ){
+                if( $potfile->equal($file) ){
                     $locale = null;
                     $potfile = null;
                 }
             }
             if( $potfile ){
-                // Validate template file as long as it exists
+                // Validate template file as long as it exists and its path is permitted
                 if( $potfile->exists() ){
                     try {
+                        Loco_gettext_Data::check($potfile);
                         $potdata = Loco_gettext_Data::load($potfile);
                         // If template is pulling JSON files, we must merge them in before msgid comparison
                         if( $project && $sync->mergeJson() ){
