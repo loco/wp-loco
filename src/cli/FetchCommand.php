@@ -144,6 +144,14 @@ abstract class Loco_cli_FetchCommand {
                 // keep translations if file already exists in this location.
                 $pofile = $project->initLocaleFile($dir,$locale);
                 $info = new Loco_mvc_FileParams( [], $pofile );
+                // Enforce the same read-location gate as the UI before merging or writing.
+                try {
+                    Loco_gettext_Data::check($pofile);
+                }
+                catch( Loco_error_Exception $e ){
+                    WP_CLI::warning( $e->getMessage().': '.$info->relpath );
+                    continue;
+                }
                 Loco_cli_Utils::debug('Saving %s..', $info->relpath );
                 $compiler = new Loco_gettext_Compiler($pofile);
                 if( $pofile->exists() ){

@@ -8,9 +8,8 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
     /**
      * Hash map for ensuring files only added once
-     * @var array
      */
-    private $unique = [];
+    private array $unique = [];
     
     /**
      * Construct with initial list if files
@@ -86,7 +85,7 @@ class Loco_fs_FileList extends ArrayIterator implements Loco_fs_FileListInterfac
 
 
     /**
-     * Check if given file is already in list
+     * Check if the given file is already on the unique list
      */
     public function has( Loco_fs_File $file ):bool {
         $hash = $this->hash( $file );

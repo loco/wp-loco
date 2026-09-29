@@ -102,9 +102,9 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 == Changelog ==
 
 = 2.8.9 =
+* Base directory restriction is now for all file reads, with a second setting for writes.
 * Download endpoint allows only po/mo/pot files as per info tab
 * Fixed unescaped HTML loophole in the file path placeholder UI
-* Reading of translation files is now limited as per the writeable directory restriction
 * JSON and PHP source only viewable if parsed as valid translations schema.
 * Fixed bug in backup restoration that allowed an attacker to copy an invalid PO target.
 * Bumped WordPress compatibility to 7.1.2

@@ -37,13 +37,11 @@ class Loco_gettext_Matcher extends LocoFuzzyMatcher {
      * Initialize matcher with current valid source strings (ref.pot)
      * @param Loco_gettext_Data $pot POT reference
      * @param bool $translate Whether copying translations from reference data
-     * @return int
      */
-    public function loadRefs( Loco_gettext_Data $pot, $translate = false ){
+    public function loadRefs( Loco_gettext_Data $pot, bool $translate = false ):int {
         $ntotal = 0;
         $this->translate = (bool) $translate;
         $this->translated = 0;
-        /* @var LocoPoMessage $new */
         foreach( $pot as $new ){
             $ntotal++;
             $this->add($new);

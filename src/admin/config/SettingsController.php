@@ -93,10 +93,11 @@ class Loco_admin_config_SettingsController extends Loco_admin_config_BaseControl
                 $post = Loco_mvc_PostParams::get();
                 if( $post->has('opts') ){
                     $opts->populate( $post->opts );
-                    // validate fs_basedir before persisting
+                    // validate fs_basedir and fs_writedir before persisting
                     Loco_fs_Locations::clear();
                     Loco_fs_Locations::getBaseDirs();
-                    // 
+                    Loco_fs_Locations::getWriteDirs();
+                    //
                     $opts->persist();
                     self::grant( $post->getArrayProp('caps') );
                     // updates complete

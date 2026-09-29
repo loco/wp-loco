@@ -214,10 +214,18 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                             </p>
                             <p>
                                 <label for="loco--fs-basedir" style="vertical-align: top">
-                                    <?php esc_html_e('Restrict writeable directories','loco-translate');?>:<br />
-                                    <?php esc_html_e('Empty means no restriction','loco-translate');?> 
+                                    <?php esc_html_e('Restricted base directories','loco-translate');?>:<br />
                                 </label>
                                 <textarea name="opts[fs_basedir]" id="loco--fs-basedir" rows="2" class="regular-text"><?php echo esc_html($opts->fs_basedir)?></textarea>
+                            </p>
+                            <p>
+                                <label for="loco--fs-writedir" style="vertical-align: top">
+                                    <?php esc_html_e('Restricted writeable directories','loco-translate');?>:
+                                </label>
+                                <textarea name="opts[fs_writedir]" id="loco--fs-writedir" rows="2" class="regular-text"><?php echo esc_html($opts->fs_writedir)?></textarea>
+                            </p>
+                            <p class="description">
+                                Directory restrictions are relative to the WordPress root (ABSPATH).
                             </p>
                         </fieldset>
                     </td>

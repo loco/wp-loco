@@ -34,10 +34,15 @@ abstract class Loco_cli_SyncCommand {
             if( $potfile && $potfile->exists() ){
                 Loco_cli_Utils::debug('Parsing template: %s',$potfile->getRelativePath($content_dir));
                 try {
+                    Loco_gettext_Data::check($potfile);
                     $pot = Loco_gettext_Data::fromSource( $potfile->getContents() );
                 }
                 catch( Loco_error_ParseException $e ){
                     WP_CLI::error( $e->getMessage().' in '.$potfile->getRelativePath($content_dir), false );
+                    $potfile = null;
+                }
+                catch( Loco_error_Exception $e ){
+                    WP_CLI::warning( $e->getMessage().': '.$potfile->getRelativePath($content_dir) );
                     $potfile = null;
                 }
             }
@@ -59,10 +64,15 @@ abstract class Loco_cli_SyncCommand {
                 // Parsing candidate PO file (definitions)
                 Loco_cli_Utils::debug('Parsing PO: %s',$pofile->getRelativePath($content_dir));
                 try {
+                    Loco_gettext_Data::check($pofile);
                     $def = Loco_gettext_Data::fromSource( $pofile->getContents() );
                 }
                 catch( Loco_error_ParseException $e ){
                     WP_CLI::error( $e->getMessage().' in '.$pofile->getRelativePath($content_dir), false );
+                    continue;
+                }
+                catch( Loco_error_Exception $e ){
+                    WP_CLI::warning( $e->getMessage().': '.$pofile->getRelativePath($content_dir) );
                     continue;
                 }
                 // Check if PO defines alternative template (reference)
@@ -76,11 +86,15 @@ abstract class Loco_cli_SyncCommand {
                     $potfile->normalize( $base_dir );
                     if( $potfile->exists() ){
                         try {
+                            Loco_gettext_Data::check($potfile);
                             Loco_cli_Utils::debug('> Parsing alternative template: %s',$potfile->getRelativePath($content_dir) );
                             $ref = Loco_gettext_Data::fromSource( $potfile->getContents() );
                         }
                         catch( Loco_error_ParseException $e ){
                             WP_CLI::error( $e->getMessage().' in '.$potfile->getRelativePath($content_dir), false );
+                        }
+                        catch( Loco_error_Exception $e ){
+                            WP_CLI::warning( $e->getMessage().': '.$potfile->getRelativePath($content_dir) );
                         }
                     }
                     else {

@@ -71,9 +71,9 @@ class Loco_gettext_Extraction {
 
 
     /**
-     * @return self
+     * Add a translataion set for extraction
      */
-    public function addProject( Loco_package_Project $project ){
+    public function addProject( Loco_package_Project $project ):self {
         $base = $this->bundle->getDirectoryPath();
         $domain = (string) $project->getDomain();
         // skip files larger than configured maximum

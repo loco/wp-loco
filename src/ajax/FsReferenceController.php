@@ -145,9 +145,9 @@ class Loco_ajax_FsReferenceController extends Loco_ajax_common_BundleController 
             throw new InvalidArgumentException('File extension disallowed, '.$ext );
         }
 
-        // Deny access to wp-config and its variants, plus files outside wp-content and WordPress root
+        // Deny access to wp-config and its variants, plus files outside Loco's configured base directory
         // Other non-source PHP is caught below by the "no translatable strings" check.
-        if( preg_match('/^wp-config[-.]/', strtolower( $srcfile->basename() ) ) || ! ( $srcfile->underContentDirectory() || $srcfile->underWordPressDirectory() ) ){
+        if( preg_match('/^wp-config[-.]/', strtolower( $srcfile->basename() ) ) || ! Loco_fs_Locations::permittedRead( $srcfile->getPath() ) ){
             throw new InvalidArgumentException('File access disallowed');
         }
 

@@ -33,6 +33,15 @@ abstract class Loco_cli_ExtractCommand {
                 Loco_cli_Utils::tabulateFiles( $potfile->getParent(), $potfile );
                 continue;
             }
+            // Enforce the same read-location gate as the UI before touching the POT.
+            // permittedRead is wider than permittedWrite, so a read-denied path can never be written either.
+            try {
+                Loco_gettext_Data::check($potfile);
+            }
+            catch( Loco_error_Exception $e ){
+                WP_CLI::warning( 'Skipping '.$potfile->basename().': '.$e->getMessage() );
+                continue;
+            }
             // Do extraction and grab only given domain's strings
             $ext = new Loco_gettext_Extraction( $project->getBundle() );
             $domain = $project->getDomain()->getName();
