@@ -4,25 +4,13 @@
  */
 class Loco_fs_Siblings {
 
-    /**
-     * @var Loco_fs_File
-     */
-    private $po;
+    private Loco_fs_File $po;
 
-    /**
-     * @var Loco_fs_File|null
-     */
-    private $mo;
+    private ?Loco_fs_File $mo = null;
 
-    /**
-     * @var Loco_fs_File|null
-     */
-    private $php;
+    private ?Loco_fs_File $php = null;
 
-    /**
-     * @var string
-     */
-    private $td = '';
+    private string $td = '';
 
 
     /**
@@ -52,9 +40,8 @@ class Loco_fs_Siblings {
 
     /**
      * Set text domain explicitly, required if unknown from PO/POT file name
-     * @return void
      */
-    public function setDomain( $domain ){
+    public function setDomain( string $domain ):void {
         $this->td = $domain ?: 'default';
     }
 
@@ -63,7 +50,7 @@ class Loco_fs_Siblings {
      * Get all dependant files (including primary po) that actually exist on disk
      * @return Loco_fs_File[]
      */
-    public function expand(){
+    public function expand():array {
         $siblings = [];
         // Source and binary pair
         foreach( [ $this->po, $this->mo, $this->php ] as $file ){
@@ -91,26 +78,17 @@ class Loco_fs_Siblings {
     }
 
 
-    /**
-     * @return Loco_fs_File
-     */
-    public function getSource(){
+    public function getSource():Loco_fs_File {
         return $this->po;
     }
 
 
-    /**
-     * @return Loco_fs_File|null
-     */
-    public function getBinary(){
+    public function getBinary():?Loco_fs_File {
         return $this->mo;
     }
 
 
-    /**
-     * @return Loco_fs_File|null
-     */
-    public function getCache(){
+    public function getCache():? Loco_fs_File {
         return $this->php;
     }
 
@@ -119,7 +97,7 @@ class Loco_fs_Siblings {
      * @param string $prefix Prefix required in case not present in PO file name
      * @return Loco_fs_File[]
      */
-    public function getJsons( $prefix ){
+    public function getJsons( string $prefix ):array {
         $list = new Loco_fs_FileList;
         $name = $this->po->filename();
         $finder = new Loco_fs_FileFinder( $this->po->dirname() );

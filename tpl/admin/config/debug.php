@@ -109,8 +109,7 @@ $this->extend('../layout');
                 <dt><?php echo $f->escape($label)?>:</dt>
                 <dd><?php 
                     $f->e('path');
-                    if( $f->writable ): echo ' ✓'; else:?> 
-                    <span class="icon icon-warn" title="Not writable directly by PHP"></span><?php
+                    if( $f->writable ): echo ' ✓'; else:?> <span class="icon icon-warn" title="Not writable directly by PHP"></span><?php
                     endif?> 
                 </dd><?php
                 endforeach?> 

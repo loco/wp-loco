@@ -42,9 +42,8 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
      * Sort to the left the best option for saving new translation files.
      * This favours custom locations, with system secondary. No other locations will be pre-selected. 
      * @param Loco_mvc_ViewParams[] $choices
-     * @return Loco_mvc_ViewParams|null
      */
-    private function sortPreferred( array $choices ){
+    private function sortPreferred( array $choices ):?Loco_mvc_ViewParams {
         usort( $choices, [__CLASS__,'_onSortPreferred'] );
         foreach( $choices as $choice ){
             if( $choice['disabled'] || $choice['copying'] || $choice['exists']){
@@ -370,7 +369,7 @@ class Loco_admin_init_InitPoController extends Loco_admin_bundle_BaseController 
         }
         // else show total lock message. probably file mods disallowed
         else if( $fs_failure ){
-            $this->set('fsLocked', $fs_failure );
+            $this->set('fsLocked', __('No target locations are writeable. Check your settings','loco-translate') );
         }
         
         // hidden fields to pass through to Ajax endpoint

@@ -7,27 +7,23 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
     /**
      * Text domain of debugger, limits when gets logged
-     * @var string|null $domain
      */
-    private $domain;
+    private ?string $domain = null;
 
     /**
      * Temporarily forced locale
-     * @var string|null $locale
      */
-    private $locale;
+    private ?string $locale = null;
 
     /**
      * Log lines for final result
-     * @var null|ArrayIterator
      */    
-    private $output;
+    private ?ArrayIterator $output  = null;
 
     /**
      * Current indent for recursive logging calls
-     * @var string
      */
-    private $indent = '';
+    private string $indent = '';
 
 
     /**
@@ -450,9 +446,8 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
     /**
      * Prepare text domain for MO file lookup
-     * @return void
      */
-    private function preloadDomain( $domain, $type, $path ){
+    private function preloadDomain( string $domain, string $type, string $path ):void {
         // plugin and theme loaders allow missing path argument, custom loader does not
         if( '' === $path ){
             $file = null;
@@ -494,15 +489,14 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         // Bootstrap text domain if a loading function was selected
         if( 'plugin' === $type ){
             if( $file ){
-                if( $file->isAbsolute() ){
-                    $path = $file->getRelativePath(WP_PLUGIN_DIR);
+                $file->normalize(WP_PLUGIN_DIR);
+                if( ! $file->exists() || ! $file->isDirectory() || ! $file->underPluginDirectory() ){
+                    throw new InvalidArgumentException('Path argument must be a directory relative to WP_PLUGIN_DIR');
                 }
-                else {
-                    $file->normalize(WP_PLUGIN_DIR);
+                if( ! Loco_fs_Locations::permittedRead($file->getPath()) ){
+                    throw new InvalidArgumentException('Path argument is disallowed by the plugin settings');
                 }
-                if( ! $file->exists() || ! $file->isDirectory() ){
-                    throw new InvalidArgumentException('Loader argument must be a directory relative to WP_PLUGIN_DIR');
-                }
+                $path = $file->getRelativePath(WP_PLUGIN_DIR);
             }
             $this->log('Calling load_plugin_textdomain with $plugin_rel_path=%s',$path);
             $returned = load_plugin_textdomain( $domain, false, $path );
@@ -511,8 +505,15 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         }
         else if( 'theme' === $type || 'child' === $type ){
             // Note that absent path argument will use current theme, and not necessarily whatever $domain is
-            if( $file && ( ! $file->isAbsolute() || ! $file->isDirectory() ) ){
-                throw new InvalidArgumentException('Path argument must reference the theme directory');
+            if( $file ){
+                if( ! $file->isAbsolute() || ! $file->isDirectory() ){
+                    throw new InvalidArgumentException('Path argument must reference a valid directory');
+                }
+                // Enforce our base directory restriction, noting that theme author can call load_theme_textdomain as they like
+                $path = $file->getPath();
+                if( ! Loco_fs_Locations::permittedRead($path) ){
+                    throw new InvalidArgumentException('Path argument is disallowed by the plugin settings');
+                }
             }
             $this->log('Calling load_theme_textdomain with $path=%s',$path);
             $returned = load_theme_textdomain( $domain, $path );
@@ -522,10 +523,14 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         else if( 'custom' === $type ){
             if( $file && ! $file->isAbsolute() ){
                 $path = $file->normalize(WP_CONTENT_DIR);
-                $this->log('Resolving relative path argument to %s',$path);
+                $this->log('Resolved relative path argument to %s',$path);
             }
             if( is_null($file) || ! $file->exists() || $file->isDirectory() ){
                 throw new InvalidArgumentException('Path argument must reference an existent file');
+            }
+            $path = $file->getPath();
+            if( ! Loco_fs_Locations::permittedRead($path) ){
+                throw new InvalidArgumentException('Path argument is disallowed by the plugin settings');
             }
             $expected = [ $this->locale.'.mo', $this->locale.'.l10n.php' ];
             $bits = explode('-',$file->basename() );
@@ -609,9 +614,8 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
 
     /**
      * Run the string lookup and render result screen, unless an error is thrown.
-     * @return string
      */
-    private function renderResult( Loco_mvc_ViewParams $form ){
+    private function renderResult( Loco_mvc_ViewParams $form ):string {
         $msgid = $form['msgid'];
         $msgctxt = $form['msgctxt'];
         // singular form by default
@@ -620,6 +624,9 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $pluralIndex = 0;
         //
         $domain = $form['domain']?:'default';
+        if( 'default' !== $domain && false !== strpbrk($domain,"./:\\\0") ){
+            throw new InvalidArgumentException('Illegal text domain');
+        }
         $this->log('Running test for domain => %s', $domain );
         //$this->logDomainState($domain);
         $default = $this->get('default');
@@ -790,6 +797,11 @@ class Loco_admin_DebugController extends Loco_mvc_AdminController {
         $this->log('Searching %u possible locations for string versions', $pofiles->count() );
         /* @var Loco_fs_LocaleFile $pofile */
         foreach( $pofiles as $pofile ){
+            $popath = $pofile->getPath();
+            if( ! Loco_fs_Locations::permittedRead($popath) ){
+                $this->log('! Skipped %s: outside permitted base directories',$popath);
+                continue;
+            }
             // initialize translation set for this PO and its siblings
             $dir = new Loco_fs_LocaleDirectory( $pofile->dirname() );
             $type = $dir->getTypeId();

@@ -34,6 +34,7 @@ class Loco_gettext_Data extends LocoPoIterator implements JsonSerializable {
     public static function check( Loco_fs_File $file ):string {
         $ext = self::ext($file);
         if( ! Loco_fs_Locations::permittedRead( $file->getPath() ) ){
+            // Translators: %s is replaced with the name of a file that cannot be read due to a directory restriction
             throw new Loco_error_Exception( sprintf( __('Access to %s is disallowed by the plugin settings','loco-translate'), $file->basename() ) );
         }
         return $ext;

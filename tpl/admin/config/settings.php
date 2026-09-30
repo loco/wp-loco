@@ -225,7 +225,7 @@ $help_url = esc_html( apply_filters('loco_external','https://localise.biz/wordpr
                                 <textarea name="opts[fs_writedir]" id="loco--fs-writedir" rows="2" class="regular-text"><?php echo esc_html($opts->fs_writedir)?></textarea>
                             </p>
                             <p class="description">
-                                Directory restrictions are relative to the WordPress root (ABSPATH).
+                                <?php esc_html_e('Directory restrictions are relative to the WordPress root (ABSPATH).','loco-translate');?> 
                             </p>
                         </fieldset>
                     </td>

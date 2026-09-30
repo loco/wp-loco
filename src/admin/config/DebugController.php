@@ -13,36 +13,38 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
     }
 
 
-    /**
-     * @param string $raw
-     * @return int 
-     */
-    private function memory_size( $raw ){
-        $bytes = wp_convert_hr_to_bytes($raw);
-        return Loco_mvc_FileParams::renderBytes($bytes);
+    private function memory_size( string $raw ):string {
+        return Loco_mvc_FileParams::renderBytes( wp_convert_hr_to_bytes($raw) );
     }
 
 
     /**
      * Get path relative to WordPress ABSPATH
-     * @param string $path
-     * @return string
      */
-    private function rel_path( $path ){
-        if( is_string($path) && $path && '/' === $path[0] ){
-            $file = new Loco_fs_File( $path );
-            $path = $file->getRelativePath(ABSPATH);
+    private function rel_path( string $path ):string {
+        if( '' === $path ){
+            return '(none)';
         }
-        else if( ! $path ){
-            $path = '(none)';
+        if( '/' === $path[0] ){
+            return ( new Loco_fs_File($path) )->getRelativePath(ABSPATH);
         }
         return $path;
     }
-    
-    
-    private function file_params( Loco_fs_File $file ){
-        $ctx = new Loco_fs_FileWriter($file);
-        return new Loco_mvc_ViewParams(['path'=>$this->rel_path($file->getPath()), 'writable'=>$ctx->writable()]);
+
+
+    /**
+     * @param bool $strict Whether to check plugin settings for restricted translation file access
+     */
+    private function file_params( Loco_fs_File $file, bool $strict = false ):Loco_mvc_ViewParams {
+        $path = $file->getPath();
+        $writeable = ( new Loco_fs_FileWriter($file) )->writable();
+        if( $writeable && $strict ){
+            $writeable =  Loco_fs_Locations::permittedWrite($path);
+        }
+        return new Loco_mvc_ViewParams([
+            'path' => $this->rel_path($path), 
+            'writable' => $writeable,
+        ]);
     }
     
 
@@ -65,7 +67,7 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'Loco Translate' => loco_plugin_version(),
             'WordPress' => $GLOBALS['wp_version'],
             'PHP' => phpversion().' ('.PHP_SAPI.')',
-            'Server' => isset($_SERVER['SERVER_SOFTWARE']) ? $_SERVER['SERVER_SOFTWARE'] : ( function_exists('apache_get_version') ? apache_get_version() : '' ),
+            'Server' => $_SERVER['SERVER_SOFTWARE'] ?? ( function_exists( 'apache_get_version' ) ? apache_get_version() : '' ),
             'jQuery' => '...',
         ] );
         // we want to know about modules in case there are security mods installed known to break functionality
@@ -139,10 +141,10 @@ class Loco_admin_config_DebugController extends Loco_admin_config_BaseController
             'disabled' => $ctx->disabled(),
             'fs_protect' => 1 === $fsp ? 'Warn' : ( $fsp ? 'Block' : 'Off' ),
         ] );
-        // important locations, starting with LOCO_LANG_DIR
+        // translation file locations. If these can't be written this plugin can't do much,
         $locations = [
-            'WP_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('WP_LANG_DIR') ) ),
-            'LOCO_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ) ),
+            'WP_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('WP_LANG_DIR') ), true ),
+            'LOCO_LANG_DIR' => $this->file_params( new Loco_fs_Directory( loco_constant('LOCO_LANG_DIR') ), true ),
         ];
         // WP_TEMP_DIR takes precedence over sys_get_temp_dir in WordPress get_temp_dir();
         if( defined('WP_TEMP_DIR') ){

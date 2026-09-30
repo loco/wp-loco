@@ -4,7 +4,7 @@ Tags: translation, language, multilingual, l10n, i18n
 Requires at least: 6.6
 Requires PHP: 7.4
 Tested up to: 7.1.2
-Stable tag: 2.8.8
+Stable tag: 2.8.9
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -102,11 +102,11 @@ We don't collect your data or track you. See the [plugin privacy notice](https:/
 == Changelog ==
 
 = 2.8.9 =
-* Base directory restriction is now for all file reads, with a second setting for writes.
+* Base directory restriction for all file reads, with a second setting for writes.
 * Download endpoint allows only po/mo/pot files as per info tab
 * Fixed unescaped HTML loophole in the file path placeholder UI
-* JSON and PHP source only viewable if parsed as valid translations schema.
-* Fixed bug in backup restoration that allowed an attacker to copy an invalid PO target.
+* JSON and PHP source only viewable if parsed as a valid l10n schema.
+* Fixed bug in backup restoration that allowed copying of an invalid PO target.
 * Bumped WordPress compatibility to 7.1.2
 
 = 2.8.8 =

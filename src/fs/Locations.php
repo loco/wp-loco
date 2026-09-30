@@ -227,7 +227,8 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * Check if a given path begins with any of the registered ones
+     * Check if a given path begins with any of the registered ones.
+     * Note that a relative path will always return false, because self::expand will return an empty array
      * @param string $path absolute path
      * @return bool whether path matched
      */    
@@ -246,7 +247,7 @@ class Loco_fs_Locations extends ArrayObject {
     /**
      * Match location and return the relative subpath.
      * Note that exact match is returned as "." indicating self
-     * @param string $path
+     * @param string $path absolute path
      * @return string|null
      */
     public function rel( string $path ): ?string {
@@ -284,17 +285,17 @@ class Loco_fs_Locations extends ArrayObject {
 
 
     /**
-     * @param string $rel Relative 
+     * @param string $path Absolute path
      * @return string[]
      */
-    public function expand( string $rel ):array {
-        if( '' === $rel ){
+    public function expand( string $path ):array {
+        if( '' === $path ){
             //Loco_error_AdminNotices::debug('Expanding empty path to empty array');
             return [];
         }
-        $path = Loco_fs_File::abs($rel);
+        $path = Loco_fs_File::abs($path);
         if( '' === $path ){
-            //throw new InvalidArgumentException('Failed on abs('.var_export($rel,true).')');
+            //throw new InvalidArgumentException('Failed on abs('.var_export($path,true).')');
             return [];
         }
         $paths = [ trailingslashit($path) ];
