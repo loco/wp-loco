@@ -123,7 +123,7 @@ $help = apply_filters('loco_external','https://localise.biz/wordpress/plugin/man
                             <label for="loco--openai_api_model">
                                 Model:
                             </label>
-                            <input type="text" size="50" name="api[openai][model]" id="loco--openai_api_model" value="<?php $api->e('model')?>" placeholder="gpt-4o-mini" spellcheck="false" />
+                            <input type="text" size="50" name="api[openai][model]" id="loco--openai_api_model" value="<?php $api->e('model')?>" placeholder="gpt-5.6-luna" spellcheck="false" />
                         </p>
                         <p>
                             <label for="loco--openai_prompt" style="vertical-align: top">

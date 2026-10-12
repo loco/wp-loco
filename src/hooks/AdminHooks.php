@@ -193,15 +193,17 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
      */
     public function filter_heartbeat_received( ?array $response = null, ?array $data = null ){
         if( is_array($data) && array_key_exists('loco-translate',$data) ){
-            $nonces = $data['loco-translate']['nonces'] ?? [];
-            foreach( $nonces as $action => $value ){
-                // Refresh nonce if it's either expired, or in its second tick.
-                // Ajax controllers check user permissions before nonce is checked.
-                if( 1 !== wp_verify_nonce($value,$action) ){
-                    $nonces[$action] = wp_create_nonce($action);
+            $nonces = $data['loco-translate']['nonces'] ?? null;
+            if( is_array($nonces) && $nonces ){
+                foreach( $nonces as $action => $value ){
+                    // Refresh nonce if it's either expired, or in its second tick.
+                    // Ajax controllers check user permissions before nonce is checked.
+                    if( 1 !== wp_verify_nonce($value,$action) ){
+                        $nonces[$action] = wp_create_nonce($action);
+                    }
                 }
+                $response['loco-translate']['nonces'] = $nonces;
             }
-            $response['loco-translate']['nonces'] = $nonces;
         }
         return $response;
     }

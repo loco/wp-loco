@@ -296,7 +296,7 @@ class Loco_mvc_View implements IteratorAggregate {
             $args = func_get_args();
             $text = call_user_func_array( 'sprintf', $args );
         }
-        echo htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' );
+        echo htmlspecialchars( $text, ENT_QUOTES, 'UTF-8' );
         return '';
     }
 

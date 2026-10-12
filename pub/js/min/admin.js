@@ -411,7 +411,8 @@ c["loco-translate"] = {
 nonces: n
 };
 }).on("heartbeat-tick", function(a, c) {
-n = c["loco-translate"] && c["loco-translate"].nonces || {};
+if (c && (c.nonces_expired || !1 === c["wp-auth-check"])) for (const d in n) n[d] = "";
+(a = (c && c["loco-translate"] || {}).nonces) && (n = a);
 });
 }
 const m = r.ajaxurl || "/wp-admin/admin-ajax.php";
@@ -5578,7 +5579,7 @@ D.require("19").init(r);
 });
 T.validate = function(w) {
 w = (w = /^\d+\.\d+\.\d+/.exec(w && w[0] || "")) && w[0];
-if ("2.8.9" === w) return !0;
+if ("2.8.10" === w) return !0;
 T.notices.warn("admin.js is the wrong version (" + w + "). Please empty all relevant caches and reload this page.");
 return !1;
 };

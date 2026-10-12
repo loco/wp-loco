@@ -13,7 +13,7 @@ class Loco_mvc_ViewParams extends ArrayObject implements JsonSerializable {
      * Default escape function for view type is HTML
      */
     public function escape( ?string $text ):string {
-        return htmlspecialchars( $text??'', ENT_COMPAT, 'UTF-8' );
+        return htmlspecialchars( $text??'', ENT_QUOTES, 'UTF-8' );
     }
 
 

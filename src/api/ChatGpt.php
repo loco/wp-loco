@@ -30,16 +30,16 @@ abstract class Loco_api_ChatGpt extends Loco_api_Client {
         $model = $config['model']??'';
         if( '' === $model ){
             $model = [
-                Loco_api_Providers::VENDOR_OPENAI => 'gpt-4.1-nano',
+                Loco_api_Providers::VENDOR_OPENAI => 'gpt-5.6-luna',
                 Loco_api_Providers::VENDOR_GOOGLE => 'gemini-2.5-flash-lite',
-                Loco_api_Providers::VENDOR_OROUTE => 'openai/gpt-4.1-nano',
+                Loco_api_Providers::VENDOR_OROUTE => 'openai/gpt-5.6-luna',
             ][$vendor];
         }
         
         // Establish temperature; preferring 0.0, but recent GPT models have minimum 1.0
         // Range is probably 0.0 -> 2.0, but letting vendor validate valid range as it may vary.
         $temperature = $config['temperature'] ?? 0.0;
-        if( $temperature < 1.0 && str_starts_with($model,'gpt-5') ){
+        if( $temperature < 1.0 && preg_match('!^(?:openai/)?gpt-(\d+)!',$model,$vers) && intval($vers[1]) > 4 ){
             $temperature = 1.0;
         }
 
