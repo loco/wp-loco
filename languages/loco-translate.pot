@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Loco Translate 2.8.10-dev\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/loco-translate/\n"
-"POT-Creation-Date: 2026-11-16 09:57+0000\n"
+"POT-Creation-Date: 2026-11-16 10:57+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: \n"
@@ -2320,6 +2320,10 @@ msgstr ""
 
 #: src/config/XMLModel.php:54
 msgid "XML supplied is empty"
+msgstr ""
+
+#: src/mvc/Controller.php:72
+msgid "You are not logged in"
 msgstr ""
 
 #: tpl/admin/init/init-copy.php:18

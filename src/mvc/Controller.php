@@ -62,31 +62,23 @@ abstract class Loco_mvc_Controller extends Loco_hooks_Hookable {
     }
     
 
-
     /**
      * Default authorization check
      * @return Loco_mvc_Controller|void
      */
-    public function auth(){
-        if( is_user_logged_in() ){
-            // default capability check. child classes should override
-            if( current_user_can('loco_admin') ){
-                return $this;
-            }
+    final public function auth(){
+        if( ! is_user_logged_in() ){
+            // WordPress should render a sign-in screen if no session, but not via ajax.
+            wp_die( __("You are not logged in",'loco-translate'), 401 );
         }
-        $this->exitForbidden();
-    }
-
-
-    /**
-     * Emulate permission denied screen as performed in wp-admin/admin.php
-     */
-    protected function exitForbidden(){
+        // default capability check. WordPress will further prevent access via menu hooks. e.g. settings.
+        if( current_user_can('loco_admin') ){
+            return $this;
+        }
+        // Emulate permission denied screen as performed in wp-admin/admin.php
         do_action( 'admin_page_access_denied' );
-        wp_die( __( 'You do not have sufficient permissions to access this page.','default' ), 403 );
-    } // @codeCoverageIgnore
-    
-
+        wp_die( __( "Sorry, you are not allowed to access this page."), 403 );
+    }
 
 
     /**
