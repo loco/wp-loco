@@ -209,6 +209,15 @@ class Loco_hooks_AdminHooks extends Loco_hooks_Hookable {
     }
 
 
+    /**
+     * wp_refresh_nonces filter callback.
+     * Fires instead of heartbeat_received when the heartbeat nonce has expired, e.g. on the first tick after re-login via wp-auth-check.
+     */
+    public function filter_wp_refresh_nonces( ?array $response = null, ?array $data = null ){
+        return $this->filter_heartbeat_received( $response, $data );
+    }
+
+
 
     /**
      * deactivate_plugin action callback
